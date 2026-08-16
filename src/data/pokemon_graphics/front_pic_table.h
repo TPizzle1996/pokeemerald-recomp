@@ -1,4 +1,12 @@
+#if defined(NATIVE_LINUX)
+/* Native target (R9 §5): the table must be mutable so the compat seam
+ * can publish the ROM_BASE-resolved session pointers into every slot
+ * at init. The GBA build keeps it const (compile-time assets). Layout,
+ * indices, tags and sizes are identical on both targets. */
+struct CompressedSpriteSheet gMonFrontPicTable[] =
+#else
 const struct CompressedSpriteSheet gMonFrontPicTable[] =
+#endif
 {
     SPECIES_SPRITE(NONE, gMonFrontPic_CircledQuestionMark),
     SPECIES_SPRITE(BULBASAUR, gMonFrontPic_Bulbasaur),

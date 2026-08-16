@@ -53,7 +53,8 @@ gen5() { # gen5 <inventory> <outdir>
         --bindings-out "$2/bindings.generated.toml" \
         --ownership-out "$2/ownership.generated.toml" \
         --consumers-out "$2/consumers.generated.toml" \
-        --species-map-out "$2/species_mapping.generated.toml"
+        --species-map-out "$2/species_mapping.generated.toml" \
+        --compat-slotmap-out "$2/pokemon_battle_slots.generated.h"
 }
 
 compare_outputs() { # compare_outputs <outdir> <label>
@@ -67,6 +68,14 @@ compare_outputs() { # compare_outputs <outdir> <label>
             fail "$label: $f differs from committed"
         fi
     done
+    # R9 §5: the generated compat slot map (C header) is a committed output
+    # too, checked in under include/emerald/resources/.
+    if cmp -s "$root/include/emerald/resources/pokemon_battle_slots.generated.h" \
+              "$dir/pokemon_battle_slots.generated.h"; then
+        pass "$label: pokemon_battle_slots.generated.h byte-identical"
+    else
+        fail "$label: pokemon_battle_slots.generated.h differs from committed"
+    fi
 }
 
 echo "== building the family generator =="
@@ -80,8 +89,9 @@ if "$gen_dir/gen-pokemon-family" --inventory "$inventory" \
         --ownership-out "$battle/ownership.generated.toml" \
         --consumers-out "$battle/consumers.generated.toml" \
         --species-map-out "$battle/species_mapping.generated.toml" \
+        --compat-slotmap-out "$root/include/emerald/resources/pokemon_battle_slots.generated.h" \
         --check >"$tmp/check.log" 2>&1; then
-    pass "generator --check passes on all five committed outputs"
+    pass "generator --check passes on all six committed outputs"
     if grep -q "1608 payload resources" "$tmp/check.log"; then
         pass "--check reports 1608 payload resources"
     else
@@ -232,6 +242,7 @@ PY
             --ownership-out "$tmp/failout/ownership.generated.toml" \
             --consumers-out "$tmp/failout/consumers.generated.toml" \
             --species-map-out "$tmp/failout/species_mapping.generated.toml" \
+            --compat-slotmap-out "$tmp/failout/slotmap.generated.h" \
             >"$log" 2>&1; then
         fail "Part D: $label (generator unexpectedly succeeded)"
     elif grep -qF "$diag" "$log"; then
@@ -254,6 +265,7 @@ if "$gen_dir/gen-pokemon-family" --inventory "$tmp/fail_malformed.toml" \
         --catalog-out "$tmp/failout/c.toml" --bindings-out "$tmp/failout/b.toml" \
         --ownership-out "$tmp/failout/o.toml" --consumers-out "$tmp/failout/cn.toml" \
         --species-map-out "$tmp/failout/sm.toml" \
+        --compat-slotmap-out "$tmp/failout/slotmap.generated.h" \
         >"$tmp/fail_malformed.log" 2>&1; then
     fail "Part D: malformed inventory (generator unexpectedly succeeded)"
 elif grep -qF "malformed inventory" "$tmp/fail_malformed.log"; then

@@ -84,12 +84,14 @@ static uint32_t ExpectedSizeForType(enum Gen3ResourceType type)
     }
 }
 
-/* Encoded stream size for one source entry (R8): the payload bytes verbatim
- * for RAW entries, the deterministic literal-only LZ77 size for LZ entries.
- * Returns SIZE_MAX on overflow. */
+/* Encoded stream size for one source entry (R8/R9): the payload bytes
+ * verbatim for RAW and GBA_LZ entries (R9: the payload IS the GBA LZ77
+ * stream), the deterministic literal-only LZ77 size for LZ entries. Returns
+ * SIZE_MAX on overflow. */
 static size_t EntryStreamSize(const struct EmeraldResourceCompatSourceEntry *entry)
 {
-    if (entry->encoding == EMERALD_COMPAT_ENTRY_RAW)
+    if (entry->encoding == EMERALD_COMPAT_ENTRY_RAW
+     || entry->encoding == EMERALD_COMPAT_ENTRY_GBA_LZ)
         return (size_t)entry->payloadSize;
     return Gen3LzLiteral_EncodedSize(entry->payloadSize);
 }
@@ -160,7 +162,26 @@ EmeraldResourceCompatImage_CreateFamily(
         }
         expected = (entry->expectedSize != 0u) ? entry->expectedSize
                                                : ExpectedSizeForType(entry->type);
-        if (expected == 0u || entry->payloadSize != expected)
+        if (entry->encoding == EMERALD_COMPAT_ENTRY_GBA_LZ)
+        {
+            /* R9 §5: the payload is a GBA LZ77 stream. Its encoded length is
+             * ROM-dependent (no invariant), but the stream header must be
+             * well-formed and its declared decoded size must equal the
+             * expected size - the mapping-level family invariant. */
+            uint32_t declared = entry->payloadSize >= 3u
+                ? (uint32_t)entry->payload[1]
+                  | ((uint32_t)entry->payload[2] << 8)
+                : 0u;
+            if (expected == 0u || entry->payloadSize < 3u
+             || entry->payload[0] != 0x10u || declared != expected)
+            {
+                NoteMismatch(diagnostics, entry->canonicalName,
+                             Gen3ResourceType_Name(entry->type), expected,
+                             declared);
+                return EMERALD_COMPAT_ERR_PAYLOAD_SIZE_MISMATCH;
+            }
+        }
+        else if (expected == 0u || entry->payloadSize != expected)
         {
             NoteMismatch(diagnostics, entry->canonicalName,
                          Gen3ResourceType_Name(entry->type), expected,
@@ -272,7 +293,15 @@ EmeraldResourceCompatImage_CreateFamily(
     {
         size_t nameLen = strlen(entries[i].canonicalName);
         table[i].type = (uint32_t)entries[i].type;
-        table[i].decodedSize = entries[i].payloadSize;
+        /* R9 §5: for GBA_LZ entries the payload is the ENCODED stream, so the
+         * entry's decoded size is its expected size (already verified against
+         * the stream's LZ77 header), not the payload length. For LZ/RAW the
+         * canonical payload IS the decoded bytes. */
+        table[i].decodedSize = (entries[i].encoding == EMERALD_COMPAT_ENTRY_GBA_LZ)
+            ? ((entries[i].expectedSize != 0u)
+                   ? entries[i].expectedSize
+                   : ExpectedSizeForType(entries[i].type))
+            : entries[i].payloadSize;
         table[i].nameOffset = offset;
         memcpy(image->bytes + offset, entries[i].canonicalName, nameLen + 1u);
         offset += nameLen + 1u;
@@ -295,12 +324,15 @@ EmeraldResourceCompatImage_CreateFamily(
         offset = (offset + 3u) & ~(size_t)3u;
         table[i].streamOffset = offset;
         table[i].streamSize = EntryStreamSize(&entries[i]);
-        if (entries[i].encoding == EMERALD_COMPAT_ENTRY_RAW)
+        if (entries[i].encoding == EMERALD_COMPAT_ENTRY_RAW
+         || entries[i].encoding == EMERALD_COMPAT_ENTRY_GBA_LZ)
         {
             /* R8 back sheets: the stream IS the payload bytes verbatim - the
              * consumers are the sprite pipeline (raw pixel copy into OBJ VRAM)
              * and DecompressTrainerBackPic (LZ77-decodes the same raw bytes it
-             * decodes on the GBA build). */
+             * decodes on the GBA build). R9 Pokémon battle: the payload IS the
+             * GBA LZ77 stream (retail-ROM bytes), served verbatim so the
+             * existing decompressors decode exactly what the GBA build decodes. */
             memcpy(image->bytes + offset, entries[i].payload,
                    (size_t)entries[i].payloadSize);
         }

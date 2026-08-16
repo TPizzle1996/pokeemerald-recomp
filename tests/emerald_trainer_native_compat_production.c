@@ -10,8 +10,11 @@
  * "only the migrated slots changed" assertions, and the R7B/R8 compat seam -
  * but drives the seam with the REAL PRODUCTION ROM_BASE snapshot built from the
  * REAL installed production pack, for the FULL trainer family: 93 front sheets
- * + 93 front palettes + 6 shared back-pic palette consumers (R7B), and the 8
- * back sheets + 2 back-only Red/Leaf palettes (R8):
+ * + 93 front palettes + 6 shared back-pic palette consumers (R7B), the 8 back
+ * sheets + 2 back-only Red/Leaf palettes (R8), and the 1608-resource Pokémon
+ * battle family (R9 §5: 1759 published table slots + the external back-EGG
+ * row; every published stream decoded by the real decompressor must equal
+ * the pack's canonical decoded bytes):
  *
  *   retail ROM -> production-qualified manifest -> emerald-bpee01-v1.rpack
  *     -> EmeraldResourceSession_BuildRomBaseCandidate (provider id
@@ -76,6 +79,7 @@
 #include "gen3/resources/toml.h"
 #include "gen3/resources/util.h"
 #include "emerald/resources/emerald_resource_session.h"
+#include "emerald/resources/pokemon_battle_slots.generated.h"
 
 static enum Gen3ResourceType CatalogTypeForName(const char *name)
 {
@@ -179,6 +183,200 @@ static void CheckFamilyContract(struct Gen3ResourceSnapshot *snapshot,
              (size_t)canonicalSize);
     CHECK(label, view.payloadSize == canonicalSize
                      && memcmp(view.payload, canonical, canonicalSize) == 0);
+}
+
+/* The data.c metadata the Pokémon tables are stamped with pre-publish: sheets
+ * carry MON_PIC_SIZE (2048, decoded sheet bytes) with the slot index as tag;
+ * palettes carry size 0 with the slot index as tag (CompressedSpritePalette
+ * consumers key on tag; sizes are only meaningful for sheets). */
+#define MON_SHEET_STAMP_SIZE 2048u
+
+/* R9 §5: verify the published Pokémon battle family against the production
+ * pack. For every one of the 1760 slots: the size/tag stamp is retained (only
+ * .data changes); external slots (the back-EGG row) stay NULL; every published
+ * slot holds exactly its mapping resource's pack payload - the retail GBA LZ77
+ * stream served verbatim - with the stream header declaring the mapping's
+ * decoded size. */
+static void VerifyPokemonPublished(const struct Gen3ResourcePack *pack)
+{
+    size_t kind;
+    size_t idx;
+    char label[96];
+
+    for (kind = 0u; kind < 4u; kind++)
+    {
+        const struct CompressedSpriteSheet *sheet =
+            kind <= 1u ? (kind == 0u ? gMonFrontPicTable : gMonBackPicTable)
+                       : NULL;
+        const struct CompressedSpritePalette *pal =
+            kind >= 2u ? (kind == 2u ? gMonPaletteTable : gMonShinyPaletteTable)
+                       : NULL;
+
+        for (idx = 0u; idx < POKEMON_BATTLE_SLOTS_PER_TABLE; idx++)
+        {
+            const void *data = sheet != NULL ? (const void *)sheet[idx].data
+                                             : (const void *)pal[idx].data;
+            /* CompressedSpritePalette carries no size - only tag. */
+            const u32 size = sheet != NULL ? sheet[idx].size : 0u;
+            const u16 tag = sheet != NULL ? sheet[idx].tag : pal[idx].tag;
+            const int32_t ri = kPokemonBattleCompatSlots[
+                kind * POKEMON_BATTLE_SLOTS_PER_TABLE + idx];
+            const struct Gen3ResourcePackEntry *entry;
+
+            snprintf(label, sizeof(label),
+                     "mon table %zu slot %zu size/tag retained", kind, idx);
+            CHECK(label, size == (sheet != NULL ? MON_SHEET_STAMP_SIZE : 0u)
+                             && tag == idx);
+            if (ri == POKEMON_BATTLE_EXTERNAL_SLOT)
+            {
+                snprintf(label, sizeof(label),
+                         "mon table %zu slot %zu external stays compiled",
+                         kind, idx);
+                CHECK(label, data == NULL);
+                continue;
+            }
+            snprintf(label, sizeof(label),
+                     "mon table %zu slot %zu published", kind, idx);
+            CHECK(label, data != NULL);
+            if (data == NULL)
+                continue;
+            entry = Gen3ResourcePack_FindByCanonicalName(
+                pack, kPokemonBattleCompatResources[ri].id);
+            snprintf(label, sizeof(label),
+                     "mon table %zu slot %zu resolves in pack", kind, idx);
+            CHECK(label, entry != NULL);
+            if (entry == NULL)
+                continue;
+            /* The pack stores the DECODED representation; the published
+             * stream is the seam's re-encoded GBA LZ77 stream. Decode it
+             * with the REAL consumer decompressor and prove it equals the
+             * pack's canonical decoded bytes - the strongest form of the
+             * Stage 3 three-way equality, exercised through the live table. */
+            {
+                u8 *decoded = (u8 *)malloc(entry->payloadSize);
+                snprintf(label, sizeof(label),
+                         "mon table %zu slot %zu stream decodes to pack bytes",
+                         kind, idx);
+                CHECK(label, decoded != NULL);
+                if (decoded == NULL)
+                    continue;
+                memset(decoded, 0, entry->payloadSize);
+                LZ77UnCompWram((const u32 *)(const void *)data, decoded);
+                CHECK(label, memcmp(decoded, entry->payload,
+                                    entry->payloadSize) == 0);
+                snprintf(label, sizeof(label),
+                         "mon table %zu slot %zu stream header == mapping size",
+                         kind, idx);
+                CHECK(label, ((const u8 *)data)[0] == 0x10u
+                         && ((const u8 *)data)[1]
+                                == (u8)(kPokemonBattleCompatResources[ri].expectedSize & 0xFFu)
+                         && ((const u8 *)data)[2]
+                                == (u8)((kPokemonBattleCompatResources[ri].expectedSize >> 8) & 0xFFu));
+                free(decoded);
+            }
+        }
+    }
+}
+
+/* ClearMigratedEntries leaves exactly the published slots NULL (external slot
+ * untouched) and retains the size/tag stamp. */
+static void VerifyPokemonCleared(void)
+{
+    size_t kind;
+    size_t idx;
+    char label[96];
+
+    for (kind = 0u; kind < 4u; kind++)
+    {
+        const struct CompressedSpriteSheet *sheet =
+            kind <= 1u ? (kind == 0u ? gMonFrontPicTable : gMonBackPicTable)
+                       : NULL;
+        const struct CompressedSpritePalette *pal =
+            kind >= 2u ? (kind == 2u ? gMonPaletteTable : gMonShinyPaletteTable)
+                       : NULL;
+
+        for (idx = 0u; idx < POKEMON_BATTLE_SLOTS_PER_TABLE; idx++)
+        {
+            const void *data = sheet != NULL ? (const void *)sheet[idx].data
+                                             : (const void *)pal[idx].data;
+            /* CompressedSpritePalette carries no size - only tag. */
+            const u32 size = sheet != NULL ? sheet[idx].size : 0u;
+            const u16 tag = sheet != NULL ? sheet[idx].tag : pal[idx].tag;
+
+            snprintf(label, sizeof(label),
+                     "mon table %zu slot %zu cleared", kind, idx);
+            CHECK(label, data == NULL && size
+                     == (sheet != NULL ? MON_SHEET_STAMP_SIZE : 0u)
+                     && tag == idx);
+        }
+    }
+}
+
+static void VerifySpotDecode(const char *table, u16 species, int32_t ri,
+                             const void *stream);
+
+/* Real-decompressor acceptance on published retail streams, spot species: the
+ * FULL byte-level canonical decode is the Stage 8 family test; here the point
+ * is that the REAL consumer codec (bios.c LZ77UnCompWram) accepts each
+ * published stream and honors its header-declared length - decode into a
+ * guarded buffer and prove no overrun (guard intact) and non-degenerate
+ * output. */
+static void VerifyPokemonSpotDecodes(void)
+{
+    static const u16 kSpot[] = {
+        SPECIES_BULBASAUR, SPECIES_CHARIZARD, SPECIES_UNOWN_Z,
+        SPECIES_CASTFORM, SPECIES_DEOXYS, SPECIES_SPINDA, SPECIES_EGG,
+    };
+    size_t s;
+
+    for (s = 0u; s < sizeof(kSpot) / sizeof(kSpot[0]); s++)
+    {
+        const u16 species = kSpot[s];
+        int32_t front = kPokemonBattleCompatSlots[species];
+        int32_t back = kPokemonBattleCompatSlots[
+            POKEMON_BATTLE_SLOTS_PER_TABLE + species];
+        VerifySpotDecode("front", species, front, gMonFrontPicTable[species].data);
+        VerifySpotDecode("back", species, back, gMonBackPicTable[species].data);
+    }
+}
+
+static void VerifySpotDecode(const char *table, u16 species, int32_t ri,
+                             const void *stream)
+{
+    u32 expected;
+    u8 *buf;
+    u32 sum = 0u;
+    u32 k;
+    char label[96];
+
+    if (ri == POKEMON_BATTLE_EXTERNAL_SLOT)
+    {
+        /* back EGG: no canonical - the slot is the compiled
+         * gMonStillFrontPic_Egg and is never part of this family. */
+        snprintf(label, sizeof(label), "spot %s %u external stays compiled",
+                 table, species);
+        CHECK(label, stream == NULL);
+        return;
+    }
+    expected = kPokemonBattleCompatResources[ri].expectedSize;
+    buf = (u8 *)malloc(expected + 4u);
+    if (buf == NULL)
+    {
+        printf("FAIL: out of memory decoding spot %u\n", species);
+        gFailures++;
+        return;
+    }
+    memset(buf, 0xA5, expected + 4u);
+    LZ77UnCompWram((const u32 *)(const void *)stream, buf);
+    snprintf(label, sizeof(label),
+             "spot %s %u decodes within declared size", table, species);
+    CHECK(label, buf[expected] == 0xA5u && buf[expected + 1u] == 0xA5u
+              && buf[expected + 2u] == 0xA5u && buf[expected + 3u] == 0xA5u);
+    for (k = 0u; k < expected; k++)
+        sum += buf[k];
+    snprintf(label, sizeof(label), "spot %s %u decodes to data", table, species);
+    CHECK(label, sum != 0u);
+    free(buf);
 }
 
 int main(int argc, char **argv)
@@ -376,6 +574,25 @@ int main(int argc, char **argv)
     CaptureBackSheetTable(beforeBackSheet);
     CaptureBackFrames(&beforeBackFrames);
 
+    /* 5c. R9 §5: the four Pokémon battle tables start at the NULL sentinel in
+     * every one of the 1760 slots, and are stamped so publication can be
+     * proven to touch ONLY .data: sheets get MON_PIC_SIZE (2048) with the slot
+     * index as tag, palettes keep size 0 with the slot index as tag - the same
+     * metadata shape data.c gives them, retained after init. */
+    for (i = 0; i < POKEMON_BATTLE_SLOTS_PER_TABLE; i++)
+    {
+        CHECK("mon front slot starts NULL", gMonFrontPicTable[i].data == NULL);
+        CHECK("mon back slot starts NULL", gMonBackPicTable[i].data == NULL);
+        CHECK("mon palette slot starts NULL", gMonPaletteTable[i].data == NULL);
+        CHECK("mon shiny slot starts NULL", gMonShinyPaletteTable[i].data == NULL);
+        gMonFrontPicTable[i].size = MON_SHEET_STAMP_SIZE;
+        gMonFrontPicTable[i].tag = (u16)i;
+        gMonBackPicTable[i].size = MON_SHEET_STAMP_SIZE;
+        gMonBackPicTable[i].tag = (u16)i;
+        gMonPaletteTable[i].tag = (u16)i;
+        gMonShinyPaletteTable[i].tag = (u16)i;
+    }
+
     /* 6. Publish through the R7B compatibility seam with the production
      * snapshot. */
     status = EmeraldResourceCompat_InitializeFromSnapshot(snapshot, &cdiag);
@@ -514,6 +731,27 @@ int main(int argc, char **argv)
      * .4bpp files verbatim), so steps 4/9/9b already prove the production chain
      * serves exactly those bytes (pack payload == legacy decoded). */
 
+    /* 12. R9 §5: the Pokémon battle family published through the production
+     * chain. All 1760 slots verified against the pack: 1759 published streams
+     * (the seam's re-encoded GBA LZ77) decode through the REAL decompressor
+     * to exactly the pack's canonical decoded bytes, with the stream header
+     * declaring the mapping's decoded size; the external back-EGG slot
+     * untouched; the size/tag stamp retained everywhere (only .data changes).
+     * Then the lifecycle: Republish is idempotent (state-load re-derivation),
+     * ClearMigratedEntries NULLs exactly the published slots, a second
+     * Republish restores them. Finally, guarded spot decodes on chosen
+     * species. */
+    VerifyPokemonPublished(pack);
+    VerifyPokemonSpotDecodes();
+    status = EmeraldResourceCompat_Republish(&cdiag);
+    CHECK("republish ok", status == EMERALD_COMPAT_OK);
+    VerifyPokemonPublished(pack);
+    EmeraldResourceCompat_ClearMigratedEntries();
+    VerifyPokemonCleared();
+    status = EmeraldResourceCompat_Republish(&cdiag);
+    CHECK("republish after clear ok", status == EMERALD_COMPAT_OK);
+    VerifyPokemonPublished(pack);
+
     /* Report. */
     if (gFailures != 0)
     {
@@ -533,6 +771,9 @@ int main(int argc, char **argv)
            info.providerId, info.providerVersion, (int)info.kind, info.precedence);
     printf("  family           : 186 front + 44 back published slots (236 total), "
            "all byte-identical to canonical\n");
+    printf("  pokemon battle   : 1759 published slots + 1 external (back EGG), "
+           "streams decode to pack bytes (real decompressor), size/tag "
+           "retained, lifecycle republish/clear verified\n");
 
     Gen3ResourceSnapshot_Destroy(snapshot);
     Gen3ResourceCandidate_Destroy(candidate);

@@ -50,12 +50,23 @@
 #include "gen3/resources/resource_lz.h"
 #include "gen3/resources/resource_types.h"
 
-/* R8: stream encoding for a compatibility-image entry (see the source-entry
+/* Stream encoding for a compatibility-image entry (see the source-entry
  * struct below). */
 enum EmeraldResourceCompatEntryEncoding
 {
     EMERALD_COMPAT_ENTRY_LZ = 0,  /* literal-only LZ77 stream (R5/R7B) */
     EMERALD_COMPAT_ENTRY_RAW = 1, /* payload bytes verbatim (R8 back sheets) */
+    /* R9 §5 (Pokémon battle family): the payload bytes ARE a GBA LZ77 stream,
+     * so the stream is the payload verbatim and the existing GBA decompressors
+     * LZ77UnCompWram it exactly as they do on the GBA build. For the Pokémon
+     * family the pack stores the DECODED representation of each retail
+     * stream, so the seam re-encodes it into a byte-deterministic
+     * literal-only stream (Gen3LzLiteral_Encode) before building the image -
+     * the image never sees the pack's decoded bytes, only the synthesized
+     * stream. expectedSize is the DECODED size the stream declares
+     * (4096/2048/32/8192/128 per resource, from the generated bindings) -
+     * the encoded length carries no invariant. */
+    EMERALD_COMPAT_ENTRY_GBA_LZ = 2,
 };
 
 /* Family-wide canonical invariants (R7A §3): every trainer-front sheet decodes
@@ -107,17 +118,25 @@ struct EmeraldResourceCompatSourceEntry
     uint32_t schema;
     const uint8_t *payload;
     uint32_t payloadSize;
-    /* R8: per-entry expected decoded size override. 0 (the R7B default) means
+    /* R8: per-entry expected size override. 0 (the R7B default) means
      * "derive from type": 2048 for TILE_GRAPHICS, 32 for PALETTE. The back
-     * sheets (8192/10240) pass frameCount*2048 explicitly. */
+     * sheets (8192/10240) pass frameCount*2048 explicitly. R9: for
+     * EMERALD_COMPAT_ENTRY_GBA_LZ entries this is the stream's DECODED size
+     * (what its LZ77 header declares), never the encoded payload length. */
     uint32_t expectedSize;
-    /* R8: stream encoding. EMERALD_COMPAT_ENTRY_LZ (the R7B default) serves
+    /* R8/R9: stream encoding. EMERALD_COMPAT_ENTRY_LZ (the R7B default) serves
      * literal-only LZ77 streams to the existing decompressor consumers
-     * (front sheets, all palettes). EMERALD_COMPAT_ENTRY_RAW serves the
-     * payload bytes verbatim as the stream - required for the back sheets,
-     * whose live consumers are NOT decompressors: the sprite pipeline copies
-     * images[frame].data straight into OBJ VRAM, and DecompressTrainerBackPic
-     * must LZ77-decode the same raw bytes it decodes on the GBA build. */
+     * (trainer front sheets, all trainer palettes). EMERALD_COMPAT_ENTRY_RAW
+     * serves the payload bytes verbatim as the stream - required for the
+     * trainer back sheets, whose live consumers are NOT decompressors: the
+     * sprite pipeline copies images[frame].data straight into OBJ VRAM, and
+     * DecompressTrainerBackPic must LZ77-decode the same raw bytes it decodes
+     * on the GBA build. EMERALD_COMPAT_ENTRY_GBA_LZ (R9) also serves the
+     * payload bytes verbatim, but the payload is a GBA LZ77 stream: the
+     * Pokémon battle tables' payloads ARE the retail ROM's compressed bytes
+     * (source_encoding "gba-lz77"), and the existing decompressors
+     * (DecompressPicFromTable_2, LoadSpecialPokePic_2, LoadCompressedSprite
+     * Palette, ...) LZ77UnCompWram them exactly as on the GBA build. */
     enum EmeraldResourceCompatEntryEncoding encoding;
 };
 
@@ -129,7 +148,9 @@ const char *EmeraldResourceCompatStatus_Describe(
  * Every entry is validated up front (fail closed unless the type is
  * TILE_GRAPHICS or PALETTE and payloadSize matches the entry's expected size -
  * the R7B family invariant 2048/32 derived from type, or the R8 per-entry
- * expectedSize override). The image is a single permanent allocation holding
+ * expectedSize override; R9 GBA_LZ entries instead must be a GBA LZ77 stream
+ * whose header-declared decoded size equals expectedSize). The image is a
+ * single permanent allocation holding
  * the entry table, the canonical names, the canonical payload copies and the
  * streams (literal-only LZ77 for LZ entries, the payload bytes verbatim for
  * RAW entries), in the same order as `entries`. On success *outImage is owned

@@ -26,11 +26,13 @@ inc_dir="$root/include/gen3/resources"
 emerald_dir="$root/src/emerald/resources"
 
 echo "== guardrail 18: dependency-creep assertion =="
-# emerald_trainer_native_compat.c is deliberately platform-coupled (guarded
+# emerald_trainer_native_compat.c and emerald_pokemon_native_compat.c are
+# deliberately platform-coupled (guarded
 # PLATFORM_SDL2 && NATIVE_LINUX, includes global.h) and is not compiled by
 # this suite; it is exercised by run_emerald_trainer_native_compat.sh.
 bad=$(grep -rEn '^[[:space:]]*#[[:space:]]*include[[:space:]]+[<"][[:space:]]*(global\.h|gba|SDL|platform|graphics|sound|rom|main\.h)' \
       --exclude='emerald_trainer_native_compat.c' \
+      --exclude='emerald_pokemon_native_compat.c' \
       "$core_dir" "$inc_dir" "$emerald_dir" "$here/emerald_rom_base_provider_test.c" || true)
 if [ -n "$bad" ]; then
     echo "FAIL: gen3 core / adapter / session includes frontend dependencies:" >&2

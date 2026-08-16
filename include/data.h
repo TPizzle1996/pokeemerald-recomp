@@ -132,9 +132,18 @@ extern const union AnimCmd *const gAnims_MonPic[];
 extern const struct MonCoords gMonFrontPicCoords[];
 extern const struct CompressedSpriteSheet gMonStillFrontPicTable[];
 extern const struct MonCoords gMonBackPicCoords[];
+/* R9: the four Pokémon battle tables are mutable on native so the compat seam
+ * publishes the ROM_BASE-resolved session pointers into every slot at init;
+ * the GBA build keeps them const (compile-time assets). */
+#if defined(NATIVE_LINUX)
+extern struct CompressedSpriteSheet gMonBackPicTable[];
+extern struct CompressedSpritePalette gMonPaletteTable[];
+extern struct CompressedSpritePalette gMonShinyPaletteTable[];
+#else
 extern const struct CompressedSpriteSheet gMonBackPicTable[];
 extern const struct CompressedSpritePalette gMonPaletteTable[];
 extern const struct CompressedSpritePalette gMonShinyPaletteTable[];
+#endif
 extern const union AnimCmd *const *const gTrainerFrontAnimsPtrTable[];
 extern const struct MonCoords gTrainerFrontPicCoords[];
 #if defined(NATIVE_LINUX)
@@ -166,7 +175,11 @@ extern const struct CompressedSpritePalette gTrainerBackPicPaletteTable[];
 extern const u8 gEnemyMonElevation[NUM_SPECIES];
 
 extern const union AnimCmd *const *const gMonFrontAnimsPtrTable[];
+#if defined(NATIVE_LINUX)
+extern struct CompressedSpriteSheet gMonFrontPicTable[];
+#else
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
+#endif
 
 extern const struct Trainer gTrainers[];
 extern const u8 gTrainerClassNames[][13];

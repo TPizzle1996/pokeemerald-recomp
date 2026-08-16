@@ -16,6 +16,7 @@
 #include "gen3/resources/resource_resolver.h"
 #include "emerald/resources/emerald_resource_compat.h"
 #include "emerald/resources/emerald_resource_session.h"
+#include "emerald/resources/emerald_pokemon_native_compat.h"
 #include "emerald/resources/emerald_trainer_native_compat.h"
 
 /* Session-global state: the published image is retained for the process session
@@ -529,6 +530,8 @@ EmeraldResourceCompat_PublishTrainerTables(
 enum EmeraldResourceCompatStatus
 EmeraldResourceCompat_Republish(struct EmeraldResourceCompatDiagnostics *diagnostics)
 {
+    enum EmeraldResourceCompatStatus status;
+
     ClearDiagnostics(diagnostics);
     if (sSessionImage == NULL)
     {
@@ -540,8 +543,21 @@ EmeraldResourceCompat_Republish(struct EmeraldResourceCompatDiagnostics *diagnos
         return EMERALD_COMPAT_ERR_UNAVAILABLE;
     }
     /* Idempotent, allocation-free: re-derives every pointer from the retained
-     * image and rewrites the same migrated slots. */
-    return EmeraldResourceCompat_PublishTrainerTables(sSessionImage, diagnostics);
+     * image and rewrites the same migrated slots. R9 §5: the Pokémon battle
+     * tables are re-derived from their session image the same way. A session
+     * in which the Pokémon family never initialized (trainer-only snapshot)
+     * has no Pokémon image: that is the additive-degradation state - the
+     * Pokémon tables were never migrated - not an error, so
+     * EMERALD_COMPAT_ERR_UNAVAILABLE is treated as success here (diagnostics
+     * cleared). Any other Pokémon failure is a real fault. */
+    status = EmeraldResourceCompat_PublishTrainerTables(sSessionImage, diagnostics);
+    if (status != EMERALD_COMPAT_OK)
+        return status;
+    status = EmeraldPokemonCompat_Republish(diagnostics);
+    if (status != EMERALD_COMPAT_OK && status != EMERALD_COMPAT_ERR_UNAVAILABLE)
+        return status;
+    ClearDiagnostics(diagnostics);
+    return EMERALD_COMPAT_OK;
 }
 
 void EmeraldResourceCompat_ClearMigratedEntries(void)
@@ -577,6 +593,10 @@ void EmeraldResourceCompat_ClearMigratedEntries(void)
     for (i = 0u; i < EMERALD_TRAINER_BACK_PALETTE_COUNT; i++)
         gTrainerBackPicPaletteTable[kTrainerBackPaletteSlots[i].tableIndex].data =
             NULL;
+
+    /* R9 §5: the four Pokémon battle tables (every published slot; the
+     * external back-EGG slot is never touched). */
+    EmeraldPokemonCompat_ClearMigratedEntries();
 }
 
 enum EmeraldResourceCompatStatus
@@ -702,6 +722,31 @@ EmeraldResourceCompat_InitializeFromSnapshot(
     EmeraldResourceCompatImage_Destroy(sSessionImage);
     sSessionImage = image;
     sInitialized = TRUE;
+
+    /* R9 §5: publish the Pokémon battle family from the same snapshot, with
+     * the same lifecycle. The Pokémon family is ADDITIVE: a snapshot that
+     * does not carry it (the trainer-only unit harness) - or whose Pokémon
+     * resources fail validation - leaves the Pokémon tables at their
+     * compiled payloads (until R9 §7): nothing mutated, no stale pointer
+     * ever installed, and the trainer family's own success stands (the
+     * seam's trainer contract predates R9). The diagnostics are cleared so
+     * the pinned trainer contract ("success leaves diagnostics empty")
+     * holds; the production proof catches a real pack regression anyway,
+     * because its post-init Pokémon verification fails loudly on any slot
+     * that did not publish. R9 §8 tightens this to hard-fail once the
+     * compiled payloads are gone on native. */
+    status = EmeraldPokemonCompat_TryInitialize(snapshot, diagnostics);
+    if (status != EMERALD_COMPAT_OK)
+    {
+        fprintf(stderr, "emerald compat: Pokémon battle family not published "
+                "(status %d%s%s) - tables stay at compiled payloads\n",
+                (int)status,
+                diagnostics != NULL && diagnostics->canonicalName[0] != '\0'
+                    ? " @ " : "",
+                diagnostics != NULL ? diagnostics->canonicalName : "");
+        ClearDiagnostics(diagnostics);
+    }
+
     return EMERALD_COMPAT_OK;
 }
 
@@ -733,6 +778,7 @@ void EmeraldResourceCompat_Shutdown(void)
     EmeraldResourceCompatImage_Destroy(sSessionImage);
     sSessionImage = NULL;
     sInitialized = FALSE;
+    EmeraldPokemonCompat_Shutdown();
 }
 
 #endif /* PLATFORM_SDL2 && NATIVE_LINUX */

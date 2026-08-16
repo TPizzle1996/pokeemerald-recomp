@@ -15,8 +15,8 @@
 #     -> Gen3ResourceCandidate_Build (1804-resource ROM_BASE snapshot,
 #        186 trainer front + 10 trainer back + 1608 Pokemon battle, R9)
 #     -> EmeraldResourceCompat_InitializeFromSnapshot
-#     -> EmeraldResourceCompatibilityImage
-#     -> live native trainer tables -> real loaders
+#     -> EmeraldResourceCompatibilityImage (trainer + Pokemon battle families)
+#     -> live native trainer + Pokemon battle tables -> real loaders
 #
 # Byte-for-byte vs canonical = the family descriptor
 # (resources/extraction/emerald/bpee01/trainer_front_family.toml) drives the
@@ -56,6 +56,7 @@ gcc -std=gnu99 -O2 -ffunction-sections -fdata-sections -Wl,--gc-sections \
     "$emerald_dir/emerald_rom_profile.c" \
     "$emerald_dir/emerald_resource_compat.c" \
     "$emerald_dir/emerald_trainer_native_compat.c" \
+    "$emerald_dir/emerald_pokemon_native_compat.c" \
     "$emerald_dir/emerald_resource_session.c" \
     "$here/emerald_trainer_native_compat_production.c" \
     -o "$tmp/emerald_trainer_native_compat_production"

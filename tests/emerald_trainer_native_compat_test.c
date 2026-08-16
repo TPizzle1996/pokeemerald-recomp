@@ -86,6 +86,7 @@
 #include "emerald/resources/emerald_resource_compat.h"
 #include "emerald/resources/emerald_resource_session.h"
 #include "emerald/resources/emerald_trainer_native_compat.h"
+#include "emerald/resources/pokemon_battle_slots.generated.h"
 
 /* config.h (pulled in by global.h via bios.c) defines NDEBUG; re-enable assert
  * support so the checks below are actually enforced. */
@@ -194,10 +195,22 @@ static const size_t kBackFrameCounts[EMERALD_TRAINER_BACK_SHEET_COUNT] =
 static u8 sLastLoadedPalette[EMERALD_TRAINER_PALETTE_SIZE];
 
 /* Sized generously (SPECIES_CELEBI = 251) so the decompress.c special-poke
- * loops never index past the stub; the load-path functions exercised here do
- * not touch these tables. */
+ * loops never index past the stub. R9 §5: on native all four Pokémon battle
+ * tables are mutable - the compat seam publishes the ROM_BASE session streams
+ * into their .data slots (the production proof stamps + verifies them); the
+ * const/non-const split mirrors data.h. The real table headers are re-checked
+ * against the generated slot map by the Stage 8 full-family test. */
+#if defined(NATIVE_LINUX)
+struct CompressedSpriteSheet gMonFrontPicTable[512] = { 0 };
+struct CompressedSpriteSheet gMonBackPicTable[512] = { 0 };
+struct CompressedSpritePalette gMonPaletteTable[512] = { 0 };
+struct CompressedSpritePalette gMonShinyPaletteTable[512] = { 0 };
+#else
 const struct CompressedSpriteSheet gMonFrontPicTable[512] = { 0 };
 const struct CompressedSpriteSheet gMonBackPicTable[512] = { 0 };
+const struct CompressedSpritePalette gMonPaletteTable[512] = { 0 };
+const struct CompressedSpritePalette gMonShinyPaletteTable[512] = { 0 };
+#endif
 
 void *AllocZeroed(u32 size)
 {
@@ -1151,6 +1164,22 @@ static void TestSaveStateAudit(void)
                              + TRAINER_PIC_SIZE * f);
         }
     }
+    /* R9 §5 additive degradation: this snapshot carries the trainer family
+     * only, so the Pokémon battle family is NOT published - every Pokémon
+     * slot stays at the NULL sentinel (the compiled payloads are still
+     * linked until R9 §7) while the trainer contract above stands. */
+    for (i = 0; i < POKEMON_BATTLE_SLOTS_PER_TABLE; i++)
+        CHECK("mon front slot untouched (additive degradation)",
+              gMonFrontPicTable[i].data == NULL);
+    for (i = 0; i < POKEMON_BATTLE_SLOTS_PER_TABLE; i++)
+        CHECK("mon back slot untouched (additive degradation)",
+              gMonBackPicTable[i].data == NULL);
+    for (i = 0; i < POKEMON_BATTLE_SLOTS_PER_TABLE; i++)
+        CHECK("mon palette slot untouched (additive degradation)",
+              gMonPaletteTable[i].data == NULL);
+    for (i = 0; i < POKEMON_BATTLE_SLOTS_PER_TABLE; i++)
+        CHECK("mon shiny slot untouched (additive degradation)",
+              gMonShinyPaletteTable[i].data == NULL);
     for (i = 0; i < ARRAY_COUNT(gTrainerFrontPicTable); i++)
         CHECK("sheet stream != palette stream",
               gTrainerFrontPicTable[i].data != gTrainerFrontPicPaletteTable[i].data);
