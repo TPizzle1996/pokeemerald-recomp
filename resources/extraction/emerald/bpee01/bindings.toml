@@ -1,0 +1,29 @@
+# Stage R1A extraction bindings — Emerald (BPEE, rev 0), Brendan trainer assets.
+#
+# Semantic declarations only: canonical ID, GBA symbol, source artifact, source
+# encoding, canonical representation and expected decoded size. There are NO
+# hand-maintained ROM offsets here; the offset is derived at generation time
+# from the matching GBA ELF symbol table (st_value - 0x08000000) and cross-
+# validated against the ROM slice bytes.
+#
+# `source_artifact` is maintainer provenance (the pret tree path). The canonical
+# decoded bytes are the sibling file with the ".lz" suffix removed.
+# `canonical_representation` is validated against the catalog `type`:
+#   tile-graphics  <-> gba-4bpp-tiles
+#   palette        <-> gba-bgr555-palette
+
+[[bindings]]
+id = "emerald:trainer/brendan/battle/front/sheet"
+symbol = "gTrainerFrontPic_Brendan"
+source_artifact = "graphics/trainers/front_pics/brendan.4bpp.lz"
+source_encoding = "gba-lz77"
+canonical_representation = "gba-4bpp-tiles"
+expected_decoded_size = 2048
+
+[[bindings]]
+id = "emerald:trainer/brendan/battle/front/normal-palette"
+symbol = "gTrainerPalette_Brendan"
+source_artifact = "graphics/trainers/palettes/brendan.gbapal.lz"
+source_encoding = "gba-lz77"
+canonical_representation = "gba-bgr555-palette"
+expected_decoded_size = 32

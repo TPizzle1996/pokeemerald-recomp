@@ -1,0 +1,177 @@
+# Stage R8 — complete trainer-back family descriptor (Emerald BPEE rev 0).
+#
+# Declarative source of truth for the trainer-BACK graphics family: 8 back
+# sheets + 2 unique back palettes. Consumed by the R8-extended family
+# generator (tools/gen3_resources/trainer_family/gen_trainer_family, invoked
+# with --back-descriptor alongside the front descriptor) which emits
+# back_bindings.generated.toml, back_ownership.generated.toml and
+# trainer_back_consumers.generated.toml; the catalog.toml entry list becomes
+# the union of both families (196). Do not hand-edit the generated files;
+# edit this descriptor and re-run the generator.
+#
+# Canonical-name rule (R7A §4): canonical = ASCII-lowercase of the
+# TRAINER_BACK_PIC_* constant suffix, underscores -> hyphens. Names are
+# persistent API.
+#
+# The 6 remaining back-palette slots (brendan, may, rs-brendan, rs-may,
+# wally, steven at gTrainerBackPicPaletteTable indices 0,1,4,5,6,7) are
+# ALIASES to the R7B front normal-palette resources: they are recorded as
+# consumers in trainer_front_consumers.generated.toml (back_palette_index)
+# and are deliberately NOT declared here — no duplicated payloads.
+#
+# Fields:
+#   canonical   public component of the canonical id (persistent API).
+#   slug        source-artifact basename (graphics/trainers/back_pics/<slug>.*).
+#   symbol      C symbol suffix (gTrainerBackPic_<symbol> /
+#               gTrainerBackPicPalette_<symbol>).
+#   pic         TRAINER_BACK_PIC_ constant suffix (identity anchor, index).
+#   index       explicit table index = the TRAINER_BACK_PIC_ value (0..7).
+#   sheet_size  decoded size in bytes: 8192 (4 frames x 2048) or
+#               10240 (5 frames x 2048, red/leaf).
+#   frames      SpriteFrameImage frame count (frame array length).
+#   frame_array the src/data.c SpriteFrameImage array that is the LIVE pixel
+#               surface for this sheet (sprite template .images).
+#   palette_dir "back_pics" (red/leaf back palettes live here).
+#   has_palette true only for red/leaf (the 2 unique back palettes); the 6
+#               others are front-palette aliases and have no payload here.
+#   ownership_native  ROM_BASE_ONLY (whole back family migrates in R8).
+#
+# Resource ID templates build the canonical id for each trainer as
+#   <namespace>:<path>  with "%s" = the trainer canonical component.
+#
+family_version = 1
+game = "emerald"
+rom_profile = "bpee01-rev0"
+namespace = "emerald"
+resource_api = "1.0.0"
+catalog_version = 1
+sheet_id_template = "emerald:trainer/%s/battle/back/sheet"
+palette_id_template = "emerald:trainer/%s/battle/back/palette"
+resource_type_sheet = "tile-graphics"
+resource_type_palette = "palette"
+schema = 1
+required_for_base = true
+sheet_decoded_size = 8192
+palette_decoded_size = 32
+sheet_encoding = "raw"
+palette_encoding = "gba-lz77"
+sheet_representation = "gba-4bpp-tiles"
+palette_representation = "gba-bgr555-palette"
+sheet_symbol_template = "gTrainerBackPic_%s"
+palette_symbol_template = "gTrainerBackPicPalette_%s"
+sheet_artifact_template = "graphics/trainers/back_pics/%s.4bpp"
+sheet_table = "gTrainerBackPicTable"
+palette_table = "gTrainerBackPicPaletteTable"
+family_label = "back"
+
+[[trainers]]
+canonical = "brendan"
+slug = "brendan"
+symbol = "Brendan"
+pic = "BRENDAN"
+index = 0
+sheet_size = 8192
+frames = 4
+size_mult = 4
+frame_array = "gTrainerBackPicTable_Brendan"
+palette_dir = "back_pics"
+has_palette = false
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "may"
+slug = "may"
+symbol = "May"
+pic = "MAY"
+index = 1
+sheet_size = 8192
+frames = 4
+size_mult = 4
+frame_array = "gTrainerBackPicTable_May"
+palette_dir = "back_pics"
+has_palette = false
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "red"
+slug = "red"
+symbol = "Red"
+pic = "RED"
+index = 2
+sheet_size = 10240
+frames = 5
+size_mult = 5
+frame_array = "gTrainerBackPicTable_Red"
+palette_dir = "back_pics"
+has_palette = true
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "leaf"
+slug = "leaf"
+symbol = "Leaf"
+pic = "LEAF"
+index = 3
+sheet_size = 10240
+frames = 5
+size_mult = 5
+frame_array = "gTrainerBackPicTable_Leaf"
+palette_dir = "back_pics"
+has_palette = true
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "ruby-sapphire-brendan"
+slug = "brendan_rs"
+symbol = "RubySapphireBrendan"
+pic = "RUBY_SAPPHIRE_BRENDAN"
+index = 4
+sheet_size = 8192
+frames = 4
+size_mult = 4
+frame_array = "gTrainerBackPicTable_RubySapphireBrendan"
+palette_dir = "back_pics"
+has_palette = false
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "ruby-sapphire-may"
+slug = "may_rs"
+symbol = "RubySapphireMay"
+pic = "RUBY_SAPPHIRE_MAY"
+index = 5
+sheet_size = 8192
+frames = 4
+size_mult = 4
+frame_array = "gTrainerBackPicTable_RubySapphireMay"
+palette_dir = "back_pics"
+has_palette = false
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "wally"
+slug = "wally"
+symbol = "Wally"
+pic = "WALLY"
+index = 6
+sheet_size = 8192
+frames = 4
+size_mult = 4
+frame_array = "gTrainerBackPicTable_Wally"
+palette_dir = "back_pics"
+has_palette = false
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "steven"
+slug = "steven"
+symbol = "Steven"
+pic = "STEVEN"
+index = 7
+sheet_size = 8192
+frames = 4
+size_mult = 4
+frame_array = "gTrainerBackPicTable_Steven"
+palette_dir = "back_pics"
+has_palette = false
+ownership_native = "ROM_BASE_ONLY"

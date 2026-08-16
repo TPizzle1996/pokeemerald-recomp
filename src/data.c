@@ -46,70 +46,108 @@ const struct SpriteFrameImage gBattlerPicTable_OpponentRight[] =
     {BATTLER_OFFSET(15), MON_PIC_SIZE},
 };
 
+/* R8: on native the frame tables are the published pixel surface: NULL
+ * sentinels (payloads are ROM_BASE-only), repointed by the compat seam to the
+ * session raw sheet + per-frame offsets. The GBA build keeps the compiled
+ * payload pointers and constness unchanged. */
+#if defined(NATIVE_LINUX)
+#define TRAINER_BACK_FRAME(trainerPic, frameNum) {NULL, TRAINER_PIC_SIZE}
+struct SpriteFrameImage gTrainerBackPicTable_Brendan[] =
+#else
+#define TRAINER_BACK_FRAME(trainerPic, frameNum) {gTrainerBackPic_##trainerPic + TRAINER_PIC_SIZE * frameNum, TRAINER_PIC_SIZE}
 const struct SpriteFrameImage gTrainerBackPicTable_Brendan[] =
+#endif
 {
-    {gTrainerBackPic_Brendan + TRAINER_PIC_SIZE * 0, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_Brendan + TRAINER_PIC_SIZE * 1, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_Brendan + TRAINER_PIC_SIZE * 2, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_Brendan + TRAINER_PIC_SIZE * 3, TRAINER_PIC_SIZE},
+    TRAINER_BACK_FRAME(Brendan, 0),
+    TRAINER_BACK_FRAME(Brendan, 1),
+    TRAINER_BACK_FRAME(Brendan, 2),
+    TRAINER_BACK_FRAME(Brendan, 3),
 };
 
+#if defined(NATIVE_LINUX)
+struct SpriteFrameImage gTrainerBackPicTable_May[] =
+#else
 const struct SpriteFrameImage gTrainerBackPicTable_May[] =
+#endif
 {
-    {gTrainerBackPic_May + TRAINER_PIC_SIZE * 0, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_May + TRAINER_PIC_SIZE * 1, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_May + TRAINER_PIC_SIZE * 2, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_May + TRAINER_PIC_SIZE * 3, TRAINER_PIC_SIZE},
+    TRAINER_BACK_FRAME(May, 0),
+    TRAINER_BACK_FRAME(May, 1),
+    TRAINER_BACK_FRAME(May, 2),
+    TRAINER_BACK_FRAME(May, 3),
 };
 
+#if defined(NATIVE_LINUX)
+struct SpriteFrameImage gTrainerBackPicTable_Red[] =
+#else
 const struct SpriteFrameImage gTrainerBackPicTable_Red[] =
+#endif
 {
-    {gTrainerBackPic_Red + TRAINER_PIC_SIZE * 0, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_Red + TRAINER_PIC_SIZE * 1, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_Red + TRAINER_PIC_SIZE * 2, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_Red + TRAINER_PIC_SIZE * 3, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_Red + TRAINER_PIC_SIZE * 4, TRAINER_PIC_SIZE},
+    TRAINER_BACK_FRAME(Red, 0),
+    TRAINER_BACK_FRAME(Red, 1),
+    TRAINER_BACK_FRAME(Red, 2),
+    TRAINER_BACK_FRAME(Red, 3),
+    TRAINER_BACK_FRAME(Red, 4),
 };
 
+#if defined(NATIVE_LINUX)
+struct SpriteFrameImage gTrainerBackPicTable_Leaf[] =
+#else
 const struct SpriteFrameImage gTrainerBackPicTable_Leaf[] =
+#endif
 {
-    {gTrainerBackPic_Leaf + TRAINER_PIC_SIZE * 0, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_Leaf + TRAINER_PIC_SIZE * 1, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_Leaf + TRAINER_PIC_SIZE * 2, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_Leaf + TRAINER_PIC_SIZE * 3, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_Leaf + TRAINER_PIC_SIZE * 4, TRAINER_PIC_SIZE},
+    TRAINER_BACK_FRAME(Leaf, 0),
+    TRAINER_BACK_FRAME(Leaf, 1),
+    TRAINER_BACK_FRAME(Leaf, 2),
+    TRAINER_BACK_FRAME(Leaf, 3),
+    TRAINER_BACK_FRAME(Leaf, 4),
 };
 
+#if defined(NATIVE_LINUX)
+struct SpriteFrameImage gTrainerBackPicTable_RubySapphireBrendan[] =
+#else
 const struct SpriteFrameImage gTrainerBackPicTable_RubySapphireBrendan[] =
+#endif
 {
-    {gTrainerBackPic_RubySapphireBrendan + TRAINER_PIC_SIZE * 0, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_RubySapphireBrendan + TRAINER_PIC_SIZE * 1, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_RubySapphireBrendan + TRAINER_PIC_SIZE * 2, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_RubySapphireBrendan + TRAINER_PIC_SIZE * 3, TRAINER_PIC_SIZE},
+    TRAINER_BACK_FRAME(RubySapphireBrendan, 0),
+    TRAINER_BACK_FRAME(RubySapphireBrendan, 1),
+    TRAINER_BACK_FRAME(RubySapphireBrendan, 2),
+    TRAINER_BACK_FRAME(RubySapphireBrendan, 3),
 };
 
+#if defined(NATIVE_LINUX)
+struct SpriteFrameImage gTrainerBackPicTable_RubySapphireMay[] =
+#else
 const struct SpriteFrameImage gTrainerBackPicTable_RubySapphireMay[] =
+#endif
 {
-    {gTrainerBackPic_RubySapphireMay + TRAINER_PIC_SIZE * 0, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_RubySapphireMay + TRAINER_PIC_SIZE * 1, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_RubySapphireMay + TRAINER_PIC_SIZE * 2, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_RubySapphireMay + TRAINER_PIC_SIZE * 3, TRAINER_PIC_SIZE},
+    TRAINER_BACK_FRAME(RubySapphireMay, 0),
+    TRAINER_BACK_FRAME(RubySapphireMay, 1),
+    TRAINER_BACK_FRAME(RubySapphireMay, 2),
+    TRAINER_BACK_FRAME(RubySapphireMay, 3),
 };
 
+#if defined(NATIVE_LINUX)
+struct SpriteFrameImage gTrainerBackPicTable_Wally[] =
+#else
 const struct SpriteFrameImage gTrainerBackPicTable_Wally[] =
+#endif
 {
-    {gTrainerBackPic_Wally + TRAINER_PIC_SIZE * 0, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_Wally + TRAINER_PIC_SIZE * 1, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_Wally + TRAINER_PIC_SIZE * 2, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_Wally + TRAINER_PIC_SIZE * 3, TRAINER_PIC_SIZE},
+    TRAINER_BACK_FRAME(Wally, 0),
+    TRAINER_BACK_FRAME(Wally, 1),
+    TRAINER_BACK_FRAME(Wally, 2),
+    TRAINER_BACK_FRAME(Wally, 3),
 };
 
+#if defined(NATIVE_LINUX)
+struct SpriteFrameImage gTrainerBackPicTable_Steven[] =
+#else
 const struct SpriteFrameImage gTrainerBackPicTable_Steven[] =
+#endif
 {
-    {gTrainerBackPic_Steven + TRAINER_PIC_SIZE * 0, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_Steven + TRAINER_PIC_SIZE * 1, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_Steven + TRAINER_PIC_SIZE * 2, TRAINER_PIC_SIZE},
-    {gTrainerBackPic_Steven + TRAINER_PIC_SIZE * 3, TRAINER_PIC_SIZE},
+    TRAINER_BACK_FRAME(Steven, 0),
+    TRAINER_BACK_FRAME(Steven, 1),
+    TRAINER_BACK_FRAME(Steven, 2),
+    TRAINER_BACK_FRAME(Steven, 3),
 };
 
 static const union AnimCmd sAnim_GeneralFrame0[] =

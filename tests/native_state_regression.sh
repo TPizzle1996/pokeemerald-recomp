@@ -35,6 +35,7 @@ trap 'rm -rf "$data_root"' EXIT
 output=$(POKEEMERALD_DATA_ROOT="$data_root" "$binary" --native-state-self-test)
 printf '%s\n' "$output"
 printf '%s\n' "$output" | grep -q 'Native state self-test passed (quick and slot 1)'
+printf '%s\n' "$output" | grep -q 'Native state self-test passed (trainer family republish)'
 
 test -s "$data_root/profiles/default/states/quick.state"
 test -s "$data_root/profiles/default/states/slot1.state"

@@ -932,7 +932,13 @@ const u32 gBattleAnimSpritePal_FlatRock[] = INCBIN_U32("graphics/battle_anims/sp
 const u32 gBattleAnimUnusedPal_Unknown2[] = INCBIN_U32("graphics/battle_anims/unused/unknown_2.gbapal.lz");
 
 #include "data/graphics/pokemon.h"
-#include "data/graphics/trainers.h"
+
+/* R8: the trainer payloads (front family + back family) no longer compile on
+ * the native target at all - they are ROM_BASE-only - so the old
+ * data/graphics/trainers.h include is gone. The GBA build compiles them from
+ * the GBA-only TUs src/data/graphics/trainers_front_payload.c and
+ * src/data/graphics/trainers_back_payload.c (auto-collected by the GBA
+ * Makefile's wildcard; excluded from Makefile_pc under NATIVE_LINUX=1). */
 
 const u8 gMonIcon_QuestionMark[] = INCBIN_U8("graphics/pokemon/question_mark/icon.4bpp");
 const u8 gMonFootprint_QuestionMark[] = INCBIN_U8("graphics/pokemon/question_mark/footprint.1bpp");

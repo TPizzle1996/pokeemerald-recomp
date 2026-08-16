@@ -95,9 +95,26 @@ const struct MonCoords gTrainerFrontPicCoords[] =
     [TRAINER_PIC_RS_MAY] = {.size = 8, .y_offset = 1},
 };
 
+#if defined(NATIVE_LINUX)
+/* Native target (R7B §4): every trainer-front sheet pointer is a NULL sentinel
+ * - the whole family is ROM_BASE-only, so no legacy leaf symbol exists in the
+ * native link, and the compat seam publishes the session pointers into these
+ * slots at init (§15). The `sprite` argument is intentionally unused here;
+ * sizes and tags are retained exactly. */
+#define TRAINER_SPRITE(trainerPic, sprite, size) [TRAINER_PIC_##trainerPic] = {NULL, size, TRAINER_PIC_##trainerPic}
+#else
 #define TRAINER_SPRITE(trainerPic, sprite, size) [TRAINER_PIC_##trainerPic] = {sprite, size, TRAINER_PIC_##trainerPic}
+#endif
 
+#if defined(NATIVE_LINUX)
+/* Native-target-only mutability: the R7B compatibility seam publishes
+ * ROM_BASE-resolved family payload pointers into the two trainer tables at
+ * session init. The GBA build keeps these tables const (compile-time assets).
+ * Layout, indices, tags and sizes are identical on both targets. */
+struct CompressedSpriteSheet gTrainerFrontPicTable[] =
+#else
 const struct CompressedSpriteSheet gTrainerFrontPicTable[] =
+#endif
 {
     TRAINER_SPRITE(HIKER, gTrainerFrontPic_Hiker, TRAINER_PIC_SIZE),
     TRAINER_SPRITE(AQUA_GRUNT_M, gTrainerFrontPic_AquaGruntM, TRAINER_PIC_SIZE),
@@ -194,9 +211,19 @@ const struct CompressedSpriteSheet gTrainerFrontPicTable[] =
     TRAINER_SPRITE(RS_MAY, gTrainerFrontPic_RubySapphireMay, TRAINER_PIC_SIZE),
 };
 
+#if defined(NATIVE_LINUX)
+/* Native target (R7B §4): as TRAINER_SPRITE above - NULL palette sentinel for
+ * every migrated front slot; tags retained exactly. */
+#define TRAINER_PAL(trainerPic, pal) [TRAINER_PIC_##trainerPic] = {NULL, TRAINER_PIC_##trainerPic}
+#else
 #define TRAINER_PAL(trainerPic, pal) [TRAINER_PIC_##trainerPic] = {pal, TRAINER_PIC_##trainerPic}
+#endif
 
+#if defined(NATIVE_LINUX)
+struct CompressedSpritePalette gTrainerFrontPicPaletteTable[] =
+#else
 const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[] =
+#endif
 {
     TRAINER_PAL(HIKER, gTrainerPalette_Hiker),
     TRAINER_PAL(AQUA_GRUNT_M, gTrainerPalette_AquaGruntM),

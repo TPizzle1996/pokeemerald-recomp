@@ -1,0 +1,887 @@
+#include "manifest.h"
+
+#include <errno.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include "elf_reader.h"
+#include "gen3/resources/lz77.h"
+#include "gen3/resources/sha1.h"
+#include "gen3/resources/resource_id.h"
+#include "gen3/resources/sha256.h"
+
+#define GBA_HEADER_GAME_CODE 0xAC
+#define GBA_HEADER_MAKER_CODE 0xB0
+#define GBA_HEADER_REVISION 0xBC
+
+/* ---- error plumbing ----------------------------------------------------- */
+
+static void SetError(char *errbuf, size_t errbufSize, const char *format, ...)
+{
+    va_list args;
+    int needed;
+    if (errbuf == NULL || errbufSize == 0)
+        return;
+    va_start(args, format);
+    needed = vsnprintf(NULL, 0, format, args);
+    va_end(args);
+    if (needed < 0)
+    {
+        errbuf[0] = '\0';
+        return;
+    }
+    if ((size_t)needed >= errbufSize)
+        needed = (int)errbufSize - 1;
+    va_start(args, format);
+    vsnprintf(errbuf, (size_t)needed + 1u, format, args);
+    va_end(args);
+}
+
+/* ---- digest helpers ----------------------------------------------------- */
+
+static void Sha1Of(const uint8_t *data, size_t size, uint8_t digest[20])
+{
+    struct Gen3Sha1Context context;
+    Gen3Sha1_Init(&context);
+    Gen3Sha1_Update(&context, data, size);
+    Gen3Sha1_Final(&context, digest);
+}
+
+static void Sha256Of(const uint8_t *data, size_t size, uint8_t digest[32])
+{
+    struct Gen3Sha256Context context;
+    Gen3Sha256_Init(&context);
+    Gen3Sha256_Update(&context, data, size);
+    Gen3Sha256_Final(&context, digest);
+}
+
+static int HexNibble(char character)
+{
+    if (character >= '0' && character <= '9')
+        return character - '0';
+    if (character >= 'a' && character <= 'f')
+        return character - 'a' + 10;
+    if (character >= 'A' && character <= 'F')
+        return character - 'A' + 10;
+    return -1;
+}
+
+static bool ParseHex(const char *hex, uint8_t *out, size_t size)
+{
+    size_t i;
+    if (hex == NULL || out == NULL)
+        return false;
+    if (strlen(hex) != size * 2u)
+        return false;
+    for (i = 0; i < size; i++)
+    {
+        int high = HexNibble(hex[i * 2u]);
+        int low = HexNibble(hex[i * 2u + 1u]);
+        if (high < 0 || low < 0)
+            return false;
+        out[i] = (uint8_t)((high << 4) | low);
+    }
+    return true;
+}
+
+/* ---- ROM identity ------------------------------------------------------- */
+
+static bool CheckRomIdentity(const uint8_t *rom, size_t romSize,
+                             const struct Gen3ManifestConfig *config,
+                             const char **badField)
+{
+    const char *gameCode = (config != NULL && config->romGameCode != NULL) ? config->romGameCode : "BPEE";
+    const char *makerCode = (config != NULL && config->romMakerCode != NULL) ? config->romMakerCode : "01";
+    unsigned revision = config != NULL ? config->romRevision : 0;
+    if (romSize != GEN3_ROM_SIZE)
+    {
+        *badField = "size";
+        return false;
+    }
+    if (strlen(gameCode) != 4 || memcmp(rom + GBA_HEADER_GAME_CODE, gameCode, 4) != 0)
+    {
+        *badField = "game code";
+        return false;
+    }
+    if (strlen(makerCode) != 2 || memcmp(rom + GBA_HEADER_MAKER_CODE, makerCode, 2) != 0)
+    {
+        *badField = "maker code";
+        return false;
+    }
+    if (rom[GBA_HEADER_REVISION] != (uint8_t)revision)
+    {
+        *badField = "software revision";
+        return false;
+    }
+    return true;
+}
+
+/* ---- catalog helpers ---------------------------------------------------- */
+
+static const struct Gen3CatalogEntry *FindCatalogEntry(
+    const struct Gen3CatalogEntry *catalog, size_t catalogCount, const char *id)
+{
+    size_t i;
+    for (i = 0; i < catalogCount; i++)
+    {
+        if (strcmp(catalog[i].id, id) == 0)
+            return &catalog[i];
+    }
+    return NULL;
+}
+
+static bool TypeCompatibleWithRepresentation(const char *catalogType,
+                                             const char *canonicalRepresentation)
+{
+    if (strcmp(catalogType, "tile-graphics") == 0)
+        return strcmp(canonicalRepresentation, "gba-4bpp-tiles") == 0;
+    if (strcmp(catalogType, "palette") == 0)
+        return strcmp(canonicalRepresentation, "gba-bgr555-palette") == 0;
+    return false;
+}
+
+/* ---- duplicate-range check ---------------------------------------------- */
+
+struct RangeCheck
+{
+    const char *id;
+    uint32_t offset;
+    uint32_t end;
+    bool allowShared;
+};
+
+static int CompareRangeByOffset(const void *left, const void *right)
+{
+    const struct RangeCheck *a = left;
+    const struct RangeCheck *b = right;
+    if (a->offset < b->offset)
+        return -1;
+    if (a->offset > b->offset)
+        return 1;
+    return strcmp(a->id, b->id);
+}
+
+/* ---- record ordering ---------------------------------------------------- */
+
+static int CompareRecordById(const void *left, const void *right)
+{
+    const struct Gen3ManifestRecord *a = left;
+    const struct Gen3ManifestRecord *b = right;
+    return strcmp(a->id, b->id);
+}
+
+/* ---- generation core ---------------------------------------------------- */
+
+enum Gen3ManifestResult Gen3Manifest_Generate(
+    const struct Gen3ManifestMeta *meta,
+    const struct Gen3CatalogEntry *catalog, size_t catalogCount,
+    const struct Gen3BindingInput *bindings, size_t bindingCount,
+    const uint8_t *elfData, size_t elfSize,
+    const uint8_t *romData, size_t romSize,
+    const struct Gen3ManifestConfig *config,
+    struct Gen3Buffer *outManifest,
+    char *errbuf, size_t errbufSize)
+{
+    const char *expectedSha1Hex = (config != NULL && config->expectedRomSha1Hex != NULL)
+        ? config->expectedRomSha1Hex : GEN3_DEFAULT_ROM_SHA1_HEX;
+    uint8_t expectedSha1[20];
+    uint8_t romSha1[20];
+    uint8_t romSha256[32];
+    struct Gen3Elf elf;
+    struct Gen3ManifestRecord *records = NULL;
+    struct RangeCheck *ranges = NULL;
+    size_t i;
+    enum Gen3ManifestResult result = GEN3_MANIFEST_INVALID_INPUT;
+
+    if (outManifest == NULL)
+        return GEN3_MANIFEST_INVALID_INPUT;
+    /* Leave the output in a safe empty state now; real capacity is allocated
+     * only at serialization so early validation failures do not leak it. */
+    Gen3Buffer_Init(outManifest, 0);
+    if (catalog == NULL || bindings == NULL || elfData == NULL || romData == NULL)
+    {
+        SetError(errbuf, errbufSize, "internal: null generation argument");
+        return GEN3_MANIFEST_INVALID_INPUT;
+    }
+
+    /* Guardrail: the qualification field is restricted to the two supported
+     * values so a manifest can never silently claim a status it does not have.
+     * NULL defaults to "fixture" (never "production"). */
+    {
+        const char *qualification = (config != NULL && config->qualification != NULL)
+            ? config->qualification : "fixture";
+        if (strcmp(qualification, "fixture") != 0
+         && strcmp(qualification, "production") != 0)
+        {
+            SetError(errbuf, errbufSize,
+                     "invalid manifest qualification '%s' (expected \"fixture\" or \"production\")",
+                     qualification);
+            return GEN3_MANIFEST_BAD_QUALIFICATION;
+        }
+    }
+
+    /* Guardrail 1-4: ROM size, identity, SHA-1, SHA-256. */
+    {
+        const char *badField = NULL;
+        if (!CheckRomIdentity(romData, romSize, config, &badField))
+        {
+            SetError(errbuf, errbufSize, "ROM identity check failed: %s", badField);
+            return GEN3_MANIFEST_BAD_ROM_SIZE;
+        }
+    }
+    Sha1Of(romData, romSize, romSha1);
+    if (!ParseHex(expectedSha1Hex, expectedSha1, sizeof(expectedSha1)))
+    {
+        SetError(errbuf, errbufSize, "invalid expected ROM SHA-1 '%s'", expectedSha1Hex);
+        return GEN3_MANIFEST_BAD_ROM_SHA1;
+    }
+    if (memcmp(romSha1, expectedSha1, sizeof(romSha1)) != 0)
+    {
+        char actual[GEN3_SHA1_HEX_SIZE];
+        Gen3Util_FormatHex(romSha1, sizeof(romSha1), actual);
+        SetError(errbuf, errbufSize, "ROM SHA-1 mismatch: expected %s, got %s",
+                 expectedSha1Hex, actual);
+        return GEN3_MANIFEST_BAD_ROM_SHA1;
+    }
+    Sha256Of(romData, romSize, romSha256);
+
+    /* Guardrail 5-7: ELF symbol table. */
+    memset(&elf, 0, sizeof(elf));
+    {
+        enum Gen3ElfResult elfResult = Gen3Elf_Open(elfData, elfSize, &elf);
+        if (elfResult != GEN3_ELF_OK)
+        {
+            SetError(errbuf, errbufSize, "ELF parse failed (error %d)", (int)elfResult);
+            return GEN3_MANIFEST_BAD_ELF;
+        }
+    }
+
+    /* Duplicate canonical ids (catalog and bindings). */
+    for (i = 0; i < catalogCount; i++)
+    {
+        size_t j;
+        for (j = i + 1u; j < catalogCount; j++)
+        {
+            if (strcmp(catalog[i].id, catalog[j].id) == 0)
+            {
+                SetError(errbuf, errbufSize, "duplicate catalog resource id '%s'", catalog[i].id);
+                result = GEN3_MANIFEST_DUPLICATE_ID;
+                goto done;
+            }
+        }
+    }
+    for (i = 0; i < bindingCount; i++)
+    {
+        size_t j;
+        for (j = i + 1u; j < bindingCount; j++)
+        {
+            if (strcmp(bindings[i].id, bindings[j].id) == 0)
+            {
+                SetError(errbuf, errbufSize, "duplicate binding id '%s'", bindings[i].id);
+                result = GEN3_MANIFEST_DUPLICATE_ID;
+                goto done;
+            }
+        }
+    }
+
+    records = calloc(bindingCount != 0 ? bindingCount : 1u, sizeof(*records));
+    ranges = calloc(bindingCount != 0 ? bindingCount : 1u, sizeof(*ranges));
+    if (records == NULL || ranges == NULL)
+    {
+        SetError(errbuf, errbufSize, "out of memory building manifest records");
+        result = GEN3_MANIFEST_INVALID_INPUT;
+        goto done;
+    }
+
+    for (i = 0; i < bindingCount; i++)
+    {
+        const struct Gen3BindingInput *binding = &bindings[i];
+        const struct Gen3CatalogEntry *catalogEntry;
+        const struct Gen3ElfSymbol *symbol;
+        size_t elfOffset;
+        size_t elfLength;
+        uint32_t romOffset;
+        uint32_t encodedLength;
+        size_t romEnd;
+        uint8_t *decoded = NULL;
+        size_t decodedSize = 0;
+        const uint8_t *canonicalBytes = NULL;
+        Gen3ResourceKey key;
+
+        if (Gen3ResourceId_ValidateCanonicalName(binding->id) != GEN3_RESOURCE_NAME_VALID)
+        {
+            SetError(errbuf, errbufSize, "binding id '%s' is not a valid canonical name",
+                     binding->id);
+            result = GEN3_MANIFEST_INVALID_NAME;
+            goto done;
+        }
+        catalogEntry = FindCatalogEntry(catalog, catalogCount, binding->id);
+        if (catalogEntry == NULL)
+        {
+            SetError(errbuf, errbufSize, "binding id '%s' is not declared in the catalog",
+                     binding->id);
+            result = GEN3_MANIFEST_UNKNOWN_RESOURCE;
+            goto done;
+        }
+        if (!TypeCompatibleWithRepresentation(catalogEntry->type, binding->canonicalRepresentation))
+        {
+            SetError(errbuf, errbufSize,
+                     "binding '%s': canonical representation '%s' is incompatible with catalog type '%s'",
+                     binding->id, binding->canonicalRepresentation, catalogEntry->type);
+            result = GEN3_MANIFEST_TYPE_MISMATCH;
+            goto done;
+        }
+
+        symbol = Gen3Elf_FindSymbol(&elf, binding->symbol);
+        if (symbol == NULL)
+        {
+            SetError(errbuf, errbufSize, "binding '%s': symbol '%s' not found in the ELF",
+                     binding->id, binding->symbol);
+            result = GEN3_MANIFEST_MISSING_SYMBOL;
+            goto done;
+        }
+        if (!Gen3Elf_SymbolFileRange(&elf, symbol, &elfOffset, &elfLength))
+        {
+            SetError(errbuf, errbufSize,
+                     "binding '%s': symbol '%s' is not an allocated ROM object at or above 0x%08x",
+                     binding->id, binding->symbol, GEN3_GBA_ROM_BASE);
+            result = GEN3_MANIFEST_SYMBOL_NOT_ROM;
+            goto done;
+        }
+        romOffset = symbol->value - GEN3_GBA_ROM_BASE;
+        encodedLength = symbol->size;
+        romEnd = (size_t)romOffset + encodedLength;
+        if (romEnd > GEN3_ROM_SIZE)
+        {
+            SetError(errbuf, errbufSize,
+                     "binding '%s': symbol '%s' occupies ROM [0x%08x, 0x%08x), past the 16 MiB image",
+                     binding->id, binding->symbol, romOffset, (uint32_t)romEnd);
+            result = GEN3_MANIFEST_ROM_RANGE_OVERFLOW;
+            goto done;
+        }
+
+        /* Guardrail 10: source artifact == ELF symbol bytes == ROM slice. */
+        if (binding->sourceArtifactSize != encodedLength
+         || memcmp(binding->sourceArtifact, elfData + elfOffset, encodedLength) != 0
+         || memcmp(binding->sourceArtifact, romData + romOffset, encodedLength) != 0)
+        {
+            SetError(errbuf, errbufSize,
+                     "binding '%s': source artifact does not match the ELF/ROM bytes at symbol '%s'",
+                     binding->id, binding->symbol);
+            result = GEN3_MANIFEST_ARTIFACT_MISMATCH;
+            goto done;
+        }
+
+        /* Guardrail 11: decode by source encoding.
+         *   gba-lz77: strict LZ77 decode with a three-way size agreement
+         *             (LZ header == binding expected == binding canonical).
+         *   raw:     (R8 back sheets) the artifact IS the canonical decoded
+         *             payload; encoded == decoded, no header, no decode. */
+        if (strcmp(binding->sourceEncoding, "raw") == 0)
+        {
+            if (binding->sourceArtifactSize != binding->expectedDecodedSize
+             || binding->sourceArtifactSize != binding->canonicalDecodedSize)
+            {
+                SetError(errbuf, errbufSize,
+                         "binding '%s': raw size mismatch (artifact %zu, "
+                         "binding expected %u, canonical %zu)",
+                         binding->id, binding->sourceArtifactSize,
+                         binding->expectedDecodedSize, binding->canonicalDecodedSize);
+                result = GEN3_MANIFEST_DECODED_SIZE_MISMATCH;
+                goto done;
+            }
+            /* Guardrails 12-13: artifact bytes == canonical decoded artifact. */
+            if (memcmp(binding->sourceArtifact, binding->canonicalDecoded,
+                       binding->sourceArtifactSize) != 0)
+            {
+                SetError(errbuf, errbufSize,
+                         "binding '%s': raw artifact does not match the canonical "
+                         "decoded artifact", binding->id);
+                result = GEN3_MANIFEST_CANONICAL_MISMATCH;
+                goto done;
+            }
+            decodedSize = binding->sourceArtifactSize;
+            canonicalBytes = binding->sourceArtifact;
+        }
+        else if (strcmp(binding->sourceEncoding, "gba-lz77") == 0)
+        {
+            uint32_t declaredSize;
+            enum Gen3Lz77Result lzResult;
+            if (binding->sourceArtifactSize < 4 || binding->sourceArtifact[0] != 0x10)
+            {
+                SetError(errbuf, errbufSize, "binding '%s': not a GBA LZ77 (.lz) stream",
+                         binding->id);
+                result = GEN3_MANIFEST_LZ_FAILED;
+                goto done;
+            }
+            declaredSize = (uint32_t)binding->sourceArtifact[1]
+                         | ((uint32_t)binding->sourceArtifact[2] << 8)
+                         | ((uint32_t)binding->sourceArtifact[3] << 16);
+            if ((size_t)declaredSize != binding->expectedDecodedSize
+             || (size_t)declaredSize != binding->canonicalDecodedSize)
+            {
+                SetError(errbuf, errbufSize,
+                         "binding '%s': decoded size mismatch (LZ header %u, binding %u, artifact %zu)",
+                         binding->id, declaredSize, binding->expectedDecodedSize,
+                         binding->canonicalDecodedSize);
+                result = GEN3_MANIFEST_DECODED_SIZE_MISMATCH;
+                goto done;
+            }
+            decoded = malloc(declaredSize != 0 ? declaredSize : 1u);
+            if (decoded == NULL)
+            {
+                SetError(errbuf, errbufSize, "out of memory decoding '%s'", binding->id);
+                result = GEN3_MANIFEST_INVALID_INPUT;
+                goto done;
+            }
+            lzResult = Gen3Lz77_Decode(binding->sourceArtifact, binding->sourceArtifactSize,
+                                       decoded, declaredSize, &decodedSize);
+            if (lzResult != GEN3_LZ77_OK)
+            {
+                SetError(errbuf, errbufSize, "binding '%s': LZ77 decode rejected (error %d)",
+                         binding->id, (int)lzResult);
+                free(decoded);
+                result = GEN3_MANIFEST_LZ_FAILED;
+                goto done;
+            }
+            if (decodedSize != (size_t)declaredSize)
+            {
+                SetError(errbuf, errbufSize, "binding '%s': decoded %zu bytes, header declared %u",
+                         binding->id, decodedSize, declaredSize);
+                free(decoded);
+                result = GEN3_MANIFEST_DECODED_SIZE_MISMATCH;
+                goto done;
+            }
+
+            /* Guardrails 12-13: decoded bytes == canonical decoded artifact. */
+            if (decodedSize != binding->canonicalDecodedSize
+             || memcmp(decoded, binding->canonicalDecoded, decodedSize) != 0)
+            {
+                SetError(errbuf, errbufSize,
+                         "binding '%s': decoded bytes do not match the canonical decoded artifact",
+                         binding->id);
+                free(decoded);
+                result = GEN3_MANIFEST_CANONICAL_MISMATCH;
+                goto done;
+            }
+            canonicalBytes = decoded;
+        }
+        else
+        {
+            SetError(errbuf, errbufSize,
+                     "binding '%s': unsupported source encoding '%s' (gba-lz77 or raw)",
+                     binding->id, binding->sourceEncoding);
+            result = GEN3_MANIFEST_UNSUPPORTED_ENCODING;
+            goto done;
+        }
+
+        records[i].id = binding->id;
+        records[i].type = catalogEntry->type;
+        records[i].schema = catalogEntry->schema;
+        records[i].symbol = binding->symbol;
+        records[i].romOffset = romOffset;
+        records[i].encodedLength = encodedLength;
+        records[i].decodedLength = (uint32_t)decodedSize;
+        records[i].sourceEncoding = binding->sourceEncoding;
+        Sha256Of(binding->sourceArtifact, binding->sourceArtifactSize,
+                 records[i].sourceEncodedSha256);
+        Sha256Of(canonicalBytes, decodedSize, records[i].canonicalDecodedSha256);
+        Gen3ResourceId_DeriveKey(binding->id, &key);
+        memcpy(records[i].key, key.bytes, sizeof(key.bytes));
+
+        ranges[i].id = binding->id;
+        ranges[i].offset = romOffset;
+        ranges[i].end = (uint32_t)romEnd;
+        ranges[i].allowShared = binding->allowSharedRange;
+
+        free(decoded);
+        decoded = NULL;
+    }
+
+    /* Records are emitted sorted bytewise by canonical id. */
+    if (bindingCount > 1)
+        qsort(records, bindingCount, sizeof(*records), CompareRecordById);
+
+    /* Duplicate-range detection (overlapping allocations are rejected unless
+     * the binding explicitly allows sharing). */
+    {
+        struct RangeCheck *sortedRanges;
+        sortedRanges = malloc((bindingCount != 0 ? bindingCount : 1u) * sizeof(*sortedRanges));
+        if (sortedRanges == NULL)
+        {
+            SetError(errbuf, errbufSize, "out of memory checking ROM ranges");
+            result = GEN3_MANIFEST_INVALID_INPUT;
+            goto done;
+        }
+        memcpy(sortedRanges, ranges, bindingCount * sizeof(*sortedRanges));
+        if (bindingCount > 1)
+            qsort(sortedRanges, bindingCount, sizeof(*sortedRanges), CompareRangeByOffset);
+        for (i = 1; i < bindingCount; i++)
+        {
+            const struct RangeCheck *previous = &sortedRanges[i - 1u];
+            const struct RangeCheck *current = &sortedRanges[i];
+            if (previous->end > current->offset
+             && !previous->allowShared && !current->allowShared)
+            {
+                SetError(errbuf, errbufSize,
+                         "ROM range of '%s' overlaps '%s' (and neither allows a shared range)",
+                         current->id, previous->id);
+                free(sortedRanges);
+                result = GEN3_MANIFEST_DUPLICATE_RANGE;
+                goto done;
+            }
+        }
+        free(sortedRanges);
+    }
+
+    /* Guardrails 14-16: key reuse + deterministic serialization. */
+    if (!Gen3Buffer_Init(outManifest, 4096))
+    {
+        SetError(errbuf, errbufSize, "out of memory");
+        result = GEN3_MANIFEST_INVALID_INPUT;
+        goto done;
+    }
+    if (!Gen3Manifest_Serialize(meta, records, bindingCount, romSha1, romSha256,
+                                GEN3_ROM_SIZE,
+                                config != NULL ? config->provenance : NULL,
+                                config != NULL ? config->qualification : NULL,
+                                outManifest))
+    {
+        SetError(errbuf, errbufSize, "out of memory serializing the manifest");
+        result = GEN3_MANIFEST_INVALID_INPUT;
+        goto done;
+    }
+    result = GEN3_MANIFEST_OK;
+
+done:
+    Gen3Elf_Destroy(&elf);
+    free(records);
+    free(ranges);
+    return result;
+}
+
+/* ---- serialization ------------------------------------------------------ */
+
+bool Gen3Manifest_Serialize(const struct Gen3ManifestMeta *meta,
+                            const struct Gen3ManifestRecord *records, size_t recordCount,
+                            const uint8_t romSha1[20], const uint8_t romSha256[32],
+                            uint32_t romSize, const char *provenance,
+                            const char *qualification,
+                            struct Gen3Buffer *out)
+{
+    const char *namespace = (meta != NULL && meta->namespace != NULL) ? meta->namespace : "emerald";
+    const char *resourceApi = (meta != NULL && meta->resourceApi != NULL) ? meta->resourceApi : "1.0.0";
+    char sha1Hex[GEN3_SHA1_HEX_SIZE];
+    char sha256Hex[GEN3_SHA256_HEX_SIZE];
+    size_t i;
+    if (out == NULL || records == NULL)
+        return false;
+    Gen3Util_FormatHex(romSha1, 20, sha1Hex);
+    Gen3Util_FormatHex(romSha256, 32, sha256Hex);
+
+    Gen3Buffer_AppendCStr(out, "# Deterministic extraction manifest - generated by tools/gen3_resources/elf_manifest.\n");
+    Gen3Buffer_AppendCStr(out, "# Do not edit by hand; regenerate with `gen3-elf-manifest --check`.\n");
+    Gen3Buffer_AppendCStr(out, "# Records are sorted bytewise by canonical resource id.\n");
+    if (provenance != NULL && provenance[0] != '\0')
+    {
+        Gen3Buffer_AppendCStr(out, "# provenance: ");
+        Gen3Buffer_AppendCStr(out, provenance);
+        Gen3Buffer_AppendCStr(out, "\n");
+    }
+    Gen3TomlWrite_Integer(out, "manifest_version", GEN3_MANIFEST_VERSION);
+    Gen3TomlWrite_String(out, "namespace", namespace);
+    Gen3TomlWrite_String(out, "resource_api", resourceApi);
+    {
+        const char *game = (meta != NULL && meta->game != NULL) ? meta->game : NULL;
+        const char *romProfile = (meta != NULL && meta->romProfile != NULL) ? meta->romProfile : NULL;
+        const char *qualificationField = (qualification != NULL && qualification[0] != '\0')
+            ? qualification : "fixture";
+        if (game != NULL && game[0] != '\0')
+            Gen3TomlWrite_String(out, "game", game);
+        if (romProfile != NULL && romProfile[0] != '\0')
+            Gen3TomlWrite_String(out, "rom_profile", romProfile);
+        Gen3TomlWrite_String(out, "qualification", qualificationField);
+    }
+    Gen3TomlWrite_Integer(out, "rom_size", (long long)romSize);
+    Gen3TomlWrite_String(out, "rom_sha1", sha1Hex);
+    Gen3TomlWrite_String(out, "rom_sha256", sha256Hex);
+    Gen3Buffer_AppendCStr(out, "\n");
+
+    for (i = 0; i < recordCount; i++)
+    {
+        const struct Gen3ManifestRecord *record = &records[i];
+        char keyHex[GEN3_SHA256_HEX_SIZE];
+        char sourceHex[GEN3_SHA256_HEX_SIZE];
+        char decodedHex[GEN3_SHA256_HEX_SIZE];
+        Gen3Util_FormatHex(record->key, sizeof(record->key), keyHex);
+        Gen3Util_FormatHex(record->sourceEncodedSha256, sizeof(record->sourceEncodedSha256), sourceHex);
+        Gen3Util_FormatHex(record->canonicalDecodedSha256, sizeof(record->canonicalDecodedSha256), decodedHex);
+
+        Gen3TomlWrite_OpenArrayTable(out, "records");
+        Gen3TomlWrite_String(out, "id", record->id);
+        Gen3TomlWrite_String(out, "key", keyHex);
+        Gen3TomlWrite_String(out, "type", record->type);
+        Gen3TomlWrite_Integer(out, "schema", (long long)record->schema);
+        Gen3TomlWrite_String(out, "symbol", record->symbol);
+        Gen3TomlWrite_Integer(out, "rom_offset", (long long)record->romOffset);
+        Gen3TomlWrite_Integer(out, "encoded_length", (long long)record->encodedLength);
+        Gen3TomlWrite_Integer(out, "decoded_length", (long long)record->decodedLength);
+        Gen3TomlWrite_String(out, "source_encoding", record->sourceEncoding);
+        Gen3TomlWrite_String(out, "source_encoded_sha256", sourceHex);
+        Gen3TomlWrite_String(out, "canonical_decoded_sha256", decodedHex);
+        Gen3Buffer_AppendCStr(out, "\n");
+    }
+    return true;
+}
+
+/* ---- TOML-driven entry point ------------------------------------------- */
+
+/* Resolves `relative` against `baseDir` and stores the result in `outPath`. */
+static bool JoinPath(const char *baseDir, const char *relative, struct Gen3Buffer *outPath)
+{
+    if (relative == NULL || outPath == NULL)
+        return false;
+    if (relative[0] == '/')
+        return Gen3Buffer_AppendCStr(outPath, relative);
+    if (baseDir != NULL && baseDir[0] != '\0')
+    {
+        if (!Gen3Buffer_AppendCStr(outPath, baseDir))
+            return false;
+        if (baseDir[strlen(baseDir) - 1u] != '/')
+            Gen3Buffer_AppendCStr(outPath, "/");
+    }
+    return Gen3Buffer_AppendCStr(outPath, relative);
+}
+
+enum Gen3ManifestResult Gen3Manifest_FromToml(
+    const struct Gen3TomlDocument *catalogDoc,
+    const struct Gen3TomlDocument *bindingsDoc,
+    const char *baseDir,
+    const uint8_t *elfData, size_t elfSize,
+    const uint8_t *romData, size_t romSize,
+    const struct Gen3ManifestConfig *config,
+    struct Gen3Buffer *outManifest,
+    char *errbuf, size_t errbufSize)
+{
+    struct Gen3ManifestMeta meta;
+    struct Gen3CatalogEntry *catalog = NULL;
+    struct Gen3BindingInput *bindings = NULL;
+    struct Gen3Buffer *fileBuffers = NULL;
+    size_t catalogCount = 0;
+    size_t bindingCount = 0;
+    size_t i;
+    enum Gen3ManifestResult result;
+
+    if (catalogDoc == NULL || bindingsDoc == NULL)
+    {
+        SetError(errbuf, errbufSize, "internal: null TOML document");
+        return GEN3_MANIFEST_INVALID_INPUT;
+    }
+    memset(&meta, 0, sizeof(meta));
+    Gen3Toml_GetString(&catalogDoc->root, "namespace", &meta.namespace);
+    Gen3Toml_GetString(&catalogDoc->root, "resource_api", &meta.resourceApi);
+    Gen3Toml_GetString(&catalogDoc->root, "game", &meta.game);
+    Gen3Toml_GetString(&catalogDoc->root, "rom_profile", &meta.romProfile);
+
+    catalogCount = Gen3Toml_GetArrayCount(&catalogDoc->root, "resources");
+    bindingCount = Gen3Toml_GetArrayCount(&bindingsDoc->root, "bindings");
+    catalog = calloc(catalogCount != 0 ? catalogCount : 1u, sizeof(*catalog));
+    bindings = calloc(bindingCount != 0 ? bindingCount : 1u, sizeof(*bindings));
+    fileBuffers = calloc(bindingCount != 0 ? bindingCount * 2u : 2u, sizeof(*fileBuffers));
+    if (catalog == NULL || bindings == NULL || fileBuffers == NULL)
+    {
+        SetError(errbuf, errbufSize, "out of memory loading inputs");
+        result = GEN3_MANIFEST_INVALID_INPUT;
+        goto done;
+    }
+
+    for (i = 0; i < catalogCount; i++)
+    {
+        const struct Gen3TomlMap *item = Gen3Toml_GetArrayItem(&catalogDoc->root, "resources", i);
+        long long schema;
+        bool requiredForBase;
+        if (item == NULL)
+        {
+            SetError(errbuf, errbufSize, "catalog resource %zu is not a table", i);
+            result = GEN3_MANIFEST_INVALID_INPUT;
+            goto done;
+        }
+        if (!Gen3Toml_GetString(item, "id", &catalog[i].id))
+        {
+            SetError(errbuf, errbufSize, "catalog resource %zu is missing 'id'", i);
+            result = GEN3_MANIFEST_INVALID_INPUT;
+            goto done;
+        }
+        if (!Gen3Toml_GetString(item, "type", &catalog[i].type))
+        {
+            SetError(errbuf, errbufSize, "catalog resource '%s' is missing 'type'", catalog[i].id);
+            result = GEN3_MANIFEST_INVALID_INPUT;
+            goto done;
+        }
+        if (!Gen3Toml_GetInteger(item, "schema", &schema) || schema < 0 || schema > (long long)UINT32_MAX)
+        {
+            SetError(errbuf, errbufSize, "catalog resource '%s' has an invalid 'schema'", catalog[i].id);
+            result = GEN3_MANIFEST_INVALID_INPUT;
+            goto done;
+        }
+        if (!Gen3Toml_GetBool(item, "required_for_base", &requiredForBase))
+        {
+            SetError(errbuf, errbufSize, "catalog resource '%s' is missing 'required_for_base'", catalog[i].id);
+            result = GEN3_MANIFEST_INVALID_INPUT;
+            goto done;
+        }
+        catalog[i].schema = (uint32_t)schema;
+    }
+
+    for (i = 0; i < bindingCount; i++)
+    {
+        const struct Gen3TomlMap *item = Gen3Toml_GetArrayItem(&bindingsDoc->root, "bindings", i);
+        const char *sourceArtifact = NULL;
+        long long expectedDecodedSize;
+        struct Gen3Buffer path;
+        const char *artifact;
+        size_t artifactLength;
+        size_t bufferIndex = i * 2u;
+        if (item == NULL)
+        {
+            SetError(errbuf, errbufSize, "binding %zu is not a table", i);
+            result = GEN3_MANIFEST_INVALID_INPUT;
+            goto done;
+        }
+        if (!Gen3Toml_GetString(item, "id", &bindings[i].id))
+        {
+            SetError(errbuf, errbufSize, "binding %zu is missing 'id'", i);
+            result = GEN3_MANIFEST_INVALID_INPUT;
+            goto done;
+        }
+        if (!Gen3Toml_GetString(item, "symbol", &bindings[i].symbol))
+        {
+            SetError(errbuf, errbufSize, "binding '%s' is missing 'symbol'", bindings[i].id);
+            result = GEN3_MANIFEST_INVALID_INPUT;
+            goto done;
+        }
+        if (!Gen3Toml_GetString(item, "source_artifact", &sourceArtifact))
+        {
+            SetError(errbuf, errbufSize, "binding '%s' is missing 'source_artifact'", bindings[i].id);
+            result = GEN3_MANIFEST_INVALID_INPUT;
+            goto done;
+        }
+        if (!Gen3Toml_GetString(item, "source_encoding", &bindings[i].sourceEncoding))
+        {
+            SetError(errbuf, errbufSize, "binding '%s' is missing 'source_encoding'", bindings[i].id);
+            result = GEN3_MANIFEST_INVALID_INPUT;
+            goto done;
+        }
+        if (!Gen3Toml_GetString(item, "canonical_representation", &bindings[i].canonicalRepresentation))
+        {
+            SetError(errbuf, errbufSize, "binding '%s' is missing 'canonical_representation'", bindings[i].id);
+            result = GEN3_MANIFEST_INVALID_INPUT;
+            goto done;
+        }
+        if (!Gen3Toml_GetInteger(item, "expected_decoded_size", &expectedDecodedSize)
+         || expectedDecodedSize < 0 || expectedDecodedSize > (long long)UINT32_MAX)
+        {
+            SetError(errbuf, errbufSize, "binding '%s' has an invalid 'expected_decoded_size'", bindings[i].id);
+            result = GEN3_MANIFEST_INVALID_INPUT;
+            goto done;
+        }
+        bindings[i].expectedDecodedSize = (uint32_t)expectedDecodedSize;
+        if (!Gen3Toml_GetBool(item, "allow_shared_range", &bindings[i].allowSharedRange))
+            bindings[i].allowSharedRange = false;
+
+        /* Load the encoded artifact. Gen3Util_ReadFile initializes the buffer
+         * itself, so do not pre-init here (that would leak the pre-allocation). */
+        if (!Gen3Buffer_Init(&path, 256))
+        {
+            SetError(errbuf, errbufSize, "out of memory building artifact path");
+            result = GEN3_MANIFEST_INVALID_INPUT;
+            goto done;
+        }
+        if (!JoinPath(baseDir, sourceArtifact, &path)
+         || !Gen3Util_ReadFile(path.data, &fileBuffers[bufferIndex], errbuf, errbufSize))
+        {
+            Gen3Buffer_Destroy(&path);
+            result = GEN3_MANIFEST_INVALID_INPUT;
+            goto done;
+        }
+        Gen3Buffer_Destroy(&path);
+        bindings[i].sourceArtifact = (const uint8_t *)fileBuffers[bufferIndex].data;
+        bindings[i].sourceArtifactSize = fileBuffers[bufferIndex].length;
+
+        /* The canonical decoded artifact: the artifact path minus ".lz" for
+         * gba-lz77; for "raw" (R8 back sheets) the artifact IS the canonical
+         * decoded payload (encoded == decoded), so the same file serves both. */
+        artifact = sourceArtifact;
+        artifactLength = strlen(artifact);
+        if (strcmp(bindings[i].sourceEncoding, "raw") == 0)
+        {
+            bindings[i].canonicalDecoded = bindings[i].sourceArtifact;
+            bindings[i].canonicalDecodedSize = bindings[i].sourceArtifactSize;
+        }
+        else
+        {
+            if (strcmp(bindings[i].sourceEncoding, "gba-lz77") != 0)
+            {
+                SetError(errbuf, errbufSize,
+                         "binding '%s': unsupported source encoding '%s' (gba-lz77 or raw)",
+                         bindings[i].id, bindings[i].sourceEncoding);
+                result = GEN3_MANIFEST_UNSUPPORTED_ENCODING;
+                goto done;
+            }
+            if (artifactLength < 3 || strcmp(artifact + artifactLength - 3u, ".lz") != 0)
+            {
+                SetError(errbuf, errbufSize,
+                         "binding '%s': canonical artifact path requires a '.lz' suffix",
+                         bindings[i].id);
+                result = GEN3_MANIFEST_INVALID_INPUT;
+                goto done;
+            }
+            if (!Gen3Buffer_Init(&path, 256))
+            {
+                SetError(errbuf, errbufSize, "out of memory building canonical path");
+                result = GEN3_MANIFEST_INVALID_INPUT;
+                goto done;
+            }
+            {
+                struct Gen3Buffer canonicalRelative;
+                Gen3Buffer_Init(&canonicalRelative, artifactLength);
+                Gen3Buffer_Append(&canonicalRelative, artifact, artifactLength - 3u);
+                Gen3Buffer_AppendCStr(&canonicalRelative, "");
+                if (!JoinPath(baseDir, canonicalRelative.data, &path))
+                {
+                    Gen3Buffer_Destroy(&canonicalRelative);
+                    Gen3Buffer_Destroy(&path);
+                    result = GEN3_MANIFEST_INVALID_INPUT;
+                    goto done;
+                }
+                Gen3Buffer_Destroy(&canonicalRelative);
+            }
+            if (!Gen3Util_ReadFile(path.data, &fileBuffers[bufferIndex + 1u], errbuf, errbufSize))
+            {
+                Gen3Buffer_Destroy(&path);
+                result = GEN3_MANIFEST_INVALID_INPUT;
+                goto done;
+            }
+            Gen3Buffer_Destroy(&path);
+            bindings[i].canonicalDecoded = (const uint8_t *)fileBuffers[bufferIndex + 1u].data;
+            bindings[i].canonicalDecodedSize = fileBuffers[bufferIndex + 1u].length;
+        }
+    }
+
+    result = Gen3Manifest_Generate(&meta, catalog, catalogCount,
+                                   bindings, bindingCount,
+                                   elfData, elfSize, romData, romSize,
+                                   config, outManifest, errbuf, errbufSize);
+
+done:
+    free(catalog);
+    free(bindings);
+    if (fileBuffers != NULL)
+    {
+        for (i = 0; i < bindingCount * 2u; i++)
+            Gen3Buffer_Destroy(&fileBuffers[i]);
+        free(fileBuffers);
+    }
+    return result;
+}

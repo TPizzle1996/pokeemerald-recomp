@@ -32,6 +32,7 @@
 #include "platform/desktop_video.h"
 #include "platform/host_memory.h"
 #include "platform/native_state.h"
+#include "emerald/resources/emerald_trainer_native_compat.h"
 #include "siirtc.h"
 
 #define NATIVE_STATE_MAGIC 0x4E535431u /* NST1 */
@@ -2382,6 +2383,29 @@ static enum NativeStateResult LoadStateFromPath(const char *path)
     Platform_VideoRestoreFramebuffer(framebuffer, DISPLAY_WIDTH * DISPLAY_HEIGHT * sizeof(u32));
     free(file);
     free(framebuffer);
+
+    /* R6 (§2/§3/§15): the trainer tables are plain native .data, outside the
+     * serialized slices (verified against the built binary: no gba_data
+     * attribute), so they keep whatever process-local values they hold across
+     * a save/load round trip - possibly garbage, possibly the NULL sentinels
+     * of a fresh process. Re-publish the current-session compatibility image
+     * into the migrated slots unconditionally so no stale or foreign
+     * process-local compat pointer can survive a load. The republish is
+     * idempotent and allocation-free; if no valid session image exists, fail
+     * closed by clearing the migrated entries (NULL sentinel) so consumers
+     * cannot use them. The seam is guarded to the native SDL2 target
+     * (emerald_trainer_native_compat.c is an empty TU elsewhere): on
+     * non-native builds there are no migrated slots to re-publish, so the
+     * calls must not be emitted (R7B, Windows release link). */
+#if defined(PLATFORM_SDL2) && defined(NATIVE_LINUX)
+    {
+        struct EmeraldResourceCompatDiagnostics diagnostics;
+        enum EmeraldResourceCompatStatus status =
+            EmeraldResourceCompat_Republish(&diagnostics);
+        if (status != EMERALD_COMPAT_OK)
+            EmeraldResourceCompat_ClearMigratedEntries();
+    }
+#endif
     return NATIVE_STATE_OK;
 }
 

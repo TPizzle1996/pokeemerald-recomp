@@ -100,6 +100,20 @@ extern const struct SpriteFrameImage gBattlerPicTable_PlayerLeft[];
 extern const struct SpriteFrameImage gBattlerPicTable_OpponentLeft[];
 extern const struct SpriteFrameImage gBattlerPicTable_PlayerRight[];
 extern const struct SpriteFrameImage gBattlerPicTable_OpponentRight[];
+#if defined(NATIVE_LINUX)
+/* R8: native back-pic frame tables are non-const so the compat seam can
+ * publish the ROM_BASE raw sheet streams into the 34 SpriteFrameImage slots
+ * (the live pixel surface: sTrainerBackSpriteTemplates -> CreateSprite ->
+ * RequestSpriteFrameImageCopy reads images[frame].data every frame). */
+extern struct SpriteFrameImage gTrainerBackPicTable_Brendan[];
+extern struct SpriteFrameImage gTrainerBackPicTable_May[];
+extern struct SpriteFrameImage gTrainerBackPicTable_Red[];
+extern struct SpriteFrameImage gTrainerBackPicTable_Leaf[];
+extern struct SpriteFrameImage gTrainerBackPicTable_RubySapphireBrendan[];
+extern struct SpriteFrameImage gTrainerBackPicTable_RubySapphireMay[];
+extern struct SpriteFrameImage gTrainerBackPicTable_Wally[];
+extern struct SpriteFrameImage gTrainerBackPicTable_Steven[];
+#else
 extern const struct SpriteFrameImage gTrainerBackPicTable_Brendan[];
 extern const struct SpriteFrameImage gTrainerBackPicTable_May[];
 extern const struct SpriteFrameImage gTrainerBackPicTable_Red[];
@@ -108,6 +122,7 @@ extern const struct SpriteFrameImage gTrainerBackPicTable_RubySapphireBrendan[];
 extern const struct SpriteFrameImage gTrainerBackPicTable_RubySapphireMay[];
 extern const struct SpriteFrameImage gTrainerBackPicTable_Wally[];
 extern const struct SpriteFrameImage gTrainerBackPicTable_Steven[];
+#endif
 
 extern const union AffineAnimCmd *const gAffineAnims_BattleSpritePlayerSide[];
 extern const union AffineAnimCmd *const gAffineAnims_BattleSpriteOpponentSide[];
@@ -122,12 +137,31 @@ extern const struct CompressedSpritePalette gMonPaletteTable[];
 extern const struct CompressedSpritePalette gMonShinyPaletteTable[];
 extern const union AnimCmd *const *const gTrainerFrontAnimsPtrTable[];
 extern const struct MonCoords gTrainerFrontPicCoords[];
+#if defined(NATIVE_LINUX)
+extern struct CompressedSpriteSheet gTrainerFrontPicTable[];
+extern struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
+#else
 extern const struct CompressedSpriteSheet gTrainerFrontPicTable[];
 extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
+#endif
 extern const union AnimCmd *const *const gTrainerBackAnimsPtrTable[];
 extern const struct MonCoords gTrainerBackPicCoords[];
-extern const struct CompressedSpriteSheet gTrainerBackPicTable[]; // functionally unused
+/* The sheet table's decompression OUTPUT is functionally unused (raw sheets,
+ * output overwritten later), but DecompressTrainerBackPic dereferences its
+ * data pointers every battle, so R8 makes it ROM_BASE-backed on native like
+ * the rest of the back family. */
+#if defined(NATIVE_LINUX)
+extern struct CompressedSpriteSheet gTrainerBackPicTable[];
+#else
+extern const struct CompressedSpriteSheet gTrainerBackPicTable[];
+#endif
+#if defined(NATIVE_LINUX)
+/* R6: native back-pic palette table is non-const so the compat seam can publish
+ * the ROM_BASE normal-palette image into the BRENDAN slot after state load. */
+extern struct CompressedSpritePalette gTrainerBackPicPaletteTable[];
+#else
 extern const struct CompressedSpritePalette gTrainerBackPicPaletteTable[];
+#endif
 
 extern const u8 gEnemyMonElevation[NUM_SPECIES];
 

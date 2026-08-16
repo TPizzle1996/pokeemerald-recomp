@@ -1,0 +1,156 @@
+#ifndef EMERALD_RESOURCES_EMERALD_TRAINER_NATIVE_COMPAT_H
+#define EMERALD_RESOURCES_EMERALD_TRAINER_NATIVE_COMPAT_H
+
+/* Native-target compatibility publication (Stage R5, generalized in R7B,
+ * extended to the trainer-BACK family in R8).
+ *
+ * The GBA build declares gTrainerFrontPicTable/gTrainerFrontPicPaletteTable as
+ * const compile-time assets. On the native target those two tables are declared
+ * non-const (see include/data.h + src/data/trainer_graphics/front_pic_tables.h)
+ * so that the compatibility seam can publish the ROM_BASE-resolved payload
+ * streams into them at session init - the existing Emerald
+ * decompression/load consumers then read every trainer exactly as they always
+ * have.
+ *
+ * R5 published exactly three migrated slots (Brendan's front sheet, front
+ * palette and back-pic palette). R7B generalizes the seam to the FULL
+ * trainer-front family: all 93 front sheet slots and all 93 front palette
+ * slots of the live native tables can receive ROM_BASE-backed streams, plus
+ * the 6 gTrainerBackPicPaletteTable slots that consume front normal-palette
+ * resources (brendan, may, rs-brendan, rs-may, wally, steven - the shared
+ * back-pic palette consumers, R7A §5). The resource-id -> table-slot mapping
+ * mirrors the R7A family descriptor
+ * (resources/extraction/emerald/bpee01/trainer_front_family.toml); the
+ * generalized test harness verifies the seam against the descriptor so the
+ * mapping cannot drift.
+ *
+ * R8 extends the seam to the trainer-BACK family: the compatibility image
+ * carries 196 entries (the front 186 unchanged, then the back family: 8 raw
+ * back sheets in TRAINER_BACK_PIC_* order, then the 2 back-only palettes
+ * red/leaf). Publication additionally serves
+ *   - the 8 gTrainerBackPicTable sheet slots (live READ: the same
+ *     DecompressTrainerBackPic dereferences the data pointer every battle,
+ *     though its decompression output is unused and overwritten later), and
+ *   - the 34 gTrainerBackPicTable_<X> SpriteFrameImage slots, the LIVE pixel
+ *     surface (sTrainerBackSpriteTemplates -> SetMultiuseSpriteTemplateTo-
+ *     TrainerBack -> CreateSprite -> RequestSpriteFrameImageCopy), and
+ *   - the 2 Red/Leaf gTrainerBackPicPaletteTable slots (live LoadCompressed-
+ *     Palette in the same DecompressTrainerBackPic).
+ * The mapping mirrors the R8 family descriptor
+ * (resources/extraction/emerald/bpee01/trainer_back_family.toml); the test
+ * harness verifies the seam against both descriptors so they cannot drift.
+ * Nothing is published into non-live surfaces: there are none in the back
+ * family - every back table slot is read by live gameplay code (the sheet
+ * table by the decompressor, the frame tables by the sprite pipeline, the
+ * palette table by LoadCompressedPalette).
+ *
+ * This module is the ONE explicit init point (§14): it resolves the whole
+ * family through the normal active M0/M1 snapshot, verifies
+ * type/schema/size/winner for every resource, builds the
+ * EmeraldResourceCompatibilityImage transactionally, and publishes its
+ * literal-only LZ77 streams into the live native trainer tables. It changes
+ * ONLY the migrated .data slots (§7) and never touches the renderer (§18).
+ *
+ * Emerald-specific (trainer-table assumptions are fine here, per R5 §26);
+ * platform-neutral in its interface so tests can compile it, but the
+ * implementation is guarded to the native SDL2 target.
+ */
+
+#include <stdint.h>
+
+#include "gen3/resources/resource_resolver.h"
+#include "emerald/resources/emerald_resource_compat.h"
+
+/* Family size: 93 front table entries (TRAINER_PIC_HIKER .. TRAINER_PIC_RS_MAY),
+ * one sheet + one normal palette resource each (R7A §2). */
+#define EMERALD_TRAINER_FRONT_COUNT 93u
+
+/* R8 back family (trainer_back_family.toml): 8 back sheets (raw 4bpp,
+ * TRAINER_BACK_PIC_BRENDAN .. TRAINER_BACK_PIC_STEVEN) + 2 back-only
+ * palettes (red, leaf; gba-lz77). The 6 other back-palette slots are R7B
+ * aliases to front normal-palette resources and add no image entries. */
+#define EMERALD_TRAINER_BACK_SHEET_COUNT   8u
+#define EMERALD_TRAINER_BACK_PALETTE_COUNT 2u
+#define EMERALD_TRAINER_BACK_ENTRY_COUNT \
+    (EMERALD_TRAINER_BACK_SHEET_COUNT + EMERALD_TRAINER_BACK_PALETTE_COUNT)
+
+/* Compatibility image layout: the front 186 entries unchanged (sheet at 2i,
+ * palette at 2i+1 for table index i), then the back family appended - the 8
+ * sheets in TRAINER_BACK_PIC_* table order at FRONT_ENTRY_COUNT..+7, then the
+ * 2 palettes (red, leaf) at FRONT_ENTRY_COUNT+8..+9. */
+#define EMERALD_TRAINER_FRONT_ENTRY_COUNT (EMERALD_TRAINER_FRONT_COUNT * 2u)
+#define EMERALD_TRAINER_FAMILY_ENTRY_COUNT \
+    (EMERALD_TRAINER_FRONT_ENTRY_COUNT + EMERALD_TRAINER_BACK_ENTRY_COUNT)
+
+/* Publish the compatibility image into the live native trainer tables.
+ * Validates the image up front (entry count 196 = 2*93 + 10, per-entry
+ * type/decoded size, name matches the family mappings) and only then mutates
+ * the migrated data slots: every [i].data in the front sheet and front
+ * palette tables, the 6 shared back-pic palette slots, and in R8 the back
+ * family - the 8 gTrainerBackPicTable sheet slots, the 34
+ * gTrainerBackPicTable_<X> SpriteFrameImage slots, and the 2 Red/Leaf
+ * back-palette slots. On failure no table entry is modified (§13
+ * transactional publication). Indices, tags, decoded sizes and every
+ * non-migrated entry stay identical. */
+enum EmeraldResourceCompatStatus
+EmeraldResourceCompat_PublishTrainerTables(
+    const struct EmeraldResourceCompatibilityImage *image,
+    struct EmeraldResourceCompatDiagnostics *diagnostics);
+
+/* R6 post-state-load republish. Requires a valid initialized session image; it
+ * is a narrow, idempotent, allocation-free re-publication of the already-valid
+ * current-session compatibility pointers into the same migrated slots - no
+ * re-resolution from ROM, no pack reread, no resource rebuild, no pointer
+ * serialization (§2/§3). Returns EMERALD_COMPAT_ERR_UNAVAILABLE (fail closed)
+ * when no session image exists; on failure the caller is expected to clear the
+ * migrated entries so stale pointers cannot survive. */
+enum EmeraldResourceCompatStatus
+EmeraldResourceCompat_Republish(struct EmeraldResourceCompatDiagnostics *diagnostics);
+
+/* R6 fail-closed clear: set every migrated native table slot's data to NULL -
+ * in R8 that is the whole trainer family: all 93 front sheet + 93 front
+ * palette slots, the 6 shared back-palette slots, the 8 back sheet slots, the
+ * 34 back SpriteFrameImage slots and the 2 Red/Leaf back-palette slots. Used
+ * when a republish is not possible, so no consumer can dereference a stale
+ * or unavailable pointer. */
+void EmeraldResourceCompat_ClearMigratedEntries(void);
+
+/* The one explicit R5 init point (§14): resolve the whole trainer family
+ * (front 186 + back 10, R8) from the active M0/M1 snapshot through the NORMAL
+ * resolver (§11), verify type/schema/payload-size/winner==ROM_BASE for every
+ * resource, build the compatibility image transactionally, then publish it
+ * into the live native trainer tables. Must run AFTER the ROM_BASE snapshot
+ * is valid and BEFORE any trainer-graphics gameplay consumer. On any failure
+ * the live tables are left untouched and the session image is unchanged; the
+ * image is retained for the process session until
+ * EmeraldResourceCompat_Shutdown. */
+enum EmeraldResourceCompatStatus
+EmeraldResourceCompat_InitializeFromSnapshot(
+    const struct Gen3ResourceSnapshot *snapshot,
+    struct EmeraldResourceCompatDiagnostics *diagnostics);
+
+/* Runtime hook (R6 loader feeds a snapshot here; the content-hydration path
+ * calls TryInitialize once). Idempotent: initialization runs at most once per
+ * registered snapshot. Until a snapshot is registered these are no-ops. */
+void EmeraldResourceCompat_SetSnapshot(const struct Gen3ResourceSnapshot *snapshot);
+void EmeraldResourceCompat_ClearSnapshot(void);
+void EmeraldResourceCompat_TryInitialize(void);
+
+/* R6 runtime loader (emerald_runtime_loader.c): build the production ROM_BASE
+ * snapshot from the production pack and register it with the seam. The pack is
+ * read from disk at the given path (the working-tree production output
+ * games/emerald/base/emerald-bpee01-v1.rpack) exactly as the production harness
+ * does - it is deliberately NOT embedded in the binary, because R7A requires
+ * every ROM_BASE_ONLY payload's encoded/decoded bytes to be absent from the
+ * native link. Idempotent (at most one registration per process session);
+ * fail-closed: a NULL/empty path or an absent or invalid pack leaves the
+ * snapshot unregistered and the migrated slots at their NULL sentinel. Call
+ * once at native startup before the content-hydration path's TryInitialize. */
+enum EmeraldResourceCompatStatus
+EmeraldResourceCompat_RegisterRuntimeSnapshot(const char *packPath);
+
+/* Release the session image. Leaves the tables as last published (the streams
+ * die with the image, so only call when no consumer can read them). */
+void EmeraldResourceCompat_Shutdown(void);
+
+#endif

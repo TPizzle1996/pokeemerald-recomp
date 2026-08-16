@@ -1,0 +1,994 @@
+# Stage R7A — complete trainer-front family descriptor (Emerald BPEE rev 0).
+#
+# SINGLE declarative source of truth for the full trainer-front graphics
+# family: 93 front sheets + 93 front palettes. Consumed by the R7A family
+# generator (tools/gen3_resources/trainer_family/gen_trainer_family) which
+# emits catalog.toml, bindings.generated.toml, ownership.generated.toml and
+# trainer_front_consumers.generated.toml. Do not hand-edit the generated
+# files; edit this descriptor and re-run the generator.
+#
+# Canonical-name rule (R7A §4): canonical = ASCII-lowercase of the
+# TRAINER_PIC_* constant suffix, underscores -> hyphens. One explicit,
+# reviewable mapping; names are persistent API.
+#
+# Fields:
+#   canonical   public component of the canonical id (persistent API).
+#   slug        source-artifact basename (graphics/trainers/<dir>/<slug>.*).
+#   symbol      C symbol suffix (gTrainerFrontPic_<symbol> / gTrainerPalette_<symbol>).
+#   pic         TRAINER_PIC_ constant suffix (identity anchor, index).
+#   index       explicit table index (order-independence for determinism).
+#   size_mult   table .size multiplier (consumer allocation metadata, NOT
+#               payload size; all sheets decode to 2048 bytes regardless).
+#   palette_dir "front_pics" or "palettes" (the 5 special palettes).
+#   ownership_native  ROM_BASE_ONLY (brendan, R6) or COMPILED_PENDING_MIGRATION.
+#   back_palette_index  optional: gTrainerBackPicPaletteTable slot that ALSO
+#               consumes this FRONT palette (additional consumer, R7A §13).
+#
+# Resource ID templates build the canonical id for each trainer as
+#   <namespace>:<path>  with "%s" = the trainer canonical component. The two
+#   patterns are game/resource-path specific (a FireRed family descriptor would
+#   supply its own); the generator machinery itself is game-neutral (§23).
+#
+family_version = 1
+game = "emerald"
+rom_profile = "bpee01-rev0"
+namespace = "emerald"
+resource_api = "1.0.0"
+catalog_version = 1
+sheet_id_template = "emerald:trainer/%s/battle/front/sheet"
+palette_id_template = "emerald:trainer/%s/battle/front/normal-palette"
+resource_type_sheet = "tile-graphics"
+resource_type_palette = "palette"
+schema = 1
+required_for_base = true
+sheet_decoded_size = 2048
+palette_decoded_size = 32
+sheet_encoding = "gba-lz77"
+palette_encoding = "gba-lz77"
+sheet_representation = "gba-4bpp-tiles"
+palette_representation = "gba-bgr555-palette"
+# R8 family-shape fields (additive; the generated outputs do not depend on the
+# presence of these names, only on their values). The back family descriptor
+# supplies its own values for the same fields.
+sheet_symbol_template = "gTrainerFrontPic_%s"
+palette_symbol_template = "gTrainerPalette_%s"
+sheet_artifact_template = "graphics/trainers/front_pics/%s.4bpp.lz"
+sheet_table = "gTrainerFrontPicTable"
+palette_table = "gTrainerFrontPicPaletteTable"
+family_label = "front"
+
+[[trainers]]
+canonical = "hiker"
+slug = "hiker"
+symbol = "Hiker"
+pic = "HIKER"
+index = 0
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "aqua-grunt-m"
+slug = "aqua_grunt_m"
+symbol = "AquaGruntM"
+pic = "AQUA_GRUNT_M"
+index = 1
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "pokemon-breeder-f"
+slug = "pokemon_breeder_f"
+symbol = "PokemonBreederF"
+pic = "POKEMON_BREEDER_F"
+index = 2
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "cooltrainer-m"
+slug = "cooltrainer_m"
+symbol = "CoolTrainerM"
+pic = "COOLTRAINER_M"
+index = 3
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "bird-keeper"
+slug = "bird_keeper"
+symbol = "BirdKeeper"
+pic = "BIRD_KEEPER"
+index = 4
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "collector"
+slug = "collector"
+symbol = "Collector"
+pic = "COLLECTOR"
+index = 5
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "aqua-grunt-f"
+slug = "aqua_grunt_f"
+symbol = "AquaGruntF"
+pic = "AQUA_GRUNT_F"
+index = 6
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "swimmer-m"
+slug = "swimmer_m"
+symbol = "SwimmerM"
+pic = "SWIMMER_M"
+index = 7
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "magma-grunt-m"
+slug = "magma_grunt_m"
+symbol = "MagmaGruntM"
+pic = "MAGMA_GRUNT_M"
+index = 8
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "expert-m"
+slug = "expert_m"
+symbol = "ExpertM"
+pic = "EXPERT_M"
+index = 9
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "aqua-admin-m"
+slug = "aqua_admin_m"
+symbol = "AquaAdminM"
+pic = "AQUA_ADMIN_M"
+index = 10
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "black-belt"
+slug = "black_belt"
+symbol = "BlackBelt"
+pic = "BLACK_BELT"
+index = 11
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "aqua-admin-f"
+slug = "aqua_admin_f"
+symbol = "AquaAdminF"
+pic = "AQUA_ADMIN_F"
+index = 12
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "aqua-leader-archie"
+slug = "aqua_leader_archie"
+symbol = "AquaLeaderArchie"
+pic = "AQUA_LEADER_ARCHIE"
+index = 13
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "hex-maniac"
+slug = "hex_maniac"
+symbol = "HexManiac"
+pic = "HEX_MANIAC"
+index = 14
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "aroma-lady"
+slug = "aroma_lady"
+symbol = "AromaLady"
+pic = "AROMA_LADY"
+index = 15
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "ruin-maniac"
+slug = "ruin_maniac"
+symbol = "RuinManiac"
+pic = "RUIN_MANIAC"
+index = 16
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "interviewer"
+slug = "interviewer"
+symbol = "Interviewer"
+pic = "INTERVIEWER"
+index = 17
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "tuber-f"
+slug = "tuber_f"
+symbol = "TuberF"
+pic = "TUBER_F"
+index = 18
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "tuber-m"
+slug = "tuber_m"
+symbol = "TuberM"
+pic = "TUBER_M"
+index = 19
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "cooltrainer-f"
+slug = "cooltrainer_f"
+symbol = "CoolTrainerF"
+pic = "COOLTRAINER_F"
+index = 20
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "lady"
+slug = "lady"
+symbol = "Lady"
+pic = "LADY"
+index = 21
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "beauty"
+slug = "beauty"
+symbol = "Beauty"
+pic = "BEAUTY"
+index = 22
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "rich-boy"
+slug = "rich_boy"
+symbol = "RichBoy"
+pic = "RICH_BOY"
+index = 23
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "expert-f"
+slug = "expert_f"
+symbol = "ExpertF"
+pic = "EXPERT_F"
+index = 24
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "pokemaniac"
+slug = "pokemaniac"
+symbol = "Pokemaniac"
+pic = "POKEMANIAC"
+index = 25
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "magma-grunt-f"
+slug = "magma_grunt_f"
+symbol = "MagmaGruntF"
+pic = "MAGMA_GRUNT_F"
+index = 26
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "guitarist"
+slug = "guitarist"
+symbol = "Guitarist"
+pic = "GUITARIST"
+index = 27
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "kindler"
+slug = "kindler"
+symbol = "Kindler"
+pic = "KINDLER"
+index = 28
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "camper"
+slug = "camper"
+symbol = "Camper"
+pic = "CAMPER"
+index = 29
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "picnicker"
+slug = "picnicker"
+symbol = "Picnicker"
+pic = "PICNICKER"
+index = 30
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "bug-maniac"
+slug = "bug_maniac"
+symbol = "BugManiac"
+pic = "BUG_MANIAC"
+index = 31
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "pokemon-breeder-m"
+slug = "pokemon_breeder_m"
+symbol = "PokemonBreederM"
+pic = "POKEMON_BREEDER_M"
+index = 32
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "psychic-m"
+slug = "psychic_m"
+symbol = "PsychicM"
+pic = "PSYCHIC_M"
+index = 33
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "psychic-f"
+slug = "psychic_f"
+symbol = "PsychicF"
+pic = "PSYCHIC_F"
+index = 34
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "gentleman"
+slug = "gentleman"
+symbol = "Gentleman"
+pic = "GENTLEMAN"
+index = 35
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "elite-four-sidney"
+slug = "elite_four_sidney"
+symbol = "EliteFourSidney"
+pic = "ELITE_FOUR_SIDNEY"
+index = 36
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "elite-four-phoebe"
+slug = "elite_four_phoebe"
+symbol = "EliteFourPhoebe"
+pic = "ELITE_FOUR_PHOEBE"
+index = 37
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "elite-four-glacia"
+slug = "elite_four_glacia"
+symbol = "EliteFourGlacia"
+pic = "ELITE_FOUR_GLACIA"
+index = 38
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "elite-four-drake"
+slug = "elite_four_drake"
+symbol = "EliteFourDrake"
+pic = "ELITE_FOUR_DRAKE"
+index = 39
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "leader-roxanne"
+slug = "leader_roxanne"
+symbol = "LeaderRoxanne"
+pic = "LEADER_ROXANNE"
+index = 40
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "leader-brawly"
+slug = "leader_brawly"
+symbol = "LeaderBrawly"
+pic = "LEADER_BRAWLY"
+index = 41
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "leader-wattson"
+slug = "leader_wattson"
+symbol = "LeaderWattson"
+pic = "LEADER_WATTSON"
+index = 42
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "leader-flannery"
+slug = "leader_flannery"
+symbol = "LeaderFlannery"
+pic = "LEADER_FLANNERY"
+index = 43
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "leader-norman"
+slug = "leader_norman"
+symbol = "LeaderNorman"
+pic = "LEADER_NORMAN"
+index = 44
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "leader-winona"
+slug = "leader_winona"
+symbol = "LeaderWinona"
+pic = "LEADER_WINONA"
+index = 45
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "leader-tate-and-liza"
+slug = "leader_tate_and_liza"
+symbol = "LeaderTateAndLiza"
+pic = "LEADER_TATE_AND_LIZA"
+index = 46
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "leader-juan"
+slug = "leader_juan"
+symbol = "LeaderJuan"
+pic = "LEADER_JUAN"
+index = 47
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "school-kid-m"
+slug = "school_kid_m"
+symbol = "SchoolKidM"
+pic = "SCHOOL_KID_M"
+index = 48
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "school-kid-f"
+slug = "school_kid_f"
+symbol = "SchoolKidF"
+pic = "SCHOOL_KID_F"
+index = 49
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "sr-and-jr"
+slug = "sr_and_jr"
+symbol = "SrAndJr"
+pic = "SR_AND_JR"
+index = 50
+size_mult = 2
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "pokefan-m"
+slug = "pokefan_m"
+symbol = "PokefanM"
+pic = "POKEFAN_M"
+index = 51
+size_mult = 2
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "pokefan-f"
+slug = "pokefan_f"
+symbol = "PokefanF"
+pic = "POKEFAN_F"
+index = 52
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "youngster"
+slug = "youngster"
+symbol = "Youngster"
+pic = "YOUNGSTER"
+index = 53
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "champion-wallace"
+slug = "champion_wallace"
+symbol = "ChampionWallace"
+pic = "CHAMPION_WALLACE"
+index = 54
+size_mult = 2
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "fisherman"
+slug = "fisherman"
+symbol = "Fisherman"
+pic = "FISHERMAN"
+index = 55
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "cycling-triathlete-m"
+slug = "cycling_triathlete_m"
+symbol = "CyclingTriathleteM"
+pic = "CYCLING_TRIATHLETE_M"
+index = 56
+size_mult = 2
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "cycling-triathlete-f"
+slug = "cycling_triathlete_f"
+symbol = "CyclingTriathleteF"
+pic = "CYCLING_TRIATHLETE_F"
+index = 57
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "running-triathlete-m"
+slug = "running_triathlete_m"
+symbol = "RunningTriathleteM"
+pic = "RUNNING_TRIATHLETE_M"
+index = 58
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "running-triathlete-f"
+slug = "running_triathlete_f"
+symbol = "RunningTriathleteF"
+pic = "RUNNING_TRIATHLETE_F"
+index = 59
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "swimming-triathlete-m"
+slug = "swimming_triathlete_m"
+symbol = "SwimmingTriathleteM"
+pic = "SWIMMING_TRIATHLETE_M"
+index = 60
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "swimming-triathlete-f"
+slug = "swimming_triathlete_f"
+symbol = "SwimmingTriathleteF"
+pic = "SWIMMING_TRIATHLETE_F"
+index = 61
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "dragon-tamer"
+slug = "dragon_tamer"
+symbol = "DragonTamer"
+pic = "DRAGON_TAMER"
+index = 62
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "ninja-boy"
+slug = "ninja_boy"
+symbol = "NinjaBoy"
+pic = "NINJA_BOY"
+index = 63
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "battle-girl"
+slug = "battle_girl"
+symbol = "BattleGirl"
+pic = "BATTLE_GIRL"
+index = 64
+size_mult = 2
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "parasol-lady"
+slug = "parasol_lady"
+symbol = "ParasolLady"
+pic = "PARASOL_LADY"
+index = 65
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "swimmer-f"
+slug = "swimmer_f"
+symbol = "SwimmerF"
+pic = "SWIMMER_F"
+index = 66
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "twins"
+slug = "twins"
+symbol = "Twins"
+pic = "TWINS"
+index = 67
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "sailor"
+slug = "sailor"
+symbol = "Sailor"
+pic = "SAILOR"
+index = 68
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "magma-admin"
+slug = "magma_admin"
+symbol = "MagmaAdmin"
+pic = "MAGMA_ADMIN"
+index = 69
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "wally"
+slug = "wally"
+symbol = "Wally"
+pic = "WALLY"
+index = 70
+size_mult = 1
+palette_dir = "palettes"
+ownership_native = "ROM_BASE_ONLY"
+back_palette_index = 6
+
+[[trainers]]
+canonical = "brendan"
+slug = "brendan"
+symbol = "Brendan"
+pic = "BRENDAN"
+index = 71
+size_mult = 1
+palette_dir = "palettes"
+ownership_native = "ROM_BASE_ONLY"
+back_palette_index = 0
+
+[[trainers]]
+canonical = "may"
+slug = "may"
+symbol = "May"
+pic = "MAY"
+index = 72
+size_mult = 1
+palette_dir = "palettes"
+ownership_native = "ROM_BASE_ONLY"
+back_palette_index = 1
+
+[[trainers]]
+canonical = "bug-catcher"
+slug = "bug_catcher"
+symbol = "BugCatcher"
+pic = "BUG_CATCHER"
+index = 73
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "pokemon-ranger-m"
+slug = "pokemon_ranger_m"
+symbol = "PokemonRangerM"
+pic = "POKEMON_RANGER_M"
+index = 74
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "pokemon-ranger-f"
+slug = "pokemon_ranger_f"
+symbol = "PokemonRangerF"
+pic = "POKEMON_RANGER_F"
+index = 75
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "magma-leader-maxie"
+slug = "magma_leader_maxie"
+symbol = "MagmaLeaderMaxie"
+pic = "MAGMA_LEADER_MAXIE"
+index = 76
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "lass"
+slug = "lass"
+symbol = "Lass"
+pic = "LASS"
+index = 77
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "young-couple"
+slug = "young_couple"
+symbol = "YoungCouple"
+pic = "YOUNG_COUPLE"
+index = 78
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "old-couple"
+slug = "old_couple"
+symbol = "OldCouple"
+pic = "OLD_COUPLE"
+index = 79
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "sis-and-bro"
+slug = "sis_and_bro"
+symbol = "SisAndBro"
+pic = "SIS_AND_BRO"
+index = 80
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "steven"
+slug = "steven"
+symbol = "Steven"
+pic = "STEVEN"
+index = 81
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+back_palette_index = 7
+
+[[trainers]]
+canonical = "salon-maiden-anabel"
+slug = "salon_maiden_anabel"
+symbol = "SalonMaidenAnabel"
+pic = "SALON_MAIDEN_ANABEL"
+index = 82
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "dome-ace-tucker"
+slug = "dome_ace_tucker"
+symbol = "DomeAceTucker"
+pic = "DOME_ACE_TUCKER"
+index = 83
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "palace-maven-spenser"
+slug = "palace_maven_spenser"
+symbol = "PalaceMavenSpenser"
+pic = "PALACE_MAVEN_SPENSER"
+index = 84
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "arena-tycoon-greta"
+slug = "arena_tycoon_greta"
+symbol = "ArenaTycoonGreta"
+pic = "ARENA_TYCOON_GRETA"
+index = 85
+size_mult = 2
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "factory-head-noland"
+slug = "factory_head_noland"
+symbol = "FactoryHeadNoland"
+pic = "FACTORY_HEAD_NOLAND"
+index = 86
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "pike-queen-lucy"
+slug = "pike_queen_lucy"
+symbol = "PikeQueenLucy"
+pic = "PIKE_QUEEN_LUCY"
+index = 87
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "pyramid-king-brandon"
+slug = "pyramid_king_brandon"
+symbol = "PyramidKingBrandon"
+pic = "PYRAMID_KING_BRANDON"
+index = 88
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "red"
+slug = "red"
+symbol = "Red"
+pic = "RED"
+index = 89
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "leaf"
+slug = "leaf"
+symbol = "Leaf"
+pic = "LEAF"
+index = 90
+size_mult = 1
+palette_dir = "front_pics"
+ownership_native = "ROM_BASE_ONLY"
+
+[[trainers]]
+canonical = "rs-brendan"
+slug = "brendan_rs"
+symbol = "RubySapphireBrendan"
+pic = "RS_BRENDAN"
+index = 91
+size_mult = 1
+palette_dir = "palettes"
+ownership_native = "ROM_BASE_ONLY"
+back_palette_index = 4
+
+[[trainers]]
+canonical = "rs-may"
+slug = "may_rs"
+symbol = "RubySapphireMay"
+pic = "RS_MAY"
+index = 92
+size_mult = 1
+palette_dir = "palettes"
+ownership_native = "ROM_BASE_ONLY"
+back_palette_index = 5
