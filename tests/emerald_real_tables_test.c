@@ -32,6 +32,16 @@
  *    - the compiled still-front table is never touched; the trainer family
  *      publishes into the REAL data.c trainer tables as well.
  *
+ *   POST-INIT LIFECYCLE (R9 §10, the state-load path native_state.c drives):
+ *    - stale every battle slot with foreign words (plus a planted word in the
+ *      external row), then EmeraldResourceCompat_Republish re-derives every
+ *      migrated slot to the SAME session-image pointer; the external row is
+ *      never written - the planted word survives, which pins the seam cannot
+ *      corrupt it either; the still-front table stays byte-identical;
+ *    - EmeraldResourceCompat_ClearMigratedEntries NULLs exactly the migrated
+ *      slots (size/tag preserved, external + still-front untouched) and the
+ *      final Republish restores every slot to its session pointer.
+ *
  * The TU cannot coexist with the harness TU (both define the real tables), so
  * it carries its own CHECK machinery and runner. INCBIN_* expands to {0}
  * stubs: the real native build resolves them via tools/preproc into literal
@@ -271,6 +281,167 @@ static void TestProductionPublication(const char *packPath)
     CHECK("real tables: registration idempotent", status == EMERALD_COMPAT_OK);
 }
 
+/* ------------------------------------------------------------------ */
+/* Post-init lifecycle: the state-load path over the REAL tables       */
+/* ------------------------------------------------------------------ */
+
+/* R9 §10: a save-state load restores process-local words into the native
+ * tables (plain .data, outside the serialized slices), so the runtime calls
+ * EmeraldResourceCompat_Republish after every load to re-derive the
+ * current-session compatibility image (native_state.c). This test drives
+ * that exact sequence at the API level over the REAL tables and the REAL
+ * production pack session:
+ *
+ *   - stale EVERY battle slot (all four tables, all 440 rows) with synthetic
+ *     DEAD words, plus a planted stale word in the external back-EGG row;
+ *   - Republish re-derives every migrated slot to the SAME session-image
+ *     pointer captured before the staling (allocation-free, idempotent);
+ *     the external back-EGG row is never written by the seam - the planted
+ *     stale word survives, which pins that the seam cannot corrupt it either;
+ *     the compiled still-front table is byte-identical throughout;
+ *   - ClearMigratedEntries (the fail-closed path) NULLs exactly the migrated
+ *     slots, preserving size/tag, leaving the external row and still-front
+ *     table untouched;
+ *   - a final Republish restores every slot to its session-image pointer.
+ */
+static void TestSaveStateLifecycle(const char *packPath)
+{
+    struct EmeraldResourceCompatDiagnostics diag;
+    const u32 *published[4][POKEMON_BATTLE_SLOTS_PER_TABLE];
+    struct CompressedSpriteSheet stillFrontCopy[POKEMON_BATTLE_SLOTS_PER_TABLE];
+    size_t i;
+    enum EmeraldResourceCompatStatus status;
+
+    (void)packPath;
+
+    /* Capture the published session-image pointers (kind-major: front, back,
+     * palette, shiny) and the untouched still-front table. */
+    for (i = 0; i < POKEMON_BATTLE_SLOTS_PER_TABLE; i++)
+    {
+        published[0][i] = gMonFrontPicTable[i].data;
+        published[1][i] = gMonBackPicTable[i].data;
+        published[2][i] = gMonPaletteTable[i].data;
+        published[3][i] = gMonShinyPaletteTable[i].data;
+    }
+    memcpy(stillFrontCopy, gMonStillFrontPicTable, sizeof(stillFrontCopy));
+    CHECK("lifecycle: session image published",
+          published[0][0] != NULL && published[1][0] != NULL
+              && published[2][0] != NULL && published[3][0] != NULL);
+    CHECK("lifecycle: external slot is the compiled egg leaf",
+          published[1][SPECIES_EGG] == (const u32 *)gMonStillFrontPic_Egg);
+
+    /* Simulate the state-load restore: foreign words in EVERY battle slot -
+     * including a deliberately planted one in the external back-EGG row. */
+    for (i = 0; i < POKEMON_BATTLE_SLOTS_PER_TABLE; i++)
+    {
+        gMonFrontPicTable[i].data = (const u32 *)(uintptr_t)(0xDEAD0000u + i);
+        gMonBackPicTable[i].data = (const u32 *)(uintptr_t)(0xDEAD1000u + i);
+        gMonPaletteTable[i].data = (const u32 *)(uintptr_t)(0xDEAD2000u + i);
+        gMonShinyPaletteTable[i].data = (const u32 *)(uintptr_t)(0xDEAD3000u + i);
+    }
+    gMonBackPicTable[SPECIES_EGG].data = (const u32 *)(uintptr_t)0xDEADBEEF;
+
+    /* The runtime's post-load republish (native_state.c). */
+    status = EmeraldResourceCompat_Republish(&diag);
+    CHECK("lifecycle: republish repairs stale pointers", status == EMERALD_COMPAT_OK);
+    CHECK("lifecycle: republish diagnostics empty", diag.stage[0] == '\0');
+
+    /* Every migrated slot re-derived to its session-image pointer (the
+     * external back-EGG row is not migrated - it still holds the planted
+     * word, pinned right below); the seam never writes it. */
+    for (i = 0; i < POKEMON_BATTLE_SLOTS_PER_TABLE; i++)
+    {
+        CHECK("lifecycle: front re-derived to session pointer",
+              gMonFrontPicTable[i].data == published[0][i]);
+        if (i != SPECIES_EGG)
+            CHECK("lifecycle: back re-derived to session pointer",
+                  gMonBackPicTable[i].data == published[1][i]);
+        CHECK("lifecycle: palette re-derived to session pointer",
+              gMonPaletteTable[i].data == published[2][i]);
+        CHECK("lifecycle: shiny re-derived to session pointer",
+              gMonShinyPaletteTable[i].data == published[3][i]);
+    }
+    CHECK("lifecycle: external slot untouched by republish (planted word persists)",
+          gMonBackPicTable[SPECIES_EGG].data == (const u32 *)(uintptr_t)0xDEADBEEF);
+    CHECK("lifecycle: still-front table untouched",
+          memcmp(gMonStillFrontPicTable, stillFrontCopy,
+                 sizeof(stillFrontCopy)) == 0);
+    CHECK("lifecycle: trainer tables republished too",
+          gTrainerFrontPicTable[0].data != NULL
+              && gTrainerBackPicTable[0].data != NULL
+              && gTrainerBackPicTable_Brendan[0].data != NULL);
+
+    /* The planted word was artificial (tables are not serialized); restore
+     * the compiled leaf for the remaining checks. */
+    gMonBackPicTable[SPECIES_EGG].data = (const u32 *)gMonStillFrontPic_Egg;
+
+    /* Idempotent: a second republish keeps the same pointers. */
+    status = EmeraldResourceCompat_Republish(&diag);
+    CHECK("lifecycle: republish idempotent ok", status == EMERALD_COMPAT_OK);
+    for (i = 0; i < POKEMON_BATTLE_SLOTS_PER_TABLE; i++)
+    {
+        CHECK("lifecycle: front idempotent pointer",
+              gMonFrontPicTable[i].data == published[0][i]);
+        CHECK("lifecycle: back idempotent pointer",
+              gMonBackPicTable[i].data == published[1][i]);
+        CHECK("lifecycle: palette idempotent pointer",
+              gMonPaletteTable[i].data == published[2][i]);
+        CHECK("lifecycle: shiny idempotent pointer",
+              gMonShinyPaletteTable[i].data == published[3][i]);
+    }
+    CHECK("lifecycle: external idempotent untouched",
+          gMonBackPicTable[SPECIES_EGG].data ==
+              (const u32 *)gMonStillFrontPic_Egg);
+
+    /* Fail-closed clear: exactly the migrated slots return to NULL; size/tag
+     * survive (only .data is the migrated word); external + still-front
+     * untouched; the trainer family NULLs alongside. */
+    EmeraldResourceCompat_ClearMigratedEntries();
+    for (i = 0; i < POKEMON_BATTLE_SLOTS_PER_TABLE; i++)
+    {
+        CHECK("lifecycle: clear front NULL", gMonFrontPicTable[i].data == NULL);
+        if (i != SPECIES_EGG)
+            CHECK("lifecycle: clear back NULL", gMonBackPicTable[i].data == NULL);
+        CHECK("lifecycle: clear palette NULL", gMonPaletteTable[i].data == NULL);
+        CHECK("lifecycle: clear shiny NULL", gMonShinyPaletteTable[i].data == NULL);
+    }
+    CHECK("lifecycle: clear leaves external untouched",
+          gMonBackPicTable[SPECIES_EGG].data ==
+              (const u32 *)gMonStillFrontPic_Egg);
+    CHECK("lifecycle: clear leaves still-front untouched",
+          memcmp(gMonStillFrontPicTable, stillFrontCopy,
+                 sizeof(stillFrontCopy)) == 0);
+    CHECK("lifecycle: clear preserves size/tag",
+          gMonFrontPicTable[0].size == MON_PIC_SIZE
+              && gMonFrontPicTable[0].tag == 0
+              && gMonShinyPaletteTable[0].tag == SPECIES_SHINY_TAG);
+    CHECK("lifecycle: clear leaves trainer slots NULL",
+          gTrainerFrontPicTable[0].data == NULL
+              && gTrainerBackPicTable[0].data == NULL
+              && gTrainerBackPicTable_Brendan[0].data == NULL);
+
+    /* The final republish restores every slot to its session pointer. */
+    status = EmeraldResourceCompat_Republish(&diag);
+    CHECK("lifecycle: republish after clear ok", status == EMERALD_COMPAT_OK);
+    for (i = 0; i < POKEMON_BATTLE_SLOTS_PER_TABLE; i++)
+    {
+        CHECK("lifecycle: front restored to session pointer",
+              gMonFrontPicTable[i].data == published[0][i]);
+        CHECK("lifecycle: back restored to session pointer",
+              gMonBackPicTable[i].data == published[1][i]);
+        CHECK("lifecycle: palette restored to session pointer",
+              gMonPaletteTable[i].data == published[2][i]);
+        CHECK("lifecycle: shiny restored to session pointer",
+              gMonShinyPaletteTable[i].data == published[3][i]);
+    }
+    CHECK("lifecycle: external untouched after restore",
+          gMonBackPicTable[SPECIES_EGG].data ==
+              (const u32 *)gMonStillFrontPic_Egg);
+    CHECK("lifecycle: still-front untouched after restore",
+          memcmp(gMonStillFrontPicTable, stillFrontCopy,
+                 sizeof(stillFrontCopy)) == 0);
+}
+
 int main(int argc, char **argv)
 {
     const char *packPath;
@@ -284,6 +455,7 @@ int main(int argc, char **argv)
 
     TestCompiledTableState();
     TestProductionPublication(packPath);
+    TestSaveStateLifecycle(packPath);
 
     if (gFailures != 0)
     {

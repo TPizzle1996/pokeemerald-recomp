@@ -18,7 +18,13 @@
 #      strict publish-at-registration path: every non-external battle slot
 #      publishes with tags/sizes retained, the external back-EGG row is
 #      untouched, the compiled still-front table is never touched, and the
-#      trainer family publishes into the real data.c tables.
+#      trainer family publishes into the real data.c tables;
+#   3. the R9 §10 state-load lifecycle over the real tables: stale every
+#      battle slot (plus a planted word in the external row), Republish
+#      re-derives every migrated slot to its session-image pointer without
+#      ever writing the external row or the still-front table, the fail-
+#      closed clear NULLs exactly the migrated slots (size/tag preserved),
+#      and the final Republish restores everything.
 set -euo pipefail
 
 here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"

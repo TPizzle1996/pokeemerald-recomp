@@ -1878,7 +1878,10 @@ static void TestShutdown(void)
     /* Fail-closed clear: exactly the migrated slots return to the NULL
      * sentinel so no consumer can dereference a stale pointer (§14/§18) - the
      * whole family: front sheets, front palettes, all 8 back palettes, the 8
-     * back SHEET table slots and all 34 back frame slots. */
+     * back SHEET table slots and all 34 back frame slots. R9 §10: the
+     * Pokémon battle tables clear the same way (slot-map driven; this TU's
+     * degraded session never published them, so they were already NULL - the
+     * pin is that the clear covers every migrated battle slot). */
     EmeraldResourceCompat_ClearMigratedEntries();
     for (i = 0; i < ARRAY_COUNT(gTrainerFrontPicTable); i++)
         CHECK("clear sets front sheet NULL", gTrainerFrontPicTable[i].data == NULL);
@@ -1894,6 +1897,14 @@ static void TestShutdown(void)
         for (f = 0; f < sBackFixtures[i].frames; f++)
             CHECK("clear sets back frame NULL", kBackFrameArrays[i][f].data == NULL);
     }
+    for (i = 0; i < POKEMON_BATTLE_SLOTS_PER_TABLE; i++)
+        CHECK("clear sets mon front NULL", gMonFrontPicTable[i].data == NULL);
+    for (i = 0; i < POKEMON_BATTLE_SLOTS_PER_TABLE; i++)
+        CHECK("clear sets mon back NULL", gMonBackPicTable[i].data == NULL);
+    for (i = 0; i < POKEMON_BATTLE_SLOTS_PER_TABLE; i++)
+        CHECK("clear sets mon palette NULL", gMonPaletteTable[i].data == NULL);
+    for (i = 0; i < POKEMON_BATTLE_SLOTS_PER_TABLE; i++)
+        CHECK("clear sets mon shiny NULL", gMonShinyPaletteTable[i].data == NULL);
 }
 
 int main(void)
