@@ -1137,8 +1137,10 @@ static void TestSaveStateAudit(void)
     CHECK("save-state audit snapshot builds", snapshot != NULL);
     if (snapshot == NULL)
         return;
+    /* R9 §8: this audit snapshot is trainer-only, so the strict init would
+     * hard-fail - the additive opt-in keeps the offline degraded contract. */
     CHECK("save-state audit init ok",
-          EmeraldResourceCompat_InitializeFromSnapshot(snapshot, NULL) == EMERALD_COMPAT_OK);
+          EmeraldResourceCompat_InitializeFromSnapshotAllowPokemonDegradation(snapshot, NULL) == EMERALD_COMPAT_OK);
 
     /* Post-publish: all migrated slots hold process-local streams in the
      * session image (build-constant INCBIN addresses can no longer occur). */
@@ -1315,7 +1317,11 @@ static void TestFamilyMappingAndParity(void)
     CaptureBackSheetTable(beforeBackSheet);
     CaptureBackFrames(&beforeBackFrames);
 
-    status = EmeraldResourceCompat_InitializeFromSnapshot(snapshot, &diag);
+    /* R9 §8: this fixture snapshot is trainer-only, so the strict init would
+     * hard-fail - the additive opt-in keeps the offline degraded contract
+     * pinned here (trainer published, Pokémon at sentinels, diagnostics
+     * cleared). The strict game path is pinned by TestPokemonStrictHardFail. */
+    status = EmeraldResourceCompat_InitializeFromSnapshotAllowPokemonDegradation(snapshot, &diag);
     CHECK("initialize ok", status == EMERALD_COMPAT_OK);
 
     /* On SUCCESS the compat diagnostics are cleared. */
@@ -1775,6 +1781,78 @@ static void TestRepublishStalePointer(void)
 }
 
 /* ------------------------------------------------------------------ */
+/* 4c. R9 §8: strict init hard-fails on an unserved Pokémon family      */
+/*                                                                     */
+/* With the compiled leaf payloads gone from the native link (R9 §7),  */
+/* a snapshot that cannot publish the Pokémon battle family is an init */
+/* error on the game path: NULL Pokémon slots cannot render battles.   */
+/* The strict entry point returns the Pokémon failure with the first  */
+/* failing resource in the diagnostics; the trainer family's own       */
+/* publication stands (per-family transactionality); the additive      */
+/* opt-in above remains the offline/harness contract.                  */
+/* ------------------------------------------------------------------ */
+
+static void TestPokemonStrictHardFail(void)
+{
+    struct Gen3ResourceSnapshot *snapshot;
+    struct EmeraldResourceCompatDiagnostics diag;
+    size_t i;
+    enum EmeraldResourceCompatStatus status;
+
+    if (!LoadFamilyFixtures() || !LoadBackFamilyFixtures())
+        return;
+    snapshot = BuildFullFamilySnapshot();
+    CHECK("strict-fail snapshot builds", snapshot != NULL);
+    if (snapshot == NULL)
+        return;
+
+    /* Clean slate: tables at sentinels, no registered snapshot. */
+    EmeraldResourceCompat_ClearMigratedEntries();
+    EmeraldResourceCompat_ClearSnapshot();
+
+    /* Strict init with a trainer-only snapshot: the trainer phase succeeds
+     * and publishes, the Pokémon phase fails closed with the first missing
+     * resource (slot map resource 0 = abra back sheet) in the diagnostics. */
+    status = EmeraldResourceCompat_InitializeFromSnapshot(snapshot, &diag);
+    CHECK("strict init hard-fails on missing Pokémon family",
+          status == EMERALD_COMPAT_ERR_RESOLVE_FAILED);
+    CHECK("strict diag names first Pokémon resource",
+          strcmp(diag.canonicalName, "emerald:pokemon/abra/battle/back/sheet") == 0);
+    CHECK("strict diag stage is resolve", strcmp(diag.stage, "resolve") == 0);
+    for (i = 0; i < POKEMON_BATTLE_SLOTS_PER_TABLE; i++)
+        CHECK("strict fail leaves front sentinel",
+              gMonFrontPicTable[i].data == NULL);
+    for (i = 0; i < POKEMON_BATTLE_SLOTS_PER_TABLE; i++)
+        CHECK("strict fail leaves back sentinel",
+              gMonBackPicTable[i].data == NULL);
+    for (i = 0; i < POKEMON_BATTLE_SLOTS_PER_TABLE; i++)
+        CHECK("strict fail leaves palette sentinel",
+              gMonPaletteTable[i].data == NULL);
+    for (i = 0; i < POKEMON_BATTLE_SLOTS_PER_TABLE; i++)
+        CHECK("strict fail leaves shiny sentinel",
+              gMonShinyPaletteTable[i].data == NULL);
+    /* The trainer family's own publication stands (per-family transaction). */
+    CHECK("strict fail keeps trainer published",
+          gTrainerFrontPicTable[0].data != NULL
+              && gTrainerFrontPicPaletteTable[0].data != NULL
+              && gTrainerBackPicTable[0].data != NULL);
+
+    /* Repeatable: a second strict init with the same snapshot fails the same
+     * way, tables unchanged (fail-closed, no drift). */
+    status = EmeraldResourceCompat_InitializeFromSnapshot(snapshot, &diag);
+    CHECK("strict init repeatable failure", status == EMERALD_COMPAT_ERR_RESOLVE_FAILED);
+    CHECK("strict diag repeatable name",
+          strcmp(diag.canonicalName, "emerald:pokemon/abra/battle/back/sheet") == 0);
+    CHECK("strict fail repeatable keeps trainer published",
+          gTrainerFrontPicTable[0].data != NULL);
+    for (i = 0; i < POKEMON_BATTLE_SLOTS_PER_TABLE; i++)
+        CHECK("strict fail repeatable keeps front sentinel",
+              gMonFrontPicTable[i].data == NULL);
+
+    DestroySnapshot(snapshot);
+}
+
+/* ------------------------------------------------------------------ */
 /* 5. Session lifetime + shutdown                                      */
 /* ------------------------------------------------------------------ */
 
@@ -1827,6 +1905,7 @@ int main(void)
     TestRuntimeHook();
     TestFailClosedTransactional();
     TestRepublishStalePointer();
+    TestPokemonStrictHardFail();
     TestShutdown();
 
     FreeFamilyFixtures();

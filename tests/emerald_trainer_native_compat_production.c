@@ -312,6 +312,171 @@ static void VerifyPokemonCleared(void)
     }
 }
 
+/* R9 §6/§8e: special-case pins on the PUBLISHED tables. The policy makes
+ * every special case mapping data (kPokemonBattleCompatSlots); these checks
+ * prove the seam serves the aliasing and size classes exactly: shared-ri
+ * slots publish THE SAME stream pointer, the egg shiny slot reuses the
+ * normal-palette stream, the old-unown rows are the question-mark/double
+ * family, the multi-frame sheets decode to their declared classes, and the
+ * Deoxys front stream is fixup-compatible with the game's
+ * DuplicateDeoxysTiles. */
+static void VerifyPokemonSpecialCases(void)
+{
+    size_t s;
+    char label[96];
+
+    /* 1. Unown family shared palettes: species 201 + the 27 form slots
+     * (413..439) all publish one normal-palette stream and one shiny-palette
+     * stream (kPokemonBattleCompatResources[1422]/[1423] - one payload for
+     * the whole family, exactly like data.c's shared palette entry). */
+    for (s = 413u; s <= 439u; s++)
+    {
+        snprintf(label, sizeof(label),
+                 "unown pal slot %zu shares species-201 stream", s);
+        CHECK(label, gMonPaletteTable[s].data
+                         == gMonPaletteTable[SPECIES_UNOWN].data);
+        snprintf(label, sizeof(label),
+                 "unown shiny slot %zu shares species-201 stream", s);
+        CHECK(label, gMonShinyPaletteTable[s].data
+                         == gMonShinyPaletteTable[SPECIES_UNOWN].data);
+    }
+
+    /* 2. Egg shiny aliases the egg NORMAL palette stream (no shiny egg -
+     * both slots map kPokemonBattleCompatResources[329]). */
+    CHECK("egg shiny slot reuses egg normal stream",
+          gMonShinyPaletteTable[SPECIES_EGG].data
+              == gMonPaletteTable[SPECIES_EGG].data);
+
+    /* 3. Old-unown rows (252..276) are the question-mark/double family: every
+     * one of the 25 rows publishes the same front sheet stream, the same back
+     * sheet stream, the same normal-palette stream and the same shiny-palette
+     * stream (ri 1039/1038/1040/1041 - one payload per kind). */
+    for (s = 253u; s <= 276u; s++)
+    {
+        snprintf(label, sizeof(label),
+                 "old-unown front slot %zu shares 252 stream", s);
+        CHECK(label, gMonFrontPicTable[s].data
+                         == gMonFrontPicTable[SPECIES_OLD_UNOWN_B].data);
+        snprintf(label, sizeof(label),
+                 "old-unown back slot %zu shares 252 stream", s);
+        CHECK(label, gMonBackPicTable[s].data
+                         == gMonBackPicTable[SPECIES_OLD_UNOWN_B].data);
+        snprintf(label, sizeof(label),
+                 "old-unown pal slot %zu shares 252 stream", s);
+        CHECK(label, gMonPaletteTable[s].data
+                         == gMonPaletteTable[SPECIES_OLD_UNOWN_B].data);
+        snprintf(label, sizeof(label),
+                 "old-unown shiny slot %zu shares 252 stream", s);
+        CHECK(label, gMonShinyPaletteTable[s].data
+                         == gMonShinyPaletteTable[SPECIES_OLD_UNOWN_B].data);
+    }
+
+    /* 4. Slot 0 fallback identity: the four kinds publish the
+     * question_mark/circled family (ri 1035/1034/1036/1037) - published, and
+     * DISTINCT from the old-unown double family (different resources). */
+    CHECK("slot 0 front published", gMonFrontPicTable[0].data != NULL);
+    CHECK("slot 0 back published", gMonBackPicTable[0].data != NULL);
+    CHECK("slot 0 pal published", gMonPaletteTable[0].data != NULL);
+    CHECK("slot 0 shiny published", gMonShinyPaletteTable[0].data != NULL);
+    CHECK("slot 0 front != old-unown front (circled vs double)",
+          gMonFrontPicTable[0].data != gMonFrontPicTable[SPECIES_OLD_UNOWN_B].data);
+
+    /* 5. Multi-frame / multi-palette size classes: decode each published
+     * stream into a guarded buffer and prove the header declares the class
+     * and the decode stays inside it (spot classes: Castform 8192/128,
+     * Deoxys 4096, Spinda front 4096, Egg front 4096, Unown front 4096). */
+    {
+        enum SizeClassKind
+        {
+            KIND_FRONT,
+            KIND_BACK,
+            KIND_PAL,
+            KIND_SHINY,
+        };
+        static const struct
+        {
+            u16 species;
+            enum SizeClassKind kind;
+            u32 size;
+            const char *what;
+        } kSizeClass[] = {
+            { SPECIES_CASTFORM, KIND_FRONT, 8192u, "castform front" },
+            { SPECIES_CASTFORM, KIND_BACK,  8192u, "castform back" },
+            { SPECIES_CASTFORM, KIND_PAL,   128u,  "castform palette" },
+            { SPECIES_CASTFORM, KIND_SHINY, 128u,  "castform shiny" },
+            { SPECIES_DEOXYS,   KIND_FRONT, 4096u, "deoxys front" },
+            { SPECIES_DEOXYS,   KIND_BACK,  4096u, "deoxys back" },
+            { SPECIES_SPINDA,   KIND_FRONT, 4096u, "spinda front" },
+            { SPECIES_EGG,      KIND_FRONT, 4096u, "egg front" },
+            { SPECIES_UNOWN,    KIND_FRONT, 4096u, "unown front" },
+        };
+        size_t c;
+
+        for (c = 0u; c < sizeof(kSizeClass) / sizeof(kSizeClass[0]); c++)
+        {
+            const struct CompressedSpriteSheet *sheet;
+            const struct CompressedSpritePalette *pal;
+            const void *stream;
+            u8 *buf;
+
+            if (kSizeClass[c].kind == KIND_FRONT)
+                sheet = &gMonFrontPicTable[kSizeClass[c].species];
+            else if (kSizeClass[c].kind == KIND_BACK)
+                sheet = &gMonBackPicTable[kSizeClass[c].species];
+            else if (kSizeClass[c].kind == KIND_PAL)
+                pal = &gMonPaletteTable[kSizeClass[c].species];
+            else
+                pal = &gMonShinyPaletteTable[kSizeClass[c].species];
+            stream = kSizeClass[c].kind <= KIND_BACK
+                         ? (const void *)sheet->data
+                         : (const void *)pal->data;
+            buf = (u8 *)malloc(kSizeClass[c].size + 4u);
+            snprintf(label, sizeof(label), "%s stream present",
+                     kSizeClass[c].what);
+            CHECK(label, stream != NULL && buf != NULL);
+            if (stream == NULL || buf == NULL)
+            {
+                free(buf);
+                continue;
+            }
+            memset(buf, 0xA5, kSizeClass[c].size + 4u);
+            LZ77UnCompWram((const u32 *)(const void *)stream, buf);
+            snprintf(label, sizeof(label), "%s header declares %u",
+                     kSizeClass[c].what, kSizeClass[c].size);
+            CHECK(label, ((const u8 *)stream)[0] == 0x10u
+                     && ((const u8 *)stream)[1] == (u8)(kSizeClass[c].size & 0xFFu)
+                     && ((const u8 *)stream)[2] == (u8)((kSizeClass[c].size >> 8) & 0xFFu));
+            snprintf(label, sizeof(label), "%s decodes inside %u (no overrun)",
+                     kSizeClass[c].what, kSizeClass[c].size);
+            CHECK(label, buf[kSizeClass[c].size] == 0xA5u
+                     && buf[kSizeClass[c].size + 1u] == 0xA5u
+                     && buf[kSizeClass[c].size + 2u] == 0xA5u
+                     && buf[kSizeClass[c].size + 3u] == 0xA5u);
+            free(buf);
+        }
+    }
+
+    /* 6. Deoxys fixup compatibility: the game's DuplicateDeoxysTiles copies
+     * frame 1 over frame 0 on the DECODED front sheet (CpuCopy32(src=frame1,
+     * dest=frame0); battle_controller / DecompressPicFromTable_2 path). Run
+     * it on the published stream's decode and prove frame 0 becomes frame
+     * 1's content with frame 1 untouched (pure-memory, no tables). */
+    {
+        u8 deoxys[4096u];
+        u8 before1[2048u];
+
+        LZ77UnCompWram((const u32 *)(const void *)
+                           gMonFrontPicTable[SPECIES_DEOXYS].data,
+                       deoxys);
+        memcpy(before1, deoxys + 2048u, sizeof(before1));
+        DuplicateDeoxysTiles(deoxys, SPECIES_DEOXYS);
+        CHECK("deoxys duplication makes frame 0 == original frame 1",
+              memcmp(deoxys, before1, sizeof(before1)) == 0);
+        CHECK("deoxys duplication leaves frame 1 unchanged",
+              memcmp(deoxys + 2048u, before1, sizeof(before1)) == 0);
+    }
+}
+
 static void VerifySpotDecode(const char *table, u16 species, int32_t ri,
                              const void *stream);
 
@@ -743,6 +908,7 @@ int main(int argc, char **argv)
      * species. */
     VerifyPokemonPublished(pack);
     VerifyPokemonSpotDecodes();
+    VerifyPokemonSpecialCases();
     status = EmeraldResourceCompat_Republish(&cdiag);
     CHECK("republish ok", status == EMERALD_COMPAT_OK);
     VerifyPokemonPublished(pack);

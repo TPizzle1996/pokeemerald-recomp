@@ -29,7 +29,10 @@
  *
  * Fail-closed: if the pack is absent or does not validate, no snapshot is
  * registered, TryInitialize stays a no-op, and the migrated slots remain at
- * their NULL sentinel - exactly the behavior the R5 harness pins.
+ * their NULL sentinel - exactly the behavior the R5 harness pins. R9 §8:
+ * registration also PUBLISHES - the strict init runs at registration and a
+ * pack that cannot serve the Pokémon battle family is a refused session (the
+ * tables are rolled back, the snapshot dropped, the failure returned).
  *
  * The file is platform-neutral in its includes (gen3 core + emerald resource
  * headers only, per the R3 guardrail-18 dependency-creep assertion); the native
@@ -41,6 +44,7 @@
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
+#include <stdio.h>
 
 #include "gen3/resources/resource_pack.h"
 #include "emerald/resources/emerald_resource_session.h"
@@ -106,6 +110,7 @@ EmeraldResourceCompat_RegisterRuntimeSnapshot(const char *packPath)
     struct Gen3ResourceCandidate *candidate = NULL;
     struct Gen3ResourceSnapshot *snapshot = NULL;
     struct Gen3ResourceDiagnosticList diagnostics;
+    struct EmeraldResourceCompatDiagnostics diag;
     struct EmeraldResourceSessionInfo info;
     enum EmeraldResourceSessionError sessionError;
     enum EmeraldResourceCompatStatus status = EMERALD_COMPAT_ERR_UNAVAILABLE;
@@ -148,8 +153,33 @@ EmeraldResourceCompat_RegisterRuntimeSnapshot(const char *packPath)
          * session by the seam and released only by
          * EmeraldResourceCompat_Shutdown. */
         EmeraldResourceCompat_SetSnapshot(snapshot);
-        sSnapshotRegistered = true;
-        status = EMERALD_COMPAT_OK;
+
+        /* R9 §8: publish at registration. The strict init is the game
+         * contract - with the compiled Pokémon leaf payloads gone from the
+         * native link (R9 §7), a pack that cannot serve the Pokémon battle
+         * family is a refused session. Roll the published tables back and
+         * drop the snapshot so nothing survives: sSnapshotRegistered stays
+         * false and the content-hydration TryInitialize stays a no-op. */
+        status = EmeraldResourceCompat_InitializeFromSnapshot(snapshot, &diag);
+        if (status != EMERALD_COMPAT_OK)
+        {
+            fprintf(stderr,
+                    "emerald runtime: session refused: Pokémon battle family "
+                    "not published (status %d%s%s)\n",
+                    (int)status,
+                    diag.canonicalName[0] != '\0' ? " @ " : "",
+                    diag.canonicalName);
+            EmeraldResourceCompat_ClearMigratedEntries();
+            EmeraldResourceCompat_ClearSnapshot();
+            Gen3ResourceSnapshot_Destroy(snapshot);
+            snapshot = NULL;
+            sSnapshotRegistered = false;
+        }
+        else
+        {
+            sSnapshotRegistered = true;
+            status = EMERALD_COMPAT_OK;
+        }
     }
     Gen3ResourceDiagnostics_Destroy(&diagnostics);
 

@@ -123,9 +123,28 @@ void EmeraldResourceCompat_ClearMigratedEntries(void);
  * is valid and BEFORE any trainer-graphics gameplay consumer. On any failure
  * the live tables are left untouched and the session image is unchanged; the
  * image is retained for the process session until
- * EmeraldResourceCompat_Shutdown. */
+ * EmeraldResourceCompat_Shutdown.
+ *
+ * R9 §5/§8: the Pokémon battle family publishes from the same snapshot with
+ * the same lifecycle. STRICT by default: a snapshot that cannot publish the
+ * Pokémon family (the compiled payloads are gone from the native link since
+ * R9 §7) is an init error - the trainer publication stands (per-family
+ * transactionality), the diagnostics carry the first failing Pokémon
+ * resource, and the caller is expected to refuse the session (the R6 runtime
+ * loader rolls the tables back and returns the failure). The additive
+ * opt-in below is for offline/synthetic snapshots only (the unit harness). */
 enum EmeraldResourceCompatStatus
 EmeraldResourceCompat_InitializeFromSnapshot(
+    const struct Gen3ResourceSnapshot *snapshot,
+    struct EmeraldResourceCompatDiagnostics *diagnostics);
+
+/* R9 §8 additive opt-in (unit harness only): the Pokémon battle family is
+ * optional - its failure degrades to NULL sentinels with the diagnostics
+ * cleared and the trainer family's success stands. The game path never uses
+ * this; it is how the offline trainer-only snapshots keep their pinned
+ * fail-closed contract. */
+enum EmeraldResourceCompatStatus
+EmeraldResourceCompat_InitializeFromSnapshotAllowPokemonDegradation(
     const struct Gen3ResourceSnapshot *snapshot,
     struct EmeraldResourceCompatDiagnostics *diagnostics);
 
@@ -144,8 +163,16 @@ void EmeraldResourceCompat_TryInitialize(void);
  * every ROM_BASE_ONLY payload's encoded/decoded bytes to be absent from the
  * native link. Idempotent (at most one registration per process session);
  * fail-closed: a NULL/empty path or an absent or invalid pack leaves the
- * snapshot unregistered and the migrated slots at their NULL sentinel. Call
- * once at native startup before the content-hydration path's TryInitialize. */
+ * snapshot unregistered and the migrated slots at their NULL sentinel.
+ *
+ * R9 §8: registration PUBLISHES. The loader runs the strict
+ * EmeraldResourceCompat_InitializeFromSnapshot at registration; a pack that
+ * cannot serve the Pokémon battle family (the compiled payloads are gone from
+ * the native link since R9 §7) is a refused session - the loader rolls the
+ * tables back, drops the snapshot, and returns the failure, so the
+ * content-hydration path's TryInitialize stays a no-op and the migrated slots
+ * stay at their NULL sentinel. Call once at native startup before the
+ * content-hydration path's TryInitialize. */
 enum EmeraldResourceCompatStatus
 EmeraldResourceCompat_RegisterRuntimeSnapshot(const char *packPath);
 

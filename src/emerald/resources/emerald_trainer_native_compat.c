@@ -599,10 +599,11 @@ void EmeraldResourceCompat_ClearMigratedEntries(void)
     EmeraldPokemonCompat_ClearMigratedEntries();
 }
 
-enum EmeraldResourceCompatStatus
-EmeraldResourceCompat_InitializeFromSnapshot(
+static enum EmeraldResourceCompatStatus
+InitializeFromSnapshotInternal(
     const struct Gen3ResourceSnapshot *snapshot,
-    struct EmeraldResourceCompatDiagnostics *diagnostics)
+    struct EmeraldResourceCompatDiagnostics *diagnostics,
+    bool32 pokemonOptional)
 {
     struct EmeraldResourceCompatSourceEntry entries[EMERALD_TRAINER_FAMILY_ENTRY_COUNT];
     struct Gen3ResourceView views[EMERALD_TRAINER_FAMILY_ENTRY_COUNT];
@@ -723,31 +724,65 @@ EmeraldResourceCompat_InitializeFromSnapshot(
     sSessionImage = image;
     sInitialized = TRUE;
 
-    /* R9 §5: publish the Pokémon battle family from the same snapshot, with
-     * the same lifecycle. The Pokémon family is ADDITIVE: a snapshot that
-     * does not carry it (the trainer-only unit harness) - or whose Pokémon
-     * resources fail validation - leaves the Pokémon tables at their
-     * compiled payloads (until R9 §7): nothing mutated, no stale pointer
-     * ever installed, and the trainer family's own success stands (the
-     * seam's trainer contract predates R9). The diagnostics are cleared so
-     * the pinned trainer contract ("success leaves diagnostics empty")
-     * holds; the production proof catches a real pack regression anyway,
-     * because its post-init Pokémon verification fails loudly on any slot
-     * that did not publish. R9 §8 tightens this to hard-fail once the
-     * compiled payloads are gone on native. */
+    /* R9 §5/§8: publish the Pokémon battle family from the same snapshot,
+     * with the same lifecycle. On the additive opt-in path (offline/synthetic
+     * snapshots - the unit harness) the Pokémon family is optional: a
+     * snapshot that does not carry it - or whose Pokémon resources fail
+     * validation - leaves the Pokémon tables at their NULL sentinels (R9 §7
+     * removed the compiled payloads from the native link): nothing mutated,
+     * no stale pointer ever installed, and the trainer family's own
+     * publication stands (the seam's trainer contract predates R9). The
+     * diagnostics are cleared on that path so the pinned trainer contract
+     * ("success leaves diagnostics empty") holds. The strict path (the game
+     * contract, R9 §8) HARD-FAILS instead: with the compiled payloads gone,
+     * NULL Pokémon slots cannot render battles, so an unserved family is an
+     * init error - the runtime loader refuses the snapshot and the caller
+     * treats the non-OK status as fatal. */
     status = EmeraldPokemonCompat_TryInitialize(snapshot, diagnostics);
     if (status != EMERALD_COMPAT_OK)
     {
-        fprintf(stderr, "emerald compat: Pokémon battle family not published "
-                "(status %d%s%s) - tables stay at compiled payloads\n",
+        fprintf(stderr,
+                "emerald compat: Pokémon battle family not published "
+                "(status %d%s%s) - %s\n",
                 (int)status,
                 diagnostics != NULL && diagnostics->canonicalName[0] != '\0'
                     ? " @ " : "",
-                diagnostics != NULL ? diagnostics->canonicalName : "");
-        ClearDiagnostics(diagnostics);
+                diagnostics != NULL ? diagnostics->canonicalName : "",
+                pokemonOptional
+                    ? "degraded to NULL sentinels (R9 §8 additive opt-in)"
+                    : "NULL-sentinel tables (R9 §7 compiled payloads are gone)");
+        if (pokemonOptional)
+        {
+            ClearDiagnostics(diagnostics);
+            return EMERALD_COMPAT_OK;
+        }
     }
 
-    return EMERALD_COMPAT_OK;
+    return status;
+}
+
+enum EmeraldResourceCompatStatus
+EmeraldResourceCompat_InitializeFromSnapshot(
+    const struct Gen3ResourceSnapshot *snapshot,
+    struct EmeraldResourceCompatDiagnostics *diagnostics)
+{
+    /* R9 §8 strict (game contract): a snapshot that cannot publish the
+     * Pokémon battle family is an init error. The trainer family's own
+     * publication stands (per-family transactionality); the caller refuses
+     * the session and rolls the tables back to their sentinels. */
+    return InitializeFromSnapshotInternal(snapshot, diagnostics, FALSE);
+}
+
+enum EmeraldResourceCompatStatus
+EmeraldResourceCompat_InitializeFromSnapshotAllowPokemonDegradation(
+    const struct Gen3ResourceSnapshot *snapshot,
+    struct EmeraldResourceCompatDiagnostics *diagnostics)
+{
+    /* R9 §8 additive opt-in (offline/synthetic snapshots - the unit
+     * harness): the Pokémon family is optional; its failure degrades to
+     * NULL sentinels with the diagnostics cleared, and the trainer
+     * family's success stands. */
+    return InitializeFromSnapshotInternal(snapshot, diagnostics, TRUE);
 }
 
 void EmeraldResourceCompat_SetSnapshot(const struct Gen3ResourceSnapshot *snapshot)
