@@ -24,6 +24,29 @@
 #          for native, and the native dependency graph (scaninc closure +
 #          make dry-run) must exclude the artifacts.
 #
+# R9 generalizes the proof to the Pokémon battle graphics family
+# (resources/extraction/emerald/bpee01/pokemon_battle/ownership.generated.toml,
+# 1608 records — the four battle tables' front/back sheets + normal/shiny
+# palettes): all 1608 are ROM_BASE_ONLY. The GBA-only payload TUs
+# (src/anim_mon_front_pics.c: 416 front leaves; src/data/graphics/
+# pokemon_battle_payload.c: 1192 back/palette/shiny leaves incl. the slot-0
+# circled-question-mark trio) must not be compiled for native, and the four
+# tables' native row macros (SPECIES_BATTLE_* in src/data.c) must keep their
+# NULL-sentinel native branches next to the GBA compiled branches, with the
+# one external back-EGG row still compiled via SPECIES_SPRITE(EGG,
+# gMonStillFrontPic_Egg). The two external aliases (gMonStillFrontPic_Egg,
+# gMonPalette_Egg) and the still-front family are deliberately NOT records
+# here (R9 §6).
+#
+# Byte-scan exemption (R9 §9): an encoded payload whose bytes are
+# byte-identical to a still-compiled still-front asset (graphics/pokemon/*/
+# front.4bpp.lz — the battle front and the party-menu front share the same
+# source art for castform, and identical PNGs compress to identical streams)
+# is REPORTED, not failed: the symbol/encoded-unless-identical/TU/dep-graph
+# checks remain hard failures, and a genuinely leaked battle leaf is never
+# byte-identical to a menu asset. This mirrors the small-decoded-payload
+# NOTE policy.
+#
 #   native = COMPILED_PENDING_MIGRATION  (zero records after R8)
 #       -> the state check stays in the runner, driven by the ownership files:
 #          any record still declaring this state MUST have its legacy symbol
@@ -47,8 +70,9 @@
 # Metadata truth (artifact sha256, encoded length, decoded length + sha256) is
 # verified for EVERY record, regardless of state. RAW records (the 8 back
 # sheets) are the payload verbatim — encoded == decoded — so they skip the
-# GBA LZ77 decode step; gba-lz77 records (all palettes, front sheets) decode
-# strictly per src/platform/bios.c LZ77UnCompWram.
+# GBA LZ77 decode step; gba-lz77 records (all palettes, front/back sheets —
+# the whole Pokémon family) decode strictly per src/platform/bios.c
+# LZ77UnCompWram.
 #
 # Usage:
 #   run_emerald_native_asset_isolation.sh [--binary PATH] [--build]
@@ -66,6 +90,7 @@ root="$(cd "$here/.." && pwd)"
 cd "$root"
 ownership="$root/resources/extraction/emerald/bpee01/ownership.generated.toml"
 back_ownership="$root/resources/extraction/emerald/bpee01/back_ownership.generated.toml"
+pokemon_ownership="$root/resources/extraction/emerald/bpee01/pokemon_battle/ownership.generated.toml"
 scaninc="$root/tools/scaninc/scaninc"
 default_binary="$root/pokeemerald-linux64"
 
@@ -88,6 +113,7 @@ bad()  { fail=$((fail + 1)); printf 'FAIL - %s\n' "$*"; }
 
 [[ -f "$ownership" ]] || { echo "FATAL: ownership file missing: $ownership" >&2; exit 2; }
 [[ -f "$back_ownership" ]] || { echo "FATAL: ownership file missing: $back_ownership" >&2; exit 2; }
+[[ -f "$pokemon_ownership" ]] || { echo "FATAL: ownership file missing: $pokemon_ownership" >&2; exit 2; }
 
 # ---------------------------------------------------------------------------
 # Build / freshness
@@ -135,10 +161,17 @@ ok "native binary is fresh: $binary"
 echo "== ownership-driven payload byte + symbol scans =="
 tmpdir="$(mktemp -d)"
 trap 'rm -rf "$tmpdir"' EXIT
-python3 - "$binary" "$ownership" "$back_ownership" "$tmpdir" <<'PY' || exit 1
-import hashlib, re, subprocess, sys
+python3 - "$binary" "$ownership" "$back_ownership" "$pokemon_ownership" "$tmpdir" <<'PY' || exit 1
+import glob, hashlib, re, subprocess, sys
 
-binary_path, ownership_path, back_ownership_path, tmpdir = sys.argv[1:5]
+# Line-buffer stdout: under 2>&1 the runner's log is the record of record,
+# and block-buffered stdout interleaves with unbuffered stderr NOTE/FAIL
+# lines mid-line (stdout flush lands inside the previous stderr write),
+# which garbles the log and has misled greps. Line buffering keeps each
+# diagnostic on its own line in write order.
+sys.stdout.reconfigure(line_buffering=True)
+
+binary_path, ownership_path, back_ownership_path, pokemon_ownership_path, tmpdir = sys.argv[1:6]
 
 def sha256_file(path):
     h = hashlib.sha256()
@@ -198,10 +231,27 @@ nm_out = subprocess.run(['nm', '-g', '--defined-only', binary_path],
                         capture_output=True, text=True)
 defined_syms = set(l.split()[-1] for l in nm_out.stdout.splitlines() if l.strip())
 
-# Both ownership files (front family R7B, back family R8) declare the same
-# [[resources]] record grammar; concatenate so every downstream check is
-# driven by the 196-record union, never a hardcoded trainer name.
-text = open(ownership_path).read() + '\n' + open(back_ownership_path).read()
+# All three ownership files (trainer front R7B, trainer back R8, Pokémon
+# battle R9) declare the same [[resources]] record grammar; concatenate so
+# every downstream check is driven by the 1804-record union, never a
+# hardcoded species or trainer name.
+text = open(ownership_path).read() + '\n' + open(back_ownership_path).read() \
+    + '\n' + open(pokemon_ownership_path).read()
+
+# R9 §9 byte-scan exemption: the sha256 of every still-compiled still-front
+# asset (graphics/pokemon/<species>/front.4bpp.lz - the party-menu fronts,
+# still compiled on native). A ROM_BASE_ONLY encoded payload that is
+# byte-identical to one of these is the same-species art-sharing case
+# (castform's battle front IS its menu front; identical PNGs compress to
+# identical streams) and is reported, not failed - see the header comment.
+# The glob is recursive: form species live nested below the species dir
+# (question_mark/circled, question_mark/double, unown/<form>), and the
+# circled question mark's BACK sprite is byte-identical to its front - the
+# back payload legitimately appears in the binary as the compiled still-front
+# asset, exactly the castform case one level deeper.
+still_front_shas = set()
+for still in glob.glob('graphics/pokemon/**/front.4bpp.lz', recursive=True):
+    still_front_shas.add(sha256_file(still))
 # Split into [[resources]] blocks (the [resources.targets] sub-table belongs to
 # the preceding block). Values may be quoted strings or bare integers.
 blocks = re.split(r'\n\[\[resources\]\]\n', '\n' + text)[1:]
@@ -306,9 +356,19 @@ for rec in records:
         else:
             print(f'ok   - {rid}: ROM_BASE_ONLY symbol {symbol} absent from binary')
         if binary.find(encoded) != -1:
-            print(f'FAIL - {rid}: {enc_len}-byte encoded payload found in {binary_path} '
-                  f'({symbol} leaked into the native executable)', file=sys.stderr)
-            bad += 1
+            if enc_sha in still_front_shas:
+                # Art-sharing with the still-compiled menu-front family
+                # (castform): the same bytes legitimately sit in the binary
+                # as the still-front asset; the symbol/TU/dep-graph checks
+                # are the hard isolation proof for this record.
+                print(f'NOTE - {rid}: {enc_len}-byte encoded payload found in '
+                      f'{binary_path} but byte-identical to a compiled '
+                      f'still-front asset (R9 §9 art-sharing); reported, '
+                      f'not failed', file=sys.stderr)
+            else:
+                print(f'FAIL - {rid}: {enc_len}-byte encoded payload found in {binary_path} '
+                      f'({symbol} leaked into the native executable)', file=sys.stderr)
+                bad += 1
         else:
             print(f'ok   - {rid}: encoded {enc_len}-byte payload absent from binary')
         if binary.find(decoded) != -1:
@@ -365,6 +425,8 @@ fi
 
 payload_tu="$root/src/data/graphics/trainers_front_payload.c"
 back_payload_tu="$root/src/data/graphics/trainers_back_payload.c"
+mon_front_payload_tu="$root/src/anim_mon_front_pics.c"
+mon_battle_payload_tu="$root/src/data/graphics/pokemon_battle_payload.c"
 if [[ -f "$payload_tu" ]]; then
     ok "GBA-only payload TU exists: src/data/graphics/trainers_front_payload.c"
 else
@@ -374,6 +436,16 @@ if [[ -f "$back_payload_tu" ]]; then
     ok "GBA-only payload TU exists: src/data/graphics/trainers_back_payload.c"
 else
     bad "GBA-only payload TU missing: src/data/graphics/trainers_back_payload.c"
+fi
+if [[ -f "$mon_front_payload_tu" ]]; then
+    ok "GBA-only payload TU exists: src/anim_mon_front_pics.c"
+else
+    bad "GBA-only payload TU missing: src/anim_mon_front_pics.c"
+fi
+if [[ -f "$mon_battle_payload_tu" ]]; then
+    ok "GBA-only payload TU exists: src/data/graphics/pokemon_battle_payload.c"
+else
+    bad "GBA-only payload TU missing: src/data/graphics/pokemon_battle_payload.c"
 fi
 
 # Native objects: only the object dir of the CHECKED binary is scanned. The
@@ -397,7 +469,9 @@ for dir in "${obj_dirs[@]}"; do
     while IFS= read -r -d '' obj; do
         found_objects=1
         if [[ "$obj" == *data/graphics/trainers_front_payload.o ]] \
-           || [[ "$obj" == *data/graphics/trainers_back_payload.o ]]; then
+           || [[ "$obj" == *data/graphics/trainers_back_payload.o ]] \
+           || [[ "$obj" == *anim_mon_front_pics.o ]] \
+           || [[ "$obj" == *data/graphics/pokemon_battle_payload.o ]]; then
             bad "GBA-only payload TU was compiled for native: $obj"
         fi
         nm "$obj" 2>/dev/null | awk '{print $3}' | sort -u > "$tmpdir/obj_syms.txt"
@@ -438,10 +512,10 @@ done
 # Native make object list: the payload TU and the ROM_BASE_ONLY artifacts must
 # not appear anywhere in the dry-run of the native build.
 dry="$(cd "$root" && make -f Makefile_pc linux64 -n 2>/dev/null || true)"
-if grep -Eq "trainers_(front|back)_payload" <<<"$dry"; then
+if grep -Eq "trainers_(front|back)_payload|anim_mon_front_pics|pokemon_battle_payload" <<<"$dry"; then
     bad "native make dry-run references a GBA-only payload TU"
 else
-    ok "native make dry-run excludes trainers_front_payload.c + trainers_back_payload.c"
+    ok "native make dry-run excludes the four GBA-only payload TUs"
 fi
 for artifact in "${migrated_artifacts[@]}"; do
     if grep -Fq "$artifact" <<<"$dry"; then
@@ -513,7 +587,53 @@ else
     bad "GBA-only back payload TU lost an INCBIN payload"
 fi
 
+# R9 §9: Pokémon battle family GBA-branch intact. The four battle tables'
+# row macros live in src/data.c (SPECIES_BATTLE_SPRITE / SPECIES_BATTLE_PAL /
+# SPECIES_BATTLE_SHINY_PAL): each must keep BOTH the native NULL-sentinel
+# branch and the GBA compiled branch, and the one external back-EGG row must
+# keep the original compiled SPECIES_SPRITE macro. The two GBA-only payload
+# TUs must define every leaf the GBA link still needs: anim_mon_front_pics.c
+# the 416 front leaves (incl. the slot-0 circled-question-mark front),
+# pokemon_battle_payload.c the 1192 back/palette/shiny leaves (incl. the
+# circled-question-mark trio and the egg palette).
+data_c="$root/src/data.c"
+if grep -Fq 'SPECIES_BATTLE_SPRITE(species, sprite) [SPECIES_##species] = {NULL, MON_PIC_SIZE, SPECIES_##species}' "$data_c" \
+   && grep -Fq 'SPECIES_BATTLE_SPRITE(species, sprite) [SPECIES_##species] = {sprite, MON_PIC_SIZE, SPECIES_##species}' "$data_c" \
+   && grep -Fq 'SPECIES_BATTLE_PAL(species, pal) [SPECIES_##species] = {NULL, SPECIES_##species}' "$data_c" \
+   && grep -Fq 'SPECIES_BATTLE_PAL(species, pal) [SPECIES_##species] = {pal, SPECIES_##species}' "$data_c" \
+   && grep -Fq 'SPECIES_BATTLE_SHINY_PAL(species, pal) [SPECIES_##species] = {NULL, SPECIES_##species + SPECIES_SHINY_TAG}' "$data_c" \
+   && grep -Fq 'SPECIES_BATTLE_SHINY_PAL(species, pal) [SPECIES_##species] = {pal, SPECIES_##species + SPECIES_SHINY_TAG}' "$data_c"; then
+    ok "data.c battle row macros keep native NULL + GBA compiled branches"
+else
+    bad "data.c battle row macros lost a branch"
+fi
+if grep -q 'SPECIES_SPRITE(EGG, gMonStillFrontPic_Egg)' \
+        "$root/src/data/pokemon_graphics/back_pic_table.h"; then
+    ok "back table external back-EGG row keeps the compiled SPECIES_SPRITE macro"
+else
+    bad "back table external back-EGG row lost the compiled macro"
+fi
+if [[ -f "$mon_front_payload_tu" ]] \
+   && [[ "$(grep -c 'INCBIN_U32(' "$mon_front_payload_tu")" -eq 416 ]] \
+   && grep -q 'INCBIN_U32("graphics/pokemon/bulbasaur/anim_front.4bpp.lz")' "$mon_front_payload_tu" \
+   && grep -q 'INCBIN_U32("graphics/pokemon/question_mark/circled/anim_front.4bpp.lz")' "$mon_front_payload_tu" \
+   && grep -q 'INCBIN_U32("graphics/pokemon/deoxys/anim_front.4bpp.lz")' "$mon_front_payload_tu"; then
+    ok "GBA-only anim TU defines all 416 front leaves"
+else
+    bad "GBA-only anim TU lost an INCBIN payload"
+fi
+if [[ -f "$mon_battle_payload_tu" ]] \
+   && [[ "$(grep -c 'INCBIN_U32(' "$mon_battle_payload_tu")" -eq 1192 ]] \
+   && grep -q 'INCBIN_U32("graphics/pokemon/abra/back.4bpp.lz")' "$mon_battle_payload_tu" \
+   && grep -q 'INCBIN_U32("graphics/pokemon/question_mark/circled/back.4bpp.lz")' "$mon_battle_payload_tu" \
+   && grep -q 'INCBIN_U32("graphics/pokemon/egg/normal.gbapal.lz")' "$mon_battle_payload_tu" \
+   && grep -q 'INCBIN_U32("graphics/pokemon/abra/shiny.gbapal.lz")' "$mon_battle_payload_tu"; then
+    ok "GBA-only battle payload TU defines all 1192 back/palette/shiny leaves"
+else
+    bad "GBA-only battle payload TU lost an INCBIN payload"
+fi
+
 echo
 echo "native asset-isolation: $pass ok, $fail failed"
 [[ "$fail" == 0 ]] || exit 1
-echo "PASS: native target matches ownership (196/196 ROM_BASE_ONLY isolated, 0 COMPILED_PENDING_MIGRATION)"
+echo "PASS: native target matches ownership (1804/1804 ROM_BASE_ONLY isolated - 196 trainer + 1608 pokemon battle, 0 COMPILED_PENDING_MIGRATION)"
