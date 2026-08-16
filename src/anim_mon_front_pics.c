@@ -1,3 +1,16 @@
+/* GBA-only TU: every Pokémon battle front-pic compiled payload (R9 §7).
+ *
+ * The native target (Makefile_pc, NATIVE_LINUX=1) excludes this TU from its
+ * C_SRCS so that no migrated Pokémon battle leaf symbol or embedded byte
+ * enters the native object/link graph - the whole family is ROM_BASE-only on
+ * native (1608 payloads published by the compat seam, R9 §5); the GBA
+ * Makefile auto-collects it via its C_SRCS wildcard, keeping the GBA build's
+ * compiled payloads and table pointers exactly as before (R9 ownership:
+ * GBA COMPILED). Do not hand-edit the payload lines: they mirror the family
+ * descriptor's source artifacts. The back-sheet / palette leaves live in the
+ * GBA-only TU data/graphics/pokemon_battle_payload.c.
+ */
+
 #include "global.h"
 
 const u32 gMonFrontPic_CircledQuestionMark[] = INCBIN_U32("graphics/pokemon/question_mark/circled/anim_front.4bpp.lz");

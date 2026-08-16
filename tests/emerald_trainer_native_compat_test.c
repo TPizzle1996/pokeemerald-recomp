@@ -1164,10 +1164,10 @@ static void TestSaveStateAudit(void)
                              + TRAINER_PIC_SIZE * f);
         }
     }
-    /* R9 §5 additive degradation: this snapshot carries the trainer family
+    /* R9 §5/§7 additive degradation: this snapshot carries the trainer family
      * only, so the Pokémon battle family is NOT published - every Pokémon
-     * slot stays at the NULL sentinel (the compiled payloads are still
-     * linked until R9 §7) while the trainer contract above stands. */
+     * slot stays at the NULL sentinel (the compiled payloads are gone from
+     * the native link since R9 §7) while the trainer contract above stands. */
     for (i = 0; i < POKEMON_BATTLE_SLOTS_PER_TABLE; i++)
         CHECK("mon front slot untouched (additive degradation)",
               gMonFrontPicTable[i].data == NULL);

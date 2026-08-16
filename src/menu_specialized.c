@@ -26,7 +26,11 @@
 #include "constants/songs.h"
 #include "gba/io_reg.h"
 
+/* R9 §7: on native, data.h declares the table non-const (the compat seam
+ * repoints the rows), so this local pret extern must not declare const. */
+#if !defined(NATIVE_LINUX)
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
+#endif
 
 EWRAM_DATA static u8 sMailboxWindowIds[MAILBOXWIN_COUNT] = {0};
 EWRAM_DATA static struct ListMenuItem *sMailboxList = NULL;

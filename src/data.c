@@ -340,6 +340,24 @@ const union AnimCmd *const gAnims_MonPic[MAX_MON_PIC_FRAMES] =
 #define SPECIES_PAL(species, pal) [SPECIES_##species] = {pal, SPECIES_##species}
 #define SPECIES_SHINY_PAL(species, pal) [SPECIES_##species] = {pal, SPECIES_##species + SPECIES_SHINY_TAG}
 
+/* R9 §7: the four Pokémon battle tables are ROM_BASE-migrated on native - the
+ * compiled leaf payloads are gone from the native link (GBA-only TUs
+ * anim_mon_front_pics.c + pokemon_battle_payload.c), so their rows expand to
+ * NULL sentinels and the compat seam publishes the session pointers at init.
+ * The `sprite` argument is intentionally unused on native; sizes and tags are
+ * retained exactly. GBA/Windows keep the compile-time assets. The still-front
+ * table and the external back-EGG row use the ORIGINAL macros above and stay
+ * compiled on every target. */
+#if defined(NATIVE_LINUX)
+#define SPECIES_BATTLE_SPRITE(species, sprite) [SPECIES_##species] = {NULL, MON_PIC_SIZE, SPECIES_##species}
+#define SPECIES_BATTLE_PAL(species, pal) [SPECIES_##species] = {NULL, SPECIES_##species}
+#define SPECIES_BATTLE_SHINY_PAL(species, pal) [SPECIES_##species] = {NULL, SPECIES_##species + SPECIES_SHINY_TAG}
+#else
+#define SPECIES_BATTLE_SPRITE(species, sprite) [SPECIES_##species] = {sprite, MON_PIC_SIZE, SPECIES_##species}
+#define SPECIES_BATTLE_PAL(species, pal) [SPECIES_##species] = {pal, SPECIES_##species}
+#define SPECIES_BATTLE_SHINY_PAL(species, pal) [SPECIES_##species] = {pal, SPECIES_##species + SPECIES_SHINY_TAG}
+#endif
+
 #include "data/pokemon_graphics/unused_anims.h"
 #include "data/pokemon_graphics/front_pic_coordinates.h"
 #include "data/pokemon_graphics/still_front_pic_table.h"
