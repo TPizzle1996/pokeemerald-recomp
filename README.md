@@ -38,7 +38,7 @@ The supported ROM is:
 ### Linux x64
 
 1. Extract `pokeemerald-recomp-v0.1.0-alpha-linux-x64.tar.gz`.
-2. Keep `BG.png`, `BG1.png`, `Border.png`, and `images/` beside the executable.
+2. Keep the `images/` directory beside the executable.
 3. Run `./pokeemerald-recomp` from the extracted directory. You may also run it
    by absolute path from another working directory.
 

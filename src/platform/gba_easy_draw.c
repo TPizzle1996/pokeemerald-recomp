@@ -28,9 +28,53 @@
 
 extern void (*const gIntrTable[])(void);
 
+/* Debug-only seam for the runtime parity capture (POKEEMERALD_NATIVE_PARITY=1).
+ * When gParityBGPixelsBuffer is non-NULL, DrawFrame additionally renders a
+ * BG-only oracle into that buffer on the same live frame state: the identical
+ * BG/composite path with OBJ sprites excluded, and no DMA/interrupt side
+ * effects. gParityBGPixelLayers, when non-NULL, receives the winning layer per
+ * oracle pixel (0=backdrop, 1=BG0, 2=BG1, 3=BG2, 4=BG3) for mismatch
+ * classification. Normal builds keep these NULL and the renderer behaves
+ * exactly as before. Declared in platform/framedraw.h. */
+uint16_t *gParityBGPixelsBuffer = NULL;
+uint8_t *gParityBGPixelLayers = NULL;
+/* Set to 1 by DrawFrame when the BG-only oracle was actually re-rendered this
+ * frame (gParityBGPixelsBuffer was non-NULL for the whole scanline loop). The
+ * host parity path reads it after DrawFrame to distinguish "oracle produced"
+ * from "capture scheduled but oracle seam did not run". Cleared by the host
+ * before DrawFrame. */
+uint8_t gParityOracleProduced = 0;
+/* Debug-only OBJ oracle seam (Stage 3B). When gParityOBJLayers is non-NULL,
+ * DrawSprites additionally copies its four per-scanline per-OBJ-priority
+ * spriteLayers into the flat host buffer [priority][scanline][x] on the same
+ * live frame state -- the MAIN pass only, since the BG-only oracle re-render
+ * skips sprites. The captured colors are the oracle's pre-composite OBJ layers
+ * exactly as presented (bit 15 presence set), including any in-DrawSprites blend
+ * effects the oracle applied. gParityOBJOracleProduced is set once the seam has
+ * copied at least one scanline this frame. Normal builds keep the pointer NULL
+ * and DrawSprites behaves exactly as before. Declared in platform/framedraw.h. */
+uint16_t *gParityOBJLayers = NULL;
+/* Stage 3E OBJ oracle seam extension: when gParityOBJPreBlendLayers is non-NULL
+ * (and gParityOBJLayers is also non-NULL), the seam additionally captures the
+ * four per-OBJ-priority layers with the RAW pre-blend/pre-brightness color the
+ * oracle sampled from the OBJ palette (bit 15 set), before any alpha blend or
+ * brightness effect was applied. This lets the Stage 3B/3E OBJ-only sampler
+ * harness compare texel colors for semi-transparent OBJ without conflating the
+ * final-effect semantics that belong in the full composite. */
+uint16_t *gParityOBJPreBlendLayers = NULL;
+uint8_t gParityOBJOracleProduced = 0;
+/* Composite oracle seam (Stage 3C). When gParityCompositeLayers is non-NULL,
+ * the MAIN DrawScanline pass additionally records the final-pixel winner per
+ * scanline (0=backdrop, 1-4=BG0-3, 5-8=OBJ priority 0-3) -- the per-pixel source
+ * map of the real GBA composite. gParityCompositeProduced is set once DrawFrame
+ * ran with the seam active. Declared in platform/framedraw.h. */
+uint8_t *gParityCompositeLayers = NULL;
+uint8_t gParityCompositeProduced = 0;
+
 struct scanlineData {
     uint16_t layers[4][DISPLAY_WIDTH];
     uint16_t spriteLayers[4][DISPLAY_WIDTH];
+    uint16_t spritePreBlendLayers[4][DISPLAY_WIDTH]; // Stage 3E OBJ seam: raw pre-blend
     uint16_t bgcnts[4];
     uint16_t winMask[DISPLAY_WIDTH];
     //priority bookkeeping
@@ -623,7 +667,6 @@ static void DrawSprites(struct scanlineData* scanline, uint16_t vcount, bool win
                 if (pixel != 0)
                 {
                     uint16_t color = palette[pixel];;
-                    
                     //if sprite mode is 2 then write to the window mask instead
                     if (isObjWin)
                     {
@@ -634,6 +677,14 @@ static void DrawSprites(struct scanlineData* scanline, uint16_t vcount, bool win
                     //this code runs if pixel is to be drawn
                     if (global_x < DISPLAY_WIDTH && global_x >= 0)
                     {
+                        // Stage 3E OBJ seam: preserve the raw sampled color
+                        // (before the alpha blend / brightness below) for the
+                        // pre-blend OBJ-layer capture. Harmless when NULL; only
+                        // runs inside the bounds check like the spriteLayers
+                        // write below.
+                        if (gParityOBJPreBlendLayers != NULL)
+                            scanline->spritePreBlendLayers[oam->priority][global_x] = color | (1 << 15);
+
                         //check if its enabled in the window (if window is enabled)
                         winShouldBlendPixel = (windowsEnabled == false || scanline->winMask[global_x] & WINMASK_CLR);
                         
@@ -667,9 +718,32 @@ static void DrawSprites(struct scanlineData* scanline, uint16_t vcount, bool win
             }
         }
     }
+
+    // Debug-only OBJ oracle seam: copy the four per-OBJ-priority layers the
+    // oracle just filled for this scanline (pre-composite, before the window
+    // masking in DrawScanline) into the flat host buffer. Same NULL-gating
+    // pattern as the BG seam; layout is [priority][vcount][x]. Stage 3E: when
+    // gParityOBJPreBlendLayers is also set, copy the RAW pre-blend colors into
+    // it (same layout) so the OBJ-only harness can compare semi-transparent
+    // texel colors without the final-effect semantics.
+    if (gParityOBJLayers != NULL)
+    {
+        for (int pr = 0; pr < 4; pr++)
+        {
+            memcpy(&gParityOBJLayers[(pr * DISPLAY_HEIGHT + vcount) * DISPLAY_WIDTH],
+                   scanline->spriteLayers[pr],
+                   sizeof(uint16_t) * DISPLAY_WIDTH);
+            if (gParityOBJPreBlendLayers != NULL)
+                memcpy(&gParityOBJPreBlendLayers[(pr * DISPLAY_HEIGHT + vcount) * DISPLAY_WIDTH],
+                       scanline->spritePreBlendLayers[pr],
+                       sizeof(uint16_t) * DISPLAY_WIDTH);
+        }
+        gParityOBJOracleProduced = 1;
+    }
 }
 
-static void DrawScanline(uint16_t *pixels, uint16_t vcount)
+static void DrawScanline(uint16_t *pixels, uint16_t vcount, bool skipSprites,
+                         uint8_t *layerOut)
 {
     unsigned int mode = REG_DISPCNT & 3;
     unsigned char numOfBgs = (mode == 0 ? 4 : 3);
@@ -683,6 +757,7 @@ static void DrawScanline(uint16_t *pixels, uint16_t vcount)
     memset(scanline.layers, 0, sizeof(scanline.layers));
     memset(scanline.winMask, 0, sizeof(scanline.winMask));
     memset(scanline.spriteLayers, 0, sizeof(scanline.spriteLayers));
+    memset(scanline.spritePreBlendLayers, 0, sizeof(scanline.spritePreBlendLayers));
     memset(scanline.prioritySortedBgsCount, 0, sizeof(scanline.prioritySortedBgsCount));
 
     for (bgnum = 0; bgnum < numOfBgs; bgnum++)
@@ -804,7 +879,7 @@ static void DrawScanline(uint16_t *pixels, uint16_t vcount)
         }
     }
 
-    if (REG_DISPCNT & DISPCNT_OBJ_ON)
+    if (REG_DISPCNT & DISPCNT_OBJ_ON && !skipSprites)
         DrawSprites(&scanline, vcount, windowsEnabled);
 
     //iterate trough every priority in order
@@ -861,20 +936,27 @@ static void DrawScanline(uint16_t *pixels, uint16_t vcount)
                     }
                     //write the pixel to scanline buffer output
                     pixels[xpos] = color;
+                    if (layerOut != NULL)
+                        layerOut[xpos] = (uint8_t)(bgnum + 1);
                 }
             }
         }
         //draw sprites on current priority
-        uint16_t *src = scanline.spriteLayers[prnum];
-        for (xpos = 0; xpos < DISPLAY_WIDTH; xpos++)
+        if (!skipSprites)
         {
-            if (getAlphaBit(src[xpos]))
+            uint16_t *src = scanline.spriteLayers[prnum];
+            for (xpos = 0; xpos < DISPLAY_WIDTH; xpos++)
             {
-                //check if sprite pixel draws inside window
-                if (windowsEnabled && !(scanline.winMask[xpos] & WINMASK_OBJ))
-                        continue;
-                //draw the pixel
-                pixels[xpos] = src[xpos];
+                if (getAlphaBit(src[xpos]))
+                {
+                    //check if sprite pixel draws inside window
+                    if (windowsEnabled && !(scanline.winMask[xpos] & WINMASK_OBJ))
+                            continue;
+                    //draw the pixel
+                    pixels[xpos] = src[xpos];
+                    if (layerOut != NULL)
+                        layerOut[xpos] = (uint8_t)(5 + prnum);
+                }
             }
         }
     }
@@ -924,17 +1006,54 @@ void DrawFrame(uint16_t *pixels)
         }
 
         memsetu16(&pixels[i * DISPLAY_WIDTH], backdropColor, DISPLAY_WIDTH);
-        DrawScanline(&pixels[i * DISPLAY_WIDTH], i);
-        
+        if (gParityCompositeLayers != NULL)
+            memset(&gParityCompositeLayers[i * DISPLAY_WIDTH], 0, DISPLAY_WIDTH);
+        DrawScanline(&pixels[i * DISPLAY_WIDTH], i, false,
+                     gParityCompositeLayers != NULL
+                         ? &gParityCompositeLayers[i * DISPLAY_WIDTH] : NULL);
+
         REG_DISPSTAT |= INTR_FLAG_HBLANK;
 
         RunDMAs(DMA_HBLANK);
-        
+
         if (REG_DISPSTAT & DISPSTAT_HBLANK_INTR)
             gIntrTable[3]();
 
         REG_DISPSTAT &= ~INTR_FLAG_HBLANK;
         REG_DISPSTAT &= ~INTR_FLAG_VCOUNT;
     }
+
+    // Debug-only oracle: re-render the same live BG state with OBJ excluded into
+    // a separate buffer. Read-only with respect to game state (no DMA/interrupt
+    // triggers, no sprite layers); identical BG composite path per scanline.
+    if (gParityBGPixelsBuffer != NULL)
+    {
+        for (i = 0; i < DISPLAY_HEIGHT; i++)
+        {
+            unsigned int blendMode = (REG_BLDCNT >> 6) & 3;
+            uint16_t backdropColor = *(uint16_t *)PLTT;
+            if (REG_BLDCNT & BLDCNT_TGT1_BD)
+            {
+                switch (blendMode)
+                {
+                case 2:
+                    backdropColor = alphaBrightnessIncrease(backdropColor);
+                    break;
+                case 3:
+                    backdropColor = alphaBrightnessDecrease(backdropColor);
+                    break;
+                }
+            }
+            memsetu16(&gParityBGPixelsBuffer[i * DISPLAY_WIDTH], backdropColor, DISPLAY_WIDTH);
+            if (gParityBGPixelLayers != NULL)
+                memset(&gParityBGPixelLayers[i * DISPLAY_WIDTH], 0, DISPLAY_WIDTH);
+            DrawScanline(&gParityBGPixelsBuffer[i * DISPLAY_WIDTH], i, true,
+                         gParityBGPixelLayers != NULL
+                             ? &gParityBGPixelLayers[i * DISPLAY_WIDTH] : NULL);
+        }
+        gParityOracleProduced = 1;
+    }
+    if (gParityCompositeLayers != NULL)
+        gParityCompositeProduced = 1;
 }
 #endif

@@ -30,8 +30,13 @@ gcc -std=gnu99 -O1 -ffunction-sections -fdata-sections -Wl,--gc-sections \
     "$core_dir/toml.c" \
     "$core_dir/util.c" \
     "$emerald_dir/emerald_resource_compat.c" \
+    "$emerald_dir/emerald_resource_ranges.c" \
     "$emerald_dir/emerald_trainer_native_compat.c" \
     "$emerald_dir/emerald_pokemon_native_compat.c" \
+    "$emerald_dir/emerald_object_event_compat.c" \
+    "$emerald_dir/emerald_tileset_compat.c" \
+    "$emerald_dir/emerald_layout_compat.c" \
+    "$here/emerald_tileset_compat_stubs.c" \
     "$here/emerald_trainer_native_compat_test.c" \
     -o "$tmp/emerald_trainer_native_compat_test_san"
 

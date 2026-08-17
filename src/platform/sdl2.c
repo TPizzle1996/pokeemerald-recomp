@@ -21,6 +21,10 @@
 #include <SDL2/SDL_image.h>
 #endif
 
+#if defined(__GLIBC__)
+#include <malloc.h> /* mallinfo2: allocation-free Republish probe (R7B Stage 9) */
+#endif
+
 #include "global.h"
 #include "platform.h"
 #include "rtc.h"
@@ -29,8 +33,12 @@
 #include "gba/m4a_internal.h"
 #include "cgb_audio.h"
 #include "gba/flash_internal.h"
+#include "gba/syscall.h"
+#include "data.h"
+#include "constants/trainers.h"
 #include "platform/dma.h"
 #include "platform/framedraw.h"
+#include "platform/native_overworld_parity.h"
 #include "platform/desktop_config.h"
 #include "platform/desktop_clock.h"
 #include "platform/desktop_audio.h"
@@ -45,6 +53,10 @@
 #include "platform/desktop_state.h"
 #include "platform/desktop_state_ui.h"
 #include "platform/native_state.h"
+#include "platform/desktop_assets.h"
+#include "platform/host_memory.h"
+#include "m4a.h"
+#include "emerald/resources/emerald_trainer_native_compat.h"
 
 HOST_DATA bool speedUp = false;
 HOST_DATA bool isRunning = true;
@@ -285,6 +297,764 @@ static bool32 NativeStatePointerInGameRange(const void *pointer)
 }
 #endif
 
+/* R7B/R8 Stage 9: trainer-family republish across a save/load round trip.
+ *
+ * The trainer tables themselves are plain native .data (no gba_data section
+ * attribute - verified against the built binary: they are outside the
+ * game_data slice), so a save state does not serialize them; the tables keep
+ * whatever process-local values they hold across a save/load round trip, and
+ * the load path re-publishes the current-session image unconditionally
+ * (native_state.c) or fails closed to the NULL sentinel. Whatever the tables
+ * contain after a load - restored game state, untouched corruption, or the
+ * NULL sentinels of a fresh process - no stale or foreign process-local
+ * compat-stream pointer can survive. This probe proves that end to end in
+ * the real binary:
+ *
+ *   1. register the production ROM_BASE snapshot exactly like the live
+ *      startup path (pack resolved via the asset-path helper, CWD fallback)
+ *      and initialize the seam, publishing all 236 migrated slots (93 front
+ *      sheets + 93 front palettes + 6 shared back-palette slots + R8: the 8
+ *      back sheet slots, the 34 back SpriteFrameImage slots and the 2
+ *      Red/Leaf back-palette slots);
+ *   2. capture a baseline of every slot (data/size/tag);
+ *   3. corrupt every migrated data pointer with a distinct garbage value and
+ *      save + load, so the load path MUST repair tables that hold garbage;
+ *   4. the load-path republish must repair every slot to its baseline stream
+ *      and leave size/tag untouched;
+ *   5. probe Republish directly under glibc heap accounting to pin the
+ *      allocation-free contract, and decode sample streams through the real
+ *      decompressor to prove the repaired pointers are live.
+ *
+ * Returns 1 on success, 0 on failure (message on stderr).
+ */
+#if defined(PLATFORM_SDL2) && defined(NATIVE_LINUX)
+static int NativeStateTrainerFamilyTest(void)
+{
+    static const u8 sharedBackPalSlots[] = {
+        TRAINER_BACK_PIC_BRENDAN,
+        TRAINER_BACK_PIC_MAY,
+        TRAINER_BACK_PIC_RUBY_SAPPHIRE_BRENDAN,
+        TRAINER_BACK_PIC_RUBY_SAPPHIRE_MAY,
+        TRAINER_BACK_PIC_WALLY,
+        TRAINER_BACK_PIC_STEVEN,
+    };
+    /* R8 back-family mapping: the 8 sheet slots in TRAINER_BACK_PIC_* order,
+     * the per-trainer frame counts (mirror the R8 family descriptor; the unit
+     * harness pins these counts against the compiled frame arrays, so they
+     * cannot drift), and the frame-table pointers the seam publishes into -
+     * the live pixel surface of the back-pic sprite pipeline. */
+    static const u8 backFrameCounts[TRAINER_BACK_PIC_STEVEN + 1] = {
+        4, 4, 5, 5, 4, 4, 4, 4,
+    };
+    static struct SpriteFrameImage *const backFrameTables[TRAINER_BACK_PIC_STEVEN + 1] = {
+        gTrainerBackPicTable_Brendan,
+        gTrainerBackPicTable_May,
+        gTrainerBackPicTable_Red,
+        gTrainerBackPicTable_Leaf,
+        gTrainerBackPicTable_RubySapphireBrendan,
+        gTrainerBackPicTable_RubySapphireMay,
+        gTrainerBackPicTable_Wally,
+        gTrainerBackPicTable_Steven,
+    };
+    struct CompressedSpriteSheet sheetBase[EMERALD_TRAINER_FRONT_COUNT];
+    struct CompressedSpritePalette palBase[EMERALD_TRAINER_FRONT_COUNT];
+    struct CompressedSpritePalette backPalBase[TRAINER_BACK_PIC_STEVEN + 1];
+    struct CompressedSpriteSheet backSheetBase[TRAINER_BACK_PIC_STEVEN + 1];
+    struct SpriteFrameImage backFrameBase[TRAINER_BACK_PIC_STEVEN + 1][5]; /* max frames */
+    struct EmeraldResourceCompatDiagnostics diagnostics;
+    enum EmeraldResourceCompatStatus status;
+    char packPath[1024];
+    u32 corruption;
+    u32 i;
+    u32 f;
+
+    /* 1. Live-session setup: same pack resolution and init order as the
+     * content-hydration path (desktop_game_content.c). */
+    if (!Platform_AssetGetPath("games/emerald/base/emerald-bpee01-v1.rpack",
+                               packPath, sizeof(packPath)))
+    {
+        fprintf(stderr, "Native state self-test: production pack not resolvable "
+                        "(run from the repo root)\n");
+        return 0;
+    }
+    status = EmeraldResourceCompat_RegisterRuntimeSnapshot(packPath);
+    if (status != EMERALD_COMPAT_OK)
+    {
+        fprintf(stderr, "Native state self-test: runtime snapshot registration failed\n");
+        return 0;
+    }
+    EmeraldResourceCompat_TryInitialize();
+    if (EmeraldResourceCompat_Republish(&diagnostics) != EMERALD_COMPAT_OK)
+    {
+        fprintf(stderr, "Native state self-test: no valid session image after init\n");
+        return 0;
+    }
+
+    /* 2. Baseline: everything the state-load republish may rewrite. */
+    memcpy(sheetBase, gTrainerFrontPicTable, sizeof(sheetBase));
+    memcpy(palBase, gTrainerFrontPicPaletteTable, sizeof(palBase));
+    memcpy(backPalBase, gTrainerBackPicPaletteTable, sizeof(backPalBase));
+    memcpy(backSheetBase, gTrainerBackPicTable, sizeof(backSheetBase));
+    for (i = 0; i < ARRAY_COUNT(backFrameBase); i++)
+    {
+        for (f = 0; f < backFrameCounts[i]; f++)
+            backFrameBase[i][f] = backFrameTables[i][f];
+    }
+
+    /* 3. Corrupt every migrated data pointer with a distinct garbage value
+     * and save: the state file must carry the stale pointers verbatim. */
+    corruption = 0xDEAD0000u;
+    for (i = 0; i < EMERALD_TRAINER_FRONT_COUNT; i++)
+    {
+        gTrainerFrontPicTable[i].data = (const u32 *)(unsigned long)corruption++;
+        gTrainerFrontPicPaletteTable[i].data = (const u32 *)(unsigned long)corruption++;
+    }
+    for (i = 0; i < ARRAY_COUNT(sharedBackPalSlots); i++)
+    {
+        gTrainerBackPicPaletteTable[sharedBackPalSlots[i]].data =
+            (const u32 *)(unsigned long)corruption++;
+    }
+    for (i = 0; i < ARRAY_COUNT(backSheetBase); i++)
+        gTrainerBackPicTable[i].data = (const u32 *)(unsigned long)corruption++;
+    for (i = 0; i < ARRAY_COUNT(backFrameBase); i++)
+    {
+        for (f = 0; f < backFrameCounts[i]; f++)
+            backFrameTables[i][f].data = (const void *)(unsigned long)corruption++;
+    }
+    /* R8: the Red/Leaf back-palette slots are migrated too - corrupt them
+     * like the six shared slots. */
+    gTrainerBackPicPaletteTable[TRAINER_BACK_PIC_RED].data =
+        (const u32 *)(unsigned long)corruption++;
+    gTrainerBackPicPaletteTable[TRAINER_BACK_PIC_LEAF].data =
+        (const u32 *)(unsigned long)corruption++;
+    if (Platform_StateSave(PLATFORM_STATE_QUICK_SLOT) == PLATFORM_STATE_OPERATION_FAILED)
+    {
+        fprintf(stderr, "Native state self-test: family-corrupt save failed: %s\n",
+                Platform_StateGetLastError());
+        return 0;
+    }
+
+    /* 4. Load back: the load-path republish must repair every migrated slot
+     * to its baseline stream, and leave size/tag and the non-migrated
+     * Red/Leaf back-palette slots untouched. */
+    if (Platform_StateLoad(PLATFORM_STATE_QUICK_SLOT) != PLATFORM_STATE_OPERATION_OK)
+    {
+        fprintf(stderr, "Native state self-test: family state load failed: %s\n",
+                Platform_StateGetLastError());
+        return 0;
+    }
+    for (i = 0; i < EMERALD_TRAINER_FRONT_COUNT; i++)
+    {
+        if (gTrainerFrontPicTable[i].data != sheetBase[i].data
+         || gTrainerFrontPicTable[i].size != sheetBase[i].size
+         || gTrainerFrontPicTable[i].tag != sheetBase[i].tag)
+        {
+            fprintf(stderr, "Native state self-test: front sheet slot %u not repaired after load\n", i);
+            return 0;
+        }
+        if (gTrainerFrontPicPaletteTable[i].data != palBase[i].data
+         || gTrainerFrontPicPaletteTable[i].tag != palBase[i].tag)
+        {
+            fprintf(stderr, "Native state self-test: front palette slot %u not repaired after load\n", i);
+            return 0;
+        }
+    }
+    for (i = 0; i < ARRAY_COUNT(sharedBackPalSlots); i++)
+    {
+        u8 slot = sharedBackPalSlots[i];
+        if (gTrainerBackPicPaletteTable[slot].data != backPalBase[slot].data
+         || gTrainerBackPicPaletteTable[slot].tag != backPalBase[slot].tag)
+        {
+            fprintf(stderr, "Native state self-test: back palette slot %u not repaired after load\n", slot);
+            return 0;
+        }
+    }
+    if (gTrainerBackPicPaletteTable[TRAINER_BACK_PIC_RED].data != backPalBase[TRAINER_BACK_PIC_RED].data
+     || gTrainerBackPicPaletteTable[TRAINER_BACK_PIC_RED].tag != backPalBase[TRAINER_BACK_PIC_RED].tag
+     || gTrainerBackPicPaletteTable[TRAINER_BACK_PIC_LEAF].data != backPalBase[TRAINER_BACK_PIC_LEAF].data
+     || gTrainerBackPicPaletteTable[TRAINER_BACK_PIC_LEAF].tag != backPalBase[TRAINER_BACK_PIC_LEAF].tag)
+    {
+        fprintf(stderr, "Native state self-test: Red/Leaf back palette slots not repaired after load\n");
+        return 0;
+    }
+    for (i = 0; i < ARRAY_COUNT(backSheetBase); i++)
+    {
+        if (gTrainerBackPicTable[i].data != backSheetBase[i].data
+         || gTrainerBackPicTable[i].size != backSheetBase[i].size
+         || gTrainerBackPicTable[i].tag != backSheetBase[i].tag)
+        {
+            fprintf(stderr, "Native state self-test: back sheet slot %u not repaired after load\n", i);
+            return 0;
+        }
+    }
+    for (i = 0; i < ARRAY_COUNT(backFrameBase); i++)
+    {
+        for (f = 0; f < backFrameCounts[i]; f++)
+        {
+            if (backFrameTables[i][f].data != backFrameBase[i][f].data
+             || backFrameTables[i][f].size != backFrameBase[i][f].size)
+            {
+                fprintf(stderr, "Native state self-test: back frame slot %u/%u not repaired after load\n",
+                        i, f);
+                return 0;
+            }
+        }
+    }
+
+    /* 5. Republish probe: idempotent, allocation-free, and the repaired
+     * streams decode through the real decompressor (the LZ77 header's
+     * declared length must match the table's decoded size; palettes are
+     * 32 bytes). */
+#if defined(__GLIBC__)
+    {
+        struct mallinfo2 before = mallinfo2();
+        status = EmeraldResourceCompat_Republish(&diagnostics);
+        if (status != EMERALD_COMPAT_OK)
+        {
+            fprintf(stderr, "Native state self-test: republish probe failed\n");
+            return 0;
+        }
+        if (before.uordblks != mallinfo2().uordblks)
+        {
+            fprintf(stderr, "Native state self-test: republish allocated heap memory\n");
+            return 0;
+        }
+    }
+#endif
+    {
+        static const u8 decodeSamples[] = {0, 1, 92}; /* first, second, last trainer */
+        u8 decoded[4096 + 16]; /* max sheet decode = TRAINER_PIC_SIZE * 2 */
+        for (i = 0; i < ARRAY_COUNT(decodeSamples); i++)
+        {
+            const u8 *stream =
+                (const u8 *)(const void *)gTrainerFrontPicTable[decodeSamples[i]].data;
+            u32 declared;
+            if (stream == NULL)
+            {
+                fprintf(stderr, "Native state self-test: front sheet stream %u NULL after load\n",
+                        decodeSamples[i]);
+                return 0;
+            }
+            /* The literal-only codec stores the decoded size in bytes 1-3 of
+             * the header (the real decompressor reads header >> 8). */
+            declared = ((u32)stream[3] << 16) | ((u32)stream[2] << 8) | stream[1];
+            if (declared != gTrainerFrontPicTable[decodeSamples[i]].size
+             || declared > sizeof(decoded)
+             || declared % TRAINER_PIC_SIZE != 0)
+            {
+                fprintf(stderr, "Native state self-test: front sheet stream %u invalid after load\n",
+                        decodeSamples[i]);
+                return 0;
+            }
+            LZ77UnCompWram((const u32 *)(const void *)stream, decoded);
+        }
+        for (i = 0; i < ARRAY_COUNT(sharedBackPalSlots); i++)
+        {
+            const u8 *stream =
+                (const u8 *)(const void *)gTrainerBackPicPaletteTable[sharedBackPalSlots[i]].data;
+            u32 declared;
+            if (stream == NULL)
+            {
+                fprintf(stderr, "Native state self-test: back palette stream %u NULL after load\n",
+                        sharedBackPalSlots[i]);
+                return 0;
+            }
+            declared = ((u32)stream[3] << 16) | ((u32)stream[2] << 8) | stream[1];
+            if (declared != 32 || declared > sizeof(decoded))
+            {
+                fprintf(stderr, "Native state self-test: back palette stream %u invalid after load\n",
+                        sharedBackPalSlots[i]);
+                return 0;
+            }
+            LZ77UnCompWram((const u32 *)(const void *)stream, decoded);
+        }
+        /* R8: the Red/Leaf back-only palette streams are LZ-encoded like the
+         * shared slots, and the back SHEET streams are RAW (no LZ header) -
+         * frame 0's pointer must be the sheet stream start (the sprite
+         * pipeline's read path), proving the repaired raw publishing. */
+        {
+            static const u8 backOnlyPalSlots[] = {
+                TRAINER_BACK_PIC_RED,
+                TRAINER_BACK_PIC_LEAF,
+            };
+            for (i = 0; i < ARRAY_COUNT(backOnlyPalSlots); i++)
+            {
+                const u8 *stream =
+                    (const u8 *)(const void *)gTrainerBackPicPaletteTable[backOnlyPalSlots[i]].data;
+                u32 declared;
+                if (stream == NULL)
+                {
+                    fprintf(stderr, "Native state self-test: back-only palette stream %u NULL after load\n",
+                            backOnlyPalSlots[i]);
+                    return 0;
+                }
+                declared = ((u32)stream[3] << 16) | ((u32)stream[2] << 8) | stream[1];
+                if (declared != 32 || declared > sizeof(decoded))
+                {
+                    fprintf(stderr, "Native state self-test: back-only palette stream %u invalid after load\n",
+                            backOnlyPalSlots[i]);
+                    return 0;
+                }
+                LZ77UnCompWram((const u32 *)(const void *)stream, decoded);
+            }
+        }
+        {
+            const u8 *sheet =
+                (const u8 *)(const void *)gTrainerBackPicTable[TRAINER_BACK_PIC_BRENDAN].data;
+            if (sheet == NULL
+             || (const u8 *)(const void *)gTrainerBackPicTable_Brendan[0].data != sheet
+             || gTrainerBackPicTable_Brendan[0].size != TRAINER_PIC_SIZE)
+            {
+                fprintf(stderr, "Native state self-test: back sheet stream invalid after load\n");
+                return 0;
+            }
+        }
+    }
+    return 1;
+}
+
+extern void RunMixerFrame(void);
+
+/* R12 (headless audio/state): the real MP2K engine round-trip.
+ *
+ * Runs entirely without SDL video/audio (utility mode: SDL_Init(0)) and
+ * without the game main loop. It initializes the REAL m4a engine, starts a
+ * REAL song from the embedded ROM tables (mus_route101, 8 tracks), warms the
+ * REAL mixer for a fixed number of frames, then proves that a State v5
+ * save/perturb/load cycle restores the audio state byte-for-byte and that a
+ * further run of mixer frames produces output identical to a control path
+ * that never saved:
+ *
+ *   1. init invariants: ident == ID_NUMBER, player/track/channel chains live
+ *   2. a started song populates channels and the PCM buffer (nonzero audio)
+ *   3. every audio pointer field re-derives to its original target after load
+ *   4. ordinary scalar audio bytes that numerically resemble host/resource
+ *      pointers (u64 pairs in the external-host-pointer range, large u32
+ *      counters) remain ordinary data
+ *   5. post-restore mixer frames are byte-identical to the control
+ *
+ * The cgb emulator state (struct AudioCGB, host .bss) is not part of any
+ * state slice, exactly like in the real game: cgb_audio_init() resets it, so
+ * both the control and the test path re-run it before their mixer frames and
+ * see identical emulator trajectories (a state load must NOT reset it - the
+ * real engine never does).
+ */
+static int NativeStateAudioSelfTest(void)
+{
+    uintptr_t bssStart;
+    uintptr_t bssEnd;
+    unsigned char *region;
+    size_t regionSize;
+    unsigned char *snapshot;
+    unsigned char *expected;
+    unsigned char *control;
+    unsigned char *after;
+    struct SoundInfo *soundInfo = &gSoundInfo;
+    struct MusicPlayerInfo *player;
+    struct SoundChannel *ch;
+    u32 i;
+    int frame;
+    uintptr_t chansStart = (uintptr_t)(void *)soundInfo->chans;
+    uintptr_t chansEnd = chansStart + sizeof(soundInfo->chans);
+    uintptr_t playerAddrs[MAX_MUSIC_PLAYERS + MAX_POKEMON_CRIES];
+    u32 expectedPlayers;
+    u32 playersSeen = 0;
+    bool32 playingPlayer = FALSE;
+
+    if (!Platform_RuntimeGetGameBssRange(&bssStart, &bssEnd)
+     || bssEnd <= bssStart || bssEnd - bssStart > 64u * 1024u * 1024u)
+    {
+        fprintf(stderr, "Native audio self-test: no game_bss range\n");
+        return 1;
+    }
+    region = (unsigned char *)(uintptr_t)bssStart;
+    regionSize = (size_t)(bssEnd - bssStart);
+    if ((uintptr_t)soundInfo < bssStart
+     || (uintptr_t)soundInfo + sizeof(*soundInfo) > bssEnd)
+    {
+        fprintf(stderr, "Native audio self-test: gSoundInfo outside game_bss\n");
+        return 1;
+    }
+    snapshot = malloc(regionSize);
+    expected = malloc(regionSize);
+    control = malloc(regionSize);
+    after = malloc(regionSize);
+    if (snapshot == NULL || expected == NULL || control == NULL || after == NULL)
+    {
+        fprintf(stderr, "Native audio self-test: allocation failed\n");
+        return 1;
+    }
+
+    if (!Platform_ProfileInit()
+     || !Platform_ProfileLoadSelectedSave(FLASH_BASE, sizeof(FLASH_BASE)))
+    {
+        fprintf(stderr, "Native audio self-test: profile initialization failed\n");
+        return 1;
+    }
+
+    /* The real main loop calls these once at startup; the mixer and the cgb
+     * emulator need no SDL device (Platform_AudioInit is presentation-only). */
+    cgb_audio_init(42060);
+    m4aSoundInit();
+
+    /* Start a real BGM (mus_route101: 8 tracks, sustained notes) and warm the
+     * mixer far enough to populate channels, envelopes and the PCM buffers. */
+    m4aSongNumStart(359);
+    for (frame = 0; frame < 40; frame++)
+        RunMixerFrame();
+
+    /* 1. init invariants. */
+    if (soundInfo->ident != ID_NUMBER)
+    {
+        fprintf(stderr, "Native audio self-test: ident 0x%08x != ID_NUMBER after init\n",
+                soundInfo->ident);
+        return 1;
+    }
+    if (soundInfo->musicPlayerHead == NULL
+     || soundInfo->MPlayMainHead == NULL
+     || soundInfo->cgbChans == NULL
+     || soundInfo->MPlayJumpTable == NULL)
+    {
+        fprintf(stderr, "Native audio self-test: gSoundInfo pointer fields unset after init\n");
+        return 1;
+    }
+
+    /* The chain head is the LAST-opened player: m4aSoundInit opens the four
+     * main players then the two cry players, and MPlayOpen prepends. */
+    playerAddrs[0] = (uintptr_t)HostResolveGbaAddr(gMPlayTable[0].info);
+    playerAddrs[1] = (uintptr_t)HostResolveGbaAddr(gMPlayTable[1].info);
+    playerAddrs[2] = (uintptr_t)HostResolveGbaAddr(gMPlayTable[2].info);
+    playerAddrs[3] = (uintptr_t)HostResolveGbaAddr(gMPlayTable[3].info);
+    playerAddrs[4] = (uintptr_t)gPokemonCryMusicPlayers;
+    playerAddrs[5] = (uintptr_t)(gPokemonCryMusicPlayers + 1);
+    expectedPlayers = MAX_MUSIC_PLAYERS + MAX_POKEMON_CRIES;
+    if (soundInfo->musicPlayerHead != (struct MusicPlayerInfo *)playerAddrs[5])
+    {
+        fprintf(stderr, "Native audio self-test: musicPlayerHead chain root mismatch "
+                        "(got %p want %p)\n",
+                (void *)soundInfo->musicPlayerHead, (void *)playerAddrs[5]);
+        return 1;
+    }
+
+    /* 2. a started song populated channels and PCM. */
+    {
+        bool32 anyChannelActive = FALSE;
+        bool32 anyPcmNonzero = FALSE;
+
+        for (i = 0; i < MAX_DIRECTSOUND_CHANNELS; i++)
+        {
+            ch = &soundInfo->chans[i];
+            if ((ch->statusFlags & 0xC7) != 0 && ch->envelopeVolume != 0)
+                anyChannelActive = TRUE;
+        }
+        for (i = 0; i < sizeof(soundInfo->pcmBuffer) / sizeof(float); i += 97)
+        {
+            if (soundInfo->pcmBuffer[i] != 0.0f)
+            {
+                anyPcmNonzero = TRUE;
+                break;
+            }
+        }
+        if (!anyChannelActive || !anyPcmNonzero)
+        {
+            fprintf(stderr, "Native audio self-test: song %u produced no audio "
+                            "(channels active=%d pcm nonzero=%d)\n",
+                    359u, anyChannelActive, anyPcmNonzero);
+            return 1;
+        }
+    }
+    fprintf(stdout, "Native audio self-test: engine initialized, song active, PCM nonzero\n");
+
+    /* Snapshot the walked audio state before save. */
+    memcpy(snapshot, region, regionSize);
+
+    /* CONTROL: tick 40 more frames from the pristine state and record the
+     * resulting bytes without ever saving. cgb_audio_init() resets the host
+     * cgb emulator so the test path below sees the same trajectory. */
+    memcpy(region, snapshot, regionSize);
+    cgb_audio_init(42060);
+    for (frame = 0; frame < 40; frame++)
+        RunMixerFrame();
+    memcpy(control, region, regionSize);
+
+    /* PHASE A - scalar round-trip. Re-establish the pristine state, plant
+     * scalar bytes that numerically resemble pointers, save, destroy, load,
+     * and require the restored span to equal the pre-save snapshot. The
+     * plants are exactly the walker's adversarial classes:
+     *
+     *   - two float values 2^64 (0x5F800000) as u64 pairs land inside the
+     *     external-host-pointer range [0x500000000000, 0x800000000000) but
+     *     are NOT mincore-mapped, so they must round-trip as data;
+     *   - a large u32 (blockCount = 0x6D53A5A5) is below 4 GiB but outside
+     *     every image range, so it must round-trip as data.
+     *
+     * No mixer frames run here, so the cgb emulator stays put. */
+    memcpy(region, snapshot, regionSize);
+    {
+        float *pb = soundInfo->pcmBuffer;
+        u32 *gap = (u32 *)soundInfo->gap2;      /* 16 untagged bytes */
+        u32 *counter = &soundInfo->chans[0].blockCount;
+
+        pb[3] = (float)(1ull << 63); pb[4] = (float)(1ull << 63);
+        pb[5] = (float)(1ull << 63);  pb[6] = (float)(1ull << 63);
+        gap[0] = 0x5F800000u;
+        gap[1] = 0x5F800000u;
+        *counter = 0x6D53A5A5u;
+    }
+    memcpy(expected, region, regionSize);
+    if (Platform_StateSave(PLATFORM_STATE_QUICK_SLOT) == PLATFORM_STATE_OPERATION_FAILED)
+    {
+        fprintf(stderr, "Native audio self-test: save failed: %s\n",
+                Platform_StateGetLastError());
+        return 1;
+    }
+
+    /* Perturb: destroy the whole walked audio span (including every pointer
+     * field) so any restore defect cannot hide behind the pre-save bytes. */
+    memset(region, 0xA5, regionSize);
+    soundInfo->MPlayMainHead = NULL;
+    soundInfo->musicPlayerHead = NULL;
+    soundInfo->MPlayJumpTable = NULL;
+    soundInfo->cgbChans = NULL;
+    for (i = 0; i < MAX_DIRECTSOUND_CHANNELS; i++)
+    {
+        ch = &soundInfo->chans[i];
+        ch->wav = (struct WaveData *)(uintptr_t)0xDEADBEEF;
+        ch->currentPointer = (s8 *)(uintptr_t)0xDEADBEEF;
+        ch->prevChannelPointer = (void *)(uintptr_t)0xDEADBEEF;
+        ch->nextChannelPointer = (void *)(uintptr_t)0xDEADBEEF;
+    }
+
+    if (Platform_StateLoad(PLATFORM_STATE_QUICK_SLOT) != PLATFORM_STATE_OPERATION_OK)
+    {
+        fprintf(stderr, "Native audio self-test: load failed: %s\n",
+                Platform_StateGetLastError());
+        return 1;
+    }
+
+    /* The restored span must equal the pre-save snapshot (plants included):
+     * scalar audio bytes that resemble pointers round-tripped as data. */
+    if (memcmp(region, expected, regionSize) != 0)
+    {
+        size_t first;
+        for (first = 0; first < regionSize; first++)
+        {
+            if (region[first] != expected[first])
+                break;
+        }
+        fprintf(stderr, "Native audio self-test: audio state diverges after load "
+                        "(game_bss+0x%zx: got 0x%02x want 0x%02x)\n",
+                first, region[first], expected[first]);
+        return 1;
+    }
+    fprintf(stdout, "Native audio self-test: restored audio span byte-identical to snapshot\n");
+
+    /* 3. pointer identities re-derived to their original targets. */
+    if (soundInfo->ident != ID_NUMBER)
+    {
+        fprintf(stderr, "Native audio self-test: ident 0x%08x != ID_NUMBER after load\n",
+                soundInfo->ident);
+        return 1;
+    }
+    if (soundInfo->MPlayMainHead == NULL
+     || soundInfo->musicPlayerHead == NULL
+     || soundInfo->cgbChans == NULL
+     || soundInfo->MPlayJumpTable == NULL)
+    {
+        fprintf(stderr, "Native audio self-test: gSoundInfo pointer fields NULL after load\n");
+        return 1;
+    }
+    if (soundInfo->MPlayJumpTable != gMPlayJumpTable)
+    {
+        fprintf(stderr, "Native audio self-test: MPlayJumpTable not re-derived "
+                        "(got %p want %p)\n",
+                (void *)soundInfo->MPlayJumpTable, (const void *)gMPlayJumpTable);
+        return 1;
+    }
+    if ((uintptr_t)soundInfo->cgbChans < bssStart
+     || (uintptr_t)soundInfo->cgbChans >= bssEnd)
+    {
+        fprintf(stderr, "Native audio self-test: cgbChans outside game_bss after load\n");
+        return 1;
+    }
+    /* Function pointers must have been restored through the executable
+     * persistent-record path, not the data path. */
+    {
+        const uintptr_t funcs[8] = {
+            (uintptr_t)soundInfo->MPlayMainHead,
+            (uintptr_t)soundInfo->CgbSound,
+            (uintptr_t)soundInfo->CgbOscOff,
+            (uintptr_t)soundInfo->MidiKeyToCgbFreq,
+            (uintptr_t)soundInfo->plynote,
+            (uintptr_t)soundInfo->ExtVolPit,
+            (uintptr_t)soundInfo->MPlayJumpTable[8],
+            (uintptr_t)soundInfo->MPlayJumpTable[19],
+        };
+        u32 failed = 0;
+        for (i = 0; i < 8; i++)
+        {
+            if (!Platform_RuntimeAddressIsExecutable(funcs[i]))
+            {
+                failed++;
+                fprintf(stderr, "Native audio self-test: func[%u] = 0x%llx NOT executable after load\n",
+                        i, (unsigned long long)funcs[i]);
+            }
+        }
+        if (failed)
+        {
+            fprintf(stderr, "Native audio self-test: %u function pointers lost executability after load\n",
+                    failed);
+            return 1;
+        }
+    }
+
+    /* Player chain: every node must be one of the six known players, its
+     * tracks/memAccArea must match the table entry for that node, and the
+     * chain must terminate after exactly six nodes. Exactly one player runs
+     * the started song (songHeader non-NULL, pointing into game_bss). */
+    player = soundInfo->musicPlayerHead;
+    while (player != NULL && playersSeen < expectedPlayers)
+    {
+        uintptr_t address = (uintptr_t)player;
+        u32 j;
+
+        for (j = 0; j < expectedPlayers; j++)
+        {
+            if (address == playerAddrs[j])
+                break;
+        }
+        if (j == expectedPlayers)
+        {
+            fprintf(stderr, "Native audio self-test: unknown player %p in chain after load\n",
+                    (void *)player);
+            return 1;
+        }
+        playerAddrs[j] = 0; /* visited */
+        playersSeen++;
+        if (j < MAX_MUSIC_PLAYERS)
+        {
+            if (player->tracks != (struct MusicPlayerTrack *)HostResolveGbaAddr(gMPlayTable[j].track)
+             || player->memAccArea != gMPlayMemAccArea)
+            {
+                fprintf(stderr, "Native audio self-test: player %u linkage not re-derived\n", j);
+                return 1;
+            }
+            if (player->songHeader != NULL)
+            {
+                if ((uintptr_t)player->songHeader < bssStart
+                 || (uintptr_t)player->songHeader >= bssEnd)
+                {
+                    fprintf(stderr, "Native audio self-test: player %u songHeader outside game_bss\n", j);
+                    return 1;
+                }
+                if (playingPlayer)
+                {
+                    fprintf(stderr, "Native audio self-test: more than one player has a song\n");
+                    return 1;
+                }
+                playingPlayer = TRUE;
+            }
+        }
+        else
+        {
+            u32 cry = j - MAX_MUSIC_PLAYERS;
+            if (player->tracks != &gPokemonCryTracks[cry * 2]
+             || player->memAccArea != NULL
+             || player->songHeader != NULL)
+            {
+                fprintf(stderr, "Native audio self-test: cry player %u linkage not re-derived\n", cry);
+                return 1;
+            }
+        }
+        if ((uintptr_t)player->tracks < bssStart || (uintptr_t)player->tracks >= bssEnd)
+        {
+            fprintf(stderr, "Native audio self-test: player %u tracks outside game_bss\n", j);
+            return 1;
+        }
+        player = player->musicPlayerNext;
+    }
+    if (player != NULL || playersSeen != expectedPlayers || !playingPlayer)
+    {
+        fprintf(stderr, "Native audio self-test: player chain malformed after load "
+                        "(nodes=%u expected=%u song=%d)\n",
+                playersSeen, expectedPlayers, (int)playingPlayer);
+        return 1;
+    }
+
+    /* Channel linkage: prev/next must stay inside the chans array, sample
+     * pointers must re-derive to image-resident (sub-4 GiB) data. */
+    for (i = 0; i < MAX_DIRECTSOUND_CHANNELS; i++)
+    {
+        ch = &soundInfo->chans[i];
+        if (ch->prevChannelPointer != NULL
+         && ((uintptr_t)ch->prevChannelPointer < chansStart
+          || (uintptr_t)ch->prevChannelPointer >= chansEnd))
+        {
+            fprintf(stderr, "Native audio self-test: chans[%u].prevChannelPointer outside chans\n", i);
+            return 1;
+        }
+        if (ch->nextChannelPointer != NULL
+         && ((uintptr_t)ch->nextChannelPointer < chansStart
+          || (uintptr_t)ch->nextChannelPointer >= chansEnd))
+        {
+            fprintf(stderr, "Native audio self-test: chans[%u].nextChannelPointer outside chans\n", i);
+            return 1;
+        }
+        if (ch->wav != NULL && (uintptr_t)ch->wav >= 0x100000000ull)
+        {
+            fprintf(stderr, "Native audio self-test: chans[%u].wav not image-resident after load\n", i);
+            return 1;
+        }
+        if (ch->currentPointer != NULL && (uintptr_t)ch->currentPointer >= 0x100000000ull)
+        {
+            fprintf(stderr, "Native audio self-test: chans[%u].currentPointer not image-resident\n", i);
+            return 1;
+        }
+    }
+    fprintf(stdout, "Native audio self-test: all audio pointer fields re-derived correctly\n");
+
+    /* PHASE B - post-restore mixer determinism. Re-establish the pristine
+     * state, save, destroy, load, then tick 40 frames and require the result
+     * to be byte-identical to the control. The save is made from the pristine
+     * snapshot (no plants), so the restored engine state equals the control's
+     * starting state, and cgb_audio_init() aligns the emulator trajectory. */
+    memcpy(region, snapshot, regionSize);
+    cgb_audio_init(42060);
+    if (Platform_StateSave(PLATFORM_STATE_QUICK_SLOT) == PLATFORM_STATE_OPERATION_FAILED)
+    {
+        fprintf(stderr, "Native audio self-test: save failed: %s\n",
+                Platform_StateGetLastError());
+        return 1;
+    }
+    memset(region, 0xA5, regionSize);
+    if (Platform_StateLoad(PLATFORM_STATE_QUICK_SLOT) != PLATFORM_STATE_OPERATION_OK)
+    {
+        fprintf(stderr, "Native audio self-test: load failed: %s\n",
+                Platform_StateGetLastError());
+        return 1;
+    }
+    for (frame = 0; frame < 40; frame++)
+        RunMixerFrame();
+    memcpy(after, region, regionSize);
+    if (memcmp(after, control, regionSize) != 0)
+    {
+        size_t first;
+        for (first = 0; first < regionSize; first++)
+        {
+            if (after[first] != control[first])
+                break;
+        }
+        fprintf(stderr, "Native audio self-test: post-restore mixer output diverges "
+                        "(game_bss+0x%zx: got 0x%02x want 0x%02x)\n",
+                first, after[first], control[first]);
+        return 1;
+    }
+    fprintf(stdout, "Native audio self-test passed "
+                    "(control: 40 frames; save/load: 40 frames; PCM byte-identical)\n");
+    return 0;
+}
+#endif /* PLATFORM_SDL2 && NATIVE_LINUX */
+
 int main(int argc, char **argv)
 {
     const char *importRomPath = NULL;
@@ -292,6 +1062,7 @@ int main(int argc, char **argv)
     bool32 verifyGameData = FALSE;
     bool32 printDataPath = FALSE;
     bool32 nativeStateSelfTest = FALSE;
+    bool32 nativeAudioSelfTest = FALSE;
     bool32 utilityMode;
     char *prefPath = NULL;
     int argIndex;
@@ -313,17 +1084,21 @@ int main(int argc, char **argv)
             printDataPath = TRUE;
         else if (strcmp(argv[argIndex], "--native-state-self-test") == 0)
             nativeStateSelfTest = TRUE;
+        else if (strcmp(argv[argIndex], "--native-audio-self-test") == 0)
+            nativeAudioSelfTest = TRUE;
         else
         {
             fprintf(stderr, "Usage: %s [--data-root PATH] [--import-rom FILE] "
                             "[--verify-game-data] [--print-data-path] "
-                            "[--native-state-self-test]\n", argv[0]);
+                            "[--native-state-self-test] "
+                            "[--native-audio-self-test]\n", argv[0]);
             return 2;
         }
     }
     if (dataRootOverride == NULL || dataRootOverride[0] == '\0')
         dataRootOverride = getenv("POKEEMERALD_DATA_ROOT");
-    utilityMode = importRomPath != NULL || verifyGameData || printDataPath || nativeStateSelfTest;
+    utilityMode = importRomPath != NULL || verifyGameData || printDataPath
+                || nativeStateSelfTest || nativeAudioSelfTest;
 
 #ifdef __ANDROID__
     SDL_setenv("SDL_AUDIODRIVER", "openslES", 1);
@@ -463,11 +1238,42 @@ int main(int argc, char **argv)
                 return 1;
             }
         }
+#if defined(NATIVE_LINUX)
+        /* The trainer-family probe (sdl2.c above) corrupts and repairs the
+         * migrated tables: its premise - NATIVE_LINUX NULL-sentinel tables
+         * repaired by the compat republish seam - exists only on the linux
+         * target. Windows keeps the GBA-style compiled tables (const, real
+         * payload pointers, no republish), so the probe cannot run there;
+         * the save/load slot tests above are target-independent. */
+        if (!NativeStateTrainerFamilyTest())
+        {
+            fprintf(stderr, "Native state self-test failed (trainer family republish)\n");
+            Platform_StorageShutdown();
+            SDL_Quit();
+            return 1;
+        }
+#endif /* NATIVE_LINUX */
         fprintf(stdout, "Native state self-test passed (quick and slot 1)\n");
+#if defined(NATIVE_LINUX)
+        fprintf(stdout, "Native state self-test passed (trainer family republish)\n");
+#endif /* NATIVE_LINUX */
         Platform_StorageShutdown();
         SDL_Quit();
         return 0;
     }
+#if defined(PLATFORM_SDL2) && defined(NATIVE_LINUX)
+    if (nativeAudioSelfTest)
+    {
+        /* Headless audio/state regression: real MP2K engine + real State v5
+         * save/load, control vs restore mixer comparison. No SDL devices are
+         * ever opened (utility mode: SDL_Init(0) only). */
+        int rc = NativeStateAudioSelfTest();
+
+        Platform_StorageShutdown();
+        SDL_Quit();
+        return rc;
+    }
+#endif /* PLATFORM_SDL2 && NATIVE_LINUX */
 
     if (!Platform_VideoInit())
         return 1;
@@ -658,6 +1464,14 @@ int main(int argc, char **argv)
     {
         struct PlatformInputActions input;
         Platform_InputPoll(&input);
+#if defined(LINUX64) && LINUX64
+        if (input.zoomReset)
+            Platform_VideoZoomReset();
+        else if (input.zoomOut)
+            Platform_VideoZoomOut();
+        else if (input.zoomIn)
+            Platform_VideoZoomIn();
+#endif
 #if defined(NATIVE_LINUX) || defined(WINDOWS64)
         HandleNativeDebugActions(&input);
 #endif
@@ -794,6 +1608,7 @@ int main(int argc, char **argv)
     }
 
     //Platform_StoreSaveFile();
+    NativeOverworldParity_Shutdown();
     Platform_SchedulerShutdown();
     Platform_StorageShutdown();
 
@@ -833,30 +1648,21 @@ void Platform_ReadFlash(u16 sectorNum, u32 offset, u8 *dest, u32 size)
         DBGPRINTF("ReadFlash out of bounds or unavailable\n");
 }
 
+/* The decorative border backgrounds/frame were removed from the presentation
+ * layer. These stubs remain only because the in-game option menu still
+ * queries them; a count of 1 leaves "OFF" as the sole background choice. */
 u8 Platform_GetBorderBackgroundCount(void)
 {
-    return Platform_VideoGetBackgroundCount() + 1;
+    return 1;
 }
 
 u8 Platform_GetBorderBackground(void)
 {
-    if (Platform_ConfigHasBorderBackground())
-        return Platform_ConfigGetBorderBackground();
-    if (gSaveBlock2Ptr != NULL)
-    {
-        u8 legacySelection = gSaveBlock2Ptr->optionsBorderBackground;
-        if (legacySelection == 1)
-            return Platform_VideoGetBackgroundCount();
-        if (legacySelection >= 2)
-            return legacySelection - 1;
-    }
     return 0;
 }
 
 void Platform_SetBorderBackground(u8 selection)
 {
-    Platform_ConfigSetBorderBackground(selection);
-    Platform_ConfigStore();
 }
 
 void Platform_SetSetting(enum PlatformSetting setting, u8 value)

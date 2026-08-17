@@ -39,10 +39,11 @@ static void FieldCallback_SweetScent(void)
 bool8 FldEff_SweetScent(void)
 {
     u8 taskId;
+    GbaAddr callbackAddr;
 
     SetWeatherScreenFadeOut();
     taskId = CreateFieldMoveTask();
-    GbaAddr callbackAddr = HOST_FUNCTION_ADDR(StartSweetScentFieldEffect);
+    callbackAddr = HOST_FUNCTION_ADDR(StartSweetScentFieldEffect);
     gTasks[taskId].data[8] = callbackAddr >> 16;
     gTasks[taskId].data[9] = callbackAddr;
     return FALSE;

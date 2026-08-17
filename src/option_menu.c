@@ -815,22 +815,30 @@ static void ProcessDisplaySettingsInput(u8 taskId)
 #ifndef __ANDROID__
         case DISPLAY_FULLSCREEN:
             gTasks[taskId].tFullscreen ^= 1;
+#ifdef PLATFORM_SDL2
             Platform_SetSetting(PLATFORM_SETTING_FULLSCREEN, gTasks[taskId].tFullscreen);
+#endif
             break;
         case DISPLAY_WINDOW_SCALE:
             if (right)
                 gTasks[taskId].tWindowScale = gTasks[taskId].tWindowScale == 5 ? 2 : gTasks[taskId].tWindowScale + 1;
             else
                 gTasks[taskId].tWindowScale = gTasks[taskId].tWindowScale == 2 ? 5 : gTasks[taskId].tWindowScale - 1;
+#ifdef PLATFORM_SDL2
             Platform_SetSetting(PLATFORM_SETTING_WINDOW_SCALE, gTasks[taskId].tWindowScale);
+#endif
             break;
         case DISPLAY_INTEGER_SCALE:
             gTasks[taskId].tIntegerScale ^= 1;
+#ifdef PLATFORM_SDL2
             Platform_SetSetting(PLATFORM_SETTING_INTEGER_SCALE, gTasks[taskId].tIntegerScale);
+#endif
             break;
         case DISPLAY_VSYNC:
             gTasks[taskId].tVSync ^= 1;
+#ifdef PLATFORM_SDL2
             Platform_SetSetting(PLATFORM_SETTING_VSYNC, gTasks[taskId].tVSync);
+#endif
             break;
 #endif
         case DISPLAY_BORDER_FRAME:

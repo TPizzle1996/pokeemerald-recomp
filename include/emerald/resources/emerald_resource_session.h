@@ -94,4 +94,56 @@ EmeraldResourceSession_BuildRomBaseCandidate(
     struct EmeraldResourceSessionInfo *outInfo,
     struct Gen3ResourceDiagnosticList *diagnostics);
 
+/* R10-F: session content fingerprint.
+ *
+ * A raw 32-byte SHA-256 over deterministic LOGICAL provider content - never
+ * paths, timestamps, pointers, allocation addresses, or process ids. Equal
+ * logical content on a different machine or filesystem path hashes
+ * identically; changed provider content or a different provider order cannot
+ * match. The exact construction is
+ *
+ *   SHA-256(
+ *       "gen3-session-content-v1\0"
+ *       || LE32(len(gameId)) || gameId
+ *       || LE32(EMERALD_RESOURCE_SESSION_ADAPTER_VERSION)
+ *       || LE32(RESOURCE_API_VERSION)              // (MAJOR<<16)|(MINOR<<8)|PATCH
+ *       || base provider logical content digest     // 32 bytes, zeros if absent
+ *       || LE32(providerCount)
+ *       || for each provider in ASCENDING precedence:
+ *            LE32(kind)
+ *            LE32(precedence)
+ *            LE32(len(providerId)) || providerId
+ *            LE32(len(providerVersion)) || providerVersion
+ *            logical content digest                 // 32 bytes, zeros if absent
+ *   )
+ *
+ * with every LE32 written explicitly little-endian. The base provider is the
+ * lowest-precedence provider (the session's ROM_BASE provider). Executable
+ * build identity is a separate compatibility check and is NOT part of this
+ * digest. */
+
+#define EMERALD_RESOURCE_SESSION_ADAPTER_VERSION 1u
+#define EMERALD_RESOURCE_SESSION_MAX_FINGERPRINT_PROVIDERS 16u
+
+struct EmeraldResourceFingerprintProvider
+{
+    const char *providerId;
+    const char *providerVersion;
+    uint32_t kind;
+    uint32_t precedence;
+    const uint8_t *logicalContentDigest; /* GEN3_PACK_SHA256_SIZE bytes, or NULL */
+};
+
+bool EmeraldResourceSession_ComputeContentFingerprint(
+    const char *gameId,
+    const struct EmeraldResourceFingerprintProvider *providers,
+    size_t providerCount, /* ascending precedence, validated */
+    uint8_t outDigest[GEN3_PACK_SHA256_SIZE]);
+
+/* Convenience form for the single ROM_BASE provider carried by
+ * EmeraldResourceSessionInfo. */
+bool EmeraldResourceSession_ComputeBaseFingerprint(
+    const struct EmeraldResourceSessionInfo *info,
+    uint8_t outDigest[GEN3_PACK_SHA256_SIZE]);
+
 #endif

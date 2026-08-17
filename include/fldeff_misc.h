@@ -32,6 +32,9 @@ void DestroyRecordMixingLights(void);
 extern const struct SpritePalette gSpritePalette_SecretPower_Cave;
 extern const struct SpritePalette gSpritePalette_SecretPower_Plant;
 extern const struct SpritePalette gFieldEffectObjectPaletteInfo9;
+#if !defined(NATIVE_LINUX)
+/* R11-C: declared in emerald/resources/tileset_native.generated.h on native. */
 extern const u16 gTilesetPalettes_SecretBase[][16];
+#endif /* !NATIVE_LINUX */
 
 #endif //GUARD_FLDEFF_MISC_H

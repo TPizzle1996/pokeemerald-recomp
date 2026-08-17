@@ -91,6 +91,18 @@ void GetCameraOffsetWithPan(s16 *x, s16 *y)
     *y = sFieldCameraOffset.yPixelOffset + sVerticalCameraPan + 8;
 }
 
+#ifdef PORTABLE
+// Native-only accessor for the expanded native overworld renderer's snapshot
+// capture (src/platform/native_overworld_renderer.c). It is not part of the
+// vanilla pret field_camera.c, so on GBA it is excluded to keep the ROM layout
+// identical to retail.
+void GetCameraTileOffsets(u8 *xTileOffset, u8 *yTileOffset)
+{
+    *xTileOffset = sFieldCameraOffset.xTileOffset;
+    *yTileOffset = sFieldCameraOffset.yTileOffset;
+}
+#endif
+
 void DrawWholeMapView(void)
 {
     DrawWholeMapViewInternal(gSaveBlock1Ptr->pos.x, gSaveBlock1Ptr->pos.y, gMapHeader.mapLayout);

@@ -47,11 +47,15 @@
 
 /* One resource per family entry. The R7A trainer-front family ships 186
  * resources (93 sheets + 93 palettes); R8 adds the 10 trainer-back sheets
- * (196 total). R9 adds the 1608-record Pokémon battle family, so the merged
- * manifest/catalog views must hold 1804 resources; 2048 keeps headroom. The
- * view structs hold ~0.8 MiB at this size and are heap-allocated in
+ * (196 total). R9 adds the 1608-record Pokémon battle family, and R11 adds
+ * the 288-record object-event family and the 1544-record tileset family:
+ * the merged manifest/catalog views hold 3643 resources; 4096 keeps
+ * headroom for the remaining R11 families. R11-D adds the 882-record
+ * layout family (441 blockdata + 441 border): the merged views now hold
+ * 4518 resources; 8192 keeps headroom for the remaining R11 families.
+ * The view structs hold ~1.6 MiB at this size and are heap-allocated in
  * BuildPackCore (never on the stack). */
-#define EMERALD_IMPORT_MAX_RECORDS 2048u
+#define EMERALD_IMPORT_MAX_RECORDS 8192u
 #define EMERALD_IMPORT_MAX_PAYLOAD_SIZE (16u * 1024u * 1024u) /* 16 MiB, matches the R2 writer cap */
 #define EMERALD_IMPORT_LOCK_NAME ".emerald-import.lock"
 

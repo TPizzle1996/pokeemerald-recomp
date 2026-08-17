@@ -1,3 +1,7 @@
+/* R11-C: the tile/palette payload leaves are ROM_BASE on native; the
+ * symbols are declared in emerald/resources/tileset_native.generated.h and
+ * defined by the compat seam (TILESET_NATIVE_DEFINE). GBA-only here. */
+#if !defined(NATIVE_LINUX)
 const u32 gTilesetTiles_Petalburg[] = INCBIN_U32("data/tilesets/secondary/petalburg/tiles.4bpp.lz");
 
 const u16 gTilesetPalettes_Petalburg[][16] =
@@ -1634,3 +1638,4 @@ const u16 gTilesetPalettes_UnionRoom[][16] =
 };
 
 const u32 gTilesetTiles_UnionRoom[] = INCBIN_U32("data/tilesets/secondary/union_room/tiles.4bpp.lz");
+#endif /* !NATIVE_LINUX */

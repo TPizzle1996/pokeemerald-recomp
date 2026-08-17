@@ -106,7 +106,12 @@ MID_BUILDDIR = $(OBJ_DIR)/$(MID_SUBDIR)
 SHELL := bash -o pipefail
 
 # Set flags for tools
-ASFLAGS := -mcpu=arm7tdmi --defsym MODERN=$(MODERN)
+# LINUX64 is always --defsym'd by the PC port's Makefile_pc (0 or 1) so the
+# asm host-pointer tables (data/*.s, *.inc) can conditionally emit .quad on
+# 64-bit hosts. The GBA build never defined it, so `.if LINUX64` in those
+# tables failed with "non-constant expression"; defining it to 0 selects the
+# .int path, byte-identical to the vanilla pret `.4byte` tables.
+ASFLAGS := -mcpu=arm7tdmi --defsym MODERN=$(MODERN) --defsym LINUX64=0
 
 INCLUDE_DIRS := include
 INCLUDE_CPP_ARGS := $(INCLUDE_DIRS:%=-iquote %)
@@ -147,6 +152,16 @@ RAMSCRGEN := $(TOOLS_DIR)/ramscrgen/ramscrgen$(EXE)
 FIX       := $(TOOLS_DIR)/gbafix/gbafix$(EXE)
 MAPJSON   := $(TOOLS_DIR)/mapjson/mapjson$(EXE)
 JSONPROC  := $(TOOLS_DIR)/jsonproc/jsonproc$(EXE)
+
+# The PC port (Makefile_pc) defines these for its own assembly pipeline; the
+# GBA Makefile references them in audio_rules.mk / map_data_rules.mk but never
+# defined them, so the song/data assembly rules fed the raw .s file to the
+# shell as a command ("Permission denied"). arm-none-eabi gas accepts both
+# .4byte/.2byte and .int/.short, and it does not underscore-prefix symbols, so
+# the GBA pipeline is the same pseudo-op conversion as Makefile_pc and a
+# no-op underscore fixup.
+ASM_PSEUDO_OP_CONV := sed -e 's/\.4byte/\.int/g;s/\.2byte/\.short/g'
+FIX_UNDERSCORE := true
 
 PERL := perl
 SHA1 := $(shell { command -v sha1sum || command -v shasum; } 2>/dev/null) -c
@@ -196,7 +211,24 @@ endif
 
 # Collect sources
 C_SRCS_IN := $(wildcard $(C_SUBDIR)/*.c $(C_SUBDIR)/*/*.c $(C_SUBDIR)/*/*/*.c)
-C_SRCS := $(foreach src,$(C_SRCS_IN),$(if $(findstring .inc.c,$(src)),,$(src)))
+# Native-only PC port TUs. The music_player.c / sound_mixer.c pair is the PC
+# audio engine (music_player.h, sound_mixer.h) that agbcc cannot compile; the
+# GBA m4a engine (src/m4a.c, src/m4a_1.s, src/m4a_tables.c) does not need them.
+# The gen3/emerald resources/*.c files are the R2/R3 resource-pack tooling
+# (TOML/sha1/sha256/ROM profile/import) and the src/platform/*.c files are the
+# SDL/desktop/native-renderer runtime -- except host_memory.c, whose Host*
+# identity helpers are called by the shared GBA TUs. None of these exist in the
+# original pret GBA tree, and they reference host-only headers plus C99
+# constructs agbcc (C89) rejects. They are compiled by Makefile_pc (PORTABLE),
+# never by the GBA Makefile.
+# src/stub.c is native-only too: it redefines real GBA functions (MultiBoot,
+# IntrMain, rfu_initializeAPI, InitRFUAPI, GameCubeMultiBoot_*, ...) as puts()
+# stubs for the PC build, which does not compile the real implementations. On
+# GBA those live in the real sources (crt0.s, link.c, multiboot.c, librfu_rfu.c,
+# link_rfu_2.c, libagbsyscall), so stub.c only causes duplicate definitions plus
+# a puts() reference whose libc .text the GBA linker script discards.
+NATIVE_ONLY_C_SRCS := $(filter-out $(C_SUBDIR)/platform/host_memory.c,$(wildcard $(C_SUBDIR)/platform/*.c $(C_SUBDIR)/gen3/resources/*.c $(C_SUBDIR)/emerald/resources/*.c)) $(C_SUBDIR)/stub.c
+C_SRCS := $(filter-out $(C_SUBDIR)/music_player.c $(C_SUBDIR)/sound_mixer.c $(NATIVE_ONLY_C_SRCS),$(foreach src,$(C_SRCS_IN),$(if $(findstring .inc.c,$(src)),,$(src))))
 C_OBJS := $(patsubst $(C_SUBDIR)/%.c,$(C_BUILDDIR)/%.o,$(C_SRCS))
 
 C_ASM_SRCS := $(wildcard $(C_SUBDIR)/*.s $(C_SUBDIR)/*/*.s $(C_SUBDIR)/*/*/*.s)

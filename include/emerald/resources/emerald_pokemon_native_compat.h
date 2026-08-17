@@ -82,4 +82,10 @@ void EmeraldPokemonCompat_ClearMigratedEntries(void);
 /* Destroy the session image and release the publication state. */
 void EmeraldPokemonCompat_Shutdown(void);
 
+/* R10-C: expose the retained session image and the per-entry schema (the
+ * image itself does not store schemas; the generated resource table does).
+ * NULL / 0 on no session or an out-of-range entry index. */
+const struct EmeraldResourceCompatibilityImage *EmeraldPokemonCompat_GetImage(void);
+uint32_t EmeraldPokemonCompat_GetEntrySchema(size_t entryIndex);
+
 #endif

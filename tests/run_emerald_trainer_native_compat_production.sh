@@ -12,10 +12,12 @@
 #
 #   retail ROM -> production manifest -> emerald-bpee01-v1.rpack
 #     -> EmeraldResourceSession_BuildRomBaseCandidate
-#     -> Gen3ResourceCandidate_Build (1804-resource ROM_BASE snapshot,
-#        186 trainer front + 10 trainer back + 1608 Pokemon battle, R9)
+#     -> Gen3ResourceCandidate_Build (3636-resource ROM_BASE snapshot,
+#        196 trainer + 1608 Pokemon battle + 288 object-event + 1544 tileset,
+#        R11-C)
 #     -> EmeraldResourceCompat_InitializeFromSnapshot
-#     -> EmeraldResourceCompatibilityImage (trainer + Pokemon battle families)
+#     -> EmeraldResourceCompatibilityImage (trainer + Pokemon battle +
+#        object-event + tileset families)
 #     -> live native trainer + Pokemon battle tables -> real loaders
 #
 # Byte-for-byte vs canonical = the family descriptor
@@ -55,8 +57,13 @@ gcc -std=gnu99 -O2 -ffunction-sections -fdata-sections -Wl,--gc-sections \
     "$core_dir/lz77.c" \
     "$emerald_dir/emerald_rom_profile.c" \
     "$emerald_dir/emerald_resource_compat.c" \
+    "$emerald_dir/emerald_resource_ranges.c" \
     "$emerald_dir/emerald_trainer_native_compat.c" \
     "$emerald_dir/emerald_pokemon_native_compat.c" \
+    "$emerald_dir/emerald_object_event_compat.c" \
+    "$emerald_dir/emerald_tileset_compat.c" \
+    "$emerald_dir/emerald_layout_compat.c" \
+    "$here/emerald_tileset_compat_stubs.c" \
     "$emerald_dir/emerald_resource_session.c" \
     "$here/emerald_trainer_native_compat_production.c" \
     -o "$tmp/emerald_trainer_native_compat_production"
@@ -66,4 +73,7 @@ echo "== running =="
     "$root/games/emerald/base/emerald-bpee01-v1.rpack" \
     --catalog "$root/resources/catalogs/emerald/catalog.toml" \
     --catalog "$root/resources/extraction/emerald/bpee01/pokemon_battle/catalog.generated.toml" \
+    --catalog "$root/resources/extraction/emerald/bpee01/object_event/catalog.generated.toml" \
+    --catalog "$root/resources/extraction/emerald/bpee01/tileset/catalog.generated.toml" \
+    --catalog "$root/resources/extraction/emerald/bpee01/layout/catalog.generated.toml" \
     --descriptor "$root/resources/extraction/emerald/bpee01/trainer_front_family.toml"

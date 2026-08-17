@@ -1,7 +1,7 @@
 pokeemerald-recomp v0.1.0-alpha - Linux x64
 
-Run ./pokeemerald-recomp directly from this folder. The images directory and PNG
-files must remain beside the executable. The system SDL2 and SDL2_image runtime
+Run ./pokeemerald-recomp directly from this folder. The images directory must
+remain beside the executable. The system SDL2 and SDL2_image runtime
 libraries are required.
 
 On first launch, select a compatible Pokemon Emerald ROM that you legally own.

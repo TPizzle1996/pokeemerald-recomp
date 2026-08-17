@@ -12,6 +12,8 @@
 #include <string.h>
 
 #include "gen3/resources/resource_pack_provider.h"
+#include "gen3/resources/resource_version.h"
+#include "gen3/resources/sha256.h"
 
 const char *EmeraldResourceSessionError_Describe(
     enum EmeraldResourceSessionError error)
@@ -112,4 +114,100 @@ EmeraldResourceSession_BuildRomBaseCandidate(
 
     *outCandidate = candidate;
     return EMERALD_SESSION_OK;
+}
+
+static void FingerprintWriteLe32(struct Gen3Sha256Context *context, uint32_t value)
+{
+    uint8_t bytes[4];
+
+    bytes[0] = (uint8_t)(value & 0xFFu);
+    bytes[1] = (uint8_t)((value >> 8) & 0xFFu);
+    bytes[2] = (uint8_t)((value >> 16) & 0xFFu);
+    bytes[3] = (uint8_t)((value >> 24) & 0xFFu);
+    Gen3Sha256_Update(context, bytes, sizeof(bytes));
+}
+
+static void FingerprintWriteLengthPrefixed(struct Gen3Sha256Context *context,
+                                           const char *text)
+{
+    size_t length = text == NULL ? 0u : strlen(text);
+
+    FingerprintWriteLe32(context, (uint32_t)length);
+    if (length != 0)
+        Gen3Sha256_Update(context, text, length);
+}
+
+bool EmeraldResourceSession_ComputeContentFingerprint(
+    const char *gameId,
+    const struct EmeraldResourceFingerprintProvider *providers,
+    size_t providerCount,
+    uint8_t outDigest[GEN3_PACK_SHA256_SIZE])
+{
+    static const char constructionTag[] = "gen3-session-content-v1";
+    struct Gen3Sha256Context context;
+    uint8_t zeroDigest[GEN3_PACK_SHA256_SIZE];
+    uint32_t apiVersion;
+    size_t i;
+
+    if (gameId == NULL || outDigest == NULL
+     || providerCount > EMERALD_RESOURCE_SESSION_MAX_FINGERPRINT_PROVIDERS
+     || (providerCount != 0 && providers == NULL))
+        return false;
+    for (i = 0; i < providerCount; i++)
+    {
+        if (providers[i].providerId == NULL
+         || providers[i].providerVersion == NULL)
+            return false;
+        if (i != 0 && providers[i].precedence <= providers[i - 1].precedence)
+            return false; /* strictly ascending precedence required */
+    }
+    memset(zeroDigest, 0, sizeof(zeroDigest));
+
+    Gen3Sha256_Init(&context);
+    /* Includes the trailing NUL. */
+    Gen3Sha256_Update(&context, constructionTag, sizeof(constructionTag));
+    FingerprintWriteLengthPrefixed(&context, gameId);
+    FingerprintWriteLe32(&context, EMERALD_RESOURCE_SESSION_ADAPTER_VERSION);
+    apiVersion = ((uint32_t)RESOURCE_API_VERSION_MAJOR << 16)
+               | ((uint32_t)RESOURCE_API_VERSION_MINOR << 8)
+               | (uint32_t)RESOURCE_API_VERSION_PATCH;
+    FingerprintWriteLe32(&context, apiVersion);
+    /* Base provider logical content digest: the lowest-precedence provider
+     * (providers[0] in the validated ascending order). */
+    Gen3Sha256_Update(&context,
+        providerCount != 0 && providers[0].logicalContentDigest != NULL
+            ? providers[0].logicalContentDigest : zeroDigest,
+        GEN3_PACK_SHA256_SIZE);
+    FingerprintWriteLe32(&context, (uint32_t)providerCount);
+    for (i = 0; i < providerCount; i++)
+    {
+        FingerprintWriteLe32(&context, providers[i].kind);
+        FingerprintWriteLe32(&context, providers[i].precedence);
+        FingerprintWriteLengthPrefixed(&context, providers[i].providerId);
+        FingerprintWriteLengthPrefixed(&context, providers[i].providerVersion);
+        Gen3Sha256_Update(&context,
+            providers[i].logicalContentDigest != NULL
+                ? providers[i].logicalContentDigest : zeroDigest,
+            GEN3_PACK_SHA256_SIZE);
+    }
+    Gen3Sha256_Final(&context, outDigest);
+    return true;
+}
+
+bool EmeraldResourceSession_ComputeBaseFingerprint(
+    const struct EmeraldResourceSessionInfo *info,
+    uint8_t outDigest[GEN3_PACK_SHA256_SIZE])
+{
+    struct EmeraldResourceFingerprintProvider provider;
+
+    if (info == NULL || outDigest == NULL)
+        return false;
+    provider.providerId = info->providerId;
+    provider.providerVersion = info->providerVersion;
+    provider.kind = (uint32_t)info->kind;
+    provider.precedence = info->precedence;
+    provider.logicalContentDigest = info->hasLogicalContentDigest
+                                  ? info->logicalContentDigest : NULL;
+    return EmeraldResourceSession_ComputeContentFingerprint(
+        info->gameId, &provider, 1u, outDigest);
 }

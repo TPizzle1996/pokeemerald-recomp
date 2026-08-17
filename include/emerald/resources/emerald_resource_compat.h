@@ -187,4 +187,22 @@ const uint8_t *EmeraldResourceCompatImage_GetCanonical(
 uint32_t EmeraldResourceCompatImage_GetCanonicalSize(
     const struct EmeraldResourceCompatibilityImage *image, size_t index);
 
+/* R10-C: the whole arena allocation span (the bytes[] region). Returns
+ * false on NULL image. */
+bool EmeraldResourceCompatImage_GetArenaSpan(
+    const struct EmeraldResourceCompatibilityImage *image,
+    const uint8_t **outBase, size_t *outSize);
+
+/* The EXPOSED span of the arena: the stream block (first stream offset ..
+ * arena end). Only the streams are published to runtime tables; the
+ * [entry table][names][canonical payloads] prefix is build-time-only and
+ * game state never references it. Used by the reverse range index as the
+ * resource-owned "hull": a pointer inside this span that matches no
+ * registered entry range is a capture error, never a silently persisted
+ * value. A value in the unexposed prefix is ordinary data. Returns false
+ * on NULL image or an empty/invalid stream block. */
+bool EmeraldResourceCompatImage_GetExposedSpan(
+    const struct EmeraldResourceCompatibilityImage *image,
+    const uint8_t **outBase, size_t *outSize);
+
 #endif

@@ -1,3 +1,7 @@
+/* R11-C: the metatile/attribute blobs are ROM_BASE on native; symbols are
+ * declared in emerald/resources/tileset_native.generated.h and defined by
+ * the compat seam (TILESET_NATIVE_DEFINE). GBA-only here. */
+#if !defined(NATIVE_LINUX)
 const u16 gMetatiles_General[] = INCBIN_U16("data/tilesets/primary/general/metatiles.bin");
 const u16 gMetatileAttributes_General[] = INCBIN_U16("data/tilesets/primary/general/metatile_attributes.bin");
 
@@ -207,3 +211,4 @@ const u16 gMetatileAttributes_MysteryEventsHouse[] = INCBIN_U16("data/tilesets/s
 
 const u16 gMetatiles_UnionRoom[] = INCBIN_U16("data/tilesets/secondary/union_room/metatiles.bin");
 const u16 gMetatileAttributes_UnionRoom[] = INCBIN_U16("data/tilesets/secondary/union_room/metatile_attributes.bin");
+#endif /* !NATIVE_LINUX */

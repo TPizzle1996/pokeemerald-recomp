@@ -171,14 +171,28 @@ EmeraldResourceCompat_RegisterRuntimeSnapshot(const char *packPath)
                     diag.canonicalName);
             EmeraldResourceCompat_ClearMigratedEntries();
             EmeraldResourceCompat_ClearSnapshot();
+            EmeraldResourceCompat_SetSessionContentFingerprint(NULL);
             Gen3ResourceSnapshot_Destroy(snapshot);
             snapshot = NULL;
             sSnapshotRegistered = false;
         }
         else
         {
+            /* R10-F: the session content fingerprint pins the exact logical
+             * provider content this session was built from (the construction
+             * lives in emerald_resource_session.h). The native save-state
+             * system stamps it into every state it writes and rejects states
+             * whose recorded fingerprint differs from the active session's -
+             * equivalent content at another path still matches, changed or
+             * reordered providers cannot. */
+            uint8_t sessionFingerprint[GEN3_PACK_SHA256_SIZE];
             sSnapshotRegistered = true;
             status = EMERALD_COMPAT_OK;
+            if (EmeraldResourceSession_ComputeBaseFingerprint(&info,
+                                                              sessionFingerprint))
+                EmeraldResourceCompat_SetSessionContentFingerprint(sessionFingerprint);
+            else
+                EmeraldResourceCompat_SetSessionContentFingerprint(NULL);
         }
     }
     Gen3ResourceDiagnostics_Destroy(&diagnostics);

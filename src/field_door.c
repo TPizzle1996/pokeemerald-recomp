@@ -444,12 +444,11 @@ static s8 StartDoorAnimationTask(const struct DoorGraphics *gfx, const struct Do
     {
         u8 taskId = CreateTask(Task_AnimateDoor, 0x50);
         s16 *data = gTasks[taskId].data;
+        GbaAddr framesAddr = HostPointerToGbaAddr(frames);
+        GbaAddr gfxAddr = HostPointerToGbaAddr(gfx);
 
         tX = x;
         tY = y;
-
-        GbaAddr framesAddr = HostPointerToGbaAddr(frames);
-        GbaAddr gfxAddr = HostPointerToGbaAddr(gfx);
 
         tFramesLo = framesAddr;
         tFramesHi = framesAddr >> 16;

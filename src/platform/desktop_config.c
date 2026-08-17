@@ -13,9 +13,6 @@
 #define PLATFORM_CONFIG_VERSION 2
 
 HOST_DATA static u8 sPlatformSettings[PLATFORM_SETTING_COUNT] = {0, 4, 0, 1, 1, 10};
-HOST_DATA static u8 sBorderBackground;
-HOST_DATA static bool32 sHasBorderBackgroundConfig;
-HOST_DATA static u8 sBackgroundOrderVersion;
 HOST_DATA static struct PlatformInputBinding sKeyboardBindings[PLATFORM_INPUT_ACTION_COUNT];
 HOST_DATA static u8 sFastForwardSpeed;
 
@@ -44,9 +41,6 @@ static void ResetDefaults(void)
     int i;
 
     memcpy(sPlatformSettings, defaults, sizeof(defaults));
-    sBorderBackground = 0;
-    sHasBorderBackgroundConfig = FALSE;
-    sBackgroundOrderVersion = 0;
     for (i = 0; i < PLATFORM_INPUT_ACTION_COUNT; i++)
         sKeyboardBindings[i] = Platform_InputGetDefaultBinding(i);
     sFastForwardSpeed = 5;
@@ -124,13 +118,6 @@ static void LoadPath(const char *path)
         {
             /* Reserved for future schema migrations; unknown versions are ignored. */
         }
-        else if (ParseValue(line, "borderBackground", &value) && value < 16)
-        {
-            sBorderBackground = value;
-            sHasBorderBackgroundConfig = TRUE;
-        }
-        else if (ParseValue(line, "backgroundOrder", &value) && value <= 255)
-            sBackgroundOrderVersion = value;
         else if (ParseValue(line, "fullscreen", &value) && value <= 1)
             sPlatformSettings[PLATFORM_SETTING_FULLSCREEN] = value;
         else if (ParseValue(line, "windowScale", &value) && value >= 2 && value <= 5)
@@ -201,15 +188,13 @@ void Platform_ConfigStore(void)
 
     offset = snprintf(contents, sizeof(contents),
                       "configVersion=%u\n"
-                      "borderBackground=%u\n"
-                      "backgroundOrder=%u\n"
                       "fullscreen=%u\n"
                       "windowScale=%u\n"
                       "integerScale=%u\n"
                       "vsync=%u\n"
                       "border=%u\n"
                       "volume=%u\n",
-                      PLATFORM_CONFIG_VERSION, sBorderBackground, sBackgroundOrderVersion,
+                      PLATFORM_CONFIG_VERSION,
                       sPlatformSettings[PLATFORM_SETTING_FULLSCREEN],
                       sPlatformSettings[PLATFORM_SETTING_WINDOW_SCALE],
                       sPlatformSettings[PLATFORM_SETTING_INTEGER_SCALE],
@@ -283,32 +268,6 @@ void Platform_ConfigSetSetting(enum PlatformSetting setting, u8 value)
 {
     if (setting < PLATFORM_SETTING_COUNT)
         sPlatformSettings[setting] = value;
-}
-
-bool32 Platform_ConfigHasBorderBackground(void)
-{
-    return sHasBorderBackgroundConfig;
-}
-
-u8 Platform_ConfigGetBorderBackground(void)
-{
-    return sBorderBackground;
-}
-
-void Platform_ConfigSetBorderBackground(u8 selection)
-{
-    sBorderBackground = selection;
-    sHasBorderBackgroundConfig = TRUE;
-}
-
-u8 Platform_ConfigGetBackgroundOrderVersion(void)
-{
-    return sBackgroundOrderVersion;
-}
-
-void Platform_ConfigSetBackgroundOrderVersion(u8 version)
-{
-    sBackgroundOrderVersion = version;
 }
 
 #endif

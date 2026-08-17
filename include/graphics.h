@@ -2940,7 +2940,12 @@ extern const u32 gTrainerFrontPic_Twins[];
 extern const u32 gTrainerFrontPic_Sailor[];
 extern const u32 gTrainerFrontPic_MagmaAdmin[];
 extern const u32 gTrainerFrontPic_Wally[];
+/* R6: gTrainerFrontPic_Brendan is a ROM_BASE-only resource on native; its
+ * declaration and definition live only in the GBA-target build path
+ * (src/data/graphics/trainers_brendan_payload.c). */
+#if !defined(NATIVE_LINUX)
 extern const u32 gTrainerFrontPic_Brendan[];
+#endif
 extern const u32 gTrainerFrontPic_May[];
 extern const u32 gTrainerFrontPic_BugCatcher[];
 extern const u32 gTrainerFrontPic_PokemonRangerM[];
@@ -3034,7 +3039,12 @@ extern const u32 gTrainerPalette_Twins[];
 extern const u32 gTrainerPalette_Sailor[];
 extern const u32 gTrainerPalette_MagmaAdmin[];
 extern const u32 gTrainerPalette_Wally[];
+/* R6: gTrainerPalette_Brendan is a ROM_BASE-only resource on native; its
+ * declaration and definition live only in the GBA-target build path
+ * (src/data/graphics/trainers_brendan_payload.c). */
+#if !defined(NATIVE_LINUX)
 extern const u32 gTrainerPalette_Brendan[];
+#endif
 extern const u32 gTrainerPalette_May[];
 extern const u32 gTrainerPalette_BugCatcher[];
 extern const u32 gTrainerPalette_PokemonRangerM[];
@@ -4133,10 +4143,12 @@ extern const u32 gDomeTourneyLineDown_Tilemap[];
 extern const u32 gDomeTourneyLineUp_Tilemap[];
 extern const u32 gDomeTourneyTree_Tilemap[];
 extern const u32 gDomeTourneyTreeButtons_Gfx[];
+#if !defined(NATIVE_LINUX) /* R11-C: floor-light leaves migrated; declared by tileset_native.generated.h */
 extern const u16 gTilesetAnims_BattleDomePals0_0[];
 extern const u16 gTilesetAnims_BattleDomePals0_1[];
 extern const u16 gTilesetAnims_BattleDomePals0_2[];
 extern const u16 gTilesetAnims_BattleDomePals0_3[];
+#endif /* !NATIVE_LINUX */
 
 extern const u32 gBattleArenaJudgmentSymbolsGfx[];
 extern const u32 gBattleArenaJudgmentSymbolsPalette[];
@@ -5024,10 +5036,19 @@ extern const u16 gFrontierFactoryMenu_Tilemap[];
 extern const u16 gFrontierFactoryMenu_Pal[];
 
 // Object event pals
+#if defined(NATIVE_LINUX)
+/* R11-B: session-published non-const native slots (the compat seam defines
+ * them). The GBA build keeps the const compile-time payloads. */
+extern u16 gObjectEventPal_Brendan[];
+extern u16 gObjectEventPal_May[];
+extern u16 gObjectEventPal_RubySapphireBrendan[];
+extern u16 gObjectEventPal_RubySapphireMay[];
+#else
 extern const u16 gObjectEventPal_Brendan[];
 extern const u16 gObjectEventPal_May[];
 extern const u16 gObjectEventPal_RubySapphireBrendan[];
 extern const u16 gObjectEventPal_RubySapphireMay[];
+#endif
 
 // Mail
 extern const u16 gMailPalette_Orange[];

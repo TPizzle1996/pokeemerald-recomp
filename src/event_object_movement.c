@@ -177,7 +177,11 @@ static bool8 NpcTakeStep(struct Sprite *);
 static bool8 IsElevationMismatchAt(u8, s16, s16);
 static bool8 AreElevationsCompatible(u8, u8);
 
+#if defined(NATIVE_LINUX)
+extern struct SpriteFrameImage sPicTable_PechaBerryTree[];
+#else
 static const struct SpriteFrameImage sPicTable_PechaBerryTree[];
+#endif
 
 const u8 gReflectionEffectPaletteMap[16] = {
         [PALSLOT_PLAYER]                 = PALSLOT_PLAYER_REFLECTION,

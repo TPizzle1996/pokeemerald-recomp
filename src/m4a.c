@@ -4,11 +4,13 @@
 
 STATIC_ASSERT(sizeof(struct Song) == 8, GbaSongTableEntrySize);
 STATIC_ASSERT(sizeof(struct MusicPlayer) == 12, GbaMusicPlayerTableEntrySize);
+#ifdef PORTABLE
 STATIC_ASSERT(offsetof(struct SoundInfo, chans) == offsetof(struct SoundMixerState, chans), SoundMixerChannelsLayout);
 STATIC_ASSERT(offsetof(struct SoundInfo, pcmBuffer) == offsetof(struct SoundMixerState, outBuffer), SoundMixerBufferLayout);
 STATIC_ASSERT(sizeof(struct SoundInfo) == sizeof(struct SoundMixerState), SoundMixerStateSize);
 STATIC_ASSERT(offsetof(struct MusicPlayerTrack, cmdPtr) == offsetof(struct MP2KTrack, cmdPtr), MusicTrackCommandPointerLayout);
 STATIC_ASSERT(sizeof(struct MusicPlayerTrack) == sizeof(struct MP2KTrack), MusicTrackSize);
+#endif
 STATIC_ASSERT(sizeof(GbaAddr) == 4, PokemonCryGotoOperandWidth);
 STATIC_ASSERT(offsetof(struct PokemonCryBytecode, part0) == 0, PokemonCryPart0Offset);
 STATIC_ASSERT(offsetof(struct PokemonCryBytecode, gotoTarget) == 3, PokemonCryGotoOperandOffset);
@@ -63,7 +65,7 @@ struct HostSongHeader
     u8 *parts[MAX_MUSICPLAYER_TRACKS];
 };
 
-static struct HostSongHeader sHostSongHeaders[NUM_MUSIC_PLAYERS];
+static struct HostSongHeader sHostSongHeaders[MAX_MUSIC_PLAYERS];
 static struct HostSongHeader sHostPokemonCrySongHeaders[MAX_POKEMON_CRIES];
 
 static struct MusicPlayerInfo *GetMusicPlayerInfo(const struct MusicPlayer *player)
@@ -526,9 +528,17 @@ void SampleFreqSet(u32 freq)
 #endif
     soundInfo->pcmDmaPeriod = PCM_DMA_BUF_SIZE / soundInfo->pcmSamplesPerVBlank;
 
+#ifdef PORTABLE
     soundInfo->pcmFreq = 60.0f * soundInfo->pcmSamplesPerVBlank;
 
     soundInfo->divFreq = 1.0f / soundInfo->pcmFreq;
+#else
+    // LCD refresh rate 59.7275Hz
+    soundInfo->pcmFreq = (597275 * soundInfo->pcmSamplesPerVBlank + 5000) / 10000;
+
+    // CPU frequency 16.78Mhz
+    soundInfo->divFreq = (16777216 / soundInfo->pcmFreq + 1) >> 1;
+#endif
 
     // Turn off timer 0.
     REG_TM0CNT_H = 0;

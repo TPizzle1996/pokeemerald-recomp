@@ -1089,8 +1089,9 @@ static void TestBuildPackFailureMatrix(struct TestAssets *a)
     }
 
     /* A manifest exceeding the record limit is rejected before record parsing.
-     * R9 Stage 4 raised the cap to 2048 (1804-entry merged family + headroom),
-     * so the rejection now starts at 2049 records. */
+     * R11-C raised the cap to 4096 (3643-entry merged families + headroom for
+     * the remaining R11 families), and R11-D raised it again to 8192 (4518
+     * merged records + headroom), so the rejection now starts at 8193. */
     {
         static const char kManifestHead[] =
             "manifest_version = 1\n"
@@ -1104,11 +1105,11 @@ static void TestBuildPackFailureMatrix(struct TestAssets *a)
         unsigned i;
         Gen3Buffer_Init(&buf, 8192);
         Gen3Buffer_AppendCStr(&buf, kManifestHead);
-        for (i = 0; i < 2049u; i++)
+        for (i = 0; i < 8193u; i++)
             Gen3Buffer_AppendFormat(&buf, "[[records]]\nid = \"emerald:x/x%u\"\n", i);
         Gen3Buffer_Append(&buf, "\0", 1u);
         ExpectBuildFailure(a, &buf, NULL, EMERALD_IMPORT_ERR_MANIFEST_TOO_MANY_RECORDS,
-                           "2049-record manifest -> MANIFEST_TOO_MANY_RECORDS");
+                           "8193-record manifest -> MANIFEST_TOO_MANY_RECORDS");
         Gen3Buffer_Destroy(&buf);
     }
 
@@ -1254,7 +1255,7 @@ static void TestBuildPackFailureMatrix(struct TestAssets *a)
         Gen3Buffer_Destroy(&dup2);
     }
 
-    /* Two manifests whose merged total exceeds the 2048-record cap are
+    /* Two manifests whose merged total exceeds the 8192-record cap are
      * rejected even when each file alone is under the cap. */
     {
         static const char kBigRecordFmt[] =
@@ -1288,7 +1289,7 @@ static void TestBuildPackFailureMatrix(struct TestAssets *a)
         Gen3Buffer_Init(&big2, 128 * 1024u);
         Gen3Buffer_AppendCStr(&big1, kManifestHead);
         Gen3Buffer_AppendCStr(&big2, kManifestHead);
-        for (i = 0; i < 1025u; i++)
+        for (i = 0; i < 4097u; i++)
         {
             char id[64];
             snprintf(id, sizeof(id), "emerald:x/big1%u", i);
@@ -1309,7 +1310,7 @@ static void TestBuildPackFailureMatrix(struct TestAssets *a)
         input.manifestCount = 2u;
         memset(&report, 0, sizeof(report));
         memset(&bytes, 0, sizeof(bytes));
-        Report("R9 merged manifests over the 2048 cap -> MANIFEST_TOO_MANY_RECORDS",
+        Report("R11 merged manifests over the 8192 cap -> MANIFEST_TOO_MANY_RECORDS",
                EmeraldImport_BuildPack(&input, &bytes, &report)
                    == EMERALD_IMPORT_ERR_MANIFEST_TOO_MANY_RECORDS,
                NULL);

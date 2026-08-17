@@ -94,6 +94,20 @@ struct Gen3BindingInput
     size_t sourceArtifactSize;
     const uint8_t *canonicalDecoded; /* expected decoded bytes (.4bpp / .gbapal) */
     size_t canonicalDecodedSize;
+    /* Palette-row slices (R11-C): when hasSymbolOffset is set, the binding
+     * addresses [symbolOffset, symbolOffset + expectedDecodedSize) inside a
+     * larger symbol instead of the whole symbol (row 0 is symbolOffset 0, so
+     * presence, not value, selects the slice path). The encoded length is
+     * then expectedDecodedSize and the slice must stay inside the symbol.
+     * Raw-encoding only. */
+    bool hasSymbolOffset;
+    uint32_t symbolOffset;
+    /* Raw concatenation tail (R11-C, StormyWater anim frames): the preproc
+     * emits every INCBIN argument, so the symbol bytes are
+     * artifact || artifact_2. Raw-encoding only; mutually exclusive with
+     * symbolOffset. When set, sourceArtifact points at the concatenation. */
+    const uint8_t *concatTail;
+    size_t concatTailSize;
 };
 
 /* The deterministic record emitted for one resource. */

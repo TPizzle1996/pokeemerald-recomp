@@ -12,6 +12,9 @@
 #endif
 
 #include "global.h"
+#if defined(LINUX64) && LINUX64
+#include "platform/native_sprite_snapshot.h"
+#endif
 #include "battle.h"
 #include "battle_anim.h"
 #include "battle_controllers.h"
@@ -33,11 +36,19 @@
 #include "platform/host_memory.h"
 #include "platform/native_state.h"
 #include "emerald/resources/emerald_trainer_native_compat.h"
+#include "platform/native_world_neighborhood.h"
 #include "siirtc.h"
 
 #define NATIVE_STATE_MAGIC 0x4E535431u /* NST1 */
-#define NATIVE_STATE_FORMAT_VERSION 4u
+/* State v5 (R10): adds the resource-reference sidecar section and replaces
+ * the hardcoded content fingerprint with the computed resource-session
+ * fingerprint. v4 is rejected with a precise message (see HeaderMatches):
+ * it cannot express resource-backed pointers. */
+#define NATIVE_STATE_FORMAT_VERSION 5u
 #define NATIVE_STATE_MAX_FILE_SIZE (32u * 1024u * 1024u)
+/* Strict sidecar bound: the production session references ~2040 compat
+ * streams; 4096 leaves headroom while keeping the container bounded. */
+#define NATIVE_STATE_MAX_RESOURCE_RECORDS 4096u
 #ifdef _WIN32
 #define NATIVE_STATE_ABI_ID "windows64-v1"
 #else
@@ -60,7 +71,34 @@ enum NativeStateSectionTag
     STATE_SECTION_SPRITE_SIDECAR,
     STATE_SECTION_RTC,
     STATE_SECTION_BATTLE_SIDECAR,
+    STATE_SECTION_RESOURCE_SIDECAR,
 };
+
+/* Representation roles (R10 §B). */
+enum NativeStateResourceRole
+{
+    NATIVE_STATE_ROLE_CANONICAL = 0,     /* canonical provider payload bytes */
+    NATIVE_STATE_ROLE_LEGACY_LZ = 1,     /* legacy/literal-LZ payload stream */
+    NATIVE_STATE_ROLE_COMPAT_OBJECT = 2, /* compatibility object/table */
+};
+
+/* One resource reference (R10 §B): everything needed to reconstruct an
+ * 8-byte pointer field from stable identity + offset. Fixed 64 bytes,
+ * packed, explicit little-endian, no pointer values, no handles, no host
+ * padding (the second reserved word makes the record exactly 64 bytes
+ * without compiler padding). */
+struct NativeStateResourceRecord
+{
+    u32 sectionTag;                       /* owning walked-slice section tag */
+    u32 fieldOffset;                      /* byte offset of the pointer field */
+    u8 resourceKey[GEN3_RESOURCE_KEY_SIZE]; /* 32-byte canonical key */
+    u32 resourceType;                     /* Gen3ResourceType */
+    u32 resourceSchema;                   /* schema/version */
+    u32 representationRole;               /* enum NativeStateResourceRole */
+    u32 rangeOffset;                      /* offset within the immutable range */
+    u32 reserved;                         /* must be 0 */
+    u32 reserved2;                        /* must be 0 */
+} __attribute__((packed));
 
 struct NativeStateHeader
 {
@@ -194,6 +232,63 @@ static u32 SectionSize(const unsigned char *start, const unsigned char *stop)
     return end >= begin && end - begin <= UINT32_MAX ? (u32)(end - begin) : 0;
 }
 
+/* R10 §D capture-side record accumulation: reset by every save, filled by
+ * the normalize walk, serialized into STATE_SECTION_RESOURCE_SIDECAR. */
+static struct NativeStateResourceRecord
+    sCaptureResourceRecords[NATIVE_STATE_MAX_RESOURCE_RECORDS];
+static u32 sCaptureResourceRecordCount;
+
+/* The active session's reverse resource-range index, or NULL when no
+ * resource session exists (non-Linux targets, no published session, or a
+ * failed registration). Capture skips resource detection without it. */
+static const struct EmeraldResourceRangeIndex *ActiveRangeIndex(void)
+{
+#if defined(PLATFORM_SDL2) && defined(NATIVE_LINUX)
+    return EmeraldResourceCompat_GetRangeIndex();
+#else
+    return NULL;
+#endif
+}
+
+/* R10 §F: the content fingerprint stamped into every written state. With an
+ * active resource session this is the session's computed logical-content
+ * digest (hex); without one it is the legacy constant - the pre-session
+ * behavior, kept for targets that never build a resource session. */
+static void WriteContentFingerprint(char *dest, u32 destSize)
+{
+    static const char hexDigits[] = "0123456789abcdef";
+#if defined(PLATFORM_SDL2) && defined(NATIVE_LINUX)
+    uint8_t digest[GEN3_PACK_SHA256_SIZE];
+    if (EmeraldResourceCompat_GetSessionContentFingerprint(digest))
+    {
+        u32 i;
+        for (i = 0; i < GEN3_PACK_SHA256_SIZE && destSize > i * 2u + 1u; i++)
+        {
+            dest[i * 2u] = hexDigits[digest[i] >> 4];
+            dest[i * 2u + 1u] = hexDigits[digest[i] & 0xFu];
+        }
+        if (destSize > GEN3_PACK_SHA256_SIZE * 2u)
+            dest[GEN3_PACK_SHA256_SIZE * 2u] = '\0';
+        return;
+    }
+#endif
+    snprintf(dest, destSize, "%s", NATIVE_STATE_CONTENT_FINGERPRINT);
+}
+
+static void StoreLe32(u8 *dest, u32 value)
+{
+    dest[0] = (u8)(value & 0xFFu);
+    dest[1] = (u8)((value >> 8) & 0xFFu);
+    dest[2] = (u8)((value >> 16) & 0xFFu);
+    dest[3] = (u8)((value >> 24) & 0xFFu);
+}
+
+static u32 ReadLe32(const u8 *source)
+{
+    return (u32)source[0] | ((u32)source[1] << 8)
+         | ((u32)source[2] << 16) | ((u32)source[3] << 24);
+}
+
 static u32 BuildSlices(struct NativeStateSlice *slices, u32 capacity,
                        u8 *framebuffer, struct SiiRtcInfo *rtc)
 {
@@ -319,6 +414,7 @@ static const char *SectionName(u32 tag)
     case STATE_SECTION_TASK_SIDECAR:   return "TASK_SIDECAR";
     case STATE_SECTION_SPRITE_SIDECAR: return "SPRITE_SIDECAR";
     case STATE_SECTION_BATTLE_SIDECAR: return "BATTLE_SIDECAR";
+    case STATE_SECTION_RESOURCE_SIDECAR: return "RESOURCE_SIDECAR";
     case STATE_SECTION_RTC:            return "RTC";
     default:                           return "UNKNOWN";
     }
@@ -1251,6 +1347,94 @@ static bool32 RuntimeLocationIsInactiveTextPrinterPointer(const struct NativeSta
 #endif
 }
 
+/* A window inside a region whose layout this module models explicitly (the
+ * sprite template/image sidecars, gSprites, text printers, gTasks, gMain and
+ * gWindows) is a native pointer only at the modeled pointer/function-member
+ * offsets. Every other window overlaps scalar fields or host alignment
+ * padding; its bytes are opaque game data and must never be re-examined as a
+ * pointer window - a scalar+padding combination can numerically land in a
+ * host mapping (for example a SpriteTemplate's u16 tag pair plus its
+ * alignment padding widened to 0x00007f38ffffffff) or in a resource hull.
+ * The counterpart pointer classification functions above recognize the
+ * member offsets; this function is the structural complement: everything
+ * else in a modeled region is data on both save and restore. */
+static bool32 RuntimeLocationIsModeledScalarOrPadding(const struct NativeStateSlice *slice,
+                                                      u32 offset)
+{
+    uintptr_t address;
+
+    if (slice->source == NULL || offset >= slice->size)
+        return FALSE;
+    address = (uintptr_t)slice->source + offset;
+#if defined(LINUX64) && LINUX64
+    if (address >= (uintptr_t)sSpriteTemplateSidecars
+     && address < (uintptr_t)sSpriteTemplateSidecars + sizeof(sSpriteTemplateSidecars))
+    {
+        u32 fieldOffset = (u32)((address - (uintptr_t)sSpriteTemplateSidecars)
+                              % sizeof(struct SpriteTemplate));
+
+        return fieldOffset != offsetof(struct SpriteTemplate, oam)
+            && fieldOffset != offsetof(struct SpriteTemplate, anims)
+            && fieldOffset != offsetof(struct SpriteTemplate, images)
+            && fieldOffset != offsetof(struct SpriteTemplate, affineAnims)
+            && fieldOffset != offsetof(struct SpriteTemplate, callback);
+    }
+    if (address >= (uintptr_t)sSpriteTemplateImageSidecars
+     && address < (uintptr_t)sSpriteTemplateImageSidecars + sizeof(sSpriteTemplateImageSidecars))
+        return (address - (uintptr_t)sSpriteTemplateImageSidecars)
+                   % sizeof(struct SpriteFrameImage)
+            != offsetof(struct SpriteFrameImage, data);
+    {
+        const struct TextPrinter *printers = TextPrinter_GetStatePrinters();
+
+        if (address >= (uintptr_t)printers
+         && address < (uintptr_t)printers + WINDOWS_MAX * sizeof(*printers))
+        {
+            u32 fieldOffset = (u32)((address - (uintptr_t)printers)
+                                  % sizeof(struct TextPrinter));
+            u32 currentChar = offsetof(struct TextPrinter, printerTemplate)
+                            + offsetof(struct TextPrinterTemplate, currentChar);
+
+            return fieldOffset != offsetof(struct TextPrinter, callback)
+                && fieldOffset != currentChar;
+        }
+    }
+#endif
+    if (address >= (uintptr_t)gSprites
+     && address < (uintptr_t)gSprites + sizeof(gSprites))
+    {
+        u32 fieldOffset = (u32)((address - (uintptr_t)gSprites) % sizeof(struct Sprite));
+
+        return fieldOffset != offsetof(struct Sprite, anims)
+            && fieldOffset != offsetof(struct Sprite, images)
+            && fieldOffset != offsetof(struct Sprite, affineAnims)
+            && fieldOffset != offsetof(struct Sprite, template)
+            && fieldOffset != offsetof(struct Sprite, subspriteTables)
+            && fieldOffset != offsetof(struct Sprite, callback);
+    }
+    if (address >= (uintptr_t)gTasks
+     && address < (uintptr_t)gTasks + NUM_TASKS * sizeof(*gTasks))
+        return (address - (uintptr_t)gTasks) % sizeof(struct Task)
+            != offsetof(struct Task, func);
+    if (address >= (uintptr_t)&gMain && address < (uintptr_t)&gMain + sizeof(gMain))
+    {
+        u32 fieldOffset = (u32)(address - (uintptr_t)&gMain);
+
+        return fieldOffset != offsetof(struct Main, callback1)
+            && fieldOffset != offsetof(struct Main, callback2)
+            && fieldOffset != offsetof(struct Main, savedCallback)
+            && fieldOffset != offsetof(struct Main, vblankCallback)
+            && fieldOffset != offsetof(struct Main, hblankCallback)
+            && fieldOffset != offsetof(struct Main, vcountCallback)
+            && fieldOffset != offsetof(struct Main, serialCallback);
+    }
+    if (address >= (uintptr_t)gWindows
+     && address < (uintptr_t)gWindows + WINDOWS_MAX * sizeof(*gWindows))
+        return (address - (uintptr_t)gWindows) % sizeof(struct Window)
+            != offsetof(struct Window, tileData);
+    return FALSE;
+}
+
 static void DescribePointerTarget(const struct NativeStateSlice *slice, u32 offset,
                                   uintptr_t address, char *target, u32 targetSize)
 {
@@ -1656,7 +1840,132 @@ static bool32 RuntimeLocationIsTextPrinterPadding(const struct NativeStateSlice 
 #endif
 }
 
-static bool32 NormalizeRuntimeBytes(const struct NativeStateSlice *slice, u8 *dest, u32 size)
+/* R10-C diagnostic: describe the hull that contains `address` and where the
+ * value falls inside it, so an in-hull capture failure names the band that
+ * caught the value (and whether that band is exposed or build-time-only).
+ * Writes an empty string when `address` is in no hull. */
+static void DescribeHullContext(
+    const struct EmeraldResourceRangeIndex *rangeIndex,
+    uintptr_t address, char *out, size_t outSize)
+{
+    size_t i;
+
+    out[0] = '\0';
+    if (rangeIndex == NULL || out == NULL || outSize == 0u)
+        return;
+    for (i = 0u; i < rangeIndex->hullCount; i++)
+    {
+        const struct EmeraldResourceRangeHull *hull = &rangeIndex->hulls[i];
+        uintptr_t hullEnd = hull->base + hull->length;
+        uintptr_t exposedStart = 0u;
+        size_t r;
+
+        if (address < hull->base || address >= hullEnd)
+            continue;
+        /* The first registered range inside this hull is the exposed
+         * region's start; anything before it is the build-time-only
+         * unexposed prefix. */
+        for (r = 0u; r < rangeIndex->rangeCount; r++)
+        {
+            if (rangeIndex->ranges[r].base >= hull->base
+             && rangeIndex->ranges[r].base < hullEnd)
+            {
+                exposedStart = rangeIndex->ranges[r].base;
+                break;
+            }
+        }
+        if (address < exposedStart)
+            snprintf(out, outSize,
+                     "resource-owned pointer lacks a registered resource "
+                     "identity (hull %zu 0x%zx..0x%zx; exposed region starts "
+                     "at 0x%zx; value in the unexposed build-time-only "
+                     "prefix)",
+                     i, hull->base, hullEnd, exposedStart);
+        else
+            snprintf(out, outSize,
+                     "resource-owned pointer lacks a registered resource "
+                     "identity (hull %zu 0x%zx..0x%zx; value in the exposed "
+                     "stream region but outside every registered range)",
+                     i, hull->base, hullEnd);
+        return;
+    }
+}
+
+/* R10 §D step 2: the eight-byte window at `offset` is examined against the
+ * active resource-range index BEFORE any normal pointer classification.
+ * Returns NORMALIZE_RESOURCE_NONE for no resource match,
+ * NORMALIZE_RESOURCE_CAPTURED when a record was appended and the in-band
+ * pointer zeroed, and NORMALIZE_RESOURCE_ERROR when the value is
+ * resource-owned but has no registered identity (or the sidecar is full) -
+ * that is a hard capture failure, never a silent omission. */
+enum NativeStateResourceWindowResult
+{
+    NORMALIZE_RESOURCE_NONE = 0,
+    NORMALIZE_RESOURCE_CAPTURED,
+    NORMALIZE_RESOURCE_ERROR,
+};
+
+static enum NativeStateResourceWindowResult CaptureResourceWindow(
+    const struct NativeStateSlice *slice, u8 *dest, u32 offset, u32 size,
+    const u8 *source, const struct EmeraldResourceRangeIndex *rangeIndex)
+{
+    uintptr_t candidate;
+    struct EmeraldResourceRangeHit hit;
+    struct NativeStateResourceRecord *record;
+
+    if (rangeIndex == NULL || offset + sizeof(uintptr_t) > size)
+        return NORMALIZE_RESOURCE_NONE;
+    memcpy(&candidate, source + offset, sizeof(candidate));
+    if (!EmeraldResourceRangeIndex_Lookup(rangeIndex, candidate, &hit))
+    {
+        /* Inside resource-owned memory but matching no registered range:
+         * the pointer has no stable resource identity and must not be
+         * persisted silently. */
+        if (EmeraldResourceRangeIndex_InHull(rangeIndex, candidate))
+        {
+            char hullContext[256];
+
+            DescribeHullContext(rangeIndex, candidate,
+                                hullContext, sizeof(hullContext));
+            SetRuntimePointerError(slice, offset, candidate,
+                                   hullContext[0] != '\0' ? hullContext
+                                                          : "resource-owned pointer lacks a registered resource identity",
+                                   "save-normalize", source, size);
+            return NORMALIZE_RESOURCE_ERROR;
+        }
+        return NORMALIZE_RESOURCE_NONE;
+    }
+    if (hit.rangeOffset > UINT32_MAX)
+    {
+        SetRuntimePointerError(slice, offset, candidate,
+                               "resource range offset exceeds the sidecar field width",
+                               "save-normalize", source, size);
+        return NORMALIZE_RESOURCE_ERROR;
+    }
+    if (sCaptureResourceRecordCount >= NATIVE_STATE_MAX_RESOURCE_RECORDS)
+    {
+        SetRuntimePointerError(slice, offset, candidate,
+                               "resource reference sidecar record limit exceeded",
+                               "save-normalize", source, size);
+        return NORMALIZE_RESOURCE_ERROR;
+    }
+    record = &sCaptureResourceRecords[sCaptureResourceRecordCount++];
+    memset(record, 0, sizeof(*record));
+    record->sectionTag = slice->tag;
+    record->fieldOffset = offset;
+    memcpy(record->resourceKey, hit.key.bytes, GEN3_RESOURCE_KEY_SIZE);
+    record->resourceType = hit.type;
+    record->resourceSchema = hit.schema;
+    record->representationRole = hit.role;
+    record->rangeOffset = (u32)hit.rangeOffset;
+    /* Neutralize the in-band pointer before normal serialization: the
+     * serialized field is zeros; the reference lives only in the sidecar. */
+    memset(dest + offset, 0, sizeof(candidate));
+    return NORMALIZE_RESOURCE_CAPTURED;
+}
+
+static bool32 NormalizeRuntimeBytes(const struct NativeStateSlice *slice, u8 *dest, u32 size,
+                                    const struct EmeraldResourceRangeIndex *rangeIndex)
 {
     const void *source = slice->source;
 #if UINTPTR_MAX > UINT32_MAX
@@ -1687,6 +1996,12 @@ static bool32 NormalizeRuntimeBytes(const struct NativeStateSlice *slice, u8 *de
             continue;
         if (RuntimeLocationIsTextPrinterPadding(slice, offset))
             continue;
+        /* Typed regions normalize only their modeled pointer members; scalar
+         * fields and alignment padding are opaque game data (checked before
+         * the resource window so a coincidental scalar value can never be
+         * captured as a resource reference either). */
+        if (RuntimeLocationIsModeledScalarOrPadding(slice, offset))
+            continue;
         /* Controller buffers are byte protocols, not native C object storage.
          * Never reinterpret ordinary packet bytes as an inferred pointer and
          * rewrite them. A complete mapped native pointer here is producer
@@ -1713,6 +2028,23 @@ static bool32 NormalizeRuntimeBytes(const struct NativeStateSlice *slice, u8 *de
         }
         functionPointer = RuntimeLocationIsFunction(slice, offset);
         knownDataPointer = RuntimeLocationIsKnownDataPointer(slice, offset);
+        /* R10 §D: resource-range detection runs BEFORE every normal pointer
+         * classification. A captured pointer becomes a sidecar record with
+         * the in-band bytes zeroed (and the walk advances past the whole
+         * eight-byte field, exactly like the persistent-record paths); a
+         * resource-owned pointer without identity is a hard capture failure. */
+        switch (CaptureResourceWindow(slice, dest, offset, size, source,
+                                      rangeIndex))
+        {
+        case NORMALIZE_RESOURCE_CAPTURED:
+            offset += sizeof(u32);
+            continue;
+        case NORMALIZE_RESOURCE_ERROR:
+            return FALSE;
+        case NORMALIZE_RESOURCE_NONE:
+        default:
+            break;
+        }
         /* An inactive printer has no continuation. Its current character and
          * callback are stale scratch values and must not become state roots. */
         if (RuntimeLocationIsInactiveTextPrinterPointer(slice, offset))
@@ -1819,6 +2151,13 @@ static bool32 RestoreRuntimeBytes(const struct NativeStateSlice *slice,
         if (slice->source != NULL
          && GetBattleBufferLocation((uintptr_t)slice->source + offset, &battleBuffer))
             continue;
+        /* Mirrors the save-side typed-region rule: raw bytes at scalar/
+         * padding windows of modeled regions are data, never decoded as
+         * records (a raw window can only self-classify as a record when its
+         * high word exactly matches a kind tag, but the rule is
+         * deterministic by construction). */
+        if (RuntimeLocationIsModeledScalarOrPadding(slice, offset))
+            continue;
 
         memcpy(&persistent, source + offset, sizeof(persistent));
         functionPointer = RuntimeLocationIsFunction(slice, offset);
@@ -1896,7 +2235,7 @@ static bool32 CaptureBattleSidecar(void *dest, u32 size)
 
     if (size != sizeof(*state))
         return FALSE;
-    memset(state, 0, sizeof(*state));
+    memset(dest, 0, size);
     BuildEwramDiagnosticSlice(&ewram);
     for (battler = 0; battler < MAX_BATTLERS_COUNT; battler++)
     {
@@ -1920,12 +2259,19 @@ static bool32 CaptureBattleSidecar(void *dest, u32 size)
             return FALSE;
         }
         pointer = HostResolveGbaAddr(logical);
-        if (!HostPointerToPersistentAddress(pointer, &state->commandBufferData[battler]))
         {
-            SetRuntimePointerError(&ewram, ewramOffset, (uintptr_t)pointer,
-                                   "battle command-buffer pointer has no persistent data identity",
-                                   "save-battle-sidecar", (const u8 *)ewram.source, ewram.size);
-            return FALSE;
+            struct HostPersistentAddress record;
+            if (!HostPointerToPersistentAddress(pointer, &record))
+            {
+                SetRuntimePointerError(&ewram, ewramOffset, (uintptr_t)pointer,
+                                       "battle command-buffer pointer has no persistent data identity",
+                                       "save-battle-sidecar", (const u8 *)ewram.source, ewram.size);
+                return FALSE;
+            }
+            /* The section payload lives at an arbitrary container offset, so
+             * records are written bytewise - never through a typed
+             * (alignment-requiring) struct access over the destination. */
+            memcpy(dest + battler * sizeof(record), &record, sizeof(record));
         }
     }
     /* Keep the battle-specific save path in the same order as normal runtime
@@ -1936,11 +2282,10 @@ static bool32 CaptureBattleSidecar(void *dest, u32 size)
 
 static bool32 ValidateBattleSidecar(const u8 *source, u32 size)
 {
-    const struct NativeStateBattleSidecar *state = (const void *)source;
     struct NativeStateSlice sidecar;
     u32 battler;
 
-    if (size != sizeof(*state))
+    if (size != sizeof(struct NativeStateBattleSidecar))
         return FALSE;
     sidecar.tag = STATE_SECTION_BATTLE_SIDECAR;
     sidecar.source = NULL;
@@ -1948,16 +2293,17 @@ static bool32 ValidateBattleSidecar(const u8 *source, u32 size)
     sidecar.runtimePointers = FALSE;
     for (battler = 0; battler < MAX_BATTLERS_COUNT; battler++)
     {
+        struct HostPersistentAddress record;
         void *pointer;
         uintptr_t raw;
 
-        if (state->commandBufferData[battler].kind == 0
-         && state->commandBufferData[battler].value == 0)
+        memcpy(&record, source + battler * sizeof(record), sizeof(record));
+        if (record.kind == 0 && record.value == 0)
             continue;
-        if (HostPersistentAddressIsData(&state->commandBufferData[battler])
-         && HostResolvePersistentAddress(&state->commandBufferData[battler], &pointer))
+        if (HostPersistentAddressIsData(&record)
+         && HostResolvePersistentAddress(&record, &pointer))
             continue;
-        memcpy(&raw, &state->commandBufferData[battler], sizeof(raw));
+        memcpy(&raw, &record, sizeof(raw));
         SetRuntimePointerError(&sidecar,
                                battler * sizeof(struct HostPersistentAddress), raw,
                                "battle sidecar contains an invalid persistent data identity",
@@ -1969,25 +2315,25 @@ static bool32 ValidateBattleSidecar(const u8 *source, u32 size)
 
 static bool32 RestoreBattleSidecar(const u8 *source, u32 size)
 {
-    const struct NativeStateBattleSidecar *state = (const void *)source;
     u32 battler;
 
     if (!ValidateBattleSidecar(source, size))
         return FALSE;
     for (battler = 0; battler < MAX_BATTLERS_COUNT; battler++)
     {
+        struct HostPersistentAddress record;
         void *pointer;
         GbaAddr logical;
 
-        if (state->commandBufferData[battler].kind == 0
-         && state->commandBufferData[battler].value == 0)
+        memcpy(&record, source + battler * sizeof(record), sizeof(record));
+        if (record.kind == 0 && record.value == 0)
             continue;
         if (gBattleBufferA[battler][0] != CONTROLLER_DMA3TRANSFER)
         {
             SetError("battle pointer sidecar does not match its command buffer");
             return FALSE;
         }
-        if (!HostResolvePersistentAddress(&state->commandBufferData[battler], &pointer))
+        if (!HostResolvePersistentAddress(&record, &pointer))
             return FALSE;
         logical = HostPointerToGbaAddr(pointer);
         if (HostAddressIsRuntimeHandle(logical))
@@ -2000,7 +2346,8 @@ static bool32 RestoreBattleSidecar(const u8 *source, u32 size)
     return TRUE;
 }
 
-static bool32 CaptureSlice(const struct NativeStateSlice *slice, u8 *dest)
+static bool32 CaptureSlice(const struct NativeStateSlice *slice, u8 *dest,
+                           const struct EmeraldResourceRangeIndex *rangeIndex)
 {
     if (slice->tag == STATE_SECTION_VIDEO_MEMORY)
     {
@@ -2051,7 +2398,8 @@ static bool32 CaptureSlice(const struct NativeStateSlice *slice, u8 *dest)
     }
     if (slice->tag == STATE_SECTION_BATTLE_SIDECAR)
         return CaptureBattleSidecar(dest, slice->size);
-    if (slice->runtimePointers && !NormalizeRuntimeBytes(slice, dest, slice->size))
+    if (slice->runtimePointers && !NormalizeRuntimeBytes(slice, dest, slice->size,
+                                                         rangeIndex))
         return FALSE;
     if (slice->runtimePointers)
         return TRUE;
@@ -2066,6 +2414,13 @@ static bool32 RestoreSlice(const struct NativeStateSlice *slice, const u8 *sourc
         memcpy(VRAM_, source, sizeof(VRAM_));
         memcpy(PLTT, source + sizeof(VRAM_), sizeof(PLTT));
         memcpy(OAM, source + sizeof(VRAM_) + sizeof(PLTT), sizeof(OAM));
+#if defined(LINUX64) && LINUX64
+        // OAM was restored directly from the save; the published OBJ command
+        // frame still describes the pre-restore frame. Invalidate it so host OBJ
+        // capture falls back to raw-OAM until the next successful LoadOam commit
+        // (the frame that re-derives commands from the restored gSprites).
+        NativeSpriteCommandSink_Invalidate();
+#endif
         return TRUE;
     }
     if (slice->tag == STATE_SECTION_TASK_SIDECAR)
@@ -2156,9 +2511,24 @@ static bool32 HeaderMatches(const struct NativeStateHeader *header, u32 fileSize
 {
     char buildId[sizeof(header->buildId)];
 
-    if (header->magic != NATIVE_STATE_MAGIC || header->formatVersion != NATIVE_STATE_FORMAT_VERSION)
+    if (header->magic != NATIVE_STATE_MAGIC)
     {
-        SetError("state format version is not supported");
+        SetError("state file is not a native state");
+        return FALSE;
+    }
+    if (header->formatVersion != NATIVE_STATE_FORMAT_VERSION)
+    {
+        /* R10 §I: v4 is rejected with a precise message - it cannot express
+         * resource-backed pointers, so loading one would either reintroduce
+         * the unsafe pointer class or require maintaining the old walker
+         * semantics forever. The version check runs before ANY section
+         * parsing, so v4 bytes can never be interpreted as a v5 sidecar. */
+        if (header->formatVersion == 4u)
+            SetError("state format v4 predates resource-aware serialization "
+                     "and cannot safely express resource-backed pointers; "
+                     "re-save with a v5 build");
+        else
+            SetError("state format version is not supported");
         return FALSE;
     }
     if (header->headerSize != sizeof(*header) || header->totalSize != fileSize
@@ -2180,12 +2550,6 @@ static bool32 HeaderMatches(const struct NativeStateHeader *header, u32 fileSize
         SetError("state was made by an incompatible native build");
         return FALSE;
     }
-    if (strncmp(header->contentFingerprint, NATIVE_STATE_CONTENT_FINGERPRINT,
-                sizeof(header->contentFingerprint)) != 0)
-    {
-        SetError("state content fingerprint does not match");
-        return FALSE;
-    }
     return TRUE;
 }
 
@@ -2197,9 +2561,11 @@ static enum NativeStateResult SaveStateToPath(const char *path)
     u8 *file;
     u32 count;
     u32 totalSize;
+    u32 sidecarSize;
     u32 offset;
     u32 i;
     struct NativeStateHeader *header;
+    const struct EmeraldResourceRangeIndex *rangeIndex = ActiveRangeIndex();
 
     framebuffer = malloc(DISPLAY_WIDTH * DISPLAY_HEIGHT * sizeof(u32));
     if (framebuffer == NULL)
@@ -2208,7 +2574,12 @@ static enum NativeStateResult SaveStateToPath(const char *path)
         return NATIVE_STATE_UNAVAILABLE;
     }
     count = BuildSlices(slices, ARRAY_COUNT(slices), framebuffer, &rtc);
-    totalSize = sizeof(struct NativeStateHeader) + count * sizeof(struct NativeStateSectionHeader);
+    /* The sidecar section always exists in v5. Its size is only known after
+     * capture, so the container reserves the maximum (4-byte count + 64-byte
+     * records) and the header totals are finalized after capture. */
+    sCaptureResourceRecordCount = 0;
+    totalSize = sizeof(struct NativeStateHeader)
+              + (count + 1u) * sizeof(struct NativeStateSectionHeader);
     for (i = 0; i < count; i++)
     {
         if (slices[i].size > UINT32_MAX - totalSize)
@@ -2219,12 +2590,16 @@ static enum NativeStateResult SaveStateToPath(const char *path)
         }
         totalSize += slices[i].size;
     }
-    if (totalSize > NATIVE_STATE_MAX_FILE_SIZE)
+    sidecarSize = 4u + NATIVE_STATE_MAX_RESOURCE_RECORDS
+                      * (u32)sizeof(struct NativeStateResourceRecord);
+    if (sidecarSize > UINT32_MAX - totalSize
+     || totalSize + sidecarSize > NATIVE_STATE_MAX_FILE_SIZE)
     {
         free(framebuffer);
         SetError("state is larger than the supported container limit");
         return NATIVE_STATE_UNAVAILABLE;
     }
+    totalSize += sidecarSize;
     file = malloc(totalSize);
     if (file == NULL)
     {
@@ -2237,8 +2612,7 @@ static enum NativeStateResult SaveStateToPath(const char *path)
     header->magic = NATIVE_STATE_MAGIC;
     header->formatVersion = NATIVE_STATE_FORMAT_VERSION;
     header->headerSize = sizeof(*header);
-    header->totalSize = totalSize;
-    header->sectionCount = count;
+    header->sectionCount = count + 1u;
     header->frame = Platform_SchedulerGetFrameCounter();
     if (!GetNativeBuildId(header->buildId, sizeof(header->buildId)))
     {
@@ -2247,15 +2621,25 @@ static enum NativeStateResult SaveStateToPath(const char *path)
         SetError("native executable build identity is unavailable");
         return NATIVE_STATE_UNAVAILABLE;
     }
-    snprintf(header->contentFingerprint, sizeof(header->contentFingerprint), "%s", NATIVE_STATE_CONTENT_FINGERPRINT);
-    offset = sizeof(*header) + count * sizeof(struct NativeStateSectionHeader);
+    /* R10 §F: the computed session fingerprint (hex), or the legacy constant
+     * when no resource session is active. */
+    WriteContentFingerprint(header->contentFingerprint,
+                            sizeof(header->contentFingerprint));
+    for (i = 0; i < count + 1u; i++)
+    {
+        struct NativeStateSectionHeader *section =
+            (struct NativeStateSectionHeader *)(file + sizeof(*header)
+                                                + i * sizeof(*section));
+        section->tag = i < count ? slices[i].tag
+                                 : (u32)STATE_SECTION_RESOURCE_SIDECAR;
+        section->size = i < count ? slices[i].size : 0;
+    }
+    offset = sizeof(*header) + (count + 1u) * sizeof(struct NativeStateSectionHeader);
     for (i = 0; i < count; i++)
     {
         struct NativeStateSectionHeader *section =
             (struct NativeStateSectionHeader *)(file + sizeof(*header) + i * sizeof(*section));
-        section->tag = slices[i].tag;
-        section->size = slices[i].size;
-        if (!CaptureSlice(&slices[i], file + offset))
+        if (!CaptureSlice(&slices[i], file + offset, rangeIndex))
         {
             free(file);
             free(framebuffer);
@@ -2264,9 +2648,38 @@ static enum NativeStateResult SaveStateToPath(const char *path)
         section->crc = Crc32(file + offset, section->size);
         offset += section->size;
     }
+    /* Serialize the resource-reference sidecar: explicit little-endian, fixed
+     * 64-byte records, count first. */
+    {
+        struct NativeStateSectionHeader *sidecar =
+            (struct NativeStateSectionHeader *)(file + sizeof(*header)
+                                                + count * sizeof(*sidecar));
+        u8 *payload = file + offset;
+        StoreLe32(payload, sCaptureResourceRecordCount);
+        for (i = 0; i < sCaptureResourceRecordCount; i++)
+        {
+            const struct NativeStateResourceRecord *record =
+                &sCaptureResourceRecords[i];
+            u8 *dest = payload + 4u + (u32)sizeof(*record) * i;
+            StoreLe32(dest, record->sectionTag);
+            StoreLe32(dest + 4u, record->fieldOffset);
+            memcpy(dest + 8u, record->resourceKey, GEN3_RESOURCE_KEY_SIZE);
+            StoreLe32(dest + 40u, record->resourceType);
+            StoreLe32(dest + 44u, record->resourceSchema);
+            StoreLe32(dest + 48u, record->representationRole);
+            StoreLe32(dest + 52u, record->rangeOffset);
+            StoreLe32(dest + 56u, record->reserved);
+            StoreLe32(dest + 60u, record->reserved2);
+        }
+        sidecar->size = 4u + sCaptureResourceRecordCount
+                            * (u32)sizeof(struct NativeStateResourceRecord);
+        sidecar->crc = Crc32(payload, sidecar->size);
+        offset += sidecar->size;
+    }
+    header->totalSize = offset;
     header->payloadSize = offset - sizeof(*header);
     header->payloadCrc = Crc32(file + sizeof(*header), header->payloadSize);
-    if (!Platform_StorageWriteAtomic(path, file, totalSize))
+    if (!Platform_StorageWriteAtomic(path, file, offset))
     {
         free(file);
         free(framebuffer);
@@ -2276,6 +2689,128 @@ static enum NativeStateResult SaveStateToPath(const char *path)
     free(file);
     free(framebuffer);
     return NATIVE_STATE_OK;
+}
+
+/* R10 §B/E: parse and strictly validate every sidecar record before any
+ * live memory is touched. Malformed states fail safely with a diagnostic. */
+static bool32 ValidateResourceRecords(const u8 *records, u32 recordCount,
+                                      const struct NativeStateSlice *slices,
+                                      u32 sliceCount)
+{
+    u32 i;
+    u32 prevSectionTag = 0;
+    u32 prevFieldOffset = 0;
+
+    for (i = 0; i < recordCount; i++)
+    {
+        const u8 *bytes = records + (u32)sizeof(struct NativeStateResourceRecord) * i;
+        u32 sectionTag = ReadLe32(bytes);
+        u32 fieldOffset = ReadLe32(bytes + 4u);
+        u32 resourceType = ReadLe32(bytes + 40u);
+        u32 resourceSchema = ReadLe32(bytes + 44u);
+        u32 representationRole = ReadLe32(bytes + 48u);
+        u32 rangeOffset = ReadLe32(bytes + 52u);
+        u32 reserved = ReadLe32(bytes + 56u);
+        u32 reserved2 = ReadLe32(bytes + 60u);
+        u32 j;
+        u32 sectionSize = 0;
+        bool32 foundSection = FALSE;
+        bool32 keyNonzero = FALSE;
+
+        for (j = 0; j < GEN3_RESOURCE_KEY_SIZE; j++)
+            keyNonzero |= bytes[8u + j] != 0;
+        for (j = 0; j < sliceCount; j++)
+        {
+            if (slices[j].tag == sectionTag)
+            {
+                foundSection = TRUE;
+                sectionSize = slices[j].size;
+                break;
+            }
+        }
+        if (!foundSection)
+        {
+            SetError("state resource reference names a section that is not serialized");
+            return FALSE;
+        }
+        if (fieldOffset % sizeof(u32) != 0 || fieldOffset > sectionSize - 8u)
+        {
+            SetError("state resource reference field offset is out of bounds");
+            return FALSE;
+        }
+        if (representationRole > (u32)NATIVE_STATE_ROLE_COMPAT_OBJECT)
+        {
+            SetError("state resource reference has an unknown representation role");
+            return FALSE;
+        }
+        if (reserved != 0 || reserved2 != 0)
+        {
+            SetError("state resource reference has a nonzero reserved field");
+            return FALSE;
+        }
+        if (!keyNonzero)
+        {
+            SetError("state resource reference has a zero resource key");
+            return FALSE;
+        }
+        (void)resourceType;
+        (void)resourceSchema;
+        (void)rangeOffset;
+        /* Strictly increasing (sectionTag, fieldOffset); fields within a
+         * section must not overlap or duplicate. */
+        if (i != 0
+         && (sectionTag < prevSectionTag
+          || (sectionTag == prevSectionTag
+           && (fieldOffset <= prevFieldOffset
+            || fieldOffset - prevFieldOffset < sizeof(uintptr_t)))))
+        {
+            SetError("state resource references are unordered, overlapping, or duplicated");
+            return FALSE;
+        }
+        prevSectionTag = sectionTag;
+        prevFieldOffset = fieldOffset;
+    }
+    return TRUE;
+}
+
+/* R10 §E step 5: resolve EVERY record against the active session's range
+ * index. Any failure rejects the whole state before live memory is touched. */
+static bool32 ResolveResourceRecords(const u8 *records, u32 recordCount,
+                                     const struct EmeraldResourceRangeIndex *rangeIndex,
+                                     uintptr_t *outPointers)
+{
+    u32 i;
+
+    for (i = 0; i < recordCount; i++)
+    {
+        const u8 *bytes = records + (u32)sizeof(struct NativeStateResourceRecord) * i;
+        Gen3ResourceKey key;
+        uint32_t sectionTag = ReadLe32(bytes);
+        uint32_t fieldOffset = ReadLe32(bytes + 4u);
+        uint32_t resourceType = ReadLe32(bytes + 40u);
+        uint32_t resourceSchema = ReadLe32(bytes + 44u);
+        uint32_t representationRole = ReadLe32(bytes + 48u);
+        uint32_t rangeOffset = ReadLe32(bytes + 52u);
+        char keyHex[GEN3_RESOURCE_KEY_HEX_SIZE];
+        char message[512];
+
+        memcpy(key.bytes, bytes + 8u, GEN3_RESOURCE_KEY_SIZE);
+        if (!EmeraldResourceRangeIndex_ResolveByKey(
+                rangeIndex, &key, resourceType, resourceSchema,
+                representationRole, (size_t)rangeOffset, &outPointers[i]))
+        {
+            Gen3ResourceId_FormatKeyHex(&key, keyHex);
+            snprintf(message, sizeof(message),
+                     "state resource reference %u could not be resolved "
+                     "(section %s field +0x%x key %s type %u schema %u role %u offset %u)",
+                     i, SectionName(sectionTag), fieldOffset, keyHex,
+                     resourceType, resourceSchema, representationRole,
+                     rangeOffset);
+            SetError(message);
+            return FALSE;
+        }
+    }
+    return TRUE;
 }
 
 static enum NativeStateResult LoadStateFromPath(const char *path)
@@ -2322,15 +2857,35 @@ static enum NativeStateResult LoadStateFromPath(const char *path)
         if (sLastError[0] == '\0') SetError("state payload checksum failed");
         return NATIVE_STATE_INCOMPATIBLE;
     }
+    /* R10 §F: the state's recorded session fingerprint must equal the active
+     * session's computed fingerprint. Equivalent content at a different path
+     * matches; changed or reordered providers cannot. No force-load path. */
+    {
+        char activeFingerprint[sizeof(header->contentFingerprint)];
+        WriteContentFingerprint(activeFingerprint, sizeof(activeFingerprint));
+        if (strncmp(header->contentFingerprint, activeFingerprint,
+                    sizeof(header->contentFingerprint)) != 0)
+        {
+            char message[320];
+            snprintf(message, sizeof(message),
+                     "state resource-session fingerprint does not match the "
+                     "active session (state %.64s, active %.64s)",
+                     header->contentFingerprint, activeFingerprint);
+            SetError(message);
+            free(file);
+            free(framebuffer);
+            return NATIVE_STATE_INCOMPATIBLE;
+        }
+    }
     count = BuildSlices(slices, ARRAY_COUNT(slices), framebuffer, &rtc);
-    if (header->sectionCount != count)
+    if (header->sectionCount != count + 1u)
     {
         free(file);
         free(framebuffer);
         SetError("state section layout does not match this build");
         return NATIVE_STATE_INCOMPATIBLE;
     }
-    offset = sizeof(*header) + count * sizeof(struct NativeStateSectionHeader);
+    offset = sizeof(*header) + header->sectionCount * sizeof(struct NativeStateSectionHeader);
     for (i = 0; i < count; i++)
     {
         const struct NativeStateSectionHeader *section =
@@ -2353,29 +2908,134 @@ static enum NativeStateResult LoadStateFromPath(const char *path)
         }
         offset += section->size;
     }
-    if (offset != fileSize)
+    /* R10 §E: the resource-reference sidecar is parsed, validated and
+     * resolved BEFORE any live game memory is touched. The resolved
+     * pointers are patched into the restored sections only after every
+     * section has been validated and restored successfully. */
     {
-        free(file);
-        free(framebuffer);
-        SetError("state has trailing or missing data");
-        return NATIVE_STATE_CORRUPT;
-    }
-    /* Validate every section before changing live game memory. A malformed
-     * later section must not leave a partially restored runtime behind. */
-    offset = sizeof(*header) + count * sizeof(struct NativeStateSectionHeader);
-    for (i = 0; i < count; i++)
-    {
-        const struct NativeStateSectionHeader *section =
-            (const struct NativeStateSectionHeader *)(file + sizeof(*header) + i * sizeof(*section));
-        if (!RestoreSlice(&slices[i], file + offset))
+        const struct NativeStateSectionHeader *sidecar =
+            (const struct NativeStateSectionHeader *)(file + sizeof(*header)
+                                                      + count * sizeof(*sidecar));
+        const u8 *records;
+        uintptr_t *resolved = NULL;
+        u32 recordCount;
+        const struct EmeraldResourceRangeIndex *rangeIndex = ActiveRangeIndex();
+
+        if (sidecar->tag != STATE_SECTION_RESOURCE_SIDECAR
+         || sidecar->size < 4u
+         || (sidecar->size - 4u) % sizeof(struct NativeStateResourceRecord) != 0
+         || sidecar->size > fileSize - offset)
         {
             free(file);
             free(framebuffer);
-            if (sLastError[0] == '\0')
-                SetError("state section could not be rehydrated");
-            return NATIVE_STATE_UNSUPPORTED;
+            SetError("state resource sidecar section is missing, malformed, or truncated");
+            return NATIVE_STATE_CORRUPT;
         }
-        offset += section->size;
+        if (sidecar->crc != Crc32(file + offset, sidecar->size))
+        {
+            free(file);
+            free(framebuffer);
+            SetError("state resource sidecar section is corrupt");
+            return NATIVE_STATE_CORRUPT;
+        }
+        recordCount = ReadLe32(file + offset);
+        if (recordCount != (sidecar->size - 4u) / sizeof(struct NativeStateResourceRecord))
+        {
+            free(file);
+            free(framebuffer);
+            SetError("state resource sidecar record count is inconsistent");
+            return NATIVE_STATE_CORRUPT;
+        }
+        if (recordCount > NATIVE_STATE_MAX_RESOURCE_RECORDS)
+        {
+            free(file);
+            free(framebuffer);
+            SetError("state resource sidecar record count exceeds the supported limit");
+            return NATIVE_STATE_CORRUPT;
+        }
+        records = file + offset + 4u;
+        offset += sidecar->size;
+        if (offset != fileSize)
+        {
+            free(file);
+            free(framebuffer);
+            SetError("state has trailing or missing data");
+            return NATIVE_STATE_CORRUPT;
+        }
+        if (!ValidateResourceRecords(records, recordCount, slices, count))
+        {
+            free(file);
+            free(framebuffer);
+            return NATIVE_STATE_CORRUPT;
+        }
+        if (recordCount != 0)
+        {
+            if (rangeIndex == NULL)
+            {
+                free(file);
+                free(framebuffer);
+                SetError("state contains resource references but no active resource session exists");
+                return NATIVE_STATE_UNSUPPORTED;
+            }
+            resolved = malloc((size_t)recordCount * sizeof(*resolved));
+            if (resolved == NULL)
+            {
+                free(file);
+                free(framebuffer);
+                SetError("unable to allocate resource reference resolution state");
+                return NATIVE_STATE_UNAVAILABLE;
+            }
+            if (!ResolveResourceRecords(records, recordCount, rangeIndex,
+                                        resolved))
+            {
+                free(resolved);
+                free(file);
+                free(framebuffer);
+                return NATIVE_STATE_UNSUPPORTED;
+            }
+        }
+        /* Everything above validated: no live game memory has been touched.
+         * Restore the sections, then patch the reconstructed resource
+         * pointers into their owning fields. */
+        offset = sizeof(*header) + header->sectionCount * sizeof(struct NativeStateSectionHeader);
+        for (i = 0; i < count; i++)
+        {
+            const struct NativeStateSectionHeader *section =
+                (const struct NativeStateSectionHeader *)(file + sizeof(*header) + i * sizeof(*section));
+            if (!RestoreSlice(&slices[i], file + offset))
+            {
+                free(resolved);
+                free(file);
+                free(framebuffer);
+                if (sLastError[0] == '\0')
+                {
+                    char message[96];
+                    snprintf(message, sizeof(message),
+                             "state section %s could not be rehydrated",
+                             SectionName(slices[i].tag));
+                    SetError(message);
+                }
+                return NATIVE_STATE_UNSUPPORTED;
+            }
+            offset += section->size;
+        }
+        for (i = 0; i < recordCount; i++)
+        {
+            const u8 *bytes = records + (u32)sizeof(struct NativeStateResourceRecord) * i;
+            u32 sectionTag = ReadLe32(bytes);
+            u32 fieldOffset = ReadLe32(bytes + 4u);
+            u32 j;
+            for (j = 0; j < count; j++)
+            {
+                if (slices[j].tag == sectionTag)
+                {
+                    memcpy((u8 *)slices[j].source + fieldOffset, &resolved[i],
+                           sizeof(uintptr_t));
+                    break;
+                }
+            }
+        }
+        free(resolved);
     }
     Platform_SchedulerSetFrameCounter(header->frame);
     Platform_AudioClearQueue();
@@ -2404,6 +3064,13 @@ static enum NativeStateResult LoadStateFromPath(const char *path)
             EmeraldResourceCompat_Republish(&diagnostics);
         if (status != EMERALD_COMPAT_OK)
             EmeraldResourceCompat_ClearMigratedEntries();
+        /* R11-E/F (plan §10): a restore keeps the location identity but
+         * re-derives every published pointer, so the neighborhood must drop
+         * its cached records and rebuild from the restored identity on next
+         * access (lazy, allocation-free, fail-closed to DEGRADED until a
+         * valid map identity is present). Never serialized: the module's
+         * storage is host .data/.bss, outside every slice. */
+        NativeWorldNeighborhood_Invalidate();
     }
 #endif
     return NATIVE_STATE_OK;

@@ -12,10 +12,5 @@ void Platform_ConfigSetKeyboardBinding(enum PlatformInputAction action, const st
 void Platform_ConfigResetInputDefaults(void);
 u8 Platform_ConfigGetFastForwardSpeed(void);
 void Platform_ConfigSetFastForwardSpeed(u8 speed);
-bool32 Platform_ConfigHasBorderBackground(void);
-u8 Platform_ConfigGetBorderBackground(void);
-void Platform_ConfigSetBorderBackground(u8 selection);
-u8 Platform_ConfigGetBackgroundOrderVersion(void);
-void Platform_ConfigSetBackgroundOrderVersion(u8 version);
 
 #endif

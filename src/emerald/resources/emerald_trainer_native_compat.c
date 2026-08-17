@@ -15,8 +15,12 @@
 
 #include "gen3/resources/resource_resolver.h"
 #include "emerald/resources/emerald_resource_compat.h"
+#include "emerald/resources/emerald_resource_ranges.h"
 #include "emerald/resources/emerald_resource_session.h"
 #include "emerald/resources/emerald_pokemon_native_compat.h"
+#include "emerald/resources/emerald_object_event_compat.h"
+#include "emerald/resources/emerald_tileset_compat.h"
+#include "emerald/resources/emerald_layout_compat.h"
 #include "emerald/resources/emerald_trainer_native_compat.h"
 
 /* Session-global state: the published image is retained for the process session
@@ -26,6 +30,19 @@
 static struct EmeraldResourceCompatibilityImage *sSessionImage;
 static const struct Gen3ResourceSnapshot *sSessionSnapshot;
 static bool32 sInitialized;
+
+/* R10-C/F session state for the native save-state system:
+ *   - the reverse resource-range index over the published images' streams
+ *     (rebuilt whenever a new session image is adopted),
+ *   - the session content fingerprint (set by the R6 loader at
+ *     registration; the construction lives in emerald_resource_session.h),
+ *   - the per-entry schemas the image does not retain (needed for range
+ *     registration; filled alongside the source entries at build). */
+static uint32_t sTrainerEntrySchemas[EMERALD_TRAINER_FAMILY_ENTRY_COUNT];
+static struct EmeraldResourceRangeIndex sRangeIndex;
+static bool32 sRangeIndexValid;
+static uint8_t sSessionContentFingerprint[GEN3_PACK_SHA256_SIZE];
+static bool32 sHasSessionContentFingerprint;
 
 /* ------------------------------------------------------------------------- */
 /* Family mappings (R7B §2, R8 §2).                                          */
@@ -554,6 +571,21 @@ EmeraldResourceCompat_Republish(struct EmeraldResourceCompatDiagnostics *diagnos
     if (status != EMERALD_COMPAT_OK)
         return status;
     status = EmeraldPokemonCompat_Republish(diagnostics);
+    if (status == EMERALD_COMPAT_OK)
+        status = EmeraldObjectEventCompat_Republish(diagnostics);
+    if (status != EMERALD_COMPAT_OK && status != EMERALD_COMPAT_ERR_UNAVAILABLE)
+        return status;
+    /* R11-C: the tileset republish follows the same additive-degradation
+     * rule - a session in which the tileset family never initialized has no
+     * tileset image; that is the sentinel state, not an error. Any other
+     * tileset failure is a real fault. */
+    status = EmeraldTilesetCompat_Republish(diagnostics);
+    if (status != EMERALD_COMPAT_OK && status != EMERALD_COMPAT_ERR_UNAVAILABLE)
+        return status;
+    /* R11-D: the layout republish follows the same additive-degradation
+     * rule as the tileset family - no layout image is the sentinel state,
+     * not an error. */
+    status = EmeraldLayoutCompat_Republish(diagnostics);
     if (status != EMERALD_COMPAT_OK && status != EMERALD_COMPAT_ERR_UNAVAILABLE)
         return status;
     ClearDiagnostics(diagnostics);
@@ -597,7 +629,19 @@ void EmeraldResourceCompat_ClearMigratedEntries(void)
     /* R9 §5: the four Pokémon battle tables (every published slot; the
      * external back-EGG slot is never touched). */
     EmeraldPokemonCompat_ClearMigratedEntries();
+    EmeraldObjectEventCompat_ClearMigratedEntries();
+
+    /* R11-C: the tileset struct pointer fields and the palette/anim/floor
+     * array bytes (the compiled structural fields - callback, isCompressed,
+     * isSecondary, sizes - are never touched). */
+    EmeraldTilesetCompat_ClearMigratedEntries();
+
+    /* R11-D: the layout record .map/.border pointers (width, height and the
+     * tileset references are compiled structural fields, never touched). */
+    EmeraldLayoutCompat_ClearMigratedEntries();
 }
+
+static void RebuildRangeIndex(void);
 
 static enum EmeraldResourceCompatStatus
 InitializeFromSnapshotInternal(
@@ -690,6 +734,9 @@ InitializeFromSnapshotInternal(
         entries[i].schema = views[i].schema;
         entries[i].payload = views[i].payload;
         entries[i].payloadSize = (uint32_t)views[i].payloadSize;
+        /* R10-C: retained for the range index (the image does not carry
+         * schemas). Entry i of the image is entry i here. */
+        sTrainerEntrySchemas[i] = views[i].schema;
     }
     /* R8: the back sheets are RAW entries with a per-entry size override (their
      * stream IS the payload bytes: sprite-pipeline copies and the
@@ -754,11 +801,266 @@ InitializeFromSnapshotInternal(
         if (pokemonOptional)
         {
             ClearDiagnostics(diagnostics);
+            status = EmeraldObjectEventCompat_TryInitialize(snapshot, diagnostics);
+            if (status != EMERALD_COMPAT_OK)
+            {
+                fprintf(stderr,
+                        "emerald compat: object-event family not published "
+                        "(status %d%s%s) - NULL-sentinel tables (R11-B)\n",
+                        (int)status,
+                        diagnostics != NULL && diagnostics->canonicalName[0] != '\0'
+                            ? " @ " : "",
+                        diagnostics != NULL ? diagnostics->canonicalName : "");
+                ClearDiagnostics(diagnostics);
+                status = EMERALD_COMPAT_OK;
+            }
+            /* R11-C: the tileset family follows the same additive opt-in on
+             * the unit-harness path - a snapshot without the tileset family
+             * leaves the structs at their NULL sentinels and the arrays
+             * zeroed; the trainer family's publication stands. */
+            status = EmeraldTilesetCompat_TryInitialize(snapshot, diagnostics);
+            if (status != EMERALD_COMPAT_OK)
+            {
+                fprintf(stderr,
+                        "emerald compat: tileset family not published "
+                        "(status %d%s%s) - NULL-sentinel tilesets (R11-C)\n",
+                        (int)status,
+                        diagnostics != NULL && diagnostics->canonicalName[0] != '\0'
+                            ? " @ " : "",
+                        diagnostics != NULL ? diagnostics->canonicalName : "");
+                ClearDiagnostics(diagnostics);
+                status = EMERALD_COMPAT_OK;
+            }
+            /* R11-D: the layout family follows the same additive opt-in on
+             * the unit-harness path - a snapshot without the layout family
+             * leaves the records at their NULL sentinels; the other
+             * families' publication stands. */
+            status = EmeraldLayoutCompat_TryInitialize(snapshot, diagnostics);
+            if (status != EMERALD_COMPAT_OK)
+            {
+                fprintf(stderr,
+                        "emerald compat: layout family not published "
+                        "(status %d%s%s) - NULL-sentinel map layouts (R11-D)\n",
+                        (int)status,
+                        diagnostics != NULL && diagnostics->canonicalName[0] != '\0'
+                            ? " @ " : "",
+                        diagnostics != NULL ? diagnostics->canonicalName : "");
+                ClearDiagnostics(diagnostics);
+                status = EMERALD_COMPAT_OK;
+            }
+            RebuildRangeIndex();
             return EMERALD_COMPAT_OK;
         }
     }
 
+    /* R11-B: the object-event family publishes from the same snapshot with
+     * the same strict lifecycle as the Pokémon family - with the compiled
+     * leaves gone from the native link, an unserved family is an init
+     * error. */
+    if (status == EMERALD_COMPAT_OK)
+    {
+        status = EmeraldObjectEventCompat_TryInitialize(snapshot, diagnostics);
+        if (status != EMERALD_COMPAT_OK)
+        {
+            fprintf(stderr,
+                    "emerald compat: object-event family not published "
+                    "(status %d%s%s) - NULL-sentinel tables (R11-B compiled "
+                    "payloads are gone)\n",
+                    (int)status,
+                    diagnostics != NULL && diagnostics->canonicalName[0] != '\0'
+                        ? " @ " : "",
+                    diagnostics != NULL ? diagnostics->canonicalName : "");
+        }
+    }
+
+    /* R11-C: the tileset family publishes from the same snapshot with the
+     * same strict lifecycle - with the compiled leaves gone from the native
+     * link (the GBA-only data headers), NULL tilesets cannot render any map,
+     * so an unserved family is an init error. */
+    if (status == EMERALD_COMPAT_OK)
+    {
+        status = EmeraldTilesetCompat_TryInitialize(snapshot, diagnostics);
+        if (status != EMERALD_COMPAT_OK)
+        {
+            fprintf(stderr,
+                    "emerald compat: tileset family not published "
+                    "(status %d%s%s) - NULL-sentinel tilesets (R11-C "
+                    "compiled leaves are gone)\n",
+                    (int)status,
+                    diagnostics != NULL && diagnostics->canonicalName[0] != '\0'
+                        ? " @ " : "",
+                    diagnostics != NULL ? diagnostics->canonicalName : "");
+        }
+    }
+
+    /* R11-D: the layout family publishes from the same snapshot with the
+     * same strict lifecycle - with the compiled leaves gone from the native
+     * link (the R11-D layouts.inc skip), NULL blockdata cannot render any
+     * map, so an unserved family is an init error. */
+    if (status == EMERALD_COMPAT_OK)
+    {
+        status = EmeraldLayoutCompat_TryInitialize(snapshot, diagnostics);
+        if (status != EMERALD_COMPAT_OK)
+        {
+            fprintf(stderr,
+                    "emerald compat: layout family not published "
+                    "(status %d%s%s) - NULL-sentinel map layouts (R11-D "
+                    "compiled leaves are gone)\n",
+                    (int)status,
+                    diagnostics != NULL && diagnostics->canonicalName[0] != '\0'
+                        ? " @ " : "",
+                    diagnostics != NULL ? diagnostics->canonicalName : "");
+        }
+    }
+
+    if (status == EMERALD_COMPAT_OK)
+        RebuildRangeIndex();
     return status;
+}
+
+/* R10-C: rebuild the reverse resource-range index from the published
+ * session images (trainer, then Pokémon). Each entry's stream region is a
+ * range with the derived resource key, type, schema (retained per entry)
+ * and the legacy/literal-LZ role; each arena's EXPOSED span (the stream
+ * block) is a hull. The unexposed [entry table][names][canonical payloads]
+ * prefix is build-time-only - game state never references it, so it is not
+ * hulled: a value there is ordinary data, not an unidentifiable resource
+ * pointer. A registration failure resets the index entirely - capture then
+ * treats every exposed-span pointer as an unidentifiable resource pointer
+ * and fails closed instead of silently persisting anything. */
+static void RebuildRangeIndex(void)
+{
+    const struct EmeraldResourceCompatibilityImage *pokemonImage =
+        EmeraldPokemonCompat_GetImage();
+    const uint8_t *arenaBase;
+    size_t arenaSize;
+    size_t i;
+
+    EmeraldResourceRangeIndex_Reset(&sRangeIndex);
+    sRangeIndexValid = FALSE;
+    if (sSessionImage != NULL
+     && EmeraldResourceCompatImage_GetExposedSpan(sSessionImage, &arenaBase,
+                                                  &arenaSize))
+        (void)EmeraldResourceRangeIndex_AddHull(&sRangeIndex,
+                                                (uintptr_t)arenaBase, arenaSize);
+    for (i = 0u; sSessionImage != NULL
+             && i < EmeraldResourceCompatImage_GetEntryCount(sSessionImage); i++)
+    {
+        if (!EmeraldResourceRangeIndex_RegisterStream(
+                &sRangeIndex, sSessionImage, i, sTrainerEntrySchemas[i],
+                EMERALD_RESOURCE_ROLE_LEGACY_LZ))
+        {
+            fprintf(stderr,
+                    "emerald compat: resource range registration failed "
+                    "(trainer entry %zu); capture will fail closed\n", i);
+            EmeraldResourceRangeIndex_Reset(&sRangeIndex);
+            return;
+        }
+    }
+    if (pokemonImage != NULL
+     && EmeraldResourceCompatImage_GetExposedSpan(pokemonImage, &arenaBase,
+                                                  &arenaSize))
+        (void)EmeraldResourceRangeIndex_AddHull(&sRangeIndex,
+                                                (uintptr_t)arenaBase, arenaSize);
+    for (i = 0u; pokemonImage != NULL
+             && i < EmeraldResourceCompatImage_GetEntryCount(pokemonImage); i++)
+    {
+        if (!EmeraldResourceRangeIndex_RegisterStream(
+                &sRangeIndex, pokemonImage, i,
+                EmeraldPokemonCompat_GetEntrySchema(i),
+                EMERALD_RESOURCE_ROLE_LEGACY_LZ))
+        {
+            fprintf(stderr,
+                    "emerald compat: resource range registration failed "
+                    "(pokemon entry %zu); capture will fail closed\n", i);
+            EmeraldResourceRangeIndex_Reset(&sRangeIndex);
+            return;
+        }
+    }
+    /* R11-B: the object-event streams are byte-identical canonical raw
+     * payloads (no LZ representation) - role CANONICAL, never LEGACY_LZ. */
+    {
+        const struct EmeraldResourceCompatibilityImage *objectEventImage =
+            EmeraldObjectEventCompat_GetImage();
+        if (objectEventImage != NULL
+         && EmeraldResourceCompatImage_GetExposedSpan(objectEventImage,
+                                                      &arenaBase, &arenaSize))
+            (void)EmeraldResourceRangeIndex_AddHull(&sRangeIndex,
+                                                    (uintptr_t)arenaBase,
+                                                    arenaSize);
+        for (i = 0u; objectEventImage != NULL
+                 && i < EmeraldResourceCompatImage_GetEntryCount(objectEventImage); i++)
+        {
+            if (!EmeraldResourceRangeIndex_RegisterStream(
+                    &sRangeIndex, objectEventImage, i, 1u,
+                    EMERALD_RESOURCE_ROLE_CANONICAL))
+            {
+                fprintf(stderr,
+                        "emerald compat: resource range registration failed "
+                        "(object-event entry %zu); capture will fail closed\n", i);
+                EmeraldResourceRangeIndex_Reset(&sRangeIndex);
+                return;
+            }
+        }
+    }
+    /* R11-C: the tileset streams - the compressed tile leaves are the
+     * synthesized literal-LZ representation (role LEGACY_LZ); the raw tiles,
+     * palettes, metatiles, attributes, anim frames and floor-light palettes
+     * are byte-identical canonical payloads (role CANONICAL). Never
+     * COMPAT_OBJECT for payload bytes. */
+    {
+        const struct EmeraldResourceCompatibilityImage *tilesetImage =
+            EmeraldTilesetCompat_GetImage();
+        if (tilesetImage != NULL
+         && EmeraldResourceCompatImage_GetExposedSpan(tilesetImage,
+                                                      &arenaBase, &arenaSize))
+            (void)EmeraldResourceRangeIndex_AddHull(&sRangeIndex,
+                                                    (uintptr_t)arenaBase,
+                                                    arenaSize);
+        for (i = 0u; tilesetImage != NULL
+                 && i < EmeraldResourceCompatImage_GetEntryCount(tilesetImage); i++)
+        {
+            if (!EmeraldResourceRangeIndex_RegisterStream(
+                    &sRangeIndex, tilesetImage, i,
+                    EmeraldTilesetCompat_GetEntrySchema(i),
+                    EmeraldTilesetCompat_GetEntryRole(i)))
+            {
+                fprintf(stderr,
+                        "emerald compat: resource range registration failed "
+                        "(tileset entry %zu); capture will fail closed\n", i);
+                EmeraldResourceRangeIndex_Reset(&sRangeIndex);
+                return;
+            }
+        }
+    }
+    /* R11-D: the layout streams (blockdata/border) are byte-identical
+     * canonical raw payloads - role CANONICAL, never LEGACY_LZ. */
+    {
+        const struct EmeraldResourceCompatibilityImage *layoutImage =
+            EmeraldLayoutCompat_GetImage();
+        if (layoutImage != NULL
+         && EmeraldResourceCompatImage_GetExposedSpan(layoutImage,
+                                                      &arenaBase, &arenaSize))
+            (void)EmeraldResourceRangeIndex_AddHull(&sRangeIndex,
+                                                    (uintptr_t)arenaBase,
+                                                    arenaSize);
+        for (i = 0u; layoutImage != NULL
+                 && i < EmeraldResourceCompatImage_GetEntryCount(layoutImage); i++)
+        {
+            if (!EmeraldResourceRangeIndex_RegisterStream(
+                    &sRangeIndex, layoutImage, i,
+                    EmeraldLayoutCompat_GetEntrySchema(i),
+                    EmeraldLayoutCompat_GetEntryRole(i)))
+            {
+                fprintf(stderr,
+                        "emerald compat: resource range registration failed "
+                        "(layout entry %zu); capture will fail closed\n", i);
+                EmeraldResourceRangeIndex_Reset(&sRangeIndex);
+                return;
+            }
+        }
+    }
+    sRangeIndexValid = TRUE;
 }
 
 enum EmeraldResourceCompatStatus
@@ -813,7 +1115,48 @@ void EmeraldResourceCompat_Shutdown(void)
     EmeraldResourceCompatImage_Destroy(sSessionImage);
     sSessionImage = NULL;
     sInitialized = FALSE;
+    EmeraldResourceRangeIndex_Reset(&sRangeIndex);
+    sRangeIndexValid = FALSE;
+    sHasSessionContentFingerprint = FALSE;
     EmeraldPokemonCompat_Shutdown();
+    EmeraldObjectEventCompat_Shutdown();
+    EmeraldTilesetCompat_Shutdown();
+    EmeraldLayoutCompat_Shutdown();
+}
+
+/* R10-C: the reverse range index over the published session images, or NULL
+ * when no valid index exists (no session, or a failed registration). The
+ * index is rebuilt whenever a new session image is adopted and dies with the
+ * session; lookups are only performed during capture/load, while the session
+ * is alive. */
+const struct EmeraldResourceRangeIndex *EmeraldResourceCompat_GetRangeIndex(void)
+{
+    return sRangeIndexValid ? &sRangeIndex : NULL;
+}
+
+/* R10-F: the session content fingerprint is computed by the R6 loader from
+ * the pack-derived session info at registration (the seam itself never
+ * touches the pack). Until it is set, save/load uses the legacy constant
+ * fingerprint (the pre-session behavior). */
+void EmeraldResourceCompat_SetSessionContentFingerprint(
+    const uint8_t digest[GEN3_PACK_SHA256_SIZE])
+{
+    if (digest == NULL)
+    {
+        sHasSessionContentFingerprint = FALSE;
+        return;
+    }
+    memcpy(sSessionContentFingerprint, digest, GEN3_PACK_SHA256_SIZE);
+    sHasSessionContentFingerprint = TRUE;
+}
+
+bool EmeraldResourceCompat_GetSessionContentFingerprint(
+    uint8_t outDigest[GEN3_PACK_SHA256_SIZE])
+{
+    if (!sHasSessionContentFingerprint || outDigest == NULL)
+        return false;
+    memcpy(outDigest, sSessionContentFingerprint, GEN3_PACK_SHA256_SIZE);
+    return true;
 }
 
 #endif /* PLATFORM_SDL2 && NATIVE_LINUX */

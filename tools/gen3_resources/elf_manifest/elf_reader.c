@@ -250,8 +250,6 @@ bool Gen3Elf_SymbolFileRange(const struct Gen3Elf *elf, const struct Gen3ElfSymb
         return false;
     if (symbol->value < GBA_ROM_BASE)
         return false;
-    if (symbol->size == 0)
-        return false;
     section = &elf->sections[symbol->shndx];
     if (symbol->value < section->addr)
         return false;
@@ -259,9 +257,24 @@ bool Gen3Elf_SymbolFileRange(const struct Gen3Elf *elf, const struct Gen3ElfSymb
     if (relative >= section->size)
         return false;
     offset = (size_t)section->offset + relative;
-    length = symbol->size;
-    if (length > section->size - relative)
-        return false;
+    if (symbol->size != 0)
+    {
+        length = symbol->size;
+        if (length > section->size - relative)
+            return false;
+    }
+    else
+    {
+        /* Assembler .incbin data labels (tileset graphics, metatile, and
+         * palette blobs) carry no size in the symtab (NOTYPE size-0). For
+         * these, *outLength is the maximum contiguous bytes available in the
+         * containing section; the caller supplies the real length and must
+         * validate it against the bound. A size-0 OBJECT symbol is malformed
+         * (a real C object always has a size) and stays rejected. */
+        if ((symbol->info & 0x0Fu) != 0u) /* STT_NOTYPE = 0 */
+            return false;
+        length = section->size - relative;
+    }
     if (!RangeFits(offset, length, elf->size))
         return false;
     *outOffset = offset;

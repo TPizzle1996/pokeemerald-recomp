@@ -6,6 +6,9 @@
 #include "main.h"
 #include "palette.h"
 #include "platform/host_memory.h"
+#if defined(LINUX64) && LINUX64
+#include "platform/native_sprite_snapshot.h"
+#endif
 
 extern void abort(void);
 
@@ -338,6 +341,9 @@ void AnimateSprites(void)
 void BuildOamBuffer(void)
 {
     u8 temp;
+#if defined(LINUX64) && LINUX64
+    NativeSpriteCommandSink_Begin();
+#endif
     UpdateOamCoords();
     BuildSpritePriorities();
     SortSprites();
@@ -347,6 +353,9 @@ void BuildOamBuffer(void)
     CopyMatricesToOamBuffer();
     gMain.oamLoadDisabled = temp;
     sShouldProcessSpriteCopyRequests = TRUE;
+#if defined(LINUX64) && LINUX64
+    NativeSpriteCommandSink_End();
+#endif
 }
 
 void UpdateOamCoords(void)
@@ -357,6 +366,15 @@ void UpdateOamCoords(void)
         struct Sprite *sprite = &gSprites[i];
         if (sprite->inUse && !sprite->invisible)
         {
+#if defined(LINUX64) && LINUX64
+            // Factored forms of the inline math below, so the OBJ command sink
+            // (which re-derives the signed pre-wrap top-left at emission time)
+            // agrees with the OAM build by construction. Arithmetic-identical:
+            // the coordOffset term collapses to 0 when not enabled, and the
+            // 9-bit/8-bit bitfield assignment wraps exactly as before.
+            sprite->oam.x = NativeSprite_GetSignedTopLeftX(sprite);
+            sprite->oam.y = NativeSprite_GetSignedTopLeftY(sprite);
+#else
             if (sprite->coordOffsetEnabled)
             {
                 sprite->oam.x = sprite->x + sprite->x2 + sprite->centerToCornerVecX + gSpriteCoordOffsetX;
@@ -367,6 +385,7 @@ void UpdateOamCoords(void)
                 sprite->oam.x = sprite->x + sprite->x2 + sprite->centerToCornerVecX;
                 sprite->oam.y = sprite->y + sprite->y2 + sprite->centerToCornerVecY;
             }
+#endif
         }
     }
 }
@@ -610,10 +629,10 @@ u8 CreateInvisibleSprite(void (*callback)(struct Sprite *))
 u8 CreateSpriteAt(u8 index, const struct SpriteTemplate *template, s16 x, s16 y, u8 subpriority)
 {
     struct Sprite *sprite = &gSprites[index];
+    const struct SpriteTemplate *stableTemplate = template;
 
     ResetSprite(sprite);
 #if defined(LINUX64) && LINUX64
-    const struct SpriteTemplate *stableTemplate = template;
     bool32 copiedTemplate = FALSE;
     bool32 copiedImage = FALSE;
     struct HostPersistentAddress templateIdentity;
@@ -633,8 +652,6 @@ u8 CreateSpriteAt(u8 index, const struct SpriteTemplate *template, s16 x, s16 y,
         }
         stableTemplate = &sSpriteTemplateSidecars[index];
     }
-#else
-    const struct SpriteTemplate *stableTemplate = template;
 #endif
 
     sprite->inUse = TRUE;
@@ -741,7 +758,15 @@ void ResetOamRange(u8 start, u8 end)
 void LoadOam(void)
 {
     if (!gMain.oamLoadDisabled)
+    {
         CpuCopy32(gMain.oamBuffer, (void *)OAM, sizeof(gMain.oamBuffer));
+#if defined(LINUX64) && LINUX64
+        // The command frame is published only when the copy actually lands in
+        // OAM. If oamLoadDisabled prevented the copy, sPublished is left at the
+        // previously presented frame (which OAM still holds).
+        NativeSpriteCommandSink_Commit();
+#endif
+    }
 }
 
 void ClearSpriteCopyRequests(void)
@@ -1933,6 +1958,11 @@ bool8 AddSpriteToOamBuffer(struct Sprite *sprite, u8 *oamIndex)
     if (!sprite->subspriteTables || sprite->subspriteMode == SUBSPRITES_OFF)
     {
         gMain.oamBuffer[*oamIndex] = sprite->oam;
+#if defined(LINUX64) && LINUX64
+        NativeSpriteCommandSink_Append(sprite, *oamIndex, 0,
+                                       sprite->oam.shape, sprite->oam.size,
+                                       sprite->oam.tileNum, sprite->oam.priority);
+#endif
         (*oamIndex)++;
         return 0;
     }
@@ -2014,6 +2044,15 @@ bool8 AddSubspritesToOamBuffer(struct Sprite *sprite, struct OamData *destOam, u
 
             if (sprite->subspriteMode != SUBSPRITES_IGNORE_PRIORITY)
                 destOam[i].priority = subspriteTable->subsprites[i].priority;
+
+#if defined(LINUX64) && LINUX64
+            // *oamIndex is the destination index of this subsprite primitive
+            // (the loop increments it after the body). destOam[i].* fields are
+            // the EFFECTIVE values that were just written to gMain.oamBuffer.
+            NativeSpriteCommandSink_Append(sprite, *oamIndex, i,
+                                           destOam[i].shape, destOam[i].size,
+                                           destOam[i].tileNum, destOam[i].priority);
+#endif
         }
     }
 

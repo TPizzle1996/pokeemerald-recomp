@@ -63,8 +63,12 @@ void Gen3Elf_Destroy(struct Gen3Elf *elf);
 /* Locates a symbol by exact name; returns NULL if absent. */
 const struct Gen3ElfSymbol *Gen3Elf_FindSymbol(const struct Gen3Elf *elf, const char *name);
 
-/* Recover the file byte range that backs a symbol. Returns false if the symbol
- * is not allocated, or its section placement is out of bounds. */
+/* Recover the file byte range that backs a symbol. Sized symbols return their
+ * exact range. Size-0 NOTYPE symbols (assembler .incbin data labels) return
+ * the maximum contiguous bytes available in the containing section as the
+ * length; the caller must validate the real length against it. Returns false
+ * if the symbol is not allocated, is a malformed size-0 non-NOTYPE symbol, or
+ * its section placement is out of bounds. */
 bool Gen3Elf_SymbolFileRange(const struct Gen3Elf *elf, const struct Gen3ElfSymbol *symbol,
                              size_t *outOffset, size_t *outLength);
 

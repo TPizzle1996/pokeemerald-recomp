@@ -448,3 +448,31 @@ uint32_t EmeraldResourceCompatImage_GetCanonicalSize(
     entry = EntryAt(image, index);
     return entry->decodedSize;
 }
+
+bool EmeraldResourceCompatImage_GetArenaSpan(
+    const struct EmeraldResourceCompatibilityImage *image,
+    const uint8_t **outBase, size_t *outSize)
+{
+    if (image == NULL || outBase == NULL || outSize == NULL)
+        return false;
+    *outBase = image->bytes;
+    *outSize = image->arenaSize;
+    return true;
+}
+
+/* The exposed span is the stream block: phase 2 lays [entry table][names]
+ * [canonical][stream], so streamArenaOffset is the first stream and the
+ * arena ends at arenaSize. Trailing alignment padding after the last stream
+ * is included - it is resource-owned exposed territory. */
+bool EmeraldResourceCompatImage_GetExposedSpan(
+    const struct EmeraldResourceCompatibilityImage *image,
+    const uint8_t **outBase, size_t *outSize)
+{
+    if (image == NULL || outBase == NULL || outSize == NULL)
+        return false;
+    if (image->streamArenaOffset >= image->arenaSize)
+        return false;
+    *outBase = image->bytes + image->streamArenaOffset;
+    *outSize = image->arenaSize - image->streamArenaOffset;
+    return true;
+}

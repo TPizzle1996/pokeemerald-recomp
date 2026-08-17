@@ -50,8 +50,13 @@ gcc -std=gnu99 -O2 -ffunction-sections -fdata-sections -Wl,--gc-sections \
     "$core_dir/lz77.c" \
     "$emerald_dir/emerald_rom_profile.c" \
     "$emerald_dir/emerald_resource_compat.c" \
+    "$emerald_dir/emerald_resource_ranges.c" \
     "$emerald_dir/emerald_trainer_native_compat.c" \
     "$emerald_dir/emerald_pokemon_native_compat.c" \
+    "$emerald_dir/emerald_object_event_compat.c" \
+    "$emerald_dir/emerald_tileset_compat.c" \
+    "$emerald_dir/emerald_layout_compat.c" \
+    "$here/emerald_tileset_compat_stubs.c" \
     "$emerald_dir/emerald_resource_session.c" \
     "$here/emerald_runtime_loader_test.c" \
     -o "$tmp/emerald_runtime_loader_test"

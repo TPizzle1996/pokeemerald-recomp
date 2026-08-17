@@ -161,6 +161,36 @@ static void RefreshKeyboardKeys(void)
     }
 }
 
+#if defined(LINUX64) && LINUX64
+static bool32 HandleZoomShortcut(struct PlatformInputActions *actions,
+                                 enum PlatformInputKey key, u8 modifiers,
+                                 bool32 repeat)
+{
+    if (!(modifiers & PLATFORM_INPUT_MODIFIER_CTRL)
+     || (modifiers & (PLATFORM_INPUT_MODIFIER_ALT | PLATFORM_INPUT_MODIFIER_GUI)))
+        return FALSE;
+    if (key == PLATFORM_INPUT_KEY_MINUS)
+    {
+        if (!repeat)
+            actions->zoomOut = TRUE;
+        return TRUE;
+    }
+    if (key == PLATFORM_INPUT_KEY_EQUALS)
+    {
+        if (!repeat)
+            actions->zoomIn = TRUE;
+        return TRUE;
+    }
+    if (key == PLATFORM_INPUT_KEY_0)
+    {
+        if (!repeat)
+            actions->zoomReset = TRUE;
+        return TRUE;
+    }
+    return FALSE;
+}
+#endif
+
 struct PlatformInputBinding Platform_InputGetDefaultBinding(enum PlatformInputAction action)
 {
     struct PlatformInputBinding binding = {PLATFORM_INPUT_KEY_NONE, 0};
@@ -221,8 +251,10 @@ enum PlatformInputKey Platform_InputKeyFromScancode(int scancode)
 {
     if (scancode >= SDL_SCANCODE_A && scancode <= SDL_SCANCODE_Z)
         return PLATFORM_INPUT_KEY_A + scancode - SDL_SCANCODE_A;
-    if (scancode >= SDL_SCANCODE_0 && scancode <= SDL_SCANCODE_9)
-        return PLATFORM_INPUT_KEY_0 + scancode - SDL_SCANCODE_0;
+    if (scancode >= SDL_SCANCODE_1 && scancode <= SDL_SCANCODE_9)
+        return PLATFORM_INPUT_KEY_1 + scancode - SDL_SCANCODE_1;
+    if (scancode == SDL_SCANCODE_0)
+        return PLATFORM_INPUT_KEY_0;
     switch (scancode)
     {
     case SDL_SCANCODE_UP: return PLATFORM_INPUT_KEY_UP;
@@ -361,6 +393,28 @@ void Platform_InputPoll(struct PlatformInputActions *actions)
         {
             enum PlatformInputKey key = Platform_InputKeyFromScancode(event.key.keysym.scancode);
             u8 modifiers = ModifiersFromSdl(event.key.keysym.mod);
+#if defined(LINUX64) && LINUX64
+            if (modifiers & PLATFORM_INPUT_MODIFIER_CTRL)
+            {
+                fprintf(stderr,
+                        "zoom input: scancode=%d keycode=%d ctrl=%d shift=%d repeat=%d\n",
+                        event.key.keysym.scancode, event.key.keysym.sym,
+                        !!(modifiers & PLATFORM_INPUT_MODIFIER_CTRL),
+                        !!(modifiers & PLATFORM_INPUT_MODIFIER_SHIFT),
+                        event.key.repeat);
+                fflush(stderr);
+            }
+            // Native zoom shortcuts are consumed before remappable GBA input.
+            // Repeated keydown events are consumed but do not cycle the level.
+            if (HandleZoomShortcut(actions, key, modifiers, event.key.repeat))
+            {
+                fprintf(stderr, "zoom shortcut consumed\n");
+                fflush(stderr);
+                if (key != PLATFORM_INPUT_KEY_NONE)
+                    sKeyboardHeld[key] = FALSE;
+                break;
+            }
+#endif
             if (key != PLATFORM_INPUT_KEY_NONE)
                 sKeyboardHeld[key] = TRUE;
             if (event.key.repeat)

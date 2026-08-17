@@ -372,3 +372,15 @@ void EmeraldPokemonCompat_Shutdown(void)
 }
 
 #endif /* defined(PLATFORM_SDL2) && defined(NATIVE_LINUX) */
+
+const struct EmeraldResourceCompatibilityImage *EmeraldPokemonCompat_GetImage(void)
+{
+    return sPokemonImage;
+}
+
+uint32_t EmeraldPokemonCompat_GetEntrySchema(size_t entryIndex)
+{
+    if (entryIndex >= POKEMON_BATTLE_RESOURCE_COUNT)
+        return 0u;
+    return kPokemonBattleCompatResources[entryIndex].schema;
+}

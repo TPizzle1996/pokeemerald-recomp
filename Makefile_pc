@@ -239,6 +239,21 @@ endif
 
 C_SRCS_IN := $(wildcard $(C_SUBDIR)/*.c $(C_SUBDIR)/*/*.c $(C_SUBDIR)/*/*/*.c)
 C_SRCS := $(foreach src,$(C_SRCS_IN),$(if $(findstring .inc.c,$(src)),,$(src)))
+# R7B/R8/R9: the trainer + Pokémon battle payload TUs are GBA-only -
+# trainers_front_payload.c (all 93 sheets + 93 palettes), trainers_back_payload.c
+# (the 8 back sheets + the 2 Red/Leaf back-only palettes), and the Pokémon
+# battle leaves (anim_mon_front_pics.c: all 416 front pics;
+# pokemon_battle_payload.c: the 1192 back/palette/shiny leaves incl. the
+# slot-0 circled-question-mark trio). The native target excludes them so the
+# migrated leaf symbols and bytes never enter the native object/link graph
+# (see src/data/graphics/trainers_front_payload.c). The GBA Makefile
+# auto-collects them via its own wildcard.
+ifeq ($(NATIVE_LINUX),1)
+C_SRCS := $(filter-out $(C_SUBDIR)/data/graphics/trainers_front_payload.c \
+                       $(C_SUBDIR)/data/graphics/trainers_back_payload.c \
+                       $(C_SUBDIR)/data/graphics/pokemon_battle_payload.c \
+                       $(C_SUBDIR)/anim_mon_front_pics.c,$(C_SRCS))
+endif
 C_OBJS := $(patsubst $(C_SUBDIR)/%.c,$(C_BUILDDIR)/%.o,$(C_SRCS))
 
 GFLIB_SRCS := $(wildcard $(GFLIB_SUBDIR)/*.c)
@@ -261,16 +276,11 @@ SONG_OBJS := $(patsubst $(SONG_SUBDIR)/%.s,$(SONG_BUILDDIR)/%.o,$(SONG_SRCS))
 
 MID_SRCS := $(wildcard $(MID_SUBDIR)/*.mid)
 MID_OBJS := $(patsubst $(MID_SUBDIR)/%.mid,$(MID_BUILDDIR)/%.o,$(MID_SRCS))
-BACKGROUND_PNGS := BG.png $(sort $(wildcard BG[0-9].png BG[0-9][0-9].png))
-BACKGROUND_BMPS := $(patsubst %.png,%.bmp,$(BACKGROUND_PNGS))
 
 OBJS     := $(C_OBJS) $(GFLIB_OBJS) $(ASM_OBJS) $(DATA_ASM_OBJS) $(SONG_OBJS) $(MID_OBJS)
 ifeq ($(NATIVE_LINUX),0)
 WINDOWS_RESOURCE_OBJ := $(OBJ_DIR)/pokemon_emerald_icon.o
 OBJS += $(WINDOWS_RESOURCE_OBJ)
-ifeq ($(WINDOWS64),0)
-WINDOWS_BORDER := $(BACKGROUND_BMPS) Border.bmp
-endif
 endif
 OBJS_REL := $(patsubst $(OBJ_DIR)/%,%,$(OBJS))
 
@@ -427,19 +437,19 @@ $(OBJ_DIR)/ld_script.ld: $(LD_SCRIPT) $(LD_SCRIPT_DEPS)
 $(OBJ_DIR)/pokemon_emerald_icon.o: resources/pokemon_emerald.rc resources/pokemon_emerald.ico
 	$(WINDRES) $< -O coff -o $@
 
-BG%.bmp: BG%.png
-	magick $< -define bmp:format=bmp4 $@
-
-Border.bmp: Border.png
-	magick $< -define bmp:format=bmp4 $@
-
 $(ELF): $(OBJ_DIR)/ld_script.ld $(OBJS)
 	cd $(OBJ_DIR) && $(LD) $(LDFLAGS) -T ld_script.ld -o ../../$@ $(OBJS_REL) $(LIB)
 	$(FIX) $@ -t"$(TITLE)" -c$(GAME_CODE) -m$(MAKER_CODE) -r$(REVISION) --silent
 
-$(ROM): $(OBJS) $(WINDOWS_BORDER) ld_script_native.ld
+$(ROM): $(OBJS) ld_script_native.ld
 ifeq ($(NATIVE_LINUX),1)
+ifeq ($(DINFO),1)
+	# -rdynamic (--export-dynamic) exports the full symtab to .dynsym so
+	# backtrace_symbols_fd() can resolve function names. Debug build only.
+	$(CC) $(CFLAGS) -no-pie -rdynamic -Wl,--demangle -Wl,-T,ld_script_native.ld $(OBJS) $(PLATFORM_INCLUDES) -o $@
+else
 	$(CC) $(CFLAGS) -no-pie -Wl,--demangle -Wl,-T,ld_script_native.ld $(OBJS) $(PLATFORM_INCLUDES) -o $@
+endif
 else ifeq ($(WINDOWS64),1)
 	$(CC) $(CFLAGS) -mwindows -static-libgcc \
 		-Wl,--demangle,-T,ld_script_native.ld,--image-base,0x00400000,--disable-dynamicbase,--disable-reloc-section \

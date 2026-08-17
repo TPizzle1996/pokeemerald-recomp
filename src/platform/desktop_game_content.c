@@ -11,9 +11,14 @@
 #include "pokemon.h"
 #include "constants/moves.h"
 #include "constants/species.h"
+#include "platform/desktop_assets.h"
 #include "platform/desktop_filesystem.h"
 #include "platform/desktop_game_content.h"
 #include "platform/desktop_storage.h"
+#if defined(NATIVE_LINUX)
+#include "emerald/resources/emerald_trainer_native_compat.h"
+#include "platform/native_world_neighborhood.h"
+#endif
 
 #define CONTENT_PATH_MAX 1024
 #define CONTENT_MANIFEST_MAX 2048
@@ -733,6 +738,28 @@ static bool32 VerifyPaths(const char *manifestPath, const char *packagePath, boo
             payloadOffset += entry.size;
         }
     }
+#if defined(NATIVE_LINUX)
+    /* R5 explicit init point (§14): after the content package has fully
+     * hydrated runtime data, run the ROM_BASE trainer-table compatibility
+     * publication once. The R6 loader registers the production ROM_BASE
+     * snapshot from the production pack read from disk first (idempotent,
+     * fail-closed); TryInitialize then publishes the three migrated Brendan
+     * slots. The pack is resolved via the asset-path helper (exe-relative then
+     * CWD-relative) and is deliberately NOT embedded in the binary: R7A
+     * requires every ROM_BASE_ONLY payload to be absent from the native link.
+     * Without a valid snapshot it stays a no-op and never mutates the tables. */
+    char packPath[CONTENT_PATH_MAX];
+    if (Platform_AssetGetPath("games/emerald/base/emerald-bpee01-v1.rpack",
+                              packPath, sizeof(packPath)))
+        EmeraldResourceCompat_RegisterRuntimeSnapshot(packPath);
+    EmeraldResourceCompat_TryInitialize();
+    /* R11-E/F: the neighborhood's one-time init point (plan §10): the map
+     * tables, tilesets and layouts are all canonical by now (hydration +
+     * publication), so seed the lazy cache with a zeroed state; the first
+     * EnsureCurrent call after a map identity is set builds the
+     * neighborhood. Allocation-free, idempotent. */
+    NativeWorldNeighborhood_Init();
+#endif
     fclose(package);
     snprintf(sInstalledPackageSha1, sizeof(sInstalledPackageSha1), "%s", actualPackageSha1);
     sLastError[0] = '\0';

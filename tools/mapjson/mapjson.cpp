@@ -597,7 +597,17 @@ string generate_layout_headers_text(Json layouts_data) {
         string layoutName = json_to_string(layout, "name");
         string border_label = layoutName + "_Border";
         string blockdata_label = layoutName + "_Blockdata";
-        text << border_label << "::\n"
+        /* R11-D: on native the blockdata/border leaves and the layout
+         * records are defined by the layout compat seam TU
+         * (include/emerald/resources/layout_native.generated.h) with
+         * NULL-sentinel map/border pointers; the gMapLayouts table below
+         * resolves those C-defined records. The GBA build keeps the
+         * compiled bytes verbatim (LINUX64 is 0 there). */
+        text << "\t.if LINUX64\n"
+             << "\t/* R11-D native: leaves and records live in the layout "
+                "compat seam TU. */\n"
+             << "\t.else\n"
+             << border_label << "::\n"
              << "\t.incbin \"" << json_to_string(layout, "border_filepath") << "\"\n\n"
              << blockdata_label << "::\n"
              << "\t.incbin \"" << json_to_string(layout, "blockdata_filepath") << "\"\n\n"
@@ -614,7 +624,7 @@ string generate_layout_headers_text(Json layouts_data) {
                  << "\t.byte " << json_to_string(layout, "border_height") << "\n"
                  << "\t.2byte 0\n";
         }
-        text << "\n";
+        text << "\t.endif\n\n";
     }
 
     return text.str();

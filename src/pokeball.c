@@ -768,6 +768,7 @@ static void SpriteCB_ReleaseMonFromBall(struct Sprite *sprite)
         s8 pan;
         u16 wantedCryCase;
         u8 taskId;
+        u32 monAddress;
 
         if (GetBattlerSide(battler) != B_SIDE_PLAYER)
         {
@@ -804,13 +805,13 @@ static void SpriteCB_ReleaseMonFromBall(struct Sprite *sprite)
 
         gBattleSpritesDataPtr->healthBoxesData[battler].waitForCry = TRUE;
 
+        monAddress = HostPointerToGbaAddr(mon);
         taskId = CreateTask(Task_PlayCryWhenReleasedFromBall, 3);
         gTasks[taskId].tCryTaskSpecies = species;
         gTasks[taskId].tCryTaskPan = pan;
         gTasks[taskId].tCryTaskWantedCry = wantedCryCase;
         gTasks[taskId].tCryTaskBattler = battler;
         gTasks[taskId].tCryTaskMonSpriteId = gBattlerSpriteIds[sprite->sBattler];
-        u32 monAddress = HostPointerToGbaAddr(mon);
         gTasks[taskId].tCryTaskMonPtr1 = monAddress >> 16;
         gTasks[taskId].tCryTaskMonPtr2 = monAddress;
         gTasks[taskId].tCryTaskState = 0;

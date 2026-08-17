@@ -80,4 +80,16 @@ void Platform_AudioShutdown(void)
     }
 }
 
+#if defined(HARNESS_REAL_SDL_PROBE)
+/* Headless desktop-audio probe only (tests/run_desktop_real_sdl_probe.sh):
+ * exposes the opened device id so the probe can query the REAL SDL device
+ * state (status / queued bytes) through the full desktop save/load
+ * sequence. Compiled exclusively into the probe binary; never in
+ * production builds. */
+u32 Platform_AudioProbeGetDevice(void)
+{
+    return (u32)sAudioDevice;
+}
+#endif
+
 #endif

@@ -957,9 +957,9 @@ void StartMonSummaryAnimation(struct Sprite *sprite, u8 frontAnimId)
 void LaunchAnimationTaskForBackSprite(struct Sprite *sprite, u8 backAnimSet)
 {
     u8 nature, taskId, animId, battler;
+    GbaAddr spriteAddr = HostPointerToGbaAddr(sprite);
 
     taskId = CreateTask(Task_HandleMonAnimation, 128);
-    GbaAddr spriteAddr = HostPointerToGbaAddr(sprite);
     gTasks[taskId].tPtrHi = spriteAddr >> 16;
     gTasks[taskId].tPtrLo = spriteAddr;
 

@@ -66,6 +66,7 @@
 #include "constants/songs.h"
 #include "constants/trainer_hill.h"
 #include "constants/weather.h"
+#include "platform/native_overworld_renderer.h"
 
 struct CableClubPlayer
 {
@@ -1456,6 +1457,316 @@ bool32 IsOverworldLinkActive(void)
         return TRUE;
     else
         return FALSE;
+}
+
+#if defined(LINUX64) && LINUX64
+enum NativeExpandedRendererStatus
+{
+    NATIVE_EXPANDED_READY,
+    NATIVE_EXPANDED_CALLBACKS,
+    NATIVE_EXPANDED_VBLANK,
+    NATIVE_EXPANDED_BATTLE,
+    NATIVE_EXPANDED_LINK,
+    NATIVE_EXPANDED_HW_BLEND,
+    NATIVE_EXPANDED_CONTROLS_LOCKED,
+    NATIVE_EXPANDED_SCRIPT,
+    NATIVE_EXPANDED_FIELD_CALLBACK,
+    NATIVE_EXPANDED_MAP_POPUP,
+    NATIVE_EXPANDED_SAVE_STATE,
+    NATIVE_EXPANDED_MAP_LAYOUT,
+    NATIVE_EXPANDED_TILESETS,
+    NATIVE_EXPANDED_MAP_GRID,
+    NATIVE_EXPANDED_BG_BUFFERS,
+    NATIVE_EXPANDED_DISPLAY_MODE,
+    NATIVE_EXPANDED_OBJ_MAPPING,
+    NATIVE_EXPANDED_DISPLAY_LAYERS,
+    NATIVE_EXPANDED_WINDOWS,
+    NATIVE_EXPANDED_BG_CONFIG,
+    NATIVE_EXPANDED_MOSAIC,
+    NATIVE_EXPANDED_PLAYER_IDS,
+    NATIVE_EXPANDED_PLAYER_CONTROLS,
+    NATIVE_EXPANDED_CAMERA,
+    NATIVE_EXPANDED_BG_SCROLL,
+    NATIVE_EXPANDED_PLAYER_OBJECT,
+    NATIVE_EXPANDED_PLAYER_SPRITE,
+};
+
+static void ReportNativeExpandedRendererStatus(enum NativeExpandedRendererStatus status)
+{
+    static HOST_DATA int sLastStatus = -1;
+    static const char *const names[] =
+    {
+        [NATIVE_EXPANDED_CALLBACKS] = "callbacks",
+        [NATIVE_EXPANDED_VBLANK] = "VBlank callback",
+        [NATIVE_EXPANDED_BATTLE] = "battle state",
+        [NATIVE_EXPANDED_LINK] = "link mode",
+        [NATIVE_EXPANDED_HW_BLEND] = "hardware blend registers",
+        [NATIVE_EXPANDED_CONTROLS_LOCKED] = "controls locked",
+        [NATIVE_EXPANDED_SCRIPT] = "script context",
+        [NATIVE_EXPANDED_FIELD_CALLBACK] = "field callback",
+        [NATIVE_EXPANDED_MAP_POPUP] = "map popup",
+        [NATIVE_EXPANDED_SAVE_STATE] = "save state",
+        [NATIVE_EXPANDED_MAP_LAYOUT] = "map layout",
+        [NATIVE_EXPANDED_TILESETS] = "tilesets",
+        [NATIVE_EXPANDED_MAP_GRID] = "runtime map grid",
+        [NATIVE_EXPANDED_BG_BUFFERS] = "overworld BG buffers",
+        [NATIVE_EXPANDED_DISPLAY_MODE] = "display mode",
+        [NATIVE_EXPANDED_OBJ_MAPPING] = "OBJ mapping",
+        [NATIVE_EXPANDED_DISPLAY_LAYERS] = "display layers",
+        [NATIVE_EXPANDED_WINDOWS] = "hardware windows",
+        [NATIVE_EXPANDED_BG_CONFIG] = "BG configuration",
+        [NATIVE_EXPANDED_MOSAIC] = "mosaic",
+        [NATIVE_EXPANDED_PLAYER_IDS] = "player IDs",
+        [NATIVE_EXPANDED_PLAYER_CONTROLS] = "player controllable flag",
+        [NATIVE_EXPANDED_CAMERA] = "camera state",
+        [NATIVE_EXPANDED_BG_SCROLL] = "BG scroll/camera agreement",
+        [NATIVE_EXPANDED_PLAYER_OBJECT] = "player object",
+        [NATIVE_EXPANDED_PLAYER_SPRITE] = "player sprite",
+    };
+
+    if (sLastStatus == status)
+        return;
+    sLastStatus = status;
+    if (status == NATIVE_EXPANDED_READY)
+        fprintf(stderr, "expanded renderer eligible\n");
+    else if (status == NATIVE_EXPANDED_BG_CONFIG)
+        fprintf(stderr, "expanded renderer blocked: %s (BG1=%04x BG2=%04x BG3=%04x)\n",
+                names[status], REG_BG1CNT, REG_BG2CNT, REG_BG3CNT);
+    else if (status == NATIVE_EXPANDED_WINDOWS)
+        fprintf(stderr,
+                "expanded renderer blocked: %s (DISPCNT=%04x WIN0=%04x/%04x WIN1=%04x/%04x WININ=%04x WINOUT=%04x)\n",
+                names[status], REG_DISPCNT, REG_WIN0H, REG_WIN0V,
+                REG_WIN1H, REG_WIN1V, REG_WININ, REG_WINOUT);
+    else
+        fprintf(stderr, "expanded renderer blocked: %s\n", names[status]);
+    fflush(stderr);
+}
+
+static bool32 AreNativeExpandedRendererWindowsSupported(void)
+{
+    u16 enabledWindows = REG_DISPCNT & (DISPCNT_WIN0_ON | DISPCNT_WIN1_ON | DISPCNT_OBJWIN_ON);
+
+    if (enabledWindows == 0)
+        return TRUE;
+
+    // The ordinary overworld deliberately keeps WIN0 and WIN1 enabled. WIN0
+    // covers the full GBA screen and passes every field layer, while WIN1 is
+    // empty. This is neutral setup state, not an active masking effect.
+    return enabledWindows == (DISPCNT_WIN0_ON | DISPCNT_WIN1_ON)
+        && REG_WIN0H == 0x00FF
+        && REG_WIN0V == 0x00FF
+        && REG_WIN1H == 0xFFFF
+        && REG_WIN1V == 0xFFFF
+        && REG_WININ == (WININ_WIN0_BG_ALL | WININ_WIN0_OBJ
+                       | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ);
+}
+#endif
+
+bool32 Overworld_IsNativeExpandedRendererReady(void)
+{
+#if defined(LINUX64) && LINUX64
+    const struct ObjectEvent *playerObject;
+    const struct Sprite *playerSprite;
+    s16 cameraX;
+    s16 cameraY;
+
+#define REJECT_NATIVE_EXPANDED(status)        \
+    do                                        \
+    {                                         \
+        ReportNativeExpandedRendererStatus(status); \
+        return FALSE;                         \
+    } while (0)
+
+    if (gMain.callback1 != CB1_Overworld || gMain.callback2 != CB2_Overworld)
+        REJECT_NATIVE_EXPANDED(NATIVE_EXPANDED_CALLBACKS);
+    if (gMain.vblankCallback != VBlankCB_Field)
+        REJECT_NATIVE_EXPANDED(NATIVE_EXPANDED_VBLANK);
+    if (gMain.inBattle)
+        REJECT_NATIVE_EXPANDED(NATIVE_EXPANDED_BATTLE);
+    if (IsOverworldLinkActive())
+        REJECT_NATIVE_EXPANDED(NATIVE_EXPANDED_LINK);
+    // The map renderer samples the BG palette straight from PLTT with no
+    // hardware blend. Software fades (NORMAL/FAST) mutate PLTT in place, so
+    // those frames are fully reproducible and parity is verified through them.
+    // Any nonzero REG_BLDCNT setup (hardware fade, flash, etc.) changes colors
+    // in the display pipeline the renderer cannot follow, so such frames fall
+    // back explicitly.
+    if (REG_BLDCNT != 0)
+        REJECT_NATIVE_EXPANDED(NATIVE_EXPANDED_HW_BLEND);
+    if (ArePlayerFieldControlsLocked())
+        REJECT_NATIVE_EXPANDED(NATIVE_EXPANDED_CONTROLS_LOCKED);
+    if (ScriptContext_IsEnabled())
+        REJECT_NATIVE_EXPANDED(NATIVE_EXPANDED_SCRIPT);
+    if (gFieldCallback != NULL || gFieldCallback2 != NULL)
+        REJECT_NATIVE_EXPANDED(NATIVE_EXPANDED_FIELD_CALLBACK);
+    if (GetMapNamePopUpWindowId() != WINDOW_NONE)
+        REJECT_NATIVE_EXPANDED(NATIVE_EXPANDED_MAP_POPUP);
+    if (gSaveBlock1Ptr == NULL)
+        REJECT_NATIVE_EXPANDED(NATIVE_EXPANDED_SAVE_STATE);
+    if (gMapHeader.mapLayout == NULL
+     || gMapHeader.mapLayout != GetMapLayout()
+     || gMapHeader.mapLayout->width == 0
+     || gMapHeader.mapLayout->height == 0
+     || gMapHeader.mapLayout->border == NULL)
+        REJECT_NATIVE_EXPANDED(NATIVE_EXPANDED_MAP_LAYOUT);
+    if (gMapHeader.mapLayout->primaryTileset == NULL
+     || gMapHeader.mapLayout->secondaryTileset == NULL
+     || gMapHeader.mapLayout->primaryTileset->metatiles == NULL
+     || gMapHeader.mapLayout->secondaryTileset->metatiles == NULL
+     || gMapHeader.mapLayout->primaryTileset->metatileAttributes == NULL
+     || gMapHeader.mapLayout->secondaryTileset->metatileAttributes == NULL)
+        REJECT_NATIVE_EXPANDED(NATIVE_EXPANDED_TILESETS);
+    if (gBackupMapLayout.map == NULL
+     || gBackupMapLayout.width != gMapHeader.mapLayout->width + MAP_OFFSET_W
+     || gBackupMapLayout.height != gMapHeader.mapLayout->height + MAP_OFFSET_H
+     || (u32)gBackupMapLayout.width * gBackupMapLayout.height > MAX_MAP_DATA_SIZE)
+        REJECT_NATIVE_EXPANDED(NATIVE_EXPANDED_MAP_GRID);
+    if (gOverworldTilemapBuffer_Bg1 == NULL
+     || gOverworldTilemapBuffer_Bg2 == NULL
+     || gOverworldTilemapBuffer_Bg3 == NULL)
+        REJECT_NATIVE_EXPANDED(NATIVE_EXPANDED_BG_BUFFERS);
+    if ((REG_DISPCNT & 7) != DISPCNT_MODE_0)
+        REJECT_NATIVE_EXPANDED(NATIVE_EXPANDED_DISPLAY_MODE);
+    if (!(REG_DISPCNT & DISPCNT_OBJ_1D_MAP))
+        REJECT_NATIVE_EXPANDED(NATIVE_EXPANDED_OBJ_MAPPING);
+    if ((REG_DISPCNT & (DISPCNT_BG1_ON | DISPCNT_BG2_ON | DISPCNT_BG3_ON
+                     | DISPCNT_OBJ_ON))
+        != (DISPCNT_BG1_ON | DISPCNT_BG2_ON | DISPCNT_BG3_ON | DISPCNT_OBJ_ON))
+        REJECT_NATIVE_EXPANDED(NATIVE_EXPANDED_DISPLAY_LAYERS);
+    if (!AreNativeExpandedRendererWindowsSupported())
+        REJECT_NATIVE_EXPANDED(NATIVE_EXPANDED_WINDOWS);
+    if ((REG_BG1CNT & NATIVE_BGCNT_CAPABILITY_MASK) != NATIVE_BGCNT_CAPABILITY_BG1
+     || (REG_BG2CNT & NATIVE_BGCNT_CAPABILITY_MASK) != NATIVE_BGCNT_CAPABILITY_BG2
+     || (REG_BG3CNT & NATIVE_BGCNT_CAPABILITY_MASK) != NATIVE_BGCNT_CAPABILITY_BG3)
+        REJECT_NATIVE_EXPANDED(NATIVE_EXPANDED_BG_CONFIG);
+    if (REG_MOSAIC & 0xFF)
+        REJECT_NATIVE_EXPANDED(NATIVE_EXPANDED_MOSAIC);
+    if (gPlayerAvatar.objectEventId >= OBJECT_EVENTS_COUNT
+     || gPlayerAvatar.spriteId >= MAX_SPRITES)
+        REJECT_NATIVE_EXPANDED(NATIVE_EXPANDED_PLAYER_IDS);
+    if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_CONTROLLABLE))
+        REJECT_NATIVE_EXPANDED(NATIVE_EXPANDED_PLAYER_CONTROLS);
+    if (gFieldCamera.callback == NULL
+     || gFieldCamera.spriteId >= MAX_SPRITES
+     || !gSprites[gFieldCamera.spriteId].inUse)
+        REJECT_NATIVE_EXPANDED(NATIVE_EXPANDED_CAMERA);
+    GetCameraOffsetWithPan(&cameraX, &cameraY);
+    if ((REG_BG1HOFS & 0x1FF) != (cameraX & 0x1FF)
+     || (REG_BG2HOFS & 0x1FF) != (cameraX & 0x1FF)
+     || (REG_BG3HOFS & 0x1FF) != (cameraX & 0x1FF)
+     || (REG_BG1VOFS & 0x1FF) != (cameraY & 0x1FF)
+     || (REG_BG2VOFS & 0x1FF) != (cameraY & 0x1FF)
+     || (REG_BG3VOFS & 0x1FF) != (cameraY & 0x1FF))
+        REJECT_NATIVE_EXPANDED(NATIVE_EXPANDED_BG_SCROLL);
+    playerObject = &gObjectEvents[gPlayerAvatar.objectEventId];
+    playerSprite = &gSprites[gPlayerAvatar.spriteId];
+    if (!playerObject->active
+     || !playerObject->isPlayer
+     || !playerObject->trackedByCamera
+     || playerObject->spriteId != gPlayerAvatar.spriteId)
+        REJECT_NATIVE_EXPANDED(NATIVE_EXPANDED_PLAYER_OBJECT);
+    if (!playerSprite->inUse)
+        REJECT_NATIVE_EXPANDED(NATIVE_EXPANDED_PLAYER_SPRITE);
+    ReportNativeExpandedRendererStatus(NATIVE_EXPANDED_READY);
+#undef REJECT_NATIVE_EXPANDED
+    return TRUE;
+#else
+    return FALSE;
+#endif
+}
+
+/*
+ * Lean eligibility gate for the 240x160 runtime parity capture (Stage 2).
+ *
+ * Deliberately separate from Overworld_IsNativeExpandedRendererReady(), which
+ * gates the old experimental zoom/expanded renderer. Parity only needs to
+ * establish that this frame is a genuine, settled field frame whose BG1/BG2/BG3
+ * composite the map renderer can reproduce AND that the GBA DrawFrame oracle
+ * will render it with no blend/window masking the native renderer cannot
+ * follow. It does NOT depend on the zoom/expanded activation state, the player
+ * avatar, OBJ mapping, or the VBlank callback (which the field deliberately
+ * NULLs for the duration of a fade). Software palette fades (NORMAL/FAST)
+ * mutate PLTT in place without touching REG_BLDCNT, so those frames remain
+ * parity-verifiable and are NOT rejected here.
+ *
+ * The blend check is precise, not a blanket REG_BLDCNT != 0 test. The field's
+ * persistent blend config -- InitOverworldGraphicsRegisters sets BLDCNT =
+ * TGT2(BG1|BG2|BG3|OBJ) | EFFECT_BLEND (0x1E40) with TGT1 empty and BLDALPHA
+ * 13/7 on every map load -- is present for the whole of ordinary gameplay. The
+ * GBA alpha blend needs a TGT1 pixel as the top blended layer and a TGT2 pixel
+ * below it; with TGT1 empty it never fires, so the BG-only oracle renders map
+ * pixels unblended, identical to REG_BLDCNT == 0. Only a config that can
+ * actually change BG1/BG2/BG3 map pixels (map layer in TGT1 with a rendered TGT2
+ * target for alpha, or nonzero BLDY brightness on a TGT1 map layer) is rejected.
+ * The exact registers are captured into the snapshot so the first hardware-blend
+ * skip reports precisely which config was unsupported and why.
+ */
+bool32 Overworld_IsNativeParityCaptureEligible(struct NativeOverworldSnapshot *snapshot)
+{
+#if defined(LINUX64) && LINUX64
+    if (snapshot == NULL)
+        return FALSE;
+
+    // Capture the blend / BG-control registers for the one-time skip diagnostic
+    // before any rejection: whichever reason fires, the report can show the
+    // exact state that was present. CaptureSnapshotCommon overwrites these on
+    // success, so they only carry the live values on the reject path.
+    snapshot->bldCnt = REG_BLDCNT;
+    snapshot->bldAlpha = REG_BLDALPHA;
+    snapshot->bldY = REG_BLDY;
+    snapshot->bgCnt[0] = REG_BG1CNT;
+    snapshot->bgCnt[1] = REG_BG2CNT;
+    snapshot->bgCnt[2] = REG_BG3CNT;
+    snapshot->dispCnt = REG_DISPCNT;
+
+    if (gMain.callback1 != CB1_Overworld || gMain.callback2 != CB2_Overworld)
+    {
+        snapshot->fallbackReason = NATIVE_FALLBACK_SCENE_NOT_OVERWORLD;
+        return FALSE;
+    }
+    if (gMain.inBattle)
+    {
+        snapshot->fallbackReason = NATIVE_FALLBACK_SCENE_NOT_OVERWORLD;
+        return FALSE;
+    }
+    if (IsOverworldLinkActive())
+    {
+        snapshot->fallbackReason = NATIVE_FALLBACK_SCENE_NOT_OVERWORLD;
+        return FALSE;
+    }
+    if (ScriptContext_IsEnabled())
+    {
+        snapshot->fallbackReason = NATIVE_FALLBACK_SCENE_NOT_OVERWORLD;
+        return FALSE;
+    }
+    if (gFieldCallback != NULL || gFieldCallback2 != NULL)
+    {
+        snapshot->fallbackReason = NATIVE_FALLBACK_SCENE_NOT_OVERWORLD;
+        return FALSE;
+    }
+    if (GetMapNamePopUpWindowId() != WINDOW_NONE)
+    {
+        snapshot->fallbackReason = NATIVE_FALLBACK_SCENE_NOT_OVERWORLD;
+        return FALSE;
+    }
+    if (NativeOverworld_BlendAffectsMapBackground(REG_BLDCNT, REG_BLDY, REG_BLDALPHA))
+    {
+        // A blend that can change BG1/BG2/BG3 map pixels the native renderer
+        // does not reproduce. The persistent field config never reaches here.
+        snapshot->fallbackReason = NATIVE_FALLBACK_HARDWARE_BLEND;
+        return FALSE;
+    }
+    if (!AreNativeExpandedRendererWindowsSupported())
+    {
+        snapshot->fallbackReason = NATIVE_FALLBACK_WINDOWS;
+        return FALSE;
+    }
+    snapshot->fallbackReason = NATIVE_FALLBACK_NONE;
+    return TRUE;
+#else
+    (void)snapshot;
+    return FALSE;
+#endif
 }
 
 static void DoCB1_Overworld(u16 newKeys, u16 heldKeys)

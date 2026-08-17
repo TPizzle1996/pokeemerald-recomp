@@ -3,7 +3,9 @@
 
 #include "global.h"
 #include "gba/gba.h"
+#ifdef PORTABLE
 #include "music_player.h"
+#endif
 
 // ASCII encoding of 'Smsh' in reverse
 // This is presumably short for SMASH, the developer of MKS4AGB.
@@ -154,7 +156,11 @@ struct SoundChannel
     u8 rhythmPan;
     u8 dummy3[3];
     u32 count;
+#ifdef PORTABLE
     float fw;
+#else
+    u32 fw;
+#endif
     u32 frequency;
     struct WaveData *wav;
     s8 *currentPointer;
@@ -162,11 +168,20 @@ struct SoundChannel
     void *prevChannelPointer;
     void *nextChannelPointer;
     u32 dummy4;
+#ifdef PORTABLE
     u32 blockCount;
+#else
+    u16 xpi;
+    u16 xpc;
+#endif
 };
 
 #define MAX_DIRECTSOUND_CHANNELS 12
-#define PCM_DMA_BUF_SIZE 4907 // size of Direct Sound buffer
+#ifdef PORTABLE
+#define PCM_DMA_BUF_SIZE 4907 // size of Direct Sound buffer (PC audio)
+#else
+#define PCM_DMA_BUF_SIZE 1584 // size of Direct Sound buffer
+#endif
 
 struct MusicPlayerInfo;
 
@@ -205,7 +220,11 @@ struct SoundInfo
     u8 gap[3];
     s32 pcmSamplesPerVBlank;
     s32 pcmFreq;
+#ifdef PORTABLE
     float divFreq;
+#else
+    s32 divFreq;
+#endif
     struct CgbChannel *cgbChans;
     MPlayMainFunc MPlayMainHead;
     struct MusicPlayerInfo *musicPlayerHead;
@@ -217,7 +236,11 @@ struct SoundInfo
     ExtVolPitFunc ExtVolPit;
     u8 gap2[16];
     struct SoundChannel chans[MAX_DIRECTSOUND_CHANNELS];
+#ifdef PORTABLE
     float pcmBuffer[PCM_DMA_BUF_SIZE * 2];
+#else
+    s8 ALIGNED(4) pcmBuffer[PCM_DMA_BUF_SIZE * 2];
+#endif
 };
 
 struct SongHeader
@@ -322,6 +345,7 @@ struct MusicPlayerTrack
 #define MUSICPLAYER_STATUS_PAUSE 0x80000000
 
 #define MAX_MUSICPLAYER_TRACKS 16
+#define MAX_MUSIC_PLAYERS 4
 
 #define TRACKS_ALL 0xFFFF
 
@@ -428,7 +452,9 @@ void SoundMain(void);
 void SoundMainBTM(void *ptr);
 void TrackStop(struct MusicPlayerInfo *player, struct MusicPlayerTrack *track);
 void MPlayMain(struct MusicPlayerInfo *);
+#ifdef PORTABLE
 void MP2KClearChain(struct MixerSource *chan);
+#endif
 
 void MPlayContinue(struct MusicPlayerInfo *mplayInfo);
 void MPlayStart(struct MusicPlayerInfo *mplayInfo, struct SongHeader *songHeader);
@@ -473,12 +499,12 @@ void SetPokemonCryStereo(u32 val);
 void SetPokemonCryPriority(u8 val);
 
 // sound command handler functions
+#ifdef PORTABLE
 void MP2K_event_fine(struct MP2KPlayerState *, struct MP2KTrack *);
 void MP2K_event_goto(struct MP2KPlayerState *, struct MP2KTrack *);
 void MP2K_event_patt(struct MP2KPlayerState *, struct MP2KTrack *);
 void MP2K_event_pend(struct MP2KPlayerState *, struct MP2KTrack *);
 void MP2K_event_rept(struct MP2KPlayerState *, struct MP2KTrack *);
-void ply_memacc(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
 void MP2K_event_prio(struct MP2KPlayerState *, struct MP2KTrack *);
 void MP2K_event_tempo(struct MP2KPlayerState *, struct MP2KTrack *);
 void MP2K_event_keysh(struct MP2KPlayerState *, struct MP2KTrack *);
@@ -493,9 +519,76 @@ void MP2K_event_mod(struct MP2KPlayerState *, struct MP2KTrack *);
 void MP2K_event_modt(struct MP2KPlayerState *, struct MP2KTrack *);
 void MP2K_event_tune(struct MP2KPlayerState *, struct MP2KTrack *);
 void MP2K_event_port(struct MP2KPlayerState *, struct MP2KTrack *);
-void ply_xcmd(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
 void MP2K_event_endtie(struct MP2KPlayerState *, struct MP2KTrack *);
-void ply_note(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
+#endif
+void ply_memacc(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
+void ply_xcmd(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
+void ply_note(u32 note_cmd, struct MusicPlayerInfo *, struct MusicPlayerTrack *);
+
+#ifndef PORTABLE
+// On GBA these jump-table slots are the original Thumb assembly handlers in
+// src/m4a_1.s, which pret names ply_*; the native PC player implements the
+// same handlers as MP2K_event_*. Map the native names onto the GBA symbols so
+// the shared engine (src/m4a.c, src/m4a_tables.c) resolves on both targets.
+void ply_fine(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
+void ply_goto(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
+void ply_patt(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
+void ply_pend(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
+void ply_rept(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
+void ply_prio(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
+void ply_tempo(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
+void ply_keysh(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
+void ply_voice(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
+void ply_vol(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
+void ply_pan(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
+void ply_bend(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
+void ply_bendr(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
+void ply_lfos(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
+void ply_lfodl(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
+void ply_mod(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
+void ply_modt(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
+void ply_tune(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
+void ply_port(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
+void ply_endtie(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
+void RealClearChain(void *x);
+
+// Native builds get these from music_player.h (PORTABLE); on GBA they must be
+// defined here. sizeof(GbaAddr) is always 4 on GBA and the byte assembly is
+// identical to the original READ_XCMD_BYTE sequence in src/m4a.c, so the GBA
+// engine (ply_memacc / ply_xwave) generates the retail code.
+#define MP2K_ADDRESS_OPERAND_SIZE sizeof(GbaAddr)
+static inline GbaAddr MP2KReadAddressOperand(const u8 *bytes)
+{
+    return (GbaAddr)bytes[0]
+        | ((GbaAddr)bytes[1] << 8)
+        | ((GbaAddr)bytes[2] << 16)
+        | ((GbaAddr)bytes[3] << 24);
+}
+
+#define MP2K_event_fine   ply_fine
+#define MP2K_event_goto   ply_goto
+#define MP2K_event_patt   ply_patt
+#define MP2K_event_pend   ply_pend
+#define MP2K_event_rept   ply_rept
+#define MP2K_event_prio   ply_prio
+#define MP2K_event_tempo  ply_tempo
+#define MP2K_event_keysh  ply_keysh
+#define MP2K_event_voice  ply_voice
+#define MP2K_event_vol    ply_vol
+#define MP2K_event_pan    ply_pan
+#define MP2K_event_bend   ply_bend
+#define MP2K_event_bendr  ply_bendr
+#define MP2K_event_lfos   ply_lfos
+#define MP2K_event_lfodl  ply_lfodl
+#define MP2K_event_mod    ply_mod
+#define MP2K_event_modt   ply_modt
+#define MP2K_event_tune   ply_tune
+#define MP2K_event_port   ply_port
+#define MP2K_event_endtie ply_endtie
+#define MP2K_event_nxx    ply_note
+#define MP2KClearChain    RealClearChain
+#define MP2KPlayerMain    MPlayMain
+#endif
 
 // extended sound command handler functions
 void ply_xxx(struct MusicPlayerInfo *, struct MusicPlayerTrack *);

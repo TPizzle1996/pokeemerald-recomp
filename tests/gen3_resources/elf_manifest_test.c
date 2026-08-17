@@ -130,6 +130,9 @@ static const struct Gen3ManifestMeta kMeta = {
 
 static void FillBindings(struct TestAssets *a, struct Gen3BindingInput *out)
 {
+    /* Zero-init so the R11-C slice/concat fields are deterministic; the
+     * slice path is driven by hasSymbolOffset presence. */
+    memset(out, 0, sizeof(out[0]) * 2u);
     out[0].id = "emerald:trainer/brendan/battle/front/sheet";
     out[0].symbol = "gTrainerFrontPic_Brendan";
     out[0].sourceEncoding = "gba-lz77";

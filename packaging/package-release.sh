@@ -31,9 +31,6 @@ copy_common_files() {
     install -d -m 0755 "$stage/images"
     install -m 0644 "$readme" "$stage/README.md"
     install -m 0644 "$repo_root/LICENSE" "$stage/LICENSE"
-    install -m 0644 "$repo_root/BG.png" "$stage/BG.png"
-    install -m 0644 "$repo_root/BG1.png" "$stage/BG1.png"
-    install -m 0644 "$repo_root/Border.png" "$stage/Border.png"
     install -m 0644 "$repo_root/images/rayquaza.png" "$stage/images/rayquaza.png"
 }
 
@@ -132,9 +129,6 @@ package_windows() {
 
 require_file "$repo_root/README.md"
 require_file "$repo_root/LICENSE"
-require_file "$repo_root/BG.png"
-require_file "$repo_root/BG1.png"
-require_file "$repo_root/Border.png"
 require_file "$repo_root/images/rayquaza.png"
 
 case "$platform" in

@@ -1,3 +1,7 @@
+/* R11-C: the struct objects are published by the compat seam on native
+ * (TILESET_NATIVE_STRUCT definitions in emerald/resources/tileset_native.generated.h,
+ * loaded in emerald_tileset_compat.c). The pointer defs below stay compiled. */
+#if !defined(NATIVE_LINUX)
 const struct Tileset gTileset_General =
 {
     .isCompressed = TRUE,
@@ -635,10 +639,12 @@ const struct Tileset gTileset_SecretBase =
     .metatileAttributes = gMetatileAttributes_SecretBasePrimary,
     .callback = NULL,
 };
+#endif /* !NATIVE_LINUX */
 
 const struct Tileset *const gTilesetPointer_SecretBase = &gTileset_SecretBase;
 const struct Tileset *const gTilesetPointer_SecretBaseRedCave = &gTileset_SecretBaseRedCave;
 
+#if !defined(NATIVE_LINUX)
 const struct Tileset gTileset_EliteFour =
 {
     .isCompressed = TRUE,
@@ -825,3 +831,4 @@ const struct Tileset gTileset_UnionRoom =
     .metatileAttributes = gMetatileAttributes_UnionRoom,
     .callback = NULL,
 };
+#endif /* !NATIVE_LINUX */

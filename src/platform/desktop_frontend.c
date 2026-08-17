@@ -697,11 +697,10 @@ static void DesktopSettingValue(int cursor, char *value, u32 valueSize)
         PLATFORM_SETTING_WINDOW_SCALE,
         PLATFORM_SETTING_INTEGER_SCALE,
         PLATFORM_SETTING_VSYNC,
-        PLATFORM_SETTING_BORDER,
         PLATFORM_SETTING_VOLUME,
     };
     u8 current;
-    if (cursor < 0 || cursor >= 6)
+    if (cursor < 0 || cursor >= 5)
     {
         value[0] = '\0';
         return;
@@ -709,7 +708,7 @@ static void DesktopSettingValue(int cursor, char *value, u32 valueSize)
     current = Platform_GetSetting(settingIds[cursor]);
     if (cursor == 1)
         snprintf(value, valueSize, "%ux", current);
-    else if (cursor == 5)
+    else if (cursor == 4)
         snprintf(value, valueSize, "%u / 10", current);
     else
         snprintf(value, valueSize, "%s", current ? "On" : "Off");
@@ -720,13 +719,13 @@ static void DrawDesktopSettings(int cursor, const char *message)
     static const char *const labels[] =
     {
         "Fullscreen", "Window Scale", "Integer Scaling", "VSync",
-        "Game Border", "Audio Volume", "Back"
+        "Audio Volume", "Back"
     };
     int i;
     char value[32];
 
     DrawSettingsChrome(SETTINGS_PAGE_DESKTOP);
-    for (i = 0; i < 7; i++)
+    for (i = 0; i < 6; i++)
     {
         DesktopSettingValue(i, value, sizeof(value));
         DrawSettingRow(112 + i * 47, labels[i], value[0] != '\0' ? value : NULL, i == cursor);
@@ -779,13 +778,12 @@ static void AdjustDesktopSetting(int cursor, int direction)
         PLATFORM_SETTING_WINDOW_SCALE,
         PLATFORM_SETTING_INTEGER_SCALE,
         PLATFORM_SETTING_VSYNC,
-        PLATFORM_SETTING_BORDER,
         PLATFORM_SETTING_VOLUME,
     };
     u8 current;
     u8 next;
 
-    if (cursor < 0 || cursor >= 6)
+    if (cursor < 0 || cursor >= 5)
         return;
     current = Platform_GetSetting(settingIds[cursor]);
     if (cursor == 1)
@@ -794,7 +792,7 @@ static void AdjustDesktopSetting(int cursor, int direction)
         next = direction < 0 ? (current == 2 ? 5 : current - 1)
                              : (current == 5 ? 2 : current + 1);
     }
-    else if (cursor == 5)
+    else if (cursor == 4)
         next = direction < 0 ? (current == 0 ? 10 : current - 1)
                              : (current == 10 ? 0 : current + 1);
     else
@@ -888,15 +886,15 @@ static void Settings(void)
         {
             if (IsUpEvent(&event) && desktopCursor > 0)
                 desktopCursor--;
-            else if (IsDownEvent(&event) && desktopCursor < 6)
+            else if (IsDownEvent(&event) && desktopCursor < 5)
                 desktopCursor++;
-            else if (IsLeftEvent(&event) && desktopCursor < 6)
+            else if (IsLeftEvent(&event) && desktopCursor < 5)
                 AdjustDesktopSetting(desktopCursor, -1);
-            else if (IsRightEvent(&event) && desktopCursor < 6)
+            else if (IsRightEvent(&event) && desktopCursor < 5)
                 AdjustDesktopSetting(desktopCursor, 1);
-            else if (IsAcceptEvent(&event) && desktopCursor < 6)
+            else if (IsAcceptEvent(&event) && desktopCursor < 5)
                 AdjustDesktopSetting(desktopCursor, 1);
-            else if (IsAcceptEvent(&event) && desktopCursor == 6)
+            else if (IsAcceptEvent(&event) && desktopCursor == 5)
                 return;
         }
         else
@@ -1048,9 +1046,16 @@ static bool32 Launcher(void)
 static SDL_Texture *LoadRayquazaTexture(void)
 {
 #if defined(NATIVE_LINUX) || defined(_WIN32)
+    static bool32 sImageInitialized;
     char path[1024];
     SDL_Texture *texture = NULL;
 
+    if (!sImageInitialized)
+    {
+        sImageInitialized = TRUE;
+        if ((IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG) == 0)
+            SDL_Log("SDL_image could not initialize: %s", IMG_GetError());
+    }
     if (Platform_AssetGetPath("images/rayquaza.png", path, sizeof(path)))
         texture = IMG_LoadTexture(sdlRenderer, path);
     if (texture == NULL)

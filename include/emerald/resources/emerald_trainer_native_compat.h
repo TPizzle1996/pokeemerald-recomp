@@ -58,8 +58,10 @@
 
 #include <stdint.h>
 
+#include "gen3/resources/resource_pack.h"
 #include "gen3/resources/resource_resolver.h"
 #include "emerald/resources/emerald_resource_compat.h"
+#include "emerald/resources/emerald_resource_ranges.h"
 
 /* Family size: 93 front table entries (TRAINER_PIC_HIKER .. TRAINER_PIC_RS_MAY),
  * one sheet + one normal palette resource each (R7A §2). */
@@ -179,5 +181,18 @@ EmeraldResourceCompat_RegisterRuntimeSnapshot(const char *packPath);
 /* Release the session image. Leaves the tables as last published (the streams
  * die with the image, so only call when no consumer can read them). */
 void EmeraldResourceCompat_Shutdown(void);
+
+/* R10-C: the reverse resource-range index over the published session
+ * images' streams, rebuilt whenever a new session image is adopted. NULL
+ * while no valid index exists. */
+const struct EmeraldResourceRangeIndex *EmeraldResourceCompat_GetRangeIndex(void);
+
+/* R10-F: the session content fingerprint, computed by the R6 loader from
+ * the pack-derived session info at registration. Until set (or after
+ * Shutdown), save/load uses the legacy constant fingerprint. */
+void EmeraldResourceCompat_SetSessionContentFingerprint(
+    const uint8_t digest[GEN3_PACK_SHA256_SIZE]);
+bool EmeraldResourceCompat_GetSessionContentFingerprint(
+    uint8_t outDigest[GEN3_PACK_SHA256_SIZE]);
 
 #endif

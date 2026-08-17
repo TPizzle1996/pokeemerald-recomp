@@ -971,10 +971,14 @@ const u32 gBattleArenaJudgmentSymbolsPalette[] = INCBIN_U32("graphics/battle_fro
 const u32 gBattleWindowTextPalette[] = INCBIN_U32("graphics/battle_interface/text.gbapal.lz");
 const u16 gPPTextPalette[] = INCBIN_U16("graphics/battle_interface/text_pp.gbapal");
 
+#if !defined(NATIVE_LINUX)
+/* R11-C: floor-light palette leaves are ROM_BASE on native (defined by the
+ * compat seam via TILESET_NATIVE_ARRAY). GBA-only here. */
 const u16 gTilesetAnims_BattleDomePals0_0[] = INCBIN_U16("graphics/battle_frontier/dome_anim1.gbapal");
 const u16 gTilesetAnims_BattleDomePals0_1[] = INCBIN_U16("graphics/battle_frontier/dome_anim2.gbapal");
 const u16 gTilesetAnims_BattleDomePals0_2[] = INCBIN_U16("graphics/battle_frontier/dome_anim3.gbapal");
 const u16 gTilesetAnims_BattleDomePals0_3[] = INCBIN_U16("graphics/battle_frontier/dome_anim4.gbapal");
+#endif /* !NATIVE_LINUX */
 
 static const u16 sUnused0[] = {0x13F, 0x119, 0x113, 0x10E};
 
@@ -1434,6 +1438,9 @@ const u32 gUnionRoomChat_Keyboard_Gfx[] = INCBIN_U32("graphics/union_room_chat/k
 const u32 gUnionRoomChat_Keyboard_Tilemap[] = INCBIN_U32("graphics/union_room_chat/keyboard.bin.lz");
 const u32 gUnionRoomChat_RButtonLabels[] = INCBIN_U32("graphics/union_room_chat/r_button_labels.4bpp.lz");
 
+#if !defined(NATIVE_LINUX)
+/* R11-C: General tileset payloads are ROM_BASE on native (defined by the
+ * compat seam via TILESET_NATIVE_ARRAY). GBA-only here. */
 const u16 gTilesetPalettes_General[][16] =
 {
     INCBIN_U16("data/tilesets/primary/general/palettes/00.gbapal"),
@@ -1455,6 +1462,7 @@ const u16 gTilesetPalettes_General[][16] =
 };
 
 const u32 gTilesetTiles_General[] = INCBIN_U32("data/tilesets/primary/general/tiles.4bpp.lz");
+#endif /* !NATIVE_LINUX */
 
 // trade/egg hatch
 

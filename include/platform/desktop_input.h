@@ -90,6 +90,11 @@ struct PlatformInputActions
     /* Temporary native-only developer/testing shortcut. */
     bool32 debugAddRareCandies;
 #endif
+#if defined(LINUX64) && LINUX64
+    bool32 zoomIn;
+    bool32 zoomOut;
+    bool32 zoomReset;
+#endif
     bool32 speedUpChanged;
     bool32 speedUp;
     u8 speed;

@@ -1,6 +1,18 @@
 #include "global.h"
 // BIOS function implementations are based on the VBA-M source code.
 
+// Native-only diagnostic support for deterministic crash reporting. Excluded
+// from Windows and GBA (MODERN=0) builds: the GBA Makefile drops all of
+// src/platform/*.c, and NATIVE_LINUX is only defined for the Linux desktop
+// target. <stdlib.h> can't be included here (global.h defines abs() as a
+// macro), so abort() is declared manually per the project's existing idiom
+// (see src/platform/host_memory.c).
+#if defined(NATIVE_LINUX)
+#include <execinfo.h>
+#include <unistd.h>
+extern void abort(void);
+#endif
+
 //memory defines here because there's no better spot for them
 u16 INTR_CHECK;
 void *INTR_VECTOR;
@@ -200,6 +212,21 @@ fail:
 
 void LZ77UnCompWram(const u32 *src, void *dst)
 {
+#if defined(NATIVE_LINUX)
+    if (src == NULL)
+    {
+        void *frames[64];
+        int nFrames = backtrace(frames, 64);
+        fprintf(stderr, "FATAL: LZ77UnCompWram called with NULL src\n");
+        fprintf(stderr, "  dst                 = %p\n", dst);
+        fprintf(stderr, "  return address      = %p\n", __builtin_return_address(0));
+        fprintf(stderr, "  backtrace (%d frames):\n", nFrames);
+        backtrace_symbols_fd(frames, nFrames, STDERR_FILENO);
+        fflush(stderr);
+        abort();
+    }
+#endif
+
     const uint8_t *source = (const uint8_t *)src;
     uint8_t *dest = (uint8_t *)dst;
 

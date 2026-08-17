@@ -38,6 +38,9 @@ struct PokedexCryMeterNeedle {
 
 struct PokedexCryScreen
 {
+    // Vanilla pret uses float for the VU-meter state in both the GBA and
+    // native builds; only gSoundInfo.pcmBuffer (and thus the local pointer
+    // into it) differs between the two, handled in BufferCryWaveformSegment.
     float cryWaveformBuffer[16];
     u8 cryState;
     u8 playhead;
@@ -354,8 +357,13 @@ static void PlayCryScreenCry(u16 species)
 static void BufferCryWaveformSegment(void)
 {
     u8 i;
+#ifdef PORTABLE
     float *baseBuffer;
     float *buffer;
+#else
+    s8 *baseBuffer;
+    s8 *buffer;
+#endif
 
     if (gPcmDmaCounter < 2)
         baseBuffer = gSoundInfo.pcmBuffer;

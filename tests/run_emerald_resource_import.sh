@@ -31,6 +31,9 @@ echo "== guardrail 18: dependency-creep assertion =="
 bad=$(grep -rEn '^[[:space:]]*#[[:space:]]*include[[:space:]]+[<"][[:space:]]*(global\.h|gba|SDL|platform|graphics|sound|rom|main\.h)' \
       --exclude='emerald_trainer_native_compat.c' \
       --exclude='emerald_pokemon_native_compat.c' \
+      --exclude='emerald_object_event_compat.c' \
+      --exclude='emerald_tileset_compat.c' \
+      --exclude='emerald_layout_compat.c' \
       "$core_dir" "$inc_dir" "$emerald_dir" "$here/emerald_resource_import_test.c" || true)
 if [ -n "$bad" ]; then
     echo "FAIL: gen3 core / importer includes frontend dependencies:" >&2

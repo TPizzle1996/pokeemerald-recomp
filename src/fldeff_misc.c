@@ -1,4 +1,9 @@
 #include "global.h"
+#if defined(NATIVE_LINUX)
+/* R11-C: gTilesetPalettes_SecretBase is ROM_BASE on native; declared here,
+ * defined by the compat seam. */
+#include "emerald/resources/tileset_native.generated.h"
+#endif
 #include "gpu_regs.h"
 #include "palette.h"
 #include "script.h"

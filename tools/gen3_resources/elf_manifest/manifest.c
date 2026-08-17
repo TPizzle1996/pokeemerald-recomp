@@ -134,10 +134,18 @@ static const struct Gen3CatalogEntry *FindCatalogEntry(
 static bool TypeCompatibleWithRepresentation(const char *catalogType,
                                              const char *canonicalRepresentation)
 {
-    if (strcmp(catalogType, "tile-graphics") == 0)
+    if (strcmp(catalogType, "tile-graphics") == 0
+     || strcmp(catalogType, "sprite-sheet") == 0)
         return strcmp(canonicalRepresentation, "gba-4bpp-tiles") == 0;
     if (strcmp(catalogType, "palette") == 0)
         return strcmp(canonicalRepresentation, "gba-bgr555-palette") == 0;
+    if (strcmp(catalogType, "tileset") == 0)
+        return strcmp(canonicalRepresentation, "gba-metatile-defs") == 0
+            || strcmp(canonicalRepresentation, "gba-metatile-attributes") == 0;
+    /* R11-D: raw little-endian u16 tilemap entries (map blockdata and the
+     * 2x2 border words) carry no compression on either target. */
+    if (strcmp(catalogType, "tilemap") == 0)
+        return strcmp(canonicalRepresentation, "gba-tilemap") == 0;
     return false;
 }
 
@@ -349,8 +357,50 @@ enum Gen3ManifestResult Gen3Manifest_Generate(
             result = GEN3_MANIFEST_SYMBOL_NOT_ROM;
             goto done;
         }
-        romOffset = symbol->value - GEN3_GBA_ROM_BASE;
-        encodedLength = symbol->size;
+        if (binding->hasSymbolOffset)
+        {
+            /* Palette-row slice (R11-C): the binding covers
+             * [symbolOffset, symbolOffset + expectedDecodedSize) inside the
+             * symbol, not the whole symbol (row 0 is offset 0; presence of
+             * the key selects the slice path). Raw-encoding only, so the
+             * encoded payload IS the decoded slice and the lengths agree.
+             * elfLength is the symbol size, or the section bound for size-0
+             * asm labels (R11-C: tileset palette blobs). */
+            if (strcmp(binding->sourceEncoding, "raw") != 0)
+            {
+                SetError(errbuf, errbufSize,
+                         "binding '%s': 'symbol_offset' requires a raw source encoding",
+                         binding->id);
+                result = GEN3_MANIFEST_INVALID_INPUT;
+                goto done;
+            }
+            if ((uint64_t)binding->symbolOffset + binding->expectedDecodedSize > elfLength)
+            {
+                SetError(errbuf, errbufSize,
+                         "binding '%s': symbol '%s' slice [%u, %u) exceeds the available bound %zu",
+                         binding->id, binding->symbol, binding->symbolOffset,
+                         binding->symbolOffset + binding->expectedDecodedSize, elfLength);
+                result = GEN3_MANIFEST_INVALID_INPUT;
+                goto done;
+            }
+            romOffset = symbol->value - GEN3_GBA_ROM_BASE + binding->symbolOffset;
+            encodedLength = binding->expectedDecodedSize;
+        }
+        else
+        {
+            romOffset = symbol->value - GEN3_GBA_ROM_BASE;
+            /* Size-0 asm labels declare no length; the artifact length is
+             * the source of truth and Guardrail 10 pins it against ELF+ROM. */
+            encodedLength = symbol->size != 0 ? symbol->size : binding->sourceArtifactSize;
+        }
+        if (encodedLength > elfLength)
+        {
+            SetError(errbuf, errbufSize,
+                     "binding '%s': symbol '%s' needs %u bytes but the ELF bound is %zu",
+                     binding->id, binding->symbol, encodedLength, elfLength);
+            result = GEN3_MANIFEST_SYMBOL_NOT_ROM;
+            goto done;
+        }
         romEnd = (size_t)romOffset + encodedLength;
         if (romEnd > GEN3_ROM_SIZE)
         {
@@ -361,9 +411,14 @@ enum Gen3ManifestResult Gen3Manifest_Generate(
             goto done;
         }
 
-        /* Guardrail 10: source artifact == ELF symbol bytes == ROM slice. */
+        /* Guardrail 10: source artifact == ELF symbol bytes == ROM slice.
+         * On the slice path the ELF side compares at the slice start and
+         * romOffset already includes the slice, so the ROM side is unchanged.
+         * symbolOffset is only meaningful on the slice path. */
         if (binding->sourceArtifactSize != encodedLength
-         || memcmp(binding->sourceArtifact, elfData + elfOffset, encodedLength) != 0
+         || memcmp(binding->sourceArtifact,
+                   elfData + elfOffset + (binding->hasSymbolOffset ? binding->symbolOffset : 0u),
+                   encodedLength) != 0
          || memcmp(binding->sourceArtifact, romData + romOffset, encodedLength) != 0)
         {
             SetError(errbuf, errbufSize,
@@ -688,7 +743,10 @@ enum Gen3ManifestResult Gen3Manifest_FromToml(
     bindingCount = Gen3Toml_GetArrayCount(&bindingsDoc->root, "bindings");
     catalog = calloc(catalogCount != 0 ? catalogCount : 1u, sizeof(*catalog));
     bindings = calloc(bindingCount != 0 ? bindingCount : 1u, sizeof(*bindings));
-    fileBuffers = calloc(bindingCount != 0 ? bindingCount * 2u : 2u, sizeof(*fileBuffers));
+    /* Three buffers per binding: [i*3] encoded artifact, [i*3+1] lz-decoded
+     * canonical (or the raw concatenation when source_artifact_2 is set),
+     * [i*3+2] the optional concatenation tail. */
+    fileBuffers = calloc(bindingCount != 0 ? bindingCount * 3u : 3u, sizeof(*fileBuffers));
     if (catalog == NULL || bindings == NULL || fileBuffers == NULL)
     {
         SetError(errbuf, errbufSize, "out of memory loading inputs");
@@ -738,11 +796,14 @@ enum Gen3ManifestResult Gen3Manifest_FromToml(
     {
         const struct Gen3TomlMap *item = Gen3Toml_GetArrayItem(&bindingsDoc->root, "bindings", i);
         const char *sourceArtifact = NULL;
+        const char *concatTail = NULL;
         long long expectedDecodedSize;
+        long long symbolOffset = 0;
+        bool hasSymbolOffset = false;
         struct Gen3Buffer path;
         const char *artifact;
         size_t artifactLength;
-        size_t bufferIndex = i * 2u;
+        size_t bufferIndex = i * 3u;
         if (item == NULL)
         {
             SetError(errbuf, errbufSize, "binding %zu is not a table", i);
@@ -789,6 +850,19 @@ enum Gen3ManifestResult Gen3Manifest_FromToml(
         bindings[i].expectedDecodedSize = (uint32_t)expectedDecodedSize;
         if (!Gen3Toml_GetBool(item, "allow_shared_range", &bindings[i].allowSharedRange))
             bindings[i].allowSharedRange = false;
+        hasSymbolOffset = Gen3Toml_GetInteger(item, "symbol_offset", &symbolOffset);
+        if (hasSymbolOffset)
+        {
+            if (symbolOffset < 0 || symbolOffset > (long long)UINT32_MAX)
+            {
+                SetError(errbuf, errbufSize, "binding '%s' has an invalid 'symbol_offset'",
+                         bindings[i].id);
+                result = GEN3_MANIFEST_INVALID_INPUT;
+                goto done;
+            }
+            bindings[i].hasSymbolOffset = true;
+            bindings[i].symbolOffset = (uint32_t)symbolOffset;
+        }
 
         /* Load the encoded artifact. Gen3Util_ReadFile initializes the buffer
          * itself, so do not pre-init here (that would leak the pre-allocation). */
@@ -867,6 +941,63 @@ enum Gen3ManifestResult Gen3Manifest_FromToml(
             bindings[i].canonicalDecoded = (const uint8_t *)fileBuffers[bufferIndex + 1u].data;
             bindings[i].canonicalDecodedSize = fileBuffers[bufferIndex + 1u].length;
         }
+
+        /* Optional raw concatenation tail (R11-C, StormyWater anim frames):
+         * the preproc emits every INCBIN argument, so the symbol bytes are
+         * artifact || artifact_2. The concatenation replaces the encoded
+         * payload (and, raw rule, the canonical payload) in slot [i*3+1];
+         * the tail half stays in slot [i*3+2] for the cleanup loop. */
+        if (Gen3Toml_GetString(item, "source_artifact_2", &concatTail))
+        {
+            if (strcmp(bindings[i].sourceEncoding, "raw") != 0)
+            {
+                SetError(errbuf, errbufSize,
+                         "binding '%s': 'source_artifact_2' requires a raw source encoding",
+                         bindings[i].id);
+                result = GEN3_MANIFEST_INVALID_INPUT;
+                goto done;
+            }
+            if (bindings[i].hasSymbolOffset)
+            {
+                SetError(errbuf, errbufSize,
+                         "binding '%s': 'source_artifact_2' and 'symbol_offset' are mutually exclusive",
+                         bindings[i].id);
+                result = GEN3_MANIFEST_INVALID_INPUT;
+                goto done;
+            }
+            if (!Gen3Buffer_Init(&path, 256))
+            {
+                SetError(errbuf, errbufSize, "out of memory building concat path");
+                result = GEN3_MANIFEST_INVALID_INPUT;
+                goto done;
+            }
+            if (!JoinPath(baseDir, concatTail, &path)
+             || !Gen3Util_ReadFile(path.data, &fileBuffers[bufferIndex + 2u], errbuf, errbufSize))
+            {
+                Gen3Buffer_Destroy(&path);
+                result = GEN3_MANIFEST_INVALID_INPUT;
+                goto done;
+            }
+            Gen3Buffer_Destroy(&path);
+            bindings[i].concatTail = (const uint8_t *)fileBuffers[bufferIndex + 2u].data;
+            bindings[i].concatTailSize = fileBuffers[bufferIndex + 2u].length;
+            if (!Gen3Buffer_Init(&fileBuffers[bufferIndex + 1u], 256)
+             || !Gen3Buffer_Append(&fileBuffers[bufferIndex + 1u],
+                                   fileBuffers[bufferIndex].data,
+                                   fileBuffers[bufferIndex].length)
+             || !Gen3Buffer_Append(&fileBuffers[bufferIndex + 1u],
+                                   bindings[i].concatTail, bindings[i].concatTailSize))
+            {
+                SetError(errbuf, errbufSize, "out of memory concatenating artifact");
+                result = GEN3_MANIFEST_INVALID_INPUT;
+                goto done;
+            }
+            bindings[i].sourceArtifact = (const uint8_t *)fileBuffers[bufferIndex + 1u].data;
+            bindings[i].sourceArtifactSize = fileBuffers[bufferIndex + 1u].length;
+            /* Raw rule: the concatenation IS the canonical decoded payload. */
+            bindings[i].canonicalDecoded = bindings[i].sourceArtifact;
+            bindings[i].canonicalDecodedSize = bindings[i].sourceArtifactSize;
+        }
     }
 
     result = Gen3Manifest_Generate(&meta, catalog, catalogCount,
@@ -879,7 +1010,7 @@ done:
     free(bindings);
     if (fileBuffers != NULL)
     {
-        for (i = 0; i < bindingCount * 2u; i++)
+        for (i = 0; i < bindingCount * 3u; i++)
             Gen3Buffer_Destroy(&fileBuffers[i]);
         free(fileBuffers);
     }

@@ -25,10 +25,18 @@ struct HostPersistentFunctionEntry
     uintptr_t native;
 };
 
+// The handle tables map host pointers/functions into the GBA-shaped 32-bit
+// address space and are only referenced by the UINTPTR_MAX > UINT32_MAX code
+// paths below (HostPointerToGbaAddr/HostResolveGbaAddr/HostFunctionToGbaAddr/
+// HostResolveFunction). On GBA the pointer space IS 32-bit, so the identity
+// branches run and the tables are dead -- but the two 256 KiB arrays would
+// still land in .bss and overflow IWRAM, so they are excluded there.
+#if UINTPTR_MAX > UINT32_MAX
 HOST_DATA static const void *sHostPointers[HOST_HANDLE_CAPACITY];
 HOST_DATA static unsigned char sHostFunctions[HOST_HANDLE_CAPACITY][sizeof(uintptr_t)];
 HOST_DATA static u32 sNextHostHandle = 1;
 HOST_DATA static u32 sNextHostFunctionHandle = 1;
+#endif
 #if defined(LINUX64) && LINUX64
 HOST_DATA static struct HostPersistentFunctionEntry sPersistentFunctions[HOST_PERSISTENT_FUNCTION_CAPACITY];
 HOST_DATA static u32 sPersistentFunctionCount;
@@ -43,8 +51,34 @@ STATIC_ASSERT(sizeof(struct HostPersistentAddress) == 8, HostPersistentAddressSi
 
 static void HostMemoryAbort(const char *message, uintptr_t addr)
 {
+#ifdef PORTABLE
     fprintf(stderr, "host memory error: %s (address=0x%zx)\n", message, addr);
     abort();
+#else
+    // GBA build: this reports native-only failures (handle-table exhaustion,
+    // invalid handle, unrepresentable pointer). On the GBA the 32-bit identity
+    // branches run, so these paths are unreachable in practice. Hang rather than
+    // pull libc fprintf/abort (and the syscalls.o '_sbrk'/'end' dependency they
+    // drag into the image) into the GBA ROM.
+    (void)message;
+    (void)addr;
+    while (1)
+        ;
+#endif
+}
+
+static void HostMemoryRegionError(const char *owner, const char *region, size_t regionSize)
+{
+#ifdef PORTABLE
+    fprintf(stderr, "host memory error: %s exceeds %s (%zu bytes)\n", owner, region, regionSize);
+    abort();
+#else
+    (void)owner;
+    (void)region;
+    (void)regionSize;
+    while (1)
+        ;
+#endif
 }
 
 #if defined(LINUX64) && LINUX64
@@ -383,6 +417,7 @@ bool32 HostAddressIsRegisteredRuntimeHandle(GbaAddr addr)
     return FALSE;
 }
 
+#if UINTPTR_MAX > UINT32_MAX
 void HostMemoryGetHandleCounters(u32 *dataHandles, u32 *functionHandles)
 {
     if (dataHandles != NULL)
@@ -390,6 +425,7 @@ void HostMemoryGetHandleCounters(u32 *dataHandles, u32 *functionHandles)
     if (functionHandles != NULL)
         *functionHandles = sNextHostFunctionHandle - 1;
 }
+#endif
 
 void HostAssertMemoryRange(const void *ptr, size_t size, const char *owner)
 {
@@ -400,14 +436,22 @@ void HostAssertMemoryRange(const void *ptr, size_t size, const char *owner)
 
     if (ptr == NULL && size != 0)
     {
+#ifdef PORTABLE
         fprintf(stderr, "host memory error: %s received NULL for %zu bytes\n", owner, size);
         abort();
+#else
+        HostMemoryAbort("received NULL range", start);
+#endif
     }
 
     if (size > UINTPTR_MAX - start)
     {
+#ifdef PORTABLE
         fprintf(stderr, "host memory error: %s range overflow\n", owner);
         abort();
+#else
+        HostMemoryAbort("range overflow", start);
+#endif
     }
     end = start + size;
 
@@ -416,16 +460,13 @@ void HostAssertMemoryRange(const void *ptr, size_t size, const char *owner)
         regionStart = (uintptr_t)(region); \
         regionEnd = regionStart + (regionSize); \
         if (start >= regionStart && start <= regionEnd && end > regionEnd) \
-        { \
-            fprintf(stderr, "host memory error: %s exceeds %s (%zu bytes)\n", owner, #region, (size_t)(regionSize)); \
-            abort(); \
-        } \
+            HostMemoryRegionError(owner, #region, (size_t)(regionSize)); \
     } while (0)
 
     if (size != 0)
     {
         CHECK_REGION(REG_BASE, 0x400);
-        CHECK_REGION(VRAM_, VRAM_SIZE);
+        CHECK_REGION(VRAM, VRAM_SIZE);
         CHECK_REGION(PLTT, PLTT_SIZE);
         CHECK_REGION(OAM, OAM_SIZE);
     }
