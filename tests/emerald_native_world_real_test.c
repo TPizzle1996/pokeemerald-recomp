@@ -907,6 +907,8 @@ static enum Gen3ResourceType CatalogTypeForName(const char *name)
         return GEN3_RESOURCE_TYPE_CRY;
     if (strcmp(name, "binary") == 0)
         return GEN3_RESOURCE_TYPE_BINARY;
+    if (strcmp(name, "instrument-bank") == 0)
+        return GEN3_RESOURCE_TYPE_INSTRUMENT_BANK;
     return GEN3_RESOURCE_TYPE_INVALID;
 }
 

@@ -122,7 +122,7 @@ bool Gen3PackBytesAllZero(const uint8_t *bytes, size_t size)
 enum Gen3ResourcePackTypeCode Gen3ResourcePack_TypeToCode(enum Gen3ResourceType type)
 {
     if ((int)type <= (int)GEN3_RESOURCE_TYPE_INVALID
-     || (int)type > (int)GEN3_RESOURCE_TYPE_BINARY)
+     || (int)type >= (int)GEN3_RESOURCE_TYPE_COUNT)
         return GEN3_PACK_TYPE_INVALID;
     return (enum Gen3ResourcePackTypeCode)(uint32_t)type;
 }
@@ -130,7 +130,7 @@ enum Gen3ResourcePackTypeCode Gen3ResourcePack_TypeToCode(enum Gen3ResourceType 
 enum Gen3ResourceType Gen3ResourcePack_TypeFromCode(enum Gen3ResourcePackTypeCode code)
 {
     if ((int)code <= (int)GEN3_PACK_TYPE_INVALID
-     || (int)code > (int)GEN3_PACK_TYPE_BINARY)
+     || (int)code >= (int)GEN3_PACK_TYPE_COUNT)
         return GEN3_RESOURCE_TYPE_INVALID;
     return (enum Gen3ResourceType)(uint32_t)code;
 }

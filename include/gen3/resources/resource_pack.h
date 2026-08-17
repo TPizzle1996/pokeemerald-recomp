@@ -127,6 +127,10 @@ enum Gen3ResourcePackTypeCode
     GEN3_PACK_TYPE_SOUND_EFFECT = 12,
     GEN3_PACK_TYPE_CRY = 13,
     GEN3_PACK_TYPE_BINARY = 14,
+    /* R12-A: audio instrument banks (voicegroups, cry tables, keysplit
+     * runs). Append-only on-disk integer; existing codes never renumber. */
+    GEN3_PACK_TYPE_INSTRUMENT_BANK = 15,
+    GEN3_PACK_TYPE_COUNT,
 };
 
 /* Canonical representation codes: what the canonical payload bytes are. */

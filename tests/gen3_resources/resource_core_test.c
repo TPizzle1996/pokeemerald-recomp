@@ -1347,6 +1347,64 @@ static void TestProviderAndCandidateBoundaries(void)
 }
 
 /* ------------------------------------------------------------------ */
+/* R12-A: audio instrument-bank type vocabulary (append-only)          */
+/* ------------------------------------------------------------------ */
+static void TestR12AudioTypeVocabulary(void)
+{
+    struct Gen3ResourceCatalog *catalog;
+    struct Gen3ResourceDiagnosticList diag;
+    const struct Gen3ResourceContract *contract;
+
+    /* The new type names exactly; every pre-existing audio-adjacent type is
+     * untouched (the enum is append-only: nothing renumbered). */
+    assert(strcmp(Gen3ResourceType_Name(GEN3_RESOURCE_TYPE_INSTRUMENT_BANK),
+                  "instrument-bank") == 0);
+    assert(strcmp(Gen3ResourceType_Name(GEN3_RESOURCE_TYPE_AUDIO_SAMPLE),
+                  "audio-sample") == 0);
+    assert(strcmp(Gen3ResourceType_Name(GEN3_RESOURCE_TYPE_MUSIC_SEQUENCE),
+                  "music-sequence") == 0);
+    assert(strcmp(Gen3ResourceType_Name(GEN3_RESOURCE_TYPE_SOUND_EFFECT),
+                  "sound-effect") == 0);
+    assert(strcmp(Gen3ResourceType_Name(GEN3_RESOURCE_TYPE_CRY), "cry") == 0);
+    assert(strcmp(Gen3ResourceType_Name(GEN3_RESOURCE_TYPE_BINARY), "binary") == 0);
+    /* Out of range (COUNT and beyond) is "invalid": never a crash, never an
+     * alias to a real type. */
+    assert(strcmp(Gen3ResourceType_Name(GEN3_RESOURCE_TYPE_COUNT), "invalid") == 0);
+    assert(strcmp(Gen3ResourceType_Name((enum Gen3ResourceType)9999), "invalid") == 0);
+
+    /* The catalog accepts instrument-bank contracts: schema 1 (voicegroups,
+     * cry tables) and schema 2 (keysplit runs) per the approved R12 §2. */
+    catalog = Gen3ResourceCatalog_Create();
+    assert(catalog != NULL);
+    assert(Gen3ResourceCatalog_Add(catalog, "emerald:audio/voicegroup/rs-drumset",
+                                   GEN3_RESOURCE_TYPE_INSTRUMENT_BANK, 1, false, NULL));
+    assert(Gen3ResourceCatalog_Add(catalog, "emerald:audio/keysplit/piano",
+                                   GEN3_RESOURCE_TYPE_INSTRUMENT_BANK, 2, false, NULL));
+    assert(Gen3ResourceCatalog_Finalize(catalog, NULL));
+    contract = Gen3ResourceCatalog_Find(catalog, "emerald:audio/voicegroup/rs-drumset");
+    assert(contract != NULL);
+    assert(contract->type == GEN3_RESOURCE_TYPE_INSTRUMENT_BANK);
+    assert(contract->schema == 1);
+    contract = Gen3ResourceCatalog_Find(catalog, "emerald:audio/keysplit/piano");
+    assert(contract != NULL);
+    assert(contract->type == GEN3_RESOURCE_TYPE_INSTRUMENT_BANK);
+    assert(contract->schema == 2);
+    Gen3ResourceCatalog_Destroy(catalog);
+
+    /* COUNT is not a storable type: catalog insertion is refused with the
+     * structured INVALID_ARGUMENT diagnostic, never accepted silently. */
+    catalog = Gen3ResourceCatalog_Create();
+    assert(catalog != NULL);
+    DiagInit(&diag);
+    assert(!Gen3ResourceCatalog_Add(catalog, "emerald:audio/song/one",
+                                    GEN3_RESOURCE_TYPE_COUNT, 1, false, &diag));
+    assert(DiagHas(&diag, GEN3_RESOURCE_REASON_INVALID_ARGUMENT));
+    DiagDestroy(&diag);
+    Gen3ResourceCatalog_Destroy(catalog);
+    printf("R12-A: instrument-bank vocabulary (names, catalog, COUNT rejection) ok\n");
+}
+
+/* ------------------------------------------------------------------ */
 /* Version constants                                                   */
 /* ------------------------------------------------------------------ */
 static void TestVersionConstants(void)
@@ -1381,6 +1439,7 @@ int main(void)
     TestTraceDeterminism();
     TestDiagnosticsStructured();
     TestProviderAndCandidateBoundaries();
+    TestR12AudioTypeVocabulary();
     TestVersionConstants();
     printf("gen3 resource core test passed\n");
     return 0;

@@ -21,6 +21,12 @@ enum Gen3ResourceType
     GEN3_RESOURCE_TYPE_SOUND_EFFECT,
     GEN3_RESOURCE_TYPE_CRY,
     GEN3_RESOURCE_TYPE_BINARY,
+    /* R12-A: audio instrument banks (voicegroups, cry tables, keysplit
+     * runs). Append-only: the .rpack type codes mirror this enum and packs
+     * encode the existing values, so new types must never renumber the
+     * earlier entries. */
+    GEN3_RESOURCE_TYPE_INSTRUMENT_BANK,
+    GEN3_RESOURCE_TYPE_COUNT,
 };
 
 struct Gen3TileGraphicsView

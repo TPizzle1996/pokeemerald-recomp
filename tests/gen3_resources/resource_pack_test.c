@@ -1273,6 +1273,47 @@ static void TestFileHelper(void)
 }
 
 /* ------------------------------------------------------------------ */
+/* R12-A: instrument-bank on-disk type code (append-only v1 integer)   */
+/* ------------------------------------------------------------------ */
+
+static void TestR12AudioTypeCodes(void)
+{
+    enum Gen3ResourceType t;
+
+    /* The new code is the append-only integer 15; every pre-existing code is
+     * untouched (packs encode these integers, so nothing may renumber). */
+    CHECK(GEN3_PACK_TYPE_INSTRUMENT_BANK == 15);
+    CHECK(GEN3_PACK_TYPE_BINARY == 14);
+    CHECK(GEN3_PACK_TYPE_CRY == 13);
+    CHECK(GEN3_PACK_TYPE_AUDIO_SAMPLE == 10);
+    CHECK(GEN3_PACK_TYPE_MUSIC_SEQUENCE == 11);
+    CHECK(GEN3_PACK_TYPE_SOUND_EFFECT == 12);
+
+    /* Instrument-bank specifically, both directions. */
+    CHECK(Gen3ResourcePack_TypeToCode(GEN3_RESOURCE_TYPE_INSTRUMENT_BANK)
+          == GEN3_PACK_TYPE_INSTRUMENT_BANK);
+    CHECK(Gen3ResourcePack_TypeFromCode(GEN3_PACK_TYPE_INSTRUMENT_BANK)
+          == GEN3_RESOURCE_TYPE_INSTRUMENT_BANK);
+
+    /* Full round-trip over every valid type: code -> type -> code. */
+    for (t = (enum Gen3ResourceType)1; t < GEN3_RESOURCE_TYPE_COUNT; t++)
+    {
+        enum Gen3ResourcePackTypeCode code = Gen3ResourcePack_TypeToCode(t);
+        CHECK((int)code >= 1);
+        CHECK(Gen3ResourcePack_TypeFromCode(code) == t);
+    }
+
+    /* Out of range maps to INVALID in both directions; COUNT is neither a
+     * storable type nor a storable on-disk code. */
+    CHECK(Gen3ResourcePack_TypeToCode(GEN3_RESOURCE_TYPE_COUNT) == GEN3_PACK_TYPE_INVALID);
+    CHECK(Gen3ResourcePack_TypeToCode(GEN3_RESOURCE_TYPE_INVALID) == GEN3_PACK_TYPE_INVALID);
+    CHECK(Gen3ResourcePack_TypeToCode((enum Gen3ResourceType)9999) == GEN3_PACK_TYPE_INVALID);
+    CHECK(Gen3ResourcePack_TypeFromCode(GEN3_PACK_TYPE_COUNT) == GEN3_RESOURCE_TYPE_INVALID);
+    CHECK(Gen3ResourcePack_TypeFromCode(GEN3_PACK_TYPE_INVALID) == GEN3_RESOURCE_TYPE_INVALID);
+    CHECK(Gen3ResourcePack_TypeFromCode((enum Gen3ResourcePackTypeCode)9999) == GEN3_RESOURCE_TYPE_INVALID);
+}
+
+/* ------------------------------------------------------------------ */
 /* Test 8: error description table                                     */
 /* ------------------------------------------------------------------ */
 
@@ -1294,6 +1335,7 @@ int main(void)
     TestCatalogValidation();
     TestWriterValidation();
     TestFileHelper();
+    TestR12AudioTypeCodes();
     TestDescribe();
 
     printf("== %d checks, %d failures ==\n", gChecks, gFailures);

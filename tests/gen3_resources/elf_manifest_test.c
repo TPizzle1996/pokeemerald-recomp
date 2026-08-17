@@ -616,6 +616,80 @@ static void TestMetadataSensitivity(struct TestAssets *a)
 
 /* ---- end-to-end via the shipped TOML documents -------------------------- */
 
+/* ---- R12-A: audio-family representation compatibility -------------------- */
+
+static void TestR12AudioRepresentations(struct TestAssets *a)
+{
+    static const struct
+    {
+        const char *type;
+        int schema;
+        const char *rep;
+        bool expectOk;
+    } cases[] =
+    {
+        /* The five approved R12 §2 pairs. */
+        { "music-sequence",  1, "gba-mp2k-song-graph", true },
+        { "audio-sample",    1, "gba-wave-data",       true },
+        { "audio-sample",    1, "gba-cgb-wave",        true },
+        { "instrument-bank", 1, "gba-tone-data-12",    true },
+        { "instrument-bank", 2, "gba-keysplit-run",    true },
+        /* Anything else fails closed: cross-type, cross-representation and
+         * wrong-schema mixes are all TYPE_MISMATCH, never silently accepted. */
+        { "music-sequence",  1, "gba-wave-data",       false },
+        { "music-sequence",  2, "gba-mp2k-song-graph", false },
+        { "audio-sample",    1, "gba-mp2k-song-graph", false },
+        { "audio-sample",    1, "gba-keysplit-run",    false },
+        { "audio-sample",    2, "gba-wave-data",       false },
+        { "instrument-bank", 1, "gba-keysplit-run",    false },
+        { "instrument-bank", 2, "gba-tone-data-12",    false },
+        { "instrument-bank", 1, "gba-wave-data",       false },
+        { "instrument-bank", 3, "gba-tone-data-12",    false },
+        { "tile-graphics",   1, "gba-mp2k-song-graph", false },
+    };
+    size_t i;
+
+    for (i = 0; i < ARRAY_SIZE(cases); i++)
+    {
+        struct Gen3CatalogEntry catalog[1];
+        struct Gen3BindingInput binding[1];
+        struct Gen3ManifestConfig config;
+        struct Gen3Buffer out = {0};
+        char errbuf[512];
+        enum Gen3ManifestResult r;
+
+        catalog[0].id = "emerald:test/audio/one";
+        catalog[0].type = cases[i].type;
+        catalog[0].schema = cases[i].schema;
+        memset(binding, 0, sizeof(binding));
+        binding[0].id = "emerald:test/audio/one";
+        binding[0].symbol = "gTrainerFrontPic_Brendan";
+        binding[0].sourceEncoding = "gba-lz77";
+        binding[0].canonicalRepresentation = cases[i].rep;
+        binding[0].expectedDecodedSize = (uint32_t)a->frontRaw.length;
+        binding[0].allowSharedRange = false;
+        binding[0].sourceArtifact = (const uint8_t *)a->frontLz.data;
+        binding[0].sourceArtifactSize = a->frontLz.length;
+        binding[0].canonicalDecoded = (const uint8_t *)a->frontRaw.data;
+        binding[0].canonicalDecodedSize = a->frontRaw.length;
+
+        memset(&config, 0, sizeof(config));
+        config.expectedRomSha1Hex = a->romSha1Hex;
+        r = GenerateWith(&kMeta, catalog, ARRAY_SIZE(catalog),
+                         binding, ARRAY_SIZE(binding),
+                         (const uint8_t *)a->elf.data, a->elf.length,
+                         (const uint8_t *)a->rom.data, a->rom.length,
+                         &config, &out, errbuf, sizeof(errbuf));
+        if (cases[i].expectOk)
+            CHECK("audio representation pair accepted",
+                  r == GEN3_MANIFEST_OK);
+        else
+            CHECK("audio representation pair rejected -> TYPE_MISMATCH",
+                  r == GEN3_MANIFEST_TYPE_MISMATCH);
+        Gen3Buffer_Destroy(&out);
+    }
+}
+
 static void TestFromToml(struct TestAssets *a)
 {
     struct Gen3Buffer catalogBuf;
@@ -695,6 +769,7 @@ int main(void)
     TestHappyPath(&assets);
     TestErrorPaths(&assets);
     TestMetadataSensitivity(&assets);
+    TestR12AudioRepresentations(&assets);
     TestFromToml(&assets);
 
     FreeAssets(&assets);

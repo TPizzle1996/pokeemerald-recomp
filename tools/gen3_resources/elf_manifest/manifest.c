@@ -131,7 +131,7 @@ static const struct Gen3CatalogEntry *FindCatalogEntry(
     return NULL;
 }
 
-static bool TypeCompatibleWithRepresentation(const char *catalogType,
+static bool TypeCompatibleWithRepresentation(const char *catalogType, int schema,
                                              const char *canonicalRepresentation)
 {
     if (strcmp(catalogType, "tile-graphics") == 0
@@ -146,6 +146,22 @@ static bool TypeCompatibleWithRepresentation(const char *catalogType,
      * 2x2 border words) carry no compression on either target. */
     if (strcmp(catalogType, "tilemap") == 0)
         return strcmp(canonicalRepresentation, "gba-tilemap") == 0;
+    /* R12-A: audio families (approved architecture, R12 §2). Each type has
+     * exactly the approved (schema, representation) pairs; anything else --
+     * wrong schema, wrong representation, cross-type mixes -- fails closed. */
+    if (strcmp(catalogType, "audio-sample") == 0)
+        return schema == 1
+            && (strcmp(canonicalRepresentation, "gba-wave-data") == 0
+             || strcmp(canonicalRepresentation, "gba-cgb-wave") == 0);
+    if (strcmp(catalogType, "music-sequence") == 0)
+        return schema == 1
+            && strcmp(canonicalRepresentation, "gba-mp2k-song-graph") == 0;
+    if (strcmp(catalogType, "instrument-bank") == 0)
+        return schema == 1
+            ? strcmp(canonicalRepresentation, "gba-tone-data-12") == 0
+            : schema == 2
+              ? strcmp(canonicalRepresentation, "gba-keysplit-run") == 0
+              : false;
     return false;
 }
 
@@ -332,7 +348,8 @@ enum Gen3ManifestResult Gen3Manifest_Generate(
             result = GEN3_MANIFEST_UNKNOWN_RESOURCE;
             goto done;
         }
-        if (!TypeCompatibleWithRepresentation(catalogEntry->type, binding->canonicalRepresentation))
+        if (!TypeCompatibleWithRepresentation(catalogEntry->type, catalogEntry->schema,
+                                              binding->canonicalRepresentation))
         {
             SetError(errbuf, errbufSize,
                      "binding '%s': canonical representation '%s' is incompatible with catalog type '%s'",

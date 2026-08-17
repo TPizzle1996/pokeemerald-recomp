@@ -136,6 +136,7 @@ const char *Gen3ResourceType_Name(enum Gen3ResourceType type)
         "invalid", "bitmap", "tile-graphics", "palette", "sprite-sheet",
         "sprite-metadata", "tileset", "tilemap", "font", "text",
         "audio-sample", "music-sequence", "sound-effect", "cry", "binary",
+        "instrument-bank",
     };
     if ((size_t)type >= sizeof(names) / sizeof(names[0]))
         return "invalid";
@@ -193,7 +194,7 @@ bool Gen3ResourceCatalog_Add(struct Gen3ResourceCatalog *catalog,
     enum Gen3ResourceReason reason;
 
     if (catalog == NULL || catalog->finalized || canonicalName == NULL
-     || type <= GEN3_RESOURCE_TYPE_INVALID || type > GEN3_RESOURCE_TYPE_BINARY
+     || type <= GEN3_RESOURCE_TYPE_INVALID || type >= GEN3_RESOURCE_TYPE_COUNT
      || schema == 0)
     {
         Gen3ResourceDiagnostics_Append(diagnostics, GEN3_DIAGNOSTIC_ERROR,
