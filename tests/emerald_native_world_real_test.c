@@ -11,11 +11,13 @@
  * (emerald_native_world_overworld_stub.c) and this file.
  *
  * The session drive publishes the R11-C tileset + R11-D layout seams from the
- * production pack (games/emerald/base/emerald-bpee01-v1.rpack, 4518 entries:
+ * production pack (games/emerald/base/emerald-bpee01-v1.rpack, 5087 entries:
  * 196 trainer + 1608 Pokémon battle + 288 object-event + 1544 tileset + 882
- * layout) BEFORE NativeWorldNeighborhood_Init: the builder's LayoutPublished
- * gate requires every map's layout record to carry published .map/.border and
- * a published primary tileset (real blockdata + metatiles from the pack).
+ * layout + 569 R12-B audio leaves; the session covers all 6 family catalogs
+ * = 5087) BEFORE NativeWorldNeighborhood_Init: the builder's
+ * LayoutPublished gate requires every map's layout record to carry published
+ * .map/.border and a published primary tileset (real blockdata + metatiles
+ * from the pack).
  *
  * Tests (plan §11 Harness B): 1 (Littleroot<->Route101 both directions:
  * origins (0,-20)/(0,+20), Oldale), 9 (no-connection interior:
@@ -1040,8 +1042,8 @@ int main(int argc, char **argv)
         return 1;
     }
     Gen3ResourcePackDiagnostics_Destroy(&packDiag);
-    CHECK(Gen3ResourcePack_GetEntryCount(pack) == 4518u);
-    CHECK(Gen3ResourceCatalog_Count(catalog) == 4518u);
+    CHECK(Gen3ResourcePack_GetEntryCount(pack) == 5087u); /* 4518 + 569 audio leaves (R12-B) */
+    CHECK(Gen3ResourceCatalog_Count(catalog) == 5087u); /* + 569 audio leaves (R12-B) */
 
     /* 2. Build the production ROM_BASE candidate + snapshot (R11-C/D seams:
      * tilesets + layouts are published from this snapshot's streams). */
@@ -1065,7 +1067,7 @@ int main(int argc, char **argv)
     CHECK(strcmp(info.providerId, EMERALD_ROM_BASE_PROVIDER_ID) == 0);
     CHECK(info.precedence == EMERALD_ROM_BASE_PRECEDENCE);
     CHECK(strcmp(info.providerVersion, "v1") == 0);
-    CHECK(info.entryCount == 4518u);
+    CHECK(info.entryCount == 5087u); /* + 569 audio leaves (R12-B) */
 
     CHECK(Gen3ResourceCandidate_Build(candidate, &snapshot, &gdiag) && snapshot != NULL);
     Gen3ResourceDiagnostics_Destroy(&gdiag);

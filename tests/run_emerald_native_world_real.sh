@@ -30,8 +30,10 @@
 # never read. The stubs are generated from data/maps/map_groups.json (the
 # same source that names the relocation targets).
 #
-# Session: pack + 5 family catalogs -> BuildRomBaseCandidate (4518 entries,
-# provider emerald.rom-base.bpee01 precedence 300) -> snapshot ->
+# Session: pack + 6 family catalogs (the R12-B audio catalog included - the
+# ROM_BASE candidate covers every pack entry, 5087 incl. the 569 audio
+# leaves) -> BuildRomBaseCandidate (5087 entries, provider
+# emerald.rom-base.bpee01 precedence 300) -> snapshot ->
 # EmeraldResourceCompat_InitializeFromSnapshot (publishes the R11-C tilesets
 # + R11-D layouts) -> NativeWorldNeighborhood_Init -> tests 1/9/10/11/14/
 # 17/18/19/20 (plan §11 Harness B, lines 528-550).
@@ -125,4 +127,5 @@ echo "== running =="
     --catalog "$root/resources/extraction/emerald/bpee01/pokemon_battle/catalog.generated.toml" \
     --catalog "$root/resources/extraction/emerald/bpee01/object_event/catalog.generated.toml" \
     --catalog "$root/resources/extraction/emerald/bpee01/tileset/catalog.generated.toml" \
-    --catalog "$root/resources/extraction/emerald/bpee01/layout/catalog.generated.toml"
+    --catalog "$root/resources/extraction/emerald/bpee01/layout/catalog.generated.toml" \
+    --catalog "$root/resources/extraction/emerald/bpee01/audio/catalog.generated.toml"

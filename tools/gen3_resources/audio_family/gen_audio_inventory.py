@@ -117,7 +117,9 @@ def die(msg):
 
 
 def canonical(symbol):
-    return symbol.replace("_", "-")
+    # R11-B canonical naming: lowercase symbol suffix, "_" -> "-" (the pack's
+    # canonical-name validator only accepts [a-z0-9._-]; Cry_Abra -> "abra").
+    return symbol.replace("_", "-").lower()
 
 
 def read_lines(root, path):

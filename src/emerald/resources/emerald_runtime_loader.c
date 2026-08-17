@@ -47,6 +47,7 @@
 #include <stdio.h>
 
 #include "gen3/resources/resource_pack.h"
+#include "emerald/resources/emerald_audio_compat.h"
 #include "emerald/resources/emerald_resource_session.h"
 #include "emerald/resources/emerald_trainer_native_compat.h"
 
@@ -178,6 +179,25 @@ EmeraldResourceCompat_RegisterRuntimeSnapshot(const char *packPath)
         }
         else
         {
+            /* R12-B: publish the audio leaf verbatim-zone arena. Additive by
+             * contract: the compiled audio objects remain the live source
+             * until R12-G, so an arena failure is a degrade (diagnostics
+             * named, arena absent) - never a session refusal, and the build
+             * sounds exactly as pre-R12-B because nothing consumes the arena
+             * yet. */
+            struct EmeraldAudioCompatDiagnostics audioDiag;
+            enum EmeraldAudioCompatStatus audioStatus =
+                EmeraldAudioCompat_TryInitialize(snapshot, pack, &audioDiag);
+            if (audioStatus != EMERALD_AUDIO_OK)
+            {
+                fprintf(stderr,
+                        "emerald runtime: audio arena not published (status %d%s%s)"
+                        " - compiled audio still serves\n",
+                        (int)audioStatus,
+                        audioDiag.canonicalName[0] != '\0' ? " @ " : "",
+                        audioDiag.canonicalName);
+            }
+
             /* R10-F: the session content fingerprint pins the exact logical
              * provider content this session was built from (the construction
              * lives in emerald_resource_session.h). The native save-state

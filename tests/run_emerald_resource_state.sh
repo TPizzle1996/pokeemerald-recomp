@@ -86,6 +86,7 @@ gcc -std=gnu99 -O2 -ffunction-sections -fdata-sections -Wl,--gc-sections \
     "$emerald_dir/emerald_tileset_compat.c" \
     "$emerald_dir/emerald_layout_compat.c" \
     "$emerald_dir/emerald_runtime_loader.c" \
+    "$emerald_dir/emerald_audio_compat.c" \
     "$root/src/platform/native_state.c" \
     "$root/src/platform/host_memory.c" \
     "$root/src/platform/native_world_neighborhood.c" \
