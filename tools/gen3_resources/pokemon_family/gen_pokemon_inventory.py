@@ -9,6 +9,7 @@ resources/extraction/emerald/bpee01/pokemon_battle/inventory.generated.toml:
     palette_table.h,shiny_palette_table.h} -> (table, index, token, symbol)
   * src/anim_mon_front_pics.c,
     src/data/graphics/pokemon.h,
+    src/data/graphics/pokemon_battle_payload.c,
     src/graphics.c                          -> symbol -> INCBIN artifact path
 
 The four tables use designated initializers [SPECIES_##token] == species id,
@@ -31,15 +32,23 @@ SPECIES_EXPR_RE = re.compile(r"#define (SPECIES_\w+) \((\w+) \+ (\d+)\)")
 SPECIES_ALIAS_RE = re.compile(r"#define (\w+) (SPECIES_\w+)")
 
 FAMILIES = [
-    ("front_sheet", "gMonFrontPicTable", "SPECIES_SPRITE", r"SPECIES_SPRITE\((\w+), (gMon\w+)\)"),
-    ("back_sheet", "gMonBackPicTable", "SPECIES_SPRITE", r"SPECIES_SPRITE\((\w+), (gMon\w+)\)"),
-    ("normal_palette", "gMonPaletteTable", "SPECIES_PAL", r"SPECIES_PAL\((\w+), (gMon\w+)\)"),
-    ("shiny_palette", "gMonShinyPaletteTable", "SPECIES_SHINY_PAL", r"SPECIES_SHINY_PAL\((\w+), (gMon\w+)\)"),
+    # R9 §7 renamed the four battle tables' row macros to SPECIES_BATTLE_*
+    # (data.c); the one back-EGG external row keeps the original
+    # SPECIES_SPRITE on every target, so the sheet pattern matches both.
+    ("front_sheet", "gMonFrontPicTable", "SPECIES_BATTLE_SPRITE",
+     r"(?:SPECIES_BATTLE_SPRITE|SPECIES_SPRITE)\((\w+), (gMon\w+)\)"),
+    ("back_sheet", "gMonBackPicTable", "SPECIES_BATTLE_SPRITE",
+     r"(?:SPECIES_BATTLE_SPRITE|SPECIES_SPRITE)\((\w+), (gMon\w+)\)"),
+    ("normal_palette", "gMonPaletteTable", "SPECIES_BATTLE_PAL",
+     r"SPECIES_BATTLE_PAL\((\w+), (gMon\w+)\)"),
+    ("shiny_palette", "gMonShinyPaletteTable", "SPECIES_BATTLE_SHINY_PAL",
+     r"SPECIES_BATTLE_SHINY_PAL\((\w+), (gMon\w+)\)"),
 ]
 
 INCBIN_FILES = [
     "src/anim_mon_front_pics.c",
     "src/data/graphics/pokemon.h",
+    "src/data/graphics/pokemon_battle_payload.c",
     "src/graphics.c",
 ]
 
