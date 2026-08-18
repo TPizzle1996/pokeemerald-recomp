@@ -261,7 +261,16 @@ const struct PokemonCrySong gPokemonCrySongTemplate =
     .blockCount = 0,
     .priority = 255,
     .reverb = 0,
+    /* R12-G: on the native linux link the compiled payloads are removed -
+     * voicegroup_dummy is gone, so the template's tone is NULL here (the
+     * field is dead by overwrite anyway: SetPokemonCryTone replaces it with
+     * the arena row before MPlayStart, and a NULL tone refuses playback).
+     * The GBA build keeps the original reference. */
+#ifdef NATIVE_LINUX
+    .tone = NULL,
+#else
     .tone = (struct ToneData *)&voicegroup_dummy,
+#endif
     .bytecode = {
         .part0 = TUNE,
         .tuneValue = C_V,

@@ -109,6 +109,7 @@ pokemon_ownership="$root/resources/extraction/emerald/bpee01/pokemon_battle/owne
 object_event_ownership="$root/resources/extraction/emerald/bpee01/object_event/ownership.generated.toml"
 tileset_ownership="$root/resources/extraction/emerald/bpee01/tileset/ownership.generated.toml"
 layout_ownership="$root/resources/extraction/emerald/bpee01/layout/ownership.generated.toml"
+audio_ownership="$root/resources/extraction/emerald/bpee01/audio/ownership.generated.toml"
 scaninc="$root/tools/scaninc/scaninc"
 default_binary="$root/pokeemerald-linux64"
 
@@ -145,6 +146,7 @@ bad()  { fail=$((fail + 1)); printf 'FAIL - %s\n' "$*"; }
 [[ -f "$object_event_ownership" ]] || { echo "FATAL: ownership file missing: $object_event_ownership" >&2; exit 2; }
 [[ -f "$tileset_ownership" ]] || { echo "FATAL: ownership file missing: $tileset_ownership" >&2; exit 2; }
 [[ -f "$layout_ownership" ]] || { echo "FATAL: ownership file missing: $layout_ownership" >&2; exit 2; }
+[[ -f "$audio_ownership" ]] || { echo "FATAL: ownership file missing: $audio_ownership" >&2; exit 2; }
 
 # ---------------------------------------------------------------------------
 # Build / freshness
@@ -192,7 +194,7 @@ ok "native binary is fresh: $binary"
 echo "== ownership-driven payload byte + symbol scans =="
 tmpdir="$(mktemp -d)"
 trap 'rm -rf "$tmpdir"' EXIT
-python3 - "$binary" "$ownership" "$back_ownership" "$pokemon_ownership" "$object_event_ownership" "$tileset_ownership" "$layout_ownership" "$tmpdir" "$maps_obj" <<'PY' || exit 1
+python3 - "$binary" "$ownership" "$back_ownership" "$pokemon_ownership" "$object_event_ownership" "$tileset_ownership" "$layout_ownership" "$audio_ownership" "$tmpdir" "$maps_obj" <<'PY' || exit 1
 import glob, hashlib, re, subprocess, sys
 
 # Line-buffer stdout: under 2>&1 the runner's log is the record of record,
@@ -202,7 +204,7 @@ import glob, hashlib, re, subprocess, sys
 # diagnostic on its own line in write order.
 sys.stdout.reconfigure(line_buffering=True)
 
-binary_path, ownership_path, back_ownership_path, pokemon_ownership_path, object_event_ownership_path, tileset_ownership_path, layout_ownership_path, tmpdir, maps_obj_path = sys.argv[1:10]
+binary_path, ownership_path, back_ownership_path, pokemon_ownership_path, object_event_ownership_path, tileset_ownership_path, layout_ownership_path, audio_ownership_path, tmpdir, maps_obj_path = sys.argv[1:11]
 
 def sha256_file(path):
     h = hashlib.sha256()
@@ -273,11 +275,11 @@ nm_out = subprocess.run(['nm', '-g', '--defined-only', binary_path],
                         capture_output=True, text=True)
 defined_syms = set(l.split()[-1] for l in nm_out.stdout.splitlines() if l.strip())
 
-# All six ownership files (trainer front R7B, trainer back R8, Pokémon
-# battle R9, object-event R11-B, tileset R11-C, layout R11-D) declare the
-# same [[resources]] record grammar; concatenate so every downstream check
-# is driven by the 4518-record union, never a hardcoded species, trainer
-# or layout name.
+# All seven ownership files (trainer front R7B, trainer back R8, Pokémon
+# battle R9, object-event R11-B, tileset R11-C, layout R11-D, audio R12-G)
+# declare the same [[resources]] record grammar; concatenate so every
+# downstream check is driven by the 5819-record union, never a hardcoded
+# species, trainer, layout or audio name.
 # R11-C: the tileset ownership file appends [[gba_parity]] blocks (18)
 # after its last [[resources]] record. Strip them per file before the
 # block split: the regex split below would otherwise fold the first
@@ -288,7 +290,7 @@ defined_syms = set(l.split()[-1] for l in nm_out.stdout.splitlines() if l.strip(
 parts = []
 for path in (ownership_path, back_ownership_path, pokemon_ownership_path,
              object_event_ownership_path, tileset_ownership_path,
-             layout_ownership_path):
+             layout_ownership_path, audio_ownership_path):
     content = open(path).read()
     parts.append(content.split('\n[[gba_parity]]')[0])
 text = '\n'.join(parts)
@@ -362,6 +364,15 @@ layout_byte_exemptions = {
     "0bde8b5d0bef72ccc3fde59c9bf351ad45a86b2094e5e2f318528ff3f136ef4b": "coincides with x86 instruction runs in .text (53 hits)",
     "eaf2d69938b5842d182be81f3ea06561297c6576f76979732b1d679db7e6b874": "coincides with x86 instruction runs in .text (35 hits)",
 }
+
+# R12-G §9 byte-scan exemptions for the audio family. Populated from the
+# first scan run: every hit is classified at scan time (the artifact's
+# bytes located in the binary via readelf/objdump before exempting, per
+# the §9 policy - coincidence with unrelated compiled bytes, never a
+# blanket section or size exemption). The symbol/object/dry-run checks
+# are the hard isolation proof for every audio record; see the entries'
+# reasons for the observed coincidence class.
+audio_byte_exemptions = {}
 
 # R9 §9 byte-scan exemption: the sha256 of every still-compiled still-front
 # asset (graphics/pokemon/<species>/front.4bpp.lz - the party-menu fronts,
@@ -510,7 +521,8 @@ for rec in records:
             print(f'ok   - {rid}: ROM_BASE_ONLY symbol {symbol} absent from binary')
         if binary.find(encoded) != -1:
             exempt_reason = tileset_byte_exemptions.get(enc_sha) \
-                or layout_byte_exemptions.get(enc_sha)
+                or layout_byte_exemptions.get(enc_sha) \
+                or audio_byte_exemptions.get(enc_sha)
             if exempt_reason:
                 # R11-C §7 / R11-D §10: sha-keyed, classified at scan time
                 # (see the dicts above - art-sharing with a compiled
@@ -584,6 +596,35 @@ for rec in records:
             print(f'ok   - {rid}: COMPILED_PENDING_MIGRATION symbol {symbol} present in binary')
         print(f'ok   - {rid}: encoded {enc_len}-byte payload still compiled (not scanned)')
 
+# R12-G §8: the compiled audio symbol classes must be COMPLETELY absent
+# from the native binary. The per-record checks above cover the ownership
+# legacy_symbols (global); this sweep uses the full nm table (local symbols
+# included - the stream labels mus_*/se_*/ph_*_N and the payload rows are
+# assembly-local, invisible to nm -g) and refuses ANY defined symbol in
+# the eight classes, no exceptions: the classes are exactly the migrated
+# audio payload families (11,980 song-family labels + 156 direct-sound
+# samples + 388 cry rows + 25 programmable waves + 195 voicegroups + 5
+# keysplits in the pre-removal baseline). The stay-compiled exceptions
+# (gSongTable, gMPlayTable, dummy_song_header, gPokemonCrySongTemplate,
+# engine lookup tables) do not match these prefixes.
+all_nm = subprocess.run(['nm', '--defined-only', binary_path],
+                        capture_output=True, text=True)
+all_defined = set(l.split()[-1] for l in all_nm.stdout.splitlines() if l.strip())
+audio_class_re = re.compile(
+    r'^(mus_|se_|ph_|DirectSoundWaveData_|Cry_|ProgrammableWaveData_|'
+    r'voicegroup_|keysplit_)')
+audio_class_hits = sorted(s for s in all_defined if audio_class_re.match(s))
+if audio_class_hits:
+    print(f'FAIL - {len(audio_class_hits)} compiled audio-family symbols '
+          f'in {binary_path}:', file=sys.stderr)
+    for s in audio_class_hits[:20]:
+        print(f'  {s}', file=sys.stderr)
+    bad += 1
+else:
+    print('ok   - zero compiled audio-family symbols in binary '
+          '(mus_/se_/ph_/DirectSoundWaveData_/Cry_/ProgrammableWaveData_/'
+          'voicegroup_/keysplit_ class sweep, local symbols included)')
+
 with open(f'{tmpdir}/migrated_symbols.txt', 'w') as f:
     f.write('\n'.join(migrated_symbols) + ('\n' if migrated_symbols else ''))
 with open(f'{tmpdir}/migrated_artifacts.txt', 'w') as f:
@@ -604,7 +645,7 @@ mapfile -t compiled_symbols < "$tmpdir/compiled_symbols.txt"
 mapfile -t migrated_artifacts < "$tmpdir/migrated_artifacts.txt"
 [[ ${#migrated_symbols[@]} -gt 0 ]] || { echo "FATAL: no ROM_BASE_ONLY records" >&2; exit 2; }
 if [[ ${#compiled_symbols[@]} -eq 0 ]]; then
-    ok "end state: zero COMPILED_PENDING_MIGRATION records (all 4518 ROM_BASE_ONLY)"
+    ok "end state: zero COMPILED_PENDING_MIGRATION records (all 5819 ROM_BASE_ONLY)"
 fi
 
 payload_tu="$root/src/data/graphics/trainers_front_payload.c"
@@ -681,6 +722,44 @@ if [[ "$found_objects" == 1 ]]; then
     ok "native object set scanned (no ROM_BASE_ONLY symbols, no payload TU object)"
 else
     ok "no native object dir present (fresh source tree; binary-only check ran)"
+fi
+
+# ---------------------------------------------------------------------------
+# R12-G §5: native gSongTable stays compiled and self-contained. 610 rows
+# (530 real rows = numeric retail-ROM logical SongHeader addresses + 80
+# dummy rows = dummy_song_header; sizeof(struct Song) stays 8), the
+# dummy_song_header definition rides inside song_table_native.generated.inc,
+# and the .error assembly pin in that file already enforces the 610*8 row
+# count at assembly time. No relocation in the native binary may name a
+# removed audio symbol (the song objects are gone; gSongTable rows are
+# immediate address constants, never linker relocations).
+# ---------------------------------------------------------------------------
+echo "== native gSongTable stay-compiled proof =="
+# One full nm pass into a variable: `awk {exit}`/grep -q would close the
+# pipe early, SIGPIPE-kill nm, and pipefail would then fail the pipeline.
+nm_full="$(nm "$binary")"
+gs_ta="$(awk '$NF=="gSongTable"{print $1}' <<<"$nm_full")"
+gs_te="$(awk '$NF=="gSongTable_end"{print $1}' <<<"$nm_full")"
+if [[ -n "$gs_ta" ]] && [[ -n "$gs_te" ]]; then
+    gs_bytes=$((16#$gs_te - 16#$gs_ta))
+    if [[ "$gs_bytes" -eq $((610 * 8)) ]]; then
+        ok "gSongTable spans 610 rows x 8 bytes ($gs_bytes bytes, pin 610*8)"
+    else
+        bad "gSongTable spans $gs_bytes bytes, expected $((610 * 8))"
+    fi
+else
+    bad "gSongTable/gSongTable_end missing from native binary"
+fi
+if grep -qE ' (dummy_song_header|gMPlayTable|gPokemonCrySongTemplate)$' <<<"$nm_full"; then
+    ok "stay-compiled exceptions present: dummy_song_header, gMPlayTable, gPokemonCrySongTemplate"
+else
+    bad "a stay-compiled audio exception symbol is missing from the native binary"
+fi
+relocs="$(readelf -r "$binary" 2>/dev/null || true)"
+if grep -Eq '\b(mus_|se_|ph_|DirectSoundWaveData_|Cry_|ProgrammableWaveData_|voicegroup_|keysplit_|gCryTable|gCryTable_Reverse|voicegroup_dummy)' <<<"$relocs"; then
+    bad "native relocations reference a removed audio symbol"
+else
+    ok "no native relocation references a removed audio symbol"
 fi
 
 # ---------------------------------------------------------------------------
@@ -843,7 +922,62 @@ else
     bad "GBA-only battle payload TU lost an INCBIN payload"
 fi
 
+# R12-G §15: audio GBA branch intact (source inspection). The GBA build
+# keeps the FULL compiled audio set: the data/sound_data.s .else branch
+# (exact original include order - voicegroups, keysplits, programmable
+# waves, music player table, GBA song table, direct-sound data), the
+# SONG_OBJS/MID_OBJS wildcards still computed for every non-linux64
+# target, the audio_rules.mk assembly + mid2agb generation rules, and all
+# 530 song objects + all 544 direct-sound samples + all authoring sources
+# (.aif/.mid/voicegroup .inc/song .s - the ownership native=gba columns
+# declare the compiled side explicitly).
+echo "== audio GBA branch intact (source inspection) =="
+sound_data="$root/data/sound_data.s"
+if grep -q '.if (NATIVE_LINUX == 1) && (LINUX64 == 1)' "$sound_data" \
+   && grep -q '.include "sound/voice_groups.inc"' "$sound_data" \
+   && grep -q '.include "sound/keysplit_tables.inc"' "$sound_data" \
+   && grep -q '.include "sound/programmable_wave_data.inc"' "$sound_data" \
+   && grep -q '.include "sound/music_player_table.inc"' "$sound_data" \
+   && grep -q '.include "sound/song_table.inc"' "$sound_data" \
+   && grep -q '.include "sound/direct_sound_data.inc"' "$sound_data" \
+   && grep -q '.include "sound/song_table_native.generated.inc"' "$sound_data"; then
+    ok "sound_data.s keeps the native payload gate + the full GBA .else include set"
+else
+    bad "sound_data.s lost the R12-G gate or a GBA payload include"
+fi
+if grep -q 'SONG_SRCS := $(wildcard $(SONG_SUBDIR)/\*.s)' "$root/Makefile_pc" \
+   && grep -q 'MID_SRCS := $(wildcard $(MID_SUBDIR)/\*.mid)' "$root/Makefile_pc" \
+   && grep -q 'ifeq ($(NATIVE_LINUX)-$(LINUX64),1-1)' "$root/Makefile_pc" \
+   && grep -qF -- '--defsym NATIVE_LINUX=$(NATIVE_LINUX)' "$root/Makefile_pc"; then
+    ok "Makefile_pc keeps the GBA song/midi wildcards + the scoped linux64 exclusion + NATIVE_LINUX defsym"
+else
+    bad "Makefile_pc lost a GBA audio source list or the R12-G gate"
+fi
+if [[ -f "$root/audio_rules.mk" ]] && grep -q 'mid2agb' "$root/audio_rules.mk"; then
+    ok "audio_rules.mk keeps the GBA assembly + midi generation rules"
+else
+    bad "audio_rules.mk missing or lost the midi generation rule"
+fi
+song_s="$(find "$root/sound/songs" -maxdepth 1 -name '*.s' | wc -l)"
+mid_m="$(find "$root/sound/songs/midi" -maxdepth 1 -name '*.mid' | wc -l)"
+aif_n="$(find "$root/sound/direct_sound_samples" -name '*.aif' | wc -l)"
+if [[ "$song_s" -eq 110 ]] && [[ "$mid_m" -eq 420 ]] && [[ "$aif_n" -eq 544 ]]; then
+    ok "all authoring sources retained: 110 song .s + 420 midi .mid + 544 sample .aif"
+else
+    bad "authoring source counts changed: song .s=$song_s (want 110), midi .mid=$mid_m (want 420), .aif=$aif_n (want 544)"
+fi
+if [[ -f "$root/sound/song_table.inc" ]] \
+   && [[ -f "$root/sound/direct_sound_data.inc" ]] \
+   && [[ -f "$root/sound/keysplit_tables.inc" ]] \
+   && [[ -f "$root/sound/programmable_wave_data.inc" ]] \
+   && [[ -f "$root/sound/voicegroups/dummy.inc" ]] \
+   && grep -q 'include "sound/cry_tables.inc"' "$root/sound/voice_groups.inc"; then
+    ok "GBA audio include set intact (song_table/direct_sound_data/keysplits/waves/voicegroup_dummy/cry_tables)"
+else
+    bad "a GBA audio include source is missing"
+fi
+
 echo
 echo "native asset-isolation: $pass ok, $fail failed"
 [[ "$fail" == 0 ]] || exit 1
-echo "PASS: native target matches ownership (4518/4518 ROM_BASE_ONLY isolated - 196 trainer + 1608 pokemon battle + 288 object-event + 1544 tileset + 882 layout, 0 COMPILED_PENDING_MIGRATION)"
+echo "PASS: native target matches ownership (5819/5819 ROM_BASE_ONLY isolated - 196 trainer + 1608 pokemon battle + 288 object-event + 1544 tileset + 882 layout + 1301 audio, 0 COMPILED_PENDING_MIGRATION)"

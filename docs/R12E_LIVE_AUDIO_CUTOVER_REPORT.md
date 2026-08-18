@@ -364,4 +364,5 @@ audible confirmation remains the pending manual gate.
 
 This document (docs/R12E_LIVE_AUDIO_CUTOVER_REPORT.md). Nothing committed
 per the stage brief. Next stage is R12-F (state battery expectation flips)
-/ R12-G (compiled payload removal + isolation audit) — NOT started.
+/ R12-G (compiled payload removal + isolation audit) — **COMPLETE
+(2026-08-18)**: see docs/R12G_AUDIO_ISOLATION_REPORT.md.

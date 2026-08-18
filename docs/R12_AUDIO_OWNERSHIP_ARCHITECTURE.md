@@ -361,6 +361,15 @@ rollback boundary. No one giant patch.
   status documentation. Gate: isolation sweep clean on both binaries;
   full 13-runner battery; manual checklist complete. Rollback: the compiled
   objects are restored by reverting the link-line change only.
+  **IMPLEMENTED — R12-G complete (2026-08-18).** The linux64 link drops the
+  530 song objects and the data/sound_data.s payload includes (voicegroups,
+  keysplits, programmable waves, song table, direct-sound samples) via the
+  `NATIVE_LINUX`/`LINUX64` assembly gate; the runner now proves 5819/5819
+  ROM_BASE_ONLY (1301 audio records added, byte-absent with zero exemptions)
+  on release + DINFO, with the audio symbol-class sweep (mus_/se_/ph_/
+  DirectSoundWaveData_/Cry_/ProgrammableWaveData_/voicegroup_/keysplit_ =
+  0), the 610-row gSongTable proof, and the GBA-branch source checks. Full
+  proof: docs/R12G_AUDIO_ISOLATION_REPORT.md.
 
 Stop conditions: STOP before R12-C if the voicegroup transform cannot be
 made bit-exact against the canonical rows; STOP before R12-D if

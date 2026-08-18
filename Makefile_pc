@@ -92,7 +92,7 @@ HOST_WIDTH_CFLAGS := -m32
 endif
 
 HOST_64BIT := $(if $(filter 1,$(LINUX64) $(WINDOWS64)),1,0)
-ASFLAGS := $(HOST_ASFLAGS) --defsym MODERN=$(MODERN) --defsym PORTABLE=1 --defsym UBFIX=1 --defsym LINUX64=$(HOST_64BIT)
+ASFLAGS := $(HOST_ASFLAGS) --defsym MODERN=$(MODERN) --defsym PORTABLE=1 --defsym UBFIX=1 --defsym LINUX64=$(HOST_64BIT) --defsym NATIVE_LINUX=$(NATIVE_LINUX)
 
 ifneq ($(filter 1,$(NATIVE_LINUX) $(WINDOWS64)),)
 CC1 := $(CC)
@@ -276,6 +276,32 @@ SONG_OBJS := $(patsubst $(SONG_SUBDIR)/%.s,$(SONG_BUILDDIR)/%.o,$(SONG_SRCS))
 
 MID_SRCS := $(wildcard $(MID_SUBDIR)/*.mid)
 MID_OBJS := $(patsubst $(MID_SUBDIR)/%.mid,$(MID_BUILDDIR)/%.o,$(MID_SRCS))
+
+# R12-G: the 64-bit native linux link drops every compiled audio payload
+# object (530 song objects; the data/sound_data.s payload includes are also
+# excluded via the NATIVE_LINUX/LINUX64 assembly gates). The GBA build and
+# the 32-bit/windows native builds keep the full payload set - SONG_OBJS /
+# MID_OBJS above are computed from the (unchanged) source wildcards, and the
+# assembly rules in audio_rules.mk still generate the midi-derived objects
+# for them; for the linux64 link these lists are simply empty, so no rule
+# fires and no payload object is linked.
+ifeq ($(NATIVE_LINUX)-$(LINUX64),1-1)
+SONG_OBJS :=
+MID_OBJS :=
+
+# R12-G: sweep stale audio payload objects out of the linux64 object tree.
+# make only deletes targets it would rebuild; with SONG_OBJS/MID_OBJS empty,
+# song objects from a pre-R12-G (payload-linked) build would linger in
+# build/linux64/sound/songs and the isolation runner - which treats the
+# object tree as the link graph and refuses any ROM_BASE_ONLY symbol in any
+# object - would fail on them. Nothing in the linux64 build references these
+# dirs; the other targets keep their own.
+.PHONY: sweep-stale-audio-objects
+sweep-stale-audio-objects:
+	rm -rf $(OBJ_DIR)/$(SONG_SUBDIR) $(OBJ_DIR)/$(MID_SUBDIR)
+
+rom: sweep-stale-audio-objects
+endif
 
 OBJS     := $(C_OBJS) $(GFLIB_OBJS) $(ASM_OBJS) $(DATA_ASM_OBJS) $(SONG_OBJS) $(MID_OBJS)
 ifeq ($(NATIVE_LINUX),0)

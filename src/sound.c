@@ -40,8 +40,9 @@ static void RestoreBGMVolumeAfterPokemonCry(void);
 #ifdef NATIVE_LINUX
 /* R12-C §4: cry rows now live in the transformed arena zone (24-byte native
  * rows, byte-identical to the LINUX64 assembler output per the parity gate).
- * The compiled tables stay linked as the additive fallback: an unpublished
- * arena degrades to compiled audio exactly as pre-R12-B. */
+ * R12-G: the compiled cry tables are GONE from the native link, so there is
+ * no fallback anymore - a row the arena cannot serve returns NULL and the
+ * cry playback path refuses (SetPokemonCryTone). */
 static struct ToneData *GetPokemonCryRow(u8 table, bool reversed, u8 index)
 {
     /* SetPokemonCryTone takes ownership of the row as a mutable ToneData;
@@ -49,10 +50,7 @@ static struct ToneData *GetPokemonCryRow(u8 table, bool reversed, u8 index)
      * const is cast away exactly where the MP2K consumer consumes it. */
     const struct EmeraldAudioToneRow *row =
         EmeraldAudioCryTableRow(table, reversed, index);
-    if (row != NULL)
-        return (struct ToneData *)(const void *)row;
-    return reversed ? &gCryTable_Reverse[(128 * table) + index]
-                    : &gCryTable[(128 * table) + index];
+    return (struct ToneData *)(const void *)row;
 }
 #endif
 

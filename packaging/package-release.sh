@@ -46,6 +46,7 @@ audit_stage() {
         case "$lower" in
             *.gba|*.sav|*.state|*.o|*.obj|*.log|core|core.*|*/core|*/core.*|\
             rom/*|*/rom/*|profiles/*|*/profiles/*|games/emerald/*|*/games/emerald/*|\
+            *.rpack|sound/*|*/sound/*|*.aif|*.mid|*.pcm|*.bin|\
             quick.png|*/quick.png|slot*.png|*/slot*.png)
                 printf 'Forbidden release path: %s\n' "$relative" >&2
                 exit 1

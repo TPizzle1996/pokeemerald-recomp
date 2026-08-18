@@ -459,6 +459,9 @@ Explicitly NOT in R12-F:
 - executable size reduction (~3.2-3.4 MiB);
 - final full binary audit + isolation runner exemption finalization.
 
+**All of the above is COMPLETE (2026-08-18)** — see
+docs/R12G_AUDIO_ISOLATION_REPORT.md.
+
 R12-F changes nothing about compiled payload presence — it only completes
 state/lifecycle identity correctness on top of the R12-E live cutover.
 

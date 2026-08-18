@@ -1850,6 +1850,15 @@ struct MusicPlayerInfo *SetPokemonCryTone(struct ToneData *tone)
     s32 i;
     struct MusicPlayerInfo *mplayInfo;
 
+#ifdef NATIVE_LINUX
+    /* R12-G: the compiled cry tables are removed from the native link, so a
+     * NULL tone means the arena could not serve this cry row (a missing or
+     * unregistered resource). Refuse playback instead of starting MPlay with
+     * a null tone and dereferencing it in the voicegroup lookup. */
+    if (tone == NULL)
+        return NULL;
+#endif
+
     for (i = 0; i < MAX_POKEMON_CRIES; i++)
     {
         struct MusicPlayerTrack *track = &gPokemonCryTracks[i * 2];
