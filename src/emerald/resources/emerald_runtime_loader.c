@@ -33,6 +33,11 @@
  * registration also PUBLISHES - the strict init runs at registration and a
  * pack that cannot serve the Pokémon battle family is a refused session (the
  * tables are rolled back, the snapshot dropped, the failure returned).
+ * R12-E: the audio arena is part of that strict init - the native gSongTable
+ * rows carry ROM logical addresses (sound/song_table_native.generated.inc),
+ * so the arena is the live audio source and an unpublishable arena is a
+ * session refusal with the same full rollback, never a silent fallback to
+ * the compiled payloads.
  *
  * The file is platform-neutral in its includes (gen3 core + emerald resource
  * headers only, per the R3 guardrail-18 dependency-creep assertion); the native
@@ -179,40 +184,57 @@ EmeraldResourceCompat_RegisterRuntimeSnapshot(const char *packPath)
         }
         else
         {
-            /* R12-B: publish the audio leaf verbatim-zone arena. Additive by
-             * contract: the compiled audio objects remain the live source
-             * until R12-G, so an arena failure is a degrade (diagnostics
-             * named, arena absent) - never a session refusal, and the build
-             * sounds exactly as pre-R12-B because nothing consumes the arena
-             * yet. */
+            /* R12-E: publish the audio arena (leaves + structural + songs).
+             * The arena is now the LIVE source - the native gSongTable rows
+             * carry ROM logical addresses, so every consumer resolves into
+             * the arena - and the compiled audio objects are dead weight
+             * (still linked until R12-G, never consumed). A pack that cannot
+             * publish the audio arena is therefore a REFUSED session, with
+             * the same full rollback as the Pokémon family above: the
+             * trainer tables published at init are rolled back too, the
+             * snapshot is dropped, and nothing survives (sSnapshotRegistered
+             * stays false; content-hydration TryInitialize stays a no-op).
+             * No silent compiled fallback in native production. */
             struct EmeraldAudioCompatDiagnostics audioDiag;
             enum EmeraldAudioCompatStatus audioStatus =
                 EmeraldAudioCompat_TryInitialize(snapshot, pack, &audioDiag);
             if (audioStatus != EMERALD_AUDIO_OK)
             {
                 fprintf(stderr,
-                        "emerald runtime: audio arena not published (status %d%s%s)"
-                        " - compiled audio still serves\n",
+                        "emerald runtime: session refused: audio arena not "
+                        "published (status %d%s%s)\n",
                         (int)audioStatus,
                         audioDiag.canonicalName[0] != '\0' ? " @ " : "",
                         audioDiag.canonicalName);
-            }
-
-            /* R10-F: the session content fingerprint pins the exact logical
-             * provider content this session was built from (the construction
-             * lives in emerald_resource_session.h). The native save-state
-             * system stamps it into every state it writes and rejects states
-             * whose recorded fingerprint differs from the active session's -
-             * equivalent content at another path still matches, changed or
-             * reordered providers cannot. */
-            uint8_t sessionFingerprint[GEN3_PACK_SHA256_SIZE];
-            sSnapshotRegistered = true;
-            status = EMERALD_COMPAT_OK;
-            if (EmeraldResourceSession_ComputeBaseFingerprint(&info,
-                                                              sessionFingerprint))
-                EmeraldResourceCompat_SetSessionContentFingerprint(sessionFingerprint);
-            else
+                EmeraldResourceCompat_ClearMigratedEntries();
+                EmeraldAudioCompat_ClearMigratedEntries();
+                EmeraldResourceCompat_ClearSnapshot();
                 EmeraldResourceCompat_SetSessionContentFingerprint(NULL);
+                Gen3ResourceSnapshot_Destroy(snapshot);
+                snapshot = NULL;
+                sSnapshotRegistered = false;
+                status = EMERALD_COMPAT_ERR_PUBLISH_FAILED;
+            }
+            else
+            {
+                /* R10-F: the session content fingerprint pins the exact
+                 * logical provider content this session was built from (the
+                 * construction lives in emerald_resource_session.h). The
+                 * native save-state system stamps it into every state it
+                 * writes and rejects states whose recorded fingerprint
+                 * differs from the active session's - equivalent content at
+                 * another path still matches, changed or reordered providers
+                 * cannot. */
+                uint8_t sessionFingerprint[GEN3_PACK_SHA256_SIZE];
+                sSnapshotRegistered = true;
+                status = EMERALD_COMPAT_OK;
+                if (EmeraldResourceSession_ComputeBaseFingerprint(
+                        &info, sessionFingerprint))
+                    EmeraldResourceCompat_SetSessionContentFingerprint(
+                        sessionFingerprint);
+                else
+                    EmeraldResourceCompat_SetSessionContentFingerprint(NULL);
+            }
         }
     }
     Gen3ResourceDiagnostics_Destroy(&diagnostics);
@@ -225,6 +247,20 @@ done:
     if (pack != NULL)
         Gen3ResourcePack_Destroy(pack);
     return status;
+}
+
+/* R12-E §12.2/§12.3: whether a runtime session is registered. The loader
+ * owns the flag (it is set only by a fully successful registration; a
+ * refused session leaves it false). Session-ful links (production) must
+ * fail a load whose post-load resource republishes (trainer tables, audio
+ * arena) cannot run; session-less links (test/offline builds that never
+ * call the cutover) skip the republishes entirely (R12-F §5 gates both on
+ * this flag) - the arena's absence alone cannot distinguish "never
+ * registered" from "registered then cleared", and the cleared case must
+ * refuse. */
+bool EmeraldResourceCompat_IsSessionRegistered(void)
+{
+    return sSnapshotRegistered;
 }
 
 #endif /* PLATFORM_SDL2 && NATIVE_LINUX */

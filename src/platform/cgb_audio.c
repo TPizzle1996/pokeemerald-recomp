@@ -39,6 +39,11 @@ void cgb_audio_init(u32 rate){
     lfsrMax[0] = 0x8000;
     lfsrMax[1] = 0x80;
     ch4Samples = 0.0f;
+    /* The APU frame/cycle counters are free-running host state; reset them
+     * with everything else so init is a complete deterministic reset (their
+     * parity gates the length/envelope/sweep events in the generate loop). */
+    apuFrame = 0;
+    apuCycle = 0;
 }
 
 

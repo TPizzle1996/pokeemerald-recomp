@@ -19,7 +19,7 @@
  * LayoutPublished gate requires every map's layout record to carry published
  * .map/.border and a published primary tileset (real blockdata + metatiles
  * from the pack). Step 3b publishes the R12-D audio seam into the SAME
- * range index (4,518 trainer ranges + 728 audio spans = 5,246 < 8,192).
+ * range index (4,518 trainer ranges + 1,301 audio ranges = 5,819 < 8,192).
  *
  * Tests (plan §11 Harness B): 1 (Littleroot<->Route101 both directions:
  * origins (0,-20)/(0,+20), Oldale), 9 (no-connection interior:
@@ -1092,8 +1092,9 @@ int main(int argc, char **argv)
 
     /* 3b. R12-D merged range-index proof (state-v5 REQUIRED): the trainer
      * family's shared index carries 4,518 ranges after publication; the
-     * audio seam adds its 728 spans (1 verbatim-zone + 530 per-song +
-     * 197 transformed) on publish, and the 530 SONG spans are
+     * audio seam adds its 1,301 per-resource ranges (105 root + 388 cry +
+     * 51 phoneme + 25 wave samples + 5 keysplits + 530 songs + 195
+     * voicegroups + 2 cry tables) on publish, and the 530 SONG ranges are
      * identity+offset ranges - the exact state-v5 shape. The song bytes
      * round-trip through the index like a sidecar record: address lookup
      * at the span base, then load-direction ResolveByKey back to the same
@@ -1118,7 +1119,7 @@ int main(int argc, char **argv)
         CHECK(audioStatus == EMERALD_AUDIO_OK);
         CHECK(EmeraldAudioCompat_GetSongCount() == EMERALD_AUDIO_SONG_COUNT);
         mergedCount = EmeraldResourceRangeIndex_GetRangeCount(index);
-        CHECK(mergedCount == 5246u); /* 4518 + 728 audio spans */
+        CHECK(mergedCount == 5819u); /* 4518 + 1301 audio ranges */
         CHECK(mergedCount < EMERALD_RESOURCE_RANGE_INDEX_MAX_RANGES);
         CHECK(EmeraldAudioCompat_GetArena(&arenaBase, &arenaSize));
         CHECK(EmeraldAudioCompat_GetSongSpan(

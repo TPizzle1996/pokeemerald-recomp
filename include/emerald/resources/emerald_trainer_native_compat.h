@@ -178,6 +178,12 @@ void EmeraldResourceCompat_TryInitialize(void);
 enum EmeraldResourceCompatStatus
 EmeraldResourceCompat_RegisterRuntimeSnapshot(const char *packPath);
 
+/* R12-E §12.2/§12.3: whether a runtime session is registered (set only by a
+ * fully successful RegisterRuntimeSnapshot; a refused session leaves it
+ * false). Session-ful links require the post-load audio republish to
+ * succeed; session-less links skip it. */
+bool EmeraldResourceCompat_IsSessionRegistered(void);
+
 /* Release the session image. Leaves the tables as last published (the streams
  * die with the image, so only call when no consumer can read them). */
 void EmeraldResourceCompat_Shutdown(void);

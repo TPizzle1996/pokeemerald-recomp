@@ -193,6 +193,28 @@ static int CompareSongScratch(const void *a, const void *b)
     return strcmp(sa->rec.canonicalName, sb->rec.canonicalName);
 }
 
+/* Phase-1c leaf-sub-zone tiling scratch (R12-F §3): one entry per leaf
+ * payload or keysplit range (label-extended), sorted by start; the proof
+ * verifies every entry is inside [0, SONG_BLOCK_OFFSET) and no two overlap. */
+struct LeafTileEntry
+{
+    uint64_t start;
+    uint64_t end;
+    char name[96];
+};
+
+/* Phase-1c leaf-sub-zone tiling comparator (R12-F §3). */
+static int CompareLeafTile(const void *a, const void *b)
+{
+    const struct LeafTileEntry *ta = (const struct LeafTileEntry *)a;
+    const struct LeafTileEntry *tb = (const struct LeafTileEntry *)b;
+    if (ta->start != tb->start)
+        return ta->start < tb->start ? -1 : 1;
+    if (ta->end != tb->end)
+        return ta->end < tb->end ? -1 : 1;
+    return strcmp(ta->name, tb->name);
+}
+
 /* One allocation: struct header + leaf table + structural table + song
  * table + the 3,329,304-byte verbatim zone (holes zeroed, payloads +
  * keysplit runs + the 530 song graphs at their ROM-relative offsets) + the
@@ -246,23 +268,32 @@ static const struct BackshiftPin kKeysplitBacks[EMERALD_AUDIO_KEYSPLIT_COUNT] =
     {"emerald:audio/keysplit/french-horn", 36u},
 };
 
-/* R12-C §8 + R12-D §9: the spans this seam registers into the shared range
- * index. The R10 index is NON-OVERLAPPING (InsertRange rejects any overlap),
- * so the R12-C verbatim-zone span (which covered the whole zone, song block
- * included) must SPLIT at the song block (docs/R12D_SONG_GRAPH_
- * IMPLEMENTATION_PLAN.md §9): the leaf sub-zone span covers
- * [ROM_START, SONG_BLOCK_START) (every leaf + keysplit run + unbacked holes;
- * no leaf extends past 0x088FC03B, the block start is 0x088FC03C); the 530
- * per-song spans tile [SONG_BLOCK_START, SONG_BLOCK_END) exactly; the 197
- * transformed table blocks (195 voicegroups + 2 cry tables, each base
- * INCLUDING its drumset back-shift pad) follow. The zone tail
- * [SONG_BLOCK_END, SPAN_END) (3,428 B) is unbacked - hull-only, fail-closed
- * on capture. Keysplits get no span of their own (inside the leaf sub-zone). */
+/* R12-F: the spans this seam registers into the shared range index are
+ * EXACTLY the 1,301 audio resources - one span per resource, no synthetic
+ * zone identity. The R10 index is NON-OVERLAPPING (InsertRange rejects any
+ * overlap), so each leaf payload, each keysplit range (base at the LABEL
+ * address the live keySplitTable pointers target; the five ranges tile
+ * [firstLabel, lastRunEnd) exactly - KeysplitRangeLength), each of the
+ * 530 per-song spans (tiling [SONG_BLOCK_START, SONG_BLOCK_END) exactly) and
+ * each of the 197 transformed table blocks (195 voicegroups + 2 cry tables,
+ * each base INCLUDING its drumset back-shift pad) gets its own identity:
+ *   leaves         AUDIO_SAMPLE       / 1 / CANONICAL      (569)
+ *   keysplits      INSTRUMENT_BANK    / 2 / CANONICAL      (5)
+ *   songs          MUSIC_SEQUENCE     / 1 / CANONICAL      (530)
+ *   voicegroups    INSTRUMENT_BANK    / 1 / COMPAT_OBJECT  (195)
+ *   cry tables     INSTRUMENT_BANK    / 1 / COMPAT_OBJECT  (2)
+ * The 3,428-byte zone tail [SONG_BLOCK_END, SPAN_END) is unbacked and hull-
+ * EXCLUDED (fail-closed on capture), as is the whole arena prefix (header +
+ * record tables) and the transform-align gap. Two hulls only: the verbatim
+ * zone minus the tail [zoneBase, +SONG_BLOCK_OFFSET + SONG_BLOCK_SIZE) and
+ * the transformed zone [transformBase, +transformSize). */
 #define EMERALD_AUDIO_RANGE_SPAN_COUNT \
-    (1u + EMERALD_AUDIO_SONG_COUNT \
+    (EMERALD_AUDIO_LEAF_COUNT + EMERALD_AUDIO_KEYSPLIT_COUNT \
+     + EMERALD_AUDIO_SONG_COUNT \
      + EMERALD_AUDIO_VOICEGROUP_COUNT + EMERALD_AUDIO_CRY_TABLE_COUNT)
-#define EMERALD_AUDIO_SPAN_TRANSFORM_FIRST \
-    (1u + EMERALD_AUDIO_SONG_COUNT)
+#if EMERALD_AUDIO_RANGE_SPAN_COUNT != 1301u
+#error "audio range span count disagrees with the pinned 1,301"
+#endif
 
 /* Zone-relative song block placement: the plan §4 quoted 0x21BFA0, but
  * 0x088FC03C - 0x0867709C is 0x284FA0 (and the block end is 0x32BFB4, not
@@ -277,12 +308,6 @@ static const struct BackshiftPin kKeysplitBacks[EMERALD_AUDIO_KEYSPLIT_COUNT] =
 #error "song block zone end disagrees with the verified 0x32BFB4"
 #endif
 
-/* The leaf sub-zone's synthetic canonical identity (sidecar records key
- * every captured arena pointer by its registered span's key; the sub-zone is
- * one resource-owned span, not a pack entry - R12-D narrowed it to
- * [ROM_START, SONG_BLOCK_START), the tail is unbacked). */
-#define EMERALD_AUDIO_VERBATIM_CANONICAL "emerald:audio/verbatim-zone"
-
 /* The registered span list: kept so re-registration can verify that the
  * index still holds exactly our spans (it also holds the trainer seam's
  * ranges, which sort around ours by base) and remove only our own block
@@ -295,30 +320,61 @@ struct EmeraldAudioRangeEntry
     size_t length;
     const char *canonicalName; /* points into the arena's record table */
     Gen3ResourceKey key;       /* derived at span build; verified in-index */
+    uint32_t type;             /* per-resource identity (R12-F §4) */
+    uint32_t schema;
+    enum EmeraldResourceRangeRole role;
 };
+
+static struct EmeraldAudioRangeEntry sAudioRanges[EMERALD_AUDIO_RANGE_SPAN_COUNT];
+static size_t sAudioRangeCount;  /* spans currently in the index */
+static size_t sAudioRangeMark;   /* sorted position of our first span */
+static size_t sAudioHullMark;    /* index->hullCount before our hulls */
+static bool sAudioRangesInIndex; /* our spans + hulls are registered now */
+
+static int CompareRangeByBase(const void *a, const void *b)
+{
+    const struct EmeraldAudioRangeEntry *ra =
+        (const struct EmeraldAudioRangeEntry *)a;
+    const struct EmeraldAudioRangeEntry *rb =
+        (const struct EmeraldAudioRangeEntry *)b;
+    if (ra->base != rb->base)
+        return ra->base < rb->base ? -1 : 1;
+    return strcmp(ra->canonicalName, rb->canonicalName);
+}
+
+/* The two audio hulls (R12-F §4, plan §5): hull A = the verbatim zone minus
+ * its unbacked tail [zoneBase, +SONG_BLOCK_OFFSET + SONG_BLOCK_SIZE), hull B
+ * = the transformed zone [transformBase, +transformSize). Everything else in
+ * the allocation (header, record tables, tail, align gap) is UNHULLED: a
+ * coincidental scalar there is ordinary data (the R10 apuCycle precedent),
+ * while a real pointer inside a hull but outside every registered range
+ * fails capture closed. */
+static size_t VerbatimHullLength(void)
+{
+    return EMERALD_AUDIO_SONG_BLOCK_OFFSET + EMERALD_AUDIO_SONG_BLOCK_SIZE;
+}
+
+static bool ArenaHullMatches(const struct EmeraldResourceRangeIndex *index)
+{
+    const uint8_t *zoneBase;
+    const uint8_t *transformBase;
+
+    if (index == NULL || sArena == NULL
+     || sAudioHullMark + 2u > index->hullCount)
+        return false;
+    zoneBase = sArena->bytes + sArena->zoneOffset;
+    transformBase = sArena->bytes + sArena->transformOffset;
+    return index->hulls[sAudioHullMark].base == (uintptr_t)zoneBase
+        && index->hulls[sAudioHullMark].length == VerbatimHullLength()
+        && index->hulls[sAudioHullMark + 1u].base == (uintptr_t)transformBase
+        && index->hulls[sAudioHullMark + 1u].length == sArena->transformSize;
+}
 
 static struct EmeraldAudioRangeEntry sAudioRanges[EMERALD_AUDIO_RANGE_SPAN_COUNT];
 static size_t sAudioRangeCount;  /* spans currently in the index */
 static size_t sAudioRangeMark;   /* sorted position of our first span */
 static size_t sAudioHullMark;    /* index->hullCount before our hull */
 static bool sAudioRangesInIndex; /* our spans + hull are registered now */
-
-/* The whole-arena hull (plan §8: one hull over the whole audio arena). The
- * registered spans cover the zones; any other arena byte (header, tables,
- * gap) has no stable resource identity and must fail a capture loudly. */
-static size_t ArenaAllocationSize(void)
-{
-    return sizeof(struct EmeraldAudioArena) + sArena->zoneOffset
-         + sArena->spanSize + sArena->transformSize;
-}
-
-static bool ArenaHullMatches(const struct EmeraldResourceRangeIndex *index)
-{
-    if (index == NULL || sArena == NULL || sAudioHullMark >= index->hullCount)
-        return false;
-    return index->hulls[sAudioHullMark].base == (uintptr_t)sArena
-        && index->hulls[sAudioHullMark].length == ArenaAllocationSize();
-}
 
 /* True when the index still holds exactly our spans at [mark, mark+count):
  * our block is CONTIGUOUS in the sorted array (all spans lie inside one
@@ -375,27 +431,128 @@ static void UnregisterArenaRanges(void)
     sAudioRangesInIndex = false;
 }
 
-/* Build the span list for the published arena (sArena must be live). */
+/* R12-F keysplit geometry, audited against the reference tree's
+ * sound/keysplit_tables.inc: each manifest run IS the table's content (the
+ * .byte entries the game indexes - note range [36..107] for tables 1/2/3/5,
+ * [24..107] for tuba), and the mks4agb label sits backshift bytes BEFORE the
+ * run start ("key split table labels can appear before the actual start of
+ * the key split table data", keysplit_tables.inc:1-11) so that the game's
+ * absolute key numbers index the table with no offset arithmetic. Because
+ * the runs tile contiguously, the LABELS tile the whole section
+ * [firstLabel, lastRunEnd) exactly (verified against the ELF symbols:
+ * KeySplitTable1..5 @ 0x086B4698/0x86B46E0/0x86B4728/0x86B477C/0x86B47C4,
+ * deltas 72/72/84/72 and last run end 0x86B4830 - 108 after the last
+ * label). The per-table range is therefore [label_N, label_{N+1}):
+ * length = runLen_N + backshift_N - backshift_{N+1}, the LAST table (in
+ * label order) getting runLen + backshift. This keeps the live
+ * track->tone.keySplitTable pointer - which targets the LABEL - resolving at
+ * rangeOffset 0, while the five ranges tile [firstLabel, lastRunEnd) with no
+ * overlap and no hole (R12-F §3 tiling, §4 role table). The next label's
+ * back-shift enters the formula, so lengths are assigned after sorting the
+ * collected records by label address. */
+struct KeysplitSpan
+{
+    uint64_t labelRomAddr;
+    uint32_t backshiftBytes;
+    uint32_t payloadBytes;
+    const char *canonicalName;
+};
+
+static int CompareKeysplitByLabel(const void *a, const void *b)
+{
+    const struct KeysplitSpan *ka = (const struct KeysplitSpan *)a;
+    const struct KeysplitSpan *kb = (const struct KeysplitSpan *)b;
+    if (ka->labelRomAddr != kb->labelRomAddr)
+        return ka->labelRomAddr < kb->labelRomAddr ? -1 : 1;
+    return strcmp(ka->canonicalName, kb->canonicalName);
+}
+
+/* Range length of sorted[i] (sorted by labelRomAddr): runLen + backshift,
+ * minus the NEXT label's back-shift (its label pad eats the tail of this
+ * run - those bytes belong to the next range, keeping the tiling exact). */
+static size_t KeysplitRangeLength(const struct KeysplitSpan *sorted,
+                                  size_t count, size_t i)
+{
+    size_t length = (size_t)sorted[i].payloadBytes + sorted[i].backshiftBytes;
+    if (i + 1u < count)
+        length -= sorted[i + 1u].backshiftBytes;
+    return length;
+}
+
+/* Build the span list for the published arena (sArena must be live): one
+ * span per resource with its exact identity (R12-F §4). The list is sorted
+ * by base at the end - the [mark, mark+count) block logic needs our spans
+ * contiguous in the shared index, and the leaf/keysplit spans (pack order in
+ * the tables) are not address-ordered until the qsort. */
 static void BuildArenaSpanList(void)
 {
     const uint8_t *zoneBase = sArena->bytes + sArena->zoneOffset;
     const uint8_t *transformBase = sArena->bytes + sArena->transformOffset;
     size_t i, n = 0u;
 
-    /* R12-D §9: the verbatim zone splits at the song block. Span 0 is the
-     * LEAF SUB-ZONE [zoneBase, +SONG_BLOCK_OFFSET) - every leaf, keysplit
-     * run and hole below the song block (the last leaf ends 0x088FC03B,
-     * one byte before the block). The 3,428-byte zone tail past the song
-     * block end is intentionally UNBACKED (hull-only, fail-closed). */
-    sAudioRanges[n].base = (uintptr_t)zoneBase;
-    sAudioRanges[n].length = EMERALD_AUDIO_SONG_BLOCK_OFFSET;
-    sAudioRanges[n].canonicalName = EMERALD_AUDIO_VERBATIM_CANONICAL;
-    Gen3ResourceId_DeriveKey(sAudioRanges[n].canonicalName,
-                             &sAudioRanges[n].key);
-    n++;
-    /* The 530 per-song spans, in arenaOffset order (phase 1c proved they
-     * tile [SONG_BLOCK_OFFSET, +SONG_BLOCK_SIZE) exactly - no gaps, no
-     * overlaps - so this sequence is already sorted by base). */
+    /* The 569 leaves: each span is exactly its payload (the phase-1c tiling
+     * proof pinned every leaf inside [zoneBase, +SONG_BLOCK_OFFSET), so no
+     * span can reach the song block or another leaf). */
+    for (i = 0; i < sArena->publishedCount; i++)
+    {
+        const struct EmeraldAudioLeafRecord *record =
+            (const struct EmeraldAudioLeafRecord *)(const void *)
+                (sArena->bytes + sArena->leafTableOffset
+                 + i * sizeof(struct EmeraldAudioLeafRecord));
+        sAudioRanges[n].base =
+            (uintptr_t)(zoneBase + record->arenaOffset);
+        sAudioRanges[n].length = record->size;
+        sAudioRanges[n].canonicalName = record->canonicalName;
+        Gen3ResourceId_DeriveKey(sAudioRanges[n].canonicalName,
+                                 &sAudioRanges[n].key);
+        sAudioRanges[n].type = GEN3_RESOURCE_TYPE_AUDIO_SAMPLE;
+        sAudioRanges[n].schema = 1u;
+        sAudioRanges[n].role = EMERALD_RESOURCE_ROLE_CANONICAL;
+        n++;
+    }
+    /* The 5 keysplit ranges: base at the LABEL address (runStart minus the
+     * back-shift) - the live track->tone.keySplitTable pointer targets the
+     * label, so its sidecar record must resolve at rangeOffset 0 (R12-F §4
+     * role table). Lengths come from the label tiling (KeysplitRangeLength):
+     * the five ranges tile [firstLabel, lastRunEnd) exactly, so they never
+     * overlap a leaf or each other and leave no keysplit-section byte
+     * unowned. The phase-1c tiling proof re-verifies the same spans. */
+    {
+        struct KeysplitSpan ks[EMERALD_AUDIO_KEYSPLIT_COUNT];
+        size_t ksCount = 0u;
+        for (i = 0; i < sArena->structuralCount; i++)
+        {
+            const struct EmeraldAudioStructuralRecord *record =
+                (const struct EmeraldAudioStructuralRecord *)(const void *)
+                    (sArena->bytes + sArena->structuralTableOffset
+                     + i * sizeof(struct EmeraldAudioStructuralRecord));
+            if (record->kind != STRUCTURAL_KEYSPLIT)
+                continue;
+            ks[ksCount].labelRomAddr = record->labelRomAddr;
+            ks[ksCount].backshiftBytes = record->backshiftBytes;
+            ks[ksCount].payloadBytes = record->payloadBytes;
+            ks[ksCount].canonicalName = record->canonicalName;
+            ksCount++;
+        }
+        qsort(ks, ksCount, sizeof(ks[0]), CompareKeysplitByLabel);
+        for (i = 0; i < ksCount; i++)
+        {
+            sAudioRanges[n].base =
+                (uintptr_t)(zoneBase + (ks[i].labelRomAddr
+                                        - EMERALD_AUDIO_ROM_START));
+            sAudioRanges[n].length =
+                KeysplitRangeLength(ks, ksCount, i);
+            sAudioRanges[n].canonicalName = ks[i].canonicalName;
+            Gen3ResourceId_DeriveKey(sAudioRanges[n].canonicalName,
+                                     &sAudioRanges[n].key);
+            sAudioRanges[n].type = GEN3_RESOURCE_TYPE_INSTRUMENT_BANK;
+            sAudioRanges[n].schema = 2u;
+            sAudioRanges[n].role = EMERALD_RESOURCE_ROLE_CANONICAL;
+            n++;
+        }
+    }
+    /* The 530 per-song spans (phase 1c proved they tile
+     * [SONG_BLOCK_OFFSET, +SONG_BLOCK_SIZE) exactly - no gaps, no overlaps). */
     for (i = 0; i < sArena->publishedSongCount; i++)
     {
         const struct EmeraldAudioSongRecord *record =
@@ -408,8 +565,15 @@ static void BuildArenaSpanList(void)
         sAudioRanges[n].canonicalName = record->canonicalName;
         Gen3ResourceId_DeriveKey(sAudioRanges[n].canonicalName,
                                  &sAudioRanges[n].key);
+        sAudioRanges[n].type = GEN3_RESOURCE_TYPE_MUSIC_SEQUENCE;
+        sAudioRanges[n].schema = 1u;
+        sAudioRanges[n].role = EMERALD_RESOURCE_ROLE_CANONICAL;
         n++;
     }
+    /* The 197 transformed blocks: whole-table COMPAT_OBJECT spans (plan §4:
+     * no per-row identities - the 21,370 rows add zero identity value). The
+     * block base INCLUDES the drumset back-shift pad; the pad must be inside
+     * the range - the back-shifted label points at it. */
     for (i = 0; i < sArena->structuralCount; i++)
     {
         const struct EmeraldAudioStructuralRecord *record =
@@ -420,20 +584,23 @@ static void BuildArenaSpanList(void)
             continue;
         sAudioRanges[n].base =
             (uintptr_t)(transformBase + record->transformOffset);
-        /* The block base INCLUDES the drumset back-shift pad; the pad must
-         * be inside the range - the back-shifted label points at it. */
         sAudioRanges[n].length =
             ((size_t)record->backshiftRows + record->rowCount) * 24u;
         sAudioRanges[n].canonicalName = record->canonicalName;
         Gen3ResourceId_DeriveKey(sAudioRanges[n].canonicalName,
                                  &sAudioRanges[n].key);
+        sAudioRanges[n].type = GEN3_RESOURCE_TYPE_INSTRUMENT_BANK;
+        sAudioRanges[n].schema = 1u;
+        sAudioRanges[n].role = EMERALD_RESOURCE_ROLE_COMPAT_OBJECT;
         n++;
     }
+    qsort(sAudioRanges, n, sizeof(sAudioRanges[0]), CompareRangeByBase);
     sAudioRangeCount = n;
 }
 
-/* Register the spans + hull into the shared index (transactional: any
- * failure restores the index to its pre-registration state). Re-registration
+/* Register the spans + two hulls into the shared index (transactional: any
+ * failure restores the index to its pre-registration state - the rollback
+ * resets hullCount to the pre-hull mark, trimming BOTH hulls). Re-registration
  * first removes our previous spans (verified - only our own block) so it
  * can never overlap itself. The sorted-insertion position of our block is
  * computed up front: with the mark recorded, the block is always
@@ -460,22 +627,18 @@ static bool RegisterArenaRanges(void)
     sAudioRangeMark = mark;
     for (i = 0; i < sAudioRangeCount; i++)
     {
-        uint32_t type = i == 0u ? GEN3_RESOURCE_TYPE_AUDIO_SAMPLE
-                  : i < EMERALD_AUDIO_SPAN_TRANSFORM_FIRST
-                      ? GEN3_RESOURCE_TYPE_MUSIC_SEQUENCE
-                      : GEN3_RESOURCE_TYPE_INSTRUMENT_BANK;
-        enum EmeraldResourceRangeRole role = i == 0u
-                  ? EMERALD_RESOURCE_ROLE_CANONICAL
-                  : i < EMERALD_AUDIO_SPAN_TRANSFORM_FIRST
-                      ? EMERALD_RESOURCE_ROLE_CANONICAL
-                      : EMERALD_RESOURCE_ROLE_COMPAT_OBJECT;
         if (!EmeraldResourceRangeIndex_RegisterSpan(
                 index, sAudioRanges[i].base, sAudioRanges[i].length,
-                sAudioRanges[i].canonicalName, type, 1u, role))
+                sAudioRanges[i].canonicalName, sAudioRanges[i].type,
+                sAudioRanges[i].schema, sAudioRanges[i].role))
             goto fail;
     }
     if (!EmeraldResourceRangeIndex_AddHull(
-            index, (uintptr_t)sArena, ArenaAllocationSize()))
+            index, (uintptr_t)(sArena->bytes + sArena->zoneOffset),
+            VerbatimHullLength())
+     || !EmeraldResourceRangeIndex_AddHull(
+            index, (uintptr_t)(sArena->bytes + sArena->transformOffset),
+            sArena->transformSize))
         goto fail;
     sAudioRangesInIndex = true;
     return true;
@@ -1217,11 +1380,102 @@ EmeraldAudioCompat_TryInitialize(
         goto done;
     }
 
+    /* Phase 1c: prove the LEAF SUB-ZONE tiling (R12-F §3): every leaf
+     * payload AND every keysplit range (label-extended: the back-shift pad
+     * plus the run) must lie strictly inside [0, SONG_BLOCK_OFFSET) and no
+     * two may overlap. This subsumes the R12-C per-run hole check, extends
+     * it to the keysplit LABEL region (the live keySplitTable pointers
+     * target the label, so an overlap there would alias another leaf's
+     * bytes), and adds the missing leaf-vs-leaf and keysplit-vs-keysplit
+     * disjointness proofs. The song block is separately proven to tile
+     * [SONG_BLOCK_OFFSET, +SONG_BLOCK_SIZE) exactly below, so the two
+     * families together leave no leaf-sub-zone byte unproven. */
+    {
+        struct LeafTileEntry *tiles = (struct LeafTileEntry *)calloc(
+            EMERALD_AUDIO_LEAF_COUNT + EMERALD_AUDIO_KEYSPLIT_COUNT,
+            sizeof(*tiles));
+        size_t tileCount = 0u;
+
+        if (tiles == NULL)
+        {
+            NoteFailure(diagnostics, "build", NULL,
+                        GEN3_RESOURCE_TYPE_INSTRUMENT_BANK,
+                        GEN3_RESOURCE_TYPE_INVALID, 1u, 0u, 0u, 0u, NULL);
+            result = EMERALD_AUDIO_ERR_OUT_OF_MEMORY;
+            goto done;
+        }
+        for (i = 0; i < count; i++)
+        {
+            tiles[tileCount].start = records[i].arenaOffset;
+            tiles[tileCount].end = tiles[tileCount].start + records[i].size;
+            snprintf(tiles[tileCount].name, sizeof(tiles[tileCount].name),
+                     "%s", records[i].canonicalName);
+            tileCount++;
+        }
+        {
+            struct KeysplitSpan ks[EMERALD_AUDIO_KEYSPLIT_COUNT];
+            size_t ksCount = 0u;
+            for (i = 0; i < structuralCount; i++)
+            {
+                const struct EmeraldAudioStructuralRecord *record =
+                    &structRecords[i];
+                if (record->kind != STRUCTURAL_KEYSPLIT)
+                    continue;
+                ks[ksCount].labelRomAddr = record->labelRomAddr;
+                ks[ksCount].backshiftBytes = record->backshiftBytes;
+                ks[ksCount].payloadBytes = record->payloadBytes;
+                ks[ksCount].canonicalName = record->canonicalName;
+                ksCount++;
+            }
+            qsort(ks, ksCount, sizeof(ks[0]), CompareKeysplitByLabel);
+            for (i = 0; i < ksCount; i++)
+            {
+                uint64_t labelOff = ks[i].labelRomAddr
+                                  - EMERALD_AUDIO_ROM_START;
+                tiles[tileCount].start = labelOff;
+                tiles[tileCount].end = labelOff
+                                     + KeysplitRangeLength(ks, ksCount, i);
+                snprintf(tiles[tileCount].name, sizeof(tiles[tileCount].name),
+                         "%s", ks[i].canonicalName);
+                tileCount++;
+            }
+        }
+        qsort(tiles, tileCount, sizeof(*tiles), CompareLeafTile);
+        for (i = 0; i < tileCount; i++)
+        {
+            uint64_t endOff = tiles[i].end;
+            if (tiles[i].end <= tiles[i].start
+             || tiles[i].start >= EMERALD_AUDIO_SONG_BLOCK_OFFSET
+             || endOff > EMERALD_AUDIO_SONG_BLOCK_OFFSET)
+            {
+                NoteFailure(diagnostics, "transform", tiles[i].name,
+                            GEN3_RESOURCE_TYPE_INSTRUMENT_BANK,
+                            GEN3_RESOURCE_TYPE_INVALID, 1u, 0u,
+                            EMERALD_AUDIO_SONG_BLOCK_OFFSET,
+                            (uint32_t)tiles[i].end, NULL);
+                free(tiles);
+                result = EMERALD_AUDIO_ERR_UNRESOLVED_POINTER;
+                goto done;
+            }
+            if (i > 0u && tiles[i - 1u].end > tiles[i].start)
+            {
+                NoteFailure(diagnostics, "transform", tiles[i].name,
+                            GEN3_RESOURCE_TYPE_INSTRUMENT_BANK,
+                            GEN3_RESOURCE_TYPE_INVALID, 1u, 0u,
+                            (uint32_t)tiles[i - 1u].end,
+                            (uint32_t)tiles[i].start, NULL);
+                free(tiles);
+                result = EMERALD_AUDIO_ERR_UNRESOLVED_POINTER;
+                goto done;
+            }
+        }
+        free(tiles);
+    }
+
     /* Phase 1c: validate the transform arithmetically (row + pad sums) and
      * prove every row pointer resolves (sample/wave -> exactly one leaf
      * span, subgroup -> exactly one voicegroup label, keysplit -> exactly
-     * one keysplit label, keysplit runs inside the verbatim zone and free
-     * of leaf overlaps) before any allocation. */
+     * one keysplit label) before any allocation. */
     recordBytes = EMERALD_AUDIO_LEAF_COUNT * sizeof(*records);
     structRecordBytes =
         EMERALD_AUDIO_STRUCTURAL_COUNT * sizeof(*structRecords);
@@ -1265,50 +1519,9 @@ EmeraldAudioCompat_TryInitialize(
 
             if (record->kind == STRUCTURAL_KEYSPLIT)
             {
-                /* Keysplit run: verbatim copy at ROM-relative offset. */
-                uint64_t romAddr = (uint64_t)entry->sourceRomOffset
-                                 + EMERALD_AUDIO_GBA_ROM_BASE;
-                uint64_t verbatimOff;
-                size_t j;
-                if (romAddr < EMERALD_AUDIO_ROM_START)
-                {
-                    NoteFailure(diagnostics, "build", record->canonicalName,
-                                GEN3_RESOURCE_TYPE_INSTRUMENT_BANK,
-                                entry->type, entry->schema, entry->schema,
-                                (uint32_t)entry->payloadSize,
-                                (uint32_t)entry->payloadSize, NULL);
-                    result = EMERALD_AUDIO_ERR_PAYLOAD_SIZE_MISMATCH;
-                    goto done;
-                }
-                verbatimOff = romAddr - EMERALD_AUDIO_ROM_START;
-                if (verbatimOff + entry->payloadSize > EMERALD_AUDIO_SPAN_SIZE)
-                {
-                    NoteFailure(diagnostics, "build", record->canonicalName,
-                                GEN3_RESOURCE_TYPE_INSTRUMENT_BANK,
-                                entry->type, entry->schema, entry->schema,
-                                (uint32_t)entry->payloadSize,
-                                (uint32_t)entry->payloadSize, NULL);
-                    result = EMERALD_AUDIO_ERR_PAYLOAD_SIZE_MISMATCH;
-                    goto done;
-                }
-                /* The run must sit in a hole: no leaf span may overlap it. */
-                for (j = 0; j < count; j++)
-                {
-                    uint64_t leafStart = (uint64_t)EMERALD_AUDIO_ROM_START
-                                       + records[j].arenaOffset;
-                    uint64_t leafEnd = leafStart + records[j].size;
-                    if (romAddr < leafEnd
-                     && romAddr + entry->payloadSize > leafStart)
-                    {
-                        NoteFailure(diagnostics, "transform",
-                                    record->canonicalName,
-                                    GEN3_RESOURCE_TYPE_INSTRUMENT_BANK,
-                                    entry->type, entry->schema, entry->schema,
-                                    (uint32_t)entry->payloadSize, 0u, NULL);
-                        result = EMERALD_AUDIO_ERR_UNRESOLVED_POINTER;
-                        goto done;
-                    }
-                }
+                /* Keysplit runs carry no transform rows; the leaf-sub-zone
+                 * tiling proof above covers their bounds, label regions and
+                 * hole placement. */
                 continue;
             }
 
@@ -1892,6 +2105,49 @@ bool EmeraldAudioCompat_GetArenaLayout(size_t *outZoneOffset,
     if (outTransformSize != NULL)
         *outTransformSize = sArena->transformSize;
     return true;
+}
+
+/* R12-E canary predicates: arena-residency bounds checks against the
+ * published arena. ContainsPointer spans the whole allocation view
+ * (verbatim zone + transformed zone, contiguous from the zone base);
+ * ContainsCanonicalPointer / ContainsTransformedPointer test the individual
+ * zones (song headers/leaves/keysplits are verbatim; voicegroup/cry rows and
+ * the transformed song rows are in the transformed zone). */
+bool EmeraldAudioCompat_ContainsPointer(uintptr_t address)
+{
+    const uint8_t *base;
+    size_t size;
+    if (!EmeraldAudioCompat_GetArena(&base, &size))
+        return false;
+    return address >= (uintptr_t)base
+        && address < (uintptr_t)base + size;
+}
+
+bool EmeraldAudioCompat_ContainsCanonicalPointer(uintptr_t address)
+{
+    const uint8_t *base;
+    size_t size;
+    if (!EmeraldAudioCompat_GetArena(&base, &size))
+        return false;
+    return address >= (uintptr_t)base
+        && address < (uintptr_t)base + size
+        && address - (uintptr_t)base < sArena->spanSize;
+}
+
+bool EmeraldAudioCompat_ContainsTransformedPointer(uintptr_t address)
+{
+    size_t zoneOffset;
+    size_t transformOffset;
+    size_t spanSize;
+    size_t transformSize;
+    if (sArena == NULL)
+        return false;
+    if (!EmeraldAudioCompat_GetArenaLayout(&zoneOffset, &transformOffset,
+                                           &spanSize, &transformSize))
+        return false;
+    return address >= (uintptr_t)(sArena->bytes + transformOffset)
+        && address < (uintptr_t)(sArena->bytes + transformOffset
+                                 + transformSize);
 }
 
 size_t EmeraldAudioCompat_GetPublishedCount(void)

@@ -747,11 +747,27 @@ static bool32 VerifyPaths(const char *manifestPath, const char *packagePath, boo
      * slots. The pack is resolved via the asset-path helper (exe-relative then
      * CWD-relative) and is deliberately NOT embedded in the binary: R7A
      * requires every ROM_BASE_ONLY payload to be absent from the native link.
-     * Without a valid snapshot it stays a no-op and never mutates the tables. */
+     * R12-E cutover: the native gSongTable rows hold ROM logical addresses,
+     * so a session without the audio arena cannot serve a single song - a
+     * refused registration is a REFUSED install (plan §12.1), not a degrade:
+     * propagate the failure so --verify-game-data exits 2 and the startup
+     * surface falls into the frontend data-setup/exit path. Without a valid
+     * snapshot, TryInitialize stays a no-op and never mutates the tables. */
     char packPath[CONTENT_PATH_MAX];
-    if (Platform_AssetGetPath("games/emerald/base/emerald-bpee01-v1.rpack",
-                              packPath, sizeof(packPath)))
-        EmeraldResourceCompat_RegisterRuntimeSnapshot(packPath);
+    if (!Platform_AssetGetPath("games/emerald/base/emerald-bpee01-v1.rpack",
+                               packPath, sizeof(packPath)))
+    {
+        fclose(package);
+        SetError("Emerald runtime session refused: production audio pack not found");
+        return FALSE;
+    }
+    if (EmeraldResourceCompat_RegisterRuntimeSnapshot(packPath) != EMERALD_COMPAT_OK)
+    {
+        fclose(package);
+        SetError("Emerald runtime session refused: production audio pack could not "
+                 "be registered (no audio arena)");
+        return FALSE;
+    }
     EmeraldResourceCompat_TryInitialize();
     /* R11-E/F: the neighborhood's one-time init point (plan §10): the map
      * tables, tilesets and layouts are all canonical by now (hydration +

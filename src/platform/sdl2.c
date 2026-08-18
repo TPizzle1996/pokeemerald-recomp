@@ -56,6 +56,7 @@
 #include "platform/desktop_assets.h"
 #include "platform/host_memory.h"
 #include "m4a.h"
+#include "emerald/resources/emerald_audio_compat.h"
 #include "emerald/resources/emerald_trainer_native_compat.h"
 
 HOST_DATA bool speedUp = false;
@@ -657,6 +658,159 @@ static bool32 NativeAudioPointerIsResourceResident(uintptr_t address)
         || EmeraldResourceRangeIndex_InHull(index, address);
 }
 
+/* R12-E live-pointer canary: with the native gSongTable rows carrying ROM
+ * logical addresses (sound/song_table_native.generated.inc), every MP2K
+ * pointer that is live during playback must resolve into the published audio
+ * arena: HydrateSongHeader resolves the song header's tone and parts through
+ * HostResolveGbaAddr into the arena, MPlayStart copies the hydrated tone into
+ * the player, track cmdPtr/patternStack point at arena stream bytes, and
+ * channels hold arena sample/wave pointers. A live pointer that is NOT
+ * arena-resident is compiled-image-resident (or foreign) - the R12-E
+ * negative canary: the compiled audio payloads must be dead in the native
+ * link, and any live pointer into them fails the test. Cry players are the
+ * one designed exception (their bytecode lives in the BSS gPokemonCrySongs
+ * buffers, compiled by design): with allowBssBytecode the part/cmdPtr/
+ * patternStack/currentPointer arena asserts are skipped, while the tone
+ * asserts always run - the cry tone (SetPokemonCryTone's transformed row)
+ * MUST be arena-resident even for cries. */
+const char *NativeAudioCheckLiveCanary(
+    const struct MusicPlayerInfo *playing, const struct SoundInfo *soundInfo,
+    bool32 allowBssBytecode)
+{
+    const struct SongHeader *header;
+    u32 i;
+
+    header = playing->songHeader;
+    if (header == NULL)
+        return "playing player songHeader is NULL";
+    if (header->tone == NULL)
+        return "songHeader tone is NULL";
+    if (!EmeraldAudioCompat_ContainsTransformedPointer(
+            (uintptr_t)header->tone))
+        return "songHeader tone is NOT arena-resident (compiled-image-resident)";
+    if (playing->tone != header->tone)
+        return "player tone differs from the hydrated songHeader tone";
+    if (!allowBssBytecode)
+    {
+        for (i = 0; i < header->trackCount; i++)
+        {
+            if (header->part[i] == NULL)
+                return "songHeader part[i] is NULL";
+            if (!EmeraldAudioCompat_ContainsCanonicalPointer(
+                    (uintptr_t)header->part[i]))
+                return "songHeader part[i] is NOT arena-resident (compiled-image-resident)";
+        }
+        /* Only the song's LIVE tracks (MPT_FLG_EXIST, the ones MPlayStart
+         * gave cmdPtr from the hydrated parts) are in the canary: the
+         * player's trackCount is the 12-slot capacity and stopped slots
+         * carry NULL cmdPtr by design (TrackStop). */
+        for (i = 0; i < playing->trackCount; i++)
+        {
+            const struct MusicPlayerTrack *track = &playing->tracks[i];
+            u32 level;
+
+            if (!(track->flags & MPT_FLG_EXIST))
+                continue;
+            if (track->cmdPtr == NULL)
+                return "track cmdPtr is NULL";
+            if (!EmeraldAudioCompat_ContainsCanonicalPointer(
+                    (uintptr_t)track->cmdPtr))
+                return "track cmdPtr is NOT arena-resident (compiled-image-resident)";
+            for (level = 0; level < track->patternLevel; level++)
+            {
+                if (track->patternStack[level] == NULL)
+                    return "track patternStack entry is NULL";
+                if (!EmeraldAudioCompat_ContainsCanonicalPointer(
+                        (uintptr_t)track->patternStack[level]))
+                    return "track patternStack entry is NOT arena-resident (compiled-image-resident)";
+            }
+        }
+    }
+    /* Channels owned by the playing player's tracks must hold arena sample
+     * and stream pointers (cry channel stream pointers may be the designed
+     * BSS bytecode, but the wave/sample pointer is always arena-resident). */
+    for (i = 0; i < MAX_DIRECTSOUND_CHANNELS; i++)
+    {
+        const struct SoundChannel *ch = &soundInfo->chans[i];
+
+        if ((ch->statusFlags & 0xC7) == 0)
+            continue;
+        if (ch->track < &playing->tracks[0]
+         || ch->track >= &playing->tracks[playing->trackCount])
+            continue; /* another player's channel (cry/SFX/etc.) */
+        if (ch->wav != NULL
+         && !EmeraldAudioCompat_ContainsCanonicalPointer(
+                (uintptr_t)ch->wav))
+            return "channel wav is NOT arena-resident (compiled-image-resident)";
+        if (!allowBssBytecode && ch->currentPointer != NULL
+         && !EmeraldAudioCompat_ContainsCanonicalPointer(
+                (uintptr_t)ch->currentPointer))
+            return "channel currentPointer is NOT arena-resident (compiled-image-resident)";
+    }
+    return NULL;
+}
+
+/* R12-E gSongTable sweep: all 610 native rows must resolve per their class -
+ * the 530 real rows carry ROM logical addresses and must resolve into the
+ * arena's verbatim zone (they are the live song graphs), while the 80 dummy
+ * rows hold the native dummy_song_header address and must resolve OUTSIDE
+ * the arena. Row 0's resolution must land at its exact zone-relative offset
+ * (arenaOffset = romAddr - EMERALD_AUDIO_ROM_START). */
+static const char *NativeAudioCheckSongTableResolution(void)
+{
+    const uint8_t *arenaBase;
+    size_t arenaSize;
+    size_t realRows = 0;
+    size_t dummyRows = 0;
+    u32 i;
+
+    if (!EmeraldAudioCompat_GetArena(&arenaBase, &arenaSize))
+        return "audio arena not published";
+    for (i = 0; i < 610; i++)
+    {
+        uintptr_t header = gSongTable[i].header;
+        uintptr_t resolved = (uintptr_t)HostResolveGbaAddr(gSongTable[i].header);
+
+        if (header >= EMERALD_AUDIO_SONG_BLOCK_START
+         && header < EMERALD_AUDIO_SONG_BLOCK_END)
+        {
+            realRows++;
+            if (!EmeraldAudioCompat_ContainsCanonicalPointer(resolved))
+                return "real gSongTable row resolves OUTSIDE the arena (compiled-image-resident)";
+        }
+        else
+        {
+            dummyRows++;
+            if (EmeraldAudioCompat_ContainsPointer(resolved))
+                return "dummy gSongTable row resolves INTO the arena";
+        }
+    }
+    if (realRows != EMERALD_AUDIO_SONG_COUNT
+     || dummyRows != 610 - EMERALD_AUDIO_SONG_COUNT)
+        return "gSongTable composition differs from 530 real / 80 dummy";
+    if (HostResolveGbaAddr(gSongTable[0].header)
+        != (void *)((uintptr_t)arenaBase
+                    + (EMERALD_AUDIO_SONG_BLOCK_START
+                       - EMERALD_AUDIO_ROM_START)))
+        return "gSongTable row 0 does not resolve to its zone-relative arena offset";
+    return NULL;
+}
+
+/* The one main player running a song (songHeader hydrated and live). */
+static const struct MusicPlayerInfo *NativeAudioFindPlayingPlayer(void)
+{
+    u32 j;
+
+    for (j = 0; j < MAX_MUSIC_PLAYERS; j++)
+    {
+        const struct MusicPlayerInfo *player =
+            (const struct MusicPlayerInfo *)HostResolveGbaAddr(gMPlayTable[j].info);
+        if (player->songHeader != NULL)
+            return player;
+    }
+    return NULL;
+}
+
 static int NativeStateAudioSelfTest(void)
 {
     /* R12-C: run against the redirected path. Same pack resolution and init
@@ -772,6 +926,38 @@ static int NativeStateAudioSelfTest(void)
                 (void *)soundInfo->musicPlayerHead, (void *)playerAddrs[5]);
         return 1;
     }
+
+    /* R12-E live-pointer canary: while mus_route101 plays, every live audio
+     * pointer (hydrated parts, hydrated + player tone, track cmdPtr, channel
+     * wav/currentPointer) must be arena-resident, and every native gSongTable
+     * row must resolve per its class. A live pointer outside the arena is
+     * compiled-image-resident - the negative canary. */
+    {
+        const struct MusicPlayerInfo *playing = NativeAudioFindPlayingPlayer();
+        const char *canaryFailure;
+
+        if (playing == NULL)
+        {
+            fprintf(stderr, "Native audio self-test: no playing player for live canary\n");
+            return 1;
+        }
+        canaryFailure = NativeAudioCheckLiveCanary(playing, soundInfo, FALSE);
+        if (canaryFailure != NULL)
+        {
+            fprintf(stderr, "Native audio self-test: live-pointer canary: %s\n",
+                    canaryFailure);
+            return 1;
+        }
+        canaryFailure = NativeAudioCheckSongTableResolution();
+        if (canaryFailure != NULL)
+        {
+            fprintf(stderr, "Native audio self-test: gSongTable sweep: %s\n",
+                    canaryFailure);
+            return 1;
+        }
+    }
+    fprintf(stdout, "Native audio self-test: live audio pointers arena-resident "
+                    "(R12-E canary)\n");
 
     /* 2. a started song populated channels and PCM. */
     {
@@ -1093,8 +1279,30 @@ static int NativeStateAudioSelfTest(void)
                 first, after[first], control[first]);
         return 1;
     }
+    /* R12-E: the post-restore live pointers were re-derived through the
+     * range index - they must be arena-resident again (state v5 relocation).
+     * The song-table sweep is static data; only the live canary re-runs. */
+    {
+        const struct MusicPlayerInfo *playing = NativeAudioFindPlayingPlayer();
+        const char *canaryFailure;
+
+        if (playing == NULL)
+        {
+            fprintf(stderr, "Native audio self-test: no playing player after load "
+                            "for live canary\n");
+            return 1;
+        }
+        canaryFailure = NativeAudioCheckLiveCanary(playing, soundInfo, FALSE);
+        if (canaryFailure != NULL)
+        {
+            fprintf(stderr, "Native audio self-test: post-restore live-pointer "
+                            "canary: %s\n", canaryFailure);
+            return 1;
+        }
+    }
     fprintf(stdout, "Native audio self-test passed "
-                    "(control: 40 frames; save/load: 40 frames; PCM byte-identical)\n");
+                    "(control: 40 frames; save/load: 40 frames; PCM byte-identical; "
+                    "live pointers arena-resident before and after load)\n");
     return 0;
 }
 #endif /* PLATFORM_SDL2 && NATIVE_LINUX */
@@ -1107,6 +1315,10 @@ int main(int argc, char **argv)
     bool32 printDataPath = FALSE;
     bool32 nativeStateSelfTest = FALSE;
     bool32 nativeAudioSelfTest = FALSE;
+    bool32 nativeAudioScenarioTest = FALSE;
+    bool32 nativeAudioScenarioOracle = FALSE;
+    bool32 nativeAudioRefusalTest = FALSE;
+    u64 nativeAudioPerfBaselineNs = 0u;
     bool32 utilityMode;
     char *prefPath = NULL;
     int argIndex;
@@ -1130,12 +1342,35 @@ int main(int argc, char **argv)
             nativeStateSelfTest = TRUE;
         else if (strcmp(argv[argIndex], "--native-audio-self-test") == 0)
             nativeAudioSelfTest = TRUE;
+        else if (strcmp(argv[argIndex], "--native-audio-scenario-test") == 0)
+            nativeAudioScenarioTest = TRUE;
+        else if (strcmp(argv[argIndex], "--native-audio-scenario-oracle") == 0)
+            nativeAudioScenarioOracle = TRUE;
+        else if (strcmp(argv[argIndex], "--native-audio-refusal-test") == 0)
+            nativeAudioRefusalTest = TRUE;
+        else if (strcmp(argv[argIndex], "--native-audio-perf-baseline") == 0
+              && argIndex + 1 < argc)
+        {
+            char *end = NULL;
+
+            nativeAudioPerfBaselineNs = strtoull(argv[++argIndex], &end, 10);
+            if (end == NULL || *end != '\0')
+            {
+                fprintf(stderr, "Invalid perf baseline: %s\n",
+                        argv[argIndex]);
+                return 2;
+            }
+        }
         else
         {
             fprintf(stderr, "Usage: %s [--data-root PATH] [--import-rom FILE] "
                             "[--verify-game-data] [--print-data-path] "
                             "[--native-state-self-test] "
-                            "[--native-audio-self-test]\n", argv[0]);
+                            "[--native-audio-self-test] "
+                            "[--native-audio-scenario-test] "
+                            "[--native-audio-scenario-oracle] "
+                            "[--native-audio-refusal-test] "
+                            "[--native-audio-perf-baseline NS]\n", argv[0]);
             return 2;
         }
     }
@@ -1317,6 +1552,35 @@ int main(int argc, char **argv)
         SDL_Quit();
         return rc;
     }
+    if (nativeAudioScenarioTest || nativeAudioScenarioOracle)
+    {
+        /* R12-E scenario battery: 15 deterministic live scenarios, each with
+         * a SHA-256 PCM digest, arena-residency canary (canary mode), and
+         * behavioral gates. Oracle mode (--native-audio-scenario-oracle) runs
+         * the same battery WITHOUT the arena canary - it is the compiled
+         * baseline (pre-cutover gSongTable) and its pointers are legitimately
+         * compiled-image-resident; its digests are the golden the migrated
+         * build must reproduce byte-for-byte. --native-audio-perf-baseline
+         * feeds the oracle's PERF window number into the test build, which
+         * asserts the plan's +5% wall-clock margin (§8 perf gate). */
+        int rc = NativeAudioScenarioTest(nativeAudioScenarioTest,
+                                         nativeAudioPerfBaselineNs);
+
+        Platform_StorageShutdown();
+        SDL_Quit();
+        return rc;
+    }
+    if (nativeAudioRefusalTest)
+    {
+        /* R12-E §12 refusal contract: missing/corrupt pack -> session
+         * refused with no arena, recovery, load-without-arena fails, and
+         * republish-after-clear is UNAVAILABLE. */
+        int rc = NativeAudioRefusalTest();
+
+        Platform_StorageShutdown();
+        SDL_Quit();
+        return rc;
+    }
 #endif /* PLATFORM_SDL2 && NATIVE_LINUX */
 
     if (!Platform_VideoInit())
@@ -1325,6 +1589,22 @@ int main(int argc, char **argv)
     if (!Platform_GameContentVerifyInstalled(TRUE)
      && !Platform_FrontendRunGameDataSetup())
     {
+        Platform_VideoShutdown();
+        Platform_InputShutdown();
+        Platform_StorageShutdown();
+        SDL_Quit();
+        return 0;
+    }
+    /* R12-E §12.1: a successful data-setup does not override a refused
+     * session. The import path only regenerates game content, never the
+     * audio pack, so with a missing/corrupt pack the session stays refused
+     * and the game must not start - otherwise song playback would silently
+     * serve the compiled audio that is still linked at GBA addresses (the
+     * fallback resolution path). Re-verify so the refusal surface holds. */
+    if (!Platform_GameContentVerifyInstalled(TRUE))
+    {
+        fprintf(stderr, "Platform startup: refused after data setup: %s\n",
+                Platform_GameContentGetLastError());
         Platform_VideoShutdown();
         Platform_InputShutdown();
         Platform_StorageShutdown();

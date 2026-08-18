@@ -224,6 +224,16 @@ size_t EmeraldAudioCompat_GetStructuralCount(void);
 bool EmeraldAudioCompat_GetTransformedRows(const uint8_t **outBase,
                                            size_t *outSize);
 
+/* R12-E live-pointer canary predicates (used by the NativeStateAudioSelfTest
+ * battery and test/debug helpers): arena-residency bounds checks against the
+ * published arena. A live audio pointer that fails all three is
+ * compiled-image-resident (or foreign) - the R12-E negative canary asserts
+ * every live pointer (song header parts/tone, player tone, track cmdPtr,
+ * pattern stack, channel wav/currentPointer, cry tone) IS arena-resident. */
+bool EmeraldAudioCompat_ContainsPointer(uintptr_t address);
+bool EmeraldAudioCompat_ContainsCanonicalPointer(uintptr_t address);
+bool EmeraldAudioCompat_ContainsTransformedPointer(uintptr_t address);
+
 /* R12-D song queries. */
 size_t EmeraldAudioCompat_GetSongCount(void);
 bool EmeraldAudioCompat_GetSongSpan(const char *canonicalName,

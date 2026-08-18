@@ -642,7 +642,11 @@ static bool BuildFullAudioPack(const char *path, size_t songCount,
                                void (*mutateLeaf)(struct AudioLeafFixture *fix,
                                                   size_t index),
                                void (*mutateSong)(struct AudioSongFixture *fix,
-                                                  size_t index))
+                                                  size_t index),
+                               size_t structuralCount,
+                               size_t skipStructuralIndex,
+                               void (*mutateStructural)(struct AudioStructuralFixture *fix,
+                                                        size_t index))
 {
     struct Gen3ResourcePackBuild *build = NULL;
     struct Gen3ResourcePackBytes bytes = { NULL, 0 };
@@ -650,9 +654,11 @@ static bool BuildFullAudioPack(const char *path, size_t songCount,
     struct Gen3ResourcePackProfileInput profile;
     struct AudioLeafFixture *leafFixes = NULL;
     struct AudioSongFixture *songFixes = NULL;
+    struct AudioStructuralFixture *structuralFixes = NULL;
     uint8_t provenanceSha[32];
     FILE *f = NULL;
     size_t i;
+    size_t structIndex = 0;
     enum Gen3ResourcePackError packError;
     bool ok = false;
 
@@ -690,6 +696,32 @@ static bool BuildFullAudioPack(const char *path, size_t songCount,
         if (mutateSong != NULL)
             mutateSong(&songFixes[i], i);
     }
+    /* R12-E failure matrix: the structural family is now mutable too (S7/S8).
+     * `skipStructuralIndex` drops one fixture (SIZE_MAX keeps all);
+     * `mutateStructural` damages a copy in place. */
+    if (structuralCount > sStructuralCount)
+        goto done;
+    structuralFixes = (struct AudioStructuralFixture *)calloc(
+        structuralCount, sizeof(*structuralFixes));
+    if (structuralFixes == NULL)
+        goto done;
+    for (i = 0; i < sStructuralCount && structIndex < structuralCount; i++)
+    {
+        if (i == skipStructuralIndex)
+            continue;
+        structuralFixes[structIndex] = sStructural[i];
+        structuralFixes[structIndex].payload =
+            (uint8_t *)malloc(sStructural[i].payloadSize);
+        if (structuralFixes[structIndex].payload == NULL)
+            goto done;
+        memcpy(structuralFixes[structIndex].payload, sStructural[i].payload,
+               sStructural[i].payloadSize);
+        if (mutateStructural != NULL)
+            mutateStructural(&structuralFixes[structIndex], structIndex);
+        structIndex++;
+    }
+    if (structIndex != structuralCount)
+        goto done;
 
     /* Deterministic synthetic identity (never cross-checked by the
      * session/seam against a real ROM). */
@@ -721,13 +753,13 @@ static bool BuildFullAudioPack(const char *path, size_t songCount,
                           &diag))
             goto done;
     }
-    /* Structurals are never mutated: passed through read-only. */
-    for (i = 0; i < sStructuralCount; i++)
+    for (i = 0; i < structuralCount; i++)
     {
-        if (!AddPackEntry(build, sStructural[i].canonicalName,
-                          sStructural[i].type, sStructural[i].schema,
-                          sStructural[i].payload, sStructural[i].payloadSize,
-                          sStructural[i].sourceRomOffset, &diag))
+        if (!AddPackEntry(build, structuralFixes[i].canonicalName,
+                          structuralFixes[i].type, structuralFixes[i].schema,
+                          structuralFixes[i].payload,
+                          structuralFixes[i].payloadSize,
+                          structuralFixes[i].sourceRomOffset, &diag))
             goto done;
     }
     for (i = 0; i < songCount; i++)
@@ -766,6 +798,12 @@ done:
         for (i = 0; i < songCount; i++)
             free(songFixes[i].payload);
         free(songFixes);
+    }
+    if (structuralFixes != NULL)
+    {
+        for (i = 0; i < structuralCount; i++)
+            free(structuralFixes[i].payload);
+        free(structuralFixes);
     }
     Gen3ResourcePackBuild_Destroy(build);
     Gen3ResourcePackDiagnostics_Destroy(&diag);
@@ -1175,27 +1213,34 @@ static void TestStructuralPublication(void)
     }
 }
 
-/* R12-C §8 + R12-D §9: assert the R10 registration state of a published
- * arena. `arenaBase` is the current GetArena base (verbatim zone start);
- * the checks cover the leaf sub-zone canonical range (the verbatim span,
- * SPLIT at the song block), the 530 per-song canonical MUSIC_SEQUENCE spans
- * (block start, mid-song, last song, last block byte; the unbacked zone
- * tail must MISS), a transformed cry row (COMPAT_OBJECT INSTRUMENT_BANK),
- * the load-direction ResolveByKey round trip, hull coverage, and the R12-D
- * HostResolveGbaAddr interval (identity-preserving inside the block, direct
- * cast outside it). */
+/* R12-F §4/§7: assert the R10 registration state of a published arena.
+ * `arenaBase` is the current GetArena base (verbatim zone start); the
+ * checks cover the 1,301 per-resource ranges - a leaf payload (CANONICAL
+ * AUDIO_SAMPLE/1, offset 0 and mid-leaf), the last leaf byte (the byte
+ * before the song block), ALL 5 keysplit ranges (base = the mks4agb LABEL,
+ * INSTRUMENT_BANK/schema 2/CANONICAL, offset 0 at the label; the run start
+ * resolves at offset == backshift; the five ranges tile
+ * [firstLabel, lastRunEnd) exactly), the 530 per-song canonical
+ * MUSIC_SEQUENCE spans (block start, mid-song, last song, last block byte;
+ * the unbacked zone tail must MISS), a transformed cry row (COMPAT_OBJECT
+ * INSTRUMENT_BANK), the load-direction ResolveByKey round trips, hull A +
+ * hull B coverage with the negative probes (zone tail, arena prefix,
+ * transform-align gap - all unhulled), and the R12-D HostResolveGbaAddr
+ * interval (identity-preserving inside the block, direct cast outside it).
+ * The synthetic emerald:audio/verbatim-zone identity is GONE: no probe may
+ * resolve under it. */
 static void CheckRangeRegistration(const char *tag, const uint8_t *arenaBase,
                                    size_t expectRanges, size_t expectHulls)
 {
     struct EmeraldResourceRangeIndex *index =
         EmeraldResourceCompat_GetRangeIndex();
     struct EmeraldResourceRangeHit hit;
-    Gen3ResourceKey verbatimKey, cryKey;
+    Gen3ResourceKey cryKey;
     uintptr_t resolved = 0;
     size_t zoneOff = 0, transformOff = 0, spanSize = 0, transformSize = 0;
     size_t cryTo = 0, cryRows = 0;
     uintptr_t transformBase = 0, cryProbe = 0;
-    bool layoutOk, cryOk, verbatimHit, cryHit, resolveOk;
+    bool layoutOk, cryOk, cryHit, resolveOk;
 
     CHECK("index present", index != NULL);
     if (index == NULL)
@@ -1203,7 +1248,6 @@ static void CheckRangeRegistration(const char *tag, const uint8_t *arenaBase,
     CHECK("range count", EmeraldResourceRangeIndex_GetRangeCount(index)
                              == expectRanges);
     CHECK("hull count", index->hullCount == expectHulls);
-    Gen3ResourceId_DeriveKey("emerald:audio/verbatim-zone", &verbatimKey);
     Gen3ResourceId_DeriveKey("emerald:audio/cry-table/forward", &cryKey);
 
     layoutOk = EmeraldAudioCompat_GetArenaLayout(&zoneOff, &transformOff,
@@ -1217,29 +1261,175 @@ static void CheckRangeRegistration(const char *tag, const uint8_t *arenaBase,
         cryProbe = transformBase + cryTo + 12u;
     }
 
-    /* Leaf sub-zone: the verbatim span, now ending at the song block. */
-    verbatimHit = EmeraldResourceRangeIndex_Lookup(index,
-                                                   (uintptr_t)arenaBase,
-                                                   &hit);
-    CHECK("verbatim hit", verbatimHit);
-    if (verbatimHit)
+    /* A leaf payload: CANONICAL AUDIO_SAMPLE/1, offset 0 at its run start
+     * and a mid-payload probe. The synthetic verbatim-zone key is gone -
+     * the leaf's own key resolves. */
     {
-        CHECK("verbatim key", Gen3ResourceId_KeyEqual(&hit.key, &verbatimKey));
-        CHECK("verbatim type", hit.type == GEN3_RESOURCE_TYPE_AUDIO_SAMPLE);
-        CHECK("verbatim role",
-              hit.role == EMERALD_RESOURCE_ROLE_CANONICAL);
-        CHECK("verbatim offset 0", hit.rangeOffset == 0u);
+        Gen3ResourceKey leafKey;
+        bool leafHit = sLeafCount > 0u;
+        Gen3ResourceId_DeriveKey(sLeaves[0].canonicalName, &leafKey);
+        leafHit = leafHit
+               && EmeraldResourceRangeIndex_Lookup(
+                      index, (uintptr_t)arenaBase + sLeaves[0].arenaOffset,
+                      &hit);
+        CHECK("leaf hit", leafHit);
+        if (leafHit)
+        {
+            CHECK("leaf key",
+                  Gen3ResourceId_KeyEqual(&hit.key, &leafKey));
+            CHECK("leaf type", hit.type == GEN3_RESOURCE_TYPE_AUDIO_SAMPLE);
+            CHECK("leaf schema", hit.schema == 1u);
+            CHECK("leaf role", hit.role == EMERALD_RESOURCE_ROLE_CANONICAL);
+            CHECK("leaf offset 0", hit.rangeOffset == 0u);
+        }
+        leafHit = sLeafCount > 0u
+               && EmeraldResourceRangeIndex_Lookup(
+                      index,
+                      (uintptr_t)arenaBase + sLeaves[0].arenaOffset + 4u,
+                      &hit);
+        CHECK("mid-leaf hit", leafHit);
+        if (leafHit)
+        {
+            CHECK("mid-leaf key",
+                  Gen3ResourceId_KeyEqual(&hit.key, &leafKey));
+            CHECK("mid-leaf offset", hit.rangeOffset == 4u);
+        }
     }
     /* The sub-zone's last byte (the last leaf ends 0x088FC03B, one byte
-     * before the song block) still belongs to the verbatim span. */
-    verbatimHit = EmeraldResourceRangeIndex_Lookup(
-        index, (uintptr_t)arenaBase + TEST_SONG_OFF - 1u, &hit);
-    CHECK("verbatim end hit", verbatimHit);
-    if (verbatimHit)
+     * before the song block) resolves under the LAST LEAF's key. */
     {
-        CHECK("verbatim end key",
-              Gen3ResourceId_KeyEqual(&hit.key, &verbatimKey));
-        CHECK("verbatim end offset", hit.rangeOffset == TEST_SONG_OFF - 1u);
+        const struct AudioLeafFixture *lastLeaf = NULL;
+        Gen3ResourceKey lastKey;
+        bool lastHit = false;
+        size_t li;
+        for (li = 0; li < sLeafCount; li++)
+        {
+            if ((size_t)sLeaves[li].arenaOffset + sLeaves[li].payloadSize
+                == TEST_SONG_OFF)
+            {
+                lastLeaf = &sLeaves[li];
+                break;
+            }
+        }
+        if (lastLeaf != NULL)
+        {
+            Gen3ResourceId_DeriveKey(lastLeaf->canonicalName, &lastKey);
+            lastHit = EmeraldResourceRangeIndex_Lookup(
+                index, (uintptr_t)arenaBase + TEST_SONG_OFF - 1u, &hit);
+            CHECK("last leaf byte hit", lastHit);
+            if (lastHit)
+            {
+                CHECK("last leaf byte key",
+                      Gen3ResourceId_KeyEqual(&hit.key, &lastKey));
+                CHECK("last leaf byte type",
+                      hit.type == GEN3_RESOURCE_TYPE_AUDIO_SAMPLE);
+                CHECK("last leaf byte offset",
+                      hit.rangeOffset == lastLeaf->payloadSize - 1u);
+            }
+        }
+    }
+    /* All 5 keysplit ranges (R12-F §4): base at the mks4agb LABEL (the live
+     * track->tone.keySplitTable pointer target) - INSTRUMENT_BANK/schema
+     * 2/CANONICAL, offset 0 at the label, offset == backshift at the run
+     * start, and the five ranges TILE [firstLabel, lastRunEnd) exactly (the
+     * next table's label is the previous range's end byte). The pinned
+     * offsets come from the reference tree's sound/keysplit_tables.inc and
+     * the ELF symbol addresses (KeySplitTable1..5); the run starts and
+     * lengths are cross-checked against the pack fixtures below. */
+    {
+        static const struct
+        {
+            const char *canonicalName;
+            uint32_t labelOff;   /* zone offset of the mks4agb label */
+            uint32_t runOff;     /* zone offset of the run start */
+            uint32_t runLen;     /* run length (= .inc entry count) */
+            uint32_t rangeLen;   /* label-tiled range length */
+        } pins[EMERALD_AUDIO_KEYSPLIT_COUNT] =
+        {
+            {"emerald:audio/keysplit/piano",       0x3D5FCu, 0x3D620u, 72u, 72u},
+            {"emerald:audio/keysplit/strings",     0x3D644u, 0x3D668u, 72u, 72u},
+            {"emerald:audio/keysplit/trumpet",     0x3D68Cu, 0x3D6B0u, 72u, 84u},
+            {"emerald:audio/keysplit/tuba",        0x3D6E0u, 0x3D6F8u, 84u, 72u},
+            {"emerald:audio/keysplit/french-horn", 0x3D728u, 0x3D74Cu, 72u, 108u},
+        };
+        size_t pi;
+        for (pi = 0; pi < EMERALD_AUDIO_KEYSPLIT_COUNT; pi++)
+        {
+            const struct AudioStructuralFixture *fix = NULL;
+            Gen3ResourceKey ksKey;
+            bool ksHit;
+            size_t fi;
+            for (fi = 0; fi < sStructuralCount; fi++)
+            {
+                if (sStructural[fi].kind == 2u
+                 && strcmp(sStructural[fi].canonicalName,
+                           pins[pi].canonicalName) == 0)
+                {
+                    fix = &sStructural[fi];
+                    break;
+                }
+            }
+            CHECK("keysplit fixture present", fix != NULL);
+            if (fix == NULL)
+                continue;
+            Gen3ResourceId_DeriveKey(fix->canonicalName, &ksKey);
+
+            /* The label: offset 0, the pointer's natural resolution. */
+            ksHit = EmeraldResourceRangeIndex_Lookup(
+                index, (uintptr_t)arenaBase + pins[pi].labelOff, &hit);
+            CHECK("keysplit label hit", ksHit);
+            if (ksHit)
+            {
+                CHECK("keysplit label key",
+                      Gen3ResourceId_KeyEqual(&hit.key, &ksKey));
+                CHECK("keysplit label type",
+                      hit.type == GEN3_RESOURCE_TYPE_INSTRUMENT_BANK);
+                CHECK("keysplit label schema", hit.schema == 2u);
+                CHECK("keysplit label role",
+                      hit.role == EMERALD_RESOURCE_ROLE_CANONICAL);
+                CHECK("keysplit label offset 0", hit.rangeOffset == 0u);
+            }
+            /* The run start (the first mapped note): offset == backshift. */
+            ksHit = EmeraldResourceRangeIndex_Lookup(
+                index, (uintptr_t)arenaBase + pins[pi].runOff, &hit);
+            CHECK("keysplit run-start hit", ksHit);
+            if (ksHit)
+            {
+                CHECK("keysplit run-start key",
+                      Gen3ResourceId_KeyEqual(&hit.key, &ksKey));
+                CHECK("keysplit run-start offset",
+                      hit.rangeOffset == pins[pi].runOff - pins[pi].labelOff);
+            }
+            /* The range's last byte - the byte before the next label. */
+            ksHit = EmeraldResourceRangeIndex_Lookup(
+                index,
+                (uintptr_t)arenaBase + pins[pi].labelOff
+                    + pins[pi].rangeLen - 1u,
+                &hit);
+            CHECK("keysplit last byte hit", ksHit);
+            if (ksHit)
+            {
+                CHECK("keysplit last byte key",
+                      Gen3ResourceId_KeyEqual(&hit.key, &ksKey));
+                CHECK("keysplit last byte offset",
+                      hit.rangeOffset == pins[pi].rangeLen - 1u);
+            }
+            /* Pack cross-check: the fixture run offset and payload length
+             * agree with the pinned geometry. */
+            CHECK("keysplit fixture run offset",
+                  fix->sourceRomOffset + 0x08000000u - EMERALD_AUDIO_ROM_START
+                      == pins[pi].runOff);
+            CHECK("keysplit fixture run length",
+                  fix->payloadSize == pins[pi].runLen);
+        }
+        /* The tiling is exact: each range ends at the next label, and the
+         * last ends at the last run end (0x3D794 = 0x3D74C + 72). */
+        for (pi = 0; pi + 1u < EMERALD_AUDIO_KEYSPLIT_COUNT; pi++)
+            CHECK("keysplit ranges tile (end == next label)",
+                  pins[pi].labelOff + pins[pi].rangeLen
+                      == pins[pi + 1u].labelOff);
+        CHECK("keysplit last range ends at last run end",
+              pins[4u].labelOff + pins[4u].rangeLen == 0x3D794u);
     }
 
     /* R12-D: the 530 per-song CANONICAL MUSIC_SEQUENCE spans tile the song
@@ -1360,8 +1550,37 @@ static void CheckRangeRegistration(const char *tag, const uint8_t *arenaBase,
         CHECK("resolve by key", resolveOk);
         CHECK("resolved pointer == probe", resolveOk && resolved == cryProbe);
     }
-    CHECK("arena in hull",
+    /* The two audio hulls (R12-F §4/§5): hull A = the verbatim zone minus
+     * its unbacked tail, hull B = the transformed zone. The zone tail, the
+     * arena prefix (record tables) and the transform-align gap are
+     * UNHULLED - a coincidental scalar there is ordinary data, while a
+     * real pointer inside a hull but outside every range fails capture
+     * closed. */
+    CHECK("hull A start",
           EmeraldResourceRangeIndex_InHull(index, (uintptr_t)arenaBase));
+    CHECK("hull A end",
+          EmeraldResourceRangeIndex_InHull(
+              index, (uintptr_t)arenaBase + TEST_SONG_OFF
+                         + EMERALD_AUDIO_SONG_BLOCK_SIZE - 1u));
+    CHECK("zone tail unhulled",
+          !EmeraldResourceRangeIndex_InHull(
+              index, (uintptr_t)arenaBase + TEST_SONG_OFF
+                         + EMERALD_AUDIO_SONG_BLOCK_SIZE));
+    CHECK("arena prefix unhulled",
+          !EmeraldResourceRangeIndex_InHull(index, (uintptr_t)arenaBase - 1u));
+    if (layoutOk)
+    {
+        CHECK("hull B start",
+              EmeraldResourceRangeIndex_InHull(index, transformBase));
+        CHECK("hull B end",
+              EmeraldResourceRangeIndex_InHull(
+                  index, transformBase + transformSize - 1u));
+        CHECK("transform-align gap unhulled",
+              !EmeraldResourceRangeIndex_InHull(index, transformBase - 1u));
+        CHECK("past transform unhulled",
+              !EmeraldResourceRangeIndex_InHull(
+                  index, transformBase + transformSize));
+    }
     (void)tag;
 }
 
@@ -1399,12 +1618,16 @@ static void TestPublication(const char *packPath)
     CHECK("TryInitialize OK",
           EmeraldAudioCompat_TryInitialize(session.snapshot, session.pack, &diag)
               == EMERALD_AUDIO_OK);
+    /* The success path records the informational publish note (payload
+     * bytes); a FAILURE would also set the actualType field. */
+    CHECK("publish note stage", strcmp(diag.stage, "publish") == 0);
+    CHECK("no failure detail on success", diag.actualType[0] == '\0');
     CHECK("arena published (GetArena)", EmeraldAudioCompat_GetArena(&arenaBase, &arenaSize));
     CHECK("arena size == span + transform",
           arenaSize == EMERALD_AUDIO_SPAN_SIZE + EMERALD_AUDIO_TRANSFORM_SIZE);
     CHECK("published count 569", EmeraldAudioCompat_GetPublishedCount() == EMERALD_AUDIO_LEAF_COUNT);
     /* R12-C §8: publish registered 198 spans + the arena hull. */
-    CheckRangeRegistration("publish", arenaBase, 728u, 1u);
+    CheckRangeRegistration("publish", arenaBase, 1301u, 2u);
 
     /* Every leaf: span + bytes agree with the pack payloads. */
     for (i = 0; i < sLeafCount; i++)
@@ -1486,7 +1709,7 @@ static void TestPublication(const char *packPath)
     /* Republish (immutable arena): OK, and the ranges survive the
      * verify/truncate/re-register cycle in identical form. */
     CHECK("republish OK", EmeraldAudioCompat_Republish(&diag) == EMERALD_AUDIO_OK);
-    CheckRangeRegistration("republish", arenaBase, 728u, 1u);
+    CheckRangeRegistration("republish", arenaBase, 1301u, 2u);
 
     /* Relocated session: a second snapshot from the same pack replaces the
      * arena atomically with identical content; the ranges must follow the
@@ -1508,7 +1731,7 @@ static void TestPublication(const char *packPath)
                      sLeaves[0].payloadSize) == 0);
         CHECK("new arena resolves",
               EmeraldAudioCompat_GetArena(&newBase, &arenaSize));
-        CheckRangeRegistration("relocated", newBase, 728u, 1u);
+        CheckRangeRegistration("relocated", newBase, 1301u, 2u);
         /* If the allocator reused the freed region, the old address is the
          * new base and the check is vacuous; otherwise the old spans must
          * be gone (unregister ran before the free). */
@@ -1563,6 +1786,43 @@ static void TestPublication(const char *packPath)
     CloseSession(&session);
     CHECK("first payload above zone start (sparse, hole at zone start)",
           firstRomAddr + 0x08000000u > EMERALD_AUDIO_ROM_START);
+}
+
+/* S7/S8 helpers: the structural family is otherwise immutable in the
+ * full-pack builder. */
+static size_t FirstVoicegroupStructuralIndex(void)
+{
+    size_t i;
+    for (i = 0; i < sStructuralCount; i++)
+        if (sStructural[i].kind == 0u)
+            return i;
+    return SIZE_MAX;
+}
+
+/* S8: corrupt one voicegroup row's GBA_ROW_PTR (bytes 4..7 of a 12-byte
+ * row). The first pointer-probing row (every type except squares/noise,
+ * whose pointer the transform drops) gets its high half flipped: real
+ * pointers are section addresses, so the flipped address is guaranteed
+ * out-of-section and unresolvable. */
+static void MutateStructuralRowPointer(struct AudioStructuralFixture *fix,
+                                       size_t index)
+{
+    size_t i;
+    uint8_t type;
+
+    (void)index;
+    if (fix->kind != 0u || fix->schema != 1u || fix->payloadSize < 12u)
+        return;
+    for (i = 0; i + 12u <= fix->payloadSize; i += 12u)
+    {
+        type = fix->payload[i];
+        if ((type & 0x07u) == 1u || (type & 0x07u) == 2u
+         || (type & 0x07u) == 4u)
+            continue; /* square/noise: pointer dropped by the transform */
+        fix->payload[i + 6u] ^= 0xFFu;
+        fix->payload[i + 7u] ^= 0xFFu;
+        return;
+    }
 }
 
 /* G: failure matrix - every bad composition/pack/session combination must
@@ -1801,7 +2061,8 @@ static void TestFailureMatrix(const char *tempDir, const char *realPackPath)
         {
             snprintf(path, sizeof(path), "%s/songrenamed.rpack", tempDir);
             CHECK("song-rename pack builds",
-                  BuildFullAudioPack(path, sSongCount, NULL, MutateSongRename));
+                  BuildFullAudioPack(path, sSongCount, NULL, MutateSongRename,
+                                     sStructuralCount, SIZE_MAX, NULL));
             {
                 struct Gen3ResourcePack *syntheticPack = NULL;
                 CHECK("song-rename pack opens",
@@ -1826,7 +2087,8 @@ static void TestFailureMatrix(const char *tempDir, const char *realPackPath)
         {
             snprintf(path, sizeof(path), "%s/songschema.rpack", tempDir);
             CHECK("song-schema pack builds",
-                  BuildFullAudioPack(path, sSongCount, NULL, MutateSongSchema));
+                  BuildFullAudioPack(path, sSongCount, NULL, MutateSongSchema,
+                                     sStructuralCount, SIZE_MAX, NULL));
             {
                 struct Gen3ResourcePack *syntheticPack = NULL;
                 CHECK("song-schema pack opens",
@@ -1848,7 +2110,8 @@ static void TestFailureMatrix(const char *tempDir, const char *realPackPath)
         {
             snprintf(path, sizeof(path), "%s/songoffset.rpack", tempDir);
             CHECK("song-offset pack builds",
-                  BuildFullAudioPack(path, sSongCount, NULL, MutateSongOffset));
+                  BuildFullAudioPack(path, sSongCount, NULL, MutateSongOffset,
+                                     sStructuralCount, SIZE_MAX, NULL));
             {
                 struct Gen3ResourcePack *syntheticPack = NULL;
                 CHECK("song-offset pack opens",
@@ -1868,7 +2131,8 @@ static void TestFailureMatrix(const char *tempDir, const char *realPackPath)
         {
             snprintf(path, sizeof(path), "%s/songearly.rpack", tempDir);
             CHECK("song-early pack builds",
-                  BuildFullAudioPack(path, sSongCount, NULL, MutateSongEarlyOffset));
+                  BuildFullAudioPack(path, sSongCount, NULL, MutateSongEarlyOffset,
+                                     sStructuralCount, SIZE_MAX, NULL));
             {
                 struct Gen3ResourcePack *syntheticPack = NULL;
                 CHECK("song-early pack opens",
@@ -1885,21 +2149,22 @@ static void TestFailureMatrix(const char *tempDir, const char *realPackPath)
 
         /* S5: song/leaf overlap - an UNREFERENCED leaf (wave 17) moved
          * into the song block. Phase 1a placement and phase 1b row
-         * resolution both pass (no row points at waves 17-20), so phase
-         * 1c's disjointness proof fires. */
+         * resolution both pass (no row points at waves 17-20), so the
+         * phase-1c tiling proof's bounds check fires (leaf start >=
+         * SONG_BLOCK_OFFSET) with the R12-F fail-closed error. */
         {
             snprintf(path, sizeof(path), "%s/waveinblock.rpack", tempDir);
             CHECK("wave-in-block pack builds",
                   BuildFullAudioPack(path, sSongCount, MutateWaveIntoSongBlock,
-                                     NULL));
+                                     NULL, sStructuralCount, SIZE_MAX, NULL));
             {
                 struct Gen3ResourcePack *syntheticPack = NULL;
                 CHECK("wave-in-block pack opens",
                       Gen3ResourcePack_OpenFile(path, &syntheticPack, &sdiag) == GEN3_PACK_OK);
                 status = EmeraldAudioCompat_TryInitialize(session.snapshot,
                                                           syntheticPack, &diag);
-                CHECK("leaf in song block -> PAYLOAD_SIZE_MISMATCH",
-                      status == EMERALD_AUDIO_ERR_PAYLOAD_SIZE_MISMATCH);
+                CHECK("leaf in song block -> UNRESOLVED_POINTER",
+                      status == EMERALD_AUDIO_ERR_UNRESOLVED_POINTER);
                 CHECK("arena absent after failure",
                       EmeraldAudioCompat_GetPublishedCount() == 0u);
                 Gen3ResourcePack_Destroy(syntheticPack);
@@ -1917,7 +2182,8 @@ static void TestFailureMatrix(const char *tempDir, const char *realPackPath)
         struct TestSession smallSongSession;
         snprintf(path, sizeof(path), "%s/songmissing.rpack", tempDir);
         CHECK("missing-song pack builds",
-              BuildFullAudioPack(path, sSongCount - 1u, NULL, NULL));
+              BuildFullAudioPack(path, sSongCount - 1u, NULL, NULL,
+                                 sStructuralCount, SIZE_MAX, NULL));
         CHECK("missing-song session opens", OpenSession(path, &smallSongSession));
         status = EmeraldAudioCompat_TryInitialize(smallSongSession.snapshot,
                                                   smallSongSession.pack, &diag);
@@ -1926,6 +2192,58 @@ static void TestFailureMatrix(const char *tempDir, const char *realPackPath)
         CHECK("arena absent after failure",
               EmeraldAudioCompat_GetPublishedCount() == 0u);
         CloseSession(&smallSongSession);
+    }
+
+    /* S7: missing voicegroup - one instrument-bank short of the 195-group
+     * composition (its own session, pack-derived). */
+    {
+        struct TestSession missingVgSession;
+        size_t skip = FirstVoicegroupStructuralIndex();
+        snprintf(path, sizeof(path), "%s/vgmissing.rpack", tempDir);
+        CHECK("missing-voicegroup pack builds",
+              skip != SIZE_MAX
+              && BuildFullAudioPack(path, sSongCount, NULL, NULL,
+                                    sStructuralCount - 1u, skip, NULL));
+        CHECK("missing-voicegroup session opens",
+              OpenSession(path, &missingVgSession));
+        status = EmeraldAudioCompat_TryInitialize(missingVgSession.snapshot,
+                                                  missingVgSession.pack, &diag);
+        CHECK("missing voicegroup -> UNEXPECTED_COMPOSITION",
+              status == EMERALD_AUDIO_ERR_UNEXPECTED_COMPOSITION);
+        CHECK("diagnostics name the composition",
+              strstr(diag.canonicalName, "structural (voicegroup 194") != NULL);
+        CHECK("diagnostics stage build",
+              strcmp(diag.stage, "build") == 0);
+        CHECK("arena absent after failure",
+              EmeraldAudioCompat_GetPublishedCount() == 0u);
+        CloseSession(&missingVgSession);
+    }
+
+    /* S8: corrupt structural row - the first voicegroup's first
+     * pointer-probing row points out-of-section. Phase 1c's transform
+     * probe fails closed naming the row. */
+    {
+        struct TestSession corruptVgSession;
+        snprintf(path, sizeof(path), "%s/vgrowptr.rpack", tempDir);
+        CHECK("corrupt-structural pack builds",
+              BuildFullAudioPack(path, sSongCount, NULL, NULL,
+                                 sStructuralCount, SIZE_MAX,
+                                 MutateStructuralRowPointer));
+        CHECK("corrupt-structural session opens",
+              OpenSession(path, &corruptVgSession));
+        status = EmeraldAudioCompat_TryInitialize(corruptVgSession.snapshot,
+                                                  corruptVgSession.pack, &diag);
+        CHECK("corrupt structural row -> UNRESOLVED_POINTER",
+              status == EMERALD_AUDIO_ERR_UNRESOLVED_POINTER);
+        CHECK("diagnostics name the voicegroup row",
+              strncmp(diag.canonicalName, "emerald:audio/voicegroup/",
+                      sizeof("emerald:audio/voicegroup/") - 1u) == 0
+              && strstr(diag.canonicalName, " row ") != NULL);
+        CHECK("diagnostics stage transform",
+              strcmp(diag.stage, "transform") == 0);
+        CHECK("arena absent after failure",
+              EmeraldAudioCompat_GetPublishedCount() == 0u);
+        CloseSession(&corruptVgSession);
     }
 }
 

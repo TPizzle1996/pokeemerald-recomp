@@ -161,6 +161,20 @@ cat audio-load.log
 grep -q "AUDIO-LOAD ok" audio-load.log
 echo "TEST A load ok (mid-BGM/mid-cry pointers re-derived into the fresh arena via ResolveByKey)"
 
+echo "== TEST A: audio arena bases differ between creator and loader (R12-E §9) =="
+python3 - "$tmp" <<'EOF'
+import re, sys
+tmp = sys.argv[1]
+create = open(f"{tmp}/audio-create.log").read()
+load = open(f"{tmp}/audio-load.log").read()
+m = re.search(r"CREATE audio arena: audio_vg=(0x[0-9a-f]+) audio_cry=(0x[0-9a-f]+)", create)
+c = (m.group(1), m.group(2))
+m = re.search(r"LOAD audio arena: audio_vg=(0x[0-9a-f]+) audio_cry=(0x[0-9a-f]+)", load)
+l = (m.group(1), m.group(2))
+assert c != l, f"audio arena bases identical across processes: {c}"
+print(f"TEST A relocation ok: audio creator {c} vs loader {l}")
+EOF
+
 echo "== TEST B: desktop state-manager load sequence (real desktop_state.c + desktop_audio.c over the fake SDL device) =="
 dstate="harness-desktop-slot-7.st"
 "$tmp/emerald_resource_state_test" desktop-audio "$pack" "$dstate" > desktop-audio.log

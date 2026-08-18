@@ -65,7 +65,25 @@ struct HostSongHeader
     u8 *parts[MAX_MUSICPLAYER_TRACKS];
 };
 
-static struct HostSongHeader sHostSongHeaders[MAX_MUSIC_PLAYERS];
+/* R12-E: hydrated song headers are materialized PER SONG, keyed by the raw
+ * ROM header address, not per player slot. The engine identifies the playing
+ * song by comparing SongHeader POINTERS (m4aSongNumStartOrChange /
+ * m4aSongNumStartOrContinue); on the GBA those are distinct ROM addresses, so
+ * a different song always compares unequal and the same song always equal. A
+ * per-slot reuse buffer would make every song on a slot compare EQUAL to the
+ * slot's current song and the change path could never fire. The first
+ * hydration of an address creates a permanent entry, so the identity
+ * semantics match the GBA exactly. Bound: the 610 gSongTable rows (530 real
+ * + 80 dummy) are the only reachable addresses. */
+#define MAX_HYDRATED_SONGS 640
+
+static struct
+{
+    GbaAddr address;
+    struct HostSongHeader header;
+} sHydratedSongHeaders[MAX_HYDRATED_SONGS];
+static u32 sHydratedSongHeaderCount;
+
 static struct HostSongHeader sHostPokemonCrySongHeaders[MAX_POKEMON_CRIES];
 
 static struct MusicPlayerInfo *GetMusicPlayerInfo(const struct MusicPlayer *player)
@@ -78,11 +96,42 @@ static struct MusicPlayerTrack *GetMusicPlayerTracks(const struct MusicPlayer *p
     return HostResolveGbaAddr(player->track);
 }
 
+/* R12-F §10: harness accessor for the hydrated-song-cache growth pin. The
+ * cache is permanent per address, so a save/load round trip must never add
+ * an entry; the R12-F cry scenario asserts the count is unchanged across
+ * the load and the battery pins the ≤610 reachability bound. */
+u32 M4aGetHydratedSongHeaderCount(void)
+{
+    return sHydratedSongHeaderCount;
+}
+
 static struct SongHeader *HydrateSongHeader(u8 playerId, GbaAddr address)
 {
     const u8 *raw = HostResolveGbaAddr(address);
-    struct HostSongHeader *host = &sHostSongHeaders[playerId];
-    u8 i;
+    struct HostSongHeader *host;
+    u32 i;
+
+    (void)playerId;
+
+    for (i = 0; i < sHydratedSongHeaderCount; i++)
+    {
+        if (sHydratedSongHeaders[i].address == address)
+            return (struct SongHeader *)&sHydratedSongHeaders[i].header;
+    }
+
+    if (sHydratedSongHeaderCount < MAX_HYDRATED_SONGS)
+    {
+        host = &sHydratedSongHeaders[sHydratedSongHeaderCount].header;
+        sHydratedSongHeaders[sHydratedSongHeaderCount].address = address;
+        sHydratedSongHeaderCount++;
+    }
+    else
+    {
+        /* Unreachable (610 gSongTable rows bound the distinct addresses);
+         * keep the session alive rather than overflow. */
+        sHydratedSongHeaders[0].address = address;
+        host = &sHydratedSongHeaders[0].header;
+    }
 
     host->trackCount = raw[0];
     host->blockCount = raw[1];

@@ -2995,9 +2995,87 @@ static enum NativeStateResult LoadStateFromPath(const char *path)
                 return NATIVE_STATE_UNSUPPORTED;
             }
         }
-        /* Everything above validated: no live game memory has been touched.
-         * Restore the sections, then patch the reconstructed resource
-         * pointers into their owning fields. */
+        /* R12-F §5 PRE-FLIGHT: every failure-prone resource republish runs
+         * BEFORE any game memory is restored. Both republishes are
+         * idempotent and allocation-free and touch only host .data outside
+         * every serialized slice (the trainer tables and the audio arena are
+         * process-lifetime state), so running them here cannot corrupt the
+         * load - and running them here means a failure refuses the load
+         * while the game is still byte-identical to its pre-load state: no
+         * slice restored, no pointer patched, no framebuffer touched, no
+         * audio unpaused. Core invariant (R12-F §5): no game-memory
+         * mutation and no audio unpause before all failure-prone resource
+         * work has been proven viable. */
+#if defined(PLATFORM_SDL2) && defined(NATIVE_LINUX)
+        /* Both republishes are gated on the runtime-session flag, mirroring
+         * the loader's contract (emerald_runtime_loader.c
+         * IsSessionRegistered): session-ful links (production - startup
+         * refuses a session-less launch) must prove every republish viable
+         * before any restore; session-less links (the state self-test's
+         * pure-machinery slot round-trips, which run before any session
+         * registration by design) have no resource references in the state
+         * (recordCount == 0, checked above) and no ranges - there is
+         * nothing to prove viable, so the pre-flight is skipped, exactly
+         * like the audio gate below. The refusal surface is unchanged: a
+         * session-less load of a resource-bearing state already refuses at
+         * the rangeIndex == NULL check, and a cleared-but-registered
+         * session (audio arena dropped) still refuses here. */
+        if (EmeraldResourceCompat_IsSessionRegistered())
+        {
+            struct EmeraldResourceCompatDiagnostics diagnostics;
+            enum EmeraldResourceCompatStatus status =
+                EmeraldResourceCompat_Republish(&diagnostics);
+            if (status != EMERALD_COMPAT_OK)
+            {
+                char message[256];
+                snprintf(message, sizeof(message),
+                         "trainer compatibility republish failed before "
+                         "restore (status %d)", (int)status);
+                SetError(message);
+                free(resolved);
+                free(file);
+                free(framebuffer);
+                return NATIVE_STATE_UNSUPPORTED;
+            }
+            /* R12-E §12.2/§12.3: the audio re-registration is mandatory for
+             * session-ful links (production: a restored state whose audio
+             * pointers cannot be re-hydrated must not run - no compiled
+             * fallback) and skipped for session-less links (test/offline
+             * builds that never call the cutover). The loader owns the
+             * session flag: the arena's absence alone cannot distinguish
+             * "never registered" from "registered then cleared", and the
+             * cleared case must fail the load (refusal contract). The
+             * refusal happens BEFORE any restore and WITHOUT clearing the
+             * arena (R12-F §6): the arena is process-lifetime and the game
+             * keeps running after a refused load, so its payloads must stay
+             * live. Its ranges are gone from the index - the state walker
+             * then fails closed on the next capture instead of persisting
+             * unresolvable pointers. */
+            {
+                struct EmeraldAudioCompatDiagnostics audioDiag;
+                enum EmeraldAudioCompatStatus audioStatus =
+                    EmeraldAudioCompat_Republish(&audioDiag);
+                if (audioStatus != EMERALD_AUDIO_OK)
+                {
+                    char message[256];
+                    snprintf(message, sizeof(message),
+                             "audio arena republish failed before restore "
+                             "(status %d%s%s)", (int)audioStatus,
+                             audioDiag.canonicalName[0] != '\0' ? " @ " : "",
+                             audioDiag.canonicalName);
+                    SetError(message);
+                    free(resolved);
+                    free(file);
+                    free(framebuffer);
+                    return NATIVE_STATE_UNSUPPORTED;
+                }
+            }
+        }
+#endif
+        /* Everything above validated + the pre-flight proven viable: no
+         * live game memory has been touched. Restore the sections, then
+         * patch the reconstructed resource pointers into their owning
+         * fields. */
         offset = sizeof(*header) + header->sectionCount * sizeof(struct NativeStateSectionHeader);
         for (i = 0; i < count; i++)
         {
@@ -3039,57 +3117,25 @@ static enum NativeStateResult LoadStateFromPath(const char *path)
         free(resolved);
     }
     Platform_SchedulerSetFrameCounter(header->frame);
-    Platform_AudioClearQueue();
-    Platform_AudioSetPaused(FALSE);
     Platform_VideoRestoreFramebuffer(framebuffer, DISPLAY_WIDTH * DISPLAY_HEIGHT * sizeof(u32));
     free(file);
     free(framebuffer);
 
-    /* R6 (§2/§3/§15): the trainer tables are plain native .data, outside the
-     * serialized slices (verified against the built binary: no gba_data
-     * attribute), so they keep whatever process-local values they hold across
-     * a save/load round trip - possibly garbage, possibly the NULL sentinels
-     * of a fresh process. Re-publish the current-session compatibility image
-     * into the migrated slots unconditionally so no stale or foreign
-     * process-local compat pointer can survive a load. The republish is
-     * idempotent and allocation-free; if no valid session image exists, fail
-     * closed by clearing the migrated entries (NULL sentinel) so consumers
-     * cannot use them. The seam is guarded to the native SDL2 target
-     * (emerald_trainer_native_compat.c is an empty TU elsewhere): on
-     * non-native builds there are no migrated slots to re-publish, so the
-     * calls must not be emitted (R7B, Windows release link). */
+    /* R12-F §5: the audio device stays PAUSED until the load has fully
+     * committed - the queue is drained and the neighborhood dropped BEFORE
+     * the unpause, so no stale audio and no stale location identity can
+     * outlive the swap. Any earlier refusal left the device paused. */
+    Platform_AudioClearQueue();
 #if defined(PLATFORM_SDL2) && defined(NATIVE_LINUX)
-    {
-        struct EmeraldResourceCompatDiagnostics diagnostics;
-        enum EmeraldResourceCompatStatus status =
-            EmeraldResourceCompat_Republish(&diagnostics);
-        if (status != EMERALD_COMPAT_OK)
-            EmeraldResourceCompat_ClearMigratedEntries();
-        /* R12-C §8: the audio arena persists across a load (process-lifetime
-         * allocation), but the trainer republish above may have reset the
-         * shared range index (dropping the audio spans + hull), so the audio
-         * seam re-registers its ranges here - after the trainer rebuild and
-         * before any consumer touches the restored pointers. Fail closed:
-         * a live arena without registered ranges would let the next save
-         * walk arena pointers without identity, so an error clears the
-         * arena (compiled audio serves; captures can no longer see arena
-         * pointers at all). */
-        {
-            struct EmeraldAudioCompatDiagnostics audioDiag;
-            enum EmeraldAudioCompatStatus audioStatus =
-                EmeraldAudioCompat_Republish(&audioDiag);
-            if (audioStatus != EMERALD_AUDIO_OK)
-                EmeraldAudioCompat_ClearMigratedEntries();
-        }
-        /* R11-E/F (plan §10): a restore keeps the location identity but
-         * re-derives every published pointer, so the neighborhood must drop
-         * its cached records and rebuild from the restored identity on next
-         * access (lazy, allocation-free, fail-closed to DEGRADED until a
-         * valid map identity is present). Never serialized: the module's
-         * storage is host .data/.bss, outside every slice. */
-        NativeWorldNeighborhood_Invalidate();
-    }
+    /* R11-E/F (plan §10): a restore keeps the location identity but
+     * re-derives every published pointer, so the neighborhood must drop
+     * its cached records and rebuild from the restored identity on next
+     * access (lazy, allocation-free, fail-closed to DEGRADED until a
+     * valid map identity is present). Never serialized: the module's
+     * storage is host .data/.bss, outside every slice. */
+    NativeWorldNeighborhood_Invalidate();
 #endif
+    Platform_AudioSetPaused(FALSE);
     return NATIVE_STATE_OK;
 }
 
