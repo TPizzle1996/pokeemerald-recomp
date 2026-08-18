@@ -36,6 +36,7 @@
 #include "platform/host_memory.h"
 #include "platform/native_state.h"
 #include "emerald/resources/emerald_trainer_native_compat.h"
+#include "emerald/resources/emerald_audio_compat.h"
 #include "platform/native_world_neighborhood.h"
 #include "siirtc.h"
 
@@ -3064,6 +3065,22 @@ static enum NativeStateResult LoadStateFromPath(const char *path)
             EmeraldResourceCompat_Republish(&diagnostics);
         if (status != EMERALD_COMPAT_OK)
             EmeraldResourceCompat_ClearMigratedEntries();
+        /* R12-C §8: the audio arena persists across a load (process-lifetime
+         * allocation), but the trainer republish above may have reset the
+         * shared range index (dropping the audio spans + hull), so the audio
+         * seam re-registers its ranges here - after the trainer rebuild and
+         * before any consumer touches the restored pointers. Fail closed:
+         * a live arena without registered ranges would let the next save
+         * walk arena pointers without identity, so an error clears the
+         * arena (compiled audio serves; captures can no longer see arena
+         * pointers at all). */
+        {
+            struct EmeraldAudioCompatDiagnostics audioDiag;
+            enum EmeraldAudioCompatStatus audioStatus =
+                EmeraldAudioCompat_Republish(&audioDiag);
+            if (audioStatus != EMERALD_AUDIO_OK)
+                EmeraldAudioCompat_ClearMigratedEntries();
+        }
         /* R11-E/F (plan §10): a restore keeps the location identity but
          * re-derives every published pointer, so the neighborhood must drop
          * its cached records and rebuild from the restored identity on next

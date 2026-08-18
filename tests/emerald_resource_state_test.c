@@ -94,7 +94,9 @@ extern bool HarnessDevicePaused(void);
 extern uint64_t HarnessDeviceQueuedBytes(void);
 #endif
 #include "gen3/resources/resource_id.h"
+#include "gen3/resources/resource_pack.h"
 #include "emerald/resources/emerald_trainer_native_compat.h"
+#include "emerald/resources/emerald_audio_compat.h"
 #include "emerald/resources/emerald_pokemon_native_compat.h"
 /* Declaration mode: the seam TU (compiled alongside) defines the arrays. */
 #include "emerald/resources/object_event_pic_tables.native.generated.h"
@@ -1629,6 +1631,83 @@ static void CheckAudioFixture(bool32 coincidencePlanted)
     }
 }
 
+/* R12-C §10.6-7: mid-BGM/mid-cry audio-arena pointer round-trip. The live
+ * engine holds pointers INTO the audio arena while a song plays (the active
+ * voicegroup's tone array in the transformed zone) and while a cry plays
+ * (the forward cry table bank). This resolves those two spans against the
+ * CURRENT process's published arena and derives their canonical keys. The
+ * create side plants them into the fixture's unasserted channel wav slots
+ * and proves the walker captures each as a keyed sidecar record; the load
+ * side proves they re-derive into the fresh process's arena via ResolveByKey
+ * (identity by key, never by address - creator and loader arenas differ). */
+struct AudioArenaPlant
+{
+    char voicegroupName[96];
+    Gen3ResourceKey voicegroupKey;
+    Gen3ResourceKey cryKey;
+    uintptr_t voicegroupBase; /* first pack-order voicegroup block base */
+    uintptr_t cryForwardBase; /* forward cry table block base */
+};
+
+static bool32 AudioArenaPlantResolve(const char *packPath,
+                                     struct AudioArenaPlant *out)
+{
+    struct Gen3ResourcePackDiagnosticList packDiag;
+    struct Gen3ResourcePack *pack = NULL;
+    const uint8_t *zoneBase = NULL;
+    size_t zoneSize = 0u;
+    size_t zoneOff = 0u, transformOff = 0u, spanSize = 0u, transformSize = 0u;
+    size_t vgTo = 0u, vgRows = 0u, cryTo = 0u, cryRows = 0u;
+    uintptr_t transformBase;
+    size_t i, n;
+    bool32 found = FALSE;
+
+    memset(out, 0, sizeof(*out));
+    Gen3ResourcePackDiagnostics_Init(&packDiag);
+    if (Gen3ResourcePack_OpenFile(packPath, &pack, &packDiag) != GEN3_PACK_OK)
+        goto done;
+    n = Gen3ResourcePack_GetEntryCount(pack);
+    for (i = 0u; i < n; i++)
+    {
+        const struct Gen3ResourcePackEntry *entry =
+            Gen3ResourcePack_GetEntry(pack, i);
+
+        if (entry != NULL
+         && strncmp(entry->canonicalName, "emerald:audio/voicegroup/",
+                    strlen("emerald:audio/voicegroup/")) == 0)
+        {
+            strncpy(out->voicegroupName, entry->canonicalName,
+                    sizeof(out->voicegroupName) - 1u);
+            out->voicegroupName[sizeof(out->voicegroupName) - 1u] = '\0';
+            found = TRUE;
+            break;
+        }
+    }
+    if (!found)
+        goto done;
+    if (!EmeraldAudioCompat_GetArena(&zoneBase, &zoneSize)
+     || !EmeraldAudioCompat_GetArenaLayout(&zoneOff, &transformOff,
+                                           &spanSize, &transformSize)
+     || !EmeraldAudioCompat_GetVoicegroupSpan(out->voicegroupName,
+                                              &vgTo, &vgRows)
+     || !EmeraldAudioCompat_GetCryTableSpan(false, &cryTo, &cryRows))
+    {
+        found = FALSE;
+        goto done;
+    }
+    transformBase = (uintptr_t)zoneBase + (transformOff - zoneOff);
+    out->voicegroupBase = transformBase + vgTo;
+    out->cryForwardBase = transformBase + cryTo;
+    Gen3ResourceId_DeriveKey(out->voicegroupName, &out->voicegroupKey);
+    Gen3ResourceId_DeriveKey("emerald:audio/cry-table/forward",
+                             &out->cryKey);
+done:
+    if (pack != NULL)
+        Gen3ResourcePack_Destroy(pack);
+    Gen3ResourcePackDiagnostics_Destroy(&packDiag);
+    return found;
+}
+
 /* TEST A create side: plant the audio fixture, save, and prove the FILE
  * treats the scalar classes as data (verbatim windows, no sidecar records)
  * and the pointer classes as tagged records (kind fields, never raw host
@@ -1637,9 +1716,12 @@ static int DoAudioRegression(const char *packPath, const char *statePath)
 {
     struct SoundInfo *fixture = AudioFixture();
     struct ParsedRecord records[32];
+    struct AudioArenaPlant plant;
     u32 recordCount = 0u;
     bool32 coincidencePlanted;
+    bool32 arenaPlanted;
     u32 jumpTableOffset;
+    u32 i;
     enum NativeStateResult result;
 
     if (!RegisterSession(packPath))
@@ -1647,6 +1729,19 @@ static int DoAudioRegression(const char *packPath, const char *statePath)
     if (!PlantRealRows())
         return 1;
     coincidencePlanted = PlantAudioFixture();
+    arenaPlanted = AudioArenaPlantResolve(packPath, &plant);
+    CHECK(arenaPlanted); /* audio arena resolved for mid-BGM/mid-cry plants */
+    if (arenaPlanted)
+    {
+        /* Mid-BGM: the active voicegroup's tone array lives in the arena's
+         * transformed zone. Mid-cry: the cry player holds the forward cry
+         * table bank. Both are real game-data pointer shapes into the arena;
+         * the walker must capture each as a keyed sidecar record. */
+        fixture->chans[1].wav =
+            (struct WaveData *)(uintptr_t)plant.voicegroupBase;
+        fixture->chans[2].wav =
+            (struct WaveData *)(uintptr_t)plant.cryForwardBase;
+    }
 
     result = NativeState_Save(HARNESS_STATE_SLOT);
     if (result != NATIVE_STATE_OK)
@@ -1655,14 +1750,14 @@ static int DoAudioRegression(const char *packPath, const char *statePath)
                 NativeState_GetLastError());
         return 1;
     }
-    /* Sidecar carries exactly the real-row records: every audio-shaped
-     * scalar stayed in-band data. */
+    /* Sidecar carries exactly the real-row records plus the two audio-arena
+     * references: every audio-shaped scalar stayed in-band data. */
     if (!ParseStateSidecar(statePath, records, 32, &recordCount))
     {
         fprintf(stderr, "audio-regression: state file has no valid resource sidecar\n");
         return 1;
     }
-    CHECK(recordCount == HARNESS_ROW_COUNT);
+    CHECK(recordCount == HARNESS_ROW_COUNT + (arenaPlanted ? 2u : 0u));
 
     /* Scalar windows round-trip verbatim in the GAME_BSS payload. */
     CHECK(StateGameBssBytesMatch(statePath,
@@ -1763,10 +1858,57 @@ static int DoAudioRegression(const char *packPath, const char *statePath)
         }
         free(bytes);
     }
+    if (arenaPlanted)
+    {
+        bool32 sawVoicegroup = FALSE;
+        bool32 sawCry = FALSE;
+
+        for (i = 0u; i < recordCount; i++)
+        {
+            if (memcmp(records[i].key, plant.voicegroupKey.bytes,
+                       GEN3_RESOURCE_KEY_SIZE) == 0)
+            {
+                sawVoicegroup = TRUE;
+                /* mid-BGM record at chans[1].wav */
+                CHECK(records[i].fieldOffset
+                      == AUDIO_MEMBER_OFFSET(chans[1].wav));
+                CHECK(records[i].type == GEN3_RESOURCE_TYPE_INSTRUMENT_BANK);
+                CHECK(records[i].schema == 1u);
+                CHECK(records[i].role == EMERALD_RESOURCE_ROLE_COMPAT_OBJECT);
+                CHECK(records[i].rangeOffset == 0u);
+            }
+            if (memcmp(records[i].key, plant.cryKey.bytes,
+                       GEN3_RESOURCE_KEY_SIZE) == 0)
+            {
+                sawCry = TRUE;
+                /* mid-cry record at chans[2].wav */
+                CHECK(records[i].fieldOffset
+                      == AUDIO_MEMBER_OFFSET(chans[2].wav));
+                CHECK(records[i].type == GEN3_RESOURCE_TYPE_INSTRUMENT_BANK);
+                CHECK(records[i].schema == 1u);
+                CHECK(records[i].role == EMERALD_RESOURCE_ROLE_COMPAT_OBJECT);
+                CHECK(records[i].rangeOffset == 0u);
+            }
+        }
+        CHECK(sawVoicegroup); /* sidecar carries the voicegroup record */
+        CHECK(sawCry); /* sidecar carries the cry-table record */
+        /* The in-band pointers are zeroed in the FILE: the reference lives
+         * only in the sidecar (identity + offset, never a raw address). */
+        CHECK(StateGameBssBytesMatch(statePath,
+                                     AUDIO_MEMBER_OFFSET(chans[1].wav), 0u));
+        CHECK(StateGameBssBytesMatch(statePath,
+                                     AUDIO_MEMBER_OFFSET(chans[2].wav), 0u));
+        /* The in-memory fixture still holds the planted values. */
+        CHECK(fixture->chans[1].wav
+              == (struct WaveData *)(uintptr_t)plant.voicegroupBase);
+        CHECK(fixture->chans[2].wav
+              == (struct WaveData *)(uintptr_t)plant.cryForwardBase);
+    }
     CheckAudioFixture(coincidencePlanted);
     if (sFailures != 0)
         return 1;
-    printf("AUDIO-REGRESSION ok (coincidence=%d)\n", (int)coincidencePlanted);
+    printf("AUDIO-REGRESSION ok (coincidence=%d, arena=%d)\n",
+           (int)coincidencePlanted, (int)arenaPlanted);
     return 0;
 }
 
@@ -1776,6 +1918,7 @@ static int DoAudioRegression(const char *packPath, const char *statePath)
  * ground truth). */
 static int DoAudioLoad(const char *packPath, const char *statePath)
 {
+    struct SoundInfo *fixture = AudioFixture();
     struct ParsedRecord records[32];
     u32 recordCount = 0u;
     u8 *bss = NULL;
@@ -1823,13 +1966,63 @@ static int DoAudioLoad(const char *packPath, const char *statePath)
     CHECK(StateGameBssBytesMatch(statePath,
                                  AUDIO_MEMBER_OFFSET(chans[1].blockCount),
                                  0x0000000004040404ull));
-    /* Sidecar record count is unchanged by the load (still the real rows). */
+    /* Sidecar record count is unchanged by the load (still the real rows
+     * plus the two audio-arena references). */
     if (!ParseStateSidecar(statePath, records, 32, &recordCount))
     {
         fprintf(stderr, "audio-load: state file has no valid resource sidecar\n");
         return 1;
     }
-    CHECK(recordCount == HARNESS_ROW_COUNT);
+    CHECK(recordCount == HARNESS_ROW_COUNT + 2u);
+    {
+        struct AudioArenaPlant plant;
+        bool32 arenaPlanted = AudioArenaPlantResolve(packPath, &plant);
+
+        CHECK(arenaPlanted); /* load: audio arena resolved for re-derivation */
+        if (arenaPlanted)
+        {
+            struct EmeraldResourceRangeIndex *rangeIndex =
+                EmeraldResourceCompat_GetRangeIndex();
+            struct EmeraldResourceRangeHit hit;
+            uintptr_t resolved = 0u;
+
+            /* The sidecar records re-derived into THIS process's arena:
+             * creator and loader arena bases differ, so the restored fields
+             * must equal the freshly published spans, not the creator's. */
+            CHECK(fixture->chans[1].wav
+                  == (struct WaveData *)(uintptr_t)plant.voicegroupBase);
+            CHECK(fixture->chans[2].wav
+                  == (struct WaveData *)(uintptr_t)plant.cryForwardBase);
+            /* Explicit ResolveByKey re-derivation, the walker's restore path
+             * (native_state.c RestoreResourcePointers). */
+            CHECK(rangeIndex != NULL
+                  && EmeraldResourceRangeIndex_ResolveByKey(
+                      rangeIndex, &plant.voicegroupKey,
+                      GEN3_RESOURCE_TYPE_INSTRUMENT_BANK, 1u,
+                      EMERALD_RESOURCE_ROLE_COMPAT_OBJECT, 0u, &resolved)
+                  && resolved == plant.voicegroupBase);
+            CHECK(rangeIndex != NULL
+                  && EmeraldResourceRangeIndex_ResolveByKey(
+                      rangeIndex, &plant.cryKey,
+                      GEN3_RESOURCE_TYPE_INSTRUMENT_BANK, 1u,
+                      EMERALD_RESOURCE_ROLE_COMPAT_OBJECT, 0u, &resolved)
+                  && resolved == plant.cryForwardBase);
+            /* Post-load the audio ranges are registered against the NEW
+             * arena base (the R12-C §8 re-registration after the trainer
+             * republish dropped the shared index). */
+            CHECK(rangeIndex != NULL
+                  && EmeraldResourceRangeIndex_Lookup(rangeIndex,
+                                                      plant.voicegroupBase,
+                                                      &hit)
+                  && Gen3ResourceId_KeyEqual(&hit.key,
+                                             &plant.voicegroupKey));
+            CHECK(rangeIndex != NULL
+                  && EmeraldResourceRangeIndex_Lookup(rangeIndex,
+                                                      plant.cryForwardBase,
+                                                      &hit)
+                  && Gen3ResourceId_KeyEqual(&hit.key, &plant.cryKey));
+        }
+    }
     CheckAudioFixture(coincidencePlanted);
     if (sFailures != 0)
         return 1;

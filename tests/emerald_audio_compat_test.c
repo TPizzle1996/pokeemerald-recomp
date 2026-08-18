@@ -1,13 +1,14 @@
 /* R12-B focused test: audio leaf ownership migration (tests A-G).
  *
  * Drives the R12-B seam (emerald_audio_compat.c) against the REAL production
- * pack (games/emerald/base/emerald-bpee01-v1.rpack, 5087 entries incl. the
- * 569 audio leaves) plus synthetic packs for the failure matrix:
+ * pack (games/emerald/base/emerald-bpee01-v1.rpack, 5289 entries incl. the
+ * 771 audio resources: 569 leaves + 202 structural) plus synthetic packs for
+ * the failure matrix:
  *
  *   A. counts        - pack composition: 105 root + 51 phoneme + 388 cry
  *                      samples + 25 programmable waves = 569 leaves, all
  *                      type AUDIO_SAMPLE / schema 1, names classified by the
- *                      R12-A taxonomy (pack total 5087);
+ *                      R12-A taxonomy (pack total 5289);
  *   B. exact         - every leaf's ROM-relative arena offset fits the
  *                      verbatim zone [0x0867709C, 0x089A3DB4], no two leaves
  *                      overlap, and the published arena bytes are
@@ -46,8 +47,10 @@
 #include "gen3/resources/resource_resolver.h"
 #include "gen3/resources/sha256.h"
 #include "emerald/resources/emerald_audio_compat.h"
-#include "emerald/resources/emerald_rom_profile.h"
+#include "emerald/resources/emerald_resource_ranges.h"
 #include "emerald/resources/emerald_resource_session.h"
+#include "emerald/resources/emerald_rom_profile.h"
+#include "emerald/resources/emerald_trainer_native_compat.h"
 
 /* ------------------------------------------------------------------ */
 /* CHECK machinery (same shape as the other offline harnesses)         */
@@ -64,6 +67,21 @@ static int sFails = 0;
             printf("FAIL %s:%d: %s\n", __FILE__, __LINE__, (label));         \
         }                                                                    \
     } while (0)
+
+/* ------------------------------------------------------------------ */
+/* R10 range index (R12-C §8 forward-pull)                              */
+/* ------------------------------------------------------------------ */
+
+/* The R12-B runner links NO trainer seam (run_audio_leaf.sh), so the audio
+ * seam's weak EmeraldResourceCompat_GetRangeIndex reference binds to this
+ * strong definition - the same stand-in the offline parity gate uses. Test F
+ * asserts the publish/republish/relocate/clear registration lifecycle. */
+static struct EmeraldResourceRangeIndex sTestRangeIndex;
+
+struct EmeraldResourceRangeIndex *EmeraldResourceCompat_GetRangeIndex(void)
+{
+    return &sTestRangeIndex;
+}
 
 /* ------------------------------------------------------------------ */
 /* Leaf taxonomy (mirrors the seam's ClassifyLeaf)                     */
@@ -184,6 +202,109 @@ static void FreeAudioLeaves(void)
         sLeaves[i].payload = NULL;
     }
     sLeafCount = 0;
+}
+
+/* ------------------------------------------------------------------ */
+/* R12-C fixtures: the 202 structural resources of the REAL pack       */
+/* ------------------------------------------------------------------ */
+
+struct AudioStructuralFixture
+{
+    char canonicalName[96];
+    enum Gen3ResourceType type;
+    uint32_t schema;
+    uint8_t *payload;          /* test-owned copy */
+    size_t payloadSize;
+    uint64_t sourceRomOffset;  /* first-row/run offset (label + backshift) */
+    uint32_t rowCount;         /* schema 1: payloadSize / 12 */
+    uint32_t kind;             /* 0 voicegroup, 1 cry-table, 2 keysplit */
+    uint32_t cryReverse;       /* cry-table only */
+};
+
+static struct AudioStructuralFixture
+    sStructural[EMERALD_AUDIO_STRUCTURAL_COUNT];
+static size_t sStructuralCount = 0;
+static size_t sVoicegroupCount = 0, sCryTableCount = 0, sKeysplitCount = 0;
+static size_t sStreamRows = 0, sKeysplitRunBytes = 0;
+
+static int ClassifyStructural(const char *name)
+{
+    if (strncmp(name, "emerald:audio/voicegroup/",
+                sizeof("emerald:audio/voicegroup/") - 1u) == 0)
+        return 0;
+    if (strncmp(name, "emerald:audio/cry-table/",
+                sizeof("emerald:audio/cry-table/") - 1u) == 0)
+        return 1;
+    if (strncmp(name, "emerald:audio/keysplit/",
+                sizeof("emerald:audio/keysplit/") - 1u) == 0)
+        return 2;
+    return -1;
+}
+
+static bool LoadStructuralFixtures(const struct Gen3ResourcePack *pack)
+{
+    size_t i, n = Gen3ResourcePack_GetEntryCount(pack);
+    size_t count = 0;
+
+    for (i = 0; i < n; i++)
+    {
+        const struct Gen3ResourcePackEntry *entry =
+            Gen3ResourcePack_GetEntry(pack, i);
+        struct AudioStructuralFixture *fix;
+        int kind;
+
+        if (entry->type != GEN3_RESOURCE_TYPE_INSTRUMENT_BANK)
+            continue;
+        if (count >= EMERALD_AUDIO_STRUCTURAL_COUNT)
+            return false;
+        kind = ClassifyStructural(entry->canonicalName);
+        if (kind < 0 || entry->payload == NULL || entry->payloadSize == 0u)
+            return false;
+        fix = &sStructural[count];
+        memset(fix, 0, sizeof(*fix));
+        snprintf(fix->canonicalName, sizeof(fix->canonicalName), "%s",
+                 entry->canonicalName);
+        fix->type = entry->type;
+        fix->schema = entry->schema;
+        fix->payload = (uint8_t *)malloc(entry->payloadSize);
+        if (fix->payload == NULL)
+            return false;
+        memcpy(fix->payload, entry->payload, entry->payloadSize);
+        fix->payloadSize = entry->payloadSize;
+        fix->sourceRomOffset = entry->sourceRomOffset;
+        fix->kind = (uint32_t)kind;
+        if (kind == 1 && entry->schema == 1u)
+            fix->cryReverse =
+                strcmp(entry->canonicalName, "emerald:audio/cry-table/reverse") == 0;
+        if (entry->schema == 1u)
+        {
+            fix->rowCount = (uint32_t)(entry->payloadSize / 12u);
+            sStreamRows += fix->rowCount;
+            if (kind == 0)
+                sVoicegroupCount++;
+            else
+                sCryTableCount++;
+        }
+        else
+        {
+            sKeysplitRunBytes += entry->payloadSize;
+            sKeysplitCount++;
+        }
+        count++;
+    }
+    sStructuralCount = count;
+    return count == EMERALD_AUDIO_STRUCTURAL_COUNT;
+}
+
+static void FreeStructuralFixtures(void)
+{
+    size_t i;
+    for (i = 0; i < sStructuralCount; i++)
+    {
+        free(sStructural[i].payload);
+        sStructural[i].payload = NULL;
+    }
+    sStructuralCount = 0;
 }
 
 /* ------------------------------------------------------------------ */
@@ -479,7 +600,7 @@ static void MutateAllToTiles(struct AudioLeafFixture *fix, size_t index)
 /* A. counts: pack composition pins 105/51/388/25 = 569. */
 static void TestAudioCounts(const struct Gen3ResourcePack *pack)
 {
-    CHECK("pack total 5087 entries", Gen3ResourcePack_GetEntryCount(pack) == 5087u);
+    CHECK("pack total 5289 entries", Gen3ResourcePack_GetEntryCount(pack) == 5289u);
     CHECK("leaf total 569", sLeafCount == EMERALD_AUDIO_LEAF_COUNT);
     CHECK("root count 105", sRootCount == EMERALD_AUDIO_ROOT_COUNT);
     CHECK("phoneme count 51", sPhonemeCount == EMERALD_AUDIO_PHONEME_COUNT);
@@ -573,12 +694,266 @@ static void TestArenaLayout(void)
     CHECK("span sparse (payloads < span)", payloadBytes < EMERALD_AUDIO_SPAN_SIZE);
 }
 
+/* R12-C counts: pack composition pins for the structural family. */
+static void TestStructuralCounts(void)
+{
+    size_t i;
+
+    CHECK("structural total 202", sStructuralCount == EMERALD_AUDIO_STRUCTURAL_COUNT);
+    CHECK("voicegroup count 195", sVoicegroupCount == EMERALD_AUDIO_VOICEGROUP_COUNT);
+    CHECK("cry-table count 2", sCryTableCount == EMERALD_AUDIO_CRY_TABLE_COUNT);
+    CHECK("keysplit count 5", sKeysplitCount == EMERALD_AUDIO_KEYSPLIT_COUNT);
+    CHECK("stream rows 21370", sStreamRows == EMERALD_AUDIO_STREAM_ROWS);
+    CHECK("keysplit run bytes 372", sKeysplitRunBytes == 372u);
+    for (i = 0; i < sStructuralCount; i++)
+    {
+        const struct AudioStructuralFixture *fix = &sStructural[i];
+        if (fix->schema == 1u)
+            CHECK("schema-1 payload is whole 12-byte rows",
+                  fix->payloadSize % 12u == 0u && fix->rowCount > 0u);
+        else
+            CHECK("schema-2 payload is a keysplit run",
+                  fix->schema == 2u && fix->kind == 2u);
+    }
+    /* Known anchors: forward cry table = 388 rows; reverse too. */
+    for (i = 0; i < sStructuralCount; i++)
+    {
+        const struct AudioStructuralFixture *fix = &sStructural[i];
+        if (fix->kind == 1u)
+            CHECK("cry table rows 388", fix->rowCount == 388u);
+    }
+}
+
+struct LabelCollector
+{
+    uint32_t addrs[197];
+    const uint8_t *bases[197];
+    size_t count;
+};
+
+static void CollectLabel(uint32_t gbaAddr, const void *hostBase, void *user)
+{
+    struct LabelCollector *c = (struct LabelCollector *)user;
+    if (c->count < 197u)
+    {
+        c->addrs[c->count] = gbaAddr;
+        c->bases[c->count] = (const uint8_t *)hostBase;
+        c->count++;
+    }
+}
+
+/* R12-C structural publication: composition gate, transformed zone,
+ * per-resource spans, cry accessor, logical-label enumeration. */
+static void TestStructuralPublication(void)
+{
+    const uint8_t *transformBase = NULL;
+    size_t transformSize = 0;
+    size_t i;
+    size_t cryFwd = 0, cryRev = 0;
+
+    CHECK("structural count 202 (published)",
+          EmeraldAudioCompat_GetStructuralCount() == EMERALD_AUDIO_STRUCTURAL_COUNT);
+    CHECK("transformed rows published",
+          EmeraldAudioCompat_GetTransformedRows(&transformBase, &transformSize));
+    CHECK("transformed zone size pinned",
+          transformSize == EMERALD_AUDIO_TRANSFORM_SIZE);
+
+    /* Per-resource spans against the pack fixtures. */
+    for (i = 0; i < sStructuralCount; i++)
+    {
+        const struct AudioStructuralFixture *fix = &sStructural[i];
+        if (fix->kind == 0)
+        {
+            size_t off = 0, rows = 0;
+            CHECK("voicegroup span resolves",
+                  EmeraldAudioCompat_GetVoicegroupSpan(fix->canonicalName,
+                                                       &off, &rows));
+            CHECK("voicegroup rows match payload", rows == fix->rowCount);
+            CHECK("voicegroup block inside transform zone",
+                  off + rows * 24u <= transformSize);
+        }
+        else if (fix->kind == 1)
+        {
+            size_t off = 0, rows = 0;
+            CHECK("cry span resolves",
+                  EmeraldAudioCompat_GetCryTableSpan(fix->cryReverse != 0u,
+                                                     &off, &rows));
+            CHECK("cry rows 388", rows == fix->rowCount);
+            if (fix->cryReverse)
+                cryRev = rows;
+            else
+                cryFwd = rows;
+        }
+        else
+        {
+            size_t off = 0, bytes = 0;
+            const uint8_t *zoneBase = NULL;
+            size_t zoneSize = 0;
+            uint64_t romAddr = fix->sourceRomOffset + 0x08000000u;
+            CHECK("keysplit span resolves",
+                  EmeraldAudioCompat_GetKeysplitSpan(fix->canonicalName,
+                                                     &off, &bytes));
+            CHECK("keysplit bytes match payload", bytes == fix->payloadSize);
+            CHECK("keysplit copy at ROM-relative offset",
+                  off == (size_t)(romAddr - EMERALD_AUDIO_ROM_START));
+            CHECK("keysplit copy inside verbatim zone",
+                  off + bytes <= EMERALD_AUDIO_SPAN_SIZE);
+            CHECK("zone published", EmeraldAudioCompat_GetArena(&zoneBase, &zoneSize));
+            CHECK("keysplit bytes == pack payload",
+                  zoneBase != NULL
+                  && memcmp(zoneBase + off, fix->payload, fix->payloadSize) == 0);
+        }
+    }
+    CHECK("cry forward rows 388", cryFwd == 388u);
+    CHECK("cry reverse rows 388", cryRev == 388u);
+
+    /* Drumset back-shift pads: rs-drumset is 29 rows with a 36-row pad. */
+    {
+        size_t off = 0, rows = 0;
+        const uint8_t *base = NULL;
+        size_t size = 0;
+        size_t k;
+        bool padZero = true;
+        CHECK("rs-drumset span resolves",
+              EmeraldAudioCompat_GetVoicegroupSpan(
+                  "emerald:audio/voicegroup/rs-drumset", &off, &rows));
+        CHECK("rs-drumset rows 29", rows == 29u);
+        CHECK("transformed rows published",
+              EmeraldAudioCompat_GetTransformedRows(&base, &size));
+        for (k = 0; k < 36u * 24u; k++)
+        {
+            if (base[off + k] != 0u)
+                padZero = false;
+        }
+        CHECK("rs-drumset pad zeroed (36 rows x 24)", padZero);
+        /* The label points at the pad start: a back-shifted group pointer
+         * dereferences the pad (mapped zeroed memory), never another
+         * table's rows. */
+        CHECK("rs-drumset pad before rows",
+              off + 36u * 24u + rows * 24u <= size);
+    }
+
+    /* Cry accessor: row indexing and bounds. */
+    CHECK("cry row 0 forward non-NULL",
+          EmeraldAudioCryTableRow(0u, false, 0u) != NULL);
+    CHECK("cry row 0 reverse non-NULL",
+          EmeraldAudioCryTableRow(0u, true, 0u) != NULL);
+    CHECK("cry rows differ forward/reverse",
+          EmeraldAudioCryTableRow(0u, false, 0u)
+              != EmeraldAudioCryTableRow(0u, true, 0u));
+    CHECK("cry row at bank 3 index 3 non-NULL",
+          EmeraldAudioCryTableRow(3u, false, 3u) != NULL);
+    CHECK("cry row beyond 388 is NULL",
+          EmeraldAudioCryTableRow(3u, false, 4u) == NULL);
+    CHECK("cry row bank 4 is NULL",
+          EmeraldAudioCryTableRow(4u, false, 0u) == NULL);
+
+    /* Logical-label enumeration: 195 voicegroups + 2 cry tables = 197
+     * unique GBA addresses, host bases inside the transformed zone. */
+    {
+        struct LabelCollector collector;
+        size_t a, b;
+        bool unique = true;
+        bool inZone = true;
+        memset(&collector, 0, sizeof(collector));
+        EmeraldAudioCompat_ForEachLogicalLabel(CollectLabel, &collector);
+        CHECK("label count 197", collector.count == 197u);
+        for (a = 0; a < collector.count; a++)
+        {
+            for (b = a + 1; b < collector.count; b++)
+            {
+                if (collector.addrs[a] == collector.addrs[b])
+                    unique = false;
+            }
+            if (collector.bases[a] < transformBase
+             || collector.bases[a] >= transformBase + transformSize)
+                inZone = false;
+        }
+        CHECK("labels unique", unique);
+        CHECK("labels inside transformed zone", inZone);
+    }
+}
+
+/* R12-C §8: assert the R10 registration state of a published arena.
+ * `arenaBase` is the current GetArena base (verbatim zone start); the
+ * checks cover the whole-zone canonical range, a transformed cry row
+ * (COMPAT_OBJECT INSTRUMENT_BANK), the load-direction ResolveByKey round
+ * trip, and hull coverage. */
+static void CheckRangeRegistration(const char *tag, const uint8_t *arenaBase,
+                                   size_t expectRanges, size_t expectHulls)
+{
+    struct EmeraldResourceRangeIndex *index =
+        EmeraldResourceCompat_GetRangeIndex();
+    struct EmeraldResourceRangeHit hit;
+    Gen3ResourceKey verbatimKey, cryKey;
+    uintptr_t resolved = 0;
+    size_t zoneOff = 0, transformOff = 0, spanSize = 0, transformSize = 0;
+    size_t cryTo = 0, cryRows = 0;
+    uintptr_t transformBase = 0, cryProbe = 0;
+    bool layoutOk, cryOk, verbatimHit, cryHit, resolveOk;
+
+    CHECK("index present", index != NULL);
+    if (index == NULL)
+        return;
+    CHECK("range count", EmeraldResourceRangeIndex_GetRangeCount(index)
+                             == expectRanges);
+    CHECK("hull count", index->hullCount == expectHulls);
+    Gen3ResourceId_DeriveKey("emerald:audio/verbatim-zone", &verbatimKey);
+    Gen3ResourceId_DeriveKey("emerald:audio/cry-table/forward", &cryKey);
+
+    layoutOk = EmeraldAudioCompat_GetArenaLayout(&zoneOff, &transformOff,
+                                                 &spanSize, &transformSize);
+    cryOk = EmeraldAudioCompat_GetCryTableSpan(false, &cryTo, &cryRows);
+    CHECK("layout accessor", layoutOk);
+    CHECK("cry span accessor", cryOk);
+    if (layoutOk && cryOk)
+    {
+        transformBase = (uintptr_t)arenaBase + (transformOff - zoneOff);
+        cryProbe = transformBase + cryTo + 12u;
+    }
+
+    /* Verbatim zone: one canonical AUDIO_SAMPLE range over the whole zone. */
+    verbatimHit = EmeraldResourceRangeIndex_Lookup(index,
+                                                   (uintptr_t)arenaBase,
+                                                   &hit);
+    CHECK("verbatim hit", verbatimHit);
+    if (verbatimHit)
+    {
+        CHECK("verbatim key", Gen3ResourceId_KeyEqual(&hit.key, &verbatimKey));
+        CHECK("verbatim type", hit.type == GEN3_RESOURCE_TYPE_AUDIO_SAMPLE);
+        CHECK("verbatim role",
+              hit.role == EMERALD_RESOURCE_ROLE_CANONICAL);
+        CHECK("verbatim offset 0", hit.rangeOffset == 0u);
+    }
+    /* Transformed block: COMPAT_OBJECT INSTRUMENT_BANK with the cry key. */
+    cryHit = cryProbe != 0u
+          && EmeraldResourceRangeIndex_Lookup(index, cryProbe, &hit);
+    CHECK("cry row hit", cryHit);
+    if (cryHit)
+    {
+        CHECK("cry key", Gen3ResourceId_KeyEqual(&hit.key, &cryKey));
+        CHECK("cry type", hit.type == GEN3_RESOURCE_TYPE_INSTRUMENT_BANK);
+        CHECK("cry role", hit.role == EMERALD_RESOURCE_ROLE_COMPAT_OBJECT);
+        CHECK("cry offset 12", hit.rangeOffset == 12u);
+        resolveOk = EmeraldResourceRangeIndex_ResolveByKey(
+            index, &cryKey, GEN3_RESOURCE_TYPE_INSTRUMENT_BANK, 1u,
+            EMERALD_RESOURCE_ROLE_COMPAT_OBJECT, 12u, &resolved);
+        CHECK("resolve by key", resolveOk);
+        CHECK("resolved pointer == probe", resolveOk && resolved == cryProbe);
+    }
+    CHECK("arena in hull",
+          EmeraldResourceRangeIndex_InHull(index, (uintptr_t)arenaBase));
+    (void)tag;
+}
+
 /* F: publication through a session built from the REAL production pack. */
 static void TestPublication(const char *packPath)
 {
     struct TestSession session;
     struct EmeraldAudioCompatDiagnostics diag;
     const uint8_t *arenaBase = NULL;
+    const uint8_t *oldBase = NULL;
+    const uint8_t *newBase = NULL;
     size_t arenaSize = 0;
     size_t i;
     size_t holeOffset = SIZE_MAX;
@@ -598,12 +973,19 @@ static void TestPublication(const char *packPath)
           EmeraldAudioCompat_TryInitialize(NULL, NULL, &diag)
               == EMERALD_AUDIO_ERR_INVALID_ARGUMENT);
 
+    /* The engine runs the trainer seam's InitializeFromSnapshot (which
+     * rebuilds the R10 index) before audio TryInitialize; mirror that. */
+    EmeraldResourceRangeIndex_Reset(EmeraldResourceCompat_GetRangeIndex());
+
     CHECK("TryInitialize OK",
           EmeraldAudioCompat_TryInitialize(session.snapshot, session.pack, &diag)
               == EMERALD_AUDIO_OK);
     CHECK("arena published (GetArena)", EmeraldAudioCompat_GetArena(&arenaBase, &arenaSize));
-    CHECK("arena size == span", arenaSize == EMERALD_AUDIO_SPAN_SIZE);
+    CHECK("arena size == span + transform",
+          arenaSize == EMERALD_AUDIO_SPAN_SIZE + EMERALD_AUDIO_TRANSFORM_SIZE);
     CHECK("published count 569", EmeraldAudioCompat_GetPublishedCount() == EMERALD_AUDIO_LEAF_COUNT);
+    /* R12-C §8: publish registered 198 spans + the arena hull. */
+    CheckRangeRegistration("publish", arenaBase, 198u, 1u);
 
     /* Every leaf: span + bytes agree with the pack payloads. */
     for (i = 0; i < sLeafCount; i++)
@@ -630,6 +1012,11 @@ static void TestPublication(const char *packPath)
           !EmeraldAudioCompat_GetLeafSpan("emerald:audio/sample/cry/not-a-real-mon", NULL, NULL));
     CHECK("unknown name: GetLeafBytes false",
           !EmeraldAudioCompat_GetLeafBytes("emerald:audio/sample/cry/not-a-real-mon", NULL, NULL));
+
+    /* R12-C structural publication: transformed zone, spans, pads, cry
+     * accessor and logical-label table, all against the pack fixtures.
+     * Runs while the arena is published. */
+    TestStructuralPublication();
 
     /* The zone is a VERBATIM ZONE at ROM-relative offsets: the first leaf
      * does not sit at offset 0 (the span starts at the voicegroup_dummy
@@ -677,13 +1064,20 @@ static void TestPublication(const char *packPath)
     if (holeOffset != SIZE_MAX && holeOffset < EMERALD_AUDIO_SPAN_SIZE)
         CHECK("unbacked hole is zeroed", arenaBase[holeOffset] == 0u);
 
-    /* Republish (immutable arena): OK. */
+    /* Republish (immutable arena): OK, and the ranges survive the
+     * verify/truncate/re-register cycle in identical form. */
     CHECK("republish OK", EmeraldAudioCompat_Republish(&diag) == EMERALD_AUDIO_OK);
+    CheckRangeRegistration("republish", arenaBase, 198u, 1u);
 
     /* Relocated session: a second snapshot from the same pack replaces the
-     * arena atomically with identical content. */
+     * arena atomically with identical content; the ranges must follow the
+     * NEW arena (the old spans are unregistered before the old arena dies). */
     {
         struct TestSession sessionB;
+        struct EmeraldResourceRangeIndex *index =
+            EmeraldResourceCompat_GetRangeIndex();
+        struct EmeraldResourceRangeHit hit;
+        oldBase = arenaBase;
         CHECK("session B opens", OpenSession(packPath, &sessionB));
         CHECK("TryInitialize (session B) OK",
               EmeraldAudioCompat_TryInitialize(sessionB.snapshot, sessionB.pack, &diag)
@@ -693,16 +1087,57 @@ static void TestPublication(const char *packPath)
         CHECK("bytes still == pack after replace",
               memcmp(arenaBase + sLeaves[0].arenaOffset, sLeaves[0].payload,
                      sLeaves[0].payloadSize) == 0);
+        CHECK("new arena resolves",
+              EmeraldAudioCompat_GetArena(&newBase, &arenaSize));
+        CheckRangeRegistration("relocated", newBase, 198u, 1u);
+        /* If the allocator reused the freed region, the old address is the
+         * new base and the check is vacuous; otherwise the old spans must
+         * be gone (unregister ran before the free). */
+        if (newBase != oldBase)
+            CHECK("old arena spans unregistered",
+                  index != NULL
+                  && !EmeraldResourceRangeIndex_Lookup(index,
+                                                       (uintptr_t)oldBase,
+                                                       &hit));
         CloseSession(&sessionB);
     }
 
-    /* Clear: fail closed. */
-    EmeraldAudioCompat_ClearMigratedEntries();
-    CHECK("after clear: count 0", EmeraldAudioCompat_GetPublishedCount() == 0u);
-    CHECK("after clear: GetArena false",
-          !EmeraldAudioCompat_GetArena(&arenaBase, &arenaSize));
+    /* Clear: fail closed - the ranges must die BEFORE the arena they point
+     * at is freed. */
+    {
+        struct EmeraldResourceRangeIndex *index =
+            EmeraldResourceCompat_GetRangeIndex();
+        struct EmeraldResourceRangeHit hit;
+        EmeraldAudioCompat_ClearMigratedEntries();
+        CHECK("after clear: count 0", EmeraldAudioCompat_GetPublishedCount() == 0u);
+        CHECK("after clear: GetArena false",
+              !EmeraldAudioCompat_GetArena(&arenaBase, &arenaSize));
+        CHECK("after clear: ranges unregistered",
+              index != NULL
+              && EmeraldResourceRangeIndex_GetRangeCount(index) == 0u
+              && index->hullCount == 0u);
+        CHECK("after clear: no lookups resolve",
+              index != NULL
+              && !EmeraldResourceRangeIndex_Lookup(index, (uintptr_t)newBase,
+                                                   &hit)
+              && !EmeraldResourceRangeIndex_InHull(index, (uintptr_t)newBase));
+    }
     CHECK("after clear: GetLeafSpan false",
           !EmeraldAudioCompat_GetLeafSpan(sLeaves[0].canonicalName, NULL, NULL));
+    CHECK("after clear: structural count 0",
+          EmeraldAudioCompat_GetStructuralCount() == 0u);
+    CHECK("after clear: transformed rows false",
+          !EmeraldAudioCompat_GetTransformedRows(NULL, NULL));
+    CHECK("after clear: voicegroup span false",
+          !EmeraldAudioCompat_GetVoicegroupSpan(
+              "emerald:audio/voicegroup/dummy", NULL, NULL));
+    CHECK("after clear: cry span false",
+          !EmeraldAudioCompat_GetCryTableSpan(false, NULL, NULL));
+    CHECK("after clear: keysplit span false",
+          !EmeraldAudioCompat_GetKeysplitSpan(
+              "emerald:audio/keysplit/piano", NULL, NULL));
+    CHECK("after clear: cry accessor NULL",
+          EmeraldAudioCryTableRow(0u, false, 0u) == NULL);
     EmeraldAudioCompat_Shutdown();
     CHECK("shutdown idempotent", EmeraldAudioCompat_GetPublishedCount() == 0u);
 
@@ -967,10 +1402,19 @@ int main(int argc, char **argv)
         Gen3ResourcePack_Destroy(pack);
         return 1;
     }
+    if (!LoadStructuralFixtures(pack))
+    {
+        fprintf(stderr, "FAIL: cannot load the 202 structural fixtures from %s\n",
+                packPath);
+        Gen3ResourcePack_Destroy(pack);
+        FreeAudioLeaves();
+        return 1;
+    }
 
     TestAudioCounts(pack);
     TestWaveDataValidation();
     TestArenaLayout();
+    TestStructuralCounts();
 
     /* Publication runs against a fresh session each time. */
     CHECK("session opens", OpenSession(packPath, &session));
@@ -982,6 +1426,7 @@ int main(int argc, char **argv)
     Gen3ResourcePack_Destroy(pack);
     Gen3ResourcePackDiagnostics_Destroy(&packDiag);
     FreeAudioLeaves();
+    FreeStructuralFixtures();
 
     printf("emerald audio compat test: %d checks, %d failures\n",
            sChecks, sFails);

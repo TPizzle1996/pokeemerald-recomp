@@ -2,19 +2,85 @@
 # Do not edit by hand; edit the R12-A inventory and re-run the
 # generator (regeneration must be a no-op diff).
 
-# Semantic extraction bindings for the 569 R12-B audio leaf
-# resources (105 root + 51 phoneme + 388 cry samples, 25
-# programmable waves). NO ROM offsets: they are derived at R12-B
-# time from the matching GBA ELF symbol table via the R1A
-# generator (gen3-elf-manifest), never hand-maintained. The
-# artifact IS the canonical payload (raw encoding); sizes are
-# derived and proven by gen_audio_bindings.py (end-symbol/
-# object-layout method + WaveData2 structural validation) before
-# the manifest pipeline re-proves them.
+# Semantic extraction bindings for the 771 audio resources: 569
+# R12-B leaves (105 root + 51 phoneme + 388 cry samples, 25
+# programmable waves) + 202 R12-C structural (195 voicegroups at
+# 20,594 GBA 12-byte rows, 2 cry tables at 388 rows each, 5
+# keysplit runs at 372 B). NO ROM offsets: they are derived from
+# the matching GBA ELF symbol table via the R1A generator
+# (gen3-elf-manifest), never hand-maintained. The artifact IS the
+# canonical payload (raw encoding); sizes are derived and proven
+# by gen_audio_bindings.py (end-symbol/object-layout method +
+# WaveData2 structural validation + the R12-C stream model) before
+# the manifest pipeline re-proves them. Structural bindings may
+# carry `symbol_offset` (drumset back-shifts, the 4 no-symbol
+# containing slices, keysplit run starts) - the manifest's slice
+# path, raw encoding only.
 
 bindings_version = 1
 game = "emerald"
 rom_profile = "bpee01-rev0"
+
+[[bindings]]
+id = "emerald:audio/cry-table/forward"
+symbol = "gCryTable"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/cry-table-forward.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 4656
+
+[[bindings]]
+id = "emerald:audio/cry-table/reverse"
+symbol = "gCryTable_Reverse"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/cry-table-reverse.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 4656
+
+[[bindings]]
+id = "emerald:audio/keysplit/french-horn"
+symbol = "KeySplitTable5"
+symbol_offset = 36
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/keysplit-french-horn.bin"
+source_encoding = "raw"
+canonical_representation = "gba-keysplit-run"
+expected_decoded_size = 72
+
+[[bindings]]
+id = "emerald:audio/keysplit/piano"
+symbol = "KeySplitTable1"
+symbol_offset = 36
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/keysplit-piano.bin"
+source_encoding = "raw"
+canonical_representation = "gba-keysplit-run"
+expected_decoded_size = 72
+
+[[bindings]]
+id = "emerald:audio/keysplit/strings"
+symbol = "KeySplitTable2"
+symbol_offset = 36
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/keysplit-strings.bin"
+source_encoding = "raw"
+canonical_representation = "gba-keysplit-run"
+expected_decoded_size = 72
+
+[[bindings]]
+id = "emerald:audio/keysplit/trumpet"
+symbol = "KeySplitTable3"
+symbol_offset = 36
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/keysplit-trumpet.bin"
+source_encoding = "raw"
+canonical_representation = "gba-keysplit-run"
+expected_decoded_size = 72
+
+[[bindings]]
+id = "emerald:audio/keysplit/tuba"
+symbol = "KeySplitTable4"
+symbol_offset = 24
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/keysplit-tuba.bin"
+source_encoding = "raw"
+canonical_representation = "gba-keysplit-run"
+expected_decoded_size = 84
 
 [[bindings]]
 id = "emerald:audio/sample/bicycle-bell"
@@ -4367,6 +4433,1580 @@ source_artifact = "sound/direct_sound_samples/unused_unknown_male_voice.bin"
 source_encoding = "raw"
 canonical_representation = "gba-wave-data"
 expected_decoded_size = 9381
+
+[[bindings]]
+id = "emerald:audio/voicegroup/abandoned-ship"
+symbol = "voicegroup030"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-abandoned-ship.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1140
+
+[[bindings]]
+id = "emerald:audio/voicegroup/abnormal-weather"
+symbol = "voicegroup089"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-abnormal-weather.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/aqua-magma-hideout"
+symbol = "voicegroup076"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-aqua-magma-hideout.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/b-arena"
+symbol = "voicegroup104"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-b-arena.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1296
+
+[[bindings]]
+id = "emerald:audio/voicegroup/b-dome"
+symbol = "voicegroup111"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-b-dome.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/b-factory"
+symbol = "voicegroup113"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-b-factory.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/b-frontier"
+symbol = "voicegroup103"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-b-frontier.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/b-palace"
+symbol = "voicegroup108"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-b-palace.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/b-pike"
+symbol = "voicegroup112"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-b-pike.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/b-pyramid"
+symbol = "voicegroup106"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-b-pyramid.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/b-pyramid-top"
+symbol = "voicegroup107"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-b-pyramid-top.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/b-tower"
+symbol = "voicegroup110"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-b-tower.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/b-tower-rs"
+symbol = "voicegroup035"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-b-tower-rs.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1020
+
+[[bindings]]
+id = "emerald:audio/voicegroup/bard"
+symbol = "voicegroup130"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-bard.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 612
+
+[[bindings]]
+id = "emerald:audio/voicegroup/birch-lab"
+symbol = "voicegroup033"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-birch-lab.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 996
+
+[[bindings]]
+id = "emerald:audio/voicegroup/cable-car"
+symbol = "voicegroup071"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-cable-car.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/cave-of-origin"
+symbol = "voicegroup037"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-cave-of-origin.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1068
+
+[[bindings]]
+id = "emerald:audio/voicegroup/contest"
+symbol = "voicegroup086"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-contest.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/contest-lobby"
+symbol = "voicegroup098"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-contest-lobby.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/contest-results"
+symbol = "voicegroup092"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-contest-results.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/contest-winner"
+symbol = "voicegroup085"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-contest-winner.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/credits"
+symbol = "voicegroup101"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-credits.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1320
+
+[[bindings]]
+id = "emerald:audio/voicegroup/cycling"
+symbol = "voicegroup049"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-cycling.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/dewford"
+symbol = "voicegroup073"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-dewford.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/dummy"
+symbol = "voicegroup000"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-dummy.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1176
+
+[[bindings]]
+id = "emerald:audio/voicegroup/emerald-drumset-1"
+symbol = "voicegroup003"
+symbol_offset = 432
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-emerald-drumset-1.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 648
+
+[[bindings]]
+id = "emerald:audio/voicegroup/emerald-drumset-2"
+symbol = "voicegroup004"
+symbol_offset = 432
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-emerald-drumset-2.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 648
+
+[[bindings]]
+id = "emerald:audio/voicegroup/encounter-aqua"
+symbol = "voicegroup065"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-encounter-aqua.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/encounter-brendan"
+symbol = "voicegroup067"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-encounter-brendan.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/encounter-champion"
+symbol = "voicegroup100"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-encounter-champion.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/encounter-cool"
+symbol = "voicegroup063"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-encounter-cool.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/encounter-elite-four"
+symbol = "voicegroup096"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-encounter-elite-four.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/encounter-female"
+symbol = "voicegroup053"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-encounter-female.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/encounter-girl"
+symbol = "voicegroup027"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-encounter-girl.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/encounter-hiker"
+symbol = "voicegroup097"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-encounter-hiker.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/encounter-intense"
+symbol = "voicegroup062"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-encounter-intense.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/encounter-interviewer"
+symbol = "voicegroup099"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-encounter-interviewer.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/encounter-magma"
+symbol = "voicegroup087"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-encounter-magma.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/encounter-male"
+symbol = "voicegroup028"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-encounter-male.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 996
+
+[[bindings]]
+id = "emerald:audio/voicegroup/encounter-may"
+symbol = "voicegroup061"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-encounter-may.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/encounter-rich"
+symbol = "voicegroup043"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-encounter-rich.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 972
+
+[[bindings]]
+id = "emerald:audio/voicegroup/encounter-suspicious"
+symbol = "voicegroup069"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-encounter-suspicious.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/encounter-swimmer"
+symbol = "voicegroup036"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-encounter-swimmer.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/encounter-twins"
+symbol = "voicegroup095"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-encounter-twins.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/end"
+symbol = "voicegroup102"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-end.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 984
+
+[[bindings]]
+id = "emerald:audio/voicegroup/ever-grande"
+symbol = "voicegroup068"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-ever-grande.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/evolution"
+symbol = "voicegroup026"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-evolution.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1020
+
+[[bindings]]
+id = "emerald:audio/voicegroup/fallarbor"
+symbol = "voicegroup083"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-fallarbor.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1008
+
+[[bindings]]
+id = "emerald:audio/voicegroup/fanfare"
+symbol = "voicegroup012"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-fanfare.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1224
+
+[[bindings]]
+id = "emerald:audio/voicegroup/follow-me"
+symbol = "voicegroup066"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-follow-me.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/fortree"
+symbol = "voicegroup032"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-fortree.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/french-horn-keysplit"
+symbol = "voicegroup009"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-french-horn-keysplit.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 24
+
+[[bindings]]
+id = "emerald:audio/voicegroup/frlg-drumset"
+symbol = "voicegroup002"
+symbol_offset = 432
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-frlg-drumset.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 648
+
+[[bindings]]
+id = "emerald:audio/voicegroup/frlg-fanfare-drumset-1"
+symbol = "voicegroup177"
+symbol_offset = 432
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-frlg-fanfare-drumset-1.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 648
+
+[[bindings]]
+id = "emerald:audio/voicegroup/frlg-fanfare-drumset-2"
+symbol = "voicegroup176"
+symbol_offset = 432
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-frlg-fanfare-drumset-2.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 576
+
+[[bindings]]
+id = "emerald:audio/voicegroup/frlg-sfx"
+symbol = "voicegroup129"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-frlg-sfx.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/game-corner"
+symbol = "voicegroup072"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-game-corner.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/gym"
+symbol = "voicegroup013"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-gym.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1080
+
+[[bindings]]
+id = "emerald:audio/voicegroup/hall-of-fame"
+symbol = "voicegroup082"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-hall-of-fame.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/hall-of-fame-room"
+symbol = "voicegroup093"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-hall-of-fame-room.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/help"
+symbol = "voicegroup056"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-help.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/intro"
+symbol = "voicegroup060"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-intro.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/intro-battle"
+symbol = "voicegroup088"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-intro-battle.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/lilycove"
+symbol = "voicegroup054"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-lilycove.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/lilycove-museum"
+symbol = "voicegroup020"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-lilycove-museum.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1044
+
+[[bindings]]
+id = "emerald:audio/voicegroup/link-contest-p1"
+symbol = "voicegroup039"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-link-contest-p1.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/link-contest-p2"
+symbol = "voicegroup040"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-link-contest-p2.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/link-contest-p3"
+symbol = "voicegroup041"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-link-contest-p3.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/link-contest-p4"
+symbol = "voicegroup042"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-link-contest-p4.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/littleroot"
+symbol = "voicegroup051"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-littleroot.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 888
+
+[[bindings]]
+id = "emerald:audio/voicegroup/littleroot-test"
+symbol = "voicegroup034"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-littleroot-test.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1008
+
+[[bindings]]
+id = "emerald:audio/voicegroup/mt-chimney"
+symbol = "voicegroup052"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-mt-chimney.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/mt-pyre"
+symbol = "voicegroup078"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-mt-pyre.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/mt-pyre-exterior"
+symbol = "voicegroup080"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-mt-pyre-exterior.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/oceanic-museum"
+symbol = "voicegroup023"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-oceanic-museum.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1068
+
+[[bindings]]
+id = "emerald:audio/voicegroup/oldale"
+symbol = "voicegroup019"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-oldale.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1020
+
+[[bindings]]
+id = "emerald:audio/voicegroup/petalburg"
+symbol = "voicegroup015"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-petalburg.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/petalburg-drumset"
+symbol = "voicegroup016"
+symbol_offset = 432
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-petalburg-drumset.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 348
+
+[[bindings]]
+id = "emerald:audio/voicegroup/petalburg-woods"
+symbol = "voicegroup018"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-petalburg-woods.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/piano-keysplit"
+symbol = "voicegroup005"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-piano-keysplit.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 48
+
+[[bindings]]
+id = "emerald:audio/voicegroup/poke-center"
+symbol = "voicegroup046"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-poke-center.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/poke-mart"
+symbol = "voicegroup050"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-poke-mart.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rayquaza-appears"
+symbol = "voicegroup109"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rayquaza-appears.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 996
+
+[[bindings]]
+id = "emerald:audio/voicegroup/register-match-call"
+symbol = "voicegroup105"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-register-match-call.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 996
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-caught-intro"
+symbol = "voicegroup179"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-caught-intro.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1056
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-celadon"
+symbol = "voicegroup168"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-celadon.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-cinnabar"
+symbol = "voicegroup138"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-cinnabar.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-credits"
+symbol = "voicegroup149"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-credits.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1116
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-credits-drumset"
+symbol = "voicegroup190"
+symbol_offset = 432
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-credits-drumset.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 624
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-cycling"
+symbol = "voicegroup141"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-cycling.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-dex-rating"
+symbol = "voicegroup175"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-dex-rating.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1056
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-encounter-boy"
+symbol = "voicegroup144"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-encounter-boy.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-encounter-deoxys"
+symbol = "voicegroup184"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-encounter-deoxys.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1032
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-encounter-girl"
+symbol = "voicegroup143"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-encounter-girl.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-encounter-rival"
+symbol = "voicegroup174"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-encounter-rival.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-encounter-rocket"
+symbol = "voicegroup142"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-encounter-rocket.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1008
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-follow-me"
+symbol = "voicegroup131"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-follow-me.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-fuchsia"
+symbol = "voicegroup167"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-fuchsia.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-game-corner"
+symbol = "voicegroup132"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-game-corner.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-game-freak"
+symbol = "voicegroup181"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-game-freak.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 564
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-gym"
+symbol = "voicegroup134"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-gym.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1080
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-hall-of-fame"
+symbol = "voicegroup145"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-hall-of-fame.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-heal"
+symbol = "voicegroup140"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-heal.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 48
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-intro-fight"
+symbol = "voicegroup136"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-intro-fight.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-jigglypuff"
+symbol = "voicegroup135"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-jigglypuff.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 996
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-lavender"
+symbol = "voicegroup139"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-lavender.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-mt-moon"
+symbol = "voicegroup147"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-mt-moon.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1008
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-mystery-gift"
+symbol = "voicegroup183"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-mystery-gift.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-new-game"
+symbol = "voicegroup182"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-new-game.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1056
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-oak"
+symbol = "voicegroup161"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-oak.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-oak-lab"
+symbol = "voicegroup160"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-oak-lab.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1056
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-obtain-key-item"
+symbol = "voicegroup178"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-obtain-key-item.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1056
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-pallet"
+symbol = "voicegroup159"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-pallet.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-pewter"
+symbol = "voicegroup173"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-pewter.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-photo"
+symbol = "voicegroup180"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-photo.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-poke-center"
+symbol = "voicegroup162"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-poke-center.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1116
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-poke-mansion"
+symbol = "voicegroup148"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-poke-mansion.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-poke-tower"
+symbol = "voicegroup165"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-poke-tower.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-rocket-hideout"
+symbol = "voicegroup133"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-rocket-hideout.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-route1"
+symbol = "voicegroup150"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-route1.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-route11"
+symbol = "voicegroup153"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-route11.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-route24"
+symbol = "voicegroup151"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-route24.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1056
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-route3"
+symbol = "voicegroup152"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-route3.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-sevii-45"
+symbol = "voicegroup188"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-sevii-45.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-sevii-67"
+symbol = "voicegroup189"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-sevii-67.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-sevii-route"
+symbol = "voicegroup187"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-sevii-route.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-silph"
+symbol = "voicegroup166"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-silph.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-ss-anne"
+symbol = "voicegroup163"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-ss-anne.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-surf"
+symbol = "voicegroup164"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-surf.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-teachy-tv-menu"
+symbol = "voicegroup186"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-teachy-tv-menu.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-title"
+symbol = "voicegroup137"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-title.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-unused"
+symbol = "voicegroup174"
+symbol_offset = 1536
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-unused.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 300
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-unused-2"
+symbol = "voicegroup174"
+symbol_offset = 1836
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-unused-2.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 48
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-vermillion"
+symbol = "voicegroup172"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-vermillion.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-victory-gym-leader"
+symbol = "voicegroup171"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-victory-gym-leader.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1092
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-victory-road"
+symbol = "voicegroup154"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-victory-road.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1116
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-victory-trainer"
+symbol = "voicegroup169"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-victory-trainer.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-victory-wild"
+symbol = "voicegroup170"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-victory-wild.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1008
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-viridian-forest"
+symbol = "voicegroup146"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-viridian-forest.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-vs-champion"
+symbol = "voicegroup158"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-vs-champion.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-vs-deoxys"
+symbol = "voicegroup185"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-vs-deoxys.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-vs-gym-leader"
+symbol = "voicegroup155"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-vs-gym-leader.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-vs-trainer"
+symbol = "voicegroup156"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-vs-trainer.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rg-vs-wild"
+symbol = "voicegroup157"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rg-vs-wild.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/roulette"
+symbol = "voicegroup038"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-roulette.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 984
+
+[[bindings]]
+id = "emerald:audio/voicegroup/route101"
+symbol = "voicegroup011"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-route101.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/route101-drumset"
+symbol = "voicegroup022"
+symbol_offset = 432
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-route101-drumset.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 348
+
+[[bindings]]
+id = "emerald:audio/voicegroup/route104"
+symbol = "voicegroup047"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-route104.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/route110"
+symbol = "voicegroup010"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-route110.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1008
+
+[[bindings]]
+id = "emerald:audio/voicegroup/route110-drumset"
+symbol = "voicegroup031"
+symbol_offset = 480
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-route110-drumset.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 300
+
+[[bindings]]
+id = "emerald:audio/voicegroup/route111"
+symbol = "voicegroup055"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-route111.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/route113"
+symbol = "voicegroup064"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-route113.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/route119"
+symbol = "voicegroup048"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-route119.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1056
+
+[[bindings]]
+id = "emerald:audio/voicegroup/route120"
+symbol = "voicegroup014"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-route120.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1020
+
+[[bindings]]
+id = "emerald:audio/voicegroup/route122"
+symbol = "voicegroup021"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-route122.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1044
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rs-drumset"
+symbol = "voicegroup001"
+symbol_offset = 432
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rs-drumset.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 348
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rs-sfx-1"
+symbol = "voicegroup127"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rs-sfx-1.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rs-sfx-2"
+symbol = "voicegroup128"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rs-sfx-2.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/rustboro"
+symbol = "voicegroup045"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-rustboro.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/safari-zone"
+symbol = "voicegroup074"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-safari-zone.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/sailing"
+symbol = "voicegroup077"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-sailing.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/school"
+symbol = "voicegroup081"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-school.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 24
+
+[[bindings]]
+id = "emerald:audio/voicegroup/sealed-chamber"
+symbol = "voicegroup084"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-sealed-chamber.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/slateport"
+symbol = "voicegroup079"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-slateport.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/sootopolis"
+symbol = "voicegroup091"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-sootopolis.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/strings-keysplit"
+symbol = "voicegroup006"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-strings-keysplit.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 36
+
+[[bindings]]
+id = "emerald:audio/voicegroup/surf"
+symbol = "voicegroup017"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-surf.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1092
+
+[[bindings]]
+id = "emerald:audio/voicegroup/title"
+symbol = "voicegroup059"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-title.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1068
+
+[[bindings]]
+id = "emerald:audio/voicegroup/trick-house"
+symbol = "voicegroup094"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-trick-house.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/trumpet-keysplit"
+symbol = "voicegroup007"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-trumpet-keysplit.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 36
+
+[[bindings]]
+id = "emerald:audio/voicegroup/tuba-keysplit"
+symbol = "voicegroup008"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-tuba-keysplit.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 24
+
+[[bindings]]
+id = "emerald:audio/voicegroup/underwater"
+symbol = "voicegroup057"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-underwater.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/unused"
+symbol = "voicegroup007"
+symbol_offset = 36
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-unused.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/unused-2"
+symbol = "voicegroup130"
+symbol_offset = 612
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-unused-2.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/verdanturf"
+symbol = "voicegroup044"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-verdanturf.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 972
+
+[[bindings]]
+id = "emerald:audio/voicegroup/victory-aqua-magma"
+symbol = "voicegroup070"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-victory-aqua-magma.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/victory-gym-leader"
+symbol = "voicegroup024"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-victory-gym-leader.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1092
+
+[[bindings]]
+id = "emerald:audio/voicegroup/victory-league"
+symbol = "voicegroup029"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-victory-league.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1056
+
+[[bindings]]
+id = "emerald:audio/voicegroup/victory-road"
+symbol = "voicegroup075"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-victory-road.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/victory-trainer"
+symbol = "voicegroup058"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-victory-trainer.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/victory-wild"
+symbol = "voicegroup025"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-victory-wild.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1008
+
+[[bindings]]
+id = "emerald:audio/voicegroup/vs-aqua-magma"
+symbol = "voicegroup118"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-vs-aqua-magma.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1092
+
+[[bindings]]
+id = "emerald:audio/voicegroup/vs-aqua-magma-leader"
+symbol = "voicegroup126"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-vs-aqua-magma-leader.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/vs-champion"
+symbol = "voicegroup121"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-vs-champion.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1032
+
+[[bindings]]
+id = "emerald:audio/voicegroup/vs-elite-four"
+symbol = "voicegroup125"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-vs-elite-four.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1008
+
+[[bindings]]
+id = "emerald:audio/voicegroup/vs-frontier-brain"
+symbol = "voicegroup115"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-vs-frontier-brain.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/vs-gym-leader"
+symbol = "voicegroup120"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-vs-gym-leader.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1092
+
+[[bindings]]
+id = "emerald:audio/voicegroup/vs-kyogre-groudon"
+symbol = "voicegroup123"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-vs-kyogre-groudon.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/vs-mew"
+symbol = "voicegroup116"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-vs-mew.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/vs-rayquaza"
+symbol = "voicegroup114"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-vs-rayquaza.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
+
+[[bindings]]
+id = "emerald:audio/voicegroup/vs-regi"
+symbol = "voicegroup122"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-vs-regi.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1008
+
+[[bindings]]
+id = "emerald:audio/voicegroup/vs-rival"
+symbol = "voicegroup124"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-vs-rival.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1044
+
+[[bindings]]
+id = "emerald:audio/voicegroup/vs-trainer"
+symbol = "voicegroup119"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-vs-trainer.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1092
+
+[[bindings]]
+id = "emerald:audio/voicegroup/vs-wild"
+symbol = "voicegroup117"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-vs-wild.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 984
+
+[[bindings]]
+id = "emerald:audio/voicegroup/weather-groudon"
+symbol = "voicegroup090"
+source_artifact = "resources/extraction/emerald/bpee01/audio/structural/voicegroup-weather-groudon.bin"
+source_encoding = "raw"
+canonical_representation = "gba-tone-data-12"
+expected_decoded_size = 1536
 
 [[bindings]]
 id = "emerald:audio/wave/programmable/1"

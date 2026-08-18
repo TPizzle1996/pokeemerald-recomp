@@ -3,7 +3,7 @@
 # R12-B audio leaf ownership migration test runner (tests A-G).
 #
 #   A-G  tests/emerald_audio_compat_test.c against the REAL production pack:
-#        A counts (105/51/388/25 = 569 leaves, pack 5087 entries),
+#        A counts (105/51/388/25 = 569 leaves, pack 5289 entries),
 #        B exact extraction (arena bytes == pack payloads == ROM slice,
 #          every leaf inside the verbatim zone, no overlaps),
 #        C WaveData2 structural validation per sample,
@@ -60,7 +60,7 @@ if "$root/tools/gen3_resources/pack_build/gen3-pack-build" \
     --catalog "$root/resources/extraction/emerald/bpee01/layout/catalog.generated.toml" \
     --catalog "$audio/catalog.generated.toml" \
     --check > "$tmp/pack_check.log" 2>&1; then
-    pass "pack reproduces byte-for-byte (5087 entries)"
+    pass "pack reproduces byte-for-byte (5289 entries)"
 else
     fail "pack --check: $(tail -3 "$tmp/pack_check.log" | tr '\n' ' ')"
 fi
@@ -83,7 +83,18 @@ else
 fi
 
 echo "== A-G: audio leaf seam tests (emerald_audio_compat_test.c) =="
+# The seam's R12-C logical-address table (RegisterLogicalLabel ->
+# HostMemoryRegisterLogicalAddress) pulls in the real host_memory
+# implementation. Compiled standalone with the Makefile_pc flag set, exactly
+# as the offline gate does; no other engine translation units are needed.
+gcc -std=gnu99 -O2 -iquote include -iquote gflib \
+    -Wno-trigraphs -DNONMATCHING -DPORTABLE -DPLATFORM_SDL2 \
+    -DRENDERER_EASY_DRAW -DMODERN=1 -DUBFIX -DDESKTOP_EXTERNAL_GAME_CONTENT \
+    '-DEMERALD_EXPECTED_SHA1="0000000000000000000000000000000000000000"' \
+    -DNATIVE_LINUX -DLINUX64=1 -fno-dce -fno-builtin -fno-pie \
+    -c "$root/src/platform/host_memory.c" -o "$tmp/host_memory.o"
 gcc -std=gnu99 -O2 -Wall -Wextra \
+    -fno-pie -no-pie \
     -iquote include -iquote "$core_dir" \
     "$core_dir/sha256.c" \
     "$core_dir/sha1.c" \
@@ -103,6 +114,8 @@ gcc -std=gnu99 -O2 -Wall -Wextra \
     "$emerald_dir/emerald_resource_ranges.c" \
     "$emerald_dir/emerald_resource_session.c" \
     "$emerald_dir/emerald_audio_compat.c" \
+    "$tmp/host_memory.o" \
+    "$root/tests/gen3_resources/host_memory_stubs.c" \
     "$root/tests/emerald_audio_compat_test.c" \
     -o "$tmp/emerald_audio_compat_test"
 if "$tmp/emerald_audio_compat_test" "$pack" "$tmp" > "$tmp/audio_test.log" 2>&1; then

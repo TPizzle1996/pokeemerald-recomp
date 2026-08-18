@@ -148,18 +148,18 @@ cat sidecar-load.log
 grep -q "REGRESSION-SIDECAR load ok" sidecar-load.log
 echo "TEST S load ok (genuine pointer members restored, scalar bytes round-trip verbatim)"
 
-echo "== TEST A: audio-shaped game_bss state carries no sidecar records (create) =="
+echo "== TEST A: audio-shaped game_bss state (create: mid-BGM/mid-cry arena pointers) =="
 astate="harness-audio-slot-7.st"
 "$tmp/emerald_resource_state_test" audio-regression "$pack" "$astate" > audio-create.log
 cat audio-create.log
 grep -q "AUDIO-REGRESSION ok" audio-create.log
-echo "TEST A create ok (scalar windows verbatim, pointer fields tagged records, no audio sidecars)"
+echo "TEST A create ok (scalar windows verbatim, pointer fields tagged records, mid-BGM/mid-cry arena pointers keyed sidecar records)"
 
-echo "== TEST A: audio fixture restores in a fresh process (load) =="
+echo "== TEST A: audio fixture restores in a fresh process (load: ResolveByKey re-derivation) =="
 "$tmp/emerald_resource_state_test" audio-load "$pack" "$astate" > audio-load.log
 cat audio-load.log
 grep -q "AUDIO-LOAD ok" audio-load.log
-echo "TEST A load ok (audio fixture byte-identical to file in a fresh process)"
+echo "TEST A load ok (mid-BGM/mid-cry pointers re-derived into the fresh arena via ResolveByKey)"
 
 echo "== TEST B: desktop state-manager load sequence (real desktop_state.c + desktop_audio.c over the fake SDL device) =="
 dstate="harness-desktop-slot-7.st"

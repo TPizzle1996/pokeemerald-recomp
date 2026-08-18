@@ -83,7 +83,25 @@ PINNED_TABLE_SONG_ROWS = 610          # gSongTable rows (530 real + 80 dummy)
 PINNED_DUMMY_SONG_ROWS = 80           # `song dummy_song_header, 0, 0` aliases
 PINNED_VOICEGROUP_INCLUDES = 195      # voicegroups/ includes (all 195, dummy.inc too)
 PINNED_CRY_ROWS = 388                 # rows in EACH of the two cry tables
+PINNED_VOICEGROUP_ROWS = 20594        # rows across the 195 voicegroup files
+PINNED_KEYSPLIT_RUN_BYTES = 372       # 5 runs: 72+72+72+84+72 (tuba is 84)
 PINNED_KEYS = sum(PINNED.values())    # 1301
+
+# Back-shift pins (R12-C). The `voice_group name, N` / `keysplit name, N`
+# second argument is the label back-shift: drumsets back-shift N ROWS, keysplit
+# labels N BYTES (the starting note, per the mks4agb convention). route110 is
+# 40 rows, all other drumsets 36; tuba starts at note 24, all other keysplits
+# at 36.
+PINNED_DRUMSET_BACKS = {
+    "rs_drumset": 36, "frlg_drumset": 36, "emerald_drumset_1": 36,
+    "emerald_drumset_2": 36, "petalburg_drumset": 36, "route101_drumset": 36,
+    "route110_drumset": 40, "frlg_fanfare_drumset_1": 36,
+    "frlg_fanfare_drumset_2": 36, "rg_credits_drumset": 36,
+}
+PINNED_KEYSPLIT_BACKS = {"piano": 36, "strings": 36, "trumpet": 36,
+                         "tuba": 24, "french_horn": 36}
+PINNED_KEYSPLIT_RUNS = {"piano": 72, "strings": 72, "trumpet": 72,
+                        "tuba": 84, "french_horn": 72}
 
 # ---------------------------------------------------------------- kind -> contract
 
@@ -293,10 +311,12 @@ def parse_waves(lines):
 
 
 def parse_voicegroups(root):
-    """Returns OrderedDict symbol (voicegroup_<name>) -> include path for the
-    195 voice_group macros. voicegroup_dummy is inventoried too: the audit
-    pins 195 tables (180 root + 10 drumsets + 5 keysplits) and dummy.inc is
-    one of them; the compiled default state is the R12 publication seam."""
+    """Returns OrderedDict symbol (voicegroup_<name>) -> (include path, back)
+    for the 195 voice_group macros, where `back` is the optional second
+    argument of `voice_group <name>, <rows>` (drumset label back-shift in
+    rows; 0 for every non-drumset). voicegroup_dummy is inventoried too: the
+    audit pins 195 tables (180 root + 10 drumsets + 5 keysplits) and dummy.inc
+    is one of them; the compiled default state is the R12 publication seam."""
     lines = read_lines(root, VOICE_GROUPS)
     includes = 0
     cry_includes = 0
@@ -317,15 +337,16 @@ def parse_voicegroups(root):
         includes += 1
         inc_path = "sound/voicegroups/" + m.group(1)
         inc_lines = read_lines(root, inc_path)
-        names = [mm.group(1) for mm in
-                 (re.match(r"voice_group\s+(\w+)", l.strip()) for l in inc_lines) if mm]
+        names = [(mm.group(1), int(mm.group(2) or 0)) for mm in
+                 (re.match(r"voice_group\s+(\w+)(?:\s*,\s*(\d+))?", l.strip())
+                  for l in inc_lines) if mm]
         if len(names) != 1:
             die(f"{inc_path}: expected exactly one `voice_group` row, found {len(names)}")
-        name = names[0]
+        name, back = names[0]
         symbol = "voicegroup_" + name
         if symbol in groups:
             die(f"{inc_path}: duplicate voicegroup symbol {symbol}")
-        groups[symbol] = inc_path
+        groups[symbol] = (inc_path, back)
     if includes != PINNED_VOICEGROUP_INCLUDES:
         die(f"{VOICE_GROUPS}: expected {PINNED_VOICEGROUP_INCLUDES} voicegroup includes, "
             f"found {includes}")
@@ -335,6 +356,79 @@ def parse_voicegroups(root):
         die(f"voicegroup family: expected {PINNED['voicegroup']} voicegroups, "
             f"found {len(groups)}")
     return groups
+
+
+# Row macro -> symbol operands (0-based arg indexes after the macro name).
+# roles: sample/wave resolve in the leaf families, group in the voicegroup
+# family, keysplit in the keysplit family. Macros not listed here carry only
+# numeric operands.
+ROW_OPERANDS = {
+    "voice_directsound": ((2, "sample"),),
+    "voice_directsound_no_resample": ((2, "sample"),),
+    "voice_directsound_alt": ((2, "sample"),),
+    "voice_programmable_wave": ((2, "wave"),),
+    "voice_programmable_wave_alt": ((2, "wave"),),
+    "voice_keysplit": ((0, "group"), (1, "keysplit")),
+    "voice_keysplit_all": ((0, "group"),),
+}
+ROW_PLAIN = {"voice_square_1", "voice_square_1_alt", "voice_square_2",
+             "voice_square_2_alt", "voice_noise", "voice_noise_alt"}
+ROW_ARITY = {  # exact required argument count per macro (all req:)
+    "voice_directsound": 7, "voice_directsound_no_resample": 7,
+    "voice_directsound_alt": 7, "voice_programmable_wave": 7,
+    "voice_programmable_wave_alt": 7, "voice_keysplit": 2,
+    "voice_keysplit_all": 1, "voice_square_1": 8, "voice_square_1_alt": 8,
+    "voice_square_2": 7, "voice_square_2_alt": 7, "voice_noise": 7,
+    "voice_noise_alt": 7,
+}
+
+
+def parse_voicegroup_rows(root, groups, samples, waves, keysplits):
+    """Row-counts every voicegroup file (R12-C row pin: 20,594 rows across
+    the 195 files) and resolves every symbol operand of every row against
+    the sample/wave/voicegroup/keysplit families. Returns symbol ->
+    row_count. The row rule is the assembly reality: a line whose first
+    token is a row macro name followed by whitespace (labels end with ':',
+    directives start with '.', `voice_group` emits a label, not a row)."""
+    ks_symbols = {"keysplit_" + name for name in keysplits}
+    counts = {}
+    all_macros = set(ROW_OPERANDS) | ROW_PLAIN
+    for symbol, (inc_path, _back) in groups.items():
+        lines = read_lines(root, inc_path)
+        n = 0
+        for i, line in enumerate(lines):
+            m = re.match(r"^\s*([A-Za-z_][A-Za-z0-9_]*)(\s|$)", line)
+            if not m:
+                continue
+            tok = m.group(1)
+            if tok.endswith(":") or tok == "voice_group":
+                continue
+            if tok not in all_macros:
+                die(f"{inc_path}:{i + 1}: unknown row token {tok!r}")
+            n += 1
+            if tok in ROW_PLAIN:
+                continue
+            args = [a.strip() for a in line[m.end():].split(",")]
+            if len(args) != ROW_ARITY[tok]:
+                die(f"{inc_path}:{i + 1}: {tok} has {len(args)} arguments, "
+                    f"expected {ROW_ARITY[tok]}")
+            for idx, role in ROW_OPERANDS[tok]:
+                operand = args[idx]
+                if operand.isdigit():
+                    if role in ("sample", "wave"):
+                        die(f"{inc_path}:{i + 1}: {tok} {role} operand is the "
+                            f"number {operand}, not a symbol")
+                    continue
+                family = {"sample": samples, "wave": waves,
+                          "group": set(groups), "keysplit": ks_symbols}[role]
+                if operand not in family:
+                    die(f"{inc_path}:{i + 1}: {tok} references undefined "
+                        f"{role} {operand}")
+        counts[symbol] = n
+    if sum(counts.values()) != PINNED_VOICEGROUP_ROWS:
+        die(f"voicegroup rows: expected {PINNED_VOICEGROUP_ROWS} rows across "
+            f"{len(counts)} files, found {sum(counts.values())}")
+    return counts
 
 
 def parse_cry_tables(lines, samples):
@@ -368,21 +462,51 @@ def parse_cry_tables(lines, samples):
 
 
 def parse_keysplits(lines):
+    """Returns OrderedDict name -> (offset, run_bytes): the label back-shift
+    (the `keysplit name, N` starting note, in bytes) and the run length
+    derived from the `split note, end` spans (each span is `end - prev`,
+    starting from the back-shift; a 3-byte table entry per note)."""
     keysplits = {}
+    current = None
+    prev = None
+    run = 0
     for i, line in enumerate(lines):
         stripped = line.strip()
         if stripped == "" or stripped.startswith("@") \
-           or stripped.startswith("split") or stripped.startswith(".align"):
+           or stripped.startswith(".align"):
             continue
         m = re.match(r"keysplit\s+(\w+),\s*(\d+)", stripped)
+        if m:
+            if current is not None:
+                keysplits[current] = (offset, run)
+            name = m.group(1)
+            if name in keysplits:
+                die(f"{KEYSPLIT_TABLES}:{i + 1}: duplicate keysplit {name}")
+            current, offset = name, int(m.group(2))
+            prev, run = offset, 0
+            continue
+        m = re.match(r"split\s+(\d+),\s*(\d+)", stripped)
         if not m:
             die(f"{KEYSPLIT_TABLES}:{i + 1}: malformed keysplit row: {stripped!r}")
-        name = m.group(1)
-        if name in keysplits:
-            die(f"{KEYSPLIT_TABLES}:{i + 1}: duplicate keysplit {name}")
-        keysplits[name] = int(m.group(2))
+        if current is None:
+            die(f"{KEYSPLIT_TABLES}:{i + 1}: split row before any keysplit")
+        end = int(m.group(2))
+        if end < prev:
+            die(f"{KEYSPLIT_TABLES}:{i + 1}: split ends below the previous note")
+        run += end - prev
+        prev = end
+    if current is not None:
+        keysplits[current] = (offset, run)
     if len(keysplits) != PINNED["keysplit"]:
         die(f"keysplit family: expected {PINNED['keysplit']} keysplits, found {len(keysplits)}")
+    for name, (offset, run) in keysplits.items():
+        if offset != PINNED_KEYSPLIT_BACKS[name]:
+            die(f"{KEYSPLIT_TABLES}: {name} back-shift {offset} != pinned {PINNED_KEYSPLIT_BACKS[name]}")
+        if run != PINNED_KEYSPLIT_RUNS[name]:
+            die(f"{KEYSPLIT_TABLES}: {name} run {run} B != pinned {PINNED_KEYSPLIT_RUNS[name]}")
+    total = sum(run for _o, run in keysplits.values())
+    if total != PINNED_KEYSPLIT_RUN_BYTES:
+        die(f"{KEYSPLIT_TABLES}: runs total {total} B != pinned {PINNED_KEYSPLIT_RUN_BYTES}")
     return keysplits
 
 
@@ -506,6 +630,19 @@ def main():
     cry_tables = parse_cry_tables(read_lines(root, CRY_TABLES), samples)
     keysplits = parse_keysplits(read_lines(root, KEYSPLIT_TABLES))
     check_sample_bijection(root, artifacts)
+    voicegroup_rows = parse_voicegroup_rows(root, voicegroups, samples, waves,
+                                            keysplits)
+
+    # R12-C back-shift pins: exactly the 10 drumsets back-shift, with the
+    # pinned per-name values; every other voicegroup must be unshifted.
+    drumset_backs = {}
+    for symbol, (_inc_path, back) in voicegroups.items():
+        if back == 0:
+            continue
+        name = symbol[len("voicegroup_"):]
+        drumset_backs[name] = back
+    if drumset_backs != PINNED_DRUMSET_BACKS:
+        die(f"drumset back-shifts {drumset_backs} != pinned {PINNED_DRUMSET_BACKS}")
 
     # Per-song structure (header track count + voicegroup reference).
     song_files = {}
@@ -549,16 +686,18 @@ def main():
         rows.append(("programmable-wave", key, sym, waves[sym], {"number": int(num)}))
     for sym in voicegroups:
         name = sym[len("voicegroup_"):]
+        inc_path, back = voicegroups[sym]
         key = CONTRACT["voicegroup"][3].format(canonical(name))
-        rows.append(("voicegroup", key, sym, voicegroups[sym], {}))
+        rows.append(("voicegroup", key, sym, inc_path,
+                     {"row_count": voicegroup_rows[sym], "back": back}))
     rows.append(("cry-table", "emerald:audio/cry-table/forward", "gCryTable",
                  CRY_TABLES, {"row_count": PINNED_CRY_ROWS}))
     rows.append(("cry-table", "emerald:audio/cry-table/reverse", "gCryTable_Reverse",
                  CRY_TABLES, {"row_count": PINNED_CRY_ROWS}))
-    for name, offset in keysplits.items():
+    for name, (offset, run) in keysplits.items():
         key = CONTRACT["keysplit"][3].format(canonical(name))
         rows.append(("keysplit", key, "keysplit_" + name, KEYSPLIT_TABLES,
-                     {"offset": offset}))
+                     {"offset": offset, "run_bytes": run}))
 
     # Duplicate-key detection (one canonical identity per audio object).
     for _kind, key, _sym, _art, _extra in rows:

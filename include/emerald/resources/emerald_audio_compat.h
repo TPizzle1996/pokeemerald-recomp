@@ -20,14 +20,22 @@
  * payload and gaps) are zeroed - a single bounded allocation, no per-resource
  * heap allocations.
  *
- * R12-B ADDITIVE CONTRACT: nothing consumes the arena yet. There are no
- * logical-range registrations (R12-F), no HostResolveGbaAddr ranges, no
- * State v5 ranges, no MP2K redirect, and no compiled audio object is removed
- * from the native executable (the compiled payloads remain the live audio
- * source until R12-G). A failed publication is a degrade, not a session
- * refusal: the diagnostics name the first failing resource, the arena stays
- * absent, and the game sounds exactly as pre-R12-B because no consumer reads
- * the arena either way.
+ * R12-C extends the arena with the 202 STRUCTURAL resources (195 voicegroups,
+ * 2 cry tables, 5 keysplit runs): their GBA-form 12-byte rows are
+ * transformed to the native 24-byte width (per-row pointers resolved at
+ * publish against the leaf table and the structural labels) into a
+ * TRANSFORMED ZONE appended after the verbatim zone; the keysplit runs are
+ * copied into the verbatim zone at their ROM-relative offsets. See docs/
+ * R12C_STRUCTURAL_AUDIO_IMPLEMENTATION_PLAN.md §1-2.
+ *
+ * R12-B/R12-C ADDITIVE CONTRACT: no consumer reads the arena until the
+ * R12-C consumer redirect lands (cry accessor + logical-address
+ * registration; sound.c / host_memory.c changes are separate files). A
+ * failed publication is a degrade, not a session refusal: the diagnostics
+ * name the first failing resource, the arena stays absent, and the game
+ * sounds exactly as pre-R12-B because no consumer reads the arena either
+ * way. No compiled audio object is removed from the native executable (the
+ * compiled payloads remain the live audio source until R12-G).
  *
  * Platform-neutral (no global.h/MP2K/frontend objects) so the offline test
  * harness can compile and drive it directly.
@@ -41,10 +49,15 @@
 #include "gen3/resources/resource_resolver.h"
 #include "emerald/resources/emerald_resource_compat.h"
 
-/* The audio section's ROM span (R12 audit): the voicegroup_dummy anchor
- * starts the audio section at 0x0867709C; the span ends at the last leaf
- * (0x089A3DB4). Offsets inside the verbatim zone are ROM-relative to the
- * start, exactly as the R12-G consumers will index them. */
+/* The audio section's ROM span (R12 audit): the section starts with the
+ * structural tables - voicegroup_dummy (voicegroup000) at 0x08675D04, the
+ * first 9 voicegroup labels below the leaf zone - and the LEAF zone starts
+ * at 0x0867709C (the first sample); both end at the last leaf (0x089A3DB4).
+ * Offsets inside the verbatim zone are ROM-relative to the leaf-zone start,
+ * exactly as the R12-G consumers will index them. Structural labels may sit
+ * anywhere in the section (dummy and the early tables precede the leaf
+ * zone); only the leaf zone is ROM-relative. */
+#define EMERALD_AUDIO_SECTION_START 0x08675D04u
 #define EMERALD_AUDIO_ROM_START 0x0867709Cu
 #define EMERALD_AUDIO_SPAN_END  0x089A3DB4u
 #define EMERALD_AUDIO_SPAN_SIZE (EMERALD_AUDIO_SPAN_END - EMERALD_AUDIO_ROM_START)
@@ -60,6 +73,43 @@
     (EMERALD_AUDIO_ROOT_COUNT + EMERALD_AUDIO_PHONEME_COUNT \
      + EMERALD_AUDIO_CRY_COUNT + EMERALD_AUDIO_WAVE_COUNT)
 
+/* R12-C structural family: 195 voicegroups (20,594 GBA-form 12-byte rows),
+ * 2 cry tables (388 rows each), 5 keysplit runs (372 B total). All 21,370
+ * rows are transformed to the native 24-byte width (docs/
+ * R12C_STRUCTURAL_AUDIO_IMPLEMENTATION_PLAN.md §1.2) in a TRANSFORMED ZONE
+ * appended to the same single arena allocation. */
+#define EMERALD_AUDIO_VOICEGROUP_COUNT 195u
+#define EMERALD_AUDIO_CRY_TABLE_COUNT   2u
+#define EMERALD_AUDIO_KEYSPLIT_COUNT    5u
+#define EMERALD_AUDIO_STRUCTURAL_COUNT \
+    (EMERALD_AUDIO_VOICEGROUP_COUNT + EMERALD_AUDIO_CRY_TABLE_COUNT \
+     + EMERALD_AUDIO_KEYSPLIT_COUNT)
+#define EMERALD_AUDIO_VOICEGROUP_ROWS 20594u
+#define EMERALD_AUDIO_CRY_ROWS         776u
+#define EMERALD_AUDIO_STREAM_ROWS \
+    (EMERALD_AUDIO_VOICEGROUP_ROWS + EMERALD_AUDIO_CRY_ROWS)
+
+/* Transformed-zone bytes: 21,370 rows x 24 B + the 10 drumset back-shift
+ * pads (364 rows x 24 B; 9 x 36 + 1 x 40, pinned in the seam) = 521,616 B.
+ * The exact figure is a seam composition gate (docs/R12C §2.1). */
+#define EMERALD_AUDIO_TRANSFORM_ROWS_BYTES (EMERALD_AUDIO_STREAM_ROWS * 24u)
+#define EMERALD_AUDIO_DRUMSET_PAD_ROWS      364u
+#define EMERALD_AUDIO_DRUMSET_PAD_BYTES \
+    (EMERALD_AUDIO_DRUMSET_PAD_ROWS * 24u)
+#define EMERALD_AUDIO_TRANSFORM_SIZE \
+    (EMERALD_AUDIO_TRANSFORM_ROWS_BYTES + EMERALD_AUDIO_DRUMSET_PAD_BYTES)
+
+/* The native-width audio row (24 bytes): the exact layout the LINUX64
+ * assembler emits for a ToneData (music_voice.inc LINUX64 branches: four
+ * scalar bytes, .space 4, .quad union, ADSR bytes, .space 4). Opaque in the
+ * seam (platform-neutral); the MP2K consumer casts to struct ToneData - the
+ * R12-C parity gate proves byte equality with the assembler output for all
+ * 21,370 rows. */
+struct EmeraldAudioToneRow
+{
+    uint8_t bytes[24];
+};
+
 enum EmeraldAudioCompatStatus
 {
     EMERALD_AUDIO_OK = 0,
@@ -70,6 +120,9 @@ enum EmeraldAudioCompatStatus
     EMERALD_AUDIO_ERR_UNEXPECTED_COUNT, /* audio-sample composition != 569 leaves */
     EMERALD_AUDIO_ERR_UNEXPECTED_OWNERSHIP, /* winner is not the ROM_BASE provider */
     EMERALD_AUDIO_ERR_UNAVAILABLE,      /* no published arena to republish */
+    EMERALD_AUDIO_ERR_UNEXPECTED_COMPOSITION, /* structural composition != 202/21,370 */
+    EMERALD_AUDIO_ERR_UNRESOLVED_POINTER, /* a row pointer failed to resolve */
+    EMERALD_AUDIO_ERR_RANGE_REGISTRATION, /* R10 range index registration failed (§8) */
 };
 
 /* Structured diagnostics for the arena build (same shape as the other compat
@@ -121,12 +174,55 @@ EmeraldAudioCompat_Republish(struct EmeraldAudioCompatDiagnostics *diagnostics);
 void EmeraldAudioCompat_ClearMigratedEntries(void);
 void EmeraldAudioCompat_Shutdown(void);
 
-/* Query helpers (tests + future R12 consumers). */
+/* Query helpers (tests + future R12 consumers). GetArena's size now spans
+ * the verbatim zone PLUS the R12-C transformed zone (the two are contiguous
+ * from the zone base); the R12-B zone offsets are unchanged. */
 bool EmeraldAudioCompat_GetArena(const uint8_t **outBase, size_t *outSize);
+/* Arena layout query: all offsets are relative to the arena struct base
+ * (sArena->bytes[0]); the verbatim zone occupies [zoneOffset, +spanSize) and
+ * the transformed zone [transformOffset, +transformSize). The 8-byte-aligned
+ * transformOffset may leave a small gap between the two zones; GetArena's
+ * size spans the verbatim zone only, so callers that walk the transform zone
+ * (tests, the offline parity gate) use this accessor instead. */
+bool EmeraldAudioCompat_GetArenaLayout(size_t *outZoneOffset,
+                                       size_t *outTransformOffset,
+                                       size_t *outSpanSize,
+                                       size_t *outTransformSize);
 size_t EmeraldAudioCompat_GetPublishedCount(void);
 bool EmeraldAudioCompat_GetLeafSpan(const char *canonicalName,
                                     size_t *outArenaOffset, size_t *outSize);
 bool EmeraldAudioCompat_GetLeafBytes(const char *canonicalName,
                                      const uint8_t **outBytes, size_t *outSize);
+
+/* R12-C structural queries. */
+size_t EmeraldAudioCompat_GetStructuralCount(void);
+bool EmeraldAudioCompat_GetTransformedRows(const uint8_t **outBase,
+                                           size_t *outSize);
+bool EmeraldAudioCompat_GetVoicegroupSpan(const char *canonicalName,
+                                          size_t *outTransformOffset,
+                                          size_t *outRowCount);
+bool EmeraldAudioCompat_GetCryTableSpan(bool reversed,
+                                        size_t *outTransformOffset,
+                                        size_t *outRowCount);
+bool EmeraldAudioCompat_GetKeysplitSpan(const char *canonicalName,
+                                        size_t *outVerbatimOffset,
+                                        size_t *outRunBytes);
+
+/* The R12-C cry row accessor (sound.c GET_CRY consumer): row `index` of the
+ * 128-row bank `table` (0..3) in the forward or reverse transformed cry
+ * block. `128*table + index` must be < 388 (the compiled bound; SpeciesToCryId
+ * caps ids at <= 387); out-of-range or unpublished -> NULL. */
+const struct EmeraldAudioToneRow *
+EmeraldAudioCryTableRow(uint8_t table, bool reversed, uint8_t index);
+
+/* Logical-label enumeration for the host_memory exact-start table (197
+ * entries: 195 voicegroup labels + 2 cry table labels, host addresses
+ * resolved at publish). Platform-neutral: the platform layer registers the
+ * labels with HostMemoryRegisterLogicalAddress via this callback. */
+typedef void (*EmeraldAudioLogicalLabelCallback)(uint32_t gbaAddr,
+                                                 const void *hostBase,
+                                                 void *user);
+void EmeraldAudioCompat_ForEachLogicalLabel(
+    EmeraldAudioLogicalLabelCallback callback, void *user);
 
 #endif

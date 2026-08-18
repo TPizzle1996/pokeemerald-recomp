@@ -28,10 +28,33 @@ COMMON_DATA bool8 gDisableMusic = 0;
 extern struct ToneData gCryTable[];
 extern struct ToneData gCryTable_Reverse[];
 
+#ifdef NATIVE_LINUX
+#include "emerald/resources/emerald_audio_compat.h"
+#endif
+
 static void Task_Fanfare(u8 taskId);
 static void CreateFanfareTask(void);
 static void Task_DuckBGMForPokemonCry(u8 taskId);
 static void RestoreBGMVolumeAfterPokemonCry(void);
+
+#ifdef NATIVE_LINUX
+/* R12-C §4: cry rows now live in the transformed arena zone (24-byte native
+ * rows, byte-identical to the LINUX64 assembler output per the parity gate).
+ * The compiled tables stay linked as the additive fallback: an unpublished
+ * arena degrades to compiled audio exactly as pre-R12-B. */
+static struct ToneData *GetPokemonCryRow(u8 table, bool reversed, u8 index)
+{
+    /* SetPokemonCryTone takes ownership of the row as a mutable ToneData;
+     * the arena row is the same 24-byte layout (parity-gate proven), so the
+     * const is cast away exactly where the MP2K consumer consumes it. */
+    const struct EmeraldAudioToneRow *row =
+        EmeraldAudioCryTableRow(table, reversed, index);
+    if (row != NULL)
+        return (struct ToneData *)(const void *)row;
+    return reversed ? &gCryTable_Reverse[(128 * table) + index]
+                    : &gCryTable[(128 * table) + index];
+}
+#endif
 
 static const struct Fanfare sFanfares[] = {
     [FANFARE_LEVEL_UP]            = { MUS_LEVEL_UP,             80 },
@@ -471,8 +494,13 @@ void PlayCryInternal(u16 species, s8 pan, s8 volume, u8 priority, u8 mode)
     index = species % 128;
     table = species / 128;
 
+    #ifdef NATIVE_LINUX
+    #define GET_CRY(speciesIndex, tableId, reversed) \
+        (GetPokemonCryRow((tableId), (reversed), (speciesIndex)))
+    #else
     #define GET_CRY(speciesIndex, tableId, reversed) \
         ((reversed) ? &gCryTable_Reverse[(128 * (tableId)) + (speciesIndex)] : &gCryTable[(128 * (tableId)) + (speciesIndex)])
+    #endif
 
     switch (table)
     {

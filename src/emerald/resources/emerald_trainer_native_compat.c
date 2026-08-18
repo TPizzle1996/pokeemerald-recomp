@@ -1129,7 +1129,7 @@ void EmeraldResourceCompat_Shutdown(void)
  * index is rebuilt whenever a new session image is adopted and dies with the
  * session; lookups are only performed during capture/load, while the session
  * is alive. */
-const struct EmeraldResourceRangeIndex *EmeraldResourceCompat_GetRangeIndex(void)
+struct EmeraldResourceRangeIndex *EmeraldResourceCompat_GetRangeIndex(void)
 {
     return sRangeIndexValid ? &sRangeIndex : NULL;
 }

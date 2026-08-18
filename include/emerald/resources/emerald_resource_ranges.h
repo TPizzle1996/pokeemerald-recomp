@@ -130,6 +130,16 @@ bool EmeraldResourceRangeIndex_RegisterStream(
     const struct EmeraldResourceCompatibilityImage *image, size_t entryIndex,
     uint32_t schema, enum EmeraldResourceRangeRole role);
 
+/* Register a raw base/length span under an explicit canonical name (R12-C:
+ * the audio seam's arena spans - transformed voicegroup/cry table blocks and
+ * the verbatim zone - have no EmeraldResourceCompatibilityImage). Same
+ * validation and sorted-insertion semantics as RegisterStream; the key is
+ * derived from `canonicalName` (e.g. "emerald:audio/voicegroup/000"). */
+bool EmeraldResourceRangeIndex_RegisterSpan(
+    struct EmeraldResourceRangeIndex *index, uintptr_t base, size_t length,
+    const char *canonicalName, uint32_t type, uint32_t schema,
+    enum EmeraldResourceRangeRole role);
+
 /* Look up a host address. Returns true and fills *outHit for an exactly-one
  * range hit; returns false for no hit. Ambiguity is impossible after
  * registration validation but is still checked and reported as false (with

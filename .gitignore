@@ -77,3 +77,8 @@ core.*
 /tools/gen3_resources/elf_manifest/gen3-elf-manifest
 __pycache__/
 *.pyc
+
+# R12-C structural audio GBA-form artifacts (synthesized by gen_audio_bindings.py
+# from ROM slices; consumed only by the manifest Guardrail 10; the pack slices
+# the ROM directly)
+resources/extraction/emerald/bpee01/audio/structural/

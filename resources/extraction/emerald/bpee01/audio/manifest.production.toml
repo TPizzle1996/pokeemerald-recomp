@@ -13,6 +13,97 @@ rom_sha1 = "f3ae088181bf583e55daf962a92bb46f4f1d07b7"
 rom_sha256 = "a9dec84dfe7f62ab2220bafaef7479da0929d066ece16a6885f6226db19085af"
 
 [[records]]
+id = "emerald:audio/cry-table/forward"
+key = "0bdc6394f7fbd98ba67c76cdb41c0adb186627f10ca06c8b5e2a9845c5871f13"
+type = "instrument-bank"
+schema = 1
+symbol = "gCryTable"
+rom_offset = 6937844
+encoded_length = 4656
+decoded_length = 4656
+source_encoding = "raw"
+source_encoded_sha256 = "aeabb64fa826c18fd13f98b6a0ab5890fb186ab0cbb3f015f37c43888ad313ae"
+canonical_decoded_sha256 = "aeabb64fa826c18fd13f98b6a0ab5890fb186ab0cbb3f015f37c43888ad313ae"
+
+[[records]]
+id = "emerald:audio/cry-table/reverse"
+key = "10f3f5841673f7b63c854429a0fed510ec4fad22ea2dbd2741ca619b7d8f3ac9"
+type = "instrument-bank"
+schema = 1
+symbol = "gCryTable_Reverse"
+rom_offset = 6942500
+encoded_length = 4656
+decoded_length = 4656
+source_encoding = "raw"
+source_encoded_sha256 = "48ccc0dcf533864b8f18e8dcb0e14e5a5fca95bccb0721f4135abb511b362151"
+canonical_decoded_sha256 = "48ccc0dcf533864b8f18e8dcb0e14e5a5fca95bccb0721f4135abb511b362151"
+
+[[records]]
+id = "emerald:audio/keysplit/french-horn"
+key = "f7f9c9874db704fcd96e6fec0bf29ea99a335d0773103ec73b640580022b1e97"
+type = "instrument-bank"
+schema = 2
+symbol = "KeySplitTable5"
+rom_offset = 7030760
+encoded_length = 72
+decoded_length = 72
+source_encoding = "raw"
+source_encoded_sha256 = "2147e95324ea8b3cdaf37c3361314e356482cac3a7a22d7b3593712ab35a59a0"
+canonical_decoded_sha256 = "2147e95324ea8b3cdaf37c3361314e356482cac3a7a22d7b3593712ab35a59a0"
+
+[[records]]
+id = "emerald:audio/keysplit/piano"
+key = "78d5bc22766d39d9d938eac2cac3d41bfb2814fd037007e9f5571ceb56c51add"
+type = "instrument-bank"
+schema = 2
+symbol = "KeySplitTable1"
+rom_offset = 7030460
+encoded_length = 72
+decoded_length = 72
+source_encoding = "raw"
+source_encoded_sha256 = "955a772f3ca5dfa128c06bebd2c0d4c93c8fc4d63c9a8e1a5fa60035c71e85fa"
+canonical_decoded_sha256 = "955a772f3ca5dfa128c06bebd2c0d4c93c8fc4d63c9a8e1a5fa60035c71e85fa"
+
+[[records]]
+id = "emerald:audio/keysplit/strings"
+key = "1da1a851ee0306bd59a3801df1758aac1b19754706330941451b234eaee97e46"
+type = "instrument-bank"
+schema = 2
+symbol = "KeySplitTable2"
+rom_offset = 7030532
+encoded_length = 72
+decoded_length = 72
+source_encoding = "raw"
+source_encoded_sha256 = "3d37cb1d3cafaaa888fdd051b34ad37100102cb03b01d200ee8d7e6001e0fb8a"
+canonical_decoded_sha256 = "3d37cb1d3cafaaa888fdd051b34ad37100102cb03b01d200ee8d7e6001e0fb8a"
+
+[[records]]
+id = "emerald:audio/keysplit/trumpet"
+key = "f74190b4389e93cecf7370ce7185a5a21ea95daaa49bf5ced5b31c47d6fcd1f6"
+type = "instrument-bank"
+schema = 2
+symbol = "KeySplitTable3"
+rom_offset = 7030604
+encoded_length = 72
+decoded_length = 72
+source_encoding = "raw"
+source_encoded_sha256 = "ebd03796aad61e36526f913d9cee8ac9e737f35fe1886bdb34368b8761309e12"
+canonical_decoded_sha256 = "ebd03796aad61e36526f913d9cee8ac9e737f35fe1886bdb34368b8761309e12"
+
+[[records]]
+id = "emerald:audio/keysplit/tuba"
+key = "4b8f0d601c4925ee8f2ea66f752551693d32eae88c8fb67a538e68258d1cfd34"
+type = "instrument-bank"
+schema = 2
+symbol = "KeySplitTable4"
+rom_offset = 7030676
+encoded_length = 84
+decoded_length = 84
+source_encoding = "raw"
+source_encoded_sha256 = "c9a2c799a004aaf0197fe3e1f2734780f8a7d0ed30676ef906a3ec34d155ff93"
+canonical_decoded_sha256 = "c9a2c799a004aaf0197fe3e1f2734780f8a7d0ed30676ef906a3ec34d155ff93"
+
+[[records]]
 id = "emerald:audio/sample/bicycle-bell"
 key = "4d8f0e72b97689d4dd7e1b67ed15e55bcc8004817dacc03aacc035e3c866a7f4"
 type = "audio-sample"
@@ -7083,6 +7174,2541 @@ decoded_length = 9381
 source_encoding = "raw"
 source_encoded_sha256 = "c65e077c4d05c7ae7b3d73ed1d1a3059acce83550c9f93c645e579e1b5274590"
 canonical_decoded_sha256 = "c65e077c4d05c7ae7b3d73ed1d1a3059acce83550c9f93c645e579e1b5274590"
+
+[[records]]
+id = "emerald:audio/voicegroup/abandoned-ship"
+key = "1c14d516296050b30c746a319f44677f74a71b6585b30d0d8db47f9a29426f26"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup030"
+rom_offset = 6800804
+encoded_length = 1140
+decoded_length = 1140
+source_encoding = "raw"
+source_encoded_sha256 = "13b62758d0fef7c4051295df815343544dfce37dcd7bdc338e6754d64940f289"
+canonical_decoded_sha256 = "13b62758d0fef7c4051295df815343544dfce37dcd7bdc338e6754d64940f289"
+
+[[records]]
+id = "emerald:audio/voicegroup/abnormal-weather"
+key = "005b50ec5034a2f8bdd9154b299283220054601250a2b46533ed5fb4f876e33e"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup089"
+rom_offset = 6882428
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "ec59b9994372febb266eaa8576d2b5af9ce3c105691e4bb19165d580422caf55"
+canonical_decoded_sha256 = "ec59b9994372febb266eaa8576d2b5af9ce3c105691e4bb19165d580422caf55"
+
+[[records]]
+id = "emerald:audio/voicegroup/aqua-magma-hideout"
+key = "c3b0e1f2f61164fd00d89f659eb6cd3a6c2f2dea64bcc3ccc0c161f5c3503b15"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup076"
+rom_offset = 6864500
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "21487975862560ef722be3125a6ab07246fcf07336ac0820bbf7b198974b83ad"
+canonical_decoded_sha256 = "21487975862560ef722be3125a6ab07246fcf07336ac0820bbf7b198974b83ad"
+
+[[records]]
+id = "emerald:audio/voicegroup/b-arena"
+key = "2f749edcab26d9a3f9c2777b702585c838c6c2bbeebfc4a569368ac799323250"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup104"
+rom_offset = 6904700
+encoded_length = 1296
+decoded_length = 1296
+source_encoding = "raw"
+source_encoded_sha256 = "64597bb9d15f8d03bfa578f74a4d6db5b369b2252daa0bc427f8508521b4d25c"
+canonical_decoded_sha256 = "64597bb9d15f8d03bfa578f74a4d6db5b369b2252daa0bc427f8508521b4d25c"
+
+[[records]]
+id = "emerald:audio/voicegroup/b-dome"
+key = "0ef7d293c6ddfeb50199880ef3a2ca6a494bfbe31ebfad08d345945a29b27f51"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup111"
+rom_offset = 6914132
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "d598fb9cf86e2d0fd6ae34b3c0f01253d6a6215d89b27871b0155ba88d0e54c0"
+canonical_decoded_sha256 = "d598fb9cf86e2d0fd6ae34b3c0f01253d6a6215d89b27871b0155ba88d0e54c0"
+
+[[records]]
+id = "emerald:audio/voicegroup/b-factory"
+key = "58e9dfe6c86c398e7c87355e54bfd00125d7b2907c21096583c4145c2d6230b2"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup113"
+rom_offset = 6917204
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "e399123576174c85eaace75eeb9584f45ec37d5d6cfc8b1a3fd6774a98241e13"
+canonical_decoded_sha256 = "e399123576174c85eaace75eeb9584f45ec37d5d6cfc8b1a3fd6774a98241e13"
+
+[[records]]
+id = "emerald:audio/voicegroup/b-frontier"
+key = "d47917a3e6dbcc1ddf02987b8c7f15da6ef7dee3023b7d0e9f6695ea290913cf"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup103"
+rom_offset = 6903164
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "2b4bcecc89024d2eab68bc7e70fb72955307c532e16a62f3a0f48d0bf69926eb"
+canonical_decoded_sha256 = "2b4bcecc89024d2eab68bc7e70fb72955307c532e16a62f3a0f48d0bf69926eb"
+
+[[records]]
+id = "emerald:audio/voicegroup/b-palace"
+key = "2437be86f179031e9d859a3e8bce06984281e1b229bebd9d35f75093f110b00f"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup108"
+rom_offset = 6910064
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "0d93aeca2bedc8ab619dca40db2b9285f5dd88d1d7e33de33282328c545aa5f6"
+canonical_decoded_sha256 = "0d93aeca2bedc8ab619dca40db2b9285f5dd88d1d7e33de33282328c545aa5f6"
+
+[[records]]
+id = "emerald:audio/voicegroup/b-pike"
+key = "c441db305b3aedb35a29cea2cd3e1c69824dee923251362b8e6c1d592a1d9b23"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup112"
+rom_offset = 6915668
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "671290a53599df26ceee127e68bf959c2a992402f77b7f43f0dfbb4e63fca4d0"
+canonical_decoded_sha256 = "671290a53599df26ceee127e68bf959c2a992402f77b7f43f0dfbb4e63fca4d0"
+
+[[records]]
+id = "emerald:audio/voicegroup/b-pyramid"
+key = "8c2e6fef38fb369ab734b8a56f67466fd6e16c0035fe5ce483d67be5d5fd32cf"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup106"
+rom_offset = 6906992
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "ec824b5dcdf5d1dbabd0c1646f7d55a68929ac6d33ca2a860bf33d2fc22e07c3"
+canonical_decoded_sha256 = "ec824b5dcdf5d1dbabd0c1646f7d55a68929ac6d33ca2a860bf33d2fc22e07c3"
+
+[[records]]
+id = "emerald:audio/voicegroup/b-pyramid-top"
+key = "2f190167d4f61c2654d9bebf989eee9444da6f6612c9ae5af338de89ad1cc4be"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup107"
+rom_offset = 6908528
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "9b4dafb823805ddceef43b83e458d96f06779437f149954cc2d446cbe2f0f65e"
+canonical_decoded_sha256 = "9b4dafb823805ddceef43b83e458d96f06779437f149954cc2d446cbe2f0f65e"
+
+[[records]]
+id = "emerald:audio/voicegroup/b-tower"
+key = "4fd8ecd0348b28f0a1d1b47ea3813d74934bf2ed518f9aafbec4a2094d0456ad"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup110"
+rom_offset = 6912596
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "443af2831910d67792cf2a0bc2a48ed216c51fb542d7d86432393772f206f796"
+canonical_decoded_sha256 = "443af2831910d67792cf2a0bc2a48ed216c51fb542d7d86432393772f206f796"
+
+[[records]]
+id = "emerald:audio/voicegroup/b-tower-rs"
+key = "3370a733f92a4c402089d110735db8501974d08f2eff0f3944b0e2c20650769b"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup035"
+rom_offset = 6805784
+encoded_length = 1020
+decoded_length = 1020
+source_encoding = "raw"
+source_encoded_sha256 = "f48f8c116c0365a60096d9745bf1f68b790a2edffbcb4256697c7284d3762859"
+canonical_decoded_sha256 = "f48f8c116c0365a60096d9745bf1f68b790a2edffbcb4256697c7284d3762859"
+
+[[records]]
+id = "emerald:audio/voicegroup/bard"
+key = "e77cee1c150951f2135064e46e945d0e53282bbd732ca38fa4476fa43e69cd7b"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup130"
+rom_offset = 6948692
+encoded_length = 612
+decoded_length = 612
+source_encoding = "raw"
+source_encoded_sha256 = "f3af1dcba9fe31573e8824300f23d09659eeb2db3c623b168109bf7bce4e91cf"
+canonical_decoded_sha256 = "f3af1dcba9fe31573e8824300f23d09659eeb2db3c623b168109bf7bce4e91cf"
+
+[[records]]
+id = "emerald:audio/voicegroup/birch-lab"
+key = "43699d65d5d2580d848f1da3cabb47371c4940d14911d525c95c8fd119330e0e"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup033"
+rom_offset = 6803780
+encoded_length = 996
+decoded_length = 996
+source_encoding = "raw"
+source_encoded_sha256 = "7c694e05bd4d6ed81b0e3e3c469d921d21cc1822c2972a4cae7b71f8452672ac"
+canonical_decoded_sha256 = "7c694e05bd4d6ed81b0e3e3c469d921d21cc1822c2972a4cae7b71f8452672ac"
+
+[[records]]
+id = "emerald:audio/voicegroup/cable-car"
+key = "cf052abbe840b00d564b924b91e8b9c5ecf55f7a1d2474f4cb7e718fc19d2199"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup071"
+rom_offset = 6856820
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "0fb39bf68becae147438de5327751291abf169283a27f0c9b47604a9d9a1939b"
+canonical_decoded_sha256 = "0fb39bf68becae147438de5327751291abf169283a27f0c9b47604a9d9a1939b"
+
+[[records]]
+id = "emerald:audio/voicegroup/cave-of-origin"
+key = "77e20add61d118e4c1fe211042c0efb0ed39c2753d035ee401e35a87c4d1b44b"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup037"
+rom_offset = 6808340
+encoded_length = 1068
+decoded_length = 1068
+source_encoding = "raw"
+source_encoded_sha256 = "7b0a44a16d3fc0331a6babe37c951021aad79753510a08f384f2d0f55af94e43"
+canonical_decoded_sha256 = "7b0a44a16d3fc0331a6babe37c951021aad79753510a08f384f2d0f55af94e43"
+
+[[records]]
+id = "emerald:audio/voicegroup/contest"
+key = "2ac08346193dd450253fa208a09646071d79c446ce4e8531edec3da65e7425cf"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup086"
+rom_offset = 6877820
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "566b5a2129514bb3c91895841a29d40c1ea3491f3d62b69fb3ae127c12e3eb85"
+canonical_decoded_sha256 = "566b5a2129514bb3c91895841a29d40c1ea3491f3d62b69fb3ae127c12e3eb85"
+
+[[records]]
+id = "emerald:audio/voicegroup/contest-lobby"
+key = "46d45aa85992b1986c76734544677aa966aa7eb10f2948ea1b70c6d64653ff59"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup098"
+rom_offset = 6896252
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "c955db9be0eca6ce6c07428fb2ebbebc2aefff792deb7014e3d4824ac1208484"
+canonical_decoded_sha256 = "c955db9be0eca6ce6c07428fb2ebbebc2aefff792deb7014e3d4824ac1208484"
+
+[[records]]
+id = "emerald:audio/voicegroup/contest-results"
+key = "35ca8173e7f8df93ee2a372262e02f3ff101b5840da19e608c4de02162cec0a0"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup092"
+rom_offset = 6887036
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "c5c664695b1f2e2e8676f831db90899847680d11c36582deb21d24f51242a41c"
+canonical_decoded_sha256 = "c5c664695b1f2e2e8676f831db90899847680d11c36582deb21d24f51242a41c"
+
+[[records]]
+id = "emerald:audio/voicegroup/contest-winner"
+key = "dc0afb772361e15e86ee2d4b6fdf72d72fef01cd28f5772620fc8486811454f9"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup085"
+rom_offset = 6876284
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "8cd2f7778fa874286cd66df3c1ba5d9a9efb7008586ac41b8979aa17456e9615"
+canonical_decoded_sha256 = "8cd2f7778fa874286cd66df3c1ba5d9a9efb7008586ac41b8979aa17456e9615"
+
+[[records]]
+id = "emerald:audio/voicegroup/credits"
+key = "b1d3da678b1459f95e5e70d3ca116d2fbefc5f47211bc7970ba8d2292effc246"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup101"
+rom_offset = 6900860
+encoded_length = 1320
+decoded_length = 1320
+source_encoding = "raw"
+source_encoded_sha256 = "32c658f347572d33358af5b70c4a68f4521f2fc8cf4ae6d190ff2a9b61a1fa14"
+canonical_decoded_sha256 = "32c658f347572d33358af5b70c4a68f4521f2fc8cf4ae6d190ff2a9b61a1fa14"
+
+[[records]]
+id = "emerald:audio/voicegroup/cycling"
+key = "96a4d777dd6869a900ba72bf51895534fd527e2732e8d99390def8f06fe868a1"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup049"
+rom_offset = 6824144
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "b86800f9e261a2d6dcbb5bb759f23b5d1f94702a18a51c56e407b1c1ad9d78e0"
+canonical_decoded_sha256 = "b86800f9e261a2d6dcbb5bb759f23b5d1f94702a18a51c56e407b1c1ad9d78e0"
+
+[[records]]
+id = "emerald:audio/voicegroup/dewford"
+key = "ad491a66df8bf9d69ba86ed9280130e0921c9ffb8052d75b40dd362cd0aa4b8b"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup073"
+rom_offset = 6859892
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "4e83f846c8c635adf7cda8a06e61e77feecbebeb780c233e0b0d1e59a0a45ff8"
+canonical_decoded_sha256 = "4e83f846c8c635adf7cda8a06e61e77feecbebeb780c233e0b0d1e59a0a45ff8"
+
+[[records]]
+id = "emerald:audio/voicegroup/dummy"
+key = "d66176dc7221041c1d22a8dd973b67f7acafb71cac42914bf67706539a8a5354"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup000"
+rom_offset = 6774020
+encoded_length = 1176
+decoded_length = 1176
+source_encoding = "raw"
+source_encoded_sha256 = "d3ebb68971724853242219d2356dca8dfe7d0d83fff9ae7ce83f612c5ac8800b"
+canonical_decoded_sha256 = "d3ebb68971724853242219d2356dca8dfe7d0d83fff9ae7ce83f612c5ac8800b"
+
+[[records]]
+id = "emerald:audio/voicegroup/emerald-drumset-1"
+key = "81eeeb77af84408a13ed1b5ecd984f9e4a9abfdcb6b5eff61eb67f36f8398516"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup003"
+rom_offset = 6776192
+encoded_length = 648
+decoded_length = 648
+source_encoding = "raw"
+source_encoded_sha256 = "b9c6be2a9ed0edad7f3bfbb69ef86164d6731031500c34c7590025f7064932d5"
+canonical_decoded_sha256 = "b9c6be2a9ed0edad7f3bfbb69ef86164d6731031500c34c7590025f7064932d5"
+
+[[records]]
+id = "emerald:audio/voicegroup/emerald-drumset-2"
+key = "23a1c9d37e1c5466b45a0048d6a42235105b184a448ade47e689a1f0cfe94468"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup004"
+rom_offset = 6776840
+encoded_length = 648
+decoded_length = 648
+source_encoding = "raw"
+source_encoded_sha256 = "f258180c8a6e45093fecd43678f9041c0bac2c9d2ae96268757b5cb562671643"
+canonical_decoded_sha256 = "f258180c8a6e45093fecd43678f9041c0bac2c9d2ae96268757b5cb562671643"
+
+[[records]]
+id = "emerald:audio/voicegroup/encounter-aqua"
+key = "5d9907dbc96dbf1035a5a9054f8155d7bcb8c2013e4aa3cfa1fe87d4a6cac82e"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup065"
+rom_offset = 6847604
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "00e580365718dc0c3e2b47eb326a5eedaaa3ca4fc6343b28834630615dd55d86"
+canonical_decoded_sha256 = "00e580365718dc0c3e2b47eb326a5eedaaa3ca4fc6343b28834630615dd55d86"
+
+[[records]]
+id = "emerald:audio/voicegroup/encounter-brendan"
+key = "f8ad8661666a8e949d31e9402f7ab96bf216103bcf6cb5fc5e71151c4683ba59"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup067"
+rom_offset = 6850676
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "e9c6603625aa627b64117155379fa7776627b79606ab728e5c582e632f799314"
+canonical_decoded_sha256 = "e9c6603625aa627b64117155379fa7776627b79606ab728e5c582e632f799314"
+
+[[records]]
+id = "emerald:audio/voicegroup/encounter-champion"
+key = "efa1f70404ca44fa498e22333bd020174b7397331b16ba27b6ea2830befbec6c"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup100"
+rom_offset = 6899324
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "cbeb14e1d35ed1f87339f885f78ce9b4804ea8f7fc7ad8655ae92eae16a3d4e0"
+canonical_decoded_sha256 = "cbeb14e1d35ed1f87339f885f78ce9b4804ea8f7fc7ad8655ae92eae16a3d4e0"
+
+[[records]]
+id = "emerald:audio/voicegroup/encounter-cool"
+key = "ffdbc983aa01e425ccaf7a143a09b7d7af4b88c3024e8c0edbe7e3fc33d97e3e"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup063"
+rom_offset = 6844532
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "3728ef4b74463f5bad72657a22f5ccb869c256dd489733bf9fb1b92261efb667"
+canonical_decoded_sha256 = "3728ef4b74463f5bad72657a22f5ccb869c256dd489733bf9fb1b92261efb667"
+
+[[records]]
+id = "emerald:audio/voicegroup/encounter-elite-four"
+key = "9e52f0dfae02cae73f262e3b341e9824080aa0fdad4bd0a0b96cc3c22cec7a72"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup096"
+rom_offset = 6893180
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "b0eb4398b7eb55f47f9c93581b604a21d1ac418059dfd4ec94f4470828a520c9"
+canonical_decoded_sha256 = "b0eb4398b7eb55f47f9c93581b604a21d1ac418059dfd4ec94f4470828a520c9"
+
+[[records]]
+id = "emerald:audio/voicegroup/encounter-female"
+key = "ad443c9b6acd8406c0ec2936c34a7735b05eb470ed45969a4c5a630adb1a4ab1"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup053"
+rom_offset = 6829640
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "2693ec19c05319af6d9e1c9495b43921d53217688613b5c5a1607c8f413be990"
+canonical_decoded_sha256 = "2693ec19c05319af6d9e1c9495b43921d53217688613b5c5a1607c8f413be990"
+
+[[records]]
+id = "emerald:audio/voicegroup/encounter-girl"
+key = "cd94cacafaef706f2cf5b34ce212cc82b187f8b5ad37e51b4672e0084ac3e7f3"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup027"
+rom_offset = 6797216
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "d920a6eae5a0abd5066e7b993c884a9bd38763501c00d736bc989ea2a163ab82"
+canonical_decoded_sha256 = "d920a6eae5a0abd5066e7b993c884a9bd38763501c00d736bc989ea2a163ab82"
+
+[[records]]
+id = "emerald:audio/voicegroup/encounter-hiker"
+key = "e600368be28c5f03dfc63503b9b26ea729c82987ac6ce82c50bb13e7f5bc0a08"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup097"
+rom_offset = 6894716
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "0d414fc712e027d9a2b4b6d0a2241bc6d7d5b2df5641e3cd250b2ed2ee07627e"
+canonical_decoded_sha256 = "0d414fc712e027d9a2b4b6d0a2241bc6d7d5b2df5641e3cd250b2ed2ee07627e"
+
+[[records]]
+id = "emerald:audio/voicegroup/encounter-intense"
+key = "c2b91f66b36281544f92fb48cef3add5dd8ed0c176c1d5608a8397c442276d6d"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup062"
+rom_offset = 6842996
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "18b3049d16fd7e26b72ace95d651bbb863b14f482b59d532374e88375aa1f663"
+canonical_decoded_sha256 = "18b3049d16fd7e26b72ace95d651bbb863b14f482b59d532374e88375aa1f663"
+
+[[records]]
+id = "emerald:audio/voicegroup/encounter-interviewer"
+key = "62085a5a5d962d77532d4c53adab474cdf81d5425c5f2a45cf8f33ee1bfeba48"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup099"
+rom_offset = 6897788
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "d50174e3485c689bb69b66724a30f6eef7f500d6198a9a39e753823b79f9ad4c"
+canonical_decoded_sha256 = "d50174e3485c689bb69b66724a30f6eef7f500d6198a9a39e753823b79f9ad4c"
+
+[[records]]
+id = "emerald:audio/voicegroup/encounter-magma"
+key = "16361ba8ab7c52dfc109d021d895fcfd563c0a022bd941e3987f0dee1e1d9f62"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup087"
+rom_offset = 6879356
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "1072633ab8b3d12faf1b1746e297fa85820a90b5719fe12618f499d30d5478db"
+canonical_decoded_sha256 = "1072633ab8b3d12faf1b1746e297fa85820a90b5719fe12618f499d30d5478db"
+
+[[records]]
+id = "emerald:audio/voicegroup/encounter-male"
+key = "4b9c1edad59749aa0ee31e78032a93fc65207c8b37f0c9b8c9e7fc11f80b3885"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup028"
+rom_offset = 6798752
+encoded_length = 996
+decoded_length = 996
+source_encoding = "raw"
+source_encoded_sha256 = "98249ec35aa69511a0a7d6a1dd8e4c89fd66318e562b3410ecdf407ff39a02a5"
+canonical_decoded_sha256 = "98249ec35aa69511a0a7d6a1dd8e4c89fd66318e562b3410ecdf407ff39a02a5"
+
+[[records]]
+id = "emerald:audio/voicegroup/encounter-may"
+key = "9d687286cfb5caae93ca87d26b03af20bb1f5c22df8f8aeb7b0b417b3a7e93a3"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup061"
+rom_offset = 6841460
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "5a059039a149117f8df0ca65473852c969da33d9900ddd894b98f64865a99eea"
+canonical_decoded_sha256 = "5a059039a149117f8df0ca65473852c969da33d9900ddd894b98f64865a99eea"
+
+[[records]]
+id = "emerald:audio/voicegroup/encounter-rich"
+key = "bf59f2dd0531a232bee290e2539732a99e378d31354d35de4c8be5b49566386c"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup043"
+rom_offset = 6816536
+encoded_length = 972
+decoded_length = 972
+source_encoding = "raw"
+source_encoded_sha256 = "74f95f78e59a68a1940d895bb490b872e4d3aeae96891c1739fc72e5535513b0"
+canonical_decoded_sha256 = "74f95f78e59a68a1940d895bb490b872e4d3aeae96891c1739fc72e5535513b0"
+
+[[records]]
+id = "emerald:audio/voicegroup/encounter-suspicious"
+key = "ddc5a7831986155750caa65e05fa2c4cc56f45ca66126ad1e72442a2c4607ded"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup069"
+rom_offset = 6853748
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "03548f3181c47b32b152cdbf1c85c1745ee3ee7f4bf1af9ed94149389a8e5820"
+canonical_decoded_sha256 = "03548f3181c47b32b152cdbf1c85c1745ee3ee7f4bf1af9ed94149389a8e5820"
+
+[[records]]
+id = "emerald:audio/voicegroup/encounter-swimmer"
+key = "0140411f36c8d1e6b7da9fe5c610ece2e762375550a4847e0bc78463b02c093b"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup036"
+rom_offset = 6806804
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "657daa1e54bd7e24b7266fcd6d09ff1324e9727d9bd652e8c88af024c405724f"
+canonical_decoded_sha256 = "657daa1e54bd7e24b7266fcd6d09ff1324e9727d9bd652e8c88af024c405724f"
+
+[[records]]
+id = "emerald:audio/voicegroup/encounter-twins"
+key = "d633288f2ee1d1f1b08e912eac28c253f039faeb2a153a2888d9f01c6f33f7b1"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup095"
+rom_offset = 6891644
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "2cc324592327ac8ad258a859de844d15b6187526fda86fa5728537c20cc3ba55"
+canonical_decoded_sha256 = "2cc324592327ac8ad258a859de844d15b6187526fda86fa5728537c20cc3ba55"
+
+[[records]]
+id = "emerald:audio/voicegroup/end"
+key = "f9e7967bc11077acc2c6988da6c298ac710422415d38256e902128a1e284c90b"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup102"
+rom_offset = 6902180
+encoded_length = 984
+decoded_length = 984
+source_encoding = "raw"
+source_encoded_sha256 = "e6cdd98bf8c8324fec01793671b691801866d0d78f5135f368d35c6d137f3fd1"
+canonical_decoded_sha256 = "e6cdd98bf8c8324fec01793671b691801866d0d78f5135f368d35c6d137f3fd1"
+
+[[records]]
+id = "emerald:audio/voicegroup/ever-grande"
+key = "f44527e3d86169fa5e69d06f43ad43a5d1f183d7487fba2383f88176324a1827"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup068"
+rom_offset = 6852212
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "5b85c781220e495cc6910ba4d33122eca9904ae686920b79642dfc77fc2ad179"
+canonical_decoded_sha256 = "5b85c781220e495cc6910ba4d33122eca9904ae686920b79642dfc77fc2ad179"
+
+[[records]]
+id = "emerald:audio/voicegroup/evolution"
+key = "7e544d5f728ee9f011213833f85ef5e37a00cfbcb1d43c98c94073fa14a08ded"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup026"
+rom_offset = 6796196
+encoded_length = 1020
+decoded_length = 1020
+source_encoding = "raw"
+source_encoded_sha256 = "fe5ab081671e2754b6fd1662de4ba7666f1aee183bc4e612a4760f9fe5ef9988"
+canonical_decoded_sha256 = "fe5ab081671e2754b6fd1662de4ba7666f1aee183bc4e612a4760f9fe5ef9988"
+
+[[records]]
+id = "emerald:audio/voicegroup/fallarbor"
+key = "1b550e69416a011d2466b1858bcac43454d454d103b72b9fd8a15bd0f2080832"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup083"
+rom_offset = 6873740
+encoded_length = 1008
+decoded_length = 1008
+source_encoding = "raw"
+source_encoded_sha256 = "cfebe2a00a8e4ab728ebd7dbfcae3b26c30f04b2a81927f37f1fa1f9f224e9d1"
+canonical_decoded_sha256 = "cfebe2a00a8e4ab728ebd7dbfcae3b26c30f04b2a81927f37f1fa1f9f224e9d1"
+
+[[records]]
+id = "emerald:audio/voicegroup/fanfare"
+key = "fb337e3707927016b91414e7061147651fc55c6169e0ab446de5111aaa9aadfa"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup012"
+rom_offset = 6781736
+encoded_length = 1224
+decoded_length = 1224
+source_encoding = "raw"
+source_encoded_sha256 = "3adbc0f0bb5c50c839acb33331493998ca90c2ad7b1501f8e829a0780575ed84"
+canonical_decoded_sha256 = "3adbc0f0bb5c50c839acb33331493998ca90c2ad7b1501f8e829a0780575ed84"
+
+[[records]]
+id = "emerald:audio/voicegroup/follow-me"
+key = "d5633e24ef552ed91e1bee8061261ad2de1d8a54ad5f3c905735586e61d980f4"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup066"
+rom_offset = 6849140
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "c708b2ba13aa88e6387ae0384b8978d310c9e5e337931b0807def99c028d6cc4"
+canonical_decoded_sha256 = "c708b2ba13aa88e6387ae0384b8978d310c9e5e337931b0807def99c028d6cc4"
+
+[[records]]
+id = "emerald:audio/voicegroup/fortree"
+key = "187783452a7aec75c33778ae586cf132249509f4389d7c5ed21bfc0dc1ed6743"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup032"
+rom_offset = 6802244
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "85b10cb90e8efa4212651754c9d22af3b4b873587a1f6a8e43cfdb4c3ea9f748"
+canonical_decoded_sha256 = "85b10cb90e8efa4212651754c9d22af3b4b873587a1f6a8e43cfdb4c3ea9f748"
+
+[[records]]
+id = "emerald:audio/voicegroup/french-horn-keysplit"
+key = "c7c3fca8325fc398f53b7b0f568026164f1de2bf092f16647f717abd9954557b"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup009"
+rom_offset = 6779168
+encoded_length = 24
+decoded_length = 24
+source_encoding = "raw"
+source_encoded_sha256 = "38ef274687ef76c31dc5fb4a1d72bd3d734c907eb01cdc10e1612b6910887d84"
+canonical_decoded_sha256 = "38ef274687ef76c31dc5fb4a1d72bd3d734c907eb01cdc10e1612b6910887d84"
+
+[[records]]
+id = "emerald:audio/voicegroup/frlg-drumset"
+key = "e7c7c49eadf84912d15e954b5703176421c37bac7d41f18a36fab0327f9d10b3"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup002"
+rom_offset = 6775544
+encoded_length = 648
+decoded_length = 648
+source_encoding = "raw"
+source_encoded_sha256 = "6806e03c7255616ef21271ef22642df3d12bb1e560841f30b70ef0e2b1caedf1"
+canonical_decoded_sha256 = "6806e03c7255616ef21271ef22642df3d12bb1e560841f30b70ef0e2b1caedf1"
+
+[[records]]
+id = "emerald:audio/voicegroup/frlg-fanfare-drumset-1"
+key = "8cc7aa42e6e1ad0e4c52531cd2cbfd4156b5903f3ff8484ed2360602e9be04ce"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup177"
+rom_offset = 7013672
+encoded_length = 648
+decoded_length = 648
+source_encoding = "raw"
+source_encoded_sha256 = "88d8c9701bd8c0ab5c61296c5eec9b2e893d7cfcdf1ad30a955bf02a37c38677"
+canonical_decoded_sha256 = "88d8c9701bd8c0ab5c61296c5eec9b2e893d7cfcdf1ad30a955bf02a37c38677"
+
+[[records]]
+id = "emerald:audio/voicegroup/frlg-fanfare-drumset-2"
+key = "8d236cc0d5ba4f839aa198d825773b0be399a11cf3aef58138a93663ab053538"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup176"
+rom_offset = 7013096
+encoded_length = 576
+decoded_length = 576
+source_encoding = "raw"
+source_encoded_sha256 = "0b4521c196501bd685d7a3e4aae8281e8d5ee36a83b19830ca1368c23de83663"
+canonical_decoded_sha256 = "0b4521c196501bd685d7a3e4aae8281e8d5ee36a83b19830ca1368c23de83663"
+
+[[records]]
+id = "emerald:audio/voicegroup/frlg-sfx"
+key = "f03f85563621bfabf0e4fef46b8cddebe7f28e514993d10d5730f9d415b43569"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup129"
+rom_offset = 6947156
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "b1483c04153715dcb0385b99ea2ba6b0d9e69f3e60df11447be441021d9ed584"
+canonical_decoded_sha256 = "b1483c04153715dcb0385b99ea2ba6b0d9e69f3e60df11447be441021d9ed584"
+
+[[records]]
+id = "emerald:audio/voicegroup/game-corner"
+key = "89a6e041c10dcdb5d07a41acc16c15a06a13e6ab43ec8c19e78a8bfd96f2f167"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup072"
+rom_offset = 6858356
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "a5de50eef926ad44a5d60fa0d19499d1983c635d06a0a486ca67e2f785e657a8"
+canonical_decoded_sha256 = "a5de50eef926ad44a5d60fa0d19499d1983c635d06a0a486ca67e2f785e657a8"
+
+[[records]]
+id = "emerald:audio/voicegroup/gym"
+key = "bc87227cc0e91f569215a72933d6bcc767739fca272f26e00dbeca6b9ee92b70"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup013"
+rom_offset = 6782960
+encoded_length = 1080
+decoded_length = 1080
+source_encoding = "raw"
+source_encoded_sha256 = "c1406b72b2b3be3db70948cbbe4e2cf6e750f7f7408ae68787079cd66583b888"
+canonical_decoded_sha256 = "c1406b72b2b3be3db70948cbbe4e2cf6e750f7f7408ae68787079cd66583b888"
+
+[[records]]
+id = "emerald:audio/voicegroup/hall-of-fame"
+key = "014a66f3bfb3c500eb53a51746e9519c6ee89dc3b60bc69c118b3ca3ba68b890"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup082"
+rom_offset = 6872204
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "e7cc1288bb9617ab0277de3734ff6180bff3160614d782e8294d68b864d8995b"
+canonical_decoded_sha256 = "e7cc1288bb9617ab0277de3734ff6180bff3160614d782e8294d68b864d8995b"
+
+[[records]]
+id = "emerald:audio/voicegroup/hall-of-fame-room"
+key = "2ac823946f8051143a78e1488986e094ea77b3914359898af444c9e8e1f9058f"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup093"
+rom_offset = 6888572
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "b691e09705b374cd22e010252fa084f3b1a0ea13e79fdf398791f7dad51d52d5"
+canonical_decoded_sha256 = "b691e09705b374cd22e010252fa084f3b1a0ea13e79fdf398791f7dad51d52d5"
+
+[[records]]
+id = "emerald:audio/voicegroup/help"
+key = "f6ef061fbfb879acf19fc7a9b06515483148b85db3904b6e6a91d5c22a8996bf"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup056"
+rom_offset = 6834248
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "868349d4d9be5a84b83dac21a2794bb3793ab85e0225f0b723df6b480fafdf16"
+canonical_decoded_sha256 = "868349d4d9be5a84b83dac21a2794bb3793ab85e0225f0b723df6b480fafdf16"
+
+[[records]]
+id = "emerald:audio/voicegroup/intro"
+key = "f7fb548c01335f2dbbc105a2aa61b1f430220aac734d1ee221593272686b0329"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup060"
+rom_offset = 6839924
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "4eb7e55c404ef44f6d52fed9752a598a49aaa2b188906769c92ded4a8a984c43"
+canonical_decoded_sha256 = "4eb7e55c404ef44f6d52fed9752a598a49aaa2b188906769c92ded4a8a984c43"
+
+[[records]]
+id = "emerald:audio/voicegroup/intro-battle"
+key = "b2917b10274034d09c43bc50f1c5b09c2302a637cdc9f7ee98694aa89499e02a"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup088"
+rom_offset = 6880892
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "6f2aebc766fe9a5689240f9cb5efbb1c46aaf911d8a3eba26ef5a2543a60f5b6"
+canonical_decoded_sha256 = "6f2aebc766fe9a5689240f9cb5efbb1c46aaf911d8a3eba26ef5a2543a60f5b6"
+
+[[records]]
+id = "emerald:audio/voicegroup/lilycove"
+key = "5f651aacf51556d67dd16bab0c38760b5d45a4238c6a7ad4fd39e813828809d3"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup054"
+rom_offset = 6831176
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "4b320bfe1e661ee288ade5caf66405e56c945557480f60aaf6b40c2f4168c66a"
+canonical_decoded_sha256 = "4b320bfe1e661ee288ade5caf66405e56c945557480f60aaf6b40c2f4168c66a"
+
+[[records]]
+id = "emerald:audio/voicegroup/lilycove-museum"
+key = "6bc59cd8c6410ed9fcc236e1533c5aad91198bf5300d0ec4d0ba4895f76c5296"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup020"
+rom_offset = 6790592
+encoded_length = 1044
+decoded_length = 1044
+source_encoding = "raw"
+source_encoded_sha256 = "1b9a8dad383f2a6758948a3af6c6f9cca498767c9656b2846a552dd4cedacc6d"
+canonical_decoded_sha256 = "1b9a8dad383f2a6758948a3af6c6f9cca498767c9656b2846a552dd4cedacc6d"
+
+[[records]]
+id = "emerald:audio/voicegroup/link-contest-p1"
+key = "946e09e36b27e22a5ff290b99c3c45a82345e2576729822fd86c6beab49ce56a"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup039"
+rom_offset = 6810392
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "a091d1c0717fad44126b8cf220bc94dd2477c5dafec416ed3bbcece4ea4bcfa6"
+canonical_decoded_sha256 = "a091d1c0717fad44126b8cf220bc94dd2477c5dafec416ed3bbcece4ea4bcfa6"
+
+[[records]]
+id = "emerald:audio/voicegroup/link-contest-p2"
+key = "a586df25475ba89b462de521e6495a4f4a774e6f996cceda081a5c0c6708bca4"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup040"
+rom_offset = 6811928
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "a091d1c0717fad44126b8cf220bc94dd2477c5dafec416ed3bbcece4ea4bcfa6"
+canonical_decoded_sha256 = "a091d1c0717fad44126b8cf220bc94dd2477c5dafec416ed3bbcece4ea4bcfa6"
+
+[[records]]
+id = "emerald:audio/voicegroup/link-contest-p3"
+key = "6feacbd88c446ae9e30b18fda0093197f19e57eaec3a65b7e7fe03e89723e230"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup041"
+rom_offset = 6813464
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "a091d1c0717fad44126b8cf220bc94dd2477c5dafec416ed3bbcece4ea4bcfa6"
+canonical_decoded_sha256 = "a091d1c0717fad44126b8cf220bc94dd2477c5dafec416ed3bbcece4ea4bcfa6"
+
+[[records]]
+id = "emerald:audio/voicegroup/link-contest-p4"
+key = "fb9e0db964471e8574cff10486c2ef7914baa209558837f8befd030f7b6af0bd"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup042"
+rom_offset = 6815000
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "a091d1c0717fad44126b8cf220bc94dd2477c5dafec416ed3bbcece4ea4bcfa6"
+canonical_decoded_sha256 = "a091d1c0717fad44126b8cf220bc94dd2477c5dafec416ed3bbcece4ea4bcfa6"
+
+[[records]]
+id = "emerald:audio/voicegroup/littleroot"
+key = "4707572c0a100e7904fa8b3ce80532bc09ab961bff0d8ef5b73a20a6de31be03"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup051"
+rom_offset = 6827216
+encoded_length = 888
+decoded_length = 888
+source_encoding = "raw"
+source_encoded_sha256 = "2b3dfda343d69cee89ee5d193462664f863ad42a30015831ef3257e00b7e17f5"
+canonical_decoded_sha256 = "2b3dfda343d69cee89ee5d193462664f863ad42a30015831ef3257e00b7e17f5"
+
+[[records]]
+id = "emerald:audio/voicegroup/littleroot-test"
+key = "cc730bff8e85cee5a07c846e89354116e09c1c01df15385cc22dfab9f8a9067f"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup034"
+rom_offset = 6804776
+encoded_length = 1008
+decoded_length = 1008
+source_encoding = "raw"
+source_encoded_sha256 = "6f21a52b3505fd2d10fdbcfee2fddb15b751cfdab53f0e596f75a8b97825273f"
+canonical_decoded_sha256 = "6f21a52b3505fd2d10fdbcfee2fddb15b751cfdab53f0e596f75a8b97825273f"
+
+[[records]]
+id = "emerald:audio/voicegroup/mt-chimney"
+key = "cf9e3874852e034c72f5dd502507fd5015d949696ff8a9b2a17b0ac03c88aa3b"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup052"
+rom_offset = 6828104
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "43d1c524d1d334d50b689a9e373b72f309000f86e3448d43cea979e4248f91a8"
+canonical_decoded_sha256 = "43d1c524d1d334d50b689a9e373b72f309000f86e3448d43cea979e4248f91a8"
+
+[[records]]
+id = "emerald:audio/voicegroup/mt-pyre"
+key = "a1e80de46e8847920b76b35c9c873a2a98ad6c4cedee6d7e135af1038f5267f9"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup078"
+rom_offset = 6867572
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "107dbcd825ce29ddce41391e6551bd4fe7fe42c207936c72c3386cf54d13bb02"
+canonical_decoded_sha256 = "107dbcd825ce29ddce41391e6551bd4fe7fe42c207936c72c3386cf54d13bb02"
+
+[[records]]
+id = "emerald:audio/voicegroup/mt-pyre-exterior"
+key = "bb0a906a3962befc8efedaa34b03bbc9c69d0e264805290751b27818050df781"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup080"
+rom_offset = 6870644
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "01b3f8ab4da563ebdf2cb3ae6e71193857d2f838dd686078d61ac58211267616"
+canonical_decoded_sha256 = "01b3f8ab4da563ebdf2cb3ae6e71193857d2f838dd686078d61ac58211267616"
+
+[[records]]
+id = "emerald:audio/voicegroup/oceanic-museum"
+key = "2e5876ce74facb68f77a94b81ae6cbea2f57becf0b083fcbcc8f1e9a5fa79057"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup023"
+rom_offset = 6793028
+encoded_length = 1068
+decoded_length = 1068
+source_encoding = "raw"
+source_encoded_sha256 = "df4cbc936ecee007a2127d0be7904f42ccd651996cb47a2e6811564efdcf54b8"
+canonical_decoded_sha256 = "df4cbc936ecee007a2127d0be7904f42ccd651996cb47a2e6811564efdcf54b8"
+
+[[records]]
+id = "emerald:audio/voicegroup/oldale"
+key = "eb87731cb28195140c7e191f59d2c971280706ad6139270fae53da673d9ae80b"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup019"
+rom_offset = 6789572
+encoded_length = 1020
+decoded_length = 1020
+source_encoding = "raw"
+source_encoded_sha256 = "eae07731aef410bf3ca76981f0c32996e5435b88fdba671ab1130d698be670e9"
+canonical_decoded_sha256 = "eae07731aef410bf3ca76981f0c32996e5435b88fdba671ab1130d698be670e9"
+
+[[records]]
+id = "emerald:audio/voicegroup/petalburg"
+key = "2fe85b338603059fd6247970f7a316c9088d285e4a694199f2fed74725ba3804"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup015"
+rom_offset = 6785060
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "344cd1cc543a3b7f43f8f9513575dc78b8d2d8c45e2d87c24a06f9d190249cf8"
+canonical_decoded_sha256 = "344cd1cc543a3b7f43f8f9513575dc78b8d2d8c45e2d87c24a06f9d190249cf8"
+
+[[records]]
+id = "emerald:audio/voicegroup/petalburg-drumset"
+key = "7c6c73e80b5fb44c377a9c2509685200dd1c15a087115e8981ef4b69daed698e"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup016"
+rom_offset = 6786596
+encoded_length = 348
+decoded_length = 348
+source_encoding = "raw"
+source_encoded_sha256 = "17f70ef859088917943edb74cc7ddf449832f35e51d37a8ca9cddd93d107ef97"
+canonical_decoded_sha256 = "17f70ef859088917943edb74cc7ddf449832f35e51d37a8ca9cddd93d107ef97"
+
+[[records]]
+id = "emerald:audio/voicegroup/petalburg-woods"
+key = "6773b3a18eb9b573db11602d2e0ce742946f9176ef086ef11783272b6058c7df"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup018"
+rom_offset = 6788036
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "9bdf3cbfe9175190f0b756ef985ff5b5fdee69814cccb50a5c6a2b3ccd4ea375"
+canonical_decoded_sha256 = "9bdf3cbfe9175190f0b756ef985ff5b5fdee69814cccb50a5c6a2b3ccd4ea375"
+
+[[records]]
+id = "emerald:audio/voicegroup/piano-keysplit"
+key = "be9bc50e6c146a53c438d54050a0b937c8892b553215e5cf88f3b7b8d5c647df"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup005"
+rom_offset = 6777488
+encoded_length = 48
+decoded_length = 48
+source_encoding = "raw"
+source_encoded_sha256 = "8b764087d5ec46dc4981473e1091e0504780b021339a3fba15972815ede03aaa"
+canonical_decoded_sha256 = "8b764087d5ec46dc4981473e1091e0504780b021339a3fba15972815ede03aaa"
+
+[[records]]
+id = "emerald:audio/voicegroup/poke-center"
+key = "8399f2a9de15f185245701ea608dafc0981fa5b81a3caa48400cea5d80d15f3f"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup046"
+rom_offset = 6820016
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "0a1525cfbbb49b08e9357b45d75ea6625d8a1e25a523cc624656b99606aa27fd"
+canonical_decoded_sha256 = "0a1525cfbbb49b08e9357b45d75ea6625d8a1e25a523cc624656b99606aa27fd"
+
+[[records]]
+id = "emerald:audio/voicegroup/poke-mart"
+key = "5567728f4971c43b4a58d7d9d3d63c2d70fe90c80bdadedf382c3991564f7328"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup050"
+rom_offset = 6825680
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "b5fe0f9d8f1623e88db548b7c69269586230920f6fa0537f2e15ff5c2a56a5d9"
+canonical_decoded_sha256 = "b5fe0f9d8f1623e88db548b7c69269586230920f6fa0537f2e15ff5c2a56a5d9"
+
+[[records]]
+id = "emerald:audio/voicegroup/rayquaza-appears"
+key = "d0c58a239eadf3ebfe1d0e97d6cb03cb0961085d983be831a984bfa2c522de1b"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup109"
+rom_offset = 6911600
+encoded_length = 996
+decoded_length = 996
+source_encoding = "raw"
+source_encoded_sha256 = "553e4a3d86b8bf072a1dfd3f63f0db0fc211cdd0a9861190569667862241ea34"
+canonical_decoded_sha256 = "553e4a3d86b8bf072a1dfd3f63f0db0fc211cdd0a9861190569667862241ea34"
+
+[[records]]
+id = "emerald:audio/voicegroup/register-match-call"
+key = "754a69f049aa903b6efd9979f491237a8d2b630ef4db2b813e99dbc50a959045"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup105"
+rom_offset = 6905996
+encoded_length = 996
+decoded_length = 996
+source_encoding = "raw"
+source_encoded_sha256 = "c89051b98662189a4171c7a3cb53b7a1478c66e785d95fbea3595222d6dcd293"
+canonical_decoded_sha256 = "c89051b98662189a4171c7a3cb53b7a1478c66e785d95fbea3595222d6dcd293"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-caught-intro"
+key = "b0164e568887919a7cbc2efb05a826fb012af767a9fd216d298c9b36986063f0"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup179"
+rom_offset = 7015376
+encoded_length = 1056
+decoded_length = 1056
+source_encoding = "raw"
+source_encoded_sha256 = "e2e4f79229c4c0b476874a5465fc972017a0afcdf79a72d51b66803d7ecf55dd"
+canonical_decoded_sha256 = "e2e4f79229c4c0b476874a5465fc972017a0afcdf79a72d51b66803d7ecf55dd"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-celadon"
+key = "fa112d29e477ff5f8d40562c2cf55b7f5b3f1398208a487a5accfedaa56ffcb5"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup168"
+rom_offset = 7001912
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "f6fa1ffe908a8958070ce248112b2db2369da9c2f439c0974b64c8b78bbaf063"
+canonical_decoded_sha256 = "f6fa1ffe908a8958070ce248112b2db2369da9c2f439c0974b64c8b78bbaf063"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-cinnabar"
+key = "de0d64a82a8f884ff65860bec8ff6d6e7fac4722cb82131702f5cfcd162037c1"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup138"
+rom_offset = 6960596
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "aab91d85dac020af5ee45a34512e0d6ed82b9331768d38c5d28317ea442cbab3"
+canonical_decoded_sha256 = "aab91d85dac020af5ee45a34512e0d6ed82b9331768d38c5d28317ea442cbab3"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-credits"
+key = "853b11dd6ad3629b3bc736696cedd72756b67decebd60af6aa0088f538cfbd70"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup149"
+rom_offset = 6974948
+encoded_length = 1116
+decoded_length = 1116
+source_encoding = "raw"
+source_encoded_sha256 = "b11e12a12717aa5e9527f7123cfadafede2900c5d9bb3479439b4a7631b6fa9a"
+canonical_decoded_sha256 = "b11e12a12717aa5e9527f7123cfadafede2900c5d9bb3479439b4a7631b6fa9a"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-credits-drumset"
+key = "2e0de1e2bf7e356d82f50ca23f2140b1146993deb04d5e905e4601293af6847e"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup190"
+rom_offset = 7029836
+encoded_length = 624
+decoded_length = 624
+source_encoding = "raw"
+source_encoded_sha256 = "114c96f11917dcfd2c8c0c003ddc30fe18db64f711a85fe7a96a19bbf2d9ffa2"
+canonical_decoded_sha256 = "114c96f11917dcfd2c8c0c003ddc30fe18db64f711a85fe7a96a19bbf2d9ffa2"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-cycling"
+key = "1dbc0e06d473869dcb569d006c7b399eef1b58b1af9a4cda0f206998f43a7825"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup141"
+rom_offset = 6963716
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "d56fd123b7999f1d08fe837131541ef0fa5d6b4b8a5562c632e561105ec90dc4"
+canonical_decoded_sha256 = "d56fd123b7999f1d08fe837131541ef0fa5d6b4b8a5562c632e561105ec90dc4"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-dex-rating"
+key = "8a2820bbcba7cc66e748d9c4648201ce7bd015e13203a67f6ed60535625938bc"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup175"
+rom_offset = 7012040
+encoded_length = 1056
+decoded_length = 1056
+source_encoding = "raw"
+source_encoded_sha256 = "1f0aa9db70f8ae3c5dd5cdbceca41861250fe1f574dc716d607f84e2d485e057"
+canonical_decoded_sha256 = "1f0aa9db70f8ae3c5dd5cdbceca41861250fe1f574dc716d607f84e2d485e057"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-encounter-boy"
+key = "2893c3a7329e8930f59b5c57f6c54ae5deeb12f160c358133131ad39d9543a29"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup144"
+rom_offset = 6967796
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "1e4ec9c4d0008fdd25a03611210d0c42777415d557d11618b47918e3d77db7ec"
+canonical_decoded_sha256 = "1e4ec9c4d0008fdd25a03611210d0c42777415d557d11618b47918e3d77db7ec"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-encounter-deoxys"
+key = "7b76d838091ec38e260fe7afa1e97e84840234ec5de4de675e3496a7fa4f150f"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup184"
+rom_offset = 7021124
+encoded_length = 1032
+decoded_length = 1032
+source_encoding = "raw"
+source_encoded_sha256 = "189db0ecb1ccb19d177953eb3225e887e96639cf3dc8eb6936a5a5739c8c8c48"
+canonical_decoded_sha256 = "189db0ecb1ccb19d177953eb3225e887e96639cf3dc8eb6936a5a5739c8c8c48"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-encounter-girl"
+key = "707677ebee20cd16a2f47a4a4a6e3cda173f708b5a6d23d6ef21a34222ec9053"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup143"
+rom_offset = 6966260
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "d1e7fd0c177118407caa115d08b67297777b5f3796fa9800777fda1a1b41b4a2"
+canonical_decoded_sha256 = "d1e7fd0c177118407caa115d08b67297777b5f3796fa9800777fda1a1b41b4a2"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-encounter-rival"
+key = "76cd4c401b41a107c6f32efb67d94bdc0a21f1364d7964b2cd9874936dd11dd3"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup174"
+rom_offset = 7010156
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "5774f3832b8e77f5a8d0bb0cba1afe9861e5d43c4bbdbe893abfa96b9006fd92"
+canonical_decoded_sha256 = "5774f3832b8e77f5a8d0bb0cba1afe9861e5d43c4bbdbe893abfa96b9006fd92"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-encounter-rocket"
+key = "6b74cc7d24ab8f14cb44978f8ce14862f417559f235946dbddd93612d6066994"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup142"
+rom_offset = 6965252
+encoded_length = 1008
+decoded_length = 1008
+source_encoding = "raw"
+source_encoded_sha256 = "437ff2a57ee017ea5fb316838ac338a4c23823e238f98ff663809d687fc04551"
+canonical_decoded_sha256 = "437ff2a57ee017ea5fb316838ac338a4c23823e238f98ff663809d687fc04551"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-follow-me"
+key = "9a6b42721c316b1d67dfb65d13f5d1512834808e39f643d4848ca2aa4774a1c2"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup131"
+rom_offset = 6950840
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "102a827ae3a53e59a3f1509a0f58632805f3913a3457772c43eba5fb42626cbd"
+canonical_decoded_sha256 = "102a827ae3a53e59a3f1509a0f58632805f3913a3457772c43eba5fb42626cbd"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-fuchsia"
+key = "c666ba1369bdc2c3aaf1b3ddc183ab3188280fdabdefd14d23eb5e6a25b6ecbd"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup167"
+rom_offset = 7000376
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "e1da73029d584527524ca68cf894be631c0979435ca4dbd6c853b3225caa7631"
+canonical_decoded_sha256 = "e1da73029d584527524ca68cf894be631c0979435ca4dbd6c853b3225caa7631"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-game-corner"
+key = "512b4d16865063487d6b206f961b24cd3929c1e2655ba0808d14fedf956646c3"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup132"
+rom_offset = 6952376
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "6f03807b549378232121a13fdd91bdf700952d5dfb046ec3be0fd728371ddfa6"
+canonical_decoded_sha256 = "6f03807b549378232121a13fdd91bdf700952d5dfb046ec3be0fd728371ddfa6"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-game-freak"
+key = "f525353904d6b2d75d37f1b2704ef9e59354b24e1c8d1f5932fff2daae0366c2"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup181"
+rom_offset = 7017968
+encoded_length = 564
+decoded_length = 564
+source_encoding = "raw"
+source_encoded_sha256 = "88c5bf4c90cd84ef87cdcb458af10994498b795e7d296bcfe131ebb77e71aded"
+canonical_decoded_sha256 = "88c5bf4c90cd84ef87cdcb458af10994498b795e7d296bcfe131ebb77e71aded"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-gym"
+key = "b4c482c9eee51b8f73752f407c14c080a0d2a45bd0eec416ee32f691638ed692"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup134"
+rom_offset = 6955448
+encoded_length = 1080
+decoded_length = 1080
+source_encoding = "raw"
+source_encoded_sha256 = "406a99948b74fdedbae7d9bad6cfdedec9d7817e93ed9ce94bc7fa6d0b41bb42"
+canonical_decoded_sha256 = "406a99948b74fdedbae7d9bad6cfdedec9d7817e93ed9ce94bc7fa6d0b41bb42"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-hall-of-fame"
+key = "c111187888232656dd746e436133b780ccb971106917b4ee80805b8b4e42113c"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup145"
+rom_offset = 6969332
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "02bebcfcdc0cb3042155c73e5b8eb1905b2e672f7429037bee28d7181c61ca50"
+canonical_decoded_sha256 = "02bebcfcdc0cb3042155c73e5b8eb1905b2e672f7429037bee28d7181c61ca50"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-heal"
+key = "2265202ad064e1ac5ab556d2f44c5d7a9d35626e35ed1be6f191a111b08fd3ab"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup140"
+rom_offset = 6963668
+encoded_length = 48
+decoded_length = 48
+source_encoding = "raw"
+source_encoded_sha256 = "3952f9f5ce38513e286def2c94f476811cd486866488b554145eda2d2e20513e"
+canonical_decoded_sha256 = "3952f9f5ce38513e286def2c94f476811cd486866488b554145eda2d2e20513e"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-intro-fight"
+key = "73c400ddc81b076a0ce3ac88277fdf5c1f8d8c42bded168f3dea22767971f730"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup136"
+rom_offset = 6957524
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "66e337eaa01cbf504f53fe5b7f2441759bb37329ef776b664f430619d04f8189"
+canonical_decoded_sha256 = "66e337eaa01cbf504f53fe5b7f2441759bb37329ef776b664f430619d04f8189"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-jigglypuff"
+key = "8631db146635fdccceaaec735d3a2b3a32cfbda7793c8436b894dbdd87f63710"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup135"
+rom_offset = 6956528
+encoded_length = 996
+decoded_length = 996
+source_encoding = "raw"
+source_encoded_sha256 = "9daaa827acf8ce867b70a09176157881620d9731a72e7422432ba8e26e6dd78d"
+canonical_decoded_sha256 = "9daaa827acf8ce867b70a09176157881620d9731a72e7422432ba8e26e6dd78d"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-lavender"
+key = "4292498f05833f1c7168fb730fde59bc8a9ced1d86d9f542c9e9490a60f58c9f"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup139"
+rom_offset = 6962132
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "07d72cc75743ca5863c5768d3ee67d1c8bd2a9ec38a3f44df0609dc9c9aa1144"
+canonical_decoded_sha256 = "07d72cc75743ca5863c5768d3ee67d1c8bd2a9ec38a3f44df0609dc9c9aa1144"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-mt-moon"
+key = "a03c2cb68c698f50cf123a791a3d63e26271a34dde353bfb7baa8fbadb9b550f"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup147"
+rom_offset = 6972404
+encoded_length = 1008
+decoded_length = 1008
+source_encoding = "raw"
+source_encoded_sha256 = "27380f9951d9a0fbaf4d5f92489a27fe2f9615e9d7a062e7e9afe7387ea68a80"
+canonical_decoded_sha256 = "27380f9951d9a0fbaf4d5f92489a27fe2f9615e9d7a062e7e9afe7387ea68a80"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-mystery-gift"
+key = "34c96ffc30423216174e709c1a55c88d4223af4bf1f9dd6c4883a4c390cd0b4a"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup183"
+rom_offset = 7019588
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "1afa2a6a92d49eb89e4706d73ba3743e47dddec27ec37bf48923f735f2431057"
+canonical_decoded_sha256 = "1afa2a6a92d49eb89e4706d73ba3743e47dddec27ec37bf48923f735f2431057"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-new-game"
+key = "84b32a7248bc22672818b1f416e57339c0b605f02f2d9fc6636c98367cfc23ee"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup182"
+rom_offset = 7018532
+encoded_length = 1056
+decoded_length = 1056
+source_encoding = "raw"
+source_encoded_sha256 = "11852bcd60fdcb037ab5251a96c7f96527f32c0e8409fc814909ef473e80b0ab"
+canonical_decoded_sha256 = "11852bcd60fdcb037ab5251a96c7f96527f32c0e8409fc814909ef473e80b0ab"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-oak"
+key = "042eb602d814d3c2dd2c0c42a1d6b8b81b4ecdaf4f89794fb2b2c64f73b5d47b"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup161"
+rom_offset = 6991580
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "56a2c28511ac316d47744b67eb3649d3527830890df41f7fdf649484fa20fd53"
+canonical_decoded_sha256 = "56a2c28511ac316d47744b67eb3649d3527830890df41f7fdf649484fa20fd53"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-oak-lab"
+key = "1b4c38fb4089915f500b0634df0a2b35b581464272e1acf6a93901abb1d2f3c1"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup160"
+rom_offset = 6990524
+encoded_length = 1056
+decoded_length = 1056
+source_encoding = "raw"
+source_encoded_sha256 = "b59e14963af3a880cc2c945f992fd5734ef665f50710be3311b9f4c19998ab73"
+canonical_decoded_sha256 = "b59e14963af3a880cc2c945f992fd5734ef665f50710be3311b9f4c19998ab73"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-obtain-key-item"
+key = "d4285dcd2fa2865d98245c397031e3cdae3c2e688b43f1e647924f0142252761"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup178"
+rom_offset = 7014320
+encoded_length = 1056
+decoded_length = 1056
+source_encoding = "raw"
+source_encoded_sha256 = "65abfb87edbfc4623bb4a1c31b3cd92ec9c43eb69dec8818f6e582a6e7dd6e48"
+canonical_decoded_sha256 = "65abfb87edbfc4623bb4a1c31b3cd92ec9c43eb69dec8818f6e582a6e7dd6e48"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-pallet"
+key = "8eec50c7c7fef6a7a7e8070a8b3b96708b6e7f053c0ba9719221c1b0a469f9ea"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup159"
+rom_offset = 6988988
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "5e3c8d9c265810f836615c5bc9a8bfa18ef2032354fbbbd6e6ac530316139ed2"
+canonical_decoded_sha256 = "5e3c8d9c265810f836615c5bc9a8bfa18ef2032354fbbbd6e6ac530316139ed2"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-pewter"
+key = "c3998e9da8d4a88e493b09e729b1d9ccf2dccc7174d0f659b971937002dfa294"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup173"
+rom_offset = 7008620
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "796c5310bcc7f6756bd76e460cb5e08f82559ba9ecb33bfeb652bdfd283076ca"
+canonical_decoded_sha256 = "796c5310bcc7f6756bd76e460cb5e08f82559ba9ecb33bfeb652bdfd283076ca"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-photo"
+key = "895f4dfc0935e978d9d39abe95325ebf539a28f5ad2facf23f7f0a4f6a3e571c"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup180"
+rom_offset = 7016432
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "fa3d15dd34611b6376c25bd0644b33dba081c246191921e7ca3e0c8dd30f65c9"
+canonical_decoded_sha256 = "fa3d15dd34611b6376c25bd0644b33dba081c246191921e7ca3e0c8dd30f65c9"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-poke-center"
+key = "ce00324eb5004ea751578ab421ee5b9c8aab94fce7692114ddfe841fcfa6422a"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup162"
+rom_offset = 6993116
+encoded_length = 1116
+decoded_length = 1116
+source_encoding = "raw"
+source_encoded_sha256 = "12a8f8c58f6af2cf2e2e54006e4290167f2d1ae0c93d7c0e13a1551b98edfd42"
+canonical_decoded_sha256 = "12a8f8c58f6af2cf2e2e54006e4290167f2d1ae0c93d7c0e13a1551b98edfd42"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-poke-mansion"
+key = "d4bda8b0cd27f914848ffe6b031f6917acb2c3f5a94b062399a810f14f2f9f1d"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup148"
+rom_offset = 6973412
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "5abae679b30d0dca121166185905ee987bdabd1c72aa0f5405df350bc8d85f88"
+canonical_decoded_sha256 = "5abae679b30d0dca121166185905ee987bdabd1c72aa0f5405df350bc8d85f88"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-poke-tower"
+key = "1b00ce73c6d202049c872538b4a23f3325646c01945e490b20a279b38d0c504f"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup165"
+rom_offset = 6997304
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "ccf28d81ae4eb667144bdba6d784be2917f9f3db0830e2576661b1c8da3009b1"
+canonical_decoded_sha256 = "ccf28d81ae4eb667144bdba6d784be2917f9f3db0830e2576661b1c8da3009b1"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-rocket-hideout"
+key = "12a7c855b6a04a06b3fbc218c4cd9b37e7df4a7b4fde2fc20ac4dd14a8494ff1"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup133"
+rom_offset = 6953912
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "29830e43e31363046ee471254faab1f5592128e1930c6a0922fb15461d22f705"
+canonical_decoded_sha256 = "29830e43e31363046ee471254faab1f5592128e1930c6a0922fb15461d22f705"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-route1"
+key = "9e5c03218d69355052bef8d69904bfeb4b1bddbe03b844d9050aefb80f2a2121"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup150"
+rom_offset = 6976064
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "c4e1f9d42f6c3ea0e4c6ae40346f56d9ae0879edeedb241ceb90ccd579f61177"
+canonical_decoded_sha256 = "c4e1f9d42f6c3ea0e4c6ae40346f56d9ae0879edeedb241ceb90ccd579f61177"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-route11"
+key = "8eec1d3caf98add38a44171c27487ebf84bce2b51d216b8c7d8d7f842421c5c1"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup153"
+rom_offset = 6980192
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "22146bc8002584252de611286f9adb29a6800c59c2facddafde6c512c2f0bf54"
+canonical_decoded_sha256 = "22146bc8002584252de611286f9adb29a6800c59c2facddafde6c512c2f0bf54"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-route24"
+key = "cd35d1cd52defcc2fb46f0258633c6b3bb66de15779e60befd286ff2faf7a8e2"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup151"
+rom_offset = 6977600
+encoded_length = 1056
+decoded_length = 1056
+source_encoding = "raw"
+source_encoded_sha256 = "2a545551cb61b4d00a3e742b5830b8a9987b154e3df324a66f1dcc9e0263939d"
+canonical_decoded_sha256 = "2a545551cb61b4d00a3e742b5830b8a9987b154e3df324a66f1dcc9e0263939d"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-route3"
+key = "3a6a47cc4677c133c702d75eebc785266c8aba19d0d3ad66e2a0b78446287f9f"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup152"
+rom_offset = 6978656
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "ac468b0787e3d9514b1671ff990b2e914ce48914739b56149303e23e201c59b3"
+canonical_decoded_sha256 = "ac468b0787e3d9514b1671ff990b2e914ce48914739b56149303e23e201c59b3"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-sevii-45"
+key = "66a652656a2728766cf2caff2c63f8917e8371a565b9beae9c45de0f76f9f759"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup188"
+rom_offset = 7026764
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "bd530b7f93a87981c31bf246b1c966cffa9b6456e86c78f39a6def3e5898d675"
+canonical_decoded_sha256 = "bd530b7f93a87981c31bf246b1c966cffa9b6456e86c78f39a6def3e5898d675"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-sevii-67"
+key = "c1b68113b2463bfa9f0a23c6f5c124039e31fcc6f912d04101fcf09e67febcaf"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup189"
+rom_offset = 7028300
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "efbfe6281c4a753fe8ca69f2e26afcdf337074a71d37ae0f369d52a0f3362d68"
+canonical_decoded_sha256 = "efbfe6281c4a753fe8ca69f2e26afcdf337074a71d37ae0f369d52a0f3362d68"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-sevii-route"
+key = "d979055e7bc66f0567294641f3d243604c3907f62a3c4973ab5ef1620403dc55"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup187"
+rom_offset = 7025228
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "db70f7a7f8d8194f1237c13de4e4c130a51cd7a493a633255a36d86fa403adef"
+canonical_decoded_sha256 = "db70f7a7f8d8194f1237c13de4e4c130a51cd7a493a633255a36d86fa403adef"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-silph"
+key = "3dfd286b2317a9ed20107e6e0784fee27b3a34d29b9701d8d06775624375958f"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup166"
+rom_offset = 6998840
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "a321e9d54f09ebefa44f5832fd3c2e88a84d1603045c520478b988ed86307c28"
+canonical_decoded_sha256 = "a321e9d54f09ebefa44f5832fd3c2e88a84d1603045c520478b988ed86307c28"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-ss-anne"
+key = "0f2172cef6a2e067b529454feb95782580514cf338220e5e1bd26c0353a28108"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup163"
+rom_offset = 6994232
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "696352f5139923694289f5e8d007b3bca49bd64de0fe6187be8a9a7d1f321eba"
+canonical_decoded_sha256 = "696352f5139923694289f5e8d007b3bca49bd64de0fe6187be8a9a7d1f321eba"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-surf"
+key = "c10a120fb55dc3b9e6660763f198986add74c929241b8a3f53059ec7b4e8d46e"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup164"
+rom_offset = 6995768
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "bf2ec974a3d17a0afa8579729f78041b0a47c9ccca7b5b7b63074033aa5d5002"
+canonical_decoded_sha256 = "bf2ec974a3d17a0afa8579729f78041b0a47c9ccca7b5b7b63074033aa5d5002"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-teachy-tv-menu"
+key = "f765087195836dcfe2785418261781c191167556cdcfa6f508424ab7eef76b4b"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup186"
+rom_offset = 7023692
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "7fcc8d000b2d2a97efd1a78139411c44128b6bc941d0e875ae658f0e83ea986f"
+canonical_decoded_sha256 = "7fcc8d000b2d2a97efd1a78139411c44128b6bc941d0e875ae658f0e83ea986f"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-title"
+key = "4d70b0336fd27f9193544ee354c9303cd8a4a4a3a6384da8d50c88adbe3942fb"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup137"
+rom_offset = 6959060
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "27afd9168ca4de17c6c005d06277a094f778f03ed5b3cccb5312b54beb8c1063"
+canonical_decoded_sha256 = "27afd9168ca4de17c6c005d06277a094f778f03ed5b3cccb5312b54beb8c1063"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-unused"
+key = "6f7afe4e5be4a2ab23454ddbacb5c71d423aad774972000fc2fe7830f29a2611"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup174"
+rom_offset = 7011692
+encoded_length = 300
+decoded_length = 300
+source_encoding = "raw"
+source_encoded_sha256 = "404e049ca27294ace35e46bf748a9d440d83adbdf0d1c21bf3335f60c9085b64"
+canonical_decoded_sha256 = "404e049ca27294ace35e46bf748a9d440d83adbdf0d1c21bf3335f60c9085b64"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-unused-2"
+key = "c3c4917bdf76c861f1e1c90ccc402f2d24aaa5fa64dc707eb050b02b6b44434d"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup174"
+rom_offset = 7011992
+encoded_length = 48
+decoded_length = 48
+source_encoding = "raw"
+source_encoded_sha256 = "91e789a96cf8b128b4d19ab9a89db104d2cfe0cf22d94c044a9ef990c0a6eefc"
+canonical_decoded_sha256 = "91e789a96cf8b128b4d19ab9a89db104d2cfe0cf22d94c044a9ef990c0a6eefc"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-vermillion"
+key = "35f9651f46f957a3482bb0c739309d131ea13fbb3e33a069ac375cbe3582aeeb"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup172"
+rom_offset = 7007084
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "6c07a3d2559cfeb3d47af5eb0f8feee66febff2befcfe27e1d99782eeb3c65f9"
+canonical_decoded_sha256 = "6c07a3d2559cfeb3d47af5eb0f8feee66febff2befcfe27e1d99782eeb3c65f9"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-victory-gym-leader"
+key = "cbdbc4662b8a60127a76b30470a6d9e9433de3c6cf71bf13715f7f18ab86efbe"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup171"
+rom_offset = 7005992
+encoded_length = 1092
+decoded_length = 1092
+source_encoding = "raw"
+source_encoded_sha256 = "36d7045fadd7b72c67caaf539df6e03e70b2701fb6dca5ee3602f135926171b7"
+canonical_decoded_sha256 = "36d7045fadd7b72c67caaf539df6e03e70b2701fb6dca5ee3602f135926171b7"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-victory-road"
+key = "6fe45a02f51663df82ce890dcf2146b37f7c1feb9e272838bae65430a375a91c"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup154"
+rom_offset = 6981728
+encoded_length = 1116
+decoded_length = 1116
+source_encoding = "raw"
+source_encoded_sha256 = "84d7c0070a7194315705d7a0b6216a7f209b451baecd499add7d2cc870869e23"
+canonical_decoded_sha256 = "84d7c0070a7194315705d7a0b6216a7f209b451baecd499add7d2cc870869e23"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-victory-trainer"
+key = "ca3e143a29cefd63961c8bde77345270868b1914b9884e00df669b0a9c784ef8"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup169"
+rom_offset = 7003448
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "9a32e50e68f4f11571d27ab8f0f2ba5177730739c6c85bf09ba8ebfe9eaef944"
+canonical_decoded_sha256 = "9a32e50e68f4f11571d27ab8f0f2ba5177730739c6c85bf09ba8ebfe9eaef944"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-victory-wild"
+key = "60c37f88d9fac47c340f74609d3aca4319df15ae62b885efda4536dcc40ae64f"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup170"
+rom_offset = 7004984
+encoded_length = 1008
+decoded_length = 1008
+source_encoding = "raw"
+source_encoded_sha256 = "e652c429963c851c4a470b0baf32db3558f88668baf3d2a73393d9692550f32c"
+canonical_decoded_sha256 = "e652c429963c851c4a470b0baf32db3558f88668baf3d2a73393d9692550f32c"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-viridian-forest"
+key = "4405f2107929fe2028cbeafa6257c4a6a2cd54abc03b1e2d5aeec9c00ea2919f"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup146"
+rom_offset = 6970868
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "060fd3d4e026d10401d77007df418a316a3369ae5f87fe6524984635773f5e33"
+canonical_decoded_sha256 = "060fd3d4e026d10401d77007df418a316a3369ae5f87fe6524984635773f5e33"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-vs-champion"
+key = "b9f3da4155b2410f49b6faeee61882005aa9eca92b753f34c681f46974b565f3"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup158"
+rom_offset = 6987452
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "84511f44f0745867832ce3ed43dfbc1e8d1ad7e792976325d4cb593011d1e0e6"
+canonical_decoded_sha256 = "84511f44f0745867832ce3ed43dfbc1e8d1ad7e792976325d4cb593011d1e0e6"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-vs-deoxys"
+key = "4221e54a154ef7a6f1f2a56c3b28ecc1e2297525b06820a7b58ba6510294f969"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup185"
+rom_offset = 7022156
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "887dbdb891f970e15edd850a849b580265ac6ed352ff1562921ff7ef6943c21d"
+canonical_decoded_sha256 = "887dbdb891f970e15edd850a849b580265ac6ed352ff1562921ff7ef6943c21d"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-vs-gym-leader"
+key = "8a91ea8fcfe88689080e60b42e9ca85893a735c11265954938f6b14bda4d1ce3"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup155"
+rom_offset = 6982844
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "4d54fdf8bf84656498edb15965212cf275e39866aafea6686096d98f5a6aeb50"
+canonical_decoded_sha256 = "4d54fdf8bf84656498edb15965212cf275e39866aafea6686096d98f5a6aeb50"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-vs-trainer"
+key = "eb12aeac8fc4157a48ae4ee263abe94b8d914fa62bb965a0c59134c26335ba7f"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup156"
+rom_offset = 6984380
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "b7ecc23bbf79e79a2c30d3b474e8a80aac8b43439948a96a51163402b57aa423"
+canonical_decoded_sha256 = "b7ecc23bbf79e79a2c30d3b474e8a80aac8b43439948a96a51163402b57aa423"
+
+[[records]]
+id = "emerald:audio/voicegroup/rg-vs-wild"
+key = "caa5729945e6c9411c20bb0bea8d7f8717543a7c03989ad3ce3729c441a8e75f"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup157"
+rom_offset = 6985916
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "3f2cae285aba4fd4681fb9d694bd7a937a95c62f62e1b4cc601c64aa440e167c"
+canonical_decoded_sha256 = "3f2cae285aba4fd4681fb9d694bd7a937a95c62f62e1b4cc601c64aa440e167c"
+
+[[records]]
+id = "emerald:audio/voicegroup/roulette"
+key = "12b3c20f890c565b0dfd119e6fce57d29775779c3f0881f774ccaa55973ca2c0"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup038"
+rom_offset = 6809408
+encoded_length = 984
+decoded_length = 984
+source_encoding = "raw"
+source_encoded_sha256 = "c646e450203cce72cd7cfab48a56f245b070802d08e4d6a628870bc738c8dcc0"
+canonical_decoded_sha256 = "c646e450203cce72cd7cfab48a56f245b070802d08e4d6a628870bc738c8dcc0"
+
+[[records]]
+id = "emerald:audio/voicegroup/route101"
+key = "c24474a1b1367cc3abf2ca30e8384ee95d098a4797cb21fe8d2242fddd300ace"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup011"
+rom_offset = 6780200
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "f03e856eb019f8279f80fb70852f6d21e05a5d5ee0e4fce1d6b93623961e7576"
+canonical_decoded_sha256 = "f03e856eb019f8279f80fb70852f6d21e05a5d5ee0e4fce1d6b93623961e7576"
+
+[[records]]
+id = "emerald:audio/voicegroup/route101-drumset"
+key = "5c6c09ec1f4db76c6c7017b82631212cc75712dbe58ab4dc85d8ea48b191a219"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup022"
+rom_offset = 6792680
+encoded_length = 348
+decoded_length = 348
+source_encoding = "raw"
+source_encoded_sha256 = "364f62c3869d5dd57290fa5ae03d227858994890f4c27f4489654703f5e9e556"
+canonical_decoded_sha256 = "364f62c3869d5dd57290fa5ae03d227858994890f4c27f4489654703f5e9e556"
+
+[[records]]
+id = "emerald:audio/voicegroup/route104"
+key = "ed7830d1dfdedf953d8c55e732d5a65334de38c021025ad73ce5ad529952b321"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup047"
+rom_offset = 6821552
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "6d5ed224ed2c508840e2b6186e9a48d56a91cd74af39ef8c6e49eb64dd97cb06"
+canonical_decoded_sha256 = "6d5ed224ed2c508840e2b6186e9a48d56a91cd74af39ef8c6e49eb64dd97cb06"
+
+[[records]]
+id = "emerald:audio/voicegroup/route110"
+key = "942bc7f2e4fa2105bc1dc6fa8141d53c51c4b4300fed4d8e370181be7db00e3e"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup010"
+rom_offset = 6779192
+encoded_length = 1008
+decoded_length = 1008
+source_encoding = "raw"
+source_encoded_sha256 = "d2ec2ecc1e13abdd4eccb6b7c288ac0a834de8566415847e6e183c08ccc105b1"
+canonical_decoded_sha256 = "d2ec2ecc1e13abdd4eccb6b7c288ac0a834de8566415847e6e183c08ccc105b1"
+
+[[records]]
+id = "emerald:audio/voicegroup/route110-drumset"
+key = "5a44216b1443f505e1119adc21156b895503658569b82038d72f0f33428a723e"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup031"
+rom_offset = 6801944
+encoded_length = 300
+decoded_length = 300
+source_encoding = "raw"
+source_encoded_sha256 = "67ec51059a6757ffe79b9468deeff746557dad61f4cad446a9ae1a8069c2ebf3"
+canonical_decoded_sha256 = "67ec51059a6757ffe79b9468deeff746557dad61f4cad446a9ae1a8069c2ebf3"
+
+[[records]]
+id = "emerald:audio/voicegroup/route111"
+key = "a893900b166d5137dd0b5467022b24876b8639daccd94b8479ae4dc47231b367"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup055"
+rom_offset = 6832712
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "b04d5db8852da05ae3a4a24c431a51983085a6eff60fff683373f04f5051d8eb"
+canonical_decoded_sha256 = "b04d5db8852da05ae3a4a24c431a51983085a6eff60fff683373f04f5051d8eb"
+
+[[records]]
+id = "emerald:audio/voicegroup/route113"
+key = "142d2680fda4788fbb249893bd50685ba3de156c76decaa720a71c5c299de0c4"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup064"
+rom_offset = 6846068
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "3313f9825d74c4e2c23f9f10855f5e347cb4b4717ae963e4d6d36bb5cd3a1149"
+canonical_decoded_sha256 = "3313f9825d74c4e2c23f9f10855f5e347cb4b4717ae963e4d6d36bb5cd3a1149"
+
+[[records]]
+id = "emerald:audio/voicegroup/route119"
+key = "576cbabb2d37c38219a62d04d9124e3cb3fe464807636e05b83d8fab1cf84121"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup048"
+rom_offset = 6823088
+encoded_length = 1056
+decoded_length = 1056
+source_encoding = "raw"
+source_encoded_sha256 = "3aa8659bf96132acbc6d309b4841e76fb3ec21d5dcf028edab59a30f643cac0b"
+canonical_decoded_sha256 = "3aa8659bf96132acbc6d309b4841e76fb3ec21d5dcf028edab59a30f643cac0b"
+
+[[records]]
+id = "emerald:audio/voicegroup/route120"
+key = "3fd6925c8ea171cec79117e046a6aa4d293a044d286fafa831ac6d4f542ca08a"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup014"
+rom_offset = 6784040
+encoded_length = 1020
+decoded_length = 1020
+source_encoding = "raw"
+source_encoded_sha256 = "d29a282ae1cf00d11b8506e80df62dca8a07c54be38b0d2c67099b04a8c839b2"
+canonical_decoded_sha256 = "d29a282ae1cf00d11b8506e80df62dca8a07c54be38b0d2c67099b04a8c839b2"
+
+[[records]]
+id = "emerald:audio/voicegroup/route122"
+key = "07b6adb18e27d3bd9b2ea3cd26763953729e2f2fb796919695b84bba6bc28061"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup021"
+rom_offset = 6791636
+encoded_length = 1044
+decoded_length = 1044
+source_encoding = "raw"
+source_encoded_sha256 = "6c18e1da1197d67887734fde679f3f3d128b86954b0e3ac22a5cbaec36e1fe5b"
+canonical_decoded_sha256 = "6c18e1da1197d67887734fde679f3f3d128b86954b0e3ac22a5cbaec36e1fe5b"
+
+[[records]]
+id = "emerald:audio/voicegroup/rs-drumset"
+key = "2e8ca0ec090e32924d9258d223fb2bfa459aa5fb63369bc56ed22f977704374e"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup001"
+rom_offset = 6775196
+encoded_length = 348
+decoded_length = 348
+source_encoding = "raw"
+source_encoded_sha256 = "62b62351c908098808d4356eb074e953e548d21f7573fa7d1b1f3ab3961815a5"
+canonical_decoded_sha256 = "62b62351c908098808d4356eb074e953e548d21f7573fa7d1b1f3ab3961815a5"
+
+[[records]]
+id = "emerald:audio/voicegroup/rs-sfx-1"
+key = "e9b9f651275ab64cecfde2f22a849bd8c654a28265aa6b5ab0f98399a1630923"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup127"
+rom_offset = 6934772
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "afdc50f8153d1fbe2df4dbd5b8af1826ae178af5410fd28db2d9bde7974115f8"
+canonical_decoded_sha256 = "afdc50f8153d1fbe2df4dbd5b8af1826ae178af5410fd28db2d9bde7974115f8"
+
+[[records]]
+id = "emerald:audio/voicegroup/rs-sfx-2"
+key = "ff31ea11c25fdb15ea428933367bca5296e3b87a9696a3208c456a4e74914ac1"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup128"
+rom_offset = 6936308
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "8acc295818ce1aa00f5a4558dc17644f369344ba05b5598c4db697ddb2bfe9f8"
+canonical_decoded_sha256 = "8acc295818ce1aa00f5a4558dc17644f369344ba05b5598c4db697ddb2bfe9f8"
+
+[[records]]
+id = "emerald:audio/voicegroup/rustboro"
+key = "83c6a59ea6c469379cdd3c9e0d3e44249e7d6b732404e873f164e6466e97af2f"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup045"
+rom_offset = 6818480
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "6c6806399a5f7803affedd561c3602b5ca8c472e4c48958558aa1a2f26145dbf"
+canonical_decoded_sha256 = "6c6806399a5f7803affedd561c3602b5ca8c472e4c48958558aa1a2f26145dbf"
+
+[[records]]
+id = "emerald:audio/voicegroup/safari-zone"
+key = "7fb2d4f6721508ba1aa83a072ff5d8ba580f472464e3092b00854fff8bffe43e"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup074"
+rom_offset = 6861428
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "3947b67e969d21cd2c52dd70eec3552a7f799f2989bedd86d37c4a77e3f79820"
+canonical_decoded_sha256 = "3947b67e969d21cd2c52dd70eec3552a7f799f2989bedd86d37c4a77e3f79820"
+
+[[records]]
+id = "emerald:audio/voicegroup/sailing"
+key = "3cc5b0cd367b5749788f5653549d7b9d93a172d6bdbd1cce1e185314239200da"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup077"
+rom_offset = 6866036
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "2e0448bf0112758c70b4757e67c7a4fef189866e2b73b36656e90e3fa6c4e614"
+canonical_decoded_sha256 = "2e0448bf0112758c70b4757e67c7a4fef189866e2b73b36656e90e3fa6c4e614"
+
+[[records]]
+id = "emerald:audio/voicegroup/school"
+key = "945a81fe386230f2ce5a655136957d215c73ff4d9e51a9bef28dba9ad4ea96b0"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup081"
+rom_offset = 6872180
+encoded_length = 24
+decoded_length = 24
+source_encoding = "raw"
+source_encoded_sha256 = "77da4921d03402edef4d7abe348692308451e9cde3abbe33c257eae8cc284f3f"
+canonical_decoded_sha256 = "77da4921d03402edef4d7abe348692308451e9cde3abbe33c257eae8cc284f3f"
+
+[[records]]
+id = "emerald:audio/voicegroup/sealed-chamber"
+key = "d3c908430817fb38c14644d0f1059e3deb4f7947c5ef9287278316408f7c1135"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup084"
+rom_offset = 6874748
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "f47aa613ddff5066002d4497e5409a212a02aad3b716746a58b17f09c3d84c8a"
+canonical_decoded_sha256 = "f47aa613ddff5066002d4497e5409a212a02aad3b716746a58b17f09c3d84c8a"
+
+[[records]]
+id = "emerald:audio/voicegroup/slateport"
+key = "b110337c082556ca07a1d7374e467abaae06fc40cb45f1f6b127cdcd1ef881b2"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup079"
+rom_offset = 6869108
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "07aa832ba44dcfe1b3f4a9cedb16dbfb9afda2f3787cc6a1e7f8f5e1b1bc05ed"
+canonical_decoded_sha256 = "07aa832ba44dcfe1b3f4a9cedb16dbfb9afda2f3787cc6a1e7f8f5e1b1bc05ed"
+
+[[records]]
+id = "emerald:audio/voicegroup/sootopolis"
+key = "6035ed53f440476d8d3b2caf08a77fe1ab26db0b7df53cf94e91deb90069628c"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup091"
+rom_offset = 6885500
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "46d4b80544c7a01189ca961a5cf2039923d71d961062a374d0adebd2f1075a2e"
+canonical_decoded_sha256 = "46d4b80544c7a01189ca961a5cf2039923d71d961062a374d0adebd2f1075a2e"
+
+[[records]]
+id = "emerald:audio/voicegroup/strings-keysplit"
+key = "193dc536a81f1785bccfcd4fb87b2da25dba0caad8fcd1ef5eaf9c6bcdebd161"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup006"
+rom_offset = 6777536
+encoded_length = 36
+decoded_length = 36
+source_encoding = "raw"
+source_encoded_sha256 = "493b3dc273df7dd15b9242f156418cfedeeea3a5169c2d757060ff1397986382"
+canonical_decoded_sha256 = "493b3dc273df7dd15b9242f156418cfedeeea3a5169c2d757060ff1397986382"
+
+[[records]]
+id = "emerald:audio/voicegroup/surf"
+key = "7000e73214938160b3ce1f58049d8a31f445dc55ab90d84c56ddc259cadd70fb"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup017"
+rom_offset = 6786944
+encoded_length = 1092
+decoded_length = 1092
+source_encoding = "raw"
+source_encoded_sha256 = "5ca8710a85a0e57424c32f9027eb674d05a00b022205f4179a6b80c863c7ff8b"
+canonical_decoded_sha256 = "5ca8710a85a0e57424c32f9027eb674d05a00b022205f4179a6b80c863c7ff8b"
+
+[[records]]
+id = "emerald:audio/voicegroup/title"
+key = "bf001971f0b3ef12eeb9df0ed11b4a3deb705b9eae234355754ac1a269515ea7"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup059"
+rom_offset = 6838856
+encoded_length = 1068
+decoded_length = 1068
+source_encoding = "raw"
+source_encoded_sha256 = "22fa6716f8d29ed16a2a3b47ca2e82088ab40c9745afed3fa799d70242d37c0c"
+canonical_decoded_sha256 = "22fa6716f8d29ed16a2a3b47ca2e82088ab40c9745afed3fa799d70242d37c0c"
+
+[[records]]
+id = "emerald:audio/voicegroup/trick-house"
+key = "97ab99bfa38e712ecf7ab9a900e610d1b88d4ce91f6df7d22c6ffba8efbb660a"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup094"
+rom_offset = 6890108
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "dc52217eb3006b4004329b3e6ad59c38b47b44d1d5ace4ab55806f8b1bb1aca0"
+canonical_decoded_sha256 = "dc52217eb3006b4004329b3e6ad59c38b47b44d1d5ace4ab55806f8b1bb1aca0"
+
+[[records]]
+id = "emerald:audio/voicegroup/trumpet-keysplit"
+key = "616dd75e065cd289beec8ee0ca7978319caf728d205ccf44c56728cb2305dc2b"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup007"
+rom_offset = 6777572
+encoded_length = 36
+decoded_length = 36
+source_encoding = "raw"
+source_encoded_sha256 = "7932b0edcfd6310a98fc86fa91e68d93f537331cb9a45bf34657549fbc0acf9c"
+canonical_decoded_sha256 = "7932b0edcfd6310a98fc86fa91e68d93f537331cb9a45bf34657549fbc0acf9c"
+
+[[records]]
+id = "emerald:audio/voicegroup/tuba-keysplit"
+key = "6dc07eaa7db6b377fdb8da1d8c685a359f944da14f088d23479261494fefa97b"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup008"
+rom_offset = 6779144
+encoded_length = 24
+decoded_length = 24
+source_encoding = "raw"
+source_encoded_sha256 = "575038f8feb4c64047b1c7a5e529d71e03b2798884636673420de1172ba87727"
+canonical_decoded_sha256 = "575038f8feb4c64047b1c7a5e529d71e03b2798884636673420de1172ba87727"
+
+[[records]]
+id = "emerald:audio/voicegroup/underwater"
+key = "a92690d8798824f840c4ffff5f71200f14c79c83f17781c06d0d59e035e7da78"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup057"
+rom_offset = 6835784
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "b91a8adfc94beedd83d8228611d3be2b9b6b51db235bd2be939b027f725f4846"
+canonical_decoded_sha256 = "b91a8adfc94beedd83d8228611d3be2b9b6b51db235bd2be939b027f725f4846"
+
+[[records]]
+id = "emerald:audio/voicegroup/unused"
+key = "4248d670c4669cdf386cf81fb0d9645a8a7c66b7f9589af8fae4ac6a0a0ccd05"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup007"
+rom_offset = 6777608
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "374b3e70b57d3dc41e064b9f9f75b719ad2a5e0fcb26a83737deae0e0fab98fe"
+canonical_decoded_sha256 = "374b3e70b57d3dc41e064b9f9f75b719ad2a5e0fcb26a83737deae0e0fab98fe"
+
+[[records]]
+id = "emerald:audio/voicegroup/unused-2"
+key = "f68353fc8177ec9e41ec8e7622a4cc952b3166577b37ff7f58e247b0d4f36ae9"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup130"
+rom_offset = 6949304
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "4e1a4767306d4fcf653802ae920805a2fcd1b92e083d174821f78be4d3d3dd67"
+canonical_decoded_sha256 = "4e1a4767306d4fcf653802ae920805a2fcd1b92e083d174821f78be4d3d3dd67"
+
+[[records]]
+id = "emerald:audio/voicegroup/verdanturf"
+key = "7b73a2bdd7917822ea52c22eaa2792fc79a636fd2c79c74314e2c69249463818"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup044"
+rom_offset = 6817508
+encoded_length = 972
+decoded_length = 972
+source_encoding = "raw"
+source_encoded_sha256 = "b534700f8cba74a93d69a70dbc9883d36e9ca6f0672e6b2c34230a813ed14606"
+canonical_decoded_sha256 = "b534700f8cba74a93d69a70dbc9883d36e9ca6f0672e6b2c34230a813ed14606"
+
+[[records]]
+id = "emerald:audio/voicegroup/victory-aqua-magma"
+key = "1f3e434204c48d88b3ca13bb02f9ac386426cc216880d604ebd0e459831fcfdf"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup070"
+rom_offset = 6855284
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "88971ef80ff3a7b1a3fde219459602266cbe4c5c620589cb49ebe59e933e228b"
+canonical_decoded_sha256 = "88971ef80ff3a7b1a3fde219459602266cbe4c5c620589cb49ebe59e933e228b"
+
+[[records]]
+id = "emerald:audio/voicegroup/victory-gym-leader"
+key = "577735426f1017bccdefd1a622441942f78c9b9de841b72419e1e1ab7dd1c6b5"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup024"
+rom_offset = 6794096
+encoded_length = 1092
+decoded_length = 1092
+source_encoding = "raw"
+source_encoded_sha256 = "6110fd72ed3bf180d097c5ec9f3466f3599bbe9fd9850b432e8b8a20987adb2f"
+canonical_decoded_sha256 = "6110fd72ed3bf180d097c5ec9f3466f3599bbe9fd9850b432e8b8a20987adb2f"
+
+[[records]]
+id = "emerald:audio/voicegroup/victory-league"
+key = "2ecef01f8980905c43f14a33d15f6ebcf5712b17bbe167883bd7c30cc11353cb"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup029"
+rom_offset = 6799748
+encoded_length = 1056
+decoded_length = 1056
+source_encoding = "raw"
+source_encoded_sha256 = "d683f541fef8e4891deefca383c7e71af7f4c049605172cfb64c0e2fc462dbcc"
+canonical_decoded_sha256 = "d683f541fef8e4891deefca383c7e71af7f4c049605172cfb64c0e2fc462dbcc"
+
+[[records]]
+id = "emerald:audio/voicegroup/victory-road"
+key = "fa14d4f14cc596a2ef4dfbde90a3f2b6cbcda85bef4f9ea4ff829d5215916f69"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup075"
+rom_offset = 6862964
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "fd9f41cdb1dc3927e0824240ecfdfb8c4d4836e647de7e0b9ccb05b5fdf09ecc"
+canonical_decoded_sha256 = "fd9f41cdb1dc3927e0824240ecfdfb8c4d4836e647de7e0b9ccb05b5fdf09ecc"
+
+[[records]]
+id = "emerald:audio/voicegroup/victory-trainer"
+key = "8efed3e458a9b0143d39309b202b33ab4c5ef0a448c75b24c15a23bec32171bd"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup058"
+rom_offset = 6837320
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "9a32e50e68f4f11571d27ab8f0f2ba5177730739c6c85bf09ba8ebfe9eaef944"
+canonical_decoded_sha256 = "9a32e50e68f4f11571d27ab8f0f2ba5177730739c6c85bf09ba8ebfe9eaef944"
+
+[[records]]
+id = "emerald:audio/voicegroup/victory-wild"
+key = "ba366f33e605a7b2c20173600da55820c2d7e9ce6925db0ecb92e5d6bc0bd670"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup025"
+rom_offset = 6795188
+encoded_length = 1008
+decoded_length = 1008
+source_encoding = "raw"
+source_encoded_sha256 = "e652c429963c851c4a470b0baf32db3558f88668baf3d2a73393d9692550f32c"
+canonical_decoded_sha256 = "e652c429963c851c4a470b0baf32db3558f88668baf3d2a73393d9692550f32c"
+
+[[records]]
+id = "emerald:audio/voicegroup/vs-aqua-magma"
+key = "bedee83f13597aba2380688543262dd9d75b349038b685ce9b98997a4bd0fe59"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup118"
+rom_offset = 6924332
+encoded_length = 1092
+decoded_length = 1092
+source_encoding = "raw"
+source_encoded_sha256 = "3d06122c33008dfe0356c9be24275fec6aa90a6dd883ba6544e0c479fa41d2ba"
+canonical_decoded_sha256 = "3d06122c33008dfe0356c9be24275fec6aa90a6dd883ba6544e0c479fa41d2ba"
+
+[[records]]
+id = "emerald:audio/voicegroup/vs-aqua-magma-leader"
+key = "94abb87bb7e6525a6e0e0bcaac12dc7b1e7e238ed7146e6ea262960105fc5c4e"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup126"
+rom_offset = 6933236
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "db1b40ee98e528427fee6a387926e97661e4ab4d45e7c1a74d4d779a48137ab7"
+canonical_decoded_sha256 = "db1b40ee98e528427fee6a387926e97661e4ab4d45e7c1a74d4d779a48137ab7"
+
+[[records]]
+id = "emerald:audio/voicegroup/vs-champion"
+key = "3569f6b674a6ee2572870a6916eb0785387fbd9163deb168fcfbc002c6acf96d"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup121"
+rom_offset = 6927608
+encoded_length = 1032
+decoded_length = 1032
+source_encoding = "raw"
+source_encoded_sha256 = "e645cff900730b4d15ebacba6c74707ecc79dd828a870708af40657d7f844205"
+canonical_decoded_sha256 = "e645cff900730b4d15ebacba6c74707ecc79dd828a870708af40657d7f844205"
+
+[[records]]
+id = "emerald:audio/voicegroup/vs-elite-four"
+key = "9aff212fca269ac25df86f91dc65dd22c41e14bec8923415aa8ac88d21a5cdda"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup125"
+rom_offset = 6932228
+encoded_length = 1008
+decoded_length = 1008
+source_encoding = "raw"
+source_encoded_sha256 = "deaac5945dd8df4b09a7f4dbe972165cf06294f6b5b2e941fa1e42affc0da119"
+canonical_decoded_sha256 = "deaac5945dd8df4b09a7f4dbe972165cf06294f6b5b2e941fa1e42affc0da119"
+
+[[records]]
+id = "emerald:audio/voicegroup/vs-frontier-brain"
+key = "46ef9a4e82b806e5755ce28d2f89617d43a0dd120521edabf7100378617ddb25"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup115"
+rom_offset = 6920276
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "d5cb355e07c72cc189f53d62e1eebe77b04292032c3dfec325cc79f95e2fdac3"
+canonical_decoded_sha256 = "d5cb355e07c72cc189f53d62e1eebe77b04292032c3dfec325cc79f95e2fdac3"
+
+[[records]]
+id = "emerald:audio/voicegroup/vs-gym-leader"
+key = "6946c2d0978903e9c0d45e1ff2593ccfae13d32d14325e6d5c4030f8f177f2fb"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup120"
+rom_offset = 6926516
+encoded_length = 1092
+decoded_length = 1092
+source_encoding = "raw"
+source_encoded_sha256 = "ead9af271074c293214c76bea18dc15c069a091e7f657ec9497a25359ab6590a"
+canonical_decoded_sha256 = "ead9af271074c293214c76bea18dc15c069a091e7f657ec9497a25359ab6590a"
+
+[[records]]
+id = "emerald:audio/voicegroup/vs-kyogre-groudon"
+key = "480ed9cd23cc626bd4de4f7ee381957e35210bedb90955ebff4e409aceed7073"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup123"
+rom_offset = 6929648
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "9be259f3ec4bb4bfb5a817c876d3ccc73191808afedf52dbfbc6b0751063825d"
+canonical_decoded_sha256 = "9be259f3ec4bb4bfb5a817c876d3ccc73191808afedf52dbfbc6b0751063825d"
+
+[[records]]
+id = "emerald:audio/voicegroup/vs-mew"
+key = "e55fe29602d7c3069981f0c2bff8eb62b88e38071dcf7025ea99002ab1f32e79"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup116"
+rom_offset = 6921812
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "ba8f2ad66dd03f3ae58496e1e52a0297d31b3c182cfa2ad8f9af222aa3f7a15d"
+canonical_decoded_sha256 = "ba8f2ad66dd03f3ae58496e1e52a0297d31b3c182cfa2ad8f9af222aa3f7a15d"
+
+[[records]]
+id = "emerald:audio/voicegroup/vs-rayquaza"
+key = "8974273a98608e3e75135680b46f9eb315f71b0e724f6a3508ca75f9c462ce07"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup114"
+rom_offset = 6918740
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "9be259f3ec4bb4bfb5a817c876d3ccc73191808afedf52dbfbc6b0751063825d"
+canonical_decoded_sha256 = "9be259f3ec4bb4bfb5a817c876d3ccc73191808afedf52dbfbc6b0751063825d"
+
+[[records]]
+id = "emerald:audio/voicegroup/vs-regi"
+key = "f243e88072493e1fdc9f098fb6e7835d84b11dc2abaaeee27d50ab9f7279adcf"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup122"
+rom_offset = 6928640
+encoded_length = 1008
+decoded_length = 1008
+source_encoding = "raw"
+source_encoded_sha256 = "1f1d8e583864354a14c9c2186a688f4219c90a24adee4f0645e12cef8ddf8567"
+canonical_decoded_sha256 = "1f1d8e583864354a14c9c2186a688f4219c90a24adee4f0645e12cef8ddf8567"
+
+[[records]]
+id = "emerald:audio/voicegroup/vs-rival"
+key = "51e96b722e28c57319f3d3a3f67e5df233a2ca37d010aa00c5be7715e00fb4dc"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup124"
+rom_offset = 6931184
+encoded_length = 1044
+decoded_length = 1044
+source_encoding = "raw"
+source_encoded_sha256 = "7d901b11095fdb28f0b59943a6014ceae77952884e6e1f87ff181a9f05e12c31"
+canonical_decoded_sha256 = "7d901b11095fdb28f0b59943a6014ceae77952884e6e1f87ff181a9f05e12c31"
+
+[[records]]
+id = "emerald:audio/voicegroup/vs-trainer"
+key = "1c0ee22afe34378ee8385b27ece03ca7bb709d28e4f8edd6b86e998224f9f52a"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup119"
+rom_offset = 6925424
+encoded_length = 1092
+decoded_length = 1092
+source_encoding = "raw"
+source_encoded_sha256 = "24ccc8954956eec8b8716dc2425eabb7684a69dc4afb3a9dd3e2a865588a6dbc"
+canonical_decoded_sha256 = "24ccc8954956eec8b8716dc2425eabb7684a69dc4afb3a9dd3e2a865588a6dbc"
+
+[[records]]
+id = "emerald:audio/voicegroup/vs-wild"
+key = "841629ad5479def688b715220a07730a6334d9e2a2229cdee83933b0104c9a8a"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup117"
+rom_offset = 6923348
+encoded_length = 984
+decoded_length = 984
+source_encoding = "raw"
+source_encoded_sha256 = "7d535c12a762eb2c29475067edc4e43472aba20252d150a54ae0843d0b240c3b"
+canonical_decoded_sha256 = "7d535c12a762eb2c29475067edc4e43472aba20252d150a54ae0843d0b240c3b"
+
+[[records]]
+id = "emerald:audio/voicegroup/weather-groudon"
+key = "2782b5f88f492eee0b8937ae291ddd432f27da7ec5980abb28f387f02907ffe1"
+type = "instrument-bank"
+schema = 1
+symbol = "voicegroup090"
+rom_offset = 6883964
+encoded_length = 1536
+decoded_length = 1536
+source_encoding = "raw"
+source_encoded_sha256 = "7ea8ae184cc321620e54d49b0d417a248270da0c8a12c912deda30f6ce714bb9"
+canonical_decoded_sha256 = "7ea8ae184cc321620e54d49b0d417a248270da0c8a12c912deda30f6ce714bb9"
 
 [[records]]
 id = "emerald:audio/wave/programmable/1"

@@ -184,8 +184,12 @@ void EmeraldResourceCompat_Shutdown(void);
 
 /* R10-C: the reverse resource-range index over the published session
  * images' streams, rebuilt whenever a new session image is adopted. NULL
- * while no valid index exists. */
-const struct EmeraldResourceRangeIndex *EmeraldResourceCompat_GetRangeIndex(void);
+ * while no valid index exists. Non-const because seams register their own
+ * spans into the shared index at publish: the trainer rebuild resets it and
+ * re-registers the image streams (RebuildRangeIndex), and the audio seam
+ * (R12-C) appends its arena spans + hull after publication - the state
+ * system (native_state.c) only ever reads it. */
+struct EmeraldResourceRangeIndex *EmeraldResourceCompat_GetRangeIndex(void);
 
 /* R10-F: the session content fingerprint, computed by the R6 loader from
  * the pack-derived session info at registration. Until set (or after

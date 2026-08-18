@@ -639,8 +639,45 @@ extern void RunMixerFrame(void);
  * see identical emulator trajectories (a state load must NOT reset it - the
  * real engine never does).
  */
+/* R12-C §8: post-load sample pointers may legitimately point into the audio
+ * arena (above 4 GiB): the range index's registered spans cover the
+ * verbatim + transformed zones and the hull covers the whole arena
+ * allocation, so a resource-resident pointer is exactly as legitimate as an
+ * image-resident one. Anything above 4 GiB that is neither is a defect -
+ * the walker would have refused the save instead of persisting it. */
+static bool32 NativeAudioPointerIsResourceResident(uintptr_t address)
+{
+    const struct EmeraldResourceRangeIndex *index =
+        EmeraldResourceCompat_GetRangeIndex();
+    struct EmeraldResourceRangeHit hit;
+
+    if (index == NULL)
+        return FALSE;
+    return EmeraldResourceRangeIndex_Lookup(index, address, &hit)
+        || EmeraldResourceRangeIndex_InHull(index, address);
+}
+
 static int NativeStateAudioSelfTest(void)
 {
+    /* R12-C: run against the redirected path. Same pack resolution and init
+     * order as the content-hydration path (desktop_game_content.c): the
+     * session publishes the audio arena, the logical-address table and the
+     * R10 range index, so the song tone hydrates into the arena's
+     * transformed rows, channels hold arena sample pointers, and the walker
+     * captures all of them as sidecar records on the mid-play save below. */
+    {
+        char packPath[1024];
+        if (!Platform_AssetGetPath("games/emerald/base/emerald-bpee01-v1.rpack",
+                                   packPath, sizeof(packPath))
+         || EmeraldResourceCompat_RegisterRuntimeSnapshot(packPath)
+                != EMERALD_COMPAT_OK)
+        {
+            fprintf(stderr, "Native audio self-test: production pack not "
+                            "resolvable/registrable\n");
+            return 1;
+        }
+    }
+
     uintptr_t bssStart;
     uintptr_t bssEnd;
     unsigned char *region;
@@ -982,7 +1019,8 @@ static int NativeStateAudioSelfTest(void)
     }
 
     /* Channel linkage: prev/next must stay inside the chans array, sample
-     * pointers must re-derive to image-resident (sub-4 GiB) data. */
+     * pointers must re-derive to image-resident (sub-4 GiB) or
+     * arena-resident (R12-C) data. */
     for (i = 0; i < MAX_DIRECTSOUND_CHANNELS; i++)
     {
         ch = &soundInfo->chans[i];
@@ -1000,14 +1038,20 @@ static int NativeStateAudioSelfTest(void)
             fprintf(stderr, "Native audio self-test: chans[%u].nextChannelPointer outside chans\n", i);
             return 1;
         }
-        if (ch->wav != NULL && (uintptr_t)ch->wav >= 0x100000000ull)
+        /* R12-C: image-resident (sub-4 GiB, compiled data) OR arena-resident
+         * (the session's resource-owned spans - see the helper). */
+        if (ch->wav != NULL
+         && (uintptr_t)ch->wav >= 0x100000000ull
+         && !NativeAudioPointerIsResourceResident((uintptr_t)ch->wav))
         {
-            fprintf(stderr, "Native audio self-test: chans[%u].wav not image-resident after load\n", i);
+            fprintf(stderr, "Native audio self-test: chans[%u].wav neither image- nor arena-resident after load\n", i);
             return 1;
         }
-        if (ch->currentPointer != NULL && (uintptr_t)ch->currentPointer >= 0x100000000ull)
+        if (ch->currentPointer != NULL
+         && (uintptr_t)ch->currentPointer >= 0x100000000ull
+         && !NativeAudioPointerIsResourceResident((uintptr_t)ch->currentPointer))
         {
-            fprintf(stderr, "Native audio self-test: chans[%u].currentPointer not image-resident\n", i);
+            fprintf(stderr, "Native audio self-test: chans[%u].currentPointer neither image- nor arena-resident\n", i);
             return 1;
         }
     }

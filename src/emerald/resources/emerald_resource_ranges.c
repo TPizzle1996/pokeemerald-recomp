@@ -35,25 +35,21 @@ bool EmeraldResourceRangeIndex_AddHull(
     return true;
 }
 
-bool EmeraldResourceRangeIndex_RegisterStream(
-    struct EmeraldResourceRangeIndex *index,
-    const struct EmeraldResourceCompatibilityImage *image, size_t entryIndex,
-    uint32_t schema, enum EmeraldResourceRangeRole role)
+/* Insert `base`..`base+length` into the sorted, non-overlapping range table
+ * with the key derived from `canonicalName`. Shared tail of RegisterStream
+ * and RegisterSpan (R12-C: the audio seam's arena spans have no
+ * EmeraldResourceCompatibilityImage, so it registers raw base/length spans
+ * under their canonical names). */
+static bool InsertRange(struct EmeraldResourceRangeIndex *index,
+                        uintptr_t base, size_t length,
+                        const char *canonicalName, uint32_t type,
+                        uint32_t schema, enum EmeraldResourceRangeRole role)
 {
-    const uint8_t *stream;
-    size_t streamSize;
-    uintptr_t base;
     size_t position;
 
-    if (index == NULL || image == NULL || role > EMERALD_RESOURCE_ROLE_COMPAT_OBJECT)
-        return false;
-    stream = EmeraldResourceCompatImage_GetStream(image, entryIndex);
-    streamSize = EmeraldResourceCompatImage_GetStreamSize(image, entryIndex);
-    if (stream == NULL || streamSize == 0)
-        return false;
-    base = (uintptr_t)stream;
-    /* base + (length - 1) must not wrap past UINTPTR_MAX. */
-    if (base > UINTPTR_MAX - (streamSize - 1))
+    if (index == NULL || role > EMERALD_RESOURCE_ROLE_COMPAT_OBJECT
+     || canonicalName == NULL || length == 0
+     || base > UINTPTR_MAX - (length - 1))
         return false;
     if (index->rangeCount >= EMERALD_RESOURCE_RANGE_INDEX_MAX_RANGES)
         return false;
@@ -64,7 +60,7 @@ bool EmeraldResourceRangeIndex_RegisterStream(
         position--;
     /* Reject overlap with either neighbour (sorted order makes two checks
      * sufficient): [prev.base, prev.base+prev.length) must not contain
-     * base, and [base, base+streamSize) must not contain next.base. */
+     * base, and [base, base+length) must not contain next.base. */
     if (position > 0)
     {
         const struct EmeraldResourceRange *prev = &index->ranges[position - 1];
@@ -74,23 +70,52 @@ bool EmeraldResourceRangeIndex_RegisterStream(
     if (position < index->rangeCount)
     {
         const struct EmeraldResourceRange *next = &index->ranges[position];
-        if (next->base < base + streamSize)
+        if (next->base < base + length)
             return false;
     }
     if (position < index->rangeCount)
         memmove(&index->ranges[position + 1], &index->ranges[position],
                 (index->rangeCount - position) * sizeof(index->ranges[0]));
     index->ranges[position].base = base;
-    index->ranges[position].length = streamSize;
-    index->ranges[position].type =
-        (uint32_t)EmeraldResourceCompatImage_GetEntryType(image, entryIndex);
+    index->ranges[position].length = length;
+    index->ranges[position].type = type;
     index->ranges[position].schema = schema;
     index->ranges[position].role = (uint32_t)role;
-    Gen3ResourceId_DeriveKey(
-        EmeraldResourceCompatImage_GetEntryName(image, entryIndex),
-        &index->ranges[position].key);
+    Gen3ResourceId_DeriveKey(canonicalName, &index->ranges[position].key);
     index->rangeCount++;
     return true;
+}
+
+bool EmeraldResourceRangeIndex_RegisterSpan(
+    struct EmeraldResourceRangeIndex *index, uintptr_t base, size_t length,
+    const char *canonicalName, uint32_t type, uint32_t schema,
+    enum EmeraldResourceRangeRole role)
+{
+    return InsertRange(index, base, length, canonicalName, type, schema, role);
+}
+
+bool EmeraldResourceRangeIndex_RegisterStream(
+    struct EmeraldResourceRangeIndex *index,
+    const struct EmeraldResourceCompatibilityImage *image, size_t entryIndex,
+    uint32_t schema, enum EmeraldResourceRangeRole role)
+{
+    const uint8_t *stream;
+    size_t streamSize;
+    uintptr_t base;
+
+    if (index == NULL || image == NULL)
+        return false;
+    stream = EmeraldResourceCompatImage_GetStream(image, entryIndex);
+    streamSize = EmeraldResourceCompatImage_GetStreamSize(image, entryIndex);
+    if (stream == NULL || streamSize == 0)
+        return false;
+    base = (uintptr_t)stream;
+    return InsertRange(index, base, streamSize,
+                       EmeraldResourceCompatImage_GetEntryName(image,
+                                                              entryIndex),
+                       (uint32_t)EmeraldResourceCompatImage_GetEntryType(
+                           image, entryIndex),
+                       schema, role);
 }
 
 bool EmeraldResourceRangeIndex_Lookup(

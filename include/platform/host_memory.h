@@ -18,6 +18,14 @@ struct HostPersistentAddress
 // resolved through the same boundary.
 GbaAddr HostPointerToGbaAddr(const void *ptr);
 void *HostResolveGbaAddr(GbaAddr addr);
+/* Exact-start logical-address table (R12-C §5): audio table labels (voicegroup
+ * and cry-table starts, 197 entries) whose GBA address must resolve to the
+ * R12-B/C arena's native rows instead of the compiled parity copy. The table
+ * is consulted before the handle table, so entries must never overlap the
+ * handle ranges; registration inserts in sorted order (publish-time only) and
+ * aborts on duplicates. Cleared by ClearMigratedEntries/Republish. */
+void HostMemoryRegisterLogicalAddress(GbaAddr addr, void *hostBase);
+void HostMemoryClearLogicalAddresses(void);
 void *HostResolveGbaTableEntry(const GbaAddr *table, u32 index);
 GbaAddr HostFunctionToGbaAddr(const void *functionPointerBytes, size_t size);
 void HostResolveFunction(GbaAddr addr, void *functionPointerBytes, size_t size);

@@ -19,6 +19,13 @@ extern void abort(void);
 #define HOST_PERSISTENT_FUNC_IMAGE   0x5046494Du /* PFIM */
 #define HOST_PERSISTENT_FUNCTION_CAPACITY 16384
 
+/* Exact-start logical-address table (R12-C §5): 195 voicegroup labels + 2 cry
+ * table labels. Every reference the table serves is exactly one label; the
+ * back-shifted drumset labels are entries, not intervals, so they cannot
+ * collide with anything. Fixed capacity - registration is publish-time only,
+ * no allocation. */
+#define HOST_LOGICAL_ADDRESS_CAPACITY 197
+
 struct HostPersistentFunctionEntry
 {
     u32 stableId;
@@ -40,6 +47,13 @@ HOST_DATA static u32 sNextHostFunctionHandle = 1;
 #if defined(LINUX64) && LINUX64
 HOST_DATA static struct HostPersistentFunctionEntry sPersistentFunctions[HOST_PERSISTENT_FUNCTION_CAPACITY];
 HOST_DATA static u32 sPersistentFunctionCount;
+/* Exact-start logical-address table (R12-C §5). Two parallel arrays kept in
+ * lock-step, sorted by addr for the binary search in HostResolveGbaAddr.
+ * Populated by the audio seam at arena publish, cleared at clear/republish;
+ * it is outside every serialized slice. */
+HOST_DATA static GbaAddr sLogicalAddrs[HOST_LOGICAL_ADDRESS_CAPACITY];
+HOST_DATA static void *sLogicalHosts[HOST_LOGICAL_ADDRESS_CAPACITY];
+HOST_DATA static u32 sLogicalCount;
 
 extern unsigned char __start_host_data[];
 extern unsigned char __stop_host_data[];
@@ -305,12 +319,73 @@ GbaAddr HostPointerToGbaAddr(const void *ptr)
 #endif
 }
 
+void HostMemoryRegisterLogicalAddress(GbaAddr addr, void *hostBase)
+{
+#if defined(LINUX64) && LINUX64
+    u32 lo, hi;
+
+    if (addr == 0 || hostBase == NULL)
+        HostMemoryAbort("invalid logical address registration", addr);
+    if ((addr & 0xFFFF0000u) == HOST_HANDLE_BASE
+     || (addr & 0xFFFF0000u) == HOST_FUNCTION_HANDLE_BASE)
+        HostMemoryAbort("logical address overlaps handle range", addr);
+
+    /* Insert in sorted order; capacity is fixed and small (publish-time). */
+    for (lo = 0; lo < sLogicalCount; lo++)
+    {
+        if (sLogicalAddrs[lo] == addr)
+            HostMemoryAbort("duplicate logical address registration", addr);
+        if (sLogicalAddrs[lo] > addr)
+            break;
+    }
+    if (sLogicalCount >= HOST_LOGICAL_ADDRESS_CAPACITY)
+        HostMemoryAbort("logical address table exhausted", addr);
+    for (hi = sLogicalCount; hi > lo; hi--)
+    {
+        sLogicalAddrs[hi] = sLogicalAddrs[hi - 1];
+        sLogicalHosts[hi] = sLogicalHosts[hi - 1];
+    }
+    sLogicalAddrs[lo] = addr;
+    sLogicalHosts[lo] = hostBase;
+    sLogicalCount++;
+#else
+    (void)addr;
+    (void)hostBase;
+#endif
+}
+
+void HostMemoryClearLogicalAddresses(void)
+{
+#if defined(LINUX64) && LINUX64
+    sLogicalCount = 0;
+#endif
+}
+
 void *HostResolveGbaAddr(GbaAddr addr)
 {
     u32 index;
 
     if (addr == 0)
         return NULL;
+
+#if defined(LINUX64) && LINUX64
+    /* Exact-start logical table first (R12-C §5.2): a registered table label
+     * resolves to the arena's native rows; the compiled parity copy stays
+     * linked as the additive fallback for anything unregistered. */
+    {
+        u32 lo = 0, hi = sLogicalCount;
+        while (lo < hi)
+        {
+            u32 mid = lo + (hi - lo) / 2;
+            if (sLogicalAddrs[mid] < addr)
+                lo = mid + 1;
+            else
+                hi = mid;
+        }
+        if (lo < sLogicalCount && sLogicalAddrs[lo] == addr)
+            return sLogicalHosts[lo];
+    }
+#endif
 
 #if UINTPTR_MAX > UINT32_MAX
     if ((addr & 0xFFFF0000u) == HOST_HANDLE_BASE)
