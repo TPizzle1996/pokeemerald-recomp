@@ -26,6 +26,17 @@ void *HostResolveGbaAddr(GbaAddr addr);
  * aborts on duplicates. Cleared by ClearMigratedEntries/Republish. */
 void HostMemoryRegisterLogicalAddress(GbaAddr addr, void *hostBase);
 void HostMemoryClearLogicalAddresses(void);
+/* Interval logical-address table (R12-D §5): ONE half-open [romStart, romEnd)
+ * GBA interval -> native base, covering the contiguous MP2K song-graph block
+ * (0x088FC03C..0x089A3050). Resolution is identity-preserving
+ * (hostBase + (addr - romStart)). Consulted after the exact-start table and
+ * before the handle table; registration inserts in sorted order (publish-time
+ * only), aborts on any overlap with an existing interval AND on any interval
+ * that would contain an exact-start entry (the exact-start table must always
+ * win). Fixed capacity 16 - a whole zone or per-song interval set must never
+ * be registered here (per-song identity lives in the R10 range index). */
+void HostMemoryRegisterLogicalRange(GbaAddr romStart, GbaAddr romEnd, void *hostBase);
+void HostMemoryClearLogicalRanges(void);
 void *HostResolveGbaTableEntry(const GbaAddr *table, u32 index);
 GbaAddr HostFunctionToGbaAddr(const void *functionPointerBytes, size_t size);
 void HostResolveFunction(GbaAddr addr, void *functionPointerBytes, size_t size);

@@ -26,6 +26,13 @@ extern void abort(void);
  * no allocation. */
 #define HOST_LOGICAL_ADDRESS_CAPACITY 197
 
+/* Interval table (R12-D §5): ONE half-open [romStart, romEnd) mapping for the
+ * contiguous MP2K song block. Capacity 16 is deliberate headroom for the
+ * architecture's approved mechanism (one span per verbatim sub-zone); the
+ * R12-D song block is the only interval registered today. Registration is
+ * publish-time only, no allocation. */
+#define HOST_LOGICAL_RANGE_CAPACITY 16
+
 struct HostPersistentFunctionEntry
 {
     u32 stableId;
@@ -54,6 +61,15 @@ HOST_DATA static u32 sPersistentFunctionCount;
 HOST_DATA static GbaAddr sLogicalAddrs[HOST_LOGICAL_ADDRESS_CAPACITY];
 HOST_DATA static void *sLogicalHosts[HOST_LOGICAL_ADDRESS_CAPACITY];
 HOST_DATA static u32 sLogicalCount;
+/* Interval table (R12-D §5): parallel arrays in lock-step, sorted by romStart
+ * for the binary search in HostResolveGbaAddr (upper bound on start, then one
+ * bounds check against the exclusive end). Populated by the audio seam at
+ * arena publish (the one song block), cleared at clear/republish; outside
+ * every serialized slice like the exact-start table. */
+HOST_DATA static GbaAddr sRangeStarts[HOST_LOGICAL_RANGE_CAPACITY];
+HOST_DATA static GbaAddr sRangeEnds[HOST_LOGICAL_RANGE_CAPACITY];
+HOST_DATA static void *sRangeHosts[HOST_LOGICAL_RANGE_CAPACITY];
+HOST_DATA static u32 sRangeCount;
 
 extern unsigned char __start_host_data[];
 extern unsigned char __stop_host_data[];
@@ -361,6 +377,62 @@ void HostMemoryClearLogicalAddresses(void)
 #endif
 }
 
+void HostMemoryRegisterLogicalRange(GbaAddr romStart, GbaAddr romEnd, void *hostBase)
+{
+#if defined(LINUX64) && LINUX64
+    u32 lo, hi, i;
+
+    if (romStart == 0 || romEnd <= romStart || hostBase == NULL)
+        HostMemoryAbort("invalid logical range registration", romStart);
+    if ((romStart & 0xFFFF0000u) == HOST_HANDLE_BASE
+     || (romStart & 0xFFFF0000u) == HOST_FUNCTION_HANDLE_BASE)
+        HostMemoryAbort("logical range overlaps handle range", romStart);
+
+    /* The exact-start table must always win (R12-D §5 precedence): an
+     * interval that contains a registered label would silently shadow it. */
+    for (i = 0; i < sLogicalCount; i++)
+    {
+        if (sLogicalAddrs[i] >= romStart && sLogicalAddrs[i] < romEnd)
+            HostMemoryAbort("logical range shadows exact-start entry", sLogicalAddrs[i]);
+    }
+    /* Intervals are disjoint; a duplicate or overlapping registration is a
+     * seam bug, never a merge. */
+    for (i = 0; i < sRangeCount; i++)
+    {
+        if (romStart < sRangeEnds[i] && romEnd > sRangeStarts[i])
+            HostMemoryAbort("overlapping logical range registration", romStart);
+    }
+    for (lo = 0; lo < sRangeCount; lo++)
+    {
+        if (sRangeStarts[lo] >= romStart)
+            break;
+    }
+    if (sRangeCount >= HOST_LOGICAL_RANGE_CAPACITY)
+        HostMemoryAbort("logical range table exhausted", romStart);
+    for (hi = sRangeCount; hi > lo; hi--)
+    {
+        sRangeStarts[hi] = sRangeStarts[hi - 1];
+        sRangeEnds[hi] = sRangeEnds[hi - 1];
+        sRangeHosts[hi] = sRangeHosts[hi - 1];
+    }
+    sRangeStarts[lo] = romStart;
+    sRangeEnds[lo] = romEnd;
+    sRangeHosts[lo] = hostBase;
+    sRangeCount++;
+#else
+    (void)romStart;
+    (void)romEnd;
+    (void)hostBase;
+#endif
+}
+
+void HostMemoryClearLogicalRanges(void)
+{
+#if defined(LINUX64) && LINUX64
+    sRangeCount = 0;
+#endif
+}
+
 void *HostResolveGbaAddr(GbaAddr addr)
 {
     u32 index;
@@ -384,6 +456,23 @@ void *HostResolveGbaAddr(GbaAddr addr)
         }
         if (lo < sLogicalCount && sLogicalAddrs[lo] == addr)
             return sLogicalHosts[lo];
+    }
+    /* Interval table (R12-D §5): upper bound on romStart, then one bounds
+     * check against the exclusive end. Identity-preserving
+     * (base + (addr - start)) - every byte of the contiguous song block is
+     * valid song content, so no per-song identity is needed here. */
+    {
+        u32 lo = 0, hi = sRangeCount;
+        while (lo < hi)
+        {
+            u32 mid = lo + (hi - lo) / 2;
+            if (sRangeStarts[mid] <= addr)
+                lo = mid + 1;
+            else
+                hi = mid;
+        }
+        if (lo > 0 && addr < sRangeEnds[lo - 1])
+            return (uint8_t *)sRangeHosts[lo - 1] + (addr - sRangeStarts[lo - 1]);
     }
 #endif
 

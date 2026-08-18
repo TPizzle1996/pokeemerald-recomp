@@ -2,20 +2,25 @@
 # Do not edit by hand; edit the R12-A inventory and re-run the
 # generator (regeneration must be a no-op diff).
 
-# Semantic extraction bindings for the 771 audio resources: 569
-# R12-B leaves (105 root + 51 phoneme + 388 cry samples, 25
+# Semantic extraction bindings for the 1,301 audio resources:
+# 569 R12-B leaves (105 root + 51 phoneme + 388 cry samples, 25
 # programmable waves) + 202 R12-C structural (195 voicegroups at
 # 20,594 GBA 12-byte rows, 2 cry tables at 388 rows each, 5
-# keysplit runs at 372 B). NO ROM offsets: they are derived from
+# keysplit runs at 372 B) + 530 R12-D song graphs (684,052 B of
+# MP2K streams; the packed-object slice rule + the engine-faithful
+# stream walker in song_walker.py prove every object boundary and
+# every address operand). NO ROM offsets: they are derived from
 # the matching GBA ELF symbol table via the R1A generator
 # (gen3-elf-manifest), never hand-maintained. The artifact IS the
 # canonical payload (raw encoding); sizes are derived and proven
 # by gen_audio_bindings.py (end-symbol/object-layout method +
-# WaveData2 structural validation + the R12-C stream model) before
-# the manifest pipeline re-proves them. Structural bindings may
-# carry `symbol_offset` (drumset back-shifts, the 4 no-symbol
-# containing slices, keysplit run starts) - the manifest's slice
-# path, raw encoding only.
+# WaveData2 structural validation + the R12-C stream model + the
+# R12-D walker) before the manifest pipeline re-proves them.
+# Structural bindings may carry `symbol_offset` (drumset
+# back-shifts, the 4 no-symbol containing slices, keysplit run
+# starts) - the manifest's slice path, raw encoding only. Song
+# bindings bind their first track label (mus_dummy binds its own
+# header symbol) with expected_decoded_size = object size.
 
 bindings_version = 1
 game = "emerald"
@@ -4433,6 +4438,4246 @@ source_artifact = "sound/direct_sound_samples/unused_unknown_male_voice.bin"
 source_encoding = "raw"
 canonical_representation = "gba-wave-data"
 expected_decoded_size = 9381
+
+[[bindings]]
+id = "emerald:audio/song/mus-abandoned-ship"
+symbol = "mus_abandoned_ship_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-abandoned-ship.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 2368
+
+[[bindings]]
+id = "emerald:audio/song/mus-abnormal-weather"
+symbol = "mus_abnormal_weather_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-abnormal-weather.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 1620
+
+[[bindings]]
+id = "emerald:audio/song/mus-aqua-magma-hideout"
+symbol = "mus_aqua_magma_hideout_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-aqua-magma-hideout.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 2316
+
+[[bindings]]
+id = "emerald:audio/song/mus-awaken-legend"
+symbol = "mus_awaken_legend_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-awaken-legend.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 876
+
+[[bindings]]
+id = "emerald:audio/song/mus-b-arena"
+symbol = "mus_b_arena_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-b-arena.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 3216
+
+[[bindings]]
+id = "emerald:audio/song/mus-b-dome"
+symbol = "mus_b_dome_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-b-dome.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 5372
+
+[[bindings]]
+id = "emerald:audio/song/mus-b-dome-lobby"
+symbol = "mus_b_dome_lobby_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-b-dome-lobby.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 588
+
+[[bindings]]
+id = "emerald:audio/song/mus-b-factory"
+symbol = "mus_b_factory_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-b-factory.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 7852
+
+[[bindings]]
+id = "emerald:audio/song/mus-b-frontier"
+symbol = "mus_b_frontier_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-b-frontier.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 5056
+
+[[bindings]]
+id = "emerald:audio/song/mus-b-palace"
+symbol = "mus_b_palace_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-b-palace.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 5520
+
+[[bindings]]
+id = "emerald:audio/song/mus-b-pike"
+symbol = "mus_b_pike_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-b-pike.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 5244
+
+[[bindings]]
+id = "emerald:audio/song/mus-b-pyramid"
+symbol = "mus_b_pyramid_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-b-pyramid.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 8880
+
+[[bindings]]
+id = "emerald:audio/song/mus-b-pyramid-top"
+symbol = "mus_b_pyramid_top_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-b-pyramid-top.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 1004
+
+[[bindings]]
+id = "emerald:audio/song/mus-b-tower"
+symbol = "mus_b_tower_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-b-tower.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 4916
+
+[[bindings]]
+id = "emerald:audio/song/mus-b-tower-rs"
+symbol = "mus_b_tower_rs_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-b-tower-rs.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 2960
+
+[[bindings]]
+id = "emerald:audio/song/mus-birch-lab"
+symbol = "mus_birch_lab_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-birch-lab.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 1708
+
+[[bindings]]
+id = "emerald:audio/song/mus-c-comm-center"
+symbol = "mus_c_comm_center_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-c-comm-center.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 720
+
+[[bindings]]
+id = "emerald:audio/song/mus-c-vs-legend-beast"
+symbol = "mus_c_vs_legend_beast_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-c-vs-legend-beast.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 2516
+
+[[bindings]]
+id = "emerald:audio/song/mus-cable-car"
+symbol = "mus_cable_car_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-cable-car.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 1652
+
+[[bindings]]
+id = "emerald:audio/song/mus-caught"
+symbol = "mus_caught_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-caught.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 1088
+
+[[bindings]]
+id = "emerald:audio/song/mus-cave-of-origin"
+symbol = "mus_cave_of_origin_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-cave-of-origin.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 2344
+
+[[bindings]]
+id = "emerald:audio/song/mus-contest"
+symbol = "mus_contest_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-contest.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 3780
+
+[[bindings]]
+id = "emerald:audio/song/mus-contest-lobby"
+symbol = "mus_contest_lobby_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-contest-lobby.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 1672
+
+[[bindings]]
+id = "emerald:audio/song/mus-contest-results"
+symbol = "mus_contest_results_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-contest-results.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 1124
+
+[[bindings]]
+id = "emerald:audio/song/mus-contest-winner"
+symbol = "mus_contest_winner_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-contest-winner.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 1548
+
+[[bindings]]
+id = "emerald:audio/song/mus-credits"
+symbol = "mus_credits_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-credits.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 9772
+
+[[bindings]]
+id = "emerald:audio/song/mus-cycling"
+symbol = "mus_cycling_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-cycling.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 6116
+
+[[bindings]]
+id = "emerald:audio/song/mus-dewford"
+symbol = "mus_dewford_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-dewford.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 3660
+
+[[bindings]]
+id = "emerald:audio/song/mus-dummy"
+symbol = "mus_dummy"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-dummy.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 8
+
+[[bindings]]
+id = "emerald:audio/song/mus-encounter-aqua"
+symbol = "mus_encounter_aqua_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-encounter-aqua.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 3648
+
+[[bindings]]
+id = "emerald:audio/song/mus-encounter-brendan"
+symbol = "mus_encounter_brendan_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-encounter-brendan.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 3332
+
+[[bindings]]
+id = "emerald:audio/song/mus-encounter-champion"
+symbol = "mus_encounter_champion_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-encounter-champion.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 4332
+
+[[bindings]]
+id = "emerald:audio/song/mus-encounter-cool"
+symbol = "mus_encounter_cool_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-encounter-cool.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 3284
+
+[[bindings]]
+id = "emerald:audio/song/mus-encounter-elite-four"
+symbol = "mus_encounter_elite_four_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-encounter-elite-four.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 3204
+
+[[bindings]]
+id = "emerald:audio/song/mus-encounter-female"
+symbol = "mus_encounter_female_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-encounter-female.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 1648
+
+[[bindings]]
+id = "emerald:audio/song/mus-encounter-girl"
+symbol = "mus_encounter_girl_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-encounter-girl.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 1424
+
+[[bindings]]
+id = "emerald:audio/song/mus-encounter-hiker"
+symbol = "mus_encounter_hiker_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-encounter-hiker.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 1408
+
+[[bindings]]
+id = "emerald:audio/song/mus-encounter-intense"
+symbol = "mus_encounter_intense_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-encounter-intense.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 2348
+
+[[bindings]]
+id = "emerald:audio/song/mus-encounter-interviewer"
+symbol = "mus_encounter_interviewer_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-encounter-interviewer.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 1416
+
+[[bindings]]
+id = "emerald:audio/song/mus-encounter-magma"
+symbol = "mus_encounter_magma_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-encounter-magma.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 2920
+
+[[bindings]]
+id = "emerald:audio/song/mus-encounter-male"
+symbol = "mus_encounter_male_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-encounter-male.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 1624
+
+[[bindings]]
+id = "emerald:audio/song/mus-encounter-may"
+symbol = "mus_encounter_may_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-encounter-may.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 3332
+
+[[bindings]]
+id = "emerald:audio/song/mus-encounter-rich"
+symbol = "mus_encounter_rich_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-encounter-rich.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 1604
+
+[[bindings]]
+id = "emerald:audio/song/mus-encounter-suspicious"
+symbol = "mus_encounter_suspicious_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-encounter-suspicious.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 2252
+
+[[bindings]]
+id = "emerald:audio/song/mus-encounter-swimmer"
+symbol = "mus_encounter_swimmer_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-encounter-swimmer.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 1244
+
+[[bindings]]
+id = "emerald:audio/song/mus-encounter-twins"
+symbol = "mus_encounter_twins_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-encounter-twins.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 1296
+
+[[bindings]]
+id = "emerald:audio/song/mus-end"
+symbol = "mus_end_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-end.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 1284
+
+[[bindings]]
+id = "emerald:audio/song/mus-ever-grande"
+symbol = "mus_ever_grande_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-ever-grande.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 3584
+
+[[bindings]]
+id = "emerald:audio/song/mus-evolution"
+symbol = "mus_evolution_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-evolution.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 1404
+
+[[bindings]]
+id = "emerald:audio/song/mus-evolution-intro"
+symbol = "mus_evolution_intro_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-evolution-intro.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 104
+
+[[bindings]]
+id = "emerald:audio/song/mus-evolved"
+symbol = "mus_evolved_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-evolved.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 416
+
+[[bindings]]
+id = "emerald:audio/song/mus-fallarbor"
+symbol = "mus_fallarbor_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-fallarbor.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 3768
+
+[[bindings]]
+id = "emerald:audio/song/mus-follow-me"
+symbol = "mus_follow_me_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-follow-me.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 1584
+
+[[bindings]]
+id = "emerald:audio/song/mus-fortree"
+symbol = "mus_fortree_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-fortree.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 2356
+
+[[bindings]]
+id = "emerald:audio/song/mus-game-corner"
+symbol = "mus_game_corner_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-game-corner.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 5928
+
+[[bindings]]
+id = "emerald:audio/song/mus-gsc-pewter"
+symbol = "mus_gsc_pewter_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-gsc-pewter.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 1476
+
+[[bindings]]
+id = "emerald:audio/song/mus-gsc-route38"
+symbol = "mus_gsc_route38_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-gsc-route38.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 964
+
+[[bindings]]
+id = "emerald:audio/song/mus-gym"
+symbol = "mus_gym_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-gym.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 2560
+
+[[bindings]]
+id = "emerald:audio/song/mus-hall-of-fame"
+symbol = "mus_hall_of_fame_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-hall-of-fame.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 2992
+
+[[bindings]]
+id = "emerald:audio/song/mus-hall-of-fame-room"
+symbol = "mus_hall_of_fame_room_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-hall-of-fame-room.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 1976
+
+[[bindings]]
+id = "emerald:audio/song/mus-heal"
+symbol = "mus_heal_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-heal.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 200
+
+[[bindings]]
+id = "emerald:audio/song/mus-help"
+symbol = "mus_help_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-help.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 976
+
+[[bindings]]
+id = "emerald:audio/song/mus-intro"
+symbol = "mus_intro_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-intro.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 4508
+
+[[bindings]]
+id = "emerald:audio/song/mus-intro-battle"
+symbol = "mus_intro_battle_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-intro-battle.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 3104
+
+[[bindings]]
+id = "emerald:audio/song/mus-level-up"
+symbol = "mus_level_up_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-level-up.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 228
+
+[[bindings]]
+id = "emerald:audio/song/mus-lilycove"
+symbol = "mus_lilycove_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-lilycove.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 4584
+
+[[bindings]]
+id = "emerald:audio/song/mus-lilycove-museum"
+symbol = "mus_lilycove_museum_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-lilycove-museum.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 2752
+
+[[bindings]]
+id = "emerald:audio/song/mus-link-contest-p1"
+symbol = "mus_link_contest_p1_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-link-contest-p1.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 2184
+
+[[bindings]]
+id = "emerald:audio/song/mus-link-contest-p2"
+symbol = "mus_link_contest_p2_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-link-contest-p2.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 2372
+
+[[bindings]]
+id = "emerald:audio/song/mus-link-contest-p3"
+symbol = "mus_link_contest_p3_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-link-contest-p3.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 2428
+
+[[bindings]]
+id = "emerald:audio/song/mus-link-contest-p4"
+symbol = "mus_link_contest_p4_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-link-contest-p4.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 2204
+
+[[bindings]]
+id = "emerald:audio/song/mus-littleroot"
+symbol = "mus_littleroot_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-littleroot.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 4696
+
+[[bindings]]
+id = "emerald:audio/song/mus-littleroot-test"
+symbol = "mus_littleroot_test_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-littleroot-test.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 2584
+
+[[bindings]]
+id = "emerald:audio/song/mus-move-deleted"
+symbol = "mus_move_deleted_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-move-deleted.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 224
+
+[[bindings]]
+id = "emerald:audio/song/mus-mt-chimney"
+symbol = "mus_mt_chimney_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-mt-chimney.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 9408
+
+[[bindings]]
+id = "emerald:audio/song/mus-mt-pyre"
+symbol = "mus_mt_pyre_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-mt-pyre.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 3252
+
+[[bindings]]
+id = "emerald:audio/song/mus-mt-pyre-exterior"
+symbol = "mus_mt_pyre_exterior_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-mt-pyre-exterior.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 8788
+
+[[bindings]]
+id = "emerald:audio/song/mus-obtain-b-points"
+symbol = "mus_obtain_b_points_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-obtain-b-points.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 776
+
+[[bindings]]
+id = "emerald:audio/song/mus-obtain-badge"
+symbol = "mus_obtain_badge_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-obtain-badge.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 728
+
+[[bindings]]
+id = "emerald:audio/song/mus-obtain-berry"
+symbol = "mus_obtain_berry_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-obtain-berry.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 208
+
+[[bindings]]
+id = "emerald:audio/song/mus-obtain-item"
+symbol = "mus_obtain_item_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-obtain-item.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 336
+
+[[bindings]]
+id = "emerald:audio/song/mus-obtain-symbol"
+symbol = "mus_obtain_symbol_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-obtain-symbol.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 972
+
+[[bindings]]
+id = "emerald:audio/song/mus-obtain-tmhm"
+symbol = "mus_obtain_tmhm_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-obtain-tmhm.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 396
+
+[[bindings]]
+id = "emerald:audio/song/mus-oceanic-museum"
+symbol = "mus_oceanic_museum_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-oceanic-museum.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 3672
+
+[[bindings]]
+id = "emerald:audio/song/mus-oldale"
+symbol = "mus_oldale_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-oldale.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 2280
+
+[[bindings]]
+id = "emerald:audio/song/mus-petalburg"
+symbol = "mus_petalburg_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-petalburg.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 2756
+
+[[bindings]]
+id = "emerald:audio/song/mus-petalburg-woods"
+symbol = "mus_petalburg_woods_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-petalburg-woods.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 2348
+
+[[bindings]]
+id = "emerald:audio/song/mus-poke-center"
+symbol = "mus_poke_center_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-poke-center.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 3140
+
+[[bindings]]
+id = "emerald:audio/song/mus-poke-mart"
+symbol = "mus_poke_mart_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-poke-mart.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 4796
+
+[[bindings]]
+id = "emerald:audio/song/mus-rayquaza-appears"
+symbol = "mus_rayquaza_appears_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rayquaza-appears.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 1120
+
+[[bindings]]
+id = "emerald:audio/song/mus-register-match-call"
+symbol = "mus_register_match_call_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-register-match-call.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 276
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-berry-pick"
+symbol = "mus_rg_berry_pick_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-berry-pick.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 3888
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-caught"
+symbol = "mus_rg_caught_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-caught.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 1088
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-caught-intro"
+symbol = "mus_rg_caught_intro_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-caught-intro.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 888
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-celadon"
+symbol = "mus_rg_celadon_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-celadon.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 2936
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-cinnabar"
+symbol = "mus_rg_cinnabar_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-cinnabar.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 3792
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-credits"
+symbol = "mus_rg_credits_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-credits.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 16396
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-cycling"
+symbol = "mus_rg_cycling_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-cycling.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 3116
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-dex-rating"
+symbol = "mus_rg_dex_rating_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-dex-rating.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 504
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-encounter-boy"
+symbol = "mus_rg_encounter_boy_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-encounter-boy.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 1188
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-encounter-deoxys"
+symbol = "mus_rg_encounter_deoxys_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-encounter-deoxys.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 2376
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-encounter-girl"
+symbol = "mus_rg_encounter_girl_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-encounter-girl.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 960
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-encounter-gym-leader"
+symbol = "mus_rg_encounter_gym_leader_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-encounter-gym-leader.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 1088
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-encounter-rival"
+symbol = "mus_rg_encounter_rival_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-encounter-rival.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 2108
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-encounter-rocket"
+symbol = "mus_rg_encounter_rocket_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-encounter-rocket.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 956
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-follow-me"
+symbol = "mus_rg_follow_me_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-follow-me.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 1268
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-fuchsia"
+symbol = "mus_rg_fuchsia_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-fuchsia.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 2620
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-game-corner"
+symbol = "mus_rg_game_corner_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-game-corner.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 3900
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-game-freak"
+symbol = "mus_rg_game_freak_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-game-freak.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 2308
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-gym"
+symbol = "mus_rg_gym_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-gym.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 2560
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-hall-of-fame"
+symbol = "mus_rg_hall_of_fame_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-hall-of-fame.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 2752
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-heal"
+symbol = "mus_rg_heal_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-heal.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 60
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-intro-fight"
+symbol = "mus_rg_intro_fight_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-intro-fight.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 2832
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-jigglypuff"
+symbol = "mus_rg_jigglypuff_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-jigglypuff.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 652
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-lavender"
+symbol = "mus_rg_lavender_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-lavender.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 3368
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-mt-moon"
+symbol = "mus_rg_mt_moon_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-mt-moon.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 5188
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-mystery-gift"
+symbol = "mus_rg_mystery_gift_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-mystery-gift.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 1140
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-net-center"
+symbol = "mus_rg_net_center_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-net-center.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 2660
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-new-game-exit"
+symbol = "mus_rg_new_game_exit_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-new-game-exit.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 192
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-new-game-instruct"
+symbol = "mus_rg_new_game_instruct_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-new-game-instruct.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 116
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-new-game-intro"
+symbol = "mus_rg_new_game_intro_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-new-game-intro.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 484
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-oak"
+symbol = "mus_rg_oak_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-oak.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 2456
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-oak-lab"
+symbol = "mus_rg_oak_lab_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-oak-lab.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 1948
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-obtain-key-item"
+symbol = "mus_rg_obtain_key_item_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-obtain-key-item.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 508
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-pallet"
+symbol = "mus_rg_pallet_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-pallet.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 2132
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-pewter"
+symbol = "mus_rg_pewter_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-pewter.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 3824
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-photo"
+symbol = "mus_rg_photo_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-photo.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 356
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-poke-center"
+symbol = "mus_rg_poke_center_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-poke-center.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 2660
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-poke-flute"
+symbol = "mus_rg_poke_flute_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-poke-flute.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 424
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-poke-jump"
+symbol = "mus_rg_poke_jump_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-poke-jump.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 3960
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-poke-mansion"
+symbol = "mus_rg_poke_mansion_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-poke-mansion.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 4680
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-poke-tower"
+symbol = "mus_rg_poke_tower_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-poke-tower.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 2248
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-rival-exit"
+symbol = "mus_rg_rival_exit_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-rival-exit.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 2004
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-rocket-hideout"
+symbol = "mus_rg_rocket_hideout_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-rocket-hideout.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 7212
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-route1"
+symbol = "mus_rg_route1_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-route1.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 2692
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-route11"
+symbol = "mus_rg_route11_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-route11.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 3448
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-route24"
+symbol = "mus_rg_route24_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-route24.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 2152
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-route3"
+symbol = "mus_rg_route3_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-route3.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 3912
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-sevii-123"
+symbol = "mus_rg_sevii_123_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-sevii-123.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 3824
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-sevii-45"
+symbol = "mus_rg_sevii_45_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-sevii-45.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 4136
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-sevii-67"
+symbol = "mus_rg_sevii_67_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-sevii-67.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 3888
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-sevii-cave"
+symbol = "mus_rg_sevii_cave_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-sevii-cave.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 5120
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-sevii-dungeon"
+symbol = "mus_rg_sevii_dungeon_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-sevii-dungeon.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 4636
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-sevii-route"
+symbol = "mus_rg_sevii_route_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-sevii-route.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 3784
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-silph"
+symbol = "mus_rg_silph_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-silph.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 5888
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-slow-pallet"
+symbol = "mus_rg_slow_pallet_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-slow-pallet.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 2108
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-ss-anne"
+symbol = "mus_rg_ss_anne_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-ss-anne.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 4772
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-surf"
+symbol = "mus_rg_surf_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-surf.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 2412
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-teachy-tv-menu"
+symbol = "mus_rg_teachy_tv_menu_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-teachy-tv-menu.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 212
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-teachy-tv-show"
+symbol = "mus_rg_teachy_tv_show_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-teachy-tv-show.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 1268
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-title"
+symbol = "mus_rg_title_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-title.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 4220
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-trainer-tower"
+symbol = "mus_rg_trainer_tower_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-trainer-tower.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 2560
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-union-room"
+symbol = "mus_rg_union_room_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-union-room.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 3964
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-vermillion"
+symbol = "mus_rg_vermillion_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-vermillion.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 3608
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-victory-gym-leader"
+symbol = "mus_rg_victory_gym_leader_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-victory-gym-leader.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 3828
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-victory-road"
+symbol = "mus_rg_victory_road_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-victory-road.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 3384
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-victory-trainer"
+symbol = "mus_rg_victory_trainer_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-victory-trainer.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 4488
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-victory-wild"
+symbol = "mus_rg_victory_wild_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-victory-wild.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 1328
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-viridian-forest"
+symbol = "mus_rg_viridian_forest_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-viridian-forest.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 4636
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-vs-champion"
+symbol = "mus_rg_vs_champion_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-vs-champion.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 10200
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-vs-deoxys"
+symbol = "mus_rg_vs_deoxys_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-vs-deoxys.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 8616
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-vs-gym-leader"
+symbol = "mus_rg_vs_gym_leader_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-vs-gym-leader.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 6892
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-vs-legend"
+symbol = "mus_rg_vs_legend_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-vs-legend.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 4792
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-vs-mewtwo"
+symbol = "mus_rg_vs_mewtwo_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-vs-mewtwo.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 4464
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-vs-trainer"
+symbol = "mus_rg_vs_trainer_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-vs-trainer.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 11124
+
+[[bindings]]
+id = "emerald:audio/song/mus-rg-vs-wild"
+symbol = "mus_rg_vs_wild_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rg-vs-wild.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 4468
+
+[[bindings]]
+id = "emerald:audio/song/mus-roulette"
+symbol = "mus_roulette_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-roulette.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 1564
+
+[[bindings]]
+id = "emerald:audio/song/mus-route101"
+symbol = "mus_route101_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-route101.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 2272
+
+[[bindings]]
+id = "emerald:audio/song/mus-route104"
+symbol = "mus_route104_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-route104.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 5068
+
+[[bindings]]
+id = "emerald:audio/song/mus-route110"
+symbol = "mus_route110_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-route110.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 2940
+
+[[bindings]]
+id = "emerald:audio/song/mus-route111"
+symbol = "mus_route111_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-route111.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 3972
+
+[[bindings]]
+id = "emerald:audio/song/mus-route113"
+symbol = "mus_route113_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-route113.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 5956
+
+[[bindings]]
+id = "emerald:audio/song/mus-route119"
+symbol = "mus_route119_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-route119.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 7428
+
+[[bindings]]
+id = "emerald:audio/song/mus-route120"
+symbol = "mus_route120_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-route120.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 4760
+
+[[bindings]]
+id = "emerald:audio/song/mus-route122"
+symbol = "mus_route122_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-route122.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 3760
+
+[[bindings]]
+id = "emerald:audio/song/mus-rustboro"
+symbol = "mus_rustboro_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-rustboro.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 4852
+
+[[bindings]]
+id = "emerald:audio/song/mus-safari-zone"
+symbol = "mus_safari_zone_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-safari-zone.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 1932
+
+[[bindings]]
+id = "emerald:audio/song/mus-sailing"
+symbol = "mus_sailing_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-sailing.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 3592
+
+[[bindings]]
+id = "emerald:audio/song/mus-school"
+symbol = "mus_school_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-school.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 840
+
+[[bindings]]
+id = "emerald:audio/song/mus-sealed-chamber"
+symbol = "mus_sealed_chamber_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-sealed-chamber.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 2064
+
+[[bindings]]
+id = "emerald:audio/song/mus-slateport"
+symbol = "mus_slateport_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-slateport.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 7740
+
+[[bindings]]
+id = "emerald:audio/song/mus-slots-jackpot"
+symbol = "mus_slots_jackpot_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-slots-jackpot.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 556
+
+[[bindings]]
+id = "emerald:audio/song/mus-slots-win"
+symbol = "mus_slots_win_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-slots-win.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 320
+
+[[bindings]]
+id = "emerald:audio/song/mus-sootopolis"
+symbol = "mus_sootopolis_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-sootopolis.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 4336
+
+[[bindings]]
+id = "emerald:audio/song/mus-surf"
+symbol = "mus_surf_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-surf.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 3744
+
+[[bindings]]
+id = "emerald:audio/song/mus-title"
+symbol = "mus_title_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-title.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 11784
+
+[[bindings]]
+id = "emerald:audio/song/mus-too-bad"
+symbol = "mus_too_bad_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-too-bad.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 244
+
+[[bindings]]
+id = "emerald:audio/song/mus-trick-house"
+symbol = "mus_trick_house_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-trick-house.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 3812
+
+[[bindings]]
+id = "emerald:audio/song/mus-underwater"
+symbol = "mus_underwater_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-underwater.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 5648
+
+[[bindings]]
+id = "emerald:audio/song/mus-verdanturf"
+symbol = "mus_verdanturf_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-verdanturf.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 2756
+
+[[bindings]]
+id = "emerald:audio/song/mus-victory-aqua-magma"
+symbol = "mus_victory_aqua_magma_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-victory-aqua-magma.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 1232
+
+[[bindings]]
+id = "emerald:audio/song/mus-victory-gym-leader"
+symbol = "mus_victory_gym_leader_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-victory-gym-leader.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 3828
+
+[[bindings]]
+id = "emerald:audio/song/mus-victory-league"
+symbol = "mus_victory_league_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-victory-league.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 2964
+
+[[bindings]]
+id = "emerald:audio/song/mus-victory-road"
+symbol = "mus_victory_road_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-victory-road.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 5024
+
+[[bindings]]
+id = "emerald:audio/song/mus-victory-trainer"
+symbol = "mus_victory_trainer_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-victory-trainer.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 4488
+
+[[bindings]]
+id = "emerald:audio/song/mus-victory-wild"
+symbol = "mus_victory_wild_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-victory-wild.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 1328
+
+[[bindings]]
+id = "emerald:audio/song/mus-vs-aqua-magma"
+symbol = "mus_vs_aqua_magma_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-vs-aqua-magma.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 4712
+
+[[bindings]]
+id = "emerald:audio/song/mus-vs-aqua-magma-leader"
+symbol = "mus_vs_aqua_magma_leader_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-vs-aqua-magma-leader.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 3736
+
+[[bindings]]
+id = "emerald:audio/song/mus-vs-champion"
+symbol = "mus_vs_champion_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-vs-champion.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 3824
+
+[[bindings]]
+id = "emerald:audio/song/mus-vs-elite-four"
+symbol = "mus_vs_elite_four_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-vs-elite-four.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 3120
+
+[[bindings]]
+id = "emerald:audio/song/mus-vs-frontier-brain"
+symbol = "mus_vs_frontier_brain_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-vs-frontier-brain.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 10076
+
+[[bindings]]
+id = "emerald:audio/song/mus-vs-gym-leader"
+symbol = "mus_vs_gym_leader_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-vs-gym-leader.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 3632
+
+[[bindings]]
+id = "emerald:audio/song/mus-vs-kyogre-groudon"
+symbol = "mus_vs_kyogre_groudon_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-vs-kyogre-groudon.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 1768
+
+[[bindings]]
+id = "emerald:audio/song/mus-vs-mew"
+symbol = "mus_vs_mew_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-vs-mew.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 5300
+
+[[bindings]]
+id = "emerald:audio/song/mus-vs-rayquaza"
+symbol = "mus_vs_rayquaza_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-vs-rayquaza.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 1768
+
+[[bindings]]
+id = "emerald:audio/song/mus-vs-regi"
+symbol = "mus_vs_regi_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-vs-regi.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 2324
+
+[[bindings]]
+id = "emerald:audio/song/mus-vs-rival"
+symbol = "mus_vs_rival_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-vs-rival.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 3248
+
+[[bindings]]
+id = "emerald:audio/song/mus-vs-trainer"
+symbol = "mus_vs_trainer_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-vs-trainer.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 4260
+
+[[bindings]]
+id = "emerald:audio/song/mus-vs-wild"
+symbol = "mus_vs_wild_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-vs-wild.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 2768
+
+[[bindings]]
+id = "emerald:audio/song/mus-weather-groudon"
+symbol = "mus_weather_groudon_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/mus-weather-groudon.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 720
+
+[[bindings]]
+id = "emerald:audio/song/ph-choice-blend"
+symbol = "ph_choice_blend_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-choice-blend.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 28
+
+[[bindings]]
+id = "emerald:audio/song/ph-choice-held"
+symbol = "ph_choice_held_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-choice-held.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 36
+
+[[bindings]]
+id = "emerald:audio/song/ph-choice-solo"
+symbol = "ph_choice_solo_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-choice-solo.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 28
+
+[[bindings]]
+id = "emerald:audio/song/ph-cloth-blend"
+symbol = "ph_cloth_blend_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-cloth-blend.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 28
+
+[[bindings]]
+id = "emerald:audio/song/ph-cloth-held"
+symbol = "ph_cloth_held_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-cloth-held.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 36
+
+[[bindings]]
+id = "emerald:audio/song/ph-cloth-solo"
+symbol = "ph_cloth_solo_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-cloth-solo.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 28
+
+[[bindings]]
+id = "emerald:audio/song/ph-cure-blend"
+symbol = "ph_cure_blend_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-cure-blend.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 28
+
+[[bindings]]
+id = "emerald:audio/song/ph-cure-held"
+symbol = "ph_cure_held_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-cure-held.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 36
+
+[[bindings]]
+id = "emerald:audio/song/ph-cure-solo"
+symbol = "ph_cure_solo_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-cure-solo.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 28
+
+[[bindings]]
+id = "emerald:audio/song/ph-dress-blend"
+symbol = "ph_dress_blend_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-dress-blend.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 28
+
+[[bindings]]
+id = "emerald:audio/song/ph-dress-held"
+symbol = "ph_dress_held_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-dress-held.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 36
+
+[[bindings]]
+id = "emerald:audio/song/ph-dress-solo"
+symbol = "ph_dress_solo_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-dress-solo.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 28
+
+[[bindings]]
+id = "emerald:audio/song/ph-face-blend"
+symbol = "ph_face_blend_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-face-blend.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 28
+
+[[bindings]]
+id = "emerald:audio/song/ph-face-held"
+symbol = "ph_face_held_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-face-held.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 36
+
+[[bindings]]
+id = "emerald:audio/song/ph-face-solo"
+symbol = "ph_face_solo_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-face-solo.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 28
+
+[[bindings]]
+id = "emerald:audio/song/ph-fleece-blend"
+symbol = "ph_fleece_blend_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-fleece-blend.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 28
+
+[[bindings]]
+id = "emerald:audio/song/ph-fleece-held"
+symbol = "ph_fleece_held_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-fleece-held.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 36
+
+[[bindings]]
+id = "emerald:audio/song/ph-fleece-solo"
+symbol = "ph_fleece_solo_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-fleece-solo.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 28
+
+[[bindings]]
+id = "emerald:audio/song/ph-foot-blend"
+symbol = "ph_foot_blend_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-foot-blend.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 28
+
+[[bindings]]
+id = "emerald:audio/song/ph-foot-held"
+symbol = "ph_foot_held_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-foot-held.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 36
+
+[[bindings]]
+id = "emerald:audio/song/ph-foot-solo"
+symbol = "ph_foot_solo_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-foot-solo.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 28
+
+[[bindings]]
+id = "emerald:audio/song/ph-goat-blend"
+symbol = "ph_goat_blend_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-goat-blend.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 28
+
+[[bindings]]
+id = "emerald:audio/song/ph-goat-held"
+symbol = "ph_goat_held_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-goat-held.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 36
+
+[[bindings]]
+id = "emerald:audio/song/ph-goat-solo"
+symbol = "ph_goat_solo_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-goat-solo.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 28
+
+[[bindings]]
+id = "emerald:audio/song/ph-goose-blend"
+symbol = "ph_goose_blend_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-goose-blend.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 28
+
+[[bindings]]
+id = "emerald:audio/song/ph-goose-held"
+symbol = "ph_goose_held_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-goose-held.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 36
+
+[[bindings]]
+id = "emerald:audio/song/ph-goose-solo"
+symbol = "ph_goose_solo_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-goose-solo.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 28
+
+[[bindings]]
+id = "emerald:audio/song/ph-kit-blend"
+symbol = "ph_kit_blend_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-kit-blend.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 28
+
+[[bindings]]
+id = "emerald:audio/song/ph-kit-held"
+symbol = "ph_kit_held_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-kit-held.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 36
+
+[[bindings]]
+id = "emerald:audio/song/ph-kit-solo"
+symbol = "ph_kit_solo_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-kit-solo.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 28
+
+[[bindings]]
+id = "emerald:audio/song/ph-lot-blend"
+symbol = "ph_lot_blend_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-lot-blend.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 28
+
+[[bindings]]
+id = "emerald:audio/song/ph-lot-held"
+symbol = "ph_lot_held_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-lot-held.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 36
+
+[[bindings]]
+id = "emerald:audio/song/ph-lot-solo"
+symbol = "ph_lot_solo_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-lot-solo.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 28
+
+[[bindings]]
+id = "emerald:audio/song/ph-mouth-blend"
+symbol = "ph_mouth_blend_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-mouth-blend.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 28
+
+[[bindings]]
+id = "emerald:audio/song/ph-mouth-held"
+symbol = "ph_mouth_held_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-mouth-held.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 36
+
+[[bindings]]
+id = "emerald:audio/song/ph-mouth-solo"
+symbol = "ph_mouth_solo_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-mouth-solo.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 28
+
+[[bindings]]
+id = "emerald:audio/song/ph-nurse-blend"
+symbol = "ph_nurse_blend_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-nurse-blend.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 28
+
+[[bindings]]
+id = "emerald:audio/song/ph-nurse-held"
+symbol = "ph_nurse_held_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-nurse-held.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 36
+
+[[bindings]]
+id = "emerald:audio/song/ph-nurse-solo"
+symbol = "ph_nurse_solo_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-nurse-solo.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 28
+
+[[bindings]]
+id = "emerald:audio/song/ph-price-blend"
+symbol = "ph_price_blend_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-price-blend.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 28
+
+[[bindings]]
+id = "emerald:audio/song/ph-price-held"
+symbol = "ph_price_held_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-price-held.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 36
+
+[[bindings]]
+id = "emerald:audio/song/ph-price-solo"
+symbol = "ph_price_solo_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-price-solo.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 28
+
+[[bindings]]
+id = "emerald:audio/song/ph-strut-blend"
+symbol = "ph_strut_blend_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-strut-blend.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 28
+
+[[bindings]]
+id = "emerald:audio/song/ph-strut-held"
+symbol = "ph_strut_held_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-strut-held.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 36
+
+[[bindings]]
+id = "emerald:audio/song/ph-strut-solo"
+symbol = "ph_strut_solo_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-strut-solo.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 28
+
+[[bindings]]
+id = "emerald:audio/song/ph-thought-blend"
+symbol = "ph_thought_blend_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-thought-blend.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 28
+
+[[bindings]]
+id = "emerald:audio/song/ph-thought-held"
+symbol = "ph_thought_held_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-thought-held.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 36
+
+[[bindings]]
+id = "emerald:audio/song/ph-thought-solo"
+symbol = "ph_thought_solo_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-thought-solo.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 28
+
+[[bindings]]
+id = "emerald:audio/song/ph-trap-blend"
+symbol = "ph_trap_blend_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-trap-blend.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 28
+
+[[bindings]]
+id = "emerald:audio/song/ph-trap-held"
+symbol = "ph_trap_held_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-trap-held.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 36
+
+[[bindings]]
+id = "emerald:audio/song/ph-trap-solo"
+symbol = "ph_trap_solo_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/ph-trap-solo.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 28
+
+[[bindings]]
+id = "emerald:audio/song/se-a"
+symbol = "se_a_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-a.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 32
+
+[[bindings]]
+id = "emerald:audio/song/se-applause"
+symbol = "se_applause_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-applause.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 276
+
+[[bindings]]
+id = "emerald:audio/song/se-arena-timeup1"
+symbol = "se_arena_timeup1_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-arena-timeup1.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 52
+
+[[bindings]]
+id = "emerald:audio/song/se-arena-timeup2"
+symbol = "se_arena_timeup2_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-arena-timeup2.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 68
+
+[[bindings]]
+id = "emerald:audio/song/se-ball"
+symbol = "se_ball_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-ball.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 36
+
+[[bindings]]
+id = "emerald:audio/song/se-ball-bounce-1"
+symbol = "se_ball_bounce_1_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-ball-bounce-1.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 44
+
+[[bindings]]
+id = "emerald:audio/song/se-ball-bounce-2"
+symbol = "se_ball_bounce_2_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-ball-bounce-2.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 44
+
+[[bindings]]
+id = "emerald:audio/song/se-ball-bounce-3"
+symbol = "se_ball_bounce_3_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-ball-bounce-3.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 44
+
+[[bindings]]
+id = "emerald:audio/song/se-ball-bounce-4"
+symbol = "se_ball_bounce_4_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-ball-bounce-4.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 44
+
+[[bindings]]
+id = "emerald:audio/song/se-ball-open"
+symbol = "se_ball_open_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-ball-open.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 88
+
+[[bindings]]
+id = "emerald:audio/song/se-ball-throw"
+symbol = "se_ball_throw_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-ball-throw.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 64
+
+[[bindings]]
+id = "emerald:audio/song/se-ball-trade"
+symbol = "se_ball_trade_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-ball-trade.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 84
+
+[[bindings]]
+id = "emerald:audio/song/se-ball-tray-ball"
+symbol = "se_ball_tray_ball_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-ball-tray-ball.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 40
+
+[[bindings]]
+id = "emerald:audio/song/se-ball-tray-enter"
+symbol = "se_ball_tray_enter_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-ball-tray-enter.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 80
+
+[[bindings]]
+id = "emerald:audio/song/se-ball-tray-exit"
+symbol = "se_ball_tray_exit_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-ball-tray-exit.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 32
+
+[[bindings]]
+id = "emerald:audio/song/se-balloon-blue"
+symbol = "se_balloon_blue_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-balloon-blue.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 48
+
+[[bindings]]
+id = "emerald:audio/song/se-balloon-red"
+symbol = "se_balloon_red_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-balloon-red.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 48
+
+[[bindings]]
+id = "emerald:audio/song/se-balloon-yellow"
+symbol = "se_balloon_yellow_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-balloon-yellow.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 56
+
+[[bindings]]
+id = "emerald:audio/song/se-bang"
+symbol = "se_bang_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-bang.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 72
+
+[[bindings]]
+id = "emerald:audio/song/se-berry-blender"
+symbol = "se_berry_blender_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-berry-blender.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 40
+
+[[bindings]]
+id = "emerald:audio/song/se-bike-bell"
+symbol = "se_bike_bell_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-bike-bell.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 28
+
+[[bindings]]
+id = "emerald:audio/song/se-bike-hop"
+symbol = "se_bike_hop_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-bike-hop.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 36
+
+[[bindings]]
+id = "emerald:audio/song/se-boo"
+symbol = "se_boo_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-boo.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 36
+
+[[bindings]]
+id = "emerald:audio/song/se-breakable-door"
+symbol = "se_breakable_door_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-breakable-door.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 68
+
+[[bindings]]
+id = "emerald:audio/song/se-bridge-walk"
+symbol = "se_bridge_walk_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-bridge-walk.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 36
+
+[[bindings]]
+id = "emerald:audio/song/se-card"
+symbol = "se_card_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-card.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 96
+
+[[bindings]]
+id = "emerald:audio/song/se-click"
+symbol = "se_click_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-click.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 36
+
+[[bindings]]
+id = "emerald:audio/song/se-contest-condition-lose"
+symbol = "se_contest_condition_lose_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-contest-condition-lose.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 36
+
+[[bindings]]
+id = "emerald:audio/song/se-contest-curtain-fall"
+symbol = "se_contest_curtain_fall_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-contest-curtain-fall.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 104
+
+[[bindings]]
+id = "emerald:audio/song/se-contest-curtain-rise"
+symbol = "se_contest_curtain_rise_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-contest-curtain-rise.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 104
+
+[[bindings]]
+id = "emerald:audio/song/se-contest-heart"
+symbol = "se_contest_heart_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-contest-heart.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 32
+
+[[bindings]]
+id = "emerald:audio/song/se-contest-icon-change"
+symbol = "se_contest_icon_change_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-contest-icon-change.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 36
+
+[[bindings]]
+id = "emerald:audio/song/se-contest-icon-clear"
+symbol = "se_contest_icon_clear_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-contest-icon-clear.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 52
+
+[[bindings]]
+id = "emerald:audio/song/se-contest-mons-turn"
+symbol = "se_contest_mons_turn_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-contest-mons-turn.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 44
+
+[[bindings]]
+id = "emerald:audio/song/se-contest-place"
+symbol = "se_contest_place_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-contest-place.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 144
+
+[[bindings]]
+id = "emerald:audio/song/se-dex-page"
+symbol = "se_dex_page_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-dex-page.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 52
+
+[[bindings]]
+id = "emerald:audio/song/se-dex-scroll"
+symbol = "se_dex_scroll_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-dex-scroll.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 40
+
+[[bindings]]
+id = "emerald:audio/song/se-dex-search"
+symbol = "se_dex_search_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-dex-search.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 508
+
+[[bindings]]
+id = "emerald:audio/song/se-ding-dong"
+symbol = "se_ding_dong_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-ding-dong.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 96
+
+[[bindings]]
+id = "emerald:audio/song/se-door"
+symbol = "se_door_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-door.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 28
+
+[[bindings]]
+id = "emerald:audio/song/se-downpour"
+symbol = "se_downpour_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-downpour.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 60
+
+[[bindings]]
+id = "emerald:audio/song/se-downpour-stop"
+symbol = "se_downpour_stop_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-downpour-stop.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 64
+
+[[bindings]]
+id = "emerald:audio/song/se-e"
+symbol = "se_e_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-e.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 32
+
+[[bindings]]
+id = "emerald:audio/song/se-effective"
+symbol = "se_effective_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-effective.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 76
+
+[[bindings]]
+id = "emerald:audio/song/se-egg-hatch"
+symbol = "se_egg_hatch_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-egg-hatch.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 140
+
+[[bindings]]
+id = "emerald:audio/song/se-elevator"
+symbol = "se_elevator_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-elevator.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 64
+
+[[bindings]]
+id = "emerald:audio/song/se-escalator"
+symbol = "se_escalator_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-escalator.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 104
+
+[[bindings]]
+id = "emerald:audio/song/se-exit"
+symbol = "se_exit_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-exit.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 52
+
+[[bindings]]
+id = "emerald:audio/song/se-exp"
+symbol = "se_exp_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-exp.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 384
+
+[[bindings]]
+id = "emerald:audio/song/se-exp-max"
+symbol = "se_exp_max_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-exp-max.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 80
+
+[[bindings]]
+id = "emerald:audio/song/se-failure"
+symbol = "se_failure_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-failure.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 48
+
+[[bindings]]
+id = "emerald:audio/song/se-faint"
+symbol = "se_faint_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-faint.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 84
+
+[[bindings]]
+id = "emerald:audio/song/se-fall"
+symbol = "se_fall_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-fall.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 84
+
+[[bindings]]
+id = "emerald:audio/song/se-field-poison"
+symbol = "se_field_poison_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-field-poison.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 40
+
+[[bindings]]
+id = "emerald:audio/song/se-flee"
+symbol = "se_flee_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-flee.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 72
+
+[[bindings]]
+id = "emerald:audio/song/se-fu-zaku"
+symbol = "se_fu_zaku_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-fu-zaku.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 48
+
+[[bindings]]
+id = "emerald:audio/song/se-glass-flute"
+symbol = "se_glass_flute_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-glass-flute.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 60
+
+[[bindings]]
+id = "emerald:audio/song/se-i"
+symbol = "se_i_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-i.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 32
+
+[[bindings]]
+id = "emerald:audio/song/se-ice-break"
+symbol = "se_ice_break_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-ice-break.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 84
+
+[[bindings]]
+id = "emerald:audio/song/se-ice-crack"
+symbol = "se_ice_crack_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-ice-crack.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 60
+
+[[bindings]]
+id = "emerald:audio/song/se-ice-stairs"
+symbol = "se_ice_stairs_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-ice-stairs.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 60
+
+[[bindings]]
+id = "emerald:audio/song/se-intro-blast"
+symbol = "se_intro_blast_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-intro-blast.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 192
+
+[[bindings]]
+id = "emerald:audio/song/se-itemfinder"
+symbol = "se_itemfinder_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-itemfinder.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 80
+
+[[bindings]]
+id = "emerald:audio/song/se-lavaridge-fall-warp"
+symbol = "se_lavaridge_fall_warp_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-lavaridge-fall-warp.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 76
+
+[[bindings]]
+id = "emerald:audio/song/se-ledge"
+symbol = "se_ledge_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-ledge.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 36
+
+[[bindings]]
+id = "emerald:audio/song/se-low-health"
+symbol = "se_low_health_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-low-health.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 44
+
+[[bindings]]
+id = "emerald:audio/song/se-m-absorb"
+symbol = "se_m_absorb_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-absorb.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 84
+
+[[bindings]]
+id = "emerald:audio/song/se-m-absorb-2"
+symbol = "se_m_absorb_2_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-absorb-2.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 188
+
+[[bindings]]
+id = "emerald:audio/song/se-m-acid-armor"
+symbol = "se_m_acid_armor_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-acid-armor.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 284
+
+[[bindings]]
+id = "emerald:audio/song/se-m-attract"
+symbol = "se_m_attract_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-attract.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 152
+
+[[bindings]]
+id = "emerald:audio/song/se-m-attract2"
+symbol = "se_m_attract2_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-attract2.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 152
+
+[[bindings]]
+id = "emerald:audio/song/se-m-barrier"
+symbol = "se_m_barrier_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-barrier.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 416
+
+[[bindings]]
+id = "emerald:audio/song/se-m-baton-pass"
+symbol = "se_m_baton_pass_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-baton-pass.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 220
+
+[[bindings]]
+id = "emerald:audio/song/se-m-belly-drum"
+symbol = "se_m_belly_drum_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-belly-drum.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 64
+
+[[bindings]]
+id = "emerald:audio/song/se-m-bind"
+symbol = "se_m_bind_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-bind.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 88
+
+[[bindings]]
+id = "emerald:audio/song/se-m-bite"
+symbol = "se_m_bite_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-bite.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 128
+
+[[bindings]]
+id = "emerald:audio/song/se-m-blizzard"
+symbol = "se_m_blizzard_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-blizzard.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 124
+
+[[bindings]]
+id = "emerald:audio/song/se-m-blizzard2"
+symbol = "se_m_blizzard2_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-blizzard2.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 76
+
+[[bindings]]
+id = "emerald:audio/song/se-m-bonemerang"
+symbol = "se_m_bonemerang_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-bonemerang.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 56
+
+[[bindings]]
+id = "emerald:audio/song/se-m-brick-break"
+symbol = "se_m_brick_break_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-brick-break.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 120
+
+[[bindings]]
+id = "emerald:audio/song/se-m-bubble"
+symbol = "se_m_bubble_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-bubble.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 52
+
+[[bindings]]
+id = "emerald:audio/song/se-m-bubble-beam"
+symbol = "se_m_bubble_beam_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-bubble-beam.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 196
+
+[[bindings]]
+id = "emerald:audio/song/se-m-bubble-beam2"
+symbol = "se_m_bubble_beam2_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-bubble-beam2.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 188
+
+[[bindings]]
+id = "emerald:audio/song/se-m-bubble2"
+symbol = "se_m_bubble2_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-bubble2.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 56
+
+[[bindings]]
+id = "emerald:audio/song/se-m-bubble3"
+symbol = "se_m_bubble3_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-bubble3.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 60
+
+[[bindings]]
+id = "emerald:audio/song/se-m-charge"
+symbol = "se_m_charge_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-charge.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 240
+
+[[bindings]]
+id = "emerald:audio/song/se-m-charm"
+symbol = "se_m_charm_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-charm.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 124
+
+[[bindings]]
+id = "emerald:audio/song/se-m-comet-punch"
+symbol = "se_m_comet_punch_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-comet-punch.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 84
+
+[[bindings]]
+id = "emerald:audio/song/se-m-confuse-ray"
+symbol = "se_m_confuse_ray_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-confuse-ray.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 140
+
+[[bindings]]
+id = "emerald:audio/song/se-m-cosmic-power"
+symbol = "se_m_cosmic_power_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-cosmic-power.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 284
+
+[[bindings]]
+id = "emerald:audio/song/se-m-crabhammer"
+symbol = "se_m_crabhammer_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-crabhammer.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 56
+
+[[bindings]]
+id = "emerald:audio/song/se-m-cut"
+symbol = "se_m_cut_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-cut.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 132
+
+[[bindings]]
+id = "emerald:audio/song/se-m-detect"
+symbol = "se_m_detect_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-detect.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 108
+
+[[bindings]]
+id = "emerald:audio/song/se-m-dig"
+symbol = "se_m_dig_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-dig.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 72
+
+[[bindings]]
+id = "emerald:audio/song/se-m-dive"
+symbol = "se_m_dive_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-dive.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 156
+
+[[bindings]]
+id = "emerald:audio/song/se-m-dizzy-punch"
+symbol = "se_m_dizzy_punch_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-dizzy-punch.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 96
+
+[[bindings]]
+id = "emerald:audio/song/se-m-double-slap"
+symbol = "se_m_double_slap_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-double-slap.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 52
+
+[[bindings]]
+id = "emerald:audio/song/se-m-double-team"
+symbol = "se_m_double_team_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-double-team.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 76
+
+[[bindings]]
+id = "emerald:audio/song/se-m-dragon-rage"
+symbol = "se_m_dragon_rage_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-dragon-rage.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 200
+
+[[bindings]]
+id = "emerald:audio/song/se-m-earthquake"
+symbol = "se_m_earthquake_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-earthquake.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 520
+
+[[bindings]]
+id = "emerald:audio/song/se-m-ember"
+symbol = "se_m_ember_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-ember.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 56
+
+[[bindings]]
+id = "emerald:audio/song/se-m-encore"
+symbol = "se_m_encore_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-encore.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 52
+
+[[bindings]]
+id = "emerald:audio/song/se-m-encore2"
+symbol = "se_m_encore2_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-encore2.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 216
+
+[[bindings]]
+id = "emerald:audio/song/se-m-explosion"
+symbol = "se_m_explosion_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-explosion.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 140
+
+[[bindings]]
+id = "emerald:audio/song/se-m-faint-attack"
+symbol = "se_m_faint_attack_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-faint-attack.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 100
+
+[[bindings]]
+id = "emerald:audio/song/se-m-fire-punch"
+symbol = "se_m_fire_punch_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-fire-punch.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 164
+
+[[bindings]]
+id = "emerald:audio/song/se-m-flame-wheel"
+symbol = "se_m_flame_wheel_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-flame-wheel.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 136
+
+[[bindings]]
+id = "emerald:audio/song/se-m-flame-wheel2"
+symbol = "se_m_flame_wheel2_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-flame-wheel2.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 112
+
+[[bindings]]
+id = "emerald:audio/song/se-m-flamethrower"
+symbol = "se_m_flamethrower_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-flamethrower.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 212
+
+[[bindings]]
+id = "emerald:audio/song/se-m-flatter"
+symbol = "se_m_flatter_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-flatter.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 72
+
+[[bindings]]
+id = "emerald:audio/song/se-m-fly"
+symbol = "se_m_fly_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-fly.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 356
+
+[[bindings]]
+id = "emerald:audio/song/se-m-giga-drain"
+symbol = "se_m_giga_drain_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-giga-drain.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 100
+
+[[bindings]]
+id = "emerald:audio/song/se-m-grasswhistle"
+symbol = "se_m_grasswhistle_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-grasswhistle.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 148
+
+[[bindings]]
+id = "emerald:audio/song/se-m-gust"
+symbol = "se_m_gust_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-gust.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 124
+
+[[bindings]]
+id = "emerald:audio/song/se-m-gust2"
+symbol = "se_m_gust2_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-gust2.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 76
+
+[[bindings]]
+id = "emerald:audio/song/se-m-hail"
+symbol = "se_m_hail_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-hail.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 116
+
+[[bindings]]
+id = "emerald:audio/song/se-m-harden"
+symbol = "se_m_harden_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-harden.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 72
+
+[[bindings]]
+id = "emerald:audio/song/se-m-haze"
+symbol = "se_m_haze_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-haze.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 308
+
+[[bindings]]
+id = "emerald:audio/song/se-m-headbutt"
+symbol = "se_m_headbutt_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-headbutt.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 104
+
+[[bindings]]
+id = "emerald:audio/song/se-m-heal-bell"
+symbol = "se_m_heal_bell_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-heal-bell.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 80
+
+[[bindings]]
+id = "emerald:audio/song/se-m-heat-wave"
+symbol = "se_m_heat_wave_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-heat-wave.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 260
+
+[[bindings]]
+id = "emerald:audio/song/se-m-horn-attack"
+symbol = "se_m_horn_attack_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-horn-attack.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 76
+
+[[bindings]]
+id = "emerald:audio/song/se-m-hydro-pump"
+symbol = "se_m_hydro_pump_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-hydro-pump.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 132
+
+[[bindings]]
+id = "emerald:audio/song/se-m-hyper-beam"
+symbol = "se_m_hyper_beam_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-hyper-beam.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 92
+
+[[bindings]]
+id = "emerald:audio/song/se-m-hyper-beam2"
+symbol = "se_m_hyper_beam2_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-hyper-beam2.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 132
+
+[[bindings]]
+id = "emerald:audio/song/se-m-icy-wind"
+symbol = "se_m_icy_wind_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-icy-wind.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 76
+
+[[bindings]]
+id = "emerald:audio/song/se-m-jump-kick"
+symbol = "se_m_jump_kick_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-jump-kick.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 76
+
+[[bindings]]
+id = "emerald:audio/song/se-m-leer"
+symbol = "se_m_leer_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-leer.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 124
+
+[[bindings]]
+id = "emerald:audio/song/se-m-lick"
+symbol = "se_m_lick_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-lick.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 180
+
+[[bindings]]
+id = "emerald:audio/song/se-m-lock-on"
+symbol = "se_m_lock_on_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-lock-on.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 80
+
+[[bindings]]
+id = "emerald:audio/song/se-m-mega-kick"
+symbol = "se_m_mega_kick_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-mega-kick.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 200
+
+[[bindings]]
+id = "emerald:audio/song/se-m-mega-kick2"
+symbol = "se_m_mega_kick2_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-mega-kick2.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 164
+
+[[bindings]]
+id = "emerald:audio/song/se-m-metronome"
+symbol = "se_m_metronome_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-metronome.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 92
+
+[[bindings]]
+id = "emerald:audio/song/se-m-milk-drink"
+symbol = "se_m_milk_drink_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-milk-drink.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 172
+
+[[bindings]]
+id = "emerald:audio/song/se-m-minimize"
+symbol = "se_m_minimize_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-minimize.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 224
+
+[[bindings]]
+id = "emerald:audio/song/se-m-mist"
+symbol = "se_m_mist_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-mist.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 120
+
+[[bindings]]
+id = "emerald:audio/song/se-m-moonlight"
+symbol = "se_m_moonlight_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-moonlight.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 296
+
+[[bindings]]
+id = "emerald:audio/song/se-m-morning-sun"
+symbol = "se_m_morning_sun_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-morning-sun.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 168
+
+[[bindings]]
+id = "emerald:audio/song/se-m-nightmare"
+symbol = "se_m_nightmare_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-nightmare.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 196
+
+[[bindings]]
+id = "emerald:audio/song/se-m-pay-day"
+symbol = "se_m_pay_day_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-pay-day.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 132
+
+[[bindings]]
+id = "emerald:audio/song/se-m-perish-song"
+symbol = "se_m_perish_song_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-perish-song.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 272
+
+[[bindings]]
+id = "emerald:audio/song/se-m-petal-dance"
+symbol = "se_m_petal_dance_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-petal-dance.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 276
+
+[[bindings]]
+id = "emerald:audio/song/se-m-poison-powder"
+symbol = "se_m_poison_powder_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-poison-powder.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 60
+
+[[bindings]]
+id = "emerald:audio/song/se-m-psybeam"
+symbol = "se_m_psybeam_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-psybeam.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 164
+
+[[bindings]]
+id = "emerald:audio/song/se-m-psybeam2"
+symbol = "se_m_psybeam2_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-psybeam2.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 340
+
+[[bindings]]
+id = "emerald:audio/song/se-m-rain-dance"
+symbol = "se_m_rain_dance_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-rain-dance.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 120
+
+[[bindings]]
+id = "emerald:audio/song/se-m-razor-wind"
+symbol = "se_m_razor_wind_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-razor-wind.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 100
+
+[[bindings]]
+id = "emerald:audio/song/se-m-razor-wind2"
+symbol = "se_m_razor_wind2_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-razor-wind2.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 64
+
+[[bindings]]
+id = "emerald:audio/song/se-m-reflect"
+symbol = "se_m_reflect_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-reflect.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 400
+
+[[bindings]]
+id = "emerald:audio/song/se-m-reversal"
+symbol = "se_m_reversal_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-reversal.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 508
+
+[[bindings]]
+id = "emerald:audio/song/se-m-rock-throw"
+symbol = "se_m_rock_throw_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-rock-throw.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 72
+
+[[bindings]]
+id = "emerald:audio/song/se-m-sacred-fire"
+symbol = "se_m_sacred_fire_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-sacred-fire.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 120
+
+[[bindings]]
+id = "emerald:audio/song/se-m-sacred-fire2"
+symbol = "se_m_sacred_fire2_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-sacred-fire2.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 224
+
+[[bindings]]
+id = "emerald:audio/song/se-m-sand-attack"
+symbol = "se_m_sand_attack_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-sand-attack.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 104
+
+[[bindings]]
+id = "emerald:audio/song/se-m-sand-tomb"
+symbol = "se_m_sand_tomb_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-sand-tomb.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 256
+
+[[bindings]]
+id = "emerald:audio/song/se-m-sandstorm"
+symbol = "se_m_sandstorm_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-sandstorm.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 372
+
+[[bindings]]
+id = "emerald:audio/song/se-m-scratch"
+symbol = "se_m_scratch_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-scratch.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 72
+
+[[bindings]]
+id = "emerald:audio/song/se-m-screech"
+symbol = "se_m_screech_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-screech.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 128
+
+[[bindings]]
+id = "emerald:audio/song/se-m-self-destruct"
+symbol = "se_m_self_destruct_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-self-destruct.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 76
+
+[[bindings]]
+id = "emerald:audio/song/se-m-sing"
+symbol = "se_m_sing_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-sing.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 248
+
+[[bindings]]
+id = "emerald:audio/song/se-m-sketch"
+symbol = "se_m_sketch_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-sketch.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 76
+
+[[bindings]]
+id = "emerald:audio/song/se-m-sky-uppercut"
+symbol = "se_m_sky_uppercut_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-sky-uppercut.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 116
+
+[[bindings]]
+id = "emerald:audio/song/se-m-snore"
+symbol = "se_m_snore_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-snore.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 104
+
+[[bindings]]
+id = "emerald:audio/song/se-m-solar-beam"
+symbol = "se_m_solar_beam_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-solar-beam.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 212
+
+[[bindings]]
+id = "emerald:audio/song/se-m-spit-up"
+symbol = "se_m_spit_up_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-spit-up.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 100
+
+[[bindings]]
+id = "emerald:audio/song/se-m-stat-decrease"
+symbol = "se_m_stat_decrease_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-stat-decrease.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 368
+
+[[bindings]]
+id = "emerald:audio/song/se-m-stat-increase"
+symbol = "se_m_stat_increase_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-stat-increase.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 384
+
+[[bindings]]
+id = "emerald:audio/song/se-m-strength"
+symbol = "se_m_strength_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-strength.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 104
+
+[[bindings]]
+id = "emerald:audio/song/se-m-string-shot"
+symbol = "se_m_string_shot_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-string-shot.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 84
+
+[[bindings]]
+id = "emerald:audio/song/se-m-string-shot2"
+symbol = "se_m_string_shot2_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-string-shot2.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 168
+
+[[bindings]]
+id = "emerald:audio/song/se-m-supersonic"
+symbol = "se_m_supersonic_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-supersonic.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 236
+
+[[bindings]]
+id = "emerald:audio/song/se-m-surf"
+symbol = "se_m_surf_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-surf.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 128
+
+[[bindings]]
+id = "emerald:audio/song/se-m-swagger"
+symbol = "se_m_swagger_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-swagger.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 88
+
+[[bindings]]
+id = "emerald:audio/song/se-m-swagger2"
+symbol = "se_m_swagger2_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-swagger2.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 56
+
+[[bindings]]
+id = "emerald:audio/song/se-m-sweet-scent"
+symbol = "se_m_sweet_scent_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-sweet-scent.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 240
+
+[[bindings]]
+id = "emerald:audio/song/se-m-swift"
+symbol = "se_m_swift_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-swift.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 144
+
+[[bindings]]
+id = "emerald:audio/song/se-m-swords-dance"
+symbol = "se_m_swords_dance_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-swords-dance.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 296
+
+[[bindings]]
+id = "emerald:audio/song/se-m-tail-whip"
+symbol = "se_m_tail_whip_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-tail-whip.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 64
+
+[[bindings]]
+id = "emerald:audio/song/se-m-take-down"
+symbol = "se_m_take_down_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-take-down.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 104
+
+[[bindings]]
+id = "emerald:audio/song/se-m-teeter-dance"
+symbol = "se_m_teeter_dance_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-teeter-dance.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 164
+
+[[bindings]]
+id = "emerald:audio/song/se-m-teleport"
+symbol = "se_m_teleport_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-teleport.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 224
+
+[[bindings]]
+id = "emerald:audio/song/se-m-thunder-wave"
+symbol = "se_m_thunder_wave_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-thunder-wave.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 132
+
+[[bindings]]
+id = "emerald:audio/song/se-m-thunderbolt"
+symbol = "se_m_thunderbolt_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-thunderbolt.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 152
+
+[[bindings]]
+id = "emerald:audio/song/se-m-thunderbolt2"
+symbol = "se_m_thunderbolt2_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-thunderbolt2.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 108
+
+[[bindings]]
+id = "emerald:audio/song/se-m-toxic"
+symbol = "se_m_toxic_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-toxic.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 108
+
+[[bindings]]
+id = "emerald:audio/song/se-m-tri-attack"
+symbol = "se_m_tri_attack_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-tri-attack.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 112
+
+[[bindings]]
+id = "emerald:audio/song/se-m-tri-attack2"
+symbol = "se_m_tri_attack2_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-tri-attack2.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 152
+
+[[bindings]]
+id = "emerald:audio/song/se-m-twister"
+symbol = "se_m_twister_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-twister.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 252
+
+[[bindings]]
+id = "emerald:audio/song/se-m-uproar"
+symbol = "se_m_uproar_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-uproar.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 92
+
+[[bindings]]
+id = "emerald:audio/song/se-m-vicegrip"
+symbol = "se_m_vicegrip_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-vicegrip.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 108
+
+[[bindings]]
+id = "emerald:audio/song/se-m-vital-throw"
+symbol = "se_m_vital_throw_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-vital-throw.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 84
+
+[[bindings]]
+id = "emerald:audio/song/se-m-vital-throw2"
+symbol = "se_m_vital_throw2_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-vital-throw2.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 128
+
+[[bindings]]
+id = "emerald:audio/song/se-m-waterfall"
+symbol = "se_m_waterfall_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-waterfall.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 180
+
+[[bindings]]
+id = "emerald:audio/song/se-m-whirlpool"
+symbol = "se_m_whirlpool_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-whirlpool.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 152
+
+[[bindings]]
+id = "emerald:audio/song/se-m-wing-attack"
+symbol = "se_m_wing_attack_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-wing-attack.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 156
+
+[[bindings]]
+id = "emerald:audio/song/se-m-yawn"
+symbol = "se_m_yawn_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-m-yawn.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 132
+
+[[bindings]]
+id = "emerald:audio/song/se-mud-ball"
+symbol = "se_mud_ball_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-mud-ball.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 48
+
+[[bindings]]
+id = "emerald:audio/song/se-mugshot"
+symbol = "se_mugshot_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-mugshot.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 236
+
+[[bindings]]
+id = "emerald:audio/song/se-n"
+symbol = "se_n_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-n.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 32
+
+[[bindings]]
+id = "emerald:audio/song/se-not-effective"
+symbol = "se_not_effective_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-not-effective.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 48
+
+[[bindings]]
+id = "emerald:audio/song/se-note-a"
+symbol = "se_note_a_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-note-a.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 56
+
+[[bindings]]
+id = "emerald:audio/song/se-note-b"
+symbol = "se_note_b_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-note-b.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 56
+
+[[bindings]]
+id = "emerald:audio/song/se-note-c"
+symbol = "se_note_c_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-note-c.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 56
+
+[[bindings]]
+id = "emerald:audio/song/se-note-c-high"
+symbol = "se_note_c_high_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-note-c-high.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 56
+
+[[bindings]]
+id = "emerald:audio/song/se-note-d"
+symbol = "se_note_d_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-note-d.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 56
+
+[[bindings]]
+id = "emerald:audio/song/se-note-e"
+symbol = "se_note_e_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-note-e.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 56
+
+[[bindings]]
+id = "emerald:audio/song/se-note-f"
+symbol = "se_note_f_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-note-f.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 56
+
+[[bindings]]
+id = "emerald:audio/song/se-note-g"
+symbol = "se_note_g_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-note-g.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 56
+
+[[bindings]]
+id = "emerald:audio/song/se-o"
+symbol = "se_o_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-o.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 32
+
+[[bindings]]
+id = "emerald:audio/song/se-orb"
+symbol = "se_orb_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-orb.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 280
+
+[[bindings]]
+id = "emerald:audio/song/se-pc-login"
+symbol = "se_pc_login_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-pc-login.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 44
+
+[[bindings]]
+id = "emerald:audio/song/se-pc-off"
+symbol = "se_pc_off_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-pc-off.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 36
+
+[[bindings]]
+id = "emerald:audio/song/se-pc-on"
+symbol = "se_pc_on_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-pc-on.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 68
+
+[[bindings]]
+id = "emerald:audio/song/se-pike-curtain-close"
+symbol = "se_pike_curtain_close_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-pike-curtain-close.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 216
+
+[[bindings]]
+id = "emerald:audio/song/se-pike-curtain-open"
+symbol = "se_pike_curtain_open_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-pike-curtain-open.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 220
+
+[[bindings]]
+id = "emerald:audio/song/se-pin"
+symbol = "se_pin_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-pin.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 44
+
+[[bindings]]
+id = "emerald:audio/song/se-pokenav-call"
+symbol = "se_pokenav_call_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-pokenav-call.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 164
+
+[[bindings]]
+id = "emerald:audio/song/se-pokenav-hang-up"
+symbol = "se_pokenav_hang_up_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-pokenav-hang-up.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 96
+
+[[bindings]]
+id = "emerald:audio/song/se-pokenav-off"
+symbol = "se_pokenav_off_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-pokenav-off.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 104
+
+[[bindings]]
+id = "emerald:audio/song/se-pokenav-on"
+symbol = "se_pokenav_on_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-pokenav-on.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 104
+
+[[bindings]]
+id = "emerald:audio/song/se-puddle"
+symbol = "se_puddle_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-puddle.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 48
+
+[[bindings]]
+id = "emerald:audio/song/se-rain"
+symbol = "se_rain_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-rain.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 60
+
+[[bindings]]
+id = "emerald:audio/song/se-rain-stop"
+symbol = "se_rain_stop_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-rain-stop.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 64
+
+[[bindings]]
+id = "emerald:audio/song/se-repel"
+symbol = "se_repel_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-repel.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 44
+
+[[bindings]]
+id = "emerald:audio/song/se-rg-bag-cursor"
+symbol = "se_rg_bag_cursor_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-rg-bag-cursor.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 56
+
+[[bindings]]
+id = "emerald:audio/song/se-rg-bag-pocket"
+symbol = "se_rg_bag_pocket_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-rg-bag-pocket.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 68
+
+[[bindings]]
+id = "emerald:audio/song/se-rg-ball-click"
+symbol = "se_rg_ball_click_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-rg-ball-click.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 64
+
+[[bindings]]
+id = "emerald:audio/song/se-rg-card-flip"
+symbol = "se_rg_card_flip_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-rg-card-flip.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 44
+
+[[bindings]]
+id = "emerald:audio/song/se-rg-card-flipping"
+symbol = "se_rg_card_flipping_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-rg-card-flipping.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 56
+
+[[bindings]]
+id = "emerald:audio/song/se-rg-card-open"
+symbol = "se_rg_card_open_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-rg-card-open.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 144
+
+[[bindings]]
+id = "emerald:audio/song/se-rg-deoxys-move"
+symbol = "se_rg_deoxys_move_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-rg-deoxys-move.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 232
+
+[[bindings]]
+id = "emerald:audio/song/se-rg-door"
+symbol = "se_rg_door_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-rg-door.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 88
+
+[[bindings]]
+id = "emerald:audio/song/se-rg-help-close"
+symbol = "se_rg_help_close_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-rg-help-close.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 108
+
+[[bindings]]
+id = "emerald:audio/song/se-rg-help-error"
+symbol = "se_rg_help_error_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-rg-help-error.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 72
+
+[[bindings]]
+id = "emerald:audio/song/se-rg-help-open"
+symbol = "se_rg_help_open_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-rg-help-open.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 112
+
+[[bindings]]
+id = "emerald:audio/song/se-rg-poke-jump-failure"
+symbol = "se_rg_poke_jump_failure_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-rg-poke-jump-failure.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 48
+
+[[bindings]]
+id = "emerald:audio/song/se-rg-poke-jump-success"
+symbol = "se_rg_poke_jump_success_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-rg-poke-jump-success.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 188
+
+[[bindings]]
+id = "emerald:audio/song/se-rg-shop"
+symbol = "se_rg_shop_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-rg-shop.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 36
+
+[[bindings]]
+id = "emerald:audio/song/se-rg-ss-anne-horn"
+symbol = "se_rg_ss_anne_horn_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-rg-ss-anne-horn.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 188
+
+[[bindings]]
+id = "emerald:audio/song/se-rotating-gate"
+symbol = "se_rotating_gate_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-rotating-gate.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 60
+
+[[bindings]]
+id = "emerald:audio/song/se-roulette-ball"
+symbol = "se_roulette_ball_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-roulette-ball.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 32
+
+[[bindings]]
+id = "emerald:audio/song/se-roulette-ball2"
+symbol = "se_roulette_ball2_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-roulette-ball2.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 84
+
+[[bindings]]
+id = "emerald:audio/song/se-save"
+symbol = "se_save_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-save.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 72
+
+[[bindings]]
+id = "emerald:audio/song/se-select"
+symbol = "se_select_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-select.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 44
+
+[[bindings]]
+id = "emerald:audio/song/se-shiny"
+symbol = "se_shiny_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-shiny.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 124
+
+[[bindings]]
+id = "emerald:audio/song/se-ship"
+symbol = "se_ship_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-ship.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 84
+
+[[bindings]]
+id = "emerald:audio/song/se-shop"
+symbol = "se_shop_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-shop.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 60
+
+[[bindings]]
+id = "emerald:audio/song/se-sliding-door"
+symbol = "se_sliding_door_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-sliding-door.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 28
+
+[[bindings]]
+id = "emerald:audio/song/se-success"
+symbol = "se_success_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-success.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 32
+
+[[bindings]]
+id = "emerald:audio/song/se-sudowoodo-shake"
+symbol = "se_sudowoodo_shake_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-sudowoodo-shake.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 56
+
+[[bindings]]
+id = "emerald:audio/song/se-super-effective"
+symbol = "se_super_effective_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-super-effective.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 124
+
+[[bindings]]
+id = "emerald:audio/song/se-switch"
+symbol = "se_switch_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-switch.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 36
+
+[[bindings]]
+id = "emerald:audio/song/se-taillow-wing-flap"
+symbol = "se_taillow_wing_flap_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-taillow-wing-flap.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 152
+
+[[bindings]]
+id = "emerald:audio/song/se-thunder"
+symbol = "se_thunder_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-thunder.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 104
+
+[[bindings]]
+id = "emerald:audio/song/se-thunder2"
+symbol = "se_thunder2_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-thunder2.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 80
+
+[[bindings]]
+id = "emerald:audio/song/se-thunderstorm"
+symbol = "se_thunderstorm_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-thunderstorm.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 60
+
+[[bindings]]
+id = "emerald:audio/song/se-thunderstorm-stop"
+symbol = "se_thunderstorm_stop_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-thunderstorm-stop.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 64
+
+[[bindings]]
+id = "emerald:audio/song/se-truck-door"
+symbol = "se_truck_door_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-truck-door.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 56
+
+[[bindings]]
+id = "emerald:audio/song/se-truck-move"
+symbol = "se_truck_move_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-truck-move.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 176
+
+[[bindings]]
+id = "emerald:audio/song/se-truck-stop"
+symbol = "se_truck_stop_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-truck-stop.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 124
+
+[[bindings]]
+id = "emerald:audio/song/se-truck-unload"
+symbol = "se_truck_unload_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-truck-unload.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 36
+
+[[bindings]]
+id = "emerald:audio/song/se-u"
+symbol = "se_u_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-u.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 32
+
+[[bindings]]
+id = "emerald:audio/song/se-unlock"
+symbol = "se_unlock_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-unlock.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 72
+
+[[bindings]]
+id = "emerald:audio/song/se-use-item"
+symbol = "se_use_item_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-use-item.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 36
+
+[[bindings]]
+id = "emerald:audio/song/se-vend"
+symbol = "se_vend_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-vend.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 36
+
+[[bindings]]
+id = "emerald:audio/song/se-wall-hit"
+symbol = "se_wall_hit_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-wall-hit.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 28
+
+[[bindings]]
+id = "emerald:audio/song/se-warp-in"
+symbol = "se_warp_in_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-warp-in.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 56
+
+[[bindings]]
+id = "emerald:audio/song/se-warp-out"
+symbol = "se_warp_out_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-warp-out.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 64
+
+[[bindings]]
+id = "emerald:audio/song/se-win-open"
+symbol = "se_win_open_1"
+source_artifact = "resources/extraction/emerald/bpee01/audio/songs/se-win-open.bin"
+source_encoding = "raw"
+canonical_representation = "gba-mp2k-song-graph"
+expected_decoded_size = 28
 
 [[bindings]]
 id = "emerald:audio/voicegroup/abandoned-ship"

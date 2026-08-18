@@ -61,6 +61,18 @@ void HostMemoryRegisterLogicalAddress(uint32_t addr, void *hostBase);
 __attribute__((weak))
 #endif
 void HostMemoryClearLogicalAddresses(void);
+/* R12-D §5: the interval hook for the contiguous song block. Same weak
+ * pattern: strong definitions live in host_memory.c, absent in offline
+ * links. */
+#if defined(__GNUC__)
+__attribute__((weak))
+#endif
+void HostMemoryRegisterLogicalRange(uint32_t romStart, uint32_t romEnd,
+                                    void *hostBase);
+#if defined(__GNUC__)
+__attribute__((weak))
+#endif
+void HostMemoryClearLogicalRanges(void);
 
 /* R12-C §8 (minimal State-v5 forward-pull): the arena's runtime tables and
  * zones register into the shared R10 resource-range index so mid-play
@@ -149,18 +161,52 @@ struct EmeraldAudioStructuralRecord
     uint32_t transformOffset;/* voicegroups/cries only (block base incl. pad) */
 };
 
-/* One allocation: struct header + leaf table + structural table + the
- * 3,329,304-byte verbatim zone (holes zeroed, payloads + keysplit runs at
- * their ROM-relative offsets) + the transformed zone (contiguous after the
- * verbatim zone, 8-aligned). */
+/* R12-D song record: canonical identity + zone-relative placement. The song
+ * payloads themselves stay canonical GBA-form bytes in the verbatim zone;
+ * only the record table is seam-owned. */
+struct EmeraldAudioSongRecord
+{
+    char canonicalName[96];
+    uint32_t arenaOffset; /* romAddr - EMERALD_AUDIO_ROM_START */
+    uint32_t size;
+};
+
+/* Phase-1c scratch: the song record under validation plus the resolver view
+ * it proved byte-identical to. Sorted by arenaOffset before the tiling
+ * proof; phase 2 copies record + payload straight from the sorted array. */
+struct EmeraldAudioSongScratch
+{
+    struct EmeraldAudioSongRecord rec;
+    const uint8_t *payload;
+};
+
+static int CompareSongScratch(const void *a, const void *b)
+{
+    const struct EmeraldAudioSongScratch *sa =
+        (const struct EmeraldAudioSongScratch *)a;
+    const struct EmeraldAudioSongScratch *sb =
+        (const struct EmeraldAudioSongScratch *)b;
+    if (sa->rec.arenaOffset != sb->rec.arenaOffset)
+        return sa->rec.arenaOffset < sb->rec.arenaOffset ? -1 : 1;
+    if (sa->rec.size != sb->rec.size)
+        return sa->rec.size < sb->rec.size ? -1 : 1;
+    return strcmp(sa->rec.canonicalName, sb->rec.canonicalName);
+}
+
+/* One allocation: struct header + leaf table + structural table + song
+ * table + the 3,329,304-byte verbatim zone (holes zeroed, payloads +
+ * keysplit runs + the 530 song graphs at their ROM-relative offsets) + the
+ * transformed zone (contiguous after the verbatim zone, 8-aligned). */
 struct EmeraldAudioArena
 {
     size_t spanSize;            /* EMERALD_AUDIO_SPAN_SIZE */
     size_t publishedCount;      /* 569 leaves when published */
     size_t structuralCount;     /* 202 when published */
+    size_t publishedSongCount;  /* 530 when published */
     size_t payloadBytes;        /* sum of leaf payloads (diagnostics) */
     size_t leafTableOffset;     /* relative to bytes[] */
     size_t structuralTableOffset; /* relative to bytes[] */
+    size_t songTableOffset;     /* relative to bytes[] */
     size_t zoneOffset;          /* verbatim zone start, relative to bytes[] */
     size_t transformOffset;     /* transformed zone start, relative to bytes[] */
     size_t transformSize;       /* EMERALD_AUDIO_TRANSFORM_SIZE */
@@ -200,17 +246,41 @@ static const struct BackshiftPin kKeysplitBacks[EMERALD_AUDIO_KEYSPLIT_COUNT] =
     {"emerald:audio/keysplit/french-horn", 36u},
 };
 
-/* R12-C §8: the spans this seam registers into the shared range index: the
- * 197 transformed table blocks (195 voicegroups + 2 cry tables, each block
- * base INCLUDING its drumset back-shift pad) plus the verbatim zone (which
- * covers the keysplit runs and every leaf). Keysplits get no span of their
- * own - they are inside the verbatim zone. */
+/* R12-C §8 + R12-D §9: the spans this seam registers into the shared range
+ * index. The R10 index is NON-OVERLAPPING (InsertRange rejects any overlap),
+ * so the R12-C verbatim-zone span (which covered the whole zone, song block
+ * included) must SPLIT at the song block (docs/R12D_SONG_GRAPH_
+ * IMPLEMENTATION_PLAN.md §9): the leaf sub-zone span covers
+ * [ROM_START, SONG_BLOCK_START) (every leaf + keysplit run + unbacked holes;
+ * no leaf extends past 0x088FC03B, the block start is 0x088FC03C); the 530
+ * per-song spans tile [SONG_BLOCK_START, SONG_BLOCK_END) exactly; the 197
+ * transformed table blocks (195 voicegroups + 2 cry tables, each base
+ * INCLUDING its drumset back-shift pad) follow. The zone tail
+ * [SONG_BLOCK_END, SPAN_END) (3,428 B) is unbacked - hull-only, fail-closed
+ * on capture. Keysplits get no span of their own (inside the leaf sub-zone). */
 #define EMERALD_AUDIO_RANGE_SPAN_COUNT \
-    (EMERALD_AUDIO_VOICEGROUP_COUNT + EMERALD_AUDIO_CRY_TABLE_COUNT + 1u)
+    (1u + EMERALD_AUDIO_SONG_COUNT \
+     + EMERALD_AUDIO_VOICEGROUP_COUNT + EMERALD_AUDIO_CRY_TABLE_COUNT)
+#define EMERALD_AUDIO_SPAN_TRANSFORM_FIRST \
+    (1u + EMERALD_AUDIO_SONG_COUNT)
 
-/* The verbatim zone's synthetic canonical identity (sidecar records key
- * every captured arena pointer by its registered span's key; the zone is
- * one resource-owned span, not a pack entry). */
+/* Zone-relative song block placement: the plan §4 quoted 0x21BFA0, but
+ * 0x088FC03C - 0x0867709C is 0x284FA0 (and the block end is 0x32BFB4, not
+ * 0x32B614). The derived expression is the single source of truth - the
+ * literal is reproduced here only as a compile-time cross-check. */
+#define EMERALD_AUDIO_SONG_BLOCK_OFFSET \
+    (EMERALD_AUDIO_SONG_BLOCK_START - EMERALD_AUDIO_ROM_START)
+#if EMERALD_AUDIO_SONG_BLOCK_OFFSET != 0x284FA0u
+#error "song block zone offset disagrees with the verified 0x284FA0"
+#endif
+#if (EMERALD_AUDIO_SONG_BLOCK_END - EMERALD_AUDIO_ROM_START) != 0x32BFB4u
+#error "song block zone end disagrees with the verified 0x32BFB4"
+#endif
+
+/* The leaf sub-zone's synthetic canonical identity (sidecar records key
+ * every captured arena pointer by its registered span's key; the sub-zone is
+ * one resource-owned span, not a pack entry - R12-D narrowed it to
+ * [ROM_START, SONG_BLOCK_START), the tail is unbacked). */
 #define EMERALD_AUDIO_VERBATIM_CANONICAL "emerald:audio/verbatim-zone"
 
 /* The registered span list: kept so re-registration can verify that the
@@ -312,12 +382,34 @@ static void BuildArenaSpanList(void)
     const uint8_t *transformBase = sArena->bytes + sArena->transformOffset;
     size_t i, n = 0u;
 
+    /* R12-D §9: the verbatim zone splits at the song block. Span 0 is the
+     * LEAF SUB-ZONE [zoneBase, +SONG_BLOCK_OFFSET) - every leaf, keysplit
+     * run and hole below the song block (the last leaf ends 0x088FC03B,
+     * one byte before the block). The 3,428-byte zone tail past the song
+     * block end is intentionally UNBACKED (hull-only, fail-closed). */
     sAudioRanges[n].base = (uintptr_t)zoneBase;
-    sAudioRanges[n].length = sArena->spanSize;
+    sAudioRanges[n].length = EMERALD_AUDIO_SONG_BLOCK_OFFSET;
     sAudioRanges[n].canonicalName = EMERALD_AUDIO_VERBATIM_CANONICAL;
     Gen3ResourceId_DeriveKey(sAudioRanges[n].canonicalName,
                              &sAudioRanges[n].key);
     n++;
+    /* The 530 per-song spans, in arenaOffset order (phase 1c proved they
+     * tile [SONG_BLOCK_OFFSET, +SONG_BLOCK_SIZE) exactly - no gaps, no
+     * overlaps - so this sequence is already sorted by base). */
+    for (i = 0; i < sArena->publishedSongCount; i++)
+    {
+        const struct EmeraldAudioSongRecord *record =
+            (const struct EmeraldAudioSongRecord *)(const void *)
+                (sArena->bytes + sArena->songTableOffset
+                 + i * sizeof(struct EmeraldAudioSongRecord));
+        sAudioRanges[n].base =
+            (uintptr_t)(zoneBase + record->arenaOffset);
+        sAudioRanges[n].length = record->size;
+        sAudioRanges[n].canonicalName = record->canonicalName;
+        Gen3ResourceId_DeriveKey(sAudioRanges[n].canonicalName,
+                                 &sAudioRanges[n].key);
+        n++;
+    }
     for (i = 0; i < sArena->structuralCount; i++)
     {
         const struct EmeraldAudioStructuralRecord *record =
@@ -369,12 +461,17 @@ static bool RegisterArenaRanges(void)
     for (i = 0; i < sAudioRangeCount; i++)
     {
         uint32_t type = i == 0u ? GEN3_RESOURCE_TYPE_AUDIO_SAMPLE
-                                : GEN3_RESOURCE_TYPE_INSTRUMENT_BANK;
+                  : i < EMERALD_AUDIO_SPAN_TRANSFORM_FIRST
+                      ? GEN3_RESOURCE_TYPE_MUSIC_SEQUENCE
+                      : GEN3_RESOURCE_TYPE_INSTRUMENT_BANK;
+        enum EmeraldResourceRangeRole role = i == 0u
+                  ? EMERALD_RESOURCE_ROLE_CANONICAL
+                  : i < EMERALD_AUDIO_SPAN_TRANSFORM_FIRST
+                      ? EMERALD_RESOURCE_ROLE_CANONICAL
+                      : EMERALD_RESOURCE_ROLE_COMPAT_OBJECT;
         if (!EmeraldResourceRangeIndex_RegisterSpan(
                 index, sAudioRanges[i].base, sAudioRanges[i].length,
-                sAudioRanges[i].canonicalName, type, 1u,
-                i == 0u ? EMERALD_RESOURCE_ROLE_CANONICAL
-                        : EMERALD_RESOURCE_ROLE_COMPAT_OBJECT))
+                sAudioRanges[i].canonicalName, type, 1u, role))
             goto fail;
     }
     if (!EmeraldResourceRangeIndex_AddHull(
@@ -671,11 +768,14 @@ EmeraldAudioCompat_TryInitialize(
     enum EmeraldAudioCompatStatus result = EMERALD_AUDIO_OK;
     struct EmeraldAudioLeafRecord *records = NULL;
     struct EmeraldAudioStructuralRecord *structRecords = NULL;
+    struct EmeraldAudioSongScratch *songScratch = NULL;
     const uint8_t *payloads[EMERALD_AUDIO_LEAF_COUNT];
     struct EmeraldAudioArena *arena = NULL;
     size_t packCount;
     size_t count = 0;
     size_t payloadBytes = 0;
+    size_t songCount = 0;
+    size_t songTableBytes = 0;
     size_t rootCount = 0, phonemeCount = 0, cryCount = 0, waveCount = 0;
     size_t recordBytes;
     size_t structRecordBytes;
@@ -1125,9 +1225,15 @@ EmeraldAudioCompat_TryInitialize(
     recordBytes = EMERALD_AUDIO_LEAF_COUNT * sizeof(*records);
     structRecordBytes =
         EMERALD_AUDIO_STRUCTURAL_COUNT * sizeof(*structRecords);
-    zoneOffset = recordBytes + structRecordBytes;
+    songTableBytes =
+        EMERALD_AUDIO_SONG_COUNT * sizeof(struct EmeraldAudioSongRecord);
+    zoneOffset = recordBytes + structRecordBytes + songTableBytes;
     if (recordBytes / EMERALD_AUDIO_LEAF_COUNT != sizeof(*records)
-     || zoneOffset < recordBytes)
+     || songTableBytes / EMERALD_AUDIO_SONG_COUNT
+            != sizeof(struct EmeraldAudioSongRecord)
+     || zoneOffset < recordBytes
+     || zoneOffset < structRecordBytes
+     || zoneOffset < songTableBytes)
     {
         NoteFailure(diagnostics, "build", NULL,
                     GEN3_RESOURCE_TYPE_INSTRUMENT_BANK,
@@ -1267,8 +1373,225 @@ EmeraldAudioCompat_TryInitialize(
         }
     }
 
+    /* Phase 1c: validate the SONG GRAPH family (R12-D: exactly 530
+     * music-sequence resources, schema 1, canonical prefix
+     * "emerald:audio/song/"). Same resolution/ownership/size machinery as
+     * the leaves; then the records are sorted by arenaOffset and proven to
+     * TILE the song block exactly - first byte at the block start, zero
+     * inter-object gaps, last byte at the block end. The tile proof is the
+     * publish-time re-derivation of the generator's packed-object rule, so
+     * an unprovable boundary fails closed before any allocation. */
+    songScratch = (struct EmeraldAudioSongScratch *)calloc(
+        EMERALD_AUDIO_SONG_COUNT, sizeof(*songScratch));
+    if (songScratch == NULL)
+    {
+        NoteFailure(diagnostics, "build", NULL,
+                    GEN3_RESOURCE_TYPE_MUSIC_SEQUENCE,
+                    GEN3_RESOURCE_TYPE_INVALID, 1u, 0u, 0u, 0u, NULL);
+        result = EMERALD_AUDIO_ERR_OUT_OF_MEMORY;
+        goto done;
+    }
+    songCount = 0u;
+    for (i = 0; i < packCount; i++)
+    {
+        const struct Gen3ResourcePackEntry *entry =
+            Gen3ResourcePack_GetEntry(pack, i);
+        struct Gen3ResourceView view;
+        struct EmeraldAudioSongScratch *scratch;
+        Gen3ResourceHandle handle;
+        enum Gen3ResourceResult resolveResult;
+        uint64_t romAddr;
+        uint64_t arenaEnd;
+        uint32_t viewSize;
+        size_t j;
+
+        if (entry->type != GEN3_RESOURCE_TYPE_MUSIC_SEQUENCE)
+            continue;
+        if (entry->schema != 1u
+         || strncmp(entry->canonicalName, "emerald:audio/song/",
+                    sizeof("emerald:audio/song/") - 1u) != 0)
+        {
+            NoteFailure(diagnostics, "build", entry->canonicalName,
+                        GEN3_RESOURCE_TYPE_MUSIC_SEQUENCE, entry->type,
+                        1u, entry->schema, 0u, (uint32_t)entry->payloadSize,
+                        NULL);
+            result = EMERALD_AUDIO_ERR_UNEXPECTED_COUNT;
+            goto done;
+        }
+        if (songCount >= EMERALD_AUDIO_SONG_COUNT)
+        {
+            NoteFailure(diagnostics, "build", entry->canonicalName,
+                        GEN3_RESOURCE_TYPE_MUSIC_SEQUENCE, entry->type,
+                        1u, entry->schema, 0u, (uint32_t)entry->payloadSize,
+                        NULL);
+            result = EMERALD_AUDIO_ERR_UNEXPECTED_COUNT;
+            goto done;
+        }
+
+        resolveResult = Gen3ResourceSnapshot_FindHandle(
+            snapshot, entry->canonicalName, &handle);
+        if (resolveResult != GEN3_RESOURCE_OK)
+        {
+            NoteFailure(diagnostics, "resolve", entry->canonicalName,
+                        GEN3_RESOURCE_TYPE_MUSIC_SEQUENCE, entry->type,
+                        1u, entry->schema, 0u, (uint32_t)entry->payloadSize,
+                        NULL);
+            result = EMERALD_AUDIO_ERR_RESOLVE_FAILED;
+            goto done;
+        }
+        resolveResult = Gen3ResourceSnapshot_Resolve(
+            snapshot, handle, GEN3_RESOURCE_TYPE_MUSIC_SEQUENCE, 1u, &view);
+        if (resolveResult != GEN3_RESOURCE_OK || view.payload == NULL)
+        {
+            NoteFailure(diagnostics, "resolve", entry->canonicalName,
+                        GEN3_RESOURCE_TYPE_MUSIC_SEQUENCE, entry->type,
+                        1u, entry->schema, 0u, (uint32_t)entry->payloadSize,
+                        NULL);
+            result = EMERALD_AUDIO_ERR_RESOLVE_FAILED;
+            goto done;
+        }
+        if (strcmp(view.winningProviderId, EMERALD_ROM_BASE_PROVIDER_ID) != 0)
+        {
+            NoteFailure(diagnostics, "resolve", entry->canonicalName,
+                        GEN3_RESOURCE_TYPE_MUSIC_SEQUENCE, entry->type,
+                        1u, entry->schema, 0u, (uint32_t)entry->payloadSize,
+                        &view);
+            result = EMERALD_AUDIO_ERR_UNEXPECTED_OWNERSHIP;
+            goto done;
+        }
+        if (view.payloadSize != entry->payloadSize || entry->payload == NULL)
+        {
+            NoteFailure(diagnostics, "build", entry->canonicalName,
+                        GEN3_RESOURCE_TYPE_MUSIC_SEQUENCE, entry->type,
+                        1u, entry->schema, (uint32_t)entry->payloadSize,
+                        (uint32_t)view.payloadSize, &view);
+            result = EMERALD_AUDIO_ERR_PAYLOAD_SIZE_MISMATCH;
+            goto done;
+        }
+        if (memcmp(view.payload, entry->payload, view.payloadSize) != 0)
+        {
+            /* The resolver view must be byte-identical to the pack entry:
+             * the arena copies session bytes, never pack-only bytes. */
+            NoteFailure(diagnostics, "build", entry->canonicalName,
+                        GEN3_RESOURCE_TYPE_MUSIC_SEQUENCE, entry->type,
+                        1u, entry->schema, (uint32_t)entry->payloadSize,
+                        (uint32_t)view.payloadSize, &view);
+            result = EMERALD_AUDIO_ERR_PAYLOAD_SIZE_MISMATCH;
+            goto done;
+        }
+
+        /* Placement: inside the song block, so the ordinary
+         * romAddr - EMERALD_AUDIO_ROM_START lands in
+         * [SONG_BLOCK_OFFSET, +SONG_BLOCK_SIZE) and the zone offset never
+         * aliases a leaf. */
+        romAddr = (uint64_t)entry->sourceRomOffset + EMERALD_AUDIO_GBA_ROM_BASE;
+        viewSize = (uint32_t)view.payloadSize;
+        if (romAddr < EMERALD_AUDIO_SONG_BLOCK_START
+         || romAddr > EMERALD_AUDIO_SONG_BLOCK_END
+         || viewSize > (uint64_t)EMERALD_AUDIO_SONG_BLOCK_END - romAddr)
+        {
+            NoteFailure(diagnostics, "build", entry->canonicalName,
+                        GEN3_RESOURCE_TYPE_MUSIC_SEQUENCE, entry->type,
+                        1u, entry->schema, (uint32_t)entry->payloadSize,
+                        viewSize, &view);
+            result = EMERALD_AUDIO_ERR_PAYLOAD_SIZE_MISMATCH;
+            goto done;
+        }
+        arenaEnd = romAddr - EMERALD_AUDIO_ROM_START + viewSize;
+        if (arenaEnd > EMERALD_AUDIO_SPAN_SIZE)
+        {
+            /* Provably unreachable (block inside the zone) but the
+             * fail-closed check is the seam's job, not arithmetic luck. */
+            NoteFailure(diagnostics, "build", entry->canonicalName,
+                        GEN3_RESOURCE_TYPE_MUSIC_SEQUENCE, entry->type,
+                        1u, entry->schema, (uint32_t)entry->payloadSize,
+                        viewSize, &view);
+            result = EMERALD_AUDIO_ERR_PAYLOAD_SIZE_MISMATCH;
+            goto done;
+        }
+        /* No song may overlap a leaf payload: the generator's packed-object
+         * proof covers the block, and R12-B proved the leaves, but the seam
+         * re-derives the DISJOINTNESS at publish time (mirrors the keysplit
+         * hole check in phase 1b). */
+        for (j = 0; j < count; j++)
+        {
+            uint64_t leafStart = (uint64_t)EMERALD_AUDIO_ROM_START
+                               + records[j].arenaOffset;
+            uint64_t leafEnd = leafStart + records[j].size;
+            if (romAddr < leafEnd
+             && romAddr + viewSize > leafStart)
+            {
+                NoteFailure(diagnostics, "build", entry->canonicalName,
+                            GEN3_RESOURCE_TYPE_MUSIC_SEQUENCE, entry->type,
+                            1u, entry->schema, (uint32_t)entry->payloadSize,
+                            0u, NULL);
+                result = EMERALD_AUDIO_ERR_PAYLOAD_SIZE_MISMATCH;
+                goto done;
+            }
+        }
+
+        scratch = &songScratch[songCount];
+        snprintf(scratch->rec.canonicalName,
+                 sizeof(scratch->rec.canonicalName), "%s",
+                 entry->canonicalName);
+        scratch->rec.arenaOffset =
+            (uint32_t)(romAddr - EMERALD_AUDIO_ROM_START);
+        scratch->rec.size = viewSize;
+        scratch->payload = view.payload;
+        songCount++;
+    }
+    if (songCount != EMERALD_AUDIO_SONG_COUNT)
+    {
+        char buffer[160];
+        snprintf(buffer, sizeof(buffer), "%zu songs", songCount);
+        NoteFailure(diagnostics, "build", buffer,
+                    GEN3_RESOURCE_TYPE_MUSIC_SEQUENCE,
+                    GEN3_RESOURCE_TYPE_INVALID, 1u, 0u,
+                    EMERALD_AUDIO_SONG_COUNT, (uint32_t)songCount, NULL);
+        result = EMERALD_AUDIO_ERR_UNEXPECTED_COUNT;
+        goto done;
+    }
+    /* Tiling proof: the sorted records must start exactly at the block
+     * offset, continue back-to-back, and end exactly at the block end. */
+    qsort(songScratch, songCount, sizeof(*songScratch), CompareSongScratch);
+    {
+        uint64_t expected = EMERALD_AUDIO_SONG_BLOCK_OFFSET;
+        for (i = 0; i < songCount; i++)
+        {
+            if (songScratch[i].rec.arenaOffset != expected)
+            {
+                char buffer[160];
+                snprintf(buffer, sizeof(buffer), "%s @ %u (expected %llx)",
+                         songScratch[i].rec.canonicalName,
+                         songScratch[i].rec.arenaOffset,
+                         (unsigned long long)expected);
+                NoteFailure(diagnostics, "build", buffer,
+                            GEN3_RESOURCE_TYPE_MUSIC_SEQUENCE,
+                            GEN3_RESOURCE_TYPE_INVALID, 1u, 0u,
+                            EMERALD_AUDIO_SONG_BLOCK_SIZE,
+                            (uint32_t)songScratch[i].rec.size, NULL);
+                result = EMERALD_AUDIO_ERR_UNEXPECTED_COMPOSITION;
+                goto done;
+            }
+            expected += songScratch[i].rec.size;
+        }
+        if (expected
+            != (uint64_t)EMERALD_AUDIO_SONG_BLOCK_OFFSET
+               + EMERALD_AUDIO_SONG_BLOCK_SIZE)
+        {
+            NoteFailure(diagnostics, "build", "song block end",
+                        GEN3_RESOURCE_TYPE_MUSIC_SEQUENCE,
+                        GEN3_RESOURCE_TYPE_INVALID, 1u, 0u,
+                        EMERALD_AUDIO_SONG_BLOCK_SIZE,
+                        (uint32_t)(expected - EMERALD_AUDIO_SONG_BLOCK_OFFSET),
+                        NULL);
+            result = EMERALD_AUDIO_ERR_UNEXPECTED_COMPOSITION;
+            goto done;
+        }
+    }
+
     /* Phase 2: one allocation for the header + leaf table + structural
-     * table + verbatim zone + transformed zone. */
+     * table + song table + verbatim zone + transformed zone. */
     if (SIZE_MAX - sizeof(struct EmeraldAudioArena) < zoneOffset
      || SIZE_MAX - sizeof(struct EmeraldAudioArena) - zoneOffset
             < EMERALD_AUDIO_SPAN_SIZE
@@ -1297,9 +1620,11 @@ EmeraldAudioCompat_TryInitialize(
     arena->spanSize = EMERALD_AUDIO_SPAN_SIZE;
     arena->publishedCount = count;
     arena->structuralCount = structuralCount;
+    arena->publishedSongCount = songCount;
     arena->payloadBytes = payloadBytes;
     arena->leafTableOffset = 0u;
     arena->structuralTableOffset = recordBytes;
+    arena->songTableOffset = recordBytes + structRecordBytes;
     arena->zoneOffset = zoneOffset;
     arena->transformOffset = transformOffset;
     arena->transformSize = EMERALD_AUDIO_TRANSFORM_SIZE;
@@ -1309,6 +1634,18 @@ EmeraldAudioCompat_TryInitialize(
         const struct EmeraldAudioLeafRecord *record = &records[i];
         memcpy(arena->bytes + arena->zoneOffset + record->arenaOffset,
                payloads[i], record->size);
+    }
+    /* R12-D: the song record table + the canonical GBA-form payloads, in
+     * the phase-1c sorted order (tiled across the song block). The scratch
+     * struct embeds a payload pointer after the record, so the table copy
+     * is per-record, never a whole-scratch memcpy. */
+    for (i = 0; i < songCount; i++)
+    {
+        memcpy(arena->bytes + arena->songTableOffset
+                   + i * sizeof(struct EmeraldAudioSongRecord),
+               &songScratch[i].rec, sizeof(struct EmeraldAudioSongRecord));
+        memcpy(arena->bytes + arena->zoneOffset + songScratch[i].rec.arenaOffset,
+               songScratch[i].payload, songScratch[i].rec.size);
     }
     {
         const uint8_t *zoneBase = arena->bytes + arena->zoneOffset;
@@ -1414,6 +1751,19 @@ EmeraldAudioCompat_TryInitialize(
     if (HostMemoryClearLogicalAddresses != NULL)
         HostMemoryClearLogicalAddresses();
     EmeraldAudioCompat_ForEachLogicalLabel(RegisterLogicalLabel, NULL);
+    /* R12-D §5: ONE interval for the contiguous song block - every song
+     * address in [0x088FC03C, 0x089A3050) resolves identity-preservingly to
+     * the arena's canonical copy. Cleared + re-registered with every
+     * publish/republish (the arena base changes on a swap). */
+    if (HostMemoryClearLogicalRanges != NULL)
+        HostMemoryClearLogicalRanges();
+    if (HostMemoryRegisterLogicalRange != NULL)
+    {
+        const uint8_t *zoneBase = sArena->bytes + sArena->zoneOffset;
+        HostMemoryRegisterLogicalRange(
+            EMERALD_AUDIO_SONG_BLOCK_START, EMERALD_AUDIO_SONG_BLOCK_END,
+            (void *)(zoneBase + EMERALD_AUDIO_SONG_BLOCK_OFFSET));
+    }
     /* R12-C §8: register the arena's spans + hull into the shared R10
      * range index (mid-play saves capture arena pointers as sidecar
      * records). Failure is a degrade, not a publish failure: the arena is
@@ -1432,6 +1782,8 @@ done:
         free(records);
     if (structRecords != NULL)
         free(structRecords);
+    if (songScratch != NULL)
+        free(songScratch);
     if (arena != NULL)
         free(arena);
     return result;
@@ -1457,6 +1809,17 @@ EmeraldAudioCompat_Republish(struct EmeraldAudioCompatDiagnostics *diagnostics)
     if (HostMemoryClearLogicalAddresses != NULL)
         HostMemoryClearLogicalAddresses();
     EmeraldAudioCompat_ForEachLogicalLabel(RegisterLogicalLabel, NULL);
+    /* R12-D §5: re-register the song interval with the CURRENT arena base
+     * (a post-load trainer republish may have swapped the arena). */
+    if (HostMemoryClearLogicalRanges != NULL)
+        HostMemoryClearLogicalRanges();
+    if (HostMemoryRegisterLogicalRange != NULL)
+    {
+        const uint8_t *zoneBase = sArena->bytes + sArena->zoneOffset;
+        HostMemoryRegisterLogicalRange(
+            EMERALD_AUDIO_SONG_BLOCK_START, EMERALD_AUDIO_SONG_BLOCK_END,
+            (void *)(zoneBase + EMERALD_AUDIO_SONG_BLOCK_OFFSET));
+    }
     /* R12-C §8: re-register the spans + hull (a post-load trainer republish
      * may have reset the shared index, dropping our ranges - the
      * verify/re-register logic handles both that and the already-registered
@@ -1478,6 +1841,8 @@ void EmeraldAudioCompat_ClearMigratedEntries(void)
     UnregisterArenaRanges();
     if (HostMemoryClearLogicalAddresses != NULL)
         HostMemoryClearLogicalAddresses();
+    if (HostMemoryClearLogicalRanges != NULL)
+        HostMemoryClearLogicalRanges();
     if (sArena != NULL)
     {
         free(sArena);
@@ -1612,6 +1977,36 @@ bool EmeraldAudioCompat_GetLeafBytes(const char *canonicalName,
     if (outSize != NULL)
         *outSize = record->size;
     return true;
+}
+
+size_t EmeraldAudioCompat_GetSongCount(void)
+{
+    return sArena != NULL ? sArena->publishedSongCount : 0u;
+}
+
+bool EmeraldAudioCompat_GetSongSpan(const char *canonicalName,
+                                    size_t *outArenaOffset, size_t *outSize)
+{
+    size_t i;
+
+    if (sArena == NULL || canonicalName == NULL)
+        return false;
+    for (i = 0; i < sArena->publishedSongCount; i++)
+    {
+        const struct EmeraldAudioSongRecord *record =
+            (const struct EmeraldAudioSongRecord *)(const void *)
+                (sArena->bytes + sArena->songTableOffset
+                 + i * sizeof(struct EmeraldAudioSongRecord));
+        if (strcmp(record->canonicalName, canonicalName) == 0)
+        {
+            if (outArenaOffset != NULL)
+                *outArenaOffset = record->arenaOffset;
+            if (outSize != NULL)
+                *outSize = record->size;
+            return true;
+        }
+    }
+    return false;
 }
 
 bool EmeraldAudioCompat_GetVoicegroupSpan(const char *canonicalName,

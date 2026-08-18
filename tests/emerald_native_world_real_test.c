@@ -11,13 +11,15 @@
  * (emerald_native_world_overworld_stub.c) and this file.
  *
  * The session drive publishes the R11-C tileset + R11-D layout seams from the
- * production pack (games/emerald/base/emerald-bpee01-v1.rpack, 5087 entries:
+ * production pack (games/emerald/base/emerald-bpee01-v1.rpack, 5819 entries:
  * 196 trainer + 1608 Pokémon battle + 288 object-event + 1544 tileset + 882
- * layout + 569 R12-B audio leaves; the session covers all 6 family catalogs
- * = 5087) BEFORE NativeWorldNeighborhood_Init: the builder's
+ * layout + 569 R12-B audio leaves + 202 R12-C structurals + 530 R12-D song
+ * graphs; the session covers all 7 family catalogs = 5819) BEFORE
+ * NativeWorldNeighborhood_Init: the builder's
  * LayoutPublished gate requires every map's layout record to carry published
  * .map/.border and a published primary tileset (real blockdata + metatiles
- * from the pack).
+ * from the pack). Step 3b publishes the R12-D audio seam into the SAME
+ * range index (4,518 trainer ranges + 728 audio spans = 5,246 < 8,192).
  *
  * Tests (plan §11 Harness B): 1 (Littleroot<->Route101 both directions:
  * origins (0,-20)/(0,+20), Oldale), 9 (no-connection interior:
@@ -58,8 +60,10 @@
 #include "gen3/resources/toml.h"
 #include "gen3/resources/util.h"
 #include "emerald/resources/emerald_resource_compat.h"
+#include "emerald/resources/emerald_resource_ranges.h"
 #include "emerald/resources/emerald_resource_session.h"
 #include "emerald/resources/emerald_trainer_native_compat.h"
+#include "emerald/resources/emerald_audio_compat.h"
 
 static unsigned sChecks;
 static unsigned sFailures;
@@ -1042,8 +1046,8 @@ int main(int argc, char **argv)
         return 1;
     }
     Gen3ResourcePackDiagnostics_Destroy(&packDiag);
-    CHECK(Gen3ResourcePack_GetEntryCount(pack) == 5289u); /* 4518 + 569 audio leaves + 202 structural (R12-B/C) */
-    CHECK(Gen3ResourceCatalog_Count(catalog) == 5289u); /* + 569 audio leaves + 202 structural (R12-B/C) */
+    CHECK(Gen3ResourcePack_GetEntryCount(pack) == 5819u); /* 4518 + 569 audio leaves + 202 structural + 530 song graphs (R12-B/C/D) */
+    CHECK(Gen3ResourceCatalog_Count(catalog) == 5819u); /* + 569 audio leaves + 202 structural + 530 song graphs (R12-B/C/D) */
 
     /* 2. Build the production ROM_BASE candidate + snapshot (R11-C/D seams:
      * tilesets + layouts are published from this snapshot's streams). */
@@ -1067,7 +1071,7 @@ int main(int argc, char **argv)
     CHECK(strcmp(info.providerId, EMERALD_ROM_BASE_PROVIDER_ID) == 0);
     CHECK(info.precedence == EMERALD_ROM_BASE_PRECEDENCE);
     CHECK(strcmp(info.providerVersion, "v1") == 0);
-    CHECK(info.entryCount == 5289u); /* + 569 audio leaves + 202 structural (R12-B/C) */
+    CHECK(info.entryCount == 5819u); /* + 569 audio leaves + 202 structural + 530 song graphs (R12-B/C/D) */
 
     CHECK(Gen3ResourceCandidate_Build(candidate, &snapshot, &gdiag) && snapshot != NULL);
     Gen3ResourceDiagnostics_Destroy(&gdiag);
@@ -1085,6 +1089,55 @@ int main(int argc, char **argv)
     status = EmeraldResourceCompat_InitializeFromSnapshot(snapshot, &cdiag);
     CHECK(status == EMERALD_COMPAT_OK);
     CHECK(cdiag.stage[0] == '\0');
+
+    /* 3b. R12-D merged range-index proof (state-v5 REQUIRED): the trainer
+     * family's shared index carries 4,518 ranges after publication; the
+     * audio seam adds its 728 spans (1 verbatim-zone + 530 per-song +
+     * 197 transformed) on publish, and the 530 SONG spans are
+     * identity+offset ranges - the exact state-v5 shape. The song bytes
+     * round-trip through the index like a sidecar record: address lookup
+     * at the span base, then load-direction ResolveByKey back to the same
+     * arena bytes. */
+    {
+        struct EmeraldResourceRangeIndex *index =
+            EmeraldResourceCompat_GetRangeIndex();
+        struct EmeraldAudioCompatDiagnostics adiag;
+        struct EmeraldResourceRangeHit hit;
+        Gen3ResourceKey songKey;
+        uintptr_t resolvedPointer = 0u;
+        size_t songOff = 0u, songSize = 0u;
+        size_t mergedCount;
+        const uint8_t *arenaBase = NULL;
+        size_t arenaSize = 0u;
+        enum EmeraldAudioCompatStatus audioStatus;
+
+        CHECK(index != NULL);
+        mergedCount = EmeraldResourceRangeIndex_GetRangeCount(index);
+        CHECK(mergedCount == 4518u); /* 196+1608+288+1544+882 trainer family */
+        audioStatus = EmeraldAudioCompat_TryInitialize(snapshot, pack, &adiag);
+        CHECK(audioStatus == EMERALD_AUDIO_OK);
+        CHECK(EmeraldAudioCompat_GetSongCount() == EMERALD_AUDIO_SONG_COUNT);
+        mergedCount = EmeraldResourceRangeIndex_GetRangeCount(index);
+        CHECK(mergedCount == 5246u); /* 4518 + 728 audio spans */
+        CHECK(mergedCount < EMERALD_RESOURCE_RANGE_INDEX_MAX_RANGES);
+        CHECK(EmeraldAudioCompat_GetArena(&arenaBase, &arenaSize));
+        CHECK(EmeraldAudioCompat_GetSongSpan(
+                  "emerald:audio/song/mus-route101", &songOff, &songSize));
+        CHECK(songSize > 0u && songOff < arenaSize);
+        /* Address lookup: the span hit at its exact base carries the
+         * canonical role and offset 0. */
+        CHECK(EmeraldResourceRangeIndex_Lookup(
+                  index, (uintptr_t)(arenaBase + songOff), &hit));
+        CHECK(hit.rangeOffset == 0u);
+        CHECK(hit.role == EMERALD_RESOURCE_ROLE_CANONICAL);
+        /* Load direction: the sidecar record (key + identity + offset)
+         * materializes the very same arena bytes. */
+        Gen3ResourceId_DeriveKey("emerald:audio/song/mus-route101", &songKey);
+        CHECK(EmeraldResourceRangeIndex_ResolveByKey(
+                  index, &songKey, GEN3_RESOURCE_TYPE_MUSIC_SEQUENCE, 1u,
+                  EMERALD_RESOURCE_ROLE_CANONICAL, 0u, &resolvedPointer));
+        CHECK(resolvedPointer == (uintptr_t)(arenaBase + songOff));
+    }
 
     /* 4. The neighborhood module: Init AFTER publication (LayoutPublished). */
     NativeWorldNeighborhood_Init();

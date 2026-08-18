@@ -3,7 +3,7 @@
 # R12-B audio leaf ownership migration test runner (tests A-G).
 #
 #   A-G  tests/emerald_audio_compat_test.c against the REAL production pack:
-#        A counts (105/51/388/25 = 569 leaves, pack 5289 entries),
+#        A counts (105/51/388/25 = 569 leaves + 530 song graphs, pack 5819 entries),
 #        B exact extraction (arena bytes == pack payloads == ROM slice,
 #          every leaf inside the verbatim zone, no overlaps),
 #        C WaveData2 structural validation per sample,
@@ -13,7 +13,10 @@
 #          invalid arguments),
 #        G failure matrix (missing leaf, unresolvable leaf, wrong type,
 #          wrong schema, wrong size, corrupt payload, out-of-span
-#          placement, pack duplicate-key guard).
+#          placement, pack duplicate-key guard) + R12-D song-graph cases
+#          (renamed song, wrong song schema, misplaced song tiling gap,
+#          out-of-block song, unreferenced leaf into the song block,
+#          missing song).
 #   E    determinism/provenance re-proofs:
 #        - gen3-pack-build --check reproduces the committed production pack
 #          byte-for-byte from the 7 manifests + 7 catalogs;
@@ -60,7 +63,7 @@ if "$root/tools/gen3_resources/pack_build/gen3-pack-build" \
     --catalog "$root/resources/extraction/emerald/bpee01/layout/catalog.generated.toml" \
     --catalog "$audio/catalog.generated.toml" \
     --check > "$tmp/pack_check.log" 2>&1; then
-    pass "pack reproduces byte-for-byte (5289 entries)"
+    pass "pack reproduces byte-for-byte (5819 entries)"
 else
     fail "pack --check: $(tail -3 "$tmp/pack_check.log" | tr '\n' ' ')"
 fi

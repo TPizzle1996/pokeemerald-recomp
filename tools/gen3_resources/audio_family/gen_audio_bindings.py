@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""R12-B/C: Emerald audio extraction bindings generator.
+"""R12-B/C/D: Emerald audio extraction bindings generator.
 
 Reads the authoritative R12-A inventory
 (resources/extraction/emerald/bpee01/audio/inventory.generated.toml) and
@@ -10,7 +10,7 @@ bindings for the R1A manifest pipeline:
   * audio/bindings.generated.toml  - [[bindings]] id/symbol/artifact/raw/
                                      representation/exact size
 
-Two resource classes:
+Three resource classes:
 
   * 569 leaves (R12-B): 105 root + 51 phoneme + 388 cry samples, 25
     programmable waves - the artifact IS the canonical payload (the checked
@@ -21,6 +21,14 @@ Two resource classes:
     row width differs (24 B), the GBA-form artifact is synthesized into
     audio/structural/*.bin (gitignored; consumed only by the manifest's
     Guardrail 10, the pack slices the ROM directly).
+  * 530 songs (R12-D): MP2K song graphs, 684,052 B. Slice derivation is
+    the packed-object rule (8+4*trackCount per object, previous header end
+    == next object start, 0 mismatches over 7,740 track labels); every
+    graph is validated by the engine-faithful stream walker
+    (song_walker.py: running status, command widths, pattern stack, XCMD
+    subs, pinned totals). The GBA-form payload is synthesized into
+    audio/songs/<canonical>.bin (gitignored; consumed only by the
+    manifest's Guardrail 10, the pack slices the ROM directly).
 
 This stage performs the structural size derivation and the three-way
 provenance proof BEFORE the manifest tooling (which re-proves Guardrail 10
@@ -69,6 +77,9 @@ import sys
 import tomllib
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import song_walker
+
 GEN3_GBA_ROM_BASE = 0x08000000
 
 LEAF_KINDS = ("sample/root", "sample/phoneme", "sample/cry", "programmable-wave")
@@ -93,6 +104,277 @@ NO_SYMBOL_GROUPS = {
     "rg_unused": ("voicegroup174", 1536),
     "rg_unused_2": ("voicegroup174", 1836),
 }
+
+# ------------------------------------------------------------ R12-D songs
+
+# The 530-song MP2K block: one contiguous ELF section
+# [0x088FC03C, 0x089A3050) = 684,052 B, anchored by the R12-B leaf tail
+# (last leaf ends 0x088FC03A, `.align 2`) and the Sio32 data that begins
+# at 0x089A3050. Verified against the qualified reference ELF.
+SONG_BLOCK_START = 0x088FC03C
+SONG_BLOCK_END = 0x089A3050
+SONG_TABLE = "sound/song_table.inc"
+
+
+def parse_song_table(root):
+    """gSongTable rows in .inc order. Returns (real_rows, dummy_rows):
+    (symbol, ms, me, table_index) for the 530 real rows and the table
+    indices of the 80 `dummy_song_header` alias rows. The compiled
+    `dummy_song_header:` definition (4 zero bytes after the table) is
+    not a row. Table index counts every `song` row (the dummy block
+    sits mid-table: indices 270..349), so it must be tracked explicitly,
+    not derived from the real-row position."""
+    rows = []
+    dummy = []
+    idx = 0
+    for line in open(root / SONG_TABLE, encoding="utf-8"):
+        m = re.match(r"\s*song\s+(\w+)\s*,\s*(\d+)\s*,\s*(\d+)\s*$", line)
+        if not m:
+            continue
+        name, ms, me = m.group(1), int(m.group(2)), int(m.group(3))
+        if name == "dummy_song_header":
+            dummy.append(idx)
+        else:
+            rows.append((name, ms, me, idx))
+        idx += 1
+    if len(rows) != 530:
+        fail(f"{SONG_TABLE}: {len(rows)} real rows != 530")
+    if len(dummy) != 80:
+        fail(f"{SONG_TABLE}: {len(dummy)} dummy rows != 80")
+    return rows, dummy
+
+
+def resolve_songs(root, elf, rom, inventory, vg_addrs, outdir, args):
+    """Derives and validates the 530 song graphs. Slice derivation is the
+    R12-D packed-object rule: size = 8 + 4*trackCount (trackCount = ROM
+    byte 0 of the header), object start = previous object's header end,
+    the block [0x088FC03C, 0x089A3050) partitions exactly. Validates:
+    the label gate (530 global headers + 7,740 local track labels, every
+    local label inside its song's stream region, exactly one label at
+    every object start), the header fields (tone in the 197-label set,
+    parts interior/ascending/first == slice start), the engine-faithful
+    sweep + control-flow walk of every track (song_walker), the pinned
+    aggregate counts, and the gSongTable rows against the ROM table.
+    Returns [(key, kind, symbol, artifact, type, schema, rep, size,
+    rom_off, symbol_offset)] sorted by key, with the canonical payload
+    synthesized into outdir/songs/<canonical>.bin (gitignored; the
+    manifest's Guardrail 10 re-proves artifact == ELF == ROM)."""
+    songs = [r for r in inventory.values() if r["kind"] == "song"]
+    if len(songs) != 530:
+        fail(f"song count {len(songs)} != 530")
+    kinds = {}
+    for r in songs:
+        kinds[r["symbol"][:3]] = kinds.get(r["symbol"][:3], 0) + 1
+    if kinds != {"mus": 210, "se_": 269, "ph_": 51}:
+        fail(f"song family counts {kinds} != mus 210 / se 269 / ph 51")
+
+    by_addr = []
+    for r in songs:
+        sym = elf.find(r["symbol"])
+        if sym is None:
+            fail(f"song symbol {r['symbol']} not in the ELF")
+        by_addr.append((sym[1], r, sym))
+    by_addr.sort(key=lambda t: t[0])
+
+    # gSongTable row cross-check (the plan's row-by-row verification,
+    # re-proven against the retail ROM table here)
+    gs = elf.find("gSongTable")
+    if gs is None:
+        fail("gSongTable not in the ELF")
+    table_base = gs[1]
+    table_rows, dummy_rows = parse_song_table(root)
+    if len(table_rows) != len(by_addr):
+        fail(f"song table rows {len(table_rows)} != song symbols {len(by_addr)}")
+    dummy_addr = elf.find("dummy_song_header")
+    if dummy_addr is None:
+        fail("dummy_song_header not in the ELF")
+    dummy_addr = dummy_addr[1]
+    for (addr, r, _s), (name, ms, me, table_idx) in zip(by_addr, table_rows):
+        if r["symbol"] != name:
+            fail(f"gSongTable row {table_idx}: table order {name} != inventory "
+                 f"{r['symbol']}")
+        # table_idx is the row's position in the full table (the 80 dummy
+        # rows sit mid-table, so the real-row position is NOT the offset)
+        row_off = table_base - GEN3_GBA_ROM_BASE + table_idx * 8
+        hdr, rms, rme = struct.unpack_from("<IHH", rom, row_off)
+        if hdr != addr:
+            fail(f"gSongTable row {table_idx} ({name}): header {hdr:#x} != "
+                 f"symbol {addr:#x}")
+        if rms != ms or rme != me:
+            fail(f"gSongTable row {table_idx} ({name}): ms/me {rms}/{rme} != "
+                 f".inc {ms}/{me}")
+        if r.get("ms") != ms or r.get("me") != me:
+            fail(f"inventory {r['key']}: ms/me ({r.get('ms')}/{r.get('me')}) "
+                 f"!= gSongTable ({ms}/{me})")
+    # the 80 dummy rows hold dummy_song_header, all four zero bytes
+    for idx in dummy_rows:
+        hdr = struct.unpack_from("<I", rom,
+                                 table_base - GEN3_GBA_ROM_BASE + idx * 8)[0]
+        if hdr != dummy_addr:
+            fail(f"gSongTable dummy row {idx}: {hdr:#x} != dummy_song_header "
+                 f"{dummy_addr:#x}")
+
+    # --- packed-object slice derivation ---
+    slices = []  # (start, header_addr, end, size, tc, r, sym)
+    for i, (addr, r, sym) in enumerate(by_addr):
+        if addr < SONG_BLOCK_START or addr >= SONG_BLOCK_END:
+            fail(f"{r['key']}: header {addr:#x} outside the song block")
+        if i > 0 and addr <= by_addr[i - 1][0]:
+            fail(f"{r['key']}: headers not strictly increasing")
+        tc = rom[addr - GEN3_GBA_ROM_BASE]
+        if r.get("track_count") != tc:
+            fail(f"inventory {r['key']}: track_count {r.get('track_count')} "
+                 f"!= header byte 0 ({tc})")
+        if r.get("resource_type") != "music-sequence" or r.get("schema") != 1 \
+                or r.get("representation") != "gba-mp2k-song-graph":
+            fail(f"inventory {r['key']}: unexpected type/schema/representation")
+        size = 8 + 4 * tc
+        slices.append((None, addr, addr + size, size, tc, r, sym))
+    for i in range(len(slices)):
+        start = SONG_BLOCK_START if i == 0 else slices[i - 1][2]
+        slices[i] = (start,) + slices[i][1:]
+    if slices[0][0] != slices[0][1]:
+        fail(f"first song {slices[0][5]['key']}: slice start "
+             f"{slices[0][0]:#x} != header {slices[0][1]:#x}")
+    if slices[-1][2] != SONG_BLOCK_END:
+        fail(f"last song end {slices[-1][2]:#x} != block end "
+             f"{SONG_BLOCK_END:#x}")
+    # the packed-object rule makes the slices contiguous by construction,
+    # so the block byte count is the span: first start to last end
+    block_bytes = slices[-1][2] - slices[0][0]
+    if block_bytes != song_walker.PIN_TOTAL_BYTES:
+        fail(f"song block bytes {block_bytes} != pinned "
+             f"{song_walker.PIN_TOTAL_BYTES}")
+
+    # --- label gate: 530 global headers + 7,740 local track labels ---
+    # STT_NOTYPE only: the section's STT_SECTION symbol (empty name,
+    # value = section start) sits at 0x088FC03C and is not a label.
+    block_syms = [s for s in elf.symbols
+                  if not s[0].startswith("$") and s[4] != 0
+                  and (s[3] & 0xF) == 0  # STT_NOTYPE
+                  and SONG_BLOCK_START <= s[1] < SONG_BLOCK_END]
+    globals_ = [s for s in block_syms if (s[3] >> 4) & 0xF == 1]
+    locals_ = [s for s in block_syms if (s[3] >> 4) & 0xF == 0]
+    if len(globals_) != 530:
+        fail(f"song block: {len(globals_)} global symbols != 530")
+    if len(locals_) != song_walker.PIN_LOCAL_LABELS:
+        fail(f"song block: {len(locals_)} local labels != "
+             f"{song_walker.PIN_LOCAL_LABELS}")
+    for s in globals_:
+        if not any(s[1] == sl[1] for sl in slices):
+            fail(f"song block: unexpected global symbol {s[0]} at {s[1]:#x}")
+    first_labels = {}
+    for start, hdr, _end, _size, tc, r, _sym in slices:
+        at = [s for s in locals_ if s[1] == start]
+        if tc == 0:
+            if at:
+                fail(f"{r['key']}: zero-track song has local labels at its "
+                     f"start {start:#x}")
+            first_labels[r["key"]] = r["symbol"]
+        else:
+            if len(at) != 1:
+                fail(f"{r['key']}: {len(at)} local labels at object start "
+                     f"{start:#x} != 1 (packed-object invariant)")
+            first_labels[r["key"]] = at[0][0]
+    # membership: assign every local label to exactly one song stream
+    # region [start, header_addr); a label inside a header region or a
+    # header gap would resolve to zero regions
+    for s in locals_:
+        hit = [sl for sl in slices if sl[0] <= s[1] < sl[1]]
+        if len(hit) != 1:
+            fail(f"local label {s[0]} at {s[1]:#x} resolves to {len(hit)} "
+                 f"song stream regions")
+
+    # --- header fields + walker per song ---
+    wave_addrs = set()
+    for r in inventory.values():
+        if r["kind"] == "programmable-wave":
+            s = elf.find(r["symbol"])
+            if s is None:
+                fail(f"wave symbol {r['symbol']} not in the ELF")
+            wave_addrs.add(s[1])
+    if len(wave_addrs) != 25:
+        fail(f"programmable wave addresses {len(wave_addrs)} != 25")
+
+    rows = []
+    agg_sweep = {k: 0 for k in ("wait", "note", "fine", "goto", "patt",
+                                "pend", "rept", "memacc", "memacc_jump",
+                                "xcmd", "xwave", "onebyte", "port", "endtie")}
+    agg_xcmd_sub = {}
+    all_targets = set()
+    all_tones = set()
+    for start, hdr, end_, size, tc, r, sym in slices:
+        key = r["key"]
+        tone = struct.unpack_from("<I", rom, hdr - GEN3_GBA_ROM_BASE + 4)[0]
+        parts = struct.unpack_from("<" + "I" * tc, rom,
+                                   hdr - GEN3_GBA_ROM_BASE + 8)
+        sweep, walk, targets = song_walker.validate_song(
+            rom, key, start, end_, hdr, list(parts), tone, vg_addrs,
+            wave_addrs)
+        # tone == the song's declared voicegroup label (the .equ value
+        # the header `.4byte` row holds)
+        vg_label = "voicegroup_" + r["voicegroup"]
+        if tone not in vg_addrs:
+            fail(f"{key}: tone {tone:#x} not in the voicegroup label set")
+        for k in agg_sweep:
+            agg_sweep[k] += sweep[k]
+        for sub, n in sweep["xcmd_sub"].items():
+            agg_xcmd_sub[sub] = agg_xcmd_sub.get(sub, 0) + n
+        all_targets |= targets
+        all_tones.add(tone)
+        if len(targets) and any(not (start <= t < hdr) for t in targets):
+            fail(f"{key}: an address operand resolved outside the song")
+        # three-way proof: ELF slice == ROM slice (the artifact below is
+        # synthesized from the ROM; the manifest re-proves it)
+        first = first_labels[key]
+        # the object is the WHOLE packed slice [start, end_): tracks +
+        # header + parts array. size (8+4N) is just the header region.
+        obj_size = end_ - start
+        if elf.slice(first, obj_size) != rom[start - GEN3_GBA_ROM_BASE:
+                                             start - GEN3_GBA_ROM_BASE
+                                             + obj_size]:
+            fail(f"{key}: ELF slice at '{first}' differs from the ROM slice")
+        # canonical payload artifact (gitignored, consumed by Guardrail 10)
+        data = rom[start - GEN3_GBA_ROM_BASE:start - GEN3_GBA_ROM_BASE
+                   + obj_size]
+        art = outdir / "songs" / (key[len("emerald:audio/song/"):] + ".bin")
+        if args.check:
+            if not art.exists() or art.read_bytes() != data:
+                fail(f"--check: {art} differs from deterministic ROM-slice "
+                     f"regeneration")
+        else:
+            art.parent.mkdir(parents=True, exist_ok=True)
+            art.write_bytes(data)
+        rows.append((key, "song", first, str(art), "music-sequence", 1,
+                     "gba-mp2k-song-graph", obj_size,
+                     start - GEN3_GBA_ROM_BASE, None))
+    rows.sort(key=lambda r: r[0])
+
+    # --- pinned aggregate gates (the R12-D stage gate) ---
+    def pin(v, name):
+        if v != getattr(song_walker, name):
+            fail(f"song walker: {name} {v} != pinned "
+                 f"{getattr(song_walker, name)}")
+
+    pin(agg_sweep["goto"], "PIN_GOTO")
+    pin(agg_sweep["patt"], "PIN_PATT")
+    pin(agg_sweep["rept"], "PIN_REPT")
+    pin(agg_sweep["memacc_jump"], "PIN_MEMACC_JUMP")
+    pin(agg_sweep["xwave"], "PIN_XWAVE")
+    operands = (agg_sweep["goto"] + agg_sweep["patt"] + agg_sweep["rept"]
+                + agg_sweep["memacc_jump"] + agg_sweep["xwave"])
+    pin(operands, "PIN_OPERANDS")
+    pin(agg_sweep["memacc"], "PIN_MEMACC")
+    pin(agg_sweep["xcmd"], "PIN_XCMD")
+    if agg_xcmd_sub != song_walker.PIN_XCMD_SUBS:
+        fail(f"song walker: XCMD sub histogram {agg_xcmd_sub} != pinned "
+             f"{song_walker.PIN_XCMD_SUBS}")
+    pin(agg_sweep["note"], "PIN_NOTES")
+    pin(sum(s[4] for s in slices), "PIN_PARTS")
+    pin(len(all_tones), "PIN_DISTINCT_TONES")
+    pin(len(all_targets), "PIN_DISTINCT_TARGETS")
+    return rows, agg_sweep, agg_xcmd_sub, all_targets, all_tones
+
 
 # GBA-form ToneData row (12 B, asm/macros/music_voice.inc) pointer layout.
 # Type byte 0: sample/wave/group pointers at bytes 4-8 (.int); keysplit rows
@@ -494,7 +776,7 @@ def resolve_structural(root, elf, rom, inventory):
                              f"keysplit label address")
 
     out.sort(key=lambda r: r[0])
-    return out
+    return out, vg_addrs  # vg_addrs was narrowed to the 197 label addresses
 
 
 def main():
@@ -529,7 +811,7 @@ def main():
     if len(leaves) != PINNED_TOTAL:
         fail(f"leaf count {len(leaves)} != {PINNED_TOTAL}")
 
-    structural = resolve_structural(root, elf, rom, inventory)
+    structural, vg_addrs = resolve_structural(root, elf, rom, inventory)
     struct_counts = {}
     for r in structural:
         struct_counts[r[1]] = struct_counts.get(r[1], 0) + 1
@@ -537,6 +819,11 @@ def main():
         fail(f"structural kind counts {struct_counts} != pinned {PINNED_STRUCT}")
     if len(structural) != PINNED_STRUCT_TOTAL:
         fail(f"structural count {len(structural)} != {PINNED_STRUCT_TOTAL}")
+
+    songs, agg_sweep, agg_xcmd_sub, all_targets, all_tones = resolve_songs(
+        root, elf, rom, inventory, vg_addrs, outdir, args)
+    if len(songs) != 530:
+        fail(f"song count {len(songs)} != 530")
 
     rows = []  # (key, kind, symbol, artifact, type, schema, rep, size,
     #           rom_off, symbol_offset)
@@ -607,6 +894,7 @@ def main():
                                 rep, size, rom_off, sym_off))
 
     rows += structural_rows
+    rows += songs
     rows.sort(key=lambda r: r[0])
 
     # --- emit the catalog ---
@@ -636,20 +924,25 @@ def main():
         "# Do not edit by hand; edit the R12-A inventory and re-run the",
         "# generator (regeneration must be a no-op diff).",
         "",
-        "# Semantic extraction bindings for the 771 audio resources: 569",
-        "# R12-B leaves (105 root + 51 phoneme + 388 cry samples, 25",
+        "# Semantic extraction bindings for the 1,301 audio resources:",
+        "# 569 R12-B leaves (105 root + 51 phoneme + 388 cry samples, 25",
         "# programmable waves) + 202 R12-C structural (195 voicegroups at",
         "# 20,594 GBA 12-byte rows, 2 cry tables at 388 rows each, 5",
-        "# keysplit runs at 372 B). NO ROM offsets: they are derived from",
+        "# keysplit runs at 372 B) + 530 R12-D song graphs (684,052 B of",
+        "# MP2K streams; the packed-object slice rule + the engine-faithful",
+        "# stream walker in song_walker.py prove every object boundary and",
+        "# every address operand). NO ROM offsets: they are derived from",
         "# the matching GBA ELF symbol table via the R1A generator",
         "# (gen3-elf-manifest), never hand-maintained. The artifact IS the",
         "# canonical payload (raw encoding); sizes are derived and proven",
         "# by gen_audio_bindings.py (end-symbol/object-layout method +",
-        "# WaveData2 structural validation + the R12-C stream model) before",
-        "# the manifest pipeline re-proves them. Structural bindings may",
-        "# carry `symbol_offset` (drumset back-shifts, the 4 no-symbol",
-        "# containing slices, keysplit run starts) - the manifest's slice",
-        "# path, raw encoding only.",
+        "# WaveData2 structural validation + the R12-C stream model + the",
+        "# R12-D walker) before the manifest pipeline re-proves them.",
+        "# Structural bindings may carry `symbol_offset` (drumset",
+        "# back-shifts, the 4 no-symbol containing slices, keysplit run",
+        "# starts) - the manifest's slice path, raw encoding only. Song",
+        "# bindings bind their first track label (mus_dummy binds its own",
+        "# header symbol) with expected_decoded_size = object size.",
         "",
         "bindings_version = 1",
         'game = "emerald"',
@@ -693,6 +986,15 @@ def main():
           f"keysplit {struct_counts['keysplit']}) "
           f"= {PINNED_STREAM_ROWS} rows, {PINNED_STREAM_ROWS * 12} GBA-form "
           f"bytes + {PINNED_KEYSPLIT_RUN_BYTES} keysplit bytes")
+    print(f"song resources: {len(songs)} = {song_walker.PIN_TOTAL_BYTES} bytes")
+    print(f"song walker: GOTO {agg_sweep['goto']} / PATT {agg_sweep['patt']} "
+          f"/ REPT {agg_sweep['rept']} / memacc-jump {agg_sweep['memacc_jump']} "
+          f"/ xwave {agg_sweep['xwave']} = "
+          f"{agg_sweep['goto'] + agg_sweep['patt'] + agg_sweep['rept'] + agg_sweep['memacc_jump'] + agg_sweep['xwave']} "
+          f"operands; XCMD {agg_sweep['xcmd']} {dict(agg_xcmd_sub)}; "
+          f"notes {agg_sweep['note']}; MEMACC {agg_sweep['memacc']}; "
+          f"targets {len(all_targets)} distinct; tones {len(all_tones)} "
+          f"distinct")
 
 
 if __name__ == "__main__":

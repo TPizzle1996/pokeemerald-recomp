@@ -28,6 +28,17 @@
  * copied into the verbatim zone at their ROM-relative offsets. See docs/
  * R12C_STRUCTURAL_AUDIO_IMPLEMENTATION_PLAN.md §1-2.
  *
+ * R12-D extends the arena with the 530 MP2K SONG GRAPHS (mus 210 / se 269 /
+ * ph 51): a contiguous ROM block [0x088FC03C, 0x089A3050) (684,052 B) copied
+ * verbatim into the existing verbatim zone at its ROM-relative offsets (the
+ * block sits inside the R12-B zone, so arenaOffset = romAddr - ROM_START
+ * works unchanged; no arena resize). The song graphs are never rewritten -
+ * canonical GBA-form bytes throughout. Resolution for the block is the
+ * R12-D hybrid: ONE interval mapping in host_memory
+ * (HostMemoryRegisterLogicalRange) plus 530 per-song CANONICAL spans in the
+ * R10 range index (state-v5 identity + offset). See docs/
+ * R12D_SONG_GRAPH_IMPLEMENTATION_PLAN.md §4-5, §9.
+ *
  * R12-B/R12-C ADDITIVE CONTRACT: no consumer reads the arena until the
  * R12-C consumer redirect lands (cry accessor + logical-address
  * registration; sound.c / host_memory.c changes are separate files). A
@@ -61,6 +72,20 @@
 #define EMERALD_AUDIO_ROM_START 0x0867709Cu
 #define EMERALD_AUDIO_SPAN_END  0x089A3DB4u
 #define EMERALD_AUDIO_SPAN_SIZE (EMERALD_AUDIO_SPAN_END - EMERALD_AUDIO_ROM_START)
+
+/* R12-D: the MP2K song-graph block. ONE contiguous ROM range
+ * [0x088FC03C, 0x089A3050) inside the R12-B leaf zone, holding exactly the
+ * 530 song graphs (mus 210 / se 269 / ph 51; 684,052 B) as canonical GBA-form
+ * bytes, tiled with zero inter-object gaps (packed-object rule: header +
+ * trackCount byte, objects back to back). Zone-relative placement is the
+ * ordinary romAddr - EMERALD_AUDIO_ROM_START (block offset 0x284FA0 - the
+ * plan §4's 0x21BFA0 was an arithmetic slip; the code derives it, see
+ * docs/R12D_SONG_GRAPH_MIGRATION_REPORT.md §6). */
+#define EMERALD_AUDIO_SONG_BLOCK_START 0x088FC03Cu
+#define EMERALD_AUDIO_SONG_BLOCK_END   0x089A3050u
+#define EMERALD_AUDIO_SONG_BLOCK_SIZE \
+    (EMERALD_AUDIO_SONG_BLOCK_END - EMERALD_AUDIO_SONG_BLOCK_START)
+#define EMERALD_AUDIO_SONG_COUNT 530u
 
 /* The R12-B leaf family: exact counts pinned from the R12-A inventory. The
  * seam refuses a session whose audio-sample composition differs (pack drift
@@ -198,6 +223,11 @@ bool EmeraldAudioCompat_GetLeafBytes(const char *canonicalName,
 size_t EmeraldAudioCompat_GetStructuralCount(void);
 bool EmeraldAudioCompat_GetTransformedRows(const uint8_t **outBase,
                                            size_t *outSize);
+
+/* R12-D song queries. */
+size_t EmeraldAudioCompat_GetSongCount(void);
+bool EmeraldAudioCompat_GetSongSpan(const char *canonicalName,
+                                    size_t *outArenaOffset, size_t *outSize);
 bool EmeraldAudioCompat_GetVoicegroupSpan(const char *canonicalName,
                                           size_t *outTransformOffset,
                                           size_t *outRowCount);
