@@ -25,6 +25,10 @@
 #include "window.h"
 #include "constants/songs.h"
 #include "gba/io_reg.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
 /* R9 §7: on native, data.h declares the table non-const (the compat seam
  * repoints the rows), so this local pret extern must not declare const. */
@@ -1504,6 +1508,8 @@ static void ShowAllConditionSparkles(struct Sprite *sprite)
 #undef sMonSpriteId
 #undef sNextSparkleSpriteId
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sLvlUpStatStrings[NUM_STATS] =
 {
     gText_MaxHP,
@@ -1513,6 +1519,7 @@ static const u8 *const sLvlUpStatStrings[NUM_STATS] =
     gText_SpDef,
     gText_Speed
 };
+#endif
 
 void DrawLevelUpWindowPg1(u16 windowId, u16 *statsBefore, u16 *statsAfter, u8 bgClr, u8 fgClr, u8 shadowClr)
 {

@@ -55,6 +55,7 @@
 #include "emerald/resources/emerald_audio_compat.h"
 #include "emerald/resources/emerald_leaf_compat.h"
 #include "emerald/resources/emerald_resource_session.h"
+#include "emerald/resources/emerald_text_compat.h"
 #include "emerald/resources/emerald_trainer_native_compat.h"
 
 static bool sSnapshotRegistered;
@@ -243,23 +244,63 @@ EmeraldResourceCompat_RegisterRuntimeSnapshot(const char *packPath)
                                 leafDiag.canonicalName);
                     }
                 }
-                /* R10-F: the session content fingerprint pins the exact
-                 * logical provider content this session was built from (the
-                 * construction lives in emerald_resource_session.h). The
-                 * native save-state system stamps it into every state it
-                 * writes and rejects states whose recorded fingerprint
-                 * differs from the active session's - equivalent content at
-                 * another path still matches, changed or reordered providers
-                 * cannot. */
-                uint8_t sessionFingerprint[GEN3_PACK_SHA256_SIZE];
-                sSnapshotRegistered = true;
-                status = EMERALD_COMPAT_OK;
-                if (EmeraldResourceSession_ComputeBaseFingerprint(
-                        &info, sessionFingerprint))
-                    EmeraldResourceCompat_SetSessionContentFingerprint(
-                        sessionFingerprint);
-                else
-                    EmeraldResourceCompat_SetSessionContentFingerprint(NULL);
+                /* R13-C: publish the sixteen text family arenas + apply
+                 * the generated slot/skeleton fills. REFUSE-CLASS (brief
+                 * §17): the cut-over families (battle/move/ability/nature/
+                 * shared/system/match-call/ribbon) have NO compiled
+                 * fallback once the C-side guards land, so a session whose
+                 * text cannot be published is refused with the same full
+                 * rollback as the Pokémon family and the audio arena: every
+                 * published seam's migrated entries are cleared, the
+                 * snapshot is dropped, and nothing survives
+                 * (sSnapshotRegistered stays false). */
+                {
+                    struct EmeraldTextCompatDiagnostics textDiag;
+                    enum EmeraldTextCompatStatus textStatus =
+                        EmeraldTextCompat_TryInitialize(snapshot, pack,
+                                                        &textDiag);
+                    if (textStatus != EMERALD_TEXT_OK)
+                    {
+                        fprintf(stderr,
+                                "emerald runtime: session refused: text "
+                                "arenas not published (status %d%s%s)\n",
+                                (int)textStatus,
+                                textDiag.canonicalName[0] != '\0' ? " @ " : "",
+                                textDiag.canonicalName);
+                        EmeraldResourceCompat_ClearMigratedEntries();
+                        EmeraldAudioCompat_ClearMigratedEntries();
+                        EmeraldTextCompat_ClearMigratedEntries();
+                        EmeraldLeafCompat_ClearMigratedEntries();
+                        EmeraldResourceCompat_ClearSnapshot();
+                        EmeraldResourceCompat_SetSessionContentFingerprint(NULL);
+                        Gen3ResourceSnapshot_Destroy(snapshot);
+                        snapshot = NULL;
+                        sSnapshotRegistered = false;
+                        status = EMERALD_COMPAT_ERR_PUBLISH_FAILED;
+                    }
+                    else
+                    {
+                        /* R10-F: the session content fingerprint pins the
+                         * exact logical provider content this session was
+                         * built from (the construction lives in
+                         * emerald_resource_session.h). The native save-state
+                         * system stamps it into every state it writes and
+                         * rejects states whose recorded fingerprint differs
+                         * from the active session's - equivalent content at
+                         * another path still matches, changed or reordered
+                         * providers cannot. */
+                        uint8_t sessionFingerprint[GEN3_PACK_SHA256_SIZE];
+                        sSnapshotRegistered = true;
+                        status = EMERALD_COMPAT_OK;
+                        if (EmeraldResourceSession_ComputeBaseFingerprint(
+                                &info, sessionFingerprint))
+                            EmeraldResourceCompat_SetSessionContentFingerprint(
+                                sessionFingerprint);
+                        else
+                            EmeraldResourceCompat_SetSessionContentFingerprint(
+                                NULL);
+                    }
+                }
             }
         }
     }

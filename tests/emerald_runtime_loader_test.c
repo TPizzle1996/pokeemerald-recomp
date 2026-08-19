@@ -34,7 +34,9 @@
 #include "gen3/resources/resource_id.h"
 #include "gen3/resources/resource_pack_writer.h"
 #include "gen3/resources/sha256.h"
+#include "emerald/resources/emerald_resource_ranges.h"
 #include "emerald/resources/emerald_rom_profile.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
 #include "../src/emerald/resources/emerald_runtime_loader.c"
 
 /* ------------------------------------------------------------------ */
@@ -314,6 +316,582 @@ static void TestLoaderProductionPack(const char *packPath)
     CHECK("registration idempotent", status == EMERALD_COMPAT_OK);
 }
 
+/* ------------------------------------------------------------------ */
+/* R13-C: text family focused tests                                   */
+/* ------------------------------------------------------------------ */
+
+/* The production pack's gText_123Dot record (#112): "1.\xff2.\xff3.\xff"
+ * as a single 9-byte resource, three 3-byte strings tiled by kind-0
+ * skeleton fills at byte offsets 0/3/6. */
+static const uint8_t k123DotBytes[9] = {
+    0xA2, 0xAD, 0xFF, 0xA3, 0xAD, 0xFF, 0xA4, 0xAD, 0xFF
+};
+#define k123DotId "emerald:text/system/gtext-123dot"
+
+/* Writer-rebuilt pack variants: the full production catalog with exactly
+ * one text record damaged (payload zeroed -> escape grammar) or dropped
+ * (-> inventory mismatch). Every other entry is copied through verbatim
+ * with its own digests, so the variant passes every seam but the text
+ * one - the refusal is provably the text record's. */
+static bool BuildTextVariantPack(const char *srcPath, const char *dstPath,
+                                 bool zero123Dot, bool drop123Dot)
+{
+    struct Gen3ResourcePack *pack = NULL;
+    struct Gen3ResourcePackDiagnosticList packDiag;
+    struct Gen3ResourcePackProfile profile;
+    struct Gen3ResourcePackBuild *build = NULL;
+    struct Gen3ResourcePackProfileInput pin;
+    struct Gen3ResourcePackEntryInput entry;
+    struct Gen3ResourcePackBytes bytes = { NULL, 0 };
+    struct Gen3ResourcePackDiagnosticList diag;
+    uint8_t zero[9] = { 0 };
+    uint8_t zeroSha[32];
+    uint8_t provenanceSha[32];
+    size_t count;
+    size_t i;
+    FILE *f = NULL;
+    bool ok = false;
+
+    Gen3ResourcePackDiagnostics_Init(&packDiag);
+    if (Gen3ResourcePack_OpenFile(srcPath, &pack, &packDiag) != GEN3_PACK_OK
+     || pack == NULL)
+        goto done;
+    Gen3ResourcePackDiagnostics_Destroy(&packDiag);
+
+    Gen3ResourcePackDiagnostics_Init(&diag);
+    build = Gen3ResourcePackBuild_Create();
+    if (build == NULL)
+        goto done;
+
+    /* The production pack's own profile: the provider identity and
+     * version derive from it exactly as the production session's, so the
+     * variant behaves identically in every seam but the one record. */
+    if (!Gen3ResourcePack_GetProfile(pack, &profile))
+        goto done;
+    memset(&pin, 0, sizeof(pin));
+    pin.basePackVersion = profile.basePackVersion;
+    pin.catalogVersion = profile.catalogVersion;
+    pin.extractionManifestVersion = profile.extractionManifestVersion;
+    pin.canonicalRepresentationVersion = profile.canonicalRepresentationVersion;
+    pin.sourceRomSize = profile.sourceRomSize;
+    /* ProfileInput takes the SHA digests by pointer (the profile holds
+     * them inline); the digests outlive SetProfile because `profile`
+     * lives in this frame and SetProfile copies them. */
+    pin.sourceRomSha1 = profile.sourceRomSha1;
+    pin.sourceRomSha256 = profile.sourceRomSha256;
+    memcpy(pin.gameCode, profile.gameCode, 4u);
+    memcpy(pin.makerCode, profile.makerCode, 2u);
+    pin.softwareRevision = profile.softwareRevision;
+    memcpy(pin.gameId, profile.gameId, GEN3_PACK_GAME_ID_SIZE);
+    pin.catalogSha256 = profile.catalogSha256;
+    pin.extractionManifestSha256 = profile.extractionManifestSha256;
+    if (Gen3ResourcePackBuild_SetProfile(build, &pin, &diag) != GEN3_PACK_OK)
+        goto done;
+
+    memset(provenanceSha, 0x5A, sizeof(provenanceSha));
+    DigestSha256(zero, sizeof(zero), zeroSha);
+
+    count = Gen3ResourcePack_GetEntryCount(pack);
+    for (i = 0; i < count; i++)
+    {
+        const struct Gen3ResourcePackEntry *e =
+            Gen3ResourcePack_GetEntry(pack, i);
+        bool is123Dot = strcmp(e->canonicalName, k123DotId) == 0;
+
+        if (is123Dot && drop123Dot)
+            continue;
+        memset(&entry, 0, sizeof(entry));
+        entry.schema = e->schema;
+        entry.flags = e->flags;
+        entry.representation = e->representation;
+        entry.sourceEncoding = e->sourceEncoding;
+        entry.canonicalName = e->canonicalName;
+        entry.key = &e->key;
+        entry.type = e->type;
+        entry.canonicalPayload =
+            is123Dot ? zero : e->payload;
+        entry.canonicalPayloadSize = e->payloadSize;
+        entry.canonicalPayloadSha256 =
+            is123Dot ? zeroSha : e->payloadSha256;
+        entry.sourceRomOffset = e->sourceRomOffset;
+        entry.sourceEncodedSize = e->sourceEncodedSize;
+        entry.sourceEncodedSha256 = provenanceSha;
+        if (Gen3ResourcePackBuild_AddEntry(build, &entry, &diag) != GEN3_PACK_OK)
+            goto done;
+    }
+
+    if (Gen3ResourcePackWriter_Write(build, &bytes, &diag) != GEN3_PACK_OK)
+        goto done;
+    f = fopen(dstPath, "wb");
+    if (f == NULL)
+        goto done;
+    if (fwrite(bytes.data, 1, bytes.size, f) != bytes.size)
+        goto done;
+    fclose(f);
+    f = NULL;
+    ok = true;
+
+done:
+    if (f != NULL)
+        fclose(f);
+    Gen3ResourcePackBytes_Destroy(&bytes);
+    Gen3ResourcePackBuild_Destroy(build);
+    Gen3ResourcePackDiagnostics_Destroy(&diag);
+    if (pack != NULL)
+        Gen3ResourcePack_Destroy(pack);
+    return ok;
+}
+
+/* The text seam against a freshly built session (the same pack ->
+ * catalog -> candidate -> snapshot chain the loader runs, driven
+ * directly so the loader's at-most-once registration is not consumed by
+ * the refusal probes). */
+static enum EmeraldTextCompatStatus RunTextSeamDirect(
+    const char *packPath, struct EmeraldTextCompatDiagnostics *diag)
+{
+    struct Gen3ResourcePack *pack = NULL;
+    struct Gen3ResourcePackDiagnosticList packDiag;
+    struct Gen3ResourceCatalog *catalog = NULL;
+    struct Gen3ResourceCandidate *candidate = NULL;
+    struct Gen3ResourceSnapshot *snapshot = NULL;
+    struct Gen3ResourceDiagnosticList diagnostics;
+    struct EmeraldResourceSessionInfo info;
+    enum EmeraldResourceSessionError sessionError;
+    enum EmeraldTextCompatStatus status = EMERALD_TEXT_ERR_UNAVAILABLE;
+
+    Gen3ResourcePackDiagnostics_Init(&packDiag);
+    if (Gen3ResourcePack_OpenFile(packPath, &pack, &packDiag) != GEN3_PACK_OK
+     || pack == NULL)
+    {
+        Gen3ResourcePackDiagnostics_Destroy(&packDiag);
+        return status;
+    }
+    Gen3ResourcePackDiagnostics_Destroy(&packDiag);
+    if (!BuildCatalogFromPack(pack, &catalog) || catalog == NULL)
+        goto done;
+    Gen3ResourceDiagnostics_Init(&diagnostics);
+    sessionError = EmeraldResourceSession_BuildRomBaseCandidate(
+        pack, catalog, &candidate, &info, &diagnostics);
+    if (sessionError == EMERALD_SESSION_OK && candidate != NULL
+     && Gen3ResourceCandidate_Build(candidate, &snapshot, &diagnostics)
+     && snapshot != NULL)
+        status = EmeraldTextCompat_TryInitialize(snapshot, pack, diag);
+    Gen3ResourceDiagnostics_Destroy(&diagnostics);
+done:
+    if (snapshot != NULL)
+        Gen3ResourceSnapshot_Destroy(snapshot);
+    if (candidate != NULL)
+        Gen3ResourceCandidate_Destroy(candidate);
+    if (catalog != NULL)
+        Gen3ResourceCatalog_Destroy(catalog);
+    if (pack != NULL)
+        Gen3ResourcePack_Destroy(pack);
+    return status;
+}
+
+/* A production pack whose text family is malformed (record payload
+ * zeroed) or incomplete (record dropped) is a REFUSED session: the
+ * loader publishes the earlier seams, then rolls EVERYTHING back - no
+ * trainer/Pokémon/text pointer survives and the snapshot is not
+ * registered, so a repeat attempt refuses identically. */
+static void TestLoaderRefusesTextVariant(const char *tempDir,
+                                         const char *prodPack,
+                                         bool zero123Dot, bool drop123Dot,
+                                         const char *label)
+{
+    enum EmeraldResourceCompatStatus status;
+    char path[512];
+
+    snprintf(path, sizeof(path), "%s/%s.rpack", tempDir, label);
+    CHECK("text variant pack builds",
+          BuildTextVariantPack(prodPack, path, zero123Dot, drop123Dot));
+
+    /* Clean slate (nothing registered in this process yet). */
+    EmeraldResourceCompat_ClearMigratedEntries();
+    EmeraldResourceCompat_ClearSnapshot();
+
+    status = EmeraldResourceCompat_RegisterRuntimeSnapshot(path);
+    CHECK("text variant refused (PUBLISH_FAILED)",
+          status == EMERALD_COMPAT_ERR_PUBLISH_FAILED);
+
+    /* Rolled back: no session, no text arena, no fills, no trainer or
+     * Pokémon pointers. */
+    CHECK("refused: session not registered",
+          !EmeraldResourceCompat_IsSessionRegistered());
+    CHECK("refused: text unpublished",
+          EmeraldTextCompat_GetPublishedCount() == 0u);
+    CHECK("refused: #112 fills NULL",
+          gText_123Dot[0] == NULL && gText_123Dot[1] == NULL
+              && gText_123Dot[2] == NULL);
+    CHECK("refused: trainer front sheet sentinel",
+          gTrainerFrontPicTable[0].data == NULL);
+    CHECK("refused: mon front sentinel",
+          gMonFrontPicTable[0].data == NULL);
+
+    /* Not registered: a second attempt re-opens and refuses identically. */
+    status = EmeraldResourceCompat_RegisterRuntimeSnapshot(path);
+    CHECK("text refusal is repeatable",
+          status == EMERALD_COMPAT_ERR_PUBLISH_FAILED);
+}
+
+/* The production registration published the text family: sixteen arenas
+ * with the pinned composition, every pack text entry byte-identical in
+ * its arena (C labels by resource id, bundle labels by blob slice), and
+ * the #112 nine-byte record resolving whole. */
+static void TestTextPublication(const char *packPath)
+{
+    struct Gen3ResourcePack *pack = NULL;
+    struct Gen3ResourcePackDiagnosticList packDiag;
+    struct { const char *id; const uint8_t *payload; size_t size; }
+        blobs[TEXT_BUNDLE_COUNT];
+    const uint8_t *bytes;
+    size_t size;
+    size_t packCount;
+    size_t i;
+    size_t total = 0u;
+    size_t textEntries = 0u;
+    size_t labelRecords = 0u;
+    size_t bundleRecords = 0u;
+    size_t blobsCount = 0u;
+
+    CHECK("16 family arenas",
+          EmeraldTextCompat_GetArenaCount() == TEXT_ARENA_COUNT);
+    CHECK("published label count",
+          EmeraldTextCompat_GetPublishedCount() == EMERALD_TEXT_LABEL_COUNT);
+
+    for (i = 0u; i < TEXT_ARENA_COUNT; i++)
+    {
+        const uint8_t *base;
+        size_t sz;
+        CHECK("arena published",
+              EmeraldTextCompat_GetArenaByKey(kTextArenaSummaries[i].key,
+                                              &base, &sz));
+        if (base != NULL)
+            total += sz;
+    }
+    CHECK("arena byte total == 903157", total == EMERALD_TEXT_TOTAL_BYTES);
+
+    /* #112: the single 9-byte record resolves whole. */
+    CHECK("123Dot record resolves",
+          EmeraldTextCompat_GetResourceBytes(k123DotId, &bytes, &size));
+    CHECK("123Dot record size", size == 9u);
+    CHECK("123Dot record bytes",
+          size == 9u && memcmp(bytes, k123DotBytes, 9u) == 0);
+
+    Gen3ResourcePackDiagnostics_Init(&packDiag);
+    if (Gen3ResourcePack_OpenFile(packPath, &pack, &packDiag) != GEN3_PACK_OK
+     || pack == NULL)
+    {
+        CHECK("production pack opens for verification", false);
+        Gen3ResourcePackDiagnostics_Destroy(&packDiag);
+        return;
+    }
+    Gen3ResourcePackDiagnostics_Destroy(&packDiag);
+
+    packCount = Gen3ResourcePack_GetEntryCount(pack);
+    printf("production pack entry count: %zu\n", packCount);
+    CHECK("production pack entry count pinned at 12063", packCount == 12063u);
+
+    /* Every text entry: C-side labels resolve by resource id; bundle ids
+     * are captured for the blob-slice pass below. */
+    for (i = 0u; i < packCount; i++)
+    {
+        const struct Gen3ResourcePackEntry *e =
+            Gen3ResourcePack_GetEntry(pack, i);
+        const char *dash;
+        bool isBundle = false;
+        size_t lo = 0u;
+        size_t hi = TEXT_BUNDLE_COUNT;
+        size_t mid;
+
+        if (e->type != GEN3_RESOURCE_TYPE_TEXT || e->schema != 1u)
+            continue;
+        textEntries++;
+        /* Bundle id? (kTextBundleIds is sorted.) */
+        while (lo < hi)
+        {
+            mid = lo + (hi - lo) / 2u;
+            int cmp = strcmp(e->canonicalName, kTextBundleIds[mid]);
+            if (cmp == 0)
+            {
+                isBundle = true;
+                break;
+            }
+            if (cmp < 0)
+                hi = mid;
+            else
+                lo = mid + 1u;
+        }
+        if (isBundle)
+        {
+            bundleRecords++;
+            CHECK("bundle entry has a payload", e->payload != NULL);
+            if (blobsCount < TEXT_BUNDLE_COUNT)
+            {
+                blobs[blobsCount].id = e->canonicalName;
+                blobs[blobsCount].payload = e->payload;
+                blobs[blobsCount].size = e->payloadSize;
+                blobsCount++;
+            }
+            continue;
+        }
+        labelRecords++;
+        CHECK("C label resolves in arena",
+              EmeraldTextCompat_GetResourceBytes(e->canonicalName,
+                                                 &bytes, &size));
+        CHECK("C label size matches", size == e->payloadSize);
+        CHECK("C label arena bytes == pack bytes",
+              bytes != NULL && size == e->payloadSize
+                  && memcmp(bytes, e->payload, size) == 0);
+        dash = strrchr(e->canonicalName, '/');
+        CHECK("C label id ends with a dash-form name",
+              dash != NULL && dash[1] != '\0');
+    }
+    printf("text entries: %zu (%zu C labels + %zu bundles)\n",
+           textEntries, labelRecords, bundleRecords);
+    CHECK("text composition pinned (4824 + 363)",
+          labelRecords == TEXT_NATIVE_LABEL_COUNT
+              && bundleRecords == TEXT_NATIVE_BUNDLE_COUNT
+              && textEntries == TEXT_NATIVE_RESOURCE_COUNT);
+
+    /* Every bundle-local label's arena slice == its blob slice. */
+    for (i = 0u; i < TEXT_BUNDLE_ENTRY_COUNT; i++)
+    {
+        const struct TextBundleEntry *be = &kTextBundleIndex[i];
+        const uint8_t *blob = NULL;
+        size_t blobSize = 0u;
+        size_t k;
+
+        for (k = 0u; k < blobsCount; k++)
+        {
+            if (strcmp(blobs[k].id, kTextBundleIds[be->bundleIndex]) == 0)
+            {
+                blob = blobs[k].payload;
+                blobSize = blobs[k].size;
+                break;
+            }
+        }
+        CHECK("bundle blob captured",
+              blob != NULL && be->blobOffset + be->size <= blobSize);
+        CHECK("bundle label resolves",
+              EmeraldTextCompat_GetLabelBytes(be->name, &bytes, &size));
+        CHECK("bundle label size matches", size == be->size);
+        CHECK("bundle label slice == blob",
+              bytes != NULL && blob != NULL && size == be->size
+                  && memcmp(bytes, blob + be->blobOffset, size) == 0);
+    }
+
+    Gen3ResourcePack_Destroy(pack);
+}
+
+/* #112: the kind-0 byte-offset fills publish gText_123Dot's three slices
+ * at its label's payload start + 0/3/6 - the fill row is a byte offset
+ * INTO the label, never an arena-absolute offset (the label sorts at a
+ * deterministic non-zero position inside the system-shared arena). */
+static void TestTextSkeletonFills(void)
+{
+    const uint8_t *labelBytes;
+    size_t labelSize;
+
+    CHECK("#112 label published",
+          EmeraldTextCompat_GetResourceBytes(k123DotId, &labelBytes,
+                                             &labelSize));
+    if (labelBytes == NULL)
+        return;
+    CHECK("#112 label is the 9-byte record", labelSize == 9u);
+    CHECK("#112 fill[0] at label payload start", gText_123Dot[0] == labelBytes);
+    CHECK("#112 fill[1] at label payload + 3", gText_123Dot[1] == labelBytes + 3);
+    CHECK("#112 fill[2] at label payload + 6", gText_123Dot[2] == labelBytes + 6);
+    CHECK("#112 fills are arena pointers",
+          EmeraldTextCompat_ContainsPointer((uintptr_t)gText_123Dot[0])
+              && EmeraldTextCompat_ContainsPointer((uintptr_t)gText_123Dot[1])
+              && EmeraldTextCompat_ContainsPointer((uintptr_t)gText_123Dot[2]));
+    CHECK("#112 row[0] bytes",
+          gText_123Dot[0] != NULL
+              && memcmp(gText_123Dot[0], k123DotBytes + 0, 3) == 0);
+    CHECK("#112 row[1] bytes",
+          gText_123Dot[1] != NULL
+              && memcmp(gText_123Dot[1], k123DotBytes + 3, 3) == 0);
+    CHECK("#112 row[2] bytes",
+          gText_123Dot[2] != NULL
+              && memcmp(gText_123Dot[2], k123DotBytes + 6, 3) == 0);
+}
+
+/* Every one of the 3,118 generated slot bindings points at the start of
+ * its own label inside a family arena (the label's deterministic sorted
+ * record start, not arena offset 0 - only one record per arena can sit
+ * at the arena's first byte). */
+static void TestTextSlotPointers(void)
+{
+    size_t i;
+
+    for (i = 0u; i < TEXT_SLOT_BINDING_COUNT; i++)
+    {
+        const struct TextSlotBinding *b = &kTextSlotBindings[i];
+        const uint8_t *ptr = *b->slot;
+        const char *dash;
+        const char *name;
+        size_t arenaIndex;
+        size_t offset;
+        size_t start;
+        size_t size;
+
+        CHECK("slot published", ptr != NULL);
+        if (ptr == NULL)
+            continue;
+        CHECK("slot is an arena pointer",
+              EmeraldTextCompat_ContainsPointer((uintptr_t)ptr));
+        if (!EmeraldTextCompat_GetArenaForPointer((uintptr_t)ptr,
+                                                  &arenaIndex, &offset))
+            continue;
+        if (!EmeraldTextCompat_GetLabelAtOffset((uint32_t)arenaIndex, offset,
+                                                &name, &start, &size))
+            continue;
+        dash = strrchr(b->name, '/');
+        CHECK("slot points at its label's start",
+              dash != NULL && offset == start && strcmp(name, dash + 1) == 0);
+    }
+}
+
+/* State-v5 currentChar routing: a mid-string pointer (gText_123Dot[1],
+ * 3 bytes into its label) hits the arena range, round-trips by key +
+ * offset, and resolves to the enclosing label with the in-label offset
+ * recoverable as hit-offset - label-start. */
+static void TestTextCurrentCharRouting(void)
+{
+    struct EmeraldResourceRangeIndex *index =
+        EmeraldResourceCompat_GetRangeIndex();
+    struct EmeraldResourceRangeHit hit;
+    Gen3ResourceKey arenaKey;
+    uintptr_t address;
+    uintptr_t resolved;
+    size_t arenaIndex = TEXT_ARENA_COUNT;
+    size_t offset = 0u;
+    size_t start;
+    size_t size;
+    const char *name;
+    size_t a;
+    bool arenaFound = false;
+
+    CHECK("range index live", index != NULL);
+    if (index == NULL)
+        return;
+    address = (uintptr_t)gText_123Dot[1];
+    CHECK("mid-string pointer published", address != 0u);
+    if (address == 0u)
+        return;
+    CHECK("mid-string pointer is a registered range",
+          EmeraldResourceRangeIndex_Lookup(index, address, &hit));
+
+    /* The enclosing arena identity: system-shared is family arena 6. */
+    for (a = 0u; a < TEXT_ARENA_COUNT; a++)
+    {
+        if (strcmp(kTextArenaSummaries[a].key, "system-shared") == 0)
+        {
+            arenaIndex = a;
+            arenaFound = true;
+            break;
+        }
+    }
+    CHECK("system-shared arena found", arenaFound);
+    Gen3ResourceId_DeriveKey("emerald:text/arena/system-shared", &arenaKey);
+    CHECK("hit key is the arena identity",
+          Gen3ResourceId_KeyEqual(&hit.key, &arenaKey));
+    CHECK("hit type text", hit.type == GEN3_RESOURCE_TYPE_TEXT);
+    CHECK("hit schema 1", hit.schema == 1u);
+    CHECK("hit role compat-object",
+          hit.role == EMERALD_RESOURCE_ROLE_COMPAT_OBJECT);
+
+    /* Load-direction round trip: key + offset reconstruct the pointer. */
+    CHECK("ResolveByKey round-trips the mid-string pointer",
+          EmeraldResourceRangeIndex_ResolveByKey(index, &hit.key,
+                                                 hit.type, hit.schema,
+                                                 hit.role, hit.rangeOffset,
+                                                 &resolved));
+    CHECK("resolved pointer == the live slot", resolved == address);
+
+    /* The walker's label-span validation at the same offset: the label
+     * sorts at a deterministic non-zero record start inside the
+     * system-shared arena, so the mid-string offsets are label-relative
+     * (hit/offset = label start + 3), and the hit and the walker must
+     * agree on the same zone-relative offset. */
+    CHECK("GetArenaForPointer locates the arena",
+          EmeraldTextCompat_GetArenaForPointer(address, &arenaIndex,
+                                               &offset));
+    CHECK("GetLabelAtOffset identifies the label",
+          EmeraldTextCompat_GetLabelAtOffset((uint32_t)arenaIndex, offset,
+                                             &name, &start, &size));
+    CHECK("label is gtext-123dot",
+          name != NULL && strcmp(name, "gtext-123dot") == 0);
+    CHECK("label span is the whole record", size == 9u);
+    CHECK("walker offset is label start + 3", offset == start + 3u);
+    CHECK("hit offset is label start + 3", hit.rangeOffset == start + 3u);
+}
+
+/* A failed direct republish (malformed/missing variant) must not disturb
+ * the loader's live session; the fail-closed clear then NULLs every
+ * applied pointer before the arena frees. */
+static void TestTextTransactionalRefusal(const char *tempDir,
+                                         const char *prodPack)
+{
+    struct EmeraldTextCompatDiagnostics diag;
+    const uint8_t *liveBytes;
+    size_t liveSize;
+    enum EmeraldTextCompatStatus status;
+    char path[512];
+
+    CHECK("live session registered",
+          EmeraldResourceCompat_IsSessionRegistered());
+    CHECK("live arena published",
+          EmeraldTextCompat_GetPublishedCount() == EMERALD_TEXT_LABEL_COUNT);
+    CHECK("live #112 slice published", gText_123Dot[1] != NULL);
+    CHECK("live record captured",
+          EmeraldTextCompat_GetResourceBytes(k123DotId, &liveBytes,
+                                             &liveSize));
+
+    /* Malformed: the record's payload fails the escape grammar. */
+    snprintf(path, sizeof(path), "%s/text_malformed.rpack", tempDir);
+    CHECK("malformed variant builds",
+          BuildTextVariantPack(prodPack, path, true, false));
+    memset(&diag, 0, sizeof(diag));
+    status = RunTextSeamDirect(path, &diag);
+    CHECK("malformed text refused (ESCAPE_GRAMMAR)",
+          status == EMERALD_TEXT_ERR_ESCAPE_GRAMMAR);
+    CHECK("malformed names the record",
+          strcmp(diag.canonicalName, k123DotId) == 0);
+
+    /* The live session survives the failed republish byte-for-byte. */
+    CHECK("live session survives", EmeraldResourceCompat_IsSessionRegistered());
+    CHECK("live arena survives",
+          EmeraldTextCompat_GetPublishedCount() == EMERALD_TEXT_LABEL_COUNT);
+    CHECK("live #112 slice survives", gText_123Dot[1] != NULL);
+
+    /* Missing: the record is dropped -> inventory mismatch. */
+    snprintf(path, sizeof(path), "%s/text_missing.rpack", tempDir);
+    CHECK("missing variant builds",
+          BuildTextVariantPack(prodPack, path, false, true));
+    memset(&diag, 0, sizeof(diag));
+    status = RunTextSeamDirect(path, &diag);
+    CHECK("missing text refused (TABLE_MISMATCH)",
+          status == EMERALD_TEXT_ERR_TABLE_MISMATCH);
+    CHECK("missing names the record",
+          strcmp(diag.canonicalName, k123DotId) == 0);
+    CHECK("live session survives", EmeraldResourceCompat_IsSessionRegistered());
+    CHECK("live arena survives",
+          EmeraldTextCompat_GetPublishedCount() == EMERALD_TEXT_LABEL_COUNT);
+    CHECK("live #112 slice survives", gText_123Dot[1] != NULL);
+
+    /* Fail-closed clear: every applied fill NULLs before the arena frees. */
+    EmeraldTextCompat_ClearMigratedEntries();
+    CHECK("cleared: no published arena",
+          EmeraldTextCompat_GetPublishedCount() == 0u);
+    CHECK("cleared: #112 fills NULL",
+          gText_123Dot[0] == NULL && gText_123Dot[1] == NULL
+              && gText_123Dot[2] == NULL);
+    CHECK("cleared: no arena pointers",
+          !EmeraldTextCompat_ContainsPointer((uintptr_t)liveBytes));
+}
+
 int main(int argc, char **argv)
 {
     const char *tempDir;
@@ -335,7 +913,16 @@ int main(int argc, char **argv)
 
     TestLoaderUnavailable();
     TestLoaderRefusesTrainerOnlyPack(tempDir);
+    TestLoaderRefusesTextVariant(tempDir, prodPack, true, false,
+                                 "text_malformed");
+    TestLoaderRefusesTextVariant(tempDir, prodPack, false, true,
+                                 "text_missing");
     TestLoaderProductionPack(prodPack);
+    TestTextPublication(prodPack);
+    TestTextSkeletonFills();
+    TestTextSlotPointers();
+    TestTextCurrentCharRouting();
+    TestTextTransactionalRefusal(tempDir, prodPack);
 
     FreeFamilyFixtures();
     FreeBackFamilyFixtures();

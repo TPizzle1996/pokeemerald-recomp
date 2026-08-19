@@ -37,6 +37,10 @@
 #include "constants/items.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
 #define MAX_TIME (10 * 60 * 60) // Timer can go up to 9:59:59
 
@@ -402,7 +406,9 @@ static const u8 sVibrationData[MAX_RFU_PLAYERS][4] =
     {3, 5, 3, 0},
 };
 
-static const u8 *const sMessages[] =
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
+static const u8 *const sMessages_berry_crush[] =
 {
     [MSG_PICK_BERRY]   = gText_ReadyPickBerry,
     [MSG_WAIT_PICK]    = gText_WaitForAllChooseBerry,
@@ -414,6 +420,7 @@ static const u8 *const sMessages[] =
     [MSG_TIMES_UP]     = gText_TimesUpNoGoodPowder,
     [MSG_COMM_STANDBY] = gText_CommunicationStandby2,
 };
+#endif
 
 static const struct BgTemplate sBgTemplates[4] =
 {
@@ -903,6 +910,8 @@ static const struct DigitObjUtilTemplate sDigitObjTemplates[] =
     }
 };
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sResultsTexts[] =
 {
     [RESULTS_PAGE_PRESSES]  = gText_SpaceTimes2, // " times"
@@ -913,6 +922,7 @@ static const u8 *const sResultsTexts[] =
     [RESULTS_PAGE_COOPERATIVE + NUM_RESULTS_PAGES] = gText_CoopRankings,
     [RESULTS_PAGE_POWER + NUM_RESULTS_PAGES]       = gText_PressingPowerRankings,
 };
+#endif
 
 static u32 (*const sBerryCrushCommands[])(struct BerryCrushGame *game, u8 *data) =
 {
@@ -2252,12 +2262,12 @@ static u32 Cmd_PrintMessage(struct BerryCrushGame *game, u8 *args)
         DrawDialogueFrame(0, FALSE);
         if (args[1] & F_MSG_EXPAND)
         {
-            StringExpandPlaceholders(gStringVar4, sMessages[args[0]]);
+            StringExpandPlaceholders(gStringVar4, sMessages_berry_crush[args[0]]);
             AddTextPrinterParameterized2(0, FONT_NORMAL, gStringVar4, game->textSpeed, 0, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
         }
         else
         {
-            AddTextPrinterParameterized2(0, FONT_NORMAL, sMessages[args[0]], game->textSpeed, 0, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+            AddTextPrinterParameterized2(0, FONT_NORMAL, sMessages_berry_crush[args[0]], game->textSpeed, 0, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
         }
         CopyWindowToVram(0, COPYWIN_FULL);
         break;
@@ -3386,9 +3396,9 @@ static u32 Cmd_StopGame(struct BerryCrushGame *game, u8 *args)
     case 0:
         DrawDialogueFrame(0, FALSE);
         if (game->playAgainState == PLAY_AGAIN_NO_BERRIES)
-            AddTextPrinterParameterized2(0, FONT_NORMAL, sMessages[MSG_NO_BERRIES], game->textSpeed, 0, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+            AddTextPrinterParameterized2(0, FONT_NORMAL, sMessages_berry_crush[MSG_NO_BERRIES], game->textSpeed, 0, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
         else
-            AddTextPrinterParameterized2(0, FONT_NORMAL, sMessages[MSG_DROPPED], game->textSpeed, 0, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+            AddTextPrinterParameterized2(0, FONT_NORMAL, sMessages_berry_crush[MSG_DROPPED], game->textSpeed, 0, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
         CopyWindowToVram(0, COPYWIN_FULL);
         break;
     case 1:

@@ -1,18 +1,30 @@
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 // multichoice lists
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_BrineyOnDewford[] =
 {
     {gText_Petalburg},
     {gText_Slateport},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_EnterInfo[] =
 {
     {gText_Enter2},
     {gText_Info2},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_ContestInfo[] =
 {
     {gText_WhatsAContest},
@@ -20,7 +32,10 @@ static const struct MenuAction MultichoiceList_ContestInfo[] =
     {gText_Ranks},
     {gText_Cancel2},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_ContestType[] =
 {
     {gText_CoolnessContest},
@@ -30,7 +45,10 @@ static const struct MenuAction MultichoiceList_ContestType[] =
     {gText_ToughnessContest},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_BasePCWithRegistry[] =
 {
     {gText_Decoration2},
@@ -38,14 +56,20 @@ static const struct MenuAction MultichoiceList_BasePCWithRegistry[] =
     {gText_Registry},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_BasePCNoRegistry[] =
 {
     {gText_Decoration2},
     {gText_PackUp},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_RegisterMenu[] =
 {
     {gMenuText_Register},
@@ -53,13 +77,19 @@ static const struct MenuAction MultichoiceList_RegisterMenu[] =
     {gText_Information},
     {gText_Cancel2},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_Bike[] =
 {
     {gText_Mach},
     {gText_Acro},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_StatusInfo[] =
 {
     {gText_Psn},
@@ -69,145 +99,208 @@ static const struct MenuAction MultichoiceList_StatusInfo[] =
     {gText_Frz},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_BrineyOffDewford[] =
 {
     {gText_Dewford},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_ViewedPaintings[] =
 {
     {gText_SawIt},
     {gText_NotYet},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_YesNoInfo2[] =
 {
     {gText_Yes},
     {gText_No},
     {gText_Info2},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_ChallengeInfo[] =
 {
     {gText_Challenge},
     {gText_Info3},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_LevelMode[] =
 {
     {gText_Lv50},
     {gText_OpenLevel},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_Mechadoll1_Q1[] =
 {
     {gTrickHouse_Mechadoll_Oddish},
     {gTrickHouse_Mechadoll_Poochyena},
     {gTrickHouse_Mechadoll_Taillow},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_Mechadoll1_Q2[] =
 {
     {gTrickHouse_Mechadoll_Azurill},
     {gTrickHouse_Mechadoll_Lotad},
     {gTrickHouse_Mechadoll_Wingull},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_Mechadoll1_Q3[] =
 {
     {gTrickHouse_Mechadoll_Dustox},
     {gTrickHouse_Mechadoll_Zubat},
     {gTrickHouse_Mechadoll_Nincada},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_Mechadoll2_Q1[] =
 {
     {gTrickHouse_Mechadoll_Ralts},
     {gTrickHouse_Mechadoll_Zigzagoon},
     {gTrickHouse_Mechadoll_Slakoth},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_Mechadoll2_Q2[] =
 {
     {gTrickHouse_Mechadoll_Poochyena2},
     {gTrickHouse_Mechadoll_Shroomish},
     {gTrickHouse_Mechadoll_Zigzagoon2},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_Mechadoll2_Q3[] =
 {
     {gTrickHouse_Mechadoll_Poochyena3},
     {gTrickHouse_Mechadoll_Zubat2},
     {gTrickHouse_Mechadoll_Carvanha},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_Mechadoll3_Q1[] =
 {
     {gTrickHouse_Mechadoll_BurnHeal},
     {gTrickHouse_Mechadoll_HarborMail},
     {gTrickHouse_Mechadoll_SamePrice},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_Mechadoll3_Q2[] =
 {
     {gTrickHouse_Mechadoll_60Yen},
     {gTrickHouse_Mechadoll_55Yen},
     {gTrickHouse_Mechadoll_Nothing},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_Mechadoll3_Q3[] =
 {
     {gTrickHouse_Mechadoll_CostMore},
     {gTrickHouse_Mechadoll_CostLess},
     {gTrickHouse_Mechadoll_SamePrice2},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_Mechadoll4_Q1[] =
 {
     {gTrickHouse_Mechadoll_Male},
     {gTrickHouse_Mechadoll_Female},
     {gTrickHouse_Mechadoll_Neither},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_Mechadoll4_Q2[] =
 {
     {gTrickHouse_Mechadoll_ElderlyMen},
     {gTrickHouse_Mechadoll_ElderlyLadies},
     {gTrickHouse_Mechadoll_SameNumber},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_Mechadoll4_Q3[] =
 {
     {gTrickHouse_Mechadoll_None},
     {gTrickHouse_Mechadoll_One},
     {gTrickHouse_Mechadoll_Two},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_Mechadoll5_Q1[] =
 {
     {gTrickHouse_Mechadoll_Two2},
     {gTrickHouse_Mechadoll_Three},
     {gTrickHouse_Mechadoll_Four},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_Mechadoll5_Q2[] =
 {
     {gTrickHouse_Mechadoll_Six},
     {gTrickHouse_Mechadoll_Seven},
     {gTrickHouse_Mechadoll_Eight},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_Mechadoll5_Q3[] =
 {
     {gTrickHouse_Mechadoll_Six2},
     {gTrickHouse_Mechadoll_Seven2},
     {gTrickHouse_Mechadoll_Eight2},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_VendingMachine[] =
 {
     {gText_FreshWaterAndPrice},
@@ -215,7 +308,10 @@ static const struct MenuAction MultichoiceList_VendingMachine[] =
     {gText_LemonadeAndPrice},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_MachBikeInfo[] =
 {
     {gText_HowToRide},
@@ -223,7 +319,10 @@ static const struct MenuAction MultichoiceList_MachBikeInfo[] =
     {gText_SandySlopes},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_AcroBikeInfo[] =
 {
     {gText_Wheelies},
@@ -231,20 +330,29 @@ static const struct MenuAction MultichoiceList_AcroBikeInfo[] =
     {gText_Jump},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_Satisfaction[] =
 {
     {gText_Satisfied},
     {gText_Dissatisfied},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_SternDeepSea[] =
 {
     {gText_DeepSeaTooth},
     {gText_DeepSeaScale},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_UnusedAshVendor[] =
 {
     {gText_BlueFlute2},
@@ -256,7 +364,10 @@ static const struct MenuAction MultichoiceList_UnusedAshVendor[] =
     {gText_GlassDesk},
     {gText_Cancel2},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_GameCornerDolls[] =
 {
     {gText_TreeckoDollAndPrice},
@@ -264,7 +375,10 @@ static const struct MenuAction MultichoiceList_GameCornerDolls[] =
     {gText_MudkipDollAndPrice},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_GameCornerTMs[] =
 {
     {gText_TM32AndPrice},
@@ -274,46 +388,67 @@ static const struct MenuAction MultichoiceList_GameCornerTMs[] =
     {gText_TM13AndPrice},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_GameCornerCoins[] =
 {
     {gText_50CoinsAndPrice},
     {gText_500CoinsAndPrice},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_HowsFishing[] =
 {
     {gText_Excellent2},
     {gText_NotSoGood},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_SSTidalSlateportWithBF[] =
 {
     {gText_LilycoveCity},
     {gText_BattleFrontier},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_SSTidalBattleFrontier[] =
 {
     {gText_SlateportCity},
     {gText_LilycoveCity},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_RightLeft[] =
 {
     {gText_Right},
     {gText_Left},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_SSTidalSlateportNoBF[] =
 {
     {gText_LilycoveCity},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_Floors[] =
 {
     {gText_5F},
@@ -323,46 +458,67 @@ static const struct MenuAction MultichoiceList_Floors[] =
     {gText_1F},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_ShardsR[] =
 {
     {gText_RedShard},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_ShardsY[] =
 {
     {gText_YellowShard},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_ShardsRY[] =
 {
     {gText_RedShard},
     {gText_YellowShard},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_ShardsB[] =
 {
     {gText_BlueShard},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_ShardsRB[] =
 {
     {gText_RedShard},
     {gText_BlueShard},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_ShardsYB[] =
 {
     {gText_YellowShard},
     {gText_BlueShard},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_ShardsRYB[] =
 {
     {gText_RedShard},
@@ -370,27 +526,39 @@ static const struct MenuAction MultichoiceList_ShardsRYB[] =
     {gText_BlueShard},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_ShardsG[] =
 {
     {gText_GreenShard},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_ShardsRG[] =
 {
     {gText_RedShard},
     {gText_GreenShard},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_ShardsYG[] =
 {
     {gText_YellowShard},
     {gText_GreenShard},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_ShardsRYG[] =
 {
     {gText_RedShard},
@@ -398,14 +566,20 @@ static const struct MenuAction MultichoiceList_ShardsRYG[] =
     {gText_GreenShard},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_ShardsBG[] =
 {
     {gText_BlueShard},
     {gText_GreenShard},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_ShardsRBG[] =
 {
     {gText_RedShard},
@@ -413,7 +587,10 @@ static const struct MenuAction MultichoiceList_ShardsRBG[] =
     {gText_GreenShard},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_ShardsYBG[] =
 {
     {gText_YellowShard},
@@ -421,7 +598,10 @@ static const struct MenuAction MultichoiceList_ShardsYBG[] =
     {gText_GreenShard},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_ShardsRYBG[] =
 {
     {gText_RedShard},
@@ -430,7 +610,10 @@ static const struct MenuAction MultichoiceList_ShardsRYBG[] =
     {gText_GreenShard},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_TourneyWithRecord[] =
 {
     {gText_Opponent},
@@ -440,7 +623,10 @@ static const struct MenuAction MultichoiceList_TourneyWithRecord[] =
     {gText_Rest},
     {gText_Retire},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_TourneyNoRecord[] =
 {
     {gText_Opponent},
@@ -449,13 +635,19 @@ static const struct MenuAction MultichoiceList_TourneyNoRecord[] =
     {gText_Rest},
     {gText_Retire},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_Tent[] =
 {
     {gText_RedTent},
     {gText_BlueTent},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_LinkServicesNoBerry[] =
 {
     {gText_TradeCenter},
@@ -463,14 +655,20 @@ static const struct MenuAction MultichoiceList_LinkServicesNoBerry[] =
     {gText_RecordCorner},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_YesNoInfo[] =
 {
     {gText_Yes},
     {gText_No},
     {gText_Info2},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_BattleMode[] =
 {
     {gText_SingleBattle},
@@ -479,7 +677,10 @@ static const struct MenuAction MultichoiceList_BattleMode[] =
     {gText_Info2},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_LinkServicesNoRecord[] =
 {
     {gText_TradeCenter},
@@ -487,7 +688,10 @@ static const struct MenuAction MultichoiceList_LinkServicesNoRecord[] =
     {gText_BerryCrush3},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_LinkServicesAll[] =
 {
     {gText_TradeCenter},
@@ -496,28 +700,40 @@ static const struct MenuAction MultichoiceList_LinkServicesAll[] =
     {gText_BerryCrush3},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_LinkServicesNoRecordBerry[] =
 {
     {gText_TradeCenter},
     {gText_Colosseum},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_WirelessMinigame[] =
 {
     {gText_PokemonJump},
     {gText_DodrioBerryPicking},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_LinkLeader[] =
 {
     {gText_JoinGroup},
     {gText_BecomeLeader},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_ContestRank[] =
 {
     {gText_NormalRank},
@@ -526,14 +742,20 @@ static const struct MenuAction MultichoiceList_ContestRank[] =
     {gText_MasterRank},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_FrontierItemChoose[] =
 {
     {gText_BattleBag},
     {gText_HeldItem},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_LinkContestInfo[] =
 {
     {gText_LinkContest},
@@ -541,14 +763,20 @@ static const struct MenuAction MultichoiceList_LinkContestInfo[] =
     {gText_AboutG_Mode},
     {gText_Cancel2},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_LinkContestMode[] =
 {
     {gText_E_Mode},
     {gText_G_Mode},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_ForcedStartMenu[] =
 {
     {gText_MenuOptionPokedex},
@@ -560,7 +788,10 @@ static const struct MenuAction MultichoiceList_ForcedStartMenu[] =
     {gText_MenuOptionOption},
     {gText_MenuOptionExit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_FrontierGamblerBet[] =
 {
     {gText_5BP},
@@ -568,28 +799,40 @@ static const struct MenuAction MultichoiceList_FrontierGamblerBet[] =
     {gText_15BP},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_UnusedSSTidal1[] =
 {
     {gText_SouthernIsland},
     {gText_BirthIsland},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_UnusedSSTidal2[] =
 {
     {gText_SouthernIsland},
     {gText_FarawayIsland},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_UnusedSSTidal3[] =
 {
     {gText_BirthIsland},
     {gText_FarawayIsland},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_UnusedSSTidal4[] =
 {
     {gText_SouthernIsland},
@@ -597,20 +840,29 @@ static const struct MenuAction MultichoiceList_UnusedSSTidal4[] =
     {gText_FarawayIsland},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_Fossil[] =
 {
     {gText_ClawFossil},
     {gText_RootFossil},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_YesNo[] =
 {
     {gText_Yes},
     {gText_No4},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_FrontierRules[] =
 {
     {gText_TwoStyles},
@@ -620,7 +872,10 @@ static const struct MenuAction MultichoiceList_FrontierRules[] =
     {gText_HoldItems},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_FrontierPassInfo[] =
 {
     {gText_Symbols2},
@@ -628,7 +883,10 @@ static const struct MenuAction MultichoiceList_FrontierPassInfo[] =
     {gText_BattlePts},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_BattleArenaRules[] =
 {
     {gText_BattleRules},
@@ -637,7 +895,10 @@ static const struct MenuAction MultichoiceList_BattleArenaRules[] =
     {gText_JudgeBody},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_BattleTowerRules[] =
 {
     {gText_TowerInfo},
@@ -646,7 +907,10 @@ static const struct MenuAction MultichoiceList_BattleTowerRules[] =
     {gText_MultiLink2},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_BattleDomeRules[] =
 {
     {gText_Matchup},
@@ -654,7 +918,10 @@ static const struct MenuAction MultichoiceList_BattleDomeRules[] =
     {gText_DoubleKO},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_BattleFactoryRules[] =
 {
     {gText_BasicRules},
@@ -664,7 +931,10 @@ static const struct MenuAction MultichoiceList_BattleFactoryRules[] =
     {gText_OpenLevel3},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_BattlePalaceRules[] =
 {
     {gText_BattleBasics},
@@ -674,7 +944,10 @@ static const struct MenuAction MultichoiceList_BattlePalaceRules[] =
     {gText_WhenInDanger},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_BattlePyramidRules[] =
 {
     {gText_PyramidPokemon},
@@ -683,7 +956,10 @@ static const struct MenuAction MultichoiceList_BattlePyramidRules[] =
     {gText_BattleBag2},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_BattlePikeRules[] =
 {
     {gText_PokenavAndBag},
@@ -691,7 +967,10 @@ static const struct MenuAction MultichoiceList_BattlePikeRules[] =
     {gText_PokemonOrder},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_GoOnRecordRestRetire[] =
 {
     {gText_GoOn},
@@ -699,33 +978,48 @@ static const struct MenuAction MultichoiceList_GoOnRecordRestRetire[] =
     {gText_Rest},
     {gText_Retire},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_GoOnRestRetire[] =
 {
     {gText_GoOn},
     {gText_Rest},
     {gText_Retire},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_GoOnRecordRetire[] =
 {
     {gText_GoOn},
     {gText_Record2},
     {gText_Retire},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_GoOnRetire[] =
 {
     {gText_GoOn},
     {gText_Retire},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_TVLati[] =
 {
     {gText_Red},
     {gText_Blue},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_BattleTowerFeelings[] =
 {
     {gText_IllBattleNow},
@@ -733,7 +1027,10 @@ static const struct MenuAction MultichoiceList_BattleTowerFeelings[] =
     {gText_ILost},
     {gText_IWontTell},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_WheresRayquaza[] =
 {
     {gText_CaveOfOrigin},
@@ -741,7 +1038,10 @@ static const struct MenuAction MultichoiceList_WheresRayquaza[] =
     {gText_SkyPillar},
     {gText_DontRemember},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_SlateportTentRules[] =
 {
     {gText_BasicRules},
@@ -751,7 +1051,10 @@ static const struct MenuAction MultichoiceList_SlateportTentRules[] =
     {gText_BattlePokemon},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_FallarborTentRules[] =
 {
     {gText_BattleTrainers},
@@ -761,7 +1064,10 @@ static const struct MenuAction MultichoiceList_FallarborTentRules[] =
     {gText_JudgeBody},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_TagMatchType[] =
 {
     {gText_NormalTagMatch},
@@ -770,11 +1076,15 @@ static const struct MenuAction MultichoiceList_TagMatchType[] =
     {gText_ExpertTagMatch},
     {gText_Exit},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction MultichoiceList_Exit[] =
 {
     {gText_Exit},
 };
+#endif
 
 struct MultichoiceListStruct
 {
@@ -900,6 +1210,8 @@ static const struct MultichoiceListStruct sMultichoiceLists[] =
     [MULTI_TAG_MATCH_TYPE]             = MULTICHOICE(MultichoiceList_TagMatchType),
 };
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 const u8 *const gStdStrings[] =
 {
     [STDSTRING_COOL] = gText_Cool,
@@ -933,6 +1245,7 @@ const u8 *const gStdStrings[] =
     [STDSTRING_BATTLE_PIKE] = gText_BattlePike,
     [STDSTRING_BATTLE_PYRAMID] = gText_BattlePyramid,
 };
+#endif
 
 static const u8 sLinkServicesMultichoiceIds[] =
 {
@@ -944,6 +1257,8 @@ static const u8 sLinkServicesMultichoiceIds[] =
     MULTI_WIRELESS_ALL_SERVICES
 };
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sPCNameStrings[] =
 {
     gText_SomeonesPC,
@@ -951,7 +1266,10 @@ static const u8 *const sPCNameStrings[] =
     gText_PlayersPC,
     gText_LogOff,
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sLilycoveSSTidalDestinations[SSTIDAL_SELECTION_COUNT] =
 {
     [SSTIDAL_SELECTION_SLATEPORT]       = gText_SlateportCity,
@@ -962,6 +1280,7 @@ static const u8 *const sLilycoveSSTidalDestinations[SSTIDAL_SELECTION_COUNT] =
     [SSTIDAL_SELECTION_FARAWAY_ISLAND]  = gText_FarawayIsland,
     [SSTIDAL_SELECTION_EXIT]            = gText_Exit,
 };
+#endif
 
 static const u8 *const sCableClubOptions_WithRecordMix[] =
 {

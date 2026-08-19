@@ -38,6 +38,10 @@ EWRAM_DATA static u16 sHatchedEggEggMoves[EGG_MOVES_ARRAY_COUNT] = {0};
 EWRAM_DATA static u16 sHatchedEggMotherMoves[MAX_MON_MOVES] = {0};
 
 #include "data/pokemon/egg_moves.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
 static const struct WindowTemplate sDaycareLevelMenuWindowTemplate =
 {
@@ -52,12 +56,15 @@ static const struct WindowTemplate sDaycareLevelMenuWindowTemplate =
 
 // Indices here are assigned by Task_HandleDaycareLevelMenuInput to VAR_RESULT,
 // which is copied to VAR_0x8004 and used as an index for GetDaycareCost
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct ListMenuItem sLevelMenuItems[] =
 {
     {gText_ExpandedPlaceholder_Empty, 0},
     {gText_ExpandedPlaceholder_Empty, 1},
     {gText_Exit, DAYCARE_LEVEL_MENU_EXIT}
 };
+#endif
 
 static const struct ListMenuTemplate sDaycareListMenuLevelTemplate =
 {
@@ -81,6 +88,8 @@ static const struct ListMenuTemplate sDaycareListMenuLevelTemplate =
     .cursorKind = CURSOR_BLACK_ARROW
 };
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sCompatibilityMessages[] =
 {
     gDaycareText_GetAlongVeryWell,
@@ -88,6 +97,7 @@ static const u8 *const sCompatibilityMessages[] =
     gDaycareText_DontLikeOther,
     gDaycareText_PlayOther
 };
+#endif
 
 static const u8 sJapaneseEggNickname[] = _("タマゴ"); // "tamago" ("egg" in Japanese)
 

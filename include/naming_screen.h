@@ -3,6 +3,19 @@
 
 #include "main.h"
 
+// R13-C: file-local struct moved here so the generated host arrays
+// (text_skeleton_arrays.generated.{c,h}) can type their externs.
+struct NamingScreenTemplate
+{
+    u8 copyExistingString;
+    u8 maxChars;
+    u8 iconFunction;
+    u8 addGenderIcon;
+    u8 initialPage;
+    u8 unused;
+    const u8 *title;
+};
+
 enum {
     NAMING_SCREEN_PLAYER,
     NAMING_SCREEN_BOX,

@@ -288,6 +288,8 @@ static const u16 sQuizLadyPrizes[] =
 };
 
 // Favor Lady data
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sFavorLadyRequests[] =
 {
     gText_FavorLady_Slippery,
@@ -297,6 +299,7 @@ static const u8 *const sFavorLadyRequests[] =
     gText_FavorLady_Sticky,
     gText_FavorLady_Pointy
 };
+#endif /* NATIVE_LINUX */
 
 static const u16 sFavorLadyAcceptedItems_Slippery[] =
 {
@@ -431,6 +434,8 @@ static const u16 sFavorLadyPrizes[] =
 };
 
 
+/* R13-C: skeleton-migrated tables (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sContestLadyMonNames[] =
 {
     [CONTEST_CATEGORY_COOL]   = gText_ContestLady_Handsome,
@@ -457,6 +462,7 @@ static const u8 *const sContestNames[] =
     [CONTEST_CATEGORY_SMART]  = gText_SmartnessContest,
     [CONTEST_CATEGORY_TOUGH]  = gText_ToughnessContest
 };
+#endif /* NATIVE_LINUX */
 
 static const u16 sContestLadyMonSpecies[] =
 {

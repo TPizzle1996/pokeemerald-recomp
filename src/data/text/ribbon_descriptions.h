@@ -1,23 +1,67 @@
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
+#ifndef NATIVE_LINUX
 const u8 gRibbonDescriptionPart1_Champion[] = _("CHAMPION-beating, HALL");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gRibbonDescriptionPart2_Champion[] = _("OF FAME Member RIBBON");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gRibbonDescriptionPart1_CoolContest[] = _("COOL CONTEST");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gRibbonDescriptionPart1_BeautyContest[] = _("BEAUTY CONTEST");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gRibbonDescriptionPart1_CuteContest[] = _("CUTE CONTEST");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gRibbonDescriptionPart1_SmartContest[] = _("SMART CONTEST");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gRibbonDescriptionPart1_ToughContest[] = _("TOUGH CONTEST");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gRibbonDescriptionPart2_NormalRank[] = _("Normal Rank winner!");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gRibbonDescriptionPart2_SuperRank[] = _("Super Rank winner!");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gRibbonDescriptionPart2_HyperRank[] = _("Hyper Rank winner!");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gRibbonDescriptionPart2_MasterRank[] = _("Master Rank winner!");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gRibbonDescriptionPart1_Winning[] = _("For clearing LV50");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gRibbonDescriptionPart2_Winning[] = _("at the BATTLE TOWER.");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gRibbonDescriptionPart1_Victory[] = _("For clearing Open Level");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gRibbonDescriptionPart2_Victory[] = _("at the BATTLE TOWER.");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gRibbonDescriptionPart1_Artist[] = _("RIBBON for being chosen");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gRibbonDescriptionPart2_Artist[] = _("as a super sketch model.");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gRibbonDescriptionPart1_Effort[] = _("RIBBON awarded for");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gRibbonDescriptionPart2_Effort[] = _("being a hard worker.");
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 const u8 *const gRibbonDescriptionPointers[][2] =
 {
     [CHAMPION_RIBBON]      = {gRibbonDescriptionPart1_Champion,      gRibbonDescriptionPart2_Champion},
@@ -46,3 +90,4 @@ const u8 *const gRibbonDescriptionPointers[][2] =
     [ARTIST_RIBBON]        = {gRibbonDescriptionPart1_Artist,        gRibbonDescriptionPart2_Artist},
     [EFFORT_RIBBON]        = {gRibbonDescriptionPart1_Effort,        gRibbonDescriptionPart2_Effort},
 };
+#endif

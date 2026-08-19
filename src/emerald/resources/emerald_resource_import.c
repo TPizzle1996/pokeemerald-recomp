@@ -55,7 +55,10 @@
  * 4518 resources; 8192 keeps headroom for the remaining R11 families.
  * The view structs hold ~1.6 MiB at this size and are heap-allocated in
  * BuildPackCore (never on the stack). */
-#define EMERALD_IMPORT_MAX_RECORDS 8192u
+/* R13-C: the text family (5,187 records) joins the eight existing families
+ * (6,876 records) -> 12,063 merged records. 16384 matches the pack writer's
+ * entry cap. The view structs are heap-allocated (see BuildPackCore). */
+#define EMERALD_IMPORT_MAX_RECORDS 16384u
 #define EMERALD_IMPORT_MAX_PAYLOAD_SIZE (16u * 1024u * 1024u) /* 16 MiB, matches the R2 writer cap */
 #define EMERALD_IMPORT_LOCK_NAME ".emerald-import.lock"
 
@@ -274,6 +277,10 @@ struct ImportManifestRecord
     uint8_t sourceEncodedSha256[GEN3_PACK_SHA256_SIZE];
     uint8_t canonicalDecodedSha256[GEN3_PACK_SHA256_SIZE];
     bool requiredForBase; /* filled from the catalog contract */
+    /* R13-C text bundles: the payload is a constructed artifact file on disk
+     * (no ROM slice). romOffset is then a placeholder 0. */
+    bool bundle;
+    char sourceArtifact[1024];
 };
 
 struct ImportManifestView
@@ -507,7 +514,24 @@ static enum EmeraldResourceImportError ParseManifest(const uint8_t *data, size_t
                                      "record has invalid schema");
         }
         out->schema = (uint32_t)schema;
-        if (!Gen3Toml_GetInteger(record, "rom_offset", &offset) || offset < 0)
+        /* R13-C text bundles: bundle = true marks a constructed artifact
+         * file (no ROM slice). The record must name the artifact and the
+         * source encoding must be raw (the artifact IS the payload). */
+        if (!Gen3Toml_GetBool(record, "bundle", &out->bundle))
+            out->bundle = false;
+        if (out->bundle
+         && (!Gen3Toml_GetString(record, "source_artifact", &value)
+          || !CopyStr(value, out->sourceArtifact, sizeof(out->sourceArtifact))))
+        {
+            Gen3Toml_Destroy(&doc);
+            return SetErrorForRecord(report, i, out->id, EMERALD_IMPORT_ERR_MANIFEST_BAD_RECORD_FIELD,
+                                     "bundle record missing valid source_artifact");
+        }
+        if (out->bundle)
+        {
+            offset = 0;
+        }
+        else if (!Gen3Toml_GetInteger(record, "rom_offset", &offset) || offset < 0)
         {
             Gen3Toml_Destroy(&doc);
             return SetErrorForRecord(report, i, out->id, EMERALD_IMPORT_ERR_MANIFEST_BAD_RECORD_FIELD,
@@ -547,6 +571,12 @@ static enum EmeraldResourceImportError ParseManifest(const uint8_t *data, size_t
             Gen3Toml_Destroy(&doc);
             return SetErrorForRecord(report, i, out->id, EMERALD_IMPORT_ERR_MANIFEST_UNSUPPORTED_ENCODING,
                                      "record has unsupported source_encoding '%s'", badEncoding);
+        }
+        if (out->bundle && out->sourceEncoding != GEN3_PACK_SOURCE_ENCODING_RAW)
+        {
+            Gen3Toml_Destroy(&doc);
+            return SetErrorForRecord(report, i, out->id, EMERALD_IMPORT_ERR_MANIFEST_UNSUPPORTED_ENCODING,
+                                     "bundle record requires a raw source_encoding");
         }
         if (!Gen3Toml_GetString(record, "source_encoded_sha256", &value)
          || !ParseHex(value, out->sourceEncodedSha256, GEN3_PACK_SHA256_SIZE))
@@ -833,9 +863,11 @@ static enum EmeraldResourceImportError ExtractRecord(
     enum Gen3ResourcePackError packError;
     Gen3ResourceKey derived;
 
-    if ((uint64_t)romDataSize != profile->romSize
-     || record->romOffset > (uint64_t)romDataSize
-     || record->encodedLength > (uint64_t)romDataSize - record->romOffset)
+    /* Bundle records carry no ROM slice; the artifact file replaces it. */
+    if (!record->bundle
+     && ((uint64_t)romDataSize != profile->romSize
+      || record->romOffset > (uint64_t)romDataSize
+      || record->encodedLength > (uint64_t)romDataSize - record->romOffset))
     {
         return SetErrorForRecord(report, recordIndex, record->id,
                                  EMERALD_IMPORT_ERR_ROM_RANGE_OUT_OF_BOUNDS,
@@ -867,18 +899,52 @@ static enum EmeraldResourceImportError ExtractRecord(
                                  "manifest type/schema disagree with the catalog contract");
     }
 
-    slice = (uint8_t *)malloc((size_t)record->encodedLength);
     decoded = (uint8_t *)malloc((size_t)record->decodedLength);
-    if (slice == NULL || decoded == NULL)
+    if (decoded == NULL)
     {
-        free(slice);
-        free(decoded);
         return SetErrorForRecord(report, recordIndex, record->id,
                                  EMERALD_IMPORT_ERR_OUT_OF_MEMORY,
                                  "out of memory extracting record");
     }
-
-    memcpy(slice, romData + record->romOffset, (size_t)record->encodedLength);
+    slice = NULL;
+    if (record->bundle)
+    {
+        /* R13-C bundle: read the constructed artifact file; it is the whole
+         * encoded payload (raw codec, encoded == decoded). The size and the
+         * digests below pin it against the manifest exactly like the ROM
+         * slice path pins non-bundle records. */
+        size_t artifactSize;
+        enum EmeraldResourceImportError readErr = ReadWholeFile(
+            record->sourceArtifact, &slice, &artifactSize, record->id,
+            EMERALD_IMPORT_ERR_ARTIFACT_READ_FAILED, report);
+        if (readErr != EMERALD_IMPORT_OK)
+        {
+            free(decoded);
+            return readErr;
+        }
+        if (artifactSize != (size_t)record->encodedLength)
+        {
+            free(slice);
+            free(decoded);
+            return SetErrorForRecord(report, recordIndex, record->id,
+                                     EMERALD_IMPORT_ERR_MANIFEST_BAD_RECORD_FIELD,
+                                     "bundle artifact %s is %zu bytes but the manifest declares %llu",
+                                     record->sourceArtifact, artifactSize,
+                                     (unsigned long long)record->encodedLength);
+        }
+    }
+    else
+    {
+        slice = (uint8_t *)malloc((size_t)record->encodedLength);
+        if (slice == NULL)
+        {
+            free(decoded);
+            return SetErrorForRecord(report, recordIndex, record->id,
+                                     EMERALD_IMPORT_ERR_OUT_OF_MEMORY,
+                                     "out of memory extracting record");
+        }
+        memcpy(slice, romData + record->romOffset, (size_t)record->encodedLength);
+    }
     Sha256Bytes(slice, (size_t)record->encodedLength, sliceSha);
     if (!BytesEqual(sliceSha, record->sourceEncodedSha256, 32u))
     {
@@ -965,6 +1031,7 @@ static enum EmeraldResourceImportError ExtractRecord(
     entry.sourceRomOffset = record->romOffset;
     entry.sourceEncodedSize = record->encodedLength;
     entry.sourceEncodedSha256 = record->sourceEncodedSha256;
+    entry.bundle = record->bundle;
 
     packError = Gen3ResourcePackBuild_AddEntry(build, &entry, diag);
     free(decoded);
@@ -1132,8 +1199,8 @@ static enum EmeraldResourceImportError BuildPackCore(const struct EmeraldImportI
         report = &localReport;
 
     /* The view structs hold EMERALD_IMPORT_MAX_RECORDS inline records each
-     * (~0.8 MiB) — too large for the stack, so the merged and per-file parse
-     * views are heap-allocated. */
+     * (~20 MiB for the manifest views) — too large for the stack, so the
+     * merged and per-file parse views are heap-allocated. */
     mergedManifest = (struct ImportManifestView *)calloc(1u, sizeof(*mergedManifest));
     parseManifest = (struct ImportManifestView *)calloc(1u, sizeof(*parseManifest));
     mergedCatalog = (struct ImportCatalogView *)calloc(1u, sizeof(*mergedCatalog));

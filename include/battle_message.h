@@ -1,5 +1,9 @@
 #ifndef GUARD_BATTLE_MESSAGE_H
 #define GUARD_BATTLE_MESSAGE_H
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
 // This buffer can hold many different things. Some of the things it can hold
 // that have explicit sizes are listed below to ensure it can contain them.
@@ -223,75 +227,211 @@ u8 GetCurrentPpToMaxPpState(u8 currentPp, u8 maxPp);
 
 extern struct BattleMsgData *gBattleMsgDataPtr;
 
+#ifndef NATIVE_LINUX
 extern const u8 *const gBattleStringsTable[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 *const gStatNamesTable[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 *const gPokeblockWasTooXStringTable[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 *const gRefereeStringsTable[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 *const gRoundsStringTable[];
+#endif
 
+#ifndef NATIVE_LINUX
 extern const u8 gText_PkmnIsEvolving[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_CongratsPkmnEvolved[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_PkmnStoppedEvolving[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_EllipsisQuestionMark[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_WhatWillPkmnDo[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_WhatWillPkmnDo2[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_WhatWillWallyDo[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_LinkStandby[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_BattleMenu[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_SafariZoneMenu[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_MoveInterfacePP[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_MoveInterfaceType[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_MoveInterfacePpType[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_MoveInterfaceDynamicColors[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_WhichMoveToForget4[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_BattleYesNoChoice[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_BattleSwitchWhich[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_BattleSwitchWhich2[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_BattleSwitchWhich3[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_BattleSwitchWhich4[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_BattleSwitchWhich5[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_SafariBalls[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_SafariBallLeft[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_Sleep[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_Poison[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_Burn[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_Paralysis[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_Ice[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_Confusion[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_Love[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_SpaceAndSpace[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_CommaSpace[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_Space2[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_LineBreak[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_NewLine[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_Are[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_Are2[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_BadEgg[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_BattleWallyName[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_Win[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_Loss[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_Draw[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_StatRose[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_DefendersStatRose[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_PkmnGettingPumped[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_PkmnShroudedInMist[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_PkmnsXPreventsSwitching[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_TheGreatNewHope[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_WillChampionshipDreamComeTrue[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_AFormerChampion[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_ThePreviousChampion[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_TheUnbeatenChampion[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_PlayerMon1Name[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_Vs[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_OpponentMon1Name[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_Mind[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_Skill[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_Body[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_Judgment[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_EmptyString3[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_RecordBattleToPass[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_BattleRecordedOnPass[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_BattleTourney[];
+#endif
 
 extern const u16 gMissStringIds[];
 extern const u16 gTrappingMoves[];

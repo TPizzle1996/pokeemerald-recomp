@@ -33,6 +33,10 @@
 #include "constants/items.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
 #define TAG_SCROLL_ARROW  2910
 #define TAG_PYRAMID_BAG   4132
@@ -100,11 +104,26 @@ static void DrawTossNumberWindow(u8);
 static void UpdateSwapLinePos(u8);
 static void SetSwapLineInvisibility(bool8);
 static void SpriteCB_BagWaitForShake(struct Sprite *);
-static void BagAction_UseOnField(u8);
-static void BagAction_Toss(u8);
-static void BagAction_Give(u8);
-static void BagAction_Cancel(u8);
-static void BagAction_UseInBattle(u8);
+#ifndef NATIVE_LINUX
+static
+#endif
+void BagAction_UseOnField(u8);
+#ifndef NATIVE_LINUX
+static
+#endif
+void BagAction_Toss(u8);
+#ifndef NATIVE_LINUX
+static
+#endif
+void BagAction_Give(u8);
+#ifndef NATIVE_LINUX
+static
+#endif
+void BagAction_Cancel(u8);
+#ifndef NATIVE_LINUX
+static
+#endif
+void BagAction_UseInBattle(u8);
 static void BagCursorMoved(s32, bool8, struct ListMenu *);
 static void PrintItemQuantity(u8 windowId, u32 itemId, u8 y);
 static void TossItem(u8);
@@ -172,6 +191,8 @@ enum {
     ACTION_DUMMY,
 };
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction sMenuActions[] =
 {
     [ACTION_USE_FIELD] =    { gMenuText_Use, {BagAction_UseOnField} },
@@ -181,6 +202,7 @@ static const struct MenuAction sMenuActions[] =
     [ACTION_USE_BATTLE] =   { gMenuText_Use, {BagAction_UseInBattle} },
     [ACTION_DUMMY] =        { gText_EmptyString2, {NULL} },
 };
+#endif
 
 static const u8 sMenuActionIds_Field[] = {ACTION_USE_FIELD, ACTION_GIVE, ACTION_TOSS, ACTION_CANCEL};
 static const u8 sMenuActionIds_ChooseToss[] = {ACTION_TOSS, ACTION_CANCEL};
@@ -1083,7 +1105,13 @@ static void CloseMenuActionWindow(void)
         CloseMenuActionWindowById(MENU_WIN_2x2);
 }
 
-static void BagAction_UseOnField(u8 taskId)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+void BagAction_UseOnField(u8 taskId)
 {
     u8 pocketId = GetItemPocket(gSpecialVar_ItemId);
 
@@ -1104,7 +1132,13 @@ static void BagAction_UseOnField(u8 taskId)
     }
 }
 
-static void BagAction_Cancel(u8 taskId)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+void BagAction_Cancel(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -1122,7 +1156,13 @@ static void SetTaskToMainPyramidBagInputHandler(u8 taskId)
     gTasks[taskId].func = Task_HandlePyramidBagInput;
 }
 
-static void BagAction_Toss(u8 taskId)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+void BagAction_Toss(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -1243,7 +1283,13 @@ static void Task_TossItem(u8 taskId)
     }
 }
 
-static void BagAction_Give(u8 taskId)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+void BagAction_Give(u8 taskId)
 {
     CloseMenuActionWindow();
     if (ItemIsMail(gSpecialVar_ItemId) == TRUE)
@@ -1297,7 +1343,13 @@ static void TryCloseBagToGiveItem(u8 taskId)
         ShowCantHoldMessage(taskId);
 }
 
-static void BagAction_UseInBattle(u8 taskId)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+void BagAction_UseInBattle(u8 taskId)
 {
     if (GetItemBattleFunc(gSpecialVar_ItemId) != NULL)
     {

@@ -46,6 +46,10 @@
 #include "constants/battle_frontier.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
 // Menu actions
 enum
@@ -91,18 +95,54 @@ EWRAM_DATA static bool8 sSavingComplete = FALSE;
 EWRAM_DATA static u8 sSaveInfoWindowId = 0;
 
 // Menu action callbacks
-static bool8 StartMenuPokedexCallback(void);
-static bool8 StartMenuPokemonCallback(void);
-static bool8 StartMenuBagCallback(void);
-static bool8 StartMenuPokeNavCallback(void);
-static bool8 StartMenuPlayerNameCallback(void);
-static bool8 StartMenuSaveCallback(void);
-static bool8 StartMenuOptionCallback(void);
-static bool8 StartMenuExitCallback(void);
-static bool8 StartMenuSafariZoneRetireCallback(void);
-static bool8 StartMenuLinkModePlayerNameCallback(void);
-static bool8 StartMenuBattlePyramidRetireCallback(void);
-static bool8 StartMenuBattlePyramidBagCallback(void);
+#ifndef NATIVE_LINUX
+static
+#endif
+bool8 StartMenuPokedexCallback(void);
+#ifndef NATIVE_LINUX
+static
+#endif
+bool8 StartMenuPokemonCallback(void);
+#ifndef NATIVE_LINUX
+static
+#endif
+bool8 StartMenuBagCallback(void);
+#ifndef NATIVE_LINUX
+static
+#endif
+bool8 StartMenuPokeNavCallback(void);
+#ifndef NATIVE_LINUX
+static
+#endif
+bool8 StartMenuPlayerNameCallback(void);
+#ifndef NATIVE_LINUX
+static
+#endif
+bool8 StartMenuSaveCallback(void);
+#ifndef NATIVE_LINUX
+static
+#endif
+bool8 StartMenuOptionCallback(void);
+#ifndef NATIVE_LINUX
+static
+#endif
+bool8 StartMenuExitCallback(void);
+#ifndef NATIVE_LINUX
+static
+#endif
+bool8 StartMenuSafariZoneRetireCallback(void);
+#ifndef NATIVE_LINUX
+static
+#endif
+bool8 StartMenuLinkModePlayerNameCallback(void);
+#ifndef NATIVE_LINUX
+static
+#endif
+bool8 StartMenuBattlePyramidRetireCallback(void);
+#ifndef NATIVE_LINUX
+static
+#endif
+bool8 StartMenuBattlePyramidBagCallback(void);
 
 // Menu callbacks
 static bool8 SaveStartCallback(void);
@@ -147,6 +187,8 @@ static const struct WindowTemplate sWindowTemplate_SafariBalls = {
     .baseBlock = 0x8
 };
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sPyramidFloorNames[FRONTIER_STAGES_PER_CHALLENGE + 1] =
 {
     gText_Floor1,
@@ -158,6 +200,7 @@ static const u8 *const sPyramidFloorNames[FRONTIER_STAGES_PER_CHALLENGE + 1] =
     gText_Floor7,
     gText_Peak
 };
+#endif
 
 static const struct WindowTemplate sWindowTemplate_PyramidFloor = {
     .bg = 0,
@@ -179,6 +222,8 @@ static const struct WindowTemplate sWindowTemplate_PyramidPeak = {
     .baseBlock = 0x8
 };
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction sStartMenuItems[] =
 {
     [MENU_ACTION_POKEDEX]         = {gText_MenuPokedex, {.u8_void = StartMenuPokedexCallback}},
@@ -195,6 +240,7 @@ static const struct MenuAction sStartMenuItems[] =
     [MENU_ACTION_RETIRE_FRONTIER] = {gText_MenuRetire,  {.u8_void = StartMenuBattlePyramidRetireCallback}},
     [MENU_ACTION_PYRAMID_BAG]     = {gText_MenuBag,     {.u8_void = StartMenuBattlePyramidBagCallback}}
 };
+#endif
 
 static const struct BgTemplate sBgTemplates_LinkBattleSave[] =
 {
@@ -636,7 +682,13 @@ static bool8 HandleStartMenuInput(void)
     return FALSE;
 }
 
-static bool8 StartMenuPokedexCallback(void)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+bool8 StartMenuPokedexCallback(void)
 {
     if (!gPaletteFade.active)
     {
@@ -652,7 +704,13 @@ static bool8 StartMenuPokedexCallback(void)
     return FALSE;
 }
 
-static bool8 StartMenuPokemonCallback(void)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+bool8 StartMenuPokemonCallback(void)
 {
     if (!gPaletteFade.active)
     {
@@ -667,7 +725,13 @@ static bool8 StartMenuPokemonCallback(void)
     return FALSE;
 }
 
-static bool8 StartMenuBagCallback(void)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+bool8 StartMenuBagCallback(void)
 {
     if (!gPaletteFade.active)
     {
@@ -682,7 +746,13 @@ static bool8 StartMenuBagCallback(void)
     return FALSE;
 }
 
-static bool8 StartMenuPokeNavCallback(void)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+bool8 StartMenuPokeNavCallback(void)
 {
     if (!gPaletteFade.active)
     {
@@ -697,7 +767,13 @@ static bool8 StartMenuPokeNavCallback(void)
     return FALSE;
 }
 
-static bool8 StartMenuPlayerNameCallback(void)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+bool8 StartMenuPlayerNameCallback(void)
 {
     if (!gPaletteFade.active)
     {
@@ -718,7 +794,13 @@ static bool8 StartMenuPlayerNameCallback(void)
     return FALSE;
 }
 
-static bool8 StartMenuSaveCallback(void)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+bool8 StartMenuSaveCallback(void)
 {
     if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
         RemoveExtraStartMenuWindows();
@@ -728,7 +810,13 @@ static bool8 StartMenuSaveCallback(void)
     return FALSE;
 }
 
-static bool8 StartMenuOptionCallback(void)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+bool8 StartMenuOptionCallback(void)
 {
     if (!gPaletteFade.active)
     {
@@ -744,7 +832,13 @@ static bool8 StartMenuOptionCallback(void)
     return FALSE;
 }
 
-static bool8 StartMenuExitCallback(void)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+bool8 StartMenuExitCallback(void)
 {
     RemoveExtraStartMenuWindows();
     HideStartMenu(); // Hide start menu
@@ -752,7 +846,13 @@ static bool8 StartMenuExitCallback(void)
     return TRUE;
 }
 
-static bool8 StartMenuSafariZoneRetireCallback(void)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+bool8 StartMenuSafariZoneRetireCallback(void)
 {
     RemoveExtraStartMenuWindows();
     HideStartMenu();
@@ -761,7 +861,13 @@ static bool8 StartMenuSafariZoneRetireCallback(void)
     return TRUE;
 }
 
-static bool8 StartMenuLinkModePlayerNameCallback(void)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+bool8 StartMenuLinkModePlayerNameCallback(void)
 {
     if (!gPaletteFade.active)
     {
@@ -775,7 +881,13 @@ static bool8 StartMenuLinkModePlayerNameCallback(void)
     return FALSE;
 }
 
-static bool8 StartMenuBattlePyramidRetireCallback(void)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+bool8 StartMenuBattlePyramidRetireCallback(void)
 {
     gMenuCallback = BattlePyramidRetireStartCallback; // Confirm retire
 
@@ -791,7 +903,13 @@ void ShowBattlePyramidStartMenu(void)
     LockPlayerFieldControls();
 }
 
-static bool8 StartMenuBattlePyramidBagCallback(void)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+bool8 StartMenuBattlePyramidBagCallback(void)
 {
     if (!gPaletteFade.active)
     {

@@ -2,6 +2,10 @@
 #define GUARD_PLAYER_PC_H
 
 #include "menu.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
 struct PlayerPCItemPageStruct
 {
@@ -15,7 +19,9 @@ struct PlayerPCItemPageStruct
 
 extern struct PlayerPCItemPageStruct gPlayerPCItemPageInfo;
 
+#ifndef NATIVE_LINUX
 extern const struct MenuAction gMailboxMailOptions[];
+#endif
 
 void ReshowPlayerPC(u8 var);
 void CB2_PlayerPCExitBagMenu(void);

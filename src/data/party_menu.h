@@ -595,6 +595,8 @@ static const u8 sPartyBoxCurrSelectionPalIds2[] = {97, 103, 104};
 static const u8 sPartyBoxSelectedForActionPalIds2[] = {161, 167, 168};
 static const u8 sPartyBoxNoMonPalIds[] = {17, 27, 28};
 
+/* R13-C: skeleton-migrated tables (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sActionStringTable[] =
 {
     [PARTY_MSG_CHOOSE_MON]             = gText_ChoosePokemon,
@@ -642,6 +644,7 @@ static const u8 *const sDescriptionStringTable[] =
     [PARTYBOX_DESC_HAVE]       = gText_Have,
     [PARTYBOX_DESC_DONT_HAVE]  = gText_DontHave,
 };
+#endif /* NATIVE_LINUX */
 
 static const u16 sUnusedData[] =
 {
@@ -651,6 +654,8 @@ static const u16 sUnusedData[] =
     0x0121, 0x013b, 0x000f, 0x0013, 0x0039, 0x0046, 0x0094, 0x00f9, 0x007f, 0x0123,
 };
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 struct
 {
     const u8 *text;
@@ -691,6 +696,53 @@ struct
     [MENU_FIELD_MOVES + FIELD_MOVE_SOFT_BOILED] = {gMoveNames[MOVE_SOFT_BOILED], CursorCb_FieldMove},
     [MENU_FIELD_MOVES + FIELD_MOVE_SWEET_SCENT] = {gMoveNames[MOVE_SWEET_SCENT], CursorCb_FieldMove},
 };
+#else
+// R13-C: native skeleton. The CursorCb_* handlers are file-local statics, so
+// only their addresses are legal constant initializers here; text rows are
+// NULL until the publication seam fills them (same designator set as the
+// non-native definition above, so the layout matches byte-for-byte).
+struct CursorOption
+{
+    const u8 *text;
+    TaskFunc func;
+};
+HOST_DATA struct CursorOption sCursorOptions[] =
+{
+    [MENU_SUMMARY] = {.func = CursorCb_Summary},
+    [MENU_SWITCH] = {.func = CursorCb_Switch},
+    [MENU_CANCEL1] = {.func = CursorCb_Cancel1},
+    [MENU_ITEM] = {.func = CursorCb_Item},
+    [MENU_GIVE] = {.func = CursorCb_Give},
+    [MENU_TAKE_ITEM] = {.func = CursorCb_TakeItem},
+    [MENU_MAIL] = {.func = CursorCb_Mail},
+    [MENU_TAKE_MAIL] = {.func = CursorCb_TakeMail},
+    [MENU_READ] = {.func = CursorCb_Read},
+    [MENU_CANCEL2] = {.func = CursorCb_Cancel2},
+    [MENU_SHIFT] = {.func = CursorCb_SendMon},
+    [MENU_SEND_OUT] = {.func = CursorCb_SendMon},
+    [MENU_ENTER] = {.func = CursorCb_Enter},
+    [MENU_NO_ENTRY] = {.func = CursorCb_NoEntry},
+    [MENU_STORE] = {.func = CursorCb_Store},
+    [MENU_REGISTER] = {.func = CursorCb_Register},
+    [MENU_TRADE1] = {.func = CursorCb_Trade1},
+    [MENU_TRADE2] = {.func = CursorCb_Trade2},
+    [MENU_TOSS] = {.func = CursorCb_Toss},
+    [MENU_FIELD_MOVES + FIELD_MOVE_CUT] = {.func = CursorCb_FieldMove},
+    [MENU_FIELD_MOVES + FIELD_MOVE_FLASH] = {.func = CursorCb_FieldMove},
+    [MENU_FIELD_MOVES + FIELD_MOVE_ROCK_SMASH] = {.func = CursorCb_FieldMove},
+    [MENU_FIELD_MOVES + FIELD_MOVE_STRENGTH] = {.func = CursorCb_FieldMove},
+    [MENU_FIELD_MOVES + FIELD_MOVE_SURF] = {.func = CursorCb_FieldMove},
+    [MENU_FIELD_MOVES + FIELD_MOVE_FLY] = {.func = CursorCb_FieldMove},
+    [MENU_FIELD_MOVES + FIELD_MOVE_DIVE] = {.func = CursorCb_FieldMove},
+    [MENU_FIELD_MOVES + FIELD_MOVE_WATERFALL] = {.func = CursorCb_FieldMove},
+    [MENU_FIELD_MOVES + FIELD_MOVE_TELEPORT] = {.func = CursorCb_FieldMove},
+    [MENU_FIELD_MOVES + FIELD_MOVE_DIG] = {.func = CursorCb_FieldMove},
+    [MENU_FIELD_MOVES + FIELD_MOVE_SECRET_POWER] = {.func = CursorCb_FieldMove},
+    [MENU_FIELD_MOVES + FIELD_MOVE_MILK_DRINK] = {.func = CursorCb_FieldMove},
+    [MENU_FIELD_MOVES + FIELD_MOVE_SOFT_BOILED] = {.func = CursorCb_FieldMove},
+    [MENU_FIELD_MOVES + FIELD_MOVE_SWEET_SCENT] = {.func = CursorCb_FieldMove},
+};
+#endif /* NATIVE_LINUX */
 
 static const u8 sPartyMenuAction_SummarySwitchCancel[] = {MENU_SUMMARY, MENU_SWITCH, MENU_CANCEL1};
 static const u8 sPartyMenuAction_ShiftSummaryCancel[] = {MENU_SHIFT, MENU_SUMMARY, MENU_CANCEL1};
@@ -785,6 +837,8 @@ struct
     [FIELD_MOVE_SWEET_SCENT]  = {SetUpFieldMove_SweetScent,  PARTY_MSG_CANT_USE_HERE},
 };
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sUnionRoomTradeMessages[] =
 {
     [UR_TRADE_MSG_NOT_MON_PARTNER_WANTS - 1]       = gText_NotPkmnOtherTrainerWants,
@@ -797,6 +851,7 @@ static const u8 *const sUnionRoomTradeMessages[] =
     [UR_TRADE_MSG_CANT_TRADE_WITH_PARTNER_1 - 1]   = gText_CantTradeWithTrainer,
     [UR_TRADE_MSG_CANT_TRADE_WITH_PARTNER_2 - 1]   = gText_CantTradeWithTrainer,
 };
+#endif /* NATIVE_LINUX */
 
 static const u32 sHeldItemGfx[] = INCBIN_U32("graphics/party_menu/hold_icons.4bpp");
 static const u16 sHeldItemPalette[] = INCBIN_U16("graphics/party_menu/hold_icons.gbapal");
@@ -1107,6 +1162,8 @@ static const bool8 sMultiBattlePartnersPartyMask[PARTY_SIZE + 2] =
     FALSE
 };
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sUnused_StatStrings[] =
 {
     gText_HP4,
@@ -1116,6 +1173,7 @@ static const u8 *const sUnused_StatStrings[] =
     gText_SpDef4,
     gText_Speed2
 };
+#endif /* NATIVE_LINUX */
 
 /* Expands to:
  * static const u16 sTMHMMoves[] =

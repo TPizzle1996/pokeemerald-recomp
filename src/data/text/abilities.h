@@ -1,81 +1,241 @@
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sNoneDescription[] = _("No special ability.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sStenchDescription[] = _("Helps repel wild POKéMON.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sDrizzleDescription[] = _("Summons rain in battle.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sSpeedBoostDescription[] = _("Gradually boosts SPEED.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sBattleArmorDescription[] = _("Blocks critical hits.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sSturdyDescription[] = _("Negates 1-hit KO attacks.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sDampDescription[] = _("Prevents self-destruction.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sLimberDescription[] = _("Prevents paralysis.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sSandVeilDescription[] = _("Ups evasion in a sandstorm.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sStaticDescription[] = _("Paralyzes on contact.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sVoltAbsorbDescription[] = _("Turns electricity into HP.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sWaterAbsorbDescription[] = _("Changes water into HP.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sObliviousDescription[] = _("Prevents attraction.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sCloudNineDescription[] = _("Negates weather effects.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sCompoundEyesDescription[] = _("Raises accuracy.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sInsomniaDescription[] = _("Prevents sleep.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sColorChangeDescription[] = _("Changes type to foe's move.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sImmunityDescription[] = _("Prevents poisoning.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sFlashFireDescription[] = _("Powers up if hit by fire.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sShieldDustDescription[] = _("Prevents added effects.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sOwnTempoDescription[] = _("Prevents confusion.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sSuctionCupsDescription[] = _("Firmly anchors the body.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sIntimidateDescription[] = _("Lowers the foe's ATTACK.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sShadowTagDescription[] = _("Prevents the foe's escape.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sRoughSkinDescription[] = _("Hurts to touch.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sWonderGuardDescription[] = _("“Super effective” hits.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sLevitateDescription[] = _("Not hit by GROUND attacks.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sEffectSporeDescription[] = _("Leaves spores on contact.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sSynchronizeDescription[] = _("Passes on status problems.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sClearBodyDescription[] = _("Prevents ability reduction.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sNaturalCureDescription[] = _("Heals upon switching out.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sLightningRodDescription[] = _("Draws electrical moves.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sSereneGraceDescription[] = _("Promotes added effects.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sSwiftSwimDescription[] = _("Raises SPEED in rain.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sChlorophyllDescription[] = _("Raises SPEED in sunshine.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sIlluminateDescription[] = _("Encounter rate increases.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sTraceDescription[] = _("Copies special ability.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sHugePowerDescription[] = _("Raises ATTACK.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sPoisonPointDescription[] = _("Poisons foe on contact.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sInnerFocusDescription[] = _("Prevents flinching.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sMagmaArmorDescription[] = _("Prevents freezing.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sWaterVeilDescription[] = _("Prevents burns.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sMagnetPullDescription[] = _("Traps STEEL-type POKéMON.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sSoundproofDescription[] = _("Avoids sound-based moves.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sRainDishDescription[] = _("Slight HP recovery in rain.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sSandStreamDescription[] = _("Summons a sandstorm.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sPressureDescription[] = _("Raises foe's PP usage.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sThickFatDescription[] = _("Heat-and-cold protection.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sEarlyBirdDescription[] = _("Awakens quickly from sleep.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sFlameBodyDescription[] = _("Burns the foe on contact.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sRunAwayDescription[] = _("Makes escaping easier.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sKeenEyeDescription[] = _("Prevents loss of accuracy.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sHyperCutterDescription[] = _("Prevents ATTACK reduction.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sPickupDescription[] = _("May pick up items.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sTruantDescription[] = _("Moves only every two turns.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sHustleDescription[] = _("Trades accuracy for power.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sCuteCharmDescription[] = _("Infatuates on contact.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sPlusDescription[] = _("Powers up with MINUS.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sMinusDescription[] = _("Powers up with PLUS.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sForecastDescription[] = _("Changes with the weather.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sStickyHoldDescription[] = _("Prevents item theft.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sShedSkinDescription[] = _("Heals the body by shedding.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sGutsDescription[] = _("Ups ATTACK if suffering.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sMarvelScaleDescription[] = _("Ups DEFENSE if suffering.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sLiquidOozeDescription[] = _("Draining causes injury.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sOvergrowDescription[] = _("Ups GRASS moves in a pinch.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sBlazeDescription[] = _("Ups FIRE moves in a pinch.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sTorrentDescription[] = _("Ups WATER moves in a pinch.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sSwarmDescription[] = _("Ups BUG moves in a pinch.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sRockHeadDescription[] = _("Prevents recoil damage.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sDroughtDescription[] = _("Summons sunlight in battle.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sArenaTrapDescription[] = _("Prevents fleeing.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sVitalSpiritDescription[] = _("Prevents sleep.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sWhiteSmokeDescription[] = _("Prevents ability reduction.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sPurePowerDescription[] = _("Raises ATTACK.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sShellArmorDescription[] = _("Blocks critical hits.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sCacophonyDescription[] = _("Avoids sound-based moves.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sAirLockDescription[] = _("Negates weather effects.");
+#endif
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
 {
@@ -159,6 +319,8 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_AIR_LOCK] = _("AIR LOCK"),
 };
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 {
     [ABILITY_NONE] = sNoneDescription,
@@ -240,3 +402,4 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_CACOPHONY] = sCacophonyDescription,
     [ABILITY_AIR_LOCK] = sAirLockDescription,
 };
+#endif

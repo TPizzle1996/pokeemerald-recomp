@@ -46,6 +46,10 @@
 #include "constants/secret_bases.h"
 #include "constants/songs.h"
 #include "constants/trainers.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
 #define TAG_SCROLL_ARROW 5112
 
@@ -87,11 +91,17 @@ static void AddRegistryMenuScrollArrows(u8);
 static void HandleRegistryMenuInput(u8);
 static void ShowRegistryMenuActions(u8);
 static void HandleRegistryMenuActionsInput(u8);
-static void ShowRegistryMenuDeleteConfirmation(u8);
+#ifndef NATIVE_LINUX
+static
+#endif
+void ShowRegistryMenuDeleteConfirmation(u8);
 static void ShowRegistryMenuDeleteYesNo(u8);
 static void DeleteRegistry_Yes(u8);
 static void DeleteRegistry_No(u8);
-static void ReturnToMainRegistryMenu(u8);
+#ifndef NATIVE_LINUX
+static
+#endif
+void ReturnToMainRegistryMenu(u8);
 static void GoToSecretBasePCRegisterMenu(u8);
 static u8 GetSecretBaseOwnerType(u8);
 
@@ -141,6 +151,8 @@ static const u8 sSecretBaseEntrancePositions[NUM_SECRET_BASE_GROUPS * 4] =
 #define GET_BASE_COMPUTER_X(group) (sSecretBaseEntrancePositions[(group) + 2])
 #define GET_BASE_COMPUTER_Y(group) (sSecretBaseEntrancePositions[(group) + 3])
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction sRegistryMenuActions[] =
 {
     {
@@ -152,6 +164,7 @@ static const struct MenuAction sRegistryMenuActions[] =
         .func = { .void_u8 = ReturnToMainRegistryMenu },
     },
 };
+#endif
 
 static const struct YesNoFuncTable sDeleteRegistryYesNoFuncs =
 {
@@ -1052,7 +1065,13 @@ static void HandleRegistryMenuActionsInput(u8 taskId)
     }
 }
 
-static void ShowRegistryMenuDeleteConfirmation(u8 taskId)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+void ShowRegistryMenuDeleteConfirmation(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     ClearStdWindowAndFrame(tMainWindowId, FALSE);
@@ -1098,7 +1117,13 @@ static void DeleteRegistry_No(u8 taskId)
     gTasks[taskId].func = HandleRegistryMenuInput;
 }
 
-static void ReturnToMainRegistryMenu(u8 taskId)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+void ReturnToMainRegistryMenu(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     AddRegistryMenuScrollArrows(taskId);

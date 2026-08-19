@@ -37,6 +37,10 @@ struct Gen3ResourcePackEntryInput
     uint64_t sourceRomOffset;              /* provenance only */
     uint64_t sourceEncodedSize;
     const uint8_t *sourceEncodedSha256;    /* 32 bytes; provenance only */
+    /* R13-C text bundles: the "source" is a constructed artifact file, not a
+     * ROM slice. sourceRomOffset/sourceEncodedSize are then provenance with
+     * a placeholder 0 offset and the writer skips the ROM-range check. */
+    bool bundle;
 };
 
 /* Pack-level fixed metadata. Pointers are borrowed for the duration of the

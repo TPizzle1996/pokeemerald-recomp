@@ -29,6 +29,10 @@
 #include "main.h"
 #include "constants/event_objects.h"
 #include "constants/rgb.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
 enum {
     INPUT_NONE,
@@ -140,16 +144,8 @@ enum
     INPUT_STATE_OVERRIDE,
 };
 
-struct NamingScreenTemplate
-{
-    u8 copyExistingString;
-    u8 maxChars;
-    u8 iconFunction;
-    u8 addGenderIcon;
-    u8 initialPage;
-    u8 unused;
-    const u8 *title;
-};
+// R13-C: struct NamingScreenTemplate moved to include/naming_screen.h so
+// the generated host arrays can type their externs.
 
 struct NamingScreenData
 {
@@ -187,6 +183,8 @@ static const u8 sPCIconOn_Gfx[] = INCBIN_U8("graphics/naming_screen/pc_icon_on.4
 static const u16 sKeyboard_Pal[] = INCBIN_U16("graphics/naming_screen/keyboard.gbapal");
 static const u16 sRival_Pal[] = INCBIN_U16("graphics/naming_screen/rival.gbapal"); // Unused, leftover from FRLG rival
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sTransferredToPCMessages[] =
 {
     gText_PkmnTransferredSomeonesPC,
@@ -194,6 +192,7 @@ static const u8 *const sTransferredToPCMessages[] =
     gText_PkmnTransferredSomeonesPCBoxFull,
     gText_PkmnTransferredLanettesPCBoxFull
 };
+#endif
 
 static const u8 sText_AlphabetUpperLower[] = _("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!");
 
@@ -309,7 +308,9 @@ static const u8 sPageColumnXPos[KBPAGE_COUNT][KBCOL_COUNT] = {
     [KEYBOARD_SYMBOLS]       = {0, 22, 44, 66, 88, 110}
 };
 
+#ifndef NATIVE_LINUX
 static const struct NamingScreenTemplate *const sNamingScreenTemplates[];
+#endif
 static const struct SubspriteTable sSubspriteTable_PageSwapFrame[];
 static const struct SubspriteTable sSubspriteTable_PageSwapText[];
 static const struct SubspriteTable sSubspriteTable_Button[];
@@ -2090,6 +2091,8 @@ static void UNUSED Debug_NamingScreenNickname(void)
 // Forward-declared variables
 //--------------------------------------------------
 
+/* R13-C: skeleton-migrated tables (rows filled at publish). */
+#ifndef NATIVE_LINUX
 // Initial pages below are pointless, they're overwritten with KBPAGE_LETTERS_UPPER in MainState_FadeIn()
 static const struct NamingScreenTemplate sPlayerNamingScreenTemplate =
 {
@@ -2143,6 +2146,7 @@ static const struct NamingScreenTemplate *const sNamingScreenTemplates[] =
     [NAMING_SCREEN_NICKNAME]   = &sMonNamingScreenTemplate,
     [NAMING_SCREEN_WALDA]      = &sWaldaWordsScreenTemplate,
 };
+#endif /* NATIVE_LINUX */
 
 static const struct OamData sOam_8x8 =
 {

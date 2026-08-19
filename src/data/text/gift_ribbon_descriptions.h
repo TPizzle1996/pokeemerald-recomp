@@ -1,51 +1,151 @@
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
+#ifndef NATIVE_LINUX
 const u8 gGiftRibbonDescriptionPart1_2003RegionalTourney[] = _("2003 REGIONAL TOURNEY");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gGiftRibbonDescriptionPart2_Champion[] = _("CHAMPION RIBBON");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gGiftRibbonDescriptionPart1_2003NationalTourney[] = _("2003 NATIONAL TOURNEY");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gGiftRibbonDescriptionPart1_2003GlobalCup[] = _("2003 GLOBAL CUP");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gGiftRibbonDescriptionPart2_RunnerUp[] = _("Runner-up RIBBON");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gGiftRibbonDescriptionPart2_Semifinalist[] = _("Semifinalist RIBBON");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gGiftRibbonDescriptionPart1_2004RegionalTourney[] = _("2004 REGIONAL TOURNEY");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gGiftRibbonDescriptionPart1_2004NationalTourney[] = _("2004 NATIONAL TOURNEY");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gGiftRibbonDescriptionPart1_2004GlobalCup[] = _("2004 GLOBAL CUP");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gGiftRibbonDescriptionPart1_2005RegionalTourney[] = _("2005 REGIONAL TOURNEY");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gGiftRibbonDescriptionPart1_2005NationalTourney[] = _("2005 NATIONAL TOURNEY");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gGiftRibbonDescriptionPart1_2005GlobalCup[] = _("2005 GLOBAL CUP");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gGiftRibbonDescriptionPart1_PokemonBattleCup[] = _("POKéMON BATTLE CUP");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gGiftRibbonDescriptionPart2_Participation[] = _("Participation RIBBON");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gGiftRibbonDescriptionPart1_PokemonLeague[] = _("POKéMON LEAGUE");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gGiftRibbonDescriptionPart1_AdvanceCup[] = _("ADVANCE CUP");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gGiftRibbonDescriptionPart1_PokemonTournament[] = _("POKéMON Tournament");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gGiftRibbonDescriptionPart2_Participation2[] = _("Participation RIBBON");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gGiftRibbonDescriptionPart1_PokemonEvent[] = _("POKéMON Event");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gGiftRibbonDescriptionPart1_PokemonFestival[] = _("POKéMON Festival");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gGiftRibbonDescriptionPart1_DifficultyClearing[] = _("Difficulty-clearing");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gGiftRibbonDescriptionPart2_Commemorative[] = _("Commemorative RIBBON");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gGiftRibbonDescriptionPart1_ClearingAllChallenges[] = _("RIBBON awarded for");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gGiftRibbonDescriptionPart2_ClearingAllChallenges[] = _("clearing all challenges.");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gGiftRibbonDescriptionPart1_100StraightWin[] = _("100-straight Win");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gGiftRibbonDescriptionPart1_DarknessTower[] = _("DARKNESS TOWER Clear");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gGiftRibbonDescriptionPart1_RedTower[] = _("RED TOWER Clear");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gGiftRibbonDescriptionPart1_BlackironTower[] = _("BLACKIRON TOWER Clear");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gGiftRibbonDescriptionPart1_FinalTower[] = _("FINAL TOWER Clear");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gGiftRibbonDescriptionPart1_LegendMaking[] = _("Legend-making");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gGiftRibbonDescriptionPart1_PokemonCenterTokyo[] = _("POKéMON CENTER TOKYO");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gGiftRibbonDescriptionPart1_PokemonCenterOsaka[] = _("POKéMON CENTER OSAKA");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gGiftRibbonDescriptionPart1_PokemonCenterNagoya[] = _("POKéMON CENTER NAGOYA");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gGiftRibbonDescriptionPart1_PokemonCenterNY[] = _("POKéMON CENTER NY");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gGiftRibbonDescriptionPart1_SummerHolidays[] = _("Summer Holidays RIBBON");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gGiftRibbonDescriptionPart2_EmptyString[] = _("");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gGiftRibbonDescriptionPart1_WinterHolidays[] = _("Winter Holidays RIBBON");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gGiftRibbonDescriptionPart1_SpringHolidays[] = _("Spring Holidays RIBBON");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gGiftRibbonDescriptionPart1_Evergreen[] = _("Evergreen RIBBON");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gGiftRibbonDescriptionPart1_SpecialHoliday[] = _("Special Holiday RIBBON");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gGiftRibbonDescriptionPart1_HardWorker[] = _("Hard Worker RIBBON");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gGiftRibbonDescriptionPart1_LotsOfFriends[] = _("Lots of Friends RIBBON");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gGiftRibbonDescriptionPart1_FullOfEnergy[] = _("Full of Energy RIBBON");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gGiftRibbonDescriptionPart1_LovedPokemon[] = _("A commemorative RIBBON");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gGiftRibbonDescriptionPart2_LovedPokemon[] = _("for a loved POKéMON.");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gGiftRibbonDescriptionPart1_LoveForPokemon[] = _("RIBBON that shows");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gGiftRibbonDescriptionPart2_LoveForPokemon[] = _("love for POKéMON.");
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 const u8 *const gGiftRibbonDescriptionPointers[MAX_GIFT_RIBBON][2] =
 {
     {gGiftRibbonDescriptionPart1_2003RegionalTourney,   gGiftRibbonDescriptionPart2_Champion},
@@ -113,3 +213,4 @@ const u8 *const gGiftRibbonDescriptionPointers[MAX_GIFT_RIBBON][2] =
     {gGiftRibbonDescriptionPart1_LovedPokemon,          gGiftRibbonDescriptionPart2_LovedPokemon},
     {gGiftRibbonDescriptionPart1_LoveForPokemon,        gGiftRibbonDescriptionPart2_LoveForPokemon}
 };
+#endif

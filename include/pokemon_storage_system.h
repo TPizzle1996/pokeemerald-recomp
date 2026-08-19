@@ -27,6 +27,22 @@ struct PokemonStorage
 extern struct PokemonStorage *gPokemonStoragePtr;
 
 void DrawTextWindowAndBufferTiles(const u8 *string, void *dst, u8 zero1, u8 zero2, s32 bytesToBuffer);
+// R13-C: file-local struct moved here so the generated host arrays
+// (text_skeleton_arrays.generated.{c,h}) can type their externs.
+struct StorageMessage
+{
+    const u8 *text;
+    u8 format;
+};
+
+// R13-C: the PC main-menu rows (sMainMenuTexts) — text + description per
+// action. Named so the generated host array can type its extern.
+struct MainMenuText
+{
+    const u8 *text;
+    const u8 *desc;
+};
+
 u8 CountMonsInBox(u8 boxId);
 s16 GetFirstFreeBoxSpot(u8 boxId);
 u8 CountPartyAliveNonEggMonsExcept(u8 slotToIgnore);

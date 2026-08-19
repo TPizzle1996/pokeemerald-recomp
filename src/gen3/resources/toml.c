@@ -138,6 +138,12 @@ static bool ParseBasicString(Parser *parser, const char **cursor, const char *en
         char character = *cursorPos++;
         if (character == '"')
         {
+            /* Gen3Buffer keeps no NUL terminator, but string values are
+             * consumed as C strings (strlen/printf/EmitEscaped). An empty
+             * string (e.g. symbol = "") must not read past the buffer; the
+             * buffer's reserved capacity+1 byte makes data[length] writable
+             * (same guarantee ParseLiteralString provides via its own copy). */
+            value.data[value.length] = '\0';
             *outString = value.data;
             *cursor = cursorPos;
             return true;

@@ -39,6 +39,10 @@
 #include "global.h"
 #include "sprite.h"
 #include "data.h"
+#include "gen3/resources/resource_id.h"
+#include "gen3/resources/resource_types.h"
+#include "emerald/resources/emerald_resource_ranges.h"
+#include "emerald/resources/emerald_text_compat.h"
 /* R12: REAL MP2K struct layouts for the audio-shaped game_bss fixture
  * (struct SoundInfo/SoundChannel/MusicPlayerInfo). Header-only; no m4a.c is
  * linked, so no audio externs are referenced. */
@@ -216,10 +220,30 @@ struct HarnessRow
     u32 reserved;
 };
 
+/* R13-C: the production pack's gText_123Dot record (#112): "1.\xff2.\xff
+ * 3.\xff" as one 9-byte resource, three 3-byte strings tiled by kind-0
+ * skeleton fills at byte offsets 0/3/6 (same literal as the runtime
+ * loader harness). */
+static const u8 k123DotBytes[9] = {
+    0xA2, 0xAD, 0xFF, 0xA3, 0xAD, 0xFF, 0xA4, 0xAD, 0xFF
+};
+
+/* R13-C: a compiled text payload the seam does NOT own (the deferred
+ * family model). It must round-trip the state file verbatim - an opaque
+ * fallback pointer, never a resource sidecar record, never relocated. */
+static const u8 sCompiledOpaqueText[] = { 0x41, 0x42, 0x43, 0xFF, 0x00 };
+
 struct HarnessGameData
 {
     u32 magic;                          /* 0x48475231 */
     struct HarnessRow rows[HARNESS_ROW_COUNT]; /* real published rows */
+    /* R13-C §13-15: the State-v5 currentChar class. textCurrentChar is a
+     * mid-string interior pointer into the published text arena (the
+     * TextPrinter.currentChar shape: gText_123Dot row 1, 3 bytes into
+     * its label); textOpaque points at compiled text (deferred families)
+     * and must survive the round trip untouched. */
+    const u8 *textCurrentChar;
+    const u8 *textOpaque;
     u32 tailMagic;                      /* 0x48475232 */
     u32 filler[24];
 };
@@ -427,6 +451,90 @@ static bool32 PlantRealRows(void)
             return FALSE;
         }
     }
+    return TRUE;
+}
+
+/* R13-C currentChar class (create side): gText_123Dot[1] is the
+ * interior-pointer shape the State-v5 routing must relocate across
+ * processes; the opaque compiled pointer must stay OUTSIDE every
+ * resource range. Only the R13-C create/load modes plant these - every
+ * other mode's record-count arithmetic counts the 10 real rows exactly. */
+static bool32 PlantCurrentCharClass(void)
+{
+    struct HarnessGameData *data = GameData();
+    data->textCurrentChar = gText_123Dot[1];
+    data->textOpaque = sCompiledOpaqueText;
+    if (data->textCurrentChar == NULL
+     || !EmeraldTextCompat_ContainsPointer(
+            (uintptr_t)data->textCurrentChar))
+    {
+        fprintf(stderr, "currentChar class not published (text seam down?)\n");
+        return FALSE;
+    }
+    if (EmeraldTextCompat_ContainsPointer((uintptr_t)data->textOpaque))
+    {
+        fprintf(stderr, "opaque compiled text landed inside a resource range\n");
+        return FALSE;
+    }
+    return TRUE;
+}
+
+/* R13-C §13-15 load side: the restored currentChar pointer must be a
+ * pointer into THIS process's text arena, at the same in-label offset
+ * (label start + 3) with the same bytes; the opaque compiled pointer
+ * must be verbatim (compiled arrays never move). */
+static bool32 VerifyTextCurrentCharRelocated(void)
+{
+    struct HarnessGameData *data = GameData();
+    size_t arenaIndex = TEXT_ARENA_COUNT;
+    size_t offset = 0u;
+    size_t start = 0u;
+    size_t size = 0u;
+    const char *name = NULL;
+    const u8 *base = NULL;
+    size_t baseSize = 0u;
+
+    if (data->textCurrentChar == NULL
+     || !EmeraldTextCompat_ContainsPointer(
+            (uintptr_t)data->textCurrentChar))
+    {
+        fprintf(stderr, "load: currentChar not in a registered text range\n");
+        return FALSE;
+    }
+    if (!EmeraldTextCompat_GetArenaForPointer((uintptr_t)data->textCurrentChar,
+                                              &arenaIndex, &offset)
+     || !EmeraldTextCompat_GetLabelAtOffset((uint32_t)arenaIndex, offset,
+                                            &name, &start, &size))
+    {
+        fprintf(stderr, "load: currentChar walker resolution failed\n");
+        return FALSE;
+    }
+    if (name == NULL || strcmp(name, "gtext-123dot") != 0 || size != 9u
+     || offset != start + 3u)
+    {
+        fprintf(stderr, "load: currentChar label/offset mismatch "
+                        "(name=%s size=%zu offset=%zu start=%zu)\n",
+                name != NULL ? name : "(null)", size, offset, start);
+        return FALSE;
+    }
+    if (memcmp(data->textCurrentChar, k123DotBytes + 3, 3) != 0)
+    {
+        fprintf(stderr, "load: currentChar bytes mismatch\n");
+        return FALSE;
+    }
+    if (data->textOpaque != sCompiledOpaqueText
+     || memcmp(data->textOpaque, sCompiledOpaqueText,
+               sizeof(sCompiledOpaqueText)) != 0)
+    {
+        fprintf(stderr, "load: opaque compiled text not verbatim\n");
+        return FALSE;
+    }
+    if (!EmeraldTextCompat_GetArenaByKey("system-shared", &base, &baseSize))
+        return FALSE;
+    printf("LOAD text arena: system_shared=%p currentChar=%p "
+           "labelStart=%zu size=%zu opaque=%p\n",
+           (const void *)base, (const void *)data->textCurrentChar,
+           start, size, (const void *)data->textOpaque);
     return TRUE;
 }
 
@@ -756,6 +864,8 @@ static int DoCreate(const char *packPath, const char *statePath)
 
     if (!PlantRealRows())
         return 1;
+    if (!PlantCurrentCharClass())
+        return 1;
     if (!VerifyTilesetPublished())
         return 1;
     if (!VerifyLayoutPublished())
@@ -764,6 +874,17 @@ static int DoCreate(const char *packPath, const char *statePath)
            (const void *)gMonFrontPicTable[1].data,
            (const void *)gMonBackPicTable[1].data,
            (const void *)gTrainerFrontPicTable[0].data);
+    {
+        const u8 *base;
+        size_t size;
+        if (!EmeraldTextCompat_GetArenaByKey("system-shared", &base, &size))
+        {
+            fprintf(stderr, "create: system-shared text arena missing\n");
+            return 1;
+        }
+        printf("CREATE text arena: system_shared=%p labels=%zu currentChar=%p\n",
+               (const void *)base, size, (const void *)gText_123Dot[1]);
+    }
 
     /* R11-E/F tests 15/16 (create side): the neighborhood module. Build the
      * real Littleroot neighborhood (maps.o tables + published layouts),
@@ -835,14 +956,54 @@ static int DoCreate(const char *packPath, const char *statePath)
                records[i].type, records[i].schema, records[i].role,
                records[i].rangeOffset);
         CHECK(records[i].reserved == 0);
-        CHECK(records[i].role == 1u);
+        /* Battle rows register as legacy-LZ compat; the R13-C text arena
+         * registers as a compat object - both are resource sidecars. */
+        CHECK(records[i].role == EMERALD_RESOURCE_ROLE_LEGACY_LZ
+              || records[i].role == EMERALD_RESOURCE_ROLE_COMPAT_OBJECT);
         CHECK(records[i].sectionTag == 8u); /* GAME_DATA */
     }
     /* Test 16 layer 2: the sidecar carries exactly the HARNESS_ROW_COUNT
-     * game-data records -- the neighborhood module added NO record (its
-     * storage is host .bss/.data, never a serialized slice). */
-    CHECK(recordCount == HARNESS_ROW_COUNT);
-    printf("CREATE expected %u records\n", HARNESS_ROW_COUNT);
+     * game-data records plus the R13-C currentChar interior pointer --
+     * the neighborhood module added NO record (its storage is host
+     * .bss/.data, never a serialized slice), and the opaque compiled
+     * text pointer added none either (it is outside every resource
+     * range, so it serializes verbatim in-band). */
+    CHECK(recordCount == HARNESS_ROW_COUNT + 1u);
+    printf("CREATE expected %u records\n", HARNESS_ROW_COUNT + 1u);
+    {
+        /* The interior-pointer record carries the system-shared arena
+         * identity with the zone-relative offset of gText_123Dot[1]
+         * (its label start + 3, the in-label offset of row 1). */
+        Gen3ResourceKey textKey;
+        size_t i2;
+        bool32 foundText = FALSE;
+        Gen3ResourceId_DeriveKey("emerald:text/arena/system-shared",
+                                 &textKey);
+        for (i2 = 0u; i2 < recordCount; i2++)
+        {
+            if (memcmp(records[i2].key, textKey.bytes,
+                       GEN3_RESOURCE_KEY_SIZE) == 0)
+            {
+                size_t arenaIndex = TEXT_ARENA_COUNT;
+                size_t offset = 0u;
+                foundText = TRUE;
+                CHECK(records[i2].role
+                      == EMERALD_RESOURCE_ROLE_COMPAT_OBJECT);
+                CHECK(records[i2].type == GEN3_RESOURCE_TYPE_TEXT);
+                CHECK(records[i2].schema == 1u);
+                CHECK(EmeraldTextCompat_GetArenaForPointer(
+                        (uintptr_t)gText_123Dot[1], &arenaIndex, &offset));
+                CHECK(records[i2].rangeOffset == (u32)offset);
+                break;
+            }
+        }
+        CHECK(foundText);
+        if (!foundText)
+        {
+            fprintf(stderr, "create: no currentChar sidecar record\n");
+            return 1;
+        }
+    }
     if (sFailures != 0)
         return 1;
     printf("CREATE ok\n");
@@ -1398,6 +1559,11 @@ static int DoLoad(const char *packPath, const char *statePath)
         CHECK(nb->neighborCount == 1u);
         CHECK(nb->neighbors[0].direction == CONNECTION_NORTH);
     }
+    /* R13-C §13-15: the currentChar interior pointer relocated into THIS
+     * process's text arena (same identity + in-label offset, fresh
+     * base); the opaque compiled pointer round-tripped verbatim. */
+    if (!VerifyTextCurrentCharRelocated())
+        return 1;
     printf("LOAD object-event arena: brendan frame=%p pal[0]=0x%04x\n",
            (const void *)sPicTable_BrendanNormal[0].data,
            gObjectEventPal_Brendan[0]);

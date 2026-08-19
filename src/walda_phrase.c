@@ -9,8 +9,14 @@
 #include "overworld.h"
 #include "pokemon_storage_system.h"
 #include "field_screen_effect.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
+#ifndef NATIVE_LINUX
 extern const u8 gText_Peekaboo[];
+#endif
 
 static void CB2_HandleGivenWaldaPhrase(void);
 static u32 GetWaldaPhraseInputCase(u8 *);

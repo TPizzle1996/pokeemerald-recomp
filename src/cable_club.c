@@ -34,6 +34,10 @@
 #include "constants/cable_club.h"
 #include "constants/songs.h"
 #include "constants/trainers.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
 static const struct WindowTemplate sWindowTemplate_LinkPlayerCount = {
     .bg = 0,
@@ -45,12 +49,15 @@ static const struct WindowTemplate sWindowTemplate_LinkPlayerCount = {
     .baseBlock = 0x0125,
 };
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sTrainerCardColorNames[] = {
     gText_BronzeCard,
     gText_CopperCard,
     gText_SilverCard,
     gText_GoldCard
 };
+#endif
 
 static void Task_LinkupStart(u8 taskId);
 static void Task_LinkupAwaitConnection(u8 taskId);

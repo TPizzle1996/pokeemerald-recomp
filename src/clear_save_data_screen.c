@@ -12,9 +12,17 @@
 #include "constants/songs.h"
 #include "constants/rgb.h"
 #include "platform.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
+#ifndef NATIVE_LINUX
 extern const u8 gText_ClearAllSaveData[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_ClearingData[];
+#endif
 
 static void Task_DoClearSaveDataScreenYesNo(u8);
 static void Task_ClearSaveDataScreenYesNoChoice(u8);

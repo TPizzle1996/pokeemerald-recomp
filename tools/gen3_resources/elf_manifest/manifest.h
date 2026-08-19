@@ -108,6 +108,14 @@ struct Gen3BindingInput
      * symbolOffset. When set, sourceArtifact points at the concatenation. */
     const uint8_t *concatTail;
     size_t concatTailSize;
+    /* R13-C text bundles: when set, the binding is a CONSTRUCTED blob on
+     * disk (e.g. a merged family's sorted label payload), not a ROM slice.
+     * There is no ELF symbol (symbol == "") and no ROM provenance; the
+     * artifact file IS the whole payload (raw encoding only, encoded ==
+     * decoded == canonical). bundleSourceArtifact records the artifact path
+     * (as written in the bindings TOML) so the pack builder can re-read it. */
+    bool bundle;
+    const char *bundleSourceArtifact;
 };
 
 /* The deterministic record emitted for one resource. */
@@ -124,6 +132,11 @@ struct Gen3ManifestRecord
     const char *sourceEncoding;
     uint8_t sourceEncodedSha256[GEN3_SHA256_SIZE];
     uint8_t canonicalDecodedSha256[GEN3_SHA256_SIZE];
+    /* R13-C text bundles: true when the record is a constructed artifact
+     * file (no ELF symbol / ROM slice); bundleSourceArtifact is the artifact
+     * path emitted into the manifest so the pack builder can read it. */
+    bool bundle;
+    const char *bundleSourceArtifact;
 };
 
 /* Runs the full R1A validation pipeline and serializes the deterministic

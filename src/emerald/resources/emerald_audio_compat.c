@@ -410,19 +410,31 @@ static bool ArenaRangesMatch(const struct EmeraldResourceRangeIndex *index)
  * seam rebuilt the index since our registration (reset - they are gone).
  * The index may be NULL in offline links (weak GetRangeIndex). Removal is
  * safe only when the entries are exactly ours (verified), and only in one
- * block: our spans sort CONTIGUOUSLY (one allocation; trainer ranges lie in
- * other allocations, so none sorts between ours) at [mark, mark+count). */
+ * block: our spans sort CONTIGUOUSLY (one allocation; other seams' ranges
+ * lie in other allocations, so none sorts between ours). The block's
+ * position is RECOMPUTED by base rather than trusted from registration
+ * time: seams that register AFTER us (the text seam's arena can sort below
+ * ours) shift the block upward, so the recorded mark can be stale - and
+ * verifying against a stale mark skips the removal while our spans remain
+ * in the index, making the next re-registration collide with itself
+ * (R13-C: sanitize-layout regression, audio republish status 10). */
 static void UnregisterArenaRanges(void)
 {
     struct EmeraldResourceRangeIndex *index = EmeraldResourceCompat_GetRangeIndex();
+    size_t mark;
 
     if (index == NULL || !sAudioRangesInIndex)
         return;
+    mark = 0u;
+    while (mark < index->rangeCount
+           && index->ranges[mark].base < sAudioRanges[0].base)
+        mark++;
+    sAudioRangeMark = mark;
     if (ArenaRangesMatch(index))
     {
-        memmove(&index->ranges[sAudioRangeMark],
-                &index->ranges[sAudioRangeMark + sAudioRangeCount],
-                (index->rangeCount - sAudioRangeMark - sAudioRangeCount)
+        memmove(&index->ranges[mark],
+                &index->ranges[mark + sAudioRangeCount],
+                (index->rangeCount - mark - sAudioRangeCount)
                     * sizeof(index->ranges[0]));
         index->rangeCount -= sAudioRangeCount;
     }
@@ -1804,12 +1816,14 @@ EmeraldAudioCompat_TryInitialize(
     }
 
     /* Phase 2: one allocation for the header + leaf table + structural
-     * table + song table + verbatim zone + transformed zone. */
-    if (SIZE_MAX - sizeof(struct EmeraldAudioArena) < zoneOffset
-     || SIZE_MAX - sizeof(struct EmeraldAudioArena) - zoneOffset
-            < EMERALD_AUDIO_SPAN_SIZE
-     || SIZE_MAX - sizeof(struct EmeraldAudioArena) - zoneOffset
-            - EMERALD_AUDIO_SPAN_SIZE < EMERALD_AUDIO_TRANSFORM_SIZE)
+     * table + song table + verbatim zone + transformed zone. The
+     * transformed zone starts at the 8-aligned transformOffset (not the
+     * raw zoneOffset + span end): reserving the unaligned figure left
+     * the last transformed row up to 7 bytes past the allocation
+     * (observed: a 4-byte heap overflow on the final row's memset). */
+    if (SIZE_MAX - sizeof(struct EmeraldAudioArena) < transformOffset
+     || SIZE_MAX - sizeof(struct EmeraldAudioArena) - transformOffset
+            < EMERALD_AUDIO_TRANSFORM_SIZE)
     {
         NoteFailure(diagnostics, "build", NULL,
                     GEN3_RESOURCE_TYPE_INSTRUMENT_BANK,
@@ -1818,8 +1832,8 @@ EmeraldAudioCompat_TryInitialize(
         goto done;
     }
     arena = (struct EmeraldAudioArena *)malloc(
-        sizeof(struct EmeraldAudioArena) + zoneOffset
-        + EMERALD_AUDIO_SPAN_SIZE + EMERALD_AUDIO_TRANSFORM_SIZE);
+        sizeof(struct EmeraldAudioArena) + transformOffset
+        + EMERALD_AUDIO_TRANSFORM_SIZE);
     if (arena == NULL)
     {
         NoteFailure(diagnostics, "build", NULL,
@@ -1828,7 +1842,7 @@ EmeraldAudioCompat_TryInitialize(
         result = EMERALD_AUDIO_ERR_OUT_OF_MEMORY;
         goto done;
     }
-    memset(arena, 0, sizeof(*arena) + zoneOffset + EMERALD_AUDIO_SPAN_SIZE
+    memset(arena, 0, sizeof(*arena) + transformOffset
            + EMERALD_AUDIO_TRANSFORM_SIZE);
     arena->spanSize = EMERALD_AUDIO_SPAN_SIZE;
     arena->publishedCount = count;

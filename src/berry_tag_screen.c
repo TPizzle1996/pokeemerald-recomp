@@ -29,6 +29,10 @@
 #include "constants/items.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
 // There are 4 windows used in berry tag screen.
 enum
@@ -141,6 +145,8 @@ static const struct WindowTemplate sWindowTemplates[] =
     DUMMY_WIN_TEMPLATE
 };
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sBerryFirmnessStrings[] =
 {
     gBerryFirmnessString_VerySoft,
@@ -149,6 +155,7 @@ static const u8 *const sBerryFirmnessStrings[] =
     gBerryFirmnessString_VeryHard,
     gBerryFirmnessString_SuperHard
 };
+#endif
 
 // this file's functions
 static void CB2_InitBerryTagScreen(void);

@@ -65,6 +65,15 @@ gcc -std=gnu99 -O2 -ffunction-sections -fdata-sections -Wl,--gc-sections \
     "$here/emerald_tileset_compat_stubs.c" \
     "$emerald_dir/emerald_resource_session.c" \
     "$emerald_dir/emerald_audio_compat.c" \
+    "$emerald_dir/emerald_text_compat.c" \
+    "$emerald_dir/text_arenas.generated.c" \
+    "$emerald_dir/text_native_table.generated.c" \
+    "$emerald_dir/text_bundle_index.generated.c" \
+    "$emerald_dir/text_slot_bindings.generated.c" \
+    "$emerald_dir/text_slots_table.generated.c" \
+    "$emerald_dir/text_skeletons_table.generated.c" \
+    "$emerald_dir/text_skeleton_arrays.generated.c" \
+    "$here/emerald_text_harness_stubs.c" \
     "$here/emerald_real_tables_test.c" \
     -o "$tmp/emerald_real_tables_test"
 

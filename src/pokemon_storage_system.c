@@ -41,6 +41,10 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/pokemon_icon.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
 /*
     NOTE: This file is large. Some general groups of functions have
@@ -344,12 +348,6 @@ struct Wallpaper
     const u32 *tiles;
     const u32 *tilemap;
     const u16 *palettes;
-};
-
-struct StorageMessage
-{
-    const u8 *text;
-    u8 format;
 };
 
 struct StorageMenu
@@ -876,10 +874,9 @@ static void UnkUtil_Run(void);
 static void UnkUtil_CpuRun(struct UnkUtilData *);
 static void UnkUtil_DmaRun(struct UnkUtilData *);
 
-struct {
-    const u8 *text;
-    const u8 *desc;
-} static const sMainMenuTexts[OPTIONS_COUNT] =
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
+static const struct MainMenuText sMainMenuTexts[OPTIONS_COUNT] =
 {
     [OPTION_WITHDRAW]   = {gText_WithdrawPokemon, gText_WithdrawMonDescription},
     [OPTION_DEPOSIT]    = {gText_DepositPokemon,  gText_DepositMonDescription},
@@ -887,6 +884,7 @@ struct {
     [OPTION_MOVE_ITEMS] = {gText_MoveItems,       gText_MoveItemsDescription},
     [OPTION_EXIT]       = {gText_SeeYa,           gText_SeeYaDescription}
 };
+#endif /* NATIVE_LINUX */
 
 static const struct WindowTemplate sWindowTemplate_MainMenu =
 {
@@ -1062,7 +1060,9 @@ static const struct SpriteTemplate sSpriteTemplate_DisplayMon =
     .callback = SpriteCallbackDummy,
 };
 
-static const struct StorageMessage sMessages[] =
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
+static const struct StorageMessage sMessages_pokemon_storage_system[] =
 {
     [MSG_EXIT_BOX]             = {gText_ExitFromBox,             MSG_VAR_NONE},
     [MSG_WHAT_YOU_DO]          = {gText_WhatDoYouWantToDo,       MSG_VAR_NONE},
@@ -1096,6 +1096,7 @@ static const struct StorageMessage sMessages[] =
     [MSG_CHANGED_TO_ITEM]      = {gText_ChangedToNewItem,        MSG_VAR_ITEM_NAME},
     [MSG_CANT_STORE_MAIL]      = {gText_MailCantBeStored,        MSG_VAR_NONE},
 };
+#endif
 
 static const struct WindowTemplate sYesNoWindowTemplate =
 {
@@ -4283,7 +4284,7 @@ static void PrintMessage(u8 id)
     u8 *txtPtr;
 
     DynamicPlaceholderTextUtil_Reset();
-    switch (sMessages[id].format)
+    switch (sMessages_pokemon_storage_system[id].format)
     {
     case MSG_VAR_NONE:
         break;
@@ -4311,7 +4312,7 @@ static void PrintMessage(u8 id)
         break;
     }
 
-    DynamicPlaceholderTextUtil_ExpandPlaceholders(sStorage->messageText, sMessages[id].text);
+    DynamicPlaceholderTextUtil_ExpandPlaceholders(sStorage->messageText, sMessages_pokemon_storage_system[id].text);
     FillWindowPixelBuffer(WIN_MESSAGE, PIXEL_FILL(1));
     AddTextPrinterParameterized(WIN_MESSAGE, FONT_NORMAL, sStorage->messageText, 0, 1, TEXT_SKIP_DRAW, NULL);
     DrawTextBorderOuter(WIN_MESSAGE, 2, 14);
@@ -7950,6 +7951,8 @@ static void InitMenu(void)
     sStorage->menuWindow.baseBlock = 92;
 }
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sMenuTexts[] =
 {
     [MENU_CANCEL]     = gPCText_Cancel,
@@ -7992,6 +7995,7 @@ static const u8 *const sMenuTexts[] =
     [MENU_MACHINE]    = gPCText_Machine,
     [MENU_SIMPLE]     = gPCText_Simple,
 };
+#endif
 
 static void SetMenuText(u8 textId)
 {

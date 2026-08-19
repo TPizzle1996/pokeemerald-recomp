@@ -32,6 +32,10 @@
 #include "constants/region_map_sections.h"
 #include "constants/songs.h"
 #include "constants/trainers.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
 // In this file only the values normally associated with Battle Pike and Factory are swapped.
 // Note that this is *not* a bug, because they are properly swapped consistently in this file.
@@ -59,8 +63,6 @@ enum {
 #define STRS_BATTLE_POSITIVE {STR_TRAINER_NAME, STR_SPECIES_IN_PARTY, STR_NONE}
 #define STRS_BATTLE_REQUEST  {STR_TRAINER_NAME, STR_MAP_NAME,         STR_NONE}
 #define STRS_FRONTIER        {STR_TRAINER_NAME, STR_FACILITY_NAME,    STR_FRONTIER_STREAK}
-
-#define NUM_STRVARS_IN_MSG 3
 
 // Topic IDs for sMatchCallGeneralTopics
 enum {
@@ -107,18 +109,6 @@ struct MatchCallTrainerTextInfo
     u8 battleFrontierRecordStreakTextIndex;
     u16 sameRouteMatchCallTextId;
     u16 differentRouteMatchCallTextId;
-};
-
-struct MatchCallText
-{
-    const u8 *text;
-    s8 stringVarFuncIds[NUM_STRVARS_IN_MSG];
-};
-
-struct MultiTrainerMatchCallText
-{
-    u16 trainerId;
-    const u8 *text;
 };
 
 struct BattleFrontierStreakInfo
@@ -750,6 +740,8 @@ static const struct MatchCallTrainerTextInfo sMatchCallTrainers[] =
     },
 };
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MatchCallText sMatchCallWildBattleTexts[] =
 {
     { .text = MatchCall_WildBattleText1,  .stringVarFuncIds = STRS_WILD_BATTLE },
@@ -768,7 +760,10 @@ static const struct MatchCallText sMatchCallWildBattleTexts[] =
     { .text = MatchCall_WildBattleText14, .stringVarFuncIds = STRS_WILD_BATTLE },
     { .text = MatchCall_WildBattleText15, .stringVarFuncIds = STRS_WILD_BATTLE },
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MatchCallText sMatchCallNegativeBattleTexts[] =
 {
     { .text = MatchCall_NegativeBattleText1,  .stringVarFuncIds = STRS_BATTLE_NEGATIVE },
@@ -786,7 +781,10 @@ static const struct MatchCallText sMatchCallNegativeBattleTexts[] =
     { .text = MatchCall_NegativeBattleText13, .stringVarFuncIds = STRS_BATTLE_NEGATIVE },
     { .text = MatchCall_NegativeBattleText14, .stringVarFuncIds = STRS_BATTLE_NEGATIVE },
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MatchCallText sMatchCallPositiveBattleTexts[] =
 {
     { .text = MatchCall_PositiveBattleText1,  .stringVarFuncIds = STRS_BATTLE_POSITIVE },
@@ -804,7 +802,10 @@ static const struct MatchCallText sMatchCallPositiveBattleTexts[] =
     { .text = MatchCall_PositiveBattleText13, .stringVarFuncIds = STRS_BATTLE_POSITIVE },
     { .text = MatchCall_PositiveBattleText14, .stringVarFuncIds = STRS_BATTLE_POSITIVE },
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MatchCallText sMatchCallSameRouteBattleRequestTexts[] =
 {
     { .text = MatchCall_SameRouteBattleRequestText1,  .stringVarFuncIds = STRS_BATTLE_REQUEST },
@@ -822,7 +823,10 @@ static const struct MatchCallText sMatchCallSameRouteBattleRequestTexts[] =
     { .text = MatchCall_SameRouteBattleRequestText13, .stringVarFuncIds = STRS_BATTLE_REQUEST },
     { .text = MatchCall_SameRouteBattleRequestText14, .stringVarFuncIds = STRS_BATTLE_REQUEST },
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MatchCallText sMatchCallDifferentRouteBattleRequestTexts[] =
 {
     { .text = MatchCall_DifferentRouteBattleRequestText1,  .stringVarFuncIds = STRS_BATTLE_REQUEST },
@@ -840,7 +844,10 @@ static const struct MatchCallText sMatchCallDifferentRouteBattleRequestTexts[] =
     { .text = MatchCall_DifferentRouteBattleRequestText13, .stringVarFuncIds = STRS_BATTLE_REQUEST },
     { .text = MatchCall_DifferentRouteBattleRequestText14, .stringVarFuncIds = STRS_BATTLE_REQUEST },
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MatchCallText sMatchCallPersonalizedTexts[] =
 {
     { .text = MatchCall_PersonalizedText1,  .stringVarFuncIds = { STR_TRAINER_NAME, STR_MAP_NAME, STR_NONE } },
@@ -908,7 +915,10 @@ static const struct MatchCallText sMatchCallPersonalizedTexts[] =
     { .text = MatchCall_PersonalizedText63, .stringVarFuncIds = STRS_NORMAL_MSG },
     { .text = MatchCall_PersonalizedText64, .stringVarFuncIds = STRS_NORMAL_MSG },
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MatchCallText sMatchCallBattleFrontierStreakTexts[] =
 {
     { .text = MatchCall_BattleFrontierStreakText1,  .stringVarFuncIds = STRS_FRONTIER },
@@ -926,7 +936,10 @@ static const struct MatchCallText sMatchCallBattleFrontierStreakTexts[] =
     { .text = MatchCall_BattleFrontierStreakText13, .stringVarFuncIds = STRS_FRONTIER },
     { .text = MatchCall_BattleFrontierStreakText14, .stringVarFuncIds = STRS_FRONTIER },
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MatchCallText sMatchCallBattleFrontierRecordStreakTexts[] =
 {
     { .text = MatchCall_BattleFrontierRecordStreakText1,  .stringVarFuncIds = STRS_FRONTIER },
@@ -944,7 +957,10 @@ static const struct MatchCallText sMatchCallBattleFrontierRecordStreakTexts[] =
     { .text = MatchCall_BattleFrontierRecordStreakText13, .stringVarFuncIds = STRS_FRONTIER },
     { .text = MatchCall_BattleFrontierRecordStreakText14, .stringVarFuncIds = STRS_FRONTIER },
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MatchCallText sMatchCallBattleDomeTexts[] =
 {
     { .text = MatchCall_BattleDomeText1,  .stringVarFuncIds = STRS_FRONTIER },
@@ -962,7 +978,10 @@ static const struct MatchCallText sMatchCallBattleDomeTexts[] =
     { .text = MatchCall_BattleDomeText13, .stringVarFuncIds = STRS_FRONTIER },
     { .text = MatchCall_BattleDomeText14, .stringVarFuncIds = STRS_FRONTIER },
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MatchCallText sMatchCallBattlePikeTexts[] =
 {
     { .text = MatchCall_BattlePikeText1,  .stringVarFuncIds = STRS_FRONTIER },
@@ -980,7 +999,10 @@ static const struct MatchCallText sMatchCallBattlePikeTexts[] =
     { .text = MatchCall_BattlePikeText13, .stringVarFuncIds = STRS_FRONTIER },
     { .text = MatchCall_BattlePikeText14, .stringVarFuncIds = STRS_FRONTIER },
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MatchCallText sMatchCallBattlePyramidTexts[] =
 {
     { .text = MatchCall_BattlePyramidText1,  .stringVarFuncIds = STRS_FRONTIER },
@@ -998,20 +1020,29 @@ static const struct MatchCallText sMatchCallBattlePyramidTexts[] =
     { .text = MatchCall_BattlePyramidText13, .stringVarFuncIds = STRS_FRONTIER },
     { .text = MatchCall_BattlePyramidText14, .stringVarFuncIds = STRS_FRONTIER },
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MatchCallText *const sMatchCallBattleTopics[] =
 {
     [B_TOPIC_WILD - 1]     = sMatchCallWildBattleTexts,
     [B_TOPIC_NEGATIVE - 1] = sMatchCallNegativeBattleTexts,
     [B_TOPIC_POSITIVE - 1] = sMatchCallPositiveBattleTexts,
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MatchCallText *const sMatchCallBattleRequestTopics[] =
 {
     [REQ_TOPIC_SAME_ROUTE - 1] = sMatchCallSameRouteBattleRequestTexts,
     [REQ_TOPIC_DIFF_ROUTE - 1] = sMatchCallDifferentRouteBattleRequestTexts,
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MatchCallText *const sMatchCallGeneralTopics[] =
 {
     [GEN_TOPIC_PERSONAL - 1]      = sMatchCallPersonalizedTexts,
@@ -1021,6 +1052,7 @@ static const struct MatchCallText *const sMatchCallGeneralTopics[] =
     [GEN_TOPIC_B_PIKE - 1]        = sMatchCallBattlePikeTexts,
     [GEN_TOPIC_B_PYRAMID - 1]     = sMatchCallBattlePyramidTexts,
 };
+#endif
 
 extern const u8 gBirchDexRatingText_AreYouCurious[];
 extern const u8 gBirchDexRatingText_SoYouveSeenAndCaught[];
@@ -1666,6 +1698,8 @@ static void PopulateMatchCallStringVar(int matchCallId, int funcId, u8 *destStr)
     sPopulateMatchCallStringVarFuncs[funcId](matchCallId, destStr);
 }
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MultiTrainerMatchCallText sMultiTrainerMatchCallTexts[] =
 {
     { .trainerId = TRAINER_KIRA_AND_DAN_1, .text = gText_Kira },
@@ -1675,6 +1709,7 @@ static const struct MultiTrainerMatchCallText sMultiTrainerMatchCallTexts[] =
     { .trainerId = TRAINER_GABBY_AND_TY_1, .text = gText_Gabby },
     { .trainerId = TRAINER_ANNA_AND_MEG_1, .text = gText_Anna },
 };
+#endif
 
 static void PopulateTrainerName(int matchCallId, u8 *destStr)
 {
@@ -1818,6 +1853,8 @@ static void PopulateSpeciesFromTrainerParty(int matchCallId, u8 *destStr)
     StringCopy(destStr, speciesName);
 }
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sBattleFrontierFacilityNames[NUM_FRONTIER_FACILITIES] =
 {
     [FRONTIER_FACILITY_TOWER]   = gText_BattleTower2,
@@ -1828,6 +1865,7 @@ static const u8 *const sBattleFrontierFacilityNames[NUM_FRONTIER_FACILITIES] =
     [MATCH_CALL_FACTORY]        = gText_BattleFactory,
     [FRONTIER_FACILITY_PYRAMID] = gText_BattlePyramid,
 };
+#endif
 
 static void PopulateBattleFrontierFacilityName(int matchCallId, u8 *destStr)
 {

@@ -32,6 +32,10 @@
 #include "constants/items.h"
 #include "constants/songs.h"
 #include "constants/rgb.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
 #define MAX_MENU_ITEMS 9
 #define MENU_MIDPOINT (MAX_MENU_ITEMS / 2)
@@ -110,12 +114,30 @@ static void DrawPokeblockMenuTitleText(void);
 static void DrawPokeblockMenuHighlight(u16, u16);
 static void PutPokeblockListMenuString(u8 *, u16);
 static void Task_HandlePokeblockMenuInput(u8);
-static void PokeblockAction_UseOnField(u8);
-static void PokeblockAction_Toss(u8);
-static void PokeblockAction_Cancel(u8);
-static void PokeblockAction_UseInBattle(u8);
-static void PokeblockAction_UseOnPokeblockFeeder(u8);
-static void PokeblockAction_GiveToContestLady(u8);
+#ifndef NATIVE_LINUX
+static
+#endif
+void PokeblockAction_UseOnField(u8);
+#ifndef NATIVE_LINUX
+static
+#endif
+void PokeblockAction_Toss(u8);
+#ifndef NATIVE_LINUX
+static
+#endif
+void PokeblockAction_Cancel(u8);
+#ifndef NATIVE_LINUX
+static
+#endif
+void PokeblockAction_UseInBattle(u8);
+#ifndef NATIVE_LINUX
+static
+#endif
+void PokeblockAction_UseOnPokeblockFeeder(u8);
+#ifndef NATIVE_LINUX
+static
+#endif
+void PokeblockAction_GiveToContestLady(u8);
 static void TossedPokeblockMessage(u8);
 static void CloseTossPokeblockWindow(u8);
 static void Task_FreeDataAndExitPokeblockCase(u8);
@@ -194,6 +216,8 @@ static const struct BgTemplate sBgTemplatesForPokeblockMenu[] =
     }
 };
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 const u8 *const gPokeblockNames[] =
 {
     [PBLOCK_CLR_NONE]      = NULL,
@@ -212,7 +236,10 @@ const u8 *const gPokeblockNames[] =
     [PBLOCK_CLR_WHITE]     = gText_WhitePokeblock,
     [PBLOCK_CLR_GOLD]      = gText_GoldPokeblock
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction sPokeblockMenuActions[] =
 {
     [PKBL_USE_ON_FIELD]  = {gMenuText_Use, {PokeblockAction_UseOnField}},
@@ -222,6 +249,7 @@ static const struct MenuAction sPokeblockMenuActions[] =
     [PKBL_USE_ON_FEEDER] = {gMenuText_Use, {PokeblockAction_UseOnPokeblockFeeder}},
     [PKBL_GIVE_TO_LADY]  = {gMenuText_Give2, {PokeblockAction_GiveToContestLady}},
 };
+#endif
 
 static const u8 sActionsOnField[] = {PKBL_USE_ON_FIELD, PKBL_TOSS, PKBL_CANCEL};
 static const u8 sActionsInBattle[] = {PKBL_USE_IN_BATTLE, PKBL_CANCEL};
@@ -1181,7 +1209,13 @@ static void Task_HandlePokeblockActionsInput(u8 taskId)
     }
 }
 
-static void PokeblockAction_UseOnField(u8 taskId)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+void PokeblockAction_UseOnField(u8 taskId)
 {
     sPokeblockMenu->callbackOnUse = UsePokeblockOnField;
     FadePaletteAndSetTaskToClosePokeblockCase(taskId);
@@ -1197,7 +1231,13 @@ static void ReturnToPokeblockCaseOnField(void)
     OpenPokeblockCase(PBLOCK_CASE_FIELD, sSavedPokeblockData.callback);
 }
 
-static void PokeblockAction_Toss(u8 taskId)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+void PokeblockAction_Toss(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -1253,7 +1293,13 @@ static void CloseTossPokeblockWindow(u8 taskId)
     gTasks[taskId].func = Task_HandlePokeblockMenuInput;
 }
 
-static void PokeblockAction_UseInBattle(u8 taskId)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+void PokeblockAction_UseInBattle(u8 taskId)
 {
     u8 nature = GetNature(&gEnemyParty[0]);
     s16 gain = PokeblockGetGain(nature, &gSaveBlock1Ptr->pokeblocks[gSpecialVar_ItemId]);
@@ -1271,7 +1317,13 @@ static void PokeblockAction_UseInBattle(u8 taskId)
     FadePaletteAndSetTaskToClosePokeblockCase(taskId);
 }
 
-static void PokeblockAction_UseOnPokeblockFeeder(u8 taskId)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+void PokeblockAction_UseOnPokeblockFeeder(u8 taskId)
 {
     SafariZoneActivatePokeblockFeeder(gSpecialVar_ItemId);
     StringCopy(gStringVar1, gPokeblockNames[gSaveBlock1Ptr->pokeblocks[gSpecialVar_ItemId].color]);
@@ -1281,7 +1333,13 @@ static void PokeblockAction_UseOnPokeblockFeeder(u8 taskId)
     FadePaletteAndSetTaskToClosePokeblockCase(taskId);
 }
 
-static void PokeblockAction_GiveToContestLady(u8 taskId)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+void PokeblockAction_GiveToContestLady(u8 taskId)
 {
     gSpecialVar_0x8004 = GivePokeblockToContestLady(&gSaveBlock1Ptr->pokeblocks[gSpecialVar_ItemId]);
     gSpecialVar_Result = gSpecialVar_ItemId;
@@ -1290,7 +1348,13 @@ static void PokeblockAction_GiveToContestLady(u8 taskId)
     FadePaletteAndSetTaskToClosePokeblockCase(taskId);
 }
 
-static void PokeblockAction_Cancel(u8 taskId)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+void PokeblockAction_Cancel(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 

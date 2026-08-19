@@ -42,6 +42,10 @@
 #include "constants/moves.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
 // This file's functions.
 static void LoadContestPalettes(void);
@@ -361,8 +365,12 @@ EWRAM_DATA u8 gCurContestWinnerSaveIdx = 0;
 COMMON_DATA u32 gContestRngValue = 0;
 
 extern const u8 gText_LinkStandby4[];
+#ifndef NATIVE_LINUX
 extern const u8 gText_BDot[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_CDot[];
+#endif
 extern void (*const gContestEffectFuncs[])(void);
 
 static const u8 sSliderHeartYPositions[CONTESTANT_COUNT] =

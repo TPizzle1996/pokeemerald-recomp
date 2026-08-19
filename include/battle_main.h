@@ -1,5 +1,9 @@
 #ifndef GUARD_BATTLE_MAIN_H
 #define GUARD_BATTLE_MAIN_H
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
 struct TrainerMoney
 {
@@ -86,7 +90,9 @@ extern const u8 gTypeEffectiveness[336];
 extern const u8 gTypeNames[NUMBER_OF_MON_TYPES][TYPE_NAME_LENGTH + 1];
 extern const struct TrainerMoney gTrainerMoneyTable[];
 extern const u8 gAbilityNames[][ABILITY_NAME_LENGTH + 1];
+#ifndef NATIVE_LINUX
 extern const u8 *const gAbilityDescriptionPointers[];
+#endif
 
 extern const u8 gStatusConditionString_PoisonJpn[8];
 extern const u8 gStatusConditionString_SleepJpn[8];
@@ -96,6 +102,9 @@ extern const u8 gStatusConditionString_IceJpn[8];
 extern const u8 gStatusConditionString_ConfusionJpn[8];
 extern const u8 gStatusConditionString_LoveJpn[8];
 
+/* R13-C: generated host array provides the NATIVE_LINUX extern (rows filled at publish). */
+#ifndef NATIVE_LINUX
 extern const u8 *const gStatusConditionStringsTable[7][2];
+#endif
 
 #endif // GUARD_BATTLE_MAIN_H

@@ -33,6 +33,10 @@
 #include "constants/rgb.h"
 #include "constants/trainers.h"
 #include "constants/union_room.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
 enum {
     WIN_MSG,
@@ -1212,12 +1216,15 @@ static void PrintHofDebutTimeOnCard(void)
         PrintStatOnBackOfCard(0, gText_HallOfFameDebut, sData->textHofTime, sTrainerCardStatColors);
 }
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sLinkBattleTexts[] =
 {
     [CARD_TYPE_FRLG]    = gText_LinkBattles,
     [CARD_TYPE_RS]      = gText_LinkCableBattles,
     [CARD_TYPE_EMERALD] = gText_LinkBattles
 };
+#endif
 
 static void BufferLinkBattleResults(void)
 {

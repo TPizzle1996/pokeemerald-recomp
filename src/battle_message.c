@@ -28,6 +28,10 @@
 #include "constants/trainers.h"
 #include "constants/trainer_hill.h"
 #include "constants/weather.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
 struct BattleWindowText
 {
@@ -52,385 +56,1143 @@ EWRAM_DATA struct BattleMsgData *gBattleMsgDataPtr = NULL;
 
 // todo: make some of those names less vague: attacker/target vs pkmn, etc.
 
+#ifndef NATIVE_LINUX
 static const u8 sText_Trainer1LoseText[] = _("{B_TRAINER1_LOSE_TEXT}");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnGainedEXP[] = _("{B_BUFF1} gained{B_BUFF2}\n{B_BUFF3} EXP. Points!\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_EmptyString4[] = _("");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_ABoosted[] = _(" a boosted");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnGrewToLv[] = _("{B_BUFF1} grew to\nLV. {B_BUFF2}!{WAIT_SE}\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnLearnedMove[] = _("{B_BUFF1} learned\n{B_BUFF2}!{WAIT_SE}\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_TryToLearnMove1[] = _("{B_BUFF1} is trying to\nlearn {B_BUFF2}.\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_TryToLearnMove2[] = _("But, {B_BUFF1} can't learn\nmore than four moves.\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_TryToLearnMove3[] = _("Delete a move to make\nroom for {B_BUFF2}?");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnForgotMove[] = _("{B_BUFF1} forgot\n{B_BUFF2}.\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_StopLearningMove[] = _("{PAUSE 32}Stop learning\n{B_BUFF2}?");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_DidNotLearnMove[] = _("{B_BUFF1} did not learn\n{B_BUFF2}.\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_UseNextPkmn[] = _("Use next POKéMON?");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_AttackMissed[] = _("{B_ATK_NAME_WITH_PREFIX}'s\nattack missed!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnProtectedItself[] = _("{B_DEF_NAME_WITH_PREFIX}\nprotected itself!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_AvoidedDamage[] = _("{B_DEF_NAME_WITH_PREFIX} avoided\ndamage with {B_DEF_ABILITY}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnMakesGroundMiss[] = _("{B_DEF_NAME_WITH_PREFIX} makes GROUND\nmoves miss with {B_DEF_ABILITY}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnAvoidedAttack[] = _("{B_DEF_NAME_WITH_PREFIX} avoided\nthe attack!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_ItDoesntAffect[] = _("It doesn't affect\n{B_DEF_NAME_WITH_PREFIX}…");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_AttackerFainted[] = _("{B_ATK_NAME_WITH_PREFIX}\nfainted!\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_TargetFainted[] = _("{B_DEF_NAME_WITH_PREFIX}\nfainted!\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PlayerGotMoney[] = _("{B_PLAYER_NAME} got ¥{B_BUFF1}\nfor winning!\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PlayerWhiteout[] = _("{B_PLAYER_NAME} is out of\nusable POKéMON!\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PlayerWhiteout2[] = _("{B_PLAYER_NAME} whited out!{PAUSE_UNTIL_PRESS}");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PreventsEscape[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} prevents\nescape with {B_SCR_ACTIVE_ABILITY}!\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_CantEscape2[] = _("Can't escape!\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_AttackerCantEscape[] = _("{B_ATK_NAME_WITH_PREFIX} can't escape!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_HitXTimes[] = _("Hit {B_BUFF1} time(s)!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnFellAsleep[] = _("{B_EFF_NAME_WITH_PREFIX}\nfell asleep!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnMadeSleep[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nmade {B_EFF_NAME_WITH_PREFIX} sleep!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnAlreadyAsleep[] = _("{B_DEF_NAME_WITH_PREFIX} is\nalready asleep!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnAlreadyAsleep2[] = _("{B_ATK_NAME_WITH_PREFIX} is\nalready asleep!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnWasntAffected[] = _("{B_DEF_NAME_WITH_PREFIX}\nwasn't affected!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnWasPoisoned[] = _("{B_EFF_NAME_WITH_PREFIX}\nwas poisoned!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnPoisonedBy[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\npoisoned {B_EFF_NAME_WITH_PREFIX}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnHurtByPoison[] = _("{B_ATK_NAME_WITH_PREFIX} is hurt\nby poison!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnAlreadyPoisoned[] = _("{B_DEF_NAME_WITH_PREFIX} is already\npoisoned.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnBadlyPoisoned[] = _("{B_EFF_NAME_WITH_PREFIX} is badly\npoisoned!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnEnergyDrained[] = _("{B_DEF_NAME_WITH_PREFIX} had its\nenergy drained!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnWasBurned[] = _("{B_EFF_NAME_WITH_PREFIX} was burned!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnBurnedBy[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nburned {B_EFF_NAME_WITH_PREFIX}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnHurtByBurn[] = _("{B_ATK_NAME_WITH_PREFIX} is hurt\nby its burn!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnAlreadyHasBurn[] = _("{B_DEF_NAME_WITH_PREFIX} already\nhas a burn.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnWasFrozen[] = _("{B_EFF_NAME_WITH_PREFIX} was\nfrozen solid!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnFrozenBy[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nfroze {B_EFF_NAME_WITH_PREFIX} solid!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnIsFrozen[] = _("{B_ATK_NAME_WITH_PREFIX} is\nfrozen solid!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnWasDefrosted[] = _("{B_DEF_NAME_WITH_PREFIX} was\ndefrosted!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnWasDefrosted2[] = _("{B_ATK_NAME_WITH_PREFIX} was\ndefrosted!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnWasDefrostedBy[] = _("{B_ATK_NAME_WITH_PREFIX} was\ndefrosted by {B_CURRENT_MOVE}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnWasParalyzed[] = _("{B_EFF_NAME_WITH_PREFIX} is paralyzed!\nIt may be unable to move!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnWasParalyzedBy[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nparalyzed {B_EFF_NAME_WITH_PREFIX}!\lIt may be unable to move!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnIsParalyzed[] = _("{B_ATK_NAME_WITH_PREFIX} is paralyzed!\nIt can't move!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnIsAlreadyParalyzed[] = _("{B_DEF_NAME_WITH_PREFIX} is\nalready paralyzed!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnHealedParalysis[] = _("{B_DEF_NAME_WITH_PREFIX} was\nhealed of paralysis!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnDreamEaten[] = _("{B_DEF_NAME_WITH_PREFIX}'s\ndream was eaten!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_StatsWontIncrease[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_BUFF1}\nwon't go higher!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_StatsWontDecrease[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1}\nwon't go lower!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_TeamStoppedWorking[] = _("Your team's {B_BUFF1}\nstopped working!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_FoeStoppedWorking[] = _("The foe's {B_BUFF1}\nstopped working!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnIsConfused[] = _("{B_ATK_NAME_WITH_PREFIX} is\nconfused!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnHealedConfusion[] = _("{B_ATK_NAME_WITH_PREFIX} snapped\nout of confusion!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnWasConfused[] = _("{B_EFF_NAME_WITH_PREFIX} became\nconfused!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnAlreadyConfused[] = _("{B_DEF_NAME_WITH_PREFIX} is\nalready confused!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnFellInLove[] = _("{B_DEF_NAME_WITH_PREFIX}\nfell in love!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnInLove[] = _("{B_ATK_NAME_WITH_PREFIX} is in love\nwith {B_SCR_ACTIVE_NAME_WITH_PREFIX}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnImmobilizedByLove[] = _("{B_ATK_NAME_WITH_PREFIX} is\nimmobilized by love!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnBlownAway[] = _("{B_DEF_NAME_WITH_PREFIX} was\nblown away!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnChangedType[] = _("{B_ATK_NAME_WITH_PREFIX} transformed\ninto the {B_BUFF1} type!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnFlinched[] = _("{B_ATK_NAME_WITH_PREFIX} flinched!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnRegainedHealth[] = _("{B_DEF_NAME_WITH_PREFIX} regained\nhealth!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnHPFull[] = _("{B_DEF_NAME_WITH_PREFIX}'s\nHP is full!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnRaisedSpDef[] = _("{B_ATK_PREFIX2}'s {B_CURRENT_MOVE}\nraised SP. DEF!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnRaisedSpDefALittle[] = _("{B_ATK_PREFIX2}'s {B_CURRENT_MOVE}\nraised SP. DEF a little!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnRaisedDef[] = _("{B_ATK_PREFIX2}'s {B_CURRENT_MOVE}\nraised DEFENSE!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnRaisedDefALittle[] = _("{B_ATK_PREFIX2}'s {B_CURRENT_MOVE}\nraised DEFENSE a little!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnCoveredByVeil[] = _("{B_ATK_PREFIX2}'s party is covered\nby a veil!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnUsedSafeguard[] = _("{B_DEF_NAME_WITH_PREFIX}'s party is protected\nby SAFEGUARD!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnSafeguardExpired[] = _("{B_ATK_PREFIX3}'s party is no longer\nprotected by SAFEGUARD!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnWentToSleep[] = _("{B_ATK_NAME_WITH_PREFIX} went\nto sleep!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnSleptHealthy[] = _("{B_ATK_NAME_WITH_PREFIX} slept and\nbecame healthy!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnWhippedWhirlwind[] = _("{B_ATK_NAME_WITH_PREFIX} whipped\nup a whirlwind!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnTookSunlight[] = _("{B_ATK_NAME_WITH_PREFIX} took\nin sunlight!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnLoweredHead[] = _("{B_ATK_NAME_WITH_PREFIX} lowered\nits head!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnIsGlowing[] = _("{B_ATK_NAME_WITH_PREFIX} is glowing!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnFlewHigh[] = _("{B_ATK_NAME_WITH_PREFIX} flew\nup high!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnDugHole[] = _("{B_ATK_NAME_WITH_PREFIX} dug a hole!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnHidUnderwater[] = _("{B_ATK_NAME_WITH_PREFIX} hid\nunderwater!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnSprangUp[] = _("{B_ATK_NAME_WITH_PREFIX} sprang up!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnSqueezedByBind[] = _("{B_DEF_NAME_WITH_PREFIX} was squeezed by\n{B_ATK_NAME_WITH_PREFIX}'s BIND!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnTrappedInVortex[] = _("{B_DEF_NAME_WITH_PREFIX} was trapped\nin the vortex!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnTrappedBySandTomb[] = _("{B_DEF_NAME_WITH_PREFIX} was trapped\nby SAND TOMB!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnWrappedBy[] = _("{B_DEF_NAME_WITH_PREFIX} was WRAPPED by\n{B_ATK_NAME_WITH_PREFIX}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnClamped[] = _("{B_ATK_NAME_WITH_PREFIX} CLAMPED\n{B_DEF_NAME_WITH_PREFIX}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnHurtBy[] = _("{B_ATK_NAME_WITH_PREFIX} is hurt\nby {B_BUFF1}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnFreedFrom[] = _("{B_ATK_NAME_WITH_PREFIX} was freed\nfrom {B_BUFF1}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnCrashed[] = _("{B_ATK_NAME_WITH_PREFIX} kept going\nand crashed!");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_PkmnShroudedInMist[] = _("{B_ATK_PREFIX2} became\nshrouded in MIST!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnProtectedByMist[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} is protected\nby MIST!");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_PkmnGettingPumped[] = _("{B_ATK_NAME_WITH_PREFIX} is getting\npumped!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnHitWithRecoil[] = _("{B_ATK_NAME_WITH_PREFIX} is hit\nwith recoil!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnProtectedItself2[] = _("{B_ATK_NAME_WITH_PREFIX} protected\nitself!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnBuffetedBySandstorm[] = _("{B_ATK_NAME_WITH_PREFIX} is buffeted\nby the sandstorm!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnPeltedByHail[] = _("{B_ATK_NAME_WITH_PREFIX} is pelted\nby HAIL!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnsXWoreOff[] = _("{B_ATK_PREFIX1}'s {B_BUFF1}\nwore off!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnSeeded[] = _("{B_DEF_NAME_WITH_PREFIX} was seeded!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnEvadedAttack[] = _("{B_DEF_NAME_WITH_PREFIX} evaded\nthe attack!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnSappedByLeechSeed[] = _("{B_ATK_NAME_WITH_PREFIX}'s health is\nsapped by LEECH SEED!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnFastAsleep[] = _("{B_ATK_NAME_WITH_PREFIX} is fast\nasleep.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnWokeUp[] = _("{B_ATK_NAME_WITH_PREFIX} woke up!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnUproarKeptAwake[] = _("But {B_SCR_ACTIVE_NAME_WITH_PREFIX}'s UPROAR\nkept it awake!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnWokeUpInUproar[] = _("{B_ATK_NAME_WITH_PREFIX} woke up\nin the UPROAR!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnCausedUproar[] = _("{B_ATK_NAME_WITH_PREFIX} caused\nan UPROAR!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnMakingUproar[] = _("{B_ATK_NAME_WITH_PREFIX} is making\nan UPROAR!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnCalmedDown[] = _("{B_ATK_NAME_WITH_PREFIX} calmed down.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnCantSleepInUproar[] = _("But {B_DEF_NAME_WITH_PREFIX} can't\nsleep in an UPROAR!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnStockpiled[] = _("{B_ATK_NAME_WITH_PREFIX} STOCKPILED\n{B_BUFF1}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnCantStockpile[] = _("{B_ATK_NAME_WITH_PREFIX} can't\nSTOCKPILE any more!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnCantSleepInUproar2[] = _("But {B_DEF_NAME_WITH_PREFIX} can't\nsleep in an UPROAR!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_UproarKeptPkmnAwake[] = _("But the UPROAR kept\n{B_DEF_NAME_WITH_PREFIX} awake!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnStayedAwakeUsing[] = _("{B_DEF_NAME_WITH_PREFIX} stayed awake\nusing its {B_DEF_ABILITY}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnStoringEnergy[] = _("{B_ATK_NAME_WITH_PREFIX} is storing\nenergy!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnUnleashedEnergy[] = _("{B_ATK_NAME_WITH_PREFIX} unleashed\nenergy!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnFatigueConfusion[] = _("{B_ATK_NAME_WITH_PREFIX} became\nconfused due to fatigue!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PlayerPickedUpMoney[] = _("{B_PLAYER_NAME} picked up\n¥{B_BUFF1}!\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnUnaffected[] = _("{B_DEF_NAME_WITH_PREFIX} is\nunaffected!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnTransformedInto[] = _("{B_ATK_NAME_WITH_PREFIX} transformed\ninto {B_BUFF1}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnMadeSubstitute[] = _("{B_ATK_NAME_WITH_PREFIX} made\na SUBSTITUTE!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnHasSubstitute[] = _("{B_ATK_NAME_WITH_PREFIX} already\nhas a SUBSTITUTE!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_SubstituteDamaged[] = _("The SUBSTITUTE took damage\nfor {B_DEF_NAME_WITH_PREFIX}!\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnSubstituteFaded[] = _("{B_DEF_NAME_WITH_PREFIX}'s\nSUBSTITUTE faded!\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnMustRecharge[] = _("{B_ATK_NAME_WITH_PREFIX} must\nrecharge!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnRageBuilding[] = _("{B_DEF_NAME_WITH_PREFIX}'s RAGE\nis building!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnMoveWasDisabled[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1}\nwas disabled!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnMoveDisabledNoMore[] = _("{B_ATK_NAME_WITH_PREFIX} is disabled\nno more!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnGotEncore[] = _("{B_DEF_NAME_WITH_PREFIX} got\nan ENCORE!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnEncoreEnded[] = _("{B_ATK_NAME_WITH_PREFIX}'s ENCORE\nended!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnTookAim[] = _("{B_ATK_NAME_WITH_PREFIX} took aim\nat {B_DEF_NAME_WITH_PREFIX}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnSketchedMove[] = _("{B_ATK_NAME_WITH_PREFIX} SKETCHED\n{B_BUFF1}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnTryingToTakeFoe[] = _("{B_ATK_NAME_WITH_PREFIX} is trying\nto take its foe with it!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnTookFoe[] = _("{B_DEF_NAME_WITH_PREFIX} took\n{B_ATK_NAME_WITH_PREFIX} with it!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnReducedPP[] = _("Reduced {B_DEF_NAME_WITH_PREFIX}'s\n{B_BUFF1} by {B_BUFF2}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnStoleItem[] = _("{B_ATK_NAME_WITH_PREFIX} stole\n{B_DEF_NAME_WITH_PREFIX}'s {B_LAST_ITEM}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_TargetCantEscapeNow[] = _("{B_DEF_NAME_WITH_PREFIX} can't\nescape now!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnFellIntoNightmare[] = _("{B_DEF_NAME_WITH_PREFIX} fell into\na NIGHTMARE!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnLockedInNightmare[] = _("{B_ATK_NAME_WITH_PREFIX} is locked\nin a NIGHTMARE!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnLaidCurse[] = _("{B_ATK_NAME_WITH_PREFIX} cut its own HP and\nlaid a CURSE on {B_DEF_NAME_WITH_PREFIX}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnAfflictedByCurse[] = _("{B_ATK_NAME_WITH_PREFIX} is afflicted\nby the CURSE!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_SpikesScattered[] = _("SPIKES were scattered all around\nthe opponent's side!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnHurtBySpikes[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} is hurt\nby SPIKES!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnIdentified[] = _("{B_ATK_NAME_WITH_PREFIX} identified\n{B_DEF_NAME_WITH_PREFIX}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnPerishCountFell[] = _("{B_ATK_NAME_WITH_PREFIX}'s PERISH count\nfell to {B_BUFF1}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnBracedItself[] = _("{B_ATK_NAME_WITH_PREFIX} braced\nitself!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnEnduredHit[] = _("{B_DEF_NAME_WITH_PREFIX} ENDURED\nthe hit!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_MagnitudeStrength[] = _("MAGNITUDE {B_BUFF1}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnCutHPMaxedAttack[] = _("{B_ATK_NAME_WITH_PREFIX} cut its own HP\nand maximized ATTACK!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnCopiedStatChanges[] = _("{B_ATK_NAME_WITH_PREFIX} copied\n{B_DEF_NAME_WITH_PREFIX}'s stat changes!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnGotFree[] = _("{B_ATK_NAME_WITH_PREFIX} got free of\n{B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnShedLeechSeed[] = _("{B_ATK_NAME_WITH_PREFIX} shed\nLEECH SEED!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnBlewAwaySpikes[] = _("{B_ATK_NAME_WITH_PREFIX} blew away\nSPIKES!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnFledFromBattle[] = _("{B_ATK_NAME_WITH_PREFIX} fled from\nbattle!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnForesawAttack[] = _("{B_ATK_NAME_WITH_PREFIX} foresaw\nan attack!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnTookAttack[] = _("{B_DEF_NAME_WITH_PREFIX} took the\n{B_BUFF1} attack!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnChoseXAsDestiny[] = _("{B_ATK_NAME_WITH_PREFIX} chose\n{B_CURRENT_MOVE} as its destiny!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnAttack[] = _("{B_BUFF1}'s attack!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnCenterAttention[] = _("{B_ATK_NAME_WITH_PREFIX} became the\ncenter of attention!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnChargingPower[] = _("{B_ATK_NAME_WITH_PREFIX} began\ncharging power!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_NaturePowerTurnedInto[] = _("NATURE POWER turned into\n{B_CURRENT_MOVE}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnStatusNormal[] = _("{B_ATK_NAME_WITH_PREFIX}'s status\nreturned to normal!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnSubjectedToTorment[] = _("{B_DEF_NAME_WITH_PREFIX} was subjected\nto TORMENT!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnTighteningFocus[] = _("{B_ATK_NAME_WITH_PREFIX} is tightening\nits focus!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnFellForTaunt[] = _("{B_DEF_NAME_WITH_PREFIX} fell for\nthe TAUNT!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnReadyToHelp[] = _("{B_ATK_NAME_WITH_PREFIX} is ready to\nhelp {B_DEF_NAME_WITH_PREFIX}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnSwitchedItems[] = _("{B_ATK_NAME_WITH_PREFIX} switched\nitems with its opponent!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnObtainedX[] = _("{B_ATK_NAME_WITH_PREFIX} obtained\n{B_BUFF1}.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnObtainedX2[] = _("{B_DEF_NAME_WITH_PREFIX} obtained\n{B_BUFF2}.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnObtainedXYObtainedZ[] = _("{B_ATK_NAME_WITH_PREFIX} obtained\n{B_BUFF1}.\p{B_DEF_NAME_WITH_PREFIX} obtained\n{B_BUFF2}.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnCopiedFoe[] = _("{B_ATK_NAME_WITH_PREFIX} copied\n{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnMadeWish[] = _("{B_ATK_NAME_WITH_PREFIX} made a WISH!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnWishCameTrue[] = _("{B_BUFF1}'s WISH\ncame true!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnPlantedRoots[] = _("{B_ATK_NAME_WITH_PREFIX} planted its roots!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnAbsorbedNutrients[] = _("{B_ATK_NAME_WITH_PREFIX} absorbed\nnutrients with its roots!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnAnchoredItself[] = _("{B_DEF_NAME_WITH_PREFIX} anchored\nitself with its roots!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnWasMadeDrowsy[] = _("{B_ATK_NAME_WITH_PREFIX} made\n{B_DEF_NAME_WITH_PREFIX} drowsy!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnKnockedOff[] = _("{B_ATK_NAME_WITH_PREFIX} knocked off\n{B_DEF_NAME_WITH_PREFIX}'s {B_LAST_ITEM}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnSwappedAbilities[] = _("{B_ATK_NAME_WITH_PREFIX} swapped abilities\nwith its opponent!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnSealedOpponentMove[] = _("{B_ATK_NAME_WITH_PREFIX} sealed the\nopponent's move(s)!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnWantsGrudge[] = _("{B_ATK_NAME_WITH_PREFIX} wants the\nopponent to bear a GRUDGE!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnLostPPGrudge[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_BUFF1} lost\nall its PP due to the GRUDGE!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnShroudedItself[] = _("{B_ATK_NAME_WITH_PREFIX} shrouded\nitself in {B_CURRENT_MOVE}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnMoveBounced[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_CURRENT_MOVE}\nwas bounced back by MAGIC COAT!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnWaitsForTarget[] = _("{B_ATK_NAME_WITH_PREFIX} waits for a target\nto make a move!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnSnatchedMove[] = _("{B_DEF_NAME_WITH_PREFIX} SNATCHED\n{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s move!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_ElectricityWeakened[] = _("Electricity's power was\nweakened!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_FireWeakened[] = _("Fire's power was\nweakened!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_XFoundOneY[] = _("{B_ATK_NAME_WITH_PREFIX} found\none {B_LAST_ITEM}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_SoothingAroma[] = _("A soothing aroma wafted\nthrough the area!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_ItemsCantBeUsedNow[] = _("Items can't be used now.{PAUSE 64}");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_ForXCommaYZ[] = _("For {B_SCR_ACTIVE_NAME_WITH_PREFIX},\n{B_LAST_ITEM} {B_BUFF1}");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnUsedXToGetPumped[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} used\n{B_LAST_ITEM} to get pumped!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnLostFocus[] = _("{B_ATK_NAME_WITH_PREFIX} lost its\nfocus and couldn't move!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnWasDraggedOut[] = _("{B_DEF_NAME_WITH_PREFIX} was\ndragged out!\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_TheWallShattered[] = _("The wall shattered!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_ButNoEffect[] = _("But it had no effect!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnHasNoMovesLeft[] = _("{B_ACTIVE_NAME_WITH_PREFIX} has no\nmoves left!\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnMoveIsDisabled[] = _("{B_ACTIVE_NAME_WITH_PREFIX}'s {B_CURRENT_MOVE}\nis disabled!\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnCantUseMoveTorment[] = _("{B_ACTIVE_NAME_WITH_PREFIX} can't use the same\nmove in a row due to the TORMENT!\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnCantUseMoveTaunt[] = _("{B_ACTIVE_NAME_WITH_PREFIX} can't use\n{B_CURRENT_MOVE} after the TAUNT!\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnCantUseMoveSealed[] = _("{B_ACTIVE_NAME_WITH_PREFIX} can't use the\nsealed {B_CURRENT_MOVE}!\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnMadeItRain[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nmade it rain!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnRaisedSpeed[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nraised its SPEED!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnProtectedBy[] = _("{B_DEF_NAME_WITH_PREFIX} was protected\nby {B_DEF_ABILITY}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnPreventsUsage[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nprevents {B_ATK_NAME_WITH_PREFIX}\lfrom using {B_CURRENT_MOVE}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnRestoredHPUsing[] = _("{B_DEF_NAME_WITH_PREFIX} restored HP\nusing its {B_DEF_ABILITY}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnsXMadeYUseless[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nmade {B_CURRENT_MOVE} useless!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnChangedTypeWith[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nmade it the {B_BUFF1} type!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnPreventsParalysisWith[] = _("{B_EFF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nprevents paralysis!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnPreventsRomanceWith[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nprevents romance!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnPreventsPoisoningWith[] = _("{B_EFF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nprevents poisoning!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnPreventsConfusionWith[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nprevents confusion!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnRaisedFirePowerWith[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nraised its FIRE power!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnAnchorsItselfWith[] = _("{B_DEF_NAME_WITH_PREFIX} anchors\nitself with {B_DEF_ABILITY}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnCutsAttackWith[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\ncuts {B_DEF_NAME_WITH_PREFIX}'s ATTACK!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnPreventsStatLossWith[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nprevents stat loss!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnHurtsWith[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nhurt {B_ATK_NAME_WITH_PREFIX}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnTraced[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} TRACED\n{B_BUFF1}'s {B_BUFF2}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnsXPreventsBurns[] = _("{B_EFF_NAME_WITH_PREFIX}'s {B_EFF_ABILITY}\nprevents burns!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnsXBlocksY[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nblocks {B_CURRENT_MOVE}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnsXBlocksY2[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nblocks {B_CURRENT_MOVE}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnsXRestoredHPALittle2[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_ATK_ABILITY}\nrestored its HP a little!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnsXWhippedUpSandstorm[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nwhipped up a sandstorm!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnsXIntensifiedSun[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nintensified the sun's rays!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnsXPreventsYLoss[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nprevents {B_BUFF1} loss!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnsXInfatuatedY[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\ninfatuated {B_ATK_NAME_WITH_PREFIX}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnsXMadeYIneffective[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nmade {B_CURRENT_MOVE} ineffective!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnsXCuredYProblem[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\ncured its {B_BUFF1} problem!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_ItSuckedLiquidOoze[] = _("It sucked up the\nLIQUID OOZE!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnTransformed[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} transformed!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnsXTookAttack[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\ntook the attack!");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_PkmnsXPreventsSwitching[] = _("{B_BUFF1}'s {B_LAST_ABILITY}\nprevents switching!\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PreventedFromWorking[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_DEF_ABILITY}\nprevented {B_SCR_ACTIVE_NAME_WITH_PREFIX}'s\l{B_BUFF1} from working!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnsXMadeItIneffective[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nmade it ineffective!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnsXPreventsFlinching[] = _("{B_EFF_NAME_WITH_PREFIX}'s {B_EFF_ABILITY}\nprevents flinching!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnsXPreventsYsZ[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_ATK_ABILITY}\nprevents {B_DEF_NAME_WITH_PREFIX}'s\l{B_DEF_ABILITY} from working!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnsXCuredItsYProblem[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\ncured its {B_BUFF1} problem!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnsXHadNoEffectOnY[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_SCR_ACTIVE_ABILITY}\nhad no effect on {B_EFF_NAME_WITH_PREFIX}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_StatSharply[] = _("sharply ");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_StatRose[] = _("rose!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_StatHarshly[] = _("harshly ");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_StatFell[] = _("fell!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_AttackersStatRose[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_BUFF1}\n{B_BUFF2}");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_DefendersStatRose[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1}\n{B_BUFF2}");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_UsingItemTheStatOfPkmnRose[] = _("Using {B_LAST_ITEM}, the {B_BUFF1}\nof {B_SCR_ACTIVE_NAME_WITH_PREFIX} {B_BUFF2}");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_AttackersStatFell[] = _("{B_ATK_NAME_WITH_PREFIX}'s {B_BUFF1}\n{B_BUFF2}");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_DefendersStatFell[] = _("{B_DEF_NAME_WITH_PREFIX}'s {B_BUFF1}\n{B_BUFF2}");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_StatsWontIncrease2[] = _("{B_ATK_NAME_WITH_PREFIX}'s stats won't\ngo any higher!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_StatsWontDecrease2[] = _("{B_DEF_NAME_WITH_PREFIX}'s stats won't\ngo any lower!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_CriticalHit[] = _("A critical hit!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_OneHitKO[] = _("It's a one-hit KO!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_123Poof[] = _("{PAUSE 32}1, {PAUSE 15}2, and{PAUSE 15}… {PAUSE 15}… {PAUSE 15}… {PAUSE 15}{PLAY_SE SE_BALL_BOUNCE_1}Poof!\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_AndEllipsis[] = _("And…\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_HMMovesCantBeForgotten[] = _("HM moves can't be\nforgotten now.\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_NotVeryEffective[] = _("It's not very effective…");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_SuperEffective[] = _("It's super effective!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_GotAwaySafely[] = _("{PLAY_SE SE_FLEE}Got away safely!\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnFledUsingIts[] = _("{PLAY_SE SE_FLEE}{B_ATK_NAME_WITH_PREFIX} fled\nusing its {B_LAST_ITEM}!\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnFledUsing[] = _("{PLAY_SE SE_FLEE}{B_ATK_NAME_WITH_PREFIX} fled\nusing {B_ATK_ABILITY}!\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_WildPkmnFled[] = _("{PLAY_SE SE_FLEE}Wild {B_BUFF1} fled!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PlayerDefeatedLinkTrainer[] = _("Player defeated\n{B_LINK_OPPONENT1_NAME}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_TwoLinkTrainersDefeated[] = _("Player beat {B_LINK_OPPONENT1_NAME}\nand {B_LINK_OPPONENT2_NAME}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PlayerLostAgainstLinkTrainer[] = _("Player lost against\n{B_LINK_OPPONENT1_NAME}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PlayerLostToTwo[] = _("Player lost to {B_LINK_OPPONENT1_NAME}\nand {B_LINK_OPPONENT2_NAME}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PlayerBattledToDrawLinkTrainer[] = _("Player battled to a draw against\n{B_LINK_OPPONENT1_NAME}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PlayerBattledToDrawVsTwo[] = _("Player battled to a draw against\n{B_LINK_OPPONENT1_NAME} and {B_LINK_OPPONENT2_NAME}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_WildFled[] = _("{PLAY_SE SE_FLEE}{B_LINK_OPPONENT1_NAME} fled!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_TwoWildFled[] = _("{PLAY_SE SE_FLEE}{B_LINK_OPPONENT1_NAME} and\n{B_LINK_OPPONENT2_NAME} fled!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_NoRunningFromTrainers[] = _("No! There's no running\nfrom a TRAINER battle!\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_CantEscape[] = _("Can't escape!\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_DontLeaveBirch[] = _("PROF. BIRCH: Don't leave me like this!\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_ButNothingHappened[] = _("But nothing happened!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_ButItFailed[] = _("But it failed!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_ItHurtConfusion[] = _("It hurt itself in its\nconfusion!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_MirrorMoveFailed[] = _("The MIRROR MOVE failed!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_StartedToRain[] = _("It started to rain!");
-static const u8 sText_DownpourStarted[] = _("A downpour started!"); // corresponds to DownpourText in pokegold and pokecrystal and is used by Rain Dance in GSC
+#endif
+#ifndef NATIVE_LINUX
+static const u8 sText_DownpourStarted[] = _("A downpour started!");
+#endif // corresponds to DownpourText in pokegold and pokecrystal and is used by Rain Dance in GSC
+#ifndef NATIVE_LINUX
 static const u8 sText_RainContinues[] = _("Rain continues to fall.");
-static const u8 sText_DownpourContinues[] = _("The downpour continues."); // unused
+#endif
+#ifndef NATIVE_LINUX
+static const u8 sText_DownpourContinues[] = _("The downpour continues.");
+#endif // unused
+#ifndef NATIVE_LINUX
 static const u8 sText_RainStopped[] = _("The rain stopped.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_SandstormBrewed[] = _("A sandstorm brewed!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_SandstormRages[] = _("The sandstorm rages.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_SandstormSubsided[] = _("The sandstorm subsided.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_SunlightGotBright[] = _("The sunlight got bright!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_SunlightStrong[] = _("The sunlight is strong.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_SunlightFaded[] = _("The sunlight faded.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_StartedHail[] = _("It started to hail!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_HailContinues[] = _("Hail continues to fall.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_HailStopped[] = _("The hail stopped.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_FailedToSpitUp[] = _("But it failed to SPIT UP\na thing!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_FailedToSwallow[] = _("But it failed to SWALLOW\na thing!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_WindBecameHeatWave[] = _("The wind turned into a\nHEAT WAVE!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_StatChangesGone[] = _("All stat changes were\neliminated!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_CoinsScattered[] = _("Coins scattered everywhere!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_TooWeakForSubstitute[] = _("It was too weak to make\na SUBSTITUTE!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_SharedPain[] = _("The battlers shared\ntheir pain!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_BellChimed[] = _("A bell chimed!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_FaintInThree[] = _("All affected POKéMON will\nfaint in three turns!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_NoPPLeft[] = _("There's no PP left for\nthis move!\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_ButNoPPLeft[] = _("But there was no PP left\nfor the move!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnIgnoresAsleep[] = _("{B_ATK_NAME_WITH_PREFIX} ignored\norders while asleep!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnIgnoredOrders[] = _("{B_ATK_NAME_WITH_PREFIX} ignored\norders!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnBeganToNap[] = _("{B_ATK_NAME_WITH_PREFIX} began to nap!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnLoafing[] = _("{B_ATK_NAME_WITH_PREFIX} is\nloafing around!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnWontObey[] = _("{B_ATK_NAME_WITH_PREFIX} won't\nobey!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnTurnedAway[] = _("{B_ATK_NAME_WITH_PREFIX} turned away!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnPretendNotNotice[] = _("{B_ATK_NAME_WITH_PREFIX} pretended\nnot to notice!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_EnemyAboutToSwitchPkmn[] = _("{B_TRAINER1_CLASS} {B_TRAINER1_NAME} is\nabout to use {B_BUFF2}.\pWill {B_PLAYER_NAME} change\nPOKéMON?");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnLearnedMove2[] = _("{B_ATK_NAME_WITH_PREFIX} learned\n{B_BUFF1}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PlayerDefeatedLinkTrainerTrainer1[] = _("Player defeated\n{B_TRAINER1_CLASS} {B_TRAINER1_NAME}!\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_CreptCloser[] = _("{B_PLAYER_NAME} crept closer to\n{B_OPPONENT_MON1_NAME}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_CantGetCloser[] = _("{B_PLAYER_NAME} can't get any closer!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnWatchingCarefully[] = _("{B_OPPONENT_MON1_NAME} is watching\ncarefully!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnCuriousAboutX[] = _("{B_OPPONENT_MON1_NAME} is curious about\nthe {B_BUFF1}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnEnthralledByX[] = _("{B_OPPONENT_MON1_NAME} is enthralled by\nthe {B_BUFF1}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnIgnoredX[] = _("{B_OPPONENT_MON1_NAME} completely ignored\nthe {B_BUFF1}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_ThrewPokeblockAtPkmn[] = _("{B_PLAYER_NAME} threw a {POKEBLOCK}\nat the {B_OPPONENT_MON1_NAME}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_OutOfSafariBalls[] = _("{PLAY_SE SE_DING_DONG}ANNOUNCER: You're out of\nSAFARI BALLS! Game over!\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_OpponentMon1Appeared[] = _("{B_OPPONENT_MON1_NAME} appeared!\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_WildPkmnAppeared[] = _("Wild {B_OPPONENT_MON1_NAME} appeared!\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_LegendaryPkmnAppeared[] = _("Wild {B_OPPONENT_MON1_NAME} appeared!\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_WildPkmnAppearedPause[] = _("Wild {B_OPPONENT_MON1_NAME} appeared!{PAUSE 127}");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_TwoWildPkmnAppeared[] = _("Wild {B_OPPONENT_MON1_NAME} and\n{B_OPPONENT_MON2_NAME} appeared!\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_Trainer1WantsToBattle[] = _("{B_TRAINER1_CLASS} {B_TRAINER1_NAME}\nwould like to battle!\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_LinkTrainerWantsToBattle[] = _("{B_LINK_OPPONENT1_NAME}\nwants to battle!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_TwoLinkTrainersWantToBattle[] = _("{B_LINK_OPPONENT1_NAME} and {B_LINK_OPPONENT2_NAME}\nwant to battle!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_Trainer1SentOutPkmn[] = _("{B_TRAINER1_CLASS} {B_TRAINER1_NAME} sent\nout {B_OPPONENT_MON1_NAME}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_Trainer1SentOutTwoPkmn[] = _("{B_TRAINER1_CLASS} {B_TRAINER1_NAME} sent\nout {B_OPPONENT_MON1_NAME} and {B_OPPONENT_MON2_NAME}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_Trainer1SentOutPkmn2[] = _("{B_TRAINER1_CLASS} {B_TRAINER1_NAME} sent\nout {B_BUFF1}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_LinkTrainerSentOutPkmn[] = _("{B_LINK_OPPONENT1_NAME} sent out\n{B_OPPONENT_MON1_NAME}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_LinkTrainerSentOutTwoPkmn[] = _("{B_LINK_OPPONENT1_NAME} sent out\n{B_OPPONENT_MON1_NAME} and {B_OPPONENT_MON2_NAME}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_TwoLinkTrainersSentOutPkmn[] = _("{B_LINK_OPPONENT1_NAME} sent out {B_LINK_OPPONENT_MON1_NAME}!\n{B_LINK_OPPONENT2_NAME} sent out {B_LINK_OPPONENT_MON2_NAME}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_LinkTrainerSentOutPkmn2[] = _("{B_LINK_OPPONENT1_NAME} sent out\n{B_BUFF1}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_LinkTrainerMultiSentOutPkmn[] = _("{B_LINK_SCR_TRAINER_NAME} sent out\n{B_BUFF1}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_GoPkmn[] = _("Go! {B_PLAYER_MON1_NAME}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_GoTwoPkmn[] = _("Go! {B_PLAYER_MON1_NAME} and\n{B_PLAYER_MON2_NAME}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_GoPkmn2[] = _("Go! {B_BUFF1}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_DoItPkmn[] = _("Do it! {B_BUFF1}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_GoForItPkmn[] = _("Go for it, {B_BUFF1}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_YourFoesWeakGetEmPkmn[] = _("Your foe's weak!\nGet 'em, {B_BUFF1}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_LinkPartnerSentOutPkmnGoPkmn[] = _("{B_LINK_PARTNER_NAME} sent out {B_LINK_PLAYER_MON2_NAME}!\nGo! {B_LINK_PLAYER_MON1_NAME}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnThatsEnough[] = _("{B_BUFF1}, that's enough!\nCome back!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnComeBack[] = _("{B_BUFF1}, come back!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnOkComeBack[] = _("{B_BUFF1}, OK!\nCome back!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnGoodComeBack[] = _("{B_BUFF1}, good!\nCome back!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_Trainer1WithdrewPkmn[] = _("{B_TRAINER1_CLASS} {B_TRAINER1_NAME}\nwithdrew {B_BUFF1}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_LinkTrainer1WithdrewPkmn[] = _("{B_LINK_OPPONENT1_NAME} withdrew\n{B_BUFF1}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_LinkTrainer2WithdrewPkmn[] = _("{B_LINK_SCR_TRAINER_NAME} withdrew\n{B_BUFF1}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_WildPkmnPrefix[] = _("Wild ");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_FoePkmnPrefix[] = _("Foe ");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_EmptyString8[] = _("");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_FoePkmnPrefix2[] = _("Foe");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_AllyPkmnPrefix[] = _("Ally");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_FoePkmnPrefix3[] = _("Foe");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_AllyPkmnPrefix2[] = _("Ally");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_FoePkmnPrefix4[] = _("Foe");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_AllyPkmnPrefix3[] = _("Ally");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_AttackerUsedX[] = _("{B_ATK_NAME_WITH_PREFIX} used\n{B_BUFF2}");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_ExclamationMark[] = _("!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_ExclamationMark2[] = _("!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_ExclamationMark3[] = _("!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_ExclamationMark4[] = _("!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_ExclamationMark5[] = _("!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_HP2[] = _("HP");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_Attack2[] = _("ATTACK");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_Defense2[] = _("DEFENSE");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_Speed[] = _("SPEED");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_SpAtk2[] = _("SP. ATK");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_SpDef2[] = _("SP. DEF");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_Accuracy[] = _("accuracy");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_Evasiveness[] = _("evasiveness");
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 const u8 *const gStatNamesTable[NUM_BATTLE_STATS] =
 {
     [STAT_HP]      = sText_HP2,
@@ -442,13 +1204,26 @@ const u8 *const gStatNamesTable[NUM_BATTLE_STATS] =
     [STAT_ACC]     = sText_Accuracy,
     [STAT_EVASION] = sText_Evasiveness,
 };
+#endif
 
+#ifndef NATIVE_LINUX
 static const u8 sText_PokeblockWasTooSpicy[] = _("was too spicy!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PokeblockWasTooDry[] = _("was too dry!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PokeblockWasTooSweet[] = _("was too sweet!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PokeblockWasTooBitter[] = _("was too bitter!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PokeblockWasTooSour[] = _("was too sour!");
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 const u8 *const gPokeblockWasTooXStringTable[FLAVOR_COUNT] =
 {
     [FLAVOR_SPICY]  = sText_PokeblockWasTooSpicy,
@@ -457,63 +1232,172 @@ const u8 *const gPokeblockWasTooXStringTable[FLAVOR_COUNT] =
     [FLAVOR_BITTER] = sText_PokeblockWasTooBitter,
     [FLAVOR_SOUR]   = sText_PokeblockWasTooSour
 };
+#endif
 
+#ifndef NATIVE_LINUX
 static const u8 sText_PlayerUsedItem[] = _("{B_PLAYER_NAME} used\n{B_LAST_ITEM}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_WallyUsedItem[] = _("WALLY used\n{B_LAST_ITEM}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_Trainer1UsedItem[] = _("{B_TRAINER1_CLASS} {B_TRAINER1_NAME}\nused {B_LAST_ITEM}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_TrainerBlockedBall[] = _("The TRAINER blocked the BALL!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_DontBeAThief[] = _("Don't be a thief!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_ItDodgedBall[] = _("It dodged the thrown BALL!\nThis POKéMON can't be caught!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_YouMissedPkmn[] = _("You missed the POKéMON!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnBrokeFree[] = _("Oh, no!\nThe POKéMON broke free!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_ItAppearedCaught[] = _("Aww!\nIt appeared to be caught!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_AarghAlmostHadIt[] = _("Aargh!\nAlmost had it!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_ShootSoClose[] = _("Shoot!\nIt was so close, too!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_GotchaPkmnCaughtPlayer[] = _("Gotcha!\n{B_OPPONENT_MON1_NAME} was caught!{WAIT_SE}{PLAY_BGM MUS_CAUGHT}\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_GotchaPkmnCaughtWally[] = _("Gotcha!\n{B_OPPONENT_MON1_NAME} was caught!{WAIT_SE}{PLAY_BGM MUS_CAUGHT}{PAUSE 127}");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_GiveNicknameCaptured[] = _("Give a nickname to the\ncaptured {B_OPPONENT_MON1_NAME}?");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnSentToPC[] = _("{B_OPPONENT_MON1_NAME} was sent to\n{B_PC_CREATOR_NAME} PC.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_Someones[] = _("someone's");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_Lanettes[] = _("LANETTE's");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnDataAddedToDex[] = _("{B_OPPONENT_MON1_NAME}'s data was\nadded to the POKéDEX.\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_ItIsRaining[] = _("It is raining.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_SandstormIsRaging[] = _("A sandstorm is raging.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_BoxIsFull[] = _("The BOX is full!\nYou can't catch any more!\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_EnigmaBerry[] = _("ENIGMA BERRY");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_BerrySuffix[] = _(" BERRY");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnsItemCuredParalysis[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\ncured paralysis!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnsItemCuredPoison[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\ncured poison!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnsItemHealedBurn[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\nhealed its burn!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnsItemDefrostedIt[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\ndefrosted it!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnsItemWokeIt[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\nwoke it from its sleep!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnsItemSnappedOut[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\nsnapped it out of confusion!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnsItemCuredProblem[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\ncured its {B_BUFF1} problem!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnsItemNormalizedStatus[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\nnormalized its status!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnsItemRestoredHealth[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\nrestored health!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnsItemRestoredPP[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\nrestored {B_BUFF1}'s PP!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnsItemRestoredStatus[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\nrestored its status!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnsItemRestoredHPALittle[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\nrestored its HP a little!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_ItemAllowsOnlyYMove[] = _("{B_LAST_ITEM} allows the\nuse of only {B_CURRENT_MOVE}!\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnHungOnWithX[] = _("{B_DEF_NAME_WITH_PREFIX} hung on\nusing its {B_LAST_ITEM}!");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_EmptyString3[] = _("");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_YouThrowABallNowRight[] = _("You throw a BALL now, right?\nI… I'll do my best!");
+#endif
 
 // early declaration of strings
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnIncapableOfPower[];
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_GlintAppearsInEye[];
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnGettingIntoPosition[];
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnBeganGrowlingDeeply[];
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnEagerForMore[];
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_DefeatedOpponentByReferee[];
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_LostToOpponentByReferee[];
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_TiedOpponentByReferee[];
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_QuestionForfeitMatch[];
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_ForfeitedMatch[];
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_Trainer1WinText[];
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_Trainer2WinText[];
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_TwoInGameTrainersDefeated[];
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_Trainer2LoseText[];
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_START] =
 {
     [STRINGID_TRAINER1LOSETEXT - BATTLESTRINGS_TABLE_START] = sText_Trainer1LoseText,
@@ -886,6 +1770,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_TRAINER1WINTEXT - BATTLESTRINGS_TABLE_START] = sText_Trainer1WinText,
     [STRINGID_TRAINER2WINTEXT - BATTLESTRINGS_TABLE_START] = sText_Trainer2WinText,
 };
+#endif
 
 const u16 gMissStringIds[] =
 {
@@ -1264,64 +2149,165 @@ const u16 gTrappingMoves[NUM_TRAPPING_MOVES + 1] =
     0xFFFF // Never read
 };
 
+#ifndef NATIVE_LINUX
 const u8 gText_PkmnIsEvolving[] = _("What?\n{STR_VAR_1} is evolving!");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_CongratsPkmnEvolved[] = _("Congratulations! Your {STR_VAR_1}\nevolved into {STR_VAR_2}!{WAIT_SE}\p");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_PkmnStoppedEvolving[] = _("Huh? {STR_VAR_1}\nstopped evolving!\p");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_EllipsisQuestionMark[] = _("……?\p");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_WhatWillPkmnDo[] = _("What will\n{B_ACTIVE_NAME_WITH_PREFIX} do?");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_WhatWillPkmnDo2[] = _("What will\n{B_PLAYER_NAME} do?");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_WhatWillWallyDo[] = _("What will\nWALLY do?");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_LinkStandby[] = _("{PAUSE 16}Link standby…");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_BattleMenu[] = _("FIGHT{CLEAR_TO 56}BAG\nPOKéMON{CLEAR_TO 56}RUN");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_SafariZoneMenu[] = _("BALL{CLEAR_TO 56}{POKEBLOCK}\nGO NEAR{CLEAR_TO 56}RUN");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_MoveInterfacePP[] = _("PP ");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_MoveInterfaceType[] = _("TYPE/");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_MoveInterfacePpType[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW DYNAMIC_COLOR4 DYNAMIC_COLOR5 DYNAMIC_COLOR6}PP\nTYPE/");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_MoveInterfaceDynamicColors[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW DYNAMIC_COLOR4 DYNAMIC_COLOR5 DYNAMIC_COLOR6}");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_WhichMoveToForget4[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW DYNAMIC_COLOR4 DYNAMIC_COLOR5 DYNAMIC_COLOR6}Which move should\nbe forgotten?");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_BattleYesNoChoice[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW DYNAMIC_COLOR4 DYNAMIC_COLOR5 DYNAMIC_COLOR6}Yes\nNo");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_BattleSwitchWhich[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW DYNAMIC_COLOR4 DYNAMIC_COLOR5 DYNAMIC_COLOR6}Switch\nwhich?");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_BattleSwitchWhich2[] = _("{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW DYNAMIC_COLOR4 DYNAMIC_COLOR5 DYNAMIC_COLOR6}");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_BattleSwitchWhich3[] = _("{UP_ARROW}");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_BattleSwitchWhich4[] = _("{ESCAPE 4}");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_BattleSwitchWhich5[] = _("-");
+#endif
 
+#ifndef NATIVE_LINUX
 static const u8 sText_HP[] = _("HP");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_Attack[] = _("ATTACK");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_Defense[] = _("DEFENSE");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_SpAtk[] = _("SP. ATK");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_SpDef[] = _("SP. DEF");
+#endif
 
 // Unused
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sStatNamesTable2[] =
 {
     sText_HP, sText_SpAtk, sText_Attack,
     sText_SpDef, sText_Defense, sText_Speed
 };
+#endif
 
+#ifndef NATIVE_LINUX
 const u8 gText_SafariBalls[] = _("{HIGHLIGHT DARK_GRAY}SAFARI BALLS");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_SafariBallLeft[] = _("{HIGHLIGHT DARK_GRAY}Left: $" "{HIGHLIGHT DARK_GRAY}");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_Sleep[] = _("sleep");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_Poison[] = _("poison");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_Burn[] = _("burn");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_Paralysis[] = _("paralysis");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_Ice[] = _("ice");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_Confusion[] = _("confusion");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_Love[] = _("love");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_SpaceAndSpace[] = _(" and ");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_CommaSpace[] = _(", ");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_Space2[] = _(" ");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_LineBreak[] = _("\l");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_NewLine[] = _("\n");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_Are[] = _("are");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_Are2[] = _("are");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_BadEgg[] = _("Bad EGG");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_BattleWallyName[] = _("WALLY");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_Win[] = _("{HIGHLIGHT TRANSPARENT}Win");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_Loss[] = _("{HIGHLIGHT TRANSPARENT}Loss");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_Draw[] = _("{HIGHLIGHT TRANSPARENT}Draw");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_SpaceIs[] = _(" is");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_ApostropheS[] = _("'s");
+#endif
 
 // For displaying names of invalid moves.
 // This is large enough that the text for TYPE_ELECTRIC will exceed TEXT_BUFF_ARRAY_COUNT.
@@ -1347,12 +2333,24 @@ static const u8 sATypeMove_Table[NUMBER_OF_MON_TYPES][17] =
     [TYPE_DARK]     = _("a DARK move")
 };
 
+#ifndef NATIVE_LINUX
 const u8 gText_BattleTourney[] = _("BATTLE TOURNEY");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_Round1[] = _("Round 1");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_Round2[] = _("Round 2");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_Semifinal[] = _("Semifinal");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_Final[] = _("Final");
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 const u8 *const gRoundsStringTable[DOME_ROUNDS_COUNT] =
 {
     [DOME_ROUND1]    = sText_Round1,
@@ -1360,30 +2358,77 @@ const u8 *const gRoundsStringTable[DOME_ROUNDS_COUNT] =
     [DOME_SEMIFINAL] = sText_Semifinal,
     [DOME_FINAL]     = sText_Final
 };
+#endif
 
+#ifndef NATIVE_LINUX
 const u8 gText_TheGreatNewHope[] = _("The great new hope!\p");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_WillChampionshipDreamComeTrue[] = _("Will the championship dream come true?!\p");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_AFormerChampion[] = _("A former CHAMPION!\p");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_ThePreviousChampion[] = _("The previous CHAMPION!\p");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_TheUnbeatenChampion[] = _("The unbeaten CHAMPION!\p");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_PlayerMon1Name[] = _("{B_PLAYER_MON1_NAME}");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_Vs[] = _("VS");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_OpponentMon1Name[] = _("{B_OPPONENT_MON1_NAME}");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_Mind[] = _("Mind");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_Skill[] = _("Skill");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_Body[] = _("Body");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_Judgment[] = _("{B_BUFF1}{CLEAR 13}Judgment{CLEAR 13}{B_BUFF2}");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_TwoTrainersSentPkmn[] = _("{B_TRAINER1_CLASS} {B_TRAINER1_NAME} sent\nout {B_OPPONENT_MON1_NAME}!\p{B_TRAINER2_CLASS} {B_TRAINER2_NAME} sent\nout {B_OPPONENT_MON2_NAME}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_Trainer2SentOutPkmn[] = _("{B_TRAINER2_CLASS} {B_TRAINER2_NAME} sent\nout {B_BUFF1}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_TwoTrainersWantToBattle[] = _("{B_TRAINER1_CLASS} {B_TRAINER1_NAME} and\n{B_TRAINER2_CLASS} {B_TRAINER2_NAME}\lwant to battle!\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_InGamePartnerSentOutZGoN[] = _("{B_PARTNER_CLASS} {B_PARTNER_NAME} sent\nout {B_PLAYER_MON2_NAME}!\lGo, {B_PLAYER_MON1_NAME}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_TwoInGameTrainersDefeated[] = _("{B_TRAINER1_CLASS} {B_TRAINER1_NAME} and\n{B_TRAINER2_CLASS} {B_TRAINER2_NAME}\lwere defeated!\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_Trainer2LoseText[] = _("{B_TRAINER2_LOSE_TEXT}");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnIncapableOfPower[] = _("{B_ATK_NAME_WITH_PREFIX} appears incapable\nof using its power!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_GlintAppearsInEye[] = _("A glint appears in\n{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s eyes!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnGettingIntoPosition[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} is getting into\nposition!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnBeganGrowlingDeeply[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} began growling deeply!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PkmnEagerForMore[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX} is eager for more!");
+#endif
 
 const u16 gBattlePalaceFlavorTextTable[] =
 {
@@ -1393,19 +2438,45 @@ const u16 gBattlePalaceFlavorTextTable[] =
     [B_MSG_EAGER_FOR_MORE] = STRINGID_PKMNEAGERFORMORE,
 };
 
+#ifndef NATIVE_LINUX
 static const u8 sText_RefIfNothingIsDecided[] = _("REFEREE: If nothing is decided in\n3 turns, we will go to judging!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_RefThatsIt[] = _("REFEREE: That's it! We will now go to\njudging to determine the winner!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_RefJudgeMind[] = _("REFEREE: Judging category 1, Mind!\nThe POKéMON showing the most guts!\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_RefJudgeSkill[] = _("REFEREE: Judging category 2, Skill!\nThe POKéMON using moves the best!\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_RefJudgeBody[] = _("REFEREE: Judging category 3, Body!\nThe POKéMON with the most vitality!\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_RefPlayerWon[] = _("REFEREE: Judgment: {B_BUFF1} to {B_BUFF2}!\nThe winner is {B_PLAYER_NAME}'s {B_PLAYER_MON1_NAME}!\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_RefOpponentWon[] = _("REFEREE: Judgment: {B_BUFF1} to {B_BUFF2}!\nThe winner is {B_TRAINER1_NAME}'s {B_OPPONENT_MON1_NAME}!\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_RefDraw[] = _("REFEREE: Judgment: 3 to 3!\nWe have a draw!\p");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_DefeatedOpponentByReferee[] = _("{B_PLAYER_MON1_NAME} defeated the opponent\n{B_OPPONENT_MON1_NAME} in a REFEREE's decision!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_LostToOpponentByReferee[] = _("{B_PLAYER_MON1_NAME} lost to the opponent\n{B_OPPONENT_MON1_NAME} in a REFEREE's decision!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_TiedOpponentByReferee[] = _("{B_PLAYER_MON1_NAME} tied the opponent\n{B_OPPONENT_MON1_NAME} in a REFEREE's decision!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_RefCommenceBattle[] = _("REFEREE: {B_PLAYER_MON1_NAME} VS {B_OPPONENT_MON1_NAME}!\nCommence battling!");
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 const u8 *const gRefereeStringsTable[] =
 {
     [B_MSG_REF_NOTHING_IS_DECIDED] = sText_RefIfNothingIsDecided,
@@ -1418,18 +2489,41 @@ const u8 *const gRefereeStringsTable[] =
     [B_MSG_REF_DRAW]               = sText_RefDraw,
     [B_MSG_REF_COMMENCE_BATTLE]    = sText_RefCommenceBattle,
 };
+#endif
 
+#ifndef NATIVE_LINUX
 static const u8 sText_QuestionForfeitMatch[] = _("Would you like to forfeit the match\nand quit now?");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_ForfeitedMatch[] = _("{B_PLAYER_NAME} forfeited the match!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_Trainer1WinText[] = _("{B_TRAINER1_WIN_TEXT}");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_Trainer2WinText[] = _("{B_TRAINER2_WIN_TEXT}");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_Trainer1Fled[] = _( "{PLAY_SE SE_FLEE}{B_TRAINER1_CLASS} {B_TRAINER1_NAME} fled!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PlayerLostAgainstTrainer1[] = _("Player lost against\n{B_TRAINER1_CLASS} {B_TRAINER1_NAME}!");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_PlayerBattledToDrawTrainer1[] = _("Player battled to a draw against\n{B_TRAINER1_CLASS} {B_TRAINER1_NAME}!");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_RecordBattleToPass[] = _("Would you like to record your battle\non your FRONTIER PASS?");
+#endif
+#ifndef NATIVE_LINUX
 const u8 gText_BattleRecordedOnPass[] = _("{B_PLAYER_NAME}'s battle result was recorded\non the FRONTIER PASS.");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_LinkTrainerWantsToBattlePause[] = _("{B_LINK_OPPONENT1_NAME}\nwants to battle!{PAUSE 49}");
+#endif
+#ifndef NATIVE_LINUX
 static const u8 sText_TwoLinkTrainersWantToBattlePause[] = _("{B_LINK_OPPONENT1_NAME} and {B_LINK_OPPONENT2_NAME}\nwant to battle!{PAUSE 49}");
+#endif
 
 // This is four lists of moves which use a different attack string in Japanese
 // to the default. See the documentation for ChooseTypeOfMoveUsedString for more detail.

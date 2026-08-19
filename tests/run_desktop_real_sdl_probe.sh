@@ -82,6 +82,15 @@ gcc -std=gnu99 -O2 -ffunction-sections -fdata-sections -Wl,--gc-sections \
     "$emerald_dir/emerald_audio_compat.c" \
     "$emerald_dir/emerald_leaf_compat.c" \
     "$emerald_dir/leaf_native_table.generated.c" \
+    "$emerald_dir/emerald_text_compat.c" \
+    "$emerald_dir/text_arenas.generated.c" \
+    "$emerald_dir/text_native_table.generated.c" \
+    "$emerald_dir/text_bundle_index.generated.c" \
+    "$emerald_dir/text_slot_bindings.generated.c" \
+    "$emerald_dir/text_slots_table.generated.c" \
+    "$emerald_dir/text_skeletons_table.generated.c" \
+    "$emerald_dir/text_skeleton_arrays.generated.c" \
+    "$here/emerald_text_harness_stubs.c" \
     "$root/src/platform/native_state.c" \
     "$root/src/platform/host_memory.c" \
     "$root/src/platform/native_world_neighborhood.c" \

@@ -29,6 +29,10 @@
 #include "task.h"
 #include "window.h"
 #include "menu_specialized.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
 // Top level PC menu options
 enum {
@@ -110,16 +114,43 @@ static void Mailbox_ReturnToPlayerPC(u8);
 static void Mailbox_PrintMailOptions(u8);
 static void Mailbox_MailOptionsProcessInput(u8);
 
-static void PlayerPC_ItemStorage(u8);
-static void PlayerPC_Mailbox(u8);
-static void PlayerPC_Decoration(u8);
-static void PlayerPC_TurnOff(u8);
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+void PlayerPC_ItemStorage(u8);
+#ifndef NATIVE_LINUX
+static
+#endif
+void PlayerPC_Mailbox(u8);
+#ifndef NATIVE_LINUX
+static
+#endif
+void PlayerPC_Decoration(u8);
+#ifndef NATIVE_LINUX
+static
+#endif
+void PlayerPC_TurnOff(u8);
 
 static void Mailbox_DoMailMoveToBag(u8);
-static void Mailbox_DoMailRead(u8);
-static void Mailbox_MoveToBag(u8);
-static void Mailbox_Give(u8);
-static void Mailbox_Cancel(u8);
+#ifndef NATIVE_LINUX
+static
+#endif
+void Mailbox_DoMailRead(u8);
+#ifndef NATIVE_LINUX
+static
+#endif
+void Mailbox_MoveToBag(u8);
+#ifndef NATIVE_LINUX
+static
+#endif
+void Mailbox_Give(u8);
+#ifndef NATIVE_LINUX
+static
+#endif
+void Mailbox_Cancel(u8);
 
 static void Mailbox_CancelMoveToBag(u8);
 static void Mailbox_HandleConfirmMoveToBag(u8);
@@ -133,10 +164,25 @@ static void Mailbox_ReshowAfterMail(void);
 static void Mailbox_HandleReturnToProcessInput(u8);
 static void Mailbox_UpdateMailListAfterDeposit(void);
 
-static void ItemStorage_Withdraw(u8);
-static void ItemStorage_Deposit(u8);
-static void ItemStorage_Toss(u8);
-static void ItemStorage_Exit(u8);
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+void ItemStorage_Withdraw(u8);
+#ifndef NATIVE_LINUX
+static
+#endif
+void ItemStorage_Deposit(u8);
+#ifndef NATIVE_LINUX
+static
+#endif
+void ItemStorage_Toss(u8);
+#ifndef NATIVE_LINUX
+static
+#endif
+void ItemStorage_Exit(u8);
 static void ItemStorage_TossItemYes(u8);
 static void ItemStorage_TossItemNo(u8);
 
@@ -181,6 +227,8 @@ static EWRAM_DATA u8 sTopMenuNumOptions = 0;
 EWRAM_DATA struct PlayerPCItemPageStruct gPlayerPCItemPageInfo = {};
 static EWRAM_DATA struct ItemStorageMenu *sItemStorageMenu = NULL;
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sItemStorage_OptionDescriptions[] =
 {
     [MENU_WITHDRAW] = gText_TakeOutItemsFromPC,
@@ -188,7 +236,10 @@ static const u8 *const sItemStorage_OptionDescriptions[] =
     [MENU_TOSS]     = gText_ThrowAwayItemsInPC,
     [MENU_EXIT]     = gText_GoBackPrevMenu,
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction sPlayerPCMenuActions[] =
 {
     [MENU_ITEMSTORAGE] = { gText_ItemStorage, {PlayerPC_ItemStorage} },
@@ -196,6 +247,7 @@ static const struct MenuAction sPlayerPCMenuActions[] =
     [MENU_DECORATION]  = { gText_Decoration,  {PlayerPC_Decoration} },
     [MENU_TURNOFF]     = { gText_TurnOff,     {PlayerPC_TurnOff} }
 };
+#endif
 
 static const u8 sBedroomPC_OptionOrder[] =
 {
@@ -214,6 +266,8 @@ static const u8 sPlayerPC_OptionOrder[] =
 };
 #define NUM_PLAYER_PC_OPTIONS ARRAY_COUNT(sPlayerPC_OptionOrder)
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction sItemStorage_MenuActions[] =
 {
     [MENU_WITHDRAW] = { gText_WithdrawItem, {ItemStorage_Withdraw} },
@@ -221,6 +275,7 @@ static const struct MenuAction sItemStorage_MenuActions[] =
     [MENU_TOSS]     = { gText_TossItem,     {ItemStorage_Toss} },
     [MENU_EXIT]     = { gText_Cancel,       {ItemStorage_Exit} }
 };
+#endif
 
 static const u16 sNewGamePCItems[][2] =
 {
@@ -228,6 +283,8 @@ static const u16 sNewGamePCItems[][2] =
     { ITEM_NONE, 0 }
 };
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 const struct MenuAction gMailboxMailOptions[] =
 {
     { gText_Read,      {Mailbox_DoMailRead} },
@@ -235,6 +292,7 @@ const struct MenuAction gMailboxMailOptions[] =
     { gText_Give2,     {Mailbox_Give} },
     { gText_Cancel2,   {Mailbox_Cancel} }
 };
+#endif
 
 static const struct WindowTemplate sWindowTemplates_MainMenus[] =
 {
@@ -448,13 +506,25 @@ void ReshowPlayerPC(u8 var)
     DisplayItemMessageOnField(var, gText_WhatWouldYouLike, InitPlayerPCMenu);
 }
 
-static void PlayerPC_ItemStorage(u8 taskId)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+void PlayerPC_ItemStorage(u8 taskId)
 {
     InitItemStorageMenu(taskId, MENU_WITHDRAW);
     gTasks[taskId].func = ItemStorageMenuProcessInput;
 }
 
-static void PlayerPC_Mailbox(u8 taskId)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+void PlayerPC_Mailbox(u8 taskId)
 {
     gPlayerPCItemPageInfo.count = GetMailboxMailCount();
 
@@ -484,12 +554,24 @@ static void PlayerPC_Mailbox(u8 taskId)
     }
 }
 
-static void PlayerPC_Decoration(u8 taskId)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+void PlayerPC_Decoration(u8 taskId)
 {
     DoPlayerRoomDecorationMenu(taskId);
 }
 
-static void PlayerPC_TurnOff(u8 taskId)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+void PlayerPC_TurnOff(u8 taskId)
 {
     if (sTopMenuNumOptions == NUM_BEDROOM_PC_OPTIONS) // Flimsy way to determine if Bedroom PC is in use
     {
@@ -552,7 +634,13 @@ static void ItemStorageMenuProcessInput(u8 taskId)
     }
 }
 
-static void ItemStorage_Deposit(u8 taskId)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+void ItemStorage_Deposit(u8 taskId)
 {
     gTasks[taskId].func = Task_ItemStorage_Deposit;
     FadeScreen(FADE_TO_BLACK, 0);
@@ -588,7 +676,13 @@ static void ItemStorage_HandleReturnToProcessInput(u8 taskId)
         gTasks[taskId].func = ItemStorageMenuProcessInput;
 }
 
-static void ItemStorage_Withdraw(u8 taskId)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+void ItemStorage_Withdraw(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -606,7 +700,13 @@ static void ItemStorage_Withdraw(u8 taskId)
 
 }
 
-static void ItemStorage_Toss(u8 taskId)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+void ItemStorage_Toss(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -641,7 +741,13 @@ static void ItemStorage_Enter(u8 taskId, bool8 toss)
     gTasks[taskId].func = ItemStorage_CreateListMenu;
 }
 
-static void ItemStorage_Exit(u8 taskId)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+void ItemStorage_Exit(u8 taskId)
 {
     ItemStorage_EraseMainMenu(taskId);
     ReshowPlayerPC(taskId);
@@ -782,7 +888,13 @@ static void Mailbox_MailOptionsProcessInput(u8 taskId)
     }
 }
 
-static void Mailbox_DoMailRead(u8 taskId)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+void Mailbox_DoMailRead(u8 taskId)
 {
     FadeScreen(FADE_TO_BLACK, 0);
     gTasks[taskId].func = Mailbox_FadeAndReadMail;
@@ -824,7 +936,13 @@ static void Mailbox_HandleReturnToProcessInput(u8 taskId)
         gTasks[taskId].func = Mailbox_ProcessInput;
 }
 
-static void Mailbox_MoveToBag(u8 taskId)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+void Mailbox_MoveToBag(u8 taskId)
 {
     DisplayItemMessageOnField(taskId, gText_MessageWillBeLost, Mailbox_AskConfirmMoveToBag);
 }
@@ -877,7 +995,13 @@ static void Mailbox_CancelMoveToBag(u8 taskId)
     Mailbox_Cancel(taskId);
 }
 
-static void Mailbox_Give(u8 taskId)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+void Mailbox_Give(u8 taskId)
 {
     if (CalculatePlayerPartyCount() == 0)
     {
@@ -932,7 +1056,13 @@ static void Mailbox_NoPokemonForMail(u8 taskId)
     DisplayItemMessageOnField(taskId, gText_NoPokemon, Mailbox_Cancel);
 }
 
-static void Mailbox_Cancel(u8 taskId)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+void Mailbox_Cancel(u8 taskId)
 {
     MailboxMenu_RemoveWindow(MAILBOXWIN_OPTIONS);
     ClearDialogWindowAndFrame(0, FALSE);

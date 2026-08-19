@@ -574,6 +574,8 @@ const u8 gStatusConditionString_IceJpn[] = _("こおり$$$$");
 const u8 gStatusConditionString_ConfusionJpn[] = _("こんらん$$$");
 const u8 gStatusConditionString_LoveJpn[] = _("メロメロ$$$");
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 const u8 *const gStatusConditionStringsTable[][2] =
 {
     {gStatusConditionString_PoisonJpn, gText_Poison},
@@ -584,6 +586,7 @@ const u8 *const gStatusConditionStringsTable[][2] =
     {gStatusConditionString_ConfusionJpn, gText_Confusion},
     {gStatusConditionString_LoveJpn, gText_Love}
 };
+#endif /* NATIVE_LINUX */
 
 void CB2_InitBattle(void)
 {

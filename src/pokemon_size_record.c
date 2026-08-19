@@ -6,6 +6,10 @@
 #include "pokemon_size_record.h"
 #include "string_util.h"
 #include "text.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
 #define DEFAULT_MAX_SIZE 0x8000 // was 0x8100 in Ruby/Sapphire
 
@@ -44,8 +48,12 @@ static const u8 sGiftRibbonsMonDataIds[GIFT_RIBBONS_COUNT - 4] =
     MON_DATA_WORLD_RIBBON
 };
 
+#ifndef NATIVE_LINUX
 extern const u8 gText_DecimalPoint[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_Marco[];
+#endif
 
 #define CM_PER_INCH 2.54
 

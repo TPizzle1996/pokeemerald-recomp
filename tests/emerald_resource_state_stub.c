@@ -90,15 +90,11 @@ struct BattleHealthboxInfo *gBattleControllerOpponentFlankHealthboxData;
 const u8 *gSelectionBattleScripts[MAX_BATTLERS_COUNT];
 const u8 *gPalaceSelectionBattleScripts[MAX_BATTLERS_COUNT];
 
-/* TextPrinter state hooks (text.c); the harness has no printers. */
-void *TextPrinter_GetStatePrinters(void) { return NULL; }
-u32 TextPrinter_DumpStateEvents(void *printers, char *dest, u32 destSize)
-{
-    (void)printers;
-    (void)dest;
-    (void)destSize;
-    return 0;
-}
+/* TextPrinter state hooks (text.c); the harness has no printers.
+ * R13-C §13-15: the State-v5 currentChar routing added the printer
+ * registry + event-dump API; the signatures must match include/text.h. */
+const struct TextPrinter *TextPrinter_GetStatePrinters(void) { return NULL; }
+void TextPrinter_DumpStateEvents(void) { }
 
 /* Native-overworld sprite snapshot sink (uncommitted native_sprite_snapshot
  * workstream); inert in the harness. */

@@ -114,6 +114,8 @@ static const u16 sOptionMenuText_Pal[] = INCBIN_U16("graphics/interface/option_m
 // note: this is only used in the Japanese release
 static const u8 sEqualSignGfx[] = INCBIN_U8("graphics/interface/option_menu_equals_sign.4bpp");
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =
 {
     [MENUITEM_TEXTSPEED]   = gText_TextSpeed,
@@ -125,6 +127,7 @@ static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =
     [MENUITEM_DISPLAY]       = gText_DisplaySettings,
     [MENUITEM_CANCEL]      = gText_OptionMenuCancel,
 };
+#endif /* NATIVE_LINUX */
 
 static const struct WindowTemplate sOptionMenuWinTemplates[] =
 {

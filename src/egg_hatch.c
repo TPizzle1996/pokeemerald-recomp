@@ -37,6 +37,10 @@
 #include "data.h"
 #include "battle.h" // to get rid of later
 #include "constants/rgb.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
 #define GFXTAG_EGG       12345
 #define GFXTAG_EGG_SHARD 23456
@@ -63,8 +67,12 @@ struct EggHatchData
     u8 textColor[3];
 };
 
+#ifndef NATIVE_LINUX
 extern const u8 gText_HatchedFromEgg[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_NicknameHatchPrompt[];
+#endif
 
 static void Task_EggHatch(u8);
 static void CB2_LoadEggHatch(void);

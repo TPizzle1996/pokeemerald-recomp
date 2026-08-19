@@ -58,6 +58,10 @@
 #include "constants/map_types.h"
 #include "constants/mystery_gift.h"
 #include "constants/slot_machine.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 #include "constants/songs.h"
 #include "constants/moves.h"
 #include "constants/party_menu.h"
@@ -1686,6 +1690,8 @@ static const struct WindowTemplate sWindowTemplate_ElevatorFloor =
     .baseBlock = 8,
 };
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sDeptStoreFloorNames[] =
 {
     [DEPT_STORE_FLOORNUM_B4F] = gText_B4F,
@@ -1705,6 +1711,7 @@ static const u8 *const sDeptStoreFloorNames[] =
     [DEPT_STORE_FLOORNUM_11F] = gText_11F,
     [DEPT_STORE_FLOORNUM_ROOFTOP] = gText_Rooftop
 };
+#endif
 
 static const u16 sElevatorWindowTiles_Ascending[ELEVATOR_WINDOW_HEIGHT][ELEVATOR_LIGHT_STAGES] =
 {
@@ -2387,6 +2394,8 @@ void ShowScrollableMultichoice(void)
     }
 }
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] =
 {
     [SCROLL_MULTI_NONE] =
@@ -2542,6 +2551,7 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_Exit
     }
 };
+#endif
 
 static void Task_ShowScrollableMultichoice(u8 taskId)
 {
@@ -3118,6 +3128,10 @@ static void ShowBattleFrontierTutorWindow(u8 menu, u16 selection)
 
 static void ShowBattleFrontierTutorMoveDescription(u8 menu, u16 selection)
 {
+/* R13-C: skeleton-migrated tables (rows filled at publish); native mode
+ * resolves these names to the generated externs via the included
+ * text_skeleton_arrays.generated.h. */
+#ifndef NATIVE_LINUX
     static const u8 *const sBattleFrontier_TutorMoveDescriptions1[] =
     {
         BattleFrontier_Lounge7_Text_SoftboiledDesc,
@@ -3147,6 +3161,7 @@ static void ShowBattleFrontierTutorMoveDescription(u8 menu, u16 selection)
         BattleFrontier_Lounge7_Text_FirePunchDesc,
         gText_Exit,
     };
+#endif
 
     if (menu == SCROLL_MULTI_BF_MOVE_TUTOR_1 || menu == SCROLL_MULTI_BF_MOVE_TUTOR_2)
     {

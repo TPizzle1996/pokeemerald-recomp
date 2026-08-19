@@ -29,6 +29,10 @@
 #include "constants/rgb.h"
 #include "constants/region_map_sections.h"
 #include "constants/songs.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
 // gFrontierPassBg_Pal has 8*16 colors, but they attempt to load 13*16 colors.
 // As a result it goes out of bounds and interprets 160 bytes of whatever comes
@@ -527,6 +531,8 @@ static const struct SpriteTemplate sSpriteTemplate_PlayerHead =
     .callback = SpriteCB_PlayerHead,
 };
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sPassAreaDescriptions[CURSOR_AREA_COUNT + 1] =
 {
     [CURSOR_AREA_NOTHING]        = gText_ThereIsNoBattleRecord, // NOTHING is re-used for CURSOR_AREA_RECORD when no Record is present
@@ -545,15 +551,11 @@ static const u8 *const sPassAreaDescriptions[CURSOR_AREA_COUNT + 1] =
     [CURSOR_AREA_SYMBOL_PYRAMID] = gText_BattlePyramidBraveSymbol,
     [CURSOR_AREA_COUNT]          = gText_EmptyString7,
 };
+#endif
 
-struct
-{
-    const u8 *name;
-    const u8 *description;
-    s16 x;
-    s16 y;
-    u8 animNum;
-} static const sMapLandmarks[NUM_FRONTIER_FACILITIES] =
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
+static const struct MapLandmark sMapLandmarks[NUM_FRONTIER_FACILITIES] =
 {
     [FRONTIER_FACILITY_TOWER]   = {gText_BattleTower3,   gText_BattleTowerDesc,    89,  40, MAP_INDICATOR_SQUARE},
     [FRONTIER_FACILITY_DOME]    = {gText_BattleDome2,    gText_BattleDomeDesc,     33,  42, MAP_INDICATOR_SQUARE},
@@ -563,6 +565,7 @@ struct
     [FRONTIER_FACILITY_PIKE]    = {gText_BattlePike2,    gText_BattlePikeDesc,     57,  57, MAP_INDICATOR_SQUARE},
     [FRONTIER_FACILITY_PYRAMID] = {gText_BattlePyramid2, gText_BattlePyramidDesc, 134,  41, MAP_INDICATOR_SQUARE},
 };
+#endif /* NATIVE_LINUX */
 
 static void ResetGpuRegsAndBgs(void)
 {

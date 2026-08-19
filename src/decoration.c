@@ -38,6 +38,10 @@
 #include "constants/songs.h"
 #include "constants/region_map_sections.h"
 #include "constants/metatile_labels.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
 #define PLACE_DECORATION_SELECTOR_TAG 0xbe5
 #define PLACE_DECORATION_PLAYER_TAG   0x008
@@ -129,10 +133,22 @@ EWRAM_DATA static u8 sCurDecorSelectedInRearrangement = 0;
 
 static void HandleDecorationActionsMenuInput(u8 taskId);
 static void PrintCurMainMenuDescription(void);
-static void DecorationMenuAction_Decorate(u8 taskId);
-static void DecorationMenuAction_PutAway(u8 taskId);
-static void DecorationMenuAction_Toss(u8 taskId);
-static void DecorationMenuAction_Cancel(u8 taskId);
+#ifndef NATIVE_LINUX
+static
+#endif
+void DecorationMenuAction_Decorate(u8 taskId);
+#ifndef NATIVE_LINUX
+static
+#endif
+void DecorationMenuAction_PutAway(u8 taskId);
+#ifndef NATIVE_LINUX
+static
+#endif
+void DecorationMenuAction_Toss(u8 taskId);
+#ifndef NATIVE_LINUX
+static
+#endif
+void DecorationMenuAction_Cancel(u8 taskId);
 static void ReturnToDecorationActionsAfterInvalidSelection(u8 taskId);
 static void SecretBasePC_PrepMenuForSelectingStoredDecors(u8 taskId);
 static void InitDecorationCategoriesWindow(u8 taskId);
@@ -208,6 +224,8 @@ static void TossDecoration(u8 taskId);
 #include "data/decoration/description.h"
 #include "data/decoration/header.h"
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sDecorationCategoryNames[] =
 {
     gText_Desk,
@@ -219,7 +237,10 @@ static const u8 *const sDecorationCategoryNames[] =
     gText_Doll,
     gText_Cushion
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction sDecorationMainMenuActions[] =
 {
     {
@@ -239,7 +260,10 @@ static const struct MenuAction sDecorationMainMenuActions[] =
         .func = { .void_u8 = DecorationMenuAction_Cancel },
     },
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sSecretBasePCMenuItemDescriptions[] =
 {
     gText_PutOutSelectedDecorItem,
@@ -247,6 +271,7 @@ static const u8 *const sSecretBasePCMenuItemDescriptions[] =
     gText_ThrowAwayUnwantedDecors,
     gText_GoBackPrevMenu
 };
+#endif
 
 static const TaskFunc sSecretBasePC_SelectedDecorationActions[][2] =
 {
@@ -628,7 +653,13 @@ static void PrintCurMainMenuDescription(void)
     AddTextPrinterParameterized2(0, FONT_NORMAL, sSecretBasePCMenuItemDescriptions[sDecorationActionsCursorPos], 0, 0, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
 }
 
-static void DecorationMenuAction_Decorate(u8 taskId)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+void DecorationMenuAction_Decorate(u8 taskId)
 {
     if (GetNumOwnedDecorations() == 0)
     {
@@ -643,7 +674,13 @@ static void DecorationMenuAction_Decorate(u8 taskId)
     }
 }
 
-static void DecorationMenuAction_PutAway(u8 taskId)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+void DecorationMenuAction_PutAway(u8 taskId)
 {
     if (!HasDecorationsInUse(taskId))
     {
@@ -660,7 +697,13 @@ static void DecorationMenuAction_PutAway(u8 taskId)
     }
 }
 
-static void DecorationMenuAction_Toss(u8 taskId)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+void DecorationMenuAction_Toss(u8 taskId)
 {
     if (GetNumOwnedDecorations() == 0)
     {
@@ -675,7 +718,13 @@ static void DecorationMenuAction_Toss(u8 taskId)
     }
 }
 
-static void DecorationMenuAction_Cancel(u8 taskId)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+void DecorationMenuAction_Cancel(u8 taskId)
 {
     RemoveDecorationWindow(WINDOW_MAIN_MENU);
     if (!sDecorationContext.isPlayerRoom)

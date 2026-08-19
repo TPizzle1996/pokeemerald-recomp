@@ -19,6 +19,10 @@
 #include "constants/songs.h"
 #include "constants/union_room.h"
 #include "constants/rgb.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
 enum {
     COLORMODE_NORMAL,
@@ -126,6 +130,8 @@ static const struct WindowTemplate sWindowTemplates[] = {
     }, DUMMY_WIN_TEMPLATE
 };
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sHeaderTexts[NUM_GROUPTYPES + 1] = {
     [0]                    = gText_WirelessCommStatus,
     [GROUPTYPE_TRADE + 1]  = gText_PeopleTrading,
@@ -133,6 +139,7 @@ static const u8 *const sHeaderTexts[NUM_GROUPTYPES + 1] = {
     [GROUPTYPE_UNION + 1]  = gText_PeopleInUnionRoom,
     [GROUPTYPE_TOTAL + 1]  = gText_PeopleCommunicating
 };
+#endif
 
 // Activity, group type, number of players
 // 0 players means the number of players can change and should be counted dynamically

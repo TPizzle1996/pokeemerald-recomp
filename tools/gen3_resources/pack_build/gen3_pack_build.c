@@ -29,7 +29,8 @@
 #include "gen3/resources/resource_pack_writer.h"
 #include "gen3/resources/util.h"
 
-#define MAX_SOURCES 16u
+/* R13-C: the text family joins the eight existing manifests/catalogs. */
+#define MAX_SOURCES 32u
 
 static void Usage(void)
 {

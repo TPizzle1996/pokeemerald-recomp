@@ -24,6 +24,10 @@
 #include "window.h"
 #include "constants/items.h"
 #include "constants/songs.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
 // Note that in this file 'Dodrio Berry Picking' is often
 // shortened to DodrioGame or just Game for convenience
@@ -2941,7 +2945,10 @@ static const struct WindowTemplate sWindowTemplates_Records =
     .baseBlock = 0x1,
 };
 
-static const u8 *const sRecordsTexts[NUM_RECORD_TYPES] = {gText_BerriesPicked, gText_BestScore, gText_BerriesInRowFivePlayers};
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
+static const u8 *const sRecordsTexts_dodrio_berry_picking[NUM_RECORD_TYPES] = {gText_BerriesPicked, gText_BestScore, gText_BerriesInRowFivePlayers};
+#endif
 static const u8 sRecordNumMaxDigits[NUM_RECORD_TYPES] = {4, 7, 4};
 ALIGNED(4)
 static const u8 sRecordTextYCoords[NUM_RECORD_TYPES][2] = {{25}, {41}, {57}};
@@ -2961,9 +2968,9 @@ static void Task_ShowDodrioBerryPickingRecords(u8 taskId)
     case 0:
         window = sWindowTemplates_Records;
         width = GetStringWidth(FONT_NORMAL, gText_BerryPickingRecords, 0);
-        for (i = 0; i < ARRAY_COUNT(sRecordsTexts); i++)
+        for (i = 0; i < ARRAY_COUNT(sRecordsTexts_dodrio_berry_picking); i++)
         {
-            widthCurr = GetStringWidth(FONT_NORMAL, sRecordsTexts[i], 0) + 50;
+            widthCurr = GetStringWidth(FONT_NORMAL, sRecordsTexts_dodrio_berry_picking[i], 0) + 50;
             if (widthCurr > width)
                 width = widthCurr;
         }
@@ -3019,7 +3026,7 @@ static void PrintRecordsText(u8 windowId, s32 width)
     {
         ConvertIntToDecimalStringN(gStringVar1, recordNums[i], STR_CONV_MODE_LEFT_ALIGN, sRecordNumMaxDigits[i]);
         numWidth = GetStringWidth(FONT_NORMAL, gStringVar1, -1);
-        AddTextPrinterParameterized(windowId, FONT_NORMAL, sRecordsTexts[i], 0, sRecordTextYCoords[i][0], TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(windowId, FONT_NORMAL, sRecordsTexts_dodrio_berry_picking[i], 0, sRecordTextYCoords[i][0], TEXT_SKIP_DRAW, NULL);
         x = (width * 8) - numWidth;
         AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar1, x, sRecordNumYCoords[i][0], TEXT_SKIP_DRAW, NULL);
     }
@@ -4533,6 +4540,8 @@ static const struct WinCoords *const sNameWindowCoords[MAX_RFU_PLAYERS] =
     sNameWindowCoords_5Players,
 };
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sRankingTexts[MAX_RFU_PLAYERS] =
 {
     gText_1Colon,
@@ -4541,6 +4550,7 @@ static const u8 *const sRankingTexts[MAX_RFU_PLAYERS] =
     gText_4Colon,
     gText_5Colon,
 };
+#endif
 
 static const u16 sResultsXCoords[] = {92, 132, 172, 212};
 static const u16 sResultsYCoords[] = {33, 49, 65, 81, 97};

@@ -3,7 +3,8 @@
 # R12-B audio leaf ownership migration test runner (tests A-G).
 #
 #   A-G  tests/emerald_audio_compat_test.c against the REAL production pack:
-#        A counts (105/51/388/25 = 569 leaves + 530 song graphs, pack 6876 entries since R13-B),
+#        A counts (105/51/388/25 = 569 leaves + 530 song graphs, pack 12063 entries since R13-C;
+#          the C-side pin at emerald_audio_compat_test.c:942 still reads 6876 until R13-C §20-23),
 #        B exact extraction (arena bytes == pack payloads == ROM slice,
 #          every leaf inside the verbatim zone, no overlaps),
 #        C WaveData2 structural validation per sample,
@@ -59,6 +60,7 @@ if "$root/tools/gen3_resources/pack_build/gen3-pack-build" \
     --manifest "$audio/manifest.production.toml" \
     --manifest "$root/resources/extraction/emerald/bpee01/movement/manifest.production.toml" \
     --manifest "$root/resources/extraction/emerald/bpee01/multiboot/manifest.production.toml" \
+    --manifest "$root/resources/extraction/emerald/bpee01/text/manifest.production.toml" \
     --catalog "$root/resources/catalogs/emerald/catalog.toml" \
     --catalog "$root/resources/extraction/emerald/bpee01/pokemon_battle/catalog.generated.toml" \
     --catalog "$root/resources/extraction/emerald/bpee01/object_event/catalog.generated.toml" \
@@ -67,8 +69,9 @@ if "$root/tools/gen3_resources/pack_build/gen3-pack-build" \
     --catalog "$audio/catalog.generated.toml" \
     --catalog "$root/resources/extraction/emerald/bpee01/movement/catalog.generated.toml" \
     --catalog "$root/resources/extraction/emerald/bpee01/multiboot/catalog.generated.toml" \
+    --catalog "$root/resources/extraction/emerald/bpee01/text/catalog.generated.toml" \
     --check > "$tmp/pack_check.log" 2>&1; then
-    pass "pack reproduces byte-for-byte (6876 entries since R13-B)"
+    pass "pack reproduces byte-for-byte (12063 entries since R13-C)"
 else
     fail "pack --check: $(tail -3 "$tmp/pack_check.log" | tr '\n' ' ')"
 fi

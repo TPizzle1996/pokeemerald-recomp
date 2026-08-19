@@ -30,6 +30,7 @@ struct BuildEntry
     uint64_t sourceRomOffset;
     uint64_t sourceEncodedSize;
     uint8_t sourceEncodedSha256[GEN3_PACK_SHA256_SIZE];
+    bool bundle; /* R13-C: artifact-file source, no ROM range */
 };
 
 struct Gen3ResourcePackBuild
@@ -376,6 +377,7 @@ enum Gen3ResourcePackError Gen3ResourcePackBuild_AddEntry(
     entry->sourceRomOffset = input->sourceRomOffset;
     entry->sourceEncodedSize = input->sourceEncodedSize;
     memcpy(entry->sourceEncodedSha256, input->sourceEncodedSha256, GEN3_PACK_SHA256_SIZE);
+    entry->bundle = input->bundle;
     build->totalPayload = total;
     build->entryCount++;
     return GEN3_PACK_OK;
@@ -549,8 +551,9 @@ enum Gen3ResourcePackError Gen3ResourcePackWriter_Write(
                 GEN3_PACK_ERR_BAD_METADATA, i, entry->canonicalName);
             return GEN3_PACK_ERR_BAD_METADATA;
         }
-        if (!Gen3PackAddU64(entry->sourceRomOffset, entry->sourceEncodedSize, &sourceEnd)
-         || sourceEnd > build->sourceRomSize)
+        if (!entry->bundle
+         && (!Gen3PackAddU64(entry->sourceRomOffset, entry->sourceEncodedSize, &sourceEnd)
+          || sourceEnd > build->sourceRomSize))
         {
             Gen3ResourcePackDiagnostics_Append(diagnostics, GEN3_PACK_STAGE_WRITE,
                 GEN3_PACK_ERR_SOURCE_RANGE_OVERFLOW, i, entry->canonicalName);

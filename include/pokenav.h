@@ -342,6 +342,16 @@ u32 PokenavList_GetTopIndex(void);
 void PokenavList_ReshowListFromCheckPage(void);
 
 // pokenav_match_call_data.c
+
+// R13-C: file-local struct moved here so the generated host arrays
+// (text_skeleton_arrays.generated.{c,h}) can type their externs.
+struct MatchCallCheckPageOverride {
+    u16 idx;
+    u16 facilityClass;
+    u32 flag;
+    const u8 *flavorTexts[CHECK_PAGE_ENTRY_COUNT];
+};
+
 bool32 MatchCall_HasCheckPage(u32 idx);
 u8 MatchCall_GetMapSec(u32 idx);
 bool32 MatchCall_HasRematchId(u32 idx);

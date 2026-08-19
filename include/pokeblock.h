@@ -1,5 +1,9 @@
 #ifndef GUARD_POKEBLOCK_H
 #define GUARD_POKEBLOCK_H
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
 #define TAG_POKEBLOCK       14818
 
@@ -52,7 +56,9 @@ void PreparePokeblockFeedScene(void);
 
 // pokeblock
 extern const s8 gPokeblockFlavorCompatibilityTable[NUM_NATURES * FLAVOR_COUNT];
+#ifndef NATIVE_LINUX
 extern const u8 *const gPokeblockNames[];
+#endif
 extern const struct CompressedSpriteSheet gPokeblockCase_SpriteSheet;
 extern const struct CompressedSpritePalette gPokeblockCase_SpritePal;
 

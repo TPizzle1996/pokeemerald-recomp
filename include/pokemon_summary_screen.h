@@ -2,11 +2,19 @@
 #define GUARD_POKEMON_SUMMARY_SCREEN_H
 
 #include "main.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
 extern u8 gLastViewedMonIndex;
 
+#ifndef NATIVE_LINUX
 extern const u8 *const gMoveDescriptionPointers[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 *const gNatureNamePointers[];
+#endif
 
 void ShowPokemonSummaryScreen(u8 mode, void *mons, u8 monIndex, u8 maxMonIndex, void (*callback)(void));
 void ShowSelectMovePokemonSummaryScreen(struct Pokemon *mons, u8 monIndex, u8 maxMonIndex, void (*callback)(void), u16 newMove);

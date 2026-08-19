@@ -2,8 +2,14 @@
 #define GUARD_SCRIPT_MENU_H
 
 #include "constants/script_menu.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
+#ifndef NATIVE_LINUX
 extern const u8 *const gStdStrings[];
+#endif
 
 bool8 ScriptMenu_Multichoice(u8 left, u8 top, u8 multichoiceId, bool8 ignoreBPress);
 bool8 ScriptMenu_MultichoiceWithDefault(u8 left, u8 top, u8 multichoiceId, bool8 ignoreBPress, u8 defaultChoice);

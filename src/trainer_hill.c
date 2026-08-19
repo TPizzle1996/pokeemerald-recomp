@@ -31,6 +31,10 @@
 #include "constants/trainers.h"
 #include "constants/trainer_hill.h"
 #include "constants/trainer_types.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
 #define HILL_MAX_TIME 215999 // 60 * 60 * 60 - 1
 
@@ -209,6 +213,8 @@ static const struct TrainerHillChallenge *const sChallengeData[NUM_TRAINER_HILL_
 };
 
 // Unused.
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sFloorStrings[] =
 {
     gText_TrainerHill1F,
@@ -216,6 +222,7 @@ static const u8 *const sFloorStrings[] =
     gText_TrainerHill3F,
     gText_TrainerHill4F,
 };
+#endif
 
 static void (*const sHillFunctions[])(void) =
 {
@@ -239,6 +246,8 @@ static void (*const sHillFunctions[])(void) =
     [TRAINER_HILL_FUNC_SET_MODE]              = TrainerHillSetMode,
 };
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sModeStrings[NUM_TRAINER_HILL_MODES] =
 {
     [HILL_MODE_NORMAL]  = gText_NormalTagMatch,
@@ -246,6 +255,7 @@ static const u8 *const sModeStrings[NUM_TRAINER_HILL_MODES] =
     [HILL_MODE_UNIQUE]  = gText_UniqueTagMatch,
     [HILL_MODE_EXPERT]  = gText_ExpertTagMatch,
 };
+#endif
 
 static const struct ObjectEventTemplate sTrainerObjectEventTemplate =
 {

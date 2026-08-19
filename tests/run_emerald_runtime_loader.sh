@@ -15,9 +15,25 @@
 #      that cannot serve the Pokémon battle family is a refused session;
 #      the loader rolls every table back to its NULL sentinel;
 #   2. NULL/empty/absent pack paths are fail-closed UNAVAILABLE;
-#   3. the REAL production pack
+#   3. writer-rebuilt production-pack variants whose text family is
+#      malformed (gText_123Dot payload zeroed) or incomplete (the record
+#      dropped) are REFUSED sessions - the loader rolls every published
+#      pointer back and the snapshot is not registered;
+#   4. the REAL production pack
 #      (games/emerald/base/emerald-bpee01-v1.rpack) registers OK and
-#      publishes the full trainer + Pokémon battle families.
+#      publishes the full trainer + Pokémon battle families AND the
+#      sixteen R13-C text arenas (slots + skeleton fills, including the
+#      #112 gText_123Dot byte-offset fills), with the State-v5
+#      currentChar range routing round-trip;
+#   5. a failed direct republish (malformed/missing variant) leaves the
+#      live registered session untouched, and the fail-closed clear
+#      NULLs every applied pointer.
+#
+# R13-C text link: the generated skeleton machinery
+# (text_skeleton_arrays.generated.c + the seven inventory/slot/skeleton
+# tables + emerald_text_compat.c) and the compiled-constant stubs
+# (emerald_text_harness_stubs.c: 17 data externs + 55 void(u8) action
+# callbacks the generated arrays reference but the harness never runs).
 set -euo pipefail
 
 here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -61,6 +77,15 @@ gcc -std=gnu99 -O2 -ffunction-sections -fdata-sections -Wl,--gc-sections \
     "$emerald_dir/emerald_audio_compat.c" \
     "$emerald_dir/emerald_leaf_compat.c" \
     "$emerald_dir/leaf_native_table.generated.c" \
+    "$emerald_dir/emerald_text_compat.c" \
+    "$emerald_dir/text_arenas.generated.c" \
+    "$emerald_dir/text_native_table.generated.c" \
+    "$emerald_dir/text_bundle_index.generated.c" \
+    "$emerald_dir/text_slot_bindings.generated.c" \
+    "$emerald_dir/text_slots_table.generated.c" \
+    "$emerald_dir/text_skeletons_table.generated.c" \
+    "$emerald_dir/text_skeleton_arrays.generated.c" \
+    "$here/emerald_text_harness_stubs.c" \
     "$here/emerald_runtime_loader_test.c" \
     -o "$tmp/emerald_runtime_loader_test"
 

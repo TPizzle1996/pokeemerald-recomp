@@ -1,5 +1,9 @@
 
 #include "global.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
 // gContestEffectDescriptionPointers
 extern const u8 gText_HighlyAppealingMove[];
@@ -217,6 +221,8 @@ extern const u8 gText_Contest_Fear[];
 extern const u8 gText_AppealNumWhichMoveWillBePlayed[];
 extern const u8 gText_AppealNumButItCantParticipate[];
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 const u8 *const gContestEffectDescriptionPointers[] =
 {
     [CONTEST_EFFECT_HIGHLY_APPEALING]                      = gText_HighlyAppealingMove,
@@ -268,10 +274,13 @@ const u8 *const gContestEffectDescriptionPointers[] =
     [CONTEST_EFFECT_BETTER_WHEN_AUDIENCE_EXCITED]          = gText_AppealBestMoreCrowdExcited,
     [CONTEST_EFFECT_DONT_EXCITE_AUDIENCE]                  = gText_TemporarilyStopCrowdExcited
 };
+#endif
 
 // Unreferenced array of pointers to move names.
 // All of the moves except Conversion are combo starters, so this may have
 // been an early list of combo starters.
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sUnusedComboMoveNameTexts[] =
 {
     gText_RainDance,
@@ -289,7 +298,10 @@ static const u8 *const sUnusedComboMoveNameTexts[] =
     gText_DefenseCurl,
     gText_LockOn
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 const u8 *const gContestMoveTypeTextPointers[] =
 {
     [CONTEST_CATEGORY_COOL]   = gContestMoveTypeCoolText,
@@ -298,7 +310,10 @@ const u8 *const gContestMoveTypeTextPointers[] =
     [CONTEST_CATEGORY_SMART]  = gContestMoveTypeSmartText,
     [CONTEST_CATEGORY_TOUGH]  = gContestMoveTypeToughText
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sUnusedAppealResultTexts[] =
 {
     gText_ButAppealWasJammed,
@@ -315,8 +330,11 @@ static const u8 *const sUnusedAppealResultTexts[] =
     gText_WorkedRatherWell,
     gText_WorkedLittleBetterThanUsual
 };
+#endif
 
 // Takes the .attentionLevel of a contestant as an index. Only 0-5 are used
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sRoundResultTexts[] =
 {
     gText_MonFailedToStandOutAtAll,
@@ -352,7 +370,10 @@ static const u8 *const sRoundResultTexts[] =
     gText_JammedAppealsMadeEvenLessNoticeable,
     gText_EveryonesAppealsMadeSame
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sAppealResultTexts[] =
 {
     [CONTEST_STRING_MORE_CONSCIOUS]            = gText_BecameMoreConsciousOfOtherMons,
@@ -418,7 +439,10 @@ static const u8 *const sAppealResultTexts[] =
     [CONTEST_STRING_UNAFFECTED]                = gText_MonWasUnaffected,
     [CONTEST_STRING_ATTRACTED_ATTENTION]       = gText_AttractedCrowdsAttention
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sContestConditions[] =
 {
     [CONTEST_CATEGORY_COOL]   = gText_Contest_Coolness,
@@ -427,7 +451,10 @@ static const u8 *const sContestConditions[] =
     [CONTEST_CATEGORY_SMART]  = gText_Contest_Smartness,
     [CONTEST_CATEGORY_TOUGH]  = gText_Contest_Toughness
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sInvalidContestMoveNames[] =
 {
     [CONTEST_CATEGORY_COOL]    = gText_CoolMove,
@@ -437,3 +464,4 @@ static const u8 *const sInvalidContestMoveNames[] =
     [CONTEST_CATEGORY_TOUGH]   = gText_ToughMove,
     [CONTEST_CATEGORIES_COUNT] = gText_3QuestionMarks
 };
+#endif

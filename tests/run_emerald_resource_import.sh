@@ -28,12 +28,15 @@ echo "== guardrail 18: dependency-creep assertion =="
 # deliberately platform-coupled (guarded
 # PLATFORM_SDL2 && NATIVE_LINUX, includes global.h) and is not compiled by
 # this suite; it is exercised by run_emerald_trainer_native_compat.sh.
+# text_native_exports.c is likewise platform-coupled (native-only exports of
+# compiled text constants; excluded from the GBA build at the Makefile level).
 bad=$(grep -rEn '^[[:space:]]*#[[:space:]]*include[[:space:]]+[<"][[:space:]]*(global\.h|gba|SDL|platform|graphics|sound|rom|main\.h)' \
       --exclude='emerald_trainer_native_compat.c' \
       --exclude='emerald_pokemon_native_compat.c' \
       --exclude='emerald_object_event_compat.c' \
       --exclude='emerald_tileset_compat.c' \
       --exclude='emerald_layout_compat.c' \
+      --exclude='text_native_exports.c' \
       "$core_dir" "$inc_dir" "$emerald_dir" "$here/emerald_resource_import_test.c" || true)
 if [ -n "$bad" ]; then
     echo "FAIL: gen3 core / importer includes frontend dependencies:" >&2

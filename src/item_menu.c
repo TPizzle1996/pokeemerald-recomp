@@ -51,6 +51,10 @@
 #include "constants/items.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
 #define TAG_POCKET_SCROLL_ARROW 110
 #define TAG_BAG_SCROLL_ARROW    111
@@ -167,7 +171,10 @@ static void PrintThereIsNoPokemon(u8);
 static void Task_ChooseHowManyToToss(u8);
 static void AskTossItems(u8);
 static void Task_RemoveItemFromBag(u8);
-static void ItemMenu_Cancel(u8);
+#ifndef NATIVE_LINUX
+static
+#endif
+void ItemMenu_Cancel(u8);
 static void HandleErrorMessage(u8);
 static void PrintItemCantBeHeld(u8);
 static void DisplayCurrentMoneyWindow(void);
@@ -191,16 +198,46 @@ static u8 CreateBagInputHandlerTask(u8);
 static void DrawItemListBgRow(u8);
 static void BagMenu_MoveCursorCallback(s32, bool8, struct ListMenu *);
 static void BagMenu_ItemPrintCallback(u8, u32, u8);
-static void ItemMenu_UseOutOfBattle(u8);
-static void ItemMenu_Toss(u8);
-static void ItemMenu_Register(u8);
-static void ItemMenu_Give(u8);
-static void ItemMenu_Cancel(u8);
-static void ItemMenu_UseInBattle(u8);
-static void ItemMenu_CheckTag(u8);
-static void ItemMenu_Show(u8);
-static void ItemMenu_GiveFavorLady(u8);
-static void ItemMenu_ConfirmQuizLady(u8);
+#ifndef NATIVE_LINUX
+static
+#endif
+void ItemMenu_UseOutOfBattle(u8);
+#ifndef NATIVE_LINUX
+static
+#endif
+void ItemMenu_Toss(u8);
+#ifndef NATIVE_LINUX
+static
+#endif
+void ItemMenu_Register(u8);
+#ifndef NATIVE_LINUX
+static
+#endif
+void ItemMenu_Give(u8);
+#ifndef NATIVE_LINUX
+static
+#endif
+void ItemMenu_Cancel(u8);
+#ifndef NATIVE_LINUX
+static
+#endif
+void ItemMenu_UseInBattle(u8);
+#ifndef NATIVE_LINUX
+static
+#endif
+void ItemMenu_CheckTag(u8);
+#ifndef NATIVE_LINUX
+static
+#endif
+void ItemMenu_Show(u8);
+#ifndef NATIVE_LINUX
+static
+#endif
+void ItemMenu_GiveFavorLady(u8);
+#ifndef NATIVE_LINUX
+static
+#endif
+void ItemMenu_ConfirmQuizLady(u8);
 static void Task_ItemContext_Normal(u8);
 static void Task_ItemContext_GiveToParty(u8);
 static void Task_ItemContext_Sell(u8);
@@ -264,6 +301,8 @@ static const struct ListMenuTemplate sItemListMenu =
     .cursorKind = CURSOR_BLACK_ARROW
 };
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction sItemMenuActions[] = {
     [ACTION_USE]               = {gMenuText_Use,      {ItemMenu_UseOutOfBattle}},
     [ACTION_TOSS]              = {gMenuText_Toss,     {ItemMenu_Toss}},
@@ -281,6 +320,7 @@ static const struct MenuAction sItemMenuActions[] = {
     [ACTION_CONFIRM_QUIZ_LADY] = {gMenuText_Confirm,  {ItemMenu_ConfirmQuizLady}},
     [ACTION_DUMMY]             = {gText_EmptyString2, {NULL}}
 };
+#endif
 
 // these are all 2D arrays with a width of 2 but are represented as 1D arrays
 // ACTION_DUMMY is used to represent blank spaces
@@ -1783,7 +1823,13 @@ static void RemoveContextWindow(void)
         BagMenu_RemoveWindow(ITEMWIN_2x3);
 }
 
-static void ItemMenu_UseOutOfBattle(u8 taskId)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+void ItemMenu_UseOutOfBattle(u8 taskId)
 {
     if (GetItemFieldFunc(gSpecialVar_ItemId))
     {
@@ -1804,7 +1850,13 @@ static void ItemMenu_UseOutOfBattle(u8 taskId)
     }
 }
 
-static void ItemMenu_Toss(u8 taskId)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+void ItemMenu_Toss(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -1902,7 +1954,13 @@ static void Task_RemoveItemFromBag(u8 taskId)
     }
 }
 
-static void ItemMenu_Register(u8 taskId)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+void ItemMenu_Register(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     u16 *scrollPos = &gBagPosition.scrollPosition[gBagPosition.pocket];
@@ -1919,7 +1977,13 @@ static void ItemMenu_Register(u8 taskId)
     ItemMenu_Cancel(taskId);
 }
 
-static void ItemMenu_Give(u8 taskId)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+void ItemMenu_Give(u8 taskId)
 {
     RemoveContextWindow();
     if (!IsWritingMailAllowed(gSpecialVar_ItemId))
@@ -1965,13 +2029,25 @@ static void HandleErrorMessage(u8 taskId)
     }
 }
 
-static void ItemMenu_CheckTag(u8 taskId)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+void ItemMenu_CheckTag(u8 taskId)
 {
     gBagMenu->newScreenCallback = DoBerryTagScreen;
     Task_FadeAndCloseBagMenu(taskId);
 }
 
-static void ItemMenu_Cancel(u8 taskId)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+void ItemMenu_Cancel(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
@@ -1983,7 +2059,13 @@ static void ItemMenu_Cancel(u8 taskId)
     ReturnToItemList(taskId);
 }
 
-static void ItemMenu_UseInBattle(u8 taskId)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+void ItemMenu_UseInBattle(u8 taskId)
 {
     if (GetItemBattleFunc(gSpecialVar_ItemId))
     {
@@ -2363,7 +2445,10 @@ static void Task_WallyTutorialBagMenu(u8 taskId)
 
 // This action is used to show the Apprentice an item when
 // they ask what item they should make their Pokémon hold
-static void ItemMenu_Show(u8 taskId)
+#ifndef NATIVE_LINUX
+static
+#endif
+void ItemMenu_Show(u8 taskId)
 {
     gSpecialVar_0x8005 = gSpecialVar_ItemId;
     gSpecialVar_Result = TRUE;
@@ -2377,7 +2462,13 @@ static void CB2_ApprenticeExitBagMenu(void)
     SetMainCallback2(CB2_ReturnToField);
 }
 
-static void ItemMenu_GiveFavorLady(u8 taskId)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+void ItemMenu_GiveFavorLady(u8 taskId)
 {
     RemoveBagItem(gSpecialVar_ItemId, 1);
     gSpecialVar_Result = TRUE;
@@ -2393,7 +2484,10 @@ static void CB2_FavorLadyExitBagMenu(void)
 
 // This action is used to confirm which item to use as
 // a prize for a custom quiz with the Lilycove Quiz Lady
-static void ItemMenu_ConfirmQuizLady(u8 taskId)
+#ifndef NATIVE_LINUX
+static
+#endif
+void ItemMenu_ConfirmQuizLady(u8 taskId)
 {
     gSpecialVar_Result = TRUE;
     RemoveContextWindow();

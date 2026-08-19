@@ -26,6 +26,10 @@
 #include "window.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
 enum
 {
@@ -190,18 +194,6 @@ struct SubtaskInfo
 {
     u16 idx;
     bool32 (*callback)(u8 *);
-};
-
-struct MessageWindowInfo
-{
-    const u8 *text;
-    u8 boxType;
-    u8 x;
-    u8 y;
-    u8 letterSpacing;
-    u8 lineSpacing;
-    bool8 hasPlaceholders;
-    bool8 useWiderBox;
 };
 
 static void InitUnionRoomChat(struct UnionRoomChat *);
@@ -628,6 +620,8 @@ static const struct SubtaskInfo sDisplaySubtasks[] = {
     {CHATDISPLAY_FUNC_ASK_CONFIRM_LEADER_LEAVE, Display_AskConfirmLeaderLeave}
 };
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MessageWindowInfo sDisplayStdMessages[] = {
     [STDMESSAGE_QUIT_CHATTING] = {
         .text = gText_QuitChatting,
@@ -740,9 +734,12 @@ static const struct MessageWindowInfo sDisplayStdMessages[] = {
         .useWiderBox = TRUE
     }
 };
+#endif
 
 static const u8 sText_Ellipsis[] = _("…");
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction sKeyboardPageTitleTexts[UNION_ROOM_KB_PAGE_COUNT + 1] = {
     [UNION_ROOM_KB_PAGE_UPPER]    = {gText_Upper, {NULL}},
     [UNION_ROOM_KB_PAGE_LOWER]    = {gText_Lower, {NULL}},
@@ -750,6 +747,7 @@ static const struct MenuAction sKeyboardPageTitleTexts[UNION_ROOM_KB_PAGE_COUNT 
     [UNION_ROOM_KB_PAGE_REGISTER] = {gText_Register2, {NULL}},
     [UNION_ROOM_KB_PAGE_COUNT]    = {gText_Exit2, {NULL}},
 };
+#endif
 
 static const u16 sUnionRoomChatInterfacePal[] = INCBIN_U16("graphics/union_room_chat/interface.gbapal");
 static const u32 sKeyboardCursorTiles[] = INCBIN_U32("graphics/union_room_chat/keyboard_cursor.4bpp.lz");

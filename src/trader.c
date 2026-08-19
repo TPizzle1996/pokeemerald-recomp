@@ -14,7 +14,13 @@
 #include "strings.h"
 #include "task.h"
 #include "script_menu.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sDefaultTraderNames[NUM_TRADER_ITEMS] =
 {
     gText_Tristan,
@@ -22,6 +28,7 @@ static const u8 *const sDefaultTraderNames[NUM_TRADER_ITEMS] =
     gText_Dennis,
     gText_Roberto,
 };
+#endif
 
 static const u8 sDefaultTraderDecorations[NUM_TRADER_ITEMS] =
 {

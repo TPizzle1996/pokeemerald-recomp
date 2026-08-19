@@ -15,10 +15,20 @@
 #include "menu.h"
 #include "pokedex.h"
 #include "constants/rgb.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
+#ifndef NATIVE_LINUX
 extern const u8 gText_DexNational[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_DexHoenn[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_PokedexDiploma[];
+#endif
 
 static void MainCB2(void);
 static void Task_DiplomaFadeIn(u8);

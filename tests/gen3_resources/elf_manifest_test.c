@@ -828,6 +828,124 @@ static void TestFromToml(struct TestAssets *a)
     Gen3Buffer_Destroy(&out);
 }
 
+/* R13-C: Gen3Toml_GetString on an empty basic string must return a valid
+ * NUL-terminated empty string. ParseBasicString used to hand out the
+ * Gen3Buffer tail without a terminator, so symbol = "" parsed into
+ * uninitialized heap bytes and the manifest emitter wrote binary junk into
+ * bundle records (deterministic within a run, garbage across runs). */
+static void TestTomlEmptyString(void)
+{
+    static const char docText[] =
+        "[[bindings]]\n"
+        "id = \"emerald:text/data/abnormal-weather\"\n"
+        "symbol = \"\"\n"
+        "bundle = true\n";
+    struct Gen3TomlDocument doc;
+    const char *symbol = NULL;
+    char errbuf[512];
+
+    memset(&doc, 0, sizeof(doc));
+    CHECK("empty-string TOML parses",
+          Gen3Toml_Parse(docText, sizeof(docText) - 1u, &doc,
+                         errbuf, sizeof(errbuf)));
+    {
+        const struct Gen3TomlMap *table =
+            Gen3Toml_GetArrayItem(&doc.root, "bindings", 0);
+        CHECK("bundle table item present", table != NULL);
+        CHECK("empty symbol retrievable",
+              table != NULL && Gen3Toml_GetString(table, "symbol", &symbol));
+        CHECK("empty symbol is a valid empty C string",
+              symbol != NULL && symbol[0] == '\0');
+        CHECK("empty symbol has length 0",
+              symbol != NULL && strlen(symbol) == 0);
+    }
+    Gen3Toml_Destroy(&doc);
+}
+
+/* R13-C bundle records end-to-end: the binding's artifact is a CONSTRUCTED
+ * blob (no ELF symbol, no ROM slice), so the manifest must carry bundle =
+ * true, a placeholder rom_offset = 0 and a clean symbol = "" line. */
+static void TestFromTomlBundle(struct TestAssets *a)
+{
+    struct Gen3Buffer catalogBuf;
+    struct Gen3Buffer bindingsBuf;
+    struct Gen3TomlDocument catalogDoc;
+    struct Gen3TomlDocument bindingsDoc;
+    struct Gen3Buffer out;
+    struct Gen3ManifestConfig config;
+    char errbuf[512];
+    enum Gen3ManifestResult r;
+    bool loaded;
+
+    Gen3Buffer_Init(&catalogBuf, 0);
+    Gen3Buffer_Init(&bindingsBuf, 0);
+    Gen3Buffer_Init(&out, 0);
+
+    loaded = ReadFile("resources/extraction/emerald/bpee01/text/"
+                      "catalog.generated.toml", &catalogBuf);
+    CHECK("shipped text catalog loads", loaded);
+    if (loaded)
+    {
+        static const char bundleBindings[] =
+            "bindings_version = 1\n"
+            "game = \"emerald\"\n"
+            "rom_profile = \"bpee01-rev0\"\n"
+            "[[bindings]]\n"
+            "id = \"emerald:text/data/abnormal-weather\"\n"
+            "symbol = \"\"\n"
+            "bundle = true\n"
+            "source_artifact = \"resources/extraction/emerald/bpee01/"
+            "text/bundles/data/abnormal-weather.bin\"\n"
+            "source_encoding = \"raw\"\n"
+            "canonical_representation = \"gba-charmap\"\n"
+            "expected_decoded_size = 109\n";
+        Gen3Buffer_Append(&bindingsBuf, bundleBindings,
+                          sizeof(bundleBindings) - 1u);
+    }
+
+    memset(&catalogDoc, 0, sizeof(catalogDoc));
+    memset(&bindingsDoc, 0, sizeof(bindingsDoc));
+    if (!loaded
+     || !Gen3Toml_Parse(catalogBuf.data, catalogBuf.length,
+                        &catalogDoc, errbuf, sizeof(errbuf))
+     || !Gen3Toml_Parse(bindingsBuf.data, bindingsBuf.length,
+                        &bindingsDoc, errbuf, sizeof(errbuf)))
+    {
+        CHECK("bundle TOML documents parse", false);
+        Gen3Buffer_Destroy(&catalogBuf);
+        Gen3Buffer_Destroy(&bindingsBuf);
+        Gen3Buffer_Destroy(&out);
+        return;
+    }
+
+    memset(&config, 0, sizeof(config));
+    config.expectedRomSha1Hex = a->romSha1Hex;
+    config.provenance = "test bundle provenance";
+    r = Gen3Manifest_FromToml(&catalogDoc, &bindingsDoc,
+                              NULL /* resolve artifact paths against cwd */,
+                              (const uint8_t *)a->elf.data, a->elf.length,
+                              (const uint8_t *)a->rom.data, a->rom.length,
+                              &config, &out, errbuf, sizeof(errbuf));
+    CHECK("bundle FromToml+Generate succeeds", r == GEN3_MANIFEST_OK);
+    CHECK("bundle record emitted",
+          r == GEN3_MANIFEST_OK && Contains(&out, "bundle = true"));
+    CHECK("bundle symbol emitted clean",
+          r == GEN3_MANIFEST_OK && Contains(&out, "symbol = \"\""));
+    CHECK("bundle source_artifact emitted",
+          r == GEN3_MANIFEST_OK
+          && Contains(&out, "source_artifact = \"resources/extraction/"
+                            "emerald/bpee01/text/bundles/data/"
+                            "abnormal-weather.bin\""));
+    CHECK("bundle rom_offset is the placeholder 0",
+          r == GEN3_MANIFEST_OK && Contains(&out, "rom_offset = 0"));
+
+    Gen3Toml_Destroy(&catalogDoc);
+    Gen3Toml_Destroy(&bindingsDoc);
+    Gen3Buffer_Destroy(&catalogBuf);
+    Gen3Buffer_Destroy(&bindingsBuf);
+    Gen3Buffer_Destroy(&out);
+}
+
 int main(void)
 {
     struct TestAssets assets;
@@ -847,6 +965,8 @@ int main(void)
     TestR12AudioRepresentations(&assets);
     TestR13BinaryRepresentations(&assets);
     TestFromToml(&assets);
+    TestTomlEmptyString();
+    TestFromTomlBundle(&assets);
 
     FreeAssets(&assets);
 

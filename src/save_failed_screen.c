@@ -14,16 +14,32 @@
 #include "gba/flash_internal.h"
 #include "text_window.h"
 #include "constants/rgb.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
 #define MSG_WIN_TOP 12
 #define CLOCK_WIN_TOP (MSG_WIN_TOP - 4)
 
+#ifndef NATIVE_LINUX
 extern const u8 gText_SaveFailedCheckingBackup[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_BackupMemoryDamaged[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_CheckCompleted[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_SaveCompleteGameCannotContinue[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_SaveCompletePressA[];
+#endif
+#ifndef NATIVE_LINUX
 extern const u8 gText_GamePlayCannotBeContinued[];
+#endif
 
 // sClockInfo enum
 enum

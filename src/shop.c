@@ -38,6 +38,10 @@
 #include "constants/metatile_behaviors.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
 #define TAG_SCROLL_ARROW   2100
 #define TAG_ITEM_ICON_BASE 2110
@@ -113,7 +117,10 @@ static EWRAM_DATA u8 sPurchaseHistoryId = 0;
 EWRAM_DATA struct ItemSlot gMartPurchaseHistory[SMARTSHOPPER_NUM_ITEMS] = {0};
 
 static void Task_ShopMenu(u8 taskId);
-static void Task_HandleShopMenuQuit(u8 taskId);
+#ifndef NATIVE_LINUX
+static
+#endif
+void Task_HandleShopMenuQuit(u8 taskId);
 static void CB2_InitBuyMenu(void);
 static void Task_GoToBuyOrSellMenu(u8 taskId);
 static void MapPostLoadHook_ReturnToShopMenu(void);
@@ -151,8 +158,14 @@ static void BuyMenuSubtractMoney(u8 taskId);
 static void RecordItemPurchase(u8 taskId);
 static void Task_ReturnToItemListAfterItemPurchase(u8 taskId);
 static void Task_ReturnToItemListAfterDecorationPurchase(u8 taskId);
-static void Task_HandleShopMenuBuy(u8 taskId);
-static void Task_HandleShopMenuSell(u8 taskId);
+#ifndef NATIVE_LINUX
+static
+#endif
+void Task_HandleShopMenuBuy(u8 taskId);
+#ifndef NATIVE_LINUX
+static
+#endif
+void Task_HandleShopMenuSell(u8 taskId);
 static void BuyMenuPrintItemDescriptionAndShowItemIcon(s32 item, bool8 onInit, struct ListMenu *list);
 static void BuyMenuPrintPriceInList(u8 windowId, u32 itemId, u8 y);
 
@@ -162,18 +175,24 @@ static const struct YesNoFuncTable sShopPurchaseYesNoFuncs =
     BuyMenuReturnToItemList
 };
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction sShopMenuActions_BuySellQuit[] =
 {
     { gText_ShopBuy, {.void_u8=Task_HandleShopMenuBuy} },
     { gText_ShopSell, {.void_u8=Task_HandleShopMenuSell} },
     { gText_ShopQuit, {.void_u8=Task_HandleShopMenuQuit} }
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction sShopMenuActions_BuyQuit[] =
 {
     { gText_ShopBuy, {.void_u8=Task_HandleShopMenuBuy} },
     { gText_ShopQuit, {.void_u8=Task_HandleShopMenuQuit} }
 };
+#endif
 
 static const struct WindowTemplate sShopMenuWindowTemplates[] =
 {
@@ -413,7 +432,13 @@ static void Task_ShopMenu(u8 taskId)
 #define tCallbackHi data[8]
 #define tCallbackLo data[9]
 
-static void Task_HandleShopMenuBuy(u8 taskId)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+void Task_HandleShopMenuBuy(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     GbaAddr callbackAddr = HOST_FUNCTION_ADDR(CB2_InitBuyMenu);
@@ -423,7 +448,13 @@ static void Task_HandleShopMenuBuy(u8 taskId)
     FadeScreen(FADE_TO_BLACK, 0);
 }
 
-static void Task_HandleShopMenuSell(u8 taskId)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+void Task_HandleShopMenuSell(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     GbaAddr callbackAddr = HOST_FUNCTION_ADDR(CB2_GoToSellMenu);
@@ -439,7 +470,13 @@ void CB2_ExitSellMenu(void)
     SetMainCallback2(CB2_ReturnToField);
 }
 
-static void Task_HandleShopMenuQuit(u8 taskId)
+#ifndef NATIVE_LINUX
+
+static
+
+#endif
+
+void Task_HandleShopMenuQuit(u8 taskId)
 {
     ClearStdWindowAndFrameToTransparent(sMartInfo.windowId, 2); // Incorrect use, making it not copy it to vram.
     RemoveWindow(sMartInfo.windowId);

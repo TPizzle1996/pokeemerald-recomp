@@ -37,6 +37,10 @@
 #include "title_screen.h"
 #include "window.h"
 #include "mystery_gift_menu.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
 /*
  * Main menu state machine
@@ -452,11 +456,16 @@ static const union AffineAnimCmd *const sSpriteAffineAnimTable_PlayerShrink[] =
     sSpriteAffineAnim_PlayerShrink
 };
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MenuAction sMenuActions_Gender[] = {
     {gText_BirchBoy, {NULL}},
     {gText_BirchGirl, {NULL}}
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sMalePresetNames[] = {
     gText_DefaultNameStu,
     gText_DefaultNameMilton,
@@ -479,7 +488,10 @@ static const u8 *const sMalePresetNames[] = {
     gText_DefaultNameStanley,
     gText_DefaultNameQuincy
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sFemalePresetNames[] = {
     gText_DefaultNameKimmy,
     gText_DefaultNameTiara,
@@ -502,6 +514,7 @@ static const u8 *const sFemalePresetNames[] = {
     gText_DefaultNameLucy,
     gText_DefaultNameHalie
 };
+#endif
 
 // The number of male vs. female names is assumed to be the same.
 // If they aren't, the smaller of the two sizes will be used and any extra names will be ignored.

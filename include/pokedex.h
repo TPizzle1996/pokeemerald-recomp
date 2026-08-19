@@ -18,6 +18,33 @@ enum
     FLAG_SET_CAUGHT
 };
 
+// R13-C: file-local search structs moved here so the generated host
+// arrays (text_skeleton_arrays.generated.{c,h}) can type their externs.
+struct SearchOptionText
+{
+    const u8 *description;
+    const u8 *title;
+};
+
+struct SearchMenuTopBarItem
+{
+    const u8 *description;
+    u8 highlightX;
+    u8 highlightY;
+    u8 highlightWidth;
+};
+
+struct SearchMenuItem
+{
+    const u8 *description;
+    u8 titleBgX;
+    u8 titleBgY;
+    u8 titleBgWidth;
+    u8 selectionBgX;
+    u8 selectionBgY;
+    u8 selectionBgWidth;
+};
+
 struct PokedexEntry
 {
     /*0x00*/ u8 categoryName[12];

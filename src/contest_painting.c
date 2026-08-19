@@ -20,6 +20,10 @@
 #include "text.h"
 #include "window.h"
 #include "constants/rgb.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
 COMMON_DATA u16 (*gContestMonPixels)[][32] = {0};
 COMMON_DATA struct ImageProcessingContext gImageProcessingContext = {0};
@@ -83,6 +87,8 @@ static const u32 sPictureFrameTilemap_Smart[]     = INCBIN_U32("graphics/picture
 static const u32 sPictureFrameTilemap_Tough[]     = INCBIN_U32("graphics/picture_frame/tough_map.bin.rl");
 static const u32 sPictureFrameTilemap_HallLobby[] = INCBIN_U32("graphics/picture_frame/lobby_map.bin.rl");
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sContestCategoryNames_Unused[] =
 {
     [CONTEST_CATEGORY_COOL]   = gContestCoolness,
@@ -91,7 +97,10 @@ static const u8 *const sContestCategoryNames_Unused[] =
     [CONTEST_CATEGORY_SMART]  = gContestSmartness,
     [CONTEST_CATEGORY_TOUGH]  = gContestToughness,
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sContestRankNames[] =
 {
     [CONTEST_RANK_NORMAL] = gContestRankNormal,
@@ -100,6 +109,7 @@ static const u8 *const sContestRankNames[] =
     [CONTEST_RANK_MASTER] = gContestRankMaster,
     [CONTEST_RANK_LINK]   = gContestLink,
 };
+#endif
 
 static const struct BgTemplate sBgTemplates[] =
 {
@@ -125,6 +135,8 @@ static const struct WindowTemplate sWindowTemplate =
     .baseBlock = 1,
 };
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sMuseumCaptions[NUM_PAINTING_CAPTIONS * CONTEST_CATEGORIES_COUNT] =
 {
     [0 + NUM_PAINTING_CAPTIONS * CONTEST_CATEGORY_COOL]   = gContestPaintingCool1,
@@ -143,6 +155,7 @@ static const u8 *const sMuseumCaptions[NUM_PAINTING_CAPTIONS * CONTEST_CATEGORIE
     [1 + NUM_PAINTING_CAPTIONS * CONTEST_CATEGORY_TOUGH]  = gContestPaintingTough2,
     [2 + NUM_PAINTING_CAPTIONS * CONTEST_CATEGORY_TOUGH]  = gContestPaintingTough3,
 };
+#endif
 
 static const struct OamData sContestPaintingMonOamData =
 {

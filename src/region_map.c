@@ -27,6 +27,10 @@
 #include "constants/map_types.h"
 #include "constants/rgb.h"
 #include "constants/weather.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
 /*
  *  This file handles region maps generally, and the map used when selecting a fly destination.
@@ -340,11 +344,14 @@ static const u8 sMapHealLocations[][3] =
     [MAPSEC_ROUTE_134] = {MAP_GROUP(MAP_ROUTE134), MAP_NUM(MAP_ROUTE134), HEAL_LOCATION_NONE},
 };
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sEverGrandeCityNames[] =
 {
     gText_PokemonLeague,
     gText_PokemonCenter
 };
+#endif
 
 static const struct MultiNameFlyDest sMultiNameFlyDestinations[] =
 {

@@ -37,6 +37,10 @@
 #include "constants/items.h"
 #include "constants/event_objects.h"
 #include "party_menu.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
 struct FrontierBrainMon
 {
@@ -682,6 +686,8 @@ const u16 gFrontierBannedSpecies[] =
     SPECIES_KYOGRE, SPECIES_GROUDON, SPECIES_RAYQUAZA, SPECIES_JIRACHI, SPECIES_DEOXYS, 0xFFFF
 };
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sRecordsWindowChallengeTexts[][2] =
 {
     [RANKING_HALL_TOWER_SINGLES] = {gText_BattleTower2,  gText_FacilitySingle},
@@ -695,13 +701,19 @@ static const u8 *const sRecordsWindowChallengeTexts[][2] =
     [RANKING_HALL_PYRAMID]       = {gText_BattlePyramid, gText_Facility},
     [RANKING_HALL_TOWER_LINK]    = {gText_BattleTower2,  gText_FacilityLink},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sLevelModeText[] =
 {
     [FRONTIER_LVL_50]   = gText_RecordsLv50,
     [FRONTIER_LVL_OPEN] = gText_RecordsOpenLevel,
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sHallFacilityToRecordsText[] =
 {
     [RANKING_HALL_TOWER_SINGLES] = gText_FrontierFacilityWinStreak,
@@ -715,6 +727,7 @@ static const u8 *const sHallFacilityToRecordsText[] =
     [RANKING_HALL_PYRAMID]       = gText_FrontierFacilityFloorsCleared,
     [RANKING_HALL_TOWER_LINK]    = gText_FrontierFacilityWinStreak,
 };
+#endif
 
 static const u16 sFrontierBrainTrainerIds[NUM_FRONTIER_FACILITIES] =
 {

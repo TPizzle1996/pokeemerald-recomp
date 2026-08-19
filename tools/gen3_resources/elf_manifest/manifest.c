@@ -171,6 +171,11 @@ static bool TypeCompatibleWithRepresentation(const char *catalogType, int schema
     if (strcmp(catalogType, "binary") == 0)
         return (schema == 1 || schema == 2)
             && strcmp(canonicalRepresentation, "gba-bytes") == 0;
+    /* R13-C: text families (labels, bundles, skeletons, match-call tables).
+     * schema 1 = gba-charmap character data; the pack stores the canonical
+     * bytes verbatim (raw codec, one byte per character slot). */
+    if (strcmp(catalogType, "text") == 0)
+        return schema == 1 && strcmp(canonicalRepresentation, "gba-charmap") == 0;
     return false;
 }
 
@@ -367,6 +372,60 @@ enum Gen3ManifestResult Gen3Manifest_Generate(
             goto done;
         }
 
+        if (binding->bundle)
+        {
+            /* R13-C text bundle: the artifact file is the entire payload --
+             * no ELF symbol, no ROM slice, no range. Raw encoding only, so
+             * encoded == decoded == canonical (the same three-way size and
+             * byte agreement the raw path enforces below). */
+            if (binding->hasSymbolOffset)
+            {
+                SetError(errbuf, errbufSize,
+                         "binding '%s': 'symbol_offset' is invalid for a bundle",
+                         binding->id);
+                result = GEN3_MANIFEST_INVALID_INPUT;
+                goto done;
+            }
+            if (strcmp(binding->sourceEncoding, "raw") != 0)
+            {
+                SetError(errbuf, errbufSize,
+                         "binding '%s': bundle bindings require a raw source encoding",
+                         binding->id);
+                result = GEN3_MANIFEST_UNSUPPORTED_ENCODING;
+                goto done;
+            }
+            if (binding->sourceArtifactSize == 0u)
+            {
+                SetError(errbuf, errbufSize,
+                         "binding '%s': bundle artifact is empty", binding->id);
+                result = GEN3_MANIFEST_INVALID_INPUT;
+                goto done;
+            }
+            if (binding->sourceArtifactSize != binding->expectedDecodedSize
+             || binding->sourceArtifactSize != binding->canonicalDecodedSize)
+            {
+                SetError(errbuf, errbufSize,
+                         "binding '%s': bundle size mismatch (artifact %zu, "
+                         "binding expected %u, canonical %zu)",
+                         binding->id, binding->sourceArtifactSize,
+                         binding->expectedDecodedSize, binding->canonicalDecodedSize);
+                result = GEN3_MANIFEST_DECODED_SIZE_MISMATCH;
+                goto done;
+            }
+            if (memcmp(binding->sourceArtifact, binding->canonicalDecoded,
+                       binding->sourceArtifactSize) != 0)
+            {
+                SetError(errbuf, errbufSize,
+                         "binding '%s': bundle artifact does not match the canonical "
+                         "decoded artifact", binding->id);
+                result = GEN3_MANIFEST_CANONICAL_MISMATCH;
+                goto done;
+            }
+            romOffset = 0;
+            encodedLength = (uint32_t)binding->sourceArtifactSize;
+        }
+        else
+        {
         symbol = Gen3Elf_FindSymbol(&elf, binding->symbol);
         if (symbol == NULL)
         {
@@ -415,9 +474,24 @@ enum Gen3ManifestResult Gen3Manifest_Generate(
         else
         {
             romOffset = symbol->value - GEN3_GBA_ROM_BASE;
-            /* Size-0 asm labels declare no length; the artifact length is
-             * the source of truth and Guardrail 10 pins it against ELF+ROM. */
-            encodedLength = symbol->size != 0 ? symbol->size : binding->sourceArtifactSize;
+            if (strcmp(catalogEntry->type, "text") == 0)
+            {
+                /* R13-C text labels: the ELF symbol bound for a .string
+                 * label runs past the 0xFF terminator into the next label
+                 * (GNU as emits no .size; the bound reaches the next
+                 * symbol), so symbol->size is NOT the payload length. The
+                 * canonical artifact (scan to the first 0xFF, charmap-
+                 * validated by the generator) defines the payload; Guardrail
+                 * 10 pins it as a prefix of the ELF/ROM bytes. */
+                encodedLength = binding->sourceArtifactSize;
+            }
+            else
+            {
+                /* Size-0 asm labels declare no length; the artifact length
+                 * is the source of truth and Guardrail 10 pins it against
+                 * ELF+ROM. */
+                encodedLength = symbol->size != 0 ? symbol->size : binding->sourceArtifactSize;
+            }
         }
         if (encodedLength > elfLength)
         {
@@ -453,6 +527,7 @@ enum Gen3ManifestResult Gen3Manifest_Generate(
             result = GEN3_MANIFEST_ARTIFACT_MISMATCH;
             goto done;
         }
+        } /* else: symbol-backed binding */
 
         /* Guardrail 11: decode by source encoding.
          *   gba-lz77: strict LZ77 decode with a three-way size agreement
@@ -565,6 +640,8 @@ enum Gen3ManifestResult Gen3Manifest_Generate(
         records[i].encodedLength = encodedLength;
         records[i].decodedLength = (uint32_t)decodedSize;
         records[i].sourceEncoding = binding->sourceEncoding;
+        records[i].bundle = binding->bundle;
+        records[i].bundleSourceArtifact = binding->bundleSourceArtifact;
         Sha256Of(binding->sourceArtifact, binding->sourceArtifactSize,
                  records[i].sourceEncodedSha256);
         Sha256Of(canonicalBytes, decodedSize, records[i].canonicalDecodedSha256);
@@ -572,8 +649,10 @@ enum Gen3ManifestResult Gen3Manifest_Generate(
         memcpy(records[i].key, key.bytes, sizeof(key.bytes));
 
         ranges[i].id = binding->id;
-        ranges[i].offset = romOffset;
-        ranges[i].end = (uint32_t)romEnd;
+        ranges[i].offset = binding->bundle ? 0u : romOffset;
+        /* Bundle records have no ROM range; end == 0 marks them for the
+         * duplicate-range sweep, which skips end == 0 entries. */
+        ranges[i].end = binding->bundle ? 0u : (uint32_t)romEnd;
         ranges[i].allowShared = binding->allowSharedRange;
 
         free(decoded);
@@ -602,6 +681,9 @@ enum Gen3ManifestResult Gen3Manifest_Generate(
         {
             const struct RangeCheck *previous = &sortedRanges[i - 1u];
             const struct RangeCheck *current = &sortedRanges[i];
+            /* Bundle records carry no ROM range (end == 0 sentinel). */
+            if (previous->end == 0u || current->end == 0u)
+                continue;
             if (previous->end > current->offset
              && !previous->allowShared && !current->allowShared)
             {
@@ -704,6 +786,15 @@ bool Gen3Manifest_Serialize(const struct Gen3ManifestMeta *meta,
         Gen3TomlWrite_String(out, "key", keyHex);
         Gen3TomlWrite_String(out, "type", record->type);
         Gen3TomlWrite_Integer(out, "schema", (long long)record->schema);
+        if (record->bundle)
+        {
+            /* R13-C bundle record: the payload is a constructed artifact on
+             * disk; the pack builder reads this path (repo-relative, resolved
+             * against the pack-build working directory). rom_offset below is
+             * 0 and carries no meaning for bundles. */
+            Gen3Buffer_AppendCStr(out, "bundle = true\n");
+            Gen3TomlWrite_String(out, "source_artifact", record->bundleSourceArtifact);
+        }
         Gen3TomlWrite_String(out, "symbol", record->symbol);
         Gen3TomlWrite_Integer(out, "rom_offset", (long long)record->romOffset);
         Gen3TomlWrite_Integer(out, "encoded_length", (long long)record->encodedLength);
@@ -876,6 +967,31 @@ enum Gen3ManifestResult Gen3Manifest_FromToml(
         bindings[i].expectedDecodedSize = (uint32_t)expectedDecodedSize;
         if (!Gen3Toml_GetBool(item, "allow_shared_range", &bindings[i].allowSharedRange))
             bindings[i].allowSharedRange = false;
+        /* R13-C text bundles: bundle = true marks a constructed artifact
+         * with no ELF symbol / ROM slice. The artifact path is carried into
+         * the manifest record so the pack builder can re-read the file. */
+        if (!Gen3Toml_GetBool(item, "bundle", &bindings[i].bundle))
+            bindings[i].bundle = false;
+        if (bindings[i].bundle)
+        {
+            const char *bundlePath;
+            if (!Gen3Toml_GetString(item, "source_artifact", &bundlePath))
+            {
+                SetError(errbuf, errbufSize, "binding '%s' is a bundle but is missing 'source_artifact'",
+                         bindings[i].id);
+                result = GEN3_MANIFEST_INVALID_INPUT;
+                goto done;
+            }
+            if (strcmp(bindings[i].sourceEncoding, "raw") != 0)
+            {
+                SetError(errbuf, errbufSize,
+                         "binding '%s': bundle bindings require a raw source encoding",
+                         bindings[i].id);
+                result = GEN3_MANIFEST_INVALID_INPUT;
+                goto done;
+            }
+            bindings[i].bundleSourceArtifact = bundlePath;
+        }
         hasSymbolOffset = Gen3Toml_GetInteger(item, "symbol_offset", &symbolOffset);
         if (hasSymbolOffset)
         {

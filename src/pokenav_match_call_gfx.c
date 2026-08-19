@@ -23,6 +23,10 @@
 #include "constants/game_stat.h"
 #include "constants/region_map_sections.h"
 #include "constants/songs.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
 #define GFXTAG_CURSOR 7
 #define GFXTAG_TRAINER_PIC 8
@@ -197,12 +201,15 @@ static const struct WindowTemplate sMatchCallInfoBoxWindowTemplate =
     .baseBlock = 38
 };
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sMatchCallOptionTexts[MATCH_CALL_OPTION_COUNT] =
 {
     [MATCH_CALL_OPTION_CALL]   = gText_Call,
     [MATCH_CALL_OPTION_CHECK]  = gText_Check,
     [MATCH_CALL_OPTION_CANCEL] = gText_Cancel6
 };
+#endif
 
 // The series of 5 dots that appear when someone is called with Match Call
 static const u8 sText_CallingDots[] = _("·{PAUSE 4}·{PAUSE 4}·{PAUSE 4}·{PAUSE 4}·\p");

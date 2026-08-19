@@ -30,6 +30,10 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/items.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
 #define MAX_JUMP_SCORE 99990
 #define MAX_JUMPS 9999
@@ -4158,7 +4162,10 @@ static const struct WindowTemplate sWindowTemplate_Records =
     .baseBlock = 0x1,
 };
 
-static const u8 *const sRecordsTexts[] = {gText_JumpsInARow, gText_BestScore2, gText_ExcellentsInARow};
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
+static const u8 *const sRecordsTexts_pokemon_jump[] = {gText_JumpsInARow, gText_BestScore2, gText_ExcellentsInARow};
+#endif
 
 #define tState data[0]
 #define tWindowId data[1]
@@ -4174,9 +4181,9 @@ static void Task_ShowPokemonJumpRecords(u8 taskId)
     case 0:
         window = sWindowTemplate_Records;
         width = GetStringWidth(FONT_NORMAL, gText_PkmnJumpRecords, 0);
-        for (i = 0; i < ARRAY_COUNT(sRecordsTexts); i++)
+        for (i = 0; i < ARRAY_COUNT(sRecordsTexts_pokemon_jump); i++)
         {
-            widthCurr = GetStringWidth(FONT_NORMAL, sRecordsTexts[i], 0) + 38;
+            widthCurr = GetStringWidth(FONT_NORMAL, sRecordsTexts_pokemon_jump[i], 0) + 38;
             if (widthCurr > width)
                 width = widthCurr;
         }
@@ -4229,9 +4236,9 @@ static void PrintRecordsText(u16 windowId, int width)
     DrawTextBorderOuter(windowId, 0x21D, 13);
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_PkmnJumpRecords, GetStringCenterAlignXOffset(FONT_NORMAL, gText_PkmnJumpRecords, width * 8), 1, TEXT_SKIP_DRAW, NULL);
-    for (i = 0; i < ARRAY_COUNT(sRecordsTexts); i++)
+    for (i = 0; i < ARRAY_COUNT(sRecordsTexts_pokemon_jump); i++)
     {
-        AddTextPrinterParameterized(windowId, FONT_NORMAL, sRecordsTexts[i], 0, 25 + (i * 16), TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(windowId, FONT_NORMAL, sRecordsTexts_pokemon_jump[i], 0, 25 + (i * 16), TEXT_SKIP_DRAW, NULL);
         ConvertIntToDecimalStringN(gStringVar1, recordNums[i], STR_CONV_MODE_LEFT_ALIGN, 5);
         TruncateToFirstWordOnly(gStringVar1);
         x = (width * 8) - GetStringWidth(FONT_NORMAL, gStringVar1, 0);

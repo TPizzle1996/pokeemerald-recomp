@@ -32,6 +32,10 @@
 #include "constants/mauville_old_man.h"
 #include "constants/songs.h"
 #include "constants/rgb.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
 static EWRAM_DATA struct EasyChatScreen *sEasyChatScreen = NULL;
 static EWRAM_DATA struct EasyChatScreenControl *sScreenControl = NULL;
@@ -425,6 +429,8 @@ struct
     },
 };
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct EasyChatScreenTemplate sEasyChatScreenTemplates[] = {
     {
         .type = EASY_CHAT_TYPE_PROFILE,
@@ -679,6 +685,7 @@ static const struct EasyChatScreenTemplate sEasyChatScreenTemplates[] = {
         .confirmText2 = gText_IsAsShownOkay,
     },
 };
+#endif
 
 // IDs are used indirectly as indexes into gEasyChatWordsByLetterPointers
 // 0 is 'Others', 1-26 are the letters A-Z
@@ -1203,15 +1210,20 @@ static const u8 sFooterOptionXOffsets[NUM_FOOTER_TYPES][4] = {
     [FOOTER_ANSWER] = {16,  80, 134, 170},
 };
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sFooterTextOptions[NUM_FOOTER_TYPES][4] = {
     [FOOTER_NORMAL] = {gText_DelAll, gText_Cancel5, gText_Ok2, NULL},
     [FOOTER_QUIZ]   = {gText_DelAll, gText_Cancel5, gText_Ok2, gText_Quiz},
     [FOOTER_ANSWER] = {gText_DelAll, gText_Cancel5, gText_Ok2, gText_Answer},
 };
+#endif
 
 #include "data/easy_chat/easy_chat_groups.h"
 #include "data/easy_chat/easy_chat_words_by_letter.h"
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sEasyChatGroupNamePointers[EC_NUM_GROUPS] = {
     [EC_GROUP_POKEMON]          = gEasyChatGroupName_Pokemon,
     [EC_GROUP_TRAINER]          = gEasyChatGroupName_Trainer,
@@ -1236,6 +1248,7 @@ static const u8 *const sEasyChatGroupNamePointers[EC_NUM_GROUPS] = {
     [EC_GROUP_TRENDY_SAYING]    = gEasyChatGroupName_TrendySaying,
     [EC_GROUP_POKEMON_NATIONAL] = gEasyChatGroupName_Pokemon2,
 };
+#endif
 
 static const u16 sDefaultProfileWords[EASY_CHAT_BATTLE_WORDS_COUNT - 2] = {
     EC_WORD_I_AM,

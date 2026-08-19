@@ -48,6 +48,8 @@ static const u16 sFrontierExchangeCorner_HoldItems[] =
     ITEM_LIST_END
 };
 
+/* R13-C: skeleton-migrated tables (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sFrontierExchangeCorner_Decor1Descriptions[] =
 {
     BattleFrontier_ExchangeServiceCorner_Text_KissPosterDesc,
@@ -97,3 +99,4 @@ static const u8 *const sFrontierExchangeCorner_HoldItemsDescriptions[] =
     BattleFrontier_ExchangeServiceCorner_Text_ScopeLensDesc,
     gText_Exit
 };
+#endif /* NATIVE_LINUX */

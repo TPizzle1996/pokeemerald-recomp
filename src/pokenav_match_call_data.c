@@ -10,6 +10,10 @@
 #include "strings.h"
 #include "constants/region_map_sections.h"
 #include "constants/trainers.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
 
 // NPC below means non-trainer character (no rematch or check page)
@@ -26,68 +30,14 @@ enum
 
 // Static type declarations
 
-typedef struct MatchCallTextDataStruct {
-    const u8 *text;
-    u16 flag;
-    u16 flag2;
-} match_call_text_data_t;
+// R13-C: MatchCallTextDataStruct (typedef match_call_text_data_t),
+// MatchCallStructNPC/Trainer/Birch/Rival/Wally and MatchCallLocationOverride
+// moved to match_call.h so the generated host arrays can type their externs.
 
 struct MatchCallStructCommon {
     u8 type;
     u8 mapSec;
     u16 flag;
-};
-
-struct MatchCallStructNPC {
-    u8 type;
-    u8 mapSec;
-    u16 flag;
-    const u8 *desc;
-    const u8 *name;
-    const match_call_text_data_t *textData;
-};
-
-// Shared by MC_TYPE_TRAINER and MC_TYPE_LEADER
-struct MatchCallStructTrainer {
-    u8 type;
-    u8 mapSec;
-    u16 flag;
-    u16 rematchTableIdx;
-    const u8 *desc;
-    const u8 *name;
-    const match_call_text_data_t *textData;
-};
-
-struct MatchCallLocationOverride {
-    u16 flag;
-    u8 mapSec;
-};
-
-struct MatchCallWally {
-    u8 type;
-    u8 mapSec;
-    u16 flag;
-    u16 rematchTableIdx;
-    const u8 *desc;
-    const match_call_text_data_t *textData;
-    const struct MatchCallLocationOverride *locationData;
-};
-
-struct MatchCallBirch {
-    u8 type;
-    u8 mapSec;
-    u16 flag;
-    const u8 *desc;
-    const u8 *name;
-};
-
-struct MatchCallRival {
-    u8 type;
-    u8 playerGender;
-    u16 flag;
-    const u8 *desc;
-    const u8 *name;
-    const match_call_text_data_t *textData;
 };
 
 typedef union {
@@ -99,13 +49,6 @@ typedef union {
     const struct MatchCallRival *rival;
     const struct MatchCallStructTrainer *leader;
 } match_call_t;
-
-struct MatchCallCheckPageOverride {
-    u16 idx;
-    u16 facilityClass;
-    u32 flag;
-    const u8 *flavorTexts[CHECK_PAGE_ENTRY_COUNT];
-};
 
 // Static RAM declarations
 
@@ -159,6 +102,8 @@ static void MatchCall_GetNameAndDescByRematchIdx(u32, const u8 **, const u8 **);
 
 // .rodata
 
+/* R13-C: skeleton-migrated tables (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const match_call_text_data_t sMrStoneTextScripts[] = {
     { MatchCall_Text_MrStone1,  0xFFFF,                              FLAG_ENABLE_MR_STONE_POKENAV },
     { MatchCall_Text_MrStone2,  FLAG_ENABLE_MR_STONE_POKENAV,        0xFFFF },
@@ -576,6 +521,7 @@ static const struct MatchCallStructTrainer sWallaceMatchCallHeader =
     .name = NULL,
     .textData = sWallaceTextScripts
 };
+#endif /* NATIVE_LINUX */
 
 static const match_call_t sMatchCallHeaders[] = {
     [MC_HEADER_MR_STONE]   = {.npc    = &sMrStoneMatchCallHeader},
@@ -657,6 +603,8 @@ static void (*const sMatchCall_GetNameAndDescFunctions[])(match_call_t, const u8
     MatchCall_GetNameAndDesc_Birch
 };
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct MatchCallCheckPageOverride sCheckPageOverrides[] = {
     {
         .idx = MC_HEADER_STEVEN,
@@ -693,6 +641,7 @@ static const struct MatchCallCheckPageOverride sCheckPageOverrides[] = {
         .flavorTexts = MCFLAVOR(May)
     }
 };
+#endif
 
 // .text
 

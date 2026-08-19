@@ -24,6 +24,10 @@
 #include "graphics.h"
 #include "pokemon_summary_screen.h"
 #include "item_menu.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
 /*
     This file handles the screen where the player chooses
@@ -286,6 +290,8 @@ static const struct WindowTemplate sUsePokeblockYesNoWinTemplate =
     .baseBlock = 0x83
 };
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sConditionNames[CONDITION_COUNT] =
 {
     [CONDITION_COOL]   = gText_Coolness,
@@ -294,6 +300,7 @@ static const u8 *const sConditionNames[CONDITION_COUNT] =
     [CONDITION_CUTE]   = gText_Cuteness,
     [CONDITION_BEAUTY] = gText_Beauty3
 };
+#endif
 
 static const struct SpriteSheet sSpriteSheet_UpDown =
 {

@@ -31,6 +31,10 @@
 #include "link_rfu.h"
 #include "wonder_news.h"
 #include "constants/cable_club.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
 enum {
     WIN_HEADER,
@@ -214,17 +218,23 @@ static const struct WindowTemplate sWindowTemplate_GiftSelect_1Option = {
     .baseBlock = 0x0155
 };
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct ListMenuItem sListMenuItems_CardsOrNews[] = {
     { gText_WonderCards,  0 },
     { gText_WonderNews,   1 },
     { gText_Exit3,        LIST_CANCEL }
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct ListMenuItem sListMenuItems_WirelessOrFriend[] = {
     { gText_WirelessCommunication,  0 },
     { gText_Friend2,                1 },
     { gText_Cancel2,                LIST_CANCEL }
 };
+#endif
 
 static const struct ListMenuTemplate sListMenuTemplate_ThreeOptions = {
     .items = NULL,
@@ -247,29 +257,41 @@ static const struct ListMenuTemplate sListMenuTemplate_ThreeOptions = {
     .cursorKind = CURSOR_BLACK_ARROW
 };
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct ListMenuItem sListMenuItems_ReceiveSendToss[] = {
     { gText_Receive,  0 },
     { gText_Send,     1 },
     { gText_Toss,     2 },
     { gText_Cancel2,  LIST_CANCEL }
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct ListMenuItem sListMenuItems_ReceiveToss[] = {
     { gText_Receive,  0 },
     { gText_Toss,     2 },
     { gText_Cancel2,  LIST_CANCEL }
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct ListMenuItem sListMenuItems_ReceiveSend[] = {
     { gText_Receive,  0 },
     { gText_Send,     1 },
     { gText_Cancel2,  LIST_CANCEL }
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct ListMenuItem sListMenuItems_Receive[] = {
     { gText_Receive,  0 },
     { gText_Cancel2,  LIST_CANCEL }
 };
+#endif
 
 static const struct ListMenuTemplate sListMenu_ReceiveSendToss = {
     .items = sListMenuItems_ReceiveSendToss,
@@ -355,12 +377,15 @@ static const struct ListMenuTemplate sListMenu_Receive = {
     .cursorKind = CURSOR_BLACK_ARROW
 };
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sUnusedMenuTexts[] = {
     gText_VarietyOfEventsImportedWireless,
     gText_WonderCardsInPossession,
     gText_ReadNewsThatArrived,
     gText_ReturnToTitle
 };
+#endif
 
 ALIGNED(2) static const u8 sTextColors_Header[]      = { TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE,     TEXT_COLOR_DARK_GRAY };
 ALIGNED(2) static const u8 sTextColors_Header_Copy[] = { TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHITE,     TEXT_COLOR_DARK_GRAY };

@@ -830,11 +830,14 @@ static const struct WindowTemplate sWindowTemplate_RegisterForTrade = {
     .baseBlock = 0x0001
 };
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct ListMenuItem sRegisterForTradeListMenuItems[] = {
     { gText_Register, 1 },
     { sText_Info, 2 },
     { sText_Exit, 3 }
 };
+#endif /* NATIVE_LINUX */
 
 static const struct ListMenuTemplate sListMenuTemplate_RegisterForTrade = {
     .items = sRegisterForTradeListMenuItems,

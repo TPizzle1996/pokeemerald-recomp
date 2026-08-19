@@ -12,6 +12,10 @@
 #include "gpu_regs.h"
 #include "menu.h"
 #include "dma3.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
 struct Pokenav_MainMenu
 {
@@ -84,6 +88,8 @@ static const struct WindowTemplate sHelpBarWindowTemplate[] =
     DUMMY_WIN_TEMPLATE
 };
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sHelpBarTexts[HELPBAR_COUNT] =
 {
     [HELPBAR_NONE]                 = gText_Pokenav_ClearButtonList,
@@ -99,6 +105,7 @@ static const u8 *const sHelpBarTexts[HELPBAR_COUNT] =
     [HELPBAR_RIBBONS_LIST]         = gText_PokenavRibbons_RibbonListButtons,
     [HELPBAR_RIBBONS_CHECK]        = gText_PokenavRibbons_RibbonCheckButtons,
 };
+#endif
 
 static const u8 sHelpBarTextColors[3] =
 {

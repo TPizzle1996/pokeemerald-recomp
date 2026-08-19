@@ -376,6 +376,8 @@ static const struct MenuAction sSelectTradeMonActions[] =
     {sText_Trade2,   {Task_DrawSelectionTrade}}
 };
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sMessages[] =
 {
     [MSG_STANDBY]                    = sText_CommunicationStandby,
@@ -388,6 +390,7 @@ static const u8 *const sMessages[] =
     [MSG_EGG_CANT_BE_TRADED]         = gText_EggCantBeTradedNow,
     [MSG_FRIENDS_MON_CANT_BE_TRADED] = gText_OtherTrainersPkmnCantBeTraded
 };
+#endif /* NATIVE_LINUX */
 
 static const u8 sTradeTextColors[] =
 {

@@ -28,6 +28,10 @@
 #include "window.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
 enum
 {
@@ -124,37 +128,12 @@ static EWRAM_DATA struct PokedexListItem *sPokedexListItem = NULL;
 COMMON_DATA u8 gUnusedPokedexU8 = 0;
 COMMON_DATA void (*gPokedexVBlankCB)(void) = NULL;
 
-struct SearchOptionText
-{
-    const u8 *description;
-    const u8 *title;
-};
-
 struct SearchOption
 {
     const struct SearchOptionText *texts;
     u8 taskDataCursorPos;
     u8 taskDataScrollOffset;
     u16 numOptions;
-};
-
-struct SearchMenuTopBarItem
-{
-    const u8 *description;
-    u8 highlightX;
-    u8 highlightY;
-    u8 highlightWidth;
-};
-
-struct SearchMenuItem
-{
-    const u8 *description;
-    u8 titleBgX;
-    u8 titleBgY;
-    u8 titleBgWidth;
-    u8 selectionBgX;
-    u8 selectionBgY;
-    u8 selectionBgWidth;
 };
 
 struct PokedexListItem
@@ -1014,6 +993,8 @@ static const u8 sLetterSearchRanges[][4] =
     ((letter) >= sLetterSearchRanges[range][2]                                  \
   && (letter) < sLetterSearchRanges[range][2] + sLetterSearchRanges[range][3])  \
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct SearchMenuTopBarItem sSearchMenuTopBarItems[SEARCH_TOPBAR_COUNT] =
 {
     [SEARCH_TOPBAR_SEARCH] =
@@ -1038,7 +1019,10 @@ static const struct SearchMenuTopBarItem sSearchMenuTopBarItems[SEARCH_TOPBAR_CO
         .highlightWidth = 5,
     },
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct SearchMenuItem sSearchMenuItems[SEARCH_COUNT] =
 {
     [SEARCH_NAME] =
@@ -1112,6 +1096,7 @@ static const struct SearchMenuItem sSearchMenuItems[SEARCH_COUNT] =
         .selectionBgWidth = 0,
     },
 };
+#endif
 
 // Left, Right, Up, Down
 static const u8 sSearchMovementMap_SearchNatDex[SEARCH_COUNT][4] =
@@ -1327,13 +1312,18 @@ static const u8 sSearchMovementMap_ShiftHoennDex[SEARCH_COUNT][4] =
     },
 };
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct SearchOptionText sDexModeOptions[] =
 {
     [DEX_MODE_HOENN]    = {gText_DexHoennDescription, gText_DexHoennTitle},
     [DEX_MODE_NATIONAL] = {gText_DexNatDescription,   gText_DexNatTitle},
     {},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct SearchOptionText sDexOrderOptions[] =
 {
     [ORDER_NUMERICAL]    = {gText_DexSortNumericalDescription, gText_DexSortNumericalTitle},
@@ -1344,7 +1334,10 @@ static const struct SearchOptionText sDexOrderOptions[] =
     [ORDER_SMALLEST]     = {gText_DexSortSmallestDescription,  gText_DexSortSmallestTitle},
     {},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct SearchOptionText sDexSearchNameOptions[] =
 {
     {gText_DexEmptyString, gText_DexSearchDontSpecify},
@@ -1359,7 +1352,10 @@ static const struct SearchOptionText sDexSearchNameOptions[] =
     [NAME_YZ]  = {gText_DexEmptyString, gText_DexSearchAlphaYZ},
     {},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct SearchOptionText sDexSearchColorOptions[] =
 {
     {gText_DexEmptyString, gText_DexSearchDontSpecify},
@@ -1375,7 +1371,10 @@ static const struct SearchOptionText sDexSearchColorOptions[] =
     [BODY_COLOR_PINK + 1]   = {gText_DexEmptyString, gText_DexSearchColorPink},
     {},
 };
+#endif
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const struct SearchOptionText sDexSearchTypeOptions[NUMBER_OF_MON_TYPES + 1] = // + 2 for "None" and terminator, - 1 for Mystery
 {
     {gText_DexEmptyString, gText_DexSearchTypeNone},
@@ -1398,6 +1397,7 @@ static const struct SearchOptionText sDexSearchTypeOptions[NUMBER_OF_MON_TYPES +
     {gText_DexEmptyString, gTypeNames[TYPE_DARK]},
     {},
 };
+#endif /* NATIVE_LINUX */
 
 static const u8 sPokedexModes[] = {DEX_MODE_HOENN, DEX_MODE_NATIONAL};
 static const u8 sOrderOptions[] =

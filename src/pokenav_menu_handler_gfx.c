@@ -16,6 +16,10 @@
 #include "scanline_effect.h"
 #include "constants/songs.h"
 #include "constants/rgb.h"
+#ifdef NATIVE_LINUX
+#include "emerald/resources/text_slots.generated.h"
+#include "emerald/resources/text_skeleton_arrays.generated.h"
+#endif
 
 #define GFXTAG_BLUE_LIGHT 1
 #define GFXTAG_OPTIONS    3
@@ -265,6 +269,8 @@ static const struct WindowTemplate sOptionDescWindowTemplate =
     .baseBlock = 8
 };
 
+/* R13-C: skeleton-migrated table (rows filled at publish). */
+#ifndef NATIVE_LINUX
 static const u8 *const sPageDescriptions[] =
 {
     [POKENAV_MENUITEM_MAP]                     = gText_CheckMapOfHoenn,
@@ -282,6 +288,7 @@ static const u8 *const sPageDescriptions[] =
     [POKENAV_MENUITEM_CONDITION_SEARCH_TOUGH]  = gText_FindToughPokemon,
     [POKENAV_MENUITEM_CONDITION_SEARCH_CANCEL] = gText_ReturnToConditionMenu
 };
+#endif
 
 static const u8 sOptionDescTextColors[]  = {TEXT_COLOR_GREEN, TEXT_COLOR_BLUE, TEXT_COLOR_LIGHT_GREEN};
 static const u8 sOptionDescTextColors2[] = {TEXT_COLOR_GREEN, TEXT_COLOR_BLUE, TEXT_COLOR_LIGHT_GREEN};
