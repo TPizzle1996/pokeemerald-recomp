@@ -53,6 +53,7 @@
 
 #include "gen3/resources/resource_pack.h"
 #include "emerald/resources/emerald_audio_compat.h"
+#include "emerald/resources/emerald_leaf_compat.h"
 #include "emerald/resources/emerald_resource_session.h"
 #include "emerald/resources/emerald_trainer_native_compat.h"
 
@@ -217,6 +218,31 @@ EmeraldResourceCompat_RegisterRuntimeSnapshot(const char *packPath)
             }
             else
             {
+                /* R13-B: publish the leaf arena (movement + multiboot).
+                 * ADDITIVE-ONLY: no consumer is redirected (the movement
+                 * consumers are deferred to the R13-G pointer graph; the
+                 * ereader program stays compiled and live), so a failed
+                 * publication is a DEGRADE with a named diagnostic, never
+                 * a session refusal - the game behaves exactly as
+                 * pre-R13-B either way. The arena holds pure payload
+                 * bytes + a name/offset/size record table; nothing in it
+                 * is serialized by State-v5, so no range registration. */
+                {
+                    struct EmeraldLeafCompatDiagnostics leafDiag;
+                    enum EmeraldLeafCompatStatus leafStatus =
+                        EmeraldLeafCompat_TryInitialize(snapshot, pack,
+                                                        &leafDiag);
+                    if (leafStatus != EMERALD_LEAF_OK)
+                    {
+                        fprintf(stderr,
+                                "emerald runtime: R13-B leaf arena not "
+                                "published (additive degrade, no consumer "
+                                "redirect): status %d%s%s\n",
+                                (int)leafStatus,
+                                leafDiag.canonicalName[0] != '\0' ? " @ " : "",
+                                leafDiag.canonicalName);
+                    }
+                }
                 /* R10-F: the session content fingerprint pins the exact
                  * logical provider content this session was built from (the
                  * construction lives in emerald_resource_session.h). The

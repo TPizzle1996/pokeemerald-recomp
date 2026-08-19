@@ -3,7 +3,7 @@
 # R12-B audio leaf ownership migration test runner (tests A-G).
 #
 #   A-G  tests/emerald_audio_compat_test.c against the REAL production pack:
-#        A counts (105/51/388/25 = 569 leaves + 530 song graphs, pack 5819 entries),
+#        A counts (105/51/388/25 = 569 leaves + 530 song graphs, pack 6876 entries since R13-B),
 #        B exact extraction (arena bytes == pack payloads == ROM slice,
 #          every leaf inside the verbatim zone, no overlaps),
 #        C WaveData2 structural validation per sample,
@@ -19,7 +19,8 @@
 #          missing song).
 #   E    determinism/provenance re-proofs:
 #        - gen3-pack-build --check reproduces the committed production pack
-#          byte-for-byte from the 7 manifests + 7 catalogs;
+#          byte-for-byte from the 8 manifests + 8 catalogs (6 pre-R13B
+#          families + the R13-B movement/multiboot leaves);
 #        - gen3-elf-manifest --check re-derives the audio manifest from the
 #          qualified ELF + retail-matching ROM (the tool re-proves the
 #          three-way ELF == ROM == manifest canonical slices).
@@ -56,14 +57,18 @@ if "$root/tools/gen3_resources/pack_build/gen3-pack-build" \
     --manifest "$root/resources/extraction/emerald/bpee01/tileset/manifest.production.toml" \
     --manifest "$root/resources/extraction/emerald/bpee01/layout/manifest.production.toml" \
     --manifest "$audio/manifest.production.toml" \
+    --manifest "$root/resources/extraction/emerald/bpee01/movement/manifest.production.toml" \
+    --manifest "$root/resources/extraction/emerald/bpee01/multiboot/manifest.production.toml" \
     --catalog "$root/resources/catalogs/emerald/catalog.toml" \
     --catalog "$root/resources/extraction/emerald/bpee01/pokemon_battle/catalog.generated.toml" \
     --catalog "$root/resources/extraction/emerald/bpee01/object_event/catalog.generated.toml" \
     --catalog "$root/resources/extraction/emerald/bpee01/tileset/catalog.generated.toml" \
     --catalog "$root/resources/extraction/emerald/bpee01/layout/catalog.generated.toml" \
     --catalog "$audio/catalog.generated.toml" \
+    --catalog "$root/resources/extraction/emerald/bpee01/movement/catalog.generated.toml" \
+    --catalog "$root/resources/extraction/emerald/bpee01/multiboot/catalog.generated.toml" \
     --check > "$tmp/pack_check.log" 2>&1; then
-    pass "pack reproduces byte-for-byte (5819 entries)"
+    pass "pack reproduces byte-for-byte (6876 entries since R13-B)"
 else
     fail "pack --check: $(tail -3 "$tmp/pack_check.log" | tr '\n' ' ')"
 fi

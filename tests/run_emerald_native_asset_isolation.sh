@@ -53,6 +53,19 @@
 # (R11-D §10, classified at scan time); the symbol/TU/dep-graph checks
 # remain the hard isolation proof.
 #
+# R13-B introduces the first COMPILED_PENDING_MIGRATION families since R8:
+# the leaf families (resources/extraction/emerald/bpee01/movement/
+# ownership.generated.toml, 1055 records — the 1047 script_data labels +
+# 8 sMovement_* objects, 7428 B — and resources/extraction/emerald/bpee01/
+# multiboot/ownership.generated.toml, 2 records — ereader + colosseum
+# programs, 176352 B) are extracted into the production pack (R13-B §10:
+# isolation ownership state with reasons) but stay COMPILED: the movement
+# labels are LOCAL symbols (pret movement.inc emits no .global; the native
+# binary shows them with `d`/`r` binding), so the COMPILED state check
+# below must match against the FULL nm table (local symbols included), not
+# nm -g — that is the whole reason this family is the first to exercise the
+# local-symbol path of the state check.
+#
 # Byte-scan exemption (R9 §9): an encoded payload whose bytes are
 # byte-identical to a still-compiled still-front asset (graphics/pokemon/*/
 # front.4bpp.lz — the battle front and the party-menu front share the same
@@ -62,11 +75,14 @@
 # byte-identical to a menu asset. This mirrors the small-decoded-payload
 # NOTE policy.
 #
-#   native = COMPILED_PENDING_MIGRATION  (zero records after R8)
+#   native = COMPILED_PENDING_MIGRATION  (1057 records after R13-B: the leaf
+#       movement + multiboot families; zero between R8 and R12-G)
 #       -> the state check stays in the runner, driven by the ownership files:
 #          any record still declaring this state MUST have its legacy symbol
 #          defined in the binary. A future family stage flips states as it
-#          migrates; the check keeps the metadata honest either way.
+#          migrates; the check keeps the metadata honest either way. The
+#          leaf movement symbols are LOCAL (see above), so the presence
+#          check runs against the full nm table.
 #
 # Fails when:
 #   a) a ROM_BASE_ONLY leaf symbol reappears in the final binary or any native
@@ -110,6 +126,8 @@ object_event_ownership="$root/resources/extraction/emerald/bpee01/object_event/o
 tileset_ownership="$root/resources/extraction/emerald/bpee01/tileset/ownership.generated.toml"
 layout_ownership="$root/resources/extraction/emerald/bpee01/layout/ownership.generated.toml"
 audio_ownership="$root/resources/extraction/emerald/bpee01/audio/ownership.generated.toml"
+movement_ownership="$root/resources/extraction/emerald/bpee01/movement/ownership.generated.toml"
+multiboot_ownership="$root/resources/extraction/emerald/bpee01/multiboot/ownership.generated.toml"
 scaninc="$root/tools/scaninc/scaninc"
 default_binary="$root/pokeemerald-linux64"
 
@@ -147,6 +165,8 @@ bad()  { fail=$((fail + 1)); printf 'FAIL - %s\n' "$*"; }
 [[ -f "$tileset_ownership" ]] || { echo "FATAL: ownership file missing: $tileset_ownership" >&2; exit 2; }
 [[ -f "$layout_ownership" ]] || { echo "FATAL: ownership file missing: $layout_ownership" >&2; exit 2; }
 [[ -f "$audio_ownership" ]] || { echo "FATAL: ownership file missing: $audio_ownership" >&2; exit 2; }
+[[ -f "$movement_ownership" ]] || { echo "FATAL: ownership file missing: $movement_ownership" >&2; exit 2; }
+[[ -f "$multiboot_ownership" ]] || { echo "FATAL: ownership file missing: $multiboot_ownership" >&2; exit 2; }
 
 # ---------------------------------------------------------------------------
 # Build / freshness
@@ -194,7 +214,7 @@ ok "native binary is fresh: $binary"
 echo "== ownership-driven payload byte + symbol scans =="
 tmpdir="$(mktemp -d)"
 trap 'rm -rf "$tmpdir"' EXIT
-python3 - "$binary" "$ownership" "$back_ownership" "$pokemon_ownership" "$object_event_ownership" "$tileset_ownership" "$layout_ownership" "$audio_ownership" "$tmpdir" "$maps_obj" <<'PY' || exit 1
+python3 - "$binary" "$ownership" "$back_ownership" "$pokemon_ownership" "$object_event_ownership" "$tileset_ownership" "$layout_ownership" "$audio_ownership" "$movement_ownership" "$multiboot_ownership" "$tmpdir" "$maps_obj" <<'PY' || exit 1
 import glob, hashlib, re, subprocess, sys
 
 # Line-buffer stdout: under 2>&1 the runner's log is the record of record,
@@ -204,7 +224,7 @@ import glob, hashlib, re, subprocess, sys
 # diagnostic on its own line in write order.
 sys.stdout.reconfigure(line_buffering=True)
 
-binary_path, ownership_path, back_ownership_path, pokemon_ownership_path, object_event_ownership_path, tileset_ownership_path, layout_ownership_path, audio_ownership_path, tmpdir, maps_obj_path = sys.argv[1:11]
+binary_path, ownership_path, back_ownership_path, pokemon_ownership_path, object_event_ownership_path, tileset_ownership_path, layout_ownership_path, audio_ownership_path, movement_ownership_path, multiboot_ownership_path, tmpdir, maps_obj_path = sys.argv[1:13]
 
 def sha256_file(path):
     h = hashlib.sha256()
@@ -275,11 +295,22 @@ nm_out = subprocess.run(['nm', '-g', '--defined-only', binary_path],
                         capture_output=True, text=True)
 defined_syms = set(l.split()[-1] for l in nm_out.stdout.splitlines() if l.strip())
 
-# All seven ownership files (trainer front R7B, trainer back R8, Pokémon
-# battle R9, object-event R11-B, tileset R11-C, layout R11-D, audio R12-G)
-# declare the same [[resources]] record grammar; concatenate so every
-# downstream check is driven by the 5819-record union, never a hardcoded
-# species, trainer, layout or audio name.
+# R13-B: the COMPILED_PENDING_MIGRATION presence check needs the FULL nm
+# table (local symbols included): the movement labels and sMovement_*
+# objects are LOCAL in both the pret ELF (movement.inc emits no .global)
+# and the native binary (d/r binding), so nm -g never sees them. The
+# ROM_BASE_ONLY absence checks keep the global-only set; the audio class
+# sweep below reuses this full set instead of running nm twice.
+all_nm = subprocess.run(['nm', '--defined-only', binary_path],
+                        capture_output=True, text=True)
+all_defined = set(l.split()[-1] for l in all_nm.stdout.splitlines() if l.strip())
+
+# All nine ownership files (trainer front R7B, trainer back R8, Pokémon
+# battle R9, object-event R11-B, tileset R11-C, layout R11-D, audio R12-G,
+# movement R13-B, multiboot R13-B) declare the same [[resources]] record
+# grammar; concatenate so every downstream check is driven by the
+# 6876-record union, never a hardcoded species, trainer, layout, audio or
+# movement name.
 # R11-C: the tileset ownership file appends [[gba_parity]] blocks (18)
 # after its last [[resources]] record. Strip them per file before the
 # block split: the regex split below would otherwise fold the first
@@ -290,7 +321,8 @@ defined_syms = set(l.split()[-1] for l in nm_out.stdout.splitlines() if l.strip(
 parts = []
 for path in (ownership_path, back_ownership_path, pokemon_ownership_path,
              object_event_ownership_path, tileset_ownership_path,
-             layout_ownership_path, audio_ownership_path):
+             layout_ownership_path, audio_ownership_path,
+             movement_ownership_path, multiboot_ownership_path):
     content = open(path).read()
     parts.append(content.split('\n[[gba_parity]]')[0])
 text = '\n'.join(parts)
@@ -587,7 +619,15 @@ for rec in records:
                 print(f'ok   - {rid}: payload absent from native maps.o')
     else:
         compiled_symbols.append(symbol)
-        if symbol not in defined_syms:
+        # R13-B: presence is checked against the FULL nm table (local
+        # symbols included) — the movement family's labels are local
+        # (movement.inc emits no .global; the 8 sMovement_* objects are
+        # local `r`), the ereader record's legacy symbol is the recomp
+        # rename gMultiBootProgram_EReader_Start (upstream renamed the
+        # pret gEReaderLinkData_Start in b89722500), and the colosseum
+        # record's blob is still linked as dead .rodata (its only consumer,
+        # intro.c:1131, is #ifndef PORTABLE) — present but never read.
+        if symbol not in all_defined:
             print(f'FAIL - {rid}: COMPILED_PENDING_MIGRATION symbol {symbol} '
                   f'missing from {binary_path} (ownership says still compiled)',
                   file=sys.stderr)
@@ -606,10 +646,8 @@ for rec in records:
 # samples + 388 cry rows + 25 programmable waves + 195 voicegroups + 5
 # keysplits in the pre-removal baseline). The stay-compiled exceptions
 # (gSongTable, gMPlayTable, dummy_song_header, gPokemonCrySongTemplate,
-# engine lookup tables) do not match these prefixes.
-all_nm = subprocess.run(['nm', '--defined-only', binary_path],
-                        capture_output=True, text=True)
-all_defined = set(l.split()[-1] for l in all_nm.stdout.splitlines() if l.strip())
+# engine lookup tables) do not match these prefixes. Reuses the full nm
+# table computed above (all_defined) — no second nm run.
 audio_class_re = re.compile(
     r'^(mus_|se_|ph_|DirectSoundWaveData_|Cry_|ProgrammableWaveData_|'
     r'voicegroup_|keysplit_)')
@@ -644,8 +682,14 @@ mapfile -t migrated_symbols < "$tmpdir/migrated_symbols.txt"
 mapfile -t compiled_symbols < "$tmpdir/compiled_symbols.txt"
 mapfile -t migrated_artifacts < "$tmpdir/migrated_artifacts.txt"
 [[ ${#migrated_symbols[@]} -gt 0 ]] || { echo "FATAL: no ROM_BASE_ONLY records" >&2; exit 2; }
-if [[ ${#compiled_symbols[@]} -eq 0 ]]; then
-    ok "end state: zero COMPILED_PENDING_MIGRATION records (all 5819 ROM_BASE_ONLY)"
+# R13-B end state: 5819 ROM_BASE_ONLY (audio/visual families through
+# R12-G) + 1057 COMPILED_PENDING_MIGRATION (the leaf families). The
+# COMPILED count is a hard check now — every leaf record's symbol was
+# verified present in the binary by the python scan above.
+if [[ ${#compiled_symbols[@]} -eq 1057 ]]; then
+    ok "end state: exactly 1057 COMPILED_PENDING_MIGRATION records (movement + multiboot leaf families; 5819 ROM_BASE_ONLY elsewhere)"
+else
+    bad "end state: ${#compiled_symbols[@]} COMPILED_PENDING_MIGRATION records, expected 1057"
 fi
 
 payload_tu="$root/src/data/graphics/trainers_front_payload.c"
@@ -980,4 +1024,4 @@ fi
 echo
 echo "native asset-isolation: $pass ok, $fail failed"
 [[ "$fail" == 0 ]] || exit 1
-echo "PASS: native target matches ownership (5819/5819 ROM_BASE_ONLY isolated - 196 trainer + 1608 pokemon battle + 288 object-event + 1544 tileset + 882 layout + 1301 audio, 0 COMPILED_PENDING_MIGRATION)"
+echo "PASS: native target matches ownership (5819/5819 ROM_BASE_ONLY isolated - 196 trainer + 1608 pokemon battle + 288 object-event + 1544 tileset + 882 layout + 1301 audio; 1057/1057 COMPILED_PENDING_MIGRATION present - 1055 movement + 2 multiboot)"

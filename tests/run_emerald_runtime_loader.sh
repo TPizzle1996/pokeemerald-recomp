@@ -59,6 +59,8 @@ gcc -std=gnu99 -O2 -ffunction-sections -fdata-sections -Wl,--gc-sections \
     "$here/emerald_tileset_compat_stubs.c" \
     "$emerald_dir/emerald_resource_session.c" \
     "$emerald_dir/emerald_audio_compat.c" \
+    "$emerald_dir/emerald_leaf_compat.c" \
+    "$emerald_dir/leaf_native_table.generated.c" \
     "$here/emerald_runtime_loader_test.c" \
     -o "$tmp/emerald_runtime_loader_test"
 

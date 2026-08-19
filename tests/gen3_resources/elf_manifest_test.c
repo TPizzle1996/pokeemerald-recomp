@@ -690,6 +690,81 @@ static void TestR12AudioRepresentations(struct TestAssets *a)
     }
 }
 
+/* ---- R13-B: binary-family representation compatibility ------------------- */
+
+static void TestR13BinaryRepresentations(struct TestAssets *a)
+{
+    static const struct
+    {
+        const char *type;
+        int schema;
+        const char *rep;
+        bool expectOk;
+    } cases[] =
+    {
+        /* The two approved R13-B §3 pairs: pure GBA bytes, no transform.
+         * schema 1 = movement scripts, schema 2 = multiboot programs. */
+        { "binary", 1, "gba-bytes", true },
+        { "binary", 2, "gba-bytes", true },
+        /* Anything else fails closed: wrong schema, cross-representation
+         * and cross-type mixes are all TYPE_MISMATCH, never silently
+         * accepted. */
+        { "binary", 3, "gba-bytes",       false },
+        { "binary", 0, "gba-bytes",       false },
+        { "binary", 1, "gba-4bpp-tiles",  false },
+        { "binary", 1, "gba-wave-data",   false },
+        { "binary", 2, "gba-mp2k-song-graph", false },
+        { "tile-graphics", 1, "gba-bytes", false },
+        { "palette",       1, "gba-bytes", false },
+        { "music-sequence", 1, "gba-bytes", false },
+    };
+    size_t i;
+
+    for (i = 0; i < ARRAY_SIZE(cases); i++)
+    {
+        struct Gen3CatalogEntry catalog[1];
+        struct Gen3BindingInput binding[1];
+        struct Gen3ManifestConfig config;
+        struct Gen3Buffer out = {0};
+        char errbuf[512];
+        enum Gen3ManifestResult r;
+
+        catalog[0].id = "emerald:test/binary/one";
+        catalog[0].type = cases[i].type;
+        catalog[0].schema = cases[i].schema;
+        memset(binding, 0, sizeof(binding));
+        binding[0].id = "emerald:test/binary/one";
+        binding[0].symbol = "gTrainerFrontPic_Brendan";
+        /* Leaf bytes are raw: the artifact IS the canonical payload (the
+         * R8 raw rule), and the three-way equality requires the raw bytes
+         * to equal the ELF symbol slice - the fixture symbol carries the
+         * encoded front bytes, so artifact == canonical == ELF bytes. */
+        binding[0].sourceEncoding = "raw";
+        binding[0].canonicalRepresentation = cases[i].rep;
+        binding[0].expectedDecodedSize = (uint32_t)a->frontLz.length;
+        binding[0].allowSharedRange = false;
+        binding[0].sourceArtifact = (const uint8_t *)a->frontLz.data;
+        binding[0].sourceArtifactSize = a->frontLz.length;
+        binding[0].canonicalDecoded = (const uint8_t *)a->frontLz.data;
+        binding[0].canonicalDecodedSize = a->frontLz.length;
+
+        memset(&config, 0, sizeof(config));
+        config.expectedRomSha1Hex = a->romSha1Hex;
+        r = GenerateWith(&kMeta, catalog, ARRAY_SIZE(catalog),
+                         binding, ARRAY_SIZE(binding),
+                         (const uint8_t *)a->elf.data, a->elf.length,
+                         (const uint8_t *)a->rom.data, a->rom.length,
+                         &config, &out, errbuf, sizeof(errbuf));
+        if (cases[i].expectOk)
+            CHECK("binary representation pair accepted",
+                  r == GEN3_MANIFEST_OK);
+        else
+            CHECK("binary representation pair rejected -> TYPE_MISMATCH",
+                  r == GEN3_MANIFEST_TYPE_MISMATCH);
+        Gen3Buffer_Destroy(&out);
+    }
+}
+
 static void TestFromToml(struct TestAssets *a)
 {
     struct Gen3Buffer catalogBuf;
@@ -770,6 +845,7 @@ int main(void)
     TestErrorPaths(&assets);
     TestMetadataSensitivity(&assets);
     TestR12AudioRepresentations(&assets);
+    TestR13BinaryRepresentations(&assets);
     TestFromToml(&assets);
 
     FreeAssets(&assets);

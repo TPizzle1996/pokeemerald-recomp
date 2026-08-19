@@ -1,16 +1,17 @@
 /* R12-B focused test: audio leaf ownership migration (tests A-G).
  *
  * Drives the R12-B seam (emerald_audio_compat.c) against the REAL production
- * pack (games/emerald/base/emerald-bpee01-v1.rpack, 5819 entries incl. the
- * 771 audio resources: 569 leaves + 202 structural + 530 song graphs) plus
- * synthetic packs for the failure matrix:
+ * pack (games/emerald/base/emerald-bpee01-v1.rpack, 6876 entries incl. the
+ * 771 audio resources: 569 leaves + 202 structural + 530 song graphs, and
+ * since R13-B the 1057 movement/multiboot leaf resources) plus synthetic
+ * packs for the failure matrix:
  *
  *   A. counts        - pack composition: 105 root + 51 phoneme + 388 cry
  *                      samples + 25 programmable waves = 569 leaves + 530
  *                      MP2K song graphs (mus 210 / se 269 / ph 51), all
  *                      type AUDIO_SAMPLE / schema 1 (MUSIC_SEQUENCE for the
  *                      songs), names classified by the R12-A taxonomy (pack
- *                      total 5819);
+ *                      total 6876 since R13-B);
  *   B. exact         - every leaf's ROM-relative arena offset fits the
  *                      verbatim zone [0x0867709C, 0x089A3DB4], no two leaves
  *                      overlap, and the published arena bytes are
@@ -938,7 +939,8 @@ static void MutateAllToTiles(struct AudioLeafFixture *fix, size_t index)
 /* A. counts: pack composition pins 105/51/388/25 = 569. */
 static void TestAudioCounts(const struct Gen3ResourcePack *pack)
 {
-    CHECK("pack total 5819 entries", Gen3ResourcePack_GetEntryCount(pack) == 5819u);
+    CHECK("pack total 6876 entries (5819 pre-R13B + 1057 leaf)",
+          Gen3ResourcePack_GetEntryCount(pack) == 6876u);
     CHECK("leaf total 569", sLeafCount == EMERALD_AUDIO_LEAF_COUNT);
     CHECK("root count 105", sRootCount == EMERALD_AUDIO_ROOT_COUNT);
     CHECK("phoneme count 51", sPhonemeCount == EMERALD_AUDIO_PHONEME_COUNT);

@@ -116,4 +116,6 @@ echo "== running =="
     --catalog "$root/resources/extraction/emerald/bpee01/object_event/catalog.generated.toml" \
     --catalog "$root/resources/extraction/emerald/bpee01/tileset/catalog.generated.toml" \
     --catalog "$root/resources/extraction/emerald/bpee01/layout/catalog.generated.toml" \
-    --catalog "$root/resources/extraction/emerald/bpee01/audio/catalog.generated.toml"
+    --catalog "$root/resources/extraction/emerald/bpee01/audio/catalog.generated.toml" \
+    --catalog "$root/resources/extraction/emerald/bpee01/movement/catalog.generated.toml" \
+    --catalog "$root/resources/extraction/emerald/bpee01/multiboot/catalog.generated.toml"

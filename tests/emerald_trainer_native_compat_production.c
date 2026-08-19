@@ -674,13 +674,13 @@ int main(int argc, char **argv)
     }
     Gen3ResourcePackDiagnostics_Destroy(&packDiag);
     printf("opened production pack : %zu entries\n", Gen3ResourcePack_GetEntryCount(pack));
-    CHECK("production pack has 5819 entries (196 trainer + 1608 Pokémon "
-          "battle + 288 object-event + 1544 tileset + 882 layout + 771 audio + 530 song graphs)",
-          Gen3ResourcePack_GetEntryCount(pack) == 5819u);
+    CHECK("production pack has 6876 entries (196 trainer + 1608 Pokémon "
+          "battle + 288 object-event + 1544 tileset + 882 layout + 771 audio + 530 song graphs + 1057 leaf)",
+          Gen3ResourcePack_GetEntryCount(pack) == 6876u);
     printf("loaded catalog          : %zu resources\n", Gen3ResourceCatalog_Count(catalog));
-    CHECK("catalog has 5819 resources (196 trainer + 1608 Pokémon battle + "
-          "288 object-event + 1544 tileset + 882 layout + 771 audio + 530 song graphs)",
-          Gen3ResourceCatalog_Count(catalog) == 5819u);
+    CHECK("catalog has 6876 resources (196 trainer + 1608 Pokémon battle + "
+          "288 object-event + 1544 tileset + 882 layout + 771 audio + 530 song graphs + 1057 leaf)",
+          Gen3ResourceCatalog_Count(catalog) == 6876u);
 
     /* 3. Build the production ROM_BASE candidate + snapshot from the real pack. */
     Gen3ResourceDiagnostics_Init(&gdiag);
@@ -713,8 +713,8 @@ int main(int argc, char **argv)
           strcmp(info.providerId, EMERALD_ROM_BASE_PROVIDER_ID) == 0);
     CHECK("provider precedence 300", info.precedence == EMERALD_ROM_BASE_PRECEDENCE);
     CHECK("provider version v1", strcmp(info.providerVersion, "v1") == 0);
-    CHECK("provider entryCount 5819 (196 trainer + 1608 Pokémon + 288 object-event + 1544 tileset + 882 layout + 771 audio + 530 song graphs)",
-          info.entryCount == 5819u);
+    CHECK("provider entryCount 6876 (196 trainer + 1608 Pokémon + 288 object-event + 1544 tileset + 882 layout + 771 audio + 530 song graphs + 1057 leaf)",
+          info.entryCount == 6876u);
 
     CHECK("snapshot builds",
           Gen3ResourceCandidate_Build(candidate, &snapshot, &gdiag) && snapshot != NULL);

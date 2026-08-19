@@ -162,6 +162,15 @@ static bool TypeCompatibleWithRepresentation(const char *catalogType, int schema
             : schema == 2
               ? strcmp(canonicalRepresentation, "gba-keysplit-run") == 0
               : false;
+    /* R13-B: leaf byte payloads (movement scripts, multiboot programs) are
+     * pure GBA bytes with no transform on either target - the pack stores the
+     * ROM bytes verbatim. schema 1 = movement, schema 2 = multiboot (the
+     * approved architecture §3 "BINARY with family schemas" pair). Anything
+     * else - wrong schema, wrong representation, cross-type mixes - fails
+     * closed. */
+    if (strcmp(catalogType, "binary") == 0)
+        return (schema == 1 || schema == 2)
+            && strcmp(canonicalRepresentation, "gba-bytes") == 0;
     return false;
 }
 
