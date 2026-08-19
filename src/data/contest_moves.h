@@ -1,3 +1,8 @@
+#ifndef NATIVE_LINUX
+/* R13-D1 native: the contest numeric tables are seam-published HOST_DATA
+ * arrays (src/emerald/resources/gameplay_data_native.c); GBA keeps the
+ * const definitions here. gContestEffectFuncs (below) always stays
+ * compiled. */
 const struct ContestMove gContestMoves[MOVES_COUNT] =
 {
     [MOVE_NONE] = {0},
@@ -2833,7 +2838,11 @@ const struct ContestMove gContestMoves[MOVES_COUNT] =
         .comboMoves = {COMBO_STARTER_CALM_MIND},
     },
 };
+#else
+extern struct ContestMove gContestMoves[MOVES_COUNT];
+#endif /* NATIVE_LINUX */
 
+#ifndef NATIVE_LINUX
 const struct ContestEffect gContestEffects[] =
 {
     [CONTEST_EFFECT_HIGHLY_APPEALING] =
@@ -3125,7 +3134,11 @@ const struct ContestEffect gContestEffects[] =
         .jam = 0,
     },
 };
+#else
+extern struct ContestEffect gContestEffects[48];
+#endif /* NATIVE_LINUX */
 
+#ifndef NATIVE_LINUX
 // A lookup table with TRUE for each combo starter ID and FALSE for ID 0,
 // which means "not a combo starter move".
 const bool8 gComboStarterLookupTable[] =
@@ -3194,6 +3207,9 @@ const bool8 gComboStarterLookupTable[] =
     TRUE,
     TRUE
 };
+#else
+extern u8 gComboStarterLookupTable[63];
+#endif /* NATIVE_LINUX */
 
 void (*const gContestEffectFuncs[])(void) =
 {

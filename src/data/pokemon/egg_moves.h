@@ -2,6 +2,12 @@
 #define EGG_MOVES_TERMINATOR 0xFFFF
 #define egg_moves(species, moves...) (SPECIES_##species + EGG_MOVES_SPECIES_OFFSET), moves
 
+#ifdef NATIVE_LINUX
+/* R13-D1 native: seam-published HOST_DATA array
+ * (src/emerald/resources/gameplay_data_native.c). Sized so
+ * ARRAY_COUNT(gEggMoves) works for src/daycare.c. */
+extern u16 gEggMoves[1139];
+#else
 const u16 gEggMoves[] = {
     egg_moves(BULBASAUR,
               MOVE_LIGHT_SCREEN,
@@ -1308,3 +1314,4 @@ const u16 gEggMoves[] = {
 
     EGG_MOVES_TERMINATOR
 };
+#endif /* NATIVE_LINUX */

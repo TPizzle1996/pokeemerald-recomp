@@ -13,10 +13,17 @@ struct TMHMLearnset
 };
 #undef TMHM_LEARN
 
-const union {
+/* R13-D1: the native fill target is the seam-published HOST_DATA array
+ * (src/emerald/resources/gameplay_data_native.c). GBA keeps the const
+ * definition here; native gets a non-static, sized extern so consumers
+ * (src/pokemon.c) compile without edits. */
+typedef union {
     struct TMHMLearnset learnset;
     u32 as_u32s[sizeof(struct TMHMLearnset) / sizeof(u32)];
-} gTMHMLearnsets[NUM_SPECIES] =
+} GameplayTMHMLearnsetData;
+
+#ifndef NATIVE_LINUX
+const GameplayTMHMLearnsetData gTMHMLearnsets[NUM_SPECIES] =
 {
     [SPECIES_NONE] = {},
 
@@ -10181,3 +10188,6 @@ const union {
     } },
 
 };
+#else
+extern GameplayTMHMLearnsetData gTMHMLearnsets[NUM_SPECIES];
+#endif /* NATIVE_LINUX */

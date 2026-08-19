@@ -1,3 +1,4 @@
+#ifndef NATIVE_LINUX
 const u16 gTutorMoves[TUTOR_MOVE_COUNT] =
 {
     [TUTOR_MOVE_MEGA_PUNCH] = MOVE_MEGA_PUNCH,
@@ -31,9 +32,16 @@ const u16 gTutorMoves[TUTOR_MOVE_COUNT] =
     [TUTOR_MOVE_FIRE_PUNCH] = MOVE_FIRE_PUNCH,
     [TUTOR_MOVE_FURY_CUTTER] = MOVE_FURY_CUTTER,
 };
+#else
+/* R13-D1 native: seam-published HOST_DATA arrays
+ * (src/emerald/resources/gameplay_data_native.c). */
+extern u16 gTutorMoves[TUTOR_MOVE_COUNT];
+extern u32 sTutorLearnsets[NUM_SPECIES];
+#endif /* NATIVE_LINUX */
 
 #define TUTOR(move) (1u << (TUTOR_##move))
 
+#ifndef NATIVE_LINUX
 static const u32 sTutorLearnsets[] =
 {
     [SPECIES_NONE]             = (0),
@@ -5748,4 +5756,5 @@ static const u32 sTutorLearnsets[] =
                                 | TUTOR(MOVE_DEFENSE_CURL)),
 
 };
+#endif /* NATIVE_LINUX */
 

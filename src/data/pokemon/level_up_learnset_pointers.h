@@ -1,3 +1,7 @@
+#ifndef NATIVE_LINUX
+/* R13-D1 native: the published HOST_DATA pointer table is seam-filled
+ * (src/emerald/resources/gameplay_data_native.c); GBA keeps the const
+ * pointer table over the compiled leaves. */
 const u16 *const gLevelUpLearnsets[NUM_SPECIES] =
 {
     [SPECIES_NONE] = sBulbasaurLevelUpLearnset,
@@ -413,3 +417,6 @@ const u16 *const gLevelUpLearnsets[NUM_SPECIES] =
     [SPECIES_DEOXYS] = sDeoxysLevelUpLearnset,
     [SPECIES_CHIMECHO] = sChimechoLevelUpLearnset,
 };
+#else
+extern u16 *gLevelUpLearnsets[NUM_SPECIES];
+#endif /* NATIVE_LINUX */

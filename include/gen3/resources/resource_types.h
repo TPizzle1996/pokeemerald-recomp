@@ -26,6 +26,9 @@ enum Gen3ResourceType
      * encode the existing values, so new types must never renumber the
      * earlier entries. */
     GEN3_RESOURCE_TYPE_INSTRUMENT_BANK,
+    /* R13-D1: structured gameplay-data rows (exact GBA wire slices with a
+     * per-family schema). See GEN3_PACK_TYPE_STRUCTURED_DATA. */
+    GEN3_RESOURCE_TYPE_STRUCTURED_DATA,
     GEN3_RESOURCE_TYPE_COUNT,
 };
 

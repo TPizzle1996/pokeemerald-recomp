@@ -136,7 +136,7 @@ const char *Gen3ResourceType_Name(enum Gen3ResourceType type)
         "invalid", "bitmap", "tile-graphics", "palette", "sprite-sheet",
         "sprite-metadata", "tileset", "tilemap", "font", "text",
         "audio-sample", "music-sequence", "sound-effect", "cry", "binary",
-        "instrument-bank",
+        "instrument-bank", "structured-data",
     };
     if ((size_t)type >= sizeof(names) / sizeof(names[0]))
         return "invalid";

@@ -394,7 +394,11 @@ extern u32 gExperienceTables[][MAX_LEVEL + 1];
 #else
 extern const u32 gExperienceTables[][MAX_LEVEL + 1];
 #endif
+#ifdef NATIVE_LINUX
+extern u16 *gLevelUpLearnsets[NUM_SPECIES];
+#else
 extern const u16 *const gLevelUpLearnsets[];
+#endif
 extern const u8 gPPUpGetMask[];
 extern const u8 gPPUpClearMask[];
 extern const u8 gPPUpAddValues[];

@@ -119,4 +119,5 @@ echo "== running =="
     --catalog "$root/resources/extraction/emerald/bpee01/audio/catalog.generated.toml" \
     --catalog "$root/resources/extraction/emerald/bpee01/movement/catalog.generated.toml" \
     --catalog "$root/resources/extraction/emerald/bpee01/text/catalog.generated.toml" \
+    --catalog "$root/resources/extraction/emerald/bpee01/gameplay/catalog.generated.toml" \
     --catalog "$root/resources/extraction/emerald/bpee01/multiboot/catalog.generated.toml"

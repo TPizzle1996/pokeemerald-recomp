@@ -348,6 +348,8 @@ static enum Gen3ResourceType ParseTypeName(const char *name)
         return GEN3_RESOURCE_TYPE_BINARY;
     if (strcmp(name, "instrument-bank") == 0)
         return GEN3_RESOURCE_TYPE_INSTRUMENT_BANK;
+    if (strcmp(name, "structured-data") == 0)
+        return GEN3_RESOURCE_TYPE_STRUCTURED_DATA;
     return GEN3_RESOURCE_TYPE_INVALID;
 }
 

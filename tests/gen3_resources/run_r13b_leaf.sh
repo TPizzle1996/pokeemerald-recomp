@@ -6,8 +6,8 @@
 #        leaf-family outputs byte-identically (movement + multiboot
 #        ownership/bindings/catalogs/leaf artifacts/seam table).
 #   E1   pack provenance/determinism: gen3-pack-build --check reproduces
-#        the committed production pack byte-for-byte from the 8 manifests
-#        + 8 catalogs (the 6876-entry pack).
+#        the committed production pack byte-for-byte from the 11 manifests
+#        + 11 catalogs (the 15373-entry pack).
 #   E1b  pack provenance mismatch (R13-B failure-matrix case): a movement
 #        manifest whose rom_sha1 no longer matches the qualified profile
 #        must fail the import - the manifest -> ROM digest validation is
@@ -18,7 +18,7 @@
 #        retail-matching ROM (three-way ELF == ROM == manifest canonical
 #        slices, byte-for-byte).
 #   A-G  seam tests: tests/emerald_leaf_compat_test.c against the REAL
-#        production pack - A counts (1055 movement + 2 multiboot, 6876
+#        production pack - A counts (1055 movement + 2 multiboot, 15373
 #        pack entries), B exact extraction (arena bytes == pack payloads,
 #        spans == pack entries, slices disjoint), C publication (session
 #        -> TryInitialize -> arena, queries, canary, invalid args,
@@ -28,7 +28,7 @@
 #        truncated movement / multiboot, overlapping claimed ROM slice,
 #        pack duplicate-key guard).
 #   F    native isolation battery: tests/run_emerald_native_asset_isolation.sh
-#        --build against the 6876-record ownership union (5819 ROM_BASE_ONLY
+#        --build against the ownership union (5819 ROM_BASE_ONLY
 #        + 1057 COMPILED_PENDING_MIGRATION; the leaf movement symbols are
 #        LOCAL, so the COMPILED presence check runs against the full nm
 #        table).
@@ -44,6 +44,8 @@ core_dir="$root/src/gen3/resources"
 emerald_dir="$root/src/emerald/resources"
 movement="$root/resources/extraction/emerald/bpee01/movement"
 multiboot="$root/resources/extraction/emerald/bpee01/multiboot"
+text="$root/resources/extraction/emerald/bpee01/text"
+gameplay="$root/resources/extraction/emerald/bpee01/gameplay"
 pack="$root/games/emerald/base/emerald-bpee01-v1.rpack"
 
 tmp="$(mktemp -d)"
@@ -75,6 +77,8 @@ if "$root/tools/gen3_resources/pack_build/gen3-pack-build" \
     --manifest "$root/resources/extraction/emerald/bpee01/tileset/manifest.production.toml" \
     --manifest "$root/resources/extraction/emerald/bpee01/layout/manifest.production.toml" \
     --manifest "$root/resources/extraction/emerald/bpee01/audio/manifest.production.toml" \
+    --manifest "$text/manifest.production.toml" \
+    --manifest "$gameplay/manifest.production.toml" \
     --manifest "$movement/manifest.production.toml" \
     --manifest "$multiboot/manifest.production.toml" \
     --catalog "$root/resources/catalogs/emerald/catalog.toml" \
@@ -83,10 +87,12 @@ if "$root/tools/gen3_resources/pack_build/gen3-pack-build" \
     --catalog "$root/resources/extraction/emerald/bpee01/tileset/catalog.generated.toml" \
     --catalog "$root/resources/extraction/emerald/bpee01/layout/catalog.generated.toml" \
     --catalog "$root/resources/extraction/emerald/bpee01/audio/catalog.generated.toml" \
+    --catalog "$text/catalog.generated.toml" \
+    --catalog "$gameplay/catalog.generated.toml" \
     --catalog "$movement/catalog.generated.toml" \
     --catalog "$multiboot/catalog.generated.toml" \
     --check > "$tmp/pack_check.log" 2>&1; then
-    pass "pack reproduces byte-for-byte (6876 entries)"
+    pass "pack reproduces byte-for-byte (15373 entries since R13-D1)"
 else
     fail "pack --check: $(tail -3 "$tmp/pack_check.log" | tr '\n' ' ')"
 fi
@@ -103,6 +109,8 @@ if "$root/tools/gen3_resources/pack_build/gen3-pack-build" \
     --manifest "$root/resources/extraction/emerald/bpee01/tileset/manifest.production.toml" \
     --manifest "$root/resources/extraction/emerald/bpee01/layout/manifest.production.toml" \
     --manifest "$root/resources/extraction/emerald/bpee01/audio/manifest.production.toml" \
+    --manifest "$text/manifest.production.toml" \
+    --manifest "$gameplay/manifest.production.toml" \
     --manifest "$tmp/movement.tampered.toml" \
     --manifest "$multiboot/manifest.production.toml" \
     --catalog "$root/resources/catalogs/emerald/catalog.toml" \
@@ -111,6 +119,8 @@ if "$root/tools/gen3_resources/pack_build/gen3-pack-build" \
     --catalog "$root/resources/extraction/emerald/bpee01/tileset/catalog.generated.toml" \
     --catalog "$root/resources/extraction/emerald/bpee01/layout/catalog.generated.toml" \
     --catalog "$root/resources/extraction/emerald/bpee01/audio/catalog.generated.toml" \
+    --catalog "$text/catalog.generated.toml" \
+    --catalog "$gameplay/catalog.generated.toml" \
     --catalog "$movement/catalog.generated.toml" \
     --catalog "$multiboot/catalog.generated.toml" \
     > "$tmp/tamper.log" 2>&1; then

@@ -1,3 +1,8 @@
+#ifndef NATIVE_LINUX
+/* R13-D1: the 411 static-const level-up leaves are guarded out on the
+ * native build - the seam publishes them into its levelup leaf arena and
+ * repoints gLevelUpLearnsets (src/emerald/resources/
+ * gameplay_data_native.c). GBA keeps the compiled leaves. */
 #define LEVEL_UP_MOVE(lvl, move) ((lvl << 9) | move)
 
 static const u16 sBulbasaurLevelUpLearnset[] = {
@@ -5615,3 +5620,4 @@ static const u16 sChimechoLevelUpLearnset[] = {
     LEVEL_UP_MOVE(46, MOVE_PSYCHIC),
     LEVEL_UP_END
 };
+#endif /* NATIVE_LINUX */

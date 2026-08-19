@@ -176,6 +176,20 @@ static bool TypeCompatibleWithRepresentation(const char *catalogType, int schema
      * bytes verbatim (raw codec, one byte per character slot). */
     if (strcmp(catalogType, "text") == 0)
         return schema == 1 && strcmp(canonicalRepresentation, "gba-charmap") == 0;
+    /* R13-D1: structured gameplay-data rows. Canonical payload is the exact
+     * padded GBA wire slice; schema declares the family row contract
+     * (species-base=1 .. contest-combo-starters=15; the approved plan §4 set,
+     * incl. the D2 item=11). The native transform (padded->packed struct) is
+     * owned entirely by the publication seam, never the pack. */
+    if (strcmp(catalogType, "structured-data") == 0)
+        return schema >= 1 && schema <= 15
+            && strcmp(canonicalRepresentation, "gba-bytes") == 0;
+    /* R13-D1: font glyph bitmaps (original GBA font wire, raw little-endian
+     * u16 wordstreams, no tile-graphics interpretation). schema 1. This is
+     * NOT a second graphics migration -- fonts keep their own type and never
+     * enter the tile/palette validators. */
+    if (strcmp(catalogType, "font") == 0)
+        return schema == 1 && strcmp(canonicalRepresentation, "gba-bytes") == 0;
     return false;
 }
 

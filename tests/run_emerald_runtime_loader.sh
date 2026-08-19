@@ -51,6 +51,7 @@ gcc -std=gnu99 -O2 -ffunction-sections -fdata-sections -Wl,--gc-sections \
     -iquote include -iquote "$core_dir" \
     -DPORTABLE -DNONMATCHING -DUBFIX -DMODERN=1 \
     -DPLATFORM_SDL2 -DNATIVE_LINUX -DLINUX64=1 \
+    -DDESKTOP_EXTERNAL_GAME_CONTENT \
     "$core_dir/sha256.c" \
     "$core_dir/sha1.c" \
     "$core_dir/resource_lz.c" \
@@ -86,6 +87,11 @@ gcc -std=gnu99 -O2 -ffunction-sections -fdata-sections -Wl,--gc-sections \
     "$emerald_dir/text_skeletons_table.generated.c" \
     "$emerald_dir/text_skeleton_arrays.generated.c" \
     "$here/emerald_text_harness_stubs.c" \
+    "$emerald_dir/gameplay_data_native.c" \
+    "$emerald_dir/gameplay_native_table.generated.c" \
+    "$emerald_dir/gameplay_levelup.generated.c" \
+    "$emerald_dir/emerald_gameplay_compat.c" \
+    "$here/emerald_gameplay_harness_stubs.c" \
     "$here/emerald_runtime_loader_test.c" \
     -o "$tmp/emerald_runtime_loader_test"
 

@@ -20,8 +20,14 @@ struct ContestEffect
     u8 jam;
 };
 
+#ifdef NATIVE_LINUX
+/* R13-D1 native: these are seam-published HOST_DATA fill targets. */
+extern struct ContestMove gContestMoves[];
+extern struct ContestEffect gContestEffects[];
+#else
 extern const struct ContestMove gContestMoves[];
 extern const struct ContestEffect gContestEffects[];
+#endif
 #ifndef NATIVE_LINUX
 extern const u8 *const gContestEffectDescriptionPointers[];
 #endif

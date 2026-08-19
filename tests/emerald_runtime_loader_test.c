@@ -36,6 +36,7 @@
 #include "gen3/resources/sha256.h"
 #include "emerald/resources/emerald_resource_ranges.h"
 #include "emerald/resources/emerald_rom_profile.h"
+#include "emerald/resources/emerald_gameplay_compat.h"
 #include "emerald/resources/text_skeleton_arrays.generated.h"
 #include "../src/emerald/resources/emerald_runtime_loader.c"
 
@@ -590,7 +591,7 @@ static void TestTextPublication(const char *packPath)
 
     packCount = Gen3ResourcePack_GetEntryCount(pack);
     printf("production pack entry count: %zu\n", packCount);
-    CHECK("production pack entry count pinned at 12063", packCount == 12063u);
+    CHECK("production pack entry count pinned at 15373 (D1)", packCount == 15373u);
 
     /* Every text entry: C-side labels resolve by resource id; bundle ids
      * are captured for the blob-slice pass below. */
@@ -892,6 +893,80 @@ static void TestTextTransactionalRefusal(const char *tempDir,
           !EmeraldTextCompat_ContainsPointer((uintptr_t)liveBytes));
 }
 
+/* ------------------------------------------------------------------ */
+/* R13-D1: gameplay-data publication                                  */
+/* ------------------------------------------------------------------ */
+
+/* The D1 fill arrays are defined by gameplay_data_native.c (linked into
+ * this harness). The harness TU includes the engine pokemon.h / data.h, so
+ * the real fill-target structs/types are visible; elements are
+ * index-addressed by species id (SPECIES_BULBASAUR = 1) / move id
+ * (MOVE_POUND = 1). */
+extern u16 gEggMoves[];                 /* defined as u16[1139] */
+extern u16 *gLevelUpLearnsets[];        /* defined as u16*[412] */
+extern u16 gFontNormalJapaneseGlyphs[]; /* defined as u16[8192] */
+extern u16 gFontNormalLatinGlyphs[];    /* defined as u16[16384] */
+
+static void TestGameplayPublication(const char *packPath)
+{
+    size_t rangeCount;
+    unsigned int i;
+    int nonzero = 0;
+
+    (void)packPath;
+    (void)gSpeciesNames; (void)gMoveNames;
+
+    CHECK("R13-D1 published",
+          EmeraldGameplayCompat_GetPublishedCount()
+              == GAMEPLAY_NATIVE_RESOURCE_COUNT);
+
+    /* Species base stats: bulbasaur baseHP 45. */
+    CHECK("R13-D1 bulbasaur baseHP 45",
+          gSpeciesInfo[SPECIES_BULBASAUR].baseHP == 45u);
+    /* Species name "BULBASAUR" first charmap byte 0xBC. */
+    CHECK("R13-D1 bulbasaur name 0xBC",
+          gSpeciesNames[SPECIES_BULBASAUR][0] == 0xBC);
+    /* Move pound: type is TYPE_NORMAL. */
+    CHECK("R13-D1 pound type normal",
+          gBattleMoves[MOVE_POUND].type == 0u);
+    /* Move name "POUND" first charmap byte 0xCA. */
+    CHECK("R13-D1 pound name 0xCA",
+          gMoveNames[MOVE_POUND][0] == 0xCA);
+    /* Egg-moves stream header: gEggMoves[0] == 20000 + SPECIES_BULBASAUR. */
+    CHECK("R13-D1 egg stream header",
+          gEggMoves[0u] == (u16)(20000u + SPECIES_BULBASAUR));
+    /* Level-up learnset pointers are published and the "none" row shares
+     * bulbasaur's leaf (vanilla sharing). */
+    CHECK("R13-D1 bulbasaur learnset published",
+          gLevelUpLearnsets[SPECIES_BULBASAUR] != NULL);
+    CHECK("R13-D1 none==bulbasaur learnset share",
+          gLevelUpLearnsets[SPECIES_NONE] == gLevelUpLearnsets[SPECIES_BULBASAUR]);
+
+    /* A Japanese + a Latin font glyph array were filled (not all-zero). */
+    nonzero = 0;
+    for (i = 0u; i < 8192u; i++)
+        if (gFontNormalJapaneseGlyphs[i] != 0u) { nonzero = 1; break; }
+    CHECK("R13-D1 normal-japanese font filled", nonzero != 0);
+    nonzero = 0;
+    for (i = 0u; i < 16384u; i++)
+        if (gFontNormalLatinGlyphs[i] != 0u) { nonzero = 1; break; }
+    CHECK("R13-D1 normal-latin font filled", nonzero != 0);
+
+    /* Arena ranges registered: the levelup arena + egg array + fonts. */
+    {
+        const struct EmeraldResourceRangeIndex *index =
+            EmeraldResourceCompat_GetRangeIndex();
+        CHECK("R13-D1 range index present", index != NULL);
+        if (index != NULL)
+        {
+            rangeCount = index->rangeCount;
+            printf("D1 range index count: %zu\n", rangeCount);
+            CHECK("R13-D1 gameplay ranges registered",
+                  rangeCount >= (size_t)(EMERALD_GAMEPLAY_FONT_COUNT + 2u));
+        }
+    }
+}
+
 int main(int argc, char **argv)
 {
     const char *tempDir;
@@ -923,6 +998,7 @@ int main(int argc, char **argv)
     TestTextSlotPointers();
     TestTextCurrentCharRouting();
     TestTextTransactionalRefusal(tempDir, prodPack);
+    TestGameplayPublication(prodPack);
 
     FreeFamilyFixtures();
     FreeBackFamilyFixtures();

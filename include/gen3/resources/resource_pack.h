@@ -130,6 +130,11 @@ enum Gen3ResourcePackTypeCode
     /* R12-A: audio instrument banks (voicegroups, cry tables, keysplit
      * runs). Append-only on-disk integer; existing codes never renumber. */
     GEN3_PACK_TYPE_INSTRUMENT_BANK = 15,
+    /* R13-D1: structured gameplay data rows (species/move/item/evolution/
+     * learnset/compatibility wire rows, growth curves). Canonical payload is
+     * the exact GBA wire slice; schema declares the family row contract.
+     * Append-only on-disk integer; existing codes never renumber. */
+    GEN3_PACK_TYPE_STRUCTURED_DATA = 16,
     GEN3_PACK_TYPE_COUNT,
 };
 
