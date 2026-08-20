@@ -33,6 +33,9 @@
 #include "emerald/resources/emerald_frontier_compat.h"
 #include "emerald/resources/emerald_resource_ranges.h"
 #include "emerald/resources/emerald_resource_session.h"
+#include "emerald/resources/frontier_aux_native.generated.h"
+#include "wild_encounter.h"        /* struct WildPokemon/Info/Header for the E3a-2 wild handoff */
+#include "apprentice.h"            /* struct ApprenticeTrainer gApprentices fill target */
 
 #include <stdint.h>
 #include <stdio.h>
@@ -46,8 +49,10 @@ struct EmeraldResourceRangeIndex *EmeraldResourceCompat_GetRangeIndex(void);
 
 static bool RegisterMonSetRange(void);
 static void UnregisterMonSetRange(void);
+static bool RegisterWildSlotRange(void);
+static void UnregisterWildSlotRange(void);
 
-#define EMERALD_FRONTIER_MAX_REG_RANGES 1u
+#define EMERALD_FRONTIER_MAX_REG_RANGES 2u
 #define EMERALD_FRONTIER_GBA_ROM_BASE   ((uint32_t)0x08000000u)
 
 static uint16_t ReadLe16(const uint8_t *data)
@@ -72,6 +77,74 @@ static const uint16_t kTentMonCount[3] =
 static uint8_t *sMonSetArena;
 static size_t sMonSetArenaTotal;
 static size_t sPublishedCount;
+
+/* ---- R13-E3a-2 facility AUX + wild handoff state. ---- */
+static uint8_t *sWildSlotArena;         /* packed 11 x 12-row WildPokemon slot arena */
+static size_t sWildSlotArenaTotal;
+static size_t sAuxPublishedCount;
+static struct WildPokemonInfo sFacilityWildInfos[EMERALD_FRONTIER_AUX_WILD_INFO_COUNT];
+
+/* Subfamily helper used by PublishFrontierAux. */
+static enum EmeraldFrontierCompatStatus PublishFrontierAux(
+    const struct Gen3ResourceSnapshot *snapshot,
+    const struct Gen3ResourcePack *pack,
+    struct EmeraldFrontierCompatDiagnostics *diagnostics);
+
+/* Forward decls (defined later in this TU) so the early E3a-2 helpers can call
+ * them before the E3a-1 helper definitions. */
+static void NoteFailure(struct EmeraldFrontierCompatDiagnostics *d,
+                        const char *stage, const char *canonicalName,
+                        enum Gen3ResourceType expectedType,
+                        enum Gen3ResourceType actualType,
+                        uint32_t expectedSchema, uint32_t actualSchema,
+                        uint32_t expectedSize, uint32_t actualSize,
+                        const struct Gen3ResourceView *view);
+static bool ResolveSessionView(const struct Gen3ResourceSnapshot *snapshot,
+                               const char *id, uint32_t schema,
+                               struct Gen3ResourceView *view);
+
+/* Helper: resolve an aux resource with ROM_BASE ownership + pack parity.
+ * Returns the pack entry payload on success, else sets `resultOut`. */
+static const uint8_t *AuxResolve(
+    const struct Gen3ResourceSnapshot *snapshot,
+    const struct Gen3ResourcePack *pack,
+    const char *id, uint32_t schema, size_t expectedSize,
+    struct EmeraldFrontierCompatDiagnostics *d,
+    enum EmeraldFrontierCompatStatus *resultOut)
+{
+    struct Gen3ResourceView view;
+    const struct Gen3ResourcePackEntry *entry;
+    if (!ResolveSessionView(snapshot, id, schema, &view))
+    {
+        NoteFailure(d, "build", id, GEN3_RESOURCE_TYPE_STRUCTURED_DATA,
+                    GEN3_RESOURCE_TYPE_INVALID, schema, 0u, 0u, 0u, NULL);
+        *resultOut = EMERALD_FRONTIER_ERR_RESOLVE_FAILED;
+        return NULL;
+    }
+    if (strcmp(view.winningProviderId, EMERALD_ROM_BASE_PROVIDER_ID) != 0)
+    {
+        NoteFailure(d, "build", id, GEN3_RESOURCE_TYPE_STRUCTURED_DATA,
+                    GEN3_RESOURCE_TYPE_INVALID, schema, schema,
+                    (uint32_t)view.payloadSize, (uint32_t)view.payloadSize,
+                    &view);
+        *resultOut = EMERALD_FRONTIER_ERR_UNEXPECTED_OWNERSHIP;
+        return NULL;
+    }
+    entry = Gen3ResourcePack_FindByCanonicalName(pack, id);
+    if (entry == NULL || entry->payload == NULL
+     || entry->payloadSize != expectedSize
+     || view.payloadSize != entry->payloadSize
+     || memcmp(view.payload, entry->payload, entry->payloadSize) != 0)
+    {
+        NoteFailure(d, "build", id, GEN3_RESOURCE_TYPE_STRUCTURED_DATA,
+                    GEN3_RESOURCE_TYPE_INVALID, schema, schema,
+                    (uint32_t)expectedSize,
+                    (uint32_t)(entry ? entry->payloadSize : 0u), NULL);
+        *resultOut = EMERALD_FRONTIER_ERR_PAYLOAD_SIZE_MISMATCH;
+        return NULL;
+    }
+    return entry->payload;
+}
 
 /* Native fill rows prebuilt in phase 2 (infallible once phase 1 passed). */
 static struct BattleFrontierTrainer
@@ -680,9 +753,15 @@ EmeraldFrontierCompat_TryInitialize(
         goto done;
     }
 
+    /* ---- R13-E3a-2 facility AUX + pike/pyramid wild handoff. ---- */
+    result = PublishFrontierAux(snapshot, pack, diagnostics);
+    if (result != EMERALD_FRONTIER_OK)
+        goto done;
+
     sPublishedCount = EMERALD_FRONTIER_TRAINER_COUNT * 2u
                     + 3u * EMERALD_FRONTIER_TENT_TRAINER_COUNT * 2u
-                    + 4u + 1u + 1u;
+                    + 4u + 1u + 1u
+                    + sAuxPublishedCount;
     NoteFailure(diagnostics, "publish", NULL, GEN3_RESOURCE_TYPE_STRUCTURED_DATA,
                 GEN3_RESOURCE_TYPE_INVALID, 0u, 0u, 0u, 0u, NULL);
     result = EMERALD_FRONTIER_OK;
@@ -693,7 +772,350 @@ done:
     return result;
 }
 
-/* ---- State-v5 arena-range registration (the mon-set arena only). ---- */
+/* =========================================================================
+ * R13-E3a-2: facility AUX publication (factory/palace/arena/pike/pyramid/
+ * brain/apprentice + pike/pyramid wild-encounter handoff).
+ *
+ * Transactional like the E3a-1 body: phase 1 validates every resource
+ * (schema 26..37; ROM_BASE winner; M0/M1 resolution; pack byte equality; the
+ * exact wire sizes; the transformed-row shapes; and every wild
+ * header->info->slot GBA-pointer edge + encounter rate) BEFORE any
+ * allocation; phase 2 builds the packed native rows + the shared wild slot
+ * arena (all infallible once phase 1 passed); phase 3 publishes atomically
+ * (pure stores) and registers ONE COMPAT_OBJECT range over the wild arena.
+ * On any phase-1/2 failure nothing is written to the fill targets and the
+ * diagnostics name the exact facility/table via the EMERALD_FRONTIER_ERR_*
+ * subfamily code.
+ * ========================================================================= */
+static enum EmeraldFrontierCompatStatus PublishFrontierAux(
+    const struct Gen3ResourceSnapshot *snapshot,
+    const struct Gen3ResourcePack *pack,
+    struct EmeraldFrontierCompatDiagnostics *diagnostics)
+{
+    enum EmeraldFrontierCompatStatus result = EMERALD_FRONTIER_OK;
+    const uint8_t *p;
+    size_t i;
+    uint8_t *slotArena = NULL;
+    size_t slotArenaBytes = 0u;
+
+    sAuxPublishedCount = 0u;
+
+    /* ---- Phase 1a: factory 7 move lists (schema 26, LEAF verbatim). ---- */
+    {
+        static const size_t sizes[7] = { 56u, 30u, 40u, 54u, 56u, 66u, 12u };
+        static u16 *const targets[7] =
+        {
+            gBattleFactoryMovesTotalPreparation, gBattleFactoryMovesImpossibleToPredict,
+            gBattleFactoryMovesWeakeningTheFoe, gBattleFactoryMovesHighRiskHighReturn,
+            gBattleFactoryMovesEndurance, gBattleFactoryMovesSlowAndSteady,
+            gBattleFactoryMovesDependsOnTheBattlesFlow,
+        };
+        for (i = 0u; i < 7u; i++)
+        {
+            p = AuxResolve(snapshot, pack, kFrontierAuxFactoryMoves[i],
+                           EMERALD_FRONTIER_SCHEMA_FACTORY, sizes[i], diagnostics, &result);
+            if (p == NULL)
+                return EMERALD_FRONTIER_ERR_FACTORY_MOVES;
+            memcpy(targets[i], p, sizes[i]);
+        }
+    }
+
+    /* ---- Phase 1b: palace + arena prize arrays (schemas 27/28). ---- */
+    p = AuxResolve(snapshot, pack, kFrontierAuxPalaceEarlyKey,
+                   EMERALD_FRONTIER_SCHEMA_PALACE, 12u, diagnostics, &result);
+    if (p == NULL) return EMERALD_FRONTIER_ERR_PALACE_PRIZES;
+    memcpy(gBattlePalaceEarlyPrizes, p, 12u);
+    p = AuxResolve(snapshot, pack, kFrontierAuxPalaceLateKey,
+                   EMERALD_FRONTIER_SCHEMA_PALACE, 18u, diagnostics, &result);
+    if (p == NULL) return EMERALD_FRONTIER_ERR_PALACE_PRIZES;
+    memcpy(gBattlePalaceLatePrizes, p, 18u);
+    p = AuxResolve(snapshot, pack, kFrontierAuxArenaShortKey,
+                   EMERALD_FRONTIER_SCHEMA_ARENA, 12u, diagnostics, &result);
+    if (p == NULL) return EMERALD_FRONTIER_ERR_ARENA_PRIZES;
+    memcpy(gBattleArenaShortStreakPrizeItems, p, 12u);
+    p = AuxResolve(snapshot, pack, kFrontierAuxArenaLongKey,
+                   EMERALD_FRONTIER_SCHEMA_ARENA, 18u, diagnostics, &result);
+    if (p == NULL) return EMERALD_FRONTIER_ERR_ARENA_PRIZES;
+    memcpy(gBattleArenaLongStreakPrizeItems, p, 18u);
+
+    /* ---- Phase 1c: pike NPC (25 x 8 -> 6 transform), speeches/hints/heals,
+     * wild mons. ---- */
+    p = AuxResolve(snapshot, pack, kFrontierAuxPikeNpcKey,
+                   EMERALD_FRONTIER_SCHEMA_PIKE_NPC,
+                   (size_t)EMERALD_FRONTIER_AUX_PIKE_NPC_SLOTS
+                       * EMERALD_FRONTIER_AUX_PIKE_NPC_WIRE,
+                   diagnostics, &result);
+    if (p == NULL) return EMERALD_FRONTIER_ERR_PIKE_NPC;
+    result = EMERALD_FRONTIER_ERR_PIKE_NPC;
+    for (i = 0u; i < EMERALD_FRONTIER_AUX_PIKE_NPC_SLOTS; i++)
+        memcpy(&gBattlePikeNPC[i],
+               p + i * EMERALD_FRONTIER_AUX_PIKE_NPC_WIRE,
+               EMERALD_FRONTIER_AUX_PIKE_NPC_NATIVE);
+    result = EMERALD_FRONTIER_OK;
+
+    {
+        size_t pikeSpeeches[3] = { 504u, 9u, 18u };
+        void *speechTargets[3] = { gBattlePikeSpeeches, gBattlePikeRoomTypeHints,
+                                   gBattlePikeHeals };
+        for (i = 0u; i < 3u; i++)
+        {
+            p = AuxResolve(snapshot, pack, kFrontierAuxPikeSpeeches[i],
+                           EMERALD_FRONTIER_SCHEMA_PIKE_SPEECH, pikeSpeeches[i],
+                           diagnostics, &result);
+            if (p == NULL) return EMERALD_FRONTIER_ERR_PIKE_SPEECH;
+            memcpy(speechTargets[i], p, pikeSpeeches[i]);
+        }
+        static u8 const *const wildTargets[8] =
+        {
+            (const u8 *)gBattlePikeLvl50Mons1, (const u8 *)gBattlePikeLvl50Mons2,
+            (const u8 *)gBattlePikeLvl50Mons3, (const u8 *)gBattlePikeLvl50Mons4,
+            (const u8 *)gBattlePikeLvlOpenMons1, (const u8 *)gBattlePikeLvlOpenMons2,
+            (const u8 *)gBattlePikeLvlOpenMons3, (const u8 *)gBattlePikeLvlOpenMons4,
+        };
+        for (i = 0u; i < 8u; i++)
+        {
+            p = AuxResolve(snapshot, pack, kFrontierAuxPikeWildMons[i],
+                           EMERALD_FRONTIER_SCHEMA_PIKE_SPEECH, 36u,
+                           diagnostics, &result);
+            if (p == NULL)
+                return EMERALD_FRONTIER_ERR_PIKE_WILDMON;
+            memcpy((void *)wildTargets[i], p, 36u);
+        }
+    }
+
+    /* ---- Phase 1d: pyramid floor templates (16 x 16 -> 13) + options. ---- */
+    p = AuxResolve(snapshot, pack, kFrontierAuxPyramidFloor[0],
+                   EMERALD_FRONTIER_SCHEMA_PYRAMID_FLOOR,
+                   (size_t)EMERALD_FRONTIER_AUX_PYRAMID_FLOOR_SLOTS
+                       * EMERALD_FRONTIER_AUX_PYRAMID_FLOOR_WIRE,
+                   diagnostics, &result);
+    if (p == NULL) return EMERALD_FRONTIER_ERR_PYRAMID_FLOOR;
+    result = EMERALD_FRONTIER_ERR_PYRAMID_FLOOR;
+    for (i = 0u; i < EMERALD_FRONTIER_AUX_PYRAMID_FLOOR_SLOTS; i++)
+        memcpy(&gBattlePyramidFloorTemplates[i],
+               p + i * EMERALD_FRONTIER_AUX_PYRAMID_FLOOR_WIRE,
+               EMERALD_FRONTIER_AUX_PYRAMID_FLOOR_NATIVE);
+    p = AuxResolve(snapshot, pack, kFrontierAuxPyramidFloor[1],
+                   EMERALD_FRONTIER_SCHEMA_PYRAMID_FLOOR, 68u,
+                   diagnostics, &result);
+    if (p == NULL) return EMERALD_FRONTIER_ERR_PYRAMID_FLOOR;
+    memcpy(gBattlePyramidFloorTemplateOptions, p, 68u);
+    result = EMERALD_FRONTIER_OK;
+
+    /* ---- Phase 1e: pyramid pickup items (deduped) + item slots. ---- */
+    p = AuxResolve(snapshot, pack, kFrontierAuxPyramidItemKey,
+                   EMERALD_FRONTIER_SCHEMA_PYRAMID_ITEM, 400u,
+                   diagnostics, &result);
+    if (p == NULL) return EMERALD_FRONTIER_ERR_PYRAMID_ITEM;
+    memcpy(gBattlePyramidPickupItems, p, 400u);
+    p = AuxResolve(snapshot, pack, kFrontierAuxPyramidSlotsKey,
+                   EMERALD_FRONTIER_SCHEMA_PYRAMID_SLOTS, 126u,
+                   diagnostics, &result);
+    if (p == NULL) return EMERALD_FRONTIER_ERR_PYRAMID_SLOTS;
+    memcpy(gBattlePyramidPickupItemSlots, p, 126u);
+
+    /* ---- Phase 1f: brain ids / mons / shared streak (schema 34). ---- */
+    p = AuxResolve(snapshot, pack, kFrontierAuxBrainIdsKey,
+                   EMERALD_FRONTIER_SCHEMA_BRAIN, 14u, diagnostics, &result);
+    if (p == NULL) return EMERALD_FRONTIER_ERR_BRAIN_IDS;
+    memcpy(gFrontierBrainTrainerIds, p, 14u);
+    p = AuxResolve(snapshot, pack, kFrontierAuxBrainMonsKey,
+                   EMERALD_FRONTIER_SCHEMA_BRAIN,
+                   (size_t)EMERALD_FRONTIER_AUX_BRAIN_MONS
+                       * EMERALD_FRONTIER_AUX_BRAIN_MONS_WIRE,
+                   diagnostics, &result);
+    if (p == NULL) return EMERALD_FRONTIER_ERR_BRAIN_MONS;
+    memcpy(gFrontierBrainsMons, p,
+           (size_t)EMERALD_FRONTIER_AUX_BRAIN_MONS * EMERALD_FRONTIER_AUX_BRAIN_MONS_WIRE);
+    p = AuxResolve(snapshot, pack, kFrontierAuxBrainStreakKey,
+                   EMERALD_FRONTIER_SCHEMA_BRAIN, 28u, diagnostics, &result);
+    if (p == NULL) return EMERALD_FRONTIER_ERR_BRAIN_STREAK;
+    memcpy(gFrontierBrainStreakAppearances, p, 28u);
+
+    /* ---- Phase 1g: apprentice 16 x (88 -> 86) transform. ---- */
+    result = EMERALD_FRONTIER_ERR_APPRENTICE;
+    for (i = 0u; i < EMERALD_FRONTIER_AUX_APPRENTICE_ROWS; i++)
+    {
+        p = AuxResolve(snapshot, pack, kFrontierAuxApprenticeKeys[i],
+                       EMERALD_FRONTIER_SCHEMA_APPRENTICE,
+                       EMERALD_FRONTIER_AUX_APPRENTICE_WIRE,
+                       diagnostics, &result);
+        if (p == NULL) return EMERALD_FRONTIER_ERR_APPRENTICE;
+        memcpy(&gApprentices[i], p, EMERALD_FRONTIER_AUX_APPRENTICE_NATIVE);
+    }
+    result = EMERALD_FRONTIER_OK;
+
+    /* ---- Phase 1h/2: pike/pyramid wild-encounter handoff. ----
+     * Validate the gBattlePikeWildMonHeaders + gBattlePyramidWildMonHeaders
+     * blocks (schema 36), the per-set slot resources (schema 37) and every
+     * header->info->slot GBA-pointer edge against the generated metadata,
+     * then build ONE packed 528-byte WildPokemon slot arena + 11 native
+     * WildPokemonInfo rows. */
+    {
+        const uint8_t *hdrBlock[2];
+        size_t hdrRows[2] = { 5u, 8u };
+        const char *hdrKey[2] = { kFrontierAuxPikeWildHeadersKey,
+                                  kFrontierAuxPyramidWildHeadersKey };
+        const struct FrontierWildInfoMeta *mat[2] =
+        { kFrontierAuxPikeWildInfos, kFrontierAuxPyramidWildInfos };
+        size_t setCount[2] = { 4u, 7u };
+        const uint8_t *slotSrc[EMERALD_FRONTIER_AUX_WILD_INFO_COUNT];
+        uint16_t rates[EMERALD_FRONTIER_AUX_WILD_INFO_COUNT];
+        size_t globalInfo = 0u;
+
+        for (int f = 0; f < 2; f++)
+        {
+            hdrBlock[f] = AuxResolve(snapshot, pack, hdrKey[f],
+                                     EMERALD_FRONTIER_SCHEMA_WILD_HEADERS,
+                                     hdrRows[f] * 20u, diagnostics, &result);
+            if (hdrBlock[f] == NULL) return result;
+            /* sentinel row must be all NULL info pointers */
+            {
+                const uint8_t *last = hdrBlock[f] + (hdrRows[f] - 1u) * 20u;
+                if (last[0] != 0xFFu || last[1] != 0xFFu
+                 || ReadLe32(last + 4u) != 0u || ReadLe32(last + 8u) != 0u
+                 || ReadLe32(last + 12u) != 0u || ReadLe32(last + 16u) != 0u)
+                {
+                    NoteFailure(diagnostics, "build", hdrKey[f],
+                                GEN3_RESOURCE_TYPE_STRUCTURED_DATA,
+                                GEN3_RESOURCE_TYPE_INVALID,
+                                EMERALD_FRONTIER_SCHEMA_WILD_HEADERS,
+                                EMERALD_FRONTIER_SCHEMA_WILD_HEADERS, 0u, 0u, NULL);
+                    return EMERALD_FRONTIER_ERR_WILD_HEADER;
+                }
+            }
+            result = EMERALD_FRONTIER_ERR_WILD_INFO;
+            for (size_t s = 0u; s < setCount[f]; s++)
+            {
+                const struct FrontierWildInfoMeta *m = &mat[f][s];
+                const struct Gen3ResourcePackEntry *slotEntry;
+                uint32_t wireInfo = ReadLe32(hdrBlock[f] + s * 20u + 4u);
+                if (wireInfo != m->gbaInfoAddr)
+                {
+                    NoteFailure(diagnostics, "build", m->key,
+                                GEN3_RESOURCE_TYPE_STRUCTURED_DATA,
+                                GEN3_RESOURCE_TYPE_INVALID,
+                                EMERALD_FRONTIER_SCHEMA_WILD_HEADERS,
+                                EMERALD_FRONTIER_SCHEMA_WILD_HEADERS,
+                                m->gbaInfoAddr, wireInfo, NULL);
+                    return EMERALD_FRONTIER_ERR_WILD_INFO;
+                }
+                slotSrc[globalInfo] = AuxResolve(snapshot, pack, m->key,
+                                                 EMERALD_FRONTIER_SCHEMA_WILD,
+                                                 (size_t)m->slotRows
+                                                     * EMERALD_FRONTIER_AUX_WILD_SLOT_WIRE,
+                                                 diagnostics, &result);
+                if (slotSrc[globalInfo] == NULL)
+                {
+                    result = EMERALD_FRONTIER_ERR_WILD_SLOT;
+                    return result;
+                }
+                /* info->slot edge: the slot resource's ROM base addresses MUST
+                 * equal the generated metadata's dependency (the slotPtr), so a
+                 * reordered/forged slot table is refused. */
+                slotEntry = Gen3ResourcePack_FindByCanonicalName(pack, m->key);
+                if (slotEntry == NULL
+                 || m->gbaSlotAddr != (uint32_t)(slotEntry->sourceRomOffset
+                                                 + EMERALD_FRONTIER_GBA_ROM_BASE))
+                {
+                    NoteFailure(diagnostics, "build", m->key,
+                                GEN3_RESOURCE_TYPE_STRUCTURED_DATA,
+                                GEN3_RESOURCE_TYPE_INVALID,
+                                EMERALD_FRONTIER_SCHEMA_WILD,
+                                EMERALD_FRONTIER_SCHEMA_WILD,
+                                m->gbaSlotAddr,
+                                (uint32_t)(slotEntry ? slotEntry->sourceRomOffset
+                                       + EMERALD_FRONTIER_GBA_ROM_BASE : 0u), NULL);
+                    return EMERALD_FRONTIER_ERR_WILD_SLOT;
+                }
+                /* bad rate: pike sets must be rate 10, pyramid sets rate 4/8. */
+                if ((f == 0 && m->rate != 10u)
+                 || (f == 1 && m->rate != 4u && m->rate != 8u))
+                {
+                    NoteFailure(diagnostics, "build", m->key,
+                                GEN3_RESOURCE_TYPE_STRUCTURED_DATA,
+                                GEN3_RESOURCE_TYPE_INVALID,
+                                EMERALD_FRONTIER_SCHEMA_WILD,
+                                EMERALD_FRONTIER_SCHEMA_WILD,
+                                (uint32_t)m->rate, (uint32_t)m->rate, NULL);
+                    return EMERALD_FRONTIER_ERR_WILD_RATE;
+                }
+                rates[globalInfo] = m->rate;
+                globalInfo++;
+            }
+            result = EMERALD_FRONTIER_OK;
+        }
+        if (globalInfo != EMERALD_FRONTIER_AUX_WILD_INFO_COUNT)
+            return EMERALD_FRONTIER_ERR_WILD_HEADER;
+
+        /* Build the packed slot arena (verify slot bytes vs the pack entry's
+         * source ROM address edge through the metadata we already validated)
+         * and the native info rows. */
+        slotArenaBytes = (size_t)EMERALD_FRONTIER_AUX_WILD_INFO_COUNT
+                         * EMERALD_FRONTIER_AUX_WILD_SLOT_ROWS
+                         * EMERALD_FRONTIER_AUX_WILD_SLOT_WIRE;
+        slotArena = (uint8_t *)malloc(slotArenaBytes > 0u ? slotArenaBytes : 1u);
+        if (slotArena == NULL)
+        {
+            NoteFailure(diagnostics, "build", NULL,
+                        GEN3_RESOURCE_TYPE_STRUCTURED_DATA,
+                        GEN3_RESOURCE_TYPE_INVALID,
+                        EMERALD_FRONTIER_SCHEMA_WILD, 0u, 0u, 0u, NULL);
+            return EMERALD_FRONTIER_ERR_OUT_OF_MEMORY;
+        }
+        globalInfo = 0u;
+        for (int f = 0; f < 2; f++)
+            for (size_t s = 0u; s < setCount[f]; s++)
+            {
+                size_t rows = EMERALD_FRONTIER_AUX_WILD_SLOT_ROWS;
+                size_t bytes = rows * EMERALD_FRONTIER_AUX_WILD_SLOT_WIRE;
+                memcpy(slotArena + globalInfo * bytes, slotSrc[globalInfo], bytes);
+                sFacilityWildInfos[globalInfo].encounterRate = (uint8_t)rates[globalInfo];
+                sFacilityWildInfos[globalInfo].wildPokemon =
+                    (const struct WildPokemon *)(slotArena + globalInfo * bytes);
+                globalInfo++;
+            }
+    }
+
+    /* ---- Phase 3: publish atomically + register the wild arena range. ---- */
+    {
+        size_t gi = 0u;
+        for (size_t h = 0u; h < 5u; h++)
+        {
+            gBattlePikeWildMonHeaders[h].mapGroup = (h < 4u) ? 0u : 0xFFu;
+            gBattlePikeWildMonHeaders[h].mapNum = (h < 4u) ? (uint8_t)(h + 1u) : 0xFFu;
+            gBattlePikeWildMonHeaders[h].waterMonsInfo = NULL;
+            gBattlePikeWildMonHeaders[h].rockSmashMonsInfo = NULL;
+            gBattlePikeWildMonHeaders[h].fishingMonsInfo = NULL;
+            gBattlePikeWildMonHeaders[h].landMonsInfo =
+                (h < 4u) ? &sFacilityWildInfos[gi++] : NULL;
+        }
+        for (size_t h = 0u; h < 8u; h++)
+        {
+            gBattlePyramidWildMonHeaders[h].mapGroup = (h < 7u) ? 0u : 0xFFu;
+            gBattlePyramidWildMonHeaders[h].mapNum = (h < 7u) ? (uint8_t)(h + 1u) : 0xFFu;
+            gBattlePyramidWildMonHeaders[h].waterMonsInfo = NULL;
+            gBattlePyramidWildMonHeaders[h].rockSmashMonsInfo = NULL;
+            gBattlePyramidWildMonHeaders[h].fishingMonsInfo = NULL;
+            gBattlePyramidWildMonHeaders[h].landMonsInfo =
+                (h < 7u) ? &sFacilityWildInfos[gi++] : NULL;
+        }
+    }
+
+    sWildSlotArena = slotArena;
+    sWildSlotArenaTotal = slotArenaBytes;
+    slotArena = NULL;
+    if (!RegisterWildSlotRange())
+        return EMERALD_FRONTIER_ERR_RANGE_REGISTRATION;
+
+    /* count of published E3a-2 fill targets (whole tables + apprentice rows) */
+    sAuxPublishedCount = 7u + 2u + 2u + 1u + 3u + 8u + 2u + 1u + 1u + 3u
+                       + EMERALD_FRONTIER_AUX_APPRENTICE_ROWS
+                       + (EMERALD_FRONTIER_AUX_WILD_INFO_COUNT);
+    return EMERALD_FRONTIER_OK;
+}
+
+/* ---- State-v5 arena-range registration (mon-set + E3a-2 wild arenas). ---- */
 
 static bool RegisterMonSetRange(void)
 {
@@ -726,6 +1148,29 @@ static bool RegisterMonSetRange(void)
         sRegisteredRangeCount++;
     }
     return allRanges;
+}
+
+/* R13-E3a-2: ONE COMPAT_OBJECT range over the packed pike/pyramid wild slot
+ * arena. Every published facility wild header's landMonsInfo points into the
+ * sFacilityWildInfos[] rows, whose wildPokemon pointers resolve into this
+ * arena - a State-v5 walk following a serialized wildPokemon must reconcile
+ * the addresses. */
+static bool RegisterWildSlotRange(void)
+{
+    struct EmeraldResourceRangeIndex *index = EmeraldResourceCompat_GetRangeIndex();
+    if (index == NULL || sWildSlotArena == NULL)
+        return true;
+    if (!EmeraldResourceRangeIndex_RegisterSpan(
+            index, (uintptr_t)sWildSlotArena, sWildSlotArenaTotal,
+            "emerald:data/arena/facility-wild-slots",
+            GEN3_RESOURCE_TYPE_STRUCTURED_DATA,
+            EMERALD_FRONTIER_SCHEMA_WILD,
+            EMERALD_RESOURCE_ROLE_COMPAT_OBJECT))
+        return false;
+    sRegisteredRanges[sRegisteredRangeCount].base = (uintptr_t)sWildSlotArena;
+    sRegisteredRanges[sRegisteredRangeCount].length = sWildSlotArenaTotal;
+    sRegisteredRangeCount++;
+    return true;
 }
 
 static void UnregisterMonSetRange(void)
@@ -781,6 +1226,53 @@ void EmeraldFrontierCompat_ClearMigratedEntries(void)
     sMonSetArena = NULL;
     sMonSetArenaTotal = 0u;
     sPublishedCount = 0u;
+
+    /* ---- R13-E3a-2 aux fill targets (zero; NULL the wild header pointers). */
+    memset(gBattleFactoryMovesTotalPreparation, 0, sizeof(gBattleFactoryMovesTotalPreparation));
+    memset(gBattleFactoryMovesImpossibleToPredict, 0, sizeof(gBattleFactoryMovesImpossibleToPredict));
+    memset(gBattleFactoryMovesWeakeningTheFoe, 0, sizeof(gBattleFactoryMovesWeakeningTheFoe));
+    memset(gBattleFactoryMovesHighRiskHighReturn, 0, sizeof(gBattleFactoryMovesHighRiskHighReturn));
+    memset(gBattleFactoryMovesEndurance, 0, sizeof(gBattleFactoryMovesEndurance));
+    memset(gBattleFactoryMovesSlowAndSteady, 0, sizeof(gBattleFactoryMovesSlowAndSteady));
+    memset(gBattleFactoryMovesDependsOnTheBattlesFlow, 0, sizeof(gBattleFactoryMovesDependsOnTheBattlesFlow));
+    memset(gBattlePalaceEarlyPrizes, 0, sizeof(gBattlePalaceEarlyPrizes));
+    memset(gBattlePalaceLatePrizes, 0, sizeof(gBattlePalaceLatePrizes));
+    memset(gBattleArenaShortStreakPrizeItems, 0, sizeof(gBattleArenaShortStreakPrizeItems));
+    memset(gBattleArenaLongStreakPrizeItems, 0, sizeof(gBattleArenaLongStreakPrizeItems));
+    memset(gBattlePikeNPC, 0, sizeof(gBattlePikeNPC));
+    memset(gBattlePikeSpeeches, 0, sizeof(gBattlePikeSpeeches));
+    memset(gBattlePikeRoomTypeHints, 0, sizeof(gBattlePikeRoomTypeHints));
+    memset(gBattlePikeHeals, 0, sizeof(gBattlePikeHeals));
+    memset(gBattlePikeLvl50Mons1, 0, sizeof(gBattlePikeLvl50Mons1));
+    memset(gBattlePikeLvl50Mons2, 0, sizeof(gBattlePikeLvl50Mons2));
+    memset(gBattlePikeLvl50Mons3, 0, sizeof(gBattlePikeLvl50Mons3));
+    memset(gBattlePikeLvl50Mons4, 0, sizeof(gBattlePikeLvl50Mons4));
+    memset(gBattlePikeLvlOpenMons1, 0, sizeof(gBattlePikeLvlOpenMons1));
+    memset(gBattlePikeLvlOpenMons2, 0, sizeof(gBattlePikeLvlOpenMons2));
+    memset(gBattlePikeLvlOpenMons3, 0, sizeof(gBattlePikeLvlOpenMons3));
+    memset(gBattlePikeLvlOpenMons4, 0, sizeof(gBattlePikeLvlOpenMons4));
+    memset(gBattlePyramidFloorTemplates, 0, sizeof(gBattlePyramidFloorTemplates));
+    memset(gBattlePyramidFloorTemplateOptions, 0, sizeof(gBattlePyramidFloorTemplateOptions));
+    memset(gBattlePyramidPickupItems, 0, sizeof(gBattlePyramidPickupItems));
+    memset(gBattlePyramidPickupItemSlots, 0, sizeof(gBattlePyramidPickupItemSlots));
+    memset(gFrontierBrainTrainerIds, 0, sizeof(gFrontierBrainTrainerIds));
+    memset(gFrontierBrainsMons, 0, sizeof(gFrontierBrainsMons));
+    memset(gFrontierBrainStreakAppearances, 0, sizeof(gFrontierBrainStreakAppearances));
+    memset(&gApprentices[0], 0,
+           (size_t)EMERALD_FRONTIER_AUX_APPRENTICE_ROWS * EMERALD_FRONTIER_AUX_APPRENTICE_NATIVE);
+    for (i = 0u; i < EMERALD_FRONTIER_AUX_WILD_INFO_COUNT; i++)
+    {
+        sFacilityWildInfos[i].wildPokemon = NULL;
+        sFacilityWildInfos[i].encounterRate = 0u;
+    }
+    for (i = 0u; i < EMERALD_FRONTIER_AUX_PIKE_WILD_SETS + 1u; i++)
+        memset(&gBattlePikeWildMonHeaders[i], 0, sizeof(struct WildPokemonHeader));
+    for (i = 0u; i < EMERALD_FRONTIER_AUX_PYRAMID_WILD_SETS + 1u; i++)
+        memset(&gBattlePyramidWildMonHeaders[i], 0, sizeof(struct WildPokemonHeader));
+    free(sWildSlotArena);
+    sWildSlotArena = NULL;
+    sWildSlotArenaTotal = 0u;
+    sAuxPublishedCount = 0u;
 }
 
 void EmeraldFrontierCompat_Shutdown(void)
@@ -818,6 +1310,23 @@ const char *EmeraldFrontierCompatStatus_Describe(
     case EMERALD_FRONTIER_ERR_UNEXPECTED_SCHEMA: return "unexpected schema";
     case EMERALD_FRONTIER_ERR_RANGE_REGISTRATION: return "range registration";
     case EMERALD_FRONTIER_ERR_UNAVAILABLE: return "unavailable";
+    case EMERALD_FRONTIER_ERR_FACTORY_MOVES: return "factory move list";
+    case EMERALD_FRONTIER_ERR_PALACE_PRIZES: return "battle palace prize";
+    case EMERALD_FRONTIER_ERR_ARENA_PRIZES: return "battle arena prize";
+    case EMERALD_FRONTIER_ERR_PIKE_NPC: return "pike npc table";
+    case EMERALD_FRONTIER_ERR_PIKE_SPEECH: return "pike speech/hints/heals";
+    case EMERALD_FRONTIER_ERR_PIKE_WILDMON: return "pike wild-mon table";
+    case EMERALD_FRONTIER_ERR_PYRAMID_FLOOR: return "pyramid floor template/options";
+    case EMERALD_FRONTIER_ERR_PYRAMID_ITEM: return "pyramid pickup item pool";
+    case EMERALD_FRONTIER_ERR_PYRAMID_SLOTS: return "pyramid pickup item slots";
+    case EMERALD_FRONTIER_ERR_BRAIN_IDS: return "frontier brain trainer ids";
+    case EMERALD_FRONTIER_ERR_BRAIN_MONS: return "frontier brain mons";
+    case EMERALD_FRONTIER_ERR_BRAIN_STREAK: return "brain streak appearances";
+    case EMERALD_FRONTIER_ERR_APPRENTICE: return "apprentice transform";
+    case EMERALD_FRONTIER_ERR_WILD_HEADER: return "pike/pyramid wild header";
+    case EMERALD_FRONTIER_ERR_WILD_INFO: return "wild info pointer edge";
+    case EMERALD_FRONTIER_ERR_WILD_SLOT: return "wild slot table";
+    case EMERALD_FRONTIER_ERR_WILD_RATE: return "wild encounter rate";
     }
     return "unknown";
 }

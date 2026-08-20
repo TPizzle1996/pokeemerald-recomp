@@ -44,6 +44,12 @@
                                  the NATIVE_LINUX gWildMonHeaders extern */
 #include "emerald/resources/emerald_encounter_compat.h"
 #include "item_use.h"   /* R13-D2: native ItemUse*_... symbols for pointer checks */
+#include "emerald/resources/frontier_data_native.h"  /* R13-E3a-2 HOST_DATA fill
+                                                       targets (pike/pyramid/brain/
+                                                       factory/palace/arena) */
+#include "apprentice.h"        /* R13-E3a-2 gApprentices fill target */
+#include "constants/moves.h"   /* R13-E3a-2 factory move assertions */
+#include "constants/items.h"   /* R13-E3a-2 pyramid pickup assertions */
 #include "../src/emerald/resources/emerald_runtime_loader.c"
 
 /* ------------------------------------------------------------------ */
@@ -597,8 +603,8 @@ static void TestTextPublication(const char *packPath)
 
     packCount = Gen3ResourcePack_GetEntryCount(pack);
     printf("production pack entry count: %zu\n", packCount);
-    CHECK("production pack entry count pinned at 18521 (R13-E3a-1)",
-          packCount == 18521u);
+    CHECK("production pack entry count pinned at 18521+59 (R13-E3a-2)",
+          packCount == 18580u);
 
     /* Every text entry: C-side labels resolve by resource id; bundle ids
      * are captured for the blob-slice pass below. */
@@ -2136,8 +2142,9 @@ static void TestFrontierTrainerGraph(const char *packPath)
     size_t i;
     u16 allHeldOk = 1u;
 
-    CHECK("R13-E3a published count 786",
-          EmeraldFrontierCompat_GetPublishedCount() == 786u);
+    /* E3a-1 (786) + E3a-2 facility AUX + wild handoff (57). */
+    CHECK("R13-E3a published count 786+57",
+          EmeraldFrontierCompat_GetPublishedCount() == 843u);
     CHECK("R13-E3a mon-set arena published",
           EmeraldFrontierCompat_GetMonSetArenaBytes() > 0u);
 
@@ -2400,6 +2407,341 @@ static void TestFrontierRefusals(const char *tempDir, const char *prodPack)
           && EmeraldFrontierCompat_GetMonSetArenaBytes() == liveArena);
 }
 
+/* ---- R13-E3a-2: facility AUX + pike/pyramid wild-handoff tests. ---- */
+
+/* R13-E3a-2 facility AUX fill targets against a freshly driven production
+ * session. RunFrontierSeamDirect publishes into the SAME HOST_DATA fill
+ * targets the loader path uses, so the assertions check the publication
+ * seam output that E3a-2 carries. Run while the production frontier state is
+ * live (before any teardown) so each table reflects the pack exactly. */
+static void TestFrontierAux(const char *packPath)
+{
+    struct EmeraldFrontierCompatDiagnostics diag;
+    enum EmeraldFrontierCompatStatus status;
+
+    status = RunFrontierSeamDirect(packPath, &diag);
+    CHECK("R13-E3a2 aux publication OK", status == EMERALD_FRONTIER_OK);
+    if (status != EMERALD_FRONTIER_OK)
+        return;
+
+    /* E3a-1 (786) + E3a-2 (57) fill targets. */
+    CHECK("R13-E3a2 published count 843",
+          EmeraldFrontierCompat_GetPublishedCount() == 843u);
+
+    /* Factory move lists: first strategy is swords-dance led, last ends with
+     * the 0xFFFF (MOVE_NONE) terminator. */
+    CHECK("R13-E3a2 factory lead move",
+          gBattleFactoryMovesTotalPreparation[0] == MOVE_SWORDS_DANCE);
+    CHECK("R13-E3a2 factory list terminator",
+          gBattleFactoryMovesTotalPreparation[27] == MOVE_NONE);
+
+    /* Pike NPC transform: row0 is OBJ_EVENT_GFX_POKEFAN_F (0x12) with the
+     * packed 6-byte speech prefix; row2's third speech id lands in the row. */
+    CHECK("R13-E3a2 pike npc row0 gfx", gBattlePikeNPC[0].graphicsId == 0x12u);
+    CHECK("R13-E3a2 pike npc row0 speech1",
+          gBattlePikeNPC[0].speechId1 == 3u);
+    CHECK("R13-E3a2 pike npc row0 speech2",
+          gBattlePikeNPC[0].speechId2 == 5u);
+    CHECK("R13-E3a2 pike npc row0 speech3",
+          gBattlePikeNPC[0].speechId3 == 6u);
+
+    /* Pyramid floor templates: row0 pins the busy floor of the Magic Room /
+       Battle Pyramid (7 items, 3 trainers, run multiplier 128, layout top). */
+    CHECK("R13-E3a2 floor row0 numItems", gBattlePyramidFloorTemplates[0].numItems == 7u);
+    CHECK("R13-E3a2 floor row0 numTrainers",
+          gBattlePyramidFloorTemplates[0].numTrainers == 3u);
+    CHECK("R13-E3a2 floor row0 runMultiplier",
+          gBattlePyramidFloorTemplates[0].runMultiplier == 128u);
+    CHECK("R13-E3a2 floor row0 layoutOffsets",
+          gBattlePyramidFloorTemplates[0].layoutOffsets[0] == 0u
+          && gBattlePyramidFloorTemplates[0].layoutOffsets[1] == 0u
+          && gBattlePyramidFloorTemplates[0].layoutOffsets[2] == 1u);
+
+    /* Pyramid pickup items: lvl50 row0 and lvlopen row0 share one DEDUPED
+     * payload, both leading with a Hyper Potion. */
+    CHECK("R13-E3a2 pickup [0][0]", gBattlePyramidPickupItems[0][0] == ITEM_HYPER_POTION);
+    CHECK("R13-E3a2 pickup [1][0] deduped", gBattlePyramidPickupItems[1][0] == ITEM_HYPER_POTION);
+
+    /* Apprentice transform: row0 ot id/facility class survive the 88->86 cut. */
+    CHECK("R13-E3a2 apprentice row0 otId", gApprentices[0].otId == 48585u);
+    CHECK("R13-E3a2 apprentice row0 class",
+          gApprentices[0].facilityClass == FACILITY_CLASS_BUG_CATCHER);
+
+    /* Brain: ids + mons published non-empty. */
+    CHECK("R13-E3a2 brain ids published", gFrontierBrainTrainerIds[0] != 0u);
+    CHECK("R13-E3a2 brain mons published",
+          gFrontierBrainsMons[0][0][0].species != 0u);
+
+    /* Pike wild-encounter handoff: headers 0-3 real (rate 10), row4 sentinel. */
+    CHECK("R13-E3a2 pike header0 info", gBattlePikeWildMonHeaders[0].landMonsInfo != NULL);
+    if (gBattlePikeWildMonHeaders[0].landMonsInfo != NULL)
+    {
+        CHECK("R13-E3a2 pike header0 rate",
+              gBattlePikeWildMonHeaders[0].landMonsInfo->encounterRate == 10u);
+        CHECK("R13-E3a2 pike header0 slot0 species",
+              gBattlePikeWildMonHeaders[0].landMonsInfo->wildPokemon[0].species != 0u);
+    }
+    CHECK("R13-E3a2 pike sentinel row4", gBattlePikeWildMonHeaders[4].landMonsInfo == NULL);
+
+    /* Pyramid wild-encounter handoff: rows0-6 real (row6 is the rate-8 set),
+       row7 sentinel. */
+    CHECK("R13-E3a2 pyramid header6 info",
+          gBattlePyramidWildMonHeaders[6].landMonsInfo != NULL);
+    if (gBattlePyramidWildMonHeaders[6].landMonsInfo != NULL)
+    {
+        CHECK("R13-E3a2 pyramid header6 rate",
+              gBattlePyramidWildMonHeaders[6].landMonsInfo->encounterRate == 8u);
+        CHECK("R13-E3a2 pyramid header6 slot",
+              gBattlePyramidWildMonHeaders[6].landMonsInfo->wildPokemon != NULL);
+    }
+    CHECK("R13-E3a2 pyramid sentinel row7",
+          gBattlePyramidWildMonHeaders[7].landMonsInfo == NULL);
+}
+
+enum {
+    FRONTIER_AUX_BAD_FACTORY_SIZE = 0,  /* factory total-preparation resized */
+    FRONTIER_AUX_BAD_PIKE_NPC_SIZE,     /* pike NPC 8B-row wire resized */
+    FRONTIER_AUX_BAD_APPRENTICE_SCHEMA, /* apprentice row0 schema != 35 */
+    FRONTIER_AUX_MISSING_WILD_SLOT,     /* drop the pike-1 slot resource */
+    FRONTIER_AUX_BAD_WILD_INFO_PTR,     /* break pike header row0 info ptr */
+    FRONTIER_AUX_BAD_PIKE_WILDMON_SIZE, /* pike lvl50/1 wildmon table resized */
+    FRONTIER_AUX_BAD_PYRAMID_FLOOR_SIZE,/* pyramid floor templates resized */
+    FRONTIER_AUX_VARIANT_COUNT
+};
+
+/* A production-pack variant with EXACTLY ONE R13-E3a-2 resource damaged or
+ * dropped so the refusal is provably the facility-AUX seam's. Every other
+ * entry (E3a-1 frontier/tent + all other families) is copied through verbatim
+ * with its own digests, so the pack passes every earlier seam.  */
+static bool BuildFrontierAuxVariantPack(const char *srcPath, const char *dstPath,
+                                        int mode)
+{
+    struct Gen3ResourcePack *pack = NULL;
+    struct Gen3ResourcePackDiagnosticList packDiag;
+    struct Gen3ResourcePackProfile profile;
+    struct Gen3ResourcePackBuild *build = NULL;
+    struct Gen3ResourcePackProfileInput pin;
+    struct Gen3ResourcePackEntryInput entry;
+    struct Gen3ResourcePackBytes bytes = { NULL, 0 };
+    struct Gen3ResourcePackDiagnosticList diag;
+    uint8_t bufSha[32];
+    uint8_t provenanceSha[32];
+    uint8_t hdrBuf[256];       /* pike/pyramid wild-header block scratch */
+    size_t count;
+    size_t i;
+    FILE *f = NULL;
+    bool ok = false;
+
+    Gen3ResourcePackDiagnostics_Init(&packDiag);
+    if (Gen3ResourcePack_OpenFile(srcPath, &pack, &packDiag) != GEN3_PACK_OK
+     || pack == NULL)
+        goto done;
+    Gen3ResourcePackDiagnostics_Destroy(&packDiag);
+
+    Gen3ResourcePackDiagnostics_Init(&diag);
+    build = Gen3ResourcePackBuild_Create();
+    if (build == NULL)
+        goto done;
+    if (!Gen3ResourcePack_GetProfile(pack, &profile))
+        goto done;
+    memset(&pin, 0, sizeof(pin));
+    pin.basePackVersion = profile.basePackVersion;
+    pin.catalogVersion = profile.catalogVersion;
+    pin.extractionManifestVersion = profile.extractionManifestVersion;
+    pin.canonicalRepresentationVersion = profile.canonicalRepresentationVersion;
+    pin.sourceRomSize = profile.sourceRomSize;
+    pin.sourceRomSha1 = profile.sourceRomSha1;
+    pin.sourceRomSha256 = profile.sourceRomSha256;
+    memcpy(pin.gameCode, profile.gameCode, 4u);
+    memcpy(pin.makerCode, profile.makerCode, 2u);
+    pin.softwareRevision = profile.softwareRevision;
+    memcpy(pin.gameId, profile.gameId, GEN3_PACK_GAME_ID_SIZE);
+    pin.catalogSha256 = profile.catalogSha256;
+    pin.extractionManifestSha256 = profile.extractionManifestSha256;
+    if (Gen3ResourcePackBuild_SetProfile(build, &pin, &diag) != GEN3_PACK_OK)
+        goto done;
+
+    memset(provenanceSha, 0x5A, sizeof(provenanceSha));
+    count = Gen3ResourcePack_GetEntryCount(pack);
+
+    for (i = 0u; i < count; i++)
+    {
+        const struct Gen3ResourcePackEntry *e = Gen3ResourcePack_GetEntry(pack, i);
+        const uint8_t *payload = e->payload;
+        const uint8_t *payloadSha = e->payloadSha256;
+        size_t payloadSize = e->payloadSize;
+        uint32_t schema = e->schema;
+        uint64_t romOffset = e->sourceRomOffset;
+
+        /* Drop the pike-1 wild slot resource (E3a-2 schema 37). */
+        if (mode == FRONTIER_AUX_MISSING_WILD_SLOT
+         && strcmp(e->canonicalName, kFrontierAuxPikeWildInfos[0].key) == 0)
+            continue;
+
+        /* Factory total-preparation move list: shrink below the expected
+         * 56-byte leaf (28 u16). */
+        if (mode == FRONTIER_AUX_BAD_FACTORY_SIZE
+         && strcmp(e->canonicalName, kFrontierAuxFactoryMoves[0]) == 0)
+        {
+            payloadSize = 40u;
+            DigestSha256(e->payload, payloadSize, bufSha);
+            payloadSha = bufSha;
+        }
+        /* Pike NPC: shrink the 25x8 wire block below the expected 200 bytes. */
+        if (mode == FRONTIER_AUX_BAD_PIKE_NPC_SIZE
+         && strcmp(e->canonicalName, kFrontierAuxPikeNpcKey) == 0)
+        {
+            payloadSize =
+                (size_t)EMERALD_FRONTIER_AUX_PIKE_NPC_SLOTS
+                    * EMERALD_FRONTIER_AUX_PIKE_NPC_WIRE - 4u;
+            DigestSha256(e->payload, payloadSize, bufSha);
+            payloadSha = bufSha;
+        }
+        /* Apprentice row 0: retag the entry with a non-35 schema so the
+         * (key, schema 35) resolution fails before any transform. */
+        if (mode == FRONTIER_AUX_BAD_APPRENTICE_SCHEMA
+         && strcmp(e->canonicalName, kFrontierAuxApprenticeKeys[0]) == 0)
+            schema = 99u;
+        /* Pike wild headers: re-point row0's land info GBA pointer (+4) so the
+         * header->info edge breaks. */
+        if (mode == FRONTIER_AUX_BAD_WILD_INFO_PTR
+         && strcmp(e->canonicalName, kFrontierAuxPikeWildHeadersKey) == 0
+         && e->payloadSize <= sizeof(hdrBuf))
+        {
+            memcpy(hdrBuf, e->payload, e->payloadSize);
+            hdrBuf[4] = (uint8_t)(hdrBuf[4] + 4u);        /* +4 into the ptr */
+            payload = hdrBuf;
+            DigestSha256(payload, e->payloadSize, bufSha);
+            payloadSha = bufSha;
+        }
+        /* Pike lvl50/1 wild-mon table: shrink below the expected 36 bytes. */
+        if (mode == FRONTIER_AUX_BAD_PIKE_WILDMON_SIZE
+         && strcmp(e->canonicalName, kFrontierAuxPikeWildMons[0]) == 0)
+        {
+            payloadSize = 32u;
+            DigestSha256(e->payload, payloadSize, bufSha);
+            payloadSha = bufSha;
+        }
+        /* Pyramid floor templates: shrink the 16x16 wire below 256 bytes. */
+        if (mode == FRONTIER_AUX_BAD_PYRAMID_FLOOR_SIZE
+         && strcmp(e->canonicalName, kFrontierAuxPyramidFloor[0]) == 0)
+        {
+            payloadSize =
+                (size_t)EMERALD_FRONTIER_AUX_PYRAMID_FLOOR_SLOTS
+                    * EMERALD_FRONTIER_AUX_PYRAMID_FLOOR_WIRE - 4u;
+            DigestSha256(e->payload, payloadSize, bufSha);
+            payloadSha = bufSha;
+        }
+
+        memset(&entry, 0, sizeof(entry));
+        entry.schema = schema;
+        entry.flags = e->flags;
+        entry.representation = e->representation;
+        entry.sourceEncoding = e->sourceEncoding;
+        entry.canonicalName = e->canonicalName;
+        entry.key = &e->key;
+        entry.type = e->type;
+        entry.canonicalPayload = payload;
+        entry.canonicalPayloadSize = payloadSize;
+        entry.canonicalPayloadSha256 = payloadSha;
+        entry.sourceRomOffset = romOffset;
+        entry.sourceEncodedSize = e->sourceEncodedSize;
+        entry.sourceEncodedSha256 = provenanceSha;
+        if (Gen3ResourcePackBuild_AddEntry(build, &entry, &diag) != GEN3_PACK_OK)
+            goto done;
+    }
+
+    if (Gen3ResourcePackWriter_Write(build, &bytes, &diag) != GEN3_PACK_OK)
+        goto done;
+    f = fopen(dstPath, "wb");
+    if (f == NULL)
+        goto done;
+    if (fwrite(bytes.data, 1, bytes.size, f) != bytes.size)
+        goto done;
+    fclose(f);
+    f = NULL;
+    ok = true;
+
+done:
+    if (f != NULL)
+        fclose(f);
+    Gen3ResourcePackBytes_Destroy(&bytes);
+    Gen3ResourcePackBuild_Destroy(build);
+    Gen3ResourcePackDiagnostics_Destroy(&diag);
+    if (pack != NULL)
+        Gen3ResourcePack_Destroy(pack);
+    return ok;
+}
+
+/* The E3a-2 seam REFUSES a pack with any facility-AUX record malformed (a
+ * resized factory/pike-npc/pike-wildmon/pyramid-floor leaf, a retagged
+ * apprentice schema, a dropped wild slot, or a broken header->info edge).
+ * Nothing is re-published: the live published tables (set by the last
+ * successful run) are untouched. NOTE: the EMERALD_FRONTIER_ERR_WILD_RATE
+ * branch is driven purely by the generated metadata constants (all pike sets
+ * are 10, pyramid sets 4/8), so it is not reachable from a pack mutation in
+ * this harness - documented in the test's commit notes. */
+static void TestFrontierAuxRefusals(const char *tempDir, const char *prodPack)
+{
+    static const char *const labels[FRONTIER_AUX_VARIANT_COUNT] = {
+        "fa_bad_factory_size", "fa_bad_pike_npc_size", "fa_bad_apprentice_schema",
+        "fa_missing_wild_slot", "fa_bad_wild_info_ptr", "fa_bad_pike_wildmon_size",
+        "fa_bad_pyramid_floor_size" };
+    static const enum EmeraldFrontierCompatStatus expects[FRONTIER_AUX_VARIANT_COUNT] = {
+        EMERALD_FRONTIER_ERR_FACTORY_MOVES,
+        EMERALD_FRONTIER_ERR_PIKE_NPC,
+        EMERALD_FRONTIER_ERR_APPRENTICE,
+        EMERALD_FRONTIER_ERR_WILD_SLOT,
+        EMERALD_FRONTIER_ERR_WILD_INFO,
+        EMERALD_FRONTIER_ERR_PIKE_WILDMON,
+        EMERALD_FRONTIER_ERR_PYRAMID_FLOOR,
+    };
+    int mode;
+
+    for (mode = 0; mode < FRONTIER_AUX_VARIANT_COUNT; mode++)
+    {
+        struct EmeraldFrontierCompatDiagnostics diag;
+        enum EmeraldFrontierCompatStatus status;
+        size_t liveCount;
+        u16 livePikeGfx, liveApprenticeOt, liveBrainId, livePickup00;
+        const struct WildPokemonInfo *livePikeInfo;
+        char path[512];
+
+        /* Clear any prior session's frontier arenas/ranges and re-deploy the
+         * PRODUCTION pack so each refusal starts from a freshly-published,
+         * non-zero baseline AND the process-global range index holds only a
+         * bounded set of frontier ranges (7 stacked failed E3a-2 sessions
+         * would each leak an E3a-1 mon-set range and eventually collide). */
+        EmeraldFrontierCompat_ClearMigratedEntries();
+        status = RunFrontierSeamDirect(prodPack, &diag);
+        CHECK("R13-E3a2 refusal baseline deploy", status == EMERALD_FRONTIER_OK);
+
+        liveCount = EmeraldFrontierCompat_GetPublishedCount();
+        livePikeGfx = gBattlePikeNPC[0].graphicsId;
+        liveApprenticeOt = gApprentices[0].otId;
+        liveBrainId = gFrontierBrainTrainerIds[0];
+        livePickup00 = gBattlePyramidPickupItems[0][0];
+        livePikeInfo = gBattlePikeWildMonHeaders[0].landMonsInfo;
+
+        snprintf(path, sizeof(path), "%s/%s.rpack", tempDir, labels[mode]);
+        CHECK("R13-E3a2 variant pack builds",
+              BuildFrontierAuxVariantPack(prodPack, path, mode));
+        status = RunFrontierSeamDirect(path, &diag);
+        CHECK("R13-E3a2 aux variant refused", status != EMERALD_FRONTIER_OK);
+        CHECK("R13-E3a2 aux variant exact code", status == expects[mode]);
+
+        /* The failed republish did not overwrite the deployed E3a-2 tables:
+         * every E3a-2 target still carries the baseline deploy's content. */
+        CHECK("R13-E3a2 refusal leaves deployed tables untouched",
+              EmeraldFrontierCompat_GetPublishedCount() == liveCount
+              && gBattlePikeNPC[0].graphicsId == livePikeGfx
+              && gApprentices[0].otId == liveApprenticeOt
+              && gFrontierBrainTrainerIds[0] == liveBrainId
+              && gBattlePyramidPickupItems[0][0] == livePickup00
+              && gBattlePikeWildMonHeaders[0].landMonsInfo == livePikeInfo);
+    }
+}
+
 int main(int argc, char **argv)
 {
     const char *tempDir;
@@ -2454,6 +2796,10 @@ int main(int argc, char **argv)
      * relocation proof for gFacilityTrainers/gFacilityTrainerMons). */
     TestFrontierTrainerGraph(prodPack);
     TestFrontierRelocation(prodPack);
+    /* R13-E3a-2 facility-AUX + pike/pyramid wild-handoff publication. Runs
+     * while the frontier session republished by TestFrontierRelocation is
+     * live, so the whole 843-fill-target frontier publication can be checked. */
+    TestFrontierAux(prodPack);
     TestTextTransactionalRefusal(tempDir, prodPack);
     /* R13-E1 failure-matrix: trainer seams against freshly built variant
      * sessions (independent of the (now rolled-back) production session). */
@@ -2464,6 +2810,10 @@ int main(int argc, char **argv)
     /* R13-E3a-1 failure-matrix: frontier seams against freshly built variant
      * sessions (after the production session is rolled back). */
     TestFrontierRefusals(tempDir, prodPack);
+    /* R13-E3a-2 failure-matrix: facility-AUX seams against freshly built
+     * variant sessions (after the E3a-1 refusals). Verifies a malformed
+     * facility-AUX resource refuses without clobbering the live tables. */
+    TestFrontierAuxRefusals(tempDir, prodPack);
 
     FreeFamilyFixtures();
     FreeBackFamilyFixtures();

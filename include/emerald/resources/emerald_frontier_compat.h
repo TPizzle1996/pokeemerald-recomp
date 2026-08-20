@@ -62,6 +62,19 @@
 #define EMERALD_FRONTIER_SCHEMA_MON          23u
 #define EMERALD_FRONTIER_SCHEMA_HELD_ITEMS   24u
 #define EMERALD_FRONTIER_SCHEMA_BANNED       25u
+/* R13-E3a-2 facility AUX schema codes (26..37). */
+#define EMERALD_FRONTIER_SCHEMA_FACTORY        26u
+#define EMERALD_FRONTIER_SCHEMA_PALACE         27u
+#define EMERALD_FRONTIER_SCHEMA_ARENA          28u
+#define EMERALD_FRONTIER_SCHEMA_PIKE_NPC       29u
+#define EMERALD_FRONTIER_SCHEMA_PIKE_SPEECH    30u
+#define EMERALD_FRONTIER_SCHEMA_PYRAMID_FLOOR 31u
+#define EMERALD_FRONTIER_SCHEMA_PYRAMID_ITEM  32u
+#define EMERALD_FRONTIER_SCHEMA_PYRAMID_SLOTS 33u
+#define EMERALD_FRONTIER_SCHEMA_BRAIN         34u
+#define EMERALD_FRONTIER_SCHEMA_APPRENTICE    35u
+#define EMERALD_FRONTIER_SCHEMA_WILD_HEADERS  36u
+#define EMERALD_FRONTIER_SCHEMA_WILD          37u
 
 /* ROM geometry (ROM-relative; GBA addresses +0x08000000). */
 #define EMERALD_FRONTIER_TRAINER_WIRE            52u
@@ -86,6 +99,24 @@ enum EmeraldFrontierCompatStatus
     EMERALD_FRONTIER_ERR_UNEXPECTED_SCHEMA,       /* entry schema != 21..25 */
     EMERALD_FRONTIER_ERR_RANGE_REGISTRATION,      /* mon-set arena span could not register */
     EMERALD_FRONTIER_ERR_UNAVAILABLE,             /* no published state to read */
+/* ---- R13-E3a-2 facility AUX diagnostics (unused if E3a-2 not driven). ---- */
+    EMERALD_FRONTIER_ERR_FACTORY_MOVES,           /* factory strategy move list bad */
+    EMERALD_FRONTIER_ERR_PALACE_PRIZES,           /* Battle Palace prize table bad */
+    EMERALD_FRONTIER_ERR_ARENA_PRIZES,            /* Battle Arena prize table bad */
+    EMERALD_FRONTIER_ERR_PIKE_NPC,                /* Pike NPC table / row malformed */
+    EMERALD_FRONTIER_ERR_PIKE_SPEECH,             /* Pike speeches/hints/heals bad */
+    EMERALD_FRONTIER_ERR_PIKE_WILDMON,            /* Pike wild-mon table bad */
+    EMERALD_FRONTIER_ERR_PYRAMID_FLOOR,           /* Pyramid floor template/options bad */
+    EMERALD_FRONTIER_ERR_PYRAMID_ITEM,            /* Pyramid pickup item pool bad */
+    EMERALD_FRONTIER_ERR_PYRAMID_SLOTS,           /* Pyramid pickup item slots bad */
+    EMERALD_FRONTIER_ERR_BRAIN_IDS,               /* Frontier brain trainer-id table bad */
+    EMERALD_FRONTIER_ERR_BRAIN_MONS,              /* Frontier brain mons table bad */
+    EMERALD_FRONTIER_ERR_BRAIN_STREAK,            /* brain streak-appearances bad */
+    EMERALD_FRONTIER_ERR_APPRENTICE,              /* apprentice 88->86 transform bad */
+    EMERALD_FRONTIER_ERR_WILD_HEADER,             /* pike/pyramid wild header bad */
+    EMERALD_FRONTIER_ERR_WILD_INFO,               /* header->info pointer edge bad */
+    EMERALD_FRONTIER_ERR_WILD_SLOT,               /* info->slot pointer / size bad */
+    EMERALD_FRONTIER_ERR_WILD_RATE,               /* wild encounter rate mismatch */
 };
 
 /* Structured diagnostics (same shape as the other compat seams). On failure

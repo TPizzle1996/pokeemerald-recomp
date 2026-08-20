@@ -24,6 +24,28 @@
 #include "constants/party_menu.h"
 #include "constants/battle_pike.h"
 
+/* R13-E3a-2: Pike content tables are seam-published from the pack
+ * (frontier_data_native.c). On native the compiled const definitions are
+ * guarded out; remap to the HOST_DATA fill targets. sFrontierBrainStreak
+ * Appearances here is the battle_pike duplicate of the frontier_util table;
+ * both remap to the same shared HOST_DATA array (one pack resource). */
+#ifdef NATIVE_LINUX
+#include "emerald/resources/frontier_data_native.h"
+#define sNPCTable                         gBattlePikeNPC
+#define sNPCSpeeches                      gBattlePikeSpeeches
+#define sRoomTypeHints                    gBattlePikeRoomTypeHints
+#define sNumMonsToHealBeforePikeQueen     gBattlePikeHeals
+#define sFrontierBrainStreakAppearances   gFrontierBrainStreakAppearances
+#define sLvl50_Mons1   ((const struct PikeWildMon *)gBattlePikeLvl50Mons1)
+#define sLvl50_Mons2   ((const struct PikeWildMon *)gBattlePikeLvl50Mons2)
+#define sLvl50_Mons3   ((const struct PikeWildMon *)gBattlePikeLvl50Mons3)
+#define sLvl50_Mons4   ((const struct PikeWildMon *)gBattlePikeLvl50Mons4)
+#define sLvlOpen_Mons1 ((const struct PikeWildMon *)gBattlePikeLvlOpenMons1)
+#define sLvlOpen_Mons2 ((const struct PikeWildMon *)gBattlePikeLvlOpenMons2)
+#define sLvlOpen_Mons3 ((const struct PikeWildMon *)gBattlePikeLvlOpenMons3)
+#define sLvlOpen_Mons4 ((const struct PikeWildMon *)gBattlePikeLvlOpenMons4)
+#endif /* NATIVE_LINUX */
+
 struct PikeRoomNPC
 {
     u16 graphicsId;
@@ -90,6 +112,7 @@ static bool8 StatusInflictionFadeOut(struct Task *task);
 static bool8 StatusInflictionFadeIn(struct Task *task);
 
 // Const rom data.
+#ifndef NATIVE_LINUX
 static const struct PikeWildMon sLvl50_Mons1[] =
 {
     {
@@ -166,6 +189,7 @@ static const struct PikeWildMon sLvl50_Mons4[] =
     }
 };
 
+#endif /* !NATIVE_LINUX */
 static const struct PikeWildMon *const sLvl50Mons[] =
 {
     sLvl50_Mons1,
@@ -174,6 +198,7 @@ static const struct PikeWildMon *const sLvl50Mons[] =
     sLvl50_Mons4
 };
 
+#ifndef NATIVE_LINUX
 static const struct PikeWildMon sLvlOpen_Mons1[] =
 {
     {
@@ -250,6 +275,7 @@ static const struct PikeWildMon sLvlOpen_Mons4[] =
     }
 };
 
+#endif /* !NATIVE_LINUX */
 static const struct PikeWildMon *const sLvlOpenMons[] =
 {
     sLvlOpen_Mons1,
@@ -264,6 +290,7 @@ static const struct PikeWildMon *const *const sWildMons[2] =
     [FRONTIER_LVL_OPEN] = sLvlOpenMons
 };
 
+#ifndef NATIVE_LINUX
 static const struct PikeRoomNPC sNPCTable[] =
 {
     {
@@ -476,6 +503,7 @@ static const u8 sFrontierBrainStreakAppearances[NUM_FRONTIER_FACILITIES][4] =
     [FRONTIER_FACILITY_PYRAMID] = {21,  70, 35, 0},
 };
 
+#endif /* !NATIVE_LINUX */
 static void (*const sBattlePikeFunctions[])(void) =
 {
     [BATTLE_PIKE_FUNC_SET_ROOM_TYPE]           = SetRoomType,
@@ -509,6 +537,7 @@ static void (*const sBattlePikeFunctions[])(void) =
     [BATTLE_PIKE_FUNC_INIT]                    = InitPikeChallenge
 };
 
+#ifndef NATIVE_LINUX
 static const u8 sRoomTypeHints[] = {
     PIKE_HINT_PEOPLE,     // PIKE_ROOM_SINGLE_BATTLE
     PIKE_HINT_PEOPLE,     // PIKE_ROOM_HEAL_FULL
@@ -530,6 +559,8 @@ static const u8 sNumMonsToHealBeforePikeQueen[][3] =
     {0, 2, 1},
     {0, 1, 2},
 };
+
+#endif /* !NATIVE_LINUX */
 
 static bool8 (*const sStatusInflictionScreenFlashFuncs[])(struct Task *) =
 {

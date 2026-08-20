@@ -79,8 +79,8 @@ ROM_SHA1 = "f3ae088181bf583e55daf962a92bb46f4f1d07b7"
 # verdanturf 45 / fallarbor 45). The 300 frontier leaves tile
 # [0x5ced2e, 0x5d5aca) exactly (the 2 trailing pad bytes before
 # gBattleFrontierTrainers at 0x5d5acc are not part of any leaf).
-PINNED_TOTAL = 6458
-PINNED_BYTES = 489082
+PINNED_TOTAL = 6517
+PINNED_BYTES = 494403
 PINNED_BY_FAMILY = {
     "species-base": (412, 11536),
     "species-name": (412, 4532),
@@ -110,6 +110,18 @@ PINNED_BY_FAMILY = {
     "tent-mon-set": (90, 1558),
     "tent-mon": (3, 2560),
     "font": (10, 294912),
+    "frontier-factory": (7, 314),
+    "frontier-palace": (2, 30),
+    "frontier-arena": (2, 30),
+    "frontier-pike-npc": (1, 200),
+    "frontier-pike-speech": (11, 819),
+    "frontier-pyramid-floor": (2, 324),
+    "frontier-pyramid-item": (1, 400),
+    "frontier-pyramid-slots": (1, 126),
+    "frontier-brain": (3, 882),
+    "frontier-apprentice": (16, 1408),
+    "frontier-wild-headers": (2, 260),
+    "frontier-wild": (11, 528),
 }
 
 # (font key, reference ELF symbol)
@@ -836,6 +848,236 @@ def derive(elf, rom, pret):
         frontier_map["tents"][tent] = {"trainer_keys": tk, "monset_keys": mk,
                                         "mons_key": tmons_key}
 
+    # --- Battle Frontier facility AUX content (R13-E3a-2) --------------------
+    # Exact-GBA-slice content resources for the factory/palace/arena/pike/
+    # pyramid/brain/apprentice facility families plus the pike/pyramid wild-
+    # encounter handoff. Wire shapes (from the reference ELF/ROM) drive the
+    # publication transforms in emerald_frontier_compat.c; each transformed
+    # family records (count, wire_stride, native_stride) so the seam rebuilds
+    # the packed native table (every native row is a prefix of its GBA row:
+    # the GBA build pads to 4-byte/88-byte boundaries, native drops the pad).
+    def get_slice(symbol, size, expected_rom, label):
+        s = elf.find(symbol)
+        if s is None or s[2] != size or s[1] - GEN3_GBA_ROM_BASE != expected_rom:
+            fail(f"{label}: symbol {symbol} size/addr mismatch"
+                 f" (got {s[2] if s else 0} B @0x{s[1] - GEN3_GBA_ROM_BASE if s else 0:x},"
+                 f" want {size} B @0x{expected_rom:x})")
+        sl = elf.slice(s, size)
+        ro = rom[expected_rom:expected_rom + size]
+        if sl != ro:
+            fail(f"{label}: {symbol} ROM slice != ELF slice")
+        return ro
+
+    aux = {
+        "factory_moves": [],     # 7 keys (schema 26)
+        "palace_early": "",      # schema 27
+        "palace_late": "",
+        "arena_short": "",       # schema 28
+        "arena_long": "",
+        "pike_npc": "",          # schema 29 (25 x 8 -> 25 x 6)
+        "pike_speeches": [],     # schema 30 keys [speeches, hints, heals]
+        "pike_wild_mons": [],    # 8 keys (lvl50 1..4, lvlopen 1..4)
+        "pyramid_floor": [],     # schema 31 keys [templates, options]
+        "pyramid_item": "",      # schema 32 (shared lvl50/lvlopen payload)
+        "pyramid_slots": "",     # schema 33
+        "brain_ids": "",         # schema 34
+        "brain_mons": "",
+        "brain_streak": "",
+        "apprentice_keys": [],   # 16 keys (schema 35)
+        "wild_headers": {},      # schema 36: {"pike":key,"pyramid":key}
+        "wild_sets": {},         # schema 37: key -> {rate, infoPtr, slotPtr, slotRows}
+        # native transform descriptors for padded->packed families
+        "pike_npc_slots": 25,
+        "pyramid_floor_slots": 16,
+        "apprentice_rows": 16,
+    }
+
+    # Factory: 7 strategy move lists (u16 move-ID arrays; LEAF).
+    FACTORY_MOVES = [
+        ("total-preparation", "sMoves_TotalPreparation", 0x611fc8, 0x38),
+        ("impossible-to-predict", "sMoves_ImpossibleToPredict", 0x612000, 0x1e),
+        ("weakening-the-foe", "sMoves_WeakeningTheFoe", 0x61201e, 0x28),
+        ("high-risk-high-return", "sMoves_HighRiskHighReturn", 0x612046, 0x36),
+        ("endurance", "sMoves_Endurance", 0x61207c, 0x38),
+        ("slow-and-steady", "sMoves_SlowAndSteady", 0x6120b4, 0x42),
+        ("depends-on-the-battles-flow", "sMoves_DependsOnTheBattlesFlow",
+         0x6120f6, 0x0c),
+    ]
+    for seg, sym, ro, sz in FACTORY_MOVES:
+        get_slice(sym, sz, ro, "factory-moves")
+        key = "emerald:data/frontier/factory/moves/%s" % seg
+        add("frontier-factory", key, sym, sz, ro)
+        aux["factory_moves"].append(key)
+
+    # Palace / Arena prize item arrays (LEAF).
+    aux["palace_early"] = "emerald:data/frontier/palace/prizes/early"
+    get_slice("sBattlePalaceEarlyPrizes", 0x0c, 0x60de78, "palace-early")
+    add("frontier-palace", aux["palace_early"], "sBattlePalaceEarlyPrizes",
+        0x0c, 0x60de78)
+    aux["palace_late"] = "emerald:data/frontier/palace/prizes/late"
+    get_slice("sBattlePalaceLatePrizes", 0x12, 0x60de84, "palace-late")
+    add("frontier-palace", aux["palace_late"], "sBattlePalaceLatePrizes",
+        0x12, 0x60de84)
+    aux["arena_short"] = "emerald:data/frontier/arena/prizes/short"
+    get_slice("sShortStreakPrizeItems", 0x0c, 0x611fa0, "arena-short")
+    add("frontier-arena", aux["arena_short"], "sShortStreakPrizeItems",
+        0x0c, 0x611fa0)
+    aux["arena_long"] = "emerald:data/frontier/arena/prizes/long"
+    get_slice("sLongStreakPrizeItems", 0x12, 0x611fac, "arena-long")
+    add("frontier-arena", aux["arena_long"], "sLongStreakPrizeItems",
+        0x12, 0x611fac)
+
+    # Pike NPC table (25 rows; GBA 8 B/row -> native 6 B/row).
+    aux["pike_npc"] = "emerald:data/frontier/pike/npc"
+    npc = get_slice("sNPCTable", 0xc8, 0x61231c, "pike-npc")
+    if len(npc) != 25 * 8:
+        fail("sNPCTable must be exactly 25 x 8 B")
+    add("frontier-pike-npc", aux["pike_npc"], "sNPCTable", 0xc8, 0x61231c)
+
+    # Pike speeches + room hints + pre-queen heals (LEAF u8/u16 content).
+    aux["pike_speeches"] = ["emerald:data/frontier/pike/speeches",
+                            "emerald:data/frontier/pike/room-hints",
+                            "emerald:data/frontier/pike/heals"]
+    get_slice("sNPCSpeeches", 0x1f8, 0x6123e4, "pike-speeches")
+    add("frontier-pike-speech", aux["pike_speeches"][0], "sNPCSpeeches",
+        0x1f8, 0x6123e4)
+    get_slice("sRoomTypeHints", 0x09, 0x61266c, "pike-room-hints")
+    add("frontier-pike-speech", aux["pike_speeches"][1], "sRoomTypeHints",
+        0x09, 0x61266c)
+    get_slice("sNumMonsToHealBeforePikeQueen", 0x12, 0x612675, "pike-heals")
+    add("frontier-pike-speech", aux["pike_speeches"][2],
+        "sNumMonsToHealBeforePikeQueen", 0x12, 0x612675)
+
+    # PikeWildMon tables (8 x 36 B; native == GBA stride, LEAF content).
+    for (which, base_rom) in (("lvl50", 0x6121d4), ("lvlopen", 0x612274)):
+        for n in range(4):
+            ro = base_rom + n * 0x24
+            sym = "sLvl%s_Mons%d" % ("50" if which == "lvl50" else "Open", n + 1)
+            key = "emerald:data/frontier/pike/wild-mons/%s/%d" % (which, n + 1)
+            get_slice(sym, 0x24, ro, "pike-wild-mon")
+            add("frontier-pike-speech", key, sym, 0x24, ro)
+            aux["pike_wild_mons"].append(key)
+
+    # Pyramid floor templates (16 x 16 -> 13) + floor-template options (68 B).
+    aux["pyramid_floor"] = ["emerald:data/frontier/pyramid/floor-templates",
+                            "emerald:data/frontier/pyramid/floor-options"]
+    pf = get_slice("sPyramidFloorTemplates", 0x100, 0x613650, "pyramid-floor")
+    if len(pf) != 16 * 16:
+        fail("sPyramidFloorTemplates must be exactly 16 x 16 B")
+    add("frontier-pyramid-floor", aux["pyramid_floor"][0],
+        "sPyramidFloorTemplates", 0x100, 0x613650)
+    get_slice("sPyramidFloorTemplateOptions", 0x44, 0x613750,
+              "pyramid-floor-options")
+    add("frontier-pyramid-floor", aux["pyramid_floor"][1],
+        "sPyramidFloorTemplateOptions", 0x44, 0x613750)
+
+    # Pyramid pickup items: lvl50 + lvlopen are byte-identical twins; store
+    # ONE payload bound to both native fill targets (dedupe).
+    l50 = get_slice("sPickupItemsLvl50", 0x190, 0x61379c, "pyramid-items-lvl50")
+    lopen = get_slice("sPickupItemsLvlOpen", 0x190, 0x61392c, "pyramid-items-lvlopen")
+    if l50 != lopen:
+        fail("sPickupItemsLvl50 != sPickupItemsLvlOpen (expected identical twins)")
+    aux["pyramid_item"] = "emerald:data/frontier/pyramid/items/lvl50"
+    add("frontier-pyramid-item", aux["pyramid_item"], "sPickupItemsLvl50",
+        0x190, 0x61379c)
+
+    # Pyramid pickup item slots (126 B).
+    aux["pyramid_slots"] = "emerald:data/frontier/pyramid/item-slots"
+    get_slice("sPickupItemSlots", 0x7e, 0x613abc, "pyramid-item-slots")
+    add("frontier-pyramid-slots", aux["pyramid_slots"], "sPickupItemSlots",
+        0x7e, 0x613abc)
+
+    # Brain: trainer ids (14 B), braves mons (20 B/row x 42 = 840 B) and the
+    # shared streak-appearances table (28 B).
+    aux["brain_ids"] = "emerald:data/frontier/brain/ids"
+    get_slice("sFrontierBrainTrainerIds", 0x0e, 0x611d30, "brain-ids")
+    add("frontier-brain", aux["brain_ids"], "sFrontierBrainTrainerIds",
+        0x0e, 0x611d30)
+    aux["brain_mons"] = "emerald:data/frontier/brain/mons"
+    bm = get_slice("sFrontierBrainsMons", 0x348, 0x61156c, "brain-mons")
+    if len(bm) != 42 * 20:
+        fail("sFrontierBrainsMons must be 42 mons x 20 B")
+    add("frontier-brain", aux["brain_mons"], "sFrontierBrainsMons",
+        0x348, 0x61156c)
+    aux["brain_streak"] = "emerald:data/frontier/brain/streak-appearances"
+    get_slice("sFrontierBrainStreakAppearances", 0x1c, 0x611550, "brain-streak")
+    add("frontier-brain", aux["brain_streak"],
+        "sFrontierBrainStreakAppearances", 0x1c, 0x611550)
+
+    # Apprentice: 16 entries x 88 B (-> native 86 B/row).
+    ap = get_slice("gApprentices", 0x580, 0x610970, "apprentice")
+    if len(ap) != 16 * 88:
+        fail("gApprentices must be 16 x 88 B")
+    for i in range(16):
+        ro = 0x610970 + i * 88
+        key = "emerald:data/frontier/apprentice/%d" % i
+        add("frontier-apprentice", key, "gApprentices", 88, ro)
+        aux["apprentice_keys"].append(key)
+
+    # ---- Pike/Pyramid wild-encounter handoff (reuse E2 wire format). ----
+    # gBattlePikeWildMonHeaders (5 x 20 = 100 B, 4 real + sentinel) and
+    # gBattlePyramidWildMonHeaders (8 x 20 = 160 B, 7 real + sentinel), each
+    # row's landMonsInfo pointer -> WildPokemonInfo (rate u8 @0, slotPtr u32
+    # @4) -> 12-row WildPokemon slot table (4 B/row). Uses the exact E2
+    # encounter slot schema/wire format, emitted under new schema codes 36/37
+    # so the E2 schema-count gate (19/20 == 1/209) is unaffected.
+    FWD = (("pike", "gBattlePikeWildMonHeaders", 0x553a14, 5,
+            "pike-%d", "emerald:data/frontier/pike/wild/headers"),
+           ("pyramid", "gBattlePyramidWildMonHeaders", 0x553894, 8,
+            "pyramid-round-%d", "emerald:data/frontier/pyramid/wild/headers"))
+    fw_infos = {}
+    for (tag, sym, hb_rom, hb_rows, setkey_fmt, hdr_key) in FWD:
+        hb = get_slice(sym, hb_rows * 20, hb_rom, "facility-wild-headers")
+        add("frontier-wild-headers", hdr_key, sym, hb_rows * 20, hb_rom)
+        aux["wild_headers"][tag] = hdr_key
+        real = 0
+        for hi in range(hb_rows):
+            coff = hb_rom + hi * 20
+            mg, mn, pad = struct.unpack_from("<BBH", rom, coff)
+            if mg == 0xFF and mn == 0xFF:
+                if any(struct.unpack_from("<I", rom, coff + f)[0] != 0
+                       for f in (4, 8, 12, 16)):
+                    fail(f"{sym} row {hi} sentinel must carry NULL info ptrs")
+                continue
+            real += 1
+            p = struct.unpack_from("<I", rom, coff + 4)[0]
+            if p == 0:
+                fail(f"{sym} row {hi} has a NULL landMonsInfo")
+            ioff = p - GEN3_GBA_ROM_BASE
+            rate = rom[ioff]
+            slotptr = struct.unpack_from("<I", rom, ioff + 4)[0]
+            if slotptr == 0:
+                fail(f"{sym} row {hi}: NULL slotPtr")
+            slot_rom = slotptr - GEN3_GBA_ROM_BASE
+            slot_slice = rom[slot_rom:slot_rom + 48]
+            rkey = "emerald:data/frontier/%s/wild/%s" % (
+                tag, setkey_fmt % (hi + 1))
+            slot_sym = obj_addr.get(slotptr)
+            if slot_sym is None:
+                fail(f"{rkey}: no object symbol for slot table @0x{slotptr:x}")
+            stbl = elf.find(slot_sym)
+            if stbl[1] - GEN3_GBA_ROM_BASE != slot_rom:
+                fail(f"{rkey}: slot symbol addr != info slotPtr")
+            if elf.slice(stbl, 48) != slot_slice:
+                fail(f"{rkey}: ROM slot slice != ELF slice")
+            add("frontier-wild", rkey, slot_sym, 48, slot_rom)
+            aux["wild_sets"][rkey] = {"rate": rate, "infoPtr": p,
+                                      "slotPtr": slotptr, "slotRows": 12}
+            fw_infos.setdefault(tag, []).append((rkey, p, rate))
+        if real != hb_rows - 1:
+            fail(f"{sym} must have {hb_rows - 1} real headers + sentinel")
+    # Rate census: pike all 10; pyramid rounds 1..6 (hi 0..5) rate 4, round
+    # 7 (hi 6) rate 8.
+    pike_rates = [aux["wild_sets"][k]["rate"] for k in aux["wild_sets"]
+                  if k.startswith("emerald:data/frontier/pike/wild/")]
+    if any(r != 10 for r in pike_rates) or len(pike_rates) != 4:
+        fail("pike wild sets must be exactly 4 sets at rate 10")
+    pyr = sorted((int(k.rsplit("-", 1)[1]) - 1,
+                  aux["wild_sets"][k]["rate"]) for k in aux["wild_sets"]
+                 if k.startswith("emerald:data/frontier/pyramid/wild/"))
+    if len(pyr) != 7 or [r for _, r in pyr] != [4, 4, 4, 4, 4, 4, 8]:
+        fail("pyramid wild sets must be 7 sets at rates [4]*6,8")
+
     rows.sort(key=lambda r: r[0])
     total = len(rows)
     if total != PINNED_TOTAL:
@@ -852,7 +1094,7 @@ def derive(elf, rom, pret):
     move_keys = [mv_key(i) for i in range(355)]
     return rows, fam, levelup_idx_map, species_keys, move_keys, item_keys, \
         callback_rows, trainer_keys, party_keys, party_meta, class_keys, \
-        head_keys, infos, frontier_map
+        head_keys, infos, frontier_map, aux
 
 
 def _f(key, family):
@@ -886,6 +1128,30 @@ def _f(key, family):
         return "frontier-held-items"
     if key == "emerald:data/frontier/banned-species":
         return "frontier-banned-species"
+    if key.startswith("emerald:data/frontier/factory/"):
+        return "frontier-factory"
+    if key.startswith("emerald:data/frontier/palace/"):
+        return "frontier-palace"
+    if key.startswith("emerald:data/frontier/arena/"):
+        return "frontier-arena"
+    if key.startswith("emerald:data/frontier/") and "/wild/" in key:
+        return "frontier-wild-headers" if key.endswith("/wild/headers") else "frontier-wild"
+    if key == "emerald:data/frontier/pike/npc":
+        return "frontier-pike-npc"
+    if key.startswith("emerald:data/frontier/pike/"):
+        # speeches / room-hints / heals / pike wild-mons tables (schema 30)
+        return "frontier-pike-speech"
+    if key.startswith("emerald:data/frontier/pyramid/items/"):
+        return "frontier-pyramid-item"
+    if key == "emerald:data/frontier/pyramid/item-slots":
+        return "frontier-pyramid-slots"
+    if key.startswith("emerald:data/frontier/pyramid/"):
+        # floor-templates + floor-options (schema 31)
+        return "frontier-pyramid-floor"
+    if key.startswith("emerald:data/frontier/brain/"):
+        return "frontier-brain"
+    if key.startswith("emerald:data/frontier/apprentice/"):
+        return "frontier-apprentice"
     if key.startswith("emerald:data/frontier/tent/"):
         parts = key[len("emerald:data/frontier/tent/"):].split("/")
         # tent/<tent>/mons (len 2) -> pool; tent/<tent>/trainer/<n>/mons
@@ -937,6 +1203,12 @@ SCHEMA = {
     "frontier-trainer": 21, "frontier-mon-set": 22, "frontier-mon": 23,
     "frontier-held-items": 24, "frontier-banned-species": 25,
     "tent-trainer": 21, "tent-mon-set": 22, "tent-mon": 23,
+    "frontier-factory": 26, "frontier-palace": 27, "frontier-arena": 28,
+    "frontier-pike-npc": 29, "frontier-pike-speech": 30,
+    "frontier-pyramid-floor": 31, "frontier-pyramid-item": 32,
+    "frontier-pyramid-slots": 33, "frontier-brain": 34,
+    "frontier-apprentice": 35,
+    "frontier-wild-headers": 36, "frontier-wild": 37,
     "font": 1,
 }
 
@@ -953,7 +1225,7 @@ def key_sanitize(key):
 def emit_gameplay(rows, fam, levelup_idx_map, species_keys, move_keys,
                   item_keys, callback_rows, trainer_keys, party_keys,
                   party_meta, class_keys, enc_head_keys, enc_infos,
-                  frontier_map, outdir, root, args):
+                  frontier_map, aux, outdir, root, args):
     famdir = outdir / "gameplay"
     artdir = famdir / "artifacts"
     art_by_key = {}
@@ -1751,6 +2023,207 @@ def emit_gameplay(rows, fam, levelup_idx_map, species_keys, move_keys,
     frm.append("")
     write_if(famdir / "frontier_index_maps.generated.toml", frm, args)
 
+    # --- R13-E3a-2 frontier AUX publication maps + constants. ----------------
+    pike_wild = sorted((int(k.rsplit("-", 1)[1]), k)
+                       for k in aux["wild_sets"]
+                       if k.startswith("emerald:data/frontier/pike/wild/"))
+    pyramid_wild = sorted((int(k.rsplit("-", 1)[1]), k)
+                          for k in aux["wild_sets"]
+                          if k.startswith("emerald:data/frontier/pyramid/wild/"))
+    fx = "EMERALD_FRONTIER_AUX_"
+    hdr = [
+        "/* Generated by tools/gen3_resources/gameplay_family/"
+        "gen_gameplay_family.py.",
+        " * Do not edit by hand; re-run the generator and --check it.",
+        " *",
+        " * R13-E3a-2 frontier facility AUX publication maps. The frontier seam",
+        " * rebuilds the Battle Factory/Palace/Arena/Pike/Pyramid/Brain/"
+        "Apprentice native tables + the pike/pyramid wild-encounter handoff"
+        " from",
+        " * the pack. kFrontierAux* arrays pair each facility table with its",
+        " * resource key; the wild info table carries the header->info->slot"
+        " edge",
+        " * metadata (rates + GBA address linkage) the seam validates then"
+        " rebuilds",
+        " * into its own packed wild slot/info arena.",
+        " */",
+        "#ifndef EMERALD_RESOURCES_FRONTIER_AUX_NATIVE_GENERATED_H",
+        "#define EMERALD_RESOURCES_FRONTIER_AUX_NATIVE_GENERATED_H",
+        "",
+        "#include <stdint.h>",
+        "",
+        f"#define {fx}SCHEMA_FACTORY        26u",
+        f"#define {fx}SCHEMA_PALACE         27u",
+        f"#define {fx}SCHEMA_ARENA          28u",
+        f"#define {fx}SCHEMA_PIKE_NPC       29u",
+        f"#define {fx}SCHEMA_PIKE_SPEECH    30u",
+        f"#define {fx}SCHEMA_PYRAMID_FLOOR 31u",
+        f"#define {fx}SCHEMA_PYRAMID_ITEM  32u",
+        f"#define {fx}SCHEMA_PYRAMID_SLOTS 33u",
+        f"#define {fx}SCHEMA_BRAIN         34u",
+        f"#define {fx}SCHEMA_APPRENTICE    35u",
+        f"#define {fx}SCHEMA_WILD_HEADERS  36u",
+        f"#define {fx}SCHEMA_WILD          37u",
+        "",
+        f"#define {fx}PIKE_NPC_SLOTS     25u   /* 25 rows GBA 8 B -> native 6 B */",
+        f"#define {fx}PIKE_NPC_WIRE      8u",
+        f"#define {fx}PIKE_NPC_NATIVE    6u",
+        f"#define {fx}PYRAMID_FLOOR_SLOTS 16u /* 16 rows GBA 16 B -> native 13 B */",
+        f"#define {fx}PYRAMID_FLOOR_WIRE 16u",
+        f"#define {fx}PYRAMID_FLOOR_NATIVE 13u",
+        f"#define {fx}APPRENTICE_ROWS    16u  /* 16 rows GBA 88 B -> native 86 B */",
+        f"#define {fx}APPRENTICE_WIRE    88u",
+        f"#define {fx}APPRENTICE_NATIVE  86u",
+        f"#define {fx}BRAIN_MONS        42u  /* FrontierBrainMon 20 B, GBA==native */",
+        f"#define {fx}BRAIN_MONS_WIRE    20u",
+        f"#define {fx}WILD_SLOT_ROWS     12u  /* WildPokemon 4 B/row */",
+        f"#define {fx}WILD_SLOT_WIRE      4u",
+        f"#define {fx}WILD_INFO_WIRE      8u",
+        f"#define {fx}PIKE_WILD_SETS      4u",
+        f"#define {fx}PYRAMID_WILD_SETS   7u",
+        f"#define {fx}WILD_INFO_COUNT   11u",
+        "",
+        "extern const char *const "
+        "kFrontierAuxFactoryMoves[7];",
+        "extern const char *const kFrontierAuxPalaceEarlyKey;",
+        "extern const char *const kFrontierAuxPalaceLateKey;",
+        "extern const char *const kFrontierAuxArenaShortKey;",
+        "extern const char *const kFrontierAuxArenaLongKey;",
+        "extern const char *const kFrontierAuxPikeNpcKey;",
+        "extern const char *const "
+        "kFrontierAuxPikeSpeeches[3];",
+        "extern const char *const "
+        "kFrontierAuxPikeWildMons[8];",
+        "extern const char *const "
+        "kFrontierAuxPyramidFloor[2];",
+        "extern const char *const kFrontierAuxPyramidItemKey;",
+        "extern const char *const kFrontierAuxPyramidSlotsKey;",
+        "extern const char *const kFrontierAuxBrainIdsKey;",
+        "extern const char *const kFrontierAuxBrainMonsKey;",
+        "extern const char *const kFrontierAuxBrainStreakKey;",
+        "extern const char *const "
+        "kFrontierAuxApprenticeKeys[16];",
+        "extern const char *const kFrontierAuxPikeWildHeadersKey;",
+        "extern const char *const kFrontierAuxPyramidWildHeadersKey;",
+        "",
+        "/* wild slot-set metadata: rate + header->info->slot GBA address"
+        " linkage */",
+        "struct FrontierWildInfoMeta",
+        "{",
+        "    const char *key;",
+        "    uint16_t rate;",
+        "    uint16_t slotRows;",
+        "    uint32_t gbaInfoAddr;",
+        "    uint32_t gbaSlotAddr;",
+        "};",
+        "extern const struct FrontierWildInfoMeta "
+        "kFrontierAuxPikeWildInfos[4];",
+        "extern const struct FrontierWildInfoMeta "
+        "kFrontierAuxPyramidWildInfos[7];",
+        "",
+        "#endif /* EMERALD_RESOURCES_FRONTIER_AUX_NATIVE_GENERATED_H */",
+    ]
+    write_if(root / "include/emerald/resources/frontier_aux_native.generated.h",
+             hdr, args)
+
+    cb = [
+        "/* Generated by tools/gen3_resources/gameplay_family/"
+        "gen_gameplay_family.py.",
+        " * Do not edit by hand; re-run the generator and --check it.",
+        " */",
+        '#include "emerald/resources/frontier_aux_native.generated.h"',
+        "",
+    ]
+    cb.append(
+        "const char *const kFrontierAuxFactoryMoves[7] =")
+    cb.append("{")
+    for k in aux["factory_moves"]:
+        cb.append(f'    "{k}",')
+    cb.append("};")
+    cb += [f'const char *const kFrontierAuxPalaceEarlyKey = '
+           f'"{aux["palace_early"]}";',
+           f'const char *const kFrontierAuxPalaceLateKey = '
+           f'"{aux["palace_late"]}";',
+           f'const char *const kFrontierAuxArenaShortKey = '
+           f'"{aux["arena_short"]}";',
+           f'const char *const kFrontierAuxArenaLongKey = '
+           f'"{aux["arena_long"]}";',
+           f'const char *const kFrontierAuxPikeNpcKey = '
+           f'"{aux["pike_npc"]}";']
+    cb.append(
+        "const char *const kFrontierAuxPikeSpeeches[3] =")
+    cb.append("{")
+    for k in aux["pike_speeches"]:
+        cb.append(f'    "{k}",')
+    cb.append("};")
+    cb.append(
+        "const char *const kFrontierAuxPikeWildMons[8] =")
+    cb.append("{")
+    for k in aux["pike_wild_mons"]:
+        cb.append(f'    "{k}",')
+    cb.append("};")
+    cb.append(
+        "const char *const kFrontierAuxPyramidFloor[2] =")
+    cb.append("{")
+    for k in aux["pyramid_floor"]:
+        cb.append(f'    "{k}",')
+    cb.append("};")
+    cb += [f'const char *const kFrontierAuxPyramidItemKey = '
+           f'"{aux["pyramid_item"]}";',
+           f'const char *const kFrontierAuxPyramidSlotsKey = '
+           f'"{aux["pyramid_slots"]}";',
+           f'const char *const kFrontierAuxBrainIdsKey = '
+           f'"{aux["brain_ids"]}";',
+           f'const char *const kFrontierAuxBrainMonsKey = '
+           f'"{aux["brain_mons"]}";',
+           f'const char *const kFrontierAuxBrainStreakKey = '
+           f'"{aux["brain_streak"]}";']
+    cb.append(
+        "const char *const kFrontierAuxApprenticeKeys[16] =")
+    cb.append("{")
+    for k in aux["apprentice_keys"]:
+        cb.append(f'    "{k}",')
+    cb.append("};")
+    cb += [f'const char *const kFrontierAuxPikeWildHeadersKey = '
+           f'"{aux["wild_headers"]["pike"]}";',
+           f'const char *const kFrontierAuxPyramidWildHeadersKey = '
+           f'"{aux["wild_headers"]["pyramid"]}";', ""]
+    for (arrname, lst) in (("kFrontierAuxPikeWildInfos", pike_wild),
+                           ("kFrontierAuxPyramidWildInfos", pyramid_wild)):
+        cb.append(
+            "const struct FrontierWildInfoMeta %s[%d] =" % (
+                arrname, len(lst)))
+        cb.append("{")
+        for (_n, rkey) in lst:
+            v = aux["wild_sets"][rkey]
+            cb.append(f'    {{"{rkey}", {v["rate"]}u, {v["slotRows"]}u, '
+                      f'0x{v["infoPtr"]:08x}u, 0x{v["slotPtr"]:08x}u}},')
+        cb.append("};")
+        cb.append("")
+    write_if(root / "src/emerald/resources/frontier_aux_native.generated.c",
+             cb, args)
+
+    # frontier AUX metadata TO ML.
+    fam2 = [
+        "# Generated by tools/gen3_resources/gameplay_family/"
+        "gen_gameplay_family.py",
+        "# Do not edit by hand; re-run the generator (regeneration must be a",
+        "# no-op diff).",
+        "",
+        "# R13-E3a-2 frontier facility AUX + pike/pyramid wild handoff.",
+        'family = "gameplay"',
+        "frontier_aux_version = 1",
+        "",
+        "[[wild_sets]]",
+    ]
+    for (_n, rkey) in pike_wild + pyramid_wild:
+        v = aux["wild_sets"][rkey]
+        fam2.append(f'set = "{rkey}"')
+        fam2.append(f"rate = {v['rate']}")
+        fam2.append(f"slot_rows = {v['slotRows']}")
+        fam2.append("")
+    write_if(famdir / "frontier_aux_maps.generated.toml", fam2, args)
+
 
 def _artifact_sub(key):
     if key.startswith("emerald:data/species/"):
@@ -1779,6 +2252,30 @@ def _artifact_sub(key):
         return "frontier-held-items"
     if key == "emerald:data/frontier/banned-species":
         return "frontier-banned-species"
+    if key.startswith("emerald:data/frontier/factory/"):
+        return "frontier-factory"
+    if key.startswith("emerald:data/frontier/palace/"):
+        return "frontier-palace"
+    if key.startswith("emerald:data/frontier/arena/"):
+        return "frontier-arena"
+    if key.startswith("emerald:data/frontier/") and "/wild/" in key:
+        return "frontier-wild-headers" if key.endswith("/wild/headers") else "frontier-wild"
+    if key == "emerald:data/frontier/pike/npc":
+        return "frontier-pike-npc"
+    if key.startswith("emerald:data/frontier/pike/"):
+        # speeches / room-hints / heals / pike wild-mons tables (schema 30)
+        return "frontier-pike-speech"
+    if key.startswith("emerald:data/frontier/pyramid/items/"):
+        return "frontier-pyramid-item"
+    if key == "emerald:data/frontier/pyramid/item-slots":
+        return "frontier-pyramid-slots"
+    if key.startswith("emerald:data/frontier/pyramid/"):
+        # floor-templates + floor-options (schema 31)
+        return "frontier-pyramid-floor"
+    if key.startswith("emerald:data/frontier/brain/"):
+        return "frontier-brain"
+    if key.startswith("emerald:data/frontier/apprentice/"):
+        return "frontier-apprentice"
     if key.startswith("emerald:data/frontier/tent/"):
         parts = key[len("emerald:data/frontier/tent/"):].split("/")
         if len(parts) == 2:
@@ -1822,11 +2319,11 @@ def main():
     elf = Elf32(open(args.elf, "rb").read())
     rows, fam, levelup_idx_map, species_keys, move_keys, item_keys, \
         callback_rows, trainer_keys, party_keys, party_meta, class_keys, \
-        enc_head_keys, enc_infos, frontier_map = derive(elf, rom, pret)
+        enc_head_keys, enc_infos, frontier_map, aux = derive(elf, rom, pret)
     emit_gameplay(rows, fam, levelup_idx_map, species_keys, move_keys,
                   item_keys, callback_rows, trainer_keys, party_keys,
                   party_meta, class_keys, enc_head_keys, enc_infos,
-                  frontier_map, outdir, root, args)
+                  frontier_map, aux, outdir, root, args)
 
     print(f"gameplay resources: {len(rows)}, "
           f"{sum(r[3] for r in rows)} B (D1+D2+E1+E2; evolutions excluded)")

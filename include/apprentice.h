@@ -13,7 +13,15 @@ struct ApprenticeTrainer
     u16 speechLost[EASY_CHAT_BATTLE_WORDS_COUNT];
 };
 
+/* R13-E3a-2: on native the 16-entry gApprentices is the seam-published
+ * HOST_DATA fill target (frontier_data_native.c), so it is mutable.
+ * GBA keeps the const definition verbatim (src/data/battle_frontier/
+ * apprentice.h). */
+#if defined(NATIVE_LINUX)
+extern struct ApprenticeTrainer gApprentices[];
+#else
 extern const struct ApprenticeTrainer gApprentices[];
+#endif
 
 void BufferApprenticeChallengeText(u8 saveApprenticeId);
 void Apprentice_ScriptContext_Enable(void);

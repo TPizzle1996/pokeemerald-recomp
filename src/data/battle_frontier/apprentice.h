@@ -294,6 +294,11 @@ extern const u8 gText_ApprenticeChallenge13[];
 extern const u8 gText_ApprenticeChallenge14[];
 extern const u8 gText_ApprenticeChallenge15[];
 
+/* R13-E3a-2: the compiled 16-entry gApprentices payload is REFUSE-class; on
+ * native it is seam-published into the HOST_DATA fill target
+ * (frontier_data_native.c) via the non-const extern in include/apprentice.h,
+ * so the const definition is guarded out of the native link. */
+#ifndef NATIVE_LINUX
 const struct ApprenticeTrainer gApprentices[NUM_APPRENTICES] =
 {
     {
@@ -425,6 +430,7 @@ const struct ApprenticeTrainer gApprentices[NUM_APPRENTICES] =
         .speechLost = {EC_WORD_THIS, EC_WORD_HAS, EC_WORD_TO, EC_WORD_BE, EC_WORD_A, EC_WORD_LIE},
     },
 };
+#endif /* !NATIVE_LINUX */
 
 // Sequence of 4 messages for the first meeting with the apprentice
 static const u8 *const sApprenticeFirstMeetingTexts[NUM_APPRENTICES][4] =

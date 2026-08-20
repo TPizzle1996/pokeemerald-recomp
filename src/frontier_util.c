@@ -40,6 +40,13 @@
 #ifdef NATIVE_LINUX
 #include "emerald/resources/text_slots.generated.h"
 #include "emerald/resources/text_skeleton_arrays.generated.h"
+/* R13-E3a-2: brain content tables (trainer ids / braves mons / shared
+ * streak-appearances) are seam-published from the pack (frontier_data_native.
+ * c). Remap to the HOST_DATA fill targets. */
+#include "emerald/resources/frontier_data_native.h"
+#define sFrontierBrainTrainerIds           gFrontierBrainTrainerIds
+#define sFrontierBrainsMons                gFrontierBrainsMons
+#define sFrontierBrainStreakAppearances    gFrontierBrainStreakAppearances
 #endif
 
 struct FrontierBrainMon
@@ -87,6 +94,7 @@ static void ShowLinkContestResultsWindow(void);
 static void CopyFrontierBrainText(bool8 playerWonText);
 
 // const rom data
+#ifndef NATIVE_LINUX
 static const u8 sFrontierBrainStreakAppearances[NUM_FRONTIER_FACILITIES][4] =
 {
     [FRONTIER_FACILITY_TOWER]   = {35,  70, 35, 1},
@@ -501,6 +509,7 @@ static const struct FrontierBrainMon sFrontierBrainsMons[][2][FRONTIER_PARTY_SIZ
     },
 };
 
+#endif /* !NATIVE_LINUX */
 static const u8 sBattlePointAwards[][NUM_FRONTIER_FACILITIES][FRONTIER_MODE_COUNT] =
 {
     {
@@ -734,6 +743,7 @@ static const u8 *const sHallFacilityToRecordsText[] =
 };
 #endif
 
+#ifndef NATIVE_LINUX
 static const u16 sFrontierBrainTrainerIds[NUM_FRONTIER_FACILITIES] =
 {
     [FRONTIER_FACILITY_TOWER]   = TRAINER_ANABEL,
@@ -745,6 +755,7 @@ static const u16 sFrontierBrainTrainerIds[NUM_FRONTIER_FACILITIES] =
     [FRONTIER_FACILITY_PYRAMID] = TRAINER_BRANDON,
 };
 
+#endif /* !NATIVE_LINUX */
 static const u8 *const sFrontierBrainPlayerLostSilverTexts[NUM_FRONTIER_FACILITIES] =
 {
     [FRONTIER_FACILITY_TOWER]   = gText_AnabelWonSilver,

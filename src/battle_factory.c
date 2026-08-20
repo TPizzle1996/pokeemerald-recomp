@@ -19,6 +19,21 @@
 #include "constants/moves.h"
 #include "constants/items.h"
 
+/* R13-E3a-2: the 7 Factory strategy move lists are seam-published content
+ * (frontier_data_native.c). On native the compiled const definitions are
+ * guarded out; these reserve the native HOST_DATA fill targets and remap the
+ * local static names so sMoveStyles keeps pointing at the pack data. */
+#ifdef NATIVE_LINUX
+#include "emerald/resources/frontier_data_native.h"
+#define sMoves_TotalPreparation            gBattleFactoryMovesTotalPreparation
+#define sMoves_ImpossibleToPredict         gBattleFactoryMovesImpossibleToPredict
+#define sMoves_WeakeningTheFoe             gBattleFactoryMovesWeakeningTheFoe
+#define sMoves_HighRiskHighReturn          gBattleFactoryMovesHighRiskHighReturn
+#define sMoves_Endurance                   gBattleFactoryMovesEndurance
+#define sMoves_SlowAndSteady               gBattleFactoryMovesSlowAndSteady
+#define sMoves_DependsOnTheBattlesFlow     gBattleFactoryMovesDependsOnTheBattlesFlow
+#endif /* NATIVE_LINUX */
+
 static bool8 sPerformedRentalSwap;
 
 static void InitFactoryChallenge(void);
@@ -52,6 +67,7 @@ static const u8 sRequiredMoveCounts[FACTORY_NUM_STYLES - 1] = {
     [FACTORY_STYLE_WEATHER - 1]       = 2
 };
 
+#ifndef NATIVE_LINUX
 static const u16 sMoves_TotalPreparation[] =
 {
     MOVE_SWORDS_DANCE, MOVE_GROWTH, MOVE_MEDITATE, MOVE_AGILITY, MOVE_DOUBLE_TEAM, MOVE_HARDEN,
@@ -108,6 +124,7 @@ static const u16 sMoves_DependsOnTheBattlesFlow[] =
     MOVE_SANDSTORM, MOVE_RAIN_DANCE, MOVE_SUNNY_DAY, MOVE_HAIL, MOVE_WEATHER_BALL,
     MOVE_NONE
 };
+#endif /* !NATIVE_LINUX */
 
 // Excludes FACTORY_STYLE_NONE
 static const u16 *const sMoveStyles[FACTORY_NUM_STYLES - 1] =

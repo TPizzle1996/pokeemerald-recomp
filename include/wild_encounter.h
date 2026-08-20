@@ -35,6 +35,16 @@ extern struct WildPokemonHeader gWildMonHeaders[];
 extern const struct WildPokemonHeader gWildMonHeaders[];
 #endif
 
+/* R13-E3a-2: the Battle Frontier Pike/Pyramid wild-encounter header blocks are
+ * seam-published HOST_DATA fill targets (frontier_data_native.c) on native. */
+#if defined(NATIVE_LINUX)
+extern struct WildPokemonHeader gBattlePikeWildMonHeaders[];
+extern struct WildPokemonHeader gBattlePyramidWildMonHeaders[];
+#else
+extern const struct WildPokemonHeader gBattlePikeWildMonHeaders[];
+extern const struct WildPokemonHeader gBattlePyramidWildMonHeaders[];
+#endif
+
 void DisableWildEncounters(bool8 disabled);
 bool8 StandardWildEncounter(u16 curMetatileBehavior, u16 prevMetatileBehavior);
 bool8 SweetScentWildEncounter(void);

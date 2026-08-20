@@ -28,6 +28,15 @@
 #include "constants/moves.h"
 #include "constants/rgb.h"
 
+/* R13-E3a-2: the Arena prize arrays are seam-published content
+ * (frontier_data_native.c). On native the compiled const definitions are
+ * guarded out; remap to the HOST_DATA fill targets. */
+#ifdef NATIVE_LINUX
+#include "emerald/resources/frontier_data_native.h"
+#define sShortStreakPrizeItems gBattleArenaShortStreakPrizeItems
+#define sLongStreakPrizeItems  gBattleArenaLongStreakPrizeItems
+#endif /* NATIVE_LINUX */
+
 static void InitArenaChallenge(void);
 static void GetArenaData(void);
 static void SetArenaData(void);
@@ -352,6 +361,7 @@ static void (*const sArenaFunctions[])(void) =
     [BATTLE_ARENA_FUNC_GET_TRAINER_NAME] = BufferArenaOpponentName,
 };
 
+#ifndef NATIVE_LINUX
 static const u16 sShortStreakPrizeItems[] =
 {
     ITEM_HP_UP,
@@ -374,6 +384,7 @@ static const u16 sLongStreakPrizeItems[] =
     ITEM_SCOPE_LENS,
     ITEM_CHOICE_BAND,
 };
+#endif /* !NATIVE_LINUX */
 
 void CallBattleArenaFunction(void)
 {

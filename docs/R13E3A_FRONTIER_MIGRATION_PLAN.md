@@ -307,3 +307,30 @@ R13-E3a-1 is **implemented and verified** (report:
    E3b (pokedex) are unchanged and not started.
 
 **R13-E3a-1 STOP.** No commit made. E3a-2 / E3b / R13-F not started.
+
+---
+
+## Implementation delta (R13-E3a-2 — facility aux + Pike/Pyramid wild)
+
+R13-E3a-2 is **implemented and verified** (report:
+`docs/R13E3A2_FRONTIER_AUX_MIGRATION_REPORT.md`).
+
+1. **Inventory:** 59 resources / 5,321 B — factory move lists (7), palace/
+   arena prizes (4), pike NPC+speeches (12), pyramid floor/items/slots (4),
+   brains (3), apprentice (16), Pike/Pyramid wild headers (2) + 11 slot sets.
+   Corrections: pike NPC 25×8→6 (150 B), brain mons 42×20, pickup-item twins
+   deduped. Total gameplay+frontier = 6,517 / 494,403 B.
+2. **Pike/Pyramid handoff:** reused E2 WildPokemon schema + validator
+   (11/11 edges); the entire wild content is no longer compiled.
+3. **Pack:** 18,521 → **18,580 entries**, 13,897,808 B, SHA-256
+   `7add1b00…bfe1`, deterministic. Cap unchanged.
+4. **Seam:** `EmeraldFrontierCompat` extended (`PublishFrontierAux`, 13 named
+   subfamily error codes); loads …→encounter→frontier. State-v5: +1 wild-slot
+   arena range → 5,851/8,192.
+5. **Gates:** loader 65,658; trainer 37,921; world 5,565; render 3,628 — all
+   pass. Release 22,478,800 → 22,488,384 B (+9,584 B). R13-C text flips = 0
+   (brain/apprentice dialogue stays as script/engine indirection).
+6. E3a-2 completes the Frontier lane. E3b (pokedex) and R13-F are unchanged
+   and not started.
+
+**R13-E3a-2 STOP.** No commit made. E3b / R13-F not started.

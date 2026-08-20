@@ -40,6 +40,16 @@ static void (*const sBattlePalaceFunctions[])(void) =
     [BATTLE_PALACE_FUNC_GIVE_PRIZE]         = GivePalacePrize,
 };
 
+/* R13-E3a-2: the Palace prize arrays are seam-published content
+ * (frontier_data_native.c). On native the compiled const definitions are
+ * guarded out; remap to the HOST_DATA fill targets. */
+#ifdef NATIVE_LINUX
+#include "emerald/resources/frontier_data_native.h"
+#define sBattlePalaceEarlyPrizes gBattlePalaceEarlyPrizes
+#define sBattlePalaceLatePrizes  gBattlePalaceLatePrizes
+#endif /* NATIVE_LINUX */
+
+#ifndef NATIVE_LINUX
 static const u16 sBattlePalaceEarlyPrizes[] =
 {
     ITEM_HP_UP,
@@ -62,6 +72,7 @@ static const u16 sBattlePalaceLatePrizes[] =
     ITEM_SCOPE_LENS,
     ITEM_CHOICE_BAND
 };
+#endif /* !NATIVE_LINUX */
 
 static const u32 sWinStreakFlags[][2] =
 {

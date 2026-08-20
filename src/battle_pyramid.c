@@ -29,6 +29,20 @@
 #include "graphics.h"
 #include "constants/battle_frontier.h"
 #include "constants/battle_pyramid.h"
+
+/* R13-E3a-2: Pyramid floor/options/item/slot content tables are seam-published
+ * from the pack (frontier_data_native.c). On native the compiled const
+ * definitions are guarded out; remap to the HOST_DATA fill targets. The
+ * lvl-50 and lvl-open pickup item pools are byte-identical twins and both
+ * map to ONE shared HOST_DATA array (one pack resource). */
+#ifdef NATIVE_LINUX
+#include "emerald/resources/frontier_data_native.h"
+#define sPyramidFloorTemplates           gBattlePyramidFloorTemplates
+#define sPyramidFloorTemplateOptions     gBattlePyramidFloorTemplateOptions
+#define sPickupItemsLvl50                gBattlePyramidPickupItems
+#define sPickupItemsLvlOpen              gBattlePyramidPickupItems
+#define sPickupItemSlots                 gBattlePyramidPickupItemSlots
+#endif /* NATIVE_LINUX */
 #include "constants/event_objects.h"
 #include "constants/event_object_movement.h"
 #include "constants/frontier_util.h"
@@ -108,6 +122,7 @@ static bool8 TrySetPyramidObjectEventPositionAtCoords(bool8, u8, u8, u8 *, u8, u
 #include "data/battle_frontier/battle_pyramid_level_50_wild_mons.h"
 #include "data/battle_frontier/battle_pyramid_open_level_wild_mons.h"
 
+#ifndef NATIVE_LINUX
 static const struct PyramidFloorTemplate sPyramidFloorTemplates[] =
 {
     {
@@ -285,11 +300,13 @@ static const u8 sPyramidFloorTemplateOptions[][2] =
     {100, 15}
 };
 
+#endif /* !NATIVE_LINUX */
 static const u8 sFloorTemplateOffsets[FRONTIER_STAGES_PER_CHALLENGE] =
 {
     0, 4, 9, 14, 19, 24, 29
 };
 
+#ifndef NATIVE_LINUX
 static const u16 sPickupItemsLvl50[TOTAL_PYRAMID_ROUNDS][PICKUP_ITEMS_PER_ROUND] =
 {
     {ITEM_HYPER_POTION, ITEM_FLUFFY_TAIL, ITEM_CHERI_BERRY, ITEM_ETHER, ITEM_LUM_BERRY, ITEM_REVIVE, ITEM_BRIGHT_POWDER, ITEM_SHELL_BELL, ITEM_MAX_REVIVE, ITEM_SACRED_ASH},
@@ -412,6 +429,7 @@ static const u8 sPickupItemSlots[][2] =
     {100, 9},
 };
 
+#endif /* !NATIVE_LINUX */
 static const u8 sPickupItemOffsets[FRONTIER_STAGES_PER_CHALLENGE] = {0, 9, 18, 27, 36, 45, 54};
 
 static const struct PyramidTrainerEncounterMusic sTrainerClassEncounterMusic[54] =
