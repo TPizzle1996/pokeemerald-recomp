@@ -42,6 +42,7 @@ gcc -std=gnu99 -O2 -ffunction-sections -fdata-sections -Wl,--gc-sections \
     -iquote include -iquote "$core_dir" \
     -DPORTABLE -DNONMATCHING -DUBFIX -DMODERN=1 \
     -DPLATFORM_SDL2 -DNATIVE_LINUX -DLINUX64=1 \
+    -DDESKTOP_EXTERNAL_GAME_CONTENT \
     "$core_dir/sha256.c" \
     "$core_dir/sha1.c" \
     "$core_dir/resource_lz.c" \
@@ -65,6 +66,8 @@ gcc -std=gnu99 -O2 -ffunction-sections -fdata-sections -Wl,--gc-sections \
     "$here/emerald_tileset_compat_stubs.c" \
     "$emerald_dir/emerald_resource_session.c" \
     "$emerald_dir/emerald_audio_compat.c" \
+    "$emerald_dir/emerald_leaf_compat.c" \
+    "$emerald_dir/leaf_native_table.generated.c" \
     "$emerald_dir/emerald_text_compat.c" \
     "$emerald_dir/text_arenas.generated.c" \
     "$emerald_dir/text_native_table.generated.c" \
@@ -74,6 +77,30 @@ gcc -std=gnu99 -O2 -ffunction-sections -fdata-sections -Wl,--gc-sections \
     "$emerald_dir/text_skeletons_table.generated.c" \
     "$emerald_dir/text_skeleton_arrays.generated.c" \
     "$here/emerald_text_harness_stubs.c" \
+    "$emerald_dir/gameplay_data_native.c" \
+    "$emerald_dir/gameplay_native_table.generated.c" \
+    "$emerald_dir/gameplay_levelup.generated.c" \
+    "$emerald_dir/gameplay_callbacks.generated.c" \
+    "$emerald_dir/gameplay_item_callbacks_native.c" \
+    "$emerald_dir/emerald_gameplay_compat.c" \
+    "$here/emerald_gameplay_harness_stubs.c" \
+    "$emerald_dir/trainer_data_native.c" \
+    "$emerald_dir/trainer_native.generated.c" \
+    "$emerald_dir/emerald_trainer_compat.c" \
+    "$emerald_dir/encounter_data_native.c" \
+    "$emerald_dir/encounter_native.generated.c" \
+    "$emerald_dir/emerald_encounter_compat.c" \
+    "$emerald_dir/frontier_data_native.c" \
+    "$emerald_dir/frontier_native.generated.c" \
+    "$emerald_dir/frontier_aux_native.generated.c" \
+    "$emerald_dir/emerald_frontier_compat.c" \
+    "$emerald_dir/pokedex_data_native.c" \
+    "$emerald_dir/pokedex_native.generated.c" \
+    "$emerald_dir/emerald_pokedex_compat.c" \
+    "$emerald_dir/map_data_native.c" \
+    "$emerald_dir/map_native.generated.c" \
+    "$emerald_dir/emerald_map_compat.c" \
+    "$here/emerald_map_harness_host.c" \
     "$here/emerald_real_tables_test.c" \
     -o "$tmp/emerald_real_tables_test"
 

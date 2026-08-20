@@ -57,6 +57,7 @@
 #include "emerald/resources/emerald_frontier_compat.h"
 #include "emerald/resources/emerald_pokedex_compat.h"
 #include "emerald/resources/emerald_gameplay_compat.h"
+#include "emerald/resources/emerald_map_compat.h"
 #include "emerald/resources/emerald_leaf_compat.h"
 #include "emerald/resources/emerald_resource_session.h"
 #include "emerald/resources/emerald_text_compat.h"
@@ -493,6 +494,50 @@ EmeraldResourceCompat_RegisterRuntimeSnapshot(const char *packPath)
                                         }
                                         else
                                         {
+                                            /* R13-F: publish the map-metadata + event
+                                             * families (headers/layout-meta/event-bundles/
+                                             * connections) into the native HOST_DATA
+                                             * gMapHeaders + the event/connection arenas.
+                                             * REFUSE-CLASS like the pokedex seam: the
+                                             * mapjson-generated map data is
+                                             * NATIVE_LINUX-gated out of the link, so a
+                                             * session whose map metadata cannot publish is
+                                             * refused with the same full rollback, the
+                                             * snapshot is dropped, and nothing survives
+                                             * (sSnapshotRegistered stays false). */
+                                            struct EmeraldMapCompatDiagnostics mapDiag;
+                                            enum EmeraldMapCompatStatus mapStatus =
+                                                EmeraldMapCompat_TryInitialize(
+                                                    snapshot, pack, &mapDiag);
+                                            if (mapStatus != EMERALD_MAP_OK)
+                                            {
+                                                fprintf(stderr,
+                                                        "emerald runtime: session refused: "
+                                                        "map metadata not published "
+                                                        "(status %d%s%s)\n",
+                                                        (int)mapStatus,
+                                                        mapDiag.canonicalName[0] != '\0'
+                                                            ? " @ " : "",
+                                                        mapDiag.canonicalName);
+                                                EmeraldResourceCompat_ClearMigratedEntries();
+                                                EmeraldAudioCompat_ClearMigratedEntries();
+                                                EmeraldTextCompat_ClearMigratedEntries();
+                                                EmeraldLeafCompat_ClearMigratedEntries();
+                                                EmeraldGameplayCompat_ClearMigratedEntries();
+                                                EmeraldTrainerCompat_ClearMigratedEntries();
+                                                EmeraldEncounterCompat_ClearMigratedEntries();
+                                                EmeraldFrontierCompat_ClearMigratedEntries();
+                                                EmeraldPokedexCompat_ClearMigratedEntries();
+                                                EmeraldMapCompat_ClearMigratedEntries();
+                                                EmeraldResourceCompat_ClearSnapshot();
+                                                EmeraldResourceCompat_SetSessionContentFingerprint(NULL);
+                                                Gen3ResourceSnapshot_Destroy(snapshot);
+                                                snapshot = NULL;
+                                                sSnapshotRegistered = false;
+                                                status = EMERALD_COMPAT_ERR_PUBLISH_FAILED;
+                                            }
+                                            else
+                                            {
                                             /* R10-F: the session content fingerprint
                                              * pins the exact logical provider content
                                              * this session was built from (the
@@ -515,6 +560,7 @@ EmeraldResourceCompat_RegisterRuntimeSnapshot(const char *packPath)
                                             else
                                                 EmeraldResourceCompat_SetSessionContentFingerprint(
                                                     NULL);
+                                            }
                                         }
                                     }
                                 }

@@ -62,6 +62,9 @@ static bool8 IsAbilityAllowingEncounter(u8 level);
 EWRAM_DATA static u8 sWildEncountersDisabled = 0;
 EWRAM_DATA static u32 sFeebasRngValue = 0;
 
+/* The generated file retains the encounter-rate constants on native while
+ * guarding its compiled data definitions (native gets those from the R13-E2/
+ * E3a-2 runtime publication seams). */
 #include "data/wild_encounters.h"
 
 static const struct WildPokemon sWildFeebas = {20, 25, SPECIES_FEEBAS};

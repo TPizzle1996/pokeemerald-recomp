@@ -101,7 +101,10 @@ extern uint64_t HarnessDeviceQueuedBytes(void);
 #include "gen3/resources/resource_pack.h"
 #include "emerald/resources/emerald_trainer_native_compat.h"
 #include "emerald/resources/emerald_audio_compat.h"
+#include "emerald/resources/emerald_map_compat.h"
 #include "emerald/resources/emerald_pokemon_native_compat.h"
+#include "emerald/resources/emerald_resource_ranges.h"
+#include "emerald/resources/map_data_native.h"
 /* Declaration mode: the seam TU (compiled alongside) defines the arrays. */
 #include "emerald/resources/object_event_pic_tables.native.generated.h"
 #include "emerald/resources/tileset_native.generated.h"
@@ -244,6 +247,10 @@ struct HarnessGameData
      * and must survive the round trip untouched. */
     const u8 *textCurrentChar;
     const u8 *textOpaque;
+    /* R13-F: an EWRAM gMapHeader-shaped working copy. The layout and script
+     * pointers target the executable image; events/connections target the
+     * session arenas and must travel through the State-v5 resource sidecar. */
+    struct MapHeader activeMapHeader;
     u32 tailMagic;                      /* 0x48475232 */
     u32 filler[24];
 };
@@ -476,6 +483,92 @@ static bool32 PlantCurrentCharClass(void)
         fprintf(stderr, "opaque compiled text landed inside a resource range\n");
         return FALSE;
     }
+    return TRUE;
+}
+
+/* R13-F State-v5 class: select one deterministic published header whose
+ * complete pointer graph is populated.  mapLayout/mapScripts are executable
+ * image pointers; events/connections are session-arena pointers registered
+ * by the map seam under schemas 43/44. */
+static const struct MapHeader *FirstConnectedPublishedMap(void)
+{
+    size_t i;
+
+    for (i = 0u; i < EMERALD_MAP_HEADER_COUNT; i++)
+    {
+        const struct MapHeader *header = &gMapHeaders[i];
+        if (header->mapLayout != NULL && header->events != NULL
+         && header->mapScripts != NULL && header->connections != NULL)
+            return header;
+    }
+    return NULL;
+}
+
+static bool32 CheckMapArenaPointer(const void *pointer, uint32_t schema)
+{
+    const struct EmeraldResourceRangeIndex *index =
+        EmeraldResourceCompat_GetRangeIndex();
+    struct EmeraldResourceRangeHit hit;
+
+    return index != NULL && pointer != NULL
+        && EmeraldResourceRangeIndex_Lookup(index, (uintptr_t)pointer, &hit)
+        && hit.type == GEN3_RESOURCE_TYPE_STRUCTURED_DATA
+        && hit.schema == schema
+        && hit.role == EMERALD_RESOURCE_ROLE_COMPAT_OBJECT;
+}
+
+static bool32 PlantMapHeaderClass(void)
+{
+    const struct MapHeader *published = FirstConnectedPublishedMap();
+
+    if (published == NULL
+     || !CheckMapArenaPointer(published->events, EMERALD_MAP_SCHEMA_EVENTS)
+     || !CheckMapArenaPointer(published->connections,
+                              EMERALD_MAP_SCHEMA_CONNECTIONS))
+    {
+        fprintf(stderr, "map-header class not fully published\n");
+        return FALSE;
+    }
+    GameData()->activeMapHeader = *published;
+    printf("CREATE map pointers: layout=%p events=%p scripts=%p connections=%p\n",
+           (const void *)published->mapLayout, (const void *)published->events,
+           (const void *)published->mapScripts,
+           (const void *)published->connections);
+    return TRUE;
+}
+
+static bool32 VerifyMapHeaderRelocated(void)
+{
+    const struct MapHeader *published = FirstConnectedPublishedMap();
+    const struct MapHeader *restored = &GameData()->activeMapHeader;
+
+    if (published == NULL
+     || restored->mapLayout != published->mapLayout
+     || restored->events != published->events
+     || restored->mapScripts != published->mapScripts
+     || restored->connections != published->connections
+     || restored->music != published->music
+     || restored->mapLayoutId != published->mapLayoutId
+     || restored->regionMapSectionId != published->regionMapSectionId
+     || restored->cave != published->cave
+     || restored->weather != published->weather
+     || restored->mapType != published->mapType
+     || restored->allowCycling != published->allowCycling
+     || restored->allowEscaping != published->allowEscaping
+     || restored->allowRunning != published->allowRunning
+     || restored->showMapName != published->showMapName
+     || restored->battleType != published->battleType
+     || !CheckMapArenaPointer(restored->events, EMERALD_MAP_SCHEMA_EVENTS)
+     || !CheckMapArenaPointer(restored->connections,
+                              EMERALD_MAP_SCHEMA_CONNECTIONS))
+    {
+        fprintf(stderr, "load: map-header pointers/scalars not re-derived\n");
+        return FALSE;
+    }
+    printf("LOAD map pointers: layout=%p events=%p scripts=%p connections=%p\n",
+           (const void *)restored->mapLayout, (const void *)restored->events,
+           (const void *)restored->mapScripts,
+           (const void *)restored->connections);
     return TRUE;
 }
 
@@ -866,6 +959,8 @@ static int DoCreate(const char *packPath, const char *statePath)
         return 1;
     if (!PlantCurrentCharClass())
         return 1;
+    if (!PlantMapHeaderClass())
+        return 1;
     if (!VerifyTilesetPublished())
         return 1;
     if (!VerifyLayoutPublished())
@@ -956,20 +1051,21 @@ static int DoCreate(const char *packPath, const char *statePath)
                records[i].type, records[i].schema, records[i].role,
                records[i].rangeOffset);
         CHECK(records[i].reserved == 0);
-        /* Battle rows register as legacy-LZ compat; the R13-C text arena
-         * registers as a compat object - both are resource sidecars. */
+        /* Battle rows register as legacy-LZ compat; text and the R13-F map
+         * event/connection arenas register as compat objects. */
         CHECK(records[i].role == EMERALD_RESOURCE_ROLE_LEGACY_LZ
               || records[i].role == EMERALD_RESOURCE_ROLE_COMPAT_OBJECT);
         CHECK(records[i].sectionTag == 8u); /* GAME_DATA */
     }
     /* Test 16 layer 2: the sidecar carries exactly the HARNESS_ROW_COUNT
-     * game-data records plus the R13-C currentChar interior pointer --
+     * game-data records, the R13-C currentChar interior pointer, and the
+     * R13-F map event/connection arena pointers --
      * the neighborhood module added NO record (its storage is host
      * .bss/.data, never a serialized slice), and the opaque compiled
      * text pointer added none either (it is outside every resource
      * range, so it serializes verbatim in-band). */
-    CHECK(recordCount == HARNESS_ROW_COUNT + 1u);
-    printf("CREATE expected %u records\n", HARNESS_ROW_COUNT + 1u);
+    CHECK(recordCount == HARNESS_ROW_COUNT + 3u);
+    printf("CREATE expected %u records\n", HARNESS_ROW_COUNT + 3u);
     {
         /* The interior-pointer record carries the system-shared arena
          * identity with the zone-relative offset of gText_123Dot[1]
@@ -1001,6 +1097,29 @@ static int DoCreate(const char *packPath, const char *statePath)
         if (!foundText)
         {
             fprintf(stderr, "create: no currentChar sidecar record\n");
+            return 1;
+        }
+    }
+    {
+        bool32 foundEvents = FALSE;
+        bool32 foundConnections = FALSE;
+        size_t i2;
+
+        for (i2 = 0u; i2 < recordCount; i2++)
+        {
+            if (records[i2].type != GEN3_RESOURCE_TYPE_STRUCTURED_DATA
+             || records[i2].role != EMERALD_RESOURCE_ROLE_COMPAT_OBJECT)
+                continue;
+            if (records[i2].schema == EMERALD_MAP_SCHEMA_EVENTS)
+                foundEvents = TRUE;
+            if (records[i2].schema == EMERALD_MAP_SCHEMA_CONNECTIONS)
+                foundConnections = TRUE;
+        }
+        CHECK(foundEvents);
+        CHECK(foundConnections);
+        if (!foundEvents || !foundConnections)
+        {
+            fprintf(stderr, "create: map arena sidecar records missing\n");
             return 1;
         }
     }
@@ -1489,6 +1608,8 @@ static int DoLoad(const char *packPath, const char *statePath)
             CHECK(GameData()->filler[i] == 0xA5A50000u + (u32)i);
     }
     if (!RowPointersMatchSession())
+        return 1;
+    if (!VerifyMapHeaderRelocated())
         return 1;
     /* R11-B cross-restart: the post-load republish re-derives the migrated
      * object-event frames and palettes from THIS process's arena. The sheet

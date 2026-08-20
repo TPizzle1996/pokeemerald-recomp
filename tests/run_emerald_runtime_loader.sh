@@ -107,6 +107,10 @@ gcc -std=gnu99 -O2 -ffunction-sections -fdata-sections -Wl,--gc-sections \
     "$emerald_dir/pokedex_data_native.c" \
     "$emerald_dir/pokedex_native.generated.c" \
     "$emerald_dir/emerald_pokedex_compat.c" \
+    "$emerald_dir/map_data_native.c" \
+    "$emerald_dir/map_native.generated.c" \
+    "$emerald_dir/emerald_map_compat.c" \
+    "$here/emerald_map_harness_host.c" \
     "$here/emerald_runtime_loader_test.c" \
     -o "$tmp/emerald_runtime_loader_test"
 

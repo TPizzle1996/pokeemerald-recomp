@@ -54,8 +54,8 @@
  * owned by EmeraldTrainerCompat (also validated here for presence/ownership
  * but filled by that seam), 19/20 encounter, 21..37 frontier aux, and 38..40
  * pokedex are validated by the frontier/pokedex seams. */
-#if GAMEPLAY_NATIVE_RESOURCE_COUNT != 6908u
-#error "R13-E gameplay+trainer+encounter+frontier-aux+pokedex resource count disagrees with the generated inventory"
+#if GAMEPLAY_NATIVE_RESOURCE_COUNT != 8438u
+#error "R13-E gameplay+trainer+encounter+frontier+pokedex+map resource count disagrees with the generated inventory"
 #endif
 
 #define EMERALD_GAMEPLAY_SPECIES_COUNT 412u

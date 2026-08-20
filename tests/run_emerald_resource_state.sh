@@ -64,6 +64,7 @@ gcc -std=gnu99 -O2 -ffunction-sections -fdata-sections -Wl,--gc-sections \
     -I "$here/shim_include" \
     -DPORTABLE -DNONMATCHING -DUBFIX -DMODERN=1 \
     -DPLATFORM_SDL2 -DNATIVE_LINUX -DLINUX64=1 \
+    -DDESKTOP_EXTERNAL_GAME_CONTENT \
     "$core_dir/sha256.c" \
     "$core_dir/sha1.c" \
     "$core_dir/resource_lz.c" \
@@ -98,6 +99,29 @@ gcc -std=gnu99 -O2 -ffunction-sections -fdata-sections -Wl,--gc-sections \
     "$emerald_dir/text_skeletons_table.generated.c" \
     "$emerald_dir/text_skeleton_arrays.generated.c" \
     "$here/emerald_text_harness_stubs.c" \
+    "$emerald_dir/gameplay_data_native.c" \
+    "$emerald_dir/gameplay_native_table.generated.c" \
+    "$emerald_dir/gameplay_levelup.generated.c" \
+    "$emerald_dir/gameplay_callbacks.generated.c" \
+    "$emerald_dir/gameplay_item_callbacks_native.c" \
+    "$emerald_dir/emerald_gameplay_compat.c" \
+    "$here/emerald_gameplay_harness_stubs.c" \
+    "$emerald_dir/trainer_data_native.c" \
+    "$emerald_dir/trainer_native.generated.c" \
+    "$emerald_dir/emerald_trainer_compat.c" \
+    "$emerald_dir/encounter_data_native.c" \
+    "$emerald_dir/encounter_native.generated.c" \
+    "$emerald_dir/emerald_encounter_compat.c" \
+    "$emerald_dir/frontier_data_native.c" \
+    "$emerald_dir/frontier_native.generated.c" \
+    "$emerald_dir/frontier_aux_native.generated.c" \
+    "$emerald_dir/emerald_frontier_compat.c" \
+    "$emerald_dir/pokedex_data_native.c" \
+    "$emerald_dir/pokedex_native.generated.c" \
+    "$emerald_dir/emerald_pokedex_compat.c" \
+    "$emerald_dir/map_data_native.c" \
+    "$emerald_dir/map_native.generated.c" \
+    "$emerald_dir/emerald_map_compat.c" \
     "$root/src/platform/native_state.c" \
     "$root/src/platform/host_memory.c" \
     "$root/src/platform/native_world_neighborhood.c" \
@@ -118,7 +142,7 @@ echo "== TEST 1/2/3: create (process A) =="
 "$tmp/emerald_resource_state_test" create "$pack" "$state" > create.log
 cat create.log
 grep -q "CREATE ok" create.log
-grep -q "CREATE recordCount=11" create.log
+grep -q "CREATE recordCount=13" create.log
 
 echo "== TEST 1/2/3: load in a fresh process (process B) =="
 "$tmp/emerald_resource_state_test" load "$pack" "$state" > load.log
@@ -160,6 +184,28 @@ assert hex(int(char, 16) - int(l, 16)) == hex(int(label_start) + 3), \
 print(f"TEST T ok: creator {c} vs loader {l}, currentChar at label+3")
 EOF
 echo "TEST T ok (interior pointer relocated; opaque compiled pointer verbatim)"
+
+echo "== TEST M: R13-F map arena pointers relocate into the fresh session =="
+grep -q "CREATE map pointers:" create.log
+grep -q "LOAD map pointers:" load.log
+python3 - "$tmp" <<'EOF'
+import re, sys
+tmp = sys.argv[1]
+create = open(f"{tmp}/create.log").read()
+load = open(f"{tmp}/load.log").read()
+pattern = r"(?:CREATE|LOAD) map pointers: layout=(0x[0-9a-f]+) events=(0x[0-9a-f]+) scripts=(0x[0-9a-f]+) connections=(0x[0-9a-f]+)"
+m = re.search(pattern, create)
+assert m, "create log lacks map pointers"
+c = m.groups()
+m = re.search(pattern, load)
+assert m, "load log lacks map pointers"
+l = m.groups()
+assert c != l, f"map pointers identical across processes: {c}"
+assert c[1] != l[1], f"event arena pointer was not relocated: {c[1]}"
+assert c[3] != l[3], f"connection arena pointer was not relocated: {c[3]}"
+print(f"TEST M ok: creator {c} vs loader {l}")
+EOF
+echo "TEST M ok (schemas 43/44 relocated; image pointers re-derived)"
 
 echo "== TEST R: coincidental hull-band values capture as data =="
 regstate="harness-regression-slot-7.st"

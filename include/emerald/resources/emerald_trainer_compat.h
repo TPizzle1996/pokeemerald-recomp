@@ -44,8 +44,8 @@
 #include "emerald/resources/trainer_native.generated.h"
 #include "emerald/resources/trainer_data_native.h"
 
-#if GAMEPLAY_NATIVE_RESOURCE_COUNT != 6908u
-#error "R13-E gameplay+trainer+encounter+frontier-aux+pokedex resource count disagrees with the generated inventory"
+#if GAMEPLAY_NATIVE_RESOURCE_COUNT != 8438u
+#error "R13-E gameplay+trainer+encounter+frontier+pokedex+map resource count disagrees with the generated inventory"
 #endif
 
 #define EMERALD_TRAINER_SCHEMA_METADATA 16u

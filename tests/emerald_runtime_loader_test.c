@@ -52,6 +52,8 @@
 #include "constants/items.h"   /* R13-E3a-2 pyramid pickup assertions */
 #include "emerald/resources/emerald_pokedex_compat.h" /* R13-E3b Pokédex seam */
 #include "emerald/resources/pokedex_data_native.h"    /* R13-E3b HOST_DATA targets */
+#include "emerald/resources/emerald_map_compat.h"     /* R13-F map seam */
+#include "emerald/resources/map_data_native.h"        /* R13-F gMapHeaders HOST_DATA */
 #include "../src/emerald/resources/emerald_runtime_loader.c"
 
 /* ------------------------------------------------------------------ */
@@ -331,6 +333,62 @@ static void TestLoaderProductionPack(const char *packPath)
     CHECK("registration idempotent", status == EMERALD_COMPAT_OK);
 }
 
+/* R13-F focused publication proof.  A successful top-level registration is
+ * necessary but not sufficient for this harness: pin the complete map count,
+ * populated header metadata, and representative schema-43/44 arena identities
+ * in the same range index State-v5 consumes.  This offline harness's host shim
+ * deliberately supplies a zero gMapLayouts routing table; the real maps.o
+ * layout edges are covered by the native-world harnesses. */
+static void TestMapPublication(void)
+{
+    const struct EmeraldResourceRangeIndex *index =
+        EmeraldResourceCompat_GetRangeIndex();
+    bool foundEvents = false;
+    bool foundConnections = false;
+    bool foundHeaderMetadata = false;
+    size_t i;
+
+    CHECK("R13-F map resource count",
+          EmeraldMapCompat_GetPublishedCount()
+              == EMERALD_MAP_HEADER_COUNT + EMERALD_MAP_LAYOUT_COUNT
+               + EMERALD_MAP_EVENT_COUNT + EMERALD_MAP_CONNECTION_COUNT);
+    CHECK("R13-F event arena published",
+          EmeraldMapCompat_GetEventArenaBytes() != 0u);
+    CHECK("R13-F connection arena published",
+          EmeraldMapCompat_GetConnArenaBytes() != 0u);
+    CHECK("R13-F range index available", index != NULL);
+
+    for (i = 0u; i < EMERALD_MAP_HEADER_COUNT; i++)
+    {
+        struct EmeraldResourceRangeHit hit;
+
+        if (gMapHeaders[i].mapLayoutId != 0u
+         || gMapHeaders[i].music != 0u
+         || gMapHeaders[i].mapScripts != NULL)
+            foundHeaderMetadata = true;
+        if (!foundEvents && gMapHeaders[i].events != NULL && index != NULL
+         && EmeraldResourceRangeIndex_Lookup(
+                index, (uintptr_t)gMapHeaders[i].events, &hit))
+        {
+            foundEvents = hit.type == GEN3_RESOURCE_TYPE_STRUCTURED_DATA
+                       && hit.schema == EMERALD_MAP_SCHEMA_EVENTS
+                       && hit.role == EMERALD_RESOURCE_ROLE_COMPAT_OBJECT;
+        }
+        if (!foundConnections && gMapHeaders[i].connections != NULL
+         && index != NULL
+         && EmeraldResourceRangeIndex_Lookup(
+                index, (uintptr_t)gMapHeaders[i].connections, &hit))
+        {
+            foundConnections = hit.type == GEN3_RESOURCE_TYPE_STRUCTURED_DATA
+                            && hit.schema == EMERALD_MAP_SCHEMA_CONNECTIONS
+                            && hit.role == EMERALD_RESOURCE_ROLE_COMPAT_OBJECT;
+        }
+    }
+    CHECK("R13-F header metadata populated", foundHeaderMetadata);
+    CHECK("R13-F schema-43 event range", foundEvents);
+    CHECK("R13-F schema-44 connection range", foundConnections);
+}
+
 /* ------------------------------------------------------------------ */
 /* R13-C: text family focused tests                                   */
 /* ------------------------------------------------------------------ */
@@ -606,7 +664,7 @@ static void TestTextPublication(const char *packPath)
     packCount = Gen3ResourcePack_GetEntryCount(pack);
     printf("production pack entry count: %zu\n", packCount);
     CHECK("production pack entry count pinned at 18521+59 (R13-E3a-2)",
-          packCount == 18971u);
+          packCount == 20501u);
 
     /* Every text entry: C-side labels resolve by resource id; bundle ids
      * are captured for the blob-slice pass below. */
@@ -2770,6 +2828,7 @@ int main(int argc, char **argv)
     TestLoaderRefusesTextVariant(tempDir, prodPack, false, true,
                                  "text_missing");
     TestLoaderProductionPack(prodPack);
+    TestMapPublication();
     TestTextPublication(prodPack);
     TestTextSkeletonFills();
     TestTextSlotPointers();

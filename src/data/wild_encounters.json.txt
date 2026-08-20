@@ -23,6 +23,7 @@
 
 
 
+#if !defined(NATIVE_LINUX)
 ## for encounter in wild_encounter_group.encounters
 {% if existsIn(encounter, "land_mons") %}
 const struct WildPokemon {{ encounter.base_label }}_LandMons[] =
@@ -87,4 +88,5 @@ const struct WildPokemonHeader {{ wild_encounter_group.label }}[] =
         .fishingMonsInfo = NULL,
     },
 };
+#endif // !NATIVE_LINUX
 ## endfor

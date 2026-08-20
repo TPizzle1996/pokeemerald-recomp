@@ -100,9 +100,8 @@ const u32 gMonStillFrontPic_CircledQuestionMark[] = {0};
 #include "emerald/resources/emerald_resource_session.h"
 #include "emerald/resources/emerald_trainer_native_compat.h"
 #include "emerald/resources/pokemon_battle_slots.generated.h"
+#include "wild_encounter.h"
 #include "../src/emerald/resources/emerald_runtime_loader.c"
-#include "../src/emerald/resources/emerald_leaf_compat.c"
-#include "../src/emerald/resources/leaf_native_table.generated.c"
 
 /* ------------------------------------------------------------------ */
 /* Test harness (own copy - cannot share the harness TU)               */

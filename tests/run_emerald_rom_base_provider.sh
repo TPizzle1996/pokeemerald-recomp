@@ -32,12 +32,16 @@ echo "== guardrail 18: dependency-creep assertion =="
 # this suite; it is exercised by run_emerald_trainer_native_compat.sh.
 # text_native_exports.c is likewise platform-coupled (native-only exports of
 # compiled text constants; excluded from the GBA build at the Makefile level).
+# R13-F's map seam/fill-target TUs are native-only consumers, not dependencies
+# of the platform-neutral ROM_BASE adapter or session helper tested here.
 bad=$(grep -rEn '^[[:space:]]*#[[:space:]]*include[[:space:]]+[<"][[:space:]]*(global\.h|gba|SDL|platform|graphics|sound|rom|main\.h)' \
       --exclude='emerald_trainer_native_compat.c' \
       --exclude='emerald_pokemon_native_compat.c' \
       --exclude='emerald_object_event_compat.c' \
       --exclude='emerald_tileset_compat.c' \
       --exclude='emerald_layout_compat.c' \
+      --exclude='emerald_map_compat.c' \
+      --exclude='map_data_native.c' \
       --exclude='text_native_exports.c' \
       "$core_dir" "$inc_dir" "$emerald_dir" "$here/emerald_rom_base_provider_test.c" || true)
 if [ -n "$bad" ]; then

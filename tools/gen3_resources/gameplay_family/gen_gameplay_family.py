@@ -38,6 +38,7 @@ Usage:
 
 import argparse
 import hashlib
+import json
 import re
 import struct
 import sys
@@ -79,8 +80,24 @@ ROM_SHA1 = "f3ae088181bf583e55daf962a92bb46f4f1d07b7"
 # verdanturf 45 / fallarbor 45). The 300 frontier leaves tile
 # [0x5ced2e, 0x5d5aca) exactly (the 2 trailing pad bytes before
 # gBattleFrontierTrainers at 0x5d5acc are not part of any leaf).
-PINNED_TOTAL = 6908
-PINNED_BYTES = 509975
+#
+# R13-F (map metadata) adds four families, one resource per row:
+#   map-header       518 x 28 B GBA wire  = 14,504 B  (schemas 41)
+#   map-layout       441 x 24 B GBA wire  = 10,584 B  (schemas 42)
+#   map-events       507 bundles          =101,908 B  (schemas 43)
+#   map-connections   64 bundles          =  2,288 B  (schemas 44)
+# The header/layout/events/connection counts were re-derived from the
+# qualified ROM @ SHA-1 f3ae08...: 518 routed headers, 441 distinct layout
+# records (406 referenced by routed map headers + 35 orphan layouts, all
+# with a unique owner key), 507 distinct event bundles (object/warp/coord/bg
+# totals 2776/1313/375/720 exactly match the ROM and the task brief), and 64
+# routed maps with connections (the 65th _MapConnections symbol in the
+# reference ELF is an unreferenced orphan). The task-brief baseline native
+# sizes are corrected in the seam docs: MapHeader 48 B, MapLayout 40 B,
+# ObjectEventTemplate 24 B (both), CoordEvent 24 B, BgEvent 16 B, MapEvents
+# 40 B, MapConnections 16 B native.
+PINNED_TOTAL = 8438
+PINNED_BYTES = 639259
 PINNED_BY_FAMILY = {
     "species-base": (412, 11536),
     "species-name": (412, 4532),
@@ -129,6 +146,11 @@ PINNED_BY_FAMILY = {
     "pokedex-row": (387, 12384),
     "pokedex-order": (3, 2366),
     "pokedex-species-to-national": (1, 822),
+    # R13-F map metadata (one resource per row / bundle).
+    "map-header": (518, 14504),
+    "map-layout": (441, 10584),
+    "map-events": (507, 101908),
+    "map-connections": (64, 2288),
 }
 
 # (font key, reference ELF symbol)
@@ -1179,6 +1201,15 @@ def derive(elf, rom, pret):
         "desc_labels": pokedex_desc_labels,
     }
 
+    # ---- R13-F map metadata + event structure ----------------------------
+    # One resource per map row / bundle: emerald:data/map/<map>/{header,
+    # layout-meta, events, connections}. map_data carries the generated seam
+    # tables: the map key bijection ((group,num) <-> semantic key / routing
+    # index), the header/layout/event-bundle/connection publications, the
+    # script-address provenance map, and the R11 layout->blockdata/border/
+    # tileset bindings.
+    map_data = derive_map(elf, rom, root, add)
+
     rows.sort(key=lambda r: r[0])
     total = len(rows)
     if total != PINNED_TOTAL:
@@ -1195,7 +1226,575 @@ def derive(elf, rom, pret):
     move_keys = [mv_key(i) for i in range(355)]
     return rows, fam, levelup_idx_map, species_keys, move_keys, item_keys, \
         callback_rows, trainer_keys, party_keys, party_meta, class_keys, \
-        head_keys, infos, frontier_map, aux, pokedex_map
+        head_keys, infos, frontier_map, aux, pokedex_map, map_data
+
+
+# ------------------------------------------------------------------ R13-F map
+# Wire struct sizes (GBA):
+#   MapHeader        28 B   struct global.fieldmap.h:185
+#   MapLayout        24 B   struct 66-80
+#   ObjectEventTemplate 24 B
+#   WarpEvent         8 B
+#   CoordEvent       16 B
+#   BgEvent          12 B
+#   MapEvents        20 B
+#   MapConnection    12 B
+#   MapConnections    8 B
+_MAP_HEADER_WIRE = 28
+_MAP_LAYOUT_WIRE = 24
+_MAP_OBJECT_WIRE = 24
+_MAP_WARP_WIRE = 8
+_MAP_COORD_WIRE = 16
+_MAP_BG_WIRE = 12
+_MAP_EVENTS_WIRE = 20
+_MAP_CONN_WIRE = 12
+_MAP_CONNS_WIRE = 8
+
+
+def _map_key(name):
+    """Routed map display name -> semantic resource segment, mirroring the
+    R13-E2 map_groups.h constant derivation: 'Route101' -> 'route-101'."""
+    return name.lower().replace("_", "-")
+
+
+def derive_map(elf, rom, root, add):
+    """Derive the four R13-F map families and the seam tables. Returns
+    map_data (a dict consumed by emit_map). Appends one resource per row /
+    bundle to `rows`/`fam` via `add`."""
+    # (mapGroup,mapNum) -> semantic key (R13-E2 contract) for key bijection.
+    map_groups_h = (root / "include/constants/map_groups.h").read_text()
+    map_const = {}
+    for m in re.finditer(
+            r"#define\s+(MAP_[A-Z0-9_]+)\s*\((\d+)\s*\|\s*\((\d+)\s*<<\s*8\)\)",
+            map_groups_h):
+        map_const[(int(m.group(3)), int(m.group(2)))] = m.group(1)
+
+    # Routed maps in gMapGroups order: group index = position in
+    # map_groups.json group_order; mapNum = position within the group list.
+    gj = json.loads((root / "data/maps/map_groups.json").read_text())
+    group_order = gj["group_order"]
+    routed = []          # (key, group, num, symbol, header RomAddr)
+    for gi, grp in enumerate(group_order):
+        for ni, name in enumerate(gj[grp]):
+            c = map_const.get((gi, ni))
+            if c is None:
+                fail(f"map ({gi},{ni}) {name} has no MAP_ constant")
+            sym = elf.find(name)
+            if sym is None:
+                fail(f"map header symbol '{name}' not in the reference ELF")
+            routed.append((_map_key(name), gi, ni, name, sym[1]))
+    if len(routed) != 518:
+        fail(f"routed map count {len(routed)} != 518")
+
+    # --- layout frames (R11 bindings): layout symbol -> blockdata/border keys
+    layout_frames = (root / "include/emerald/resources/"
+                     "layout_frames.generated.h").read_text()
+    layout_bind = {}
+    for m in re.finditer(
+            r"LAYOUT_RECORD\((\w+_Layout),\s*\"([^\"]+)\",\s*\d+,\s*\"([^\"]+)\",\s*\d+\)",
+            layout_frames):
+        layout_bind[m.group(1)] = (m.group(2), m.group(3))  # (blockdata, border)
+
+    # --- tileset frames: gTileset_X symbol -> resource key prefix
+    ts_frames = (root / "include/emerald/resources/"
+                 "tileset_frames.generated.h").read_text()
+    ts_key = {}
+    for m in re.finditer(r"TILESET_STRUCT\((gTileset_\w+),\s*"
+                         r"\"emerald:tileset/([\w-]+)/tiles\"", ts_frames):
+        ts_key[m.group(1)] = "emerald:tileset/" + m.group(2)
+    if not ts_key:
+        fail("no TILESET_STRUCT records parsed")
+    # tileset struct GBA address -> key (for layout wire pointer provenance)
+    ts_addr = {}
+    for s in elf.symbols:
+        if (s[3] & 0xf) in (0, 1) and s[0] in ts_key:
+            ts_addr[s[1]] = ts_key[s[0]]
+
+    def addr_key(a):
+        """Find the semantic key for a GBA address (map/events/connection/
+        tileset), else None."""
+        for k, gi, ni, name, addr in routed:
+            if addr == a:
+                return k
+        return None
+
+    headers = []        # per-routed-map header records
+    blobs = []          # (rkey, canonical bytes) for artifact emission
+    for (key, gi, ni, name, symaddr) in routed:
+        roff = symaddr - GEN3_GBA_ROM_BASE
+        row = rom[roff:roff + _MAP_HEADER_WIRE]
+        if len(row) != _MAP_HEADER_WIRE:
+            fail(f"header {key}: short ROM row")
+        if elf.slice(elf.find(name), _MAP_HEADER_WIRE) != row:
+            fail(f"header {key}: ROM slice != ELF slice")
+        layptr = struct.unpack_from("<I", row, 0)[0]
+        evptr = struct.unpack_from("<I", row, 4)[0]
+        scptr = struct.unpack_from("<I", row, 8)[0]
+        coptr = struct.unpack_from("<I", row, 12)[0]
+        music = struct.unpack_from("<H", row, 16)[0]
+        layout_id = struct.unpack_from("<H", row, 18)[0]
+        flags_byte = row[26]
+        rkey = "emerald:data/map/%s/header" % key
+        add("map-header", rkey, name, _MAP_HEADER_WIRE, roff)
+        blobs.append((rkey, row))
+        headers.append(dict(key=key, group=gi, num=ni, symbol=name,
+                            rkey=rkey, rom_addr=symaddr, layout_addr=layptr,
+                            events_addr=evptr, scripts_addr=scptr,
+                            conn_addr=coptr, music=music, layout_id=layout_id,
+                            flags=flags_byte))
+    if len(headers) != 518:
+        fail(f"map-header resources {len(headers)} != 518")
+
+    # --- layout-meta resources (441 distinct layout records)
+    # owner = first routed map (group order) that references the layout addr;
+    # orphan layouts (not referenced by any routed header) key by the dashed
+    # layout-symbol prefix.
+    own_by_addr = {}
+    for h in headers:
+        own_by_addr.setdefault(h["layout_addr"], h["key"])
+    lay_done_id = {}
+    lays_sorted = sorted(h["layout_addr"] for h in headers)
+    layout_records = []
+    distinct_lays = {}
+    for s in elf.symbols:
+        if (s[3] & 0xf) in (0, 1) and s[0].endswith("_Layout"):
+            distinct_lays.setdefault(s[1], s[0])
+    for addr, symbol in sorted(distinct_lays.items()):
+        owner = own_by_addr.get(addr)
+        if owner is None:
+            owner = symbol[:-len("_Layout")].lower().replace("_", "-")
+        roff = addr - GEN3_GBA_ROM_BASE
+        row = rom[roff:roff + _MAP_LAYOUT_WIRE]
+        if len(row) != _MAP_LAYOUT_WIRE:
+            fail(f"layout {symbol}: short ROM row")
+        if elf.slice(elf.find(symbol), _MAP_LAYOUT_WIRE) != row:
+            fail(f"layout {symbol}: ROM slice != ELF slice")
+        width, height = struct.unpack_from("<ii", row, 0)
+        border_ptr = struct.unpack_from("<I", row, 8)[0]
+        map_ptr = struct.unpack_from("<I", row, 12)[0]
+        prim_ptr = struct.unpack_from("<I", row, 16)[0]
+        sec_ptr = struct.unpack_from("<I", row, 20)[0]
+        (blockdata_key, border_key) = layout_bind.get(symbol, (None, None))
+        rkey = "emerald:data/map/%s/layout-meta" % owner
+        if lay_done_id.get(rkey):
+            fail(f"duplicate layout-meta resource {rkey}")
+        lay_done_id[rkey] = True
+        add("map-layout", rkey, symbol, _MAP_LAYOUT_WIRE, roff)
+        blobs.append((rkey, row))
+        layout_records.append(dict(key=owner, symbol=symbol, rkey=rkey,
+                                   rom_addr=addr, width=width, height=height,
+                                   border_addr=border_ptr, map_addr=map_ptr,
+                                   prim_addr=prim_ptr, sec_addr=sec_ptr,
+                                   blockdata_key=blockdata_key,
+                                   border_key=border_key,
+                                   prim_key=ts_addr.get(prim_ptr),
+                                   sec_key=ts_addr.get(sec_ptr)))
+    if len(layout_records) != 441:
+        fail(f"map-layout resources {len(layout_records)} != 441")
+
+    # --- event-bundle resources (507 distinct _MapEvents blocks; the 11
+    # unused contest-hall maps share ContestHall_MapEvents in the ROM but are
+    # published as events=NULL in the recomp, see seam docs).
+    me_blocks = {}
+    for s in elf.symbols:
+        if s[0].endswith("_MapEvents"):
+            me_blocks.setdefault(s[1], s[0])
+    head_events_to_key = {}
+    for h in headers:
+        head_events_to_key.setdefault(h["events_addr"], h["key"])
+    event_records = []
+    ev_done = {}
+    for addr, symbol in sorted(me_blocks.items()):
+        roff = addr - GEN3_GBA_ROM_BASE
+        me = rom[roff:roff + _MAP_EVENTS_WIRE]
+        ocount, wcount, ccount, bcount = me[0], me[1], me[2], me[3]
+        optr, wptr, cptr, bptr = struct.unpack_from("<IIII", me, 4)
+        ob, wb, cb, bb = (ocount * _MAP_OBJECT_WIRE,
+                          wcount * _MAP_WARP_WIRE,
+                          ccount * _MAP_COORD_WIRE,
+                          bcount * _MAP_BG_WIRE)
+        segs = []
+        if ocount:
+            segs.append((optr, ob))
+        if wcount:
+            segs.append((wptr, wb))
+        if ccount:
+            segs.append((cptr, cb))
+        if bcount:
+            segs.append((bptr, bb))
+        segs.sort()
+        contiguous = True
+        for i in range(len(segs) - 1):
+            if segs[i][0] + segs[i][1] != segs[i + 1][0]:
+                contiguous = False
+                break
+        if segs and segs[-1][0] + segs[-1][1] != addr:
+            contiguous = False
+        if not contiguous:
+            fail(f"event bundle {symbol}: arrays not contiguous before "
+                 f"the MapEvents struct")
+        # canonical = [object][warp][coord][bg][MapEvents] exact ROM block
+        parts = []
+        if ocount:
+            parts.append(rom[optr - GEN3_GBA_ROM_BASE:
+                             optr - GEN3_GBA_ROM_BASE + ob])
+        if wcount:
+            parts.append(rom[wptr - GEN3_GBA_ROM_BASE:
+                             wptr - GEN3_GBA_ROM_BASE + wb])
+        if ccount:
+            parts.append(rom[cptr - GEN3_GBA_ROM_BASE:
+                             cptr - GEN3_GBA_ROM_BASE + cb])
+        if bcount:
+            parts.append(rom[bptr - GEN3_GBA_ROM_BASE:
+                             bptr - GEN3_GBA_ROM_BASE + bb])
+        parts.append(me)
+        canon = b"".join(parts)
+        # verify the canonical block is exactly the contiguous ROM slice
+        first = segs[0][0] if segs else addr
+        span = rom[first - GEN3_GBA_ROM_BASE:
+                   first - GEN3_GBA_ROM_BASE + len(canon)]
+        if span != canon:
+            fail(f"event bundle {symbol}: canonical block != contiguous ROM "
+                 f"slice")
+        owner = head_events_to_key.get(addr)
+        if owner is None:
+            # shared ContestHall bundle: not its own routed map resource;
+            # skip (the 11 contest halls publish events=NULL).
+            continue
+        rkey = "emerald:data/map/%s/events" % owner
+        if ev_done.get(rkey):
+            fail(f"duplicate events resource {rkey}")
+        ev_done[rkey] = True
+        add("map-events", rkey, symbol, len(canon), first - GEN3_GBA_ROM_BASE)
+        blobs.append((rkey, canon))
+        # script provenance within bundle (GBA logical addresses)
+        obj_scripts = []
+        if ocount:
+            for i in range(ocount):
+                obj_scripts.append(struct.unpack_from(
+                    "<I", rom, optr - GEN3_GBA_ROM_BASE + i * 24 + 0x10)[0])
+        coord_scripts = []
+        if ccount:
+            for i in range(ccount):
+                coord_scripts.append(struct.unpack_from(
+                    "<I", rom, cptr - GEN3_GBA_ROM_BASE + i * 16 + 8)[0])
+        bg_scripts = []   # BgEvent overlay: sign kind scripts @ offset 8
+        if bcount:
+            for i in range(bcount):
+                base = bptr - GEN3_GBA_ROM_BASE + i * _MAP_BG_WIRE
+                kind = rom[base + 5]
+                if 0 <= kind <= 4:   # BG_EVENT_PLAYER_FACING_* -> script
+                    bg_scripts.append(struct.unpack_from("<I", rom, base + 8)[0])
+                else:
+                    bg_scripts.append(0)
+        event_records.append(dict(key=owner, map_symbol=None, rkey=rkey,
+                                  symbol=symbol, rom_addr=addr,
+                                  ocount=ocount, wcount=wcount,
+                                  ccount=ccount, bcount=bcount,
+                                  optr=optr, wptr=wptr, cptr=cptr, bptr=bptr,
+                                  obj_scripts=obj_scripts,
+                                  coord_scripts=coord_scripts,
+                                  bg_scripts=bg_scripts))
+    if len(event_records) != 507:
+        fail(f"map-events resources {len(event_records)} != 507")
+
+    # --- connection resources (64 routed maps with connections) -----------
+    conn_records = []
+    for h in headers:
+        coptr = h["conn_addr"]
+        if coptr == 0:
+            continue
+        # resolve the connection block symbol (provenance) & canonical bytes
+        roff = coptr - GEN3_GBA_ROM_BASE
+        conns = rom[roff:roff + _MAP_CONNS_WIRE]
+        count = struct.unpack_from("<i", conns, 0)[0]
+        list_ptr = struct.unpack_from("<I", conns, 4)[0]
+        arr = rom[list_ptr - GEN3_GBA_ROM_BASE:
+                  list_ptr - GEN3_GBA_ROM_BASE + count * _MAP_CONN_WIRE]
+        # The qualifying ROM lays each map's connections as the CONTIGUOUS
+        # block [connection array (cnt x 12) @ list_ptr][MapConnections struct
+        # (8) @ list_ptr+cnt*12 = coptr], and consecutive maps tile (see
+        # _MapConnections/_MapConnectionsList). The canonical slice therefore
+        # starts at list_ptr (array-first), NOT at coptr -- slicing from coptr
+        # with the struct+array concatenation bleeds into the next map's data.
+        canon = arr + conns
+        conn_slice_off = list_ptr - GEN3_GBA_ROM_BASE
+        # array bytes + struct must equal the contiguous ROM slice at list_ptr
+        if rom[conn_slice_off:conn_slice_off + len(canon)] != canon:
+            fail(f"connections {h['key']}: contiguous array+struct slice "
+                 "does not reproduce the canonical bytes")
+        sym_at = [s[0] for s in elf.symbols
+                  if s[1] == coptr and s[0].endswith("_MapConnections")]
+        sym = sym_at[0] if sym_at else (h["symbol"] + "_MapConnections")
+        # validate against ELF slice of the connection block symbol (8 bytes)
+        con_sym = elf.find(sym)
+        if con_sym is None or con_sym[1] - GEN3_GBA_ROM_BASE != roff:
+            fail(f"connections {h['key']}: no symbol at connection block")
+        # The _MapConnections/_MapConnectionsList labels are size-0 STT_NOTYPE
+        # symbols (address-only); validate by address + byte content, not size.
+        if elf.slice(con_sym, _MAP_CONNS_WIRE) != conns:
+            fail(f"connections {h['key']}: ROM block != ELF slice")
+        # validate the list array bytes against ROM
+        list_sym = elf.find(sym[:-len("MapConnections")] + "MapConnectionsList")
+        if list_sym is None or list_sym[1] - GEN3_GBA_ROM_BASE != (list_ptr - GEN3_GBA_ROM_BASE):
+            fail(f"connections {h['key']}: list symbol mismatch")
+        if elf.slice(list_sym, count * _MAP_CONN_WIRE) != arr:
+            fail(f"connections {h['key']}: ROM list != ELF slice")
+        rkey = "emerald:data/map/%s/connections" % h["key"]
+        add("map-connections", rkey, sym, len(canon), conn_slice_off)
+        blobs.append((rkey, canon))
+        conn_records.append(dict(key=h["key"], rkey=rkey, count=count,
+                                 rom_addr=coptr, list_addr=list_ptr))
+    if len(conn_records) != 64:
+        fail(f"map-connections resources {len(conn_records)} != 64")
+
+    # --- seam tables ------------------------------------------------------
+    # routing index = position in the group-order traversal (0..517); the map
+    # key bijection is (group,num) <-> key, and header index i corresponds to
+    # group table [group][num].
+    idx_by_key = {}
+    routing = headers  # already in group-order
+    for i, h in enumerate(routing):
+        idx_by_key[h["key"]] = i
+    events_by_key = {}
+    for e in event_records:
+        events_by_key[e["key"]] = e
+    conn_by_key = {}
+    for c in conn_records:
+        conn_by_key[c["key"]] = c
+    layout_by_key = {}
+    for lrec in layout_records:
+        layout_by_key[lrec["key"]] = lrec
+    # per-header: resolved layout/events/connections keys
+    header_join = []
+    for h in headers:
+        ev = events_by_key.get(h["key"])
+        co = conn_by_key.get(h["key"])
+        lay = own_by_addr.get(h["layout_addr"])
+        header_join.append(dict(h, layout_key=(layout_by_key.get(lay) or
+                                               {}).get("rkey"),
+                                events_key=(ev["rkey"] if ev else ""),
+                                connections_key=(co["rkey"] if co else ""),
+                                events_count=(ev is not None)))
+    return dict(headers=header_join, layouts=sorted(layout_records,
+                                                     key=lambda r: r["key"]),
+                events=sorted(event_records, key=lambda r: r["key"]),
+                connections=sorted(conn_records, key=lambda r: r["key"]),
+                idx_by_key=idx_by_key,
+                layout_by_key=layout_by_key,
+                blobs=blobs)
+
+
+# ------------------------------------------------------------------ emit_map
+# R13-F seam tables: per-map header/layout-meta/event-bundle/connection keys +
+# event-bundle metadata (per-type row counts, provenance GBA addresses) + R11
+# layout pointer-target bindings (layout -> blockdata/border/tileset keys).
+# Consumed by EmeraldMapCompat (include/src/emerald/resources/
+# emerald_map_compat.*). Deterministic; --check must be a no-op diff.
+def emit_map(map_data, outdir, root, args):
+    headers = map_data["headers"]          # group-order (routing index = pos)
+    layouts = map_data["layouts"]          # sorted by key
+    events = map_data["events"]            # sorted by key
+    conns = map_data["connections"]        # sorted by key
+    idx_by_key = map_data["idx_by_key"]
+
+    if len(headers) != 518:
+        fail(f"emit_map: {len(headers)} headers")
+    if len(layouts) != 441:
+        fail(f"emit_map: {len(layouts)} layouts")
+    if len(events) != 507:
+        fail(f"emit_map: {len(events)} events")
+    if len(conns) != 64:
+        fail(f"emit_map: {len(conns)} connections")
+
+    MAPN = "EMERALD_MAP_"
+    hdr = [
+        "/* Generated by tools/gen3_resources/gameplay_family/"
+        "gen_gameplay_family.py.",
+        " * Do not edit by hand; re-run the generator and --check it.",
+        " *",
+        " * R13-F map metadata publication maps (EmeraldMapCompat seam).",
+        " * kMapHeaderKeys[i] is the per-map header resource key in routing",
+        " * order (i == the (mapGroup,mapNum) bijection position); "
+        "kMapHeaderGroups/",
+        " * kMapHeaderNums carry that bijection explicitly. Layout, event and",
+        " * connection families are each sorted by canonical key. The seam",
+        " * validates every resource (schema/size/ROM_BASE winner/set equality),",
+        " * the script GBA addresses (provenance), the R11 layout pointer-target",
+        " * bindings, and that every connection target map exists, then publishes",
+        " * the native HOST_DATA tables.",
+        " */",
+        "#ifndef EMERALD_RESOURCES_MAP_NATIVE_GENERATED_H",
+        "#define EMERALD_RESOURCES_MAP_NATIVE_GENERATED_H",
+        "",
+        "#include <stdint.h>",
+        "",
+        f"#define {MAPN}SCHEMA_HEADER      41u",
+        f"#define {MAPN}SCHEMA_LAYOUT      42u",
+        f"#define {MAPN}SCHEMA_EVENTS      43u",
+        f"#define {MAPN}SCHEMA_CONNECTIONS 44u",
+        f"#define {MAPN}HEADER_COUNT       {len(headers)}u",
+        f"#define {MAPN}LAYOUT_COUNT       {len(layouts)}u",
+        f"#define {MAPN}EVENT_COUNT        {len(events)}u",
+        f"#define {MAPN}CONNECTION_COUNT   {len(conns)}u",
+        f"#define {MAPN}HEADER_BYTES       {len(headers) * _MAP_HEADER_WIRE}u",
+        f"#define {MAPN}LAYOUT_BYTES       {len(layouts) * _MAP_LAYOUT_WIRE}u",
+        f"#define {MAPN}CONNS_BYTES        {sum(c['count'] * _MAP_CONN_WIRE + _MAP_CONNS_WIRE for c in conns)}u",
+        "",
+        "/* routing-order key + bijection + provenance. */",
+        "extern const char *const kMapHeaderKeys[EMERALD_MAP_HEADER_COUNT];",
+        "extern const uint8_t kMapHeaderGroups[EMERALD_MAP_HEADER_COUNT];",
+        "extern const uint8_t kMapHeaderNums[EMERALD_MAP_HEADER_COUNT];",
+        "extern const uint32_t kMapHeaderAddrs[EMERALD_MAP_HEADER_COUNT];",
+        "extern const char *const "
+        "kMapLayoutKeyByHeader[EMERALD_MAP_HEADER_COUNT];",
+        "extern const char *const "
+        "kMapEventsKeyByHeader[EMERALD_MAP_HEADER_COUNT];",
+        "extern const char *const "
+        "kMapConnectionsKeyByHeader[EMERALD_MAP_HEADER_COUNT];",
+        "",
+        "/* layout structural rows: key + provenance width/height + R11",
+        " * pointer-target bindings (blockdata/border/tileset resource keys,",
+        " * \"\" when not derivable). */",
+        "extern const char *const kMapLayoutKeys[EMERALD_MAP_LAYOUT_COUNT];",
+        "extern const uint32_t kMapLayoutAddrs[EMERALD_MAP_LAYOUT_COUNT];",
+        "extern const uint16_t kMapLayoutWidth[EMERALD_MAP_LAYOUT_COUNT];",
+        "extern const uint16_t kMapLayoutHeight[EMERALD_MAP_LAYOUT_COUNT];",
+        "extern const char *const "
+        "kMapLayoutBlockdataKey[EMERALD_MAP_LAYOUT_COUNT];",
+        "extern const char *const "
+        "kMapLayoutBorderKey[EMERALD_MAP_LAYOUT_COUNT];",
+        "extern const char *const "
+        "kMapLayoutPrimaryKey[EMERALD_MAP_LAYOUT_COUNT];",
+        "extern const char *const "
+        "kMapLayoutSecondaryKey[EMERALD_MAP_LAYOUT_COUNT];",
+        "",
+        "/* event bundles sorted by key: per-type row counts + provenance",
+        " * script GBA addresses (flat, prefix-sum starts). */",
+        "struct EmeraldMapEventRecord",
+        "{",
+        "    const char *name;",
+        "    uint32_t gbaAddr;  /* MapEvents struct GBA address */",
+        "    uint8_t objectCount;",
+        "    uint8_t warpCount;",
+        "    uint8_t coordCount;",
+        "    uint8_t bgCount;",
+        "};",
+        "extern const struct EmeraldMapEventRecord "
+        "kMapEvents[EMERALD_MAP_EVENT_COUNT];",
+        "",
+        "extern const uint32_t "
+        "kMapEventObjectScriptStart[EMERALD_MAP_EVENT_COUNT + 1u];",
+        "extern const uint32_t "
+        "kMapEventCoordScriptStart[EMERALD_MAP_EVENT_COUNT + 1u];",
+        "extern const uint32_t "
+        "kMapEventBgScriptStart[EMERALD_MAP_EVENT_COUNT + 1u];",
+        "extern const uint32_t kMapEventObjectScriptAddrs[];",
+        "extern const uint32_t kMapEventCoordScriptAddrs[];",
+        "extern const uint32_t kMapEventBgScriptAddrs[];",
+        "",
+        "/* connections sorted by key. */",
+        "struct EmeraldMapConnectionRecord",
+        "{",
+        "    const char *name;",
+        "    uint32_t gbaAddr;  /* MapConnections block GBA address */",
+        "    int32_t count;",
+        "};",
+        "extern const struct EmeraldMapConnectionRecord "
+        "kMapConnections[EMERALD_MAP_CONNECTION_COUNT];",
+        "",
+        "#endif /* EMERALD_RESOURCES_MAP_NATIVE_GENERATED_H */",
+    ]
+
+    c_out = [
+        "/* Generated by tools/gen3_resources/gameplay_family/"
+        "gen_gameplay_family.py.",
+        " * Do not edit by hand; re-run the generator and --check it.",
+        " */",
+        '#include "emerald/resources/map_native.generated.h"',
+        "",
+        "const char *const kMapHeaderKeys[EMERALD_MAP_HEADER_COUNT] =",
+        "{",
+    ]
+    for h in headers:
+        c_out.append(f'    "{h["rkey"]}",')
+    c_out += ["};", "", "const uint8_t kMapHeaderGroups[EMERALD_MAP_HEADER_COUNT] =", "{"]
+    c_out += [f"    {h['group']}u," for h in headers]
+    c_out += ["};", "", "const uint8_t kMapHeaderNums[EMERALD_MAP_HEADER_COUNT] =", "{"]
+    c_out += [f"    {h['num']}u," for h in headers]
+    c_out += ["};", "", "const uint32_t kMapHeaderAddrs[EMERALD_MAP_HEADER_COUNT] =", "{"]
+    c_out += [f"    0x{h['rom_addr']:08x}u," for h in headers]
+    c_out += ["};", "",
+              "const char *const kMapLayoutKeyByHeader[EMERALD_MAP_HEADER_COUNT] =",
+              "{"]
+    for h in headers:
+        c_out.append(f'    "{h["layout_key"]}",')
+    c_out += ["};", "",
+              "const char *const kMapEventsKeyByHeader[EMERALD_MAP_HEADER_COUNT] =",
+              "{"]
+    for h in headers:
+        c_out.append(f'    "{h["events_key"]}",')
+    c_out += ["};", "",
+              "const char *const kMapConnectionsKeyByHeader[EMERALD_MAP_HEADER_COUNT] =",
+              "{"]
+    for h in headers:
+        c_out.append(f'    "{h["connections_key"]}",')
+    c_out += ["};", "",
+              "const char *const kMapLayoutKeys[EMERALD_MAP_LAYOUT_COUNT] =",
+              "{"]
+    for l in layouts:
+        c_out.append(f'    "{l["rkey"]}",')
+    c_out += ["};", "", "const uint32_t kMapLayoutAddrs[EMERALD_MAP_LAYOUT_COUNT] =", "{"]
+    c_out += [f"    0x{l['rom_addr']:08x}u," for l in layouts]
+    c_out += ["};", "", "const uint16_t kMapLayoutWidth[EMERALD_MAP_LAYOUT_COUNT] =", "{"]
+    c_out += [f"    {l['width']}u," for l in layouts]
+    c_out += ["};", "", "const uint16_t kMapLayoutHeight[EMERALD_MAP_LAYOUT_COUNT] =", "{"]
+    c_out += [f"    {l['height']}u," for l in layouts]
+    c_out += ["};", ""]
+    for name, field in (("kMapLayoutBlockdataKey", "blockdata_key"),
+                        ("kMapLayoutBorderKey", "border_key"),
+                        ("kMapLayoutPrimaryKey", "prim_key"),
+                        ("kMapLayoutSecondaryKey", "sec_key")):
+        c_out += [f"const char *const {name}[EMERALD_MAP_LAYOUT_COUNT] =", "{"]
+        for l in layouts:
+            c_out.append(f'    "{l.get(field) or ""}",')
+        c_out += ["};", ""]
+
+    obj_addrs, coord_addrs, bg_addrs = [], [], []
+    obj_starts, coord_starts, bg_starts = [0], [0], [0]
+    c_out += ["", "const struct EmeraldMapEventRecord "
+                  "kMapEvents[EMERALD_MAP_EVENT_COUNT] =", "{"]
+    for e in events:
+        c_out.append(f'    {{"{e["rkey"]}", 0x{e["rom_addr"]:08x}u, '
+                     f'{e["ocount"]}u, {e["wcount"]}u, {e["ccount"]}u, '
+                     f'{e["bcount"]}u}},')
+        obj_addrs += e["obj_scripts"]
+        coord_addrs += e["coord_scripts"]
+        bg_addrs += e["bg_scripts"]
+        obj_starts.append(len(obj_addrs))
+        coord_starts.append(len(coord_addrs))
+        bg_starts.append(len(bg_addrs))
+    c_out += ["};", ""]
+    for name, starts, addrs in (("kMapEventObjectScriptStart", obj_starts, obj_addrs),
+                                ("kMapEventCoordScriptStart", coord_starts, coord_addrs),
+                                ("kMapEventBgScriptStart", bg_starts, bg_addrs)):
+        c_out += [f"const uint32_t {name}[EMERALD_MAP_EVENT_COUNT + 1u] =", "{"]
+        c_out += [f"    {s}u," for s in starts]
+        c_out += ["};", ""]
+        aname = name.replace("Start", "Addrs")
+        c_out += [f"const uint32_t {aname}[] =", "{"]
+        c_out += [f"    0x{a:08x}u," for a in addrs]
+        c_out += ["};", ""]
+
+    c_out += ["", "const struct EmeraldMapConnectionRecord "
+                  "kMapConnections[EMERALD_MAP_CONNECTION_COUNT] =", "{"]
+    for c in conns:
+        c_out.append('    {"%s", 0x%08xu, %d},' % (c["rkey"],
+                                                    c["rom_addr"], c["count"]))
+    c_out += ["};", ""]
+
+    write_if(root / "include/emerald/resources/map_native.generated.h", hdr, args)
+    write_if(root / "src/emerald/resources/map_native.generated.c", c_out, args)
 
 
 def _f(key, family):
@@ -1278,6 +1877,11 @@ def _f(key, family):
         return "pokedex-species-to-national"
     if key.startswith("emerald:data/pokedex/"):
         return "pokedex-row"
+    if key.startswith("emerald:data/map/"):
+        return {"header": "map-header", "layout-meta": "map-layout",
+                "events": "map-events",
+                "connections": "map-connections"}.get(
+                    key.rsplit("/", 1)[-1], "map-header")
     return "?"
 
 
@@ -1318,6 +1922,8 @@ SCHEMA = {
     "frontier-wild-headers": 36, "frontier-wild": 37,
     "pokedex-row": 38, "pokedex-order": 39,
     "pokedex-species-to-national": 40,
+    "map-header": 41, "map-layout": 42, "map-events": 43,
+    "map-connections": 44,
     "font": 1,
 }
 
@@ -2522,6 +3128,8 @@ def _artifact_sub(key):
         return "pokedex-species-to-national"
     if key.startswith("emerald:data/pokedex/"):
         return "pokedex-row"
+    if key.startswith("emerald:data/map/"):
+        return key.rsplit("/", 1)[-1]  # header / layout-meta / events / connections
     return "font"
 
 
@@ -2550,12 +3158,13 @@ def main():
     elf = Elf32(open(args.elf, "rb").read())
     rows, fam, levelup_idx_map, species_keys, move_keys, item_keys, \
         callback_rows, trainer_keys, party_keys, party_meta, class_keys, \
-        enc_head_keys, enc_infos, frontier_map, aux, pokedex_map = \
+        enc_head_keys, enc_infos, frontier_map, aux, pokedex_map, map_data = \
         derive(elf, rom, pret)
     emit_gameplay(rows, fam, levelup_idx_map, species_keys, move_keys,
                   item_keys, callback_rows, trainer_keys, party_keys,
                   party_meta, class_keys, enc_head_keys, enc_infos,
                   frontier_map, aux, pokedex_map, outdir, root, args)
+    emit_map(map_data, outdir, root, args)
 
     print(f"gameplay resources: {len(rows)}, "
           f"{sum(r[3] for r in rows)} B (D1+D2+E1+E2; evolutions excluded)")
