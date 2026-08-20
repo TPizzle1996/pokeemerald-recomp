@@ -5865,6 +5865,13 @@
     FRONTIER_MON_STARMIE_8,     \
     -1
 
+/* R13-E3a-1: the native mon-set leaves are published by the frontier seam into
+ * its packed arena (frontier_data_native.c); the compiled const arrays below
+ * are guarded out of the native link (REFUSE-class, no fallback). GBA keeps
+ * them verbatim. The FRONTIER_MONS_* macros above stay defined (they are only
+ * ever used by these arrays, so on native they are harmless preprocessor
+ * definitions). */
+#ifndef NATIVE_LINUX
 const u16 gBattleFrontierTrainerMons_Brady[] =
 {
     FRONTIER_MONS_YOUNGSTER_LASS_1
@@ -7367,3 +7374,4 @@ const u16 gBattleFrontierTrainerMons_Gretel[] =
 {
     FRONTIER_MONS_AROMA_LADY_3
 };
+#endif /* NATIVE_LINUX */

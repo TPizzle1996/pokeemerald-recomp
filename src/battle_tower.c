@@ -79,6 +79,10 @@ static void FillPartnerParty(u16 trainerId);
 static void SetEReaderTrainerChecksum(struct BattleTowerEReaderTrainer *ereaderTrainer);
 static u8 SetTentPtrsGetLevel(void);
 
+/* R13-E3a-1: the native held-items table is the seam-published HOST_DATA
+ * fill target (frontier_data_native.c); the compiled const payload is guarded
+ * out of the native link (REFUSE-class, no fallback). GBA verbatim. */
+#ifndef NATIVE_LINUX
 const u16 gBattleFrontierHeldItems[] =
 {
     [BATTLE_FRONTIER_ITEM_NONE]           = ITEM_NONE,
@@ -145,6 +149,7 @@ const u16 gBattleFrontierHeldItems[] =
     [BATTLE_FRONTIER_ITEM_LUCKY_PUNCH]    = ITEM_LUCKY_PUNCH,
     [BATTLE_FRONTIER_ITEM_GANLON_BERRY]   = ITEM_GANLON_BERRY,
 };
+#endif /* NATIVE_LINUX */
 
 #include "data/battle_frontier/battle_frontier_trainer_mons.h"
 #include "data/battle_frontier/battle_frontier_trainers.h"

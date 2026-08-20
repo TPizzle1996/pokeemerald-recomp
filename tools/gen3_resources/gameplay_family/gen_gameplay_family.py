@@ -66,8 +66,21 @@ ROM_SHA1 = "f3ae088181bf583e55daf962a92bb46f4f1d07b7"
 # (src/data/pokemon/evolution.h). Publishing vanilla evolution data would
 # silently overwrite that fork behaviour, which the R13-D stage brief forbids
 # (STOP for that family; keep compiled).
-PINNED_TOTAL = 5672
-PINNED_BYTES = 422364
+#
+# R13-E3a-1 adds the frontier families (schema 21 trainer metadata 300 x 52 B
+# = 15600 B; schema 22 mon-set index-stream leaves 300 = 28060 B; schema 23
+# shared 882-mons pool 1 x 14112 B; schema 24 held-items 126 B; schema 25
+# banned-species 22 B) plus the three Battle Tent families (tent-trainer 90 x
+# 52 B = 4680 B; tent-mon-set 90 leaves = 1558 B; tent-mon 3 pools =
+# 2560 B). Mon index-stream model confirmed from the ROM: every frontier
+# trainer's monSet GBA ptr resolves to a distinct 0xFFFF-terminated leaf and
+# every leaf index is 0..881; every tent trainer's monSet ptr resolves to a
+# leaf whose indices are within that tent's own pool (slateport 70 /
+# verdanturf 45 / fallarbor 45). The 300 frontier leaves tile
+# [0x5ced2e, 0x5d5aca) exactly (the 2 trailing pad bytes before
+# gBattleFrontierTrainers at 0x5d5acc are not part of any leaf).
+PINNED_TOTAL = 6458
+PINNED_BYTES = 489082
 PINNED_BY_FAMILY = {
     "species-base": (412, 11536),
     "species-name": (412, 4532),
@@ -88,6 +101,14 @@ PINNED_BY_FAMILY = {
     "trainer-class-name": (66, 858),
     "encounter-headers": (1, 2500),
     "encounter": (209, 7900),
+    "frontier-trainer": (300, 15600),
+    "frontier-mon-set": (300, 28060),
+    "frontier-mon": (1, 14112),
+    "frontier-held-items": (1, 126),
+    "frontier-banned-species": (1, 22),
+    "tent-trainer": (90, 4680),
+    "tent-mon-set": (90, 1558),
+    "tent-mon": (3, 2560),
     "font": (10, 294912),
 }
 
@@ -679,6 +700,142 @@ def derive(elf, rom, pret):
     if len(infos) != 209:
         fail(f"distinct infos {len(infos)} != 209")
 
+    # --- Battle Frontier trainer/mon graph + Battle Tents (R13-E3a-1) -------
+    # Frontier trainer metadata rows are the exact 52-byte GBA wire slices of
+    # gBattleFrontierTrainers; each row's GBA monSet pointer (u32 @ wire offset
+    # 48) resolves to the trainer's own 0xFFFF-terminated u16 index-stream leaf
+    # (indices 0..881 into the shared 882-row gBattleFrontierMons pool). The 300
+    # leaves tile [0x5ced2e, 0x5d5aca) contiguously (2 pad bytes precede
+    # gBattleFrontierTrainers). Tents (slateport/verdanturf/fallarbor) share the
+    # same trainer schema; each tent trainer's monSet pointer resolves to that
+    # tent's leaf, whose indices are within the tent's OWN mons pool.
+    FRONTIER_TRAINER_ROM = 0x5d5acc
+    FRONTIER_TRAINER_WIRE = 52
+    FRONTIER_TRAINER_COUNT = 300
+    FRONTIER_MONS_ROM = 0x5d97bc
+    FRONTIER_MONS_WIRE = 16
+    FRONTIER_MONS_COUNT = 882
+    FRONTIER_MONSET_BLOCK_S = 0x5ced2e
+    HELD_ITEMS_ROM = 0x5cecb0
+    HELD_ITEMS_BYTES = 126
+    BANNED_ROM = 0x611c9a
+    BANNED_BYTES = 22
+    TENTS = [("slateport", 0x5dda14, 70),
+             ("verdanturf", 0x5de610, 45),
+             ("fallarbor", 0x5df084, 45)]
+    TENT_TRAINER_COUNT = 30
+
+    for sym, rom_off, label in [
+            ("gBattleFrontierTrainers", FRONTIER_TRAINER_ROM, "gBattleFrontierTrainers"),
+            ("gBattleFrontierMons", FRONTIER_MONS_ROM, "gBattleFrontierMons"),
+            ("gBattleFrontierHeldItems", HELD_ITEMS_ROM, "gBattleFrontierHeldItems"),
+            ("gFrontierBannedSpecies", BANNED_ROM, "gFrontierBannedSpecies")]:
+        s = elf.find(sym)
+        if s is None or s[1] - GEN3_GBA_ROM_BASE != rom_off:
+            fail(f"{sym} not at expected ROM 0x{rom_off:x}")
+
+    def frontier_leaf(addr):
+        """(rom_offset, size, words) of the 0xFFFF-terminated u16 stream at a
+        GBA address. indices must be in [0, 882)."""
+        leaf_off = addr - GEN3_GBA_ROM_BASE
+        words = []
+        while True:
+            w = struct.unpack_from("<H", rom, leaf_off)[0]
+            if w == 0xFFFF:
+                break
+            words.append(w)
+            leaf_off += 2
+        end = leaf_off + 2  # after the terminator
+        if any(w >= FRONTIER_MONS_COUNT for w in words):
+            fail(f"frontier mon-set leaf @0x{addr:x} has out-of-range index")
+        return leaf_off - 2 * len(words), end, words
+
+    frontier_map = {"trainer_keys": [], "monset_keys": [], "mons_key": "",
+                    "held_key": "", "banned_key": "", "tents": {}}
+
+    # Shared 882-row pool, held items, banned species.
+    fpool_key = "emerald:data/frontier/mons"
+    fm_sz = FRONTIER_MONS_WIRE * FRONTIER_MONS_COUNT
+    if elf.find("gBattleFrontierMons")[2] != fm_sz:
+        fail(f"gBattleFrontierMons size != {FRONTIER_MONS_WIRE} x {FRONTIER_MONS_COUNT}")
+    if rom[FRONTIER_MONS_ROM:FRONTIER_MONS_ROM + fm_sz] != elf.slice(
+            elf.find("gBattleFrontierMons"), fm_sz):
+        fail("gBattleFrontierMons ROM slice != ELF slice")
+    add("frontier-mon", fpool_key, "gBattleFrontierMons", fm_sz, FRONTIER_MONS_ROM)
+    add("frontier-held-items", "emerald:data/frontier/held-items",
+        "gBattleFrontierHeldItems", HELD_ITEMS_BYTES, HELD_ITEMS_ROM)
+    add("frontier-banned-species", "emerald:data/frontier/banned-species",
+        "gFrontierBannedSpecies", BANNED_BYTES, BANNED_ROM)
+
+    # 300 frontier trainer rows + 300 mon-set leaves + end-to-end tiling.
+    ft_sz = FRONTIER_TRAINER_WIRE * FRONTIER_TRAINER_COUNT
+    if elf.find("gBattleFrontierTrainers")[2] != ft_sz:
+        fail(f"gBattleFrontierTrainers size != 52 x 300")
+    if rom[FRONTIER_TRAINER_ROM:FRONTIER_TRAINER_ROM + ft_sz] != elf.slice(
+            elf.find("gBattleFrontierTrainers"), ft_sz):
+        fail("gBattleFrontierTrainers ROM slice != ELF slice")
+    f_leaf_spans = []
+    for i in range(FRONTIER_TRAINER_COUNT):
+        off = FRONTIER_TRAINER_ROM + i * FRONTIER_TRAINER_WIRE
+        tkey = "emerald:data/frontier/trainer/%d" % i
+        mkey = tkey + "/mons"
+        if rom[off:off + FRONTIER_TRAINER_WIRE] != elf.slice(elf.find("gBattleFrontierTrainers"), ft_sz)[i*FRONTIER_TRAINER_WIRE:(i+1)*FRONTIER_TRAINER_WIRE]:
+            fail(f"gBattleFrontierTrainers[{i}] ROM slice != ELF slice")
+        add("frontier-trainer", tkey, "gBattleFrontierTrainers",
+            FRONTIER_TRAINER_WIRE, off)
+        monset = struct.unpack_from("<I", rom, off + 48)[0]
+        leaf_off, leaf_end, words = frontier_leaf(monset)
+        leaf_sym = obj_addr.get(monset, "gBattleFrontierTrainerMons")
+        add("frontier-mon-set", mkey, leaf_sym, leaf_end - leaf_off, leaf_off)
+        f_leaf_spans.append((leaf_off, leaf_end))
+        frontier_map["trainer_keys"].append(tkey)
+        frontier_map["monset_keys"].append(mkey)
+    # The 300 leaves tile the block contiguously in address order.
+    f_leaf_spans.sort()
+    cursor = FRONTIER_MONSET_BLOCK_S
+    for (s_, e_) in f_leaf_spans:
+        if s_ != cursor:
+            fail(f"frontier mon-set leaf tiling gap at {s_:x} (cursor {cursor:x})")
+        cursor = e_
+    if cursor != 0x5d5aca:
+        fail(f"frontier mon-set block end {cursor:x} != expected 0x5d5aca")
+    frontier_map["mons_key"] = fpool_key
+    frontier_map["held_key"] = "emerald:data/frontier/held-items"
+    frontier_map["banned_key"] = "emerald:data/frontier/banned-species"
+
+    # Three Battle Tent families (same trainer schema, per-tent mons pools).
+    for (tent, troff, pool_size) in TENTS:
+        tent_base = "emerald:data/frontier/tent/%s" % tent
+        tmons_key = tent_base + "/mons"
+        pool_sz = pool_size * FRONTIER_MONS_WIRE
+        tmons_sym = elf.find("g%sBattleTentMons" % tent.capitalize())
+        if tmons_sym is None or tmons_sym[2] != pool_sz:
+            fail("no exact-size tent mons symbol for %s" % tent)
+        tmons_entry_rom = tmons_sym[1] - GEN3_GBA_ROM_BASE
+        if rom[tmons_entry_rom:tmons_entry_rom + pool_sz] != elf.slice(
+                tmons_sym, pool_sz):
+            fail("tent mons ROM slice != ELF slice")
+        add("tent-mon", tmons_key, "g%sBattleTentMons" % tent.capitalize(),
+            pool_sz, tmons_entry_rom)
+        tk = []; mk = []
+        for i in range(TENT_TRAINER_COUNT):
+            off = troff + i * FRONTIER_TRAINER_WIRE
+            tkey = tent_base + "/trainer/%d" % i
+            mkey = tkey + "/mons"
+            row_rom = rom[off:off + FRONTIER_TRAINER_WIRE]
+            add("tent-trainer", tkey, "g%sBattleTentTrainers" % tent.capitalize(),
+                FRONTIER_TRAINER_WIRE, off)
+            monset = struct.unpack_from("<I", row_rom, 48)[0]
+            leaf_off, leaf_end, words = frontier_leaf(monset)
+            if any(w >= pool_size for w in words):
+                fail(f"{tent} mon-set leaf@{hex(monset)} index out of pool")
+            leaf_sym = obj_addr.get(monset,
+                                    "g%sBattleTentTrainerMons" % tent.capitalize())
+            add("tent-mon-set", mkey, leaf_sym, leaf_end - leaf_off, leaf_off)
+            tk.append(tkey); mk.append(mkey)
+        frontier_map["tents"][tent] = {"trainer_keys": tk, "monset_keys": mk,
+                                        "mons_key": tmons_key}
+
     rows.sort(key=lambda r: r[0])
     total = len(rows)
     if total != PINNED_TOTAL:
@@ -695,7 +852,7 @@ def derive(elf, rom, pret):
     move_keys = [mv_key(i) for i in range(355)]
     return rows, fam, levelup_idx_map, species_keys, move_keys, item_keys, \
         callback_rows, trainer_keys, party_keys, party_meta, class_keys, \
-        head_keys, infos
+        head_keys, infos, frontier_map
 
 
 def _f(key, family):
@@ -721,6 +878,23 @@ def _f(key, family):
         return "encounter-headers"
     if key.startswith("emerald:data/encounter/"):
         return "encounter"
+    if key.startswith("emerald:data/frontier/trainer/"):
+        return "frontier-mon-set" if key.endswith("/mons") else "frontier-trainer"
+    if key == "emerald:data/frontier/mons":
+        return "frontier-mon"
+    if key == "emerald:data/frontier/held-items":
+        return "frontier-held-items"
+    if key == "emerald:data/frontier/banned-species":
+        return "frontier-banned-species"
+    if key.startswith("emerald:data/frontier/tent/"):
+        parts = key[len("emerald:data/frontier/tent/"):].split("/")
+        # tent/<tent>/mons (len 2) -> pool; tent/<tent>/trainer/<n>/mons
+        # (last /mons) -> mon-set; tent/<tent>/trainer/<n> -> trainer.
+        if len(parts) == 2:
+            return "tent-mon"
+        if parts[-1] == "mons":
+            return "tent-mon-set"
+        return "tent-trainer"
     if key.startswith("emerald:data/growth-rate/"):
         return "growth-rate"
     if key == "emerald:data/tutor/moves":
@@ -760,6 +934,9 @@ SCHEMA = {
     "contest-effects": 14, "contest-combo-starters": 15,
     "trainer": 16, "trainer-party": 17, "trainer-class-name": 18,
     "encounter-headers": 19, "encounter": 20,
+    "frontier-trainer": 21, "frontier-mon-set": 22, "frontier-mon": 23,
+    "frontier-held-items": 24, "frontier-banned-species": 25,
+    "tent-trainer": 21, "tent-mon-set": 22, "tent-mon": 23,
     "font": 1,
 }
 
@@ -776,7 +953,7 @@ def key_sanitize(key):
 def emit_gameplay(rows, fam, levelup_idx_map, species_keys, move_keys,
                   item_keys, callback_rows, trainer_keys, party_keys,
                   party_meta, class_keys, enc_head_keys, enc_infos,
-                  outdir, root, args):
+                  frontier_map, outdir, root, args):
     famdir = outdir / "gameplay"
     artdir = famdir / "artifacts"
     art_by_key = {}
@@ -1406,6 +1583,174 @@ def emit_gameplay(rows, fam, levelup_idx_map, species_keys, move_keys,
     write_if(root / "src/emerald/resources/encounter_native.generated.c",
              enc_c, args)
 
+    # ---- frontier seam generated maps (R13-E3a-1) ---------------------------
+    # The frontier publication seam (EmeraldFrontierCompat) rebuilds the native
+    # gBattleFrontierTrainers[300] / gBattleFrontierMons[882] / held-items /
+    # banned-species / tent tables from the frontier resources.
+    # kFrontierTrainerKeys[i] / kFrontierMonSetKeys[i] are the trainer metadata
+    # row and its 0xFFFF-terminated mon-set index-stream leaf; the seam
+    # validates the row's GBA monSet pointer == leaf source ROM address for all
+    # 300 edges and every leaf index 0..881, then rebuilds each native row's
+    # monSet to point into its mon-set arena. kFrontierTent*Keys carry the same
+    # per-trainer maps for the three tents (index 0=slateport 1=verdanturf
+    # 2=fallarbor, each 30 trainers + a per-tent mons pool key).
+    FRN = "EMERALD_FRONTIER_"
+    fr_hdr = [
+        "/* Generated by tools/gen3_resources/gameplay_family/"
+        "gen_gameplay_family.py.",
+        " * Do not edit by hand; re-run the generator and --check it.",
+        " *",
+        " * R13-E3a-1 frontier publication maps and constants. The frontier seam",
+        " * rebuilds the native Battle Frontier trainer/mon tables into their",
+        " * HOST_DATA fill targets (frontier_data_native.c) from the pack.",
+        " * kFrontierTrainerKeys[i] is the 52-byte GBA trainer metadata row;",
+        " * kFrontierMonSetKeys[i] its 0xFFFF-terminated u16 index stream into",
+        " * the shared 882-row gBattleFrontierMons pool (the seam validates each",
+        " * row's GBA monSet pointer resolves to its leaf and every index is in",
+        " * range, then rebuilds the native monSet into its mon-set arena).",
+        " */",
+        "#ifndef EMERALD_RESOURCES_FRONTIER_NATIVE_GENERATED_H",
+        "#define EMERALD_RESOURCES_FRONTIER_NATIVE_GENERATED_H",
+        "",
+        "#include <stdint.h>",
+        "",
+        f"#define {FRN}SCHEMA_TRAINER     21u",
+        f"#define {FRN}SCHEMA_MON_SET     22u",
+        f"#define {FRN}SCHEMA_MON         23u",
+        f"#define {FRN}SCHEMA_HELD_ITEMS 24u",
+        f"#define {FRN}SCHEMA_BANNED     25u",
+        f"#define {FRN}TRAINER_COUNT      300u",
+        f"#define {FRN}MONS_COUNT        882u",
+        f"#define {FRN}HELDITEMS_COUNT     63u",
+        f"#define {FRN}BANNED_COUNT        11u",
+        f"#define {FRN}TENT_TRAINER_COUNT 30u",
+        f"#define {FRN}TENT_SLATEPORT_MONS    70u",
+        f"#define {FRN}TENT_VERDANTURF_MONS   45u",
+        f"#define {FRN}TENT_FALLARBOR_MONS    45u",
+        f"#define {FRN}MON_WIRE 16u",
+        f"#define {FRN}MON_NATIVE 14u",
+        f"#define {FRN}TRAINER_WIRE 52u",
+        f"#define {FRN}TRAINER_NATIVE 56u",
+        "",
+        "enum FrontierTentTag",
+        "{",
+        "    FRONTIER_TENT_SLATEPORT = 0,",
+        "    FRONTIER_TENT_VERDANTURF = 1,",
+        "    FRONTIER_TENT_FALLARBOR = 2,",
+        f"    FRONTIER_TENT_COUNT_ = 3,",
+        "};",
+        "",
+        "/* frontier trainer index -> metadata resource key */",
+        "extern const char *const "
+        "kFrontierTrainerKeys[EMERALD_FRONTIER_TRAINER_COUNT];",
+        "/* frontier trainer index -> mon-set leaf resource key */",
+        "extern const char *const "
+        "kFrontierMonSetKeys[EMERALD_FRONTIER_TRAINER_COUNT];",
+        "extern const char *const kFrontierMonsKey;",
+        "extern const char *const kFrontierHeldItemsKey;",
+        "extern const char *const kFrontierBannedSpeciesKey;",
+        "/* tent (slateport/verdanturf/fallarbor) trainer index -> keys */",
+        "extern const char *const "
+        "kFrontierTentTrainerKeys[3][EMERALD_FRONTIER_TENT_TRAINER_COUNT];",
+        "extern const char *const "
+        "kFrontierTentMonSetKeys[3][EMERALD_FRONTIER_TENT_TRAINER_COUNT];",
+        "extern const char *const kFrontierTentMonsKeys[3];",
+        "",
+        "#endif /* EMERALD_RESOURCES_FRONTIER_NATIVE_GENERATED_H */",
+    ]
+    write_if(root / "include/emerald/resources/frontier_native.generated.h",
+             fr_hdr, args)
+
+    fr_c = [
+        "/* Generated by tools/gen3_resources/gameplay_family/"
+        "gen_gameplay_family.py.",
+        " * Do not edit by hand; re-run the generator and --check it.",
+        " */",
+        '#include "emerald/resources/frontier_native.generated.h"',
+        "",
+        "const char *const "
+        "kFrontierTrainerKeys[EMERALD_FRONTIER_TRAINER_COUNT] =",
+        "{",
+    ]
+    for k in frontier_map["trainer_keys"]:
+        fr_c.append(f'    "{k}",')
+    fr_c += [
+        "};",
+        "",
+        "const char *const "
+        "kFrontierMonSetKeys[EMERALD_FRONTIER_TRAINER_COUNT] =",
+        "{",
+    ]
+    for k in frontier_map["monset_keys"]:
+        fr_c.append(f'    "{k}",')
+    fr_c += [
+        "};",
+        "",
+        f'const char *const kFrontierMonsKey = '
+        f'"{frontier_map["mons_key"]}";',
+        f'const char *const kFrontierHeldItemsKey = '
+        f'"{frontier_map["held_key"]}";',
+        f'const char *const kFrontierBannedSpeciesKey = '
+        f'"{frontier_map["banned_key"]}";',
+        "",
+        "const char *const "
+        "kFrontierTentTrainerKeys[3][EMERALD_FRONTIER_TENT_TRAINER_COUNT] =",
+        "{",
+    ]
+    for tent in ("slateport", "verdanturf", "fallarbor"):
+        fr_c.append("    {" + ", ".join(
+            '"%s"' % k for k in frontier_map["tents"][tent]["trainer_keys"]) + "},")
+    fr_c += [
+        "};",
+        "",
+        "const char *const "
+        "kFrontierTentMonSetKeys[3][EMERALD_FRONTIER_TENT_TRAINER_COUNT] =",
+        "{",
+    ]
+    for tent in ("slateport", "verdanturf", "fallarbor"):
+        fr_c.append("    {" + ", ".join(
+            '"%s"' % k for k in frontier_map["tents"][tent]["monset_keys"]) + "},")
+    fr_c += [
+        "};",
+        "",
+        "const char *const kFrontierTentMonsKeys[3] =",
+        "{",
+    ]
+    for tent in ("slateport", "verdanturf", "fallarbor"):
+        fr_c.append(f'    "{frontier_map["tents"][tent]["mons_key"]}",')
+    fr_c += [
+        "};",
+        "",
+    ]
+    write_if(root / "src/emerald/resources/frontier_native.generated.c",
+             fr_c, args)
+
+    # frontier metadata TO ML (index maps / graph edges for the report)
+    frm = [
+        "# Generated by tools/gen3_resources/gameplay_family/"
+        "gen_gameplay_family.py",
+        "# Do not edit by hand; re-run the generator (regeneration must be a",
+        "# no-op diff).",
+        "",
+        "# R13-E3a-1 frontier/tent index maps: trainer->mon-set leaf edges,",
+        "# mon-index bounds, held-item/banned resources.",
+        'family = "gameplay"',
+        "frontier_version = 1",
+        "",
+    ]
+    for i in range(300):
+        frm.append("[[frontier_trainers]]")
+        frm.append(f"index = {i}")
+        frm.append(f'trainer = "{frontier_map["trainer_keys"][i]}"')
+        frm.append(f'mon_set = "{frontier_map["monset_keys"][i]}"')
+        frm.append("")
+    frm.append(f'frontier_mons = "{frontier_map["mons_key"]}"')
+    frm.append(f'frontier_held_items = "{frontier_map["held_key"]}"')
+    frm.append(f'frontier_banned_species = "{frontier_map["banned_key"]}"')
+    frm.append("mon_index_max = 881")
+    frm.append("")
+    write_if(famdir / "frontier_index_maps.generated.toml", frm, args)
+
 
 def _artifact_sub(key):
     if key.startswith("emerald:data/species/"):
@@ -1426,6 +1771,21 @@ def _artifact_sub(key):
         return "encounter-headers"
     if key.startswith("emerald:data/encounter/"):
         return "encounter"
+    if key.startswith("emerald:data/frontier/trainer/"):
+        return "frontier-mon-set" if key.endswith("/mons") else "frontier-trainer"
+    if key == "emerald:data/frontier/mons":
+        return "frontier-mons"
+    if key == "emerald:data/frontier/held-items":
+        return "frontier-held-items"
+    if key == "emerald:data/frontier/banned-species":
+        return "frontier-banned-species"
+    if key.startswith("emerald:data/frontier/tent/"):
+        parts = key[len("emerald:data/frontier/tent/"):].split("/")
+        if len(parts) == 2:
+            return "tent-mons"
+        if parts[-1] == "mons":
+            return "tent-mon-set"
+        return "tent-trainer"
     if key.startswith("emerald:data/growth-rate/"):
         return "growth-rate"
     if key == "emerald:data/tutor/moves":
@@ -1462,11 +1822,11 @@ def main():
     elf = Elf32(open(args.elf, "rb").read())
     rows, fam, levelup_idx_map, species_keys, move_keys, item_keys, \
         callback_rows, trainer_keys, party_keys, party_meta, class_keys, \
-        enc_head_keys, enc_infos = derive(elf, rom, pret)
+        enc_head_keys, enc_infos, frontier_map = derive(elf, rom, pret)
     emit_gameplay(rows, fam, levelup_idx_map, species_keys, move_keys,
                   item_keys, callback_rows, trainer_keys, party_keys,
                   party_meta, class_keys, enc_head_keys, enc_infos,
-                  outdir, root, args)
+                  frontier_map, outdir, root, args)
 
     print(f"gameplay resources: {len(rows)}, "
           f"{sum(r[3] for r in rows)} B (D1+D2+E1+E2; evolutions excluded)")

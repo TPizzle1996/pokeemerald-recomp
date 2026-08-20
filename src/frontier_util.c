@@ -680,11 +680,16 @@ static const u8 sFrontierBrainObjEventGfx[NUM_FRONTIER_FACILITIES][2] =
     [FRONTIER_FACILITY_PYRAMID] = {OBJ_EVENT_GFX_BRANDON, FALSE},
 };
 
+/* R13-E3a-1: the native banned-species table is the seam-published HOST_DATA
+ * fill target (frontier_data_native.c); the compiled const payload is guarded
+ * out of the native link (REFUSE-class, no fallback). GBA verbatim. */
+#ifndef NATIVE_LINUX
 const u16 gFrontierBannedSpecies[] =
 {
     SPECIES_MEW, SPECIES_MEWTWO, SPECIES_HO_OH, SPECIES_LUGIA, SPECIES_CELEBI,
     SPECIES_KYOGRE, SPECIES_GROUDON, SPECIES_RAYQUAZA, SPECIES_JIRACHI, SPECIES_DEOXYS, 0xFFFF
 };
+#endif /* NATIVE_LINUX */
 
 /* R13-C: skeleton-migrated table (rows filled at publish). */
 #ifndef NATIVE_LINUX

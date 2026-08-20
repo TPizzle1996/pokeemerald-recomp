@@ -1,3 +1,7 @@
+/* R13-E3a-1: the native Frontier mons pool is the seam-published HOST_DATA
+ * fill target (frontier_data_native.c); the compiled const payload is guarded
+ * out of the native link (REFUSE-class, no fallback). GBA verbatim. */
+#ifndef NATIVE_LINUX
 const struct FacilityMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
 {
     [FRONTIER_MON_SUNKERN] = {
@@ -6175,3 +6179,4 @@ const struct FacilityMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .nature = NATURE_MODEST
     }
 };
+#endif /* NATIVE_LINUX */

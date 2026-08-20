@@ -1,3 +1,9 @@
+/* R13-E3a-1: the native Battle Tent trainer/mon tables are seam-published
+ * HOST_DATA fill targets (frontier_data_native.c); the entire compiled const
+ * payload below (tent mon-set leaves, the three tent trainer tables and the
+ * three tent mons pools) is guarded out of the native link (REFUSE-class, no
+ * fallback). GBA keeps it verbatim. */
+#ifndef NATIVE_LINUX
 // Slateport Battle Tent.
 const u16 gSlateportBattleTentTrainerMons_Jolie[] =
 {
@@ -3003,3 +3009,4 @@ const struct FacilityMon gFallarborBattleTentMons[NUM_FALLARBOR_TENT_MONS] =
         .nature = NATURE_ADAMANT
     }
 };
+#endif /* NATIVE_LINUX */

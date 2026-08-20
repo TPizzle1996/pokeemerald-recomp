@@ -44,7 +44,7 @@
 #include "emerald/resources/trainer_native.generated.h"
 #include "emerald/resources/trainer_data_native.h"
 
-#if GAMEPLAY_NATIVE_RESOURCE_COUNT != 5672u
+#if GAMEPLAY_NATIVE_RESOURCE_COUNT != 6458u
 #error "R13-E gameplay+trainer+encounter resource count disagrees with the generated inventory"
 #endif
 

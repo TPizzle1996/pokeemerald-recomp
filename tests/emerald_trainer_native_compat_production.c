@@ -676,13 +676,13 @@ int main(int argc, char **argv)
     }
     Gen3ResourcePackDiagnostics_Destroy(&packDiag);
     printf("opened production pack : %zu entries\n", Gen3ResourcePack_GetEntryCount(pack));
-    CHECK("production pack has 17735 entries (196 trainer + 1608 Pokémon "
-          "battle + 288 object-event + 1544 tileset + 882 layout + 771 audio + 530 song graphs + 1057 leaf + 5187 text + 3310 D1 + 377 items + 1775 E1 + 210 E2)",
-          Gen3ResourcePack_GetEntryCount(pack) == 17735u);
+    CHECK("production pack has 18521 entries (196 trainer + 1608 Pokémon "
+          "battle + 288 object-event + 1544 tileset + 882 layout + 771 audio + 530 song graphs + 1057 leaf + 5187 text + 3310 D1 + 377 items + 1775 E1 + 210 E2 + 786 E3a-1)",
+          Gen3ResourcePack_GetEntryCount(pack) == 18521u);
     printf("loaded catalog          : %zu resources\n", Gen3ResourceCatalog_Count(catalog));
-    CHECK("catalog has 17735 resources (196 trainer + 1608 Pokémon battle + "
-          "288 object-event + 1544 tileset + 882 layout + 771 audio + 530 song graphs + 1057 leaf + 5187 text + 3310 D1 + 377 items + 1775 E1 + 210 E2)",
-          Gen3ResourceCatalog_Count(catalog) == 17735u);
+    CHECK("catalog has 18521 resources (196 trainer + 1608 Pokémon battle + "
+          "288 object-event + 1544 tileset + 882 layout + 771 audio + 530 song graphs + 1057 leaf + 5187 text + 3310 D1 + 377 items + 1775 E1 + 210 E2 + 786 E3a-1)",
+          Gen3ResourceCatalog_Count(catalog) == 18521u);
 
     /* 3. Build the production ROM_BASE candidate + snapshot from the real pack. */
     Gen3ResourceDiagnostics_Init(&gdiag);
@@ -715,8 +715,8 @@ int main(int argc, char **argv)
           strcmp(info.providerId, EMERALD_ROM_BASE_PROVIDER_ID) == 0);
     CHECK("provider precedence 300", info.precedence == EMERALD_ROM_BASE_PRECEDENCE);
     CHECK("provider version v1", strcmp(info.providerVersion, "v1") == 0);
-    CHECK("provider entryCount 17735 (196 trainer + 1608 Pokémon + 288 object-event + 1544 tileset + 882 layout + 771 audio + 530 song graphs + 1057 leaf + 5187 text + 3310 D1 + 377 items + 1775 E1 + 210 E2)",
-          info.entryCount == 17735u);
+    CHECK("provider entryCount 18521 (196 trainer + 1608 Pokémon + 288 object-event + 1544 tileset + 882 layout + 771 audio + 530 song graphs + 1057 leaf + 5187 text + 3310 D1 + 377 items + 1775 E1 + 210 E2 + 786 E3a-1)",
+          info.entryCount == 18521u);
 
     CHECK("snapshot builds",
           Gen3ResourceCandidate_Build(candidate, &snapshot, &gdiag) && snapshot != NULL);

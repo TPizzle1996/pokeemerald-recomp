@@ -1,3 +1,9 @@
+/* R13-E3a-1: the native Frontier trainer table is the seam-published HOST_DATA
+ * fill target (src/emerald/resources/frontier_data_native.c); the compiled
+ * const payload is guarded out of the native link so a session whose frontier
+ * data cannot publish is a refused session with no fallback. GBA keeps this
+ * verbatim. */
+#ifndef NATIVE_LINUX
 const struct BattleFrontierTrainer gBattleFrontierTrainers[FRONTIER_TRAINERS_COUNT] =
 {
     [FRONTIER_TRAINER_BRADY] = {
@@ -2401,3 +2407,4 @@ const struct BattleFrontierTrainer gBattleFrontierTrainers[FRONTIER_TRAINERS_COU
         .monSet = gBattleFrontierTrainerMons_Gretel
     }
 };
+#endif /* NATIVE_LINUX */

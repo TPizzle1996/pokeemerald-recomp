@@ -37,11 +37,34 @@ extern const u8 gTowerMaleFacilityClasses[30];
 extern const u8 gTowerMaleTrainerGfxIds[30];
 extern const u8 gTowerFemaleFacilityClasses[20];
 extern const u8 gTowerFemaleTrainerGfxIds[20];
+/* R13-E3a-1: the Frontier/Tent tables are seam-published HOST_DATA fill
+ * targets on native (frontier_data_native.c), so the externs are non-const
+ * there; GBA keeps the const definitions verbatim (battle_frontier_*.h /
+ * battle_tent.h). gVerdanturf/gFallarbor tent arrays were previously only
+ * declared via the const definitions in battle_tent.h; they are declared
+ * here now so engine TUs resolve them on native (where battle_tent.h is
+ * guarded out). */
+#if defined(NATIVE_LINUX)
+extern u16 gBattleFrontierHeldItems[];
+extern struct FacilityMon gBattleFrontierMons[];
+extern struct BattleFrontierTrainer gBattleFrontierTrainers[];
+extern struct FacilityMon gSlateportBattleTentMons[];
+extern struct BattleFrontierTrainer gSlateportBattleTentTrainers[];
+extern struct FacilityMon gVerdanturfBattleTentMons[];
+extern struct BattleFrontierTrainer gVerdanturfBattleTentTrainers[];
+extern struct FacilityMon gFallarborBattleTentMons[];
+extern struct BattleFrontierTrainer gFallarborBattleTentTrainers[];
+#else
 extern const u16 gBattleFrontierHeldItems[];
 extern const struct FacilityMon gBattleFrontierMons[];
 extern const struct BattleFrontierTrainer gBattleFrontierTrainers[];
 extern const struct FacilityMon gSlateportBattleTentMons[];
 extern const struct BattleFrontierTrainer gSlateportBattleTentTrainers[];
+extern const struct FacilityMon gVerdanturfBattleTentMons[];
+extern const struct BattleFrontierTrainer gVerdanturfBattleTentTrainers[];
+extern const struct FacilityMon gFallarborBattleTentMons[];
+extern const struct BattleFrontierTrainer gFallarborBattleTentTrainers[];
+#endif
 
 // Temporary storage for monIds of the opponent team
 // during team generation in battle factory and similar facilities.

@@ -597,7 +597,8 @@ static void TestTextPublication(const char *packPath)
 
     packCount = Gen3ResourcePack_GetEntryCount(pack);
     printf("production pack entry count: %zu\n", packCount);
-    CHECK("production pack entry count pinned at 17735 (R13-E2)", packCount == 17735u);
+    CHECK("production pack entry count pinned at 18521 (R13-E3a-1)",
+          packCount == 18521u);
 
     /* Every text entry: C-side labels resolve by resource id; bundle ids
      * are captured for the blob-slice pass below. */
@@ -1866,6 +1867,539 @@ static void TestEncounterRefusals(const char *tempDir, const char *prodPack)
           && EmeraldEncounterCompat_GetSlotArenaBytes() == liveArena);
 }
 
+/* ---- R13-E3a-1: Frontier + Battle Tent publication seam tests. ---- */
+
+/* R13-E3a: the engine EWRAM facility aliases gFacilityTrainers /
+ * gFacilityTrainerMons (defined in src/battle_tower.c:44-45, re-pointed at
+ * SetFacilityPtrsGetLevel/SetTentPtrsGetLevel). src/battle_tower.c is not
+ * linked into this test binary, so the aliases are stubbed here (matching the
+ * engine declaration in include/battle_tower.h) so the relocation test can
+ * drive/observe the alias target. */
+const struct BattleFrontierTrainer *gFacilityTrainers;
+const struct FacilityMon *gFacilityTrainerMons;
+
+/* Drive EmeraldFrontierCompat directly against a session built from the given
+ * pack (the same chain the loader runs, independent of its at-most-once
+ * registration). */
+static enum EmeraldFrontierCompatStatus RunFrontierSeamDirect(
+    const char *packPath, struct EmeraldFrontierCompatDiagnostics *diag)
+{
+    struct Gen3ResourcePack *pack = NULL;
+    struct Gen3ResourcePackDiagnosticList packDiag;
+    struct Gen3ResourceCatalog *catalog = NULL;
+    struct Gen3ResourceCandidate *candidate = NULL;
+    struct Gen3ResourceSnapshot *snapshot = NULL;
+    struct Gen3ResourceDiagnosticList diagnostics;
+    struct EmeraldResourceSessionInfo info;
+    enum EmeraldResourceSessionError sessionError;
+    enum EmeraldFrontierCompatStatus status = EMERALD_FRONTIER_ERR_UNAVAILABLE;
+
+    Gen3ResourcePackDiagnostics_Init(&packDiag);
+    if (Gen3ResourcePack_OpenFile(packPath, &pack, &packDiag) != GEN3_PACK_OK
+     || pack == NULL)
+    {
+        Gen3ResourcePackDiagnostics_Destroy(&packDiag);
+        return status;
+    }
+    Gen3ResourcePackDiagnostics_Destroy(&packDiag);
+    if (!BuildCatalogFromPack(pack, &catalog) || catalog == NULL)
+        goto done;
+    Gen3ResourceDiagnostics_Init(&diagnostics);
+    sessionError = EmeraldResourceSession_BuildRomBaseCandidate(
+        pack, catalog, &candidate, &info, &diagnostics);
+    if (sessionError == EMERALD_SESSION_OK && candidate != NULL
+     && Gen3ResourceCandidate_Build(candidate, &snapshot, &diagnostics)
+     && snapshot != NULL)
+        status = EmeraldFrontierCompat_TryInitialize(snapshot, pack, diag);
+    Gen3ResourceDiagnostics_Destroy(&diagnostics);
+done:
+    if (snapshot != NULL)
+        Gen3ResourceSnapshot_Destroy(snapshot);
+    if (candidate != NULL)
+        Gen3ResourceCandidate_Destroy(candidate);
+    if (catalog != NULL)
+        Gen3ResourceCatalog_Destroy(catalog);
+    if (pack != NULL)
+        Gen3ResourcePack_Destroy(pack);
+    return status;
+}
+
+/* Is `p` inside the CURRENTLY registered mon-set COMPAT_OBJECT arena? */
+static bool MonSetResident(const u16 *p)
+{
+    const struct EmeraldResourceRangeIndex *index;
+    struct EmeraldResourceRangeHit hit;
+    if (p == NULL)
+        return false;
+    index = EmeraldResourceCompat_GetRangeIndex();
+    if (index == NULL
+     || !EmeraldResourceRangeIndex_Lookup(index, (uintptr_t)p, &hit))
+        return false;
+    return hit.role == EMERALD_RESOURCE_ROLE_COMPAT_OBJECT
+        && hit.schema == EMERALD_FRONTIER_SCHEMA_MON_SET;
+}
+
+enum {
+    FRONTIER_VAR_BAD_TRAINER_SIZE = 0,
+    FRONTIER_VAR_BAD_MONSET_PTR,   /* row monSet GBA ptr re-pointed (link breaks) */
+    FRONTIER_VAR_UNTERMINATED,     /* a mon-set leaf's terminator removed */
+    FRONTIER_VAR_MON_INDEX,        /* a mon-set leaf index forced >= pool size */
+    FRONTIER_VAR_MISSING_POOL,     /* the shared mons pool resource dropped */
+    FRONTIER_VAR_MON_TRANSFORM,    /* pool payload resized (16-row -> wrong len) */
+    FRONTIER_VAR_MISSING_HELD_BANNED, /* drop held-items + banned-species */
+};
+
+/* A production-pack variant with EXACTLY ONE frontier record damaged/dropped
+ * so the refusal is provably the frontier seam's. Every other entry is copied
+ * through verbatim with its own digests. */
+static bool BuildFrontierVariantPack(const char *srcPath, const char *dstPath,
+                                     int mode)
+{
+    static const char *kTrainer0 = "emerald:data/frontier/trainer/0";
+    static const char *kMonSet1 = "emerald:data/frontier/trainer/1/mons";
+    static const char *kHeld = "emerald:data/frontier/held-items";
+    static const char *kBanned = "emerald:data/frontier/banned-species";
+    struct Gen3ResourcePack *pack = NULL;
+    struct Gen3ResourcePackDiagnosticList packDiag;
+    struct Gen3ResourcePackProfile profile;
+    struct Gen3ResourcePackBuild *build = NULL;
+    struct Gen3ResourcePackProfileInput pin;
+    struct Gen3ResourcePackEntryInput entry;
+    struct Gen3ResourcePackBytes bytes = { NULL, 0 };
+    struct Gen3ResourcePackDiagnosticList diag;
+    uint8_t bufSha[32];
+    uint8_t provenanceSha[32];
+    uint8_t trainer0Buf[EMERALD_FRONTIER_TRAINER_WIRE];
+    uint8_t leafBuf[128];
+    size_t count;
+    size_t i;
+    FILE *f = NULL;
+    bool ok = false;
+
+    Gen3ResourcePackDiagnostics_Init(&packDiag);
+    if (Gen3ResourcePack_OpenFile(srcPath, &pack, &packDiag) != GEN3_PACK_OK
+     || pack == NULL)
+        goto done;
+    Gen3ResourcePackDiagnostics_Destroy(&packDiag);
+
+    Gen3ResourcePackDiagnostics_Init(&diag);
+    build = Gen3ResourcePackBuild_Create();
+    if (build == NULL)
+        goto done;
+    if (!Gen3ResourcePack_GetProfile(pack, &profile))
+        goto done;
+    memset(&pin, 0, sizeof(pin));
+    pin.basePackVersion = profile.basePackVersion;
+    pin.catalogVersion = profile.catalogVersion;
+    pin.extractionManifestVersion = profile.extractionManifestVersion;
+    pin.canonicalRepresentationVersion = profile.canonicalRepresentationVersion;
+    pin.sourceRomSize = profile.sourceRomSize;
+    pin.sourceRomSha1 = profile.sourceRomSha1;
+    pin.sourceRomSha256 = profile.sourceRomSha256;
+    memcpy(pin.gameCode, profile.gameCode, 4u);
+    memcpy(pin.makerCode, profile.makerCode, 2u);
+    pin.softwareRevision = profile.softwareRevision;
+    memcpy(pin.gameId, profile.gameId, GEN3_PACK_GAME_ID_SIZE);
+    pin.catalogSha256 = profile.catalogSha256;
+    pin.extractionManifestSha256 = profile.extractionManifestSha256;
+    if (Gen3ResourcePackBuild_SetProfile(build, &pin, &diag) != GEN3_PACK_OK)
+        goto done;
+
+    memset(provenanceSha, 0x5A, sizeof(provenanceSha));
+    count = Gen3ResourcePack_GetEntryCount(pack);
+
+    for (i = 0u; i < count; i++)
+    {
+        const struct Gen3ResourcePackEntry *e = Gen3ResourcePack_GetEntry(pack, i);
+        const uint8_t *payload = e->payload;
+        const uint8_t *payloadSha = e->payloadSha256;
+        size_t payloadSize = e->payloadSize;
+        uint64_t romOffset = e->sourceRomOffset;
+
+        if (mode == FRONTIER_VAR_MISSING_POOL
+         && strcmp(e->canonicalName, kFrontierMonsKey) == 0)
+            continue;
+        if ((mode == FRONTIER_VAR_MISSING_HELD_BANNED)
+         && (strcmp(e->canonicalName, kHeld) == 0
+             || strcmp(e->canonicalName, kBanned) == 0))
+            continue;
+
+        if (mode == FRONTIER_VAR_BAD_TRAINER_SIZE
+         && strcmp(e->canonicalName, kTrainer0) == 0)
+        {
+            payloadSize = EMERALD_FRONTIER_TRAINER_WIRE - 4u;
+            DigestSha256(e->payload, payloadSize, bufSha);
+            payloadSha = bufSha;
+        }
+        /* Re-point trainer 0's monSet GBA ptr at +4 into its own leaf: the
+         * row->leaf edge (== leaf ROM address) breaks. */
+        if (mode == FRONTIER_VAR_BAD_MONSET_PTR
+         && strcmp(e->canonicalName, kTrainer0) == 0)
+        {
+            memcpy(trainer0Buf, e->payload, EMERALD_FRONTIER_TRAINER_WIRE);
+            WriteLe32Native(trainer0Buf + 48u,
+                            (uint32_t)ReadLe32Native(e->payload + 48u) + 4u);
+            payload = trainer0Buf;
+            DigestSha256(payload, EMERALD_FRONTIER_TRAINER_WIRE, bufSha);
+            payloadSha = bufSha;
+        }
+        if (mode == FRONTIER_VAR_UNTERMINATED
+         && strcmp(e->canonicalName, kMonSet1) == 0)
+        {
+            memcpy(leafBuf, e->payload, e->payloadSize <= sizeof(leafBuf)
+                                         ? e->payloadSize : sizeof(leafBuf));
+            /* destroy the trailing 0xFFFF terminator (stream "@4" the last
+             * two payload bytes to a non-FFFF), making it unterminated. */
+            leafBuf[e->payloadSize - 2u] = 0x01u;
+            leafBuf[e->payloadSize - 1u] = 0x02u;
+            payload = leafBuf;
+            DigestSha256(payload, e->payloadSize, bufSha);
+            payloadSha = bufSha;
+        }
+        if (mode == FRONTIER_VAR_MON_INDEX
+         && strcmp(e->canonicalName, kMonSet1) == 0)
+        {
+            memcpy(leafBuf, e->payload, e->payloadSize <= sizeof(leafBuf)
+                                         ? e->payloadSize : sizeof(leafBuf));
+            /* Force the FIRST mon index to 900 (>= 882). */
+            leafBuf[0] = 0x84u;
+            leafBuf[1] = 0x03u;
+            payload = leafBuf;
+            DigestSha256(payload, e->payloadSize, bufSha);
+            payloadSha = bufSha;
+        }
+        if (mode == FRONTIER_VAR_MON_TRANSFORM
+         && strcmp(e->canonicalName, kFrontierMonsKey) == 0)
+        {
+            /* Resize the shared pool to a non-16-multiple (transform input
+             * mismatch): 16*882 -> 16*881+2. */
+            payloadSize = (size_t)EMERALD_FRONTIER_MONS_COUNT
+                        * EMERALD_FRONTIER_MON_WIRE - 14u;
+            DigestSha256(e->payload, payloadSize, bufSha);
+            payloadSha = bufSha;
+        }
+
+        memset(&entry, 0, sizeof(entry));
+        entry.schema = e->schema;
+        entry.flags = e->flags;
+        entry.representation = e->representation;
+        entry.sourceEncoding = e->sourceEncoding;
+        entry.canonicalName = e->canonicalName;
+        entry.key = &e->key;
+        entry.type = e->type;
+        entry.canonicalPayload = payload;
+        entry.canonicalPayloadSize = payloadSize;
+        entry.canonicalPayloadSha256 = payloadSha;
+        entry.sourceRomOffset = romOffset;
+        entry.sourceEncodedSize = e->sourceEncodedSize;
+        entry.sourceEncodedSha256 = provenanceSha;
+        if (Gen3ResourcePackBuild_AddEntry(build, &entry, &diag) != GEN3_PACK_OK)
+            goto done;
+    }
+
+    if (Gen3ResourcePackWriter_Write(build, &bytes, &diag) != GEN3_PACK_OK)
+        goto done;
+    f = fopen(dstPath, "wb");
+    if (f == NULL)
+        goto done;
+    if (fwrite(bytes.data, 1, bytes.size, f) != bytes.size)
+        goto done;
+    fclose(f);
+    f = NULL;
+    ok = true;
+
+done:
+    if (f != NULL)
+        fclose(f);
+    Gen3ResourcePackBytes_Destroy(&bytes);
+    Gen3ResourcePackBuild_Destroy(build);
+    Gen3ResourcePackDiagnostics_Destroy(&diag);
+    if (pack != NULL)
+        Gen3ResourcePack_Destroy(pack);
+    return ok;
+}
+
+/* The production registration published the frontier + tent families into the
+ * live fill targets: 786 resources, the shared 882-mons pool transformed to
+ * 14-byte native rows, held-items/banned leaves copied, and every published
+ * trainer row's monSet in the packed mon-set arena, with the row->leaf GBA
+ * edges intact in the pack. */
+static void TestFrontierTrainerGraph(const char *packPath)
+{
+    struct Gen3ResourcePack *pack = NULL;
+    struct Gen3ResourcePackDiagnosticList packDiag;
+    const struct EmeraldResourceRangeIndex *index;
+    struct EmeraldResourceRangeHit hit;
+    const struct Gen3ResourcePackEntry *poolEntry;
+    const struct Gen3ResourcePackEntry *heldEntry;
+    const struct Gen3ResourcePackEntry *bannedEntry;
+    size_t i;
+    u16 allHeldOk = 1u;
+
+    CHECK("R13-E3a published count 786",
+          EmeraldFrontierCompat_GetPublishedCount() == 786u);
+    CHECK("R13-E3a mon-set arena published",
+          EmeraldFrontierCompat_GetMonSetArenaBytes() > 0u);
+
+    Gen3ResourcePackDiagnostics_Init(&packDiag);
+    if (Gen3ResourcePack_OpenFile(packPath, &pack, &packDiag) != GEN3_PACK_OK
+     || pack == NULL)
+    {
+        CHECK("R13-E3a pack opens for verification", false);
+        Gen3ResourcePackDiagnostics_Destroy(&packDiag);
+        return;
+    }
+    Gen3ResourcePackDiagnostics_Destroy(&packDiag);
+
+    index = EmeraldResourceCompat_GetRangeIndex();
+    CHECK("R13-E3a range index present", index != NULL);
+
+    poolEntry = Gen3ResourcePack_FindByCanonicalName(pack, kFrontierMonsKey);
+    heldEntry = Gen3ResourcePack_FindByCanonicalName(pack, kFrontierHeldItemsKey);
+    bannedEntry = Gen3ResourcePack_FindByCanonicalName(pack,
+                                                       kFrontierBannedSpeciesKey);
+    CHECK("R13-E3a pool/held/banned present",
+          poolEntry != NULL && heldEntry != NULL && bannedEntry != NULL);
+
+    /* Facility aliases: the engine re-points these at SetFacilityPtrsGetLevel;
+     * proving they alias the published fill targets is the State-v5 target. */
+    {
+        const struct BattleFrontierTrainer *facTrainers = gBattleFrontierTrainers;
+        const struct FacilityMon *facMons = gBattleFrontierMons;
+        CHECK("R13-E3a facility trainer alias -> published table",
+              facTrainers == gBattleFrontierTrainers);
+        CHECK("R13-E3a facility mons alias -> published pool",
+              facMons == gBattleFrontierMons);
+    }
+
+    /* Every frontier trainer row matches its pack metadata; monSet arena-
+     * resident; the mon-set leaf bytes are byte-exact vs the pack. */
+    for (i = 0u; i < EMERALD_FRONTIER_TRAINER_COUNT; i++)
+    {
+        const struct Gen3ResourcePackEntry *te =
+            Gen3ResourcePack_FindByCanonicalName(pack, kFrontierTrainerKeys[i]);
+        const struct Gen3ResourcePackEntry *me =
+            Gen3ResourcePack_FindByCanonicalName(pack, kFrontierMonSetKeys[i]);
+        const struct BattleFrontierTrainer *t = &gBattleFrontierTrainers[i];
+        if (te == NULL || me == NULL)
+        {
+            CHECK("R13-E3a trainer/monset entry present", false);
+            continue;
+        }
+        CHECK("R13-E3a trainer metadata wire match",
+              t->facilityClass == te->payload[0]
+              && memcmp(t->trainerName, te->payload + 4u, 8u) == 0);
+        CHECK("R13-E3a trainer speech wire match",
+              memcmp(t->speechBefore, te->payload + 12u, 12u) == 0
+              && memcmp(t->speechWin, te->payload + 24u, 12u) == 0
+              && memcmp(t->speechLose, te->payload + 36u, 12u) == 0);
+        CHECK("R13-E3a monSet arena-resident", MonSetResident(t->monSet));
+        CHECK("R13-E3a mon-set leaf bytes exact",
+              t->monSet != NULL
+              && memcmp(t->monSet, me->payload, me->payloadSize) == 0);
+    }
+
+    /* Shared 882-mons pool: every row is a byte-exact 16->14 transform. */
+    CHECK("R13-E3a pool sized 882x16",
+          poolEntry->payloadSize
+              == (size_t)EMERALD_FRONTIER_MONS_COUNT * EMERALD_FRONTIER_MON_WIRE);
+    for (i = 0u; i < 32u; i++)
+    {
+        const uint8_t *w = poolEntry->payload + i * EMERALD_FRONTIER_MON_WIRE;
+        const struct FacilityMon *m = &gBattleFrontierMons[i];
+        bool movesOk = (EncLe16(w + 2u) == m->moves[0]
+                     && EncLe16(w + 4u) == m->moves[1]
+                     && EncLe16(w + 6u) == m->moves[2]
+                     && EncLe16(w + 8u) == m->moves[3]);
+        CHECK("R13-E3a mons row species", EncLe16(w + 0u) == m->species);
+        CHECK("R13-E3a mons row moves", movesOk);
+        CHECK("R13-E3a mons row scalar tail",
+              w[10u] == m->itemTableId && w[11u] == m->evSpread
+              && w[12u] == m->nature);
+    }
+    /* A row whose itemTableId indexes into the published held-items table. */
+    {
+        const struct FacilityMon *m = &gBattleFrontierMons[0];
+        if (m->itemTableId < EMERALD_FRONTIER_HELDITEMS_COUNT
+         && heldEntry != NULL)
+            CHECK("R13-E3a held-item resolution",
+                  gBattleFrontierHeldItems[m->itemTableId]
+                      == EncLe16(heldEntry->payload + 2u * m->itemTableId));
+    }
+    /* Held items + banned species leaf copies. */
+    for (i = 0u; i < (size_t)EMERALD_FRONTIER_HELDITEMS_COUNT && heldEntry; i++)
+        allHeldOk &= (gBattleFrontierHeldItems[i]
+                      == EncLe16(heldEntry->payload + 2u * i));
+    CHECK("R13-E3a held items leaf exact", allHeldOk == 1u);
+    CHECK("R13-E3a banned leaf exact",
+          bannedEntry != NULL
+          && memcmp(gFrontierBannedSpecies, bannedEntry->payload,
+                    (size_t)EMERALD_FRONTIER_BANNED_COUNT * 2u) == 0);
+
+    /* Tent families: three trainer tables + three mons pools, monSet leaves
+     * index into each tent's own pool. */
+    for (i = 0u; i < 3u; i++)
+    {
+        const struct Gen3ResourcePackEntry *pool =
+            Gen3ResourcePack_FindByCanonicalName(pack, kFrontierTentMonsKeys[i]);
+        const struct BattleFrontierTrainer *tt;
+        const struct FacilityMon *poolPtr;
+        size_t j;
+        switch (i)
+        {
+        case 0: tt = gSlateportBattleTentTrainers;
+                poolPtr = gSlateportBattleTentMons; break;
+        case 1: tt = gVerdanturfBattleTentTrainers;
+                poolPtr = gVerdanturfBattleTentMons; break;
+        default: tt = gFallarborBattleTentTrainers;
+                 poolPtr = gFallarborBattleTentMons; break;
+        }
+        CHECK("R13-E3a tent pool present", pool != NULL);
+        for (j = 0u; j < EMERALD_FRONTIER_TENT_TRAINER_COUNT; j++)
+        {
+            const struct Gen3ResourcePackEntry *te = Gen3ResourcePack_FindByCanonicalName(
+                pack, kFrontierTentTrainerKeys[i][j]);
+            const struct Gen3ResourcePackEntry *me = Gen3ResourcePack_FindByCanonicalName(
+                pack, kFrontierTentMonSetKeys[i][j]);
+            const struct BattleFrontierTrainer *r = &tt[j];
+            if (te == NULL || me == NULL)
+                continue;
+            CHECK("R13-E3a tent trainer wire", r->facilityClass == te->payload[0]);
+            CHECK("R13-E3a tent monSet arena-resident", MonSetResident(r->monSet));
+            CHECK("R13-E3a tent mon-set leaf exact",
+                  r->monSet != NULL
+                  && memcmp(r->monSet, me->payload, me->payloadSize) == 0);
+            /* every index in the tent leaf is within the tent's own pool. */
+            {
+                uint16_t poolSize = (i == 0u) ? EMERALD_FRONTIER_TENT_SLATEPORT_MONS
+                                   : EMERALD_FRONTIER_TENT_VERDANTURF_MONS;
+                size_t k;
+                int oob = 0;
+                for (k = 0u; k < me->payloadSize / 2u - 1u; k++)
+                    oob |= (EncLe16(me->payload + 2u * k) >= poolSize);
+                CHECK("R13-E3a tent indices in-pool", oob == 0);
+            }
+        }
+        CHECK("R13-E3a tent mons transformed",
+              poolPtr[0].species
+                  == EncLe16(pool->payload + 0u));
+    }
+
+    /* The mon-set arena is a registered COMPAT_OBJECT range (schema 22). */
+    if (index != NULL
+     && EmeraldResourceRangeIndex_Lookup(index,
+            (uintptr_t)gBattleFrontierTrainers[0].monSet, &hit))
+        CHECK("R13-E3a mon-set arena COMPAT_OBJECT range",
+              hit.role == EMERALD_RESOURCE_ROLE_COMPAT_OBJECT
+              && hit.schema == EMERALD_FRONTIER_SCHEMA_MON_SET);
+    else
+        CHECK("R13-E3a mon-set arena resolvable", false);
+
+    Gen3ResourcePack_Destroy(pack);
+}
+
+/* State-v5 fresh-process relocation: establish facility-style pointers into
+ * the published tables, capture the mon-set arena, tear the session down
+ * (all monSet NULL, the arena range unregistered, the arena freed), then
+ * republish from a fresh snapshot and prove every monSet pointer resolves
+ * into the CURRENT registered mon-set arena range (no dangling creator
+ * pointer survives) while the facility aliases still point at the published
+ * (non-zero) fill targets. The loader seam publishes the HOST_DATA train/mon
+ * tables itself, so gFacilityTrainers/gFacilityTrainerMons (engine EWRAM
+ * aliases re-pointed at SetFacilityPtrsGetLevel) resolve into these tables
+ * by construction; the mon-set arena is the only malloc'd span the State-v5
+ * walker must re-derive, so the relocation proof centres on it. */
+static void TestFrontierRelocation(const char *packPath)
+{
+    struct EmeraldResourceRangeIndex *index;
+    struct EmeraldFrontierCompatDiagnostics diag;
+    enum EmeraldFrontierCompatStatus status;
+    const u16 *republishedMonSet;
+    struct EmeraldResourceRangeHit hit;
+    uintptr_t oldArenaBase = 0u;
+
+    /* Establish the facility aliases (SetFacilityPtrsGetLevel-equivalent). */
+    gFacilityTrainers = gBattleFrontierTrainers;
+    gFacilityTrainerMons = gBattleFrontierMons;
+
+    index = EmeraldResourceCompat_GetRangeIndex();
+    /* Capture the production mon-set arena base (the creator's span). */
+    if (index != NULL
+     && EmeraldResourceRangeIndex_Lookup(index,
+            (uintptr_t)gBattleFrontierTrainers[0].monSet, &hit))
+        oldArenaBase = (uintptr_t)gBattleFrontierTrainers[0].monSet
+                     - hit.rangeOffset;
+
+    /* Tear the session down: every monSet NULL, the arena span unregistered. */
+    EmeraldFrontierCompat_ClearMigratedEntries();
+    CHECK("R13-E3a teardown NULLs monSet (no creator pointer survives)",
+          gBattleFrontierTrainers[0].monSet == NULL
+          && gSlateportBattleTentTrainers[0].monSet == NULL);
+    CHECK("R13-E3a teardown releases arena",
+          EmeraldFrontierCompat_GetMonSetArenaBytes() == 0u);
+    if (index != NULL && oldArenaBase != 0u)
+        CHECK("R13-E3a old arena span unregistered (no creator pointer survives)",
+              !EmeraldResourceRangeIndex_Lookup(index, oldArenaBase, &hit));
+
+    /* Republish from a fresh snapshot: a brand-new mon-set arena. */
+    status = RunFrontierSeamDirect(packPath, &diag);
+    CHECK("R13-E3a republish OK", status == EMERALD_FRONTIER_OK);
+
+    republishedMonSet = gBattleFrontierTrainers[0].monSet;
+    CHECK("R13-E3a republished monSet non-NULL", republishedMonSet != NULL);
+    /* The monSet is re-derived into the CURRENT registered arena range, not a
+     * dangling creator address. */
+    CHECK("R13-E3a republished monSet in current arena",
+          MonSetResident(republishedMonSet));
+    index = EmeraldResourceCompat_GetRangeIndex();
+    if (index != NULL
+     && EmeraldResourceRangeIndex_Lookup(index, (uintptr_t)republishedMonSet,
+                                         &hit))
+        CHECK("R13-E3a republished monSet COMPAT_OBJECT schema-22",
+              hit.role == EMERALD_RESOURCE_ROLE_COMPAT_OBJECT
+              && hit.schema == EMERALD_FRONTIER_SCHEMA_MON_SET);
+
+    /* The facility aliases still resolve into the published (non-zero) tables
+     * after the republish, and reads through them are valid. */
+    CHECK("R13-E3a facility aliases re-resolve to published tables",
+          gFacilityTrainers == gBattleFrontierTrainers
+          && gFacilityTrainerMons == gBattleFrontierMons
+          && gFacilityTrainers[0].monSet != NULL
+          && MonSetResident(gFacilityTrainers[0].monSet)
+          && gFacilityTrainerMons[0].species != 0u);
+}
+
+/* The frontier seam REFUSES a pack whose frontier records are malformed (a
+ * resized trainer row, a broken row->monSet GBA edge, an unterminated mon-set,
+ * an out-of-range mon index, a missing shared mons pool, a transform-length
+ * mismatch, or missing held/banned). Nothing is published. */
+static void TestFrontierRefusals(const char *tempDir, const char *prodPack)
+{
+    static const char *const labels[7] = {
+        "fr_bad_trainer_size", "fr_bad_monset_ptr", "fr_unterminated",
+        "fr_mon_index", "fr_missing_pool", "fr_mon_transform",
+        "fr_missing_held_banned" };
+    const u16 *liveMonSet = gBattleFrontierTrainers[0].monSet;
+    size_t liveArena = EmeraldFrontierCompat_GetMonSetArenaBytes();
+    int mode;
+    for (mode = 0; mode < 7; mode++)
+    {
+        struct EmeraldFrontierCompatDiagnostics diag;
+        enum EmeraldFrontierCompatStatus status;
+        char path[512];
+
+        snprintf(path, sizeof(path), "%s/%s.rpack", tempDir, labels[mode]);
+        CHECK("R13-E3a variant pack builds",
+              BuildFrontierVariantPack(prodPack, path, mode));
+        status = RunFrontierSeamDirect(path, &diag);
+        CHECK("R13-E3a frontier variant refused", status != EMERALD_FRONTIER_OK);
+    }
+    /* The refused direct runs did not overwrite the live published tables. */
+    CHECK("R13-E3a refusal leaves live tables untouched",
+          gBattleFrontierTrainers[0].monSet == liveMonSet
+          && EmeraldFrontierCompat_GetMonSetArenaBytes() == liveArena);
+}
+
 int main(int argc, char **argv)
 {
     const char *tempDir;
@@ -1911,6 +2445,15 @@ int main(int argc, char **argv)
      * published gWildMonHeaders / gWildEncounterInfos + slot arena can be
      * checked against the pack. */
     TestEncounterPublication(prodPack);
+    /* R13-E3a-1 frontier/tent publication. Runs while the production session
+     * is still live (BEFORE TestTextTransactionalRefusal tears it down), so
+     * the published gBattleFrontierTrainers / gBattleFrontierMons / held /
+     * banned / tent tables + the mon-set arena can be checked against the
+     * pack. The relocation test then tears the frontier session down and
+     * republishes from a fresh snapshot (the State-v5 fresh-process
+     * relocation proof for gFacilityTrainers/gFacilityTrainerMons). */
+    TestFrontierTrainerGraph(prodPack);
+    TestFrontierRelocation(prodPack);
     TestTextTransactionalRefusal(tempDir, prodPack);
     /* R13-E1 failure-matrix: trainer seams against freshly built variant
      * sessions (independent of the (now rolled-back) production session). */
@@ -1918,6 +2461,9 @@ int main(int argc, char **argv)
     /* R13-E2 failure-matrix: encounter seams against freshly built variant
      * sessions (after the production session is rolled back). */
     TestEncounterRefusals(tempDir, prodPack);
+    /* R13-E3a-1 failure-matrix: frontier seams against freshly built variant
+     * sessions (after the production session is rolled back). */
+    TestFrontierRefusals(tempDir, prodPack);
 
     FreeFamilyFixtures();
     FreeBackFamilyFixtures();
