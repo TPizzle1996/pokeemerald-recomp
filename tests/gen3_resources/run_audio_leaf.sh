@@ -3,7 +3,7 @@
 # R12-B audio leaf ownership migration test runner (tests A-G).
 #
 #   A-G  tests/emerald_audio_compat_test.c against the REAL production pack:
-#        A counts (105/51/388/25 = 569 leaves + 530 song graphs, pack 12063 entries since R13-C;
+#        A counts (105/51/388/25 = 569 leaves + 530 song graphs, pack 15750 entries since R13-D2;
 #          the C-side pin at emerald_audio_compat_test.c:942 still reads 6876 until R13-C §20-23),
 #        B exact extraction (arena bytes == pack payloads == ROM slice,
 #          every leaf inside the verbatim zone, no overlaps),
@@ -71,7 +71,7 @@ if "$root/tools/gen3_resources/pack_build/gen3-pack-build" \
     --catalog "$root/resources/extraction/emerald/bpee01/multiboot/catalog.generated.toml" \
     --catalog "$root/resources/extraction/emerald/bpee01/text/catalog.generated.toml" \
     --check > "$tmp/pack_check.log" 2>&1; then
-    pass "pack reproduces byte-for-byte (12063 entries since R13-C)"
+    pass "pack reproduces byte-for-byte (15750 entries since R13-D2)"
 else
     fail "pack --check: $(tail -3 "$tmp/pack_check.log" | tr '\n' ' ')"
 fi

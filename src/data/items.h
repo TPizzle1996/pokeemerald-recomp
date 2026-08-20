@@ -1,3 +1,10 @@
+/* R13-D2: gItems is a GBA/desktop-definition splice. The compiled array is
+ * the single source of truth on GBA; on native (NATIVE_LINUX) it is guarded
+ * out and the writable HOST_DATA gItems (src/emerald/resources/
+ * gameplay_data_native.c) is published by the gameplay seam
+ * (emerald_gameplay_compat.c) from the production pack. */
+#ifndef NATIVE_LINUX
+
 const struct Item gItems[] =
 {
     [ITEM_NONE] =
@@ -4538,3 +4545,4 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 };
+#endif /* NATIVE_LINUX */

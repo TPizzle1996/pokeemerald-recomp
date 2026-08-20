@@ -811,3 +811,38 @@ plan above:
    already permitted; the transform/index-map patterns extend directly.
 
 **R13-D1 STOP.** No commit made. D2 and R13-E not started.
+
+---
+
+## Implementation delta (R13-D2 — gItems, supersedes the D1 note)
+
+R13-D2 is **implemented and verified** (report:
+`docs/R13D2_ITEM_DATA_MIGRATION_REPORT.md`).
+
+1. **Parity gate:** 6/377 rows diverge (King's Rock/Deep Sea Tooth/Scale/Metal
+   Coat/Dragon Scale/Up-Grade — `type` `PARTY_MENU` + `EvolutionStone` vs
+   vanilla `BAG_MENU`+`CannotUse`), a deliberate fork QOL change in
+   `src/data/items.h`. 371/371 other data rows + all 27 callbacks + all 310
+   descriptions match vanilla. **Handled without silent normalization:** the
+   seam publishes the vanilla 44-B rows and applies an explicit, guarded
+   6-row override (`type=PARTY_MENU`, `fieldUseFunc=EvolutionStone`), so the
+   377/377 oracle holds against the overridden form.
+2. **Items:** 377 `emerald:data/item/<name>` resources (schema 11, 44 B), +
+   27-entry callback registry (`gameplay_callbacks.generated.{h,c}` +
+   native mapping). Gameplay total 3,687 resources / 358,818 B.
+3. **Pack:** 15,373 → **15,750 entries**, 13,190,320 B, SHA-256
+   `71a0ba0e…95291`, deterministic (headroom 634; no cap raise).
+4. **Publication/cutover:** native `HOST_DATA gItems[377]` filled by the D1
+   seam (D2 phase); compiled `gItems` + `s*Desc` guarded out (GBA unchanged);
+   zero consumer edits. `gItems` now in host_data (section 28), `s*Desc`
+   absent from the binary.
+5. **Item-description cutover:** 310 → ROM_BASE_ONLY (text ownership
+   3119→3429 ROM_BASE_ONLY; 2068→1758 pending); pokedex/easy-chat stay
+   deferred.
+6. **State-v5:** no format change; no per-item ranges; range index stays
+   5,847/8,192.
+7. **Gates:** `--verify-game-data` exit 0; loader battery 62,945 checks;
+   trainer-compat 37,921; world 5,565; render 3,628 — all pass. Release
+   binary 22,368,088 → 22,363,584 B (−4,504 B).
+
+**R13-D2 STOP.** No commit made. R13-E not started.

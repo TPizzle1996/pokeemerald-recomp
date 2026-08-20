@@ -26,6 +26,35 @@
 #include "constants/global.h"      /* POKEMON_NAME_LENGTH, MOVE_NAME_LENGTH */
 #include "constants/party_menu.h"  /* TUTOR_MOVE_COUNT */
 #include "fonts.h"                 /* the ten u16 glyph glyph arrays (extern) */
+#include "constants/items.h"       /* ITEMS_COUNT + ITEM_USE_PARTY_MENU etc. */
+
+/* D2: the struct Item fill-target type, layout-identical to the engine's
+ * include/item.h definition so the seam fills gItems exactly as the engine
+ * consumers read them, without dragging global.h into these global.h-free
+ * TUs. A TU that already includes item.h (GUARD_ITEM_H, e.g. the loader test
+ * harness) keeps the engine struct; the local definition is byte-identical
+ * (same members in the same order; GameplayItemUseFunc and ItemUseFunc are
+ * both `void (*)(u8)`). */
+#ifndef GUARD_ITEM_H
+typedef void (*GameplayItemUseFunc)(u8);
+struct Item
+{
+    u8 name[ITEM_NAME_LENGTH];
+    u16 itemId;
+    u16 price;
+    u8 holdEffect;
+    u8 holdEffectParam;
+    const u8 *description;
+    u8 importance;
+    bool8 registrability;
+    u8 pocket;
+    u8 type;
+    GameplayItemUseFunc fieldUseFunc;
+    u8 battleUsage;
+    GameplayItemUseFunc battleUseFunc;
+    u8 secondaryId;
+};
+#endif /* GUARD_ITEM_H */
 
 /* The D1 fill-target structs, layout-identical to the engine's
  * include/pokemon.h:297..325 / include/contest_effect.h:8..21 definitions so
@@ -137,5 +166,13 @@ extern u8 gComboStarterLookupTable[63];
 /* Level-up learnset pointer table (rebuilt to the seam's leaf arena).
  * NULL until the seam fills it; seeds NULL zry. */
 extern u16 *gLevelUpLearnsets[NUM_SPECIES];
+
+/* D2: the item fill target, 377 x struct Item (72 B). The compiled
+ * `const struct Item gItems[]` in src/data/items.h is NATIVE_LINUX-guarded
+ * out of the native link; this HOST_DATA array (defined in the definitions
+ * TU) is the single native definition the seam fills. item.h already externs
+ * `struct Item gItems[]` (non-const under DESKTOP_EXTERNAL_GAME_CONTENT);
+ * this sized complement pins the ITEMS_COUNT bound for the seam. */
+extern struct Item gItems[ITEMS_COUNT];
 
 #endif /* EMERALD_RESOURCES_GAMEPLAY_DATA_NATIVE_H */

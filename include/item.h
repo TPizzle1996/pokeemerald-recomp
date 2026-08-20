@@ -31,7 +31,16 @@ struct BagPocket
     u8 capacity;
 };
 
+/* R13-D2: on native the compiled gItems (src/data/items.h) is guarded out
+ * and the definition comes from the gameplay seam's HOST_DATA gItems, which
+ * the seam writes at boot. Match the D1 precedent (pokemon.h/data.h):
+ * drop the const on the native extern so the declaration agrees with the
+ * writable fill target. */
+#ifdef DESKTOP_EXTERNAL_GAME_CONTENT
+extern struct Item gItems[];
+#else
 extern const struct Item gItems[];
+#endif
 extern struct BagPocket gBagPockets[];
 
 void ApplyNewEncryptionKeyToBagItems(u32 newKey);

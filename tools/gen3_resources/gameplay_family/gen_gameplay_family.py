@@ -48,16 +48,20 @@ ROM_SIZE = 0x1000000
 ROM_SHA1 = "f3ae088181bf583e55daf962a92bb46f4f1d07b7"
 
 # ------------------------------------------------------------------ pins
-# D1 = 3310 resources / 342230 B. NOTE: the evolution family (412 x 40 B =
-# 16480 B) is EXCLUDED from D1: the compile-vs-vanilla parity gate proved the
-# recomp deliberately replaced the 12 vanilla trade evolutions (Kadabra/
-# Machoke/Graveler/Haunter -> level 40; Poliwhirl et al. -> item) with
-# level/item evolutions (src/data/pokemon/evolution.h). Publishing vanilla
-# evolution data would silently overwrite that fork behaviour, which the R13-D
-# stage brief forbids (STOP for that family; keep compiled). D1 therefore
-# ships every parity-passing family and leaves gEvolutionTable compiled.
-PINNED_TOTAL = 3310
-PINNED_BYTES = 342230
+# R13-D1 = 3310 resources / 342230 B (the diverged evolution family is
+# excluded -- see note below). R13-D2 adds the gItems family (377 x 44 B GBA
+# wire rows = 16588 B, schema 11=item). Combined gameplay total:
+#    3687 resources / 358818 B.
+#
+# NOTE (R13-D1): the evolution family (412 x 40 B = 16480 B) is EXCLUDED: the
+# compile-vs-vanilla parity gate proved the recomp deliberately replaced the
+# 12 vanilla trade evolutions (Kadabra/Machoke/Graveler/Haunter -> level 40;
+# Poliwhirl et al. -> item) with level/item evolutions
+# (src/data/pokemon/evolution.h). Publishing vanilla evolution data would
+# silently overwrite that fork behaviour, which the R13-D stage brief forbids
+# (STOP for that family; keep compiled).
+PINNED_TOTAL = 3687
+PINNED_BYTES = 358818
 PINNED_BY_FAMILY = {
     "species-base": (412, 11536),
     "species-name": (412, 4532),
@@ -72,6 +76,7 @@ PINNED_BY_FAMILY = {
     "tutor-moves": (1, 60),
     "contest-effects": (1, 192),
     "contest-combo-starters": (1, 63),
+    "item": (377, 16588),
     "font": (10, 294912),
 }
 
@@ -172,6 +177,30 @@ def derive_key(canonical_id):
     matching Gen3ResourceId_DeriveKey (src/gen3/resources/resource_id.c)."""
     return hashlib.sha256(
         b"gen3-resource-id-v1\x00" + canonical_id.encode("ascii")).hexdigest()
+
+
+def callback_kind_suffix(symbol):
+    """Split a reference item-use symbol into (kind, suffix), e.g.
+    ItemUseOutOfBattle_Medicine -> ('OUTOFBATTLE', 'Medicine')."""
+    for kind, prefix in (("OUTOFBATTLE", "ItemUseOutOfBattle_"),
+                         ("INBATTLE", "ItemUseInBattle_")):
+        if symbol.startswith(prefix):
+            return kind, symbol[len(prefix):]
+    fail(f"reference item-use symbol '{symbol}' has an unexpected prefix")
+
+
+def callback_token(symbol):
+    """Stable C enum token for a reference item-use symbol."""
+    kind, suffix = callback_kind_suffix(symbol)
+    return ("GAMEPLAY_ITEM_USE_ACTION_" + kind + "_" + suffix).upper()
+
+
+def action_id(symbol):
+    """Stable semantic id for a reference item-use symbol, e.g.
+    item-use/out-of-battle/medicine."""
+    kind, suffix = callback_kind_suffix(symbol)
+    return "item-use/" + kind.lower().replace("outofbattle", "out-of-battle") \
+        .replace("inbattle", "in-battle") + "/" + suffix.lower().replace("_", "-")
 
 
 def semantic_name(prefix, name):
@@ -359,6 +388,39 @@ def derive(elf, rom, pret):
             fail(f"{symbol}: ROM slice != ELF slice")
         add("font", "emerald:font/" + key, symbol, size, rom_off)
 
+    # --- items (gItems, 44 B GBA wire rows) -- R13-D2 ------------------------
+    item_names = parse_enum("ITEM_", pret / "include/constants/items.h")
+    if any(i not in item_names for i in range(377)):
+        fail("item enum must map indices 0..376 exactly")
+    item_key = (lambda i: "emerald:data/item/" +
+                semantic_name("ITEM_", item_names[i]))  # noqa: E731
+    ref_addr_symbol = {}
+    for s in elf.symbols:
+        ref_addr_symbol.setdefault(s[1], s[0])
+    it_sym, it_data, it_size = sym_bytes("gItems")
+    if it_size != 44 * 377:
+        fail(f"gItems size {it_size} != 44 x 377")
+    item_callbacks = {}   # GBA addr -> reference symbol (the 27-use census)
+    for i in range(377):
+        off = i * 44
+        row = it_data[off:off + 44]
+        rom_off = it_sym[1] - GEN3_GBA_ROM_BASE + off
+        if rom[rom_off:rom_off + 44] != row:
+            fail(f"gItems[{i}]: ROM slice != ELF slice")
+        add("item", item_key(i), "gItems", 44, rom_off)
+        for foff in (28, 36):  # fieldUseFunc, battleUseFunc GBA addresses
+            addr = struct.unpack_from("<I", row, foff)[0]
+            if addr == 0:
+                continue  # null battle-use (non-battle items)
+            if addr not in ref_addr_symbol:
+                fail(f"gItems[{i}]: callback addr 0x{addr:x} "
+                     "has no reference ELF symbol")
+            item_callbacks[addr] = ref_addr_symbol[addr]
+    if len(item_callbacks) != 27:
+        fail(f"item callback census {len(item_callbacks)} != 27")
+    callback_rows = sorted(item_callbacks.items())  # (addr, symbol) by addr
+    item_keys = [item_key(i) for i in range(377)]
+
     rows.sort(key=lambda r: r[0])
     total = len(rows)
     if total != PINNED_TOTAL:
@@ -373,7 +435,8 @@ def derive(elf, rom, pret):
                  f"{count} / {bcount}")
     species_keys = [sp_key(i) for i in range(412)]
     move_keys = [mv_key(i) for i in range(355)]
-    return rows, fam, levelup_idx_map, species_keys, move_keys
+    return rows, fam, levelup_idx_map, species_keys, move_keys, item_keys, \
+        callback_rows
 
 
 def _f(key, family):
@@ -389,6 +452,8 @@ def _f(key, family):
         sub = key.rsplit("/", 1)[-1]
         return {"name": "move-name", "contest": "move-contest"}.get(
             sub, "move-battle")
+    if key.startswith("emerald:data/item/"):
+        return "item"
     if key.startswith("emerald:data/growth-rate/"):
         return "growth-rate"
     if key == "emerald:data/tutor/moves":
@@ -424,7 +489,7 @@ SCHEMA = {
     "species-base": 1, "species-name": 2, "species-evolutions": 3,
     "species-levelup": 4, "species-tmhm": 5, "species-tutor": 6,
     "species-egg-moves": 7, "move-battle": 8, "move-name": 9,
-    "move-contest": 10, "growth-rate": 12, "tutor-moves": 13,
+    "move-contest": 10, "item": 11, "growth-rate": 12, "tutor-moves": 13,
     "contest-effects": 14, "contest-combo-starters": 15, "font": 1,
 }
 
@@ -439,7 +504,7 @@ def key_sanitize(key):
 
 
 def emit_gameplay(rows, fam, levelup_idx_map, species_keys, move_keys,
-                  outdir, root, args):
+                  item_keys, callback_rows, outdir, root, args):
     famdir = outdir / "gameplay"
     artdir = famdir / "artifacts"
     art_by_key = {}
@@ -687,6 +752,13 @@ def emit_gameplay(rows, fam, levelup_idx_map, species_keys, move_keys,
         "extern const char *const "
         "kGameplayMoveKeys[GAMEPLAY_NATIVE_MOVE_COUNT];",
         "",
+        "/* item index -> item resource key (emerald:data/item/<name>). */",
+        "#ifndef GAMEPLAY_NATIVE_ITEM_COUNT",
+        "#define GAMEPLAY_NATIVE_ITEM_COUNT 377u",
+        "#endif",
+        "extern const char *const "
+        "kGameplayItemKeys[GAMEPLAY_NATIVE_ITEM_COUNT];",
+        "",
         "#endif /* EMERALD_RESOURCES_GAMEPLAY_NATIVE_GENERATED_H */",
     ]
     write_if(root / "include/emerald/resources/gameplay_native.generated.h",
@@ -753,9 +825,113 @@ def emit_gameplay(rows, fam, levelup_idx_map, species_keys, move_keys,
     lvl_c_lines += [
         "};",
         "",
+        "const char *const kGameplayItemKeys[GAMEPLAY_NATIVE_ITEM_COUNT] =",
+        "{",
+    ]
+    for k in item_keys:
+        lvl_c_lines.append(f'    "{k}",')
+    lvl_c_lines += [
+        "};",
+        "",
     ]
     write_if(root / "src/emerald/resources/gameplay_levelup.generated.c",
              lvl_c_lines, args)
+
+    # ---- item callback registry (R13-D2) ---------------------------------
+    # Maps each distinct GBA use-function address to a stable semantic action
+    # token. The seam reads an item row's fieldUseFunc/battleUseFunc GBA
+    # addresses, looks them up here, and maps the action token to the native
+    # ItemUseFunc (the native mapping is a compiled engine table, never the
+    # pack). Actions are keyed by the reference pret symbol name.
+    cb_h = [
+        "/* Generated by tools/gen3_resources/gameplay_family/"
+        "gen_gameplay_family.py.",
+        " * Do not edit by hand; re-run the generator and --check it.",
+        " *",
+        " * R13-D2 item-use callback registry. Every distinct GBA use-function",
+        " * address across the 377 gItems rows, mapped to a stable semantic",
+        " * action token. The gameplay seam resolves an item row's two GBA",
+        " * callback addresses (fieldUseFunc/battleUseFunc) through this table",
+        " * and maps the action to a native ItemUseFunc via the compiled seam",
+        " * table (gameplay_item_callbacks_native.c). The pack resource NEVER",
+        " * stores a native function pointer: it holds the exact 44-byte ROM",
+        " * row (GBA addresses included) and the seam does the validation +",
+        " * resolution.",
+        " */",
+        "#ifndef EMERALD_RESOURCES_GAMEPLAY_CALLBACKS_GENERATED_H",
+        "#define EMERALD_RESOURCES_GAMEPLAY_CALLBACKS_GENERATED_H",
+        "",
+        "#include <stdint.h>",
+        "",
+        f"#define GAMEPLAY_ITEM_CALLBACK_COUNT {len(callback_rows)}u",
+        "",
+        "enum GameplayItemUseAction",
+        "{",
+    ]
+    tokens = []
+    for addr, symbol in callback_rows:
+        tok = callback_token(symbol)
+        tokens.append((addr, symbol, tok))
+    for idx, (addr, symbol, tok) in enumerate(tokens):
+        cb_h.append(f"    {tok} = {idx},")
+    cb_h += [
+        "    GAMEPLAY_ITEM_USE_ACTION_COUNT,",
+        "};",
+        "",
+        "struct GameplayItemCallback",
+        "{",
+        "    uint32_t gbaAddr;       /* reference GBA function address */",
+        "    uint32_t action;        /* enum GameplayItemUseAction */",
+        "    const char *symbol;     /* reference pret symbol name */",
+        "};",
+        "",
+        "extern const struct GameplayItemCallback "
+        "kGameplayItemCallbacks[GAMEPLAY_ITEM_CALLBACK_COUNT];",
+        "",
+        "#endif /* EMERALD_RESOURCES_GAMEPLAY_CALLBACKS_GENERATED_H */",
+    ]
+    write_if(root / "include/emerald/resources/gameplay_callbacks.generated.h",
+             cb_h, args)
+
+    cb_c = [
+        "/* Generated by tools/gen3_resources/gameplay_family/"
+        "gen_gameplay_family.py.",
+        " * Do not edit by hand; re-run the generator and --check it.",
+        " */",
+        '#include "emerald/resources/gameplay_callbacks.generated.h"',
+        "",
+        "const struct GameplayItemCallback "
+        "kGameplayItemCallbacks[GAMEPLAY_ITEM_CALLBACK_COUNT] =",
+        "{",
+    ]
+    for addr, symbol, tok in tokens:
+        cb_c.append(f'    {{0x{addr:08x}u, {tok}, "{symbol}"}},')
+    cb_c += [
+        "};",
+        "",
+    ]
+    write_if(root / "src/emerald/resources/gameplay_callbacks.generated.c",
+             cb_c, args)
+
+    # callback metadata TO ML
+    cbm = [
+        "# Generated by tools/gen3_resources/gameplay_family/"
+        "gen_gameplay_family.py",
+        "# Do not edit by hand; re-run the generator (regeneration must be a",
+        "# no-op diff).",
+        "",
+        "# R13-D2 item-use callback census (27 distinct GBA addresses).",
+        'family = "gameplay"',
+        "callback_version = 1",
+        "",
+    ]
+    for addr, symbol, tok in tokens:
+        cbm.append("[[callbacks]]")
+        cbm.append(f'gba_address = {addr}')
+        cbm.append(f'symbol = "{symbol}"')
+        cbm.append(f'action = "{action_id(symbol)}"')
+        cbm.append("")
+    write_if(famdir / "item_callbacks.generated.toml", cbm, args)
 
 
 def _artifact_sub(key):
@@ -767,6 +943,8 @@ def _artifact_sub(key):
     if key.startswith("emerald:data/move/"):
         return "move-name" if key.endswith("/name") else (
             "move-contest" if key.endswith("/contest") else "move-battle")
+    if key.startswith("emerald:data/item/"):
+        return "items"
     if key.startswith("emerald:data/growth-rate/"):
         return "growth-rate"
     if key == "emerald:data/tutor/moves":
@@ -801,13 +979,14 @@ def main():
         fail(f"ROM SHA-1 != {ROM_SHA1} (retail-matching ROM required)")
 
     elf = Elf32(open(args.elf, "rb").read())
-    rows, fam, levelup_idx_map, species_keys, move_keys = derive(
-        elf, rom, pret)
+    rows, fam, levelup_idx_map, species_keys, move_keys, item_keys, \
+        callback_rows = derive(elf, rom, pret)
     emit_gameplay(rows, fam, levelup_idx_map, species_keys, move_keys,
-                  outdir, root, args)
+                  item_keys, callback_rows, outdir, root, args)
 
     print(f"gameplay resources: {len(rows)}, "
-          f"{sum(r[3] for r in rows)} B (D1 subtotal; D2 items excluded)")
+          f"{sum(r[3] for r in rows)} B (D1+D2; evolutions excluded)")
+    print(f"item callback census: {len(callback_rows)} distinct")
     for family in sorted(PINNED_BY_FAMILY):
         print(f"  {family}: {fam.get(family, 0)} resources")
 

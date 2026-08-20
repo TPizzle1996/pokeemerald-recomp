@@ -1,3 +1,12 @@
+/* R13-D2: the compiled `s<Item>Desc[]` payloads are the GBA/desktop source
+ * of the item description strings. On native (NATIVE_LINUX) the payloads are
+ * guarded out: the R13-D2 cutover flips the `emerald:text/item/*` resources
+ * to ROM_BASE_ONLY and gItems[].description re-points into the R13-C item
+ * text arena, so these compiled bytes have no native consumer (the only
+ * s*Desc reference, gItems[].description, is itself guarded out in
+ * src/data/items.h). GBA keeps them verbatim. */
+#ifndef NATIVE_LINUX
+
 static const u8 sDummyDesc[] = _(
     "?????");
 
@@ -1549,3 +1558,4 @@ static const u8 sOldSeaMapDesc[] = _(
     "A faded sea chart\n"
     "that shows the way\n"
     "to a certain island.");
+#endif /* NATIVE_LINUX */

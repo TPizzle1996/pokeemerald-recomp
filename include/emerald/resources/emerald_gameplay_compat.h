@@ -40,13 +40,17 @@
 #include "gen3/resources/resource_types.h"
 #include "emerald/resources/emerald_resource_compat.h"
 #include "emerald/resources/gameplay_native.generated.h"
+#include "emerald/resources/gameplay_callbacks.generated.h"
+#include "emerald/resources/gameplay_item_callbacks_native.h"
 #include "emerald/resources/gameplay_data_native.h"
+#include "emerald/resources/emerald_text_compat.h"
 
-/* D1 family count pins (from the D1 inventory): 3,300 structured +
- * 10 fonts = 3,310 resources, which must agree with the generated
- * inventory at compile time. */
-#if GAMEPLAY_NATIVE_RESOURCE_COUNT != 3310u
-#error "R13-D1 gameplay resource count disagrees with the generated inventory"
+/* D1+D2 family count pins. D1: 3,300 structured + 10 fonts; D2 adds the
+ * gItems family (schema 11, 377 x 44 B). Combined gameplay inventory =
+ * 3,687 resources, which must agree with the generated inventory at compile
+ * time. */
+#if GAMEPLAY_NATIVE_RESOURCE_COUNT != 3687u
+#error "R13-D gameplay resource count disagrees with the generated inventory"
 #endif
 
 #define EMERALD_GAMEPLAY_SPECIES_COUNT 412u
@@ -57,6 +61,26 @@
 #define EMERALD_GAMEPLAY_MOVE_COUNT    355u
 #define EMERALD_GAMEPLAY_GROWTH_COUNT  8u
 #define EMERALD_GAMEPLAY_FONT_COUNT    10u
+#define EMERALD_GAMEPLAY_ITEM_COUNT    377u
+
+/* The six trade-evolution held items for which the recomp's compiled gItems
+ * deliberately diverges from vanilla (the fork override, NOT normalized
+ * back): vanilla rows are ITEM_USE_BAG_MENU(0x04) + CannotUse; the recomp
+ * uses ITEM_USE_PARTY_MENU(0x01) + ItemUseOutOfBattle_EvolutionStone so the
+ * held items are directly usable to trigger evolution. The publication seam
+ * applies exactly these overrides, each guarded (assert the vanilla row is
+ * the 0x04+CannotUse baseline before overriding; else REFUSE). Values are
+ * the gItems array indices == item ids (constants/items.h). */
+#define EMERALD_GAMEPLAY_OVERRIDE_ITEM_COUNT 6u
+static const uint16_t kGameplayItemUseOverrides[EMERALD_GAMEPLAY_OVERRIDE_ITEM_COUNT] =
+{
+    187u, /* ITEM_KINGS_ROCK */
+    192u, /* ITEM_DEEP_SEA_TOOTH */
+    193u, /* ITEM_DEEP_SEA_SCALE */
+    199u, /* ITEM_METAL_COAT */
+    201u, /* ITEM_DRAGON_SCALE */
+    218u, /* ITEM_UP_GRADE */
+};
 
 enum EmeraldGameplayCompatStatus
 {
@@ -72,6 +96,9 @@ enum EmeraldGameplayCompatStatus
     EMERALD_GAMEPLAY_ERR_UNEXPECTED_TYPE,    /* entry type != expected family type */
     EMERALD_GAMEPLAY_ERR_UNEXPECTED_SCHEMA,  /* entry schema != expected family schema */
     EMERALD_GAMEPLAY_ERR_RANGE_REGISTRATION, /* arena spans could not register */
+    EMERALD_GAMEPLAY_ERR_ITEM_DESCRIPTION,   /* item row's description GBA addr did not bind to an R13-C item text label */
+    EMERALD_GAMEPLAY_ERR_ITEM_CALLBACK,      /* item row's field/battle callback addr not in the 27-value census */
+    EMERALD_GAMEPLAY_ERR_ITEM_OVERRIDE,      /* a fork-override guard failed (row not the 0x04+CannotUse baseline) */
     EMERALD_GAMEPLAY_ERR_UNAVAILABLE,        /* no published state to republish */
 };
 

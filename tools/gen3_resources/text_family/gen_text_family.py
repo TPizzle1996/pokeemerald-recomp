@@ -207,8 +207,11 @@ KEY_SEGMENT = {
 
 # Live cutover families (plan §11 tranches 1-2): ROM_BASE_ONLY after the
 # R13-C cutover (skeleton tables for battle/move/ability/nature, pointer
-# slots for shared/system/match-call/ribbon). Table-blocked families
-# (item/pokedex/easy-chat) stay COMPILED_PENDING_MIGRATION (R13-D/E).
+# slots for shared/system/match-call/ribbon). The item-description family
+# flipped ROM_BASE_ONLY at R13-D2 (gItems[].description re-points into the
+# item arena) via a targeted ownership flip - it stays OUT of LIVE_FAMILIES
+# so the slot/skeleton/table emission is unchanged. Table-blocked families
+# (item-lookups, pokedex/easy-chat) stay COMPILED_PENDING_MIGRATION.
 LIVE_FAMILIES = frozenset(
     {"battle", "move", "ability", "nature", "shared", "system",
      "match-call", "ribbon"})
@@ -2775,9 +2778,19 @@ def emit_family(records, dual, label_arts, bundle_blobs, fam_dir, args, keymap):
         "",
     ]
     sym_fam = {r[0]: r[1] for r in records if r[3] == "c"}
+    # R13-D2: the item-description family (emerald:text/item/s<item>desc)
+    # flips to ROM_BASE_ONLY at this stage - native gItems[].description
+    # re-points into the item text arena (the item-description C arrays are
+    # guarded out of the native link). This is a TARGETED ownership flip:
+    # the "item" family is NOT added to LIVE_FAMILIES (that set also drives
+    # the slot/skeleton/table emission), so pokedex/easy-chat/contest remain
+    # COMPILED_PENDING_MIGRATION and the text family is otherwise byte-
+    # identical (only these ownership records change).
     for rid in sorted(label_arts):
         symbol, size = by_id[rid]
-        state = "ROM_BASE_ONLY" if sym_fam[symbol] in LIVE_FAMILIES \
+        label_family = sym_fam[symbol]
+        state = "ROM_BASE_ONLY" if (label_family in LIVE_FAMILIES
+                                    or label_family == "item") \
             else "COMPILED_PENDING_MIGRATION"
         data = root / label_arts[rid]
         h = sha256(data.read_bytes())

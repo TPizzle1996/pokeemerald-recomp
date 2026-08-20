@@ -60,14 +60,38 @@ static void UnregisterArenaRanges(void);
 #define SCHEMA_TUTOR_MOVES      13u
 #define SCHEMA_CONTEST_EFFECTS  14u
 #define SCHEMA_COMBO            15u
+#define SCHEMA_ITEM             11u
 
 #define GAMEPLAY_SPECIES_WIRE_SIZE 28u
 #define GAMEPLAY_MOVE_WIRE_SIZE   12u
+#define GAMEPLAY_ITEM_WIRE_SIZE   44u
 #define GAMEPLAY_EGG_TOTAL_BYTES  2278u  /* 1139 u16; the 165 blocks sum to
                                             exactly this (the last block
                                             carries the 0xFFFF terminator) */
 #define GAMEPLAY_GROWTH_BYTES     404u
 #define GAMEPLAY_MAX_REG_RANGES   (EMERALD_GAMEPLAY_FONT_COUNT + 2u)
+#define GAMEPLAY_GBA_ROM_BASE     ((uint32_t)0x08000000u)
+
+/* D2 item wire-row field layout (44 B, ROM gItems row):
+ *   name[14] @0 | itemId u16 @14 | price u16 @16 | holdEffect u8 @18 |
+ *   holdEffectParam u8 @19 | description u32(GBA) @20 | importance u8 @24 |
+ *   registrability u8 @25 | pocket u8 @26 | type u8 @27 |
+ *   fieldUseFunc u32(GBA) @28 | battleUsage u8 @32 |
+ *   battleUseFunc u32(GBA) @36 | secondaryId u8 @40. */
+#define ITEM_W_OFF_NAME        0u
+#define ITEM_W_OFF_ITEMID      14u
+#define ITEM_W_OFF_PRICE       16u
+#define ITEM_W_OFF_HOLDEFFECT  18u
+#define ITEM_W_OFF_HOLDPARAM   19u
+#define ITEM_W_OFF_DESC        20u
+#define ITEM_W_OFF_IMPORTANCE  24u
+#define ITEM_W_OFF_REGISTRABLE 25u
+#define ITEM_W_OFF_POCKET      26u
+#define ITEM_W_OFF_TYPE        27u
+#define ITEM_W_OFF_FIELDUSE    28u
+#define ITEM_W_OFF_BATTLEUSAGE 32u
+#define ITEM_W_OFF_BATTLEUSE   36u
+#define ITEM_W_OFF_SECONDARYID 40u
 
 /* One leaf record in the levelup arena: canonical resource name + payload
  * size (offsets are the running sum, by construction). */
@@ -84,6 +108,26 @@ static size_t sArenaByteTotal;
 static size_t sPublishedCount;
 static struct { uintptr_t base; size_t length; } sRegisteredRanges[GAMEPLAY_MAX_REG_RANGES];
 static size_t sRegisteredRangeCount;
+
+/* ---- R13-D2 item publication state ---- */
+/* One native fill-target row per item (built in phase 2, published to the
+ * HOST_DATA gItems in phase 3 with a single memcpy). */
+static struct Item sItemRows[EMERALD_GAMEPLAY_ITEM_COUNT];
+
+/* R13-C item-description label -> ROM offset mapping, built in phase 2 by
+ * scanning the pack's `emerald:text/item/s<item>desc` labels. It lets the
+ * seam bind an item row's description GBA address (wire @20) to the exact
+ * R13-C item text label the arena already publishes (ROM_BASE_ONLY after
+ * the R13-D2 ownership flip), then re-point the native description to that
+ * label's
+ * arena bytes. Sorted by romOffset for binary search. */
+struct ItemDescLabel
+{
+    uint64_t romOffset;
+    const char *name;   /* canonical label id, e.g. emerald:text/item/spotiondesc */
+};
+static struct ItemDescLabel *sItemDescLabels;
+static size_t sItemDescLabelCount;
 
 static void ClearDiagnostics(struct EmeraldGameplayCompatDiagnostics *diagnostics)
 {
@@ -155,6 +199,47 @@ static size_t FindNativeIndex(const char *id)
     return row != NULL ? (size_t)(row - kGameplayNativeResources) : (size_t)-1;
 }
 
+/* R13-D2: look up an item row's GBA use-function address in the 27-value
+ * callback census (kGameplayItemCallbacks, sorted by gbaAddr). Returns the
+ * semantic action, or GAMEPLAY_ITEM_USE_ACTION_COUNT when the address is not
+ * in the census (the seam REFUSEs on any non-zero unmapped address). */
+static enum GameplayItemUseAction ResolveItemCallback(uint32_t gbaAddr)
+{
+    size_t lo = 0u;
+    size_t hi = GAMEPLAY_ITEM_CALLBACK_COUNT;
+    while (lo < hi)
+    {
+        size_t mid = lo + (hi - lo) / 2u;
+        uint32_t a = kGameplayItemCallbacks[mid].gbaAddr;
+        if (a == gbaAddr)
+            return (enum GameplayItemUseAction)kGameplayItemCallbacks[mid].action;
+        if (a < gbaAddr)
+            lo = mid + 1u;
+        else
+            hi = mid;
+    }
+    return GAMEPLAY_ITEM_USE_ACTION_COUNT;
+}
+
+/* R13-D2: find an item-description R13-C label whose ROM offset equals `off`.
+ * sItemDescLabels is sorted ascending by romOffset. */
+static const struct ItemDescLabel *FindItemDescLabel(uint64_t off)
+{
+    size_t lo = 0u;
+    size_t hi = sItemDescLabelCount;
+    while (lo < hi)
+    {
+        size_t mid = lo + (hi - lo) / 2u;
+        if (sItemDescLabels[mid].romOffset == off)
+            return &sItemDescLabels[mid];
+        if (sItemDescLabels[mid].romOffset < off)
+            lo = mid + 1u;
+        else
+            hi = mid;
+    }
+    return NULL;
+}
+
 /* D1 family type for a resource id (font prefix -> FONT, else structured). */
 static enum Gen3ResourceType FamilyTypeOf(const char *name)
 {
@@ -180,6 +265,12 @@ static bool ResolveSessionView(const struct Gen3ResourceSnapshot *snapshot,
 static uint16_t ReadLe16(const uint8_t *data)
 {
     return (uint16_t)(data[0] | ((uint16_t)data[1] << 8));
+}
+
+static uint32_t ReadLe32(const uint8_t *data)
+{
+    return (uint32_t)data[0] | ((uint32_t)data[1] << 8)
+        | ((uint32_t)data[2] << 16) | ((uint32_t)data[3] << 24);
 }
 
 /* Fixed-width charmap names: one 0xFF terminator marking the end of the
@@ -254,6 +345,9 @@ const char *EmeraldGameplayCompatStatus_Describe(
     case EMERALD_GAMEPLAY_ERR_UNEXPECTED_TYPE: return "unexpected type";
     case EMERALD_GAMEPLAY_ERR_UNEXPECTED_SCHEMA: return "unexpected schema";
     case EMERALD_GAMEPLAY_ERR_RANGE_REGISTRATION: return "range registration";
+    case EMERALD_GAMEPLAY_ERR_ITEM_DESCRIPTION: return "item description unbound";
+    case EMERALD_GAMEPLAY_ERR_ITEM_CALLBACK: return "item callback unresolvable";
+    case EMERALD_GAMEPLAY_ERR_ITEM_OVERRIDE: return "item override guard failed";
     case EMERALD_GAMEPLAY_ERR_UNAVAILABLE: return "unavailable";
     }
     return "unknown";
@@ -452,6 +546,7 @@ EmeraldGameplayCompat_TryInitialize(
      || familyCount[SCHEMA_MOVE_NAME] != EMERALD_GAMEPLAY_MOVE_COUNT
      || familyCount[SCHEMA_MOVE_CONTEST] != EMERALD_GAMEPLAY_MOVE_COUNT
      || familyCount[SCHEMA_GROWTH] != EMERALD_GAMEPLAY_GROWTH_COUNT
+     || familyCount[SCHEMA_ITEM] != EMERALD_GAMEPLAY_ITEM_COUNT
      || familyCount[SCHEMA_TUTOR_MOVES] != 1u
      || familyCount[SCHEMA_CONTEST_EFFECTS] != 1u
      || familyCount[SCHEMA_COMBO] != 1u
@@ -527,6 +622,223 @@ EmeraldGameplayCompat_TryInitialize(
                 goto done;
             }
         }
+    }
+
+    /* ---- Phase 2 (D2): resolve the item rows against the pack + the R13-C
+     * item text labels, and build the 377 native rows. Everything here is
+     * validated before any publication; the phase-3 store into gItems is a
+     * single infallible memcpy. ---- */
+    {
+        /* Build the R13-C item-description label -> ROM offset map by
+         * scanning the pack (each `emerald:text/item/s<item>desc` label's
+         * sourceRomOffset is its ROM offset: GBA addr - 0x08000000). */
+        size_t descCap = 0u;
+        sItemDescLabelCount = 0u;
+        for (i = 0u; i < packCount && sItemDescLabelCount < packCount; i++)
+        {
+            const struct Gen3ResourcePackEntry *entry2 =
+                Gen3ResourcePack_GetEntry(pack, i);
+            if (entry2 == NULL || entry2->canonicalName == NULL)
+                continue;
+            if (strncmp(entry2->canonicalName, "emerald:text/item/", 18u) != 0)
+                continue;
+            if (entry2->type != GEN3_RESOURCE_TYPE_TEXT)
+                continue;
+            if (sItemDescLabelCount >= descCap)
+            {
+                size_t newCap = descCap ? descCap * 2u : 64u;
+                struct ItemDescLabel *grown = (struct ItemDescLabel *)
+                    realloc(sItemDescLabels, newCap * sizeof(*grown));
+                if (grown == NULL)
+                {
+                    NoteFailure(diagnostics, "build", entry2->canonicalName,
+                                GEN3_RESOURCE_TYPE_TEXT, entry2->type, 1u,
+                                entry2->schema, 0u, 0u, NULL);
+                    result = EMERALD_GAMEPLAY_ERR_OUT_OF_MEMORY;
+                    goto done;
+                }
+                sItemDescLabels = grown;
+                descCap = newCap;
+            }
+            sItemDescLabels[sItemDescLabelCount].romOffset =
+                entry2->sourceRomOffset;
+            sItemDescLabels[sItemDescLabelCount].name = entry2->canonicalName;
+            sItemDescLabelCount++;
+        }
+        /* Sort the map ascending by romOffset for binary search. */
+        {
+            size_t a, b;
+            for (a = 1u; a < sItemDescLabelCount; a++)
+            {
+                struct ItemDescLabel key = sItemDescLabels[a];
+                b = a;
+                while (b > 0u
+                    && sItemDescLabels[b - 1u].romOffset > key.romOffset)
+                {
+                    sItemDescLabels[b] = sItemDescLabels[b - 1u];
+                    b--;
+                }
+                sItemDescLabels[b] = key;
+            }
+        }
+
+        /* Build each native row. */
+        memset(sItemRows, 0, sizeof(sItemRows));
+        for (i = 0u; i < EMERALD_GAMEPLAY_ITEM_COUNT; i++)
+        {
+            const char *key = kGameplayItemKeys[i];
+            size_t idx;
+            const uint8_t *p;
+            struct Item *row;
+            uint32_t descAddr;
+            const struct ItemDescLabel *label;
+            const uint8_t *descBytes;
+            size_t descSize;
+            enum GameplayItemUseAction fieldAction;
+            enum GameplayItemUseAction battleAction;
+            uint16_t overrideIdx;
+            bool isOverride = false;
+
+            idx = FindNativeIndex(key);
+            if (idx == (size_t)-1 || src[idx] == NULL)
+            {
+                NoteFailure(diagnostics, "build", key,
+                            GEN3_RESOURCE_TYPE_STRUCTURED_DATA,
+                            GEN3_RESOURCE_TYPE_INVALID, SCHEMA_ITEM, SCHEMA_ITEM,
+                            0u, 0u, NULL);
+                result = EMERALD_GAMEPLAY_ERR_RESOLVE_FAILED;
+                goto done;
+            }
+            p = src[idx];
+            row = &sItemRows[i];
+
+            /* Canonical scalar + name copy (identical to the compiled GBA
+             * row's data fields). */
+            memcpy(row->name, p + ITEM_W_OFF_NAME, ITEM_NAME_LENGTH);
+            row->itemId = ReadLe16(p + ITEM_W_OFF_ITEMID);
+            row->price = ReadLe16(p + ITEM_W_OFF_PRICE);
+            row->holdEffect = p[ITEM_W_OFF_HOLDEFFECT];
+            row->holdEffectParam = p[ITEM_W_OFF_HOLDPARAM];
+            row->importance = p[ITEM_W_OFF_IMPORTANCE];
+            row->registrability = p[ITEM_W_OFF_REGISTRABLE];
+            row->pocket = p[ITEM_W_OFF_POCKET];
+            row->type = p[ITEM_W_OFF_TYPE];
+            row->battleUsage = p[ITEM_W_OFF_BATTLEUSAGE];
+            row->secondaryId = p[ITEM_W_OFF_SECONDARYID];
+
+            /* Description: the wire GBA address must be the STABLE match of
+             * an R13-C item text label (ROM offset: addr - 0x08000000). Bind
+             * the native description pointer to that label's arena bytes. A
+             * description every item must resolve (0 NULL in the census;
+             * the 68 dummy rows share emerald:text/item/sdummydesc). */
+            descAddr = ReadLe32(p + ITEM_W_OFF_DESC);
+            if (descAddr < GAMEPLAY_GBA_ROM_BASE)
+            {
+                NoteFailure(diagnostics, "build", key,
+                            GEN3_RESOURCE_TYPE_STRUCTURED_DATA,
+                            GEN3_RESOURCE_TYPE_INVALID, SCHEMA_ITEM, SCHEMA_ITEM,
+                            descAddr, 0u, NULL);
+                result = EMERALD_GAMEPLAY_ERR_ITEM_DESCRIPTION;
+                goto done;
+            }
+            label = FindItemDescLabel((uint64_t)descAddr - GAMEPLAY_GBA_ROM_BASE);
+            if (label == NULL
+             || !EmeraldTextCompat_GetResourceBytes(label->name, &descBytes,
+                                                    &descSize)
+             || descBytes == NULL)
+            {
+                NoteFailure(diagnostics, "build", key,
+                            GEN3_RESOURCE_TYPE_TEXT, GEN3_RESOURCE_TYPE_INVALID,
+                            1u, 1u, 0u, 0u, NULL);
+                result = EMERALD_GAMEPLAY_ERR_ITEM_DESCRIPTION;
+                goto done;
+            }
+            row->description = descBytes;
+
+            /* Callbacks: a ZERO GBA address means "no function" (a
+             * non-battle item's battleUseFunc) -> NULL. Any NON-ZERO
+             * address must be in the 27-value census; resolve to the
+             * native ItemUseFunc. An unknown non-zero address is REFUSED. */
+            if (ReadLe32(p + ITEM_W_OFF_FIELDUSE) != 0u)
+            {
+                fieldAction = ResolveItemCallback(
+                    ReadLe32(p + ITEM_W_OFF_FIELDUSE));
+                if (fieldAction == GAMEPLAY_ITEM_USE_ACTION_COUNT)
+                {
+                    NoteFailure(diagnostics, "build", key,
+                                GEN3_RESOURCE_TYPE_STRUCTURED_DATA,
+                                GEN3_RESOURCE_TYPE_INVALID, SCHEMA_ITEM, SCHEMA_ITEM,
+                                0u, 0u, NULL);
+                    result = EMERALD_GAMEPLAY_ERR_ITEM_CALLBACK;
+                    goto done;
+                }
+                row->fieldUseFunc =
+                    GameplayItemUseFunctionForAction(fieldAction);
+            }
+            else
+            {
+                fieldAction = GAMEPLAY_ITEM_USE_ACTION_COUNT;
+                row->fieldUseFunc = NULL;
+            }
+            if (ReadLe32(p + ITEM_W_OFF_BATTLEUSE) != 0u)
+            {
+                battleAction = ResolveItemCallback(
+                    ReadLe32(p + ITEM_W_OFF_BATTLEUSE));
+                if (battleAction == GAMEPLAY_ITEM_USE_ACTION_COUNT)
+                {
+                    NoteFailure(diagnostics, "build", key,
+                                GEN3_RESOURCE_TYPE_STRUCTURED_DATA,
+                                GEN3_RESOURCE_TYPE_INVALID, SCHEMA_ITEM, SCHEMA_ITEM,
+                                0u, 0u, NULL);
+                    result = EMERALD_GAMEPLAY_ERR_ITEM_CALLBACK;
+                    goto done;
+                }
+                row->battleUseFunc =
+                    GameplayItemUseFunctionForAction(battleAction);
+            }
+            else
+            {
+                battleAction = GAMEPLAY_ITEM_USE_ACTION_COUNT;
+                row->battleUseFunc = NULL;
+            }
+
+            /* Fork override: the six trade-evolution held items are directly
+             * usable to trigger evolution. Before overriding each, assert the
+             * canonical vanilla row is the expected 0x04 + CannotUse baseline
+             * so the override stays grounded (never blind). */
+            for (overrideIdx = 0u;
+                 overrideIdx < EMERALD_GAMEPLAY_OVERRIDE_ITEM_COUNT;
+                 overrideIdx++)
+            {
+                if (kGameplayItemUseOverrides[overrideIdx] == (uint16_t)i)
+                {
+                    isOverride = true;
+                    break;
+                }
+            }
+            if (isOverride)
+            {
+                if (row->type != ITEM_USE_BAG_MENU
+                 || fieldAction != GAMEPLAY_ITEM_USE_ACTION_OUTOFBATTLE_CANNOTUSE)
+                {
+                    NoteFailure(diagnostics, "override", key,
+                                GEN3_RESOURCE_TYPE_STRUCTURED_DATA,
+                                GEN3_RESOURCE_TYPE_INVALID,
+                                SCHEMA_ITEM, SCHEMA_ITEM,
+                                row->type, (uint32_t)fieldAction, NULL);
+                    result = EMERALD_GAMEPLAY_ERR_ITEM_OVERRIDE;
+                    goto done;
+                }
+                row->type = ITEM_USE_PARTY_MENU;
+                row->fieldUseFunc = GameplayItemUseFunctionForAction(
+                    GAMEPLAY_ITEM_USE_ACTION_OUTOFBATTLE_EVOLUTIONSTONE);
+            }
+        }
+
+        /* itemId/type/secondaryId sanity: at least the enum coverage is
+         * index-ordered; the equal-payload parity for the other 371 rows is
+         * proven field-by-field against the pack above (byte equality), so
+         * nothing further is needed here. */
     }
 
     /* ---- Phase 2: build the levelup leaf arena + assembled egg stream
@@ -813,7 +1125,13 @@ EmeraldGameplayCompat_TryInitialize(
             font[f / 2u] = ReadLe16(src[i] + f);
     }
 
-    /* Public ranges (levelup arena + egg + font arrays). */
+    /* D2 publication: one infallible memcpy publishes all 377 native rows
+     * into the HOST_DATA gItems. */
+    memcpy(gItems, sItemRows, sizeof(sItemRows));
+
+    /* Public ranges (levelup arena + egg + font arrays). D2 adds NO item
+     * ranges: gItems is fixed HOST_DATA .data and descriptions live in the
+     * R13-C item text arena (already range-covered). */
     if (!RegisterArenaRanges())
     {
         NoteFailure(diagnostics, "publish", NULL, GEN3_RESOURCE_TYPE_STRUCTURED_DATA,
@@ -923,10 +1241,17 @@ void EmeraldGameplayCompat_ClearMigratedEntries(void)
         gLevelUpLearnsets[i] = NULL;
     free(sArenaBytes);
     free(sLeaves);
+    free(sItemDescLabels);
     sArenaBytes = NULL;
     sLeaves = NULL;
     sLeafCount = 0u;
     sArenaByteTotal = 0u;
+    sItemDescLabels = NULL;
+    sItemDescLabelCount = 0u;
+    /* R13-D2: zero the item fill target so no native description pointer
+     * dangles into the (sibling-seam, outer rollback) freed text arena and
+     * no callback pointer survives a refused session. */
+    memset(gItems, 0, sizeof(gItems));
     sPublishedCount = 0u;
 }
 

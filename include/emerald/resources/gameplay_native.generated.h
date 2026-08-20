@@ -15,7 +15,7 @@
 
 #include <stdint.h>
 
-#define GAMEPLAY_NATIVE_RESOURCE_COUNT 3310u
+#define GAMEPLAY_NATIVE_RESOURCE_COUNT 3687u
 #define GAMEPLAY_NATIVE_SPECIES_COUNT 412u
 
 struct GameplayNativeResource
@@ -42,5 +42,11 @@ extern const char *const kGameplaySpeciesKeys[GAMEPLAY_NATIVE_SPECIES_COUNT];
 #define GAMEPLAY_NATIVE_MOVE_COUNT 355u
 #endif
 extern const char *const kGameplayMoveKeys[GAMEPLAY_NATIVE_MOVE_COUNT];
+
+/* item index -> item resource key (emerald:data/item/<name>). */
+#ifndef GAMEPLAY_NATIVE_ITEM_COUNT
+#define GAMEPLAY_NATIVE_ITEM_COUNT 377u
+#endif
+extern const char *const kGameplayItemKeys[GAMEPLAY_NATIVE_ITEM_COUNT];
 
 #endif /* EMERALD_RESOURCES_GAMEPLAY_NATIVE_GENERATED_H */

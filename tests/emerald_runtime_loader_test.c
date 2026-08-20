@@ -38,6 +38,7 @@
 #include "emerald/resources/emerald_rom_profile.h"
 #include "emerald/resources/emerald_gameplay_compat.h"
 #include "emerald/resources/text_skeleton_arrays.generated.h"
+#include "item_use.h"   /* R13-D2: native ItemUse*_... symbols for pointer checks */
 #include "../src/emerald/resources/emerald_runtime_loader.c"
 
 /* ------------------------------------------------------------------ */
@@ -591,7 +592,7 @@ static void TestTextPublication(const char *packPath)
 
     packCount = Gen3ResourcePack_GetEntryCount(pack);
     printf("production pack entry count: %zu\n", packCount);
-    CHECK("production pack entry count pinned at 15373 (D1)", packCount == 15373u);
+    CHECK("production pack entry count pinned at 15750 (R13-D2)", packCount == 15750u);
 
     /* Every text entry: C-side labels resolve by resource id; bundle ids
      * are captured for the blob-slice pass below. */
@@ -906,6 +907,9 @@ extern u16 gEggMoves[];                 /* defined as u16[1139] */
 extern u16 *gLevelUpLearnsets[];        /* defined as u16*[412] */
 extern u16 gFontNormalJapaneseGlyphs[]; /* defined as u16[8192] */
 extern u16 gFontNormalLatinGlyphs[];    /* defined as u16[16384] */
+/* R13-D2: the gameplay seam's HOST_DATA item fill target (struct Item from
+ * item.h, already in scope via emerald_gameplay_compat.h). */
+extern struct Item gItems[ITEMS_COUNT];
 
 static void TestGameplayPublication(const char *packPath)
 {
@@ -965,6 +969,54 @@ static void TestGameplayPublication(const char *packPath)
                   rangeCount >= (size_t)(EMERALD_GAMEPLAY_FONT_COUNT + 2u));
         }
     }
+
+    /* --- R13-D2: gItems publication + item-description cutover --- */
+    /* A medicine row: Potion is priced 300 and is a party-menu medicine both
+     * on the field (ItemUseOutOfBattle_Medicine) and in battle. */
+    CHECK("R13-D2 potion price 300",
+          gItems[ITEM_POTION].price == 300u);
+    CHECK("R13-D2 potion field medicine",
+          gItems[ITEM_POTION].fieldUseFunc == ItemUseOutOfBattle_Medicine);
+    CHECK("R13-D2 potion battle medicine",
+          gItems[ITEM_POTION].battleUseFunc == ItemUseInBattle_Medicine);
+    /* A Pokeball row resolves its battle callback to a native function. */
+    CHECK("R13-D2 master ball battle callback",
+          gItems[ITEM_MASTER_BALL].battleUseFunc == ItemUseInBattle_PokeBall);
+    /* The 6 fork overrides are applied (type PARTY_MENU + EvolutionStone),
+     * each on the guarded 0x04+CannotUse vanilla baseline. */
+    CHECK("R13-D2 kings-rock override type",
+          gItems[ITEM_KINGS_ROCK].type == ITEM_USE_PARTY_MENU);
+    CHECK("R13-D2 kings-rock override func",
+          gItems[ITEM_KINGS_ROCK].fieldUseFunc == ItemUseOutOfBattle_EvolutionStone);
+    /* A non-battle held item has no battle-use function (NULL). */
+    CHECK("R13-D2 kings-rock no battle func",
+          gItems[ITEM_KINGS_ROCK].battleUseFunc == NULL);
+    /* The item name is copied from the packed row (14-byte charmap "POTION"
+     * row: P==0xCA in the condensed charmap). */
+    CHECK("R13-D2 potion name first byte",
+          gItems[ITEM_POTION].name[0] == 0xCAu);
+    /* Descriptions re-point into the R13-C item text arena (ROM_BASE_ONLY). */
+    CHECK("R13-D2 potion desc in text arena",
+          gItems[ITEM_POTION].description != NULL
+          && EmeraldTextCompat_ContainsPointer(
+                 (uintptr_t)gItems[ITEM_POTION].description));
+    {
+        const uint8_t *potionBytes;
+        size_t potionSize;
+        CHECK("R13-D2 potion desc == spotiondesc arena bytes",
+              EmeraldTextCompat_GetResourceBytes(
+                  "emerald:text/item/spotiondesc", &potionBytes, &potionSize)
+              && gItems[ITEM_POTION].description == potionBytes);
+    }
+    /* A dummy row shares sDummyDesc. Index 0 = ITEM_NONE is a dummy. */
+    {
+        const uint8_t *dummyBytes;
+        size_t dummySize;
+        CHECK("R13-D2 dummy desc bound",
+              EmeraldTextCompat_GetResourceBytes(
+                  "emerald:text/item/sdummydesc", &dummyBytes, &dummySize)
+              && gItems[0].description == dummyBytes);
+    }
 }
 
 int main(int argc, char **argv)
@@ -997,8 +1049,12 @@ int main(int argc, char **argv)
     TestTextSkeletonFills();
     TestTextSlotPointers();
     TestTextCurrentCharRouting();
-    TestTextTransactionalRefusal(tempDir, prodPack);
+    /* R13-D1/D2 gameplay publication. Runs while the production text arena
+     * is still live (BEFORE TestTextTransactionalRefusal tears it down), so
+     * the R13-D2 gItems description pointers can be checked against the
+     * R13-C item-arena bytes. */
     TestGameplayPublication(prodPack);
+    TestTextTransactionalRefusal(tempDir, prodPack);
 
     FreeFamilyFixtures();
     FreeBackFamilyFixtures();

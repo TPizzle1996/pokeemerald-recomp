@@ -29,14 +29,24 @@ HOST_DATA struct ContestEffect gContestEffects[48];
 HOST_DATA u8 gComboStarterLookupTable[63];
 HOST_DATA u16 *gLevelUpLearnsets[NUM_SPECIES];
 
+/* R13-D2: the item fill target. Zero-initialized; the publication seam
+ * (emerald_gameplay_compat.c) writes all 377 rows at boot (REFUSE-class:
+ * the compiled gItems in src/data/items.h is NATIVE_LINUX-guarded out, so
+ * there is no fallback). This is the single native gItems definition. */
+HOST_DATA struct Item gItems[ITEMS_COUNT];
+
 #if NUM_SPECIES != 412
 #error "R13-D1 species count disagrees with the gameplay-D1 pins"
 #endif
 #if MOVES_COUNT != 355
 #error "R13-D1 move count disagrees with the gameplay-D1 pins"
 #endif
+#if ITEMS_COUNT != 377
+#error "R13-D2 item count disagrees with the gameplay-D2 pins"
+#endif
 _Static_assert(sizeof(struct SpeciesInfo) == 26, "GameplaySpeciesInfoSize");
 _Static_assert(sizeof(struct BattleMove) == 9, "GameplayBattleMoveSize");
 _Static_assert(sizeof(struct ContestMove) == 7, "GameplayContestMoveSize");
 _Static_assert(sizeof(struct ContestEffect) == 3, "GameplayContestEffectSize");
 _Static_assert(sizeof(GameplayTMHMLearnsetData) == 8, "GameplayTMHMSize");
+_Static_assert(sizeof(struct Item) == 72, "GameplayItemSize");

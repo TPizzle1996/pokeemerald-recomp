@@ -90,6 +90,8 @@ gcc -std=gnu99 -O2 -ffunction-sections -fdata-sections -Wl,--gc-sections \
     "$emerald_dir/gameplay_data_native.c" \
     "$emerald_dir/gameplay_native_table.generated.c" \
     "$emerald_dir/gameplay_levelup.generated.c" \
+    "$emerald_dir/gameplay_callbacks.generated.c" \
+    "$emerald_dir/gameplay_item_callbacks_native.c" \
     "$emerald_dir/emerald_gameplay_compat.c" \
     "$here/emerald_gameplay_harness_stubs.c" \
     "$here/emerald_runtime_loader_test.c" \
