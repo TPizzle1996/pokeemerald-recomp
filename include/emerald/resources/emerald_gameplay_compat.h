@@ -45,12 +45,16 @@
 #include "emerald/resources/gameplay_data_native.h"
 #include "emerald/resources/emerald_text_compat.h"
 
-/* D1+D2 family count pins. D1: 3,300 structured + 10 fonts; D2 adds the
- * gItems family (schema 11, 377 x 44 B). Combined gameplay inventory =
- * 3,687 resources, which must agree with the generated inventory at compile
- * time. */
-#if GAMEPLAY_NATIVE_RESOURCE_COUNT != 3687u
-#error "R13-D gameplay resource count disagrees with the generated inventory"
+/* Gameplay+trainer inventory pins. D1: 3,300 structured + 10 fonts; D2 adds
+ * the gItems family (schema 11, 377 x 44 B); R13-E1 adds the three trainer
+ * families (schema 16 metadata 855, 17 party 854, 18 class-name 66).
+ * Combined inventory = 5,462 resources, which must agree with the generated
+ * inventory at compile time. EmeraldGameplayCompat publishes the schema 1..15
+ * structured + font families in-place; the schema 16..18 trainer families are
+ * owned by EmeraldTrainerCompat (also validated here for presence/ownership
+ * but filled by that seam). */
+#if GAMEPLAY_NATIVE_RESOURCE_COUNT != 5462u
+#error "R13-E gameplay+trainer resource count disagrees with the generated inventory"
 #endif
 
 #define EMERALD_GAMEPLAY_SPECIES_COUNT 412u

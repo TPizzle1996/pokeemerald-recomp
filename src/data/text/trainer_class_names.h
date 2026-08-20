@@ -1,3 +1,7 @@
+/* R13-E1: native class names are the seam-published HOST_DATA fill target
+ * (trainer_data_native.c); the compiled const payload is guarded out of the
+ * native link (REFUSE-class). GBA keeps this verbatim. */
+#ifndef NATIVE_LINUX
 const u8 gTrainerClassNames[][13] = {
     [TRAINER_CLASS_PKMN_TRAINER_1] = _("{PKMN} TRAINER"),
     [TRAINER_CLASS_PKMN_TRAINER_2] = _("{PKMN} TRAINER"),
@@ -66,3 +70,8 @@ const u8 gTrainerClassNames[][13] = {
     [TRAINER_CLASS_PYRAMID_KING] = _("PYRAMID KING"),
     [TRAINER_CLASS_RS_PROTAG] = _("{PKMN} TRAINER"),
 };
+#else
+/* Native: no compiled class-name payload; the HOST_DATA definition in
+ * src/emerald/resources/trainer_data_native.c is filled by
+ * EmeraldTrainerCompat (REFUSE-class). */
+#endif /* NATIVE_LINUX */

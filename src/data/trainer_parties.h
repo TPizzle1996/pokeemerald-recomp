@@ -1,3 +1,9 @@
+/* R13-E1: the compiled party leaves are the GBA flavor's data. On native
+ * the leaves live in the seam's packed party arena
+ * (src/emerald/resources/emerald_trainer_compat.c) and each gTrainers row's
+ * party pointer is rebuilt to point there, so this whole file is guarded out
+ * of the native link. GBA keeps every leaf verbatim. */
+#ifndef NATIVE_LINUX
 static const struct TrainerMonNoItemDefaultMoves sParty_Sawyer1[] = {
     {
     .iv = 0,
@@ -12434,3 +12440,4 @@ static const struct TrainerMonNoItemDefaultMoves sParty_MayLinkPlaceholder[] = {
     .species = SPECIES_KYOGRE,
     }
 };
+#endif /* NATIVE_LINUX */

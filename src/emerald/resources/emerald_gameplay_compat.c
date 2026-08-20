@@ -507,17 +507,14 @@ EmeraldGameplayCompat_TryInitialize(
             }
             fontCount++;
         }
-        else
+        else if (row->schema < 16u)
         {
-            if (row->schema >= 16u)
-            {
-                NoteFailure(diagnostics, "build", entry->canonicalName,
-                            familyType, entry->type, row->schema, row->schema,
-                            (uint32_t)row->size,
-                            (uint32_t)row->size, NULL);
-                result = EMERALD_GAMEPLAY_ERR_UNEXPECTED_SCHEMA;
-                goto done;
-            }
+            /* R13-E1: schema >= 16 = the trainer-owned families (16 metadata /
+             * 17 party / 18 class-name). They are presence-validated above
+             * (type/schema/size/ownership/bytes) and marked seen alongside
+             * every other generated row, but their fill targets are owned and
+             * published by EmeraldTrainerCompat (which runs after this seam in
+             * the runtime loader chain), not here. */
             familyCount[row->schema]++;
         }
     }

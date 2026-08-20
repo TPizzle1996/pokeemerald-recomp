@@ -181,8 +181,17 @@ extern struct CompressedSpriteSheet gMonFrontPicTable[];
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 #endif
 
+/* R13-E1: native gTrainers/gTrainerClassNames are the seam-published HOST_DATA
+ * fill targets (trainer_data_native.c), so they are mutable on native.
+ * GBA keeps the const definitions verbatim (src/data/trainers.h and
+ * src/data/text/trainer_class_names.h). */
+#if defined(NATIVE_LINUX)
+extern struct Trainer gTrainers[];
+extern u8 gTrainerClassNames[][13];
+#else
 extern const struct Trainer gTrainers[];
 extern const u8 gTrainerClassNames[][13];
+#endif
 #ifdef DESKTOP_EXTERNAL_GAME_CONTENT
 extern u8 gSpeciesNames[][POKEMON_NAME_LENGTH + 1];
 extern u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1];

@@ -1,3 +1,8 @@
+/* R13-E1: native trainer table is the seam-published HOST_DATA fill target
+ * (src/emerald/resources/trainer_data_native.c); the compiled const payload
+ * is guarded out of the native link so a session whose trainer data cannot
+ * publish is a refused session with no fallback. GBA keeps this verbatim. */
+#ifndef NATIVE_LINUX
 const struct Trainer gTrainers[] = {
     [TRAINER_NONE] =
     {
@@ -10261,3 +10266,8 @@ const struct Trainer gTrainers[] = {
         .party = NO_ITEM_DEFAULT_MOVES(sParty_MayLinkPlaceholder),
     },
 };
+#else
+/* Native: no compiled gTrainers payload; the HOST_DATA definition in
+ * src/emerald/resources/trainer_data_native.c is filled by
+ * EmeraldTrainerCompat (REFUSE-class). */
+#endif /* NATIVE_LINUX */

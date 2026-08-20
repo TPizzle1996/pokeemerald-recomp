@@ -41,6 +41,7 @@ import hashlib
 import re
 import struct
 import sys
+import unicodedata
 from pathlib import Path
 
 GEN3_GBA_ROM_BASE = 0x08000000
@@ -50,8 +51,11 @@ ROM_SHA1 = "f3ae088181bf583e55daf962a92bb46f4f1d07b7"
 # ------------------------------------------------------------------ pins
 # R13-D1 = 3310 resources / 342230 B (the diverged evolution family is
 # excluded -- see note below). R13-D2 adds the gItems family (377 x 44 B GBA
-# wire rows = 16588 B, schema 11=item). Combined gameplay total:
-#    3687 resources / 358818 B.
+# wire rows = 16588 B, schema 11=item). R13-E1 adds the three trainer
+# families (schema 16 metadata 855 x 40 B = 34200 B; schema 17 party leaves
+# 854 = 18088 B; schema 18 class names 66 x 13 B = 858 B). Combined gameplay
+# + trainer total:
+#    5462 resources / 411964 B.
 #
 # NOTE (R13-D1): the evolution family (412 x 40 B = 16480 B) is EXCLUDED: the
 # compile-vs-vanilla parity gate proved the recomp deliberately replaced the
@@ -60,8 +64,8 @@ ROM_SHA1 = "f3ae088181bf583e55daf962a92bb46f4f1d07b7"
 # (src/data/pokemon/evolution.h). Publishing vanilla evolution data would
 # silently overwrite that fork behaviour, which the R13-D stage brief forbids
 # (STOP for that family; keep compiled).
-PINNED_TOTAL = 3687
-PINNED_BYTES = 358818
+PINNED_TOTAL = 5462
+PINNED_BYTES = 411964
 PINNED_BY_FAMILY = {
     "species-base": (412, 11536),
     "species-name": (412, 4532),
@@ -77,6 +81,9 @@ PINNED_BY_FAMILY = {
     "contest-effects": (1, 192),
     "contest-combo-starters": (1, 63),
     "item": (377, 16588),
+    "trainer": (855, 34200),
+    "trainer-party": (854, 18088),
+    "trainer-class-name": (66, 858),
     "font": (10, 294912),
 }
 
@@ -206,6 +213,25 @@ def action_id(symbol):
 def semantic_name(prefix, name):
     """'SPECIES_BULBASAUR' -> 'bulbasaur'; 'MOVE_VICE_GRIP' -> 'vice-grip'."""
     return name[len(prefix):].lower().replace("_", "-")
+
+
+def class_resource_suffix(display):
+    """Display string -> ASCII resource segment satisfying the M0/M1 name
+    grammar ([a-z0-9._-] per IsSegmentCharacter in src/gen3/resources/
+    resource_id.c). The charmap display strings carry non-ASCII glyphs (the
+    gender signs in SWIMMER♂/♀ and the accented é in POKéMANIAC/POKéFAN)
+    and the animated-text brace tokens ({PKMN}); NFKD-transliterate é -> e,
+    map the sex glyphs (♂ -> m, ♀ -> f), spaces -> '-', and drop every
+    character the grammar forbids. The result stays readable and unique per
+    class; duplicate display strings are disambiguated separately by
+    appending the class index. """
+    s = unicodedata.normalize("NFKD", display)
+    s = "".join(ch for ch in s if not unicodedata.combining(ch))
+    s = s.replace("\u2642", "m").replace("\u2640", "f")
+    s = s.replace(" ", "-").lower()
+    allowed = "._-"
+    return "".join(ch for ch in s
+                   if ch.isascii() and (ch in allowed or ch.isalnum()))
 
 
 def parse_enum(regex_prefix, path):
@@ -421,6 +447,121 @@ def derive(elf, rom, pret):
     callback_rows = sorted(item_callbacks.items())  # (addr, symbol) by addr
     item_keys = [item_key(i) for i in range(377)]
 
+    # --- trainers (R13-E1) ------------------------------------------------
+    # Parse the recomp source for the canonical order. trainer_names[i] is
+    # the semantic suffix of the i-th `[TRAINER_<suffix>]` designator in file
+    # order (trainer id i == designator index i, no gaps), lowercased with
+    # '_' -> '-': TRAINER_GRUNT_AQUA_HIDEOUT_1 -> "grunt-aqua-hideout-1".
+    TRAINER_ROW_OFF = 0x310030   # gTrainers ROM-relative (+ 0x08000000 GBA)
+    TRAINER_CLASS_OFF = 0x30fcd4 # gTrainerClassNames
+    TRAINER_PBLOCK_S = 0x30b62c  # party leaves block start
+    TRAINER_PBLOCK_E = 0x30fcd4  # party leaves block end (touches classes)
+    TRAINER_ROW_WIRE = 40
+    TRAINER_CLASS_WIRE = 13
+    TRAINER_ROM_STRIDE = {0: 8, 1: 16, 2: 8, 3: 16}  # by partyFlags & 3
+
+    trainers_h = (root / "src/data/trainers.h").read_text()
+    designators = re.findall(r"^\s*\[(TRAINER_[A-Z0-9_]+)\]",
+                             trainers_h, re.M)
+    if len(designators) != 855:
+        fail(f"trainers.h designators {len(designators)} != 855")
+    trainer_names = [d[len("TRAINER_"):].lower().replace("_", "-")
+                     for d in designators]
+
+    # Class names: parse the `[TRAINER_CLASS_X] = _("display")` rows in file
+    # order. The display-string-derived key is unique per class: when two
+    # classes share a display string (e.g. the four "{PKMN} TRAINER" rows),
+    # the later one disambiguates with its class index appended. The
+    # generated kGameplayTrainerClassKeys[66] maps each class index to its
+    # exact key, so the seam is never ambiguous.
+    class_h = (root / "src/data/text/trainer_class_names.h").read_text()
+    class_rows = re.findall(
+        r"^\s*\[TRAINER_CLASS_[A-Z0-9_]+\]\s*=\s*_\(([^)]*)\)\s*[,]?\s*$",
+        class_h, re.M)
+    if len(class_rows) != 66:
+        fail(f"trainer_class_names.h rows {len(class_rows)} != 66")
+    seen_class = set()
+    class_keys = []
+    for cidx, display in enumerate(class_rows):
+        if len(display) >= 2 and display[0] == '"' and display[-1] == '"':
+            display = display[1:-1]  # drop the charmap string quotes
+        base = class_resource_suffix(display)
+        key = base if base not in seen_class else base + "-" + str(cidx)
+        seen_class.add(key)
+        class_keys.append("emerald:data/trainer-class/" + key)
+    if len(set(class_keys)) != 66:
+        fail("trainer-class keys must be distinct (66)")
+
+    tr_sym, tr_data, tr_size = sym_bytes("gTrainers")
+    if tr_size != TRAINER_ROW_WIRE * 855:
+        fail(f"gTrainers size {tr_size} != 40 x 855")
+    cl_sym, cl_data, cl_size = sym_bytes("gTrainerClassNames")
+    if cl_size != TRAINER_CLASS_WIRE * 66:
+        fail(f"gTrainerClassNames size {cl_size} != 13 x 66")
+    if tr_sym[1] - GEN3_GBA_ROM_BASE != TRAINER_ROW_OFF:
+        fail(f"gTrainers not at expected 0x{TRAINER_ROW_OFF:x}")
+    if cl_sym[1] - GEN3_GBA_ROM_BASE != TRAINER_CLASS_OFF:
+        fail(f"gTrainerClassNames not at expected 0x{TRAINER_CLASS_OFF:x}")
+
+    # Per-trainer generated maps (index-aligned with gTrainers[855]).
+    trainer_keys = []          # trainer id -> metadata resource key
+    party_keys = []            # trainer id -> party resource key ("" if NULL)
+    party_meta = []            # (partySize, variant) per trainer
+    party_leaves = []          # (trainer_idx, rom_off, size, variant)
+
+    for i in range(855):
+        row_rom = TRAINER_ROW_OFF + i * TRAINER_ROW_WIRE
+        if rom[row_rom:row_rom + TRAINER_ROW_WIRE] != tr_data[
+                i * TRAINER_ROW_WIRE:i * TRAINER_ROW_WIRE + TRAINER_ROW_WIRE]:
+            fail(f"gTrainers[{i}]: ROM slice != ELF slice")
+        add("trainer", "emerald:data/trainer/" + trainer_names[i],
+            "gTrainers", TRAINER_ROW_WIRE, row_rom)
+        trainer_keys.append("emerald:data/trainer/" + trainer_names[i])
+
+        flags = tr_data[i * TRAINER_ROW_WIRE]
+        psz = tr_data[i * TRAINER_ROW_WIRE + 0x20]
+        variant = flags & 3
+        pptr = struct.unpack_from("<I", tr_data, i * TRAINER_ROW_WIRE + 0x24)[0]
+        if pptr:
+            leaf_off = pptr - GEN3_GBA_ROM_BASE
+            leaf_size = psz * TRAINER_ROM_STRIDE[variant]
+            if leaf_off < TRAINER_PBLOCK_S or leaf_off + leaf_size > TRAINER_PBLOCK_E:
+                fail(f"gTrainers[{i}] party leaf outside the party block")
+            add("trainer-party",
+                "emerald:data/trainer/" + trainer_names[i] + "/party",
+                "gTrainersParty", leaf_size, leaf_off)
+            party_keys.append(
+                "emerald:data/trainer/" + trainer_names[i] + "/party")
+            party_leaves.append((i, leaf_off, leaf_size, variant))
+        else:
+            if psz != 0 or i != 0:
+                fail(f"gTrainers[{i}] NULL party but partySize {psz}")
+            party_keys.append("")
+        party_meta.append((psz, variant))
+
+    # The 854 leaves must tile [TRAINER_PBLOCK_S, TRAINER_PBLOCK_E) exactly
+    # in trainer-index order (no overlap, no gap) - the sum is the 18,088 B
+    # canonical party block.
+    party_leaves.sort(key=lambda t: t[0])
+    if len(party_leaves) != 854:
+        fail(f"party leaves {len(party_leaves)} != 854")
+    cursor = TRAINER_PBLOCK_S
+    for (i, leaf_off, leaf_size, variant) in party_leaves:
+        if leaf_off != cursor:
+            fail(f"party leaves do not tile contiguously at trainer {i}; "
+                 f"leaf @0x{leaf_off:x} but block cursor 0x{cursor:x}")
+        cursor += leaf_size
+    if cursor != TRAINER_PBLOCK_E:
+        fail("party leaves do not cover the full party block")
+
+    for c in range(66):
+        cl_rom = TRAINER_CLASS_OFF + c * TRAINER_CLASS_WIRE
+        if rom[cl_rom:cl_rom + TRAINER_CLASS_WIRE] != cl_data[
+                c * TRAINER_CLASS_WIRE:c * TRAINER_CLASS_WIRE + TRAINER_CLASS_WIRE]:
+            fail(f"gTrainerClassNames[{c}]: ROM slice != ELF slice")
+        add("trainer-class-name", class_keys[c], "gTrainerClassNames",
+            TRAINER_CLASS_WIRE, cl_rom)
+
     rows.sort(key=lambda r: r[0])
     total = len(rows)
     if total != PINNED_TOTAL:
@@ -436,7 +577,7 @@ def derive(elf, rom, pret):
     species_keys = [sp_key(i) for i in range(412)]
     move_keys = [mv_key(i) for i in range(355)]
     return rows, fam, levelup_idx_map, species_keys, move_keys, item_keys, \
-        callback_rows
+        callback_rows, trainer_keys, party_keys, party_meta, class_keys
 
 
 def _f(key, family):
@@ -454,6 +595,10 @@ def _f(key, family):
             sub, "move-battle")
     if key.startswith("emerald:data/item/"):
         return "item"
+    if key.startswith("emerald:data/trainer/"):
+        return "trainer-party" if key.endswith("/party") else "trainer"
+    if key.startswith("emerald:data/trainer-class/"):
+        return "trainer-class-name"
     if key.startswith("emerald:data/growth-rate/"):
         return "growth-rate"
     if key == "emerald:data/tutor/moves":
@@ -490,7 +635,9 @@ SCHEMA = {
     "species-levelup": 4, "species-tmhm": 5, "species-tutor": 6,
     "species-egg-moves": 7, "move-battle": 8, "move-name": 9,
     "move-contest": 10, "item": 11, "growth-rate": 12, "tutor-moves": 13,
-    "contest-effects": 14, "contest-combo-starters": 15, "font": 1,
+    "contest-effects": 14, "contest-combo-starters": 15,
+    "trainer": 16, "trainer-party": 17, "trainer-class-name": 18,
+    "font": 1,
 }
 
 
@@ -504,7 +651,8 @@ def key_sanitize(key):
 
 
 def emit_gameplay(rows, fam, levelup_idx_map, species_keys, move_keys,
-                  item_keys, callback_rows, outdir, root, args):
+                  item_keys, callback_rows, trainer_keys, party_keys,
+                  party_meta, class_keys, outdir, root, args):
     famdir = outdir / "gameplay"
     artdir = famdir / "artifacts"
     art_by_key = {}
@@ -722,6 +870,9 @@ def emit_gameplay(rows, fam, levelup_idx_map, species_keys, move_keys,
         "",
         f"#define GAMEPLAY_NATIVE_RESOURCE_COUNT {len(rows)}u",
         f"#define GAMEPLAY_NATIVE_SPECIES_COUNT 412u",
+        f"#define GAMEPLAY_NATIVE_TRAINER_COUNT 855u",
+        f"#define GAMEPLAY_NATIVE_CLASS_COUNT 66u",
+        f"#define GAMEPLAY_NATIVE_TRAINER_PARTY_COUNT 854u",
         "",
         "struct GameplayNativeResource",
         "{",
@@ -933,6 +1084,113 @@ def emit_gameplay(rows, fam, levelup_idx_map, species_keys, move_keys,
         cbm.append("")
     write_if(famdir / "item_callbacks.generated.toml", cbm, args)
 
+    # ---- trainer seam generated maps (R13-E1) ----------------------------
+    # Index-aligned maps for the trainer families so the seam can rebuild the
+    # native gTrainers[855] / gTrainerClassNames[66][13] tables and the party
+    # pointer graph without parsing pack names. The variant enum is aligned
+    # with the two partyFlags bits (bit0 = custom moveset, bit1 = held item)
+    # so `variant == (partyFlags & 3)`; the seam REFUSEs any disagreement
+    # between a row's partyFlags and the generated metadata.
+    tr_hdr = [
+        "/* Generated by tools/gen3_resources/gameplay_family/"
+        "gen_gameplay_family.py.",
+        " * Do not edit by hand; re-run the generator and --check it.",
+        " *",
+        " * R13-E1 trainer publication maps. Index-aligned with the native",
+        " * gTrainers table (855 trainers). kGameplayTrainerKeys[i] is the",
+        " * metadata resource key (emerald:data/trainer/<name>);",
+        " * kGameplayTrainerPartyKeys[i] is that trainer's party leaf key",
+        " * (emerald:data/trainer/<name>/party) or \"\" for the NULL-party",
+        " * TRAINER_NONE row; kGameplayTrainerPartyMeta[i] carries the",
+        " * canonical (partySize, variant) such that the variant equals the",
+        " * row's (partyFlags & 3). kGameplayTrainerClassKeys[c] maps each",
+        " * class index (0..65) to its class-name resource key.",
+        " */",
+        "#ifndef EMERALD_RESOURCES_TRAINER_NATIVE_GENERATED_H",
+        "#define EMERALD_RESOURCES_TRAINER_NATIVE_GENERATED_H",
+        "",
+        "#include <stdint.h>",
+        '#include "emerald/resources/gameplay_native.generated.h"',
+        "",
+        "enum GameplayTrainerPartyVariant",
+        "{",
+        "    GAMEPLAY_TRAINER_PARTY_NO_ITEM_DEFAULT_MOVES = 0,",
+        "    GAMEPLAY_TRAINER_PARTY_NO_ITEM_CUSTOM_MOVES = 1,",
+        "    GAMEPLAY_TRAINER_PARTY_ITEM_DEFAULT_MOVES = 2,",
+        "    GAMEPLAY_TRAINER_PARTY_ITEM_CUSTOM_MOVES = 3,",
+        "};",
+        "",
+        "struct GameplayTrainerPartyMeta",
+        "{",
+        "    uint8_t partySize;  /* canonical party size (wire partySize) */",
+        "    uint8_t variant;    /* enum GameplayTrainerPartyVariant */",
+        "};",
+        "",
+        "/* trainer id -> metadata resource key */",
+        "extern const char *const "
+        "kGameplayTrainerKeys[GAMEPLAY_NATIVE_TRAINER_COUNT];",
+        "/* trainer id -> party leaf resource key (\"\" for NULL party) */",
+        "extern const char *const "
+        "kGameplayTrainerPartyKeys[GAMEPLAY_NATIVE_TRAINER_COUNT];",
+        "/* trainer id -> canonical (partySize, variant) */",
+        "extern const struct GameplayTrainerPartyMeta "
+        "kGameplayTrainerPartyMeta[GAMEPLAY_NATIVE_TRAINER_COUNT];",
+        "/* class index -> class-name resource key */",
+        "extern const char *const "
+        "kGameplayTrainerClassKeys[GAMEPLAY_NATIVE_CLASS_COUNT];",
+        "",
+        "#endif /* EMERALD_RESOURCES_TRAINER_NATIVE_GENERATED_H */",
+    ]
+    write_if(root / "include/emerald/resources/trainer_native.generated.h",
+             tr_hdr, args)
+
+    tr_c = [
+        "/* Generated by tools/gen3_resources/gameplay_family/"
+        "gen_gameplay_family.py.",
+        " * Do not edit by hand; re-run the generator and --check it.",
+        " */",
+        '#include "emerald/resources/trainer_native.generated.h"',
+        "",
+        "const char *const "
+        "kGameplayTrainerKeys[GAMEPLAY_NATIVE_TRAINER_COUNT] =",
+        "{",
+    ]
+    for k in trainer_keys:
+        tr_c.append(f'    "{k}",')
+    tr_c += [
+        "};",
+        "",
+        "const char *const "
+        "kGameplayTrainerPartyKeys[GAMEPLAY_NATIVE_TRAINER_COUNT] =",
+        "{",
+    ]
+    for k in party_keys:
+        tr_c.append(f'    "{k}",')
+    tr_c += [
+        "};",
+        "",
+        "const struct GameplayTrainerPartyMeta "
+        "kGameplayTrainerPartyMeta[GAMEPLAY_NATIVE_TRAINER_COUNT] =",
+        "{",
+    ]
+    for (psz, variant) in party_meta:
+        tr_c.append(f"    {{{psz}u, {variant}u}},")
+    tr_c += [
+        "};",
+        "",
+        "const char *const "
+        "kGameplayTrainerClassKeys[GAMEPLAY_NATIVE_CLASS_COUNT] =",
+        "{",
+    ]
+    for k in class_keys:
+        tr_c.append(f'    "{k}",')
+    tr_c += [
+        "};",
+        "",
+    ]
+    write_if(root / "src/emerald/resources/trainer_native.generated.c",
+             tr_c, args)
+
 
 def _artifact_sub(key):
     if key.startswith("emerald:data/species/"):
@@ -945,6 +1203,10 @@ def _artifact_sub(key):
             "move-contest" if key.endswith("/contest") else "move-battle")
     if key.startswith("emerald:data/item/"):
         return "items"
+    if key.startswith("emerald:data/trainer/"):
+        return "trainer-party" if key.endswith("/party") else "trainer"
+    if key.startswith("emerald:data/trainer-class/"):
+        return "trainer-class-name"
     if key.startswith("emerald:data/growth-rate/"):
         return "growth-rate"
     if key == "emerald:data/tutor/moves":
@@ -980,15 +1242,19 @@ def main():
 
     elf = Elf32(open(args.elf, "rb").read())
     rows, fam, levelup_idx_map, species_keys, move_keys, item_keys, \
-        callback_rows = derive(elf, rom, pret)
+        callback_rows, trainer_keys, party_keys, party_meta, class_keys = \
+        derive(elf, rom, pret)
     emit_gameplay(rows, fam, levelup_idx_map, species_keys, move_keys,
-                  item_keys, callback_rows, outdir, root, args)
+                  item_keys, callback_rows, trainer_keys, party_keys,
+                  party_meta, class_keys, outdir, root, args)
 
     print(f"gameplay resources: {len(rows)}, "
-          f"{sum(r[3] for r in rows)} B (D1+D2; evolutions excluded)")
+          f"{sum(r[3] for r in rows)} B (D1+D2+E1; evolutions excluded)")
     print(f"item callback census: {len(callback_rows)} distinct")
     for family in sorted(PINNED_BY_FAMILY):
         print(f"  {family}: {fam.get(family, 0)} resources")
+    print(f"trainer metadata: {len(trainer_keys)} / party: "
+          f"{sum(1 for k in party_keys if k)} / class: {len(class_keys)}")
 
 
 if __name__ == "__main__":

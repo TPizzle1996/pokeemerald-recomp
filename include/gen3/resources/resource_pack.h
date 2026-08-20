@@ -161,7 +161,7 @@ enum Gen3ResourceType Gen3ResourcePack_TypeFromCode(enum Gen3ResourcePackTypeCod
 /* v1 limits / caps (bounded, but not tiny enough to block migration)  */
 /* ------------------------------------------------------------------ */
 
-#define GEN3_PACK_MAX_ENTRIES         16384u
+#define GEN3_PACK_MAX_ENTRIES         32768u
 #define GEN3_PACK_NAME_MAX            GEN3_RESOURCE_NAME_MAX /* 255 */
 #define GEN3_PACK_MAX_PAYLOAD_SIZE    0x01000000u            /* 16 MiB per resource */
 #define GEN3_PACK_MAX_TOTAL_PAYLOAD   0x40000000u            /* 1 GiB across the pack */

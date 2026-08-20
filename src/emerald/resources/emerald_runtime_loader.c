@@ -57,6 +57,7 @@
 #include "emerald/resources/emerald_leaf_compat.h"
 #include "emerald/resources/emerald_resource_session.h"
 #include "emerald/resources/emerald_text_compat.h"
+#include "emerald/resources/emerald_trainer_compat.h"
 #include "emerald/resources/emerald_trainer_native_compat.h"
 
 static bool sSnapshotRegistered;
@@ -211,6 +212,7 @@ EmeraldResourceCompat_RegisterRuntimeSnapshot(const char *packPath)
                         audioDiag.canonicalName);
                 EmeraldResourceCompat_ClearMigratedEntries();
                 EmeraldAudioCompat_ClearMigratedEntries();
+                EmeraldTrainerCompat_ClearMigratedEntries();
                 EmeraldResourceCompat_ClearSnapshot();
                 EmeraldResourceCompat_SetSessionContentFingerprint(NULL);
                 Gen3ResourceSnapshot_Destroy(snapshot);
@@ -272,6 +274,7 @@ EmeraldResourceCompat_RegisterRuntimeSnapshot(const char *packPath)
                         EmeraldAudioCompat_ClearMigratedEntries();
                         EmeraldTextCompat_ClearMigratedEntries();
                         EmeraldLeafCompat_ClearMigratedEntries();
+                        EmeraldTrainerCompat_ClearMigratedEntries();
                         EmeraldResourceCompat_ClearSnapshot();
                         EmeraldResourceCompat_SetSessionContentFingerprint(NULL);
                         Gen3ResourceSnapshot_Destroy(snapshot);
@@ -310,6 +313,7 @@ EmeraldResourceCompat_RegisterRuntimeSnapshot(const char *packPath)
                             EmeraldTextCompat_ClearMigratedEntries();
                             EmeraldLeafCompat_ClearMigratedEntries();
                             EmeraldGameplayCompat_ClearMigratedEntries();
+                            EmeraldTrainerCompat_ClearMigratedEntries();
                             EmeraldResourceCompat_ClearSnapshot();
                             EmeraldResourceCompat_SetSessionContentFingerprint(NULL);
                             Gen3ResourceSnapshot_Destroy(snapshot);
@@ -319,25 +323,66 @@ EmeraldResourceCompat_RegisterRuntimeSnapshot(const char *packPath)
                         }
                         else
                         {
-                            /* R10-F: the session content fingerprint pins the
-                             * exact logical provider content this session was
-                             * built from (the construction lives in
-                             * emerald_resource_session.h). The native save-state
-                             * system stamps it into every state it writes and
-                             * rejects states whose recorded fingerprint differs
-                             * from the active session's - equivalent content at
-                             * another path still matches, changed or reordered
-                             * providers cannot. */
-                            uint8_t sessionFingerprint[GEN3_PACK_SHA256_SIZE];
-                            sSnapshotRegistered = true;
-                            status = EMERALD_COMPAT_OK;
-                            if (EmeraldResourceSession_ComputeBaseFingerprint(
-                                    &info, sessionFingerprint))
-                                EmeraldResourceCompat_SetSessionContentFingerprint(
-                                    sessionFingerprint);
+                            /* R13-E1: publish the trainer-data families
+                             * (gTrainers + party leaves + trainer class
+                             * names) into their native HOST_DATA fill
+                             * targets. REFUSE-CLASS like the gameplay seam
+                             * (which runs just before this so gItems/gameplay
+                             * are live first): the compiled const trainer
+                             * definitions are NATIVE_LINUX-guarded out, so
+                             * there is no fallback - a session whose trainer
+                             * data cannot publish is refused with the same
+                             * full rollback as every earlier seam (trainer
+                             * graphics, audio, text, gameplay), the snapshot
+                             * is dropped, and nothing survives
+                             * (sSnapshotRegistered stays false). */
+                            struct EmeraldTrainerCompatDiagnostics trainerDiag;
+                            enum EmeraldTrainerCompatStatus trainerStatus =
+                                EmeraldTrainerCompat_TryInitialize(
+                                    snapshot, pack, &trainerDiag);
+                            if (trainerStatus != EMERALD_TRAINER_OK)
+                            {
+                                fprintf(stderr,
+                                        "emerald runtime: session refused: "
+                                        "trainer data not published (status %d%s%s)\n",
+                                        (int)trainerStatus,
+                                        trainerDiag.canonicalName[0] != '\0' ? " @ " : "",
+                                        trainerDiag.canonicalName);
+                                EmeraldResourceCompat_ClearMigratedEntries();
+                                EmeraldAudioCompat_ClearMigratedEntries();
+                                EmeraldTextCompat_ClearMigratedEntries();
+                                EmeraldLeafCompat_ClearMigratedEntries();
+                                EmeraldGameplayCompat_ClearMigratedEntries();
+                                EmeraldTrainerCompat_ClearMigratedEntries();
+                                EmeraldResourceCompat_ClearSnapshot();
+                                EmeraldResourceCompat_SetSessionContentFingerprint(NULL);
+                                Gen3ResourceSnapshot_Destroy(snapshot);
+                                snapshot = NULL;
+                                sSnapshotRegistered = false;
+                                status = EMERALD_COMPAT_ERR_PUBLISH_FAILED;
+                            }
                             else
-                                EmeraldResourceCompat_SetSessionContentFingerprint(
-                                    NULL);
+                            {
+                                /* R10-F: the session content fingerprint pins the
+                                 * exact logical provider content this session was
+                                 * built from (the construction lives in
+                                 * emerald_resource_session.h). The native save-state
+                                 * system stamps it into every state it writes and
+                                 * rejects states whose recorded fingerprint differs
+                                 * from the active session's - equivalent content at
+                                 * another path still matches, changed or reordered
+                                 * providers cannot. */
+                                uint8_t sessionFingerprint[GEN3_PACK_SHA256_SIZE];
+                                sSnapshotRegistered = true;
+                                status = EMERALD_COMPAT_OK;
+                                if (EmeraldResourceSession_ComputeBaseFingerprint(
+                                        &info, sessionFingerprint))
+                                    EmeraldResourceCompat_SetSessionContentFingerprint(
+                                        sessionFingerprint);
+                                else
+                                    EmeraldResourceCompat_SetSessionContentFingerprint(
+                                        NULL);
+                            }
                         }
                     }
                 }

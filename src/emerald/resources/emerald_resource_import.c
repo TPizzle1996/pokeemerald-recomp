@@ -58,7 +58,7 @@
 /* R13-C: the text family (5,187 records) joins the eight existing families
  * (6,876 records) -> 12,063 merged records. 16384 matches the pack writer's
  * entry cap. The view structs are heap-allocated (see BuildPackCore). */
-#define EMERALD_IMPORT_MAX_RECORDS 16384u
+#define EMERALD_IMPORT_MAX_RECORDS 32768u
 #define EMERALD_IMPORT_MAX_PAYLOAD_SIZE (16u * 1024u * 1024u) /* 16 MiB, matches the R2 writer cap */
 #define EMERALD_IMPORT_LOCK_NAME ".emerald-import.lock"
 

@@ -37,6 +37,8 @@
 #include "emerald/resources/emerald_resource_ranges.h"
 #include "emerald/resources/emerald_rom_profile.h"
 #include "emerald/resources/emerald_gameplay_compat.h"
+#include "emerald/resources/emerald_trainer_compat.h"
+#include "emerald/resources/trainer_native.generated.h"
 #include "emerald/resources/text_skeleton_arrays.generated.h"
 #include "item_use.h"   /* R13-D2: native ItemUse*_... symbols for pointer checks */
 #include "../src/emerald/resources/emerald_runtime_loader.c"
@@ -592,7 +594,7 @@ static void TestTextPublication(const char *packPath)
 
     packCount = Gen3ResourcePack_GetEntryCount(pack);
     printf("production pack entry count: %zu\n", packCount);
-    CHECK("production pack entry count pinned at 15750 (R13-D2)", packCount == 15750u);
+    CHECK("production pack entry count pinned at 17525 (R13-E1)", packCount == 17525u);
 
     /* Every text entry: C-side labels resolve by resource id; bundle ids
      * are captured for the blob-slice pass below. */
@@ -1019,6 +1021,367 @@ static void TestGameplayPublication(const char *packPath)
     }
 }
 
+/* ------------------------------------------------------------------ */
+/* R13-E1: trainer-data (gTrainers / party leaves / class names)       */
+/* ------------------------------------------------------------------ */
+
+/* Drive EmeraldTrainerCompat directly against a session built from the given
+ * pack (the same pack->catalog->candidate->snapshot chain the loader runs,
+ * so the loader's at-most-once registration is not consumed by the refusal
+ * probes). */
+static enum EmeraldTrainerCompatStatus RunTrainerSeamDirect(
+    const char *packPath, struct EmeraldTrainerCompatDiagnostics *diag)
+{
+    struct Gen3ResourcePack *pack = NULL;
+    struct Gen3ResourcePackDiagnosticList packDiag;
+    struct Gen3ResourceCatalog *catalog = NULL;
+    struct Gen3ResourceCandidate *candidate = NULL;
+    struct Gen3ResourceSnapshot *snapshot = NULL;
+    struct Gen3ResourceDiagnosticList diagnostics;
+    struct EmeraldResourceSessionInfo info;
+    enum EmeraldResourceSessionError sessionError;
+    enum EmeraldTrainerCompatStatus status = EMERALD_TRAINER_ERR_UNAVAILABLE;
+
+    Gen3ResourcePackDiagnostics_Init(&packDiag);
+    if (Gen3ResourcePack_OpenFile(packPath, &pack, &packDiag) != GEN3_PACK_OK
+     || pack == NULL)
+    {
+        Gen3ResourcePackDiagnostics_Destroy(&packDiag);
+        return status;
+    }
+    Gen3ResourcePackDiagnostics_Destroy(&packDiag);
+    if (!BuildCatalogFromPack(pack, &catalog) || catalog == NULL)
+        goto done;
+    Gen3ResourceDiagnostics_Init(&diagnostics);
+    sessionError = EmeraldResourceSession_BuildRomBaseCandidate(
+        pack, catalog, &candidate, &info, &diagnostics);
+    if (sessionError == EMERALD_SESSION_OK && candidate != NULL
+     && Gen3ResourceCandidate_Build(candidate, &snapshot, &diagnostics)
+     && snapshot != NULL)
+        status = EmeraldTrainerCompat_TryInitialize(snapshot, pack, diag);
+    Gen3ResourceDiagnostics_Destroy(&diagnostics);
+done:
+    if (snapshot != NULL)
+        Gen3ResourceSnapshot_Destroy(snapshot);
+    if (candidate != NULL)
+        Gen3ResourceCandidate_Destroy(candidate);
+    if (catalog != NULL)
+        Gen3ResourceCatalog_Destroy(catalog);
+    if (pack != NULL)
+        Gen3ResourcePack_Destroy(pack);
+    return status;
+}
+
+enum { TRAINER_VAR_DROP_PARTY = 0, TRAINER_VAR_BAD_VARIANT = 1,
+       TRAINER_VAR_BAD_PARTY_SIZE = 2 };
+
+/* A production-pack variant with EXACTLY ONE trainer record damaged/dropped
+ * so the refusal is provably the trainer seam's:
+ *   DROP_PARTY       - the trainer-1 party leaf is dropped (unresolvable);
+ *   BAD_VARIANT      - trainer-1's metadata partyFlags byte is forced to
+ *                      custom moveset (variant/partyFlags mismatch);
+ *   BAD_PARTY_SIZE   - trainer-1's metadata partySize byte is forced to 2
+ *                      (bad party size).
+ * Every other entry is copied through verbatim with its own digests. */
+static bool BuildTrainerVariantPack(const char *srcPath, const char *dstPath,
+                                    int mode)
+{
+    struct Gen3ResourcePack *pack = NULL;
+    struct Gen3ResourcePackDiagnosticList packDiag;
+    struct Gen3ResourcePackProfile profile;
+    struct Gen3ResourcePackBuild *build = NULL;
+    struct Gen3ResourcePackProfileInput pin;
+    struct Gen3ResourcePackEntryInput entry;
+    struct Gen3ResourcePackBytes bytes = { NULL, 0 };
+    struct Gen3ResourcePackDiagnosticList diag;
+    uint8_t rowbuf[EMERALD_TRAINER_ROW_WIRE];
+    uint8_t rowSha[32];
+    uint8_t provenanceSha[32];
+    const char *metaKey = kGameplayTrainerKeys[1];
+    const char *partyKey = kGameplayTrainerPartyKeys[1];
+    size_t count;
+    size_t i;
+    FILE *f = NULL;
+    bool ok = false;
+
+    Gen3ResourcePackDiagnostics_Init(&packDiag);
+    if (Gen3ResourcePack_OpenFile(srcPath, &pack, &packDiag) != GEN3_PACK_OK
+     || pack == NULL)
+        goto done;
+    Gen3ResourcePackDiagnostics_Destroy(&packDiag);
+
+    Gen3ResourcePackDiagnostics_Init(&diag);
+    build = Gen3ResourcePackBuild_Create();
+    if (build == NULL)
+        goto done;
+
+    if (!Gen3ResourcePack_GetProfile(pack, &profile))
+        goto done;
+    memset(&pin, 0, sizeof(pin));
+    pin.basePackVersion = profile.basePackVersion;
+    pin.catalogVersion = profile.catalogVersion;
+    pin.extractionManifestVersion = profile.extractionManifestVersion;
+    pin.canonicalRepresentationVersion = profile.canonicalRepresentationVersion;
+    pin.sourceRomSize = profile.sourceRomSize;
+    pin.sourceRomSha1 = profile.sourceRomSha1;
+    pin.sourceRomSha256 = profile.sourceRomSha256;
+    memcpy(pin.gameCode, profile.gameCode, 4u);
+    memcpy(pin.makerCode, profile.makerCode, 2u);
+    pin.softwareRevision = profile.softwareRevision;
+    memcpy(pin.gameId, profile.gameId, GEN3_PACK_GAME_ID_SIZE);
+    pin.catalogSha256 = profile.catalogSha256;
+    pin.extractionManifestSha256 = profile.extractionManifestSha256;
+    if (Gen3ResourcePackBuild_SetProfile(build, &pin, &diag) != GEN3_PACK_OK)
+        goto done;
+
+    memset(provenanceSha, 0x5A, sizeof(provenanceSha));
+
+    count = Gen3ResourcePack_GetEntryCount(pack);
+    for (i = 0; i < count; i++)
+    {
+        const struct Gen3ResourcePackEntry *e =
+            Gen3ResourcePack_GetEntry(pack, i);
+        bool isMeta = strcmp(e->canonicalName, metaKey) == 0;
+        bool isParty = strcmp(e->canonicalName, partyKey) == 0;
+        const uint8_t *payload = e->payload;
+        const uint8_t *payloadSha = e->payloadSha256;
+
+        if (isParty && mode == TRAINER_VAR_DROP_PARTY)
+            continue; /* drop the trainer-1 party leaf */
+        if (isMeta && (mode == TRAINER_VAR_BAD_VARIANT
+                    || mode == TRAINER_VAR_BAD_PARTY_SIZE))
+        {
+            memcpy(rowbuf, e->payload, EMERALD_TRAINER_ROW_WIRE);
+            if (mode == TRAINER_VAR_BAD_VARIANT)
+                rowbuf[0] = 0x01u;             /* custom moveset bit */
+            else
+                rowbuf[0x20] = 2u;             /* partySize -> 2 */
+            DigestSha256(rowbuf, EMERALD_TRAINER_ROW_WIRE, rowSha);
+            payload = rowbuf;
+            payloadSha = rowSha;
+        }
+        memset(&entry, 0, sizeof(entry));
+        entry.schema = e->schema;
+        entry.flags = e->flags;
+        entry.representation = e->representation;
+        entry.sourceEncoding = e->sourceEncoding;
+        entry.canonicalName = e->canonicalName;
+        entry.key = &e->key;
+        entry.type = e->type;
+        entry.canonicalPayload = payload;
+        entry.canonicalPayloadSize = e->payloadSize;
+        entry.canonicalPayloadSha256 = payloadSha;
+        entry.sourceRomOffset = e->sourceRomOffset;
+        entry.sourceEncodedSize = e->sourceEncodedSize;
+        entry.sourceEncodedSha256 = provenanceSha;
+        if (Gen3ResourcePackBuild_AddEntry(build, &entry, &diag) != GEN3_PACK_OK)
+            goto done;
+    }
+
+    if (Gen3ResourcePackWriter_Write(build, &bytes, &diag) != GEN3_PACK_OK)
+        goto done;
+    f = fopen(dstPath, "wb");
+    if (f == NULL)
+        goto done;
+    if (fwrite(bytes.data, 1, bytes.size, f) != bytes.size)
+        goto done;
+    fclose(f);
+    f = NULL;
+    ok = true;
+
+done:
+    if (f != NULL)
+        fclose(f);
+    Gen3ResourcePackBytes_Destroy(&bytes);
+    Gen3ResourcePackBuild_Destroy(build);
+    Gen3ResourcePackDiagnostics_Destroy(&diag);
+    if (pack != NULL)
+        Gen3ResourcePack_Destroy(pack);
+    return ok;
+}
+
+/* The production registration published the trainer families: 855 metadata
+ * rows (48-byte native, party pointer rebuilt to the seam's packed party
+ * arena), 854 party leaves, 66 class-name rows. Verify a handful of
+ * representative trainers exactly, the arena/range residency, and that the
+ * generated index maps agree with the pack. */
+static void TestTrainerPublication(const char *packPath)
+{
+    struct Gen3ResourcePack *pack = NULL;
+    struct Gen3ResourcePackDiagnosticList packDiag;
+    const struct EmeraldResourceRangeIndex *index;
+    static const uint8_t kHikerRow[13] = {
+        0xC2, 0xC3, 0xC5, 0xBF, 0xCC, 0xFF, 0, 0, 0, 0, 0, 0, 0 };
+    size_t expectedArena = 0u;
+    size_t arenaBytes;
+    size_t i;
+
+    CHECK("R13-E1 published count 1775",
+          EmeraldTrainerCompat_GetPublishedCount()
+              == GAMEPLAY_NATIVE_TRAINER_COUNT
+                 + GAMEPLAY_NATIVE_TRAINER_PARTY_COUNT
+                 + GAMEPLAY_NATIVE_CLASS_COUNT);
+    arenaBytes = EmeraldTrainerCompat_GetPartyArenaBytes();
+    CHECK("R13-E1 party arena built", arenaBytes > 0u);
+
+    /* Arena size == the generated native-stride sum (6/14/8/16 per mon). */
+    {
+        static const size_t kNativeStride[4] = { 6u, 14u, 8u, 16u };
+        for (i = 0u; i < GAMEPLAY_NATIVE_TRAINER_COUNT; i++)
+        {
+            uint8_t v;
+            if (kGameplayTrainerPartyKeys[i][0] == '\0')
+                continue;
+            v = kGameplayTrainerPartyMeta[i].variant;
+            expectedArena += (size_t)kGameplayTrainerPartyMeta[i].partySize
+                           * kNativeStride[v & 3u];
+        }
+    }
+    CHECK("R13-E1 arena bytes == generated sum", arenaBytes == expectedArena);
+
+    /* TRAINER_NONE (id 0): NULL party / partySize 0, empty party key. */
+    CHECK("R13-E1 none partySize 0", gTrainers[0].partySize == 0u);
+    CHECK("R13-E1 none NULL party",
+          gTrainers[0].party.NoItemDefaultMoves == NULL);
+    CHECK("R13-E1 none party key empty", kGameplayTrainerPartyKeys[0][0] == '\0');
+
+    /* SAWYER (id 1): no item, default moves, one Geodude. */
+    CHECK("R13-E1 sawyer flags", gTrainers[1].partyFlags == 0u);
+    CHECK("R13-E1 sawyer class hiker",
+          gTrainers[1].trainerClass == TRAINER_CLASS_HIKER);
+    CHECK("R13-E1 sawyer not double", gTrainers[1].doubleBattle == FALSE);
+    CHECK("R13-E1 sawyer aiFlags", gTrainers[1].aiFlags == 0x7u);
+    CHECK("R13-E1 sawyer items zero",
+          gTrainers[1].items[0] == 0u && gTrainers[1].items[3] == 0u);
+    CHECK("R13-E1 sawyer partySize 1", gTrainers[1].partySize == 1u);
+    CHECK("R13-E1 sawyer mon species", gTrainers[1].party.NoItemDefaultMoves[0].species == 74u);
+    CHECK("R13-E1 sawyer mon lvl 21", gTrainers[1].party.NoItemDefaultMoves[0].lvl == 21u);
+    CHECK("R13-E1 sawyer mon iv 0", gTrainers[1].party.NoItemDefaultMoves[0].iv == 0u);
+
+    /* Party pointer is arena-resident (registered COMPAT_OBJECT range). */
+    index = EmeraldResourceCompat_GetRangeIndex();
+    CHECK("R13-E1 range index present", index != NULL);
+    if (index != NULL)
+    {
+        struct EmeraldResourceRangeHit hit;
+        if (EmeraldResourceRangeIndex_Lookup(
+                index, (uintptr_t)gTrainers[1].party.NoItemDefaultMoves,
+                &hit))
+            CHECK("R13-E1 party pointer in COMPAT_OBJECT arena",
+                  hit.role == EMERALD_RESOURCE_ROLE_COMPAT_OBJECT
+                  && hit.schema == EMERALD_TRAINER_SCHEMA_PARTY);
+        else
+            CHECK("R13-E1 party pointer resolvable in arena", false);
+    }
+
+    /* A 6-mon trainer (id 9): species/levels exact. */
+    CHECK("R13-E1 6mon partySize", gTrainers[9].partySize == 6u);
+    CHECK("R13-E1 6mon m0", gTrainers[9].party.NoItemDefaultMoves[0].species == 315u);
+    CHECK("R13-E1 6mon m0 lvl", gTrainers[9].party.NoItemDefaultMoves[0].lvl == 26u);
+    CHECK("R13-E1 6mon m5", gTrainers[9].party.NoItemDefaultMoves[5].species == 304u);
+
+    /* A double-battle trainer (id 51): doubleBattle TRUE, 2 mons. */
+    CHECK("R13-E1 dbl battle flag", gTrainers[51].doubleBattle == TRUE);
+    CHECK("R13-E1 dbl partySize 2", gTrainers[51].partySize == 2u);
+    CHECK("R13-E1 dbl m0", gTrainers[51].party.NoItemDefaultMoves[0].species == 81u
+          && gTrainers[51].party.NoItemDefaultMoves[0].iv == 50u
+          && gTrainers[51].party.NoItemDefaultMoves[0].lvl == 17u);
+    CHECK("R13-E1 dbl m1", gTrainers[51].party.NoItemDefaultMoves[1].species == 370u);
+
+    /* A custom-moves trainer (id 38): variant 1, moves exact. */
+    CHECK("R13-E1 custom flags", (gTrainers[38].partyFlags & 3u) == 1u);
+    CHECK("R13-E1 custom partySize", gTrainers[38].partySize == 2u);
+    CHECK("R13-E1 custom m0 moves",
+          gTrainers[38].party.NoItemCustomMoves[0].species == 357u
+          && gTrainers[38].party.NoItemCustomMoves[0].lvl == 43u
+          && gTrainers[38].party.NoItemCustomMoves[0].moves[0] == 94u);
+    CHECK("R13-E1 custom m1 moves",
+          gTrainers[38].party.NoItemCustomMoves[1].species == 319u
+          && gTrainers[38].party.NoItemCustomMoves[1].moves[0] == 285u
+          && gTrainers[38].party.NoItemCustomMoves[1].moves[1] == 89u);
+
+    /* An item+custom-moves trainer (id 71): variant 3, held item + moves. */
+    CHECK("R13-E1 itemcustom flags", (gTrainers[71].partyFlags & 3u) == 3u);
+    CHECK("R13-E1 itemcustom partySize", gTrainers[71].partySize == 1u);
+    CHECK("R13-E1 itemcustom items", gTrainers[71].items[0] == 21u);
+    CHECK("R13-E1 itemcustom mon",
+          gTrainers[71].party.ItemCustomMoves[0].species == 305u
+          && gTrainers[71].party.ItemCustomMoves[0].lvl == 26u
+          && gTrainers[71].party.ItemCustomMoves[0].iv == 255u
+          && gTrainers[71].party.ItemCustomMoves[0].heldItem == 0u
+          && gTrainers[71].party.ItemCustomMoves[0].moves[0] == 98u
+          && gTrainers[71].party.ItemCustomMoves[0].moves[1] == 97u
+          && gTrainers[71].party.ItemCustomMoves[0].moves[2] == 17u);
+
+    /* Class-name rows: HIKER (index 2) published verbatim. */
+    CHECK("R13-E1 hiker class row",
+          memcmp(gTrainerClassNames[TRAINER_CLASS_HIKER], kHikerRow, 13) == 0);
+    CHECK("R13-E1 hiker class node",
+          kGameplayTrainerClassKeys[TRAINER_CLASS_HIKER][0] != '\0' &&
+          gTrainerClassNames[TRAINER_CLASS_COLLECTOR][0] == 0xBDu);
+
+    /* Generated maps agree with the pack: every key resolves to an entry
+     * with the right type/schema/size. */
+    Gen3ResourcePackDiagnostics_Init(&packDiag);
+    if (Gen3ResourcePack_OpenFile(packPath, &pack, &packDiag) == GEN3_PACK_OK
+     && pack != NULL)
+    {
+        static const size_t kProbe[3] = { 1u, 9u, 71u };
+        size_t k;
+        for (k = 0u; k < 3u; k++)
+        {
+            const struct Gen3ResourcePackEntry *me =
+                Gen3ResourcePack_FindByCanonicalName(
+                    pack, kGameplayTrainerKeys[kProbe[k]]);
+            const struct Gen3ResourcePackEntry *pe =
+                Gen3ResourcePack_FindByCanonicalName(
+                    pack, kGameplayTrainerPartyKeys[kProbe[k]]);
+            CHECK("R13-E1 meta key present in pack",
+                  me != NULL && me->type == GEN3_RESOURCE_TYPE_STRUCTURED_DATA
+                  && me->schema == EMERALD_TRAINER_SCHEMA_METADATA
+                  && me->payloadSize == EMERALD_TRAINER_ROW_WIRE);
+            CHECK("R13-E1 party key present in pack",
+                  pe != NULL && pe->schema == EMERALD_TRAINER_SCHEMA_PARTY
+                  && pe->payloadSize == (size_t)kGameplayTrainerPartyMeta[kProbe[k]].partySize * (kProbe[k]==71?16u:8u));
+        }
+        Gen3ResourcePack_Destroy(pack);
+    }
+    Gen3ResourcePackDiagnostics_Destroy(&packDiag);
+}
+
+/* The trainer seam REFUSES a pack whose trainer records are malformed:
+ * a missing party leaf, a partyFlags that disagrees with the generated
+ * variant, or a mis-sized party. Nothing is published (fail-closed); the
+ * already-live production session's published gTrainers are left untouched
+ * (captured before the probes, compared after). */
+static void TestTrainerRefusals(const char *tempDir, const char *prodPack)
+{
+    static const char *const labels[3] = {
+        "trainer_missing_party", "trainer_bad_variant", "trainer_bad_party_size" };
+    const struct TrainerMonNoItemDefaultMoves *liveParty =
+        gTrainers[1].party.NoItemDefaultMoves;
+    uint8_t livePartySize = gTrainers[1].partySize;
+    size_t liveArena = EmeraldTrainerCompat_GetPartyArenaBytes();
+    int mode;
+    for (mode = 0; mode < 3; mode++)
+    {
+        struct EmeraldTrainerCompatDiagnostics diag;
+        enum EmeraldTrainerCompatStatus status;
+        char path[512];
+
+        snprintf(path, sizeof(path), "%s/%s.rpack", tempDir, labels[mode]);
+        CHECK("R13-E1 variant pack builds",
+              BuildTrainerVariantPack(prodPack, path, mode));
+        status = RunTrainerSeamDirect(path, &diag);
+        CHECK("R13-E1 trainer variant refused", status != EMERALD_TRAINER_OK);
+    }
+    /* The refused direct runs did not overwrite the live published tables. */
+    CHECK("R13-E1 refusal leaves live party untouched",
+          gTrainers[1].partySize == livePartySize
+          && gTrainers[1].party.NoItemDefaultMoves == liveParty
+          && EmeraldTrainerCompat_GetPartyArenaBytes() == liveArena);
+}
+
 int main(int argc, char **argv)
 {
     const char *tempDir;
@@ -1054,7 +1417,15 @@ int main(int argc, char **argv)
      * the R13-D2 gItems description pointers can be checked against the
      * R13-C item-arena bytes. */
     TestGameplayPublication(prodPack);
+    /* R13-E1 trainer-data publication. Runs while the production session is
+     * still live (BEFORE TestTextTransactionalRefusal tears it down), so the
+     * published gTrainers / gTrainerClassNames + party arena can be checked
+     * against the pack. */
+    TestTrainerPublication(prodPack);
     TestTextTransactionalRefusal(tempDir, prodPack);
+    /* R13-E1 failure-matrix: trainer seams against freshly built variant
+     * sessions (independent of the (now rolled-back) production session). */
+    TestTrainerRefusals(tempDir, prodPack);
 
     FreeFamilyFixtures();
     FreeBackFamilyFixtures();
