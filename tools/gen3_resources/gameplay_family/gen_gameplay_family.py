@@ -79,8 +79,8 @@ ROM_SHA1 = "f3ae088181bf583e55daf962a92bb46f4f1d07b7"
 # verdanturf 45 / fallarbor 45). The 300 frontier leaves tile
 # [0x5ced2e, 0x5d5aca) exactly (the 2 trailing pad bytes before
 # gBattleFrontierTrainers at 0x5d5acc are not part of any leaf).
-PINNED_TOTAL = 6517
-PINNED_BYTES = 494403
+PINNED_TOTAL = 6908
+PINNED_BYTES = 509975
 PINNED_BY_FAMILY = {
     "species-base": (412, 11536),
     "species-name": (412, 4532),
@@ -122,6 +122,13 @@ PINNED_BY_FAMILY = {
     "frontier-apprentice": (16, 1408),
     "frontier-wild-headers": (2, 260),
     "frontier-wild": (11, 528),
+    # R13-E3b Pokédex: 387 rows x 32 B GBA wire + the ordering/routing u16
+    # tables (alphabetical 411 / height 386 / weight 386 / species-to-national
+    # 411). The description text stays an R13-C text identity (never a
+    # structured resource here).
+    "pokedex-row": (387, 12384),
+    "pokedex-order": (3, 2366),
+    "pokedex-species-to-national": (1, 822),
 }
 
 # (font key, reference ELF symbol)
@@ -1078,6 +1085,100 @@ def derive(elf, rom, pret):
     if len(pyr) != 7 or [r for _, r in pyr] != [4, 4, 4, 4, 4, 4, 8]:
         fail("pyramid wild sets must be 7 sets at rates [4]*6,8")
 
+    # --- Pokédex rows + ordering/routing tables (R13-E3b) ------------------
+    # gPokedexEntries: 387 rows x 32 B GBA wire @0x56b5b0. Row layout (native
+    # struct in include/pokedex.h): categoryName[12] INLINE Gen-3 charmap
+    # string @0 (NOT a pointer), height u16 @12, weight u16 @14, description
+    # u32 GBA text ptr @16 (the ONLY text pointer), unused u16 @20,
+    # pokemonScale u16 @22, pokemonOffset u16 @24, trainerScale u16 @26,
+    # trainerOffset u16 @28 (+2 pad -> 32). The description GBA address
+    # resolves to the reference `g<Species>PokedexText` symbol -> its R13-C
+    # text label (emerald:text/pokedex/g<species>pokedextext). Category stays
+    # inline (copied byte-identically into the native 40 B row). The ordering/
+    # routing tables are u16 arrays, byte-identical GBA/native.
+    POKEDEX_ROWS_ROM = 0x56b5b0
+    POKEDEX_ROW_WIRE = 32
+    POKEDEX_ROWS = 387
+    POKEDEX_ORDERS = [  # (reference symbol, ROM offset, u16 count, suffix)
+        ("gPokedexOrder_Alphabetical", 0x55c6a4, 411, "alphabetical"),
+        ("gPokedexOrder_Weight", 0x55c9da, 386, "weight"),
+        ("gPokedexOrder_Height", 0x55ccde, 386, "height"),
+    ]
+
+    pe_sym, pe_data, pe_size = sym_bytes("gPokedexEntries")
+    if pe_size != POKEDEX_ROW_WIRE * POKEDEX_ROWS:
+        fail(f"gPokedexEntries {pe_size} != {POKEDEX_ROW_WIRE} x {POKEDEX_ROWS}")
+    if pe_sym[1] - GEN3_GBA_ROM_BASE != POKEDEX_ROWS_ROM:
+        fail(f"gPokedexEntries not at expected 0x{POKEDEX_ROWS_ROM:x}")
+
+    # R13-C pokedex text base label -> rom_offset (from the emitted text
+    # manifest). The seam re-points description into these live identities.
+    text_manifest = (root / "resources/extraction/emerald/bpee01/text"
+                     / "manifest.production.toml")
+    if not text_manifest.exists():
+        fail("text manifest missing: run gen_text_family.py before the "
+             "gameplay generator")
+    txt = text_manifest.read_text()
+    text_base_off = {}
+    for m in re.finditer(
+            r'id = "([^"]+)"\nkey = "[0-9a-f]+"\ntype = "text"\nschema = '
+            r'\d+\nsymbol = "[^"]*"\nrom_offset = (\d+)', txt):
+        text_base_off[int(m.group(2))] = m.group(1)
+    pokedex_text_ids = {v for v in text_base_off.values()
+                        if v.startswith("emerald:text/pokedex/")}
+    if len(pokedex_text_ids) != POKEDEX_ROWS:
+        fail(f"R13-C pokedex text resource set {len(pokedex_text_ids)} != 387")
+
+    pokedex_row_keys = []
+    pokedex_desc_labels = []
+    for i in range(POKEDEX_ROWS):
+        rom_off = POKEDEX_ROWS_ROM + i * POKEDEX_ROW_WIRE
+        row = rom[rom_off:rom_off + POKEDEX_ROW_WIRE]
+        if row != pe_data[i * POKEDEX_ROW_WIRE:(i + 1) * POKEDEX_ROW_WIRE]:
+            fail(f"gPokedexEntries[{i}]: ROM slice != ELF slice")
+        desc = struct.unpack_from("<I", row, 16)[0]
+        sym = ref_addr_symbol.get(desc)
+        if sym is None or not sym.endswith("PokedexText") \
+                or sym[:1] not in ("g", "s"):
+            fail(f"gPokedexEntries[{i}]: description addr 0x{desc:x} has no "
+                 "reference PokedexText symbol")
+        species_sem = sym[1:-len("PokedexText")].lower().replace("_", "-")
+        rkey = "emerald:data/pokedex/" + species_sem
+        label = "emerald:text/pokedex/g" + species_sem + "pokedextext"
+        if label not in pokedex_text_ids:
+            fail(f"gPokedexEntries[{i}] ({rkey}): description label {label} "
+                 "has no R13-C pokedex text resource")
+        add("pokedex-row", rkey, "gPokedexEntries", POKEDEX_ROW_WIRE, rom_off)
+        pokedex_row_keys.append(rkey)
+        pokedex_desc_labels.append(label)
+    if (len(pokedex_row_keys) != POKEDEX_ROWS
+            or len(set(pokedex_row_keys)) != POKEDEX_ROWS):
+        fail("pokedex row resource keys must be 387 distinct")
+
+    for (osym, orom, orows, suffix) in POKEDEX_ORDERS:
+        s = elf.find(osym)
+        if s is None or s[2] != orows * 2:
+            fail(f"{osym} must be {orows} x 2 B")
+        if s[1] - GEN3_GBA_ROM_BASE != orom:
+            fail(f"{osym} not at expected 0x{orom:x}")
+        if rom[orom:orom + orows * 2] != elf.slice(s, orows * 2):
+            fail(f"{osym}: ROM slice != ELF slice")
+        add("pokedex-order", "emerald:data/pokedex/order/" + suffix,
+            osym, orows * 2, orom)
+    s2n_sym, s2n_data, s2n_size = sym_bytes("sSpeciesToNationalPokedexNum")
+    if (s2n_size != 411 * 2
+            or s2n_sym[1] - GEN3_GBA_ROM_BASE != 0x31dc82
+            or rom[0x31dc82:0x31dc82 + 822] != s2n_data):
+        fail("sSpeciesToNationalPokedexNum must be 411 x 2 B @0x31dc82")
+    add("pokedex-species-to-national",
+        "emerald:data/pokedex/species-to-national",
+        "sSpeciesToNationalPokedexNum", 822, 0x31dc82)
+
+    pokedex_map = {
+        "row_keys": pokedex_row_keys,
+        "desc_labels": pokedex_desc_labels,
+    }
+
     rows.sort(key=lambda r: r[0])
     total = len(rows)
     if total != PINNED_TOTAL:
@@ -1094,7 +1195,7 @@ def derive(elf, rom, pret):
     move_keys = [mv_key(i) for i in range(355)]
     return rows, fam, levelup_idx_map, species_keys, move_keys, item_keys, \
         callback_rows, trainer_keys, party_keys, party_meta, class_keys, \
-        head_keys, infos, frontier_map, aux
+        head_keys, infos, frontier_map, aux, pokedex_map
 
 
 def _f(key, family):
@@ -1171,6 +1272,12 @@ def _f(key, family):
         return "contest-combo-starters"
     if key.startswith("emerald:font/"):
         return "font"
+    if key.startswith("emerald:data/pokedex/order/"):
+        return "pokedex-order"
+    if key == "emerald:data/pokedex/species-to-national":
+        return "pokedex-species-to-national"
+    if key.startswith("emerald:data/pokedex/"):
+        return "pokedex-row"
     return "?"
 
 
@@ -1209,6 +1316,8 @@ SCHEMA = {
     "frontier-pyramid-slots": 33, "frontier-brain": 34,
     "frontier-apprentice": 35,
     "frontier-wild-headers": 36, "frontier-wild": 37,
+    "pokedex-row": 38, "pokedex-order": 39,
+    "pokedex-species-to-national": 40,
     "font": 1,
 }
 
@@ -1225,7 +1334,7 @@ def key_sanitize(key):
 def emit_gameplay(rows, fam, levelup_idx_map, species_keys, move_keys,
                   item_keys, callback_rows, trainer_keys, party_keys,
                   party_meta, class_keys, enc_head_keys, enc_infos,
-                  frontier_map, aux, outdir, root, args):
+                  frontier_map, aux, pokedex_map, outdir, root, args):
     famdir = outdir / "gameplay"
     artdir = famdir / "artifacts"
     art_by_key = {}
@@ -2224,6 +2333,122 @@ def emit_gameplay(rows, fam, levelup_idx_map, species_keys, move_keys,
         fam2.append("")
     write_if(famdir / "frontier_aux_maps.generated.toml", fam2, args)
 
+    # ---- Pokédex seam generated maps + constants (R13-E3b) ----------------
+    # The pokedex publication seam (EmeraldPokedexCompat) rebuilds the native
+    # gPokedexEntries[387] + the four ordering/routing arrays from the pack.
+    # kPokedexRowKeys[i] is the row resource key
+    # (emerald:data/pokedex/<species>) for gPokedexEntries row i (national-dex
+    # index); kPokedexDescLabels[i] is the R13-C description text identity
+    # (emerald:text/pokedex/g<species>pokedextext) each row's GBA description
+    # pointer must bind to. The seam validates every row's desc address
+    # resolves to its label, then re-points description into the live R13-C
+    # arena.
+    PKD = "EMERALD_POKEDEX_"
+    pk_hdr = [
+        "/* Generated by tools/gen3_resources/gameplay_family/"
+        "gen_gameplay_family.py.",
+        " * Do not edit by hand; re-run the generator and --check it.",
+        " *",
+        " * R13-E3b Pokédex publication maps. gPokedexEntries is indexed by",
+        " * national-dex value (index 0 = the UNKNOWN/dummy row).",
+        " * kPokedexRowKeys[i] is the row resource key for index i;",
+        " * kPokedexDescLabels[i] the R13-C description text label that row",
+        " * i's GBA description pointer must resolve to (387/387). The four",
+        " * ordering/routing resources are exposed as single canonical keys.",
+        " */",
+        "#ifndef EMERALD_RESOURCES_POKEDEX_NATIVE_GENERATED_H",
+        "#define EMERALD_RESOURCES_POKEDEX_NATIVE_GENERATED_H",
+        "",
+        "#include <stdint.h>",
+        "",
+        f"#define {PKD}SCHEMA_ROW       38u",
+        f"#define {PKD}SCHEMA_ORDER     39u",
+        f"#define {PKD}SCHEMA_S2N       40u",
+        f"#define {PKD}ROW_COUNT        387u",
+        f"#define {PKD}ROW_WIRE         32u",
+        f"#define {PKD}ROW_NATIVE       40u",
+        f"#define {PKD}ALPHABETICAL_COUNT 411u",
+        f"#define {PKD}HEIGHT_COUNT      386u",
+        f"#define {PKD}WEIGHT_COUNT      386u",
+        f"#define {PKD}S2N_COUNT         411u",
+        "",
+        "/* national-dex index -> row resource key (emerald:data/pokedex/"
+        "<species>) */",
+        "extern const char *const "
+        "kPokedexRowKeys[EMERALD_POKEDEX_ROW_COUNT];",
+        "/* national-dex index -> R13-C description text label */",
+        "extern const char *const "
+        "kPokedexDescLabels[EMERALD_POKEDEX_ROW_COUNT];",
+        "",
+        "extern const char *const kPokedexOrderAlphabeticalKey;",
+        "extern const char *const kPokedexOrderHeightKey;",
+        "extern const char *const kPokedexOrderWeightKey;",
+        "extern const char *const kPokedexSpeciesToNationalKey;",
+        "",
+        "#endif /* EMERALD_RESOURCES_POKEDEX_NATIVE_GENERATED_H */",
+    ]
+    write_if(root / "include/emerald/resources/pokedex_native.generated.h",
+             pk_hdr, args)
+
+    pk_c = [
+        "/* Generated by tools/gen3_resources/gameplay_family/"
+        "gen_gameplay_family.py.",
+        " * Do not edit by hand; re-run the generator and --check it.",
+        " */",
+        '#include "emerald/resources/pokedex_native.generated.h"',
+        "",
+        "const char *const "
+        "kPokedexRowKeys[EMERALD_POKEDEX_ROW_COUNT] =",
+        "{",
+    ]
+    for k in pokedex_map["row_keys"]:
+        pk_c.append(f'    "{k}",')
+    pk_c += [
+        "};",
+        "",
+        "const char *const "
+        "kPokedexDescLabels[EMERALD_POKEDEX_ROW_COUNT] =",
+        "{",
+    ]
+    for k in pokedex_map["desc_labels"]:
+        pk_c.append(f'    "{k}",')
+    pk_c += [
+        "};",
+        "",
+        'const char *const kPokedexOrderAlphabeticalKey = '
+        '"emerald:data/pokedex/order/alphabetical";',
+        'const char *const kPokedexOrderHeightKey = '
+        '"emerald:data/pokedex/order/height";',
+        'const char *const kPokedexOrderWeightKey = '
+        '"emerald:data/pokedex/order/weight";',
+        'const char *const kPokedexSpeciesToNationalKey = '
+        '"emerald:data/pokedex/species-to-national";',
+        "",
+    ]
+    write_if(root / "src/emerald/resources/pokedex_native.generated.c",
+             pk_c, args)
+
+    # pokedex metadata TO ML (row keys + description bindings for the report
+    # and the text-binding proof).
+    pkm = [
+        "# Generated by tools/gen3_resources/gameplay_family/"
+        "gen_gameplay_family.py",
+        "# Do not edit by hand; re-run the generator (regeneration must be a",
+        "# no-op diff).",
+        "",
+        "# R13-E3b Pokédex row keys + description bindings.",
+        'family = "gameplay"',
+        "pokedex_version = 1",
+        "",
+    ]
+    for i in range(387):
+        pkm.append("[[rows]]")
+        pkm.append(f"index = {i}")
+        pkm.append(f'row_key = "{pokedex_map["row_keys"][i]}"')
+        pkm.append(f'description_label = "{pokedex_map["desc_labels"][i]}"')
+        pkm.append("")
+    write_if(famdir / "pokedex_maps.generated.toml", pkm, args)
+
 
 def _artifact_sub(key):
     if key.startswith("emerald:data/species/"):
@@ -2291,6 +2516,12 @@ def _artifact_sub(key):
         return "contest-effects"
     if key == "emerald:data/contest/combo-starters":
         return "contest-combo-starters"
+    if key.startswith("emerald:data/pokedex/order/"):
+        return "pokedex-order"
+    if key == "emerald:data/pokedex/species-to-national":
+        return "pokedex-species-to-national"
+    if key.startswith("emerald:data/pokedex/"):
+        return "pokedex-row"
     return "font"
 
 
@@ -2319,11 +2550,12 @@ def main():
     elf = Elf32(open(args.elf, "rb").read())
     rows, fam, levelup_idx_map, species_keys, move_keys, item_keys, \
         callback_rows, trainer_keys, party_keys, party_meta, class_keys, \
-        enc_head_keys, enc_infos, frontier_map, aux = derive(elf, rom, pret)
+        enc_head_keys, enc_infos, frontier_map, aux, pokedex_map = \
+        derive(elf, rom, pret)
     emit_gameplay(rows, fam, levelup_idx_map, species_keys, move_keys,
                   item_keys, callback_rows, trainer_keys, party_keys,
                   party_meta, class_keys, enc_head_keys, enc_infos,
-                  frontier_map, aux, outdir, root, args)
+                  frontier_map, aux, pokedex_map, outdir, root, args)
 
     print(f"gameplay resources: {len(rows)}, "
           f"{sum(r[3] for r in rows)} B (D1+D2+E1+E2; evolutions excluded)")
@@ -2333,6 +2565,8 @@ def main():
     print(f"trainer metadata: {len(trainer_keys)} / party: "
           f"{sum(1 for k in party_keys if k)} / class: {len(class_keys)}")
     print(f"encounter headers block: 1 / slot tables: {len(enc_infos)}")
+    print(f"pokedex rows: {len(pokedex_map['row_keys'])} / ordering+routing: "
+          f"4 resources (row bytes 12384; order 2366; s2n 822)")
 
 
 if __name__ == "__main__":

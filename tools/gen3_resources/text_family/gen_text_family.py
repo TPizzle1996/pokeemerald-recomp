@@ -2779,18 +2779,19 @@ def emit_family(records, dual, label_arts, bundle_blobs, fam_dir, args, keymap):
     ]
     sym_fam = {r[0]: r[1] for r in records if r[3] == "c"}
     # R13-D2: the item-description family (emerald:text/item/s<item>desc)
-    # flips to ROM_BASE_ONLY at this stage - native gItems[].description
-    # re-points into the item text arena (the item-description C arrays are
-    # guarded out of the native link). This is a TARGETED ownership flip:
-    # the "item" family is NOT added to LIVE_FAMILIES (that set also drives
-    # the slot/skeleton/table emission), so pokedex/easy-chat/contest remain
-    # COMPILED_PENDING_MIGRATION and the text family is otherwise byte-
-    # identical (only these ownership records change).
+    # flips to ROM_BASE_ONLY at that stage - native gItems[].description
+    # re-points into the item text arena. R13-E3b does the SAME TARGETED flip
+    # for the Pokédex description family (emerald:text/pokedex/g<species>
+    # pokedextext): native gPokedexEntries[].description re-points into the
+    # R13-C Pokédex text arena. Neither family is added to LIVE_FAMILIES
+    # (that set also drives the slot/skeleton/table emission), so easy-chat /
+    # contest etc. remain COMPILED_PENDING_MIGRATION and the text family is
+    # otherwise byte-identical (only these ownership records change).
     for rid in sorted(label_arts):
         symbol, size = by_id[rid]
         label_family = sym_fam[symbol]
         state = "ROM_BASE_ONLY" if (label_family in LIVE_FAMILIES
-                                    or label_family == "item") \
+                                    or label_family in ("item", "pokedex")) \
             else "COMPILED_PENDING_MIGRATION"
         data = root / label_arts[rid]
         h = sha256(data.read_bytes())

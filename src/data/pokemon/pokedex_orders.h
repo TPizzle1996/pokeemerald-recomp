@@ -1,3 +1,11 @@
+#ifdef NATIVE_LINUX
+/* R13-E3b: the ordering/routing arrays are HOST_DATA in pokedex_data_native.c
+ * (filled by the publication seam, byte-identical u16). GBA keeps the compiled
+ * const arrays below verbatim. */
+extern u16 gPokedexOrder_Alphabetical[411];
+extern u16 gPokedexOrder_Height[386];
+extern u16 gPokedexOrder_Weight[386];
+#else
 const u16 gPokedexOrder_Alphabetical[] =
 {
     NATIONAL_DEX_OLD_UNOWN_B,
@@ -1193,3 +1201,4 @@ const u16 gPokedexOrder_Height[] =
     NATIONAL_DEX_STEELIX,
     NATIONAL_DEX_WAILORD,
 };
+#endif /* NATIVE_LINUX */

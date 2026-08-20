@@ -50,6 +50,8 @@
 #include "apprentice.h"        /* R13-E3a-2 gApprentices fill target */
 #include "constants/moves.h"   /* R13-E3a-2 factory move assertions */
 #include "constants/items.h"   /* R13-E3a-2 pyramid pickup assertions */
+#include "emerald/resources/emerald_pokedex_compat.h" /* R13-E3b Pokédex seam */
+#include "emerald/resources/pokedex_data_native.h"    /* R13-E3b HOST_DATA targets */
 #include "../src/emerald/resources/emerald_runtime_loader.c"
 
 /* ------------------------------------------------------------------ */
@@ -604,7 +606,7 @@ static void TestTextPublication(const char *packPath)
     packCount = Gen3ResourcePack_GetEntryCount(pack);
     printf("production pack entry count: %zu\n", packCount);
     CHECK("production pack entry count pinned at 18521+59 (R13-E3a-2)",
-          packCount == 18580u);
+          packCount == 18971u);
 
     /* Every text entry: C-side labels resolve by resource id; bundle ids
      * are captured for the blob-slice pass below. */

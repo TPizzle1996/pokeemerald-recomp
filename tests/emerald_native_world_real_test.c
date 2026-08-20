@@ -1048,8 +1048,8 @@ int main(int argc, char **argv)
         return 1;
     }
     Gen3ResourcePackDiagnostics_Destroy(&packDiag);
-    CHECK(Gen3ResourcePack_GetEntryCount(pack) == 18580u); /* 4518 + 569 audio leaves + 202 structural + 530 song graphs (R12-B/C/D) + 1057 leaf (R13-B) + 5187 text (R13-C) + 3310 D1 */
-    CHECK(Gen3ResourceCatalog_Count(catalog) == 18580u); /* + 569 audio leaves + 202 structural + 530 song graphs (R12-B/C/D) + 1057 leaf (R13-B) + 5187 text (R13-C) + 3310 D1 */
+    CHECK(Gen3ResourcePack_GetEntryCount(pack) == 18971u); /* 4518 + 569 audio leaves + 202 structural + 530 song graphs (R12-B/C/D) + 1057 leaf (R13-B) + 5187 text (R13-C) + 3310 D1 */
+    CHECK(Gen3ResourceCatalog_Count(catalog) == 18971u); /* + 569 audio leaves + 202 structural + 530 song graphs (R12-B/C/D) + 1057 leaf (R13-B) + 5187 text (R13-C) + 3310 D1 */
 
     /* 2. Build the production ROM_BASE candidate + snapshot (R11-C/D seams:
      * tilesets + layouts are published from this snapshot's streams). */
@@ -1073,7 +1073,7 @@ int main(int argc, char **argv)
     CHECK(strcmp(info.providerId, EMERALD_ROM_BASE_PROVIDER_ID) == 0);
     CHECK(info.precedence == EMERALD_ROM_BASE_PRECEDENCE);
     CHECK(strcmp(info.providerVersion, "v1") == 0);
-    CHECK(info.entryCount == 18580u); /* + 569 audio leaves + 202 structural + 530 song graphs (R12-B/C/D) + 1057 leaf (R13-B) + 5187 text (R13-C) + 3310 D1 */
+    CHECK(info.entryCount == 18971u); /* + 569 audio leaves + 202 structural + 530 song graphs (R12-B/C/D) + 1057 leaf (R13-B) + 5187 text (R13-C) + 3310 D1 */
 
     CHECK(Gen3ResourceCandidate_Build(candidate, &snapshot, &gdiag) && snapshot != NULL);
     Gen3ResourceDiagnostics_Destroy(&gdiag);

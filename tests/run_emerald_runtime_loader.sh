@@ -104,6 +104,9 @@ gcc -std=gnu99 -O2 -ffunction-sections -fdata-sections -Wl,--gc-sections \
     "$emerald_dir/frontier_native.generated.c" \
     "$emerald_dir/frontier_aux_native.generated.c" \
     "$emerald_dir/emerald_frontier_compat.c" \
+    "$emerald_dir/pokedex_data_native.c" \
+    "$emerald_dir/pokedex_native.generated.c" \
+    "$emerald_dir/emerald_pokedex_compat.c" \
     "$here/emerald_runtime_loader_test.c" \
     -o "$tmp/emerald_runtime_loader_test"
 

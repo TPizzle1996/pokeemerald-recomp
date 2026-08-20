@@ -526,3 +526,36 @@ R13-E2 is **implemented and verified** (report:
    pools + pokedex text.
 
 **R13-E2 STOP.** No commit made. E3 and R13-F not started.
+
+---
+
+## Implementation deltas (R13-E3 — Frontier + Pokédex)
+
+The E3 Frontier + Pokédex scope is **implemented and verified** across three
+stages (reports: `R13E3A1_FRONTIER_TRAINER_GRAPH_REPORT.md`,
+`R13E3A2_FRONTIER_AUX_MIGRATION_REPORT.md`, `R13E3B_POKEDEX_MIGRATION_REPORT.md`):
+
+1. **E3a-1 (Frontier trainer/mon graph):** frontier trainers 300×52 + 300 mon-set
+   leaves (28,060) + shared 882-mons pool (14,112 → 16/14 transform) + held
+   items + banned species + Battle Tents (90 trainers/160 mons) = 786
+   resources / 66,718 B.
+2. **E3a-2 (facility aux + Pike/Pyramid wild):** factory move lists, palace/
+   arena prizes, pike NPC (+ wild), pyramid floor/item (+ wild), brains,
+   apprentice = 59 resources / 5,321 B; Pike/Pyramid wild handoff reused E2
+   (+11 slot sets), no longer compiled.
+3. **E3b (Pokédex):** 387 rows × 32 B GBA (category inline + 1 description ptr)
+   + 4 ordering/routing tables = 391 resources; 387 description labels flipped
+   ROM_BASE_ONLY (58,017 B).
+4. Pack: 18,521 (E3a-1) → 18,580 (E3a-2) → **18,971 (E3b)** entries /
+   13,987,040 B, SHA-256 `4e2be728…72e`. Cap unchanged.
+5. Seams: EmeraldFrontierCompat (trainer/mon graph + aux) +
+   EmeraldPokedexCompat; range index **5,851/8,192**; `gFacilityTrainers`/
+   `gFacilityTrainerMons` relocated (E3a-1 State-v5 fresh-process gate green).
+6. Battery (loader 65,658 / trainer 37,921 / world 5,565 / render 3,628) green.
+   Release binary 22,488,384 → 22,442,296 B (net shrink −46 KB after E3b).
+7. Engine-owned exceptions individually documented (dome, mindratings,
+   fixed-IV/rental-range, pickup %, trainer-class music, brain flags/dialogue,
+   apprentice dialogue). Remaining deferred: dex area/region graphics (gfx
+   stage), map metadata (R13-F).
+
+**R13-E STOP.** No commit made. R13-F not started.

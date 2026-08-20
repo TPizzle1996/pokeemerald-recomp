@@ -1,3 +1,7 @@
+#ifndef NATIVE_LINUX
+/* R13-E3b: on native, gPokedexEntries.description is re-pointed (by the
+ * publication seam) into the live R13-C Pokédex text arena, so these compiled
+ * payloads are unused. GBA keeps them verbatim. */
 const u8 gDummyPokedexText[] = _(
     "This is a newly discovered POKéMON.\n"
     "It is currently under investigation.\n"
@@ -2319,3 +2323,4 @@ const u8 gDeoxysPokedexText[] = _(
     "extraterrestrial virus exposed to a laser\n"
     "beam. Its body is configured for superior\n"
     "agility and speed.");
+#endif /* NATIVE_LINUX */

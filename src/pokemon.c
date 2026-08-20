@@ -521,6 +521,12 @@ static const u16 sSpeciesToHoennPokedexNum[NUM_SPECIES - 1] =
 };
 
 // Assigns all species to the National Dex Index (Summary No. for National Dex)
+#ifdef NATIVE_LINUX
+/* R13-E3b: the species->national-dex routing table is HOST_DATA in
+ * pokedex_data_native.c (filled by the publication seam, byte-identical u16).
+ * GBA keeps the compiled const array below verbatim. */
+extern u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1];
+#else
 static const u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1] =
 {
     SPECIES_TO_NATIONAL(BULBASAUR),
@@ -935,6 +941,7 @@ static const u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1] =
     SPECIES_TO_NATIONAL(DEOXYS),
     SPECIES_TO_NATIONAL(CHIMECHO),
 };
+#endif /* NATIVE_LINUX */
 
 // Assigns all Hoenn Dex Indexes to a National Dex Index
 static const u16 sHoennToNationalOrder[NUM_SPECIES - 1] =

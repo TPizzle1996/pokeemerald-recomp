@@ -55,6 +55,7 @@
 #include "emerald/resources/emerald_audio_compat.h"
 #include "emerald/resources/emerald_encounter_compat.h"
 #include "emerald/resources/emerald_frontier_compat.h"
+#include "emerald/resources/emerald_pokedex_compat.h"
 #include "emerald/resources/emerald_gameplay_compat.h"
 #include "emerald/resources/emerald_leaf_compat.h"
 #include "emerald/resources/emerald_resource_session.h"
@@ -452,28 +453,69 @@ EmeraldResourceCompat_RegisterRuntimeSnapshot(const char *packPath)
                                     }
                                     else
                                     {
-                                        /* R10-F: the session content fingerprint
-                                         * pins the exact logical provider content
-                                         * this session was built from (the
-                                         * construction lives in
-                                         * emerald_resource_session.h). The
-                                         * native save-state system stamps it
-                                         * into every state it writes and
-                                         * rejects states whose recorded
-                                         * fingerprint differs from the active
-                                         * session's - equivalent content at
-                                         * another path still matches, changed
-                                         * or reordered providers cannot. */
-                                        uint8_t sessionFingerprint[GEN3_PACK_SHA256_SIZE];
-                                        sSnapshotRegistered = true;
-                                        status = EMERALD_COMPAT_OK;
-                                        if (EmeraldResourceSession_ComputeBaseFingerprint(
-                                                &info, sessionFingerprint))
-                                            EmeraldResourceCompat_SetSessionContentFingerprint(
-                                                sessionFingerprint);
+                                        /* R13-E3b: Pokédex structured-data +
+                                         * R13-C description-text cutover. Runs
+                                         * AFTER EmeraldFrontierCompat; the
+                                         * R13-C text arena it re-points into is
+                                         * already live. REFUSE-class: on failure
+                                         * the whole registration rolls back. */
+                                        struct EmeraldPokedexCompatDiagnostics
+                                            pokedexDiag;
+                                        enum EmeraldPokedexCompatStatus
+                                            pokedexStatus =
+                                            EmeraldPokedexCompat_TryInitialize(
+                                                snapshot, pack, &pokedexDiag);
+                                        if (pokedexStatus != EMERALD_POKEDEX_OK)
+                                        {
+                                            fprintf(stderr,
+                                                    "emerald runtime: session refused: "
+                                                    "pokedex data not published "
+                                                    "(status %d%s%s)\n",
+                                                    (int)pokedexStatus,
+                                                    pokedexDiag.canonicalName[0] != '\0'
+                                                        ? " @ " : "",
+                                                    pokedexDiag.canonicalName);
+                                            EmeraldResourceCompat_ClearMigratedEntries();
+                                            EmeraldAudioCompat_ClearMigratedEntries();
+                                            EmeraldTextCompat_ClearMigratedEntries();
+                                            EmeraldLeafCompat_ClearMigratedEntries();
+                                            EmeraldGameplayCompat_ClearMigratedEntries();
+                                            EmeraldTrainerCompat_ClearMigratedEntries();
+                                            EmeraldEncounterCompat_ClearMigratedEntries();
+                                            EmeraldFrontierCompat_ClearMigratedEntries();
+                                            EmeraldPokedexCompat_ClearMigratedEntries();
+                                            EmeraldResourceCompat_ClearSnapshot();
+                                            EmeraldResourceCompat_SetSessionContentFingerprint(NULL);
+                                            Gen3ResourceSnapshot_Destroy(snapshot);
+                                            snapshot = NULL;
+                                            sSnapshotRegistered = false;
+                                            status = EMERALD_COMPAT_ERR_PUBLISH_FAILED;
+                                        }
                                         else
-                                            EmeraldResourceCompat_SetSessionContentFingerprint(
-                                                NULL);
+                                        {
+                                            /* R10-F: the session content fingerprint
+                                             * pins the exact logical provider content
+                                             * this session was built from (the
+                                             * construction lives in
+                                             * emerald_resource_session.h). The
+                                             * native save-state system stamps it
+                                             * into every state it writes and
+                                             * rejects states whose recorded
+                                             * fingerprint differs from the active
+                                             * session's - equivalent content at
+                                             * another path still matches, changed
+                                             * or reordered providers cannot. */
+                                            uint8_t sessionFingerprint[GEN3_PACK_SHA256_SIZE];
+                                            sSnapshotRegistered = true;
+                                            status = EMERALD_COMPAT_OK;
+                                            if (EmeraldResourceSession_ComputeBaseFingerprint(
+                                                    &info, sessionFingerprint))
+                                                EmeraldResourceCompat_SetSessionContentFingerprint(
+                                                    sessionFingerprint);
+                                            else
+                                                EmeraldResourceCompat_SetSessionContentFingerprint(
+                                                    NULL);
+                                        }
                                     }
                                 }
                             }

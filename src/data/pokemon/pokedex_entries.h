@@ -1,3 +1,10 @@
+#ifdef NATIVE_LINUX
+/* R13-E3b: the definitive rows are HOST_DATA in pokedex_data_native.c (filled
+ * by the publication seam, description re-pointed into the R13-C arena). This
+ * extern keeps pokedex.c / international_string_util.c compiling. GBA keeps
+ * the compiled const array below verbatim. */
+extern struct PokedexEntry gPokedexEntries[387];
+#else
 const struct PokedexEntry gPokedexEntries[] =
 {
     [NATIONAL_DEX_NONE] =
@@ -4644,3 +4651,4 @@ const struct PokedexEntry gPokedexEntries[] =
         .trainerOffset = 2,
     },
 };
+#endif /* NATIVE_LINUX */

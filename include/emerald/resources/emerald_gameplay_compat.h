@@ -48,13 +48,14 @@
 /* Gameplay+trainer inventory pins. D1: 3,300 structured + 10 fonts; D2 adds
  * the gItems family (schema 11, 377 x 44 B); R13-E1 adds the three trainer
  * families (schema 16 metadata 855, 17 party 854, 18 class-name 66).
- * Combined inventory = 5,462 resources, which must agree with the generated
+ * Combined inventory = 6,908 resources, which must agree with the generated
  * inventory at compile time. EmeraldGameplayCompat publishes the schema 1..15
  * structured + font families in-place; the schema 16..18 trainer families are
  * owned by EmeraldTrainerCompat (also validated here for presence/ownership
- * but filled by that seam). */
-#if GAMEPLAY_NATIVE_RESOURCE_COUNT != 6517u
-#error "R13-E gameplay+trainer+encounter+frontier-aux resource count disagrees with the generated inventory"
+ * but filled by that seam), 19/20 encounter, 21..37 frontier aux, and 38..40
+ * pokedex are validated by the frontier/pokedex seams. */
+#if GAMEPLAY_NATIVE_RESOURCE_COUNT != 6908u
+#error "R13-E gameplay+trainer+encounter+frontier-aux+pokedex resource count disagrees with the generated inventory"
 #endif
 
 #define EMERALD_GAMEPLAY_SPECIES_COUNT 412u
