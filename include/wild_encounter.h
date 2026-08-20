@@ -26,7 +26,14 @@ struct WildPokemonHeader
     const struct WildPokemonInfo *fishingMonsInfo;
 };
 
+/* R13-E2: on native the map-based gWildMonHeaders is the seam-published
+ * HOST_DATA fill target (encounter_data_native.c), so it is mutable.
+ * GBA keeps the const definition verbatim (src/data/wild_encounters.h). */
+#if defined(NATIVE_LINUX)
+extern struct WildPokemonHeader gWildMonHeaders[];
+#else
 extern const struct WildPokemonHeader gWildMonHeaders[];
+#endif
 
 void DisableWildEncounters(bool8 disabled);
 bool8 StandardWildEncounter(u16 curMetatileBehavior, u16 prevMetatileBehavior);

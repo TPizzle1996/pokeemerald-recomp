@@ -53,9 +53,11 @@ ROM_SHA1 = "f3ae088181bf583e55daf962a92bb46f4f1d07b7"
 # excluded -- see note below). R13-D2 adds the gItems family (377 x 44 B GBA
 # wire rows = 16588 B, schema 11=item). R13-E1 adds the three trainer
 # families (schema 16 metadata 855 x 40 B = 34200 B; schema 17 party leaves
-# 854 = 18088 B; schema 18 class names 66 x 13 B = 858 B). Combined gameplay
-# + trainer total:
-#    5462 resources / 411964 B.
+# 854 = 18088 B; schema 18 class names 66 x 13 B = 858 B). R13-E2 adds the
+# wild-encounter families (schema 19 headers block = 1 x 2500 B; schema 20
+# per-(map,type) slot tables = 209 resources / 7,900 B). Combined gameplay +
+# trainer + encounter total:
+#    5672 resources / 422364 B.
 #
 # NOTE (R13-D1): the evolution family (412 x 40 B = 16480 B) is EXCLUDED: the
 # compile-vs-vanilla parity gate proved the recomp deliberately replaced the
@@ -64,8 +66,8 @@ ROM_SHA1 = "f3ae088181bf583e55daf962a92bb46f4f1d07b7"
 # (src/data/pokemon/evolution.h). Publishing vanilla evolution data would
 # silently overwrite that fork behaviour, which the R13-D stage brief forbids
 # (STOP for that family; keep compiled).
-PINNED_TOTAL = 5462
-PINNED_BYTES = 411964
+PINNED_TOTAL = 5672
+PINNED_BYTES = 422364
 PINNED_BY_FAMILY = {
     "species-base": (412, 11536),
     "species-name": (412, 4532),
@@ -84,6 +86,8 @@ PINNED_BY_FAMILY = {
     "trainer": (855, 34200),
     "trainer-party": (854, 18088),
     "trainer-class-name": (66, 858),
+    "encounter-headers": (1, 2500),
+    "encounter": (209, 7900),
     "font": (10, 294912),
 }
 
@@ -562,6 +566,119 @@ def derive(elf, rom, pret):
         add("trainer-class-name", class_keys[c], "gTrainerClassNames",
             TRAINER_CLASS_WIRE, cl_rom)
 
+    # --- wild encounters (R13-E2) ---------------------------------------------
+    # ONE `emerald:data/encounter/headers` block resource (the exact 2,500 B
+    # ROM gWildMonHeaders block: 124 real + 1 MAP_UNDEFINED sentinel at row
+    # 124) + 209 `emerald:data/encounter/<map>/<type>` slot-table resources
+    # (type in land/water/rock/fishing; payload = the exact ROM WildPokemon
+    # slot slice). encounterRate + the info/slot GBA pointers ride as
+    # generated metadata for the publication seam's header->info->slot graph
+    # validation. See docs/R13E2_WILD_ENCOUNTER_MIGRATION_PLAN.md.
+    ENCOUNTER_HEADERS_ROM = 0x552d48   # gWildMonHeaders ROM-relative
+    ENCOUNTER_HEADER_WIRE = 20
+    ENCOUNTER_SLOT_WIRE = 4
+    ENCOUNTER_TYPE_SLOTS = {"land": 12, "water": 5,
+                            "rock-smash": 5, "fishing": 10}
+    # (type tag, GBA-pointer field offset within the 20 B header row); order
+    # matches the native struct field order (rock-smash before fishing).
+    ENCOUNTER_FIELDS = (("land", 4), ("water", 8),
+                        ("rock-smash", 12), ("fishing", 16))
+
+    hdr_sym = elf.find("gWildMonHeaders")
+    if hdr_sym is None or hdr_sym[2] != ENCOUNTER_HEADER_WIRE * 125:
+        fail("gWildMonHeaders must be exactly 125 x 20 B")
+    if hdr_sym[1] - GEN3_GBA_ROM_BASE != ENCOUNTER_HEADERS_ROM:
+        fail(f"gWildMonHeaders not at expected 0x{ENCOUNTER_HEADERS_ROM:x}")
+    hdr_block = rom[ENCOUNTER_HEADERS_ROM:ENCOUNTER_HEADERS_ROM + 2500]
+    if elf.slice(hdr_sym, 2500) != hdr_block:
+        fail("gWildMonHeaders ROM slice != ELF slice")
+
+    # (mapGroup,mapNum) -> lowercase semantic map name from map_groups.h
+    # (the R13-F map identity): MAP_FOO_BAR -> foo-bar.
+    map_groups_h = (root / "include/constants/map_groups.h").read_text()
+    map_value = {}
+    for m in re.finditer(
+            r"#define\s+(MAP_[A-Z0-9_]+)\s*\((\d+)\s*\|\s*\((\d+)\s*<<\s*8\)\)",
+            map_groups_h):
+        val = (int(m.group(3)) << 8) | int(m.group(2))
+        if val in map_value and map_value[val] != m.group(1):
+            fail(f"map_groups.h collision for map value {val:#x}")
+        map_value[val] = m.group(1)[len("MAP_"):].lower().replace("_", "-")
+
+    add("encounter-headers", "emerald:data/encounter/headers",
+        "gWildMonHeaders", 2500, ENCOUNTER_HEADERS_ROM)
+
+    # Object-symbol address map (slot-table provenance): STT_OBJECT only, so
+    # the compiler's "$d"/"$a" alignment labels never shadow a real table.
+    obj_addr = {}
+    for s in elf.symbols:
+        if (s[3] & 0xf) == 1 and s[4] >= 0:
+            obj_addr.setdefault(s[1], s[0])
+
+    head_keys = []   # 125 x 4 slot-resource keys ("" = null header field)
+    infos = {}       # slot resource key -> {rate, infoPtr, slotPtr, slotRows}
+    ac_variant = 0   # Altering Cave header index (1..9 in header order)
+    for hi in range(125):
+        coff = ENCOUNTER_HEADERS_ROM + hi * ENCOUNTER_HEADER_WIRE
+        mg, mn, pad = struct.unpack_from("<BBH", rom, coff)
+        if hi == 124:
+            if mg != 0xFF or mn != 0xFF:
+                fail("gWildMonHeaders row 124 is not the MAP_UNDEFINED sentinel")
+            if any(struct.unpack_from("<I", rom, coff + f)[0] != 0
+                   for _, f in ENCOUNTER_FIELDS):
+                fail("sentinel header must carry NULL info pointers")
+            head_keys.append(["", "", "", ""])
+            continue
+        alter = (mg == 24 and mn == 106)
+        if alter:
+            ac_variant += 1
+            map_key = "altering-cave-%d" % ac_variant
+        else:
+            v = (mg << 8) | mn
+            if v not in map_value:
+                fail(f"gWildMonHeaders map ({mg},{mn}) has no MAP_ constant")
+            map_key = map_value[v]
+        field_keys = []
+        for (tname, foff) in ENCOUNTER_FIELDS:
+            p = struct.unpack_from("<I", rom, coff + foff)[0]
+            if p == 0:
+                field_keys.append("")
+                continue
+            ioff = p - GEN3_GBA_ROM_BASE
+            rate = rom[ioff]
+            slotptr = struct.unpack_from("<I", rom, ioff + 4)[0]
+            if slotptr == 0:
+                fail(f"info @0x{p:x} ({map_key}/{tname}) has a NULL slotPtr")
+            slot_rom = slotptr - GEN3_GBA_ROM_BASE
+            slot_rows = ENCOUNTER_TYPE_SLOTS[tname]
+            slot_bytes = slot_rows * ENCOUNTER_SLOT_WIRE
+            slot_slice = rom[slot_rom:slot_rom + slot_bytes]
+            rkey = "emerald:data/encounter/%s/%s" % (map_key, tname)
+
+            slot_sym = obj_addr.get(slotptr)
+            if slot_sym is None:
+                fail(f"{rkey}: no object symbol for slot table @0x{slotptr:x}")
+            stbl = elf.find(slot_sym)
+            if stbl[1] - GEN3_GBA_ROM_BASE != slot_rom:
+                fail(f"{rkey}: slot symbol addr != info slotPtr")
+            if elf.slice(stbl, slot_bytes) != slot_slice:
+                fail(f"{rkey}: ROM slot slice != ELF slice")
+
+            add("encounter", rkey, slot_sym, slot_bytes, slot_rom)
+            field_keys.append(rkey)
+            if rkey in infos:
+                fail(f"duplicate encounter resource {rkey}")
+            infos[rkey] = {"rate": rate, "infoPtr": p, "slotPtr": slotptr,
+                           "slotRows": slot_rows}
+        head_keys.append(field_keys)
+
+    if ac_variant != 9:
+        fail(f"Altering Cave variants {ac_variant} != 9")
+    if sum(1 for h in head_keys for f in h if f) != 209:
+        fail("map-based encounter slot resources != 209")
+    if len(infos) != 209:
+        fail(f"distinct infos {len(infos)} != 209")
+
     rows.sort(key=lambda r: r[0])
     total = len(rows)
     if total != PINNED_TOTAL:
@@ -577,7 +694,8 @@ def derive(elf, rom, pret):
     species_keys = [sp_key(i) for i in range(412)]
     move_keys = [mv_key(i) for i in range(355)]
     return rows, fam, levelup_idx_map, species_keys, move_keys, item_keys, \
-        callback_rows, trainer_keys, party_keys, party_meta, class_keys
+        callback_rows, trainer_keys, party_keys, party_meta, class_keys, \
+        head_keys, infos
 
 
 def _f(key, family):
@@ -599,6 +717,10 @@ def _f(key, family):
         return "trainer-party" if key.endswith("/party") else "trainer"
     if key.startswith("emerald:data/trainer-class/"):
         return "trainer-class-name"
+    if key == "emerald:data/encounter/headers":
+        return "encounter-headers"
+    if key.startswith("emerald:data/encounter/"):
+        return "encounter"
     if key.startswith("emerald:data/growth-rate/"):
         return "growth-rate"
     if key == "emerald:data/tutor/moves":
@@ -637,6 +759,7 @@ SCHEMA = {
     "move-contest": 10, "item": 11, "growth-rate": 12, "tutor-moves": 13,
     "contest-effects": 14, "contest-combo-starters": 15,
     "trainer": 16, "trainer-party": 17, "trainer-class-name": 18,
+    "encounter-headers": 19, "encounter": 20,
     "font": 1,
 }
 
@@ -652,7 +775,8 @@ def key_sanitize(key):
 
 def emit_gameplay(rows, fam, levelup_idx_map, species_keys, move_keys,
                   item_keys, callback_rows, trainer_keys, party_keys,
-                  party_meta, class_keys, outdir, root, args):
+                  party_meta, class_keys, enc_head_keys, enc_infos,
+                  outdir, root, args):
     famdir = outdir / "gameplay"
     artdir = famdir / "artifacts"
     art_by_key = {}
@@ -1191,6 +1315,97 @@ def emit_gameplay(rows, fam, levelup_idx_map, species_keys, move_keys,
     write_if(root / "src/emerald/resources/trainer_native.generated.c",
              tr_c, args)
 
+    # ---- encounter seam generated maps (R13-E2) ----------------------------
+    # The encounter publication seam (EmeraldEncounterCompat) rebuilds the
+    # native gWildMonHeaders[125] / WildPokemonInfo[209] / slot arena from the
+    # 210 encounter resources. kEncounterHeaderKeys[h][t] (header-index x
+    # land/water/rock-smash/fishing) carries the slot resource key for each
+    # non-null header field ("" = null family); kEncounterInfos (sorted by
+    # canonical key) carries the per-(map,type) encounterRate and the two GBA
+    # pointers (info ptr, slot ptr) so the seam can validate the full
+    # header->info->slot pointer graph against the pack (every resource byte-
+    # identical, every pointer edge exact) before publishing.
+    ECN = "EMERALD_ENCOUNTER_"
+    enc_hdr = [
+        "/* Generated by tools/gen3_resources/gameplay_family/"
+        "gen_gameplay_family.py.",
+        " * Do not edit by hand; re-run the generator and --check it.",
+        " *",
+        " * R13-E2 encounter publication maps. kEncounterHeaderKeys[h][t] is",
+        " * the slot resource key (emerald:data/encounter/<map>/<type>) for",
+        " * header row h / field t (0=land,1=water,2=rock-smash,3=fishing),",
+        " * or \"\" for a NULL header field. Header row 124 is the MAP_UNDEFINED",
+        " * sentinel. kEncounterInfos (sorted by canonical key) carries each",
+        " * published slot table's encounterRate and the two GBA pointers the",
+        " * seam validates against the pack (info ptr at instantiation, slot",
+        " * ptr over the slot-table ROM address). The seam publishes the",
+        " * native gWildMonHeaders array with info pointers rebuilt to its own",
+        " * 209 native WildPokemonInfo objects, slotPtr rebuilt into the slot",
+        " * arena.",
+        " */",
+        "#ifndef EMERALD_RESOURCES_ENCOUNTER_NATIVE_GENERATED_H",
+        "#define EMERALD_RESOURCES_ENCOUNTER_NATIVE_GENERATED_H",
+        "",
+        "#include <stdint.h>",
+        "",
+        f"#define {ECN}SCHEMA_HEADERS 19u",
+        f"#define {ECN}SCHEMA_SLOT    20u",
+        f"#define {ECN}HEADER_COUNT   125u",
+        f"#define {ECN}INFO_COUNT     209u",
+        f"#define {ECN}HEADERS_BYTES  2500u",
+        "",
+        "/* header row x field (0 land, 1 water, 2 rock-smash, 3 fishing). */",
+        "extern const char *const "
+        "kEncounterHeaderKeys[EMERALD_ENCOUNTER_HEADER_COUNT][4];",
+        "",
+        "struct EmeraldEncounterInfoRecord",
+        "{",
+        "    const char *name;    /* canonical slot resource key */",
+        "    uint8_t rate;        /* wire encounterRate (info @0) */",
+        "    uint32_t gbaInfoPtr; /* info struct GBA address (header field) */",
+        "    uint32_t gbaSlotPtr; /* slot table GBA address (info @4) */",
+        "    uint32_t slotRows;   /* slot-table row count (payload/4) */",
+        "};",
+        "",
+        "extern const struct EmeraldEncounterInfoRecord "
+        "kEncounterInfos[EMERALD_ENCOUNTER_INFO_COUNT];",
+        "",
+        "#endif /* EMERALD_RESOURCES_ENCOUNTER_NATIVE_GENERATED_H */",
+    ]
+    write_if(root / "include/emerald/resources/encounter_native.generated.h",
+             enc_hdr, args)
+
+    enc_c = [
+        "/* Generated by tools/gen3_resources/gameplay_family/"
+        "gen_gameplay_family.py.",
+        " * Do not edit by hand; re-run the generator and --check it.",
+        " */",
+        '#include "emerald/resources/encounter_native.generated.h"',
+        "",
+        "const char *const "
+        "kEncounterHeaderKeys[EMERALD_ENCOUNTER_HEADER_COUNT][4] =",
+        "{",
+    ]
+    for fields in enc_head_keys:
+        enc_c.append("    {" + ", ".join('"%s"' % f for f in fields) + "},")
+    enc_c += [
+        "};",
+        "",
+        "const struct EmeraldEncounterInfoRecord "
+        "kEncounterInfos[EMERALD_ENCOUNTER_INFO_COUNT] =",
+        "{",
+    ]
+    for rkey in sorted(enc_infos):
+        e = enc_infos[rkey]
+        enc_c.append(f'    {{"{rkey}", {e["rate"]}u, 0x{e["infoPtr"]:08x}u, '
+                     f'0x{e["slotPtr"]:08x}u, {e["slotRows"]}u}},')
+    enc_c += [
+        "};",
+        "",
+    ]
+    write_if(root / "src/emerald/resources/encounter_native.generated.c",
+             enc_c, args)
+
 
 def _artifact_sub(key):
     if key.startswith("emerald:data/species/"):
@@ -1207,6 +1422,10 @@ def _artifact_sub(key):
         return "trainer-party" if key.endswith("/party") else "trainer"
     if key.startswith("emerald:data/trainer-class/"):
         return "trainer-class-name"
+    if key == "emerald:data/encounter/headers":
+        return "encounter-headers"
+    if key.startswith("emerald:data/encounter/"):
+        return "encounter"
     if key.startswith("emerald:data/growth-rate/"):
         return "growth-rate"
     if key == "emerald:data/tutor/moves":
@@ -1242,19 +1461,21 @@ def main():
 
     elf = Elf32(open(args.elf, "rb").read())
     rows, fam, levelup_idx_map, species_keys, move_keys, item_keys, \
-        callback_rows, trainer_keys, party_keys, party_meta, class_keys = \
-        derive(elf, rom, pret)
+        callback_rows, trainer_keys, party_keys, party_meta, class_keys, \
+        enc_head_keys, enc_infos = derive(elf, rom, pret)
     emit_gameplay(rows, fam, levelup_idx_map, species_keys, move_keys,
                   item_keys, callback_rows, trainer_keys, party_keys,
-                  party_meta, class_keys, outdir, root, args)
+                  party_meta, class_keys, enc_head_keys, enc_infos,
+                  outdir, root, args)
 
     print(f"gameplay resources: {len(rows)}, "
-          f"{sum(r[3] for r in rows)} B (D1+D2+E1; evolutions excluded)")
+          f"{sum(r[3] for r in rows)} B (D1+D2+E1+E2; evolutions excluded)")
     print(f"item callback census: {len(callback_rows)} distinct")
     for family in sorted(PINNED_BY_FAMILY):
         print(f"  {family}: {fam.get(family, 0)} resources")
     print(f"trainer metadata: {len(trainer_keys)} / party: "
           f"{sum(1 for k in party_keys if k)} / class: {len(class_keys)}")
+    print(f"encounter headers block: 1 / slot tables: {len(enc_infos)}")
 
 
 if __name__ == "__main__":

@@ -40,6 +40,9 @@
 #include "emerald/resources/emerald_trainer_compat.h"
 #include "emerald/resources/trainer_native.generated.h"
 #include "emerald/resources/text_skeleton_arrays.generated.h"
+#include "wild_encounter.h"   /* R13-E2: real struct WildPokemon{Info,Header} +
+                                 the NATIVE_LINUX gWildMonHeaders extern */
+#include "emerald/resources/emerald_encounter_compat.h"
 #include "item_use.h"   /* R13-D2: native ItemUse*_... symbols for pointer checks */
 #include "../src/emerald/resources/emerald_runtime_loader.c"
 
@@ -594,7 +597,7 @@ static void TestTextPublication(const char *packPath)
 
     packCount = Gen3ResourcePack_GetEntryCount(pack);
     printf("production pack entry count: %zu\n", packCount);
-    CHECK("production pack entry count pinned at 17525 (R13-E1)", packCount == 17525u);
+    CHECK("production pack entry count pinned at 17735 (R13-E2)", packCount == 17735u);
 
     /* Every text entry: C-side labels resolve by resource id; bundle ids
      * are captured for the blob-slice pass below. */
@@ -1382,6 +1385,487 @@ static void TestTrainerRefusals(const char *tempDir, const char *prodPack)
           && EmeraldTrainerCompat_GetPartyArenaBytes() == liveArena);
 }
 
+/* ------------------------------------------------------------------ */
+/* R13-E2: wild-encounter (headers + map-based info + slot tables)     */
+/* ------------------------------------------------------------------ */
+
+static uint16_t EncLe16(const uint8_t *d)
+{
+    return (uint16_t)(d[0] | ((uint16_t)d[1] << 8));
+}
+static uint32_t ReadLe32Native(const uint8_t *d)
+{
+    return (uint32_t)d[0] | ((uint32_t)d[1] << 8)
+        | ((uint32_t)d[2] << 16) | ((uint32_t)d[3] << 24);
+}
+static void WriteLe32Native(uint8_t *d, uint32_t v)
+{
+    d[0] = (uint8_t)(v & 0xFF); d[1] = (uint8_t)((v >> 8) & 0xFF);
+    d[2] = (uint8_t)((v >> 16) & 0xFF); d[3] = (uint8_t)((v >> 24) & 0xFF);
+}
+
+static int FindHeaderIdx(u8 mapGroup, u8 mapNum)
+{
+    size_t i;
+    for (i = 0u; i < EMERALD_ENCOUNTER_HEADER_COUNT; i++)
+        if (gWildMonHeaders[i].mapGroup == mapGroup
+         && gWildMonHeaders[i].mapNum == mapNum)
+            return (int)i;
+    return -1;
+}
+
+/* Binary search over the (sorted) generated info records by canonical key. */
+static size_t FindEncInfoIndex(const char *key)
+{
+    size_t lo = 0u;
+    size_t hi = EMERALD_ENCOUNTER_INFO_COUNT;
+    while (lo < hi)
+    {
+        size_t mid = lo + (hi - lo) / 2u;
+        int cmp = strcmp(key, kEncounterInfos[mid].name);
+        if (cmp == 0)
+            return mid;
+        if (cmp < 0)
+            hi = mid;
+        else
+            lo = mid + 1u;
+    }
+    return (size_t)-1;
+}
+
+/* Drive EmeraldEncounterCompat directly against a session built from the
+ * given pack (the same pack->catalog->candidate->snapshot chain the loader
+ * runs, independent of the loader's at-most-once registration). */
+static enum EmeraldEncounterCompatStatus RunEncounterSeamDirect(
+    const char *packPath, struct EmeraldEncounterCompatDiagnostics *diag)
+{
+    struct Gen3ResourcePack *pack = NULL;
+    struct Gen3ResourcePackDiagnosticList packDiag;
+    struct Gen3ResourceCatalog *catalog = NULL;
+    struct Gen3ResourceCandidate *candidate = NULL;
+    struct Gen3ResourceSnapshot *snapshot = NULL;
+    struct Gen3ResourceDiagnosticList diagnostics;
+    struct EmeraldResourceSessionInfo info;
+    enum EmeraldResourceSessionError sessionError;
+    enum EmeraldEncounterCompatStatus status = EMERALD_ENCOUNTER_ERR_UNAVAILABLE;
+
+    Gen3ResourcePackDiagnostics_Init(&packDiag);
+    if (Gen3ResourcePack_OpenFile(packPath, &pack, &packDiag) != GEN3_PACK_OK
+     || pack == NULL)
+    {
+        Gen3ResourcePackDiagnostics_Destroy(&packDiag);
+        return status;
+    }
+    Gen3ResourcePackDiagnostics_Destroy(&packDiag);
+    if (!BuildCatalogFromPack(pack, &catalog) || catalog == NULL)
+        goto done;
+    Gen3ResourceDiagnostics_Init(&diagnostics);
+    sessionError = EmeraldResourceSession_BuildRomBaseCandidate(
+        pack, catalog, &candidate, &info, &diagnostics);
+    if (sessionError == EMERALD_SESSION_OK && candidate != NULL
+     && Gen3ResourceCandidate_Build(candidate, &snapshot, &diagnostics)
+     && snapshot != NULL)
+        status = EmeraldEncounterCompat_TryInitialize(snapshot, pack, diag);
+    Gen3ResourceDiagnostics_Destroy(&diagnostics);
+done:
+    if (snapshot != NULL)
+        Gen3ResourceSnapshot_Destroy(snapshot);
+    if (candidate != NULL)
+        Gen3ResourceCandidate_Destroy(candidate);
+    if (catalog != NULL)
+        Gen3ResourceCatalog_Destroy(catalog);
+    if (pack != NULL)
+        Gen3ResourcePack_Destroy(pack);
+    return status;
+}
+
+enum {
+    ENC_VAR_BAD_HEADERS_SIZE = 0,
+    ENC_VAR_BAD_SENTINEL,
+    ENC_VAR_HEADER_INFO_PTR,
+    ENC_VAR_INFO_SLOT_PTR,
+    ENC_VAR_MISSING_SLOT,
+    ENC_VAR_ALTERING_CAVE,
+};
+
+/* A production-pack variant with EXACTLY ONE encounter record damaged/dropped
+ * so the refusal is provably the encounter seam's:
+ *   BAD_HEADERS_SIZE  - the headers resource payload is re-sized (2500 -> 2480);
+ *   BAD_SENTINEL      - the sentinel header's mapGroup is flipped off 0xFF;
+ *   HEADER_INFO_PTR   - Route 101's land info pointer is re-pointed at Route
+ *                       102's land info (header->info edge breaks);
+ *   INFO_SLOT_PTR     - Route 101's land slot resource ROM offset moved by +4
+ *                       (info->slot edge breaks);
+ *   MISSING_SLOT      - the Route 101 land slot resource is dropped;
+ *   ALTERING_CAVE     - Altering Cave row 114's mapGroup/mapNum changed.
+ * Every other entry is copied through verbatim with its own digests. */
+static bool BuildEncounterVariantPack(const char *srcPath, const char *dstPath,
+                                      int mode)
+{
+    static const char *kHeadersId = "emerald:data/encounter/headers";
+    static const char *kRoute101Land = "emerald:data/encounter/route101/land";
+    struct Gen3ResourcePack *pack = NULL;
+    struct Gen3ResourcePackDiagnosticList packDiag;
+    struct Gen3ResourcePackProfile profile;
+    struct Gen3ResourcePackBuild *build = NULL;
+    struct Gen3ResourcePackProfileInput pin;
+    struct Gen3ResourcePackEntryInput entry;
+    struct Gen3ResourcePackBytes bytes = { NULL, 0 };
+    struct Gen3ResourcePackDiagnosticList diag;
+    uint8_t headerBuf[EMERALD_ENCOUNTER_HEADERS_BYTES];
+    uint8_t bufSha[32];
+    uint8_t provenanceSha[32];
+    size_t count;
+    size_t i;
+    FILE *f = NULL;
+    bool ok = false;
+
+    Gen3ResourcePackDiagnostics_Init(&packDiag);
+    if (Gen3ResourcePack_OpenFile(srcPath, &pack, &packDiag) != GEN3_PACK_OK
+     || pack == NULL)
+        goto done;
+    Gen3ResourcePackDiagnostics_Destroy(&packDiag);
+
+    Gen3ResourcePackDiagnostics_Init(&diag);
+    build = Gen3ResourcePackBuild_Create();
+    if (build == NULL)
+        goto done;
+
+    if (!Gen3ResourcePack_GetProfile(pack, &profile))
+        goto done;
+    memset(&pin, 0, sizeof(pin));
+    pin.basePackVersion = profile.basePackVersion;
+    pin.catalogVersion = profile.catalogVersion;
+    pin.extractionManifestVersion = profile.extractionManifestVersion;
+    pin.canonicalRepresentationVersion = profile.canonicalRepresentationVersion;
+    pin.sourceRomSize = profile.sourceRomSize;
+    pin.sourceRomSha1 = profile.sourceRomSha1;
+    pin.sourceRomSha256 = profile.sourceRomSha256;
+    memcpy(pin.gameCode, profile.gameCode, 4u);
+    memcpy(pin.makerCode, profile.makerCode, 2u);
+    pin.softwareRevision = profile.softwareRevision;
+    memcpy(pin.gameId, profile.gameId, GEN3_PACK_GAME_ID_SIZE);
+    pin.catalogSha256 = profile.catalogSha256;
+    pin.extractionManifestSha256 = profile.extractionManifestSha256;
+    if (Gen3ResourcePackBuild_SetProfile(build, &pin, &diag) != GEN3_PACK_OK)
+        goto done;
+
+    memset(provenanceSha, 0x5A, sizeof(provenanceSha));
+
+    count = Gen3ResourcePack_GetEntryCount(pack);
+    for (i = 0u; i < count; i++)
+    {
+        const struct Gen3ResourcePackEntry *e =
+            Gen3ResourcePack_GetEntry(pack, i);
+        bool isHeaders = strcmp(e->canonicalName, kHeadersId) == 0;
+        bool isRoute101Land = strcmp(e->canonicalName, kRoute101Land) == 0;
+        const uint8_t *payload = e->payload;
+        const uint8_t *payloadSha = e->payloadSha256;
+        size_t payloadSize = e->payloadSize;
+        uint64_t romOffset = e->sourceRomOffset;
+
+        if (isHeaders && e->payloadSize == EMERALD_ENCOUNTER_HEADERS_BYTES)
+        {
+            /* Route 102's land info GBA pointer (header row 1 @ +4). */
+            uint32_t route102LandPtr;
+            memcpy(headerBuf, e->payload, EMERALD_ENCOUNTER_HEADERS_BYTES);
+            switch (mode)
+            {
+            case ENC_VAR_BAD_SENTINEL:
+                headerBuf[EMERALD_ENCOUNTER_SENTINEL_ROW
+                          * EMERALD_ENCOUNTER_HEADER_WIRE + 0u] = 0x01u;
+                break;
+            case ENC_VAR_HEADER_INFO_PTR:
+                route102LandPtr = (uint32_t)ReadLe32Native(
+                    e->payload + 1u * EMERALD_ENCOUNTER_HEADER_WIRE + 4u);
+                WriteLe32Native(headerBuf + 4u, route102LandPtr);
+                break;
+            case ENC_VAR_ALTERING_CAVE:
+                headerBuf[EMERALD_ENCOUNTER_ALTERING_ROW0
+                          * EMERALD_ENCOUNTER_HEADER_WIRE + 0u] = 0x00u;
+                headerBuf[EMERALD_ENCOUNTER_ALTERING_ROW0
+                          * EMERALD_ENCOUNTER_HEADER_WIRE + 1u] = 0x10u;
+                break;
+            default:
+                break;
+            }
+            if (mode == ENC_VAR_BAD_HEADERS_SIZE)
+            {
+                payloadSize = EMERALD_ENCOUNTER_HEADERS_BYTES - 20u;
+                DigestSha256(headerBuf, payloadSize, bufSha);
+                payloadSha = bufSha;
+            }
+            else
+            {
+                DigestSha256(headerBuf, EMERALD_ENCOUNTER_HEADERS_BYTES, bufSha);
+                payloadSha = bufSha;
+            }
+            payload = headerBuf;
+        }
+        if (isRoute101Land && mode == ENC_VAR_MISSING_SLOT)
+            continue; /* drop the Route 101 land slot resource */
+        if (isRoute101Land && mode == ENC_VAR_INFO_SLOT_PTR)
+            romOffset = e->sourceRomOffset + 4u;
+
+        memset(&entry, 0, sizeof(entry));
+        entry.schema = e->schema;
+        entry.flags = e->flags;
+        entry.representation = e->representation;
+        entry.sourceEncoding = e->sourceEncoding;
+        entry.canonicalName = e->canonicalName;
+        entry.key = &e->key;
+        entry.type = e->type;
+        entry.canonicalPayload = payload;
+        entry.canonicalPayloadSize = payloadSize;
+        entry.canonicalPayloadSha256 = payloadSha;
+        entry.sourceRomOffset = romOffset;
+        entry.sourceEncodedSize = e->sourceEncodedSize;
+        entry.sourceEncodedSha256 = provenanceSha;
+        if (Gen3ResourcePackBuild_AddEntry(build, &entry, &diag) != GEN3_PACK_OK)
+            goto done;
+    }
+
+    if (Gen3ResourcePackWriter_Write(build, &bytes, &diag) != GEN3_PACK_OK)
+        goto done;
+    f = fopen(dstPath, "wb");
+    if (f == NULL)
+        goto done;
+    if (fwrite(bytes.data, 1, bytes.size, f) != bytes.size)
+        goto done;
+    fclose(f);
+    f = NULL;
+    ok = true;
+
+done:
+    if (f != NULL)
+        fclose(f);
+    Gen3ResourcePackBytes_Destroy(&bytes);
+    Gen3ResourcePackBuild_Destroy(build);
+    Gen3ResourcePackDiagnostics_Destroy(&diag);
+    if (pack != NULL)
+        Gen3ResourcePack_Destroy(pack);
+    return ok;
+}
+
+/* The production registration published the encounter families: 210 resources
+ * (1 headers block + 209 slot tables), the headers array + 209 native info
+ * objects + a byte-exact slot arena, with the pointer graph rebuilt. */
+static void TestEncounterPublication(const char *packPath)
+{
+    struct Gen3ResourcePack *pack = NULL;
+    struct Gen3ResourcePackDiagnosticList packDiag;
+    const struct EmeraldResourceRangeIndex *index;
+    uint8_t *arena = (uint8_t *)gWildEncounterInfos[0].wildPokemon;
+    size_t offset = 0u;
+    size_t slotCount = 0u;
+    size_t i;
+    int route101;
+
+    CHECK("R13-E2 published count 210",
+          EmeraldEncounterCompat_GetPublishedCount()
+              == EMERALD_ENCOUNTER_INFO_COUNT + 1u);
+    CHECK("R13-E2 slot arena 7900 B",
+          EmeraldEncounterCompat_GetSlotArenaBytes() == 7900u);
+
+    /* Sentinel terminates the consumer's linear scan. */
+    CHECK("R13-E2 sentinel mapGroup/mapNum",
+          gWildMonHeaders[EMERALD_ENCOUNTER_SENTINEL_ROW].mapGroup == 0xFFu
+          && gWildMonHeaders[EMERALD_ENCOUNTER_SENTINEL_ROW].mapNum == 0xFFu);
+    CHECK("R13-E2 sentinel info NULL",
+          gWildMonHeaders[EMERALD_ENCOUNTER_SENTINEL_ROW].landMonsInfo == NULL
+          && gWildMonHeaders[EMERALD_ENCOUNTER_SENTINEL_ROW].waterMonsInfo == NULL
+          && gWildMonHeaders[EMERALD_ENCOUNTER_SENTINEL_ROW].rockSmashMonsInfo == NULL
+          && gWildMonHeaders[EMERALD_ENCOUNTER_SENTINEL_ROW].fishingMonsInfo == NULL);
+
+    /* The slot arena is byte-exact: every published info's slot pointer is
+     * arena-resident at the generated offset, matching the pack payload. */
+    Gen3ResourcePackDiagnostics_Init(&packDiag);
+    if (Gen3ResourcePack_OpenFile(packPath, &pack, &packDiag) != GEN3_PACK_OK
+     || pack == NULL)
+    {
+        CHECK("R13-E2 pack opens for verification", false);
+        Gen3ResourcePackDiagnostics_Destroy(&packDiag);
+        return;
+    }
+    Gen3ResourcePackDiagnostics_Destroy(&packDiag);
+
+    for (i = 0u; i < EMERALD_ENCOUNTER_INFO_COUNT; i++)
+    {
+        const struct Gen3ResourcePackEntry *e =
+            Gen3ResourcePack_FindByCanonicalName(pack, kEncounterInfos[i].name);
+        size_t bytes = (size_t)kEncounterInfos[i].slotRows * 4u;
+        if (e != NULL && e->schema == EMERALD_ENCOUNTER_SCHEMA_SLOT)
+            slotCount++;
+        CHECK("R13-E2 slot entry present",
+              e != NULL && e->type == GEN3_RESOURCE_TYPE_STRUCTURED_DATA
+              && e->schema == EMERALD_ENCOUNTER_SCHEMA_SLOT
+              && e->payloadSize == bytes);
+        if (e == NULL)
+            continue;
+        CHECK("R13-E2 info pointer arena-resident",
+              (uint8_t *)gWildEncounterInfos[i].wildPokemon == arena + offset);
+        CHECK("R13-E2 arena slice == pack payload",
+              memcmp(arena + offset, e->payload, bytes) == 0);
+        CHECK("R13-E2 info rate == generated",
+              gWildEncounterInfos[i].encounterRate
+                  == kEncounterInfos[i].rate);
+        offset += bytes;
+    }
+    CHECK("R13-E2 all 209 slot entries enumerated", slotCount == 209u);
+
+    /* Sample per-type maps (through the published graph). Route 101 is the
+     * first header (map 0,16) and has a land family only (a null-family
+     * example for water/rock/fishing). */
+    route101 = FindHeaderIdx(0u, 16u);
+    CHECK("R13-E2 route101 header found", route101 == 0);
+    if (route101 >= 0)
+    {
+        const struct Gen3ResourcePackEntry *land =
+            Gen3ResourcePack_FindByCanonicalName(pack,
+                kEncounterHeaderKeys[route101][EMERALD_ENCOUNTER_FIELD_LAND]);
+        const struct WildPokemonInfo *li =
+            gWildMonHeaders[route101].landMonsInfo;
+        CHECK("R13-E2 route101 land published", li != NULL);
+        if (li != NULL && land != NULL)
+        {
+            CHECK("R13-E2 route101 land rate 20", li->encounterRate == 20u);
+            CHECK("R13-E2 route101 land slot0 exact",
+                  li->wildPokemon[0].minLevel == land->payload[0]
+                  && li->wildPokemon[0].maxLevel == land->payload[1]
+                  && li->wildPokemon[0].species
+                      == EncLe16(land->payload + 2u));
+        }
+        CHECK("R13-E2 route101 null water/rock/fishing",
+              gWildMonHeaders[route101].waterMonsInfo == NULL
+              && gWildMonHeaders[route101].rockSmashMonsInfo == NULL
+              && gWildMonHeaders[route101].fishingMonsInfo == NULL);
+    }
+    /* Route 102 has land + water + fishing (sample each type). */
+    {
+        int r102 = FindHeaderIdx(0u, 17u);
+        const struct WildPokemonInfo *li, *wi, *fi;
+        CHECK("R13-E2 route102 header found", r102 == 1);
+        if (r102 < 0)
+        {
+            Gen3ResourcePack_Destroy(pack);
+            return;
+        }
+        li = gWildMonHeaders[r102].landMonsInfo;
+        wi = gWildMonHeaders[r102].waterMonsInfo;
+        fi = gWildMonHeaders[r102].fishingMonsInfo;
+        CHECK("R13-E2 route102 land/water/fishing",
+              li != NULL && wi != NULL && fi != NULL);
+        if (li != NULL && wi != NULL && fi != NULL)
+        {
+            CHECK("R13-E2 route102 land rate", li->encounterRate > 0u);
+            CHECK("R13-E2 route102 water rate", wi->encounterRate == 4u);
+            CHECK("R13-E2 route102 fishing rate", fi->encounterRate == 30u);
+            CHECK("R13-E2 route102 water slot0 minLevel",
+                  wi->wildPokemon[0].minLevel <= wi->wildPokemon[0].maxLevel);
+        }
+    }
+    /* A rock-smash family: Route 114 (map 0,29) has land/water/rock/fishing. */
+    {
+        int r114 = FindHeaderIdx(0u, 29u);
+        const struct WildPokemonInfo *ri;
+        CHECK("R13-E2 route114 header found", r114 >= 0);
+        if (r114 >= 0)
+        {
+            ri = gWildMonHeaders[r114].rockSmashMonsInfo;
+            CHECK("R13-E2 route114 rock-smash published", ri != NULL);
+            if (ri != NULL)
+            {
+                CHECK("R13-E2 route114 rock-smash rate", ri->encounterRate > 0u);
+                CHECK("R13-E2 route114 rock-smash slot0 valid",
+                      ri->wildPokemon[0].minLevel <= ri->wildPokemon[0].maxLevel
+                      && ri->wildPokemon[0].species != 0u);
+            }
+        }
+    }
+
+    /* Altering Cave: exactly 9 headers at map (24,106), in header order, each
+     * carrying its altering-cave-1..9 land family at the matching key. */
+    {
+        int altering[9];
+        int found = 0;
+        size_t k;
+        for (i = 0u; i < EMERALD_ENCOUNTER_HEADER_COUNT; i++)
+        {
+            if (gWildMonHeaders[i].mapGroup
+                    == EMERALD_ENCOUNTER_ALTERING_MAP_GROUP
+             && gWildMonHeaders[i].mapNum
+                    == EMERALD_ENCOUNTER_ALTERING_MAP_NUM
+             && found < 9)
+                altering[found++] = (int)i;
+        }
+        CHECK("R13-E2 9 altering-cave headers", found == 9);
+        for (k = 0u; k < 9u && k < (size_t)found; k++)
+        {
+            char expect[64];
+            int idx = altering[k];
+            size_t infoi;
+            CHECK("R13-E2 altering cave at 114..122",
+                  idx == (int)(EMERALD_ENCOUNTER_ALTERING_ROW0 + k));
+            snprintf(expect, sizeof(expect),
+                     "emerald:data/encounter/altering-cave-%zu/land", k + 1u);
+            CHECK("R13-E2 altering land key matches",
+                  strcmp(expect, kEncounterHeaderKeys[idx]
+                      [EMERALD_ENCOUNTER_FIELD_LAND]) == 0);
+            infoi = FindEncInfoIndex(expect);
+            CHECK("R13-E2 altering-cave info found", infoi != (size_t)-1);
+            if (infoi != (size_t)-1)
+                CHECK("R13-E2 altering-cave order exact",
+                      gWildMonHeaders[idx].landMonsInfo
+                          == &gWildEncounterInfos[infoi]);
+        }
+    }
+
+    /* The slot arena is a registered COMPAT_OBJECT range. */
+    index = EmeraldResourceCompat_GetRangeIndex();
+    CHECK("R13-E2 range index present", index != NULL);
+    if (index != NULL)
+    {
+        struct EmeraldResourceRangeHit hit;
+        if (EmeraldResourceRangeIndex_Lookup(index, (uintptr_t)arena, &hit))
+            CHECK("R13-E2 slot arena COMPAT_OBJECT range",
+                  hit.role == EMERALD_RESOURCE_ROLE_COMPAT_OBJECT
+                  && hit.schema == EMERALD_ENCOUNTER_SCHEMA_SLOT);
+        else
+            CHECK("R13-E2 slot arena resolvable", false);
+    }
+
+    Gen3ResourcePack_Destroy(pack);
+}
+
+/* The encounter seam REFUSES a pack whose encounter records are malformed
+ * (wrong headers size, bad sentinel, broken header->info / info->slot edges,
+ * a missing slot, or an Altering Cave misorder). Nothing is published. */
+static void TestEncounterRefusals(const char *tempDir, const char *prodPack)
+{
+    static const char *const labels[6] = {
+        "enc_bad_headers_size", "enc_bad_sentinel", "enc_header_info_ptr",
+        "enc_info_slot_ptr", "enc_missing_slot", "enc_altering_cave" };
+    const struct WildPokemonInfo *liveLand = gWildMonHeaders[0].landMonsInfo;
+    size_t liveArena = EmeraldEncounterCompat_GetSlotArenaBytes();
+    int mode;
+    for (mode = 0; mode < 6; mode++)
+    {
+        struct EmeraldEncounterCompatDiagnostics diag;
+        enum EmeraldEncounterCompatStatus status;
+        char path[512];
+
+        snprintf(path, sizeof(path), "%s/%s.rpack", tempDir, labels[mode]);
+        CHECK("R13-E2 variant pack builds",
+              BuildEncounterVariantPack(prodPack, path, mode));
+        status = RunEncounterSeamDirect(path, &diag);
+        CHECK("R13-E2 encounter variant refused", status != EMERALD_ENCOUNTER_OK);
+    }
+    /* The refused direct runs did not overwrite the live published tables. */
+    CHECK("R13-E2 refusal leaves live tables untouched",
+          gWildMonHeaders[0].landMonsInfo == liveLand
+          && EmeraldEncounterCompat_GetSlotArenaBytes() == liveArena);
+}
+
 int main(int argc, char **argv)
 {
     const char *tempDir;
@@ -1422,10 +1906,18 @@ int main(int argc, char **argv)
      * published gTrainers / gTrainerClassNames + party arena can be checked
      * against the pack. */
     TestTrainerPublication(prodPack);
+    /* R13-E2 wild-encounter publication. Runs while the production session is
+     * still live (BEFORE TestTextTransactionalRefusal tears it down), so the
+     * published gWildMonHeaders / gWildEncounterInfos + slot arena can be
+     * checked against the pack. */
+    TestEncounterPublication(prodPack);
     TestTextTransactionalRefusal(tempDir, prodPack);
     /* R13-E1 failure-matrix: trainer seams against freshly built variant
      * sessions (independent of the (now rolled-back) production session). */
     TestTrainerRefusals(tempDir, prodPack);
+    /* R13-E2 failure-matrix: encounter seams against freshly built variant
+     * sessions (after the production session is rolled back). */
+    TestEncounterRefusals(tempDir, prodPack);
 
     FreeFamilyFixtures();
     FreeBackFamilyFixtures();

@@ -497,3 +497,32 @@ R13-E1 is **implemented and verified** (report:
    non-divergences. F+E3 projections unchanged.
 
 **R13-E1 STOP.** No commit made. E2/E3 and R13-F not started.
+
+---
+
+## Implementation delta (R13-E2 — wild encounters)
+
+R13-E2 is **implemented and verified** (report:
+`docs/R13E2_WILD_ENCOUNTER_MIGRATION_REPORT.md`).
+
+1. **Inventory/re-deltas locked:** gWildMonHeaders 125 rows × 20 B = 124 real +
+   1 MAP_UNDEFINED sentinel; 209 map-based info (95/55/6/53) + 209 slot tables
+   / 1,975 rows / 7,900 B; zero aliasing. Deltas resolved: 125/124 =
+   sentinel; 209/220 = +11 Pike/Pyramid → E3; 2,070/2,107 = stale arithmetic
+   (1,975 map-based / 2,107 total). Parity PASS, no override.
+2. **Resources:** `emerald:data/encounter/headers` (1 × 2,500 B) + 209
+   `emerald:data/encounter/<map>/<type>` = **210 resources / 10,400 B**;
+   schemas 19/20. Map keys = semantic MAP_* names (shared with R13-F);
+   Altering Cave → altering-cave-1..9.
+3. **Pack:** 17,525 → **17,735 entries**, 13,650,128 B, SHA-256
+   `90a60c9d…aa6`, deterministic. Cap unchanged (32,768).
+4. **Seam:** `EmeraldEncounterCompat` (transactional; 209/209 pointer-graph
+   validation; slot arena + native gWildMonHeaders/infos rebuild); loader
+   order …→trainer→encounter; 1 slot-arena range → post-E2 range 5,849/8,192.
+5. **Gates:** loader 63,901; trainer 37,921; world 5,565; render 3,628 — all
+   pass. Release 22,442,568 → 22,451,008 B (+8,440 B). Map-based slot arrays
+   absent from the binary; Pike/Pyramid + sRoamerLocations stay compiled.
+6. E3 (frontier+pokedex) inherits the deferred Pike/Pyramid tables + frontier
+   pools + pokedex text.
+
+**R13-E2 STOP.** No commit made. E3 and R13-F not started.

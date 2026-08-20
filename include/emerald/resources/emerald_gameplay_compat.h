@@ -53,8 +53,8 @@
  * structured + font families in-place; the schema 16..18 trainer families are
  * owned by EmeraldTrainerCompat (also validated here for presence/ownership
  * but filled by that seam). */
-#if GAMEPLAY_NATIVE_RESOURCE_COUNT != 5462u
-#error "R13-E gameplay+trainer resource count disagrees with the generated inventory"
+#if GAMEPLAY_NATIVE_RESOURCE_COUNT != 5672u
+#error "R13-E gameplay+trainer+encounter resource count disagrees with the generated inventory"
 #endif
 
 #define EMERALD_GAMEPLAY_SPECIES_COUNT 412u
