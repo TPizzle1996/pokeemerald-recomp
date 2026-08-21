@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 5
 export_count = 29
 reloc_count = 49
+instruction_count = 175
 
 [[segments]]
 kind = "bytecode"
@@ -288,6 +289,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/littleroottown-mayshouse-1f"
 target_export = "LittlerootTown_MaysHouse_1F_EventScript_SetMovingBoxes"
 target_offset = 37
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 21
 runtime_resolution_required = true
 
 [[relocs]]
@@ -298,6 +301,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/littleroottown-mayshouse-1f"
 target_export = "LittlerootTown_MaysHouse_1F_EventScript_CheckShowShoesManual"
 target_offset = 56
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 40
 runtime_resolution_required = true
 
 [[relocs]]
@@ -308,6 +313,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/littleroottown-mayshouse-1f"
 target_export = "LittlerootTown_MaysHouse_1F_EventScript_ShowRunningShoesManual"
 target_offset = 69
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 53
 runtime_resolution_required = true
 
 [[relocs]]
@@ -318,6 +325,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/littleroottown-mayshouse-1f"
 target_export = "LittlerootTown_MaysHouse_1F_EventScript_MoveMomToDoor"
 target_offset = 137
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 121
 runtime_resolution_required = true
 
 [[relocs]]
@@ -328,6 +337,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/littleroottown-mayshouse-1f"
 target_export = "LittlerootTown_MaysHouse_1F_EventScript_MoveMomToStairs"
 target_offset = 113
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 97
 runtime_resolution_required = true
 
 [[relocs]]
@@ -338,6 +349,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/littleroottown-mayshouse-1f"
 target_export = "LittlerootTown_MaysHouse_1F_EventScript_MoveMomToTV"
 target_offset = 125
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 109
 runtime_resolution_required = true
 
 [[relocs]]
@@ -347,6 +360,8 @@ original_encoded_gba = 0x81f7b67
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/littleroottown-brendanshouse-1f"
 target_export = "PlayersHouse_1F_Text_GoSetTheClock"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -356,6 +371,8 @@ original_encoded_gba = 0x81f898a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/littleroottown-mayshouse-1f-movement-pushtowardstairs"
 target_export = "LittlerootTown_MaysHouse_1F_Movement_PushTowardStairs"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -365,6 +382,8 @@ original_encoded_gba = 0x81f898a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/littleroottown-mayshouse-1f-movement-pushtowardstairs"
 target_export = "LittlerootTown_MaysHouse_1F_Movement_PushTowardStairs"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -375,6 +394,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/players-house"
 target_export = "PlayersHouse_1F_EventScript_EnterHouseMovingIn"
 target_offset = 6
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 6
 runtime_resolution_required = true
 
 [[relocs]]
@@ -385,6 +406,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/players-house"
 target_export = "PlayersHouse_1F_EventScript_PetalburgGymReportFemale"
 target_offset = 478
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 454
 runtime_resolution_required = true
 
 [[relocs]]
@@ -394,6 +417,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -403,6 +428,8 @@ original_encoded_gba = 0x827259a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-delay48"
 target_export = "Common_Movement_Delay48"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -412,6 +439,8 @@ original_encoded_gba = 0x82725a8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterright"
 target_export = "Common_Movement_WalkInPlaceFasterRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -421,6 +450,8 @@ original_encoded_gba = 0x81f89ec
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/littleroottown-mayshouse-1f-movement-rivalmomapproach"
 target_export = "LittlerootTown_MaysHouse_1F_Movement_RivalMomApproach"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -430,6 +461,8 @@ original_encoded_gba = 0x81f8bc5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/littleroottown-mayshouse-1f"
 target_export = "RivalsHouse_1F_Text_OhYoureTheNewNeighbor"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -440,6 +473,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/littleroottown-mayshouse-1f"
 target_export = "RivalsHouse_1F_EventScript_GoHomeEverySoOften"
 target_offset = 398
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 331
 runtime_resolution_required = true
 
 [[relocs]]
@@ -450,6 +485,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/littleroottown-mayshouse-1f"
 target_export = "RivalsHouse_1F_EventScript_RivalIsOnRoute103"
 target_offset = 388
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 321
 runtime_resolution_required = true
 
 [[relocs]]
@@ -460,6 +497,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/littleroottown-mayshouse-1f"
 target_export = "RivalsHouse_1F_EventScript_RivalTooBusy"
 target_offset = 378
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 311
 runtime_resolution_required = true
 
 [[relocs]]
@@ -469,6 +508,8 @@ original_encoded_gba = 0x81f8ca5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/littleroottown-mayshouse-1f"
 target_export = "RivalsHouse_1F_Text_LikeChildLikeFather"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -478,6 +519,8 @@ original_encoded_gba = 0x81f8d37
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/littleroottown-mayshouse-1f"
 target_export = "RivalsHouse_1F_Text_TooBusyToNoticeVisit"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -487,6 +530,8 @@ original_encoded_gba = 0x81f8d93
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/littleroottown-mayshouse-1f"
 target_export = "RivalsHouse_1F_Text_WentOutToRoute103"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -496,6 +541,8 @@ original_encoded_gba = 0x81f8e01
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/littleroottown-mayshouse-1f"
 target_export = "RivalsHouse_1F_Text_ShouldGoHomeEverySoOften"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -505,6 +552,8 @@ original_encoded_gba = 0x81f9262
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/littleroottown-mayshouse-1f"
 target_export = "RivalsHouse_1F_Text_DoYouHavePokemon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -514,6 +563,8 @@ original_encoded_gba = 0x82725a8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterright"
 target_export = "Common_Movement_WalkInPlaceFasterRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -524,6 +575,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/players-house"
 target_export = "PlayersHouse_1F_EventScript_MomGoSeeRoom"
 target_offset = 103
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 101
 runtime_resolution_required = true
 
 [[relocs]]
@@ -534,6 +587,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/littleroottown-mayshouse-1f"
 target_export = "LittlerootTown_MaysHouse_1F_EventScript_MeetRival"
 target_offset = 486
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 419
 runtime_resolution_required = true
 
 [[relocs]]
@@ -544,6 +599,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/littleroottown-mayshouse-1f"
 target_export = "LittlerootTown_MaysHouse_1F_EventScript_MeetRival"
 target_offset = 486
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 419
 runtime_resolution_required = true
 
 [[relocs]]
@@ -554,6 +611,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/littleroottown-mayshouse-1f"
 target_export = "LittlerootTown_MaysHouse_1F_EventScript_MeetRival"
 target_offset = 486
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 419
 runtime_resolution_required = true
 
 [[relocs]]
@@ -563,6 +622,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -572,6 +633,8 @@ original_encoded_gba = 0x827259a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-delay48"
 target_export = "Common_Movement_Delay48"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -582,6 +645,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/littleroottown-mayshouse-1f"
 target_export = "LittlerootTown_MaysHouse_1F_EventScript_PlayerFaceMay"
 target_offset = 645
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 578
 runtime_resolution_required = true
 
 [[relocs]]
@@ -592,6 +657,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/littleroottown-mayshouse-1f"
 target_export = "LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer0"
 target_offset = 656
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 589
 runtime_resolution_required = true
 
 [[relocs]]
@@ -602,6 +669,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/littleroottown-mayshouse-1f"
 target_export = "LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer1"
 target_offset = 667
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 600
 runtime_resolution_required = true
 
 [[relocs]]
@@ -612,6 +681,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/littleroottown-mayshouse-1f"
 target_export = "LittlerootTown_MaysHouse_1F_EventScript_MayApproachPlayer2"
 target_offset = 678
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 611
 runtime_resolution_required = true
 
 [[relocs]]
@@ -621,6 +692,8 @@ original_encoded_gba = 0x81f8ec6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/littleroottown-mayshouse-1f"
 target_export = "RivalsHouse_1F_Text_MayWhoAreYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -631,6 +704,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/littleroottown-mayshouse-1f"
 target_export = "LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs0"
 target_offset = 709
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 622
 runtime_resolution_required = true
 
 [[relocs]]
@@ -641,6 +716,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/littleroottown-mayshouse-1f"
 target_export = "LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs1"
 target_offset = 727
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 640
 runtime_resolution_required = true
 
 [[relocs]]
@@ -651,6 +728,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/littleroottown-mayshouse-1f"
 target_export = "LittlerootTown_MaysHouse_1F_EventScript_MayGoUpstairs2"
 target_offset = 745
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 658
 runtime_resolution_required = true
 
 [[relocs]]
@@ -660,6 +739,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -669,6 +750,8 @@ original_encoded_gba = 0x81f8b56
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/littleroottown-mayshouse-1f-movement-mayapproachplayer0"
 target_export = "LittlerootTown_MaysHouse_1F_Movement_MayApproachPlayer0"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -678,6 +761,8 @@ original_encoded_gba = 0x81f8b5e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/littleroottown-mayshouse-1f-movement-mayapproachplayer1"
 target_export = "LittlerootTown_MaysHouse_1F_Movement_MayApproachPlayer1"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -687,6 +772,8 @@ original_encoded_gba = 0x81f8b62
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/littleroottown-mayshouse-1f-movement-mayapproachplayer2"
 target_export = "LittlerootTown_MaysHouse_1F_Movement_MayApproachPlayer2"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -696,6 +783,8 @@ original_encoded_gba = 0x81f8ba0
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/littleroottown-mayshouse-1f-movement-playerwatchmayexit0"
 target_export = "LittlerootTown_MaysHouse_1F_Movement_PlayerWatchMayExit0"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -705,6 +794,8 @@ original_encoded_gba = 0x81f8baf
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/littleroottown-mayshouse-1f-movement-maygoupstairs0"
 target_export = "LittlerootTown_MaysHouse_1F_Movement_MayGoUpstairs0"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -714,6 +805,8 @@ original_encoded_gba = 0x81f8ba4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/littleroottown-mayshouse-1f-movement-playerwatchmayexit1"
 target_export = "LittlerootTown_MaysHouse_1F_Movement_PlayerWatchMayExit1"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -723,6 +816,8 @@ original_encoded_gba = 0x81f8bb5
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/littleroottown-mayshouse-1f-movement-maygoupstairs1"
 target_export = "LittlerootTown_MaysHouse_1F_Movement_MayGoUpstairs1"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -732,6 +827,8 @@ original_encoded_gba = 0x81f8bab
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/littleroottown-mayshouse-1f-movement-playerwatchmayexit2"
 target_export = "LittlerootTown_MaysHouse_1F_Movement_PlayerWatchMayExit2"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -741,4 +838,706 @@ original_encoded_gba = 0x81f8bbf
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/littleroottown-mayshouse-1f-movement-maygoupstairs2"
 target_export = "LittlerootTown_MaysHouse_1F_Movement_MayGoUpstairs2"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 5
+
+[[boundaries]]
+payload_offset = 5
+length = 6
+
+[[boundaries]]
+payload_offset = 11
+length = 3
+
+[[boundaries]]
+payload_offset = 14
+length = 6
+
+[[boundaries]]
+payload_offset = 20
+length = 1
+
+[[boundaries]]
+payload_offset = 21
+length = 9
+
+[[boundaries]]
+payload_offset = 30
+length = 9
+
+[[boundaries]]
+payload_offset = 39
+length = 1
+
+[[boundaries]]
+payload_offset = 40
+length = 1
+
+[[boundaries]]
+payload_offset = 41
+length = 5
+
+[[boundaries]]
+payload_offset = 46
+length = 6
+
+[[boundaries]]
+payload_offset = 52
+length = 1
+
+[[boundaries]]
+payload_offset = 53
+length = 9
+
+[[boundaries]]
+payload_offset = 62
+length = 1
+
+[[boundaries]]
+payload_offset = 63
+length = 5
+
+[[boundaries]]
+payload_offset = 68
+length = 6
+
+[[boundaries]]
+payload_offset = 74
+length = 5
+
+[[boundaries]]
+payload_offset = 79
+length = 6
+
+[[boundaries]]
+payload_offset = 85
+length = 5
+
+[[boundaries]]
+payload_offset = 90
+length = 6
+
+[[boundaries]]
+payload_offset = 96
+length = 1
+
+[[boundaries]]
+payload_offset = 97
+length = 7
+
+[[boundaries]]
+payload_offset = 104
+length = 4
+
+[[boundaries]]
+payload_offset = 108
+length = 1
+
+[[boundaries]]
+payload_offset = 109
+length = 7
+
+[[boundaries]]
+payload_offset = 116
+length = 4
+
+[[boundaries]]
+payload_offset = 120
+length = 1
+
+[[boundaries]]
+payload_offset = 121
+length = 7
+
+[[boundaries]]
+payload_offset = 128
+length = 4
+
+[[boundaries]]
+payload_offset = 132
+length = 1
+
+[[boundaries]]
+payload_offset = 133
+length = 1
+
+[[boundaries]]
+payload_offset = 134
+length = 6
+
+[[boundaries]]
+payload_offset = 140
+length = 2
+
+[[boundaries]]
+payload_offset = 142
+length = 1
+
+[[boundaries]]
+payload_offset = 143
+length = 7
+
+[[boundaries]]
+payload_offset = 150
+length = 7
+
+[[boundaries]]
+payload_offset = 157
+length = 3
+
+[[boundaries]]
+payload_offset = 160
+length = 8
+
+[[boundaries]]
+payload_offset = 168
+length = 1
+
+[[boundaries]]
+payload_offset = 169
+length = 1
+
+[[boundaries]]
+payload_offset = 170
+length = 1
+
+[[boundaries]]
+payload_offset = 171
+length = 1
+
+[[boundaries]]
+payload_offset = 172
+length = 5
+
+[[boundaries]]
+payload_offset = 177
+length = 5
+
+[[boundaries]]
+payload_offset = 182
+length = 5
+
+[[boundaries]]
+payload_offset = 188
+length = 1
+
+[[boundaries]]
+payload_offset = 189
+length = 5
+
+[[boundaries]]
+payload_offset = 194
+length = 5
+
+[[boundaries]]
+payload_offset = 199
+length = 5
+
+[[boundaries]]
+payload_offset = 205
+length = 1
+
+[[boundaries]]
+payload_offset = 206
+length = 3
+
+[[boundaries]]
+payload_offset = 209
+length = 7
+
+[[boundaries]]
+payload_offset = 216
+length = 3
+
+[[boundaries]]
+payload_offset = 219
+length = 7
+
+[[boundaries]]
+payload_offset = 226
+length = 3
+
+[[boundaries]]
+payload_offset = 229
+length = 7
+
+[[boundaries]]
+payload_offset = 236
+length = 7
+
+[[boundaries]]
+payload_offset = 243
+length = 3
+
+[[boundaries]]
+payload_offset = 246
+length = 3
+
+[[boundaries]]
+payload_offset = 249
+length = 6
+
+[[boundaries]]
+payload_offset = 255
+length = 2
+
+[[boundaries]]
+payload_offset = 257
+length = 3
+
+[[boundaries]]
+payload_offset = 260
+length = 5
+
+[[boundaries]]
+payload_offset = 265
+length = 1
+
+[[boundaries]]
+payload_offset = 266
+length = 1
+
+[[boundaries]]
+payload_offset = 267
+length = 1
+
+[[boundaries]]
+payload_offset = 268
+length = 1
+
+[[boundaries]]
+payload_offset = 269
+length = 3
+
+[[boundaries]]
+payload_offset = 272
+length = 6
+
+[[boundaries]]
+payload_offset = 278
+length = 3
+
+[[boundaries]]
+payload_offset = 281
+length = 6
+
+[[boundaries]]
+payload_offset = 287
+length = 5
+
+[[boundaries]]
+payload_offset = 292
+length = 6
+
+[[boundaries]]
+payload_offset = 298
+length = 3
+
+[[boundaries]]
+payload_offset = 301
+length = 6
+
+[[boundaries]]
+payload_offset = 307
+length = 2
+
+[[boundaries]]
+payload_offset = 309
+length = 1
+
+[[boundaries]]
+payload_offset = 310
+length = 1
+
+[[boundaries]]
+payload_offset = 311
+length = 6
+
+[[boundaries]]
+payload_offset = 317
+length = 2
+
+[[boundaries]]
+payload_offset = 319
+length = 1
+
+[[boundaries]]
+payload_offset = 320
+length = 1
+
+[[boundaries]]
+payload_offset = 321
+length = 6
+
+[[boundaries]]
+payload_offset = 327
+length = 2
+
+[[boundaries]]
+payload_offset = 329
+length = 1
+
+[[boundaries]]
+payload_offset = 330
+length = 1
+
+[[boundaries]]
+payload_offset = 331
+length = 6
+
+[[boundaries]]
+payload_offset = 337
+length = 2
+
+[[boundaries]]
+payload_offset = 339
+length = 1
+
+[[boundaries]]
+payload_offset = 340
+length = 1
+
+[[boundaries]]
+payload_offset = 341
+length = 1
+
+[[boundaries]]
+payload_offset = 342
+length = 1
+
+[[boundaries]]
+payload_offset = 343
+length = 3
+
+[[boundaries]]
+payload_offset = 346
+length = 6
+
+[[boundaries]]
+payload_offset = 352
+length = 2
+
+[[boundaries]]
+payload_offset = 354
+length = 1
+
+[[boundaries]]
+payload_offset = 355
+length = 1
+
+[[boundaries]]
+payload_offset = 356
+length = 1
+
+[[boundaries]]
+payload_offset = 357
+length = 5
+
+[[boundaries]]
+payload_offset = 362
+length = 5
+
+[[boundaries]]
+payload_offset = 367
+length = 7
+
+[[boundaries]]
+payload_offset = 374
+length = 3
+
+[[boundaries]]
+payload_offset = 377
+length = 5
+
+[[boundaries]]
+payload_offset = 383
+length = 1
+
+[[boundaries]]
+payload_offset = 384
+length = 5
+
+[[boundaries]]
+payload_offset = 389
+length = 5
+
+[[boundaries]]
+payload_offset = 395
+length = 1
+
+[[boundaries]]
+payload_offset = 396
+length = 5
+
+[[boundaries]]
+payload_offset = 401
+length = 5
+
+[[boundaries]]
+payload_offset = 407
+length = 1
+
+[[boundaries]]
+payload_offset = 408
+length = 5
+
+[[boundaries]]
+payload_offset = 413
+length = 5
+
+[[boundaries]]
+payload_offset = 419
+length = 3
+
+[[boundaries]]
+payload_offset = 422
+length = 3
+
+[[boundaries]]
+payload_offset = 425
+length = 3
+
+[[boundaries]]
+payload_offset = 428
+length = 3
+
+[[boundaries]]
+payload_offset = 431
+length = 3
+
+[[boundaries]]
+payload_offset = 434
+length = 7
+
+[[boundaries]]
+payload_offset = 441
+length = 3
+
+[[boundaries]]
+payload_offset = 444
+length = 7
+
+[[boundaries]]
+payload_offset = 451
+length = 3
+
+[[boundaries]]
+payload_offset = 454
+length = 5
+
+[[boundaries]]
+payload_offset = 459
+length = 6
+
+[[boundaries]]
+payload_offset = 465
+length = 4
+
+[[boundaries]]
+payload_offset = 469
+length = 5
+
+[[boundaries]]
+payload_offset = 474
+length = 6
+
+[[boundaries]]
+payload_offset = 480
+length = 5
+
+[[boundaries]]
+payload_offset = 485
+length = 6
+
+[[boundaries]]
+payload_offset = 491
+length = 5
+
+[[boundaries]]
+payload_offset = 496
+length = 6
+
+[[boundaries]]
+payload_offset = 502
+length = 6
+
+[[boundaries]]
+payload_offset = 508
+length = 2
+
+[[boundaries]]
+payload_offset = 510
+length = 1
+
+[[boundaries]]
+payload_offset = 511
+length = 5
+
+[[boundaries]]
+payload_offset = 516
+length = 6
+
+[[boundaries]]
+payload_offset = 522
+length = 5
+
+[[boundaries]]
+payload_offset = 527
+length = 6
+
+[[boundaries]]
+payload_offset = 533
+length = 5
+
+[[boundaries]]
+payload_offset = 538
+length = 6
+
+[[boundaries]]
+payload_offset = 544
+length = 3
+
+[[boundaries]]
+payload_offset = 547
+length = 3
+
+[[boundaries]]
+payload_offset = 550
+length = 3
+
+[[boundaries]]
+payload_offset = 553
+length = 3
+
+[[boundaries]]
+payload_offset = 556
+length = 3
+
+[[boundaries]]
+payload_offset = 559
+length = 3
+
+[[boundaries]]
+payload_offset = 562
+length = 5
+
+[[boundaries]]
+payload_offset = 567
+length = 5
+
+[[boundaries]]
+payload_offset = 572
+length = 3
+
+[[boundaries]]
+payload_offset = 575
+length = 1
+
+[[boundaries]]
+payload_offset = 576
+length = 1
+
+[[boundaries]]
+payload_offset = 577
+length = 1
+
+[[boundaries]]
+payload_offset = 578
+length = 7
+
+[[boundaries]]
+payload_offset = 585
+length = 3
+
+[[boundaries]]
+payload_offset = 588
+length = 1
+
+[[boundaries]]
+payload_offset = 589
+length = 7
+
+[[boundaries]]
+payload_offset = 596
+length = 3
+
+[[boundaries]]
+payload_offset = 599
+length = 1
+
+[[boundaries]]
+payload_offset = 600
+length = 7
+
+[[boundaries]]
+payload_offset = 607
+length = 3
+
+[[boundaries]]
+payload_offset = 610
+length = 1
+
+[[boundaries]]
+payload_offset = 611
+length = 7
+
+[[boundaries]]
+payload_offset = 618
+length = 3
+
+[[boundaries]]
+payload_offset = 621
+length = 1
+
+[[boundaries]]
+payload_offset = 622
+length = 7
+
+[[boundaries]]
+payload_offset = 629
+length = 7
+
+[[boundaries]]
+payload_offset = 636
+length = 3
+
+[[boundaries]]
+payload_offset = 639
+length = 1
+
+[[boundaries]]
+payload_offset = 640
+length = 7
+
+[[boundaries]]
+payload_offset = 647
+length = 7
+
+[[boundaries]]
+payload_offset = 654
+length = 3
+
+[[boundaries]]
+payload_offset = 657
+length = 1
+
+[[boundaries]]
+payload_offset = 658
+length = 7
+
+[[boundaries]]
+payload_offset = 665
+length = 7
+
+[[boundaries]]
+payload_offset = 672
+length = 3
+
+[[boundaries]]
+payload_offset = 675
+length = 1

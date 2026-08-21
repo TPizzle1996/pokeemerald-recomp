@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 9
 reloc_count = 16
+instruction_count = 59
 
 [[segments]]
 kind = "bytecode"
@@ -103,6 +104,8 @@ original_encoded_gba = 0x82030ed
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/verdanturftown-friendshipratershouse"
 target_export = "VerdanturfTown_FriendshipRatersHouse_Text_SeeHowMuchPokemonLikesYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -113,6 +116,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-friendshipratershouse"
 target_export = "VerdanturfTown_FriendshipRatersHouse_EventScript_DetestsYou"
 target_offset = 100
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 99
 runtime_resolution_required = true
 
 [[relocs]]
@@ -123,6 +128,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-friendshipratershouse"
 target_export = "VerdanturfTown_FriendshipRatersHouse_EventScript_VeryWary"
 target_offset = 110
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 109
 runtime_resolution_required = true
 
 [[relocs]]
@@ -133,6 +140,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-friendshipratershouse"
 target_export = "VerdanturfTown_FriendshipRatersHouse_EventScript_NotUsedToYou"
 target_offset = 120
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 119
 runtime_resolution_required = true
 
 [[relocs]]
@@ -143,6 +152,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-friendshipratershouse"
 target_export = "VerdanturfTown_FriendshipRatersHouse_EventScript_GettingUsedToYou"
 target_offset = 130
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 129
 runtime_resolution_required = true
 
 [[relocs]]
@@ -153,6 +164,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-friendshipratershouse"
 target_export = "VerdanturfTown_FriendshipRatersHouse_EventScript_LikesYouQuiteALot"
 target_offset = 140
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 139
 runtime_resolution_required = true
 
 [[relocs]]
@@ -163,6 +176,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-friendshipratershouse"
 target_export = "VerdanturfTown_FriendshipRatersHouse_EventScript_VeryHappy"
 target_offset = 150
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 149
 runtime_resolution_required = true
 
 [[relocs]]
@@ -173,6 +188,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-friendshipratershouse"
 target_export = "VerdanturfTown_FriendshipRatersHouse_EventScript_AdoresYou"
 target_offset = 160
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 159
 runtime_resolution_required = true
 
 [[relocs]]
@@ -182,6 +199,8 @@ original_encoded_gba = 0x82032df
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/verdanturftown-friendshipratershouse"
 target_export = "VerdanturfTown_FriendshipRatersHouse_Text_DetestsYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -191,6 +210,8 @@ original_encoded_gba = 0x8203288
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/verdanturftown-friendshipratershouse"
 target_export = "VerdanturfTown_FriendshipRatersHouse_Text_VeryWary"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -200,6 +221,8 @@ original_encoded_gba = 0x8203249
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/verdanturftown-friendshipratershouse"
 target_export = "VerdanturfTown_FriendshipRatersHouse_Text_NotUsedToYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -209,6 +232,8 @@ original_encoded_gba = 0x8203213
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/verdanturftown-friendshipratershouse"
 target_export = "VerdanturfTown_FriendshipRatersHouse_Text_GettingUsedToYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -218,6 +243,8 @@ original_encoded_gba = 0x82031d1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/verdanturftown-friendshipratershouse"
 target_export = "VerdanturfTown_FriendshipRatersHouse_Text_LikesYouQuiteALot"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -227,6 +254,8 @@ original_encoded_gba = 0x8203192
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/verdanturftown-friendshipratershouse"
 target_export = "VerdanturfTown_FriendshipRatersHouse_Text_VeryHappy"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -236,6 +265,8 @@ original_encoded_gba = 0x8203141
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/verdanturftown-friendshipratershouse"
 target_export = "VerdanturfTown_FriendshipRatersHouse_Text_AdoresYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -245,4 +276,242 @@ original_encoded_gba = 0x820334a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/verdanturftown-friendshipratershouse"
 target_export = "VerdanturfTown_FriendshipRatersHouse_Text_Pikachu"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 1
+
+[[boundaries]]
+payload_offset = 2
+length = 6
+
+[[boundaries]]
+payload_offset = 8
+length = 2
+
+[[boundaries]]
+payload_offset = 10
+length = 5
+
+[[boundaries]]
+payload_offset = 15
+length = 5
+
+[[boundaries]]
+payload_offset = 20
+length = 5
+
+[[boundaries]]
+payload_offset = 25
+length = 6
+
+[[boundaries]]
+payload_offset = 31
+length = 5
+
+[[boundaries]]
+payload_offset = 36
+length = 6
+
+[[boundaries]]
+payload_offset = 42
+length = 5
+
+[[boundaries]]
+payload_offset = 47
+length = 6
+
+[[boundaries]]
+payload_offset = 53
+length = 5
+
+[[boundaries]]
+payload_offset = 58
+length = 6
+
+[[boundaries]]
+payload_offset = 64
+length = 5
+
+[[boundaries]]
+payload_offset = 69
+length = 6
+
+[[boundaries]]
+payload_offset = 75
+length = 5
+
+[[boundaries]]
+payload_offset = 80
+length = 6
+
+[[boundaries]]
+payload_offset = 86
+length = 5
+
+[[boundaries]]
+payload_offset = 91
+length = 6
+
+[[boundaries]]
+payload_offset = 97
+length = 1
+
+[[boundaries]]
+payload_offset = 98
+length = 1
+
+[[boundaries]]
+payload_offset = 99
+length = 6
+
+[[boundaries]]
+payload_offset = 105
+length = 2
+
+[[boundaries]]
+payload_offset = 107
+length = 1
+
+[[boundaries]]
+payload_offset = 108
+length = 1
+
+[[boundaries]]
+payload_offset = 109
+length = 6
+
+[[boundaries]]
+payload_offset = 115
+length = 2
+
+[[boundaries]]
+payload_offset = 117
+length = 1
+
+[[boundaries]]
+payload_offset = 118
+length = 1
+
+[[boundaries]]
+payload_offset = 119
+length = 6
+
+[[boundaries]]
+payload_offset = 125
+length = 2
+
+[[boundaries]]
+payload_offset = 127
+length = 1
+
+[[boundaries]]
+payload_offset = 128
+length = 1
+
+[[boundaries]]
+payload_offset = 129
+length = 6
+
+[[boundaries]]
+payload_offset = 135
+length = 2
+
+[[boundaries]]
+payload_offset = 137
+length = 1
+
+[[boundaries]]
+payload_offset = 138
+length = 1
+
+[[boundaries]]
+payload_offset = 139
+length = 6
+
+[[boundaries]]
+payload_offset = 145
+length = 2
+
+[[boundaries]]
+payload_offset = 147
+length = 1
+
+[[boundaries]]
+payload_offset = 148
+length = 1
+
+[[boundaries]]
+payload_offset = 149
+length = 6
+
+[[boundaries]]
+payload_offset = 155
+length = 2
+
+[[boundaries]]
+payload_offset = 157
+length = 1
+
+[[boundaries]]
+payload_offset = 158
+length = 1
+
+[[boundaries]]
+payload_offset = 159
+length = 6
+
+[[boundaries]]
+payload_offset = 165
+length = 2
+
+[[boundaries]]
+payload_offset = 167
+length = 1
+
+[[boundaries]]
+payload_offset = 168
+length = 1
+
+[[boundaries]]
+payload_offset = 169
+length = 1
+
+[[boundaries]]
+payload_offset = 170
+length = 1
+
+[[boundaries]]
+payload_offset = 171
+length = 1
+
+[[boundaries]]
+payload_offset = 172
+length = 5
+
+[[boundaries]]
+payload_offset = 177
+length = 6
+
+[[boundaries]]
+payload_offset = 183
+length = 2
+
+[[boundaries]]
+payload_offset = 185
+length = 1
+
+[[boundaries]]
+payload_offset = 186
+length = 1
+
+[[boundaries]]
+payload_offset = 187
+length = 1

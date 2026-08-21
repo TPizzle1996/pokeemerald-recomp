@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 17
 reloc_count = 18
+instruction_count = 63
 
 [[segments]]
 kind = "bytecode"
@@ -168,6 +169,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-rankinghall"
 target_export = "BattleFrontier_RankingHall_EventScript_ShowRecords"
 target_offset = 121
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 120
 runtime_resolution_required = true
 
 [[relocs]]
@@ -178,6 +181,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-rankinghall"
 target_export = "BattleFrontier_RankingHall_EventScript_ShowRecords"
 target_offset = 121
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 120
 runtime_resolution_required = true
 
 [[relocs]]
@@ -188,6 +193,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-rankinghall"
 target_export = "BattleFrontier_RankingHall_EventScript_ShowRecords"
 target_offset = 121
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 120
 runtime_resolution_required = true
 
 [[relocs]]
@@ -198,6 +205,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-rankinghall"
 target_export = "BattleFrontier_RankingHall_EventScript_ShowRecords"
 target_offset = 121
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 120
 runtime_resolution_required = true
 
 [[relocs]]
@@ -208,6 +217,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-rankinghall"
 target_export = "BattleFrontier_RankingHall_EventScript_ShowRecords"
 target_offset = 121
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 120
 runtime_resolution_required = true
 
 [[relocs]]
@@ -218,6 +229,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-rankinghall"
 target_export = "BattleFrontier_RankingHall_EventScript_ShowRecords"
 target_offset = 121
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 120
 runtime_resolution_required = true
 
 [[relocs]]
@@ -228,6 +241,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-rankinghall"
 target_export = "BattleFrontier_RankingHall_EventScript_ShowRecords"
 target_offset = 121
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 120
 runtime_resolution_required = true
 
 [[relocs]]
@@ -238,6 +253,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-rankinghall"
 target_export = "BattleFrontier_RankingHall_EventScript_ShowRecords"
 target_offset = 121
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 120
 runtime_resolution_required = true
 
 [[relocs]]
@@ -248,6 +265,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-rankinghall"
 target_export = "BattleFrontier_RankingHall_EventScript_ShowRecords"
 target_offset = 121
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 120
 runtime_resolution_required = true
 
 [[relocs]]
@@ -258,6 +277,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-rankinghall"
 target_export = "BattleFrontier_RankingHall_EventScript_ShowRecords"
 target_offset = 121
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 120
 runtime_resolution_required = true
 
 [[relocs]]
@@ -267,6 +288,8 @@ original_encoded_gba = 0x825e57c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-rankinghall"
 target_export = "BattleFrontier_RankingHall_Text_ExplainRankingHall"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -276,6 +299,8 @@ original_encoded_gba = 0x825e5f9
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-rankinghall"
 target_export = "BattleFrontier_RankingHall_Text_DomePikeFactoryRecords"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -285,6 +310,8 @@ original_encoded_gba = 0x825e62e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-rankinghall"
 target_export = "BattleFrontier_RankingHall_Text_PalaceArenaPyramidRecords"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -294,6 +321,8 @@ original_encoded_gba = 0x825e666
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-rankinghall"
 target_export = "BattleFrontier_RankingHall_Text_IsYourNameOnThisList"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -304,6 +333,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-rankinghall"
 target_export = "BattleFrontier_RankingHall_EventScript_NinjaBoyNameOnList"
 target_offset = 192
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 191
 runtime_resolution_required = true
 
 [[relocs]]
@@ -313,6 +344,8 @@ original_encoded_gba = 0x825e6b6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-rankinghall"
 target_export = "BattleFrontier_RankingHall_Text_WorkHarderIfYouSawFriendsName"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -322,6 +355,8 @@ original_encoded_gba = 0x825e685
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-rankinghall"
 target_export = "BattleFrontier_RankingHall_Text_WowThatsSuper"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -331,4 +366,258 @@ original_encoded_gba = 0x825e715
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-rankinghall"
 target_export = "BattleFrontier_RankingHall_Text_MyNamesNotUpThere"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 5
+
+[[boundaries]]
+payload_offset = 6
+length = 5
+
+[[boundaries]]
+payload_offset = 12
+length = 1
+
+[[boundaries]]
+payload_offset = 13
+length = 5
+
+[[boundaries]]
+payload_offset = 18
+length = 5
+
+[[boundaries]]
+payload_offset = 24
+length = 1
+
+[[boundaries]]
+payload_offset = 25
+length = 5
+
+[[boundaries]]
+payload_offset = 30
+length = 5
+
+[[boundaries]]
+payload_offset = 36
+length = 1
+
+[[boundaries]]
+payload_offset = 37
+length = 5
+
+[[boundaries]]
+payload_offset = 42
+length = 5
+
+[[boundaries]]
+payload_offset = 48
+length = 1
+
+[[boundaries]]
+payload_offset = 49
+length = 5
+
+[[boundaries]]
+payload_offset = 54
+length = 5
+
+[[boundaries]]
+payload_offset = 60
+length = 1
+
+[[boundaries]]
+payload_offset = 61
+length = 5
+
+[[boundaries]]
+payload_offset = 66
+length = 5
+
+[[boundaries]]
+payload_offset = 72
+length = 1
+
+[[boundaries]]
+payload_offset = 73
+length = 5
+
+[[boundaries]]
+payload_offset = 78
+length = 5
+
+[[boundaries]]
+payload_offset = 84
+length = 1
+
+[[boundaries]]
+payload_offset = 85
+length = 5
+
+[[boundaries]]
+payload_offset = 90
+length = 5
+
+[[boundaries]]
+payload_offset = 96
+length = 1
+
+[[boundaries]]
+payload_offset = 97
+length = 5
+
+[[boundaries]]
+payload_offset = 102
+length = 5
+
+[[boundaries]]
+payload_offset = 108
+length = 1
+
+[[boundaries]]
+payload_offset = 109
+length = 5
+
+[[boundaries]]
+payload_offset = 114
+length = 5
+
+[[boundaries]]
+payload_offset = 120
+length = 3
+
+[[boundaries]]
+payload_offset = 123
+length = 1
+
+[[boundaries]]
+payload_offset = 124
+length = 3
+
+[[boundaries]]
+payload_offset = 127
+length = 1
+
+[[boundaries]]
+payload_offset = 128
+length = 3
+
+[[boundaries]]
+payload_offset = 131
+length = 1
+
+[[boundaries]]
+payload_offset = 132
+length = 1
+
+[[boundaries]]
+payload_offset = 133
+length = 6
+
+[[boundaries]]
+payload_offset = 139
+length = 2
+
+[[boundaries]]
+payload_offset = 141
+length = 1
+
+[[boundaries]]
+payload_offset = 142
+length = 6
+
+[[boundaries]]
+payload_offset = 148
+length = 2
+
+[[boundaries]]
+payload_offset = 150
+length = 1
+
+[[boundaries]]
+payload_offset = 151
+length = 6
+
+[[boundaries]]
+payload_offset = 157
+length = 2
+
+[[boundaries]]
+payload_offset = 159
+length = 1
+
+[[boundaries]]
+payload_offset = 160
+length = 1
+
+[[boundaries]]
+payload_offset = 161
+length = 1
+
+[[boundaries]]
+payload_offset = 162
+length = 6
+
+[[boundaries]]
+payload_offset = 168
+length = 2
+
+[[boundaries]]
+payload_offset = 170
+length = 5
+
+[[boundaries]]
+payload_offset = 175
+length = 6
+
+[[boundaries]]
+payload_offset = 181
+length = 6
+
+[[boundaries]]
+payload_offset = 187
+length = 2
+
+[[boundaries]]
+payload_offset = 189
+length = 1
+
+[[boundaries]]
+payload_offset = 190
+length = 1
+
+[[boundaries]]
+payload_offset = 191
+length = 6
+
+[[boundaries]]
+payload_offset = 197
+length = 2
+
+[[boundaries]]
+payload_offset = 199
+length = 1
+
+[[boundaries]]
+payload_offset = 200
+length = 1
+
+[[boundaries]]
+payload_offset = 201
+length = 6
+
+[[boundaries]]
+payload_offset = 207
+length = 2
+
+[[boundaries]]
+payload_offset = 209
+length = 1

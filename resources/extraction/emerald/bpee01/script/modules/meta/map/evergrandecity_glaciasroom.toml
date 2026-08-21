@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 2
 export_count = 8
 reloc_count = 12
+instruction_count = 35
 
 [[segments]]
 kind = "bytecode"
@@ -102,6 +103,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/elite-four"
 target_export = "PokemonLeague_EliteFour_EventScript_WalkInCloseDoor"
 target_offset = 125
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 125
 runtime_resolution_required = true
 
 [[relocs]]
@@ -112,6 +115,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/evergrandecity-glaciasroom"
 target_export = "EverGrandeCity_GlaciasRoom_EventScript_ResetAdvanceToNextRoom"
 target_offset = 75
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 39
 runtime_resolution_required = true
 
 [[relocs]]
@@ -122,6 +127,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/evergrandecity-glaciasroom"
 target_export = "EverGrandeCity_GlaciasRoom_EventScript_CloseDoor"
 target_offset = 81
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 45
 runtime_resolution_required = true
 
 [[relocs]]
@@ -132,6 +139,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/elite-four"
 target_export = "PokemonLeague_EliteFour_EventScript_ResetAdvanceToNextRoom"
 target_offset = 196
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 196
 runtime_resolution_required = true
 
 [[relocs]]
@@ -142,6 +151,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/elite-four"
 target_export = "PokemonLeague_EliteFour_EventScript_CloseDoor"
 target_offset = 359
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 359
 runtime_resolution_required = true
 
 [[relocs]]
@@ -152,6 +163,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/evergrandecity-glaciasroom"
 target_export = "EverGrandeCity_GlaciasRoom_EventScript_PostBattleSpeech"
 target_offset = 126
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 90
 runtime_resolution_required = true
 
 [[relocs]]
@@ -161,6 +174,8 @@ original_encoded_gba = 0x82284ac
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/evergrandecity-glaciasroom"
 target_export = "EverGrandeCity_GlaciasRoom_Text_IntroSpeech"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -170,6 +185,8 @@ original_encoded_gba = 0x82285b4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/evergrandecity-glaciasroom"
 target_export = "EverGrandeCity_GlaciasRoom_Text_Defeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -180,6 +197,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/evergrandecity-glaciasroom"
 target_export = "EverGrandeCity_GlaciasRoom_EventScript_Defeated"
 target_offset = 136
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 100
 runtime_resolution_required = true
 
 [[relocs]]
@@ -189,6 +208,8 @@ original_encoded_gba = 0x8228640
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/evergrandecity-glaciasroom"
 target_export = "EverGrandeCity_GlaciasRoom_Text_PostBattleSpeech"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -199,6 +220,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/elite-four"
 target_export = "PokemonLeague_EliteFour_SetAdvanceToNextRoomMetatiles"
 target_offset = 0
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 0
 runtime_resolution_required = true
 
 [[relocs]]
@@ -208,4 +231,146 @@ original_encoded_gba = 0x8228640
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/evergrandecity-glaciasroom"
 target_export = "EverGrandeCity_GlaciasRoom_Text_PostBattleSpeech"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 4
+
+[[boundaries]]
+payload_offset = 4
+length = 1
+
+[[boundaries]]
+payload_offset = 5
+length = 1
+
+[[boundaries]]
+payload_offset = 6
+length = 5
+
+[[boundaries]]
+payload_offset = 11
+length = 5
+
+[[boundaries]]
+payload_offset = 16
+length = 1
+
+[[boundaries]]
+payload_offset = 17
+length = 1
+
+[[boundaries]]
+payload_offset = 18
+length = 3
+
+[[boundaries]]
+payload_offset = 21
+length = 6
+
+[[boundaries]]
+payload_offset = 27
+length = 5
+
+[[boundaries]]
+payload_offset = 32
+length = 6
+
+[[boundaries]]
+payload_offset = 38
+length = 1
+
+[[boundaries]]
+payload_offset = 39
+length = 5
+
+[[boundaries]]
+payload_offset = 44
+length = 1
+
+[[boundaries]]
+payload_offset = 45
+length = 5
+
+[[boundaries]]
+payload_offset = 50
+length = 1
+
+[[boundaries]]
+payload_offset = 51
+length = 1
+
+[[boundaries]]
+payload_offset = 52
+length = 1
+
+[[boundaries]]
+payload_offset = 53
+length = 3
+
+[[boundaries]]
+payload_offset = 56
+length = 6
+
+[[boundaries]]
+payload_offset = 62
+length = 4
+
+[[boundaries]]
+payload_offset = 66
+length = 6
+
+[[boundaries]]
+payload_offset = 72
+length = 2
+
+[[boundaries]]
+payload_offset = 74
+length = 10
+
+[[boundaries]]
+payload_offset = 84
+length = 5
+
+[[boundaries]]
+payload_offset = 90
+length = 6
+
+[[boundaries]]
+payload_offset = 96
+length = 2
+
+[[boundaries]]
+payload_offset = 98
+length = 1
+
+[[boundaries]]
+payload_offset = 99
+length = 1
+
+[[boundaries]]
+payload_offset = 100
+length = 3
+
+[[boundaries]]
+payload_offset = 103
+length = 5
+
+[[boundaries]]
+payload_offset = 108
+length = 6
+
+[[boundaries]]
+payload_offset = 114
+length = 2
+
+[[boundaries]]
+payload_offset = 116
+length = 1
+
+[[boundaries]]
+payload_offset = 117
+length = 1

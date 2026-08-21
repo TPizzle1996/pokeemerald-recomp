@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 3
 reloc_count = 5
+instruction_count = 17
 
 [[segments]]
 kind = "bytecode"
@@ -55,6 +56,8 @@ original_encoded_gba = 0x8226ba4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-house3"
 target_export = "SootopolisCity_House3_Text_JuanHasManyFansDoYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -65,6 +68,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/sootopoliscity-house3"
 target_export = "SootopolisCity_House3_EventScript_HaveFans"
 target_offset = 32
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 31
 runtime_resolution_required = true
 
 [[relocs]]
@@ -74,6 +79,8 @@ original_encoded_gba = 0x8226c44
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-house3"
 target_export = "SootopolisCity_House3_Text_LonesomeTryWorkingHarder"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -83,6 +90,8 @@ original_encoded_gba = 0x8226c20
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-house3"
 target_export = "SootopolisCity_House3_Text_YouMustBePrettyStrong"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -92,4 +101,74 @@ original_encoded_gba = 0x8226c9c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-house3"
 target_export = "SootopolisCity_House3_Text_TrainerFanClubWasWild"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 1
+
+[[boundaries]]
+payload_offset = 2
+length = 6
+
+[[boundaries]]
+payload_offset = 8
+length = 2
+
+[[boundaries]]
+payload_offset = 10
+length = 5
+
+[[boundaries]]
+payload_offset = 15
+length = 6
+
+[[boundaries]]
+payload_offset = 21
+length = 6
+
+[[boundaries]]
+payload_offset = 27
+length = 2
+
+[[boundaries]]
+payload_offset = 29
+length = 1
+
+[[boundaries]]
+payload_offset = 30
+length = 1
+
+[[boundaries]]
+payload_offset = 31
+length = 6
+
+[[boundaries]]
+payload_offset = 37
+length = 2
+
+[[boundaries]]
+payload_offset = 39
+length = 1
+
+[[boundaries]]
+payload_offset = 40
+length = 1
+
+[[boundaries]]
+payload_offset = 41
+length = 6
+
+[[boundaries]]
+payload_offset = 47
+length = 2
+
+[[boundaries]]
+payload_offset = 49
+length = 1

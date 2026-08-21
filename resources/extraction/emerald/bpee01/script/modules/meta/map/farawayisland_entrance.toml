@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 6
 reloc_count = 7
+instruction_count = 34
 
 [[segments]]
 kind = "bytecode"
@@ -79,6 +80,8 @@ original_encoded_gba = 0x82c6b42
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/event-ticket-2"
 target_export = "FarawayIsland_Entrance_Text_SailorReturn"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -89,6 +92,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/farawayisland-entrance"
 target_export = "FarawayIsland_Entrance_EventScript_AsYouLike"
 target_offset = 89
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 83
 runtime_resolution_required = true
 
 [[relocs]]
@@ -98,6 +103,8 @@ original_encoded_gba = 0x82a6a5d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/event-ticket-1"
 target_export = "EventTicket_Text_SailHome"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -107,6 +114,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -117,6 +126,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/prof-birch"
 target_export = "Common_EventScript_FerryDepartIsland"
 target_offset = 419
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 409
 runtime_resolution_required = true
 
 [[relocs]]
@@ -126,6 +137,8 @@ original_encoded_gba = 0x82a6a82
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/event-ticket-1"
 target_export = "EventTicket_Text_AsYouLike"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -135,4 +148,142 @@ original_encoded_gba = 0x82c6d5a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/event-ticket-2"
 target_export = "FarawayIsland_Entrance_Text_Sign"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 1
+
+[[boundaries]]
+payload_offset = 4
+length = 3
+
+[[boundaries]]
+payload_offset = 7
+length = 1
+
+[[boundaries]]
+payload_offset = 8
+length = 1
+
+[[boundaries]]
+payload_offset = 9
+length = 3
+
+[[boundaries]]
+payload_offset = 12
+length = 1
+
+[[boundaries]]
+payload_offset = 13
+length = 1
+
+[[boundaries]]
+payload_offset = 14
+length = 1
+
+[[boundaries]]
+payload_offset = 15
+length = 1
+
+[[boundaries]]
+payload_offset = 16
+length = 6
+
+[[boundaries]]
+payload_offset = 22
+length = 2
+
+[[boundaries]]
+payload_offset = 24
+length = 5
+
+[[boundaries]]
+payload_offset = 29
+length = 6
+
+[[boundaries]]
+payload_offset = 35
+length = 6
+
+[[boundaries]]
+payload_offset = 41
+length = 2
+
+[[boundaries]]
+payload_offset = 43
+length = 1
+
+[[boundaries]]
+payload_offset = 44
+length = 7
+
+[[boundaries]]
+payload_offset = 51
+length = 3
+
+[[boundaries]]
+payload_offset = 54
+length = 3
+
+[[boundaries]]
+payload_offset = 57
+length = 5
+
+[[boundaries]]
+payload_offset = 62
+length = 5
+
+[[boundaries]]
+payload_offset = 67
+length = 5
+
+[[boundaries]]
+payload_offset = 72
+length = 8
+
+[[boundaries]]
+payload_offset = 80
+length = 1
+
+[[boundaries]]
+payload_offset = 81
+length = 1
+
+[[boundaries]]
+payload_offset = 82
+length = 1
+
+[[boundaries]]
+payload_offset = 83
+length = 6
+
+[[boundaries]]
+payload_offset = 89
+length = 2
+
+[[boundaries]]
+payload_offset = 91
+length = 1
+
+[[boundaries]]
+payload_offset = 92
+length = 1
+
+[[boundaries]]
+payload_offset = 93
+length = 6
+
+[[boundaries]]
+payload_offset = 99
+length = 2
+
+[[boundaries]]
+payload_offset = 101
+length = 1

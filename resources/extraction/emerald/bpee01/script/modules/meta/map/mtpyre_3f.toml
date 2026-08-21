@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 5
 reloc_count = 15
+instruction_count = 30
 
 [[segments]]
 kind = "bytecode"
@@ -71,6 +72,8 @@ original_encoded_gba = 0x82317e3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-3f"
 target_export = "MtPyre_3F_Text_WilliamIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -80,6 +83,8 @@ original_encoded_gba = 0x8231853
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-3f"
 target_export = "MtPyre_3F_Text_WilliamDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -89,6 +94,8 @@ original_encoded_gba = 0x8231869
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-3f"
 target_export = "MtPyre_3F_Text_WilliamPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -98,6 +105,8 @@ original_encoded_gba = 0x82318a1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-3f"
 target_export = "MtPyre_3F_Text_KaylaIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -107,6 +116,8 @@ original_encoded_gba = 0x82318dd
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-3f"
 target_export = "MtPyre_3F_Text_KaylaDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -116,6 +127,8 @@ original_encoded_gba = 0x82318f2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-3f"
 target_export = "MtPyre_3F_Text_KaylaPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -125,6 +138,8 @@ original_encoded_gba = 0x8231952
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-3f"
 target_export = "MtPyre_3F_Text_GabrielleIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -134,6 +149,8 @@ original_encoded_gba = 0x823196a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-3f"
 target_export = "MtPyre_3F_Text_GabrielleDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -144,6 +161,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtpyre-3f"
 target_export = "MtPyre_3F_EventScript_RegisterGabrielle"
 target_offset = 91
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 90
 runtime_resolution_required = true
 
 [[relocs]]
@@ -154,6 +173,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtpyre-3f"
 target_export = "MtPyre_3F_EventScript_RematchGabrielle"
 target_offset = 122
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 121
 runtime_resolution_required = true
 
 [[relocs]]
@@ -163,6 +184,8 @@ original_encoded_gba = 0x823199b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-3f"
 target_export = "MtPyre_3F_Text_GabriellePostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -172,6 +195,8 @@ original_encoded_gba = 0x8231a49
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-3f"
 target_export = "MtPyre_3F_Text_GabrielleRegister"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -181,6 +206,8 @@ original_encoded_gba = 0x8231aab
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-3f"
 target_export = "MtPyre_3F_Text_GabrielleRematchIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -190,6 +217,8 @@ original_encoded_gba = 0x8231ae6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-3f"
 target_export = "MtPyre_3F_Text_GabrielleRematchDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -199,4 +228,126 @@ original_encoded_gba = 0x8231b0d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-3f"
 target_export = "MtPyre_3F_Text_GabriellePostRematch"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 14
+
+[[boundaries]]
+payload_offset = 14
+length = 6
+
+[[boundaries]]
+payload_offset = 20
+length = 2
+
+[[boundaries]]
+payload_offset = 22
+length = 1
+
+[[boundaries]]
+payload_offset = 23
+length = 14
+
+[[boundaries]]
+payload_offset = 37
+length = 6
+
+[[boundaries]]
+payload_offset = 43
+length = 2
+
+[[boundaries]]
+payload_offset = 45
+length = 1
+
+[[boundaries]]
+payload_offset = 46
+length = 18
+
+[[boundaries]]
+payload_offset = 64
+length = 5
+
+[[boundaries]]
+payload_offset = 69
+length = 5
+
+[[boundaries]]
+payload_offset = 74
+length = 6
+
+[[boundaries]]
+payload_offset = 80
+length = 6
+
+[[boundaries]]
+payload_offset = 86
+length = 2
+
+[[boundaries]]
+payload_offset = 88
+length = 1
+
+[[boundaries]]
+payload_offset = 89
+length = 1
+
+[[boundaries]]
+payload_offset = 90
+length = 3
+
+[[boundaries]]
+payload_offset = 93
+length = 3
+
+[[boundaries]]
+payload_offset = 96
+length = 6
+
+[[boundaries]]
+payload_offset = 102
+length = 2
+
+[[boundaries]]
+payload_offset = 104
+length = 5
+
+[[boundaries]]
+payload_offset = 109
+length = 3
+
+[[boundaries]]
+payload_offset = 112
+length = 5
+
+[[boundaries]]
+payload_offset = 117
+length = 2
+
+[[boundaries]]
+payload_offset = 119
+length = 1
+
+[[boundaries]]
+payload_offset = 120
+length = 1
+
+[[boundaries]]
+payload_offset = 121
+length = 14
+
+[[boundaries]]
+payload_offset = 135
+length = 6
+
+[[boundaries]]
+payload_offset = 141
+length = 2
+
+[[boundaries]]
+payload_offset = 143
+length = 1

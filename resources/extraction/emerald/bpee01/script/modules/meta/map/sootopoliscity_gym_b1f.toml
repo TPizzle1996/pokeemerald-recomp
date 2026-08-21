@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 10
 reloc_count = 30
+instruction_count = 40
 
 [[segments]]
 kind = "bytecode"
@@ -111,6 +112,8 @@ original_encoded_gba = 0x8225d71
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-gym-b1f"
 target_export = "SootopolisCity_Gym_B1F_Text_AndreaIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -120,6 +123,8 @@ original_encoded_gba = 0x8225db6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-gym-b1f"
 target_export = "SootopolisCity_Gym_B1F_Text_AndreaDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -129,6 +134,8 @@ original_encoded_gba = 0x8225dcf
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-gym-b1f"
 target_export = "SootopolisCity_Gym_B1F_Text_AndreaPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -138,6 +145,8 @@ original_encoded_gba = 0x8225e04
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-gym-b1f"
 target_export = "SootopolisCity_Gym_B1F_Text_CrissyIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -147,6 +156,8 @@ original_encoded_gba = 0x8225e60
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-gym-b1f"
 target_export = "SootopolisCity_Gym_B1F_Text_CrissyDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -156,6 +167,8 @@ original_encoded_gba = 0x8225e90
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-gym-b1f"
 target_export = "SootopolisCity_Gym_B1F_Text_CrissyPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -165,6 +178,8 @@ original_encoded_gba = 0x822646e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-gym-b1f"
 target_export = "SootopolisCity_Gym_B1F_Text_BriannaIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -174,6 +189,8 @@ original_encoded_gba = 0x8226495
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-gym-b1f"
 target_export = "SootopolisCity_Gym_B1F_Text_BriannaDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -183,6 +200,8 @@ original_encoded_gba = 0x82264bc
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-gym-b1f"
 target_export = "SootopolisCity_Gym_B1F_Text_BriannaPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -192,6 +211,8 @@ original_encoded_gba = 0x8225fbe
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-gym-b1f"
 target_export = "SootopolisCity_Gym_B1F_Text_ConnieIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -201,6 +222,8 @@ original_encoded_gba = 0x8225feb
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-gym-b1f"
 target_export = "SootopolisCity_Gym_B1F_Text_ConnieDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -210,6 +233,8 @@ original_encoded_gba = 0x8225ffe
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-gym-b1f"
 target_export = "SootopolisCity_Gym_B1F_Text_ConniePostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -219,6 +244,8 @@ original_encoded_gba = 0x8226061
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-gym-b1f"
 target_export = "SootopolisCity_Gym_B1F_Text_BridgetIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -228,6 +255,8 @@ original_encoded_gba = 0x82260b6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-gym-b1f"
 target_export = "SootopolisCity_Gym_B1F_Text_BridgetDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -237,6 +266,8 @@ original_encoded_gba = 0x82260d1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-gym-b1f"
 target_export = "SootopolisCity_Gym_B1F_Text_BridgetPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -246,6 +277,8 @@ original_encoded_gba = 0x8226164
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-gym-b1f"
 target_export = "SootopolisCity_Gym_B1F_Text_OliviaIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -255,6 +288,8 @@ original_encoded_gba = 0x82261a7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-gym-b1f"
 target_export = "SootopolisCity_Gym_B1F_Text_OliviaDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -264,6 +299,8 @@ original_encoded_gba = 0x82261b5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-gym-b1f"
 target_export = "SootopolisCity_Gym_B1F_Text_OliviaPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -273,6 +310,8 @@ original_encoded_gba = 0x82261f7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-gym-b1f"
 target_export = "SootopolisCity_Gym_B1F_Text_TiffanyIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -282,6 +321,8 @@ original_encoded_gba = 0x8226274
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-gym-b1f"
 target_export = "SootopolisCity_Gym_B1F_Text_TiffanyDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -291,6 +332,8 @@ original_encoded_gba = 0x8226286
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-gym-b1f"
 target_export = "SootopolisCity_Gym_B1F_Text_TiffanyPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -300,6 +343,8 @@ original_encoded_gba = 0x82262f3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-gym-b1f"
 target_export = "SootopolisCity_Gym_B1F_Text_BethanyIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -309,6 +354,8 @@ original_encoded_gba = 0x822633b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-gym-b1f"
 target_export = "SootopolisCity_Gym_B1F_Text_BethanyDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -318,6 +365,8 @@ original_encoded_gba = 0x8226341
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-gym-b1f"
 target_export = "SootopolisCity_Gym_B1F_Text_BethanyPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -327,6 +376,8 @@ original_encoded_gba = 0x8226388
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-gym-b1f"
 target_export = "SootopolisCity_Gym_B1F_Text_AnnikaIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -336,6 +387,8 @@ original_encoded_gba = 0x82263bd
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-gym-b1f"
 target_export = "SootopolisCity_Gym_B1F_Text_AnnikaDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -345,6 +398,8 @@ original_encoded_gba = 0x82263f4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-gym-b1f"
 target_export = "SootopolisCity_Gym_B1F_Text_AnnikaPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -354,6 +409,8 @@ original_encoded_gba = 0x8225ed6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-gym-b1f"
 target_export = "SootopolisCity_Gym_B1F_Text_DaphneIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -363,6 +420,8 @@ original_encoded_gba = 0x8225f35
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-gym-b1f"
 target_export = "SootopolisCity_Gym_B1F_Text_DaphneDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -372,4 +431,166 @@ original_encoded_gba = 0x8225f67
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-gym-b1f"
 target_export = "SootopolisCity_Gym_B1F_Text_DaphnePostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 14
+
+[[boundaries]]
+payload_offset = 14
+length = 6
+
+[[boundaries]]
+payload_offset = 20
+length = 2
+
+[[boundaries]]
+payload_offset = 22
+length = 1
+
+[[boundaries]]
+payload_offset = 23
+length = 14
+
+[[boundaries]]
+payload_offset = 37
+length = 6
+
+[[boundaries]]
+payload_offset = 43
+length = 2
+
+[[boundaries]]
+payload_offset = 45
+length = 1
+
+[[boundaries]]
+payload_offset = 46
+length = 14
+
+[[boundaries]]
+payload_offset = 60
+length = 6
+
+[[boundaries]]
+payload_offset = 66
+length = 2
+
+[[boundaries]]
+payload_offset = 68
+length = 1
+
+[[boundaries]]
+payload_offset = 69
+length = 14
+
+[[boundaries]]
+payload_offset = 83
+length = 6
+
+[[boundaries]]
+payload_offset = 89
+length = 2
+
+[[boundaries]]
+payload_offset = 91
+length = 1
+
+[[boundaries]]
+payload_offset = 92
+length = 14
+
+[[boundaries]]
+payload_offset = 106
+length = 6
+
+[[boundaries]]
+payload_offset = 112
+length = 2
+
+[[boundaries]]
+payload_offset = 114
+length = 1
+
+[[boundaries]]
+payload_offset = 115
+length = 14
+
+[[boundaries]]
+payload_offset = 129
+length = 6
+
+[[boundaries]]
+payload_offset = 135
+length = 2
+
+[[boundaries]]
+payload_offset = 137
+length = 1
+
+[[boundaries]]
+payload_offset = 138
+length = 14
+
+[[boundaries]]
+payload_offset = 152
+length = 6
+
+[[boundaries]]
+payload_offset = 158
+length = 2
+
+[[boundaries]]
+payload_offset = 160
+length = 1
+
+[[boundaries]]
+payload_offset = 161
+length = 14
+
+[[boundaries]]
+payload_offset = 175
+length = 6
+
+[[boundaries]]
+payload_offset = 181
+length = 2
+
+[[boundaries]]
+payload_offset = 183
+length = 1
+
+[[boundaries]]
+payload_offset = 184
+length = 14
+
+[[boundaries]]
+payload_offset = 198
+length = 6
+
+[[boundaries]]
+payload_offset = 204
+length = 2
+
+[[boundaries]]
+payload_offset = 206
+length = 1
+
+[[boundaries]]
+payload_offset = 207
+length = 14
+
+[[boundaries]]
+payload_offset = 221
+length = 6
+
+[[boundaries]]
+payload_offset = 227
+length = 2
+
+[[boundaries]]
+payload_offset = 229
+length = 1

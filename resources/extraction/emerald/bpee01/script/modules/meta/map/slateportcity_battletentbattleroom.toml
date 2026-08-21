@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 3
 export_count = 9
 reloc_count = 8
+instruction_count = 68
 
 [[segments]]
 kind = "bytecode"
@@ -116,6 +117,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-battletentbattleroom"
 target_export = "SlateportCity_BattleTentBattleRoom_EventScript_SetPlayerGfx"
 target_offset = 22
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 6
 runtime_resolution_required = true
 
 [[relocs]]
@@ -126,6 +129,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-battletentbattleroom"
 target_export = "SlateportCity_BattleTentBattleRoom_EventScript_SetPlayerGfxMale"
 target_offset = 46
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 30
 runtime_resolution_required = true
 
 [[relocs]]
@@ -136,6 +141,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-battletentbattleroom"
 target_export = "SlateportCity_BattleTentBattleRoom_EventScript_SetPlayerGfxFemale"
 target_offset = 52
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 36
 runtime_resolution_required = true
 
 [[relocs]]
@@ -145,6 +152,8 @@ original_encoded_gba = 0x8209a99
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/slateportcity-battletentbattleroom-movement-playerenter"
 target_export = "SlateportCity_BattleTentBattleRoom_Movement_PlayerEnter"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -154,6 +163,8 @@ original_encoded_gba = 0x8209a9e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/slateportcity-battletentbattleroom-movement-opponententer"
 target_export = "SlateportCity_BattleTentBattleRoom_Movement_OpponentEnter"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -162,6 +173,8 @@ operand_width = 4
 original_encoded_gba = 0x2021fc4
 target_class = "RAM_DATA_TARGET"
 target_resource_key = ""
+target_kind = "RAM_HOST"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -172,6 +185,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-battletentbattleroom"
 target_export = "SlateportCity_BattleTentBattleRoom_EventScript_DefeatedOpponent"
 target_offset = 217
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 181
 runtime_resolution_required = true
 
 [[relocs]]
@@ -182,4 +197,278 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-battletentbattleroom"
 target_export = "SlateportCity_BattleTentBattleRoom_EventScript_WarpToLobbyWon"
 target_offset = 283
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 247
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 5
+
+[[boundaries]]
+payload_offset = 5
+length = 1
+
+[[boundaries]]
+payload_offset = 6
+length = 1
+
+[[boundaries]]
+payload_offset = 7
+length = 5
+
+[[boundaries]]
+payload_offset = 12
+length = 6
+
+[[boundaries]]
+payload_offset = 18
+length = 5
+
+[[boundaries]]
+payload_offset = 23
+length = 6
+
+[[boundaries]]
+payload_offset = 29
+length = 1
+
+[[boundaries]]
+payload_offset = 30
+length = 5
+
+[[boundaries]]
+payload_offset = 35
+length = 1
+
+[[boundaries]]
+payload_offset = 36
+length = 5
+
+[[boundaries]]
+payload_offset = 41
+length = 1
+
+[[boundaries]]
+payload_offset = 42
+length = 5
+
+[[boundaries]]
+payload_offset = 47
+length = 5
+
+[[boundaries]]
+payload_offset = 52
+length = 5
+
+[[boundaries]]
+payload_offset = 57
+length = 1
+
+[[boundaries]]
+payload_offset = 58
+length = 7
+
+[[boundaries]]
+payload_offset = 65
+length = 3
+
+[[boundaries]]
+payload_offset = 68
+length = 5
+
+[[boundaries]]
+payload_offset = 73
+length = 3
+
+[[boundaries]]
+payload_offset = 76
+length = 7
+
+[[boundaries]]
+payload_offset = 83
+length = 3
+
+[[boundaries]]
+payload_offset = 86
+length = 3
+
+[[boundaries]]
+payload_offset = 89
+length = 7
+
+[[boundaries]]
+payload_offset = 96
+length = 3
+
+[[boundaries]]
+payload_offset = 99
+length = 5
+
+[[boundaries]]
+payload_offset = 104
+length = 3
+
+[[boundaries]]
+payload_offset = 107
+length = 1
+
+[[boundaries]]
+payload_offset = 108
+length = 6
+
+[[boundaries]]
+payload_offset = 114
+length = 2
+
+[[boundaries]]
+payload_offset = 116
+length = 1
+
+[[boundaries]]
+payload_offset = 117
+length = 1
+
+[[boundaries]]
+payload_offset = 118
+length = 3
+
+[[boundaries]]
+payload_offset = 121
+length = 5
+
+[[boundaries]]
+payload_offset = 126
+length = 5
+
+[[boundaries]]
+payload_offset = 131
+length = 3
+
+[[boundaries]]
+payload_offset = 134
+length = 1
+
+[[boundaries]]
+payload_offset = 135
+length = 5
+
+[[boundaries]]
+payload_offset = 140
+length = 5
+
+[[boundaries]]
+payload_offset = 145
+length = 6
+
+[[boundaries]]
+payload_offset = 151
+length = 5
+
+[[boundaries]]
+payload_offset = 156
+length = 5
+
+[[boundaries]]
+payload_offset = 161
+length = 5
+
+[[boundaries]]
+payload_offset = 166
+length = 3
+
+[[boundaries]]
+payload_offset = 169
+length = 3
+
+[[boundaries]]
+payload_offset = 172
+length = 8
+
+[[boundaries]]
+payload_offset = 180
+length = 1
+
+[[boundaries]]
+payload_offset = 181
+length = 5
+
+[[boundaries]]
+payload_offset = 186
+length = 5
+
+[[boundaries]]
+payload_offset = 191
+length = 3
+
+[[boundaries]]
+payload_offset = 194
+length = 5
+
+[[boundaries]]
+payload_offset = 199
+length = 5
+
+[[boundaries]]
+payload_offset = 204
+length = 5
+
+[[boundaries]]
+payload_offset = 209
+length = 5
+
+[[boundaries]]
+payload_offset = 214
+length = 3
+
+[[boundaries]]
+payload_offset = 217
+length = 5
+
+[[boundaries]]
+payload_offset = 222
+length = 5
+
+[[boundaries]]
+payload_offset = 227
+length = 6
+
+[[boundaries]]
+payload_offset = 233
+length = 5
+
+[[boundaries]]
+payload_offset = 238
+length = 8
+
+[[boundaries]]
+payload_offset = 246
+length = 1
+
+[[boundaries]]
+payload_offset = 247
+length = 5
+
+[[boundaries]]
+payload_offset = 252
+length = 5
+
+[[boundaries]]
+payload_offset = 257
+length = 5
+
+[[boundaries]]
+payload_offset = 262
+length = 3
+
+[[boundaries]]
+payload_offset = 265
+length = 3
+
+[[boundaries]]
+payload_offset = 268
+length = 8
+
+[[boundaries]]
+payload_offset = 276
+length = 1

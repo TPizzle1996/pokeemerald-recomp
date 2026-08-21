@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 28
 reloc_count = 45
+instruction_count = 165
 
 [[segments]]
 kind = "bytecode"
@@ -256,6 +257,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/obtain-item"
 target_export = "EventScript_ObtainItemMessage"
 target_offset = 16
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 16
 runtime_resolution_required = true
 
 [[relocs]]
@@ -266,6 +269,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/obtain-item"
 target_export = "EventScript_BufferPocketNameAndTryFanfare"
 target_offset = 53
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 53
 runtime_resolution_required = true
 
 [[relocs]]
@@ -276,6 +281,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/obtain-item"
 target_export = "EventScript_ObtainedItem"
 target_offset = 194
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 194
 runtime_resolution_required = true
 
 [[relocs]]
@@ -286,6 +293,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/obtain-item"
 target_export = "EventScript_NoRoomForItem"
 target_offset = 214
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 214
 runtime_resolution_required = true
 
 [[relocs]]
@@ -296,6 +305,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/obtain-item"
 target_export = "EventScript_BufferItemsPocket"
 target_offset = 114
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 114
 runtime_resolution_required = true
 
 [[relocs]]
@@ -306,6 +317,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/obtain-item"
 target_export = "EventScript_BufferKeyItemsPocket"
 target_offset = 130
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 130
 runtime_resolution_required = true
 
 [[relocs]]
@@ -316,6 +329,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/obtain-item"
 target_export = "EventScript_BufferPokeballsPocket"
 target_offset = 146
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 146
 runtime_resolution_required = true
 
 [[relocs]]
@@ -326,6 +341,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/obtain-item"
 target_export = "EventScript_BufferTMHMsPocket"
 target_offset = 162
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 162
 runtime_resolution_required = true
 
 [[relocs]]
@@ -336,6 +353,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/obtain-item"
 target_export = "EventScript_BufferBerriesPocket"
 target_offset = 178
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 178
 runtime_resolution_required = true
 
 [[relocs]]
@@ -346,6 +365,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/obtain-item"
 target_export = "EventScript_PlayFanfareObtainedItem"
 target_offset = 220
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 220
 runtime_resolution_required = true
 
 [[relocs]]
@@ -356,6 +377,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/obtain-item"
 target_export = "EventScript_PlayFanfareObtainedItem"
 target_offset = 220
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 220
 runtime_resolution_required = true
 
 [[relocs]]
@@ -366,6 +389,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/obtain-item"
 target_export = "EventScript_PlayFanfareObtainedItem"
 target_offset = 220
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 220
 runtime_resolution_required = true
 
 [[relocs]]
@@ -376,6 +401,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/obtain-item"
 target_export = "EventScript_PlayFanfareObtainedTMHM"
 target_offset = 224
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 224
 runtime_resolution_required = true
 
 [[relocs]]
@@ -386,6 +413,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/obtain-item"
 target_export = "EventScript_PlayFanfareObtainedItem"
 target_offset = 220
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 220
 runtime_resolution_required = true
 
 [[relocs]]
@@ -395,6 +424,8 @@ original_encoded_gba = 0x8272a78
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/obtain-item"
 target_export = "gText_ObtainedTheItem"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -404,6 +435,8 @@ original_encoded_gba = 0x8272a9a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/obtain-item"
 target_export = "gText_PutItemInPocket"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -414,6 +447,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/obtain-item"
 target_export = "EventScript_ObtainDecorationMessage"
 target_offset = 242
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 242
 runtime_resolution_required = true
 
 [[relocs]]
@@ -424,6 +459,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/obtain-item"
 target_export = "EventScript_ObtainedDecor"
 target_offset = 269
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 269
 runtime_resolution_required = true
 
 [[relocs]]
@@ -434,6 +471,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/obtain-item"
 target_export = "EventScript_NoRoomForDecor"
 target_offset = 292
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 292
 runtime_resolution_required = true
 
 [[relocs]]
@@ -443,6 +482,8 @@ original_encoded_gba = 0x8272b09
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/obtain-item"
 target_export = "gText_ObtainedTheDecor"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -452,6 +493,8 @@ original_encoded_gba = 0x8272b48
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/obtain-item"
 target_export = "gText_TheDecorWasTransferredToThePC"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -462,6 +505,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/obtain-item"
 target_export = "EventScript_BufferPocketNameAndTryFanfare"
 target_offset = 53
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 53
 runtime_resolution_required = true
 
 [[relocs]]
@@ -472,6 +517,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/obtain-item"
 target_export = "EventScript_PickUpItem"
 target_offset = 359
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 359
 runtime_resolution_required = true
 
 [[relocs]]
@@ -482,6 +529,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/obtain-item"
 target_export = "EventScript_NoRoomToPickUpItem"
 target_offset = 462
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 462
 runtime_resolution_required = true
 
 [[relocs]]
@@ -492,6 +541,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/obtain-item"
 target_export = "EventScript_FoundTMHM"
 target_offset = 444
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 444
 runtime_resolution_required = true
 
 [[relocs]]
@@ -502,6 +553,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/obtain-item"
 target_export = "EventScript_FoundItem"
 target_offset = 456
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 456
 runtime_resolution_required = true
 
 [[relocs]]
@@ -512,6 +565,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/obtain-item"
 target_export = "EventScript_PutBattlePyramidItemInBag"
 target_offset = 435
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 435
 runtime_resolution_required = true
 
 [[relocs]]
@@ -521,6 +576,8 @@ original_encoded_gba = 0x8272a9a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/obtain-item"
 target_export = "gText_PutItemInPocket"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -530,6 +587,8 @@ original_encoded_gba = 0x8272aea
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/obtain-item"
 target_export = "gText_PlayerPutItemInBag"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -539,6 +598,8 @@ original_encoded_gba = 0x82731a9
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/event-scripts"
 target_export = "gText_PlayerFoundOneTMHM"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -548,6 +609,8 @@ original_encoded_gba = 0x8272abf
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/obtain-item"
 target_export = "gText_PlayerFoundOneItem"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -557,6 +620,8 @@ original_encoded_gba = 0x8272a78
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/obtain-item"
 target_export = "gText_ObtainedTheItem"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -566,6 +631,8 @@ original_encoded_gba = 0x8272ad0
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/obtain-item"
 target_export = "gText_TooBadBagIsFull"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -576,6 +643,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/obtain-item"
 target_export = "EventScript_BufferPocketNameAndTryFanfare"
 target_offset = 53
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 53
 runtime_resolution_required = true
 
 [[relocs]]
@@ -586,6 +655,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/obtain-item"
 target_export = "EventScript_PickUpHiddenItem"
 target_offset = 533
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 533
 runtime_resolution_required = true
 
 [[relocs]]
@@ -596,6 +667,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/obtain-item"
 target_export = "EventScript_NoRoomForHiddenItem"
 target_offset = 628
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 628
 runtime_resolution_required = true
 
 [[relocs]]
@@ -606,6 +679,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/obtain-item"
 target_export = "EventScript_FoundHiddenTMHM"
 target_offset = 571
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 571
 runtime_resolution_required = true
 
 [[relocs]]
@@ -616,6 +691,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/obtain-item"
 target_export = "EventScript_FoundHiddenItem"
 target_offset = 588
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 588
 runtime_resolution_required = true
 
 [[relocs]]
@@ -625,6 +702,8 @@ original_encoded_gba = 0x82731a9
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/event-scripts"
 target_export = "gText_PlayerFoundOneTMHM"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -635,6 +714,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/obtain-item"
 target_export = "EventScript_PutHiddenItemInPocket"
 target_offset = 599
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 599
 runtime_resolution_required = true
 
 [[relocs]]
@@ -644,6 +725,8 @@ original_encoded_gba = 0x8272abf
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/obtain-item"
 target_export = "gText_PlayerFoundOneItem"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -654,6 +737,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/obtain-item"
 target_export = "EventScript_PutHiddenItemInPocket"
 target_offset = 599
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 599
 runtime_resolution_required = true
 
 [[relocs]]
@@ -663,6 +748,8 @@ original_encoded_gba = 0x8272a9a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/obtain-item"
 target_export = "gText_PutItemInPocket"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -672,6 +759,8 @@ original_encoded_gba = 0x8272abf
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/obtain-item"
 target_export = "gText_PlayerFoundOneItem"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -681,4 +770,666 @@ original_encoded_gba = 0x8272ad0
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/obtain-item"
 target_export = "gText_TooBadBagIsFull"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 5
+
+[[boundaries]]
+payload_offset = 5
+length = 5
+
+[[boundaries]]
+payload_offset = 10
+length = 5
+
+[[boundaries]]
+payload_offset = 15
+length = 1
+
+[[boundaries]]
+payload_offset = 16
+length = 6
+
+[[boundaries]]
+payload_offset = 22
+length = 3
+
+[[boundaries]]
+payload_offset = 25
+length = 5
+
+[[boundaries]]
+payload_offset = 30
+length = 5
+
+[[boundaries]]
+payload_offset = 35
+length = 6
+
+[[boundaries]]
+payload_offset = 41
+length = 5
+
+[[boundaries]]
+payload_offset = 46
+length = 6
+
+[[boundaries]]
+payload_offset = 52
+length = 1
+
+[[boundaries]]
+payload_offset = 53
+length = 5
+
+[[boundaries]]
+payload_offset = 58
+length = 5
+
+[[boundaries]]
+payload_offset = 63
+length = 6
+
+[[boundaries]]
+payload_offset = 69
+length = 5
+
+[[boundaries]]
+payload_offset = 74
+length = 6
+
+[[boundaries]]
+payload_offset = 80
+length = 5
+
+[[boundaries]]
+payload_offset = 85
+length = 6
+
+[[boundaries]]
+payload_offset = 91
+length = 5
+
+[[boundaries]]
+payload_offset = 96
+length = 6
+
+[[boundaries]]
+payload_offset = 102
+length = 5
+
+[[boundaries]]
+payload_offset = 107
+length = 6
+
+[[boundaries]]
+payload_offset = 113
+length = 1
+
+[[boundaries]]
+payload_offset = 114
+length = 4
+
+[[boundaries]]
+payload_offset = 118
+length = 5
+
+[[boundaries]]
+payload_offset = 123
+length = 6
+
+[[boundaries]]
+payload_offset = 129
+length = 1
+
+[[boundaries]]
+payload_offset = 130
+length = 4
+
+[[boundaries]]
+payload_offset = 134
+length = 5
+
+[[boundaries]]
+payload_offset = 139
+length = 6
+
+[[boundaries]]
+payload_offset = 145
+length = 1
+
+[[boundaries]]
+payload_offset = 146
+length = 4
+
+[[boundaries]]
+payload_offset = 150
+length = 5
+
+[[boundaries]]
+payload_offset = 155
+length = 6
+
+[[boundaries]]
+payload_offset = 161
+length = 1
+
+[[boundaries]]
+payload_offset = 162
+length = 4
+
+[[boundaries]]
+payload_offset = 166
+length = 5
+
+[[boundaries]]
+payload_offset = 171
+length = 6
+
+[[boundaries]]
+payload_offset = 177
+length = 1
+
+[[boundaries]]
+payload_offset = 178
+length = 4
+
+[[boundaries]]
+payload_offset = 182
+length = 5
+
+[[boundaries]]
+payload_offset = 187
+length = 6
+
+[[boundaries]]
+payload_offset = 193
+length = 1
+
+[[boundaries]]
+payload_offset = 194
+length = 5
+
+[[boundaries]]
+payload_offset = 199
+length = 1
+
+[[boundaries]]
+payload_offset = 200
+length = 6
+
+[[boundaries]]
+payload_offset = 206
+length = 2
+
+[[boundaries]]
+payload_offset = 208
+length = 5
+
+[[boundaries]]
+payload_offset = 213
+length = 1
+
+[[boundaries]]
+payload_offset = 214
+length = 5
+
+[[boundaries]]
+payload_offset = 219
+length = 1
+
+[[boundaries]]
+payload_offset = 220
+length = 3
+
+[[boundaries]]
+payload_offset = 223
+length = 1
+
+[[boundaries]]
+payload_offset = 224
+length = 3
+
+[[boundaries]]
+payload_offset = 227
+length = 1
+
+[[boundaries]]
+payload_offset = 228
+length = 3
+
+[[boundaries]]
+payload_offset = 231
+length = 5
+
+[[boundaries]]
+payload_offset = 236
+length = 5
+
+[[boundaries]]
+payload_offset = 241
+length = 1
+
+[[boundaries]]
+payload_offset = 242
+length = 4
+
+[[boundaries]]
+payload_offset = 246
+length = 5
+
+[[boundaries]]
+payload_offset = 251
+length = 6
+
+[[boundaries]]
+payload_offset = 257
+length = 5
+
+[[boundaries]]
+payload_offset = 262
+length = 6
+
+[[boundaries]]
+payload_offset = 268
+length = 1
+
+[[boundaries]]
+payload_offset = 269
+length = 3
+
+[[boundaries]]
+payload_offset = 272
+length = 5
+
+[[boundaries]]
+payload_offset = 277
+length = 1
+
+[[boundaries]]
+payload_offset = 278
+length = 6
+
+[[boundaries]]
+payload_offset = 284
+length = 2
+
+[[boundaries]]
+payload_offset = 286
+length = 5
+
+[[boundaries]]
+payload_offset = 291
+length = 1
+
+[[boundaries]]
+payload_offset = 292
+length = 5
+
+[[boundaries]]
+payload_offset = 297
+length = 1
+
+[[boundaries]]
+payload_offset = 298
+length = 1
+
+[[boundaries]]
+payload_offset = 299
+length = 1
+
+[[boundaries]]
+payload_offset = 300
+length = 1
+
+[[boundaries]]
+payload_offset = 301
+length = 5
+
+[[boundaries]]
+payload_offset = 306
+length = 5
+
+[[boundaries]]
+payload_offset = 311
+length = 5
+
+[[boundaries]]
+payload_offset = 316
+length = 5
+
+[[boundaries]]
+payload_offset = 321
+length = 6
+
+[[boundaries]]
+payload_offset = 327
+length = 3
+
+[[boundaries]]
+payload_offset = 330
+length = 5
+
+[[boundaries]]
+payload_offset = 335
+length = 5
+
+[[boundaries]]
+payload_offset = 340
+length = 6
+
+[[boundaries]]
+payload_offset = 346
+length = 5
+
+[[boundaries]]
+payload_offset = 351
+length = 6
+
+[[boundaries]]
+payload_offset = 357
+length = 1
+
+[[boundaries]]
+payload_offset = 358
+length = 1
+
+[[boundaries]]
+payload_offset = 359
+length = 3
+
+[[boundaries]]
+payload_offset = 362
+length = 5
+
+[[boundaries]]
+payload_offset = 367
+length = 5
+
+[[boundaries]]
+payload_offset = 372
+length = 5
+
+[[boundaries]]
+payload_offset = 377
+length = 5
+
+[[boundaries]]
+payload_offset = 382
+length = 6
+
+[[boundaries]]
+payload_offset = 388
+length = 5
+
+[[boundaries]]
+payload_offset = 393
+length = 6
+
+[[boundaries]]
+payload_offset = 399
+length = 1
+
+[[boundaries]]
+payload_offset = 400
+length = 1
+
+[[boundaries]]
+payload_offset = 401
+length = 6
+
+[[boundaries]]
+payload_offset = 407
+length = 5
+
+[[boundaries]]
+payload_offset = 412
+length = 3
+
+[[boundaries]]
+payload_offset = 415
+length = 5
+
+[[boundaries]]
+payload_offset = 420
+length = 6
+
+[[boundaries]]
+payload_offset = 426
+length = 6
+
+[[boundaries]]
+payload_offset = 432
+length = 2
+
+[[boundaries]]
+payload_offset = 434
+length = 1
+
+[[boundaries]]
+payload_offset = 435
+length = 6
+
+[[boundaries]]
+payload_offset = 441
+length = 2
+
+[[boundaries]]
+payload_offset = 443
+length = 1
+
+[[boundaries]]
+payload_offset = 444
+length = 6
+
+[[boundaries]]
+payload_offset = 450
+length = 5
+
+[[boundaries]]
+payload_offset = 455
+length = 1
+
+[[boundaries]]
+payload_offset = 456
+length = 5
+
+[[boundaries]]
+payload_offset = 461
+length = 1
+
+[[boundaries]]
+payload_offset = 462
+length = 6
+
+[[boundaries]]
+payload_offset = 468
+length = 2
+
+[[boundaries]]
+payload_offset = 470
+length = 6
+
+[[boundaries]]
+payload_offset = 476
+length = 2
+
+[[boundaries]]
+payload_offset = 478
+length = 5
+
+[[boundaries]]
+payload_offset = 483
+length = 1
+
+[[boundaries]]
+payload_offset = 484
+length = 1
+
+[[boundaries]]
+payload_offset = 485
+length = 1
+
+[[boundaries]]
+payload_offset = 486
+length = 5
+
+[[boundaries]]
+payload_offset = 491
+length = 5
+
+[[boundaries]]
+payload_offset = 496
+length = 6
+
+[[boundaries]]
+payload_offset = 502
+length = 3
+
+[[boundaries]]
+payload_offset = 505
+length = 5
+
+[[boundaries]]
+payload_offset = 510
+length = 5
+
+[[boundaries]]
+payload_offset = 515
+length = 6
+
+[[boundaries]]
+payload_offset = 521
+length = 5
+
+[[boundaries]]
+payload_offset = 526
+length = 6
+
+[[boundaries]]
+payload_offset = 532
+length = 1
+
+[[boundaries]]
+payload_offset = 533
+length = 5
+
+[[boundaries]]
+payload_offset = 538
+length = 5
+
+[[boundaries]]
+payload_offset = 543
+length = 5
+
+[[boundaries]]
+payload_offset = 548
+length = 5
+
+[[boundaries]]
+payload_offset = 553
+length = 6
+
+[[boundaries]]
+payload_offset = 559
+length = 5
+
+[[boundaries]]
+payload_offset = 564
+length = 6
+
+[[boundaries]]
+payload_offset = 570
+length = 1
+
+[[boundaries]]
+payload_offset = 571
+length = 6
+
+[[boundaries]]
+payload_offset = 577
+length = 5
+
+[[boundaries]]
+payload_offset = 582
+length = 5
+
+[[boundaries]]
+payload_offset = 588
+length = 5
+
+[[boundaries]]
+payload_offset = 593
+length = 5
+
+[[boundaries]]
+payload_offset = 599
+length = 1
+
+[[boundaries]]
+payload_offset = 600
+length = 1
+
+[[boundaries]]
+payload_offset = 601
+length = 6
+
+[[boundaries]]
+payload_offset = 607
+length = 5
+
+[[boundaries]]
+payload_offset = 612
+length = 6
+
+[[boundaries]]
+payload_offset = 618
+length = 2
+
+[[boundaries]]
+payload_offset = 620
+length = 3
+
+[[boundaries]]
+payload_offset = 623
+length = 3
+
+[[boundaries]]
+payload_offset = 626
+length = 1
+
+[[boundaries]]
+payload_offset = 627
+length = 1
+
+[[boundaries]]
+payload_offset = 628
+length = 6
+
+[[boundaries]]
+payload_offset = 634
+length = 2
+
+[[boundaries]]
+payload_offset = 636
+length = 6
+
+[[boundaries]]
+payload_offset = 642
+length = 2
+
+[[boundaries]]
+payload_offset = 644
+length = 5
+
+[[boundaries]]
+payload_offset = 649
+length = 1
+
+[[boundaries]]
+payload_offset = 650
+length = 1

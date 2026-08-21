@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 13
 reloc_count = 20
+instruction_count = 70
 
 [[segments]]
 kind = "bytecode"
@@ -136,6 +137,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity-devoncorp-1f"
 target_export = "RustboroCity_DevonCorp_1F_EventScript_BlockStairs"
 target_offset = 16
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 10
 runtime_resolution_required = true
 
 [[relocs]]
@@ -146,6 +149,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity-devoncorp-1f"
 target_export = "RustboroCity_DevonCorp_1F_EventScript_GoodsRecovered"
 target_offset = 68
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 62
 runtime_resolution_required = true
 
 [[relocs]]
@@ -156,6 +161,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity-devoncorp-1f"
 target_export = "RustboroCity_DevonCorp_1F_EventScript_RobberWasntBright"
 target_offset = 58
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 52
 runtime_resolution_required = true
 
 [[relocs]]
@@ -165,6 +172,8 @@ original_encoded_gba = 0x82113d1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-devoncorp-1f"
 target_export = "RustboroCity_DevonCorp_1F_Text_ThoseShoesAreOurProduct"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -174,6 +183,8 @@ original_encoded_gba = 0x8211446
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-devoncorp-1f"
 target_export = "RustboroCity_DevonCorp_1F_Text_RobberWasntVeryBright"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -183,6 +194,8 @@ original_encoded_gba = 0x82114de
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-devoncorp-1f"
 target_export = "RustboroCity_DevonCorp_1F_Text_SoundsLikeStolenGoodsRecovered"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -193,6 +206,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity-devoncorp-1f"
 target_export = "RustboroCity_DevonCorp_1F_EventScript_AlwaysWelcome"
 target_offset = 117
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 111
 runtime_resolution_required = true
 
 [[relocs]]
@@ -203,6 +218,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity-devoncorp-1f"
 target_export = "RustboroCity_DevonCorp_1F_EventScript_GotRobbed"
 target_offset = 127
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 121
 runtime_resolution_required = true
 
 [[relocs]]
@@ -213,6 +230,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity-devoncorp-1f"
 target_export = "RustboroCity_DevonCorp_1F_EventScript_GotRobbed"
 target_offset = 127
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 121
 runtime_resolution_required = true
 
 [[relocs]]
@@ -222,6 +241,8 @@ original_encoded_gba = 0x821151b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-devoncorp-1f"
 target_export = "RustboroCity_DevonCorp_1F_Text_OnlyAuthorizedPeopleEnter"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -231,6 +252,8 @@ original_encoded_gba = 0x8211585
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-devoncorp-1f"
 target_export = "RustboroCity_DevonCorp_1F_Text_YoureAlwaysWelcomeHere"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -240,6 +263,8 @@ original_encoded_gba = 0x8211558
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-devoncorp-1f"
 target_export = "RustboroCity_DevonCorp_1F_Text_HowCouldWeGetRobbed"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -250,6 +275,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity-devoncorp-1f"
 target_export = "RustboroCity_DevonCorp_1F_EventScript_WelcomeToDevonCorp"
 target_offset = 176
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 170
 runtime_resolution_required = true
 
 [[relocs]]
@@ -260,6 +287,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity-devoncorp-1f"
 target_export = "RustboroCity_DevonCorp_1F_EventScript_StaffGotRobbed"
 target_offset = 186
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 180
 runtime_resolution_required = true
 
 [[relocs]]
@@ -270,6 +299,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity-devoncorp-1f"
 target_export = "RustboroCity_DevonCorp_1F_EventScript_StaffGotRobbed"
 target_offset = 186
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 180
 runtime_resolution_required = true
 
 [[relocs]]
@@ -279,6 +310,8 @@ original_encoded_gba = 0x821131b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-devoncorp-1f"
 target_export = "RustboroCity_DevonCorp_1F_Text_WelcomeToDevonCorp"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -288,6 +321,8 @@ original_encoded_gba = 0x821131b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-devoncorp-1f"
 target_export = "RustboroCity_DevonCorp_1F_Text_WelcomeToDevonCorp"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -297,6 +332,8 @@ original_encoded_gba = 0x821138b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-devoncorp-1f"
 target_export = "RustboroCity_DevonCorp_1F_Text_StaffGotRobbed"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -306,6 +343,8 @@ original_encoded_gba = 0x82115ac
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-devoncorp-1f"
 target_export = "RustboroCity_DevonCorp_1F_Text_RocksMetalDisplay"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -315,4 +354,286 @@ original_encoded_gba = 0x8211722
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-devoncorp-1f"
 target_export = "RustboroCity_DevonCorp_1F_Text_ProductDisplay"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 6
+
+[[boundaries]]
+payload_offset = 9
+length = 1
+
+[[boundaries]]
+payload_offset = 10
+length = 7
+
+[[boundaries]]
+payload_offset = 17
+length = 4
+
+[[boundaries]]
+payload_offset = 21
+length = 1
+
+[[boundaries]]
+payload_offset = 22
+length = 1
+
+[[boundaries]]
+payload_offset = 23
+length = 1
+
+[[boundaries]]
+payload_offset = 24
+length = 3
+
+[[boundaries]]
+payload_offset = 27
+length = 6
+
+[[boundaries]]
+payload_offset = 33
+length = 3
+
+[[boundaries]]
+payload_offset = 36
+length = 6
+
+[[boundaries]]
+payload_offset = 42
+length = 6
+
+[[boundaries]]
+payload_offset = 48
+length = 2
+
+[[boundaries]]
+payload_offset = 50
+length = 1
+
+[[boundaries]]
+payload_offset = 51
+length = 1
+
+[[boundaries]]
+payload_offset = 52
+length = 6
+
+[[boundaries]]
+payload_offset = 58
+length = 2
+
+[[boundaries]]
+payload_offset = 60
+length = 1
+
+[[boundaries]]
+payload_offset = 61
+length = 1
+
+[[boundaries]]
+payload_offset = 62
+length = 6
+
+[[boundaries]]
+payload_offset = 68
+length = 2
+
+[[boundaries]]
+payload_offset = 70
+length = 1
+
+[[boundaries]]
+payload_offset = 71
+length = 1
+
+[[boundaries]]
+payload_offset = 72
+length = 1
+
+[[boundaries]]
+payload_offset = 73
+length = 1
+
+[[boundaries]]
+payload_offset = 74
+length = 3
+
+[[boundaries]]
+payload_offset = 77
+length = 6
+
+[[boundaries]]
+payload_offset = 83
+length = 3
+
+[[boundaries]]
+payload_offset = 86
+length = 6
+
+[[boundaries]]
+payload_offset = 92
+length = 3
+
+[[boundaries]]
+payload_offset = 95
+length = 6
+
+[[boundaries]]
+payload_offset = 101
+length = 6
+
+[[boundaries]]
+payload_offset = 107
+length = 2
+
+[[boundaries]]
+payload_offset = 109
+length = 1
+
+[[boundaries]]
+payload_offset = 110
+length = 1
+
+[[boundaries]]
+payload_offset = 111
+length = 6
+
+[[boundaries]]
+payload_offset = 117
+length = 2
+
+[[boundaries]]
+payload_offset = 119
+length = 1
+
+[[boundaries]]
+payload_offset = 120
+length = 1
+
+[[boundaries]]
+payload_offset = 121
+length = 6
+
+[[boundaries]]
+payload_offset = 127
+length = 2
+
+[[boundaries]]
+payload_offset = 129
+length = 1
+
+[[boundaries]]
+payload_offset = 130
+length = 1
+
+[[boundaries]]
+payload_offset = 131
+length = 1
+
+[[boundaries]]
+payload_offset = 132
+length = 1
+
+[[boundaries]]
+payload_offset = 133
+length = 3
+
+[[boundaries]]
+payload_offset = 136
+length = 6
+
+[[boundaries]]
+payload_offset = 142
+length = 3
+
+[[boundaries]]
+payload_offset = 145
+length = 6
+
+[[boundaries]]
+payload_offset = 151
+length = 3
+
+[[boundaries]]
+payload_offset = 154
+length = 6
+
+[[boundaries]]
+payload_offset = 160
+length = 6
+
+[[boundaries]]
+payload_offset = 166
+length = 2
+
+[[boundaries]]
+payload_offset = 168
+length = 1
+
+[[boundaries]]
+payload_offset = 169
+length = 1
+
+[[boundaries]]
+payload_offset = 170
+length = 6
+
+[[boundaries]]
+payload_offset = 176
+length = 2
+
+[[boundaries]]
+payload_offset = 178
+length = 1
+
+[[boundaries]]
+payload_offset = 179
+length = 1
+
+[[boundaries]]
+payload_offset = 180
+length = 6
+
+[[boundaries]]
+payload_offset = 186
+length = 2
+
+[[boundaries]]
+payload_offset = 188
+length = 1
+
+[[boundaries]]
+payload_offset = 189
+length = 1
+
+[[boundaries]]
+payload_offset = 190
+length = 6
+
+[[boundaries]]
+payload_offset = 196
+length = 2
+
+[[boundaries]]
+payload_offset = 198
+length = 1
+
+[[boundaries]]
+payload_offset = 199
+length = 6
+
+[[boundaries]]
+payload_offset = 205
+length = 2
+
+[[boundaries]]
+payload_offset = 207
+length = 1

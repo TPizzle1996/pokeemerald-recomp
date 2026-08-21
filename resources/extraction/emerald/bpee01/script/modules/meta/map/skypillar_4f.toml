@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 3
 reloc_count = 1
+instruction_count = 9
 
 [[segments]]
 kind = "bytecode"
@@ -56,4 +57,42 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/skypillar-4f"
 target_export = "SkyPillar_4F_EventScript_CleanFloor"
 target_offset = 33
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 17
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 5
+
+[[boundaries]]
+payload_offset = 5
+length = 6
+
+[[boundaries]]
+payload_offset = 11
+length = 5
+
+[[boundaries]]
+payload_offset = 16
+length = 1
+
+[[boundaries]]
+payload_offset = 17
+length = 3
+
+[[boundaries]]
+payload_offset = 20
+length = 1
+
+[[boundaries]]
+payload_offset = 21
+length = 2
+
+[[boundaries]]
+payload_offset = 23
+length = 8
+
+[[boundaries]]
+payload_offset = 31
+length = 1

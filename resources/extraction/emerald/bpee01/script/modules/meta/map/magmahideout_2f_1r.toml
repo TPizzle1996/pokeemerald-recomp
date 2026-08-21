@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 4
 reloc_count = 12
+instruction_count = 16
 
 [[segments]]
 kind = "bytecode"
@@ -63,6 +64,8 @@ original_encoded_gba = 0x8239bad
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/magmahideout-2f-1r"
 target_export = "MagmaHideout_2F_1R_Text_Grunt14Intro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -72,6 +75,8 @@ original_encoded_gba = 0x8239c4b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/magmahideout-2f-1r"
 target_export = "MagmaHideout_2F_1R_Text_Grunt14Defeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -81,6 +86,8 @@ original_encoded_gba = 0x8239c74
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/magmahideout-2f-1r"
 target_export = "MagmaHideout_2F_1R_Text_Grunt14PostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -90,6 +97,8 @@ original_encoded_gba = 0x8239cab
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/magmahideout-2f-1r"
 target_export = "MagmaHideout_2F_1R_Text_Grunt3Intro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -99,6 +108,8 @@ original_encoded_gba = 0x8239d09
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/magmahideout-2f-1r"
 target_export = "MagmaHideout_2F_1R_Text_Grunt3Defeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -108,6 +119,8 @@ original_encoded_gba = 0x8239d1d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/magmahideout-2f-1r"
 target_export = "MagmaHideout_2F_1R_Text_Grunt3PostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -117,6 +130,8 @@ original_encoded_gba = 0x8239d62
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/magmahideout-2f-1r"
 target_export = "MagmaHideout_2F_1R_Text_Grunt4Intro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -126,6 +141,8 @@ original_encoded_gba = 0x8239d75
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/magmahideout-2f-1r"
 target_export = "MagmaHideout_2F_1R_Text_Grunt4Defeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -135,6 +152,8 @@ original_encoded_gba = 0x8239d7d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/magmahideout-2f-1r"
 target_export = "MagmaHideout_2F_1R_Text_Grunt4PostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -144,6 +163,8 @@ original_encoded_gba = 0x8239dc5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/magmahideout-2f-1r"
 target_export = "MagmaHideout_2F_1R_Text_Grunt5Intro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -153,6 +174,8 @@ original_encoded_gba = 0x8239dda
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/magmahideout-2f-1r"
 target_export = "MagmaHideout_2F_1R_Text_Grunt5Defeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -162,4 +185,70 @@ original_encoded_gba = 0x8239de2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/magmahideout-2f-1r"
 target_export = "MagmaHideout_2F_1R_Text_Grunt5PostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 14
+
+[[boundaries]]
+payload_offset = 14
+length = 6
+
+[[boundaries]]
+payload_offset = 20
+length = 2
+
+[[boundaries]]
+payload_offset = 22
+length = 1
+
+[[boundaries]]
+payload_offset = 23
+length = 14
+
+[[boundaries]]
+payload_offset = 37
+length = 6
+
+[[boundaries]]
+payload_offset = 43
+length = 2
+
+[[boundaries]]
+payload_offset = 45
+length = 1
+
+[[boundaries]]
+payload_offset = 46
+length = 14
+
+[[boundaries]]
+payload_offset = 60
+length = 6
+
+[[boundaries]]
+payload_offset = 66
+length = 2
+
+[[boundaries]]
+payload_offset = 68
+length = 1
+
+[[boundaries]]
+payload_offset = 69
+length = 14
+
+[[boundaries]]
+payload_offset = 83
+length = 6
+
+[[boundaries]]
+payload_offset = 89
+length = 2
+
+[[boundaries]]
+payload_offset = 91
+length = 1

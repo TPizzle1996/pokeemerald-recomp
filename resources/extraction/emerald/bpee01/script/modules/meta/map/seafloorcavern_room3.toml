@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 2
 reloc_count = 6
+instruction_count = 8
 
 [[segments]]
 kind = "bytecode"
@@ -47,6 +48,8 @@ original_encoded_gba = 0x8234966
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/seafloorcavern-room3"
 target_export = "SeafloorCavern_Room3_Text_ShellyIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -56,6 +59,8 @@ original_encoded_gba = 0x8234a79
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/seafloorcavern-room3"
 target_export = "SeafloorCavern_Room3_Text_ShellyDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -65,6 +70,8 @@ original_encoded_gba = 0x8234a8a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/seafloorcavern-room3"
 target_export = "SeafloorCavern_Room3_Text_ShellyPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -74,6 +81,8 @@ original_encoded_gba = 0x8234b3a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/seafloorcavern-room3"
 target_export = "SeafloorCavern_Room3_Text_Grunt5Intro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -83,6 +92,8 @@ original_encoded_gba = 0x8234bfe
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/seafloorcavern-room3"
 target_export = "SeafloorCavern_Room3_Text_Grunt5Defeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -92,4 +103,38 @@ original_encoded_gba = 0x8234c04
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/seafloorcavern-room3"
 target_export = "SeafloorCavern_Room3_Text_Grunt5PostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 14
+
+[[boundaries]]
+payload_offset = 14
+length = 6
+
+[[boundaries]]
+payload_offset = 20
+length = 2
+
+[[boundaries]]
+payload_offset = 22
+length = 1
+
+[[boundaries]]
+payload_offset = 23
+length = 14
+
+[[boundaries]]
+payload_offset = 37
+length = 6
+
+[[boundaries]]
+payload_offset = 43
+length = 2
+
+[[boundaries]]
+payload_offset = 45
+length = 1

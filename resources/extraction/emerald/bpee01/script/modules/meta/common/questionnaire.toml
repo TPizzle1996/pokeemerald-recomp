@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 5
 reloc_count = 23
+instruction_count = 63
 
 [[segments]]
 kind = "bytecode"
@@ -71,6 +72,8 @@ original_encoded_gba = 0x827339f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/questionnaire"
 target_export = "Questionnaire_Text_FillOut"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -81,6 +84,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/questionnaire"
 target_export = "Questionnaire_EventScript_Release"
 target_offset = 226
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 226
 runtime_resolution_required = true
 
 [[relocs]]
@@ -91,6 +96,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pc"
 target_export = "Common_ShowEasyChatScreen"
 target_offset = 234
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 234
 runtime_resolution_required = true
 
 [[relocs]]
@@ -101,6 +108,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/questionnaire"
 target_export = "Questionnaire_EventScript_PlayerInputMysteryEventPhrase"
 target_offset = 82
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 82
 runtime_resolution_required = true
 
 [[relocs]]
@@ -111,6 +120,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/questionnaire"
 target_export = "Questionnaire_EventScript_PlayerInputMysteryGiftPhrase"
 target_offset = 154
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 154
 runtime_resolution_required = true
 
 [[relocs]]
@@ -121,6 +132,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/questionnaire"
 target_export = "Questionnaire_EventScript_Release"
 target_offset = 226
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 226
 runtime_resolution_required = true
 
 [[relocs]]
@@ -131,6 +144,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/questionnaire"
 target_export = "Questionnaire_EventScript_ThankYou"
 target_offset = 228
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 228
 runtime_resolution_required = true
 
 [[relocs]]
@@ -141,6 +156,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/questionnaire"
 target_export = "Questionnaire_EventScript_ThankYou"
 target_offset = 228
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 228
 runtime_resolution_required = true
 
 [[relocs]]
@@ -151,6 +168,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/questionnaire"
 target_export = "Questionnaire_EventScript_ThankYou"
 target_offset = 228
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 228
 runtime_resolution_required = true
 
 [[relocs]]
@@ -160,6 +179,8 @@ original_encoded_gba = 0x82725b0
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-facedown"
 target_export = "Common_Movement_FaceDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -169,6 +190,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -178,6 +201,8 @@ original_encoded_gba = 0x827259a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-delay48"
 target_export = "Common_Movement_Delay48"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -187,6 +212,8 @@ original_encoded_gba = 0x8273506
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/questionnaire"
 target_export = "Questionnaire_Text_YouKnowThoseWordsEvent"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -196,6 +223,8 @@ original_encoded_gba = 0x8273559
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/questionnaire"
 target_export = "Questionnaire_Text_YouCanAccessMysteryEvent"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -206,6 +235,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/questionnaire"
 target_export = "Questionnaire_EventScript_ThankYou"
 target_offset = 228
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 228
 runtime_resolution_required = true
 
 [[relocs]]
@@ -216,6 +247,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/questionnaire"
 target_export = "Questionnaire_EventScript_ThankYou"
 target_offset = 228
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 228
 runtime_resolution_required = true
 
 [[relocs]]
@@ -225,6 +258,8 @@ original_encoded_gba = 0x82725b0
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-facedown"
 target_export = "Common_Movement_FaceDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -234,6 +269,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -243,6 +280,8 @@ original_encoded_gba = 0x827259a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-delay48"
 target_export = "Common_Movement_Delay48"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -252,6 +291,8 @@ original_encoded_gba = 0x8273446
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/questionnaire"
 target_export = "Questionnaire_Text_YouKnowThoseWordsGift"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -261,6 +302,8 @@ original_encoded_gba = 0x82734cc
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/questionnaire"
 target_export = "Questionnaire_Text_YouCanAccessMysteryGift"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -270,6 +313,8 @@ original_encoded_gba = 0x82725b0
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-facedown"
 target_export = "Common_Movement_FaceDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -279,4 +324,258 @@ original_encoded_gba = 0x82733d8
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/questionnaire"
 target_export = "Questionnaire_Text_ThankYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 6
+
+[[boundaries]]
+payload_offset = 7
+length = 2
+
+[[boundaries]]
+payload_offset = 9
+length = 5
+
+[[boundaries]]
+payload_offset = 14
+length = 6
+
+[[boundaries]]
+payload_offset = 20
+length = 5
+
+[[boundaries]]
+payload_offset = 25
+length = 5
+
+[[boundaries]]
+payload_offset = 30
+length = 1
+
+[[boundaries]]
+payload_offset = 31
+length = 1
+
+[[boundaries]]
+payload_offset = 32
+length = 5
+
+[[boundaries]]
+payload_offset = 37
+length = 5
+
+[[boundaries]]
+payload_offset = 42
+length = 6
+
+[[boundaries]]
+payload_offset = 48
+length = 5
+
+[[boundaries]]
+payload_offset = 53
+length = 6
+
+[[boundaries]]
+payload_offset = 59
+length = 5
+
+[[boundaries]]
+payload_offset = 64
+length = 6
+
+[[boundaries]]
+payload_offset = 70
+length = 5
+
+[[boundaries]]
+payload_offset = 75
+length = 6
+
+[[boundaries]]
+payload_offset = 81
+length = 1
+
+[[boundaries]]
+payload_offset = 82
+length = 3
+
+[[boundaries]]
+payload_offset = 85
+length = 6
+
+[[boundaries]]
+payload_offset = 91
+length = 3
+
+[[boundaries]]
+payload_offset = 94
+length = 6
+
+[[boundaries]]
+payload_offset = 100
+length = 7
+
+[[boundaries]]
+payload_offset = 107
+length = 3
+
+[[boundaries]]
+payload_offset = 110
+length = 3
+
+[[boundaries]]
+payload_offset = 113
+length = 7
+
+[[boundaries]]
+payload_offset = 120
+length = 3
+
+[[boundaries]]
+payload_offset = 123
+length = 7
+
+[[boundaries]]
+payload_offset = 130
+length = 3
+
+[[boundaries]]
+payload_offset = 133
+length = 6
+
+[[boundaries]]
+payload_offset = 139
+length = 2
+
+[[boundaries]]
+payload_offset = 141
+length = 3
+
+[[boundaries]]
+payload_offset = 144
+length = 6
+
+[[boundaries]]
+payload_offset = 150
+length = 2
+
+[[boundaries]]
+payload_offset = 152
+length = 1
+
+[[boundaries]]
+payload_offset = 153
+length = 1
+
+[[boundaries]]
+payload_offset = 154
+length = 3
+
+[[boundaries]]
+payload_offset = 157
+length = 6
+
+[[boundaries]]
+payload_offset = 163
+length = 3
+
+[[boundaries]]
+payload_offset = 166
+length = 6
+
+[[boundaries]]
+payload_offset = 172
+length = 7
+
+[[boundaries]]
+payload_offset = 179
+length = 3
+
+[[boundaries]]
+payload_offset = 182
+length = 3
+
+[[boundaries]]
+payload_offset = 185
+length = 7
+
+[[boundaries]]
+payload_offset = 192
+length = 3
+
+[[boundaries]]
+payload_offset = 195
+length = 7
+
+[[boundaries]]
+payload_offset = 202
+length = 3
+
+[[boundaries]]
+payload_offset = 205
+length = 6
+
+[[boundaries]]
+payload_offset = 211
+length = 2
+
+[[boundaries]]
+payload_offset = 213
+length = 3
+
+[[boundaries]]
+payload_offset = 216
+length = 6
+
+[[boundaries]]
+payload_offset = 222
+length = 2
+
+[[boundaries]]
+payload_offset = 224
+length = 1
+
+[[boundaries]]
+payload_offset = 225
+length = 1
+
+[[boundaries]]
+payload_offset = 226
+length = 1
+
+[[boundaries]]
+payload_offset = 227
+length = 1
+
+[[boundaries]]
+payload_offset = 228
+length = 7
+
+[[boundaries]]
+payload_offset = 235
+length = 3
+
+[[boundaries]]
+payload_offset = 238
+length = 6
+
+[[boundaries]]
+payload_offset = 244
+length = 2
+
+[[boundaries]]
+payload_offset = 246
+length = 1
+
+[[boundaries]]
+payload_offset = 247
+length = 1

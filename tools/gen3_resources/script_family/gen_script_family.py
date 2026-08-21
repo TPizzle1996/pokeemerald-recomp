@@ -174,6 +174,37 @@ MOVEMENT_BRIDGE_BYTES_PIN = 12
 MART_TABLES_PIN = 38
 MART_TABLE_BYTES_PIN = 742
 
+# R13-G3 (shadow resolver seam): target sub-kind pins measured against
+# the qualified graph. SCRIPT_TARGET rows split into payload (module
+# bytecode, export boundary) / routing (region-gap dispatch table
+# starts) / bridge (the 3 recomp-local movement cases); TEXT_TARGET
+# rows are bundle members (canonical label inside a C bundle blob) or
+# per-label catalog ids (the 20 gift handoff labels); MART_TABLE_TARGET
+# rows are the 38 typed mart tables, the 198 dispatch-table targets, or
+# the 26 braille text-class edges. DISPATCH and BRAILLE stay deferred
+# through G3 (routing bytes are not module payload; the 22 braille
+# labels await their C handoff); everything else resolves to a live
+# arena/sibling-seam pointer in the shadow generation.
+TARGET_SUBKIND_PINS = {
+    # Measured 2026-08-21 against the qualified graph: 8,198 payload
+    # script targets + 7 routing-class script targets (dispatch rows
+    # into conditional tables) + 3 movement bridges close the 8,208
+    # SCRIPT_TARGET class; 6,187 bundle members + 20 per-label gift
+    # ids close 6,207 TEXT_TARGET; all 2,009 MOVEMENT_TARGET edges
+    # resolve to B resources (the 3 bridges are SCRIPT-class operands).
+    "SCRIPT_PAYLOAD": 8198,
+    "SCRIPT_ROUTING": 7,
+    "SCRIPT_BRIDGE": 3,
+    "TEXT_BUNDLE_MEMBER": 6187,
+    "TEXT_LABEL": 20,
+    "MOVEMENT_RESOURCE": 2009,
+    "MOVEMENT_BRIDGE": 0,
+    "MART_TABLE": 38,
+    "DISPATCH": 198,
+    "BRAILLE": 26,
+    "RAM_HOST": 18,
+}
+
 LABEL_RE = re.compile(r"^([A-Za-z_][A-Za-z0-9_]*)::?$")
 INCLUDE_RE = re.compile(
     r'^\s*\.include "data/(maps/([A-Za-z0-9_]+)/scripts\.inc|scripts/([A-Za-z0-9_]+)\.inc)"')
@@ -442,7 +473,7 @@ def emit_all(outdir, args, rom, modules, text_class_bytes, move_class_bytes,
              routing, operands, routing_relocs, gift_text_edges,
              braille_text_edges, bundle_of, move_id_of, base, std,
              object_refs, coord_refs, bg_refs, map_script_refs,
-             names_by_addr):
+             names_by_addr, dyn):
     out = outdir / "script" / "modules"
     check = args.check
     by_start = sorted(modules, key=lambda m: m.region_start)
@@ -521,6 +552,63 @@ def emit_all(outdir, args, rom, modules, text_class_bytes, move_class_bytes,
     write_if(out / "mart_tables.generated.toml",
              render_mart_tables(modules), check)
 
+    # ---- R13-G3 seam tables (plan sec 1): generated C inventory ----
+    # The std/F/mart rows resolve with the SAME entrypoint logic as the
+    # TOML renderers (the f_inbound TOML itself is not tomllib-parseable:
+    # its top-level `references` count key collides with the
+    # [[references]] array-of-tables name), so the C rows are built
+    # directly from the resolved data.
+    std_raw = []
+    for i, (off, typ, sym) in enumerate(sorted(std, key=lambda r: r[0])):
+        target = struct.unpack_from("<I", rom, off - GEN3_GBA_ROM_BASE)[0]
+        tmod, ex, moff, boundary = resolve_entrypoint(
+            "gStdScripts", dict(gba_target=target), by_start, routing,
+            move_class_bytes, names_by_addr)
+        std_raw.append(dict(slot=i, rom_offset=off, encoded_gba=target,
+                            module_key=tmod.id, export=ex["name"],
+                            module_offset=moff, boundary_kind=boundary))
+    f_raw = []
+    for kind, refs in (("map-scripts", map_script_refs),
+                       ("object-event", object_refs),
+                       ("coord-event", coord_refs),
+                       ("bg-event", bg_refs)):
+        for r in refs:
+            tmod, ex, moff, boundary = resolve_entrypoint(
+                kind, r, by_start, routing, move_class_bytes,
+                names_by_addr)
+            key = (r["map_key"][len("emerald:data/map/"):-len("/header")]
+                   if kind == "map-scripts"
+                   else r["map_name"].lower().replace("_", "-"))
+            same_map = resolve_same_map(kind, r, tmod)
+            map_symbol = (r["map_symbol"] if kind == "map-scripts"
+                          else r["map_name"])
+            f_raw.append(dict(kind=kind, map_symbol=map_symbol, map_key=key,
+                              gba_target=r["gba_target"],
+                              module_key=tmod.id, export=ex["name"],
+                              module_offset=moff, boundary_kind=boundary,
+                              same_map=same_map))
+    mart_raw = []
+    for m in sorted(modules, key=lambda m: m.region_start):
+        for s in m.segments:
+            if s.get("kind") != "static-data":
+                continue
+            ex = next((e for e in m.exports
+                       if e["original_gba_address"] == s["original_gba_start"]),
+                      None)
+            mart_raw.append(dict(
+                label=ex["name"] if ex else
+                f"table_0x{s['original_gba_start']:X}",
+                gba_address=s["original_gba_start"], module_key=m.id,
+                module_offset=s["payload_offset"], byte_count=s["byte_count"],
+                item_count=(s["byte_count"] - 2) // 2))
+    ram_rows = [dict(gba_address=op["target_gba"],
+                     source_gba_offset=op["source_gba_offset"])
+                for op in operands
+                if op["target_class"] == "RAM_DATA_TARGET"]
+    emit_script_native_tables(Path(args.root), args, rom, base, modules,
+                              routing_relocs, std_raw, f_raw, mart_raw,
+                              ram_rows, dyn)
+
     print(f"\n=== R13-G2 RESULTS ===")
     print(f"Modules: {len(modules)} (pinned: {MODULES_PIN})  [{n_map} map, {n_common} common, {n_gift} gift]")
     print(f"Payload bytes: {sum(m.payload_bytes for m in modules)} (pinned: {BYTECODE_PIN})")
@@ -563,6 +651,16 @@ def emit_all(outdir, args, rom, modules, text_class_bytes, move_class_bytes,
     print(f"\nDone. Files in {out}/")
 
 
+def payload_offset_of_opt(m, a):
+    """Payload offset of GBA address `a` in module `m`, or None when the
+    address is not inside one of `m`'s emitted segments (region gaps:
+    routing tables, movement bridges, etc.)."""
+    for s in m.segments:
+        if s["original_gba_start"] <= a < s["original_gba_start"] + s["byte_count"]:
+            return s["payload_offset"] + (a - s["original_gba_start"])
+    return None
+
+
 def render_meta(m):
     lines = [
         "# Generated by tools/gen3_resources/script_family/gen_script_family.py.",
@@ -584,6 +682,7 @@ def render_meta(m):
         f"segment_count = {len(m.segments)}",
         f"export_count = {len(m.exports)}",
         f"reloc_count = {len(m.relocs)}",
+        f"instruction_count = {len(m.boundaries)}",
         "",
     ]
     for s in m.segments:
@@ -624,7 +723,16 @@ def render_meta(m):
         if r.get("target_offset") is not None:
             lines.append(f"target_offset = {r['target_offset']}")
         lines += [
+            f"target_kind = \"{r['target_kind']}\"",
+            f"target_payload_offset = {r['target_payload_offset']}",
             f"runtime_resolution_required = {str(r['runtime_resolution_required']).lower()}",
+            "",
+        ]
+    for off, length in m.boundaries:
+        lines += [
+            "[[boundaries]]",
+            f"payload_offset = {off}",
+            f"length = {length}",
             "",
         ]
     return "\n".join(lines)
@@ -1241,6 +1349,672 @@ def render_mart_tables(modules):
     return "\n".join(lines)
 
 
+
+
+def render_script_native_h(n_mod, n_seg, n_exp, n_rel, n_rrt, n_bnd, n_dyn):
+    pins = [
+        ("EMERALD_SCRIPT_MODULE_COUNT", n_mod, 523),
+        ("EMERALD_SCRIPT_SEGMENT_COUNT", n_seg, 812),
+        ("EMERALD_SCRIPT_EXPORT_COUNT", n_exp, 7683),
+        ("EMERALD_SCRIPT_RELOC_COUNT", n_rel, 15874),
+        ("EMERALD_SCRIPT_ROUTING_RELOC_COUNT", n_rrt, 830),
+        ("EMERALD_SCRIPT_TOTAL_RELOC_COUNT", n_rel + n_rrt, 16704),
+        ("EMERALD_SCRIPT_STD_SCRIPT_COUNT", 11, 11),
+        ("EMERALD_SCRIPT_F_BINDING_COUNT", 3501, 3501),
+        ("EMERALD_SCRIPT_MART_COUNT", 38, 38),
+        ("EMERALD_SCRIPT_RAM_TARGET_COUNT", 18, 18),
+        ("EMERALD_SCRIPT_RAM_ALLOWLIST_COUNT", 1, 1),
+        ("EMERALD_SCRIPT_BRIDGE_COUNT", 3, 3),
+        ("EMERALD_SCRIPT_ARENA_PAYLOAD_BYTES", 207330, 207330),
+        ("EMERALD_SCRIPT_ARENA_ALIGNMENT", 16, 16),
+    ]
+    lines = [
+        "/* Generated by tools/gen3_resources/script_family/gen_script_family.py.",
+        " * Do not edit by hand; regeneration must be a no-op diff.",
+        " *",
+        " * R13-G3 shadow-seam native inventory (plan sec 1): the G2 script",
+        " * family metadata projected into C - 523 module rows, 812 segments,",
+        " * 7,683 exports, 15,874 module relocations + 830 routing",
+        " * relocations (16,704 operands), the instruction-boundary walk,",
+        " * the dynamic encoded-GBA target index (parity oracle input), the",
+        " * 11 gStdScripts shadow records, the 3,501 F inbound bindings,",
+        " * the 38 mart tables, the 18 RAM targets + 1 allowlist row, and",
+        " * the 3 recomp-local movement bridges (bytes embedded from the",
+        " * qualified ROM). EmeraldScriptCompat validates the session's pack",
+        " * against this table and stages its shadow generation from it.",
+        " */",
+        "#ifndef EMERALD_RESOURCES_SCRIPT_NATIVE_GENERATED_H",
+        "#define EMERALD_RESOURCES_SCRIPT_NATIVE_GENERATED_H",
+        "",
+        "#include <stdint.h>",
+        "",
+    ]
+    for name, actual, wanted in pins:
+        if actual != wanted:
+            fail(f"script native pin {name}: {actual} != {wanted}")
+        lines.append(f"#define {name} {actual}u")
+    lines += [
+        "",
+        "enum EmeraldScriptNativeTargetClass",
+        "{",
+        "    EMERALD_SCRIPT_NATIVE_CLASS_SCRIPT = 0,",
+        "    EMERALD_SCRIPT_NATIVE_CLASS_TEXT = 1,",
+        "    EMERALD_SCRIPT_NATIVE_CLASS_MOVEMENT = 2,",
+        "    EMERALD_SCRIPT_NATIVE_CLASS_STATIC_DATA = 3,",
+        "    EMERALD_SCRIPT_NATIVE_CLASS_RAM_DATA = 4,",
+        "};",
+        "",
+        "enum EmeraldScriptNativeTargetKind",
+        "{",
+        "    EMERALD_SCRIPT_NATIVE_KIND_SCRIPT_PAYLOAD = 0,",
+        "    EMERALD_SCRIPT_NATIVE_KIND_SCRIPT_ROUTING = 1,",
+        "    EMERALD_SCRIPT_NATIVE_KIND_SCRIPT_BRIDGE = 2,",
+        "    EMERALD_SCRIPT_NATIVE_KIND_TEXT_BUNDLE_MEMBER = 3,",
+        "    EMERALD_SCRIPT_NATIVE_KIND_TEXT_LABEL = 4,",
+        "    EMERALD_SCRIPT_NATIVE_KIND_MOVEMENT_RESOURCE = 5,",
+        "    EMERALD_SCRIPT_NATIVE_KIND_MOVEMENT_BRIDGE = 6,",
+        "    EMERALD_SCRIPT_NATIVE_KIND_MART_TABLE = 7,",
+        "    EMERALD_SCRIPT_NATIVE_KIND_DISPATCH = 8,",
+        "    EMERALD_SCRIPT_NATIVE_KIND_BRAILLE = 9,",
+        "    EMERALD_SCRIPT_NATIVE_KIND_RAM_HOST = 10,",
+        "};",
+        "",
+        "enum EmeraldScriptNativeBoundaryKind",
+        "{",
+        "    EMERALD_SCRIPT_NATIVE_BOUNDARY_OFFSET_ZERO = 0,",
+        "    EMERALD_SCRIPT_NATIVE_BOUNDARY_INTERIOR = 1,",
+        "    EMERALD_SCRIPT_NATIVE_BOUNDARY_ROUTING = 2,",
+        "    EMERALD_SCRIPT_NATIVE_BOUNDARY_NONE = 0xFF,",
+        "};",
+        "",
+        "enum EmeraldScriptNativeModuleKind",
+        "{",
+        "    EMERALD_SCRIPT_NATIVE_MODULE_MAP = 0,",
+        "    EMERALD_SCRIPT_NATIVE_MODULE_COMMON = 1,",
+        "    EMERALD_SCRIPT_NATIVE_MODULE_GIFT = 2,",
+        "};",
+        "",
+        "enum EmeraldScriptNativeSegmentKind",
+        "{",
+        "    EMERALD_SCRIPT_NATIVE_SEGMENT_BYTECODE = 0,",
+        "    EMERALD_SCRIPT_NATIVE_SEGMENT_STATIC_DATA = 1,",
+        "};",
+        "",
+        "enum EmeraldScriptNativeExportKind",
+        "{",
+        "    EMERALD_SCRIPT_NATIVE_EXPORT_SCRIPT = 0,",
+        "    EMERALD_SCRIPT_NATIVE_EXPORT_TYPED_DATA = 1,",
+        "    EMERALD_SCRIPT_NATIVE_EXPORT_OPAQUE = 2,",
+        "};",
+        "",
+        "enum EmeraldScriptNativeFKind",
+        "{",
+        "    EMERALD_SCRIPT_NATIVE_F_MAP_SCRIPTS = 0,",
+        "    EMERALD_SCRIPT_NATIVE_F_OBJECT_EVENT = 1,",
+        "    EMERALD_SCRIPT_NATIVE_F_COORD_EVENT = 2,",
+        "    EMERALD_SCRIPT_NATIVE_F_BG_EVENT = 3,",
+        "};",
+        "",
+        "#define EMERALD_SCRIPT_NATIVE_OFFSET_NONE 0xFFFFFFFFu",
+        "",
+        "struct EmeraldScriptNativeModule",
+        "{",
+        "    const char *id;",
+        "    const char *primarySymbol;",
+        "    uint8_t digest[32];",
+        "    uint32_t schema;",
+        "    uint32_t regionGbaStart;",
+        "    uint32_t payloadSize;",
+        "    uint32_t arenaOffset;",
+        "    uint32_t segmentFirst;",
+        "    uint32_t segmentCount;",
+        "    uint32_t exportFirst;",
+        "    uint32_t exportCount;",
+        "    uint32_t relocFirst;",
+        "    uint32_t relocCount;",
+        "    uint32_t boundaryFirst;",
+        "    uint32_t boundaryCount;",
+        "    uint8_t kind;",
+        "    uint8_t embedded;",
+        "};",
+        "",
+        "struct EmeraldScriptNativeSegment",
+        "{",
+        "    uint32_t originalGbaStart;",
+        "    uint32_t byteCount;",
+        "    uint32_t payloadOffset;",
+        "    uint8_t kind;",
+        "};",
+        "",
+        "struct EmeraldScriptNativeExport",
+        "{",
+        "    uint32_t moduleIndex;",
+        "    uint32_t payloadOffset;",
+        "    uint32_t originalGbaAddress;",
+        "    uint8_t boundaryKind;",
+        "    uint8_t kind;",
+        "    uint32_t name;",
+        "};",
+        "",
+        "struct EmeraldScriptNativeReloc",
+        "{",
+        "    uint32_t moduleIndex;",
+        "    uint32_t operandPayloadOffset;",
+        "    uint32_t originalEncodedGba;",
+        "    uint8_t targetClass;",
+        "    uint8_t targetKind;",
+        "    uint32_t targetKey;",
+        "    uint32_t targetLabel;",
+        "    uint32_t targetOffset;",
+        "    uint32_t targetPayloadOffset;",
+        "};",
+        "",
+        "struct EmeraldScriptNativeRoutingReloc",
+        "{",
+        "    uint32_t sourceGbaOffset;",
+        "    uint32_t sourceTable;",
+        "    uint8_t targetClass;",
+        "    uint8_t targetKind;",
+        "    uint32_t targetGba;",
+        "    uint32_t targetKey;",
+        "    uint32_t targetLabel;",
+        "    uint32_t targetOffset;",
+        "    uint32_t targetPayloadOffset;",
+        "};",
+        "",
+        "struct EmeraldScriptNativeDynamicTarget",
+        "{",
+        "    uint32_t gbaAddress;",
+        "    uint8_t targetClass;",
+        "    uint8_t targetKind;",
+        "    uint32_t targetKey;",
+        "    uint32_t targetLabel;",
+        "    uint32_t targetOffset;",
+        "    uint32_t targetPayloadOffset;",
+        "    uint8_t boundaryKind;",
+        "};",
+        "",
+        "struct EmeraldScriptNativeBridge",
+        "{",
+        "    const char *key;",
+        "    const char *symbol;",
+        "    uint32_t gbaAddress;",
+        "    uint8_t byteCount;",
+        "    uint8_t bytes[8];",
+        "};",
+        "",
+        "struct EmeraldScriptNativeStdScript",
+        "{",
+        "    uint32_t moduleIndex;",
+        "    uint32_t exportIndex;",
+        "    uint32_t payloadOffset;",
+        "    uint32_t encodedGba;",
+        "    uint32_t romOffset;",
+        "    uint8_t boundaryKind;",
+        "    uint8_t slot;",
+        "};",
+        "",
+        "struct EmeraldScriptNativeFBinding",
+        "{",
+        "    uint8_t kind;",
+        "    uint8_t boundaryKind;",
+        "    uint8_t sameMap;",
+        "    uint32_t mapSymbol;",
+        "    uint32_t mapKey;",
+        "    uint32_t gbaTarget;",
+        "    uint32_t moduleIndex;",
+        "    uint32_t exportIndex;",
+        "    uint32_t payloadOffset;",
+        "};",
+        "",
+        "struct EmeraldScriptNativeMart",
+        "{",
+        "    uint32_t moduleIndex;",
+        "    uint32_t payloadOffset;",
+        "    uint32_t gbaAddress;",
+        "    uint32_t label;",
+        "    uint16_t byteCount;",
+        "    uint16_t itemCount;",
+        "};",
+        "",
+        "struct EmeraldScriptNativeRamTarget",
+        "{",
+        "    uint32_t gbaAddress;",
+        "    uint8_t region;",
+        "    uint32_t sourceGbaOffset;",
+        "};",
+        "",
+        "struct EmeraldScriptNativeRamAllowlist",
+        "{",
+        "    uint32_t gbaAddress;",
+        "    uint32_t size;",
+        "};",
+        "",
+        "struct EmeraldScriptNativeBoundary",
+        "{",
+        "    uint32_t payloadOffset;",
+        "    uint16_t length;",
+        "    uint16_t pad;",
+        "};",
+        "",
+        "struct EmeraldScriptCompatNativeTable",
+        "{",
+        "    const struct EmeraldScriptNativeModule *modules;",
+        "    uint32_t moduleCount;",
+        "    const struct EmeraldScriptNativeSegment *segments;",
+        "    uint32_t segmentCount;",
+        "    const struct EmeraldScriptNativeExport *exports;",
+        "    uint32_t exportCount;",
+        "    const struct EmeraldScriptNativeReloc *relocs;",
+        "    uint32_t relocCount;",
+        "    const struct EmeraldScriptNativeRoutingReloc *routingRelocs;",
+        "    uint32_t routingRelocCount;",
+        "    const struct EmeraldScriptNativeDynamicTarget *dynamicTargets;",
+        "    uint32_t dynamicTargetCount;",
+        "    const struct EmeraldScriptNativeStdScript *stdScripts;",
+        "    uint32_t stdScriptCount;",
+        "    const struct EmeraldScriptNativeFBinding *fBindings;",
+        "    uint32_t fBindingCount;",
+        "    const struct EmeraldScriptNativeMart *marts;",
+        "    uint32_t martCount;",
+        "    const struct EmeraldScriptNativeRamTarget *ramTargets;",
+        "    uint32_t ramTargetCount;",
+        "    const struct EmeraldScriptNativeRamAllowlist *ramAllowlist;",
+        "    uint32_t ramAllowlistCount;",
+        "    const struct EmeraldScriptNativeBridge *bridges;",
+        "    uint32_t bridgeCount;",
+        "    const struct EmeraldScriptNativeBoundary *boundaries;",
+        "    uint32_t boundaryCount;",
+        "    const char *const *pool;",
+        "    uint32_t poolCount;",
+        "};",
+        "",
+        "extern const struct EmeraldScriptCompatNativeTable kEmeraldScriptCompatTable;",
+        "",
+        "#endif /* EMERALD_RESOURCES_SCRIPT_NATIVE_GENERATED_H */",
+        "",
+    ]
+    return "\n".join(lines)
+
+
+def _cstr(s):
+    return '"%s"' % s
+
+
+def render_script_native_c(mod_rows, seg_rows, exp_rows, reloc_rows, rrt_rows,
+                           dyn_rows, bridge_rows, std_rows, f_rows, mart_rows,
+                           ram_rows, bound_rows, pool, arena_bytes):
+    cls_map = {"SCRIPT_TARGET": 0, "TEXT_TARGET": 1, "MOVEMENT_TARGET": 2,
+               "MART_TABLE_TARGET": 3, "RAM_DATA_TARGET": 4}
+    kind_map = {
+        "SCRIPT_PAYLOAD": 0, "SCRIPT_ROUTING": 1, "SCRIPT_BRIDGE": 2,
+        "TEXT_BUNDLE_MEMBER": 3, "TEXT_LABEL": 4, "MOVEMENT_RESOURCE": 5,
+        "MOVEMENT_BRIDGE": 6, "MART_TABLE": 7, "DISPATCH": 8,
+        "BRAILLE": 9, "RAM_HOST": 10,
+    }
+    bnd_map = {"offset-zero": 0, "interior": 1, "routing": 2}
+    fkind_map = {"map-scripts": 0, "object-event": 1, "coord-event": 2,
+                 "bg-event": 3}
+    out = [
+        "/* Generated by tools/gen3_resources/script_family/gen_script_family.py.",
+        " * Do not edit by hand; regeneration must be a no-op diff.",
+        " * See include/emerald/resources/script_native.generated.h for the",
+        " * row contracts. One initializer per line (the G3 fault-injection",
+        " * harness edits rows textually).",
+        " */",
+        "#include \"emerald/resources/script_native.generated.h\"",
+        "",
+        "/* The 3 recomp-local movement bridges (plan sec 5): explicit named",
+        " * compiled bridges, 12 B total. The table embeds the qualified-ROM",
+        " * bytes so EmeraldScriptCompat can prove byte identity against the",
+        " * compiled symbols; the live pointers themselves come from the",
+        " * symbols below (never written into any arena). */",
+        "extern const uint8_t Route103_EventScript_RivalExitFacingNorth2[7];",
+        "extern const uint8_t Ferry_EventScript_DepartIslandBoardSouth[2];",
+        "extern const uint8_t Ferry_EventScript_DepartIslandBoardWest[3];",
+        "const uint8_t *const kEmeraldScriptNativeBridgeSymbols["
+        + str(len(bridge_rows)) + "] = {",
+    ]
+    for b in bridge_rows:
+        out.append(f"    {b['sym']},")
+    out += [
+        "};",
+        "",
+        "/* The one approved writable RAM target (plan sec 9): EWRAM",
+        " * 0x02021fc4 = gStringVar4, the 1,000-byte string-variable",
+        " * buffer. RAM operands resolve to this host symbol only -",
+        " * permission comes from the allowlist, never from address",
+        " * arithmetic. */",
+        "extern uint8_t gStringVar4[1000];",
+        "",
+    ]
+    out.append(f"static const char *const kScriptPool[{len(pool)}] = {{")
+    for s in pool:
+        out.append(f"    {_cstr(s)},")
+    out += [
+        "};",
+        "",
+    ]
+
+    def emit_array(cname, ctype, rows, fmt):
+        out.append(f"static const {ctype} {cname}[{len(rows)}] = {{")
+        for r in rows:
+            out.append("    " + fmt(r) + ",")
+        out.append("};")
+        out.append("")
+
+    emit_array("kScriptModules", "struct EmeraldScriptNativeModule",
+               mod_rows,
+               lambda r: "{%s, %s, {%s}, %uu, 0x%xu, %uu, %uu, %uu, %uu, "
+                         "%uu, %uu, %uu, %uu, %uu, %uu, %uu, %uu}" % (
+                   _cstr(r["id"]), _cstr(r["sym"]),
+                   ", ".join("0x%02x" % b for b in r["digest"]),
+                   r["schema"], r["rstart"], r["size"], r["arena"],
+                   r["sfirst"], r["sn"], r["efirst"], r["en"],
+                   r["rfirst"], r["rn"], r["bfirst"], r["bn"],
+                   r["kind"], r["embedded"]))
+    emit_array("kScriptSegments", "struct EmeraldScriptNativeSegment",
+               seg_rows,
+               lambda r: "{0x%xu, %uu, %uu, %uu}" % (r["gba"], r["n"],
+                                                     r["off"], r["kind"]))
+    emit_array("kScriptExports", "struct EmeraldScriptNativeExport",
+               exp_rows,
+               lambda r: "{%uu, %uu, 0x%xu, %uu, %uu, %uu}" % (
+                   r["mi"], r["off"], r["gba"], r["bk"], r["kind"],
+                   r["name"]))
+    emit_array("kScriptRelocs", "struct EmeraldScriptNativeReloc",
+               reloc_rows,
+               lambda r: "{%uu, %uu, 0x%xu, %uu, %uu, %uu, %uu, %uu, %uu}" % (
+                   r["mi"], r["off"], r["enc"],
+                   cls_map[r["cls"]], kind_map[r["kind"]],
+                   r["key"], r["label"], r["to"], r["tpo"]))
+    emit_array("kScriptRoutingRelocs",
+               "struct EmeraldScriptNativeRoutingReloc", rrt_rows,
+               lambda r: "{0x%xu, %uu, %uu, %uu, 0x%xu, %uu, %uu, %uu, %uu}" % (
+                   r["gba"], r["table"], cls_map[r["cls"]],
+                   kind_map[r["kind"]], r["tg"], r["key"], r["label"],
+                   r["to"], r["tpo"]))
+    emit_array("kScriptDynamicTargets",
+               "struct EmeraldScriptNativeDynamicTarget", dyn_rows,
+               lambda r: "{0x%xu, %uu, %uu, %uu, %uu, %uu, %uu, %uu}" % (
+                   r["gba"], cls_map[r["cls"]], kind_map[r["kind"]],
+                   r["key"], r["label"], r["to"], r["tpo"], r["bk"]))
+    emit_array("kScriptBridges", "struct EmeraldScriptNativeBridge",
+               bridge_rows,
+               lambda r: "{%s, %s, 0x%xu, %uu, {%s}}" % (
+                   _cstr(r["key"]), _cstr(r["sym"]), r["gba"], r["n"],
+                   ", ".join("0x%02x" % b for b in r["bytes"])))
+    emit_array("kScriptStdScripts", "struct EmeraldScriptNativeStdScript",
+               std_rows,
+               lambda r: "{%uu, %uu, %uu, 0x%xu, 0x%xu, %uu, %uu}" % (
+                   r["mi"], r["ei"], r["po"], r["enc"], r["rom"],
+                   r["bk"], r["slot"]))
+    emit_array("kScriptFBindings", "struct EmeraldScriptNativeFBinding",
+               f_rows,
+               lambda r: "{%uu, %uu, %uu, %uu, %uu, 0x%xu, %uu, %uu, %uu}" % (
+                   fkind_map[r["kind"]], r["bk"], r["sm"], r["ms"],
+                   r["mk"], r["gt"], r["mi"], r["ei"], r["po"]))
+    emit_array("kScriptMarts", "struct EmeraldScriptNativeMart", mart_rows,
+               lambda r: "{%uu, %uu, 0x%xu, %uu, %uu, %uu}" % (
+                   r["mi"], r["po"], r["gba"], r["label"], r["n"],
+                   r["items"]))
+    emit_array("kScriptRamTargets", "struct EmeraldScriptNativeRamTarget",
+               ram_rows,
+               lambda r: "{0x%xu, %uu, 0x%xu}" % (r["gba"], 0,
+                                                  r["src"]))
+    emit_array("kScriptRamAllowlist", "struct EmeraldScriptNativeRamAllowlist",
+               [dict(gba=0x2021FC4, size=1000)],
+               lambda r: "{0x%xu, %uu}" % (r["gba"], r["size"]))
+    emit_array("kScriptBoundaries", "struct EmeraldScriptNativeBoundary",
+               bound_rows,
+               lambda r: "{%uu, %uu, 0u}" % (r["off"], r["n"]))
+
+    out += [
+        "const struct EmeraldScriptCompatNativeTable kEmeraldScriptCompatTable = {",
+        "    kScriptModules, EMERALD_SCRIPT_MODULE_COUNT,",
+        "    kScriptSegments, EMERALD_SCRIPT_SEGMENT_COUNT,",
+        "    kScriptExports, EMERALD_SCRIPT_EXPORT_COUNT,",
+        "    kScriptRelocs, EMERALD_SCRIPT_RELOC_COUNT,",
+        "    kScriptRoutingRelocs, EMERALD_SCRIPT_ROUTING_RELOC_COUNT,",
+        "    kScriptDynamicTargets, (uint32_t)" + str(len(dyn_rows)) + "u,",
+        "    kScriptStdScripts, EMERALD_SCRIPT_STD_SCRIPT_COUNT,",
+        "    kScriptFBindings, EMERALD_SCRIPT_F_BINDING_COUNT,",
+        "    kScriptMarts, EMERALD_SCRIPT_MART_COUNT,",
+        "    kScriptRamTargets, EMERALD_SCRIPT_RAM_TARGET_COUNT,",
+        "    kScriptRamAllowlist, EMERALD_SCRIPT_RAM_ALLOWLIST_COUNT,",
+        "    kScriptBridges, EMERALD_SCRIPT_BRIDGE_COUNT,",
+        "    kScriptBoundaries, (uint32_t)" + str(len(bound_rows)) + "u,",
+        "    kScriptPool, (uint32_t)" + str(len(pool)) + "u,",
+        "};",
+        "",
+    ]
+    return "\n".join(out)
+
+
+def emit_script_native_tables(root, args, rom, base, modules, routing_relocs,
+                              std_raw, f_raw, mart_raw,
+                              ram_rows, dyn):
+    """R13-G3 (plan sec 1/10/18): emit the shadow seam's generated C
+    inventory - include/emerald/resources/script_native.generated.h +
+    src/emerald/resources/script_native_table.generated.c. Every row is
+    a projection of the already-generated G2 metadata plus the boundary
+    walk and the dynamic encoded-GBA target index derived in main();
+    the G1 graph itself is not reinterpreted here."""
+    mods = sorted(modules, key=lambda m: m.id)
+    mod_idx = {m.id: i for i, m in enumerate(mods)}
+    # Deterministic arena layout: modules in bytewise id order (the
+    # manifest order), 16-aligned spans, payload bytes contiguous.
+    arena_offsets = {}
+    cursor = 0
+    for m in mods:
+        arena_offsets[m.id] = cursor
+        cursor += (m.payload_bytes + 15) & ~15
+    arena_bytes = cursor
+
+    # String pool (index 0 = "").
+    pool_idx = {"": 0}
+    pool = [""]
+
+    def P(s):
+        if s is None:
+            return 0xFFFFFFFF
+        i = pool_idx.get(s)
+        if i is None:
+            i = len(pool)
+            pool_idx[s] = i
+            pool.append(s)
+        return i
+
+    # Braille export rows: the MART_TABLE_TARGET rows with BRAILLE kind
+    # name (module, payload offset); those exports are typed braille
+    # data positions, not instruction boundaries.
+    braille_offsets = set()
+    for m in mods:
+        for r in m.relocs:
+            if r["target_kind"] == "BRAILLE":
+                braille_offsets.add((m.id, r["target_payload_offset"]))
+    mart_spans = {}
+    for m in mods:
+        mart_spans[m.id] = [
+            (s["payload_offset"], s["payload_offset"] + s["byte_count"])
+            for s in m.segments if s.get("kind") == "static-data"]
+
+    mod_rows, seg_rows, exp_rows, reloc_rows, bound_rows = [], [], [], [], []
+    exp_index_of = {}  # module id -> {payload_offset: global export row}
+    seg_first = exp_first = rel_first = bound_first = 0
+    for mi, m in enumerate(mods):
+        mod_rows.append(dict(
+            id=m.id, sym=m.primary_symbol,
+            digest=bytes.fromhex(sha256hex(m.payload)),
+            schema=m.schema, rstart=m.region_start, size=m.payload_bytes,
+            arena=arena_offsets[m.id],
+            kind={"map": 0, "common": 1, "mystery-gift": 2}[m.kind],
+            embedded=1 if m.payload else 0,
+            sfirst=seg_first, sn=len(m.segments),
+            efirst=exp_first, en=len(m.exports),
+            rfirst=rel_first, rn=len(m.relocs),
+            bfirst=bound_first, bn=len(m.boundaries)))
+        exp_index_of[m.id] = {}
+        for s in m.segments:
+            seg_rows.append(dict(
+                gba=s["original_gba_start"], n=s["byte_count"],
+                off=s["payload_offset"],
+                kind=1 if s.get("kind") == "static-data" else 0))
+        for e in sorted(m.exports, key=lambda e: e["payload_offset"]):
+            exp_index_of[m.id][e["payload_offset"]] = exp_first
+            if (m.id, e["payload_offset"]) in braille_offsets \
+               or any(s <= e["payload_offset"] < t
+                      for s, t in mart_spans[m.id]):
+                ekind = 1
+            elif e.get("opaque"):
+                ekind = 2
+            else:
+                ekind = 0
+            exp_rows.append(dict(
+                mi=mi, off=e["payload_offset"], gba=e["original_gba_address"],
+                bk=0 if e["boundary_kind"] == "offset-zero" else 1,
+                kind=ekind,
+                name=P(e["name"])))
+            exp_first += 1
+        for r in m.relocs:
+            reloc_rows.append(dict(
+                mi=mi, off=r["operand_payload_offset"],
+                enc=r["original_encoded_gba"],
+                cls=r["target_class"], kind=r["target_kind"],
+                key=P(r["target_resource_key"]),
+                label=P(r.get("canonical_label") or r.get("target_export")),
+                to=r["target_offset"] if r.get("target_offset") is not None
+                   else 0xFFFFFFFF,
+                tpo=r.get("target_payload_offset", 0xFFFFFFFF)))
+        for off, length in m.boundaries:
+            bound_rows.append(dict(off=off, n=length))
+        seg_first += len(m.segments)
+        rel_first += len(m.relocs)
+        bound_first += len(m.boundaries)
+    if exp_first != len(exp_rows):
+        fail(f"export row count drift {exp_first} != {len(exp_rows)}")
+
+    rrt_rows = []
+    for r in sorted(routing_relocs, key=lambda r: r["source_gba_offset"]):
+        rrt_rows.append(dict(
+            gba=r["source_gba_offset"], table=P(r["source_table"]),
+            cls=r["target_class"], kind=r["target_kind"],
+            tg=r["target_gba"], key=P(r["target_resource_key"]),
+            label=P(r.get("canonical_label") or r.get("target_export")),
+            to=r["target_offset"] if r.get("target_offset") is not None
+               else 0xFFFFFFFF,
+            tpo=r.get("target_payload_offset", 0xFFFFFFFF)))
+
+    # Dynamic target index: unique (encoded GBA, class) -> canonical
+    # identity, sorted ascending; the seam's encoded-target resolution
+    # and the 16,704 parity oracle both read it.
+    dyn_rows = []
+    for (gba, cls), (kind, key, label, to, tpo, canon) in sorted(dyn.items()):
+        bk = 0xFF
+        if kind == "SCRIPT_PAYLOAD":
+            tmi = mod_idx.get(key)
+            if tmi is not None:
+                ex = next((e for e in mods[tmi].exports
+                           if e["payload_offset"] == tpo), None)
+                if ex is not None:
+                    bk = 0 if ex["boundary_kind"] == "offset-zero" else 1
+        dyn_rows.append(dict(
+            gba=gba, cls=cls, kind=kind, key=P(key),
+            label=P(canon or label),
+            to=to if to is not None else 0xFFFFFFFF,
+            tpo=tpo if tpo is not None else 0xFFFFFFFF, bk=bk))
+
+    # The 3 recomp-local movement bridges: gba/size/bytes come straight
+    # from the qualified ROM (the generator's provenance, plan sec 5).
+    bridge_rows = []
+    for name, rel, size in RECOMP_LOCAL_MOVEMENT:
+        gba = base + rel
+        data = rom[(gba - GEN3_GBA_ROM_BASE):(gba - GEN3_GBA_ROM_BASE) + size]
+        bridge_rows.append(dict(
+            key=f"emerald:movement/bridge/{slugify(name)}", sym=name,
+            gba=gba, n=size, bytes=list(data)))
+
+    # gStdScripts + F inbound rows: payload offsets are derived from the
+    # encoded GBA target through segment containment (the TOML rows
+    # carry region-relative offsets per the G1 convention).
+    std_rows = []
+    for rec in std_raw:
+        mi = mod_idx[rec["module_key"]]
+        po = payload_offset_of_opt(mods[mi], rec["encoded_gba"])
+        if po is None:
+            fail(f"gStdScripts slot {rec['slot']}: {rec['export']} not in "
+                 f"module payload")
+        ei = exp_index_of[rec["module_key"]].get(po)
+        if ei is None:
+            fail(f"gStdScripts slot {rec['slot']}: no export at payload {po}")
+        std_rows.append(dict(
+            mi=mi, ei=ei, po=po, enc=rec["encoded_gba"],
+            rom=rec["rom_offset"],
+            bk={"offset-zero": 0, "interior": 1, "routing": 2}[rec["boundary_kind"]],
+            slot=rec["slot"]))
+    f_rows = []
+    for rec in sorted(f_raw, key=lambda r: (r["kind"], r["gba_target"])):
+        mi = mod_idx[rec["module_key"]]
+        is_routing = rec["boundary_kind"] == "routing"
+        po = 0xFFFFFFFF
+        ei = 0xFFFFFFFF
+        if is_routing:
+            if rec["kind"] != "map-scripts":
+                fail(f"non-map-scripts F ref with routing boundary: "
+                     f"{rec['map_symbol']}")
+        else:
+            po = payload_offset_of_opt(mods[mi], rec["gba_target"])
+            if po is None:
+                fail(f"F ref {rec['kind']} {rec['map_symbol']} target "
+                     f"{rec['gba_target']:#x} not in module payload")
+            ei = exp_index_of[rec["module_key"]].get(po)
+            if ei is None:
+                fail(f"F ref {rec['kind']} {rec['map_symbol']}: no export "
+                     f"at payload {po}")
+        f_rows.append(dict(
+            kind=rec["kind"],
+            bk={"offset-zero": 0, "interior": 1, "routing": 2}[rec["boundary_kind"]],
+            sm=1 if rec["same_map"] else 0,
+            ms=P(rec["map_symbol"]), mk=P(rec["map_key"]),
+            gt=rec["gba_target"], mi=mi, ei=ei, po=po))
+    if len(f_rows) != F_INBOUND_PINS["map-scripts"] + F_INBOUND_PINS["object-event"] \
+            + F_INBOUND_PINS["coord-event"] + F_INBOUND_PINS["bg-event"]:
+        fail(f"F rows {len(f_rows)} != 3501")
+    mart_rows = []
+    for t in mart_raw:
+        mi = mod_idx[t["module_key"]]
+        mart_rows.append(dict(
+            mi=mi, po=t["module_offset"], gba=t["gba_address"],
+            label=P(t["label"]), n=t["byte_count"], items=t["item_count"]))
+    if len(mart_rows) != MART_TABLES_PIN:
+        fail(f"mart rows {len(mart_rows)} != {MART_TABLES_PIN}")
+    ram_row_list = []
+    for r in ram_rows:
+        ram_row_list.append(dict(gba=r["gba_address"], src=r["source_gba_offset"]))
+    if len(ram_row_list) != 18:
+        fail(f"ram rows {len(ram_row_list)} != 18")
+    if len(bridge_rows) != 3 or len(std_rows) != 11:
+        fail(f"bridge/std rows {len(bridge_rows)}/{len(std_rows)} != 3/11")
+
+    header = render_script_native_h(
+        len(mod_rows), len(seg_rows), len(exp_rows), len(reloc_rows),
+        len(rrt_rows), len(bound_rows), len(dyn_rows))
+    body = render_script_native_c(
+        mod_rows, seg_rows, exp_rows, reloc_rows, rrt_rows, dyn_rows,
+        bridge_rows, std_rows, f_rows, mart_rows, ram_row_list,
+        bound_rows, pool, arena_bytes)
+    hpath = root / "include/emerald/resources/script_native.generated.h"
+    cpath = root / "src/emerald/resources/script_native_table.generated.c"
+    write_if(hpath, header, args.check)
+    write_if(cpath, body, args.check)
+    print(f"    seam tables: {hpath.name} + {cpath.name} "
+          f"({len(pool)} pool strings, {len(dyn_rows)} dynamic targets, "
+          f"{arena_bytes} B deterministic arena, "
+          f"{len(bound_rows)} boundaries)")
+
+
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("root", nargs="?", default=".")
@@ -1278,7 +2052,7 @@ def main():
     # G1 oracle; the walk artifacts are not needed by the resource emission.
     (map_tables, conditional_tables, dispatch_rows, cond_rows, total_rows,
      map_leaf_targets, object_refs, coord_refs, bg_refs, engine_refs,
-     std, mg_excluded) = graph_state
+     std, mg_excluded, bfs_starts, bfs_sizes) = graph_state
     del graph_state, map_tables, conditional_tables, dispatch_rows, cond_rows
     del total_rows, map_leaf_targets, engine_refs, mg_excluded
     print(f"  rss {rss_mb()} MB")
@@ -1716,6 +2490,333 @@ def main():
              f"!= {BRAILLE_TEXT_EDGES_PIN} / {BRAILLE_TEXT_LABELS_PIN}")
     print(f"  rss {rss_mb()} MB (relocs: +{rss_mb() - phase_rss} MB)")
 
+    # ---- R13-G3 shadow-seam enrichment -----------------------------------
+    # (plan sec 10/11/18): instruction boundaries, target sub-kinds, payload
+    # offsets, and the dynamic encoded-GBA target index all derive from the
+    # already-attributed graph; nothing is re-extracted from ROM/ELF.
+    phase_rss = rss_mb()
+    mods_by_id = {m.id: m for m in all_modules}
+    # Text bundles (symbol -> (bundle id, canonical label)) for the
+    # bundle-member edges; the per-label ids (incl. the 20 gift handoff
+    # labels) resolve by key directly.
+    bundles_toml_path = outdir / "text" / "bundles.generated.toml"
+    try:
+        bundles_doc = tomllib.loads(bundles_toml_path.read_text())
+    except OSError:
+        fail(f"text bundles missing at {bundles_toml_path}: run "
+             f"gen_text_family.py before the script family")
+    text_symbol_info = {}
+    bundle_id_set = set()
+    for b in bundles_doc.get("bundles", []):
+        bundle_id_set.add(b["id"])
+        for lab in b.get("labels", []):
+            text_symbol_info[lab["symbol"]] = (b["id"], lab["canonical"])
+    del bundles_doc
+    catalog_toml_path = outdir / "text" / "catalog.generated.toml"
+    try:
+        catalog_ids = {ln.split('"')[1]
+                       for ln in catalog_toml_path.read_text().splitlines()
+                       if ln.startswith('id = "emerald:')}
+    except OSError:
+        fail(f"text catalog missing at {catalog_toml_path}: run "
+             f"gen_text_family.py before the script family")
+
+    # Instruction boundaries (plan sec 10): the AUTHORITATIVE walk is the
+    # G1 BFS (proven roots, break on unknown opcode / terminal) that the
+    # operand census used - never a per-segment re-walk (segments can cut
+    # through a trainerbattle instruction whose inline metadata was typed
+    # static-data by the G2 cutter). The BFS root set does not include
+    # map-script dispatch targets (OnTransition/OnFrame/etc. are entered
+    # only through routing tables the BFS never walks), so the remaining
+    # bytecode-class bytes get a supplementary walk seeded from every
+    # SCRIPT_TARGET operand target + F entry + gStdScripts target, with
+    # the same grammar/break/terminal rules. The supplementary rows mark
+    # instruction boundaries ONLY: the G1 classification, operand census
+    # and pins are untouched (no graph re-derivation).
+    sup_starts = {}
+    seeds = {op["target_gba"] for op in operands
+             if op["target_class"] == "SCRIPT_TARGET"}
+    seeds.update(x["gba_target"] for x in object_refs)
+    seeds.update(x["gba_target"] for x in coord_refs)
+    seeds.update(x["gba_target"] for x in bg_refs)
+    # Every non-data export is an entry point too (labels the census
+    # never references still mark valid code); exports at typed-data
+    # positions (mart spans) are data labels and are not seeded.
+    for m in all_modules:
+        for s in m.segments:
+            if s.get("kind") != "static-data":
+                continue
+            for e in m.exports:
+                if (s["payload_offset"] <= e["payload_offset"]
+                        < s["payload_offset"] + s["byte_count"]):
+                    seeds.discard(e["original_gba_address"])
+        for e in m.exports:
+            seeds.add(e["original_gba_address"])
+    seeds.update(struct.unpack_from("<I", rom, a - GEN3_GBA_ROM_BASE)[0]
+                 for a, _, _ in std)
+    section_end = base + elf.sections[4]["sh_size"]
+    terminal_set = {0x02, 0x03, 0x05, 0x08, 0x0C, 0x0D, 0x24, 0xB9}
+
+    def rom_u8(a):
+        return rom[a - GEN3_GBA_ROM_BASE]
+
+    def rom_u32(a):
+        return struct.unpack_from("<I", rom, a - GEN3_GBA_ROM_BASE)[0]
+
+    bfs_starts_sorted = sorted(bfs_starts)
+    queue = sorted(seeds)
+    seen = set(queue)
+    while queue:
+        p = queue.pop(0)
+        if not (base <= p < section_end) or p in text_starts \
+           or p in move_starts or p in bfs_starts or p in sup_starts:
+            continue
+        for _ in range(100000):
+            if p in bfs_starts or p in sup_starts:
+                break
+            spec = opcode_table.get(rom_u8(p))
+            if not spec:
+                break
+            size, types, operand = spec["encoded_size"], \
+                list(spec.get("operand_types", [])), 1
+            if rom_u8(p) == 0x5C:
+                tt = trainer_types.get(rom_u8(p + 1))
+                if not tt:
+                    break
+                size, types, operand = tt["encoded_size"], \
+                    list(tt.get("operand_types", [])), 2
+            if size <= 0 or p + size > section_end:
+                break
+            # Never decode across a BFS-decoded start: the census walk
+            # owns those bytes and the boundary model must not overlap
+            # (a chain may reach a region the BFS entered from another
+            # root; the BFS interpretation wins).
+            j = bisect.bisect_left(bfs_starts_sorted, p + 1)
+            if j < len(bfs_starts_sorted) and bfs_starts_sorted[j] < p + size:
+                break
+            sup_starts[p] = size
+            for typ in types:
+                if typ.startswith("ADDR32"):
+                    val = rom_u32(p + operand)
+                    if typ == "ADDR32_SCRIPT" and base <= val < section_end \
+                       and val not in seen:
+                        queue.append(val)
+                        seen.add(val)
+                    operand += 4
+                elif typ == "U8":
+                    operand += 1
+                elif typ in ("U16_LE", "VAR16", "SPECIAL_ID"):
+                    operand += 2
+                elif typ == "U32_LE":
+                    operand += 4
+            if rom_u8(p) in terminal_set:
+                break
+            p += size
+
+    start_by_module = {}
+    boundary_total = 0
+    all_starts = {}
+    all_starts.update(bfs_sizes)
+    all_starts.update(sup_starts)
+    for m in all_modules:
+        rows = []
+        for gba in m.gbytes:
+            if gba in all_starts:
+                rows.append((payload_offset_of_opt(m, gba), all_starts[gba]))
+        rows.sort()
+        m.boundaries = rows
+        start_by_module[m.id] = {off for off, _ in rows}
+        boundary_total += len(rows)
+    print(f"  supplementary walk: {len(sup_starts)} starts "
+          f"({sum(sup_starts.values())} B in non-BFS bytecode)")
+    # Opaque-byte accounting: the G1 BFS decodes 204,350 B of the
+    # 207,330-byte bytecode class; the remaining bytes are data or
+    # dynamically-reached code the census never walks (its own
+    # routing_or_typed_data sources). Those bytes are legitimately
+    # opaque in the boundary model: instruction queries refuse there,
+    # operand rows index there structurally (G1 census authority).
+    opaque_bytes = 0
+    for m in all_modules:
+        spans = [(off, off + length) for off, length in m.boundaries]
+        for s in m.segments:
+            if s.get("kind") != "bytecode":
+                continue
+            pos = s["payload_offset"]
+            end = pos + s["byte_count"]
+            while pos < end:
+                i = bisect.bisect_right(spans, (pos, 1 << 62)) - 1
+                if i >= 0 and spans[i][0] <= pos < spans[i][1]:
+                    pos = spans[i][1]
+                else:
+                    j = bisect.bisect_right(spans, (pos, 1 << 62))
+                    nxt = spans[j][0] if j < len(spans) else end
+                    opaque_bytes += min(nxt, end) - pos
+                    pos = min(nxt, end)
+    n_mart_exports = 0
+    n_opaque_exports = 0
+    n_offset_zero = 0
+    static_data_spans = {}
+    for m in all_modules:
+        static_data_spans[m.id] = [
+            (s["payload_offset"], s["payload_offset"] + s["byte_count"])
+            for s in m.segments if s.get("kind") == "static-data"]
+    for m in all_modules:
+        for e in m.exports:
+            e["opaque"] = False
+            if e["boundary_kind"] == "offset-zero":
+                if e["payload_offset"] != 0:
+                    fail(f"{m.id}: offset-zero export {e['name']} at "
+                         f"payload {e['payload_offset']} != 0")
+                n_offset_zero += 1
+            elif any(s <= e["payload_offset"] < t
+                     for s, t in static_data_spans[m.id]):
+                # Inside a mart/decor table: a typed data position (the
+                # table start export or a trainerbattle inline slot that
+                # the G1 symbol model labels), not an instruction
+                # boundary (plan sec 7.5).
+                n_mart_exports += 1
+            elif e["payload_offset"] not in start_by_module[m.id]:
+                # An unreferenced label on bytes the G1 walk never
+                # decoded (unknown opcode / dead data after a
+                # terminator). A valid export identity whose instruction
+                # boundary is unproven - the G4 differential oracle
+                # exercises these.
+                e["opaque"] = True
+                n_opaque_exports += 1
+    del static_data_spans
+    # Operand containment: inside one BFS instruction, or in a
+    # static-data segment (typed-data operands), or in an opaque zone
+    # (G1 census sources the BFS never decoded). Overlap between
+    # operands stays forbidden structurally (sorted rows, below).
+    spans_by_module = {}
+    for m in all_modules:
+        spans_by_module[m.id] = [(off, off + length)
+                                 for off, length in m.boundaries]
+    opaque_operands = 0
+    for m in all_modules:
+        spans = spans_by_module[m.id]
+        sd = [(s["payload_offset"], s["payload_offset"] + s["byte_count"])
+              for s in m.segments if s.get("kind") == "static-data"]
+        for r in m.relocs:
+            off = r["operand_payload_offset"]
+            i = bisect.bisect_right(spans, (off, 1 << 62)) - 1
+            if i >= 0 and spans[i][0] <= off \
+               and off + r["operand_width"] <= spans[i][1]:
+                continue
+            if any(s <= off and off + r["operand_width"] <= t
+                   for s, t in sd):
+                continue
+            opaque_operands += 1
+
+    # Target sub-kinds + payload offsets + dynamic index (plan sec 18).
+    move_id_set = set(move_id_of.values())
+    subkinds = Counter()
+    dyn = {}
+
+    def enrich_row(r, enc, is_routing):
+        cls = r["target_class"]
+        key = r["target_resource_key"]
+        tmod = mods_by_id.get(key)
+        kind = None
+        po = None
+        label = None
+        if cls == "SCRIPT_TARGET":
+            if tmod is not None:
+                po = payload_offset_of_opt(tmod, enc)
+                kind = "SCRIPT_PAYLOAD" if po is not None else "SCRIPT_ROUTING"
+            elif key.startswith("emerald:movement/bridge/"):
+                kind = "SCRIPT_BRIDGE"
+            else:
+                fail(f"SCRIPT_TARGET key {key} is neither a module nor a bridge")
+        elif cls == "TEXT_TARGET":
+            sym = r["target_export"]
+            if key in catalog_ids and key not in bundle_id_set:
+                # A per-label catalog id (the 20 gift handoff labels and
+                # any direct C-side label): resolves by key alone.
+                kind, label = "TEXT_LABEL", key[len("emerald:text/"):]
+            elif sym in text_symbol_info or \
+                    QUALIFIED_TO_RECOMP_TEXT.get(sym) in text_symbol_info:
+                # AC-3 renames (plan sec 7): the qualified symbol
+                # resolves through the text family's RENAME_MAP to the
+                # recomp-built bundle catalog name.
+                lookup = sym if sym in text_symbol_info \
+                    else QUALIFIED_TO_RECOMP_TEXT[sym]
+                bid, canonical = text_symbol_info[lookup]
+                if bid != key:
+                    fail(f"TEXT_TARGET {sym}: bundle {bid} != reloc key {key}")
+                kind, label = "TEXT_BUNDLE_MEMBER", canonical
+            else:
+                fail(f"TEXT_TARGET {key} ({sym}) is not a catalog label "
+                     f"nor a bundle member")
+        elif cls == "MOVEMENT_TARGET":
+            if key.startswith("emerald:movement/bridge/"):
+                kind = "MOVEMENT_BRIDGE"
+            elif key in move_id_set:
+                kind = "MOVEMENT_RESOURCE"
+            else:
+                fail(f"MOVEMENT_TARGET key {key} is neither a B resource "
+                     f"nor a bridge")
+        elif cls == "MART_TABLE_TARGET":
+            if tmod is not None:
+                po = payload_offset_of_opt(tmod, enc)
+                if po is None:
+                    fail(f"MART_TABLE_TARGET {key} {enc:#x} not in payload")
+                kind = "MART_TABLE"
+            elif key.startswith("emerald:script/routing/"):
+                kind = "DISPATCH"
+            elif key.startswith("emerald:text/braille/"):
+                kind = "BRAILLE"
+            else:
+                fail(f"MART_TABLE_TARGET key {key} unresolved")
+        elif cls == "RAM_DATA_TARGET":
+            kind = "RAM_HOST"
+        else:
+            fail(f"unhandled target class {cls}")
+        r["target_kind"] = kind
+        r["target_payload_offset"] = po if po is not None else 0xFFFFFFFF
+        if label is not None:
+            r["canonical_label"] = label
+        subkinds[kind] += 1
+        dkey = (enc, cls)
+        ident = (kind, key, r.get("target_export"), r.get("target_offset"),
+                 r.get("target_payload_offset"), r.get("canonical_label"))
+        if dkey in dyn and dyn[dkey] != ident:
+            fail(f"dynamic target {dkey} ambiguous: {dyn[dkey]} vs {ident}")
+        dyn[dkey] = ident
+
+    for m in all_modules:
+        for r in m.relocs:
+            enrich_row(r, r["original_encoded_gba"], False)
+    for r in routing_relocs:
+        enrich_row(r, r["target_gba"], True)
+        # Dispatch rows target module payload script labels OR the three
+        # recomp-local movement bridges (a Route103 OnFrame row points
+        # at the named bridge, plan sec 5).
+        if r["target_class"] == "SCRIPT_TARGET" \
+           and r["target_kind"] not in ("SCRIPT_PAYLOAD", "SCRIPT_ROUTING",
+                                        "SCRIPT_BRIDGE"):
+            fail(f"routing SCRIPT_TARGET {r['target_gba']:#x} "
+                 f"kind {r['target_kind']} (not payload/routing/bridge)")
+        if r["target_class"] == "MART_TABLE_TARGET" and r["target_kind"] != "DISPATCH":
+            fail(f"routing MART_TABLE_TARGET {r['target_gba']:#x} not DISPATCH")
+    for k, v in sorted(subkinds.items()):
+        pin = TARGET_SUBKIND_PINS.get(k)
+        if pin is not None and v != pin:
+            fail(f"target sub-kind {k}: {v} != pin {pin}")
+    print(f"  target sub-kinds: {dict(sorted(subkinds.items()))}")
+    print(f"  boundaries: {boundary_total} instructions, "
+          f"{n_offset_zero} offset-zero exports, "
+          f"{n_mart_exports} mart-span export rows, "
+          f"{n_opaque_exports} opaque export rows, "
+          f"{opaque_bytes} opaque bytes, {opaque_operands} opaque operands")
+    print(f"  dynamic targets: {len(dyn)} unique (gba, class) identities")
+    del start_by_module, spans_by_module, text_symbol_info, move_id_set
+    del bundle_id_set
+    del mods_by_id, catalog_ids
+    del enrich_row, bfs_starts, bfs_sizes, sup_starts, all_starts
+    del rom_u8, rom_u32
+    print(f"  rss {rss_mb()} MB (G3 enrichment: +{rss_mb() - phase_rss} MB)")
+
     # Emit the KEPT module set only (all_modules includes the movement-only
     # include that the retention rule drops; it is not a G module).
     #
@@ -1735,7 +2836,7 @@ def main():
              move_class_bytes, routing, operands, routing_relocs,
              gift_text_edges, braille_text_edges, bundle_of, move_id_of,
              base, std, object_refs, coord_refs, bg_refs,
-             map_script_refs, names_by_addr)
+             map_script_refs, names_by_addr, dyn)
 
 
 if __name__ == "__main__":

@@ -17,6 +17,7 @@ static_data_bytes = 16
 segment_count = 3
 export_count = 17
 reloc_count = 17
+instruction_count = 134
 
 [[segments]]
 kind = "bytecode"
@@ -181,6 +182,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepyramidfloor"
 target_export = "BattleFrontier_BattlePyramidFloor_EventScript_UpdateLightLoop"
 target_offset = 68
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 26
 runtime_resolution_required = true
 
 [[relocs]]
@@ -191,6 +194,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepyramidfloor"
 target_export = "BattleFrontier_BattlePyramidFloor_EventScript_ReadyChallenge"
 target_offset = 346
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 304
 runtime_resolution_required = true
 
 [[relocs]]
@@ -201,6 +206,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepyramidfloor"
 target_export = "BattleFrontier_BattlePyramid_EventScript_WarpToLobby"
 target_offset = 307
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 265
 runtime_resolution_required = true
 
 [[relocs]]
@@ -211,6 +218,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepyramidfloor"
 target_export = "BattleFrontier_BattlePyramidFloor_EventScript_ReadyChallenge"
 target_offset = 346
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 304
 runtime_resolution_required = true
 
 [[relocs]]
@@ -221,6 +230,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepyramidfloor"
 target_export = "BattleFrontier_BattlePyramidFloor_EventScript_ResetParty"
 target_offset = 262
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 220
 runtime_resolution_required = true
 
 [[relocs]]
@@ -231,6 +242,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepyramidfloor"
 target_export = "BattleFrontier_BattlePyramidFloor_EventScript_ResetParty"
 target_offset = 262
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 220
 runtime_resolution_required = true
 
 [[relocs]]
@@ -241,6 +254,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepyramidfloor"
 target_export = "BattleFrontier_BattlePyramidFloor_EventScript_ResetParty"
 target_offset = 262
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 220
 runtime_resolution_required = true
 
 [[relocs]]
@@ -251,6 +266,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepyramidfloor"
 target_export = "BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost"
 target_offset = 271
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 229
 runtime_resolution_required = true
 
 [[relocs]]
@@ -261,6 +278,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepyramidfloor"
 target_export = "BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost"
 target_offset = 271
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 229
 runtime_resolution_required = true
 
 [[relocs]]
@@ -271,6 +290,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepyramidfloor"
 target_export = "BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost"
 target_offset = 271
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 229
 runtime_resolution_required = true
 
 [[relocs]]
@@ -281,6 +302,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepyramidfloor"
 target_export = "BattleFrontier_BattlePyramidFloor_EventScript_SetLightRadius"
 target_offset = 418
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 376
 runtime_resolution_required = true
 
 [[relocs]]
@@ -291,6 +314,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battletowerbattleroom"
 target_export = "BattleFrontier_EventScript_IncrementWinStreak"
 target_offset = 890
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 859
 runtime_resolution_required = true
 
 [[relocs]]
@@ -301,6 +326,8 @@ target_class = "MART_TABLE_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepyramidfloor"
 target_export = "BattlePyramid_WarpToTop"
 target_offset = 488
+target_kind = "MART_TABLE"
+target_payload_offset = 488
 runtime_resolution_required = true
 
 [[relocs]]
@@ -310,6 +337,8 @@ original_encoded_gba = 0x8252c8d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepyramidfloor"
 target_export = "BattleFacility_TrainerBattle_PlaceholderText"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -319,6 +348,8 @@ original_encoded_gba = 0x8252c8d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepyramidfloor"
 target_export = "BattleFacility_TrainerBattle_PlaceholderText"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -329,6 +360,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepyramidfloor"
 target_export = "BattlePyramid_FindItemBallEnd"
 target_offset = 596
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 554
 runtime_resolution_required = true
 
 [[relocs]]
@@ -339,4 +372,542 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepyramidfloor"
 target_export = "BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost"
 target_offset = 271
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 229
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 5
+
+[[boundaries]]
+payload_offset = 6
+length = 5
+
+[[boundaries]]
+payload_offset = 11
+length = 5
+
+[[boundaries]]
+payload_offset = 16
+length = 5
+
+[[boundaries]]
+payload_offset = 21
+length = 5
+
+[[boundaries]]
+payload_offset = 26
+length = 3
+
+[[boundaries]]
+payload_offset = 29
+length = 3
+
+[[boundaries]]
+payload_offset = 32
+length = 5
+
+[[boundaries]]
+payload_offset = 37
+length = 6
+
+[[boundaries]]
+payload_offset = 43
+length = 5
+
+[[boundaries]]
+payload_offset = 48
+length = 1
+
+[[boundaries]]
+payload_offset = 49
+length = 1
+
+[[boundaries]]
+payload_offset = 50
+length = 3
+
+[[boundaries]]
+payload_offset = 53
+length = 5
+
+[[boundaries]]
+payload_offset = 58
+length = 1
+
+[[boundaries]]
+payload_offset = 59
+length = 4
+
+[[boundaries]]
+payload_offset = 63
+length = 5
+
+[[boundaries]]
+payload_offset = 68
+length = 1
+
+[[boundaries]]
+payload_offset = 69
+length = 5
+
+[[boundaries]]
+payload_offset = 74
+length = 3
+
+[[boundaries]]
+payload_offset = 77
+length = 5
+
+[[boundaries]]
+payload_offset = 82
+length = 3
+
+[[boundaries]]
+payload_offset = 85
+length = 5
+
+[[boundaries]]
+payload_offset = 90
+length = 5
+
+[[boundaries]]
+payload_offset = 95
+length = 6
+
+[[boundaries]]
+payload_offset = 101
+length = 5
+
+[[boundaries]]
+payload_offset = 106
+length = 6
+
+[[boundaries]]
+payload_offset = 112
+length = 5
+
+[[boundaries]]
+payload_offset = 117
+length = 6
+
+[[boundaries]]
+payload_offset = 123
+length = 5
+
+[[boundaries]]
+payload_offset = 128
+length = 5
+
+[[boundaries]]
+payload_offset = 133
+length = 3
+
+[[boundaries]]
+payload_offset = 136
+length = 5
+
+[[boundaries]]
+payload_offset = 141
+length = 6
+
+[[boundaries]]
+payload_offset = 147
+length = 5
+
+[[boundaries]]
+payload_offset = 152
+length = 6
+
+[[boundaries]]
+payload_offset = 158
+length = 5
+
+[[boundaries]]
+payload_offset = 163
+length = 6
+
+[[boundaries]]
+payload_offset = 169
+length = 5
+
+[[boundaries]]
+payload_offset = 174
+length = 6
+
+[[boundaries]]
+payload_offset = 180
+length = 5
+
+[[boundaries]]
+payload_offset = 185
+length = 6
+
+[[boundaries]]
+payload_offset = 191
+length = 5
+
+[[boundaries]]
+payload_offset = 196
+length = 6
+
+[[boundaries]]
+payload_offset = 202
+length = 5
+
+[[boundaries]]
+payload_offset = 207
+length = 5
+
+[[boundaries]]
+payload_offset = 212
+length = 3
+
+[[boundaries]]
+payload_offset = 215
+length = 5
+
+[[boundaries]]
+payload_offset = 220
+length = 5
+
+[[boundaries]]
+payload_offset = 225
+length = 3
+
+[[boundaries]]
+payload_offset = 228
+length = 1
+
+[[boundaries]]
+payload_offset = 229
+length = 5
+
+[[boundaries]]
+payload_offset = 234
+length = 5
+
+[[boundaries]]
+payload_offset = 239
+length = 5
+
+[[boundaries]]
+payload_offset = 244
+length = 3
+
+[[boundaries]]
+payload_offset = 247
+length = 5
+
+[[boundaries]]
+payload_offset = 252
+length = 5
+
+[[boundaries]]
+payload_offset = 257
+length = 5
+
+[[boundaries]]
+payload_offset = 262
+length = 3
+
+[[boundaries]]
+payload_offset = 265
+length = 5
+
+[[boundaries]]
+payload_offset = 270
+length = 5
+
+[[boundaries]]
+payload_offset = 275
+length = 5
+
+[[boundaries]]
+payload_offset = 280
+length = 3
+
+[[boundaries]]
+payload_offset = 283
+length = 5
+
+[[boundaries]]
+payload_offset = 288
+length = 3
+
+[[boundaries]]
+payload_offset = 291
+length = 3
+
+[[boundaries]]
+payload_offset = 294
+length = 8
+
+[[boundaries]]
+payload_offset = 302
+length = 1
+
+[[boundaries]]
+payload_offset = 303
+length = 1
+
+[[boundaries]]
+payload_offset = 304
+length = 5
+
+[[boundaries]]
+payload_offset = 309
+length = 5
+
+[[boundaries]]
+payload_offset = 314
+length = 3
+
+[[boundaries]]
+payload_offset = 317
+length = 3
+
+[[boundaries]]
+payload_offset = 320
+length = 5
+
+[[boundaries]]
+payload_offset = 325
+length = 5
+
+[[boundaries]]
+payload_offset = 330
+length = 5
+
+[[boundaries]]
+payload_offset = 335
+length = 3
+
+[[boundaries]]
+payload_offset = 338
+length = 5
+
+[[boundaries]]
+payload_offset = 343
+length = 3
+
+[[boundaries]]
+payload_offset = 346
+length = 5
+
+[[boundaries]]
+payload_offset = 351
+length = 5
+
+[[boundaries]]
+payload_offset = 356
+length = 3
+
+[[boundaries]]
+payload_offset = 359
+length = 5
+
+[[boundaries]]
+payload_offset = 364
+length = 1
+
+[[boundaries]]
+payload_offset = 365
+length = 5
+
+[[boundaries]]
+payload_offset = 370
+length = 5
+
+[[boundaries]]
+payload_offset = 375
+length = 1
+
+[[boundaries]]
+payload_offset = 376
+length = 5
+
+[[boundaries]]
+payload_offset = 381
+length = 5
+
+[[boundaries]]
+payload_offset = 386
+length = 5
+
+[[boundaries]]
+payload_offset = 391
+length = 3
+
+[[boundaries]]
+payload_offset = 394
+length = 1
+
+[[boundaries]]
+payload_offset = 395
+length = 5
+
+[[boundaries]]
+payload_offset = 400
+length = 5
+
+[[boundaries]]
+payload_offset = 405
+length = 5
+
+[[boundaries]]
+payload_offset = 410
+length = 3
+
+[[boundaries]]
+payload_offset = 413
+length = 5
+
+[[boundaries]]
+payload_offset = 418
+length = 5
+
+[[boundaries]]
+payload_offset = 423
+length = 5
+
+[[boundaries]]
+payload_offset = 428
+length = 5
+
+[[boundaries]]
+payload_offset = 433
+length = 3
+
+[[boundaries]]
+payload_offset = 436
+length = 5
+
+[[boundaries]]
+payload_offset = 441
+length = 6
+
+[[boundaries]]
+payload_offset = 447
+length = 5
+
+[[boundaries]]
+payload_offset = 452
+length = 3
+
+[[boundaries]]
+payload_offset = 455
+length = 5
+
+[[boundaries]]
+payload_offset = 460
+length = 5
+
+[[boundaries]]
+payload_offset = 465
+length = 5
+
+[[boundaries]]
+payload_offset = 470
+length = 3
+
+[[boundaries]]
+payload_offset = 473
+length = 5
+
+[[boundaries]]
+payload_offset = 478
+length = 8
+
+[[boundaries]]
+payload_offset = 486
+length = 1
+
+[[boundaries]]
+payload_offset = 487
+length = 1
+
+[[boundaries]]
+payload_offset = 488
+length = 8
+
+[[boundaries]]
+payload_offset = 496
+length = 1
+
+[[boundaries]]
+payload_offset = 497
+length = 1
+
+[[boundaries]]
+payload_offset = 498
+length = 14
+
+[[boundaries]]
+payload_offset = 512
+length = 5
+
+[[boundaries]]
+payload_offset = 517
+length = 3
+
+[[boundaries]]
+payload_offset = 520
+length = 1
+
+[[boundaries]]
+payload_offset = 521
+length = 1
+
+[[boundaries]]
+payload_offset = 522
+length = 1
+
+[[boundaries]]
+payload_offset = 523
+length = 1
+
+[[boundaries]]
+payload_offset = 524
+length = 1
+
+[[boundaries]]
+payload_offset = 525
+length = 5
+
+[[boundaries]]
+payload_offset = 530
+length = 3
+
+[[boundaries]]
+payload_offset = 533
+length = 2
+
+[[boundaries]]
+payload_offset = 535
+length = 5
+
+[[boundaries]]
+payload_offset = 540
+length = 6
+
+[[boundaries]]
+payload_offset = 546
+length = 5
+
+[[boundaries]]
+payload_offset = 551
+length = 3
+
+[[boundaries]]
+payload_offset = 554
+length = 1
+
+[[boundaries]]
+payload_offset = 555
+length = 5

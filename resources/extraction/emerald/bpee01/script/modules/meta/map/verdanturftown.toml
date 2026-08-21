@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 11
 reloc_count = 14
+instruction_count = 49
 
 [[segments]]
 kind = "bytecode"
@@ -120,6 +121,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown"
 target_export = "VerdanturfTown_EventScript_TwinTunnelOpen"
 target_offset = 46
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 40
 runtime_resolution_required = true
 
 [[relocs]]
@@ -129,6 +132,8 @@ original_encoded_gba = 0x81eb5fd
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/verdanturftown"
 target_export = "VerdanturfTown_Text_ManTryingToDigTunnel"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -138,6 +143,8 @@ original_encoded_gba = 0x82725a2
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceoriginaldirection"
 target_export = "Common_Movement_FaceOriginalDirection"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -147,6 +154,8 @@ original_encoded_gba = 0x81eb6e0
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/verdanturftown"
 target_export = "VerdanturfTown_Text_ManDugTunnelForLove"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -156,6 +165,8 @@ original_encoded_gba = 0x82725a2
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceoriginaldirection"
 target_export = "Common_Movement_FaceOriginalDirection"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -165,6 +176,8 @@ original_encoded_gba = 0x81eb736
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/verdanturftown"
 target_export = "VerdanturfTown_Text_AirCleanHere"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -174,6 +187,8 @@ original_encoded_gba = 0x81eb7e2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/verdanturftown"
 target_export = "VerdanturfTown_Text_MakeBattleTentDebut"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -184,6 +199,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown"
 target_export = "VerdanturfTown_EventScript_BoyTunnelOpen"
 target_offset = 105
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 99
 runtime_resolution_required = true
 
 [[relocs]]
@@ -193,6 +210,8 @@ original_encoded_gba = 0x81eb854
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/verdanturftown"
 target_export = "VerdanturfTown_Text_GuyTryingToBustThroughCave"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -202,6 +221,8 @@ original_encoded_gba = 0x81eb935
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/verdanturftown"
 target_export = "VerdanturfTown_Text_EasyToGetToRustboroNow"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -211,6 +232,8 @@ original_encoded_gba = 0x81eb9c4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/verdanturftown"
 target_export = "VerdanturfTown_Text_TownSign"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -220,6 +243,8 @@ original_encoded_gba = 0x81eba11
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/verdanturftown"
 target_export = "VerdanturfTown_Text_WandasHouse"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -229,6 +254,8 @@ original_encoded_gba = 0x81eba1f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/verdanturftown"
 target_export = "VerdanturfTown_Text_BattleTentSign"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -238,4 +265,202 @@ original_encoded_gba = 0x81eba59
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/verdanturftown"
 target_export = "VerdanturfTown_Text_RusturfTunnelSign"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 5
+
+[[boundaries]]
+payload_offset = 8
+length = 1
+
+[[boundaries]]
+payload_offset = 9
+length = 1
+
+[[boundaries]]
+payload_offset = 10
+length = 1
+
+[[boundaries]]
+payload_offset = 11
+length = 3
+
+[[boundaries]]
+payload_offset = 14
+length = 6
+
+[[boundaries]]
+payload_offset = 20
+length = 6
+
+[[boundaries]]
+payload_offset = 26
+length = 2
+
+[[boundaries]]
+payload_offset = 28
+length = 7
+
+[[boundaries]]
+payload_offset = 35
+length = 3
+
+[[boundaries]]
+payload_offset = 38
+length = 1
+
+[[boundaries]]
+payload_offset = 39
+length = 1
+
+[[boundaries]]
+payload_offset = 40
+length = 6
+
+[[boundaries]]
+payload_offset = 46
+length = 2
+
+[[boundaries]]
+payload_offset = 48
+length = 7
+
+[[boundaries]]
+payload_offset = 55
+length = 3
+
+[[boundaries]]
+payload_offset = 58
+length = 1
+
+[[boundaries]]
+payload_offset = 59
+length = 1
+
+[[boundaries]]
+payload_offset = 60
+length = 6
+
+[[boundaries]]
+payload_offset = 66
+length = 2
+
+[[boundaries]]
+payload_offset = 68
+length = 1
+
+[[boundaries]]
+payload_offset = 69
+length = 6
+
+[[boundaries]]
+payload_offset = 75
+length = 2
+
+[[boundaries]]
+payload_offset = 77
+length = 1
+
+[[boundaries]]
+payload_offset = 78
+length = 1
+
+[[boundaries]]
+payload_offset = 79
+length = 1
+
+[[boundaries]]
+payload_offset = 80
+length = 3
+
+[[boundaries]]
+payload_offset = 83
+length = 6
+
+[[boundaries]]
+payload_offset = 89
+length = 6
+
+[[boundaries]]
+payload_offset = 95
+length = 2
+
+[[boundaries]]
+payload_offset = 97
+length = 1
+
+[[boundaries]]
+payload_offset = 98
+length = 1
+
+[[boundaries]]
+payload_offset = 99
+length = 6
+
+[[boundaries]]
+payload_offset = 105
+length = 2
+
+[[boundaries]]
+payload_offset = 107
+length = 1
+
+[[boundaries]]
+payload_offset = 108
+length = 1
+
+[[boundaries]]
+payload_offset = 109
+length = 6
+
+[[boundaries]]
+payload_offset = 115
+length = 2
+
+[[boundaries]]
+payload_offset = 117
+length = 1
+
+[[boundaries]]
+payload_offset = 118
+length = 6
+
+[[boundaries]]
+payload_offset = 124
+length = 2
+
+[[boundaries]]
+payload_offset = 126
+length = 1
+
+[[boundaries]]
+payload_offset = 127
+length = 6
+
+[[boundaries]]
+payload_offset = 133
+length = 2
+
+[[boundaries]]
+payload_offset = 135
+length = 1
+
+[[boundaries]]
+payload_offset = 136
+length = 6
+
+[[boundaries]]
+payload_offset = 142
+length = 2
+
+[[boundaries]]
+payload_offset = 144
+length = 1

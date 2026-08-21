@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 9
 reloc_count = 31
+instruction_count = 62
 
 [[segments]]
 kind = "bytecode"
@@ -103,6 +104,8 @@ original_encoded_gba = 0x822c608
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/meteorfalls-1f-2r"
 target_export = "MeteorFalls_1F_2R_Text_NicolasIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -112,6 +115,8 @@ original_encoded_gba = 0x822c678
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/meteorfalls-1f-2r"
 target_export = "MeteorFalls_1F_2R_Text_NicolasDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -122,6 +127,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/meteorfalls-1f-2r"
 target_export = "MeteorFalls_1F_2R_EventScript_RegisterNicolas"
 target_offset = 45
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 44
 runtime_resolution_required = true
 
 [[relocs]]
@@ -132,6 +139,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/meteorfalls-1f-2r"
 target_export = "MeteorFalls_1F_2R_EventScript_RematchNicolas"
 target_offset = 76
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 75
 runtime_resolution_required = true
 
 [[relocs]]
@@ -141,6 +150,8 @@ original_encoded_gba = 0x822c6a3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/meteorfalls-1f-2r"
 target_export = "MeteorFalls_1F_2R_Text_NicolasPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -150,6 +161,8 @@ original_encoded_gba = 0x822c6f6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/meteorfalls-1f-2r"
 target_export = "MeteorFalls_1F_2R_Text_NicolasRegister"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -159,6 +172,8 @@ original_encoded_gba = 0x822c73f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/meteorfalls-1f-2r"
 target_export = "MeteorFalls_1F_2R_Text_NicolasRematchIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -168,6 +183,8 @@ original_encoded_gba = 0x822c7ad
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/meteorfalls-1f-2r"
 target_export = "MeteorFalls_1F_2R_Text_NicolasRematchDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -177,6 +194,8 @@ original_encoded_gba = 0x822c7d8
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/meteorfalls-1f-2r"
 target_export = "MeteorFalls_1F_2R_Text_NicolasPostRematch"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -186,6 +205,8 @@ original_encoded_gba = 0x822c843
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/meteorfalls-1f-2r"
 target_export = "MeteorFalls_1F_2R_Text_JohnIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -195,6 +216,8 @@ original_encoded_gba = 0x822c89c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/meteorfalls-1f-2r"
 target_export = "MeteorFalls_1F_2R_Text_JohnDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -204,6 +227,8 @@ original_encoded_gba = 0x822c92b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/meteorfalls-1f-2r"
 target_export = "MeteorFalls_1F_2R_Text_JohnNotEnoughMons"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -214,6 +239,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/meteorfalls-1f-2r"
 target_export = "MeteorFalls_1F_2R_EventScript_RegisterJohn"
 target_offset = 147
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 146
 runtime_resolution_required = true
 
 [[relocs]]
@@ -224,6 +251,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/meteorfalls-1f-2r"
 target_export = "MeteorFalls_1F_2R_EventScript_RematchJohn"
 target_offset = 172
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 171
 runtime_resolution_required = true
 
 [[relocs]]
@@ -233,6 +262,8 @@ original_encoded_gba = 0x822c8c1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/meteorfalls-1f-2r"
 target_export = "MeteorFalls_1F_2R_Text_JohnPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -242,6 +273,8 @@ original_encoded_gba = 0x822c99c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/meteorfalls-1f-2r"
 target_export = "MeteorFalls_1F_2R_Text_JohnRegister"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -251,6 +284,8 @@ original_encoded_gba = 0x822cb47
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/meteorfalls-1f-2r"
 target_export = "MeteorFalls_1F_2R_Text_JohnRematchIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -260,6 +295,8 @@ original_encoded_gba = 0x822cba0
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/meteorfalls-1f-2r"
 target_export = "MeteorFalls_1F_2R_Text_JohnRematchDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -269,6 +306,8 @@ original_encoded_gba = 0x822cc27
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/meteorfalls-1f-2r"
 target_export = "MeteorFalls_1F_2R_Text_JohnRematchNotEnoughMons"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -278,6 +317,8 @@ original_encoded_gba = 0x822cbc5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/meteorfalls-1f-2r"
 target_export = "MeteorFalls_1F_2R_Text_JohnPostRematch"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -287,6 +328,8 @@ original_encoded_gba = 0x822c9e6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/meteorfalls-1f-2r"
 target_export = "MeteorFalls_1F_2R_Text_JayIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -296,6 +339,8 @@ original_encoded_gba = 0x822ca44
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/meteorfalls-1f-2r"
 target_export = "MeteorFalls_1F_2R_Text_JayDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -305,6 +350,8 @@ original_encoded_gba = 0x822cacd
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/meteorfalls-1f-2r"
 target_export = "MeteorFalls_1F_2R_Text_JayNotEnoughMons"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -315,6 +362,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/meteorfalls-1f-2r"
 target_export = "MeteorFalls_1F_2R_EventScript_RegisterJay"
 target_offset = 247
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 246
 runtime_resolution_required = true
 
 [[relocs]]
@@ -325,6 +374,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/meteorfalls-1f-2r"
 target_export = "MeteorFalls_1F_2R_EventScript_RematchJay"
 target_offset = 272
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 271
 runtime_resolution_required = true
 
 [[relocs]]
@@ -334,6 +385,8 @@ original_encoded_gba = 0x822ca70
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/meteorfalls-1f-2r"
 target_export = "MeteorFalls_1F_2R_Text_JayPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -343,6 +396,8 @@ original_encoded_gba = 0x822c99c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/meteorfalls-1f-2r"
 target_export = "MeteorFalls_1F_2R_Text_JohnRegister"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -352,6 +407,8 @@ original_encoded_gba = 0x822cc98
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/meteorfalls-1f-2r"
 target_export = "MeteorFalls_1F_2R_Text_JayRematchIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -361,6 +418,8 @@ original_encoded_gba = 0x822cd08
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/meteorfalls-1f-2r"
 target_export = "MeteorFalls_1F_2R_Text_JayRematchDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -370,6 +429,8 @@ original_encoded_gba = 0x822cdab
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/meteorfalls-1f-2r"
 target_export = "MeteorFalls_1F_2R_Text_JayRematchNotEnoughMons"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -379,4 +440,254 @@ original_encoded_gba = 0x822cd34
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/meteorfalls-1f-2r"
 target_export = "MeteorFalls_1F_2R_Text_JayPostRematch"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 18
+
+[[boundaries]]
+payload_offset = 18
+length = 5
+
+[[boundaries]]
+payload_offset = 23
+length = 5
+
+[[boundaries]]
+payload_offset = 28
+length = 6
+
+[[boundaries]]
+payload_offset = 34
+length = 6
+
+[[boundaries]]
+payload_offset = 40
+length = 2
+
+[[boundaries]]
+payload_offset = 42
+length = 1
+
+[[boundaries]]
+payload_offset = 43
+length = 1
+
+[[boundaries]]
+payload_offset = 44
+length = 3
+
+[[boundaries]]
+payload_offset = 47
+length = 3
+
+[[boundaries]]
+payload_offset = 50
+length = 6
+
+[[boundaries]]
+payload_offset = 56
+length = 2
+
+[[boundaries]]
+payload_offset = 58
+length = 5
+
+[[boundaries]]
+payload_offset = 63
+length = 3
+
+[[boundaries]]
+payload_offset = 66
+length = 5
+
+[[boundaries]]
+payload_offset = 71
+length = 2
+
+[[boundaries]]
+payload_offset = 73
+length = 1
+
+[[boundaries]]
+payload_offset = 74
+length = 1
+
+[[boundaries]]
+payload_offset = 75
+length = 14
+
+[[boundaries]]
+payload_offset = 89
+length = 6
+
+[[boundaries]]
+payload_offset = 95
+length = 2
+
+[[boundaries]]
+payload_offset = 97
+length = 1
+
+[[boundaries]]
+payload_offset = 98
+length = 22
+
+[[boundaries]]
+payload_offset = 120
+length = 5
+
+[[boundaries]]
+payload_offset = 125
+length = 5
+
+[[boundaries]]
+payload_offset = 130
+length = 6
+
+[[boundaries]]
+payload_offset = 136
+length = 6
+
+[[boundaries]]
+payload_offset = 142
+length = 2
+
+[[boundaries]]
+payload_offset = 144
+length = 1
+
+[[boundaries]]
+payload_offset = 145
+length = 1
+
+[[boundaries]]
+payload_offset = 146
+length = 6
+
+[[boundaries]]
+payload_offset = 152
+length = 2
+
+[[boundaries]]
+payload_offset = 154
+length = 5
+
+[[boundaries]]
+payload_offset = 159
+length = 3
+
+[[boundaries]]
+payload_offset = 162
+length = 5
+
+[[boundaries]]
+payload_offset = 167
+length = 2
+
+[[boundaries]]
+payload_offset = 169
+length = 1
+
+[[boundaries]]
+payload_offset = 170
+length = 1
+
+[[boundaries]]
+payload_offset = 171
+length = 18
+
+[[boundaries]]
+payload_offset = 189
+length = 6
+
+[[boundaries]]
+payload_offset = 195
+length = 2
+
+[[boundaries]]
+payload_offset = 197
+length = 1
+
+[[boundaries]]
+payload_offset = 198
+length = 22
+
+[[boundaries]]
+payload_offset = 220
+length = 5
+
+[[boundaries]]
+payload_offset = 225
+length = 5
+
+[[boundaries]]
+payload_offset = 230
+length = 6
+
+[[boundaries]]
+payload_offset = 236
+length = 6
+
+[[boundaries]]
+payload_offset = 242
+length = 2
+
+[[boundaries]]
+payload_offset = 244
+length = 1
+
+[[boundaries]]
+payload_offset = 245
+length = 1
+
+[[boundaries]]
+payload_offset = 246
+length = 6
+
+[[boundaries]]
+payload_offset = 252
+length = 2
+
+[[boundaries]]
+payload_offset = 254
+length = 5
+
+[[boundaries]]
+payload_offset = 259
+length = 3
+
+[[boundaries]]
+payload_offset = 262
+length = 5
+
+[[boundaries]]
+payload_offset = 267
+length = 2
+
+[[boundaries]]
+payload_offset = 269
+length = 1
+
+[[boundaries]]
+payload_offset = 270
+length = 1
+
+[[boundaries]]
+payload_offset = 271
+length = 18
+
+[[boundaries]]
+payload_offset = 289
+length = 6
+
+[[boundaries]]
+payload_offset = 295
+length = 2
+
+[[boundaries]]
+payload_offset = 297
+length = 1

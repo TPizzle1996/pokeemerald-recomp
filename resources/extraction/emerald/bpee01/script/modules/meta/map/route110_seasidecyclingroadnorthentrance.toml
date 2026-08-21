@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 2
 export_count = 4
 reloc_count = 4
+instruction_count = 26
 
 [[segments]]
 kind = "bytecode"
@@ -69,6 +70,8 @@ original_encoded_gba = 0x826eac1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-seasidecyclingroadnorthentrance"
 target_export = "Route110_SeasideCyclingRoadNorthEntrance_Text_GoAllOutOnCyclingRoad"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -79,6 +82,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-seasidecyclingroadnorthentrance"
 target_export = "Route110_SeasideCyclingRoadNorthEntrance_EventScript_NoBike"
 target_offset = 40
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 39
 runtime_resolution_required = true
 
 [[relocs]]
@@ -88,6 +93,8 @@ original_encoded_gba = 0x826eb48
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-seasidecyclingroadnorthentrance"
 target_export = "Route110_SeasideCyclingRoadNorthEntrance_Text_TooDangerousToWalk"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -97,4 +104,110 @@ original_encoded_gba = 0x826eab4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-seasidecyclingroadnorthentrance-movement-pushplayerbackfromcounter"
 target_export = "Route110_SeasideCyclingRoadNorthEntrance_Movement_PushPlayerBackFromCounter"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 1
+
+[[boundaries]]
+payload_offset = 2
+length = 6
+
+[[boundaries]]
+payload_offset = 8
+length = 2
+
+[[boundaries]]
+payload_offset = 10
+length = 1
+
+[[boundaries]]
+payload_offset = 11
+length = 1
+
+[[boundaries]]
+payload_offset = 12
+length = 1
+
+[[boundaries]]
+payload_offset = 13
+length = 5
+
+[[boundaries]]
+payload_offset = 18
+length = 5
+
+[[boundaries]]
+payload_offset = 23
+length = 6
+
+[[boundaries]]
+payload_offset = 29
+length = 3
+
+[[boundaries]]
+payload_offset = 32
+length = 5
+
+[[boundaries]]
+payload_offset = 37
+length = 1
+
+[[boundaries]]
+payload_offset = 38
+length = 1
+
+[[boundaries]]
+payload_offset = 39
+length = 6
+
+[[boundaries]]
+payload_offset = 45
+length = 2
+
+[[boundaries]]
+payload_offset = 47
+length = 1
+
+[[boundaries]]
+payload_offset = 48
+length = 7
+
+[[boundaries]]
+payload_offset = 55
+length = 3
+
+[[boundaries]]
+payload_offset = 58
+length = 1
+
+[[boundaries]]
+payload_offset = 59
+length = 1
+
+[[boundaries]]
+payload_offset = 60
+length = 1
+
+[[boundaries]]
+payload_offset = 61
+length = 3
+
+[[boundaries]]
+payload_offset = 64
+length = 5
+
+[[boundaries]]
+payload_offset = 69
+length = 1
+
+[[boundaries]]
+payload_offset = 70
+length = 1

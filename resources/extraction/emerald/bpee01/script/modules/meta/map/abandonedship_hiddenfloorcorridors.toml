@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 19
 reloc_count = 29
+instruction_count = 115
 
 [[segments]]
 kind = "bytecode"
@@ -184,6 +185,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/abandonedship-hiddenfloorcorridors"
 target_export = "AbandonedShip_HiddenFloorCorridors_EventScript_LockRoom1"
 target_offset = 133
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 122
 runtime_resolution_required = true
 
 [[relocs]]
@@ -194,6 +197,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/abandonedship-hiddenfloorcorridors"
 target_export = "AbandonedShip_HiddenFloorCorridors_EventScript_LockRoom2"
 target_offset = 143
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 132
 runtime_resolution_required = true
 
 [[relocs]]
@@ -204,6 +209,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/abandonedship-hiddenfloorcorridors"
 target_export = "AbandonedShip_HiddenFloorCorridors_EventScript_LockRoom4"
 target_offset = 153
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 142
 runtime_resolution_required = true
 
 [[relocs]]
@@ -214,6 +221,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/abandonedship-hiddenfloorcorridors"
 target_export = "AbandonedShip_HiddenFloorCorridors_EventScript_LockRoom6"
 target_offset = 163
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 152
 runtime_resolution_required = true
 
 [[relocs]]
@@ -224,6 +233,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/abandonedship-hiddenfloorcorridors"
 target_export = "AbandonedShip_HiddenFloorCorridors_EventScript_UnlockRoom1"
 target_offset = 93
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 82
 runtime_resolution_required = true
 
 [[relocs]]
@@ -234,6 +245,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/abandonedship-hiddenfloorcorridors"
 target_export = "AbandonedShip_HiddenFloorCorridors_EventScript_UnlockRoom2"
 target_offset = 103
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 92
 runtime_resolution_required = true
 
 [[relocs]]
@@ -244,6 +257,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/abandonedship-hiddenfloorcorridors"
 target_export = "AbandonedShip_HiddenFloorCorridors_EventScript_UnlockRoom4"
 target_offset = 113
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 102
 runtime_resolution_required = true
 
 [[relocs]]
@@ -254,6 +269,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/abandonedship-hiddenfloorcorridors"
 target_export = "AbandonedShip_HiddenFloorCorridors_EventScript_UnlockRoom6"
 target_offset = 123
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 112
 runtime_resolution_required = true
 
 [[relocs]]
@@ -264,6 +281,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/abandonedship-hiddenfloorcorridors"
 target_export = "AbandonedShip_HiddenFloorCorridors_EventScript_TheDoorIsOpen"
 target_offset = 433
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 422
 runtime_resolution_required = true
 
 [[relocs]]
@@ -274,6 +293,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/abandonedship-hiddenfloorcorridors"
 target_export = "AbandonedShip_HiddenFloorCorridors_EventScript_Rm1IsLocked"
 target_offset = 393
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 382
 runtime_resolution_required = true
 
 [[relocs]]
@@ -283,6 +304,8 @@ original_encoded_gba = 0x8238bf7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/abandonedship-hiddenfloorcorridors"
 target_export = "AbandonedShip_HiddenFloorCorridors_Text_InsertedKey"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -293,6 +316,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/abandonedship-hiddenfloorcorridors"
 target_export = "AbandonedShip_HiddenFloorCorridors_EventScript_UnlockRoom1"
 target_offset = 93
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 82
 runtime_resolution_required = true
 
 [[relocs]]
@@ -303,6 +328,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/abandonedship-hiddenfloorcorridors"
 target_export = "AbandonedShip_HiddenFloorCorridors_EventScript_TheDoorIsOpen"
 target_offset = 433
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 422
 runtime_resolution_required = true
 
 [[relocs]]
@@ -313,6 +340,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/abandonedship-hiddenfloorcorridors"
 target_export = "AbandonedShip_HiddenFloorCorridors_EventScript_Rm2IsLocked"
 target_offset = 403
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 392
 runtime_resolution_required = true
 
 [[relocs]]
@@ -322,6 +351,8 @@ original_encoded_gba = 0x8238bf7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/abandonedship-hiddenfloorcorridors"
 target_export = "AbandonedShip_HiddenFloorCorridors_Text_InsertedKey"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -332,6 +363,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/abandonedship-hiddenfloorcorridors"
 target_export = "AbandonedShip_HiddenFloorCorridors_EventScript_UnlockRoom2"
 target_offset = 103
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 92
 runtime_resolution_required = true
 
 [[relocs]]
@@ -342,6 +375,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/abandonedship-hiddenfloorcorridors"
 target_export = "AbandonedShip_HiddenFloorCorridors_EventScript_TheDoorIsOpen"
 target_offset = 433
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 422
 runtime_resolution_required = true
 
 [[relocs]]
@@ -352,6 +387,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/abandonedship-hiddenfloorcorridors"
 target_export = "AbandonedShip_HiddenFloorCorridors_EventScript_Rm4IsLocked"
 target_offset = 413
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 402
 runtime_resolution_required = true
 
 [[relocs]]
@@ -361,6 +398,8 @@ original_encoded_gba = 0x8238bf7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/abandonedship-hiddenfloorcorridors"
 target_export = "AbandonedShip_HiddenFloorCorridors_Text_InsertedKey"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -371,6 +410,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/abandonedship-hiddenfloorcorridors"
 target_export = "AbandonedShip_HiddenFloorCorridors_EventScript_UnlockRoom4"
 target_offset = 113
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 102
 runtime_resolution_required = true
 
 [[relocs]]
@@ -381,6 +422,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/abandonedship-hiddenfloorcorridors"
 target_export = "AbandonedShip_HiddenFloorCorridors_EventScript_TheDoorIsOpen"
 target_offset = 433
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 422
 runtime_resolution_required = true
 
 [[relocs]]
@@ -391,6 +434,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/abandonedship-hiddenfloorcorridors"
 target_export = "AbandonedShip_HiddenFloorCorridors_EventScript_Rm6IsLocked"
 target_offset = 423
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 412
 runtime_resolution_required = true
 
 [[relocs]]
@@ -400,6 +445,8 @@ original_encoded_gba = 0x8238bf7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/abandonedship-hiddenfloorcorridors"
 target_export = "AbandonedShip_HiddenFloorCorridors_Text_InsertedKey"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -410,6 +457,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/abandonedship-hiddenfloorcorridors"
 target_export = "AbandonedShip_HiddenFloorCorridors_EventScript_UnlockRoom6"
 target_offset = 123
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 112
 runtime_resolution_required = true
 
 [[relocs]]
@@ -419,6 +468,8 @@ original_encoded_gba = 0x8238b27
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/abandonedship-hiddenfloorcorridors"
 target_export = "AbandonedShip_HiddenFloorCorridors_Text_Rm1DoorIsLocked"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -428,6 +479,8 @@ original_encoded_gba = 0x8238b5b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/abandonedship-hiddenfloorcorridors"
 target_export = "AbandonedShip_HiddenFloorCorridors_Text_Rm2DoorIsLocked"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -437,6 +490,8 @@ original_encoded_gba = 0x8238b8f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/abandonedship-hiddenfloorcorridors"
 target_export = "AbandonedShip_HiddenFloorCorridors_Text_Rm4DoorIsLocked"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -446,6 +501,8 @@ original_encoded_gba = 0x8238bc3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/abandonedship-hiddenfloorcorridors"
 target_export = "AbandonedShip_HiddenFloorCorridors_Text_Rm6DoorIsLocked"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -455,4 +512,466 @@ original_encoded_gba = 0x8237fa5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/abandonedship-corridors-b1f"
 target_export = "AbandonedShip_Text_TheDoorIsOpen"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 8
+
+[[boundaries]]
+payload_offset = 8
+length = 1
+
+[[boundaries]]
+payload_offset = 9
+length = 3
+
+[[boundaries]]
+payload_offset = 12
+length = 6
+
+[[boundaries]]
+payload_offset = 18
+length = 3
+
+[[boundaries]]
+payload_offset = 21
+length = 6
+
+[[boundaries]]
+payload_offset = 27
+length = 3
+
+[[boundaries]]
+payload_offset = 30
+length = 6
+
+[[boundaries]]
+payload_offset = 36
+length = 3
+
+[[boundaries]]
+payload_offset = 39
+length = 6
+
+[[boundaries]]
+payload_offset = 45
+length = 3
+
+[[boundaries]]
+payload_offset = 48
+length = 6
+
+[[boundaries]]
+payload_offset = 54
+length = 3
+
+[[boundaries]]
+payload_offset = 57
+length = 6
+
+[[boundaries]]
+payload_offset = 63
+length = 3
+
+[[boundaries]]
+payload_offset = 66
+length = 6
+
+[[boundaries]]
+payload_offset = 72
+length = 3
+
+[[boundaries]]
+payload_offset = 75
+length = 6
+
+[[boundaries]]
+payload_offset = 81
+length = 1
+
+[[boundaries]]
+payload_offset = 82
+length = 9
+
+[[boundaries]]
+payload_offset = 91
+length = 1
+
+[[boundaries]]
+payload_offset = 92
+length = 9
+
+[[boundaries]]
+payload_offset = 101
+length = 1
+
+[[boundaries]]
+payload_offset = 102
+length = 9
+
+[[boundaries]]
+payload_offset = 111
+length = 1
+
+[[boundaries]]
+payload_offset = 112
+length = 9
+
+[[boundaries]]
+payload_offset = 121
+length = 1
+
+[[boundaries]]
+payload_offset = 122
+length = 9
+
+[[boundaries]]
+payload_offset = 131
+length = 1
+
+[[boundaries]]
+payload_offset = 132
+length = 9
+
+[[boundaries]]
+payload_offset = 141
+length = 1
+
+[[boundaries]]
+payload_offset = 142
+length = 9
+
+[[boundaries]]
+payload_offset = 151
+length = 1
+
+[[boundaries]]
+payload_offset = 152
+length = 9
+
+[[boundaries]]
+payload_offset = 161
+length = 1
+
+[[boundaries]]
+payload_offset = 162
+length = 1
+
+[[boundaries]]
+payload_offset = 163
+length = 3
+
+[[boundaries]]
+payload_offset = 166
+length = 6
+
+[[boundaries]]
+payload_offset = 172
+length = 5
+
+[[boundaries]]
+payload_offset = 177
+length = 5
+
+[[boundaries]]
+payload_offset = 182
+length = 6
+
+[[boundaries]]
+payload_offset = 188
+length = 6
+
+[[boundaries]]
+payload_offset = 194
+length = 2
+
+[[boundaries]]
+payload_offset = 196
+length = 3
+
+[[boundaries]]
+payload_offset = 199
+length = 5
+
+[[boundaries]]
+payload_offset = 204
+length = 3
+
+[[boundaries]]
+payload_offset = 207
+length = 5
+
+[[boundaries]]
+payload_offset = 212
+length = 3
+
+[[boundaries]]
+payload_offset = 215
+length = 1
+
+[[boundaries]]
+payload_offset = 216
+length = 1
+
+[[boundaries]]
+payload_offset = 217
+length = 1
+
+[[boundaries]]
+payload_offset = 218
+length = 3
+
+[[boundaries]]
+payload_offset = 221
+length = 6
+
+[[boundaries]]
+payload_offset = 227
+length = 5
+
+[[boundaries]]
+payload_offset = 232
+length = 5
+
+[[boundaries]]
+payload_offset = 237
+length = 6
+
+[[boundaries]]
+payload_offset = 243
+length = 6
+
+[[boundaries]]
+payload_offset = 249
+length = 2
+
+[[boundaries]]
+payload_offset = 251
+length = 3
+
+[[boundaries]]
+payload_offset = 254
+length = 5
+
+[[boundaries]]
+payload_offset = 259
+length = 3
+
+[[boundaries]]
+payload_offset = 262
+length = 5
+
+[[boundaries]]
+payload_offset = 267
+length = 3
+
+[[boundaries]]
+payload_offset = 270
+length = 1
+
+[[boundaries]]
+payload_offset = 271
+length = 1
+
+[[boundaries]]
+payload_offset = 272
+length = 1
+
+[[boundaries]]
+payload_offset = 273
+length = 3
+
+[[boundaries]]
+payload_offset = 276
+length = 6
+
+[[boundaries]]
+payload_offset = 282
+length = 5
+
+[[boundaries]]
+payload_offset = 287
+length = 5
+
+[[boundaries]]
+payload_offset = 292
+length = 6
+
+[[boundaries]]
+payload_offset = 298
+length = 6
+
+[[boundaries]]
+payload_offset = 304
+length = 2
+
+[[boundaries]]
+payload_offset = 306
+length = 3
+
+[[boundaries]]
+payload_offset = 309
+length = 5
+
+[[boundaries]]
+payload_offset = 314
+length = 3
+
+[[boundaries]]
+payload_offset = 317
+length = 5
+
+[[boundaries]]
+payload_offset = 322
+length = 3
+
+[[boundaries]]
+payload_offset = 325
+length = 1
+
+[[boundaries]]
+payload_offset = 326
+length = 1
+
+[[boundaries]]
+payload_offset = 327
+length = 1
+
+[[boundaries]]
+payload_offset = 328
+length = 3
+
+[[boundaries]]
+payload_offset = 331
+length = 6
+
+[[boundaries]]
+payload_offset = 337
+length = 5
+
+[[boundaries]]
+payload_offset = 342
+length = 5
+
+[[boundaries]]
+payload_offset = 347
+length = 6
+
+[[boundaries]]
+payload_offset = 353
+length = 6
+
+[[boundaries]]
+payload_offset = 359
+length = 2
+
+[[boundaries]]
+payload_offset = 361
+length = 3
+
+[[boundaries]]
+payload_offset = 364
+length = 5
+
+[[boundaries]]
+payload_offset = 369
+length = 3
+
+[[boundaries]]
+payload_offset = 372
+length = 5
+
+[[boundaries]]
+payload_offset = 377
+length = 3
+
+[[boundaries]]
+payload_offset = 380
+length = 1
+
+[[boundaries]]
+payload_offset = 381
+length = 1
+
+[[boundaries]]
+payload_offset = 382
+length = 6
+
+[[boundaries]]
+payload_offset = 388
+length = 2
+
+[[boundaries]]
+payload_offset = 390
+length = 1
+
+[[boundaries]]
+payload_offset = 391
+length = 1
+
+[[boundaries]]
+payload_offset = 392
+length = 6
+
+[[boundaries]]
+payload_offset = 398
+length = 2
+
+[[boundaries]]
+payload_offset = 400
+length = 1
+
+[[boundaries]]
+payload_offset = 401
+length = 1
+
+[[boundaries]]
+payload_offset = 402
+length = 6
+
+[[boundaries]]
+payload_offset = 408
+length = 2
+
+[[boundaries]]
+payload_offset = 410
+length = 1
+
+[[boundaries]]
+payload_offset = 411
+length = 1
+
+[[boundaries]]
+payload_offset = 412
+length = 6
+
+[[boundaries]]
+payload_offset = 418
+length = 2
+
+[[boundaries]]
+payload_offset = 420
+length = 1
+
+[[boundaries]]
+payload_offset = 421
+length = 1
+
+[[boundaries]]
+payload_offset = 422
+length = 6
+
+[[boundaries]]
+payload_offset = 428
+length = 2
+
+[[boundaries]]
+payload_offset = 430
+length = 1
+
+[[boundaries]]
+payload_offset = 431
+length = 1

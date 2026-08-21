@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 5
 reloc_count = 12
+instruction_count = 39
 
 [[segments]]
 kind = "bytecode"
@@ -72,6 +73,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-house2"
 target_export = "MauvilleCity_House2_EventScript_ReceivedCoinCase"
 target_offset = 126
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 125
 runtime_resolution_required = true
 
 [[relocs]]
@@ -81,6 +84,8 @@ original_encoded_gba = 0x8210cee
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-house2"
 target_export = "MauvilleCity_House2_Text_BuyHarborMailAtSlateport"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -91,6 +96,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-house2"
 target_export = "MauvilleCity_House2_EventScript_AskToTradeForHarborMail"
 target_offset = 38
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 37
 runtime_resolution_required = true
 
 [[relocs]]
@@ -100,6 +107,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -109,6 +118,8 @@ original_encoded_gba = 0x827259a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-delay48"
 target_export = "Common_Movement_Delay48"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -118,6 +129,8 @@ original_encoded_gba = 0x8210d76
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-house2"
 target_export = "MauvilleCity_House2_Text_TradeHarborMailForCoinCase"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -128,6 +141,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-house2"
 target_export = "MauvilleCity_House2_EventScript_AcceptTrade"
 target_offset = 92
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 91
 runtime_resolution_required = true
 
 [[relocs]]
@@ -138,6 +153,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-house2"
 target_export = "MauvilleCity_House2_EventScript_DeclineTrade"
 target_offset = 136
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 135
 runtime_resolution_required = true
 
 [[relocs]]
@@ -147,6 +164,8 @@ original_encoded_gba = 0x8210db3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-house2"
 target_export = "MauvilleCity_House2_Text_IllTradeYouCoinCase"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -157,6 +176,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-house2"
 target_export = "MauvilleCity_House2_EventScript_ReceivedCoinCase"
 target_offset = 126
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 125
 runtime_resolution_required = true
 
 [[relocs]]
@@ -166,6 +187,8 @@ original_encoded_gba = 0x8210de7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-house2"
 target_export = "MauvilleCity_House2_Text_UseCoinCaseAtGameCorner"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -175,4 +198,162 @@ original_encoded_gba = 0x8210e16
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-house2"
 target_export = "MauvilleCity_House2_Text_ThatsDisappointing"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 1
+
+[[boundaries]]
+payload_offset = 2
+length = 3
+
+[[boundaries]]
+payload_offset = 5
+length = 6
+
+[[boundaries]]
+payload_offset = 11
+length = 6
+
+[[boundaries]]
+payload_offset = 17
+length = 2
+
+[[boundaries]]
+payload_offset = 19
+length = 5
+
+[[boundaries]]
+payload_offset = 24
+length = 5
+
+[[boundaries]]
+payload_offset = 29
+length = 6
+
+[[boundaries]]
+payload_offset = 35
+length = 1
+
+[[boundaries]]
+payload_offset = 36
+length = 1
+
+[[boundaries]]
+payload_offset = 37
+length = 3
+
+[[boundaries]]
+payload_offset = 40
+length = 7
+
+[[boundaries]]
+payload_offset = 47
+length = 3
+
+[[boundaries]]
+payload_offset = 50
+length = 7
+
+[[boundaries]]
+payload_offset = 57
+length = 3
+
+[[boundaries]]
+payload_offset = 60
+length = 6
+
+[[boundaries]]
+payload_offset = 66
+length = 2
+
+[[boundaries]]
+payload_offset = 68
+length = 5
+
+[[boundaries]]
+payload_offset = 73
+length = 6
+
+[[boundaries]]
+payload_offset = 79
+length = 5
+
+[[boundaries]]
+payload_offset = 84
+length = 6
+
+[[boundaries]]
+payload_offset = 90
+length = 1
+
+[[boundaries]]
+payload_offset = 91
+length = 6
+
+[[boundaries]]
+payload_offset = 97
+length = 2
+
+[[boundaries]]
+payload_offset = 99
+length = 5
+
+[[boundaries]]
+payload_offset = 104
+length = 5
+
+[[boundaries]]
+payload_offset = 109
+length = 5
+
+[[boundaries]]
+payload_offset = 114
+length = 2
+
+[[boundaries]]
+payload_offset = 116
+length = 3
+
+[[boundaries]]
+payload_offset = 119
+length = 5
+
+[[boundaries]]
+payload_offset = 125
+length = 6
+
+[[boundaries]]
+payload_offset = 131
+length = 2
+
+[[boundaries]]
+payload_offset = 133
+length = 1
+
+[[boundaries]]
+payload_offset = 134
+length = 1
+
+[[boundaries]]
+payload_offset = 135
+length = 6
+
+[[boundaries]]
+payload_offset = 141
+length = 2
+
+[[boundaries]]
+payload_offset = 143
+length = 1
+
+[[boundaries]]
+payload_offset = 144
+length = 1

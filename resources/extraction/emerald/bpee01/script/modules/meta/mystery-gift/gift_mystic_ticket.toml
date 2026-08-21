@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 3
 reloc_count = 10
+instruction_count = 0
 
 [[segments]]
 kind = "bytecode"
@@ -56,6 +57,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/mystery-gift/gift-mystic-ticket"
 target_export = "MysteryGiftScript_MysticTicket"
 target_offset = 0
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 0
 runtime_resolution_required = true
 
 [[relocs]]
@@ -66,6 +69,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/mystery-gift/gift-mystic-ticket"
 target_export = "MysticTicket_Obtained"
 target_offset = 109
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 109
 runtime_resolution_required = true
 
 [[relocs]]
@@ -76,6 +81,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/mystery-gift/gift-mystic-ticket"
 target_export = "MysticTicket_Obtained"
 target_offset = 109
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 109
 runtime_resolution_required = true
 
 [[relocs]]
@@ -86,6 +93,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/mystery-gift/gift-mystic-ticket"
 target_export = "MysticTicket_Obtained"
 target_offset = 109
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 109
 runtime_resolution_required = true
 
 [[relocs]]
@@ -96,6 +105,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/mystery-gift/gift-mystic-ticket"
 target_export = "MysticTicket_Obtained"
 target_offset = 109
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 109
 runtime_resolution_required = true
 
 [[relocs]]
@@ -105,6 +116,8 @@ original_encoded_gba = 0x8675581
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/mystery-gift/stext-mysticticketforyou"
 target_export = "sText_MysticTicketForYou"
+target_kind = "TEXT_LABEL"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -115,6 +128,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/mystery-gift/gift-mystic-ticket"
 target_export = "MysticTicket_NoBagSpace"
 target_offset = 100
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 100
 runtime_resolution_required = true
 
 [[relocs]]
@@ -124,6 +139,8 @@ original_encoded_gba = 0x86755de
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/mystery-gift/stext-mysticticketuseatport"
 target_export = "sText_MysticTicketUseAtPort"
+target_kind = "TEXT_LABEL"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -133,6 +150,8 @@ original_encoded_gba = 0x867566f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/mystery-gift/stext-mysticticketbagfull"
 target_export = "sText_MysticTicketBagFull"
+target_kind = "TEXT_LABEL"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -142,4 +161,6 @@ original_encoded_gba = 0x8675642
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/mystery-gift/stext-mysticticketthankyou"
 target_export = "sText_MysticTicketThankYou"
+target_kind = "TEXT_LABEL"
+target_payload_offset = 4294967295
 runtime_resolution_required = true

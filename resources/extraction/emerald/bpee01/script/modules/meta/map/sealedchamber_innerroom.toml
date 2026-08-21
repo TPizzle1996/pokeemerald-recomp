@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 8
 reloc_count = 10
+instruction_count = 71
 
 [[segments]]
 kind = "bytecode"
@@ -95,6 +96,8 @@ original_encoded_gba = 0x82a6b99
 target_class = "MART_TABLE_TARGET"
 target_resource_key = "emerald:text/braille/sealedchamber-innerroom-braille-firstwailordlastrelicanth"
 target_export = "SealedChamber_InnerRoom_Braille_FirstWailordLastRelicanth"
+target_kind = "BRAILLE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -105,6 +108,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/sealedchamber-innerroom"
 target_export = "SealedChamber_InnerRoom_EventScript_NoEffect"
 target_offset = 92
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 91
 runtime_resolution_required = true
 
 [[relocs]]
@@ -115,6 +120,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/sealedchamber-innerroom"
 target_export = "SealedChamber_InnerRoom_EventScript_NoEffect"
 target_offset = 92
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 91
 runtime_resolution_required = true
 
 [[relocs]]
@@ -124,6 +131,8 @@ original_encoded_gba = 0x827301b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/event-scripts"
 target_export = "gText_DoorOpenedFarAway"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -133,6 +142,8 @@ original_encoded_gba = 0x82a6bca
 target_class = "MART_TABLE_TARGET"
 target_resource_key = "emerald:text/braille/sealedchamber-innerroom-braille-inthiscavewehavelived"
 target_export = "SealedChamber_InnerRoom_Braille_InThisCaveWeHaveLived"
+target_kind = "BRAILLE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -142,6 +153,8 @@ original_encoded_gba = 0x82a6bec
 target_class = "MART_TABLE_TARGET"
 target_resource_key = "emerald:text/braille/sealedchamber-innerroom-braille-weowealltothepokemon"
 target_export = "SealedChamber_InnerRoom_Braille_WeOweAllToThePokemon"
+target_kind = "BRAILLE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -151,6 +164,8 @@ original_encoded_gba = 0x82a6c0d
 target_class = "MART_TABLE_TARGET"
 target_resource_key = "emerald:text/braille/sealedchamber-innerroom-braille-butwesealedthepokemonaway"
 target_export = "SealedChamber_InnerRoom_Braille_ButWeSealedThePokemonAway"
+target_kind = "BRAILLE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -160,6 +175,8 @@ original_encoded_gba = 0x82a6c34
 target_class = "MART_TABLE_TARGET"
 target_resource_key = "emerald:text/braille/sealedchamber-innerroom-braille-wefearedit"
 target_export = "SealedChamber_InnerRoom_Braille_WeFearedIt"
+target_kind = "BRAILLE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -169,6 +186,8 @@ original_encoded_gba = 0x82a6c48
 target_class = "MART_TABLE_TARGET"
 target_resource_key = "emerald:text/braille/sealedchamber-innerroom-braille-thosewithcouragehope"
 target_export = "SealedChamber_InnerRoom_Braille_ThoseWithCourageHope"
+target_kind = "BRAILLE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -178,4 +197,290 @@ original_encoded_gba = 0x82a6c73
 target_class = "MART_TABLE_TARGET"
 target_resource_key = "emerald:text/braille/sealedchamber-innerroom-braille-opendooreternalpokemonwaits"
 target_export = "SealedChamber_InnerRoom_Braille_OpenDoorEternalPokemonWaits"
+target_kind = "BRAILLE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 5
+
+[[boundaries]]
+payload_offset = 6
+length = 1
+
+[[boundaries]]
+payload_offset = 7
+length = 1
+
+[[boundaries]]
+payload_offset = 8
+length = 3
+
+[[boundaries]]
+payload_offset = 11
+length = 6
+
+[[boundaries]]
+payload_offset = 17
+length = 5
+
+[[boundaries]]
+payload_offset = 22
+length = 5
+
+[[boundaries]]
+payload_offset = 27
+length = 6
+
+[[boundaries]]
+payload_offset = 33
+length = 2
+
+[[boundaries]]
+payload_offset = 35
+length = 3
+
+[[boundaries]]
+payload_offset = 38
+length = 3
+
+[[boundaries]]
+payload_offset = 41
+length = 1
+
+[[boundaries]]
+payload_offset = 42
+length = 3
+
+[[boundaries]]
+payload_offset = 45
+length = 3
+
+[[boundaries]]
+payload_offset = 48
+length = 1
+
+[[boundaries]]
+payload_offset = 49
+length = 3
+
+[[boundaries]]
+payload_offset = 52
+length = 3
+
+[[boundaries]]
+payload_offset = 55
+length = 3
+
+[[boundaries]]
+payload_offset = 58
+length = 1
+
+[[boundaries]]
+payload_offset = 59
+length = 3
+
+[[boundaries]]
+payload_offset = 62
+length = 3
+
+[[boundaries]]
+payload_offset = 65
+length = 3
+
+[[boundaries]]
+payload_offset = 68
+length = 1
+
+[[boundaries]]
+payload_offset = 69
+length = 3
+
+[[boundaries]]
+payload_offset = 72
+length = 3
+
+[[boundaries]]
+payload_offset = 75
+length = 6
+
+[[boundaries]]
+payload_offset = 81
+length = 2
+
+[[boundaries]]
+payload_offset = 83
+length = 1
+
+[[boundaries]]
+payload_offset = 84
+length = 2
+
+[[boundaries]]
+payload_offset = 86
+length = 3
+
+[[boundaries]]
+payload_offset = 89
+length = 1
+
+[[boundaries]]
+payload_offset = 90
+length = 1
+
+[[boundaries]]
+payload_offset = 91
+length = 1
+
+[[boundaries]]
+payload_offset = 92
+length = 1
+
+[[boundaries]]
+payload_offset = 93
+length = 1
+
+[[boundaries]]
+payload_offset = 94
+length = 5
+
+[[boundaries]]
+payload_offset = 99
+length = 1
+
+[[boundaries]]
+payload_offset = 100
+length = 1
+
+[[boundaries]]
+payload_offset = 101
+length = 1
+
+[[boundaries]]
+payload_offset = 102
+length = 1
+
+[[boundaries]]
+payload_offset = 103
+length = 1
+
+[[boundaries]]
+payload_offset = 104
+length = 5
+
+[[boundaries]]
+payload_offset = 109
+length = 1
+
+[[boundaries]]
+payload_offset = 110
+length = 1
+
+[[boundaries]]
+payload_offset = 111
+length = 1
+
+[[boundaries]]
+payload_offset = 112
+length = 1
+
+[[boundaries]]
+payload_offset = 113
+length = 1
+
+[[boundaries]]
+payload_offset = 114
+length = 5
+
+[[boundaries]]
+payload_offset = 119
+length = 1
+
+[[boundaries]]
+payload_offset = 120
+length = 1
+
+[[boundaries]]
+payload_offset = 121
+length = 1
+
+[[boundaries]]
+payload_offset = 122
+length = 1
+
+[[boundaries]]
+payload_offset = 123
+length = 1
+
+[[boundaries]]
+payload_offset = 124
+length = 5
+
+[[boundaries]]
+payload_offset = 129
+length = 1
+
+[[boundaries]]
+payload_offset = 130
+length = 1
+
+[[boundaries]]
+payload_offset = 131
+length = 1
+
+[[boundaries]]
+payload_offset = 132
+length = 1
+
+[[boundaries]]
+payload_offset = 133
+length = 1
+
+[[boundaries]]
+payload_offset = 134
+length = 5
+
+[[boundaries]]
+payload_offset = 139
+length = 1
+
+[[boundaries]]
+payload_offset = 140
+length = 1
+
+[[boundaries]]
+payload_offset = 141
+length = 1
+
+[[boundaries]]
+payload_offset = 142
+length = 1
+
+[[boundaries]]
+payload_offset = 143
+length = 1
+
+[[boundaries]]
+payload_offset = 144
+length = 5
+
+[[boundaries]]
+payload_offset = 149
+length = 1
+
+[[boundaries]]
+payload_offset = 150
+length = 1
+
+[[boundaries]]
+payload_offset = 151
+length = 1
+
+[[boundaries]]
+payload_offset = 152
+length = 1

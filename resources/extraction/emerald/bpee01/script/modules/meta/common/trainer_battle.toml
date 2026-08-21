@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 2
 export_count = 18
 reloc_count = 21
+instruction_count = 105
 
 [[segments]]
 kind = "bytecode"
@@ -182,6 +183,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/trainer-battle"
 target_export = "EventScript_ShowTrainerIntroMsg"
 target_offset = 232
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 230
 runtime_resolution_required = true
 
 [[relocs]]
@@ -191,6 +194,8 @@ original_encoded_gba = 0x827143a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/movement-revealtrainer"
 target_export = "Movement_RevealTrainer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -201,6 +206,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/trainer-battle"
 target_export = "EventScript_NoNormalTrainerBattle"
 target_offset = 53
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 53
 runtime_resolution_required = true
 
 [[relocs]]
@@ -211,6 +218,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/trainer-battle"
 target_export = "EventScript_ShowTrainerIntroMsg"
 target_offset = 232
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 230
 runtime_resolution_required = true
 
 [[relocs]]
@@ -221,6 +230,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/trainer-battle"
 target_export = "EventScript_RevealTrainer"
 target_offset = 219
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 219
 runtime_resolution_required = true
 
 [[relocs]]
@@ -231,6 +242,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/trainer-battle"
 target_export = "EventScript_NoDoubleTrainerBattle"
 target_offset = 109
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 109
 runtime_resolution_required = true
 
 [[relocs]]
@@ -241,6 +254,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/trainer-battle"
 target_export = "EventScript_NotEnoughMonsForDoubleBattle"
 target_offset = 102
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 102
 runtime_resolution_required = true
 
 [[relocs]]
@@ -251,6 +266,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/trainer-battle"
 target_export = "EventScript_ShowTrainerIntroMsg"
 target_offset = 232
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 230
 runtime_resolution_required = true
 
 [[relocs]]
@@ -260,6 +277,8 @@ original_encoded_gba = 0x827143a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/movement-revealtrainer"
 target_export = "Movement_RevealTrainer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -270,6 +289,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/trainer-battle"
 target_export = "EventScript_RevealTrainer"
 target_offset = 219
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 219
 runtime_resolution_required = true
 
 [[relocs]]
@@ -280,6 +301,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/trainer-battle"
 target_export = "EventScript_NoRematchTrainerBattle"
 target_offset = 163
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 163
 runtime_resolution_required = true
 
 [[relocs]]
@@ -290,6 +313,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/trainer-battle"
 target_export = "EventScript_NoDoubleRematchTrainerBattle"
 target_offset = 211
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 211
 runtime_resolution_required = true
 
 [[relocs]]
@@ -300,6 +325,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/trainer-battle"
 target_export = "EventScript_NotEnoughMonsForDoubleRematchBattle"
 target_offset = 212
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 212
 runtime_resolution_required = true
 
 [[relocs]]
@@ -309,6 +336,8 @@ original_encoded_gba = 0x827143a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/movement-revealtrainer"
 target_export = "Movement_RevealTrainer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -319,6 +348,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/trainer-battle"
 target_export = "EventScript_TrainerApproach"
 target_offset = 2
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2
 runtime_resolution_required = true
 
 [[relocs]]
@@ -329,6 +360,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/trainer-battle"
 target_export = "EventScript_DoTrainerBattle"
 target_offset = 256
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 254
 runtime_resolution_required = true
 
 [[relocs]]
@@ -339,6 +372,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/trainer-battle"
 target_export = "EventScript_EndTrainerBattle"
 target_offset = 317
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 315
 runtime_resolution_required = true
 
 [[relocs]]
@@ -349,6 +384,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/trainer-battle"
 target_export = "EventScript_EndTrainerBattle"
 target_offset = 317
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 315
 runtime_resolution_required = true
 
 [[relocs]]
@@ -359,6 +396,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/trainer-battle"
 target_export = "EventScript_EndTrainerBattle"
 target_offset = 317
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 315
 runtime_resolution_required = true
 
 [[relocs]]
@@ -369,6 +408,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/trainer-battle"
 target_export = "EventScript_EndTrainerBattle"
 target_offset = 317
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 315
 runtime_resolution_required = true
 
 [[relocs]]
@@ -379,4 +420,426 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/trainer-battle"
 target_export = "EventScript_EndTrainerBattle"
 target_offset = 317
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 315
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 1
+
+[[boundaries]]
+payload_offset = 2
+length = 3
+
+[[boundaries]]
+payload_offset = 5
+length = 3
+
+[[boundaries]]
+payload_offset = 8
+length = 1
+
+[[boundaries]]
+payload_offset = 9
+length = 5
+
+[[boundaries]]
+payload_offset = 14
+length = 1
+
+[[boundaries]]
+payload_offset = 15
+length = 1
+
+[[boundaries]]
+payload_offset = 16
+length = 7
+
+[[boundaries]]
+payload_offset = 23
+length = 3
+
+[[boundaries]]
+payload_offset = 26
+length = 5
+
+[[boundaries]]
+payload_offset = 31
+length = 5
+
+[[boundaries]]
+payload_offset = 36
+length = 6
+
+[[boundaries]]
+payload_offset = 42
+length = 3
+
+[[boundaries]]
+payload_offset = 45
+length = 3
+
+[[boundaries]]
+payload_offset = 48
+length = 5
+
+[[boundaries]]
+payload_offset = 53
+length = 1
+
+[[boundaries]]
+payload_offset = 54
+length = 1
+
+[[boundaries]]
+payload_offset = 55
+length = 1
+
+[[boundaries]]
+payload_offset = 56
+length = 5
+
+[[boundaries]]
+payload_offset = 61
+length = 5
+
+[[boundaries]]
+payload_offset = 66
+length = 5
+
+[[boundaries]]
+payload_offset = 71
+length = 6
+
+[[boundaries]]
+payload_offset = 77
+length = 3
+
+[[boundaries]]
+payload_offset = 80
+length = 5
+
+[[boundaries]]
+payload_offset = 85
+length = 6
+
+[[boundaries]]
+payload_offset = 91
+length = 3
+
+[[boundaries]]
+payload_offset = 94
+length = 3
+
+[[boundaries]]
+payload_offset = 97
+length = 5
+
+[[boundaries]]
+payload_offset = 102
+length = 3
+
+[[boundaries]]
+payload_offset = 105
+length = 1
+
+[[boundaries]]
+payload_offset = 106
+length = 1
+
+[[boundaries]]
+payload_offset = 107
+length = 1
+
+[[boundaries]]
+payload_offset = 108
+length = 1
+
+[[boundaries]]
+payload_offset = 109
+length = 1
+
+[[boundaries]]
+payload_offset = 110
+length = 7
+
+[[boundaries]]
+payload_offset = 117
+length = 3
+
+[[boundaries]]
+payload_offset = 120
+length = 3
+
+[[boundaries]]
+payload_offset = 123
+length = 1
+
+[[boundaries]]
+payload_offset = 124
+length = 1
+
+[[boundaries]]
+payload_offset = 125
+length = 5
+
+[[boundaries]]
+payload_offset = 130
+length = 5
+
+[[boundaries]]
+payload_offset = 135
+length = 5
+
+[[boundaries]]
+payload_offset = 140
+length = 6
+
+[[boundaries]]
+payload_offset = 146
+length = 3
+
+[[boundaries]]
+payload_offset = 149
+length = 3
+
+[[boundaries]]
+payload_offset = 152
+length = 3
+
+[[boundaries]]
+payload_offset = 155
+length = 1
+
+[[boundaries]]
+payload_offset = 156
+length = 1
+
+[[boundaries]]
+payload_offset = 157
+length = 3
+
+[[boundaries]]
+payload_offset = 160
+length = 1
+
+[[boundaries]]
+payload_offset = 161
+length = 1
+
+[[boundaries]]
+payload_offset = 162
+length = 1
+
+[[boundaries]]
+payload_offset = 163
+length = 1
+
+[[boundaries]]
+payload_offset = 164
+length = 5
+
+[[boundaries]]
+payload_offset = 169
+length = 5
+
+[[boundaries]]
+payload_offset = 174
+length = 6
+
+[[boundaries]]
+payload_offset = 180
+length = 3
+
+[[boundaries]]
+payload_offset = 183
+length = 5
+
+[[boundaries]]
+payload_offset = 188
+length = 6
+
+[[boundaries]]
+payload_offset = 194
+length = 3
+
+[[boundaries]]
+payload_offset = 197
+length = 3
+
+[[boundaries]]
+payload_offset = 200
+length = 3
+
+[[boundaries]]
+payload_offset = 203
+length = 1
+
+[[boundaries]]
+payload_offset = 204
+length = 1
+
+[[boundaries]]
+payload_offset = 205
+length = 3
+
+[[boundaries]]
+payload_offset = 208
+length = 1
+
+[[boundaries]]
+payload_offset = 209
+length = 1
+
+[[boundaries]]
+payload_offset = 210
+length = 1
+
+[[boundaries]]
+payload_offset = 211
+length = 1
+
+[[boundaries]]
+payload_offset = 212
+length = 3
+
+[[boundaries]]
+payload_offset = 215
+length = 1
+
+[[boundaries]]
+payload_offset = 216
+length = 1
+
+[[boundaries]]
+payload_offset = 217
+length = 1
+
+[[boundaries]]
+payload_offset = 218
+length = 1
+
+[[boundaries]]
+payload_offset = 219
+length = 7
+
+[[boundaries]]
+payload_offset = 226
+length = 3
+
+[[boundaries]]
+payload_offset = 229
+length = 1
+
+[[boundaries]]
+payload_offset = 230
+length = 3
+
+[[boundaries]]
+payload_offset = 233
+length = 1
+
+[[boundaries]]
+payload_offset = 234
+length = 1
+
+[[boundaries]]
+payload_offset = 235
+length = 3
+
+[[boundaries]]
+payload_offset = 238
+length = 5
+
+[[boundaries]]
+payload_offset = 243
+length = 6
+
+[[boundaries]]
+payload_offset = 249
+length = 5
+
+[[boundaries]]
+payload_offset = 254
+length = 1
+
+[[boundaries]]
+payload_offset = 255
+length = 5
+
+[[boundaries]]
+payload_offset = 260
+length = 5
+
+[[boundaries]]
+payload_offset = 265
+length = 6
+
+[[boundaries]]
+payload_offset = 271
+length = 5
+
+[[boundaries]]
+payload_offset = 276
+length = 6
+
+[[boundaries]]
+payload_offset = 282
+length = 5
+
+[[boundaries]]
+payload_offset = 287
+length = 6
+
+[[boundaries]]
+payload_offset = 293
+length = 5
+
+[[boundaries]]
+payload_offset = 298
+length = 6
+
+[[boundaries]]
+payload_offset = 304
+length = 5
+
+[[boundaries]]
+payload_offset = 309
+length = 6
+
+[[boundaries]]
+payload_offset = 315
+length = 1
+
+[[boundaries]]
+payload_offset = 316
+length = 1
+
+[[boundaries]]
+payload_offset = 317
+length = 1
+
+[[boundaries]]
+payload_offset = 318
+length = 5
+
+[[boundaries]]
+payload_offset = 323
+length = 1
+
+[[boundaries]]
+payload_offset = 324
+length = 1
+
+[[boundaries]]
+payload_offset = 325
+length = 1
+
+[[boundaries]]
+payload_offset = 326
+length = 1

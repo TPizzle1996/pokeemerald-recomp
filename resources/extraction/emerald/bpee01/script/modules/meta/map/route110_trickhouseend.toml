@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 3
 export_count = 25
 reloc_count = 75
+instruction_count = 243
 
 [[segments]]
 kind = "bytecode"
@@ -244,6 +245,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_EventScript_SetDoorClosedMetatile"
 target_offset = 94
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 53
 runtime_resolution_required = true
 
 [[relocs]]
@@ -254,6 +257,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_EventScript_SetDoorClosedMetatile"
 target_offset = 94
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 53
 runtime_resolution_required = true
 
 [[relocs]]
@@ -263,6 +268,8 @@ original_encoded_gba = 0x826b08d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_Text_YouveMadeItToMe"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -273,6 +280,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_EventScript_CompletedPuzzle1"
 target_offset = 213
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 172
 runtime_resolution_required = true
 
 [[relocs]]
@@ -283,6 +292,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_EventScript_CompletedPuzzle2"
 target_offset = 273
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 232
 runtime_resolution_required = true
 
 [[relocs]]
@@ -293,6 +304,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_EventScript_CompletedPuzzle3"
 target_offset = 333
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 292
 runtime_resolution_required = true
 
 [[relocs]]
@@ -303,6 +316,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_EventScript_CompletedPuzzle4"
 target_offset = 393
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 352
 runtime_resolution_required = true
 
 [[relocs]]
@@ -313,6 +328,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_EventScript_CompletedPuzzle5"
 target_offset = 453
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 412
 runtime_resolution_required = true
 
 [[relocs]]
@@ -323,6 +340,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_EventScript_CompletedPuzzle6"
 target_offset = 513
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 472
 runtime_resolution_required = true
 
 [[relocs]]
@@ -333,6 +352,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_EventScript_CompletedPuzzle7"
 target_offset = 573
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 532
 runtime_resolution_required = true
 
 [[relocs]]
@@ -343,6 +364,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_EventScript_CompletedPuzzle8"
 target_offset = 633
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 592
 runtime_resolution_required = true
 
 [[relocs]]
@@ -352,6 +375,8 @@ original_encoded_gba = 0x826b0bc
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_Text_AllNightToPlantTrees"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -361,6 +386,8 @@ original_encoded_gba = 0x826b73d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_Text_YouHaveEarnedThisReward"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -371,6 +398,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_EventScript_BagFull"
 target_offset = 832
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 791
 runtime_resolution_required = true
 
 [[relocs]]
@@ -380,6 +409,8 @@ original_encoded_gba = 0x826b7ef
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_Text_MakeNewTricksToStumpYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -390,6 +421,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_EventScript_TrickMasterExit"
 target_offset = 800
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 759
 runtime_resolution_required = true
 
 [[relocs]]
@@ -399,6 +432,8 @@ original_encoded_gba = 0x826b13b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_Text_AllNightToMakeMaze"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -408,6 +443,8 @@ original_encoded_gba = 0x826b73d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_Text_YouHaveEarnedThisReward"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -418,6 +455,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_EventScript_BagFull"
 target_offset = 832
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 791
 runtime_resolution_required = true
 
 [[relocs]]
@@ -427,6 +466,8 @@ original_encoded_gba = 0x826b7ef
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_Text_MakeNewTricksToStumpYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -437,6 +478,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_EventScript_TrickMasterExit"
 target_offset = 800
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 759
 runtime_resolution_required = true
 
 [[relocs]]
@@ -446,6 +489,8 @@ original_encoded_gba = 0x826b1ad
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_Text_AllNightToPreparePanels"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -455,6 +500,8 @@ original_encoded_gba = 0x826b73d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_Text_YouHaveEarnedThisReward"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -465,6 +512,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_EventScript_BagFull"
 target_offset = 832
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 791
 runtime_resolution_required = true
 
 [[relocs]]
@@ -474,6 +523,8 @@ original_encoded_gba = 0x826b7ef
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_Text_MakeNewTricksToStumpYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -484,6 +535,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_EventScript_TrickMasterExit"
 target_offset = 800
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 759
 runtime_resolution_required = true
 
 [[relocs]]
@@ -493,6 +546,8 @@ original_encoded_gba = 0x826b223
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_Text_AllNightToShoveBoulders"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -502,6 +557,8 @@ original_encoded_gba = 0x826b73d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_Text_YouHaveEarnedThisReward"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -512,6 +569,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_EventScript_BagFull"
 target_offset = 832
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 791
 runtime_resolution_required = true
 
 [[relocs]]
@@ -521,6 +580,8 @@ original_encoded_gba = 0x826b7ef
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_Text_MakeNewTricksToStumpYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -531,6 +592,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_EventScript_TrickMasterExit"
 target_offset = 800
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 759
 runtime_resolution_required = true
 
 [[relocs]]
@@ -540,6 +603,8 @@ original_encoded_gba = 0x826b293
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_Text_AllNightToMakeMechadolls"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -549,6 +614,8 @@ original_encoded_gba = 0x826b73d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_Text_YouHaveEarnedThisReward"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -559,6 +626,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_EventScript_BagFull"
 target_offset = 832
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 791
 runtime_resolution_required = true
 
 [[relocs]]
@@ -568,6 +637,8 @@ original_encoded_gba = 0x826b7ef
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_Text_MakeNewTricksToStumpYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -578,6 +649,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_EventScript_TrickMasterExit"
 target_offset = 800
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 759
 runtime_resolution_required = true
 
 [[relocs]]
@@ -587,6 +660,8 @@ original_encoded_gba = 0x826b315
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_Text_AllNightToInstallDoors"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -596,6 +671,8 @@ original_encoded_gba = 0x826b73d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_Text_YouHaveEarnedThisReward"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -606,6 +683,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_EventScript_BagFull"
 target_offset = 832
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 791
 runtime_resolution_required = true
 
 [[relocs]]
@@ -615,6 +694,8 @@ original_encoded_gba = 0x826b7ef
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_Text_MakeNewTricksToStumpYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -625,6 +706,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_EventScript_TrickMasterExit"
 target_offset = 800
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 759
 runtime_resolution_required = true
 
 [[relocs]]
@@ -634,6 +717,8 @@ original_encoded_gba = 0x826b365
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_Text_AllNightSettingUpArrows"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -643,6 +728,8 @@ original_encoded_gba = 0x826b73d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_Text_YouHaveEarnedThisReward"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -653,6 +740,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_EventScript_BagFull"
 target_offset = 832
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 791
 runtime_resolution_required = true
 
 [[relocs]]
@@ -662,6 +751,8 @@ original_encoded_gba = 0x826b7ef
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_Text_MakeNewTricksToStumpYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -672,6 +763,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_EventScript_TrickMasterExit"
 target_offset = 800
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 759
 runtime_resolution_required = true
 
 [[relocs]]
@@ -681,6 +774,8 @@ original_encoded_gba = 0x826b3ab
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_Text_AllNightPolishingFloors"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -691,6 +786,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_EventScript_TrickMasterFaceAwaySouth"
 target_offset = 870
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 829
 runtime_resolution_required = true
 
 [[relocs]]
@@ -701,6 +798,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_EventScript_TrickMasterFaceAwayNorth"
 target_offset = 881
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 840
 runtime_resolution_required = true
 
 [[relocs]]
@@ -711,6 +810,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_EventScript_TrickMasterFaceAwayWest"
 target_offset = 892
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 851
 runtime_resolution_required = true
 
 [[relocs]]
@@ -721,6 +822,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_EventScript_TrickMasterFaceAwayEast"
 target_offset = 903
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 862
 runtime_resolution_required = true
 
 [[relocs]]
@@ -730,6 +833,8 @@ original_encoded_gba = 0x826b3fa
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_Text_FountainOfIdeasRunDry"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -739,6 +844,8 @@ original_encoded_gba = 0x827259e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceplayer"
 target_export = "Common_Movement_FacePlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -748,6 +855,8 @@ original_encoded_gba = 0x826b485
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_Text_DefeatedMePreferWhichTent"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -758,6 +867,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_EventScript_ChooseTent"
 target_offset = 758
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 717
 runtime_resolution_required = true
 
 [[relocs]]
@@ -768,6 +879,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_EventScript_NoRoomForTent"
 target_offset = 851
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 810
 runtime_resolution_required = true
 
 [[relocs]]
@@ -777,6 +890,8 @@ original_encoded_gba = 0x826b69a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_Text_LeavingOnJourney"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -787,6 +902,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_EventScript_TrickMasterExit"
 target_offset = 800
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 759
 runtime_resolution_required = true
 
 [[relocs]]
@@ -797,6 +914,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_EventScript_GiveRedTent"
 target_offset = 784
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 743
 runtime_resolution_required = true
 
 [[relocs]]
@@ -807,6 +926,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_EventScript_GiveBlueTent"
 target_offset = 792
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 751
 runtime_resolution_required = true
 
 [[relocs]]
@@ -816,6 +937,8 @@ original_encoded_gba = 0x8269e36
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhouse-movement-trickmasterspin"
 target_export = "Route110_TrickHouse_Movement_TrickMasterSpin"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -825,6 +948,8 @@ original_encoded_gba = 0x8269e3f
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhouse-movement-trickmasterjumpaway"
 target_export = "Route110_TrickHouse_Movement_TrickMasterJumpAway"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -835,6 +960,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_BagIsFull"
 target_offset = 283
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 283
 runtime_resolution_required = true
 
 [[relocs]]
@@ -844,6 +971,8 @@ original_encoded_gba = 0x826b760
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_Text_NoRoomForThis"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -854,6 +983,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_NoRoomForDecor"
 target_offset = 302
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 302
 runtime_resolution_required = true
 
 [[relocs]]
@@ -863,6 +994,8 @@ original_encoded_gba = 0x826b615
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_Text_NoRoomInPC"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -872,6 +1005,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -881,6 +1016,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -890,6 +1027,8 @@ original_encoded_gba = 0x82725a4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterleft"
 target_export = "Common_Movement_WalkInPlaceFasterLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -899,6 +1038,8 @@ original_encoded_gba = 0x82725a8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterright"
 target_export = "Common_Movement_WalkInPlaceFasterRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -908,6 +1049,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -917,6 +1060,8 @@ original_encoded_gba = 0x826b08b
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhouseend-movement-trickmastersurprise"
 target_export = "Route110_TrickHouseEnd_Movement_TrickMasterSurprise"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -926,6 +1071,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -935,6 +1082,8 @@ original_encoded_gba = 0x826b8bd
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhouseend"
 target_export = "Route110_TrickHouseEnd_Text_YoureIgnoringMe"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -944,4 +1093,978 @@ original_encoded_gba = 0x826b089
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhouseend-movement-keepplayerinroom"
 target_export = "Route110_TrickHouseEnd_Movement_KeepPlayerInRoom"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 5
+
+[[boundaries]]
+payload_offset = 5
+length = 6
+
+[[boundaries]]
+payload_offset = 11
+length = 1
+
+[[boundaries]]
+payload_offset = 12
+length = 5
+
+[[boundaries]]
+payload_offset = 17
+length = 5
+
+[[boundaries]]
+payload_offset = 22
+length = 3
+
+[[boundaries]]
+payload_offset = 25
+length = 1
+
+[[boundaries]]
+payload_offset = 26
+length = 3
+
+[[boundaries]]
+payload_offset = 29
+length = 5
+
+[[boundaries]]
+payload_offset = 34
+length = 4
+
+[[boundaries]]
+payload_offset = 38
+length = 1
+
+[[boundaries]]
+payload_offset = 39
+length = 5
+
+[[boundaries]]
+payload_offset = 44
+length = 5
+
+[[boundaries]]
+payload_offset = 49
+length = 3
+
+[[boundaries]]
+payload_offset = 52
+length = 1
+
+[[boundaries]]
+payload_offset = 53
+length = 9
+
+[[boundaries]]
+payload_offset = 62
+length = 1
+
+[[boundaries]]
+payload_offset = 63
+length = 1
+
+[[boundaries]]
+payload_offset = 64
+length = 1
+
+[[boundaries]]
+payload_offset = 65
+length = 6
+
+[[boundaries]]
+payload_offset = 71
+length = 2
+
+[[boundaries]]
+payload_offset = 73
+length = 5
+
+[[boundaries]]
+payload_offset = 78
+length = 5
+
+[[boundaries]]
+payload_offset = 83
+length = 5
+
+[[boundaries]]
+payload_offset = 88
+length = 6
+
+[[boundaries]]
+payload_offset = 94
+length = 5
+
+[[boundaries]]
+payload_offset = 99
+length = 6
+
+[[boundaries]]
+payload_offset = 105
+length = 5
+
+[[boundaries]]
+payload_offset = 110
+length = 6
+
+[[boundaries]]
+payload_offset = 116
+length = 5
+
+[[boundaries]]
+payload_offset = 121
+length = 6
+
+[[boundaries]]
+payload_offset = 127
+length = 5
+
+[[boundaries]]
+payload_offset = 132
+length = 6
+
+[[boundaries]]
+payload_offset = 138
+length = 5
+
+[[boundaries]]
+payload_offset = 143
+length = 6
+
+[[boundaries]]
+payload_offset = 149
+length = 5
+
+[[boundaries]]
+payload_offset = 154
+length = 6
+
+[[boundaries]]
+payload_offset = 160
+length = 5
+
+[[boundaries]]
+payload_offset = 165
+length = 6
+
+[[boundaries]]
+payload_offset = 171
+length = 1
+
+[[boundaries]]
+payload_offset = 172
+length = 6
+
+[[boundaries]]
+payload_offset = 178
+length = 2
+
+[[boundaries]]
+payload_offset = 180
+length = 6
+
+[[boundaries]]
+payload_offset = 186
+length = 2
+
+[[boundaries]]
+payload_offset = 188
+length = 5
+
+[[boundaries]]
+payload_offset = 193
+length = 5
+
+[[boundaries]]
+payload_offset = 198
+length = 5
+
+[[boundaries]]
+payload_offset = 203
+length = 2
+
+[[boundaries]]
+payload_offset = 205
+length = 5
+
+[[boundaries]]
+payload_offset = 210
+length = 6
+
+[[boundaries]]
+payload_offset = 216
+length = 6
+
+[[boundaries]]
+payload_offset = 222
+length = 2
+
+[[boundaries]]
+payload_offset = 224
+length = 1
+
+[[boundaries]]
+payload_offset = 225
+length = 5
+
+[[boundaries]]
+payload_offset = 230
+length = 1
+
+[[boundaries]]
+payload_offset = 231
+length = 1
+
+[[boundaries]]
+payload_offset = 232
+length = 6
+
+[[boundaries]]
+payload_offset = 238
+length = 2
+
+[[boundaries]]
+payload_offset = 240
+length = 6
+
+[[boundaries]]
+payload_offset = 246
+length = 2
+
+[[boundaries]]
+payload_offset = 248
+length = 5
+
+[[boundaries]]
+payload_offset = 253
+length = 5
+
+[[boundaries]]
+payload_offset = 258
+length = 5
+
+[[boundaries]]
+payload_offset = 263
+length = 2
+
+[[boundaries]]
+payload_offset = 265
+length = 5
+
+[[boundaries]]
+payload_offset = 270
+length = 6
+
+[[boundaries]]
+payload_offset = 276
+length = 6
+
+[[boundaries]]
+payload_offset = 282
+length = 2
+
+[[boundaries]]
+payload_offset = 284
+length = 1
+
+[[boundaries]]
+payload_offset = 285
+length = 5
+
+[[boundaries]]
+payload_offset = 290
+length = 1
+
+[[boundaries]]
+payload_offset = 291
+length = 1
+
+[[boundaries]]
+payload_offset = 292
+length = 6
+
+[[boundaries]]
+payload_offset = 298
+length = 2
+
+[[boundaries]]
+payload_offset = 300
+length = 6
+
+[[boundaries]]
+payload_offset = 306
+length = 2
+
+[[boundaries]]
+payload_offset = 308
+length = 5
+
+[[boundaries]]
+payload_offset = 313
+length = 5
+
+[[boundaries]]
+payload_offset = 318
+length = 5
+
+[[boundaries]]
+payload_offset = 323
+length = 2
+
+[[boundaries]]
+payload_offset = 325
+length = 5
+
+[[boundaries]]
+payload_offset = 330
+length = 6
+
+[[boundaries]]
+payload_offset = 336
+length = 6
+
+[[boundaries]]
+payload_offset = 342
+length = 2
+
+[[boundaries]]
+payload_offset = 344
+length = 1
+
+[[boundaries]]
+payload_offset = 345
+length = 5
+
+[[boundaries]]
+payload_offset = 350
+length = 1
+
+[[boundaries]]
+payload_offset = 351
+length = 1
+
+[[boundaries]]
+payload_offset = 352
+length = 6
+
+[[boundaries]]
+payload_offset = 358
+length = 2
+
+[[boundaries]]
+payload_offset = 360
+length = 6
+
+[[boundaries]]
+payload_offset = 366
+length = 2
+
+[[boundaries]]
+payload_offset = 368
+length = 5
+
+[[boundaries]]
+payload_offset = 373
+length = 5
+
+[[boundaries]]
+payload_offset = 378
+length = 5
+
+[[boundaries]]
+payload_offset = 383
+length = 2
+
+[[boundaries]]
+payload_offset = 385
+length = 5
+
+[[boundaries]]
+payload_offset = 390
+length = 6
+
+[[boundaries]]
+payload_offset = 396
+length = 6
+
+[[boundaries]]
+payload_offset = 402
+length = 2
+
+[[boundaries]]
+payload_offset = 404
+length = 1
+
+[[boundaries]]
+payload_offset = 405
+length = 5
+
+[[boundaries]]
+payload_offset = 410
+length = 1
+
+[[boundaries]]
+payload_offset = 411
+length = 1
+
+[[boundaries]]
+payload_offset = 412
+length = 6
+
+[[boundaries]]
+payload_offset = 418
+length = 2
+
+[[boundaries]]
+payload_offset = 420
+length = 6
+
+[[boundaries]]
+payload_offset = 426
+length = 2
+
+[[boundaries]]
+payload_offset = 428
+length = 5
+
+[[boundaries]]
+payload_offset = 433
+length = 5
+
+[[boundaries]]
+payload_offset = 438
+length = 5
+
+[[boundaries]]
+payload_offset = 443
+length = 2
+
+[[boundaries]]
+payload_offset = 445
+length = 5
+
+[[boundaries]]
+payload_offset = 450
+length = 6
+
+[[boundaries]]
+payload_offset = 456
+length = 6
+
+[[boundaries]]
+payload_offset = 462
+length = 2
+
+[[boundaries]]
+payload_offset = 464
+length = 1
+
+[[boundaries]]
+payload_offset = 465
+length = 5
+
+[[boundaries]]
+payload_offset = 470
+length = 1
+
+[[boundaries]]
+payload_offset = 471
+length = 1
+
+[[boundaries]]
+payload_offset = 472
+length = 6
+
+[[boundaries]]
+payload_offset = 478
+length = 2
+
+[[boundaries]]
+payload_offset = 480
+length = 6
+
+[[boundaries]]
+payload_offset = 486
+length = 2
+
+[[boundaries]]
+payload_offset = 488
+length = 5
+
+[[boundaries]]
+payload_offset = 493
+length = 5
+
+[[boundaries]]
+payload_offset = 498
+length = 5
+
+[[boundaries]]
+payload_offset = 503
+length = 2
+
+[[boundaries]]
+payload_offset = 505
+length = 5
+
+[[boundaries]]
+payload_offset = 510
+length = 6
+
+[[boundaries]]
+payload_offset = 516
+length = 6
+
+[[boundaries]]
+payload_offset = 522
+length = 2
+
+[[boundaries]]
+payload_offset = 524
+length = 1
+
+[[boundaries]]
+payload_offset = 525
+length = 5
+
+[[boundaries]]
+payload_offset = 530
+length = 1
+
+[[boundaries]]
+payload_offset = 531
+length = 1
+
+[[boundaries]]
+payload_offset = 532
+length = 6
+
+[[boundaries]]
+payload_offset = 538
+length = 2
+
+[[boundaries]]
+payload_offset = 540
+length = 6
+
+[[boundaries]]
+payload_offset = 546
+length = 2
+
+[[boundaries]]
+payload_offset = 548
+length = 5
+
+[[boundaries]]
+payload_offset = 553
+length = 5
+
+[[boundaries]]
+payload_offset = 558
+length = 5
+
+[[boundaries]]
+payload_offset = 563
+length = 2
+
+[[boundaries]]
+payload_offset = 565
+length = 5
+
+[[boundaries]]
+payload_offset = 570
+length = 6
+
+[[boundaries]]
+payload_offset = 576
+length = 6
+
+[[boundaries]]
+payload_offset = 582
+length = 2
+
+[[boundaries]]
+payload_offset = 584
+length = 1
+
+[[boundaries]]
+payload_offset = 585
+length = 5
+
+[[boundaries]]
+payload_offset = 590
+length = 1
+
+[[boundaries]]
+payload_offset = 591
+length = 1
+
+[[boundaries]]
+payload_offset = 592
+length = 6
+
+[[boundaries]]
+payload_offset = 598
+length = 2
+
+[[boundaries]]
+payload_offset = 600
+length = 1
+
+[[boundaries]]
+payload_offset = 601
+length = 5
+
+[[boundaries]]
+payload_offset = 606
+length = 6
+
+[[boundaries]]
+payload_offset = 612
+length = 5
+
+[[boundaries]]
+payload_offset = 617
+length = 6
+
+[[boundaries]]
+payload_offset = 623
+length = 5
+
+[[boundaries]]
+payload_offset = 628
+length = 6
+
+[[boundaries]]
+payload_offset = 634
+length = 5
+
+[[boundaries]]
+payload_offset = 639
+length = 6
+
+[[boundaries]]
+payload_offset = 645
+length = 3
+
+[[boundaries]]
+payload_offset = 648
+length = 6
+
+[[boundaries]]
+payload_offset = 654
+length = 2
+
+[[boundaries]]
+payload_offset = 656
+length = 1
+
+[[boundaries]]
+payload_offset = 657
+length = 7
+
+[[boundaries]]
+payload_offset = 664
+length = 3
+
+[[boundaries]]
+payload_offset = 667
+length = 3
+
+[[boundaries]]
+payload_offset = 670
+length = 6
+
+[[boundaries]]
+payload_offset = 676
+length = 2
+
+[[boundaries]]
+payload_offset = 678
+length = 5
+
+[[boundaries]]
+payload_offset = 683
+length = 5
+
+[[boundaries]]
+payload_offset = 688
+length = 5
+
+[[boundaries]]
+payload_offset = 693
+length = 6
+
+[[boundaries]]
+payload_offset = 699
+length = 6
+
+[[boundaries]]
+payload_offset = 705
+length = 2
+
+[[boundaries]]
+payload_offset = 707
+length = 5
+
+[[boundaries]]
+payload_offset = 712
+length = 3
+
+[[boundaries]]
+payload_offset = 715
+length = 1
+
+[[boundaries]]
+payload_offset = 716
+length = 1
+
+[[boundaries]]
+payload_offset = 717
+length = 5
+
+[[boundaries]]
+payload_offset = 722
+length = 5
+
+[[boundaries]]
+payload_offset = 727
+length = 5
+
+[[boundaries]]
+payload_offset = 732
+length = 6
+
+[[boundaries]]
+payload_offset = 738
+length = 5
+
+[[boundaries]]
+payload_offset = 743
+length = 5
+
+[[boundaries]]
+payload_offset = 748
+length = 2
+
+[[boundaries]]
+payload_offset = 750
+length = 1
+
+[[boundaries]]
+payload_offset = 751
+length = 5
+
+[[boundaries]]
+payload_offset = 756
+length = 2
+
+[[boundaries]]
+payload_offset = 758
+length = 1
+
+[[boundaries]]
+payload_offset = 759
+length = 7
+
+[[boundaries]]
+payload_offset = 766
+length = 3
+
+[[boundaries]]
+payload_offset = 769
+length = 3
+
+[[boundaries]]
+payload_offset = 772
+length = 7
+
+[[boundaries]]
+payload_offset = 779
+length = 3
+
+[[boundaries]]
+payload_offset = 782
+length = 3
+
+[[boundaries]]
+payload_offset = 785
+length = 5
+
+[[boundaries]]
+payload_offset = 790
+length = 1
+
+[[boundaries]]
+payload_offset = 791
+length = 5
+
+[[boundaries]]
+payload_offset = 796
+length = 6
+
+[[boundaries]]
+payload_offset = 802
+length = 2
+
+[[boundaries]]
+payload_offset = 804
+length = 5
+
+[[boundaries]]
+payload_offset = 809
+length = 1
+
+[[boundaries]]
+payload_offset = 810
+length = 5
+
+[[boundaries]]
+payload_offset = 815
+length = 6
+
+[[boundaries]]
+payload_offset = 821
+length = 2
+
+[[boundaries]]
+payload_offset = 823
+length = 5
+
+[[boundaries]]
+payload_offset = 828
+length = 1
+
+[[boundaries]]
+payload_offset = 829
+length = 7
+
+[[boundaries]]
+payload_offset = 836
+length = 3
+
+[[boundaries]]
+payload_offset = 839
+length = 1
+
+[[boundaries]]
+payload_offset = 840
+length = 7
+
+[[boundaries]]
+payload_offset = 847
+length = 3
+
+[[boundaries]]
+payload_offset = 850
+length = 1
+
+[[boundaries]]
+payload_offset = 851
+length = 7
+
+[[boundaries]]
+payload_offset = 858
+length = 3
+
+[[boundaries]]
+payload_offset = 861
+length = 1
+
+[[boundaries]]
+payload_offset = 862
+length = 7
+
+[[boundaries]]
+payload_offset = 869
+length = 3
+
+[[boundaries]]
+payload_offset = 872
+length = 1
+
+[[boundaries]]
+payload_offset = 873
+length = 1
+
+[[boundaries]]
+payload_offset = 874
+length = 4
+
+[[boundaries]]
+payload_offset = 878
+length = 3
+
+[[boundaries]]
+payload_offset = 881
+length = 7
+
+[[boundaries]]
+payload_offset = 888
+length = 3
+
+[[boundaries]]
+payload_offset = 891
+length = 3
+
+[[boundaries]]
+payload_offset = 894
+length = 7
+
+[[boundaries]]
+payload_offset = 901
+length = 3
+
+[[boundaries]]
+payload_offset = 904
+length = 3
+
+[[boundaries]]
+payload_offset = 907
+length = 7
+
+[[boundaries]]
+payload_offset = 914
+length = 3
+
+[[boundaries]]
+payload_offset = 917
+length = 6
+
+[[boundaries]]
+payload_offset = 923
+length = 2
+
+[[boundaries]]
+payload_offset = 925
+length = 1
+
+[[boundaries]]
+payload_offset = 926
+length = 7
+
+[[boundaries]]
+payload_offset = 933
+length = 3
+
+[[boundaries]]
+payload_offset = 936
+length = 3
+
+[[boundaries]]
+payload_offset = 939
+length = 4
+
+[[boundaries]]
+payload_offset = 943
+length = 1
+
+[[boundaries]]
+payload_offset = 944
+length = 1

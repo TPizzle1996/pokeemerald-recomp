@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 33
 reloc_count = 84
+instruction_count = 264
 
 [[segments]]
 kind = "bytecode"
@@ -296,6 +297,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_ReenterWorkshopAfterSootSack"
 target_offset = 21
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 15
 runtime_resolution_required = true
 
 [[relocs]]
@@ -306,6 +309,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_GiveItemAfterNoRoom"
 target_offset = 909
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 903
 runtime_resolution_required = true
 
 [[relocs]]
@@ -316,6 +321,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_CheckCollectedAsh"
 target_offset = 107
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 101
 runtime_resolution_required = true
 
 [[relocs]]
@@ -326,6 +333,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_ExplainSootSack"
 target_offset = 97
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 91
 runtime_resolution_required = true
 
 [[relocs]]
@@ -335,6 +344,8 @@ original_encoded_gba = 0x826f19d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_Text_GoCollectAshWithThis"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -344,6 +355,8 @@ original_encoded_gba = 0x826f252
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_Text_ExplainSootSack"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -353,6 +366,8 @@ original_encoded_gba = 0x826f252
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_Text_ExplainSootSack"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -363,6 +378,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_SootSackNotInBag"
 target_offset = 154
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 148
 runtime_resolution_required = true
 
 [[relocs]]
@@ -372,6 +389,8 @@ original_encoded_gba = 0x826f312
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_Text_LetsSeeCollectedAshes"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -382,6 +401,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_NotEnoughAsh"
 target_offset = 723
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 717
 runtime_resolution_required = true
 
 [[relocs]]
@@ -391,6 +412,8 @@ original_encoded_gba = 0x826f40a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_Text_WhichGlassItemWoudYouLike"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -401,6 +424,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_ChooseGlassItem"
 target_offset = 164
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 158
 runtime_resolution_required = true
 
 [[relocs]]
@@ -410,6 +435,8 @@ original_encoded_gba = 0x826f772
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_Text_HaventGotYourSootSack"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -420,6 +447,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_BlueFlute"
 target_offset = 283
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 277
 runtime_resolution_required = true
 
 [[relocs]]
@@ -430,6 +459,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_YellowFlute"
 target_offset = 343
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 337
 runtime_resolution_required = true
 
 [[relocs]]
@@ -440,6 +471,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_RedFlute"
 target_offset = 403
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 397
 runtime_resolution_required = true
 
 [[relocs]]
@@ -450,6 +483,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_WhiteFlute"
 target_offset = 463
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 457
 runtime_resolution_required = true
 
 [[relocs]]
@@ -460,6 +495,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_BlackFlute"
 target_offset = 523
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 517
 runtime_resolution_required = true
 
 [[relocs]]
@@ -470,6 +507,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_PrettyChair"
 target_offset = 583
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 577
 runtime_resolution_required = true
 
 [[relocs]]
@@ -480,6 +519,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_PrettyDesk"
 target_offset = 648
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 642
 runtime_resolution_required = true
 
 [[relocs]]
@@ -490,6 +531,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_CancelGlassItemSelect"
 target_offset = 713
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 707
 runtime_resolution_required = true
 
 [[relocs]]
@@ -500,6 +543,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_CancelGlassItemSelect"
 target_offset = 713
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 707
 runtime_resolution_required = true
 
 [[relocs]]
@@ -510,6 +555,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_NotEnoughAshForItem"
 target_offset = 747
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 741
 runtime_resolution_required = true
 
 [[relocs]]
@@ -519,6 +566,8 @@ original_encoded_gba = 0x826f480
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_Text_IsThatTheItemForYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -529,6 +578,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_ChooseDifferentItem"
 target_offset = 768
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 762
 runtime_resolution_required = true
 
 [[relocs]]
@@ -539,6 +590,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_MakeGlassItem"
 target_offset = 780
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 774
 runtime_resolution_required = true
 
 [[relocs]]
@@ -549,6 +602,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_NotEnoughAshForItem"
 target_offset = 747
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 741
 runtime_resolution_required = true
 
 [[relocs]]
@@ -558,6 +613,8 @@ original_encoded_gba = 0x826f480
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_Text_IsThatTheItemForYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -568,6 +625,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_ChooseDifferentItem"
 target_offset = 768
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 762
 runtime_resolution_required = true
 
 [[relocs]]
@@ -578,6 +637,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_MakeGlassItem"
 target_offset = 780
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 774
 runtime_resolution_required = true
 
 [[relocs]]
@@ -588,6 +649,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_NotEnoughAshForItem"
 target_offset = 747
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 741
 runtime_resolution_required = true
 
 [[relocs]]
@@ -597,6 +660,8 @@ original_encoded_gba = 0x826f480
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_Text_IsThatTheItemForYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -607,6 +672,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_ChooseDifferentItem"
 target_offset = 768
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 762
 runtime_resolution_required = true
 
 [[relocs]]
@@ -617,6 +684,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_MakeGlassItem"
 target_offset = 780
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 774
 runtime_resolution_required = true
 
 [[relocs]]
@@ -627,6 +696,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_NotEnoughAshForItem"
 target_offset = 747
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 741
 runtime_resolution_required = true
 
 [[relocs]]
@@ -636,6 +707,8 @@ original_encoded_gba = 0x826f480
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_Text_IsThatTheItemForYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -646,6 +719,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_ChooseDifferentItem"
 target_offset = 768
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 762
 runtime_resolution_required = true
 
 [[relocs]]
@@ -656,6 +731,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_MakeGlassItem"
 target_offset = 780
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 774
 runtime_resolution_required = true
 
 [[relocs]]
@@ -666,6 +743,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_NotEnoughAshForItem"
 target_offset = 747
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 741
 runtime_resolution_required = true
 
 [[relocs]]
@@ -675,6 +754,8 @@ original_encoded_gba = 0x826f480
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_Text_IsThatTheItemForYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -685,6 +766,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_ChooseDifferentItem"
 target_offset = 768
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 762
 runtime_resolution_required = true
 
 [[relocs]]
@@ -695,6 +778,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_MakeGlassItem"
 target_offset = 780
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 774
 runtime_resolution_required = true
 
 [[relocs]]
@@ -705,6 +790,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_NotEnoughAshForItem"
 target_offset = 747
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 741
 runtime_resolution_required = true
 
 [[relocs]]
@@ -714,6 +801,8 @@ original_encoded_gba = 0x826f480
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_Text_IsThatTheItemForYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -724,6 +813,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_ChooseDifferentItem"
 target_offset = 768
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 762
 runtime_resolution_required = true
 
 [[relocs]]
@@ -734,6 +825,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_MakeGlassItem"
 target_offset = 780
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 774
 runtime_resolution_required = true
 
 [[relocs]]
@@ -744,6 +837,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_NotEnoughAshForItem"
 target_offset = 747
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 741
 runtime_resolution_required = true
 
 [[relocs]]
@@ -753,6 +848,8 @@ original_encoded_gba = 0x826f480
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_Text_IsThatTheItemForYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -763,6 +860,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_ChooseDifferentItem"
 target_offset = 768
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 762
 runtime_resolution_required = true
 
 [[relocs]]
@@ -773,6 +872,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_MakeGlassItem"
 target_offset = 780
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 774
 runtime_resolution_required = true
 
 [[relocs]]
@@ -782,6 +883,8 @@ original_encoded_gba = 0x826f641
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_Text_AllThatAshButDontWantAnything"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -791,6 +894,8 @@ original_encoded_gba = 0x826f34e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_Text_NotEnoughAshNeedX"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -800,6 +905,8 @@ original_encoded_gba = 0x826f543
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_Text_NotEnoughAshToMakeItem"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -810,6 +917,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_ChooseGlassItem"
 target_offset = 164
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 158
 runtime_resolution_required = true
 
 [[relocs]]
@@ -819,6 +928,8 @@ original_encoded_gba = 0x826f4b5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_Text_WhichWouldYouLike"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -829,6 +940,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_ChooseGlassItem"
 target_offset = 164
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 158
 runtime_resolution_required = true
 
 [[relocs]]
@@ -838,6 +951,8 @@ original_encoded_gba = 0x826f4da
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_Text_IllMakeItemForYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -847,6 +962,8 @@ original_encoded_gba = 0x826f688
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_Text_IveFinishedGlassItem"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -857,6 +974,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_GiveGlassFlute"
 target_offset = 836
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 830
 runtime_resolution_required = true
 
 [[relocs]]
@@ -867,6 +986,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_GiveGlassDecor"
 target_offset = 860
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 854
 runtime_resolution_required = true
 
 [[relocs]]
@@ -877,6 +998,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_NoRoomForFlute"
 target_offset = 879
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 873
 runtime_resolution_required = true
 
 [[relocs]]
@@ -887,6 +1010,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_NoRoomForDecor"
 target_offset = 894
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 888
 runtime_resolution_required = true
 
 [[relocs]]
@@ -897,6 +1022,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_BagIsFull"
 target_offset = 283
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 283
 runtime_resolution_required = true
 
 [[relocs]]
@@ -906,6 +1033,8 @@ original_encoded_gba = 0x826f6b7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_Text_NoRoomInBag"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -916,6 +1045,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_NoRoomForDecor"
 target_offset = 302
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 302
 runtime_resolution_required = true
 
 [[relocs]]
@@ -925,6 +1056,8 @@ original_encoded_gba = 0x826f715
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_Text_NoRoomInPC"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -935,6 +1068,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_GiveBlueFlute"
 target_offset = 992
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 986
 runtime_resolution_required = true
 
 [[relocs]]
@@ -945,6 +1080,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_GiveYellowFlute"
 target_offset = 1012
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1006
 runtime_resolution_required = true
 
 [[relocs]]
@@ -955,6 +1092,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_GiveRedFlute"
 target_offset = 1032
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1026
 runtime_resolution_required = true
 
 [[relocs]]
@@ -965,6 +1104,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_GiveWhiteFlute"
 target_offset = 1052
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1046
 runtime_resolution_required = true
 
 [[relocs]]
@@ -975,6 +1116,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_GiveBlackFlute"
 target_offset = 1072
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1066
 runtime_resolution_required = true
 
 [[relocs]]
@@ -985,6 +1128,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_GivePrettyChair"
 target_offset = 1092
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1086
 runtime_resolution_required = true
 
 [[relocs]]
@@ -995,6 +1140,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_GivePrettyDesk"
 target_offset = 1112
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1106
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1005,6 +1152,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_TryGiveItemAgain"
 target_offset = 1132
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1126
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1015,6 +1164,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_TryGiveItemAgain"
 target_offset = 1132
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1126
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1025,6 +1176,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_TryGiveItemAgain"
 target_offset = 1132
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1126
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1035,6 +1188,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_TryGiveItemAgain"
 target_offset = 1132
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1126
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1045,6 +1200,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_TryGiveItemAgain"
 target_offset = 1132
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1126
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1055,6 +1212,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_TryGiveItemAgain"
 target_offset = 1132
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1126
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1065,6 +1224,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_TryGiveItemAgain"
 target_offset = 1132
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1126
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1074,6 +1235,8 @@ original_encoded_gba = 0x826f688
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_Text_IveFinishedGlassItem"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1084,6 +1247,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_GiveGlassFlute"
 target_offset = 836
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 830
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1094,6 +1259,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_EventScript_GiveGlassDecor"
 target_offset = 860
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 854
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1103,4 +1270,1062 @@ original_encoded_gba = 0x826f7ec
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route113-glassworkshop"
 target_export = "Route113_GlassWorkshop_Text_FunToBlowGlassFlute"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 5
+
+[[boundaries]]
+payload_offset = 8
+length = 6
+
+[[boundaries]]
+payload_offset = 14
+length = 1
+
+[[boundaries]]
+payload_offset = 15
+length = 5
+
+[[boundaries]]
+payload_offset = 20
+length = 1
+
+[[boundaries]]
+payload_offset = 21
+length = 1
+
+[[boundaries]]
+payload_offset = 22
+length = 1
+
+[[boundaries]]
+payload_offset = 23
+length = 5
+
+[[boundaries]]
+payload_offset = 28
+length = 6
+
+[[boundaries]]
+payload_offset = 34
+length = 5
+
+[[boundaries]]
+payload_offset = 39
+length = 6
+
+[[boundaries]]
+payload_offset = 45
+length = 5
+
+[[boundaries]]
+payload_offset = 50
+length = 6
+
+[[boundaries]]
+payload_offset = 56
+length = 6
+
+[[boundaries]]
+payload_offset = 62
+length = 2
+
+[[boundaries]]
+payload_offset = 64
+length = 5
+
+[[boundaries]]
+payload_offset = 69
+length = 5
+
+[[boundaries]]
+payload_offset = 74
+length = 2
+
+[[boundaries]]
+payload_offset = 76
+length = 5
+
+[[boundaries]]
+payload_offset = 81
+length = 6
+
+[[boundaries]]
+payload_offset = 87
+length = 2
+
+[[boundaries]]
+payload_offset = 89
+length = 1
+
+[[boundaries]]
+payload_offset = 90
+length = 1
+
+[[boundaries]]
+payload_offset = 91
+length = 6
+
+[[boundaries]]
+payload_offset = 97
+length = 2
+
+[[boundaries]]
+payload_offset = 99
+length = 1
+
+[[boundaries]]
+payload_offset = 100
+length = 1
+
+[[boundaries]]
+payload_offset = 101
+length = 5
+
+[[boundaries]]
+payload_offset = 106
+length = 5
+
+[[boundaries]]
+payload_offset = 111
+length = 6
+
+[[boundaries]]
+payload_offset = 117
+length = 6
+
+[[boundaries]]
+payload_offset = 123
+length = 2
+
+[[boundaries]]
+payload_offset = 125
+length = 5
+
+[[boundaries]]
+payload_offset = 130
+length = 6
+
+[[boundaries]]
+payload_offset = 136
+length = 5
+
+[[boundaries]]
+payload_offset = 141
+length = 1
+
+[[boundaries]]
+payload_offset = 142
+length = 5
+
+[[boundaries]]
+payload_offset = 148
+length = 6
+
+[[boundaries]]
+payload_offset = 154
+length = 2
+
+[[boundaries]]
+payload_offset = 156
+length = 1
+
+[[boundaries]]
+payload_offset = 157
+length = 1
+
+[[boundaries]]
+payload_offset = 158
+length = 5
+
+[[boundaries]]
+payload_offset = 163
+length = 5
+
+[[boundaries]]
+payload_offset = 168
+length = 3
+
+[[boundaries]]
+payload_offset = 171
+length = 1
+
+[[boundaries]]
+payload_offset = 172
+length = 5
+
+[[boundaries]]
+payload_offset = 177
+length = 5
+
+[[boundaries]]
+payload_offset = 182
+length = 6
+
+[[boundaries]]
+payload_offset = 188
+length = 5
+
+[[boundaries]]
+payload_offset = 193
+length = 6
+
+[[boundaries]]
+payload_offset = 199
+length = 5
+
+[[boundaries]]
+payload_offset = 204
+length = 6
+
+[[boundaries]]
+payload_offset = 210
+length = 5
+
+[[boundaries]]
+payload_offset = 215
+length = 6
+
+[[boundaries]]
+payload_offset = 221
+length = 5
+
+[[boundaries]]
+payload_offset = 226
+length = 6
+
+[[boundaries]]
+payload_offset = 232
+length = 5
+
+[[boundaries]]
+payload_offset = 237
+length = 6
+
+[[boundaries]]
+payload_offset = 243
+length = 5
+
+[[boundaries]]
+payload_offset = 248
+length = 6
+
+[[boundaries]]
+payload_offset = 254
+length = 5
+
+[[boundaries]]
+payload_offset = 259
+length = 6
+
+[[boundaries]]
+payload_offset = 265
+length = 5
+
+[[boundaries]]
+payload_offset = 270
+length = 6
+
+[[boundaries]]
+payload_offset = 276
+length = 1
+
+[[boundaries]]
+payload_offset = 277
+length = 5
+
+[[boundaries]]
+payload_offset = 282
+length = 4
+
+[[boundaries]]
+payload_offset = 286
+length = 5
+
+[[boundaries]]
+payload_offset = 291
+length = 5
+
+[[boundaries]]
+payload_offset = 296
+length = 6
+
+[[boundaries]]
+payload_offset = 302
+length = 6
+
+[[boundaries]]
+payload_offset = 308
+length = 2
+
+[[boundaries]]
+payload_offset = 310
+length = 5
+
+[[boundaries]]
+payload_offset = 315
+length = 6
+
+[[boundaries]]
+payload_offset = 321
+length = 5
+
+[[boundaries]]
+payload_offset = 326
+length = 5
+
+[[boundaries]]
+payload_offset = 331
+length = 5
+
+[[boundaries]]
+payload_offset = 337
+length = 5
+
+[[boundaries]]
+payload_offset = 342
+length = 4
+
+[[boundaries]]
+payload_offset = 346
+length = 5
+
+[[boundaries]]
+payload_offset = 351
+length = 5
+
+[[boundaries]]
+payload_offset = 356
+length = 6
+
+[[boundaries]]
+payload_offset = 362
+length = 6
+
+[[boundaries]]
+payload_offset = 368
+length = 2
+
+[[boundaries]]
+payload_offset = 370
+length = 5
+
+[[boundaries]]
+payload_offset = 375
+length = 6
+
+[[boundaries]]
+payload_offset = 381
+length = 5
+
+[[boundaries]]
+payload_offset = 386
+length = 5
+
+[[boundaries]]
+payload_offset = 391
+length = 5
+
+[[boundaries]]
+payload_offset = 397
+length = 5
+
+[[boundaries]]
+payload_offset = 402
+length = 4
+
+[[boundaries]]
+payload_offset = 406
+length = 5
+
+[[boundaries]]
+payload_offset = 411
+length = 5
+
+[[boundaries]]
+payload_offset = 416
+length = 6
+
+[[boundaries]]
+payload_offset = 422
+length = 6
+
+[[boundaries]]
+payload_offset = 428
+length = 2
+
+[[boundaries]]
+payload_offset = 430
+length = 5
+
+[[boundaries]]
+payload_offset = 435
+length = 6
+
+[[boundaries]]
+payload_offset = 441
+length = 5
+
+[[boundaries]]
+payload_offset = 446
+length = 5
+
+[[boundaries]]
+payload_offset = 451
+length = 5
+
+[[boundaries]]
+payload_offset = 457
+length = 5
+
+[[boundaries]]
+payload_offset = 462
+length = 4
+
+[[boundaries]]
+payload_offset = 466
+length = 5
+
+[[boundaries]]
+payload_offset = 471
+length = 5
+
+[[boundaries]]
+payload_offset = 476
+length = 6
+
+[[boundaries]]
+payload_offset = 482
+length = 6
+
+[[boundaries]]
+payload_offset = 488
+length = 2
+
+[[boundaries]]
+payload_offset = 490
+length = 5
+
+[[boundaries]]
+payload_offset = 495
+length = 6
+
+[[boundaries]]
+payload_offset = 501
+length = 5
+
+[[boundaries]]
+payload_offset = 506
+length = 5
+
+[[boundaries]]
+payload_offset = 511
+length = 5
+
+[[boundaries]]
+payload_offset = 517
+length = 5
+
+[[boundaries]]
+payload_offset = 522
+length = 4
+
+[[boundaries]]
+payload_offset = 526
+length = 5
+
+[[boundaries]]
+payload_offset = 531
+length = 5
+
+[[boundaries]]
+payload_offset = 536
+length = 6
+
+[[boundaries]]
+payload_offset = 542
+length = 6
+
+[[boundaries]]
+payload_offset = 548
+length = 2
+
+[[boundaries]]
+payload_offset = 550
+length = 5
+
+[[boundaries]]
+payload_offset = 555
+length = 6
+
+[[boundaries]]
+payload_offset = 561
+length = 5
+
+[[boundaries]]
+payload_offset = 566
+length = 5
+
+[[boundaries]]
+payload_offset = 571
+length = 5
+
+[[boundaries]]
+payload_offset = 577
+length = 5
+
+[[boundaries]]
+payload_offset = 582
+length = 5
+
+[[boundaries]]
+payload_offset = 587
+length = 4
+
+[[boundaries]]
+payload_offset = 591
+length = 5
+
+[[boundaries]]
+payload_offset = 596
+length = 5
+
+[[boundaries]]
+payload_offset = 601
+length = 6
+
+[[boundaries]]
+payload_offset = 607
+length = 6
+
+[[boundaries]]
+payload_offset = 613
+length = 2
+
+[[boundaries]]
+payload_offset = 615
+length = 5
+
+[[boundaries]]
+payload_offset = 620
+length = 6
+
+[[boundaries]]
+payload_offset = 626
+length = 5
+
+[[boundaries]]
+payload_offset = 631
+length = 5
+
+[[boundaries]]
+payload_offset = 636
+length = 5
+
+[[boundaries]]
+payload_offset = 642
+length = 5
+
+[[boundaries]]
+payload_offset = 647
+length = 5
+
+[[boundaries]]
+payload_offset = 652
+length = 4
+
+[[boundaries]]
+payload_offset = 656
+length = 5
+
+[[boundaries]]
+payload_offset = 661
+length = 5
+
+[[boundaries]]
+payload_offset = 666
+length = 6
+
+[[boundaries]]
+payload_offset = 672
+length = 6
+
+[[boundaries]]
+payload_offset = 678
+length = 2
+
+[[boundaries]]
+payload_offset = 680
+length = 5
+
+[[boundaries]]
+payload_offset = 685
+length = 6
+
+[[boundaries]]
+payload_offset = 691
+length = 5
+
+[[boundaries]]
+payload_offset = 696
+length = 5
+
+[[boundaries]]
+payload_offset = 701
+length = 5
+
+[[boundaries]]
+payload_offset = 707
+length = 6
+
+[[boundaries]]
+payload_offset = 713
+length = 2
+
+[[boundaries]]
+payload_offset = 715
+length = 1
+
+[[boundaries]]
+payload_offset = 716
+length = 1
+
+[[boundaries]]
+payload_offset = 717
+length = 5
+
+[[boundaries]]
+payload_offset = 722
+length = 5
+
+[[boundaries]]
+payload_offset = 727
+length = 4
+
+[[boundaries]]
+payload_offset = 731
+length = 6
+
+[[boundaries]]
+payload_offset = 737
+length = 2
+
+[[boundaries]]
+payload_offset = 739
+length = 1
+
+[[boundaries]]
+payload_offset = 740
+length = 1
+
+[[boundaries]]
+payload_offset = 741
+length = 5
+
+[[boundaries]]
+payload_offset = 746
+length = 4
+
+[[boundaries]]
+payload_offset = 750
+length = 5
+
+[[boundaries]]
+payload_offset = 755
+length = 1
+
+[[boundaries]]
+payload_offset = 756
+length = 5
+
+[[boundaries]]
+payload_offset = 762
+length = 5
+
+[[boundaries]]
+payload_offset = 767
+length = 1
+
+[[boundaries]]
+payload_offset = 768
+length = 5
+
+[[boundaries]]
+payload_offset = 774
+length = 6
+
+[[boundaries]]
+payload_offset = 780
+length = 2
+
+[[boundaries]]
+payload_offset = 782
+length = 1
+
+[[boundaries]]
+payload_offset = 783
+length = 2
+
+[[boundaries]]
+payload_offset = 785
+length = 3
+
+[[boundaries]]
+payload_offset = 788
+length = 3
+
+[[boundaries]]
+payload_offset = 791
+length = 2
+
+[[boundaries]]
+payload_offset = 793
+length = 6
+
+[[boundaries]]
+payload_offset = 799
+length = 2
+
+[[boundaries]]
+payload_offset = 801
+length = 5
+
+[[boundaries]]
+payload_offset = 806
+length = 6
+
+[[boundaries]]
+payload_offset = 812
+length = 5
+
+[[boundaries]]
+payload_offset = 817
+length = 6
+
+[[boundaries]]
+payload_offset = 823
+length = 5
+
+[[boundaries]]
+payload_offset = 828
+length = 1
+
+[[boundaries]]
+payload_offset = 829
+length = 1
+
+[[boundaries]]
+payload_offset = 830
+length = 5
+
+[[boundaries]]
+payload_offset = 835
+length = 5
+
+[[boundaries]]
+payload_offset = 840
+length = 2
+
+[[boundaries]]
+payload_offset = 842
+length = 5
+
+[[boundaries]]
+payload_offset = 847
+length = 6
+
+[[boundaries]]
+payload_offset = 853
+length = 1
+
+[[boundaries]]
+payload_offset = 854
+length = 5
+
+[[boundaries]]
+payload_offset = 859
+length = 2
+
+[[boundaries]]
+payload_offset = 861
+length = 5
+
+[[boundaries]]
+payload_offset = 866
+length = 6
+
+[[boundaries]]
+payload_offset = 872
+length = 1
+
+[[boundaries]]
+payload_offset = 873
+length = 5
+
+[[boundaries]]
+payload_offset = 878
+length = 6
+
+[[boundaries]]
+payload_offset = 884
+length = 2
+
+[[boundaries]]
+payload_offset = 886
+length = 1
+
+[[boundaries]]
+payload_offset = 887
+length = 1
+
+[[boundaries]]
+payload_offset = 888
+length = 5
+
+[[boundaries]]
+payload_offset = 893
+length = 6
+
+[[boundaries]]
+payload_offset = 899
+length = 2
+
+[[boundaries]]
+payload_offset = 901
+length = 1
+
+[[boundaries]]
+payload_offset = 902
+length = 1
+
+[[boundaries]]
+payload_offset = 903
+length = 5
+
+[[boundaries]]
+payload_offset = 908
+length = 5
+
+[[boundaries]]
+payload_offset = 913
+length = 6
+
+[[boundaries]]
+payload_offset = 919
+length = 5
+
+[[boundaries]]
+payload_offset = 924
+length = 6
+
+[[boundaries]]
+payload_offset = 930
+length = 5
+
+[[boundaries]]
+payload_offset = 935
+length = 6
+
+[[boundaries]]
+payload_offset = 941
+length = 5
+
+[[boundaries]]
+payload_offset = 946
+length = 6
+
+[[boundaries]]
+payload_offset = 952
+length = 5
+
+[[boundaries]]
+payload_offset = 957
+length = 6
+
+[[boundaries]]
+payload_offset = 963
+length = 5
+
+[[boundaries]]
+payload_offset = 968
+length = 6
+
+[[boundaries]]
+payload_offset = 974
+length = 5
+
+[[boundaries]]
+payload_offset = 979
+length = 6
+
+[[boundaries]]
+payload_offset = 985
+length = 1
+
+[[boundaries]]
+payload_offset = 986
+length = 5
+
+[[boundaries]]
+payload_offset = 991
+length = 5
+
+[[boundaries]]
+payload_offset = 996
+length = 4
+
+[[boundaries]]
+payload_offset = 1000
+length = 5
+
+[[boundaries]]
+payload_offset = 1006
+length = 5
+
+[[boundaries]]
+payload_offset = 1011
+length = 5
+
+[[boundaries]]
+payload_offset = 1016
+length = 4
+
+[[boundaries]]
+payload_offset = 1020
+length = 5
+
+[[boundaries]]
+payload_offset = 1026
+length = 5
+
+[[boundaries]]
+payload_offset = 1031
+length = 5
+
+[[boundaries]]
+payload_offset = 1036
+length = 4
+
+[[boundaries]]
+payload_offset = 1040
+length = 5
+
+[[boundaries]]
+payload_offset = 1046
+length = 5
+
+[[boundaries]]
+payload_offset = 1051
+length = 5
+
+[[boundaries]]
+payload_offset = 1056
+length = 4
+
+[[boundaries]]
+payload_offset = 1060
+length = 5
+
+[[boundaries]]
+payload_offset = 1066
+length = 5
+
+[[boundaries]]
+payload_offset = 1071
+length = 5
+
+[[boundaries]]
+payload_offset = 1076
+length = 4
+
+[[boundaries]]
+payload_offset = 1080
+length = 5
+
+[[boundaries]]
+payload_offset = 1086
+length = 5
+
+[[boundaries]]
+payload_offset = 1091
+length = 5
+
+[[boundaries]]
+payload_offset = 1096
+length = 4
+
+[[boundaries]]
+payload_offset = 1100
+length = 5
+
+[[boundaries]]
+payload_offset = 1106
+length = 5
+
+[[boundaries]]
+payload_offset = 1111
+length = 5
+
+[[boundaries]]
+payload_offset = 1116
+length = 4
+
+[[boundaries]]
+payload_offset = 1120
+length = 5
+
+[[boundaries]]
+payload_offset = 1126
+length = 6
+
+[[boundaries]]
+payload_offset = 1132
+length = 2
+
+[[boundaries]]
+payload_offset = 1134
+length = 5
+
+[[boundaries]]
+payload_offset = 1139
+length = 6
+
+[[boundaries]]
+payload_offset = 1145
+length = 5
+
+[[boundaries]]
+payload_offset = 1150
+length = 6
+
+[[boundaries]]
+payload_offset = 1156
+length = 5
+
+[[boundaries]]
+payload_offset = 1161
+length = 1
+
+[[boundaries]]
+payload_offset = 1162
+length = 1
+
+[[boundaries]]
+payload_offset = 1163
+length = 6
+
+[[boundaries]]
+payload_offset = 1169
+length = 2
+
+[[boundaries]]
+payload_offset = 1171
+length = 1

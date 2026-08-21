@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 14
 reloc_count = 24
+instruction_count = 102
 
 [[segments]]
 kind = "bytecode"
@@ -143,6 +144,8 @@ original_encoded_gba = 0x8227369
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-lotadandseedothouse"
 target_export = "SootopolisCity_LotadAndSeedotHouse_Text_PleaseShowMeBigSeedot"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -153,6 +156,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/sootopoliscity-lotadandseedothouse"
 target_export = "SootopolisCity_LotadAndSeedotHouse_EventScript_CancelShowSeedot"
 target_offset = 72
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 71
 runtime_resolution_required = true
 
 [[relocs]]
@@ -163,6 +168,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/sootopoliscity-lotadandseedothouse"
 target_export = "SootopolisCity_LotadAndSeedotHouse_EventScript_NotSeedot"
 target_offset = 82
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 81
 runtime_resolution_required = true
 
 [[relocs]]
@@ -173,6 +180,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/sootopoliscity-lotadandseedothouse"
 target_export = "SootopolisCity_LotadAndSeedotHouse_EventScript_SmallSeedot"
 target_offset = 92
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 91
 runtime_resolution_required = true
 
 [[relocs]]
@@ -183,6 +192,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/sootopoliscity-lotadandseedothouse"
 target_export = "SootopolisCity_LotadAndSeedotHouse_EventScript_BigSeedot"
 target_offset = 102
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 101
 runtime_resolution_required = true
 
 [[relocs]]
@@ -192,6 +203,8 @@ original_encoded_gba = 0x82275bc
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-lotadandseedothouse"
 target_export = "SootopolisCity_LotadAndSeedotHouse_Text_DontHaveBigSeedot"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -201,6 +214,8 @@ original_encoded_gba = 0x8227584
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-lotadandseedothouse"
 target_export = "SootopolisCity_LotadAndSeedotHouse_Text_ThatsNotSeedot"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -210,6 +225,8 @@ original_encoded_gba = 0x8227544
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-lotadandseedothouse"
 target_export = "SootopolisCity_LotadAndSeedotHouse_Text_SeenBiggerSeedot"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -219,6 +236,8 @@ original_encoded_gba = 0x8227480
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-lotadandseedothouse"
 target_export = "SootopolisCity_LotadAndSeedotHouse_Text_GoshMightBeBiggerThanLotad"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -229,6 +248,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/sootopoliscity-lotadandseedothouse"
 target_export = "SootopolisCity_LotadAndSeedotHouse_EventScript_NoRoomForElixir1"
 target_offset = 136
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 135
 runtime_resolution_required = true
 
 [[relocs]]
@@ -238,6 +259,8 @@ original_encoded_gba = 0x8227524
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-lotadandseedothouse"
 target_export = "SootopolisCity_LotadAndSeedotHouse_Text_BagCrammedFull1"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -247,6 +270,8 @@ original_encoded_gba = 0x8227676
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-lotadandseedothouse"
 target_export = "SootopolisCity_LotadAndSeedotHouse_Text_PleaseShowMeBigLotad"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -257,6 +282,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/sootopoliscity-lotadandseedothouse"
 target_export = "SootopolisCity_LotadAndSeedotHouse_EventScript_CancelShowLotad"
 target_offset = 217
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 216
 runtime_resolution_required = true
 
 [[relocs]]
@@ -267,6 +294,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/sootopoliscity-lotadandseedothouse"
 target_export = "SootopolisCity_LotadAndSeedotHouse_EventScript_NotLotad"
 target_offset = 227
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 226
 runtime_resolution_required = true
 
 [[relocs]]
@@ -277,6 +306,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/sootopoliscity-lotadandseedothouse"
 target_export = "SootopolisCity_LotadAndSeedotHouse_EventScript_SmallLotad"
 target_offset = 237
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 236
 runtime_resolution_required = true
 
 [[relocs]]
@@ -287,6 +318,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/sootopoliscity-lotadandseedothouse"
 target_export = "SootopolisCity_LotadAndSeedotHouse_EventScript_BigLotad"
 target_offset = 247
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 246
 runtime_resolution_required = true
 
 [[relocs]]
@@ -296,6 +329,8 @@ original_encoded_gba = 0x8227896
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-lotadandseedothouse"
 target_export = "SootopolisCity_LotadAndSeedotHouse_Text_DontHaveBigLotad"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -305,6 +340,8 @@ original_encoded_gba = 0x8227867
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-lotadandseedothouse"
 target_export = "SootopolisCity_LotadAndSeedotHouse_Text_ThatsNotLotad"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -314,6 +351,8 @@ original_encoded_gba = 0x822782a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-lotadandseedothouse"
 target_export = "SootopolisCity_LotadAndSeedotHouse_Text_SeenBiggerLotad"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -323,6 +362,8 @@ original_encoded_gba = 0x822776c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-lotadandseedothouse"
 target_export = "SootopolisCity_LotadAndSeedotHouse_Text_WowMightBeBiggerThanSeedot"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -333,6 +374,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/sootopoliscity-lotadandseedothouse"
 target_export = "SootopolisCity_LotadAndSeedotHouse_EventScript_NoRoomForElixir2"
 target_offset = 281
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 280
 runtime_resolution_required = true
 
 [[relocs]]
@@ -342,6 +385,8 @@ original_encoded_gba = 0x822780a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-lotadandseedothouse"
 target_export = "SootopolisCity_LotadAndSeedotHouse_Text_BagCrammedFull2"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -351,6 +396,8 @@ original_encoded_gba = 0x8227617
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-lotadandseedothouse"
 target_export = "SootopolisCity_LotadAndSeedotHouse_Text_BiggestSeedotInHistory"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -360,4 +407,414 @@ original_encoded_gba = 0x82278f2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-lotadandseedothouse"
 target_export = "SootopolisCity_LotadAndSeedotHouse_Text_BiggestLotadInHistory"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 1
+
+[[boundaries]]
+payload_offset = 4
+length = 1
+
+[[boundaries]]
+payload_offset = 5
+length = 6
+
+[[boundaries]]
+payload_offset = 11
+length = 2
+
+[[boundaries]]
+payload_offset = 13
+length = 3
+
+[[boundaries]]
+payload_offset = 16
+length = 1
+
+[[boundaries]]
+payload_offset = 17
+length = 5
+
+[[boundaries]]
+payload_offset = 22
+length = 5
+
+[[boundaries]]
+payload_offset = 27
+length = 6
+
+[[boundaries]]
+payload_offset = 33
+length = 3
+
+[[boundaries]]
+payload_offset = 36
+length = 5
+
+[[boundaries]]
+payload_offset = 41
+length = 6
+
+[[boundaries]]
+payload_offset = 47
+length = 5
+
+[[boundaries]]
+payload_offset = 52
+length = 6
+
+[[boundaries]]
+payload_offset = 58
+length = 5
+
+[[boundaries]]
+payload_offset = 63
+length = 6
+
+[[boundaries]]
+payload_offset = 69
+length = 1
+
+[[boundaries]]
+payload_offset = 70
+length = 1
+
+[[boundaries]]
+payload_offset = 71
+length = 6
+
+[[boundaries]]
+payload_offset = 77
+length = 2
+
+[[boundaries]]
+payload_offset = 79
+length = 1
+
+[[boundaries]]
+payload_offset = 80
+length = 1
+
+[[boundaries]]
+payload_offset = 81
+length = 6
+
+[[boundaries]]
+payload_offset = 87
+length = 2
+
+[[boundaries]]
+payload_offset = 89
+length = 1
+
+[[boundaries]]
+payload_offset = 90
+length = 1
+
+[[boundaries]]
+payload_offset = 91
+length = 6
+
+[[boundaries]]
+payload_offset = 97
+length = 2
+
+[[boundaries]]
+payload_offset = 99
+length = 1
+
+[[boundaries]]
+payload_offset = 100
+length = 1
+
+[[boundaries]]
+payload_offset = 101
+length = 6
+
+[[boundaries]]
+payload_offset = 107
+length = 2
+
+[[boundaries]]
+payload_offset = 109
+length = 5
+
+[[boundaries]]
+payload_offset = 114
+length = 5
+
+[[boundaries]]
+payload_offset = 119
+length = 2
+
+[[boundaries]]
+payload_offset = 121
+length = 5
+
+[[boundaries]]
+payload_offset = 126
+length = 6
+
+[[boundaries]]
+payload_offset = 132
+length = 1
+
+[[boundaries]]
+payload_offset = 133
+length = 1
+
+[[boundaries]]
+payload_offset = 134
+length = 1
+
+[[boundaries]]
+payload_offset = 135
+length = 6
+
+[[boundaries]]
+payload_offset = 141
+length = 2
+
+[[boundaries]]
+payload_offset = 143
+length = 1
+
+[[boundaries]]
+payload_offset = 144
+length = 1
+
+[[boundaries]]
+payload_offset = 145
+length = 3
+
+[[boundaries]]
+payload_offset = 148
+length = 1
+
+[[boundaries]]
+payload_offset = 149
+length = 1
+
+[[boundaries]]
+payload_offset = 150
+length = 6
+
+[[boundaries]]
+payload_offset = 156
+length = 2
+
+[[boundaries]]
+payload_offset = 158
+length = 3
+
+[[boundaries]]
+payload_offset = 161
+length = 1
+
+[[boundaries]]
+payload_offset = 162
+length = 5
+
+[[boundaries]]
+payload_offset = 167
+length = 5
+
+[[boundaries]]
+payload_offset = 172
+length = 6
+
+[[boundaries]]
+payload_offset = 178
+length = 3
+
+[[boundaries]]
+payload_offset = 181
+length = 5
+
+[[boundaries]]
+payload_offset = 186
+length = 6
+
+[[boundaries]]
+payload_offset = 192
+length = 5
+
+[[boundaries]]
+payload_offset = 197
+length = 6
+
+[[boundaries]]
+payload_offset = 203
+length = 5
+
+[[boundaries]]
+payload_offset = 208
+length = 6
+
+[[boundaries]]
+payload_offset = 214
+length = 1
+
+[[boundaries]]
+payload_offset = 215
+length = 1
+
+[[boundaries]]
+payload_offset = 216
+length = 6
+
+[[boundaries]]
+payload_offset = 222
+length = 2
+
+[[boundaries]]
+payload_offset = 224
+length = 1
+
+[[boundaries]]
+payload_offset = 225
+length = 1
+
+[[boundaries]]
+payload_offset = 226
+length = 6
+
+[[boundaries]]
+payload_offset = 232
+length = 2
+
+[[boundaries]]
+payload_offset = 234
+length = 1
+
+[[boundaries]]
+payload_offset = 235
+length = 1
+
+[[boundaries]]
+payload_offset = 236
+length = 6
+
+[[boundaries]]
+payload_offset = 242
+length = 2
+
+[[boundaries]]
+payload_offset = 244
+length = 1
+
+[[boundaries]]
+payload_offset = 245
+length = 1
+
+[[boundaries]]
+payload_offset = 246
+length = 6
+
+[[boundaries]]
+payload_offset = 252
+length = 2
+
+[[boundaries]]
+payload_offset = 254
+length = 5
+
+[[boundaries]]
+payload_offset = 259
+length = 5
+
+[[boundaries]]
+payload_offset = 264
+length = 2
+
+[[boundaries]]
+payload_offset = 266
+length = 5
+
+[[boundaries]]
+payload_offset = 271
+length = 6
+
+[[boundaries]]
+payload_offset = 277
+length = 1
+
+[[boundaries]]
+payload_offset = 278
+length = 1
+
+[[boundaries]]
+payload_offset = 279
+length = 1
+
+[[boundaries]]
+payload_offset = 280
+length = 6
+
+[[boundaries]]
+payload_offset = 286
+length = 2
+
+[[boundaries]]
+payload_offset = 288
+length = 1
+
+[[boundaries]]
+payload_offset = 289
+length = 1
+
+[[boundaries]]
+payload_offset = 290
+length = 3
+
+[[boundaries]]
+payload_offset = 293
+length = 1
+
+[[boundaries]]
+payload_offset = 294
+length = 6
+
+[[boundaries]]
+payload_offset = 300
+length = 2
+
+[[boundaries]]
+payload_offset = 302
+length = 1
+
+[[boundaries]]
+payload_offset = 303
+length = 1
+
+[[boundaries]]
+payload_offset = 304
+length = 3
+
+[[boundaries]]
+payload_offset = 307
+length = 1
+
+[[boundaries]]
+payload_offset = 308
+length = 6
+
+[[boundaries]]
+payload_offset = 314
+length = 2
+
+[[boundaries]]
+payload_offset = 316
+length = 1
+
+[[boundaries]]
+payload_offset = 317
+length = 1

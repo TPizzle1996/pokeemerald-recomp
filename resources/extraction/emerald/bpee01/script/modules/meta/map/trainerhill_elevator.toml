@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 6
 reloc_count = 10
+instruction_count = 36
 
 [[segments]]
 kind = "bytecode"
@@ -79,6 +80,8 @@ original_encoded_gba = 0x82693eb
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/trainerhill-elevator-movement-playerexitelevatortoroof"
 target_export = "TrainerHill_Elevator_Movement_PlayerExitElevatorToRoof"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -88,6 +91,8 @@ original_encoded_gba = 0x82693e4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/trainerhill-elevator-movement-playerapproachattendant"
 target_export = "TrainerHill_Elevator_Movement_PlayerApproachAttendant"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -97,6 +102,8 @@ original_encoded_gba = 0x82693ee
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/trainerhill-elevator-movement-attendantfaceplayer"
 target_export = "TrainerHill_Elevator_Movement_AttendantFacePlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -106,6 +113,8 @@ original_encoded_gba = 0x8268f3e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/trainerhill-entrance"
 target_export = "TrainerHill_Elevator_Text_ReturnToReception"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -116,6 +125,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/trainerhill-elevator"
 target_export = "TrainerHill_Elevator_EventScript_ExitToRoof"
 target_offset = 17
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1
 runtime_resolution_required = true
 
 [[relocs]]
@@ -125,6 +136,8 @@ original_encoded_gba = 0x82693f0
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/trainerhill-elevator-movement-attendantfacedown"
 target_export = "TrainerHill_Elevator_Movement_AttendantFaceDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -134,6 +147,8 @@ original_encoded_gba = 0x82693df
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/trainerhill-elevator-movement-playermovetocenterofelevator"
 target_export = "TrainerHill_Elevator_Movement_PlayerMoveToCenterOfElevator"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -144,6 +159,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/trainerhill-elevator"
 target_export = "TrainerHill_Elevator_EventScript_MoveElevator"
 target_offset = 138
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 122
 runtime_resolution_required = true
 
 [[relocs]]
@@ -153,6 +170,8 @@ original_encoded_gba = 0x82693e7
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/trainerhill-elevator-movement-playerexitelevator"
 target_export = "TrainerHill_Elevator_Movement_PlayerExitElevator"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -163,4 +182,150 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/trainerhill-elevator"
 target_export = "TrainerHill_Elevator_EventScript_CloseFloorSelect"
 target_offset = 133
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 117
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 7
+
+[[boundaries]]
+payload_offset = 8
+length = 3
+
+[[boundaries]]
+payload_offset = 11
+length = 1
+
+[[boundaries]]
+payload_offset = 12
+length = 8
+
+[[boundaries]]
+payload_offset = 20
+length = 1
+
+[[boundaries]]
+payload_offset = 21
+length = 1
+
+[[boundaries]]
+payload_offset = 22
+length = 7
+
+[[boundaries]]
+payload_offset = 29
+length = 3
+
+[[boundaries]]
+payload_offset = 32
+length = 7
+
+[[boundaries]]
+payload_offset = 39
+length = 3
+
+[[boundaries]]
+payload_offset = 42
+length = 1
+
+[[boundaries]]
+payload_offset = 43
+length = 6
+
+[[boundaries]]
+payload_offset = 49
+length = 2
+
+[[boundaries]]
+payload_offset = 51
+length = 5
+
+[[boundaries]]
+payload_offset = 56
+length = 6
+
+[[boundaries]]
+payload_offset = 62
+length = 1
+
+[[boundaries]]
+payload_offset = 63
+length = 7
+
+[[boundaries]]
+payload_offset = 70
+length = 3
+
+[[boundaries]]
+payload_offset = 73
+length = 7
+
+[[boundaries]]
+payload_offset = 80
+length = 3
+
+[[boundaries]]
+payload_offset = 83
+length = 5
+
+[[boundaries]]
+payload_offset = 88
+length = 3
+
+[[boundaries]]
+payload_offset = 91
+length = 7
+
+[[boundaries]]
+payload_offset = 98
+length = 3
+
+[[boundaries]]
+payload_offset = 101
+length = 8
+
+[[boundaries]]
+payload_offset = 109
+length = 1
+
+[[boundaries]]
+payload_offset = 110
+length = 1
+
+[[boundaries]]
+payload_offset = 111
+length = 5
+
+[[boundaries]]
+payload_offset = 117
+length = 3
+
+[[boundaries]]
+payload_offset = 120
+length = 1
+
+[[boundaries]]
+payload_offset = 121
+length = 1
+
+[[boundaries]]
+payload_offset = 122
+length = 1
+
+[[boundaries]]
+payload_offset = 123
+length = 3
+
+[[boundaries]]
+payload_offset = 126
+length = 1
+
+[[boundaries]]
+payload_offset = 127
+length = 1

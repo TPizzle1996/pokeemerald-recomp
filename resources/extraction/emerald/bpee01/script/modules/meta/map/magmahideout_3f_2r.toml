@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 1
 reloc_count = 3
+instruction_count = 4
 
 [[segments]]
 kind = "bytecode"
@@ -39,6 +40,8 @@ original_encoded_gba = 0x823a3ec
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/magmahideout-3f-2r"
 target_export = "MagmaHideout_3F_2R_Text_Grunt10Intro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -48,6 +51,8 @@ original_encoded_gba = 0x823a4bb
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/magmahideout-3f-2r"
 target_export = "MagmaHideout_3F_2R_Text_Grunt10Defeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -57,4 +62,22 @@ original_encoded_gba = 0x823a4ef
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/magmahideout-3f-2r"
 target_export = "MagmaHideout_3F_2R_Text_Grunt10PostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 14
+
+[[boundaries]]
+payload_offset = 14
+length = 6
+
+[[boundaries]]
+payload_offset = 20
+length = 2
+
+[[boundaries]]
+payload_offset = 22
+length = 1

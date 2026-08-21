@@ -17,6 +17,7 @@ static_data_bytes = 48
 segment_count = 5
 export_count = 8
 reloc_count = 10
+instruction_count = 41
 
 [[segments]]
 kind = "bytecode"
@@ -121,6 +122,8 @@ original_encoded_gba = 0x8272a21
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/mart-clerk"
 target_export = "gText_HowMayIServeYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -131,6 +134,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity-mart"
 target_export = "RustboroCity_Mart_EventScript_PokemartBasic"
 target_offset = 28
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 27
 runtime_resolution_required = true
 
 [[relocs]]
@@ -141,6 +146,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity-mart"
 target_export = "RustboroCity_Mart_EventScript_PokemartExpanded"
 target_offset = 67
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 66
 runtime_resolution_required = true
 
 [[relocs]]
@@ -151,6 +158,8 @@ target_class = "MART_TABLE_TARGET"
 target_resource_key = "emerald:script/map/rustborocity-mart"
 target_export = "RustboroCity_Mart_Pokemart_Basic"
 target_offset = 42
+target_kind = "MART_TABLE"
+target_payload_offset = 42
 runtime_resolution_required = true
 
 [[relocs]]
@@ -160,6 +169,8 @@ original_encoded_gba = 0x8272a3f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/mart-clerk"
 target_export = "gText_PleaseComeAgain"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -170,6 +181,8 @@ target_class = "MART_TABLE_TARGET"
 target_resource_key = "emerald:script/map/rustborocity-mart"
 target_export = "RustboroCity_Mart_Pokemart_Expanded"
 target_offset = 82
+target_kind = "MART_TABLE"
+target_payload_offset = 82
 runtime_resolution_required = true
 
 [[relocs]]
@@ -179,6 +192,8 @@ original_encoded_gba = 0x8272a3f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/mart-clerk"
 target_export = "gText_PleaseComeAgain"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -188,6 +203,8 @@ original_encoded_gba = 0x8214f8f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-mart"
 target_export = "RustboroCity_Mart_Text_BuyingHealsInCaseOfShroomish"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -197,6 +214,8 @@ original_encoded_gba = 0x8214ff1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-mart"
 target_export = "RustboroCity_Mart_Text_ShouldBuySuperPotionsInstead"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -206,4 +225,170 @@ original_encoded_gba = 0x821505c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-mart"
 target_export = "RustboroCity_Mart_Text_GettingEscapeRopeJustInCase"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 1
+
+[[boundaries]]
+payload_offset = 2
+length = 5
+
+[[boundaries]]
+payload_offset = 7
+length = 1
+
+[[boundaries]]
+payload_offset = 8
+length = 3
+
+[[boundaries]]
+payload_offset = 11
+length = 6
+
+[[boundaries]]
+payload_offset = 17
+length = 3
+
+[[boundaries]]
+payload_offset = 20
+length = 6
+
+[[boundaries]]
+payload_offset = 26
+length = 1
+
+[[boundaries]]
+payload_offset = 27
+length = 5
+
+[[boundaries]]
+payload_offset = 32
+length = 6
+
+[[boundaries]]
+payload_offset = 38
+length = 2
+
+[[boundaries]]
+payload_offset = 40
+length = 1
+
+[[boundaries]]
+payload_offset = 41
+length = 1
+
+[[boundaries]]
+payload_offset = 42
+length = 5
+
+[[boundaries]]
+payload_offset = 47
+length = 1
+
+[[boundaries]]
+payload_offset = 48
+length = 2
+
+[[boundaries]]
+payload_offset = 50
+length = 6
+
+[[boundaries]]
+payload_offset = 56
+length = 3
+
+[[boundaries]]
+payload_offset = 59
+length = 1
+
+[[boundaries]]
+payload_offset = 60
+length = 3
+
+[[boundaries]]
+payload_offset = 63
+length = 1
+
+[[boundaries]]
+payload_offset = 64
+length = 1
+
+[[boundaries]]
+payload_offset = 65
+length = 1
+
+[[boundaries]]
+payload_offset = 66
+length = 5
+
+[[boundaries]]
+payload_offset = 71
+length = 6
+
+[[boundaries]]
+payload_offset = 77
+length = 2
+
+[[boundaries]]
+payload_offset = 79
+length = 1
+
+[[boundaries]]
+payload_offset = 80
+length = 1
+
+[[boundaries]]
+payload_offset = 82
+length = 5
+
+[[boundaries]]
+payload_offset = 87
+length = 1
+
+[[boundaries]]
+payload_offset = 88
+length = 1
+
+[[boundaries]]
+payload_offset = 110
+length = 6
+
+[[boundaries]]
+payload_offset = 116
+length = 2
+
+[[boundaries]]
+payload_offset = 118
+length = 1
+
+[[boundaries]]
+payload_offset = 119
+length = 6
+
+[[boundaries]]
+payload_offset = 125
+length = 2
+
+[[boundaries]]
+payload_offset = 127
+length = 1
+
+[[boundaries]]
+payload_offset = 128
+length = 6
+
+[[boundaries]]
+payload_offset = 134
+length = 2
+
+[[boundaries]]
+payload_offset = 136
+length = 1

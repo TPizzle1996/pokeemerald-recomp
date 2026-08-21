@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 4
 reloc_count = 2
+instruction_count = 54
 
 [[segments]]
 kind = "bytecode"
@@ -63,6 +64,8 @@ original_encoded_gba = 0x82725c6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-delay32"
 target_export = "Common_Movement_Delay32"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -72,4 +75,222 @@ original_encoded_gba = 0x82725ba
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkup6"
 target_export = "Common_Movement_WalkUp6"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 7
+
+[[boundaries]]
+payload_offset = 7
+length = 3
+
+[[boundaries]]
+payload_offset = 10
+length = 3
+
+[[boundaries]]
+payload_offset = 13
+length = 9
+
+[[boundaries]]
+payload_offset = 22
+length = 9
+
+[[boundaries]]
+payload_offset = 31
+length = 9
+
+[[boundaries]]
+payload_offset = 40
+length = 9
+
+[[boundaries]]
+payload_offset = 49
+length = 9
+
+[[boundaries]]
+payload_offset = 58
+length = 9
+
+[[boundaries]]
+payload_offset = 67
+length = 9
+
+[[boundaries]]
+payload_offset = 76
+length = 9
+
+[[boundaries]]
+payload_offset = 85
+length = 9
+
+[[boundaries]]
+payload_offset = 94
+length = 9
+
+[[boundaries]]
+payload_offset = 103
+length = 9
+
+[[boundaries]]
+payload_offset = 112
+length = 9
+
+[[boundaries]]
+payload_offset = 121
+length = 3
+
+[[boundaries]]
+payload_offset = 124
+length = 1
+
+[[boundaries]]
+payload_offset = 125
+length = 7
+
+[[boundaries]]
+payload_offset = 132
+length = 3
+
+[[boundaries]]
+payload_offset = 135
+length = 3
+
+[[boundaries]]
+payload_offset = 138
+length = 9
+
+[[boundaries]]
+payload_offset = 147
+length = 9
+
+[[boundaries]]
+payload_offset = 156
+length = 9
+
+[[boundaries]]
+payload_offset = 165
+length = 9
+
+[[boundaries]]
+payload_offset = 174
+length = 9
+
+[[boundaries]]
+payload_offset = 183
+length = 9
+
+[[boundaries]]
+payload_offset = 192
+length = 3
+
+[[boundaries]]
+payload_offset = 195
+length = 1
+
+[[boundaries]]
+payload_offset = 196
+length = 9
+
+[[boundaries]]
+payload_offset = 205
+length = 9
+
+[[boundaries]]
+payload_offset = 214
+length = 9
+
+[[boundaries]]
+payload_offset = 223
+length = 9
+
+[[boundaries]]
+payload_offset = 232
+length = 9
+
+[[boundaries]]
+payload_offset = 241
+length = 9
+
+[[boundaries]]
+payload_offset = 250
+length = 9
+
+[[boundaries]]
+payload_offset = 259
+length = 9
+
+[[boundaries]]
+payload_offset = 268
+length = 9
+
+[[boundaries]]
+payload_offset = 277
+length = 9
+
+[[boundaries]]
+payload_offset = 286
+length = 9
+
+[[boundaries]]
+payload_offset = 295
+length = 9
+
+[[boundaries]]
+payload_offset = 304
+length = 9
+
+[[boundaries]]
+payload_offset = 313
+length = 9
+
+[[boundaries]]
+payload_offset = 322
+length = 9
+
+[[boundaries]]
+payload_offset = 331
+length = 9
+
+[[boundaries]]
+payload_offset = 340
+length = 9
+
+[[boundaries]]
+payload_offset = 349
+length = 9
+
+[[boundaries]]
+payload_offset = 358
+length = 1
+
+[[boundaries]]
+payload_offset = 359
+length = 9
+
+[[boundaries]]
+payload_offset = 368
+length = 9
+
+[[boundaries]]
+payload_offset = 377
+length = 9
+
+[[boundaries]]
+payload_offset = 386
+length = 9
+
+[[boundaries]]
+payload_offset = 395
+length = 9
+
+[[boundaries]]
+payload_offset = 404
+length = 9
+
+[[boundaries]]
+payload_offset = 413
+length = 1

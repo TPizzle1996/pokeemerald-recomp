@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 2
 export_count = 7
 reloc_count = 7
+instruction_count = 38
 
 [[segments]]
 kind = "bytecode"
@@ -94,6 +95,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-seasidecyclingroadsouthentrance"
 target_export = "Route110_SeasideCyclingRoadSouthEntrance_EventScript_RestartChallenge"
 target_offset = 29
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 23
 runtime_resolution_required = true
 
 [[relocs]]
@@ -104,6 +107,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-seasidecyclingroadsouthentrance"
 target_export = "Route110_SeasideCyclingRoadSouthEntrance_EventScript_RestartChallenge"
 target_offset = 29
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 23
 runtime_resolution_required = true
 
 [[relocs]]
@@ -113,6 +118,8 @@ original_encoded_gba = 0x826ec23
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-seasidecyclingroadsouthentrance"
 target_export = "Route110_SeasideCyclingRoadSouthEntrance_Text_GoAllOutOnCyclingRoad"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -123,6 +130,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-seasidecyclingroadsouthentrance"
 target_export = "Route110_SeasideCyclingRoadSouthEntrance_EventScript_OnMachBike"
 target_offset = 85
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 79
 runtime_resolution_required = true
 
 [[relocs]]
@@ -133,6 +142,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-seasidecyclingroadsouthentrance"
 target_export = "Route110_SeasideCyclingRoadSouthEntrance_EventScript_NoBike"
 target_offset = 91
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 85
 runtime_resolution_required = true
 
 [[relocs]]
@@ -142,6 +153,8 @@ original_encoded_gba = 0x826ecaa
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-seasidecyclingroadsouthentrance"
 target_export = "Route110_SeasideCyclingRoadSouthEntrance_Text_TooDangerousToWalk"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -151,4 +164,158 @@ original_encoded_gba = 0x826ec11
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-seasidecyclingroadsouthentrance-movement-pushplayerbackfromcounter"
 target_export = "Route110_SeasideCyclingRoadSouthEntrance_Movement_PushPlayerBackFromCounter"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 5
+
+[[boundaries]]
+payload_offset = 5
+length = 6
+
+[[boundaries]]
+payload_offset = 11
+length = 5
+
+[[boundaries]]
+payload_offset = 16
+length = 6
+
+[[boundaries]]
+payload_offset = 22
+length = 1
+
+[[boundaries]]
+payload_offset = 23
+length = 5
+
+[[boundaries]]
+payload_offset = 28
+length = 1
+
+[[boundaries]]
+payload_offset = 29
+length = 1
+
+[[boundaries]]
+payload_offset = 30
+length = 1
+
+[[boundaries]]
+payload_offset = 31
+length = 6
+
+[[boundaries]]
+payload_offset = 37
+length = 2
+
+[[boundaries]]
+payload_offset = 39
+length = 1
+
+[[boundaries]]
+payload_offset = 40
+length = 1
+
+[[boundaries]]
+payload_offset = 41
+length = 1
+
+[[boundaries]]
+payload_offset = 42
+length = 5
+
+[[boundaries]]
+payload_offset = 47
+length = 5
+
+[[boundaries]]
+payload_offset = 52
+length = 6
+
+[[boundaries]]
+payload_offset = 58
+length = 5
+
+[[boundaries]]
+payload_offset = 63
+length = 6
+
+[[boundaries]]
+payload_offset = 69
+length = 3
+
+[[boundaries]]
+payload_offset = 72
+length = 5
+
+[[boundaries]]
+payload_offset = 77
+length = 1
+
+[[boundaries]]
+payload_offset = 78
+length = 1
+
+[[boundaries]]
+payload_offset = 79
+length = 5
+
+[[boundaries]]
+payload_offset = 84
+length = 1
+
+[[boundaries]]
+payload_offset = 85
+length = 6
+
+[[boundaries]]
+payload_offset = 91
+length = 2
+
+[[boundaries]]
+payload_offset = 93
+length = 1
+
+[[boundaries]]
+payload_offset = 94
+length = 7
+
+[[boundaries]]
+payload_offset = 101
+length = 3
+
+[[boundaries]]
+payload_offset = 104
+length = 1
+
+[[boundaries]]
+payload_offset = 105
+length = 1
+
+[[boundaries]]
+payload_offset = 106
+length = 1
+
+[[boundaries]]
+payload_offset = 107
+length = 5
+
+[[boundaries]]
+payload_offset = 112
+length = 3
+
+[[boundaries]]
+payload_offset = 115
+length = 5
+
+[[boundaries]]
+payload_offset = 120
+length = 1
+
+[[boundaries]]
+payload_offset = 121
+length = 1

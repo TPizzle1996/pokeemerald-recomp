@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 8
 reloc_count = 20
+instruction_count = 63
 
 [[segments]]
 kind = "bytecode"
@@ -95,6 +96,8 @@ original_encoded_gba = 0x8209b8e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-nameratershouse"
 target_export = "SlateportCity_NameRatersHouse_Text_PleasedToRateMonNickname"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -105,6 +108,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-nameratershouse"
 target_export = "SlateportCity_NameRatersHouse_EventScript_ChooseMonToRate"
 target_offset = 34
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 33
 runtime_resolution_required = true
 
 [[relocs]]
@@ -115,6 +120,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-nameratershouse"
 target_export = "SlateportCity_NameRatersHouse_EventScript_DeclineNameRate"
 target_offset = 69
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 68
 runtime_resolution_required = true
 
 [[relocs]]
@@ -124,6 +131,8 @@ original_encoded_gba = 0x8209bff
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-nameratershouse"
 target_export = "SlateportCity_NameRatersHouse_Text_CritiqueWhichMonNickname"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -134,6 +143,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-nameratershouse"
 target_export = "SlateportCity_NameRatersHouse_EventScript_RateMonNickname"
 target_offset = 79
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 78
 runtime_resolution_required = true
 
 [[relocs]]
@@ -144,6 +155,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-nameratershouse"
 target_export = "SlateportCity_NameRatersHouse_EventScript_DeclineNameRate"
 target_offset = 69
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 68
 runtime_resolution_required = true
 
 [[relocs]]
@@ -153,6 +166,8 @@ original_encoded_gba = 0x8209d42
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-nameratershouse"
 target_export = "SlateportCity_NameRatersHouse_Text_DoVisitAgain"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -163,6 +178,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-nameratershouse"
 target_export = "SlateportCity_NameRatersHouse_EventScript_CantRateEgg"
 target_offset = 162
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 161
 runtime_resolution_required = true
 
 [[relocs]]
@@ -173,6 +190,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-nameratershouse"
 target_export = "SlateportCity_NameRatersHouse_EventScript_PlayerNotMonsOT"
 target_offset = 172
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 171
 runtime_resolution_required = true
 
 [[relocs]]
@@ -183,6 +202,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-nameratershouse"
 target_export = "SlateportCity_NameRatersHouse_EventScript_PlayerNotMonsOT"
 target_offset = 172
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 171
 runtime_resolution_required = true
 
 [[relocs]]
@@ -192,6 +213,8 @@ original_encoded_gba = 0x8209c2b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-nameratershouse"
 target_export = "SlateportCity_NameRatersHouse_Text_FineNameSuggestBetterOne"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -202,6 +225,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-nameratershouse"
 target_export = "SlateportCity_NameRatersHouse_EventScript_ChangeNickname"
 target_offset = 182
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 181
 runtime_resolution_required = true
 
 [[relocs]]
@@ -212,6 +237,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-nameratershouse"
 target_export = "SlateportCity_NameRatersHouse_EventScript_DeclineNameRate"
 target_offset = 69
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 68
 runtime_resolution_required = true
 
 [[relocs]]
@@ -221,6 +248,8 @@ original_encoded_gba = 0x8209e74
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-nameratershouse"
 target_export = "SlateportCity_NameRatersHouse_Text_ThatIsMerelyAnEgg"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -230,6 +259,8 @@ original_encoded_gba = 0x8209df0
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-nameratershouse"
 target_export = "SlateportCity_NameRatersHouse_Text_MagnificentName"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -239,6 +270,8 @@ original_encoded_gba = 0x8209ca4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-nameratershouse"
 target_export = "SlateportCity_NameRatersHouse_Text_WhatShallNewNameBe"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -249,6 +282,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/kecleon"
 target_export = "Common_EventScript_NameReceivedPartyMon"
 target_offset = 258
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 236
 runtime_resolution_required = true
 
 [[relocs]]
@@ -259,6 +294,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-nameratershouse"
 target_export = "SlateportCity_NameRatersHouse_EventScript_NewNameDifferent"
 target_offset = 224
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 223
 runtime_resolution_required = true
 
 [[relocs]]
@@ -268,6 +305,8 @@ original_encoded_gba = 0x8209d5e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-nameratershouse"
 target_export = "SlateportCity_NameRatersHouse_Text_NameNoDifferentYetSuperior"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -277,4 +316,258 @@ original_encoded_gba = 0x8209cd4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-nameratershouse"
 target_export = "SlateportCity_NameRatersHouse_Text_MonShallBeKnownAsName"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 1
+
+[[boundaries]]
+payload_offset = 2
+length = 6
+
+[[boundaries]]
+payload_offset = 8
+length = 2
+
+[[boundaries]]
+payload_offset = 10
+length = 5
+
+[[boundaries]]
+payload_offset = 15
+length = 6
+
+[[boundaries]]
+payload_offset = 21
+length = 5
+
+[[boundaries]]
+payload_offset = 26
+length = 6
+
+[[boundaries]]
+payload_offset = 32
+length = 1
+
+[[boundaries]]
+payload_offset = 33
+length = 6
+
+[[boundaries]]
+payload_offset = 39
+length = 2
+
+[[boundaries]]
+payload_offset = 41
+length = 3
+
+[[boundaries]]
+payload_offset = 44
+length = 1
+
+[[boundaries]]
+payload_offset = 45
+length = 5
+
+[[boundaries]]
+payload_offset = 50
+length = 6
+
+[[boundaries]]
+payload_offset = 56
+length = 5
+
+[[boundaries]]
+payload_offset = 61
+length = 6
+
+[[boundaries]]
+payload_offset = 67
+length = 1
+
+[[boundaries]]
+payload_offset = 68
+length = 6
+
+[[boundaries]]
+payload_offset = 74
+length = 2
+
+[[boundaries]]
+payload_offset = 76
+length = 1
+
+[[boundaries]]
+payload_offset = 77
+length = 1
+
+[[boundaries]]
+payload_offset = 78
+length = 5
+
+[[boundaries]]
+payload_offset = 83
+length = 5
+
+[[boundaries]]
+payload_offset = 88
+length = 6
+
+[[boundaries]]
+payload_offset = 94
+length = 3
+
+[[boundaries]]
+payload_offset = 97
+length = 3
+
+[[boundaries]]
+payload_offset = 100
+length = 5
+
+[[boundaries]]
+payload_offset = 105
+length = 6
+
+[[boundaries]]
+payload_offset = 111
+length = 5
+
+[[boundaries]]
+payload_offset = 116
+length = 3
+
+[[boundaries]]
+payload_offset = 119
+length = 5
+
+[[boundaries]]
+payload_offset = 124
+length = 6
+
+[[boundaries]]
+payload_offset = 130
+length = 6
+
+[[boundaries]]
+payload_offset = 136
+length = 2
+
+[[boundaries]]
+payload_offset = 138
+length = 5
+
+[[boundaries]]
+payload_offset = 143
+length = 6
+
+[[boundaries]]
+payload_offset = 149
+length = 5
+
+[[boundaries]]
+payload_offset = 154
+length = 6
+
+[[boundaries]]
+payload_offset = 160
+length = 1
+
+[[boundaries]]
+payload_offset = 161
+length = 6
+
+[[boundaries]]
+payload_offset = 167
+length = 2
+
+[[boundaries]]
+payload_offset = 169
+length = 1
+
+[[boundaries]]
+payload_offset = 170
+length = 1
+
+[[boundaries]]
+payload_offset = 171
+length = 6
+
+[[boundaries]]
+payload_offset = 177
+length = 2
+
+[[boundaries]]
+payload_offset = 179
+length = 1
+
+[[boundaries]]
+payload_offset = 180
+length = 1
+
+[[boundaries]]
+payload_offset = 181
+length = 6
+
+[[boundaries]]
+payload_offset = 187
+length = 2
+
+[[boundaries]]
+payload_offset = 189
+length = 5
+
+[[boundaries]]
+payload_offset = 194
+length = 5
+
+[[boundaries]]
+payload_offset = 199
+length = 3
+
+[[boundaries]]
+payload_offset = 202
+length = 5
+
+[[boundaries]]
+payload_offset = 207
+length = 6
+
+[[boundaries]]
+payload_offset = 213
+length = 6
+
+[[boundaries]]
+payload_offset = 219
+length = 2
+
+[[boundaries]]
+payload_offset = 221
+length = 1
+
+[[boundaries]]
+payload_offset = 222
+length = 1
+
+[[boundaries]]
+payload_offset = 223
+length = 6
+
+[[boundaries]]
+payload_offset = 229
+length = 2
+
+[[boundaries]]
+payload_offset = 231
+length = 1
+
+[[boundaries]]
+payload_offset = 232
+length = 1

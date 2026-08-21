@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 9
 reloc_count = 12
+instruction_count = 41
 
 [[segments]]
 kind = "bytecode"
@@ -104,6 +105,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/hall-of-fame"
 target_export = "Common_EventScript_UpdateBrineyLocation"
 target_offset = 285
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 285
 runtime_resolution_required = true
 
 [[relocs]]
@@ -114,6 +117,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pkmn-center-nurse"
 target_export = "Common_EventScript_PkmnCenterNurse"
 target_offset = 0
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 0
 runtime_resolution_required = true
 
 [[relocs]]
@@ -123,6 +128,8 @@ original_encoded_gba = 0x8207a76
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-pokemoncenter-1f"
 target_export = "PetalburgCity_PokemonCenter_1F_Text_PCStorageSystem"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -132,6 +139,8 @@ original_encoded_gba = 0x8207ad6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-pokemoncenter-1f"
 target_export = "PetalburgCity_PokemonCenter_1F_Text_OranBerryRegainedHP"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -141,6 +150,8 @@ original_encoded_gba = 0x8207b09
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-pokemoncenter-1f"
 target_export = "PetalburgCity_PokemonCenter_1F_Text_ManyTypesOfPokemon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -151,6 +162,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-pokemoncenter-1f"
 target_export = "PetalburgCity_PokemonCenter_1F_EventScript_SayStarterTypeInfo"
 target_offset = 80
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 69
 runtime_resolution_required = true
 
 [[relocs]]
@@ -161,6 +174,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-pokemoncenter-1f"
 target_export = "PetalburgCity_PokemonCenter_1F_EventScript_SayTreeckoType"
 target_offset = 115
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 104
 runtime_resolution_required = true
 
 [[relocs]]
@@ -171,6 +186,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-pokemoncenter-1f"
 target_export = "PetalburgCity_PokemonCenter_1F_EventScript_SayTorchicType"
 target_offset = 124
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 113
 runtime_resolution_required = true
 
 [[relocs]]
@@ -181,6 +198,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-pokemoncenter-1f"
 target_export = "PetalburgCity_PokemonCenter_1F_EventScript_SayMudkipType"
 target_offset = 133
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 122
 runtime_resolution_required = true
 
 [[relocs]]
@@ -190,6 +209,8 @@ original_encoded_gba = 0x8207bb0
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-pokemoncenter-1f"
 target_export = "PetalburgCity_PokemonCenter_1F_Text_TreeckoIsGrassType"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -199,6 +220,8 @@ original_encoded_gba = 0x8207c35
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-pokemoncenter-1f"
 target_export = "PetalburgCity_PokemonCenter_1F_Text_TorchicIsFireType"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -208,4 +231,170 @@ original_encoded_gba = 0x8207cb7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-pokemoncenter-1f"
 target_export = "PetalburgCity_PokemonCenter_1F_Text_MudkipIsWaterType"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 5
+
+[[boundaries]]
+payload_offset = 8
+length = 1
+
+[[boundaries]]
+payload_offset = 9
+length = 5
+
+[[boundaries]]
+payload_offset = 14
+length = 5
+
+[[boundaries]]
+payload_offset = 19
+length = 1
+
+[[boundaries]]
+payload_offset = 20
+length = 1
+
+[[boundaries]]
+payload_offset = 21
+length = 1
+
+[[boundaries]]
+payload_offset = 22
+length = 1
+
+[[boundaries]]
+payload_offset = 23
+length = 6
+
+[[boundaries]]
+payload_offset = 29
+length = 2
+
+[[boundaries]]
+payload_offset = 31
+length = 1
+
+[[boundaries]]
+payload_offset = 32
+length = 6
+
+[[boundaries]]
+payload_offset = 38
+length = 2
+
+[[boundaries]]
+payload_offset = 40
+length = 1
+
+[[boundaries]]
+payload_offset = 41
+length = 1
+
+[[boundaries]]
+payload_offset = 42
+length = 1
+
+[[boundaries]]
+payload_offset = 43
+length = 6
+
+[[boundaries]]
+payload_offset = 49
+length = 2
+
+[[boundaries]]
+payload_offset = 51
+length = 5
+
+[[boundaries]]
+payload_offset = 56
+length = 5
+
+[[boundaries]]
+payload_offset = 61
+length = 6
+
+[[boundaries]]
+payload_offset = 67
+length = 1
+
+[[boundaries]]
+payload_offset = 68
+length = 1
+
+[[boundaries]]
+payload_offset = 69
+length = 5
+
+[[boundaries]]
+payload_offset = 74
+length = 6
+
+[[boundaries]]
+payload_offset = 80
+length = 5
+
+[[boundaries]]
+payload_offset = 85
+length = 6
+
+[[boundaries]]
+payload_offset = 91
+length = 5
+
+[[boundaries]]
+payload_offset = 96
+length = 6
+
+[[boundaries]]
+payload_offset = 102
+length = 1
+
+[[boundaries]]
+payload_offset = 103
+length = 1
+
+[[boundaries]]
+payload_offset = 104
+length = 6
+
+[[boundaries]]
+payload_offset = 110
+length = 2
+
+[[boundaries]]
+payload_offset = 112
+length = 1
+
+[[boundaries]]
+payload_offset = 113
+length = 6
+
+[[boundaries]]
+payload_offset = 119
+length = 2
+
+[[boundaries]]
+payload_offset = 121
+length = 1
+
+[[boundaries]]
+payload_offset = 122
+length = 6
+
+[[boundaries]]
+payload_offset = 128
+length = 2
+
+[[boundaries]]
+payload_offset = 130
+length = 1

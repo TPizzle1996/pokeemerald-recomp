@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 14
 reloc_count = 17
+instruction_count = 67
 
 [[segments]]
 kind = "bytecode"
@@ -143,6 +144,8 @@ original_encoded_gba = 0x81e2676
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity"
 target_export = "FortreeCity_Text_SawGiganticPokemonInSky"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -153,6 +156,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/fortreecity"
 target_export = "FortreeCity_EventScript_WomanGymAccessible"
 target_offset = 48
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 37
 runtime_resolution_required = true
 
 [[relocs]]
@@ -162,6 +167,8 @@ original_encoded_gba = 0x81e2738
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity"
 target_export = "FortreeCity_Text_SomethingBlockingGym"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -171,6 +178,8 @@ original_encoded_gba = 0x81e27b6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity"
 target_export = "FortreeCity_Text_ThisTimeIllBeatWinona"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -180,6 +189,8 @@ original_encoded_gba = 0x81e27fe
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity"
 target_export = "FortreeCity_Text_TreesGrowByDrinkingRainwater"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -189,6 +200,8 @@ original_encoded_gba = 0x81e2880
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity"
 target_export = "FortreeCity_Text_EveryoneHealthyAndLively"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -198,6 +211,8 @@ original_encoded_gba = 0x81e292e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity"
 target_export = "FortreeCity_Text_BugPokemonComeThroughWindow"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -207,6 +222,8 @@ original_encoded_gba = 0x81e299d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity"
 target_export = "FortreeCity_Text_PokemonThatEvolveWhenTraded"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -216,6 +233,8 @@ original_encoded_gba = 0x81e2aac
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity"
 target_export = "FortreeCity_Text_CitySign"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -225,6 +244,8 @@ original_encoded_gba = 0x81e2ae6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity"
 target_export = "FortreeCity_Text_GymSign"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -235,6 +256,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/fortreecity"
 target_export = "FortreeCity_EventScript_AskUseDevonScope"
 target_offset = 140
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 129
 runtime_resolution_required = true
 
 [[relocs]]
@@ -244,6 +267,8 @@ original_encoded_gba = 0x81e29e5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity"
 target_export = "FortreeCity_Text_SomethingUnseeable"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -253,6 +278,8 @@ original_encoded_gba = 0x81e2a08
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity"
 target_export = "FortreeCity_Text_UnseeableUseDevonScope"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -263,6 +290,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/fortreecity"
 target_export = "FortreeCity_EventScript_UseDevonScope"
 target_offset = 161
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 150
 runtime_resolution_required = true
 
 [[relocs]]
@@ -272,6 +301,8 @@ original_encoded_gba = 0x81e2a48
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity"
 target_export = "FortreeCity_Text_UsedDevonScopePokemonFled"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -281,6 +312,8 @@ original_encoded_gba = 0x82723c7
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/movement-kecleonappears"
 target_export = "Movement_KecleonAppears"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -290,4 +323,274 @@ original_encoded_gba = 0x81e2674
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/fortreecity-movement-kecleonflee"
 target_export = "FortreeCity_Movement_KecleonFlee"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 1
+
+[[boundaries]]
+payload_offset = 4
+length = 2
+
+[[boundaries]]
+payload_offset = 6
+length = 1
+
+[[boundaries]]
+payload_offset = 7
+length = 6
+
+[[boundaries]]
+payload_offset = 13
+length = 2
+
+[[boundaries]]
+payload_offset = 15
+length = 1
+
+[[boundaries]]
+payload_offset = 16
+length = 1
+
+[[boundaries]]
+payload_offset = 17
+length = 1
+
+[[boundaries]]
+payload_offset = 18
+length = 3
+
+[[boundaries]]
+payload_offset = 21
+length = 6
+
+[[boundaries]]
+payload_offset = 27
+length = 6
+
+[[boundaries]]
+payload_offset = 33
+length = 2
+
+[[boundaries]]
+payload_offset = 35
+length = 1
+
+[[boundaries]]
+payload_offset = 36
+length = 1
+
+[[boundaries]]
+payload_offset = 37
+length = 6
+
+[[boundaries]]
+payload_offset = 43
+length = 2
+
+[[boundaries]]
+payload_offset = 45
+length = 1
+
+[[boundaries]]
+payload_offset = 46
+length = 1
+
+[[boundaries]]
+payload_offset = 47
+length = 6
+
+[[boundaries]]
+payload_offset = 53
+length = 2
+
+[[boundaries]]
+payload_offset = 55
+length = 1
+
+[[boundaries]]
+payload_offset = 56
+length = 6
+
+[[boundaries]]
+payload_offset = 62
+length = 2
+
+[[boundaries]]
+payload_offset = 64
+length = 1
+
+[[boundaries]]
+payload_offset = 65
+length = 6
+
+[[boundaries]]
+payload_offset = 71
+length = 2
+
+[[boundaries]]
+payload_offset = 73
+length = 1
+
+[[boundaries]]
+payload_offset = 74
+length = 6
+
+[[boundaries]]
+payload_offset = 80
+length = 2
+
+[[boundaries]]
+payload_offset = 82
+length = 1
+
+[[boundaries]]
+payload_offset = 83
+length = 6
+
+[[boundaries]]
+payload_offset = 89
+length = 2
+
+[[boundaries]]
+payload_offset = 91
+length = 1
+
+[[boundaries]]
+payload_offset = 92
+length = 6
+
+[[boundaries]]
+payload_offset = 98
+length = 2
+
+[[boundaries]]
+payload_offset = 100
+length = 1
+
+[[boundaries]]
+payload_offset = 101
+length = 1
+
+[[boundaries]]
+payload_offset = 102
+length = 1
+
+[[boundaries]]
+payload_offset = 103
+length = 5
+
+[[boundaries]]
+payload_offset = 108
+length = 5
+
+[[boundaries]]
+payload_offset = 113
+length = 6
+
+[[boundaries]]
+payload_offset = 119
+length = 6
+
+[[boundaries]]
+payload_offset = 125
+length = 2
+
+[[boundaries]]
+payload_offset = 127
+length = 1
+
+[[boundaries]]
+payload_offset = 128
+length = 1
+
+[[boundaries]]
+payload_offset = 129
+length = 6
+
+[[boundaries]]
+payload_offset = 135
+length = 2
+
+[[boundaries]]
+payload_offset = 137
+length = 5
+
+[[boundaries]]
+payload_offset = 142
+length = 6
+
+[[boundaries]]
+payload_offset = 148
+length = 1
+
+[[boundaries]]
+payload_offset = 149
+length = 1
+
+[[boundaries]]
+payload_offset = 150
+length = 6
+
+[[boundaries]]
+payload_offset = 156
+length = 2
+
+[[boundaries]]
+payload_offset = 158
+length = 1
+
+[[boundaries]]
+payload_offset = 159
+length = 7
+
+[[boundaries]]
+payload_offset = 166
+length = 3
+
+[[boundaries]]
+payload_offset = 169
+length = 1
+
+[[boundaries]]
+payload_offset = 170
+length = 5
+
+[[boundaries]]
+payload_offset = 175
+length = 3
+
+[[boundaries]]
+payload_offset = 178
+length = 1
+
+[[boundaries]]
+payload_offset = 179
+length = 7
+
+[[boundaries]]
+payload_offset = 186
+length = 3
+
+[[boundaries]]
+payload_offset = 189
+length = 3
+
+[[boundaries]]
+payload_offset = 192
+length = 3
+
+[[boundaries]]
+payload_offset = 195
+length = 1
+
+[[boundaries]]
+payload_offset = 196
+length = 1

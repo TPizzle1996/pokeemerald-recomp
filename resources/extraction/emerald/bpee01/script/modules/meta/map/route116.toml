@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 4
 export_count = 46
 reloc_count = 103
+instruction_count = 276
 
 [[segments]]
 kind = "bytecode"
@@ -418,6 +419,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route116"
 target_export = "Route116_EventScript_SetWandasBoyfriendPos"
 target_offset = 59
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 43
 runtime_resolution_required = true
 
 [[relocs]]
@@ -428,6 +431,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/abnormal-weather"
 target_export = "AbnormalWeather_EventScript_HideMapNamePopup"
 target_offset = 1024
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1024
 runtime_resolution_required = true
 
 [[relocs]]
@@ -438,6 +443,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/abnormal-weather"
 target_export = "AbnormalWeather_StartGroudonWeather"
 target_offset = 1032
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1032
 runtime_resolution_required = true
 
 [[relocs]]
@@ -448,6 +455,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/abnormal-weather"
 target_export = "AbnormalWeather_StartGroudonWeather"
 target_offset = 1032
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1032
 runtime_resolution_required = true
 
 [[relocs]]
@@ -458,6 +467,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/abnormal-weather"
 target_export = "AbnormalWeather_EventScript_PlaceTilesRoute116North"
 target_offset = 76
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 76
 runtime_resolution_required = true
 
 [[relocs]]
@@ -468,6 +479,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/abnormal-weather"
 target_export = "AbnormalWeather_EventScript_PlaceTilesRoute116South"
 target_offset = 95
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 95
 runtime_resolution_required = true
 
 [[relocs]]
@@ -478,6 +491,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route116"
 target_export = "Route116_EventScript_BoyfriendGruntLeftTunnel"
 target_offset = 130
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 104
 runtime_resolution_required = true
 
 [[relocs]]
@@ -488,6 +503,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route116"
 target_export = "Route116_EventScript_BoyfriendGruntInTunnel"
 target_offset = 140
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 114
 runtime_resolution_required = true
 
 [[relocs]]
@@ -497,6 +514,8 @@ original_encoded_gba = 0x81f3140
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route116"
 target_export = "Route116_Text_WantToDigTunnel"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -506,6 +525,8 @@ original_encoded_gba = 0x81f32c1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route116"
 target_export = "Route116_Text_GoonHightailedItOutOfTunnel"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -515,6 +536,8 @@ original_encoded_gba = 0x81f3166
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route116"
 target_export = "Route116_Text_DiggingTunnelWhenGoonOrderedMeOut"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -525,6 +548,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route116"
 target_export = "Route116_EventScript_TryGiveRepeatBallAgain"
 target_offset = 287
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 261
 runtime_resolution_required = true
 
 [[relocs]]
@@ -534,6 +559,8 @@ original_encoded_gba = 0x81f3317
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route116"
 target_export = "Route116_Text_ThankYouTokenOfAppreciation"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -544,6 +571,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route116"
 target_export = "Route116_EventScript_GiveRepeatBall"
 target_offset = 175
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 149
 runtime_resolution_required = true
 
 [[relocs]]
@@ -554,6 +583,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route116"
 target_export = "Route116_EventScript_NoRoomForRepeatBall"
 target_offset = 301
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 275
 runtime_resolution_required = true
 
 [[relocs]]
@@ -563,6 +594,8 @@ original_encoded_gba = 0x81f3521
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route116"
 target_export = "Route116_Text_NewBallAvailableAtMart"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -573,6 +606,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route116"
 target_export = "Route116_EventScript_DevonEmployeeExit"
 target_offset = 265
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 239
 runtime_resolution_required = true
 
 [[relocs]]
@@ -583,6 +618,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route116"
 target_export = "Route116_EventScript_DevonEmployeeExit"
 target_offset = 265
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 239
 runtime_resolution_required = true
 
 [[relocs]]
@@ -593,6 +630,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route116"
 target_export = "Route116_EventScript_DevonEmployeeExit"
 target_offset = 265
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 239
 runtime_resolution_required = true
 
 [[relocs]]
@@ -603,6 +642,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route116"
 target_export = "Route116_EventScript_DevonEmployeeExitEast"
 target_offset = 276
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 250
 runtime_resolution_required = true
 
 [[relocs]]
@@ -612,6 +653,8 @@ original_encoded_gba = 0x81f2d43
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route116-movement-devonemployeeexit"
 target_export = "Route116_Movement_DevonEmployeeExit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -621,6 +664,8 @@ original_encoded_gba = 0x81f2d4c
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route116-movement-devonemployeeexiteast"
 target_export = "Route116_Movement_DevonEmployeeExitEast"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -630,6 +675,8 @@ original_encoded_gba = 0x81f35ce
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route116"
 target_export = "Route116_Text_TokenOfAppreciation"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -640,6 +687,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route116"
 target_export = "Route116_EventScript_GiveRepeatBall"
 target_offset = 175
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 149
 runtime_resolution_required = true
 
 [[relocs]]
@@ -649,6 +698,8 @@ original_encoded_gba = 0x81f3593
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route116"
 target_export = "Route116_Text_BagIsJamPacked"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -658,6 +709,8 @@ original_encoded_gba = 0x81f379d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route116"
 target_export = "Route116_Text_RouteSignRustboro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -667,6 +720,8 @@ original_encoded_gba = 0x81f37b7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route116"
 target_export = "Route116_Text_RusturfTunnelSign"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -676,6 +731,8 @@ original_encoded_gba = 0x81f380f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route116"
 target_export = "Route116_Text_TunnelersRestHouse"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -685,6 +742,8 @@ original_encoded_gba = 0x81f3825
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route116"
 target_export = "Route116_Text_TrainerTipsBToStopEvolution"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -694,6 +753,8 @@ original_encoded_gba = 0x81f38d4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route116"
 target_export = "Route116_Text_TrainerTipsBagHasPockets"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -703,6 +764,8 @@ original_encoded_gba = 0x81f309d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route116"
 target_export = "Route116_Text_ScoundrelMadeOffWithPeeko"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -712,6 +775,8 @@ original_encoded_gba = 0x82725a8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterright"
 target_export = "Common_Movement_WalkInPlaceFasterRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -721,6 +786,8 @@ original_encoded_gba = 0x82725a4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterleft"
 target_export = "Common_Movement_WalkInPlaceFasterLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -730,6 +797,8 @@ original_encoded_gba = 0x81f309d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route116"
 target_export = "Route116_Text_ScoundrelMadeOffWithPeeko"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -740,6 +809,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route116"
 target_export = "Route116_EventScript_PlayerHasGlasses"
 target_offset = 485
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 439
 runtime_resolution_required = true
 
 [[relocs]]
@@ -750,6 +821,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route116"
 target_export = "Route116_EventScript_FoundGlassesNotOnPlayer"
 target_offset = 470
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 424
 runtime_resolution_required = true
 
 [[relocs]]
@@ -759,6 +832,8 @@ original_encoded_gba = 0x81f3657
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route116"
 target_export = "Route116_Text_CanYouHelpMeFindGlasses"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -768,6 +843,8 @@ original_encoded_gba = 0x81f3718
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route116"
 target_export = "Route116_Text_CantFindGlassesNotHere"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -778,6 +855,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route116"
 target_export = "Route116_EventScript_GlassesManExit"
 target_offset = 542
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 496
 runtime_resolution_required = true
 
 [[relocs]]
@@ -787,6 +866,8 @@ original_encoded_gba = 0x81f3657
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route116"
 target_export = "Route116_Text_CanYouHelpMeFindGlasses"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -796,6 +877,8 @@ original_encoded_gba = 0x81f3688
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route116"
 target_export = "Route116_Text_MayISeeThoseGlasses"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -806,6 +889,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route116"
 target_export = "Route116_EventScript_FoundGlassesOnPlayer"
 target_offset = 527
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 481
 runtime_resolution_required = true
 
 [[relocs]]
@@ -815,6 +900,8 @@ original_encoded_gba = 0x81f375e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route116"
 target_export = "Route116_Text_NotWhatImLookingFor"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -824,6 +911,8 @@ original_encoded_gba = 0x81f36b4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route116"
 target_export = "Route116_Text_NotWhatImLookingForMaybeTheyArentHere"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -834,6 +923,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route116"
 target_export = "Route116_EventScript_GlassesManExit"
 target_offset = 542
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 496
 runtime_resolution_required = true
 
 [[relocs]]
@@ -844,6 +935,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route116"
 target_export = "Route116_EventScript_GlassesManExitNormal"
 target_offset = 594
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 548
 runtime_resolution_required = true
 
 [[relocs]]
@@ -854,6 +947,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route116"
 target_export = "Route116_EventScript_GlassesManExitNormal"
 target_offset = 594
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 548
 runtime_resolution_required = true
 
 [[relocs]]
@@ -864,6 +959,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route116"
 target_export = "Route116_EventScript_GlassesManExitNormal"
 target_offset = 594
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 548
 runtime_resolution_required = true
 
 [[relocs]]
@@ -874,6 +971,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route116"
 target_export = "Route116_EventScript_GlassesManExitEast"
 target_offset = 605
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 559
 runtime_resolution_required = true
 
 [[relocs]]
@@ -883,6 +982,8 @@ original_encoded_gba = 0x81f2e74
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route116-movement-glassesmanexit"
 target_export = "Route116_Movement_GlassesManExit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -892,6 +993,8 @@ original_encoded_gba = 0x81f2e7e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route116-movement-glassesmanexiteast"
 target_export = "Route116_Movement_GlassesManExitEast"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -901,6 +1004,8 @@ original_encoded_gba = 0x829bb79
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/trainers"
 target_export = "Route116_Text_JoeyIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -910,6 +1015,8 @@ original_encoded_gba = 0x829bb9a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/trainers"
 target_export = "Route116_Text_JoeyDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -919,6 +1026,8 @@ original_encoded_gba = 0x829bbc6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/trainers"
 target_export = "Route116_Text_JoeyPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -928,6 +1037,8 @@ original_encoded_gba = 0x829bbfd
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/trainers"
 target_export = "Route116_Text_JoseIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -937,6 +1048,8 @@ original_encoded_gba = 0x829bc25
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/trainers"
 target_export = "Route116_Text_JoseDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -946,6 +1059,8 @@ original_encoded_gba = 0x829bc42
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/trainers"
 target_export = "Route116_Text_JosePostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -955,6 +1070,8 @@ original_encoded_gba = 0x829bd0c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/trainers"
 target_export = "Route116_Text_JerryIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -964,6 +1081,8 @@ original_encoded_gba = 0x829bd66
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/trainers"
 target_export = "Route116_Text_JerryDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -974,6 +1093,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route116"
 target_export = "Route116_EventScript_TryRegisterJerryAfterBattle"
 target_offset = 748
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 681
 runtime_resolution_required = true
 
 [[relocs]]
@@ -984,6 +1105,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route116"
 target_export = "Route116_EventScript_RematchJerry"
 target_offset = 834
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 767
 runtime_resolution_required = true
 
 [[relocs]]
@@ -994,6 +1117,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route116"
 target_export = "Route116_EventScript_TryRegisterJerry"
 target_offset = 790
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 723
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1003,6 +1128,8 @@ original_encoded_gba = 0x829bd92
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/trainers"
 target_export = "Route116_Text_JerryPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1013,6 +1140,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route116"
 target_export = "Route116_EventScript_RegisterJerryAfterBattle"
 target_offset = 759
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 692
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1022,6 +1151,8 @@ original_encoded_gba = 0x829be71
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/trainers"
 target_export = "Route116_Text_JerryRegister2"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1032,6 +1163,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route116"
 target_export = "Route116_EventScript_RegisterJerry"
 target_offset = 809
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 742
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1041,6 +1174,8 @@ original_encoded_gba = 0x829bd92
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/trainers"
 target_export = "Route116_Text_JerryPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1050,6 +1185,8 @@ original_encoded_gba = 0x829bdef
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/trainers"
 target_export = "Route116_Text_JerryRegister1"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1059,6 +1196,8 @@ original_encoded_gba = 0x829bef3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/trainers"
 target_export = "Route116_Text_JerryRematchIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1068,6 +1207,8 @@ original_encoded_gba = 0x829bf4c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/trainers"
 target_export = "Route116_Text_JerryRematchDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1077,6 +1218,8 @@ original_encoded_gba = 0x829bf68
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/trainers"
 target_export = "Route116_Text_JerryPostRematch"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1086,6 +1229,8 @@ original_encoded_gba = 0x829bacd
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/trainers"
 target_export = "Route116_Text_ClarkIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1095,6 +1240,8 @@ original_encoded_gba = 0x829bb0f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/trainers"
 target_export = "Route116_Text_ClarkDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1104,6 +1251,8 @@ original_encoded_gba = 0x829bb31
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/trainers"
 target_export = "Route116_Text_ClarkPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1113,6 +1262,8 @@ original_encoded_gba = 0x829bc7f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/trainers"
 target_export = "Route116_Text_JaniceIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1122,6 +1273,8 @@ original_encoded_gba = 0x829bcb3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/trainers"
 target_export = "Route116_Text_JaniceDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1131,6 +1284,8 @@ original_encoded_gba = 0x829bccc
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/trainers"
 target_export = "Route116_Text_JanicePostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1140,6 +1295,8 @@ original_encoded_gba = 0x829bfc5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/trainers"
 target_export = "Route116_Text_KarenIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1149,6 +1306,8 @@ original_encoded_gba = 0x829bffa
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/trainers"
 target_export = "Route116_Text_KarenDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1159,6 +1318,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route116"
 target_export = "Route116_EventScript_TryRegisterKarenAfterBattle"
 target_offset = 968
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 901
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1169,6 +1330,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route116"
 target_export = "Route116_EventScript_RematchKaren"
 target_offset = 1054
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 987
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1179,6 +1342,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route116"
 target_export = "Route116_EventScript_TryRegisterKaren"
 target_offset = 1010
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 943
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1188,6 +1353,8 @@ original_encoded_gba = 0x829c010
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/trainers"
 target_export = "Route116_Text_KarenPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1198,6 +1365,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route116"
 target_export = "Route116_EventScript_RegisterKarenAfterBattle"
 target_offset = 979
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 912
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1207,6 +1376,8 @@ original_encoded_gba = 0x829c096
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/trainers"
 target_export = "Route116_Text_KarenRegister2"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1217,6 +1388,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route116"
 target_export = "Route116_EventScript_RegisterKaren"
 target_offset = 1029
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 962
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1226,6 +1399,8 @@ original_encoded_gba = 0x829c010
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/trainers"
 target_export = "Route116_Text_KarenPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1235,6 +1410,8 @@ original_encoded_gba = 0x829c052
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/trainers"
 target_export = "Route116_Text_KarenRegister1"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1244,6 +1421,8 @@ original_encoded_gba = 0x829c0da
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/trainers"
 target_export = "Route116_Text_KarenRematchIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1253,6 +1432,8 @@ original_encoded_gba = 0x829c11f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/trainers"
 target_export = "Route116_Text_KarenRematchDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1262,6 +1443,8 @@ original_encoded_gba = 0x829c13b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/trainers"
 target_export = "Route116_Text_KarenPostRematch"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1271,6 +1454,8 @@ original_encoded_gba = 0x829c173
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/trainers"
 target_export = "Route116_Text_SarahIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1280,6 +1465,8 @@ original_encoded_gba = 0x829c1b8
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/trainers"
 target_export = "Route116_Text_SarahDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1289,6 +1476,8 @@ original_encoded_gba = 0x829c1ea
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/trainers"
 target_export = "Route116_Text_SarahPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1298,6 +1487,8 @@ original_encoded_gba = 0x829c266
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/trainers"
 target_export = "Route116_Text_DawsonIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1307,6 +1498,8 @@ original_encoded_gba = 0x829c2c2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/trainers"
 target_export = "Route116_Text_DawsonDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1316,6 +1509,8 @@ original_encoded_gba = 0x829c2dd
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/trainers"
 target_export = "Route116_Text_DawsonPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1325,6 +1520,8 @@ original_encoded_gba = 0x829c350
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/trainers"
 target_export = "Route116_Text_DevanIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1334,6 +1531,8 @@ original_encoded_gba = 0x829c365
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/trainers"
 target_export = "Route116_Text_DevanDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1343,6 +1542,8 @@ original_encoded_gba = 0x829c380
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/trainers"
 target_export = "Route116_Text_DevanPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1352,6 +1553,8 @@ original_encoded_gba = 0x829c3c1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/trainers"
 target_export = "Route116_Text_JohnsonIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1361,6 +1564,8 @@ original_encoded_gba = 0x829c3f7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/trainers"
 target_export = "Route116_Text_JohnsonDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1370,4 +1575,1110 @@ original_encoded_gba = 0x829c418
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/trainers"
 target_export = "Route116_Text_JohnsonPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 6
+
+[[boundaries]]
+payload_offset = 9
+length = 5
+
+[[boundaries]]
+payload_offset = 14
+length = 6
+
+[[boundaries]]
+payload_offset = 20
+length = 5
+
+[[boundaries]]
+payload_offset = 25
+length = 6
+
+[[boundaries]]
+payload_offset = 31
+length = 5
+
+[[boundaries]]
+payload_offset = 36
+length = 6
+
+[[boundaries]]
+payload_offset = 42
+length = 1
+
+[[boundaries]]
+payload_offset = 43
+length = 7
+
+[[boundaries]]
+payload_offset = 50
+length = 1
+
+[[boundaries]]
+payload_offset = 51
+length = 5
+
+[[boundaries]]
+payload_offset = 56
+length = 6
+
+[[boundaries]]
+payload_offset = 62
+length = 5
+
+[[boundaries]]
+payload_offset = 67
+length = 6
+
+[[boundaries]]
+payload_offset = 73
+length = 1
+
+[[boundaries]]
+payload_offset = 74
+length = 1
+
+[[boundaries]]
+payload_offset = 75
+length = 1
+
+[[boundaries]]
+payload_offset = 76
+length = 3
+
+[[boundaries]]
+payload_offset = 79
+length = 6
+
+[[boundaries]]
+payload_offset = 85
+length = 3
+
+[[boundaries]]
+payload_offset = 88
+length = 6
+
+[[boundaries]]
+payload_offset = 94
+length = 6
+
+[[boundaries]]
+payload_offset = 100
+length = 2
+
+[[boundaries]]
+payload_offset = 102
+length = 1
+
+[[boundaries]]
+payload_offset = 103
+length = 1
+
+[[boundaries]]
+payload_offset = 104
+length = 6
+
+[[boundaries]]
+payload_offset = 110
+length = 2
+
+[[boundaries]]
+payload_offset = 112
+length = 1
+
+[[boundaries]]
+payload_offset = 113
+length = 1
+
+[[boundaries]]
+payload_offset = 114
+length = 6
+
+[[boundaries]]
+payload_offset = 120
+length = 2
+
+[[boundaries]]
+payload_offset = 122
+length = 1
+
+[[boundaries]]
+payload_offset = 123
+length = 1
+
+[[boundaries]]
+payload_offset = 124
+length = 1
+
+[[boundaries]]
+payload_offset = 125
+length = 1
+
+[[boundaries]]
+payload_offset = 126
+length = 3
+
+[[boundaries]]
+payload_offset = 129
+length = 6
+
+[[boundaries]]
+payload_offset = 135
+length = 6
+
+[[boundaries]]
+payload_offset = 141
+length = 2
+
+[[boundaries]]
+payload_offset = 143
+length = 5
+
+[[boundaries]]
+payload_offset = 149
+length = 3
+
+[[boundaries]]
+payload_offset = 152
+length = 5
+
+[[boundaries]]
+payload_offset = 157
+length = 5
+
+[[boundaries]]
+payload_offset = 162
+length = 2
+
+[[boundaries]]
+payload_offset = 164
+length = 5
+
+[[boundaries]]
+payload_offset = 169
+length = 6
+
+[[boundaries]]
+payload_offset = 175
+length = 6
+
+[[boundaries]]
+payload_offset = 181
+length = 2
+
+[[boundaries]]
+payload_offset = 183
+length = 1
+
+[[boundaries]]
+payload_offset = 184
+length = 5
+
+[[boundaries]]
+payload_offset = 189
+length = 6
+
+[[boundaries]]
+payload_offset = 195
+length = 5
+
+[[boundaries]]
+payload_offset = 200
+length = 6
+
+[[boundaries]]
+payload_offset = 206
+length = 5
+
+[[boundaries]]
+payload_offset = 211
+length = 6
+
+[[boundaries]]
+payload_offset = 217
+length = 5
+
+[[boundaries]]
+payload_offset = 222
+length = 6
+
+[[boundaries]]
+payload_offset = 228
+length = 3
+
+[[boundaries]]
+payload_offset = 231
+length = 3
+
+[[boundaries]]
+payload_offset = 234
+length = 3
+
+[[boundaries]]
+payload_offset = 237
+length = 1
+
+[[boundaries]]
+payload_offset = 238
+length = 1
+
+[[boundaries]]
+payload_offset = 239
+length = 7
+
+[[boundaries]]
+payload_offset = 246
+length = 3
+
+[[boundaries]]
+payload_offset = 249
+length = 1
+
+[[boundaries]]
+payload_offset = 250
+length = 7
+
+[[boundaries]]
+payload_offset = 257
+length = 3
+
+[[boundaries]]
+payload_offset = 260
+length = 1
+
+[[boundaries]]
+payload_offset = 261
+length = 6
+
+[[boundaries]]
+payload_offset = 267
+length = 2
+
+[[boundaries]]
+payload_offset = 269
+length = 5
+
+[[boundaries]]
+payload_offset = 275
+length = 6
+
+[[boundaries]]
+payload_offset = 281
+length = 2
+
+[[boundaries]]
+payload_offset = 283
+length = 1
+
+[[boundaries]]
+payload_offset = 284
+length = 1
+
+[[boundaries]]
+payload_offset = 285
+length = 6
+
+[[boundaries]]
+payload_offset = 291
+length = 2
+
+[[boundaries]]
+payload_offset = 293
+length = 1
+
+[[boundaries]]
+payload_offset = 294
+length = 6
+
+[[boundaries]]
+payload_offset = 300
+length = 2
+
+[[boundaries]]
+payload_offset = 302
+length = 1
+
+[[boundaries]]
+payload_offset = 303
+length = 6
+
+[[boundaries]]
+payload_offset = 309
+length = 2
+
+[[boundaries]]
+payload_offset = 311
+length = 1
+
+[[boundaries]]
+payload_offset = 312
+length = 6
+
+[[boundaries]]
+payload_offset = 318
+length = 2
+
+[[boundaries]]
+payload_offset = 320
+length = 1
+
+[[boundaries]]
+payload_offset = 321
+length = 6
+
+[[boundaries]]
+payload_offset = 327
+length = 2
+
+[[boundaries]]
+payload_offset = 329
+length = 1
+
+[[boundaries]]
+payload_offset = 330
+length = 1
+
+[[boundaries]]
+payload_offset = 331
+length = 1
+
+[[boundaries]]
+payload_offset = 332
+length = 6
+
+[[boundaries]]
+payload_offset = 338
+length = 2
+
+[[boundaries]]
+payload_offset = 340
+length = 5
+
+[[boundaries]]
+payload_offset = 345
+length = 1
+
+[[boundaries]]
+payload_offset = 346
+length = 1
+
+[[boundaries]]
+payload_offset = 347
+length = 1
+
+[[boundaries]]
+payload_offset = 348
+length = 7
+
+[[boundaries]]
+payload_offset = 355
+length = 7
+
+[[boundaries]]
+payload_offset = 362
+length = 3
+
+[[boundaries]]
+payload_offset = 365
+length = 6
+
+[[boundaries]]
+payload_offset = 371
+length = 2
+
+[[boundaries]]
+payload_offset = 373
+length = 5
+
+[[boundaries]]
+payload_offset = 378
+length = 1
+
+[[boundaries]]
+payload_offset = 379
+length = 1
+
+[[boundaries]]
+payload_offset = 380
+length = 1
+
+[[boundaries]]
+payload_offset = 381
+length = 1
+
+[[boundaries]]
+payload_offset = 382
+length = 5
+
+[[boundaries]]
+payload_offset = 387
+length = 5
+
+[[boundaries]]
+payload_offset = 392
+length = 6
+
+[[boundaries]]
+payload_offset = 398
+length = 5
+
+[[boundaries]]
+payload_offset = 403
+length = 5
+
+[[boundaries]]
+payload_offset = 408
+length = 6
+
+[[boundaries]]
+payload_offset = 414
+length = 6
+
+[[boundaries]]
+payload_offset = 420
+length = 2
+
+[[boundaries]]
+payload_offset = 422
+length = 1
+
+[[boundaries]]
+payload_offset = 423
+length = 1
+
+[[boundaries]]
+payload_offset = 424
+length = 6
+
+[[boundaries]]
+payload_offset = 430
+length = 2
+
+[[boundaries]]
+payload_offset = 432
+length = 1
+
+[[boundaries]]
+payload_offset = 433
+length = 5
+
+[[boundaries]]
+payload_offset = 439
+length = 6
+
+[[boundaries]]
+payload_offset = 445
+length = 2
+
+[[boundaries]]
+payload_offset = 447
+length = 6
+
+[[boundaries]]
+payload_offset = 453
+length = 2
+
+[[boundaries]]
+payload_offset = 455
+length = 5
+
+[[boundaries]]
+payload_offset = 460
+length = 5
+
+[[boundaries]]
+payload_offset = 465
+length = 6
+
+[[boundaries]]
+payload_offset = 471
+length = 6
+
+[[boundaries]]
+payload_offset = 477
+length = 2
+
+[[boundaries]]
+payload_offset = 479
+length = 1
+
+[[boundaries]]
+payload_offset = 480
+length = 1
+
+[[boundaries]]
+payload_offset = 481
+length = 6
+
+[[boundaries]]
+payload_offset = 487
+length = 2
+
+[[boundaries]]
+payload_offset = 489
+length = 1
+
+[[boundaries]]
+payload_offset = 490
+length = 5
+
+[[boundaries]]
+payload_offset = 496
+length = 3
+
+[[boundaries]]
+payload_offset = 499
+length = 5
+
+[[boundaries]]
+payload_offset = 504
+length = 6
+
+[[boundaries]]
+payload_offset = 510
+length = 5
+
+[[boundaries]]
+payload_offset = 515
+length = 6
+
+[[boundaries]]
+payload_offset = 521
+length = 5
+
+[[boundaries]]
+payload_offset = 526
+length = 6
+
+[[boundaries]]
+payload_offset = 532
+length = 5
+
+[[boundaries]]
+payload_offset = 537
+length = 6
+
+[[boundaries]]
+payload_offset = 543
+length = 3
+
+[[boundaries]]
+payload_offset = 546
+length = 1
+
+[[boundaries]]
+payload_offset = 547
+length = 1
+
+[[boundaries]]
+payload_offset = 548
+length = 7
+
+[[boundaries]]
+payload_offset = 555
+length = 3
+
+[[boundaries]]
+payload_offset = 558
+length = 1
+
+[[boundaries]]
+payload_offset = 559
+length = 7
+
+[[boundaries]]
+payload_offset = 566
+length = 3
+
+[[boundaries]]
+payload_offset = 569
+length = 1
+
+[[boundaries]]
+payload_offset = 570
+length = 14
+
+[[boundaries]]
+payload_offset = 584
+length = 6
+
+[[boundaries]]
+payload_offset = 590
+length = 2
+
+[[boundaries]]
+payload_offset = 592
+length = 1
+
+[[boundaries]]
+payload_offset = 593
+length = 14
+
+[[boundaries]]
+payload_offset = 607
+length = 6
+
+[[boundaries]]
+payload_offset = 613
+length = 2
+
+[[boundaries]]
+payload_offset = 615
+length = 1
+
+[[boundaries]]
+payload_offset = 616
+length = 18
+
+[[boundaries]]
+payload_offset = 634
+length = 5
+
+[[boundaries]]
+payload_offset = 639
+length = 5
+
+[[boundaries]]
+payload_offset = 644
+length = 6
+
+[[boundaries]]
+payload_offset = 650
+length = 5
+
+[[boundaries]]
+payload_offset = 655
+length = 5
+
+[[boundaries]]
+payload_offset = 660
+length = 5
+
+[[boundaries]]
+payload_offset = 665
+length = 6
+
+[[boundaries]]
+payload_offset = 671
+length = 6
+
+[[boundaries]]
+payload_offset = 677
+length = 2
+
+[[boundaries]]
+payload_offset = 679
+length = 1
+
+[[boundaries]]
+payload_offset = 680
+length = 1
+
+[[boundaries]]
+payload_offset = 681
+length = 3
+
+[[boundaries]]
+payload_offset = 684
+length = 6
+
+[[boundaries]]
+payload_offset = 690
+length = 1
+
+[[boundaries]]
+payload_offset = 691
+length = 1
+
+[[boundaries]]
+payload_offset = 692
+length = 3
+
+[[boundaries]]
+payload_offset = 695
+length = 3
+
+[[boundaries]]
+payload_offset = 698
+length = 6
+
+[[boundaries]]
+payload_offset = 704
+length = 2
+
+[[boundaries]]
+payload_offset = 706
+length = 5
+
+[[boundaries]]
+payload_offset = 711
+length = 3
+
+[[boundaries]]
+payload_offset = 714
+length = 5
+
+[[boundaries]]
+payload_offset = 719
+length = 2
+
+[[boundaries]]
+payload_offset = 721
+length = 1
+
+[[boundaries]]
+payload_offset = 722
+length = 1
+
+[[boundaries]]
+payload_offset = 723
+length = 3
+
+[[boundaries]]
+payload_offset = 726
+length = 6
+
+[[boundaries]]
+payload_offset = 732
+length = 6
+
+[[boundaries]]
+payload_offset = 738
+length = 2
+
+[[boundaries]]
+payload_offset = 740
+length = 1
+
+[[boundaries]]
+payload_offset = 741
+length = 1
+
+[[boundaries]]
+payload_offset = 742
+length = 6
+
+[[boundaries]]
+payload_offset = 748
+length = 2
+
+[[boundaries]]
+payload_offset = 750
+length = 5
+
+[[boundaries]]
+payload_offset = 755
+length = 3
+
+[[boundaries]]
+payload_offset = 758
+length = 5
+
+[[boundaries]]
+payload_offset = 763
+length = 2
+
+[[boundaries]]
+payload_offset = 765
+length = 1
+
+[[boundaries]]
+payload_offset = 766
+length = 1
+
+[[boundaries]]
+payload_offset = 767
+length = 14
+
+[[boundaries]]
+payload_offset = 781
+length = 6
+
+[[boundaries]]
+payload_offset = 787
+length = 2
+
+[[boundaries]]
+payload_offset = 789
+length = 1
+
+[[boundaries]]
+payload_offset = 790
+length = 14
+
+[[boundaries]]
+payload_offset = 804
+length = 6
+
+[[boundaries]]
+payload_offset = 810
+length = 2
+
+[[boundaries]]
+payload_offset = 812
+length = 1
+
+[[boundaries]]
+payload_offset = 813
+length = 14
+
+[[boundaries]]
+payload_offset = 827
+length = 6
+
+[[boundaries]]
+payload_offset = 833
+length = 2
+
+[[boundaries]]
+payload_offset = 835
+length = 1
+
+[[boundaries]]
+payload_offset = 836
+length = 18
+
+[[boundaries]]
+payload_offset = 854
+length = 5
+
+[[boundaries]]
+payload_offset = 859
+length = 5
+
+[[boundaries]]
+payload_offset = 864
+length = 6
+
+[[boundaries]]
+payload_offset = 870
+length = 5
+
+[[boundaries]]
+payload_offset = 875
+length = 5
+
+[[boundaries]]
+payload_offset = 880
+length = 5
+
+[[boundaries]]
+payload_offset = 885
+length = 6
+
+[[boundaries]]
+payload_offset = 891
+length = 6
+
+[[boundaries]]
+payload_offset = 897
+length = 2
+
+[[boundaries]]
+payload_offset = 899
+length = 1
+
+[[boundaries]]
+payload_offset = 900
+length = 1
+
+[[boundaries]]
+payload_offset = 901
+length = 3
+
+[[boundaries]]
+payload_offset = 904
+length = 6
+
+[[boundaries]]
+payload_offset = 910
+length = 1
+
+[[boundaries]]
+payload_offset = 911
+length = 1
+
+[[boundaries]]
+payload_offset = 912
+length = 3
+
+[[boundaries]]
+payload_offset = 915
+length = 3
+
+[[boundaries]]
+payload_offset = 918
+length = 6
+
+[[boundaries]]
+payload_offset = 924
+length = 2
+
+[[boundaries]]
+payload_offset = 926
+length = 5
+
+[[boundaries]]
+payload_offset = 931
+length = 3
+
+[[boundaries]]
+payload_offset = 934
+length = 5
+
+[[boundaries]]
+payload_offset = 939
+length = 2
+
+[[boundaries]]
+payload_offset = 941
+length = 1
+
+[[boundaries]]
+payload_offset = 942
+length = 1
+
+[[boundaries]]
+payload_offset = 943
+length = 3
+
+[[boundaries]]
+payload_offset = 946
+length = 6
+
+[[boundaries]]
+payload_offset = 952
+length = 6
+
+[[boundaries]]
+payload_offset = 958
+length = 2
+
+[[boundaries]]
+payload_offset = 960
+length = 1
+
+[[boundaries]]
+payload_offset = 961
+length = 1
+
+[[boundaries]]
+payload_offset = 962
+length = 6
+
+[[boundaries]]
+payload_offset = 968
+length = 2
+
+[[boundaries]]
+payload_offset = 970
+length = 5
+
+[[boundaries]]
+payload_offset = 975
+length = 3
+
+[[boundaries]]
+payload_offset = 978
+length = 5
+
+[[boundaries]]
+payload_offset = 983
+length = 2
+
+[[boundaries]]
+payload_offset = 985
+length = 1
+
+[[boundaries]]
+payload_offset = 986
+length = 1
+
+[[boundaries]]
+payload_offset = 987
+length = 14
+
+[[boundaries]]
+payload_offset = 1001
+length = 6
+
+[[boundaries]]
+payload_offset = 1007
+length = 2
+
+[[boundaries]]
+payload_offset = 1009
+length = 1
+
+[[boundaries]]
+payload_offset = 1010
+length = 14
+
+[[boundaries]]
+payload_offset = 1024
+length = 6
+
+[[boundaries]]
+payload_offset = 1030
+length = 2
+
+[[boundaries]]
+payload_offset = 1032
+length = 1
+
+[[boundaries]]
+payload_offset = 1033
+length = 14
+
+[[boundaries]]
+payload_offset = 1047
+length = 6
+
+[[boundaries]]
+payload_offset = 1053
+length = 2
+
+[[boundaries]]
+payload_offset = 1055
+length = 1
+
+[[boundaries]]
+payload_offset = 1056
+length = 14
+
+[[boundaries]]
+payload_offset = 1070
+length = 6
+
+[[boundaries]]
+payload_offset = 1076
+length = 2
+
+[[boundaries]]
+payload_offset = 1078
+length = 1
+
+[[boundaries]]
+payload_offset = 1079
+length = 14
+
+[[boundaries]]
+payload_offset = 1093
+length = 6
+
+[[boundaries]]
+payload_offset = 1099
+length = 2
+
+[[boundaries]]
+payload_offset = 1101
+length = 1

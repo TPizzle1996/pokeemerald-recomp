@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 3
 reloc_count = 2
+instruction_count = 19
 
 [[segments]]
 kind = "bytecode"
@@ -55,6 +56,8 @@ original_encoded_gba = 0x8272e0f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/event-scripts"
 target_export = "gText_RegisteredTrainerinPokeNav"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -65,4 +68,82 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/trainer-script"
 target_export = "EventScript_GotoTrainerScript"
 target_offset = 45
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 45
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 4
+
+[[boundaries]]
+payload_offset = 4
+length = 4
+
+[[boundaries]]
+payload_offset = 8
+length = 1
+
+[[boundaries]]
+payload_offset = 9
+length = 3
+
+[[boundaries]]
+payload_offset = 12
+length = 3
+
+[[boundaries]]
+payload_offset = 15
+length = 6
+
+[[boundaries]]
+payload_offset = 21
+length = 2
+
+[[boundaries]]
+payload_offset = 23
+length = 1
+
+[[boundaries]]
+payload_offset = 24
+length = 1
+
+[[boundaries]]
+payload_offset = 25
+length = 3
+
+[[boundaries]]
+payload_offset = 28
+length = 1
+
+[[boundaries]]
+payload_offset = 29
+length = 3
+
+[[boundaries]]
+payload_offset = 32
+length = 5
+
+[[boundaries]]
+payload_offset = 37
+length = 6
+
+[[boundaries]]
+payload_offset = 43
+length = 1
+
+[[boundaries]]
+payload_offset = 44
+length = 1
+
+[[boundaries]]
+payload_offset = 45
+length = 1
+
+[[boundaries]]
+payload_offset = 46
+length = 1
+
+[[boundaries]]
+payload_offset = 47
+length = 1

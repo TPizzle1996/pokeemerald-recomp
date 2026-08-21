@@ -17,6 +17,7 @@ static_data_bytes = 88
 segment_count = 9
 export_count = 14
 reloc_count = 21
+instruction_count = 115
 
 [[segments]]
 kind = "bytecode"
@@ -195,6 +196,8 @@ original_encoded_gba = 0x8272a21
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/mart-clerk"
 target_export = "gText_HowMayIServeYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -205,6 +208,8 @@ target_class = "MART_TABLE_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstore-5f"
 target_export = "LilycoveCity_DepartmentStore_5F_Pokemart_Dolls"
 target_offset = 38
+target_kind = "MART_TABLE"
+target_payload_offset = 38
 runtime_resolution_required = true
 
 [[relocs]]
@@ -214,6 +219,8 @@ original_encoded_gba = 0x8272a3f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/mart-clerk"
 target_export = "gText_PleaseComeAgain"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -223,6 +230,8 @@ original_encoded_gba = 0x8272a21
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/mart-clerk"
 target_export = "gText_HowMayIServeYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -233,6 +242,8 @@ target_class = "MART_TABLE_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstore-5f"
 target_export = "LilycoveCity_DepartmentStore_5F_Pokemart_Cushions"
 target_offset = 90
+target_kind = "MART_TABLE"
+target_payload_offset = 90
 runtime_resolution_required = true
 
 [[relocs]]
@@ -242,6 +253,8 @@ original_encoded_gba = 0x8272a3f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/mart-clerk"
 target_export = "gText_PleaseComeAgain"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -251,6 +264,8 @@ original_encoded_gba = 0x8272a21
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/mart-clerk"
 target_export = "gText_HowMayIServeYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -261,6 +276,8 @@ target_class = "MART_TABLE_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstore-5f"
 target_export = "LilycoveCity_DepartmentStore_5F_Pokemart_Posters"
 target_offset = 138
+target_kind = "MART_TABLE"
+target_payload_offset = 138
 runtime_resolution_required = true
 
 [[relocs]]
@@ -270,6 +287,8 @@ original_encoded_gba = 0x8272a3f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/mart-clerk"
 target_export = "gText_PleaseComeAgain"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -279,6 +298,8 @@ original_encoded_gba = 0x8272a21
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/mart-clerk"
 target_export = "gText_HowMayIServeYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -289,6 +310,8 @@ target_class = "MART_TABLE_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstore-5f"
 target_export = "LilycoveCity_DepartmentStore_5F_Pokemart_Mats"
 target_offset = 186
+target_kind = "MART_TABLE"
+target_payload_offset = 186
 runtime_resolution_required = true
 
 [[relocs]]
@@ -298,6 +321,8 @@ original_encoded_gba = 0x8272a3f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/mart-clerk"
 target_export = "gText_PleaseComeAgain"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -307,6 +332,8 @@ original_encoded_gba = 0x82200c5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-departmentstore-5f"
 target_export = "LilycoveCity_DepartmentStore_5F_Text_PlaceFullOfCuteDolls"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -316,6 +343,8 @@ original_encoded_gba = 0x827259e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceplayer"
 target_export = "Common_Movement_FacePlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -326,6 +355,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstore-5f"
 target_export = "LilycoveCity_DepartmentStore_5F_EventScript_WomanNormal"
 target_offset = 290
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 258
 runtime_resolution_required = true
 
 [[relocs]]
@@ -336,6 +367,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstore-5f"
 target_export = "LilycoveCity_DepartmentStore_5F_EventScript_WomanNormal"
 target_offset = 290
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 258
 runtime_resolution_required = true
 
 [[relocs]]
@@ -346,6 +379,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstore-5f"
 target_export = "LilycoveCity_DepartmentStore_5F_EventScript_WomanLegendaryWeather"
 target_offset = 301
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 269
 runtime_resolution_required = true
 
 [[relocs]]
@@ -355,6 +390,8 @@ original_encoded_gba = 0x822016b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-departmentstore-5f"
 target_export = "LilycoveCity_DepartmentStore_5F_Text_SellManyCuteMatsHere"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -364,6 +401,8 @@ original_encoded_gba = 0x82201c4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-departmentstore-5f"
 target_export = "LilycoveCity_DepartmentStore_5F_Text_ClosedRooftopForWeather"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -373,6 +412,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -382,4 +423,466 @@ original_encoded_gba = 0x8220122
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-departmentstore-5f"
 target_export = "LilycoveCity_DepartmentStore_5F_Text_GettingDollInsteadOfPokemon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 7
+
+[[boundaries]]
+payload_offset = 7
+length = 4
+
+[[boundaries]]
+payload_offset = 11
+length = 1
+
+[[boundaries]]
+payload_offset = 12
+length = 1
+
+[[boundaries]]
+payload_offset = 13
+length = 1
+
+[[boundaries]]
+payload_offset = 14
+length = 5
+
+[[boundaries]]
+payload_offset = 19
+length = 1
+
+[[boundaries]]
+payload_offset = 20
+length = 5
+
+[[boundaries]]
+payload_offset = 25
+length = 6
+
+[[boundaries]]
+payload_offset = 31
+length = 2
+
+[[boundaries]]
+payload_offset = 33
+length = 1
+
+[[boundaries]]
+payload_offset = 34
+length = 1
+
+[[boundaries]]
+payload_offset = 38
+length = 3
+
+[[boundaries]]
+payload_offset = 41
+length = 1
+
+[[boundaries]]
+payload_offset = 42
+length = 3
+
+[[boundaries]]
+payload_offset = 45
+length = 1
+
+[[boundaries]]
+payload_offset = 46
+length = 4
+
+[[boundaries]]
+payload_offset = 50
+length = 1
+
+[[boundaries]]
+payload_offset = 51
+length = 1
+
+[[boundaries]]
+payload_offset = 52
+length = 1
+
+[[boundaries]]
+payload_offset = 53
+length = 1
+
+[[boundaries]]
+payload_offset = 54
+length = 1
+
+[[boundaries]]
+payload_offset = 55
+length = 1
+
+[[boundaries]]
+payload_offset = 56
+length = 3
+
+[[boundaries]]
+payload_offset = 59
+length = 1
+
+[[boundaries]]
+payload_offset = 60
+length = 3
+
+[[boundaries]]
+payload_offset = 63
+length = 1
+
+[[boundaries]]
+payload_offset = 64
+length = 1
+
+[[boundaries]]
+payload_offset = 65
+length = 1
+
+[[boundaries]]
+payload_offset = 66
+length = 1
+
+[[boundaries]]
+payload_offset = 67
+length = 1
+
+[[boundaries]]
+payload_offset = 68
+length = 5
+
+[[boundaries]]
+payload_offset = 73
+length = 1
+
+[[boundaries]]
+payload_offset = 74
+length = 5
+
+[[boundaries]]
+payload_offset = 79
+length = 6
+
+[[boundaries]]
+payload_offset = 85
+length = 2
+
+[[boundaries]]
+payload_offset = 87
+length = 1
+
+[[boundaries]]
+payload_offset = 88
+length = 1
+
+[[boundaries]]
+payload_offset = 90
+length = 4
+
+[[boundaries]]
+payload_offset = 94
+length = 1
+
+[[boundaries]]
+payload_offset = 95
+length = 1
+
+[[boundaries]]
+payload_offset = 96
+length = 1
+
+[[boundaries]]
+payload_offset = 97
+length = 1
+
+[[boundaries]]
+payload_offset = 98
+length = 1
+
+[[boundaries]]
+payload_offset = 99
+length = 1
+
+[[boundaries]]
+payload_offset = 100
+length = 1
+
+[[boundaries]]
+payload_offset = 101
+length = 1
+
+[[boundaries]]
+payload_offset = 102
+length = 1
+
+[[boundaries]]
+payload_offset = 103
+length = 1
+
+[[boundaries]]
+payload_offset = 104
+length = 1
+
+[[boundaries]]
+payload_offset = 105
+length = 1
+
+[[boundaries]]
+payload_offset = 106
+length = 3
+
+[[boundaries]]
+payload_offset = 109
+length = 1
+
+[[boundaries]]
+payload_offset = 110
+length = 1
+
+[[boundaries]]
+payload_offset = 111
+length = 1
+
+[[boundaries]]
+payload_offset = 112
+length = 1
+
+[[boundaries]]
+payload_offset = 113
+length = 1
+
+[[boundaries]]
+payload_offset = 114
+length = 5
+
+[[boundaries]]
+payload_offset = 119
+length = 1
+
+[[boundaries]]
+payload_offset = 120
+length = 5
+
+[[boundaries]]
+payload_offset = 125
+length = 6
+
+[[boundaries]]
+payload_offset = 131
+length = 2
+
+[[boundaries]]
+payload_offset = 133
+length = 1
+
+[[boundaries]]
+payload_offset = 134
+length = 1
+
+[[boundaries]]
+payload_offset = 138
+length = 5
+
+[[boundaries]]
+payload_offset = 143
+length = 1
+
+[[boundaries]]
+payload_offset = 144
+length = 5
+
+[[boundaries]]
+payload_offset = 149
+length = 1
+
+[[boundaries]]
+payload_offset = 150
+length = 3
+
+[[boundaries]]
+payload_offset = 153
+length = 1
+
+[[boundaries]]
+payload_offset = 154
+length = 5
+
+[[boundaries]]
+payload_offset = 159
+length = 1
+
+[[boundaries]]
+payload_offset = 160
+length = 1
+
+[[boundaries]]
+payload_offset = 161
+length = 1
+
+[[boundaries]]
+payload_offset = 162
+length = 5
+
+[[boundaries]]
+payload_offset = 167
+length = 1
+
+[[boundaries]]
+payload_offset = 168
+length = 5
+
+[[boundaries]]
+payload_offset = 173
+length = 6
+
+[[boundaries]]
+payload_offset = 179
+length = 2
+
+[[boundaries]]
+payload_offset = 181
+length = 1
+
+[[boundaries]]
+payload_offset = 182
+length = 1
+
+[[boundaries]]
+payload_offset = 186
+length = 8
+
+[[boundaries]]
+payload_offset = 194
+length = 8
+
+[[boundaries]]
+payload_offset = 202
+length = 3
+
+[[boundaries]]
+payload_offset = 205
+length = 1
+
+[[boundaries]]
+payload_offset = 206
+length = 1
+
+[[boundaries]]
+payload_offset = 207
+length = 1
+
+[[boundaries]]
+payload_offset = 208
+length = 1
+
+[[boundaries]]
+payload_offset = 209
+length = 1
+
+[[boundaries]]
+payload_offset = 210
+length = 6
+
+[[boundaries]]
+payload_offset = 216
+length = 2
+
+[[boundaries]]
+payload_offset = 218
+length = 1
+
+[[boundaries]]
+payload_offset = 219
+length = 1
+
+[[boundaries]]
+payload_offset = 220
+length = 7
+
+[[boundaries]]
+payload_offset = 227
+length = 3
+
+[[boundaries]]
+payload_offset = 230
+length = 5
+
+[[boundaries]]
+payload_offset = 235
+length = 6
+
+[[boundaries]]
+payload_offset = 241
+length = 5
+
+[[boundaries]]
+payload_offset = 246
+length = 6
+
+[[boundaries]]
+payload_offset = 252
+length = 5
+
+[[boundaries]]
+payload_offset = 258
+length = 6
+
+[[boundaries]]
+payload_offset = 264
+length = 2
+
+[[boundaries]]
+payload_offset = 266
+length = 1
+
+[[boundaries]]
+payload_offset = 267
+length = 1
+
+[[boundaries]]
+payload_offset = 268
+length = 1
+
+[[boundaries]]
+payload_offset = 269
+length = 6
+
+[[boundaries]]
+payload_offset = 275
+length = 2
+
+[[boundaries]]
+payload_offset = 277
+length = 1
+
+[[boundaries]]
+payload_offset = 278
+length = 7
+
+[[boundaries]]
+payload_offset = 285
+length = 3
+
+[[boundaries]]
+payload_offset = 288
+length = 1
+
+[[boundaries]]
+payload_offset = 289
+length = 1
+
+[[boundaries]]
+payload_offset = 290
+length = 6
+
+[[boundaries]]
+payload_offset = 296
+length = 2
+
+[[boundaries]]
+payload_offset = 298
+length = 1

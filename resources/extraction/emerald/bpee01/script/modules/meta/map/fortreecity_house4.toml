@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 2
 export_count = 6
 reloc_count = 14
+instruction_count = 53
 
 [[segments]]
 kind = "bytecode"
@@ -85,6 +86,8 @@ original_encoded_gba = 0x8217d33
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-house4"
 target_export = "FortreeCity_House4_Text_BringsWorldCloserTogether"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -95,6 +98,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/fortreecity-house4"
 target_export = "FortreeCity_House4_EventScript_ReceivedMentalHerb"
 target_offset = 134
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 133
 runtime_resolution_required = true
 
 [[relocs]]
@@ -105,6 +110,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/fortreecity-house4"
 target_export = "FortreeCity_House4_EventScript_WingullReturned"
 target_offset = 88
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 87
 runtime_resolution_required = true
 
 [[relocs]]
@@ -115,6 +122,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/fortreecity-house4"
 target_export = "FortreeCity_House4_EventScript_WingullOnErrand"
 target_offset = 68
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 67
 runtime_resolution_required = true
 
 [[relocs]]
@@ -124,6 +133,8 @@ original_encoded_gba = 0x8217db9
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-house4"
 target_export = "FortreeCity_House4_Text_GoBirdPokemon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -133,6 +144,8 @@ original_encoded_gba = 0x8217d1a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/fortreecity-house4-movement-wingullexit"
 target_export = "FortreeCity_House4_Movement_WingullExit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -142,6 +155,8 @@ original_encoded_gba = 0x827259e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceplayer"
 target_export = "Common_Movement_FacePlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -151,6 +166,8 @@ original_encoded_gba = 0x8217dd2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-house4"
 target_export = "FortreeCity_House4_Text_AskedWingullToRunErrand"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -160,6 +177,8 @@ original_encoded_gba = 0x827259e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceplayer"
 target_export = "Common_Movement_FacePlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -169,6 +188,8 @@ original_encoded_gba = 0x8217e05
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-house4"
 target_export = "FortreeCity_House4_Text_WelcomeWingullTakeMentalHerb"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -179,6 +200,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_ShowBagIsFull"
 target_offset = 273
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 273
 runtime_resolution_required = true
 
 [[relocs]]
@@ -188,6 +211,8 @@ original_encoded_gba = 0x827259e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceplayer"
 target_export = "Common_Movement_FacePlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -197,6 +222,8 @@ original_encoded_gba = 0x8217ea8
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-house4"
 target_export = "FortreeCity_House4_Text_FriendsFarAwayThanksToWingull"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -206,4 +233,218 @@ original_encoded_gba = 0x8217ee0
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-house4"
 target_export = "FortreeCity_House4_Text_Wingull"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 6
+
+[[boundaries]]
+payload_offset = 6
+length = 2
+
+[[boundaries]]
+payload_offset = 8
+length = 1
+
+[[boundaries]]
+payload_offset = 9
+length = 1
+
+[[boundaries]]
+payload_offset = 10
+length = 3
+
+[[boundaries]]
+payload_offset = 13
+length = 6
+
+[[boundaries]]
+payload_offset = 19
+length = 3
+
+[[boundaries]]
+payload_offset = 22
+length = 6
+
+[[boundaries]]
+payload_offset = 28
+length = 3
+
+[[boundaries]]
+payload_offset = 31
+length = 6
+
+[[boundaries]]
+payload_offset = 37
+length = 6
+
+[[boundaries]]
+payload_offset = 43
+length = 2
+
+[[boundaries]]
+payload_offset = 45
+length = 1
+
+[[boundaries]]
+payload_offset = 46
+length = 3
+
+[[boundaries]]
+payload_offset = 49
+length = 3
+
+[[boundaries]]
+payload_offset = 52
+length = 7
+
+[[boundaries]]
+payload_offset = 59
+length = 3
+
+[[boundaries]]
+payload_offset = 62
+length = 3
+
+[[boundaries]]
+payload_offset = 65
+length = 1
+
+[[boundaries]]
+payload_offset = 66
+length = 1
+
+[[boundaries]]
+payload_offset = 67
+length = 7
+
+[[boundaries]]
+payload_offset = 74
+length = 3
+
+[[boundaries]]
+payload_offset = 77
+length = 6
+
+[[boundaries]]
+payload_offset = 83
+length = 2
+
+[[boundaries]]
+payload_offset = 85
+length = 1
+
+[[boundaries]]
+payload_offset = 86
+length = 1
+
+[[boundaries]]
+payload_offset = 87
+length = 7
+
+[[boundaries]]
+payload_offset = 94
+length = 3
+
+[[boundaries]]
+payload_offset = 97
+length = 6
+
+[[boundaries]]
+payload_offset = 103
+length = 2
+
+[[boundaries]]
+payload_offset = 105
+length = 5
+
+[[boundaries]]
+payload_offset = 110
+length = 5
+
+[[boundaries]]
+payload_offset = 115
+length = 2
+
+[[boundaries]]
+payload_offset = 117
+length = 5
+
+[[boundaries]]
+payload_offset = 122
+length = 6
+
+[[boundaries]]
+payload_offset = 128
+length = 3
+
+[[boundaries]]
+payload_offset = 131
+length = 1
+
+[[boundaries]]
+payload_offset = 132
+length = 1
+
+[[boundaries]]
+payload_offset = 133
+length = 7
+
+[[boundaries]]
+payload_offset = 140
+length = 3
+
+[[boundaries]]
+payload_offset = 143
+length = 6
+
+[[boundaries]]
+payload_offset = 149
+length = 2
+
+[[boundaries]]
+payload_offset = 151
+length = 1
+
+[[boundaries]]
+payload_offset = 152
+length = 1
+
+[[boundaries]]
+payload_offset = 153
+length = 1
+
+[[boundaries]]
+payload_offset = 154
+length = 1
+
+[[boundaries]]
+payload_offset = 155
+length = 1
+
+[[boundaries]]
+payload_offset = 156
+length = 5
+
+[[boundaries]]
+payload_offset = 161
+length = 6
+
+[[boundaries]]
+payload_offset = 167
+length = 2
+
+[[boundaries]]
+payload_offset = 169
+length = 1
+
+[[boundaries]]
+payload_offset = 170
+length = 1
+
+[[boundaries]]
+payload_offset = 171
+length = 1

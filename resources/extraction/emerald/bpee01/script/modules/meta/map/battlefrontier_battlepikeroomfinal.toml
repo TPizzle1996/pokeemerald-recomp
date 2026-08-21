@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 2
 export_count = 2
 reloc_count = 2
+instruction_count = 18
 
 [[segments]]
 kind = "bytecode"
@@ -53,6 +54,8 @@ original_encoded_gba = 0x825e3db
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battlepikeroomfinal-movement-attendantapproachplayer"
 target_export = "BattleFrontier_BattlePikeRoomFinal_Movement_AttendantApproachPlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -62,4 +65,78 @@ original_encoded_gba = 0x825e3f2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepikeroomfinal"
 target_export = "BattleFrontier_BattlePikeRoomFinal_Text_CongratsThisWayPlease"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 7
+
+[[boundaries]]
+payload_offset = 10
+length = 3
+
+[[boundaries]]
+payload_offset = 13
+length = 5
+
+[[boundaries]]
+payload_offset = 18
+length = 5
+
+[[boundaries]]
+payload_offset = 23
+length = 5
+
+[[boundaries]]
+payload_offset = 28
+length = 3
+
+[[boundaries]]
+payload_offset = 31
+length = 1
+
+[[boundaries]]
+payload_offset = 32
+length = 6
+
+[[boundaries]]
+payload_offset = 38
+length = 2
+
+[[boundaries]]
+payload_offset = 40
+length = 1
+
+[[boundaries]]
+payload_offset = 41
+length = 1
+
+[[boundaries]]
+payload_offset = 42
+length = 8
+
+[[boundaries]]
+payload_offset = 50
+length = 1
+
+[[boundaries]]
+payload_offset = 51
+length = 1
+
+[[boundaries]]
+payload_offset = 52
+length = 5
+
+[[boundaries]]
+payload_offset = 57
+length = 4
+
+[[boundaries]]
+payload_offset = 61
+length = 1

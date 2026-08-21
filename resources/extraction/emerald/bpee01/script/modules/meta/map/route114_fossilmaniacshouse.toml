@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 5
 reloc_count = 6
+instruction_count = 26
 
 [[segments]]
 kind = "bytecode"
@@ -72,6 +73,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route114-fossilmaniacshouse"
 target_export = "Route114_FossilManiacsHouse_EventScript_ReceivedDig"
 target_offset = 57
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 51
 runtime_resolution_required = true
 
 [[relocs]]
@@ -81,6 +84,8 @@ original_encoded_gba = 0x822ad85
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route114-fossilmaniacshouse"
 target_export = "Route114_FossilManiacsHouse_Text_HaveThisToDigLikeMyBrother"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -91,6 +96,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_ShowBagIsFull"
 target_offset = 273
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 273
 runtime_resolution_required = true
 
 [[relocs]]
@@ -100,6 +107,8 @@ original_encoded_gba = 0x822ae48
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route114-fossilmaniacshouse"
 target_export = "Route114_FossilManiacsHouse_Text_DigReturnsYouToEntrance"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -109,6 +118,8 @@ original_encoded_gba = 0x822ae92
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route114-fossilmaniacshouse"
 target_export = "Route114_FossilManiacsHouse_Text_RocksFillDisplayCase"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -118,4 +129,110 @@ original_encoded_gba = 0x822aec2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route114-fossilmaniacshouse"
 target_export = "Route114_FossilManiacsHouse_Text_CrammedWithBooks"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 1
+
+[[boundaries]]
+payload_offset = 4
+length = 1
+
+[[boundaries]]
+payload_offset = 5
+length = 1
+
+[[boundaries]]
+payload_offset = 6
+length = 3
+
+[[boundaries]]
+payload_offset = 9
+length = 6
+
+[[boundaries]]
+payload_offset = 15
+length = 6
+
+[[boundaries]]
+payload_offset = 21
+length = 2
+
+[[boundaries]]
+payload_offset = 23
+length = 5
+
+[[boundaries]]
+payload_offset = 28
+length = 5
+
+[[boundaries]]
+payload_offset = 33
+length = 2
+
+[[boundaries]]
+payload_offset = 35
+length = 5
+
+[[boundaries]]
+payload_offset = 40
+length = 6
+
+[[boundaries]]
+payload_offset = 46
+length = 3
+
+[[boundaries]]
+payload_offset = 49
+length = 1
+
+[[boundaries]]
+payload_offset = 50
+length = 1
+
+[[boundaries]]
+payload_offset = 51
+length = 6
+
+[[boundaries]]
+payload_offset = 57
+length = 2
+
+[[boundaries]]
+payload_offset = 59
+length = 1
+
+[[boundaries]]
+payload_offset = 60
+length = 1
+
+[[boundaries]]
+payload_offset = 61
+length = 6
+
+[[boundaries]]
+payload_offset = 67
+length = 2
+
+[[boundaries]]
+payload_offset = 69
+length = 1
+
+[[boundaries]]
+payload_offset = 70
+length = 6
+
+[[boundaries]]
+payload_offset = 76
+length = 2
+
+[[boundaries]]
+payload_offset = 78
+length = 1

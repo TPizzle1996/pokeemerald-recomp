@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 2
 export_count = 143
 reloc_count = 348
+instruction_count = 1049
 
 [[segments]]
 kind = "bytecode"
@@ -1182,6 +1183,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "LilycoveCity_ContestLobby_EventScript_PickUpPrize"
 target_offset = 78
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 78
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1192,6 +1195,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "LilycoveCity_ContestLobby_EventScript_ReceptionWelcome"
 target_offset = 37
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 37
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1202,6 +1207,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "LilycoveCity_ContestLobby_EventScript_GivePokeblockCase"
 target_offset = 46
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 46
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1212,6 +1219,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "LilycoveCity_ContestLobby_EventScript_AskEnterContest"
 target_offset = 149
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 149
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1221,6 +1230,8 @@ original_encoded_gba = 0x827aea8
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "LilycoveCity_ContestLobby_Text_ContestReception"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1230,6 +1241,8 @@ original_encoded_gba = 0x827ada7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "LilycoveCity_ContestLobby_Text_ReceptionDontHavePokeblockCase"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1239,6 +1252,8 @@ original_encoded_gba = 0x827ae47
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "LilycoveCity_ContestLobby_Text_NowThatWeveClearedThatUp"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1248,6 +1263,8 @@ original_encoded_gba = 0x827b67b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "LilycoveCity_ContestLobby_Text_PokemonWonWeHavePrize"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1258,6 +1275,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "LilycoveCity_ContestLobby_EventScript_GiveLuxuryBallAtCounter"
 target_offset = 103
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 103
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1268,6 +1287,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "LilycoveCity_ContestLobby_EventScript_NoRoomForLuxuryBallAtCounter"
 target_offset = 134
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 134
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1278,6 +1299,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_BagIsFull"
 target_offset = 283
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 283
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1287,6 +1310,8 @@ original_encoded_gba = 0x827b6e7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "LilycoveCity_ContestLobby_Text_ComeBackForPrizeLater"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1296,6 +1321,8 @@ original_encoded_gba = 0x827af28
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "LilycoveCity_ContestLobby_Text_EnterContest1"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1306,6 +1333,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "LilycoveCity_ContestLobby_EventScript_ChooseContestRank"
 target_offset = 413
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 413
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1316,6 +1345,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "LilycoveCity_ContestLobby_EventScript_ContestInfo"
 target_offset = 210
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 210
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1326,6 +1357,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "LilycoveCity_ContestLobby_EventScript_CancelEnterContest"
 target_offset = 324
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 324
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1336,6 +1369,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "LilycoveCity_ContestLobby_EventScript_CancelEnterContest"
 target_offset = 324
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 324
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1345,6 +1380,8 @@ original_encoded_gba = 0x827af5e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "LilycoveCity_ContestLobby_Text_WhichTopic1"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1355,6 +1392,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "LilycoveCity_ContestLobby_EventScript_ExplainContests"
 target_offset = 282
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 282
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1365,6 +1404,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "LilycoveCity_ContestLobby_EventScript_ExplainContestTypes"
 target_offset = 296
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 296
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1375,6 +1416,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "LilycoveCity_ContestLobby_EventScript_ExplainContestRanks"
 target_offset = 310
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 310
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1385,6 +1428,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "LilycoveCity_ContestLobby_EventScript_AskEnterContest"
 target_offset = 149
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 149
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1395,6 +1440,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "LilycoveCity_ContestLobby_EventScript_AskEnterContest"
 target_offset = 149
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 149
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1404,6 +1451,8 @@ original_encoded_gba = 0x827af7a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "LilycoveCity_ContestLobby_Text_ExplainContests"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1414,6 +1463,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "LilycoveCity_ContestLobby_EventScript_ContestInfo"
 target_offset = 210
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 210
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1423,6 +1474,8 @@ original_encoded_gba = 0x827b17d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "LilycoveCity_ContestLobby_Text_ExplainContestTypes"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1433,6 +1486,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "LilycoveCity_ContestLobby_EventScript_ContestInfo"
 target_offset = 210
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 210
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1442,6 +1497,8 @@ original_encoded_gba = 0x827b221
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "LilycoveCity_ContestLobby_Text_ExplainContestRanks"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1452,6 +1509,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "LilycoveCity_ContestLobby_EventScript_ContestInfo"
 target_offset = 210
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 210
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1461,6 +1520,8 @@ original_encoded_gba = 0x827bd4f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "LilycoveCity_ContestLobby_Text_ParticipateAnotherTime"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1470,6 +1531,8 @@ original_encoded_gba = 0x827b44a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "LilycoveCity_ContestLobby_Text_EnterWhichPokemon1"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1480,6 +1543,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "LilycoveCity_ContestLobby_EventScript_CancelEnterContest"
 target_offset = 324
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 324
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1490,6 +1555,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "LilycoveCity_ContestLobby_EventScript_CantEnterLowRank"
 target_offset = 589
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 589
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1500,6 +1567,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "LilycoveCity_ContestLobby_EventScript_EnterMon"
 target_offset = 706
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 706
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1510,6 +1579,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "LilycoveCity_ContestLobby_EventScript_ConfirmEntryAlreadyWon"
 target_offset = 640
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 640
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1520,6 +1591,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "LilycoveCity_ContestLobby_EventScript_CantEnterEgg"
 target_offset = 676
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 676
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1530,6 +1603,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "LilycoveCity_ContestLobby_EventScript_CantEnterFainted"
 target_offset = 691
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 691
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1539,6 +1614,8 @@ original_encoded_gba = 0x827b3ff
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "LilycoveCity_ContestLobby_Text_EnterWhichRank"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1549,6 +1626,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "LilycoveCity_ContestLobby_EventScript_EnterNormalRank"
 target_offset = 496
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 496
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1559,6 +1638,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "LilycoveCity_ContestLobby_EventScript_EnterSuperRank"
 target_offset = 507
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 507
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1569,6 +1650,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "LilycoveCity_ContestLobby_EventScript_EnterHyperRank"
 target_offset = 518
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 518
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1579,6 +1662,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "LilycoveCity_ContestLobby_EventScript_EnterMasterRank"
 target_offset = 529
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 529
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1589,6 +1674,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "LilycoveCity_ContestLobby_EventScript_CancelEnterContest"
 target_offset = 324
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 324
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1599,6 +1686,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "LilycoveCity_ContestLobby_EventScript_CancelEnterContest"
 target_offset = 324
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 324
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1609,6 +1698,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "LilycoveCity_ContestLobby_EventScript_ChooseContestType"
 target_offset = 540
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 540
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1619,6 +1710,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "LilycoveCity_ContestLobby_EventScript_ChooseContestType"
 target_offset = 540
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 540
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1629,6 +1722,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "LilycoveCity_ContestLobby_EventScript_ChooseContestType"
 target_offset = 540
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 540
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1639,6 +1734,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "LilycoveCity_ContestLobby_EventScript_ChooseContestType"
 target_offset = 540
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 540
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1648,6 +1745,8 @@ original_encoded_gba = 0x827b423
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "LilycoveCity_ContestLobby_Text_EnterWhichContest1"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1658,6 +1757,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "LilycoveCity_ContestLobby_EventScript_CancelEnterContest"
 target_offset = 324
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 324
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1668,6 +1769,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "LilycoveCity_ContestLobby_EventScript_CancelEnterContest"
 target_offset = 324
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 324
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1678,6 +1781,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "LilycoveCity_ContestLobby_EventScript_ChooseContestMon"
 target_offset = 334
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 334
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1687,6 +1792,8 @@ original_encoded_gba = 0x827b471
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "LilycoveCity_ContestLobby_Text_MonNotQualifiedForRank"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1697,6 +1804,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "LilycoveCity_ContestLobby_EventScript_ChooseContestMon"
 target_offset = 334
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 334
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1706,6 +1815,8 @@ original_encoded_gba = 0x827b5c4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "LilycoveCity_ContestLobby_Text_ConfirmContestMon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1716,6 +1827,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "LilycoveCity_ContestLobby_EventScript_ChooseContestMon"
 target_offset = 334
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 334
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1726,6 +1839,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "LilycoveCity_ContestLobby_EventScript_EnterMon"
 target_offset = 706
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 706
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1735,6 +1850,8 @@ original_encoded_gba = 0x827b547
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "LilycoveCity_ContestLobby_Text_AlreadyWonEnterAnyway"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1745,6 +1862,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "LilycoveCity_ContestLobby_EventScript_ChooseContestMon"
 target_offset = 334
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 334
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1755,6 +1874,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "LilycoveCity_ContestLobby_EventScript_EnterMon"
 target_offset = 706
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 706
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1764,6 +1885,8 @@ original_encoded_gba = 0x827b4c4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "LilycoveCity_ContestLobby_Text_EggCannotTakePart"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1774,6 +1897,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "LilycoveCity_ContestLobby_EventScript_ChooseContestMon"
 target_offset = 334
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 334
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1783,6 +1908,8 @@ original_encoded_gba = 0x827b501
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "LilycoveCity_ContestLobby_Text_MonInNoConditionForContest"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1793,6 +1920,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "LilycoveCity_ContestLobby_EventScript_ChooseContestMon"
 target_offset = 334
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 334
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1802,6 +1931,8 @@ original_encoded_gba = 0x827b5e2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "LilycoveCity_ContestLobby_Text_YourMonIsEntryNum4"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1811,6 +1942,8 @@ original_encoded_gba = 0x827ad43
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-player4faceup"
 target_export = "ContestHall_Movement_Player4FaceUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1820,6 +1953,8 @@ original_encoded_gba = 0x827ad09
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-mcwalkdown"
 target_export = "ContestHall_Movement_MCWalkDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1830,6 +1965,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_TryWaitForLink"
 target_offset = 1134
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1134
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1840,6 +1977,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_GetContestRankStringId"
 target_offset = 813
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 813
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1850,6 +1989,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_GetContestCategory"
 target_offset = 887
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 887
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1860,6 +2001,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_ContestGettingStarted"
 target_offset = 978
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 978
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1870,6 +2013,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_ShowContestMons"
 target_offset = 1072
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1072
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1880,6 +2025,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_DoContestAppeals"
 target_offset = 2876
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2876
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1890,6 +2037,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_ContestResults"
 target_offset = 3040
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3040
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1900,6 +2049,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_GetWinnerObjEventId"
 target_offset = 3266
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3266
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1910,6 +2061,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_CongratulateWinner"
 target_offset = 3343
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3343
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1920,6 +2073,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_AudienceLookAround"
 target_offset = 3414
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3414
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1930,6 +2085,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_GiveWinnerPrize"
 target_offset = 3697
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3697
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1940,6 +2097,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_GetNormalStringId"
 target_offset = 863
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 863
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1950,6 +2109,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_GetSuperStringId"
 target_offset = 869
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 869
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1960,6 +2121,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_GetHyperStringId"
 target_offset = 875
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 875
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1970,6 +2133,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_GetMasterStringId"
 target_offset = 881
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 881
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1980,6 +2145,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_GetCategoryCool"
 target_offset = 948
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 948
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1990,6 +2157,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_GetCategoryBeauty"
 target_offset = 954
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 954
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2000,6 +2169,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_GetCategoryCute"
 target_offset = 960
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 960
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2010,6 +2181,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_GetCategorySmart"
 target_offset = 966
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 966
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2020,6 +2193,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_GetCategoryTough"
 target_offset = 972
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 972
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2030,6 +2205,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_GettingStarted"
 target_offset = 1004
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1004
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2039,6 +2216,8 @@ original_encoded_gba = 0x827ad0b
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-mcbackup"
 target_export = "ContestHall_Movement_MCBackUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2049,6 +2228,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_GettingStartedLink"
 target_offset = 1026
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1026
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2058,6 +2239,8 @@ original_encoded_gba = 0x827b711
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "ContestHall_Text_GettingStartedParticipantsAsFollows"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2068,6 +2251,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_GettingStartedWireless"
 target_offset = 1049
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1049
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2077,6 +2262,8 @@ original_encoded_gba = 0x827b78f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "ContestHall_Text_GettingStartedParticipantsAsFollowsLink"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2086,6 +2273,8 @@ original_encoded_gba = 0x827c929
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "ContestHall_Text_GettingStartedWireless"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2096,6 +2285,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_TryWaitForLink"
 target_offset = 1134
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1134
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2105,6 +2296,8 @@ original_encoded_gba = 0x827c972
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "ContestHall_Text_ParticipantsAsFollows"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2115,6 +2308,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_TryWaitForLink"
 target_offset = 1134
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1134
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2125,6 +2320,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_ContestantWalkToCenter"
 target_offset = 1156
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1156
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2135,6 +2332,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_ShowContestMonPic"
 target_offset = 1293
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1293
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2145,6 +2344,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_AudienceHeartEmotes"
 target_offset = 1674
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1674
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2155,6 +2356,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_AudienceReactToContestant"
 target_offset = 1552
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1552
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2165,6 +2368,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_ContestantReturn"
 target_offset = 2741
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2741
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2175,6 +2380,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_TryWaitForLink"
 target_offset = 1134
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1134
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2185,6 +2392,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_TryWaitForLink"
 target_offset = 1134
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1134
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2195,6 +2404,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_ShowContestMons"
 target_offset = 1072
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1072
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2205,6 +2416,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_AudienceVote"
 target_offset = 1387
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1387
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2215,6 +2428,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_WaitForLink"
 target_offset = 1151
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1151
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2225,6 +2440,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Player1WalkToCenter"
 target_offset = 1201
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1201
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2235,6 +2452,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Player2WalkToCenter"
 target_offset = 1224
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1224
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2245,6 +2464,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Player3WalkToCenter"
 target_offset = 1247
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1247
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2255,6 +2476,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Player4WalkToCenter"
 target_offset = 1270
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1270
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2265,6 +2488,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_TryWaitForLink"
 target_offset = 1134
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1134
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2274,6 +2499,8 @@ original_encoded_gba = 0x827ad52
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-player1walktocenter"
 target_export = "ContestHall_Movement_Player1WalkToCenter"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2284,6 +2511,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_TryWaitForLink"
 target_offset = 1134
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1134
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2293,6 +2522,8 @@ original_encoded_gba = 0x827ad5e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-player2walktocenter"
 target_export = "ContestHall_Movement_Player2WalkToCenter"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2303,6 +2534,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_TryWaitForLink"
 target_offset = 1134
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1134
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2312,6 +2545,8 @@ original_encoded_gba = 0x827ad66
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-player3walktocenter"
 target_export = "ContestHall_Movement_Player3WalkToCenter"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2322,6 +2557,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_TryWaitForLink"
 target_offset = 1134
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1134
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2331,6 +2568,8 @@ original_encoded_gba = 0x827ad6e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-player4walktocenter"
 target_export = "ContestHall_Movement_Player4WalkToCenter"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2340,6 +2579,8 @@ original_encoded_gba = 0x827ad20
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-contestantdelay32"
 target_export = "ContestHall_Movement_ContestantDelay32"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2350,6 +2591,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_TryWaitForLink"
 target_offset = 1134
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1134
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2360,6 +2603,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_CheckIfContestWithRSPlayer"
 target_offset = 4283
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 4164
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2369,6 +2614,8 @@ original_encoded_gba = 0x827ad20
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-contestantdelay32"
 target_export = "ContestHall_Movement_ContestantDelay32"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2379,6 +2626,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_EntryXTrainersMon"
 target_offset = 1362
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1362
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2389,6 +2638,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_EntryXTrainersMonLink"
 target_offset = 1380
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1380
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2398,6 +2649,8 @@ original_encoded_gba = 0x827b815
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "ContestHall_Text_EntryXTrainersMon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2407,6 +2660,8 @@ original_encoded_gba = 0x827b815
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "ContestHall_Text_EntryXTrainersMon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2417,6 +2672,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_AudienceWillVote"
 target_offset = 1447
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1447
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2427,6 +2684,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_VotingUnderWay"
 target_offset = 1524
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1524
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2437,6 +2696,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_AudienceLookAround"
 target_offset = 3414
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3414
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2446,6 +2707,8 @@ original_encoded_gba = 0x827ad23
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-mcfacejudge2"
 target_export = "ContestHall_Movement_MCFaceJudge2"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2455,6 +2718,8 @@ original_encoded_gba = 0x827ad25
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-judgefacemc"
 target_export = "ContestHall_Movement_JudgeFaceMC"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2464,6 +2729,8 @@ original_encoded_gba = 0x827ad13
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-facecontestants"
 target_export = "ContestHall_Movement_FaceContestants"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2473,6 +2740,8 @@ original_encoded_gba = 0x827ad13
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-facecontestants"
 target_export = "ContestHall_Movement_FaceContestants"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2483,6 +2752,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_AudienceWillVoteLink"
 target_offset = 1467
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1467
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2492,6 +2763,8 @@ original_encoded_gba = 0x827b830
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "ContestHall_Text_SeenContestantsAudienceWillVote"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2502,6 +2775,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_AudienceWillVoteWireless"
 target_offset = 1490
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1490
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2511,6 +2786,8 @@ original_encoded_gba = 0x827b830
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "ContestHall_Text_SeenContestantsAudienceWillVote"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2520,6 +2797,8 @@ original_encoded_gba = 0x827c9af
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "ContestHall_Text_WeveSeenContestants"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2530,6 +2809,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_TryWaitForLink"
 target_offset = 1134
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1134
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2539,6 +2820,8 @@ original_encoded_gba = 0x827ca04
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "ContestHall_Text_AudienceWillVote"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2549,6 +2832,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_TryWaitForLink"
 target_offset = 1134
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1134
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2558,6 +2843,8 @@ original_encoded_gba = 0x827ca42
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "ContestHall_Text_LetVotingBegin"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2568,6 +2855,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_TryWaitForLink"
 target_offset = 1134
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1134
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2578,6 +2867,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_VotingUnderWayLink"
 target_offset = 1541
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1541
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2587,6 +2878,8 @@ original_encoded_gba = 0x827b8f2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "ContestHall_Text_VotingUnderWay"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2596,6 +2889,8 @@ original_encoded_gba = 0x827b8f2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "ContestHall_Text_VotingUnderWay"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2606,6 +2901,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_TryWaitForLink"
 target_offset = 1134
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1134
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2616,6 +2913,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_TryWaitForLink"
 target_offset = 1134
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1134
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2625,6 +2924,8 @@ original_encoded_gba = 0x827ad33
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-audiencememberlookleft"
 target_export = "ContestHall_Movement_AudienceMemberLookLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2635,6 +2936,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_VObjectAudienceLookAround"
 target_offset = 3498
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3498
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2644,6 +2947,8 @@ original_encoded_gba = 0x827ad3b
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-audiencememberlookright"
 target_export = "ContestHall_Movement_AudienceMemberLookRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2653,6 +2958,8 @@ original_encoded_gba = 0x827ad3f
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-audiencememberlookdown"
 target_export = "ContestHall_Movement_AudienceMemberLookDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2662,6 +2969,8 @@ original_encoded_gba = 0x827ad3b
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-audiencememberlookright"
 target_export = "ContestHall_Movement_AudienceMemberLookRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2671,6 +2980,8 @@ original_encoded_gba = 0x827ad3b
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-audiencememberlookright"
 target_export = "ContestHall_Movement_AudienceMemberLookRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2680,6 +2991,8 @@ original_encoded_gba = 0x827ad33
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-audiencememberlookleft"
 target_export = "ContestHall_Movement_AudienceMemberLookLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2689,6 +3002,8 @@ original_encoded_gba = 0x827ad3f
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-audiencememberlookdown"
 target_export = "ContestHall_Movement_AudienceMemberLookDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2698,6 +3013,8 @@ original_encoded_gba = 0x827ad37
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-audiencememberlookup"
 target_export = "ContestHall_Movement_AudienceMemberLookUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2707,6 +3024,8 @@ original_encoded_gba = 0x827ad33
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-audiencememberlookleft"
 target_export = "ContestHall_Movement_AudienceMemberLookLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2716,6 +3035,8 @@ original_encoded_gba = 0x827ad45
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-mclookatjudge"
 target_export = "ContestHall_Movement_MCLookAtJudge"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2725,6 +3046,8 @@ original_encoded_gba = 0x827ad4e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-mcwalkinplacedown"
 target_export = "ContestHall_Movement_MCWalkInPlaceDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2734,6 +3057,8 @@ original_encoded_gba = 0x827ad49
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-judgelookatmc"
 target_export = "ContestHall_Movement_JudgeLookAtMC"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2744,6 +3069,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_TryWaitForLink"
 target_offset = 1134
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1134
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2754,6 +3081,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_GetNumberOfHeartsNormal"
 target_offset = 1935
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1935
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2764,6 +3093,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_GetNumberOfHeartsSuper"
 target_offset = 2029
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2029
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2774,6 +3105,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_GetNumberOfHeartsHyper"
 target_offset = 2123
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2123
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2784,6 +3117,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_GetNumberOfHeartsMaster"
 target_offset = 2217
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2217
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2794,6 +3129,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_GetNumberOfHeartsLink"
 target_offset = 2311
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2311
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2804,6 +3141,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_DisplayHearts"
 target_offset = 1824
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1824
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2814,6 +3153,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_TryDisplayHeartAudienceMember1"
 target_offset = 2453
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2453
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2824,6 +3165,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_TryDisplayHeartAudienceMember2"
 target_offset = 2489
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2489
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2834,6 +3177,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_TryDisplayHeartAudienceMember3"
 target_offset = 2525
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2525
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2844,6 +3189,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_TryDisplayHeartAudienceMember4"
 target_offset = 2561
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2561
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2854,6 +3201,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_TryDisplayHeartAudienceMember5"
 target_offset = 2597
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2597
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2864,6 +3213,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_TryDisplayHeartAudienceMember6"
 target_offset = 2633
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2633
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2874,6 +3225,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_TryDisplayHeartAudienceMember7"
 target_offset = 2669
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2669
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2884,6 +3237,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_TryDisplayHeartAudienceMember8"
 target_offset = 2705
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2705
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2894,6 +3249,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_DisplayHearts"
 target_offset = 1824
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1824
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2904,6 +3261,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Set8Hearts"
 target_offset = 2447
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2447
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2914,6 +3273,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Set7Hearts"
 target_offset = 2441
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2441
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2924,6 +3285,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Set6Hearts"
 target_offset = 2435
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2435
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2934,6 +3297,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Set5Hearts"
 target_offset = 2429
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2429
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2944,6 +3309,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Set4Hearts"
 target_offset = 2423
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2423
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2954,6 +3321,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Set3Hearts"
 target_offset = 2417
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2417
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2964,6 +3333,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Set2Hearts"
 target_offset = 2411
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2411
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2974,6 +3345,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Set1Heart"
 target_offset = 2405
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2405
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2984,6 +3357,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Set8Hearts"
 target_offset = 2447
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2447
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2994,6 +3369,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Set7Hearts"
 target_offset = 2441
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2441
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3004,6 +3381,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Set6Hearts"
 target_offset = 2435
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2435
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3014,6 +3393,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Set5Hearts"
 target_offset = 2429
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2429
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3024,6 +3405,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Set4Hearts"
 target_offset = 2423
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2423
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3034,6 +3417,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Set3Hearts"
 target_offset = 2417
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2417
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3044,6 +3429,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Set2Hearts"
 target_offset = 2411
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2411
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3054,6 +3441,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Set1Heart"
 target_offset = 2405
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2405
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3064,6 +3453,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Set8Hearts"
 target_offset = 2447
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2447
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3074,6 +3465,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Set7Hearts"
 target_offset = 2441
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2441
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3084,6 +3477,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Set6Hearts"
 target_offset = 2435
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2435
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3094,6 +3489,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Set5Hearts"
 target_offset = 2429
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2429
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3104,6 +3501,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Set4Hearts"
 target_offset = 2423
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2423
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3114,6 +3513,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Set3Hearts"
 target_offset = 2417
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2417
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3124,6 +3525,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Set2Hearts"
 target_offset = 2411
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2411
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3134,6 +3537,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Set1Heart"
 target_offset = 2405
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2405
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3144,6 +3549,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Set8Hearts"
 target_offset = 2447
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2447
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3154,6 +3561,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Set7Hearts"
 target_offset = 2441
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2441
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3164,6 +3573,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Set6Hearts"
 target_offset = 2435
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2435
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3174,6 +3585,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Set5Hearts"
 target_offset = 2429
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2429
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3184,6 +3597,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Set4Hearts"
 target_offset = 2423
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2423
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3194,6 +3609,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Set3Hearts"
 target_offset = 2417
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2417
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3204,6 +3621,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Set2Hearts"
 target_offset = 2411
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2411
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3214,6 +3633,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Set1Heart"
 target_offset = 2405
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2405
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3224,6 +3645,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Set8Hearts"
 target_offset = 2447
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2447
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3234,6 +3657,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Set7Hearts"
 target_offset = 2441
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2441
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3244,6 +3669,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Set6Hearts"
 target_offset = 2435
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2435
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3254,6 +3681,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Set5Hearts"
 target_offset = 2429
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2429
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3264,6 +3693,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Set4Hearts"
 target_offset = 2423
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2423
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3274,6 +3705,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Set3Hearts"
 target_offset = 2417
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2417
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3284,6 +3717,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Set2Hearts"
 target_offset = 2411
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2411
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3294,6 +3729,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Set1Heart"
 target_offset = 2405
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2405
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3304,6 +3741,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_AudienceMember1AlreadyEmoted"
 target_offset = 2488
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2488
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3313,6 +3752,8 @@ original_encoded_gba = 0x827ad11
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-heart"
 target_export = "ContestHall_Movement_Heart"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3323,6 +3764,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_AudienceMember2AlreadyEmoted"
 target_offset = 2524
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2524
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3332,6 +3775,8 @@ original_encoded_gba = 0x827ad11
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-heart"
 target_export = "ContestHall_Movement_Heart"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3342,6 +3787,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_AudienceMember3AlreadyEmoted"
 target_offset = 2560
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2560
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3351,6 +3798,8 @@ original_encoded_gba = 0x827ad11
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-heart"
 target_export = "ContestHall_Movement_Heart"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3361,6 +3810,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Audience4MemberAlreadyEmoted"
 target_offset = 2596
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2596
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3370,6 +3821,8 @@ original_encoded_gba = 0x827ad11
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-heart"
 target_export = "ContestHall_Movement_Heart"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3380,6 +3833,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_AudienceMember5AlreadyEmoted"
 target_offset = 2632
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2632
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3389,6 +3844,8 @@ original_encoded_gba = 0x827ad11
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-heart"
 target_export = "ContestHall_Movement_Heart"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3399,6 +3856,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_AudienceMember6AlreadyEmoted"
 target_offset = 2668
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2668
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3408,6 +3867,8 @@ original_encoded_gba = 0x827ad11
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-heart"
 target_export = "ContestHall_Movement_Heart"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3418,6 +3879,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_AudienceMember7AlreadyEmoted"
 target_offset = 2704
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2704
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3427,6 +3890,8 @@ original_encoded_gba = 0x827ad11
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-heart"
 target_export = "ContestHall_Movement_Heart"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3437,6 +3902,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_AudienceMember8AlreadyEmoted"
 target_offset = 2740
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2740
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3446,6 +3913,8 @@ original_encoded_gba = 0x827ad11
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-heart"
 target_export = "ContestHall_Movement_Heart"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3456,6 +3925,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_TryWaitForLink"
 target_offset = 1134
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1134
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3466,6 +3937,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Player1WalkBack"
 target_offset = 2804
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2804
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3476,6 +3949,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Player2WalkBack"
 target_offset = 2822
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2822
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3486,6 +3961,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Player3WalkBack"
 target_offset = 2840
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2840
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3496,6 +3973,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Player4WalkBack"
 target_offset = 2858
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2858
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3506,6 +3985,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_TryWaitForLink"
 target_offset = 1134
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1134
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3515,6 +3996,8 @@ original_encoded_gba = 0x827ad58
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-player1walkback"
 target_export = "ContestHall_Movement_Player1WalkBack"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3525,6 +4008,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_TryWaitForLink"
 target_offset = 1134
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1134
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3534,6 +4019,8 @@ original_encoded_gba = 0x827ad62
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-player2walkback"
 target_export = "ContestHall_Movement_Player2WalkBack"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3544,6 +4031,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_TryWaitForLink"
 target_offset = 1134
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1134
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3553,6 +4042,8 @@ original_encoded_gba = 0x827ad6a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-player3walkback"
 target_export = "ContestHall_Movement_Player3WalkBack"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3563,6 +4054,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_TryWaitForLink"
 target_offset = 1134
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1134
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3572,6 +4065,8 @@ original_encoded_gba = 0x827ad74
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-player4walkback"
 target_export = "ContestHall_Movement_Player4WalkBack"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3581,6 +4076,8 @@ original_encoded_gba = 0x827ad27
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-facecontestants2"
 target_export = "ContestHall_Movement_FaceContestants2"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3591,6 +4088,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_TryWaitForLink"
 target_offset = 1134
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1134
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3601,6 +4100,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_LetsAppeal"
 target_offset = 2958
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2958
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3610,6 +4111,8 @@ original_encoded_gba = 0x827ad15
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-walkstageleft"
 target_export = "ContestHall_Movement_WalkStageLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3619,6 +4122,8 @@ original_encoded_gba = 0x827ad19
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-walkstageright"
 target_export = "ContestHall_Movement_WalkStageRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3629,6 +4134,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_TryWaitForLink"
 target_offset = 1134
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1134
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3638,6 +4145,8 @@ original_encoded_gba = 0x827ad19
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-walkstageright"
 target_export = "ContestHall_Movement_WalkStageRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3647,6 +4156,8 @@ original_encoded_gba = 0x827ad15
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-walkstageleft"
 target_export = "ContestHall_Movement_WalkStageLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3657,6 +4168,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_LetsAppealLink"
 target_offset = 2978
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2978
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3666,6 +4179,8 @@ original_encoded_gba = 0x827b904
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "ContestHall_Text_VotingCompleteLetsAppeal"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3676,6 +4191,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_LetsAppealWireless"
 target_offset = 3001
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3001
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3685,6 +4202,8 @@ original_encoded_gba = 0x827b904
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "ContestHall_Text_VotingCompleteLetsAppeal"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3695,6 +4214,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_TryWaitForLink"
 target_offset = 1134
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1134
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3704,6 +4225,8 @@ original_encoded_gba = 0x827ca71
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "ContestHall_Text_VotingComplete"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3714,6 +4237,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_TryWaitForLink"
 target_offset = 1134
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1134
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3723,6 +4248,8 @@ original_encoded_gba = 0x827cad0
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "ContestHall_Text_SecondStageOfJudging"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3733,6 +4260,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_TryWaitForLink"
 target_offset = 1134
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1134
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3742,6 +4271,8 @@ original_encoded_gba = 0x827cb55
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "ContestHall_Text_LetsAppeal"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3752,6 +4283,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_TryWaitForLink"
 target_offset = 1134
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1134
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3762,6 +4295,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_TryWaitForLink"
 target_offset = 1134
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1134
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3772,6 +4307,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_ThatsItForJudging"
 target_offset = 3126
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3126
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3782,6 +4319,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_TryWaitForLink"
 target_offset = 1134
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1134
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3792,6 +4331,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_ThankYouForAppeals"
 target_offset = 3161
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3161
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3802,6 +4343,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_TryWaitForLink"
 target_offset = 1134
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1134
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3811,6 +4354,8 @@ original_encoded_gba = 0x827ad0f
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-mcfacejudge"
 target_export = "ContestHall_Movement_MCFaceJudge"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3821,6 +4366,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_JudgeLooksReady"
 target_offset = 3196
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3196
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3831,6 +4378,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_TryWaitForLink"
 target_offset = 1134
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1134
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3841,6 +4390,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_WeWillDeclareWinner"
 target_offset = 3231
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3231
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3851,6 +4402,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_TryWaitForLink"
 target_offset = 1134
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1134
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3860,6 +4413,8 @@ original_encoded_gba = 0x827ad13
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-facecontestants"
 target_export = "ContestHall_Movement_FaceContestants"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3870,6 +4425,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_ThatsItForJudgingLink"
 target_offset = 3146
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3146
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3879,6 +4436,8 @@ original_encoded_gba = 0x827ba15
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "ContestHall_Text_ThatsItForJudging"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3889,6 +4448,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_TryWaitForLink"
 target_offset = 1134
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1134
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3898,6 +4459,8 @@ original_encoded_gba = 0x827ba15
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "ContestHall_Text_ThatsItForJudging"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3908,6 +4471,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_ThankYouForAppealsLink"
 target_offset = 3181
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3181
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3917,6 +4482,8 @@ original_encoded_gba = 0x827ba30
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "ContestHall_Text_ThankYouForAppeals"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3927,6 +4494,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_TryWaitForLink"
 target_offset = 1134
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1134
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3936,6 +4505,8 @@ original_encoded_gba = 0x827ba30
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "ContestHall_Text_ThankYouForAppeals"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3946,6 +4517,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_JudgeLooksReadyLink"
 target_offset = 3216
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3216
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3955,6 +4528,8 @@ original_encoded_gba = 0x827baac
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "ContestHall_Text_JudgeLooksReady"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3965,6 +4540,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_TryWaitForLink"
 target_offset = 1134
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1134
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3974,6 +4551,8 @@ original_encoded_gba = 0x827baac
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "ContestHall_Text_JudgeLooksReady"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3984,6 +4563,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_WeWillDeclareWinnerLink"
 target_offset = 3251
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3251
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3993,6 +4574,8 @@ original_encoded_gba = 0x827bb25
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "ContestHall_Text_WeWillNowDeclareWinner"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4003,6 +4586,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_TryWaitForLink"
 target_offset = 1134
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1134
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4012,6 +4597,8 @@ original_encoded_gba = 0x827bb25
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "ContestHall_Text_WeWillNowDeclareWinner"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4022,6 +4609,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_GetPlayer1ObjEventId"
 target_offset = 3319
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3319
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4032,6 +4621,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_GetPlayer2ObjEventId"
 target_offset = 3325
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3325
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4042,6 +4633,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_GetPlayer3ObjEventId"
 target_offset = 3331
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3331
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4052,6 +4645,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_GetPlayer4ObjEventId"
 target_offset = 3337
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3337
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4062,6 +4657,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_CongratsWinner"
 target_offset = 3387
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3387
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4071,6 +4668,8 @@ original_encoded_gba = 0x827ad1d
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-winningplayerwalkup"
 target_export = "ContestHall_Movement_WinningPlayerWalkUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4081,6 +4680,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_CongratsWinnerLink"
 target_offset = 3407
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3407
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4090,6 +4691,8 @@ original_encoded_gba = 0x827bb4c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "ContestHall_Text_CongratsTrainerXandMon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4099,6 +4702,8 @@ original_encoded_gba = 0x827bb4c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "ContestHall_Text_CongratsTrainerXandMon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4109,6 +4714,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_VObjectAudienceLookAround"
 target_offset = 3498
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3498
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4118,6 +4725,8 @@ original_encoded_gba = 0x827ad3b
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-audiencememberlookright"
 target_export = "ContestHall_Movement_AudienceMemberLookRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4127,6 +4736,8 @@ original_encoded_gba = 0x827ad3f
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-audiencememberlookdown"
 target_export = "ContestHall_Movement_AudienceMemberLookDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4136,6 +4747,8 @@ original_encoded_gba = 0x827ad3b
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-audiencememberlookright"
 target_export = "ContestHall_Movement_AudienceMemberLookRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4145,6 +4758,8 @@ original_encoded_gba = 0x827ad33
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-audiencememberlookleft"
 target_export = "ContestHall_Movement_AudienceMemberLookLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4154,6 +4769,8 @@ original_encoded_gba = 0x827ad3f
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-audiencememberlookdown"
 target_export = "ContestHall_Movement_AudienceMemberLookDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4163,6 +4780,8 @@ original_encoded_gba = 0x827ad37
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-audiencememberlookup"
 target_export = "ContestHall_Movement_AudienceMemberLookUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4172,6 +4791,8 @@ original_encoded_gba = 0x827ad33
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-audiencememberlookleft"
 target_export = "ContestHall_Movement_AudienceMemberLookLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4182,6 +4803,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_AudienceLookAround"
 target_offset = 3414
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3414
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4192,6 +4815,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_EndLinkContest"
 target_offset = 3859
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3859
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4202,6 +4827,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_CheckShouldSkipPrize"
 target_offset = 3801
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3801
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4212,6 +4839,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_SkipPrize"
 target_offset = 3773
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3773
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4221,6 +4850,8 @@ original_encoded_gba = 0x827bba8
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "ContestHall_Text_AcceptYourPrize"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4231,6 +4862,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_WinnerApproachForPrize"
 target_offset = 3891
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3891
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4241,6 +4874,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_GivePrizeIfWinner"
 target_offset = 3993
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3993
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4251,6 +4886,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_AudienceLookAround"
 target_offset = 3414
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3414
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4261,6 +4898,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_SetReadyForContestArtist"
 target_offset = 3853
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3853
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4270,6 +4909,8 @@ original_encoded_gba = 0x827bb7a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "ContestHall_Text_CongratsPleaseCompeteAgain"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4280,6 +4921,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_SetReadyForContestArtist"
 target_offset = 3853
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3853
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4290,6 +4933,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_CheckPlayerWon"
 target_offset = 3818
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3818
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4300,6 +4945,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_CheckRankIsMaster"
 target_offset = 3833
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3833
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4310,6 +4957,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_DontSkipPrize"
 target_offset = 3848
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3848
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4320,6 +4969,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_SetReadyForLinkContestArtist"
 target_offset = 3884
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3884
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4330,6 +4981,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Player1ApproachForPrize"
 target_offset = 3941
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3941
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4340,6 +4993,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Player2ApproachForPrize"
 target_offset = 3954
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3954
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4350,6 +5005,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Player3ApproachForPrize"
 target_offset = 3967
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3967
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4360,6 +5017,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_Player4ApproachForPrize"
 target_offset = 3980
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3980
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4369,6 +5028,8 @@ original_encoded_gba = 0x827ad7a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-player1approachforprize"
 target_export = "ContestHall_Movement_Player1ApproachForPrize"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4378,6 +5039,8 @@ original_encoded_gba = 0x827ad7e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-player2approachforprize"
 target_export = "ContestHall_Movement_Player2ApproachForPrize"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4387,6 +5050,8 @@ original_encoded_gba = 0x827ad29
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-player3approachforprize"
 target_export = "ContestHall_Movement_Player3ApproachForPrize"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4396,6 +5061,8 @@ original_encoded_gba = 0x827ad2d
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/contesthall-movement-player4approachforprize"
 target_export = "ContestHall_Movement_Player4ApproachForPrize"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4406,6 +5073,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_GiveContestPrizes"
 target_offset = 4018
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 4018
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4415,6 +5084,8 @@ original_encoded_gba = 0x827bb7a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "ContestHall_Text_CongratsPleaseCompeteAgain"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4425,6 +5096,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_SetSketchFlag"
 target_offset = 3849
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3849
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4435,6 +5108,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_ReceiveContestRibbon"
 target_offset = 4122
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 4122
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4445,6 +5120,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_GiveLuxuryBall"
 target_offset = 4088
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 4088
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4454,6 +5131,8 @@ original_encoded_gba = 0x827bb7a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "ContestHall_Text_CongratsPleaseCompeteAgain"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4464,6 +5143,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_BagIsFull"
 target_offset = 283
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 283
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4473,6 +5154,8 @@ original_encoded_gba = 0x827bc2f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "ContestHall_Text_PickUpPrizeAtCounterLater"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4483,6 +5166,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_NoRoomForLuxuryBall"
 target_offset = 4067
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 4067
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4492,6 +5177,8 @@ original_encoded_gba = 0x827bb7a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "ContestHall_Text_CongratsPleaseCompeteAgain"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4501,6 +5188,8 @@ original_encoded_gba = 0x827bbd4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "ContestHall_Text_ConferRibbonAsPrize"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4510,6 +5199,8 @@ original_encoded_gba = 0x827bc00
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "ContestHall_Text_ReceivedRibbon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4519,6 +5210,8 @@ original_encoded_gba = 0x827bc16
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "ContestHall_Text_PutRibbonOnMon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4529,6 +5222,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_RetRSPlayer"
 target_offset = 4300
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 4181
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4539,4 +5234,4202 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "LilycoveCity_ContestLobby_EventScript_DelayForRSPlayer"
 target_offset = 4318
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 4199
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 1
+
+[[boundaries]]
+payload_offset = 2
+length = 5
+
+[[boundaries]]
+payload_offset = 7
+length = 6
+
+[[boundaries]]
+payload_offset = 13
+length = 3
+
+[[boundaries]]
+payload_offset = 16
+length = 6
+
+[[boundaries]]
+payload_offset = 22
+length = 3
+
+[[boundaries]]
+payload_offset = 25
+length = 6
+
+[[boundaries]]
+payload_offset = 31
+length = 5
+
+[[boundaries]]
+payload_offset = 37
+length = 6
+
+[[boundaries]]
+payload_offset = 43
+length = 2
+
+[[boundaries]]
+payload_offset = 45
+length = 1
+
+[[boundaries]]
+payload_offset = 46
+length = 6
+
+[[boundaries]]
+payload_offset = 52
+length = 2
+
+[[boundaries]]
+payload_offset = 54
+length = 5
+
+[[boundaries]]
+payload_offset = 59
+length = 5
+
+[[boundaries]]
+payload_offset = 64
+length = 2
+
+[[boundaries]]
+payload_offset = 66
+length = 3
+
+[[boundaries]]
+payload_offset = 69
+length = 6
+
+[[boundaries]]
+payload_offset = 75
+length = 2
+
+[[boundaries]]
+payload_offset = 77
+length = 1
+
+[[boundaries]]
+payload_offset = 78
+length = 6
+
+[[boundaries]]
+payload_offset = 84
+length = 2
+
+[[boundaries]]
+payload_offset = 86
+length = 5
+
+[[boundaries]]
+payload_offset = 91
+length = 5
+
+[[boundaries]]
+payload_offset = 96
+length = 6
+
+[[boundaries]]
+payload_offset = 102
+length = 1
+
+[[boundaries]]
+payload_offset = 103
+length = 5
+
+[[boundaries]]
+payload_offset = 108
+length = 5
+
+[[boundaries]]
+payload_offset = 113
+length = 2
+
+[[boundaries]]
+payload_offset = 115
+length = 5
+
+[[boundaries]]
+payload_offset = 120
+length = 6
+
+[[boundaries]]
+payload_offset = 126
+length = 5
+
+[[boundaries]]
+payload_offset = 131
+length = 1
+
+[[boundaries]]
+payload_offset = 132
+length = 1
+
+[[boundaries]]
+payload_offset = 133
+length = 1
+
+[[boundaries]]
+payload_offset = 134
+length = 5
+
+[[boundaries]]
+payload_offset = 139
+length = 6
+
+[[boundaries]]
+payload_offset = 145
+length = 2
+
+[[boundaries]]
+payload_offset = 147
+length = 1
+
+[[boundaries]]
+payload_offset = 148
+length = 1
+
+[[boundaries]]
+payload_offset = 149
+length = 5
+
+[[boundaries]]
+payload_offset = 154
+length = 1
+
+[[boundaries]]
+payload_offset = 155
+length = 5
+
+[[boundaries]]
+payload_offset = 160
+length = 5
+
+[[boundaries]]
+payload_offset = 165
+length = 5
+
+[[boundaries]]
+payload_offset = 170
+length = 6
+
+[[boundaries]]
+payload_offset = 176
+length = 5
+
+[[boundaries]]
+payload_offset = 181
+length = 6
+
+[[boundaries]]
+payload_offset = 187
+length = 5
+
+[[boundaries]]
+payload_offset = 192
+length = 6
+
+[[boundaries]]
+payload_offset = 198
+length = 5
+
+[[boundaries]]
+payload_offset = 203
+length = 6
+
+[[boundaries]]
+payload_offset = 209
+length = 1
+
+[[boundaries]]
+payload_offset = 210
+length = 5
+
+[[boundaries]]
+payload_offset = 215
+length = 1
+
+[[boundaries]]
+payload_offset = 216
+length = 5
+
+[[boundaries]]
+payload_offset = 221
+length = 5
+
+[[boundaries]]
+payload_offset = 226
+length = 5
+
+[[boundaries]]
+payload_offset = 231
+length = 6
+
+[[boundaries]]
+payload_offset = 237
+length = 5
+
+[[boundaries]]
+payload_offset = 242
+length = 6
+
+[[boundaries]]
+payload_offset = 248
+length = 5
+
+[[boundaries]]
+payload_offset = 253
+length = 6
+
+[[boundaries]]
+payload_offset = 259
+length = 5
+
+[[boundaries]]
+payload_offset = 264
+length = 6
+
+[[boundaries]]
+payload_offset = 270
+length = 5
+
+[[boundaries]]
+payload_offset = 275
+length = 6
+
+[[boundaries]]
+payload_offset = 281
+length = 1
+
+[[boundaries]]
+payload_offset = 282
+length = 6
+
+[[boundaries]]
+payload_offset = 288
+length = 2
+
+[[boundaries]]
+payload_offset = 290
+length = 5
+
+[[boundaries]]
+payload_offset = 296
+length = 6
+
+[[boundaries]]
+payload_offset = 302
+length = 2
+
+[[boundaries]]
+payload_offset = 304
+length = 5
+
+[[boundaries]]
+payload_offset = 310
+length = 6
+
+[[boundaries]]
+payload_offset = 316
+length = 2
+
+[[boundaries]]
+payload_offset = 318
+length = 5
+
+[[boundaries]]
+payload_offset = 324
+length = 6
+
+[[boundaries]]
+payload_offset = 330
+length = 2
+
+[[boundaries]]
+payload_offset = 332
+length = 1
+
+[[boundaries]]
+payload_offset = 333
+length = 1
+
+[[boundaries]]
+payload_offset = 334
+length = 6
+
+[[boundaries]]
+payload_offset = 340
+length = 2
+
+[[boundaries]]
+payload_offset = 342
+length = 1
+
+[[boundaries]]
+payload_offset = 343
+length = 5
+
+[[boundaries]]
+payload_offset = 348
+length = 6
+
+[[boundaries]]
+payload_offset = 354
+length = 3
+
+[[boundaries]]
+payload_offset = 357
+length = 5
+
+[[boundaries]]
+payload_offset = 362
+length = 6
+
+[[boundaries]]
+payload_offset = 368
+length = 5
+
+[[boundaries]]
+payload_offset = 373
+length = 6
+
+[[boundaries]]
+payload_offset = 379
+length = 5
+
+[[boundaries]]
+payload_offset = 384
+length = 6
+
+[[boundaries]]
+payload_offset = 390
+length = 5
+
+[[boundaries]]
+payload_offset = 395
+length = 6
+
+[[boundaries]]
+payload_offset = 401
+length = 5
+
+[[boundaries]]
+payload_offset = 406
+length = 6
+
+[[boundaries]]
+payload_offset = 412
+length = 1
+
+[[boundaries]]
+payload_offset = 413
+length = 5
+
+[[boundaries]]
+payload_offset = 418
+length = 1
+
+[[boundaries]]
+payload_offset = 419
+length = 5
+
+[[boundaries]]
+payload_offset = 424
+length = 5
+
+[[boundaries]]
+payload_offset = 429
+length = 5
+
+[[boundaries]]
+payload_offset = 434
+length = 6
+
+[[boundaries]]
+payload_offset = 440
+length = 5
+
+[[boundaries]]
+payload_offset = 445
+length = 6
+
+[[boundaries]]
+payload_offset = 451
+length = 5
+
+[[boundaries]]
+payload_offset = 456
+length = 6
+
+[[boundaries]]
+payload_offset = 462
+length = 5
+
+[[boundaries]]
+payload_offset = 467
+length = 6
+
+[[boundaries]]
+payload_offset = 473
+length = 5
+
+[[boundaries]]
+payload_offset = 478
+length = 6
+
+[[boundaries]]
+payload_offset = 484
+length = 5
+
+[[boundaries]]
+payload_offset = 489
+length = 6
+
+[[boundaries]]
+payload_offset = 495
+length = 1
+
+[[boundaries]]
+payload_offset = 496
+length = 5
+
+[[boundaries]]
+payload_offset = 501
+length = 5
+
+[[boundaries]]
+payload_offset = 507
+length = 5
+
+[[boundaries]]
+payload_offset = 512
+length = 5
+
+[[boundaries]]
+payload_offset = 518
+length = 5
+
+[[boundaries]]
+payload_offset = 523
+length = 5
+
+[[boundaries]]
+payload_offset = 529
+length = 5
+
+[[boundaries]]
+payload_offset = 534
+length = 5
+
+[[boundaries]]
+payload_offset = 540
+length = 5
+
+[[boundaries]]
+payload_offset = 545
+length = 1
+
+[[boundaries]]
+payload_offset = 546
+length = 5
+
+[[boundaries]]
+payload_offset = 551
+length = 5
+
+[[boundaries]]
+payload_offset = 556
+length = 5
+
+[[boundaries]]
+payload_offset = 561
+length = 6
+
+[[boundaries]]
+payload_offset = 567
+length = 5
+
+[[boundaries]]
+payload_offset = 572
+length = 6
+
+[[boundaries]]
+payload_offset = 578
+length = 5
+
+[[boundaries]]
+payload_offset = 583
+length = 5
+
+[[boundaries]]
+payload_offset = 589
+length = 6
+
+[[boundaries]]
+payload_offset = 595
+length = 2
+
+[[boundaries]]
+payload_offset = 597
+length = 5
+
+[[boundaries]]
+payload_offset = 604
+length = 6
+
+[[boundaries]]
+payload_offset = 610
+length = 2
+
+[[boundaries]]
+payload_offset = 612
+length = 5
+
+[[boundaries]]
+payload_offset = 617
+length = 5
+
+[[boundaries]]
+payload_offset = 622
+length = 6
+
+[[boundaries]]
+payload_offset = 628
+length = 5
+
+[[boundaries]]
+payload_offset = 633
+length = 6
+
+[[boundaries]]
+payload_offset = 639
+length = 1
+
+[[boundaries]]
+payload_offset = 640
+length = 6
+
+[[boundaries]]
+payload_offset = 646
+length = 2
+
+[[boundaries]]
+payload_offset = 648
+length = 5
+
+[[boundaries]]
+payload_offset = 653
+length = 5
+
+[[boundaries]]
+payload_offset = 658
+length = 6
+
+[[boundaries]]
+payload_offset = 664
+length = 5
+
+[[boundaries]]
+payload_offset = 669
+length = 6
+
+[[boundaries]]
+payload_offset = 675
+length = 1
+
+[[boundaries]]
+payload_offset = 676
+length = 6
+
+[[boundaries]]
+payload_offset = 682
+length = 2
+
+[[boundaries]]
+payload_offset = 684
+length = 5
+
+[[boundaries]]
+payload_offset = 691
+length = 6
+
+[[boundaries]]
+payload_offset = 697
+length = 2
+
+[[boundaries]]
+payload_offset = 699
+length = 5
+
+[[boundaries]]
+payload_offset = 706
+length = 6
+
+[[boundaries]]
+payload_offset = 712
+length = 2
+
+[[boundaries]]
+payload_offset = 714
+length = 1
+
+[[boundaries]]
+payload_offset = 715
+length = 1
+
+[[boundaries]]
+payload_offset = 716
+length = 5
+
+[[boundaries]]
+payload_offset = 721
+length = 1
+
+[[boundaries]]
+payload_offset = 722
+length = 3
+
+[[boundaries]]
+payload_offset = 725
+length = 5
+
+[[boundaries]]
+payload_offset = 730
+length = 1
+
+[[boundaries]]
+payload_offset = 731
+length = 7
+
+[[boundaries]]
+payload_offset = 738
+length = 3
+
+[[boundaries]]
+payload_offset = 741
+length = 7
+
+[[boundaries]]
+payload_offset = 748
+length = 3
+
+[[boundaries]]
+payload_offset = 751
+length = 1
+
+[[boundaries]]
+payload_offset = 752
+length = 5
+
+[[boundaries]]
+payload_offset = 757
+length = 5
+
+[[boundaries]]
+payload_offset = 762
+length = 5
+
+[[boundaries]]
+payload_offset = 767
+length = 5
+
+[[boundaries]]
+payload_offset = 772
+length = 5
+
+[[boundaries]]
+payload_offset = 777
+length = 5
+
+[[boundaries]]
+payload_offset = 782
+length = 5
+
+[[boundaries]]
+payload_offset = 787
+length = 5
+
+[[boundaries]]
+payload_offset = 792
+length = 5
+
+[[boundaries]]
+payload_offset = 797
+length = 5
+
+[[boundaries]]
+payload_offset = 802
+length = 5
+
+[[boundaries]]
+payload_offset = 807
+length = 5
+
+[[boundaries]]
+payload_offset = 812
+length = 1
+
+[[boundaries]]
+payload_offset = 813
+length = 5
+
+[[boundaries]]
+payload_offset = 818
+length = 5
+
+[[boundaries]]
+payload_offset = 823
+length = 6
+
+[[boundaries]]
+payload_offset = 829
+length = 5
+
+[[boundaries]]
+payload_offset = 834
+length = 6
+
+[[boundaries]]
+payload_offset = 840
+length = 5
+
+[[boundaries]]
+payload_offset = 845
+length = 6
+
+[[boundaries]]
+payload_offset = 851
+length = 5
+
+[[boundaries]]
+payload_offset = 856
+length = 6
+
+[[boundaries]]
+payload_offset = 862
+length = 1
+
+[[boundaries]]
+payload_offset = 863
+length = 5
+
+[[boundaries]]
+payload_offset = 868
+length = 1
+
+[[boundaries]]
+payload_offset = 869
+length = 5
+
+[[boundaries]]
+payload_offset = 874
+length = 1
+
+[[boundaries]]
+payload_offset = 875
+length = 5
+
+[[boundaries]]
+payload_offset = 880
+length = 1
+
+[[boundaries]]
+payload_offset = 881
+length = 5
+
+[[boundaries]]
+payload_offset = 886
+length = 1
+
+[[boundaries]]
+payload_offset = 887
+length = 5
+
+[[boundaries]]
+payload_offset = 892
+length = 5
+
+[[boundaries]]
+payload_offset = 897
+length = 6
+
+[[boundaries]]
+payload_offset = 903
+length = 5
+
+[[boundaries]]
+payload_offset = 908
+length = 6
+
+[[boundaries]]
+payload_offset = 914
+length = 5
+
+[[boundaries]]
+payload_offset = 919
+length = 6
+
+[[boundaries]]
+payload_offset = 925
+length = 5
+
+[[boundaries]]
+payload_offset = 930
+length = 6
+
+[[boundaries]]
+payload_offset = 936
+length = 5
+
+[[boundaries]]
+payload_offset = 941
+length = 6
+
+[[boundaries]]
+payload_offset = 947
+length = 1
+
+[[boundaries]]
+payload_offset = 948
+length = 5
+
+[[boundaries]]
+payload_offset = 953
+length = 1
+
+[[boundaries]]
+payload_offset = 954
+length = 5
+
+[[boundaries]]
+payload_offset = 959
+length = 1
+
+[[boundaries]]
+payload_offset = 960
+length = 5
+
+[[boundaries]]
+payload_offset = 965
+length = 1
+
+[[boundaries]]
+payload_offset = 966
+length = 5
+
+[[boundaries]]
+payload_offset = 971
+length = 1
+
+[[boundaries]]
+payload_offset = 972
+length = 5
+
+[[boundaries]]
+payload_offset = 977
+length = 1
+
+[[boundaries]]
+payload_offset = 978
+length = 4
+
+[[boundaries]]
+payload_offset = 982
+length = 4
+
+[[boundaries]]
+payload_offset = 986
+length = 5
+
+[[boundaries]]
+payload_offset = 991
+length = 1
+
+[[boundaries]]
+payload_offset = 992
+length = 7
+
+[[boundaries]]
+payload_offset = 999
+length = 3
+
+[[boundaries]]
+payload_offset = 1002
+length = 1
+
+[[boundaries]]
+payload_offset = 1003
+length = 1
+
+[[boundaries]]
+payload_offset = 1004
+length = 5
+
+[[boundaries]]
+payload_offset = 1009
+length = 6
+
+[[boundaries]]
+payload_offset = 1015
+length = 1
+
+[[boundaries]]
+payload_offset = 1016
+length = 6
+
+[[boundaries]]
+payload_offset = 1022
+length = 2
+
+[[boundaries]]
+payload_offset = 1024
+length = 1
+
+[[boundaries]]
+payload_offset = 1025
+length = 1
+
+[[boundaries]]
+payload_offset = 1026
+length = 5
+
+[[boundaries]]
+payload_offset = 1031
+length = 5
+
+[[boundaries]]
+payload_offset = 1036
+length = 6
+
+[[boundaries]]
+payload_offset = 1042
+length = 5
+
+[[boundaries]]
+payload_offset = 1047
+length = 1
+
+[[boundaries]]
+payload_offset = 1048
+length = 1
+
+[[boundaries]]
+payload_offset = 1049
+length = 5
+
+[[boundaries]]
+payload_offset = 1054
+length = 1
+
+[[boundaries]]
+payload_offset = 1055
+length = 5
+
+[[boundaries]]
+payload_offset = 1060
+length = 5
+
+[[boundaries]]
+payload_offset = 1065
+length = 1
+
+[[boundaries]]
+payload_offset = 1066
+length = 5
+
+[[boundaries]]
+payload_offset = 1071
+length = 1
+
+[[boundaries]]
+payload_offset = 1072
+length = 5
+
+[[boundaries]]
+payload_offset = 1077
+length = 5
+
+[[boundaries]]
+payload_offset = 1082
+length = 5
+
+[[boundaries]]
+payload_offset = 1087
+length = 5
+
+[[boundaries]]
+payload_offset = 1092
+length = 5
+
+[[boundaries]]
+payload_offset = 1097
+length = 5
+
+[[boundaries]]
+payload_offset = 1102
+length = 5
+
+[[boundaries]]
+payload_offset = 1107
+length = 5
+
+[[boundaries]]
+payload_offset = 1112
+length = 5
+
+[[boundaries]]
+payload_offset = 1117
+length = 6
+
+[[boundaries]]
+payload_offset = 1123
+length = 5
+
+[[boundaries]]
+payload_offset = 1128
+length = 5
+
+[[boundaries]]
+payload_offset = 1133
+length = 1
+
+[[boundaries]]
+payload_offset = 1134
+length = 5
+
+[[boundaries]]
+payload_offset = 1139
+length = 5
+
+[[boundaries]]
+payload_offset = 1144
+length = 6
+
+[[boundaries]]
+payload_offset = 1150
+length = 1
+
+[[boundaries]]
+payload_offset = 1151
+length = 3
+
+[[boundaries]]
+payload_offset = 1154
+length = 1
+
+[[boundaries]]
+payload_offset = 1155
+length = 1
+
+[[boundaries]]
+payload_offset = 1156
+length = 5
+
+[[boundaries]]
+payload_offset = 1161
+length = 6
+
+[[boundaries]]
+payload_offset = 1167
+length = 5
+
+[[boundaries]]
+payload_offset = 1172
+length = 6
+
+[[boundaries]]
+payload_offset = 1178
+length = 5
+
+[[boundaries]]
+payload_offset = 1183
+length = 6
+
+[[boundaries]]
+payload_offset = 1189
+length = 5
+
+[[boundaries]]
+payload_offset = 1194
+length = 6
+
+[[boundaries]]
+payload_offset = 1200
+length = 1
+
+[[boundaries]]
+payload_offset = 1201
+length = 5
+
+[[boundaries]]
+payload_offset = 1206
+length = 1
+
+[[boundaries]]
+payload_offset = 1207
+length = 7
+
+[[boundaries]]
+payload_offset = 1214
+length = 3
+
+[[boundaries]]
+payload_offset = 1217
+length = 1
+
+[[boundaries]]
+payload_offset = 1218
+length = 5
+
+[[boundaries]]
+payload_offset = 1223
+length = 1
+
+[[boundaries]]
+payload_offset = 1224
+length = 5
+
+[[boundaries]]
+payload_offset = 1229
+length = 1
+
+[[boundaries]]
+payload_offset = 1230
+length = 7
+
+[[boundaries]]
+payload_offset = 1237
+length = 3
+
+[[boundaries]]
+payload_offset = 1240
+length = 1
+
+[[boundaries]]
+payload_offset = 1241
+length = 5
+
+[[boundaries]]
+payload_offset = 1246
+length = 1
+
+[[boundaries]]
+payload_offset = 1247
+length = 5
+
+[[boundaries]]
+payload_offset = 1252
+length = 1
+
+[[boundaries]]
+payload_offset = 1253
+length = 7
+
+[[boundaries]]
+payload_offset = 1260
+length = 3
+
+[[boundaries]]
+payload_offset = 1263
+length = 1
+
+[[boundaries]]
+payload_offset = 1264
+length = 5
+
+[[boundaries]]
+payload_offset = 1269
+length = 1
+
+[[boundaries]]
+payload_offset = 1270
+length = 5
+
+[[boundaries]]
+payload_offset = 1275
+length = 1
+
+[[boundaries]]
+payload_offset = 1276
+length = 7
+
+[[boundaries]]
+payload_offset = 1283
+length = 3
+
+[[boundaries]]
+payload_offset = 1286
+length = 1
+
+[[boundaries]]
+payload_offset = 1287
+length = 5
+
+[[boundaries]]
+payload_offset = 1292
+length = 1
+
+[[boundaries]]
+payload_offset = 1293
+length = 3
+
+[[boundaries]]
+payload_offset = 1296
+length = 5
+
+[[boundaries]]
+payload_offset = 1301
+length = 4
+
+[[boundaries]]
+payload_offset = 1305
+length = 1
+
+[[boundaries]]
+payload_offset = 1306
+length = 7
+
+[[boundaries]]
+payload_offset = 1313
+length = 3
+
+[[boundaries]]
+payload_offset = 1316
+length = 1
+
+[[boundaries]]
+payload_offset = 1317
+length = 5
+
+[[boundaries]]
+payload_offset = 1322
+length = 5
+
+[[boundaries]]
+payload_offset = 1327
+length = 3
+
+[[boundaries]]
+payload_offset = 1330
+length = 3
+
+[[boundaries]]
+payload_offset = 1333
+length = 1
+
+[[boundaries]]
+payload_offset = 1334
+length = 7
+
+[[boundaries]]
+payload_offset = 1341
+length = 3
+
+[[boundaries]]
+payload_offset = 1344
+length = 1
+
+[[boundaries]]
+payload_offset = 1345
+length = 5
+
+[[boundaries]]
+payload_offset = 1350
+length = 3
+
+[[boundaries]]
+payload_offset = 1353
+length = 3
+
+[[boundaries]]
+payload_offset = 1356
+length = 5
+
+[[boundaries]]
+payload_offset = 1361
+length = 1
+
+[[boundaries]]
+payload_offset = 1362
+length = 5
+
+[[boundaries]]
+payload_offset = 1367
+length = 6
+
+[[boundaries]]
+payload_offset = 1373
+length = 5
+
+[[boundaries]]
+payload_offset = 1378
+length = 1
+
+[[boundaries]]
+payload_offset = 1379
+length = 1
+
+[[boundaries]]
+payload_offset = 1380
+length = 5
+
+[[boundaries]]
+payload_offset = 1385
+length = 1
+
+[[boundaries]]
+payload_offset = 1386
+length = 1
+
+[[boundaries]]
+payload_offset = 1387
+length = 5
+
+[[boundaries]]
+payload_offset = 1392
+length = 5
+
+[[boundaries]]
+payload_offset = 1397
+length = 3
+
+[[boundaries]]
+payload_offset = 1400
+length = 1
+
+[[boundaries]]
+payload_offset = 1401
+length = 5
+
+[[boundaries]]
+payload_offset = 1406
+length = 7
+
+[[boundaries]]
+payload_offset = 1413
+length = 3
+
+[[boundaries]]
+payload_offset = 1416
+length = 7
+
+[[boundaries]]
+payload_offset = 1423
+length = 3
+
+[[boundaries]]
+payload_offset = 1426
+length = 3
+
+[[boundaries]]
+payload_offset = 1429
+length = 7
+
+[[boundaries]]
+payload_offset = 1436
+length = 7
+
+[[boundaries]]
+payload_offset = 1443
+length = 3
+
+[[boundaries]]
+payload_offset = 1446
+length = 1
+
+[[boundaries]]
+payload_offset = 1447
+length = 5
+
+[[boundaries]]
+payload_offset = 1452
+length = 6
+
+[[boundaries]]
+payload_offset = 1458
+length = 6
+
+[[boundaries]]
+payload_offset = 1464
+length = 2
+
+[[boundaries]]
+payload_offset = 1466
+length = 1
+
+[[boundaries]]
+payload_offset = 1467
+length = 5
+
+[[boundaries]]
+payload_offset = 1472
+length = 5
+
+[[boundaries]]
+payload_offset = 1477
+length = 6
+
+[[boundaries]]
+payload_offset = 1483
+length = 5
+
+[[boundaries]]
+payload_offset = 1488
+length = 1
+
+[[boundaries]]
+payload_offset = 1489
+length = 1
+
+[[boundaries]]
+payload_offset = 1490
+length = 5
+
+[[boundaries]]
+payload_offset = 1495
+length = 1
+
+[[boundaries]]
+payload_offset = 1496
+length = 5
+
+[[boundaries]]
+payload_offset = 1501
+length = 5
+
+[[boundaries]]
+payload_offset = 1506
+length = 1
+
+[[boundaries]]
+payload_offset = 1507
+length = 5
+
+[[boundaries]]
+payload_offset = 1512
+length = 5
+
+[[boundaries]]
+payload_offset = 1517
+length = 1
+
+[[boundaries]]
+payload_offset = 1518
+length = 5
+
+[[boundaries]]
+payload_offset = 1523
+length = 1
+
+[[boundaries]]
+payload_offset = 1524
+length = 5
+
+[[boundaries]]
+payload_offset = 1529
+length = 6
+
+[[boundaries]]
+payload_offset = 1535
+length = 5
+
+[[boundaries]]
+payload_offset = 1540
+length = 1
+
+[[boundaries]]
+payload_offset = 1541
+length = 5
+
+[[boundaries]]
+payload_offset = 1546
+length = 5
+
+[[boundaries]]
+payload_offset = 1551
+length = 1
+
+[[boundaries]]
+payload_offset = 1552
+length = 5
+
+[[boundaries]]
+payload_offset = 1557
+length = 7
+
+[[boundaries]]
+payload_offset = 1564
+length = 3
+
+[[boundaries]]
+payload_offset = 1567
+length = 3
+
+[[boundaries]]
+payload_offset = 1570
+length = 5
+
+[[boundaries]]
+payload_offset = 1575
+length = 7
+
+[[boundaries]]
+payload_offset = 1582
+length = 7
+
+[[boundaries]]
+payload_offset = 1589
+length = 7
+
+[[boundaries]]
+payload_offset = 1596
+length = 3
+
+[[boundaries]]
+payload_offset = 1599
+length = 7
+
+[[boundaries]]
+payload_offset = 1606
+length = 3
+
+[[boundaries]]
+payload_offset = 1609
+length = 7
+
+[[boundaries]]
+payload_offset = 1616
+length = 7
+
+[[boundaries]]
+payload_offset = 1623
+length = 7
+
+[[boundaries]]
+payload_offset = 1630
+length = 7
+
+[[boundaries]]
+payload_offset = 1637
+length = 3
+
+[[boundaries]]
+payload_offset = 1640
+length = 7
+
+[[boundaries]]
+payload_offset = 1647
+length = 3
+
+[[boundaries]]
+payload_offset = 1650
+length = 7
+
+[[boundaries]]
+payload_offset = 1657
+length = 7
+
+[[boundaries]]
+payload_offset = 1664
+length = 3
+
+[[boundaries]]
+payload_offset = 1667
+length = 1
+
+[[boundaries]]
+payload_offset = 1668
+length = 5
+
+[[boundaries]]
+payload_offset = 1673
+length = 1
+
+[[boundaries]]
+payload_offset = 1674
+length = 3
+
+[[boundaries]]
+payload_offset = 1677
+length = 5
+
+[[boundaries]]
+payload_offset = 1682
+length = 6
+
+[[boundaries]]
+payload_offset = 1688
+length = 5
+
+[[boundaries]]
+payload_offset = 1693
+length = 6
+
+[[boundaries]]
+payload_offset = 1699
+length = 5
+
+[[boundaries]]
+payload_offset = 1704
+length = 6
+
+[[boundaries]]
+payload_offset = 1710
+length = 5
+
+[[boundaries]]
+payload_offset = 1715
+length = 6
+
+[[boundaries]]
+payload_offset = 1721
+length = 5
+
+[[boundaries]]
+payload_offset = 1726
+length = 6
+
+[[boundaries]]
+payload_offset = 1732
+length = 5
+
+[[boundaries]]
+payload_offset = 1737
+length = 5
+
+[[boundaries]]
+payload_offset = 1742
+length = 5
+
+[[boundaries]]
+payload_offset = 1747
+length = 5
+
+[[boundaries]]
+payload_offset = 1752
+length = 5
+
+[[boundaries]]
+payload_offset = 1757
+length = 5
+
+[[boundaries]]
+payload_offset = 1762
+length = 5
+
+[[boundaries]]
+payload_offset = 1767
+length = 5
+
+[[boundaries]]
+payload_offset = 1772
+length = 5
+
+[[boundaries]]
+payload_offset = 1777
+length = 6
+
+[[boundaries]]
+payload_offset = 1783
+length = 5
+
+[[boundaries]]
+payload_offset = 1788
+length = 5
+
+[[boundaries]]
+payload_offset = 1793
+length = 5
+
+[[boundaries]]
+payload_offset = 1798
+length = 5
+
+[[boundaries]]
+payload_offset = 1803
+length = 5
+
+[[boundaries]]
+payload_offset = 1808
+length = 5
+
+[[boundaries]]
+payload_offset = 1813
+length = 5
+
+[[boundaries]]
+payload_offset = 1818
+length = 5
+
+[[boundaries]]
+payload_offset = 1823
+length = 1
+
+[[boundaries]]
+payload_offset = 1824
+length = 5
+
+[[boundaries]]
+payload_offset = 1829
+length = 3
+
+[[boundaries]]
+payload_offset = 1832
+length = 5
+
+[[boundaries]]
+payload_offset = 1837
+length = 6
+
+[[boundaries]]
+payload_offset = 1843
+length = 5
+
+[[boundaries]]
+payload_offset = 1848
+length = 6
+
+[[boundaries]]
+payload_offset = 1854
+length = 5
+
+[[boundaries]]
+payload_offset = 1859
+length = 6
+
+[[boundaries]]
+payload_offset = 1865
+length = 5
+
+[[boundaries]]
+payload_offset = 1870
+length = 6
+
+[[boundaries]]
+payload_offset = 1876
+length = 5
+
+[[boundaries]]
+payload_offset = 1881
+length = 6
+
+[[boundaries]]
+payload_offset = 1887
+length = 5
+
+[[boundaries]]
+payload_offset = 1892
+length = 6
+
+[[boundaries]]
+payload_offset = 1898
+length = 5
+
+[[boundaries]]
+payload_offset = 1903
+length = 6
+
+[[boundaries]]
+payload_offset = 1909
+length = 5
+
+[[boundaries]]
+payload_offset = 1914
+length = 6
+
+[[boundaries]]
+payload_offset = 1920
+length = 5
+
+[[boundaries]]
+payload_offset = 1925
+length = 6
+
+[[boundaries]]
+payload_offset = 1931
+length = 3
+
+[[boundaries]]
+payload_offset = 1934
+length = 1
+
+[[boundaries]]
+payload_offset = 1935
+length = 5
+
+[[boundaries]]
+payload_offset = 1940
+length = 6
+
+[[boundaries]]
+payload_offset = 1946
+length = 5
+
+[[boundaries]]
+payload_offset = 1951
+length = 6
+
+[[boundaries]]
+payload_offset = 1957
+length = 5
+
+[[boundaries]]
+payload_offset = 1962
+length = 6
+
+[[boundaries]]
+payload_offset = 1968
+length = 5
+
+[[boundaries]]
+payload_offset = 1973
+length = 6
+
+[[boundaries]]
+payload_offset = 1979
+length = 5
+
+[[boundaries]]
+payload_offset = 1984
+length = 6
+
+[[boundaries]]
+payload_offset = 1990
+length = 5
+
+[[boundaries]]
+payload_offset = 1995
+length = 6
+
+[[boundaries]]
+payload_offset = 2001
+length = 5
+
+[[boundaries]]
+payload_offset = 2006
+length = 6
+
+[[boundaries]]
+payload_offset = 2012
+length = 5
+
+[[boundaries]]
+payload_offset = 2017
+length = 6
+
+[[boundaries]]
+payload_offset = 2023
+length = 5
+
+[[boundaries]]
+payload_offset = 2028
+length = 1
+
+[[boundaries]]
+payload_offset = 2029
+length = 5
+
+[[boundaries]]
+payload_offset = 2034
+length = 6
+
+[[boundaries]]
+payload_offset = 2040
+length = 5
+
+[[boundaries]]
+payload_offset = 2045
+length = 6
+
+[[boundaries]]
+payload_offset = 2051
+length = 5
+
+[[boundaries]]
+payload_offset = 2056
+length = 6
+
+[[boundaries]]
+payload_offset = 2062
+length = 5
+
+[[boundaries]]
+payload_offset = 2067
+length = 6
+
+[[boundaries]]
+payload_offset = 2073
+length = 5
+
+[[boundaries]]
+payload_offset = 2078
+length = 6
+
+[[boundaries]]
+payload_offset = 2084
+length = 5
+
+[[boundaries]]
+payload_offset = 2089
+length = 6
+
+[[boundaries]]
+payload_offset = 2095
+length = 5
+
+[[boundaries]]
+payload_offset = 2100
+length = 6
+
+[[boundaries]]
+payload_offset = 2106
+length = 5
+
+[[boundaries]]
+payload_offset = 2111
+length = 6
+
+[[boundaries]]
+payload_offset = 2117
+length = 5
+
+[[boundaries]]
+payload_offset = 2122
+length = 1
+
+[[boundaries]]
+payload_offset = 2123
+length = 5
+
+[[boundaries]]
+payload_offset = 2128
+length = 6
+
+[[boundaries]]
+payload_offset = 2134
+length = 5
+
+[[boundaries]]
+payload_offset = 2139
+length = 6
+
+[[boundaries]]
+payload_offset = 2145
+length = 5
+
+[[boundaries]]
+payload_offset = 2150
+length = 6
+
+[[boundaries]]
+payload_offset = 2156
+length = 5
+
+[[boundaries]]
+payload_offset = 2161
+length = 6
+
+[[boundaries]]
+payload_offset = 2167
+length = 5
+
+[[boundaries]]
+payload_offset = 2172
+length = 6
+
+[[boundaries]]
+payload_offset = 2178
+length = 5
+
+[[boundaries]]
+payload_offset = 2183
+length = 6
+
+[[boundaries]]
+payload_offset = 2189
+length = 5
+
+[[boundaries]]
+payload_offset = 2194
+length = 6
+
+[[boundaries]]
+payload_offset = 2200
+length = 5
+
+[[boundaries]]
+payload_offset = 2205
+length = 6
+
+[[boundaries]]
+payload_offset = 2211
+length = 5
+
+[[boundaries]]
+payload_offset = 2216
+length = 1
+
+[[boundaries]]
+payload_offset = 2217
+length = 5
+
+[[boundaries]]
+payload_offset = 2222
+length = 6
+
+[[boundaries]]
+payload_offset = 2228
+length = 5
+
+[[boundaries]]
+payload_offset = 2233
+length = 6
+
+[[boundaries]]
+payload_offset = 2239
+length = 5
+
+[[boundaries]]
+payload_offset = 2244
+length = 6
+
+[[boundaries]]
+payload_offset = 2250
+length = 5
+
+[[boundaries]]
+payload_offset = 2255
+length = 6
+
+[[boundaries]]
+payload_offset = 2261
+length = 5
+
+[[boundaries]]
+payload_offset = 2266
+length = 6
+
+[[boundaries]]
+payload_offset = 2272
+length = 5
+
+[[boundaries]]
+payload_offset = 2277
+length = 6
+
+[[boundaries]]
+payload_offset = 2283
+length = 5
+
+[[boundaries]]
+payload_offset = 2288
+length = 6
+
+[[boundaries]]
+payload_offset = 2294
+length = 5
+
+[[boundaries]]
+payload_offset = 2299
+length = 6
+
+[[boundaries]]
+payload_offset = 2305
+length = 5
+
+[[boundaries]]
+payload_offset = 2310
+length = 1
+
+[[boundaries]]
+payload_offset = 2311
+length = 5
+
+[[boundaries]]
+payload_offset = 2316
+length = 6
+
+[[boundaries]]
+payload_offset = 2322
+length = 5
+
+[[boundaries]]
+payload_offset = 2327
+length = 6
+
+[[boundaries]]
+payload_offset = 2333
+length = 5
+
+[[boundaries]]
+payload_offset = 2338
+length = 6
+
+[[boundaries]]
+payload_offset = 2344
+length = 5
+
+[[boundaries]]
+payload_offset = 2349
+length = 6
+
+[[boundaries]]
+payload_offset = 2355
+length = 5
+
+[[boundaries]]
+payload_offset = 2360
+length = 6
+
+[[boundaries]]
+payload_offset = 2366
+length = 5
+
+[[boundaries]]
+payload_offset = 2371
+length = 6
+
+[[boundaries]]
+payload_offset = 2377
+length = 5
+
+[[boundaries]]
+payload_offset = 2382
+length = 6
+
+[[boundaries]]
+payload_offset = 2388
+length = 5
+
+[[boundaries]]
+payload_offset = 2393
+length = 6
+
+[[boundaries]]
+payload_offset = 2399
+length = 5
+
+[[boundaries]]
+payload_offset = 2404
+length = 1
+
+[[boundaries]]
+payload_offset = 2405
+length = 5
+
+[[boundaries]]
+payload_offset = 2410
+length = 1
+
+[[boundaries]]
+payload_offset = 2411
+length = 5
+
+[[boundaries]]
+payload_offset = 2416
+length = 1
+
+[[boundaries]]
+payload_offset = 2417
+length = 5
+
+[[boundaries]]
+payload_offset = 2422
+length = 1
+
+[[boundaries]]
+payload_offset = 2423
+length = 5
+
+[[boundaries]]
+payload_offset = 2428
+length = 1
+
+[[boundaries]]
+payload_offset = 2429
+length = 5
+
+[[boundaries]]
+payload_offset = 2434
+length = 1
+
+[[boundaries]]
+payload_offset = 2435
+length = 5
+
+[[boundaries]]
+payload_offset = 2440
+length = 1
+
+[[boundaries]]
+payload_offset = 2441
+length = 5
+
+[[boundaries]]
+payload_offset = 2446
+length = 1
+
+[[boundaries]]
+payload_offset = 2447
+length = 5
+
+[[boundaries]]
+payload_offset = 2452
+length = 1
+
+[[boundaries]]
+payload_offset = 2453
+length = 5
+
+[[boundaries]]
+payload_offset = 2458
+length = 6
+
+[[boundaries]]
+payload_offset = 2464
+length = 7
+
+[[boundaries]]
+payload_offset = 2471
+length = 3
+
+[[boundaries]]
+payload_offset = 2474
+length = 3
+
+[[boundaries]]
+payload_offset = 2477
+length = 5
+
+[[boundaries]]
+payload_offset = 2482
+length = 5
+
+[[boundaries]]
+payload_offset = 2487
+length = 1
+
+[[boundaries]]
+payload_offset = 2488
+length = 1
+
+[[boundaries]]
+payload_offset = 2489
+length = 5
+
+[[boundaries]]
+payload_offset = 2494
+length = 6
+
+[[boundaries]]
+payload_offset = 2500
+length = 7
+
+[[boundaries]]
+payload_offset = 2507
+length = 3
+
+[[boundaries]]
+payload_offset = 2510
+length = 3
+
+[[boundaries]]
+payload_offset = 2513
+length = 5
+
+[[boundaries]]
+payload_offset = 2518
+length = 5
+
+[[boundaries]]
+payload_offset = 2523
+length = 1
+
+[[boundaries]]
+payload_offset = 2524
+length = 1
+
+[[boundaries]]
+payload_offset = 2525
+length = 5
+
+[[boundaries]]
+payload_offset = 2530
+length = 6
+
+[[boundaries]]
+payload_offset = 2536
+length = 7
+
+[[boundaries]]
+payload_offset = 2543
+length = 3
+
+[[boundaries]]
+payload_offset = 2546
+length = 3
+
+[[boundaries]]
+payload_offset = 2549
+length = 5
+
+[[boundaries]]
+payload_offset = 2554
+length = 5
+
+[[boundaries]]
+payload_offset = 2559
+length = 1
+
+[[boundaries]]
+payload_offset = 2560
+length = 1
+
+[[boundaries]]
+payload_offset = 2561
+length = 5
+
+[[boundaries]]
+payload_offset = 2566
+length = 6
+
+[[boundaries]]
+payload_offset = 2572
+length = 7
+
+[[boundaries]]
+payload_offset = 2579
+length = 3
+
+[[boundaries]]
+payload_offset = 2582
+length = 3
+
+[[boundaries]]
+payload_offset = 2585
+length = 5
+
+[[boundaries]]
+payload_offset = 2590
+length = 5
+
+[[boundaries]]
+payload_offset = 2595
+length = 1
+
+[[boundaries]]
+payload_offset = 2596
+length = 1
+
+[[boundaries]]
+payload_offset = 2597
+length = 5
+
+[[boundaries]]
+payload_offset = 2602
+length = 6
+
+[[boundaries]]
+payload_offset = 2608
+length = 7
+
+[[boundaries]]
+payload_offset = 2615
+length = 3
+
+[[boundaries]]
+payload_offset = 2618
+length = 3
+
+[[boundaries]]
+payload_offset = 2621
+length = 5
+
+[[boundaries]]
+payload_offset = 2626
+length = 5
+
+[[boundaries]]
+payload_offset = 2631
+length = 1
+
+[[boundaries]]
+payload_offset = 2632
+length = 1
+
+[[boundaries]]
+payload_offset = 2633
+length = 5
+
+[[boundaries]]
+payload_offset = 2638
+length = 6
+
+[[boundaries]]
+payload_offset = 2644
+length = 7
+
+[[boundaries]]
+payload_offset = 2651
+length = 3
+
+[[boundaries]]
+payload_offset = 2654
+length = 3
+
+[[boundaries]]
+payload_offset = 2657
+length = 5
+
+[[boundaries]]
+payload_offset = 2662
+length = 5
+
+[[boundaries]]
+payload_offset = 2667
+length = 1
+
+[[boundaries]]
+payload_offset = 2668
+length = 1
+
+[[boundaries]]
+payload_offset = 2669
+length = 5
+
+[[boundaries]]
+payload_offset = 2674
+length = 6
+
+[[boundaries]]
+payload_offset = 2680
+length = 7
+
+[[boundaries]]
+payload_offset = 2687
+length = 3
+
+[[boundaries]]
+payload_offset = 2690
+length = 3
+
+[[boundaries]]
+payload_offset = 2693
+length = 5
+
+[[boundaries]]
+payload_offset = 2698
+length = 5
+
+[[boundaries]]
+payload_offset = 2703
+length = 1
+
+[[boundaries]]
+payload_offset = 2704
+length = 1
+
+[[boundaries]]
+payload_offset = 2705
+length = 5
+
+[[boundaries]]
+payload_offset = 2710
+length = 6
+
+[[boundaries]]
+payload_offset = 2716
+length = 7
+
+[[boundaries]]
+payload_offset = 2723
+length = 3
+
+[[boundaries]]
+payload_offset = 2726
+length = 3
+
+[[boundaries]]
+payload_offset = 2729
+length = 5
+
+[[boundaries]]
+payload_offset = 2734
+length = 5
+
+[[boundaries]]
+payload_offset = 2739
+length = 1
+
+[[boundaries]]
+payload_offset = 2740
+length = 1
+
+[[boundaries]]
+payload_offset = 2741
+length = 1
+
+[[boundaries]]
+payload_offset = 2742
+length = 1
+
+[[boundaries]]
+payload_offset = 2743
+length = 3
+
+[[boundaries]]
+payload_offset = 2746
+length = 3
+
+[[boundaries]]
+payload_offset = 2749
+length = 5
+
+[[boundaries]]
+payload_offset = 2754
+length = 5
+
+[[boundaries]]
+payload_offset = 2759
+length = 5
+
+[[boundaries]]
+payload_offset = 2764
+length = 6
+
+[[boundaries]]
+payload_offset = 2770
+length = 5
+
+[[boundaries]]
+payload_offset = 2775
+length = 6
+
+[[boundaries]]
+payload_offset = 2781
+length = 5
+
+[[boundaries]]
+payload_offset = 2786
+length = 6
+
+[[boundaries]]
+payload_offset = 2792
+length = 5
+
+[[boundaries]]
+payload_offset = 2797
+length = 6
+
+[[boundaries]]
+payload_offset = 2803
+length = 1
+
+[[boundaries]]
+payload_offset = 2804
+length = 5
+
+[[boundaries]]
+payload_offset = 2809
+length = 1
+
+[[boundaries]]
+payload_offset = 2810
+length = 7
+
+[[boundaries]]
+payload_offset = 2817
+length = 3
+
+[[boundaries]]
+payload_offset = 2820
+length = 1
+
+[[boundaries]]
+payload_offset = 2821
+length = 1
+
+[[boundaries]]
+payload_offset = 2822
+length = 5
+
+[[boundaries]]
+payload_offset = 2827
+length = 1
+
+[[boundaries]]
+payload_offset = 2828
+length = 7
+
+[[boundaries]]
+payload_offset = 2835
+length = 3
+
+[[boundaries]]
+payload_offset = 2838
+length = 1
+
+[[boundaries]]
+payload_offset = 2839
+length = 1
+
+[[boundaries]]
+payload_offset = 2840
+length = 5
+
+[[boundaries]]
+payload_offset = 2845
+length = 1
+
+[[boundaries]]
+payload_offset = 2846
+length = 7
+
+[[boundaries]]
+payload_offset = 2853
+length = 3
+
+[[boundaries]]
+payload_offset = 2856
+length = 1
+
+[[boundaries]]
+payload_offset = 2857
+length = 1
+
+[[boundaries]]
+payload_offset = 2858
+length = 5
+
+[[boundaries]]
+payload_offset = 2863
+length = 1
+
+[[boundaries]]
+payload_offset = 2864
+length = 7
+
+[[boundaries]]
+payload_offset = 2871
+length = 3
+
+[[boundaries]]
+payload_offset = 2874
+length = 1
+
+[[boundaries]]
+payload_offset = 2875
+length = 1
+
+[[boundaries]]
+payload_offset = 2876
+length = 1
+
+[[boundaries]]
+payload_offset = 2877
+length = 7
+
+[[boundaries]]
+payload_offset = 2884
+length = 3
+
+[[boundaries]]
+payload_offset = 2887
+length = 5
+
+[[boundaries]]
+payload_offset = 2892
+length = 5
+
+[[boundaries]]
+payload_offset = 2897
+length = 1
+
+[[boundaries]]
+payload_offset = 2898
+length = 7
+
+[[boundaries]]
+payload_offset = 2905
+length = 7
+
+[[boundaries]]
+payload_offset = 2912
+length = 3
+
+[[boundaries]]
+payload_offset = 2915
+length = 1
+
+[[boundaries]]
+payload_offset = 2916
+length = 5
+
+[[boundaries]]
+payload_offset = 2921
+length = 5
+
+[[boundaries]]
+payload_offset = 2926
+length = 3
+
+[[boundaries]]
+payload_offset = 2929
+length = 1
+
+[[boundaries]]
+payload_offset = 2930
+length = 3
+
+[[boundaries]]
+payload_offset = 2933
+length = 5
+
+[[boundaries]]
+payload_offset = 2938
+length = 1
+
+[[boundaries]]
+payload_offset = 2939
+length = 7
+
+[[boundaries]]
+payload_offset = 2946
+length = 7
+
+[[boundaries]]
+payload_offset = 2953
+length = 3
+
+[[boundaries]]
+payload_offset = 2956
+length = 1
+
+[[boundaries]]
+payload_offset = 2957
+length = 1
+
+[[boundaries]]
+payload_offset = 2958
+length = 5
+
+[[boundaries]]
+payload_offset = 2963
+length = 6
+
+[[boundaries]]
+payload_offset = 2969
+length = 6
+
+[[boundaries]]
+payload_offset = 2975
+length = 2
+
+[[boundaries]]
+payload_offset = 2977
+length = 1
+
+[[boundaries]]
+payload_offset = 2978
+length = 5
+
+[[boundaries]]
+payload_offset = 2983
+length = 5
+
+[[boundaries]]
+payload_offset = 2988
+length = 6
+
+[[boundaries]]
+payload_offset = 2994
+length = 5
+
+[[boundaries]]
+payload_offset = 2999
+length = 1
+
+[[boundaries]]
+payload_offset = 3000
+length = 1
+
+[[boundaries]]
+payload_offset = 3001
+length = 5
+
+[[boundaries]]
+payload_offset = 3006
+length = 5
+
+[[boundaries]]
+payload_offset = 3011
+length = 1
+
+[[boundaries]]
+payload_offset = 3012
+length = 5
+
+[[boundaries]]
+payload_offset = 3017
+length = 5
+
+[[boundaries]]
+payload_offset = 3022
+length = 1
+
+[[boundaries]]
+payload_offset = 3023
+length = 5
+
+[[boundaries]]
+payload_offset = 3028
+length = 5
+
+[[boundaries]]
+payload_offset = 3033
+length = 1
+
+[[boundaries]]
+payload_offset = 3034
+length = 5
+
+[[boundaries]]
+payload_offset = 3039
+length = 1
+
+[[boundaries]]
+payload_offset = 3040
+length = 5
+
+[[boundaries]]
+payload_offset = 3045
+length = 5
+
+[[boundaries]]
+payload_offset = 3050
+length = 5
+
+[[boundaries]]
+payload_offset = 3055
+length = 5
+
+[[boundaries]]
+payload_offset = 3060
+length = 5
+
+[[boundaries]]
+payload_offset = 3065
+length = 7
+
+[[boundaries]]
+payload_offset = 3072
+length = 3
+
+[[boundaries]]
+payload_offset = 3075
+length = 5
+
+[[boundaries]]
+payload_offset = 3080
+length = 5
+
+[[boundaries]]
+payload_offset = 3085
+length = 5
+
+[[boundaries]]
+payload_offset = 3090
+length = 5
+
+[[boundaries]]
+payload_offset = 3095
+length = 7
+
+[[boundaries]]
+payload_offset = 3102
+length = 3
+
+[[boundaries]]
+payload_offset = 3105
+length = 1
+
+[[boundaries]]
+payload_offset = 3106
+length = 1
+
+[[boundaries]]
+payload_offset = 3107
+length = 3
+
+[[boundaries]]
+payload_offset = 3110
+length = 5
+
+[[boundaries]]
+payload_offset = 3115
+length = 1
+
+[[boundaries]]
+payload_offset = 3116
+length = 5
+
+[[boundaries]]
+payload_offset = 3121
+length = 4
+
+[[boundaries]]
+payload_offset = 3125
+length = 1
+
+[[boundaries]]
+payload_offset = 3126
+length = 5
+
+[[boundaries]]
+payload_offset = 3131
+length = 6
+
+[[boundaries]]
+payload_offset = 3137
+length = 6
+
+[[boundaries]]
+payload_offset = 3143
+length = 2
+
+[[boundaries]]
+payload_offset = 3145
+length = 1
+
+[[boundaries]]
+payload_offset = 3146
+length = 5
+
+[[boundaries]]
+payload_offset = 3151
+length = 5
+
+[[boundaries]]
+payload_offset = 3156
+length = 1
+
+[[boundaries]]
+payload_offset = 3157
+length = 3
+
+[[boundaries]]
+payload_offset = 3160
+length = 1
+
+[[boundaries]]
+payload_offset = 3161
+length = 5
+
+[[boundaries]]
+payload_offset = 3166
+length = 6
+
+[[boundaries]]
+payload_offset = 3172
+length = 6
+
+[[boundaries]]
+payload_offset = 3178
+length = 2
+
+[[boundaries]]
+payload_offset = 3180
+length = 1
+
+[[boundaries]]
+payload_offset = 3181
+length = 5
+
+[[boundaries]]
+payload_offset = 3186
+length = 5
+
+[[boundaries]]
+payload_offset = 3191
+length = 1
+
+[[boundaries]]
+payload_offset = 3192
+length = 3
+
+[[boundaries]]
+payload_offset = 3195
+length = 1
+
+[[boundaries]]
+payload_offset = 3196
+length = 5
+
+[[boundaries]]
+payload_offset = 3201
+length = 6
+
+[[boundaries]]
+payload_offset = 3207
+length = 6
+
+[[boundaries]]
+payload_offset = 3213
+length = 2
+
+[[boundaries]]
+payload_offset = 3215
+length = 1
+
+[[boundaries]]
+payload_offset = 3216
+length = 5
+
+[[boundaries]]
+payload_offset = 3221
+length = 5
+
+[[boundaries]]
+payload_offset = 3226
+length = 1
+
+[[boundaries]]
+payload_offset = 3227
+length = 3
+
+[[boundaries]]
+payload_offset = 3230
+length = 1
+
+[[boundaries]]
+payload_offset = 3231
+length = 5
+
+[[boundaries]]
+payload_offset = 3236
+length = 6
+
+[[boundaries]]
+payload_offset = 3242
+length = 6
+
+[[boundaries]]
+payload_offset = 3248
+length = 2
+
+[[boundaries]]
+payload_offset = 3250
+length = 1
+
+[[boundaries]]
+payload_offset = 3251
+length = 5
+
+[[boundaries]]
+payload_offset = 3256
+length = 5
+
+[[boundaries]]
+payload_offset = 3261
+length = 1
+
+[[boundaries]]
+payload_offset = 3262
+length = 3
+
+[[boundaries]]
+payload_offset = 3265
+length = 1
+
+[[boundaries]]
+payload_offset = 3266
+length = 3
+
+[[boundaries]]
+payload_offset = 3269
+length = 5
+
+[[boundaries]]
+payload_offset = 3274
+length = 5
+
+[[boundaries]]
+payload_offset = 3279
+length = 6
+
+[[boundaries]]
+payload_offset = 3285
+length = 5
+
+[[boundaries]]
+payload_offset = 3290
+length = 6
+
+[[boundaries]]
+payload_offset = 3296
+length = 5
+
+[[boundaries]]
+payload_offset = 3301
+length = 6
+
+[[boundaries]]
+payload_offset = 3307
+length = 5
+
+[[boundaries]]
+payload_offset = 3312
+length = 6
+
+[[boundaries]]
+payload_offset = 3318
+length = 1
+
+[[boundaries]]
+payload_offset = 3319
+length = 5
+
+[[boundaries]]
+payload_offset = 3324
+length = 1
+
+[[boundaries]]
+payload_offset = 3325
+length = 5
+
+[[boundaries]]
+payload_offset = 3330
+length = 1
+
+[[boundaries]]
+payload_offset = 3331
+length = 5
+
+[[boundaries]]
+payload_offset = 3336
+length = 1
+
+[[boundaries]]
+payload_offset = 3337
+length = 5
+
+[[boundaries]]
+payload_offset = 3342
+length = 1
+
+[[boundaries]]
+payload_offset = 3343
+length = 3
+
+[[boundaries]]
+payload_offset = 3346
+length = 3
+
+[[boundaries]]
+payload_offset = 3349
+length = 5
+
+[[boundaries]]
+payload_offset = 3354
+length = 4
+
+[[boundaries]]
+payload_offset = 3358
+length = 5
+
+[[boundaries]]
+payload_offset = 3363
+length = 5
+
+[[boundaries]]
+payload_offset = 3368
+length = 7
+
+[[boundaries]]
+payload_offset = 3375
+length = 3
+
+[[boundaries]]
+payload_offset = 3378
+length = 3
+
+[[boundaries]]
+payload_offset = 3381
+length = 5
+
+[[boundaries]]
+payload_offset = 3386
+length = 1
+
+[[boundaries]]
+payload_offset = 3387
+length = 5
+
+[[boundaries]]
+payload_offset = 3392
+length = 6
+
+[[boundaries]]
+payload_offset = 3398
+length = 6
+
+[[boundaries]]
+payload_offset = 3404
+length = 2
+
+[[boundaries]]
+payload_offset = 3406
+length = 1
+
+[[boundaries]]
+payload_offset = 3407
+length = 5
+
+[[boundaries]]
+payload_offset = 3412
+length = 1
+
+[[boundaries]]
+payload_offset = 3413
+length = 1
+
+[[boundaries]]
+payload_offset = 3414
+length = 5
+
+[[boundaries]]
+payload_offset = 3419
+length = 1
+
+[[boundaries]]
+payload_offset = 3420
+length = 5
+
+[[boundaries]]
+payload_offset = 3425
+length = 6
+
+[[boundaries]]
+payload_offset = 3431
+length = 7
+
+[[boundaries]]
+payload_offset = 3438
+length = 7
+
+[[boundaries]]
+payload_offset = 3445
+length = 7
+
+[[boundaries]]
+payload_offset = 3452
+length = 3
+
+[[boundaries]]
+payload_offset = 3455
+length = 7
+
+[[boundaries]]
+payload_offset = 3462
+length = 7
+
+[[boundaries]]
+payload_offset = 3469
+length = 7
+
+[[boundaries]]
+payload_offset = 3476
+length = 7
+
+[[boundaries]]
+payload_offset = 3483
+length = 5
+
+[[boundaries]]
+payload_offset = 3488
+length = 6
+
+[[boundaries]]
+payload_offset = 3494
+length = 3
+
+[[boundaries]]
+payload_offset = 3497
+length = 1
+
+[[boundaries]]
+payload_offset = 3498
+length = 3
+
+[[boundaries]]
+payload_offset = 3501
+length = 3
+
+[[boundaries]]
+payload_offset = 3504
+length = 3
+
+[[boundaries]]
+payload_offset = 3507
+length = 3
+
+[[boundaries]]
+payload_offset = 3510
+length = 3
+
+[[boundaries]]
+payload_offset = 3513
+length = 3
+
+[[boundaries]]
+payload_offset = 3516
+length = 3
+
+[[boundaries]]
+payload_offset = 3519
+length = 3
+
+[[boundaries]]
+payload_offset = 3522
+length = 3
+
+[[boundaries]]
+payload_offset = 3525
+length = 3
+
+[[boundaries]]
+payload_offset = 3528
+length = 3
+
+[[boundaries]]
+payload_offset = 3531
+length = 3
+
+[[boundaries]]
+payload_offset = 3534
+length = 3
+
+[[boundaries]]
+payload_offset = 3537
+length = 3
+
+[[boundaries]]
+payload_offset = 3540
+length = 3
+
+[[boundaries]]
+payload_offset = 3543
+length = 3
+
+[[boundaries]]
+payload_offset = 3546
+length = 3
+
+[[boundaries]]
+payload_offset = 3549
+length = 3
+
+[[boundaries]]
+payload_offset = 3552
+length = 3
+
+[[boundaries]]
+payload_offset = 3555
+length = 3
+
+[[boundaries]]
+payload_offset = 3558
+length = 3
+
+[[boundaries]]
+payload_offset = 3561
+length = 3
+
+[[boundaries]]
+payload_offset = 3564
+length = 3
+
+[[boundaries]]
+payload_offset = 3567
+length = 3
+
+[[boundaries]]
+payload_offset = 3570
+length = 3
+
+[[boundaries]]
+payload_offset = 3573
+length = 3
+
+[[boundaries]]
+payload_offset = 3576
+length = 3
+
+[[boundaries]]
+payload_offset = 3579
+length = 3
+
+[[boundaries]]
+payload_offset = 3582
+length = 3
+
+[[boundaries]]
+payload_offset = 3585
+length = 3
+
+[[boundaries]]
+payload_offset = 3588
+length = 3
+
+[[boundaries]]
+payload_offset = 3591
+length = 3
+
+[[boundaries]]
+payload_offset = 3594
+length = 3
+
+[[boundaries]]
+payload_offset = 3597
+length = 3
+
+[[boundaries]]
+payload_offset = 3600
+length = 3
+
+[[boundaries]]
+payload_offset = 3603
+length = 3
+
+[[boundaries]]
+payload_offset = 3606
+length = 3
+
+[[boundaries]]
+payload_offset = 3609
+length = 3
+
+[[boundaries]]
+payload_offset = 3612
+length = 3
+
+[[boundaries]]
+payload_offset = 3615
+length = 3
+
+[[boundaries]]
+payload_offset = 3618
+length = 3
+
+[[boundaries]]
+payload_offset = 3621
+length = 3
+
+[[boundaries]]
+payload_offset = 3624
+length = 3
+
+[[boundaries]]
+payload_offset = 3627
+length = 3
+
+[[boundaries]]
+payload_offset = 3630
+length = 3
+
+[[boundaries]]
+payload_offset = 3633
+length = 3
+
+[[boundaries]]
+payload_offset = 3636
+length = 3
+
+[[boundaries]]
+payload_offset = 3639
+length = 3
+
+[[boundaries]]
+payload_offset = 3642
+length = 3
+
+[[boundaries]]
+payload_offset = 3645
+length = 3
+
+[[boundaries]]
+payload_offset = 3648
+length = 3
+
+[[boundaries]]
+payload_offset = 3651
+length = 3
+
+[[boundaries]]
+payload_offset = 3654
+length = 3
+
+[[boundaries]]
+payload_offset = 3657
+length = 3
+
+[[boundaries]]
+payload_offset = 3660
+length = 3
+
+[[boundaries]]
+payload_offset = 3663
+length = 3
+
+[[boundaries]]
+payload_offset = 3666
+length = 3
+
+[[boundaries]]
+payload_offset = 3669
+length = 3
+
+[[boundaries]]
+payload_offset = 3672
+length = 3
+
+[[boundaries]]
+payload_offset = 3675
+length = 3
+
+[[boundaries]]
+payload_offset = 3678
+length = 3
+
+[[boundaries]]
+payload_offset = 3681
+length = 3
+
+[[boundaries]]
+payload_offset = 3684
+length = 3
+
+[[boundaries]]
+payload_offset = 3687
+length = 3
+
+[[boundaries]]
+payload_offset = 3690
+length = 3
+
+[[boundaries]]
+payload_offset = 3693
+length = 3
+
+[[boundaries]]
+payload_offset = 3696
+length = 1
+
+[[boundaries]]
+payload_offset = 3697
+length = 5
+
+[[boundaries]]
+payload_offset = 3702
+length = 6
+
+[[boundaries]]
+payload_offset = 3708
+length = 5
+
+[[boundaries]]
+payload_offset = 3713
+length = 3
+
+[[boundaries]]
+payload_offset = 3716
+length = 6
+
+[[boundaries]]
+payload_offset = 3722
+length = 1
+
+[[boundaries]]
+payload_offset = 3723
+length = 6
+
+[[boundaries]]
+payload_offset = 3729
+length = 2
+
+[[boundaries]]
+payload_offset = 3731
+length = 1
+
+[[boundaries]]
+payload_offset = 3732
+length = 5
+
+[[boundaries]]
+payload_offset = 3737
+length = 5
+
+[[boundaries]]
+payload_offset = 3742
+length = 3
+
+[[boundaries]]
+payload_offset = 3745
+length = 5
+
+[[boundaries]]
+payload_offset = 3750
+length = 5
+
+[[boundaries]]
+payload_offset = 3755
+length = 3
+
+[[boundaries]]
+payload_offset = 3758
+length = 3
+
+[[boundaries]]
+payload_offset = 3761
+length = 5
+
+[[boundaries]]
+payload_offset = 3766
+length = 6
+
+[[boundaries]]
+payload_offset = 3772
+length = 1
+
+[[boundaries]]
+payload_offset = 3773
+length = 1
+
+[[boundaries]]
+payload_offset = 3774
+length = 6
+
+[[boundaries]]
+payload_offset = 3780
+length = 2
+
+[[boundaries]]
+payload_offset = 3782
+length = 1
+
+[[boundaries]]
+payload_offset = 3783
+length = 3
+
+[[boundaries]]
+payload_offset = 3786
+length = 3
+
+[[boundaries]]
+payload_offset = 3789
+length = 5
+
+[[boundaries]]
+payload_offset = 3794
+length = 6
+
+[[boundaries]]
+payload_offset = 3800
+length = 1
+
+[[boundaries]]
+payload_offset = 3801
+length = 5
+
+[[boundaries]]
+payload_offset = 3806
+length = 5
+
+[[boundaries]]
+payload_offset = 3811
+length = 6
+
+[[boundaries]]
+payload_offset = 3817
+length = 1
+
+[[boundaries]]
+payload_offset = 3818
+length = 3
+
+[[boundaries]]
+payload_offset = 3821
+length = 5
+
+[[boundaries]]
+payload_offset = 3826
+length = 6
+
+[[boundaries]]
+payload_offset = 3832
+length = 1
+
+[[boundaries]]
+payload_offset = 3833
+length = 5
+
+[[boundaries]]
+payload_offset = 3838
+length = 6
+
+[[boundaries]]
+payload_offset = 3844
+length = 3
+
+[[boundaries]]
+payload_offset = 3847
+length = 1
+
+[[boundaries]]
+payload_offset = 3848
+length = 1
+
+[[boundaries]]
+payload_offset = 3849
+length = 3
+
+[[boundaries]]
+payload_offset = 3852
+length = 1
+
+[[boundaries]]
+payload_offset = 3853
+length = 5
+
+[[boundaries]]
+payload_offset = 3858
+length = 1
+
+[[boundaries]]
+payload_offset = 3859
+length = 3
+
+[[boundaries]]
+payload_offset = 3862
+length = 3
+
+[[boundaries]]
+payload_offset = 3865
+length = 3
+
+[[boundaries]]
+payload_offset = 3868
+length = 3
+
+[[boundaries]]
+payload_offset = 3871
+length = 5
+
+[[boundaries]]
+payload_offset = 3876
+length = 6
+
+[[boundaries]]
+payload_offset = 3882
+length = 1
+
+[[boundaries]]
+payload_offset = 3883
+length = 1
+
+[[boundaries]]
+payload_offset = 3884
+length = 5
+
+[[boundaries]]
+payload_offset = 3889
+length = 1
+
+[[boundaries]]
+payload_offset = 3890
+length = 1
+
+[[boundaries]]
+payload_offset = 3891
+length = 5
+
+[[boundaries]]
+payload_offset = 3896
+length = 5
+
+[[boundaries]]
+payload_offset = 3901
+length = 6
+
+[[boundaries]]
+payload_offset = 3907
+length = 5
+
+[[boundaries]]
+payload_offset = 3912
+length = 6
+
+[[boundaries]]
+payload_offset = 3918
+length = 5
+
+[[boundaries]]
+payload_offset = 3923
+length = 6
+
+[[boundaries]]
+payload_offset = 3929
+length = 5
+
+[[boundaries]]
+payload_offset = 3934
+length = 6
+
+[[boundaries]]
+payload_offset = 3940
+length = 1
+
+[[boundaries]]
+payload_offset = 3941
+length = 1
+
+[[boundaries]]
+payload_offset = 3942
+length = 7
+
+[[boundaries]]
+payload_offset = 3949
+length = 3
+
+[[boundaries]]
+payload_offset = 3952
+length = 1
+
+[[boundaries]]
+payload_offset = 3953
+length = 1
+
+[[boundaries]]
+payload_offset = 3954
+length = 1
+
+[[boundaries]]
+payload_offset = 3955
+length = 7
+
+[[boundaries]]
+payload_offset = 3962
+length = 3
+
+[[boundaries]]
+payload_offset = 3965
+length = 1
+
+[[boundaries]]
+payload_offset = 3966
+length = 1
+
+[[boundaries]]
+payload_offset = 3967
+length = 1
+
+[[boundaries]]
+payload_offset = 3968
+length = 7
+
+[[boundaries]]
+payload_offset = 3975
+length = 3
+
+[[boundaries]]
+payload_offset = 3978
+length = 1
+
+[[boundaries]]
+payload_offset = 3979
+length = 1
+
+[[boundaries]]
+payload_offset = 3980
+length = 1
+
+[[boundaries]]
+payload_offset = 3981
+length = 7
+
+[[boundaries]]
+payload_offset = 3988
+length = 3
+
+[[boundaries]]
+payload_offset = 3991
+length = 1
+
+[[boundaries]]
+payload_offset = 3992
+length = 1
+
+[[boundaries]]
+payload_offset = 3993
+length = 3
+
+[[boundaries]]
+payload_offset = 3996
+length = 5
+
+[[boundaries]]
+payload_offset = 4001
+length = 6
+
+[[boundaries]]
+payload_offset = 4007
+length = 1
+
+[[boundaries]]
+payload_offset = 4008
+length = 6
+
+[[boundaries]]
+payload_offset = 4014
+length = 2
+
+[[boundaries]]
+payload_offset = 4016
+length = 1
+
+[[boundaries]]
+payload_offset = 4017
+length = 1
+
+[[boundaries]]
+payload_offset = 4018
+length = 5
+
+[[boundaries]]
+payload_offset = 4023
+length = 6
+
+[[boundaries]]
+payload_offset = 4029
+length = 5
+
+[[boundaries]]
+payload_offset = 4034
+length = 5
+
+[[boundaries]]
+payload_offset = 4039
+length = 6
+
+[[boundaries]]
+payload_offset = 4045
+length = 5
+
+[[boundaries]]
+payload_offset = 4050
+length = 6
+
+[[boundaries]]
+payload_offset = 4056
+length = 1
+
+[[boundaries]]
+payload_offset = 4057
+length = 6
+
+[[boundaries]]
+payload_offset = 4063
+length = 2
+
+[[boundaries]]
+payload_offset = 4065
+length = 1
+
+[[boundaries]]
+payload_offset = 4066
+length = 1
+
+[[boundaries]]
+payload_offset = 4067
+length = 1
+
+[[boundaries]]
+payload_offset = 4068
+length = 5
+
+[[boundaries]]
+payload_offset = 4073
+length = 6
+
+[[boundaries]]
+payload_offset = 4079
+length = 2
+
+[[boundaries]]
+payload_offset = 4081
+length = 1
+
+[[boundaries]]
+payload_offset = 4082
+length = 5
+
+[[boundaries]]
+payload_offset = 4087
+length = 1
+
+[[boundaries]]
+payload_offset = 4088
+length = 5
+
+[[boundaries]]
+payload_offset = 4093
+length = 5
+
+[[boundaries]]
+payload_offset = 4098
+length = 2
+
+[[boundaries]]
+payload_offset = 4100
+length = 5
+
+[[boundaries]]
+payload_offset = 4105
+length = 6
+
+[[boundaries]]
+payload_offset = 4111
+length = 1
+
+[[boundaries]]
+payload_offset = 4112
+length = 6
+
+[[boundaries]]
+payload_offset = 4118
+length = 2
+
+[[boundaries]]
+payload_offset = 4120
+length = 1
+
+[[boundaries]]
+payload_offset = 4121
+length = 1
+
+[[boundaries]]
+payload_offset = 4122
+length = 3
+
+[[boundaries]]
+payload_offset = 4125
+length = 2
+
+[[boundaries]]
+payload_offset = 4127
+length = 3
+
+[[boundaries]]
+payload_offset = 4130
+length = 1
+
+[[boundaries]]
+payload_offset = 4131
+length = 6
+
+[[boundaries]]
+payload_offset = 4137
+length = 2
+
+[[boundaries]]
+payload_offset = 4139
+length = 3
+
+[[boundaries]]
+payload_offset = 4142
+length = 6
+
+[[boundaries]]
+payload_offset = 4148
+length = 2
+
+[[boundaries]]
+payload_offset = 4150
+length = 1
+
+[[boundaries]]
+payload_offset = 4151
+length = 3
+
+[[boundaries]]
+payload_offset = 4154
+length = 6
+
+[[boundaries]]
+payload_offset = 4160
+length = 2
+
+[[boundaries]]
+payload_offset = 4162
+length = 1
+
+[[boundaries]]
+payload_offset = 4163
+length = 1
+
+[[boundaries]]
+payload_offset = 4164
+length = 5
+
+[[boundaries]]
+payload_offset = 4169
+length = 5
+
+[[boundaries]]
+payload_offset = 4174
+length = 6
+
+[[boundaries]]
+payload_offset = 4180
+length = 1
+
+[[boundaries]]
+payload_offset = 4181
+length = 1
+
+[[boundaries]]
+payload_offset = 4182
+length = 5
+
+[[boundaries]]
+payload_offset = 4187
+length = 5
+
+[[boundaries]]
+payload_offset = 4192
+length = 6
+
+[[boundaries]]
+payload_offset = 4198
+length = 1
+
+[[boundaries]]
+payload_offset = 4199
+length = 3
+
+[[boundaries]]
+payload_offset = 4202
+length = 1

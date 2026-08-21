@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 3
 reloc_count = 7
+instruction_count = 26
 
 [[segments]]
 kind = "bytecode"
@@ -56,6 +57,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-house3"
 target_export = "MossdeepCity_House3_EventScript_ReceivedSuperRod"
 target_offset = 64
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 63
 runtime_resolution_required = true
 
 [[relocs]]
@@ -65,6 +68,8 @@ original_encoded_gba = 0x8222616
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-house3"
 target_export = "MossdeepCity_House3_Text_YouWantSuperRod"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -75,6 +80,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-house3"
 target_export = "MossdeepCity_House3_EventScript_DeclineSuperRod"
 target_offset = 74
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 73
 runtime_resolution_required = true
 
 [[relocs]]
@@ -84,6 +91,8 @@ original_encoded_gba = 0x82226b6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-house3"
 target_export = "MossdeepCity_House3_Text_SuperRodIsSuper"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -93,6 +102,8 @@ original_encoded_gba = 0x82226f0
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-house3"
 target_export = "MossdeepCity_House3_Text_TryDroppingRodInWater"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -102,6 +113,8 @@ original_encoded_gba = 0x8222751
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-house3"
 target_export = "MossdeepCity_House3_Text_GoAfterSeafloorPokemon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -111,4 +124,110 @@ original_encoded_gba = 0x8222733
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-house3"
 target_export = "MossdeepCity_House3_Text_DontYouLikeToFish"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 1
+
+[[boundaries]]
+payload_offset = 2
+length = 3
+
+[[boundaries]]
+payload_offset = 5
+length = 6
+
+[[boundaries]]
+payload_offset = 11
+length = 6
+
+[[boundaries]]
+payload_offset = 17
+length = 2
+
+[[boundaries]]
+payload_offset = 19
+length = 5
+
+[[boundaries]]
+payload_offset = 24
+length = 6
+
+[[boundaries]]
+payload_offset = 30
+length = 6
+
+[[boundaries]]
+payload_offset = 36
+length = 2
+
+[[boundaries]]
+payload_offset = 38
+length = 5
+
+[[boundaries]]
+payload_offset = 43
+length = 5
+
+[[boundaries]]
+payload_offset = 48
+length = 2
+
+[[boundaries]]
+payload_offset = 50
+length = 3
+
+[[boundaries]]
+payload_offset = 53
+length = 6
+
+[[boundaries]]
+payload_offset = 59
+length = 2
+
+[[boundaries]]
+payload_offset = 61
+length = 1
+
+[[boundaries]]
+payload_offset = 62
+length = 1
+
+[[boundaries]]
+payload_offset = 63
+length = 6
+
+[[boundaries]]
+payload_offset = 69
+length = 2
+
+[[boundaries]]
+payload_offset = 71
+length = 1
+
+[[boundaries]]
+payload_offset = 72
+length = 1
+
+[[boundaries]]
+payload_offset = 73
+length = 6
+
+[[boundaries]]
+payload_offset = 79
+length = 2
+
+[[boundaries]]
+payload_offset = 81
+length = 1
+
+[[boundaries]]
+payload_offset = 82
+length = 1

@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 2
 reloc_count = 1
+instruction_count = 7
 
 [[segments]]
 kind = "bytecode"
@@ -48,4 +49,34 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/fierypath"
 target_export = "FieryPath_EventScript_MoveScottToFallarbor"
 target_offset = 19
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 13
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 6
+
+[[boundaries]]
+payload_offset = 9
+length = 3
+
+[[boundaries]]
+payload_offset = 12
+length = 1
+
+[[boundaries]]
+payload_offset = 13
+length = 3
+
+[[boundaries]]
+payload_offset = 16
+length = 3
+
+[[boundaries]]
+payload_offset = 19
+length = 1

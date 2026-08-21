@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 3
 export_count = 38
 reloc_count = 95
+instruction_count = 243
 
 [[segments]]
 kind = "bytecode"
@@ -348,6 +349,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtpyre-summit"
 target_export = "MtPyre_Summit_EventScript_SetArchieMaxiePositions"
 target_offset = 18
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 12
 runtime_resolution_required = true
 
 [[relocs]]
@@ -358,6 +361,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtpyre-summit"
 target_export = "MtPyre_Summit_EventScript_TeamAquaExits"
 target_offset = 69
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 63
 runtime_resolution_required = true
 
 [[relocs]]
@@ -368,6 +373,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtpyre-summit"
 target_export = "MtPyre_Summit_EventScript_TeamAquaExits"
 target_offset = 69
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 63
 runtime_resolution_required = true
 
 [[relocs]]
@@ -378,6 +385,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtpyre-summit"
 target_export = "MtPyre_Summit_EventScript_TeamAquaExits"
 target_offset = 69
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 63
 runtime_resolution_required = true
 
 [[relocs]]
@@ -387,6 +396,8 @@ original_encoded_gba = 0x82725b2
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceup"
 target_export = "Common_Movement_FaceUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -396,6 +407,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -406,6 +419,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtpyre-summit"
 target_export = "MtPyre_Summit_EventScript_ArchieFacePlayer0"
 target_offset = 233
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 227
 runtime_resolution_required = true
 
 [[relocs]]
@@ -416,6 +431,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtpyre-summit"
 target_export = "MtPyre_Summit_EventScript_ArchieFacePlayer1"
 target_offset = 244
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 238
 runtime_resolution_required = true
 
 [[relocs]]
@@ -426,6 +443,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtpyre-summit"
 target_export = "MtPyre_Summit_EventScript_ArchieFacePlayer2"
 target_offset = 245
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 239
 runtime_resolution_required = true
 
 [[relocs]]
@@ -435,6 +454,8 @@ original_encoded_gba = 0x823281a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-summit"
 target_export = "MtPyre_Summit_Text_ArchieWeGotTheOrbLetsGo"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -445,6 +466,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtpyre-summit"
 target_export = "MtPyre_Summit_EventScript_OldLadyApproachPlayer0"
 target_offset = 256
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 250
 runtime_resolution_required = true
 
 [[relocs]]
@@ -455,6 +478,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtpyre-summit"
 target_export = "MtPyre_Summit_EventScript_OldLadyApproachPlayer1"
 target_offset = 277
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 271
 runtime_resolution_required = true
 
 [[relocs]]
@@ -465,6 +490,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtpyre-summit"
 target_export = "MtPyre_Summit_EventScript_OldLadyApproachPlayer2"
 target_offset = 288
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 282
 runtime_resolution_required = true
 
 [[relocs]]
@@ -474,6 +501,8 @@ original_encoded_gba = 0x823290e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-summit"
 target_export = "MtPyre_Summit_Text_BothOrbsTakenMagmaLeftThis"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -483,6 +512,8 @@ original_encoded_gba = 0x8232136
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mtpyre-summit-movement-archiefaceplayer0"
 target_export = "MtPyre_Summit_Movement_ArchieFacePlayer0"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -492,6 +523,8 @@ original_encoded_gba = 0x8232139
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mtpyre-summit-movement-archiefaceplayer2"
 target_export = "MtPyre_Summit_Movement_ArchieFacePlayer2"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -501,6 +534,8 @@ original_encoded_gba = 0x823212c
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mtpyre-summit-movement-oldladyapproachplayer0"
 target_export = "MtPyre_Summit_Movement_OldLadyApproachPlayer0"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -510,6 +545,8 @@ original_encoded_gba = 0x82725a8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterright"
 target_export = "Common_Movement_WalkInPlaceFasterRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -519,6 +556,8 @@ original_encoded_gba = 0x8232130
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mtpyre-summit-movement-oldladyapproachplayer1"
 target_export = "MtPyre_Summit_Movement_OldLadyApproachPlayer1"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -528,6 +567,8 @@ original_encoded_gba = 0x8232132
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mtpyre-summit-movement-oldladyapproachplayer2"
 target_export = "MtPyre_Summit_Movement_OldLadyApproachPlayer2"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -537,6 +578,8 @@ original_encoded_gba = 0x82725a4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterleft"
 target_export = "Common_Movement_WalkInPlaceFasterLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -547,6 +590,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtpyre-summit"
 target_export = "MtPyre_Summit_EventScript_OldManAfterRayquaza"
 target_offset = 368
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 346
 runtime_resolution_required = true
 
 [[relocs]]
@@ -556,6 +601,8 @@ original_encoded_gba = 0x8232e0c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-summit"
 target_export = "MtPyre_Summit_Text_WillYouHearOutMyTale"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -566,6 +613,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtpyre-summit"
 target_export = "MtPyre_Summit_EventScript_OldManTale"
 target_offset = 400
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 378
 runtime_resolution_required = true
 
 [[relocs]]
@@ -576,6 +625,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtpyre-summit"
 target_export = "MtPyre_Summit_EventScript_DeclineOldManTale"
 target_offset = 409
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 387
 runtime_resolution_required = true
 
 [[relocs]]
@@ -585,6 +636,8 @@ original_encoded_gba = 0x82331a6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-summit"
 target_export = "MtPyre_Summit_Text_HearTheNewLegendOfHoenn"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -595,6 +648,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtpyre-summit"
 target_export = "MtPyre_Summit_EventScript_OldManNewTale"
 target_offset = 418
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 396
 runtime_resolution_required = true
 
 [[relocs]]
@@ -605,6 +660,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtpyre-summit"
 target_export = "MtPyre_Summit_EventScript_DeclineOldManTale"
 target_offset = 409
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 387
 runtime_resolution_required = true
 
 [[relocs]]
@@ -614,6 +671,8 @@ original_encoded_gba = 0x8232f27
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-summit"
 target_export = "MtPyre_Summit_Text_GroudonKyogreTale"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -623,6 +682,8 @@ original_encoded_gba = 0x8233162
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-summit"
 target_export = "MtPyre_Summit_Text_WellThatTooIsFine"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -632,6 +693,8 @@ original_encoded_gba = 0x823325d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-summit"
 target_export = "MtPyre_Summit_Text_HoennTrioTale"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -642,6 +705,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtpyre-summit"
 target_export = "MtPyre_Summit_EventScript_OldLadyAfterOrbsReturned"
 target_offset = 491
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 469
 runtime_resolution_required = true
 
 [[relocs]]
@@ -652,6 +717,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtpyre-summit"
 target_export = "MtPyre_Summit_EventScript_OldLadyOrbsReturned"
 target_offset = 468
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 446
 runtime_resolution_required = true
 
 [[relocs]]
@@ -662,6 +729,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtpyre-summit"
 target_export = "MtPyre_Summit_EventScript_OldLadyLegendariesAwake"
 target_offset = 481
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 459
 runtime_resolution_required = true
 
 [[relocs]]
@@ -671,6 +740,8 @@ original_encoded_gba = 0x8232ad8
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-summit"
 target_export = "MtPyre_Summit_Text_OrbsHaveBeenTaken"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -680,6 +751,8 @@ original_encoded_gba = 0x8232ca6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-summit"
 target_export = "MtPyre_Summit_Text_ThoseTwoMenReturnedOrbs"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -689,6 +762,8 @@ original_encoded_gba = 0x8232b4f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-summit"
 target_export = "MtPyre_Summit_Text_GroudonKyogreAwakened"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -698,6 +773,8 @@ original_encoded_gba = 0x8232d1e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-summit"
 target_export = "MtPyre_Summit_Text_SuperAncientPokemonTaughtUs"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -708,6 +785,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtpyre-summit"
 target_export = "MtPyre_Summit_EventScript_ArchieMaxieReturnOrbs"
 target_offset = 537
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 515
 runtime_resolution_required = true
 
 [[relocs]]
@@ -718,6 +797,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtpyre-summit"
 target_export = "MtPyre_Summit_EventScript_ArchieMaxieReturnOrbs"
 target_offset = 537
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 515
 runtime_resolution_required = true
 
 [[relocs]]
@@ -728,6 +809,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtpyre-summit"
 target_export = "MtPyre_Summit_EventScript_ArchieMaxieReturnOrbs"
 target_offset = 537
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 515
 runtime_resolution_required = true
 
 [[relocs]]
@@ -737,6 +820,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -747,6 +832,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtpyre-summit"
 target_export = "MtPyre_Summit_EventScript_ArchieMaxieBeginExit0"
 target_offset = 717
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 695
 runtime_resolution_required = true
 
 [[relocs]]
@@ -757,6 +844,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtpyre-summit"
 target_export = "MtPyre_Summit_EventScript_ArchieMaxieBeginExit1"
 target_offset = 742
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 720
 runtime_resolution_required = true
 
 [[relocs]]
@@ -767,6 +856,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtpyre-summit"
 target_export = "MtPyre_Summit_EventScript_ArchieMaxieBeginExit2"
 target_offset = 767
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 745
 runtime_resolution_required = true
 
 [[relocs]]
@@ -776,6 +867,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -785,6 +878,8 @@ original_encoded_gba = 0x827259a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-delay48"
 target_export = "Common_Movement_Delay48"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -795,6 +890,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtpyre-summit"
 target_export = "MtPyre_Summit_EventScript_MaxieApproachPlayer0"
 target_offset = 792
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 770
 runtime_resolution_required = true
 
 [[relocs]]
@@ -805,6 +902,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtpyre-summit"
 target_export = "MtPyre_Summit_EventScript_MaxieApproachPlayer1"
 target_offset = 817
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 795
 runtime_resolution_required = true
 
 [[relocs]]
@@ -815,6 +914,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtpyre-summit"
 target_export = "MtPyre_Summit_EventScript_MaxieApproachPlayer2"
 target_offset = 842
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 820
 runtime_resolution_required = true
 
 [[relocs]]
@@ -824,6 +925,8 @@ original_encoded_gba = 0x8233183
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-summit"
 target_export = "MtPyre_Summit_Text_MaxieSilence"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -834,6 +937,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtpyre-summit"
 target_export = "MtPyre_Summit_EventScript_MaxieApproachArchie0"
 target_offset = 867
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 845
 runtime_resolution_required = true
 
 [[relocs]]
@@ -844,6 +949,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtpyre-summit"
 target_export = "MtPyre_Summit_EventScript_MaxieApproachArchie1"
 target_offset = 895
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 873
 runtime_resolution_required = true
 
 [[relocs]]
@@ -854,6 +961,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtpyre-summit"
 target_export = "MtPyre_Summit_EventScript_MaxieApproachArchie2"
 target_offset = 923
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 901
 runtime_resolution_required = true
 
 [[relocs]]
@@ -863,6 +972,8 @@ original_encoded_gba = 0x82323b6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mtpyre-summit-movement-archieexit"
 target_export = "MtPyre_Summit_Movement_ArchieExit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -872,6 +983,8 @@ original_encoded_gba = 0x82323bd
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mtpyre-summit-movement-maxieexit"
 target_export = "MtPyre_Summit_Movement_MaxieExit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -881,6 +994,8 @@ original_encoded_gba = 0x82323c4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mtpyre-summit-movement-playerwatcharchiemaxieexit0"
 target_export = "MtPyre_Summit_Movement_PlayerWatchArchieMaxieExit0"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -890,6 +1005,8 @@ original_encoded_gba = 0x82323b6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mtpyre-summit-movement-archieexit"
 target_export = "MtPyre_Summit_Movement_ArchieExit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -899,6 +1016,8 @@ original_encoded_gba = 0x82323bd
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mtpyre-summit-movement-maxieexit"
 target_export = "MtPyre_Summit_Movement_MaxieExit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -908,6 +1027,8 @@ original_encoded_gba = 0x82323cb
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mtpyre-summit-movement-playerwatcharchiemaxieexit1"
 target_export = "MtPyre_Summit_Movement_PlayerWatchArchieMaxieExit1"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -917,6 +1038,8 @@ original_encoded_gba = 0x82323b6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mtpyre-summit-movement-archieexit"
 target_export = "MtPyre_Summit_Movement_ArchieExit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -926,6 +1049,8 @@ original_encoded_gba = 0x82323bd
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mtpyre-summit-movement-maxieexit"
 target_export = "MtPyre_Summit_Movement_MaxieExit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -935,6 +1060,8 @@ original_encoded_gba = 0x82323d2
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mtpyre-summit-movement-playerwatcharchiemaxieexit2"
 target_export = "MtPyre_Summit_Movement_PlayerWatchArchieMaxieExit2"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -944,6 +1071,8 @@ original_encoded_gba = 0x82323b6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mtpyre-summit-movement-archieexit"
 target_export = "MtPyre_Summit_Movement_ArchieExit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -953,6 +1082,8 @@ original_encoded_gba = 0x82323bd
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mtpyre-summit-movement-maxieexit"
 target_export = "MtPyre_Summit_Movement_MaxieExit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -962,6 +1093,8 @@ original_encoded_gba = 0x82323ae
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mtpyre-summit-movement-playerfacemaxie0"
 target_export = "MtPyre_Summit_Movement_PlayerFaceMaxie0"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -971,6 +1104,8 @@ original_encoded_gba = 0x82323e7
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mtpyre-summit-movement-archiewatchmaxie"
 target_export = "MtPyre_Summit_Movement_ArchieWatchMaxie"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -980,6 +1115,8 @@ original_encoded_gba = 0x82323d8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mtpyre-summit-movement-maxieapproachplayer0"
 target_export = "MtPyre_Summit_Movement_MaxieApproachPlayer0"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -989,6 +1126,8 @@ original_encoded_gba = 0x82323b2
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mtpyre-summit-movement-playerfacemaxie"
 target_export = "MtPyre_Summit_Movement_PlayerFaceMaxie"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -998,6 +1137,8 @@ original_encoded_gba = 0x82323e7
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mtpyre-summit-movement-archiewatchmaxie"
 target_export = "MtPyre_Summit_Movement_ArchieWatchMaxie"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1007,6 +1148,8 @@ original_encoded_gba = 0x82323dd
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mtpyre-summit-movement-maxieapproachplayer1"
 target_export = "MtPyre_Summit_Movement_MaxieApproachPlayer1"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1016,6 +1159,8 @@ original_encoded_gba = 0x82323b2
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mtpyre-summit-movement-playerfacemaxie"
 target_export = "MtPyre_Summit_Movement_PlayerFaceMaxie"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1025,6 +1170,8 @@ original_encoded_gba = 0x82323e7
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mtpyre-summit-movement-archiewatchmaxie"
 target_export = "MtPyre_Summit_Movement_ArchieWatchMaxie"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1034,6 +1181,8 @@ original_encoded_gba = 0x82323e2
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mtpyre-summit-movement-maxieapproachplayer2"
 target_export = "MtPyre_Summit_Movement_MaxieApproachPlayer2"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1043,6 +1192,8 @@ original_encoded_gba = 0x82323ea
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mtpyre-summit-movement-playerwatchmaxie"
 target_export = "MtPyre_Summit_Movement_PlayerWatchMaxie"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1052,6 +1203,8 @@ original_encoded_gba = 0x82323ed
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mtpyre-summit-movement-maxieapproacharchie0"
 target_export = "MtPyre_Summit_Movement_MaxieApproachArchie0"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1061,6 +1214,8 @@ original_encoded_gba = 0x82725a8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterright"
 target_export = "Common_Movement_WalkInPlaceFasterRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1070,6 +1225,8 @@ original_encoded_gba = 0x82323ea
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mtpyre-summit-movement-playerwatchmaxie"
 target_export = "MtPyre_Summit_Movement_PlayerWatchMaxie"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1079,6 +1236,8 @@ original_encoded_gba = 0x82323f3
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mtpyre-summit-movement-maxieapproacharchie1"
 target_export = "MtPyre_Summit_Movement_MaxieApproachArchie1"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1088,6 +1247,8 @@ original_encoded_gba = 0x82725a8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterright"
 target_export = "Common_Movement_WalkInPlaceFasterRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1097,6 +1258,8 @@ original_encoded_gba = 0x82323ea
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mtpyre-summit-movement-playerwatchmaxie"
 target_export = "MtPyre_Summit_Movement_PlayerWatchMaxie"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1106,6 +1269,8 @@ original_encoded_gba = 0x82323f8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mtpyre-summit-movement-maxieapproacharchie2"
 target_export = "MtPyre_Summit_Movement_MaxieApproachArchie2"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1115,6 +1280,8 @@ original_encoded_gba = 0x82725a8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterright"
 target_export = "Common_Movement_WalkInPlaceFasterRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1124,6 +1291,8 @@ original_encoded_gba = 0x8232459
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-summit"
 target_export = "MtPyre_Summit_Text_Grunt1Intro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1133,6 +1302,8 @@ original_encoded_gba = 0x82324a0
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-summit"
 target_export = "MtPyre_Summit_Text_Grunt1Defeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1142,6 +1313,8 @@ original_encoded_gba = 0x82324e0
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-summit"
 target_export = "MtPyre_Summit_Text_Grunt1PostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1151,6 +1324,8 @@ original_encoded_gba = 0x8232513
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-summit"
 target_export = "MtPyre_Summit_Text_Grunt2Intro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1160,6 +1335,8 @@ original_encoded_gba = 0x82325b0
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-summit"
 target_export = "MtPyre_Summit_Text_Grunt2Defeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1169,6 +1346,8 @@ original_encoded_gba = 0x82325e4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-summit"
 target_export = "MtPyre_Summit_Text_Grunt2PostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1178,6 +1357,8 @@ original_encoded_gba = 0x823261d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-summit"
 target_export = "MtPyre_Summit_Text_Grunt3Intro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1187,6 +1368,8 @@ original_encoded_gba = 0x8232678
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-summit"
 target_export = "MtPyre_Summit_Text_Grunt3Defeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1196,6 +1379,8 @@ original_encoded_gba = 0x82326b3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-summit"
 target_export = "MtPyre_Summit_Text_Grunt3PostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1205,6 +1390,8 @@ original_encoded_gba = 0x823271b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-summit"
 target_export = "MtPyre_Summit_Text_Grunt4Intro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1214,6 +1401,8 @@ original_encoded_gba = 0x823279a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-summit"
 target_export = "MtPyre_Summit_Text_Grunt4Defeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1223,4 +1412,978 @@ original_encoded_gba = 0x82327d8
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-summit"
 target_export = "MtPyre_Summit_Text_Grunt4PostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 5
+
+[[boundaries]]
+payload_offset = 5
+length = 6
+
+[[boundaries]]
+payload_offset = 11
+length = 1
+
+[[boundaries]]
+payload_offset = 12
+length = 7
+
+[[boundaries]]
+payload_offset = 19
+length = 7
+
+[[boundaries]]
+payload_offset = 26
+length = 1
+
+[[boundaries]]
+payload_offset = 27
+length = 1
+
+[[boundaries]]
+payload_offset = 28
+length = 5
+
+[[boundaries]]
+payload_offset = 33
+length = 5
+
+[[boundaries]]
+payload_offset = 39
+length = 1
+
+[[boundaries]]
+payload_offset = 40
+length = 5
+
+[[boundaries]]
+payload_offset = 45
+length = 5
+
+[[boundaries]]
+payload_offset = 51
+length = 1
+
+[[boundaries]]
+payload_offset = 52
+length = 5
+
+[[boundaries]]
+payload_offset = 57
+length = 5
+
+[[boundaries]]
+payload_offset = 63
+length = 4
+
+[[boundaries]]
+payload_offset = 67
+length = 7
+
+[[boundaries]]
+payload_offset = 74
+length = 3
+
+[[boundaries]]
+payload_offset = 77
+length = 7
+
+[[boundaries]]
+payload_offset = 84
+length = 3
+
+[[boundaries]]
+payload_offset = 87
+length = 3
+
+[[boundaries]]
+payload_offset = 90
+length = 5
+
+[[boundaries]]
+payload_offset = 95
+length = 6
+
+[[boundaries]]
+payload_offset = 101
+length = 5
+
+[[boundaries]]
+payload_offset = 106
+length = 6
+
+[[boundaries]]
+payload_offset = 112
+length = 5
+
+[[boundaries]]
+payload_offset = 117
+length = 6
+
+[[boundaries]]
+payload_offset = 123
+length = 6
+
+[[boundaries]]
+payload_offset = 129
+length = 2
+
+[[boundaries]]
+payload_offset = 131
+length = 1
+
+[[boundaries]]
+payload_offset = 132
+length = 2
+
+[[boundaries]]
+payload_offset = 134
+length = 3
+
+[[boundaries]]
+payload_offset = 137
+length = 3
+
+[[boundaries]]
+payload_offset = 140
+length = 3
+
+[[boundaries]]
+payload_offset = 143
+length = 3
+
+[[boundaries]]
+payload_offset = 146
+length = 3
+
+[[boundaries]]
+payload_offset = 149
+length = 3
+
+[[boundaries]]
+payload_offset = 152
+length = 3
+
+[[boundaries]]
+payload_offset = 155
+length = 1
+
+[[boundaries]]
+payload_offset = 156
+length = 2
+
+[[boundaries]]
+payload_offset = 158
+length = 3
+
+[[boundaries]]
+payload_offset = 161
+length = 5
+
+[[boundaries]]
+payload_offset = 166
+length = 5
+
+[[boundaries]]
+payload_offset = 171
+length = 6
+
+[[boundaries]]
+payload_offset = 177
+length = 5
+
+[[boundaries]]
+payload_offset = 182
+length = 6
+
+[[boundaries]]
+payload_offset = 188
+length = 5
+
+[[boundaries]]
+payload_offset = 193
+length = 6
+
+[[boundaries]]
+payload_offset = 199
+length = 6
+
+[[boundaries]]
+payload_offset = 205
+length = 2
+
+[[boundaries]]
+payload_offset = 207
+length = 5
+
+[[boundaries]]
+payload_offset = 212
+length = 5
+
+[[boundaries]]
+payload_offset = 217
+length = 2
+
+[[boundaries]]
+payload_offset = 219
+length = 3
+
+[[boundaries]]
+payload_offset = 222
+length = 3
+
+[[boundaries]]
+payload_offset = 225
+length = 1
+
+[[boundaries]]
+payload_offset = 226
+length = 1
+
+[[boundaries]]
+payload_offset = 227
+length = 7
+
+[[boundaries]]
+payload_offset = 234
+length = 3
+
+[[boundaries]]
+payload_offset = 237
+length = 1
+
+[[boundaries]]
+payload_offset = 238
+length = 1
+
+[[boundaries]]
+payload_offset = 239
+length = 7
+
+[[boundaries]]
+payload_offset = 246
+length = 3
+
+[[boundaries]]
+payload_offset = 249
+length = 1
+
+[[boundaries]]
+payload_offset = 250
+length = 7
+
+[[boundaries]]
+payload_offset = 257
+length = 3
+
+[[boundaries]]
+payload_offset = 260
+length = 7
+
+[[boundaries]]
+payload_offset = 267
+length = 3
+
+[[boundaries]]
+payload_offset = 270
+length = 1
+
+[[boundaries]]
+payload_offset = 271
+length = 7
+
+[[boundaries]]
+payload_offset = 278
+length = 3
+
+[[boundaries]]
+payload_offset = 281
+length = 1
+
+[[boundaries]]
+payload_offset = 282
+length = 7
+
+[[boundaries]]
+payload_offset = 289
+length = 3
+
+[[boundaries]]
+payload_offset = 292
+length = 7
+
+[[boundaries]]
+payload_offset = 299
+length = 3
+
+[[boundaries]]
+payload_offset = 302
+length = 1
+
+[[boundaries]]
+payload_offset = 303
+length = 1
+
+[[boundaries]]
+payload_offset = 304
+length = 1
+
+[[boundaries]]
+payload_offset = 305
+length = 3
+
+[[boundaries]]
+payload_offset = 308
+length = 6
+
+[[boundaries]]
+payload_offset = 314
+length = 6
+
+[[boundaries]]
+payload_offset = 320
+length = 2
+
+[[boundaries]]
+payload_offset = 322
+length = 5
+
+[[boundaries]]
+payload_offset = 327
+length = 6
+
+[[boundaries]]
+payload_offset = 333
+length = 5
+
+[[boundaries]]
+payload_offset = 338
+length = 6
+
+[[boundaries]]
+payload_offset = 344
+length = 1
+
+[[boundaries]]
+payload_offset = 345
+length = 1
+
+[[boundaries]]
+payload_offset = 346
+length = 6
+
+[[boundaries]]
+payload_offset = 352
+length = 2
+
+[[boundaries]]
+payload_offset = 354
+length = 5
+
+[[boundaries]]
+payload_offset = 359
+length = 6
+
+[[boundaries]]
+payload_offset = 365
+length = 5
+
+[[boundaries]]
+payload_offset = 370
+length = 6
+
+[[boundaries]]
+payload_offset = 376
+length = 1
+
+[[boundaries]]
+payload_offset = 377
+length = 1
+
+[[boundaries]]
+payload_offset = 378
+length = 6
+
+[[boundaries]]
+payload_offset = 384
+length = 2
+
+[[boundaries]]
+payload_offset = 386
+length = 1
+
+[[boundaries]]
+payload_offset = 387
+length = 6
+
+[[boundaries]]
+payload_offset = 393
+length = 2
+
+[[boundaries]]
+payload_offset = 395
+length = 1
+
+[[boundaries]]
+payload_offset = 396
+length = 6
+
+[[boundaries]]
+payload_offset = 402
+length = 2
+
+[[boundaries]]
+payload_offset = 404
+length = 1
+
+[[boundaries]]
+payload_offset = 405
+length = 1
+
+[[boundaries]]
+payload_offset = 406
+length = 1
+
+[[boundaries]]
+payload_offset = 407
+length = 3
+
+[[boundaries]]
+payload_offset = 410
+length = 6
+
+[[boundaries]]
+payload_offset = 416
+length = 5
+
+[[boundaries]]
+payload_offset = 421
+length = 6
+
+[[boundaries]]
+payload_offset = 427
+length = 3
+
+[[boundaries]]
+payload_offset = 430
+length = 6
+
+[[boundaries]]
+payload_offset = 436
+length = 6
+
+[[boundaries]]
+payload_offset = 442
+length = 2
+
+[[boundaries]]
+payload_offset = 444
+length = 1
+
+[[boundaries]]
+payload_offset = 445
+length = 1
+
+[[boundaries]]
+payload_offset = 446
+length = 6
+
+[[boundaries]]
+payload_offset = 452
+length = 2
+
+[[boundaries]]
+payload_offset = 454
+length = 3
+
+[[boundaries]]
+payload_offset = 457
+length = 1
+
+[[boundaries]]
+payload_offset = 458
+length = 1
+
+[[boundaries]]
+payload_offset = 459
+length = 6
+
+[[boundaries]]
+payload_offset = 465
+length = 2
+
+[[boundaries]]
+payload_offset = 467
+length = 1
+
+[[boundaries]]
+payload_offset = 468
+length = 1
+
+[[boundaries]]
+payload_offset = 469
+length = 6
+
+[[boundaries]]
+payload_offset = 475
+length = 2
+
+[[boundaries]]
+payload_offset = 477
+length = 1
+
+[[boundaries]]
+payload_offset = 478
+length = 1
+
+[[boundaries]]
+payload_offset = 479
+length = 1
+
+[[boundaries]]
+payload_offset = 480
+length = 5
+
+[[boundaries]]
+payload_offset = 485
+length = 5
+
+[[boundaries]]
+payload_offset = 491
+length = 1
+
+[[boundaries]]
+payload_offset = 492
+length = 5
+
+[[boundaries]]
+payload_offset = 497
+length = 5
+
+[[boundaries]]
+payload_offset = 503
+length = 1
+
+[[boundaries]]
+payload_offset = 504
+length = 5
+
+[[boundaries]]
+payload_offset = 509
+length = 5
+
+[[boundaries]]
+payload_offset = 515
+length = 7
+
+[[boundaries]]
+payload_offset = 522
+length = 3
+
+[[boundaries]]
+payload_offset = 525
+length = 3
+
+[[boundaries]]
+payload_offset = 528
+length = 5
+
+[[boundaries]]
+payload_offset = 533
+length = 6
+
+[[boundaries]]
+payload_offset = 539
+length = 5
+
+[[boundaries]]
+payload_offset = 544
+length = 6
+
+[[boundaries]]
+payload_offset = 550
+length = 5
+
+[[boundaries]]
+payload_offset = 555
+length = 6
+
+[[boundaries]]
+payload_offset = 561
+length = 3
+
+[[boundaries]]
+payload_offset = 564
+length = 7
+
+[[boundaries]]
+payload_offset = 571
+length = 3
+
+[[boundaries]]
+payload_offset = 574
+length = 7
+
+[[boundaries]]
+payload_offset = 581
+length = 3
+
+[[boundaries]]
+payload_offset = 584
+length = 3
+
+[[boundaries]]
+payload_offset = 587
+length = 5
+
+[[boundaries]]
+payload_offset = 592
+length = 6
+
+[[boundaries]]
+payload_offset = 598
+length = 5
+
+[[boundaries]]
+payload_offset = 603
+length = 6
+
+[[boundaries]]
+payload_offset = 609
+length = 5
+
+[[boundaries]]
+payload_offset = 614
+length = 6
+
+[[boundaries]]
+payload_offset = 620
+length = 6
+
+[[boundaries]]
+payload_offset = 626
+length = 2
+
+[[boundaries]]
+payload_offset = 628
+length = 1
+
+[[boundaries]]
+payload_offset = 629
+length = 5
+
+[[boundaries]]
+payload_offset = 634
+length = 6
+
+[[boundaries]]
+payload_offset = 640
+length = 5
+
+[[boundaries]]
+payload_offset = 645
+length = 6
+
+[[boundaries]]
+payload_offset = 651
+length = 5
+
+[[boundaries]]
+payload_offset = 656
+length = 6
+
+[[boundaries]]
+payload_offset = 662
+length = 3
+
+[[boundaries]]
+payload_offset = 665
+length = 7
+
+[[boundaries]]
+payload_offset = 672
+length = 7
+
+[[boundaries]]
+payload_offset = 679
+length = 3
+
+[[boundaries]]
+payload_offset = 682
+length = 3
+
+[[boundaries]]
+payload_offset = 685
+length = 3
+
+[[boundaries]]
+payload_offset = 688
+length = 5
+
+[[boundaries]]
+payload_offset = 693
+length = 1
+
+[[boundaries]]
+payload_offset = 694
+length = 1
+
+[[boundaries]]
+payload_offset = 695
+length = 7
+
+[[boundaries]]
+payload_offset = 702
+length = 7
+
+[[boundaries]]
+payload_offset = 709
+length = 7
+
+[[boundaries]]
+payload_offset = 716
+length = 3
+
+[[boundaries]]
+payload_offset = 719
+length = 1
+
+[[boundaries]]
+payload_offset = 720
+length = 7
+
+[[boundaries]]
+payload_offset = 727
+length = 7
+
+[[boundaries]]
+payload_offset = 734
+length = 7
+
+[[boundaries]]
+payload_offset = 741
+length = 3
+
+[[boundaries]]
+payload_offset = 744
+length = 1
+
+[[boundaries]]
+payload_offset = 745
+length = 7
+
+[[boundaries]]
+payload_offset = 752
+length = 7
+
+[[boundaries]]
+payload_offset = 759
+length = 7
+
+[[boundaries]]
+payload_offset = 766
+length = 3
+
+[[boundaries]]
+payload_offset = 769
+length = 1
+
+[[boundaries]]
+payload_offset = 770
+length = 7
+
+[[boundaries]]
+payload_offset = 777
+length = 7
+
+[[boundaries]]
+payload_offset = 784
+length = 7
+
+[[boundaries]]
+payload_offset = 791
+length = 3
+
+[[boundaries]]
+payload_offset = 794
+length = 1
+
+[[boundaries]]
+payload_offset = 795
+length = 7
+
+[[boundaries]]
+payload_offset = 802
+length = 7
+
+[[boundaries]]
+payload_offset = 809
+length = 7
+
+[[boundaries]]
+payload_offset = 816
+length = 3
+
+[[boundaries]]
+payload_offset = 819
+length = 1
+
+[[boundaries]]
+payload_offset = 820
+length = 7
+
+[[boundaries]]
+payload_offset = 827
+length = 7
+
+[[boundaries]]
+payload_offset = 834
+length = 7
+
+[[boundaries]]
+payload_offset = 841
+length = 3
+
+[[boundaries]]
+payload_offset = 844
+length = 1
+
+[[boundaries]]
+payload_offset = 845
+length = 7
+
+[[boundaries]]
+payload_offset = 852
+length = 7
+
+[[boundaries]]
+payload_offset = 859
+length = 3
+
+[[boundaries]]
+payload_offset = 862
+length = 7
+
+[[boundaries]]
+payload_offset = 869
+length = 3
+
+[[boundaries]]
+payload_offset = 872
+length = 1
+
+[[boundaries]]
+payload_offset = 873
+length = 7
+
+[[boundaries]]
+payload_offset = 880
+length = 7
+
+[[boundaries]]
+payload_offset = 887
+length = 3
+
+[[boundaries]]
+payload_offset = 890
+length = 7
+
+[[boundaries]]
+payload_offset = 897
+length = 3
+
+[[boundaries]]
+payload_offset = 900
+length = 1
+
+[[boundaries]]
+payload_offset = 901
+length = 7
+
+[[boundaries]]
+payload_offset = 908
+length = 7
+
+[[boundaries]]
+payload_offset = 915
+length = 3
+
+[[boundaries]]
+payload_offset = 918
+length = 7
+
+[[boundaries]]
+payload_offset = 925
+length = 3
+
+[[boundaries]]
+payload_offset = 928
+length = 1
+
+[[boundaries]]
+payload_offset = 929
+length = 14
+
+[[boundaries]]
+payload_offset = 943
+length = 6
+
+[[boundaries]]
+payload_offset = 949
+length = 2
+
+[[boundaries]]
+payload_offset = 951
+length = 1
+
+[[boundaries]]
+payload_offset = 952
+length = 14
+
+[[boundaries]]
+payload_offset = 966
+length = 6
+
+[[boundaries]]
+payload_offset = 972
+length = 2
+
+[[boundaries]]
+payload_offset = 974
+length = 1
+
+[[boundaries]]
+payload_offset = 975
+length = 14
+
+[[boundaries]]
+payload_offset = 989
+length = 6
+
+[[boundaries]]
+payload_offset = 995
+length = 2
+
+[[boundaries]]
+payload_offset = 997
+length = 1
+
+[[boundaries]]
+payload_offset = 998
+length = 14
+
+[[boundaries]]
+payload_offset = 1012
+length = 6
+
+[[boundaries]]
+payload_offset = 1018
+length = 2
+
+[[boundaries]]
+payload_offset = 1020
+length = 1

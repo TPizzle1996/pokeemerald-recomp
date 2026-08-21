@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 32
 reloc_count = 111
+instruction_count = 278
 
 [[segments]]
 kind = "bytecode"
@@ -288,6 +289,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_SwaggerTaught"
 target_offset = 94
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 94
 runtime_resolution_required = true
 
 [[relocs]]
@@ -297,6 +300,8 @@ original_encoded_gba = 0x82c6e37
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/move-tutors"
 target_export = "MoveTutor_Text_SwaggerTeach"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -307,6 +312,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_SwaggerDeclined"
 target_offset = 84
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 84
 runtime_resolution_required = true
 
 [[relocs]]
@@ -317,6 +324,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_CanOnlyBeLearnedOnce"
 target_offset = 1047
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1047
 runtime_resolution_required = true
 
 [[relocs]]
@@ -327,6 +336,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_SwaggerDeclined"
 target_offset = 84
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 84
 runtime_resolution_required = true
 
 [[relocs]]
@@ -336,6 +347,8 @@ original_encoded_gba = 0x82c6f66
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/move-tutors"
 target_export = "MoveTutor_Text_SwaggerWhichMon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -346,6 +359,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_OpenPartyMenu"
 target_offset = 1040
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1040
 runtime_resolution_required = true
 
 [[relocs]]
@@ -356,6 +371,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_SwaggerDeclined"
 target_offset = 84
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 84
 runtime_resolution_required = true
 
 [[relocs]]
@@ -366,6 +383,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_SwaggerTaught"
 target_offset = 94
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 94
 runtime_resolution_required = true
 
 [[relocs]]
@@ -375,6 +394,8 @@ original_encoded_gba = 0x82c6f33
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/move-tutors"
 target_export = "MoveTutor_Text_SwaggerDeclined"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -384,6 +405,8 @@ original_encoded_gba = 0x82c6f9e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/move-tutors"
 target_export = "MoveTutor_Text_SwaggerTaught"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -394,6 +417,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_RolloutTaught"
 target_offset = 198
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 198
 runtime_resolution_required = true
 
 [[relocs]]
@@ -403,6 +428,8 @@ original_encoded_gba = 0x82c6fdb
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/move-tutors"
 target_export = "MoveTutor_Text_RolloutTeach"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -413,6 +440,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_RolloutDeclined"
 target_offset = 188
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 188
 runtime_resolution_required = true
 
 [[relocs]]
@@ -423,6 +452,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_CanOnlyBeLearnedOnce"
 target_offset = 1047
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1047
 runtime_resolution_required = true
 
 [[relocs]]
@@ -433,6 +464,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_RolloutDeclined"
 target_offset = 188
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 188
 runtime_resolution_required = true
 
 [[relocs]]
@@ -442,6 +475,8 @@ original_encoded_gba = 0x82c70f3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/move-tutors"
 target_export = "MoveTutor_Text_RolloutWhichMon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -452,6 +487,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_OpenPartyMenu"
 target_offset = 1040
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1040
 runtime_resolution_required = true
 
 [[relocs]]
@@ -462,6 +499,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_RolloutDeclined"
 target_offset = 188
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 188
 runtime_resolution_required = true
 
 [[relocs]]
@@ -472,6 +511,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_RolloutTaught"
 target_offset = 198
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 198
 runtime_resolution_required = true
 
 [[relocs]]
@@ -481,6 +522,8 @@ original_encoded_gba = 0x82c70c4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/move-tutors"
 target_export = "MoveTutor_Text_RolloutDeclined"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -490,6 +533,8 @@ original_encoded_gba = 0x82c7133
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/move-tutors"
 target_export = "MoveTutor_Text_RolloutTaught"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -500,6 +545,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_FuryCutterTaught"
 target_offset = 302
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 302
 runtime_resolution_required = true
 
 [[relocs]]
@@ -509,6 +556,8 @@ original_encoded_gba = 0x82c7174
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/move-tutors"
 target_export = "MoveTutor_Text_FuryCutterTeach"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -519,6 +568,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_FuryCutterDeclined"
 target_offset = 292
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 292
 runtime_resolution_required = true
 
 [[relocs]]
@@ -529,6 +580,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_CanOnlyBeLearnedOnce"
 target_offset = 1047
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1047
 runtime_resolution_required = true
 
 [[relocs]]
@@ -539,6 +592,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_FuryCutterDeclined"
 target_offset = 292
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 292
 runtime_resolution_required = true
 
 [[relocs]]
@@ -548,6 +603,8 @@ original_encoded_gba = 0x82c7243
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/move-tutors"
 target_export = "MoveTutor_Text_FuryCutterWhichMon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -558,6 +615,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_OpenPartyMenu"
 target_offset = 1040
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1040
 runtime_resolution_required = true
 
 [[relocs]]
@@ -568,6 +627,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_FuryCutterDeclined"
 target_offset = 292
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 292
 runtime_resolution_required = true
 
 [[relocs]]
@@ -578,6 +639,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_FuryCutterTaught"
 target_offset = 302
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 302
 runtime_resolution_required = true
 
 [[relocs]]
@@ -587,6 +650,8 @@ original_encoded_gba = 0x82c7221
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/move-tutors"
 target_export = "MoveTutor_Text_FuryCutterDeclined"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -596,6 +661,8 @@ original_encoded_gba = 0x82c726e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/move-tutors"
 target_export = "MoveTutor_Text_FuryCutterTaught"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -606,6 +673,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_MimicTaught"
 target_offset = 406
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 406
 runtime_resolution_required = true
 
 [[relocs]]
@@ -615,6 +684,8 @@ original_encoded_gba = 0x82c72b6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/move-tutors"
 target_export = "MoveTutor_MimicTeach"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -625,6 +696,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_MimicDeclined"
 target_offset = 396
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 396
 runtime_resolution_required = true
 
 [[relocs]]
@@ -635,6 +708,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_CanOnlyBeLearnedOnce"
 target_offset = 1047
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1047
 runtime_resolution_required = true
 
 [[relocs]]
@@ -645,6 +720,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_MimicDeclined"
 target_offset = 396
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 396
 runtime_resolution_required = true
 
 [[relocs]]
@@ -654,6 +731,8 @@ original_encoded_gba = 0x82c73b1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/move-tutors"
 target_export = "MoveTutor_Text_MimicWhichMon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -664,6 +743,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_OpenPartyMenu"
 target_offset = 1040
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1040
 runtime_resolution_required = true
 
 [[relocs]]
@@ -674,6 +755,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_MimicDeclined"
 target_offset = 396
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 396
 runtime_resolution_required = true
 
 [[relocs]]
@@ -684,6 +767,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_MimicTaught"
 target_offset = 406
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 406
 runtime_resolution_required = true
 
 [[relocs]]
@@ -693,6 +778,8 @@ original_encoded_gba = 0x82c737f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/move-tutors"
 target_export = "MoveTutor_MimicDeclined"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -702,6 +789,8 @@ original_encoded_gba = 0x82c73f6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/move-tutors"
 target_export = "MoveTutor_Text_MimicTaught"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -712,6 +801,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_MetronomeTaught"
 target_offset = 510
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 510
 runtime_resolution_required = true
 
 [[relocs]]
@@ -721,6 +812,8 @@ original_encoded_gba = 0x82c7449
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/move-tutors"
 target_export = "MoveTutor_Text_MetronomeTeach"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -731,6 +824,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_MetronomeDeclined"
 target_offset = 500
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 500
 runtime_resolution_required = true
 
 [[relocs]]
@@ -741,6 +836,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_CanOnlyBeLearnedOnce"
 target_offset = 1047
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1047
 runtime_resolution_required = true
 
 [[relocs]]
@@ -751,6 +848,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_MetronomeDeclined"
 target_offset = 500
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 500
 runtime_resolution_required = true
 
 [[relocs]]
@@ -760,6 +859,8 @@ original_encoded_gba = 0x82c7582
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/move-tutors"
 target_export = "MoveTutor_Text_MetronomeWhichMon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -770,6 +871,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_OpenPartyMenu"
 target_offset = 1040
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1040
 runtime_resolution_required = true
 
 [[relocs]]
@@ -780,6 +883,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_MetronomeDeclined"
 target_offset = 500
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 500
 runtime_resolution_required = true
 
 [[relocs]]
@@ -790,6 +895,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_MetronomeTaught"
 target_offset = 510
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 510
 runtime_resolution_required = true
 
 [[relocs]]
@@ -799,6 +906,8 @@ original_encoded_gba = 0x82c7556
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/move-tutors"
 target_export = "MoveTutor_Text_MetronomeDeclined"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -808,6 +917,8 @@ original_encoded_gba = 0x82c75b5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/move-tutors"
 target_export = "MoveTutor_Text_MetronomeTaught"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -818,6 +929,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_SleepTalkTaught"
 target_offset = 614
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 614
 runtime_resolution_required = true
 
 [[relocs]]
@@ -827,6 +940,8 @@ original_encoded_gba = 0x82c7637
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/move-tutors"
 target_export = "MoveTutor_Text_SleepTalkTeach"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -837,6 +952,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_SleepTalkDeclined"
 target_offset = 604
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 604
 runtime_resolution_required = true
 
 [[relocs]]
@@ -847,6 +964,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_CanOnlyBeLearnedOnce"
 target_offset = 1047
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1047
 runtime_resolution_required = true
 
 [[relocs]]
@@ -857,6 +976,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_SleepTalkDeclined"
 target_offset = 604
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 604
 runtime_resolution_required = true
 
 [[relocs]]
@@ -866,6 +987,8 @@ original_encoded_gba = 0x82c7721
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/move-tutors"
 target_export = "MoveTutor_Text_SleepTalkWhichMon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -876,6 +999,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_OpenPartyMenu"
 target_offset = 1040
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1040
 runtime_resolution_required = true
 
 [[relocs]]
@@ -886,6 +1011,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_SleepTalkDeclined"
 target_offset = 604
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 604
 runtime_resolution_required = true
 
 [[relocs]]
@@ -896,6 +1023,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_SleepTalkTaught"
 target_offset = 614
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 614
 runtime_resolution_required = true
 
 [[relocs]]
@@ -905,6 +1034,8 @@ original_encoded_gba = 0x82c76e2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/move-tutors"
 target_export = "MoveTutor_Text_SleepTalkDeclined"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -914,6 +1045,8 @@ original_encoded_gba = 0x82c775a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/move-tutors"
 target_export = "MoveTutor_Text_SleepTalkTaught"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -924,6 +1057,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_SubstituteTaught"
 target_offset = 718
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 718
 runtime_resolution_required = true
 
 [[relocs]]
@@ -933,6 +1068,8 @@ original_encoded_gba = 0x82c77c6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/move-tutors"
 target_export = "MoveTutor_Text_SubstituteTeach"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -943,6 +1080,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_SubstituteDeclined"
 target_offset = 708
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 708
 runtime_resolution_required = true
 
 [[relocs]]
@@ -953,6 +1092,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_CanOnlyBeLearnedOnce"
 target_offset = 1047
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1047
 runtime_resolution_required = true
 
 [[relocs]]
@@ -963,6 +1104,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_SubstituteDeclined"
 target_offset = 708
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 708
 runtime_resolution_required = true
 
 [[relocs]]
@@ -972,6 +1115,8 @@ original_encoded_gba = 0x82c7911
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/move-tutors"
 target_export = "MoveTutor_Text_SubstituteWhichMon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -982,6 +1127,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_OpenPartyMenu"
 target_offset = 1040
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1040
 runtime_resolution_required = true
 
 [[relocs]]
@@ -992,6 +1139,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_SubstituteDeclined"
 target_offset = 708
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 708
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1002,6 +1151,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_SubstituteTaught"
 target_offset = 718
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 718
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1011,6 +1162,8 @@ original_encoded_gba = 0x82c78d1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/move-tutors"
 target_export = "MoveTutor_Text_SubstituteDeclined"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1020,6 +1173,8 @@ original_encoded_gba = 0x82c794b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/move-tutors"
 target_export = "MoveTutor_Text_SubstituteTaught"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1030,6 +1185,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_DynamicPunchTaught"
 target_offset = 822
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 822
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1039,6 +1196,8 @@ original_encoded_gba = 0x82c79a6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/move-tutors"
 target_export = "MoveTutor_Text_DynamicPunchTeach"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1049,6 +1208,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_DynamicPunchDeclined"
 target_offset = 812
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 812
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1059,6 +1220,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_CanOnlyBeLearnedOnce"
 target_offset = 1047
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1047
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1069,6 +1232,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_DynamicPunchDeclined"
 target_offset = 812
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 812
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1078,6 +1243,8 @@ original_encoded_gba = 0x82c7b0d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/move-tutors"
 target_export = "MoveTutor_Text_DynamicPunchWhichMon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1088,6 +1255,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_OpenPartyMenu"
 target_offset = 1040
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1040
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1098,6 +1267,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_DynamicPunchDeclined"
 target_offset = 812
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 812
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1108,6 +1279,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_DynamicPunchTaught"
 target_offset = 822
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 822
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1117,6 +1290,8 @@ original_encoded_gba = 0x82c7ad4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/move-tutors"
 target_export = "MoveTutor_Text_DynamicPunchDeclined"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1126,6 +1301,8 @@ original_encoded_gba = 0x82c7b4f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/move-tutors"
 target_export = "MoveTutor_Text_DynamicPunchTaught"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1136,6 +1313,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_DoubleEdgeTaught"
 target_offset = 926
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 926
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1145,6 +1324,8 @@ original_encoded_gba = 0x82c7b8e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/move-tutors"
 target_export = "MoveTutor_Text_DoubleEdgeTeach"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1155,6 +1336,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_DoubleEdgeDeclined"
 target_offset = 916
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 916
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1165,6 +1348,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_CanOnlyBeLearnedOnce"
 target_offset = 1047
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1047
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1175,6 +1360,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_DoubleEdgeDeclined"
 target_offset = 916
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 916
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1184,6 +1371,8 @@ original_encoded_gba = 0x82c7c98
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/move-tutors"
 target_export = "MoveTutor_Text_DoubleEdgeWhichMon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1194,6 +1383,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_OpenPartyMenu"
 target_offset = 1040
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1040
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1204,6 +1395,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_DoubleEdgeDeclined"
 target_offset = 916
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 916
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1214,6 +1407,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_DoubleEdgeTaught"
 target_offset = 926
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 926
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1223,6 +1418,8 @@ original_encoded_gba = 0x82c7c7e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/move-tutors"
 target_export = "MoveTutor_Text_DoubleEdgeDeclined"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1232,6 +1429,8 @@ original_encoded_gba = 0x82c7cc8
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/move-tutors"
 target_export = "MoveTutor_Text_DoubleEdgeTaught"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1242,6 +1441,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_ExplosionTaught"
 target_offset = 1030
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1030
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1251,6 +1452,8 @@ original_encoded_gba = 0x82c7cfa
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/move-tutors"
 target_export = "MoveTutor_Text_ExplosionTeach"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1261,6 +1464,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_ExplosionDeclined"
 target_offset = 1020
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1020
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1271,6 +1476,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_CanOnlyBeLearnedOnce"
 target_offset = 1047
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1047
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1281,6 +1488,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_ExplosionDeclined"
 target_offset = 1020
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1020
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1290,6 +1499,8 @@ original_encoded_gba = 0x82c7e40
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/move-tutors"
 target_export = "MoveTutor_Text_ExplosionWhichMon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1300,6 +1511,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_OpenPartyMenu"
 target_offset = 1040
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1040
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1310,6 +1523,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_ExplosionDeclined"
 target_offset = 1020
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1020
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1320,6 +1535,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/move-tutors"
 target_export = "MoveTutor_EventScript_ExplosionTaught"
 target_offset = 1030
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1030
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1329,6 +1546,8 @@ original_encoded_gba = 0x82c7e04
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/move-tutors"
 target_export = "MoveTutor_Text_ExplosionDeclined"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1338,6 +1557,8 @@ original_encoded_gba = 0x82c7e7a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/move-tutors"
 target_export = "MoveTutor_Text_ExplosionTaught"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1347,4 +1568,1118 @@ original_encoded_gba = 0x82c6e05
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/move-tutors"
 target_export = "MoveTutor_Text_ThisMoveCanOnlyBeLearnedOnce"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 1
+
+[[boundaries]]
+payload_offset = 2
+length = 3
+
+[[boundaries]]
+payload_offset = 5
+length = 6
+
+[[boundaries]]
+payload_offset = 11
+length = 6
+
+[[boundaries]]
+payload_offset = 17
+length = 2
+
+[[boundaries]]
+payload_offset = 19
+length = 5
+
+[[boundaries]]
+payload_offset = 24
+length = 6
+
+[[boundaries]]
+payload_offset = 30
+length = 5
+
+[[boundaries]]
+payload_offset = 35
+length = 5
+
+[[boundaries]]
+payload_offset = 40
+length = 6
+
+[[boundaries]]
+payload_offset = 46
+length = 6
+
+[[boundaries]]
+payload_offset = 52
+length = 2
+
+[[boundaries]]
+payload_offset = 54
+length = 5
+
+[[boundaries]]
+payload_offset = 59
+length = 5
+
+[[boundaries]]
+payload_offset = 64
+length = 5
+
+[[boundaries]]
+payload_offset = 69
+length = 6
+
+[[boundaries]]
+payload_offset = 75
+length = 3
+
+[[boundaries]]
+payload_offset = 78
+length = 5
+
+[[boundaries]]
+payload_offset = 84
+length = 6
+
+[[boundaries]]
+payload_offset = 90
+length = 2
+
+[[boundaries]]
+payload_offset = 92
+length = 1
+
+[[boundaries]]
+payload_offset = 93
+length = 1
+
+[[boundaries]]
+payload_offset = 94
+length = 6
+
+[[boundaries]]
+payload_offset = 100
+length = 2
+
+[[boundaries]]
+payload_offset = 102
+length = 1
+
+[[boundaries]]
+payload_offset = 103
+length = 1
+
+[[boundaries]]
+payload_offset = 104
+length = 1
+
+[[boundaries]]
+payload_offset = 105
+length = 1
+
+[[boundaries]]
+payload_offset = 106
+length = 3
+
+[[boundaries]]
+payload_offset = 109
+length = 6
+
+[[boundaries]]
+payload_offset = 115
+length = 6
+
+[[boundaries]]
+payload_offset = 121
+length = 2
+
+[[boundaries]]
+payload_offset = 123
+length = 5
+
+[[boundaries]]
+payload_offset = 128
+length = 6
+
+[[boundaries]]
+payload_offset = 134
+length = 5
+
+[[boundaries]]
+payload_offset = 139
+length = 5
+
+[[boundaries]]
+payload_offset = 144
+length = 6
+
+[[boundaries]]
+payload_offset = 150
+length = 6
+
+[[boundaries]]
+payload_offset = 156
+length = 2
+
+[[boundaries]]
+payload_offset = 158
+length = 5
+
+[[boundaries]]
+payload_offset = 163
+length = 5
+
+[[boundaries]]
+payload_offset = 168
+length = 5
+
+[[boundaries]]
+payload_offset = 173
+length = 6
+
+[[boundaries]]
+payload_offset = 179
+length = 3
+
+[[boundaries]]
+payload_offset = 182
+length = 5
+
+[[boundaries]]
+payload_offset = 188
+length = 6
+
+[[boundaries]]
+payload_offset = 194
+length = 2
+
+[[boundaries]]
+payload_offset = 196
+length = 1
+
+[[boundaries]]
+payload_offset = 197
+length = 1
+
+[[boundaries]]
+payload_offset = 198
+length = 6
+
+[[boundaries]]
+payload_offset = 204
+length = 2
+
+[[boundaries]]
+payload_offset = 206
+length = 1
+
+[[boundaries]]
+payload_offset = 207
+length = 1
+
+[[boundaries]]
+payload_offset = 208
+length = 1
+
+[[boundaries]]
+payload_offset = 209
+length = 1
+
+[[boundaries]]
+payload_offset = 210
+length = 3
+
+[[boundaries]]
+payload_offset = 213
+length = 6
+
+[[boundaries]]
+payload_offset = 219
+length = 6
+
+[[boundaries]]
+payload_offset = 225
+length = 2
+
+[[boundaries]]
+payload_offset = 227
+length = 5
+
+[[boundaries]]
+payload_offset = 232
+length = 6
+
+[[boundaries]]
+payload_offset = 238
+length = 5
+
+[[boundaries]]
+payload_offset = 243
+length = 5
+
+[[boundaries]]
+payload_offset = 248
+length = 6
+
+[[boundaries]]
+payload_offset = 254
+length = 6
+
+[[boundaries]]
+payload_offset = 260
+length = 2
+
+[[boundaries]]
+payload_offset = 262
+length = 5
+
+[[boundaries]]
+payload_offset = 267
+length = 5
+
+[[boundaries]]
+payload_offset = 272
+length = 5
+
+[[boundaries]]
+payload_offset = 277
+length = 6
+
+[[boundaries]]
+payload_offset = 283
+length = 3
+
+[[boundaries]]
+payload_offset = 286
+length = 5
+
+[[boundaries]]
+payload_offset = 292
+length = 6
+
+[[boundaries]]
+payload_offset = 298
+length = 2
+
+[[boundaries]]
+payload_offset = 300
+length = 1
+
+[[boundaries]]
+payload_offset = 301
+length = 1
+
+[[boundaries]]
+payload_offset = 302
+length = 6
+
+[[boundaries]]
+payload_offset = 308
+length = 2
+
+[[boundaries]]
+payload_offset = 310
+length = 1
+
+[[boundaries]]
+payload_offset = 311
+length = 1
+
+[[boundaries]]
+payload_offset = 312
+length = 1
+
+[[boundaries]]
+payload_offset = 313
+length = 1
+
+[[boundaries]]
+payload_offset = 314
+length = 3
+
+[[boundaries]]
+payload_offset = 317
+length = 6
+
+[[boundaries]]
+payload_offset = 323
+length = 6
+
+[[boundaries]]
+payload_offset = 329
+length = 2
+
+[[boundaries]]
+payload_offset = 331
+length = 5
+
+[[boundaries]]
+payload_offset = 336
+length = 6
+
+[[boundaries]]
+payload_offset = 342
+length = 5
+
+[[boundaries]]
+payload_offset = 347
+length = 5
+
+[[boundaries]]
+payload_offset = 352
+length = 6
+
+[[boundaries]]
+payload_offset = 358
+length = 6
+
+[[boundaries]]
+payload_offset = 364
+length = 2
+
+[[boundaries]]
+payload_offset = 366
+length = 5
+
+[[boundaries]]
+payload_offset = 371
+length = 5
+
+[[boundaries]]
+payload_offset = 376
+length = 5
+
+[[boundaries]]
+payload_offset = 381
+length = 6
+
+[[boundaries]]
+payload_offset = 387
+length = 3
+
+[[boundaries]]
+payload_offset = 390
+length = 5
+
+[[boundaries]]
+payload_offset = 396
+length = 6
+
+[[boundaries]]
+payload_offset = 402
+length = 2
+
+[[boundaries]]
+payload_offset = 404
+length = 1
+
+[[boundaries]]
+payload_offset = 405
+length = 1
+
+[[boundaries]]
+payload_offset = 406
+length = 6
+
+[[boundaries]]
+payload_offset = 412
+length = 2
+
+[[boundaries]]
+payload_offset = 414
+length = 1
+
+[[boundaries]]
+payload_offset = 415
+length = 1
+
+[[boundaries]]
+payload_offset = 416
+length = 1
+
+[[boundaries]]
+payload_offset = 417
+length = 1
+
+[[boundaries]]
+payload_offset = 418
+length = 3
+
+[[boundaries]]
+payload_offset = 421
+length = 6
+
+[[boundaries]]
+payload_offset = 427
+length = 6
+
+[[boundaries]]
+payload_offset = 433
+length = 2
+
+[[boundaries]]
+payload_offset = 435
+length = 5
+
+[[boundaries]]
+payload_offset = 440
+length = 6
+
+[[boundaries]]
+payload_offset = 446
+length = 5
+
+[[boundaries]]
+payload_offset = 451
+length = 5
+
+[[boundaries]]
+payload_offset = 456
+length = 6
+
+[[boundaries]]
+payload_offset = 462
+length = 6
+
+[[boundaries]]
+payload_offset = 468
+length = 2
+
+[[boundaries]]
+payload_offset = 470
+length = 5
+
+[[boundaries]]
+payload_offset = 475
+length = 5
+
+[[boundaries]]
+payload_offset = 480
+length = 5
+
+[[boundaries]]
+payload_offset = 485
+length = 6
+
+[[boundaries]]
+payload_offset = 491
+length = 3
+
+[[boundaries]]
+payload_offset = 494
+length = 5
+
+[[boundaries]]
+payload_offset = 500
+length = 6
+
+[[boundaries]]
+payload_offset = 506
+length = 2
+
+[[boundaries]]
+payload_offset = 508
+length = 1
+
+[[boundaries]]
+payload_offset = 509
+length = 1
+
+[[boundaries]]
+payload_offset = 510
+length = 6
+
+[[boundaries]]
+payload_offset = 516
+length = 2
+
+[[boundaries]]
+payload_offset = 518
+length = 1
+
+[[boundaries]]
+payload_offset = 519
+length = 1
+
+[[boundaries]]
+payload_offset = 520
+length = 1
+
+[[boundaries]]
+payload_offset = 521
+length = 1
+
+[[boundaries]]
+payload_offset = 522
+length = 3
+
+[[boundaries]]
+payload_offset = 525
+length = 6
+
+[[boundaries]]
+payload_offset = 531
+length = 6
+
+[[boundaries]]
+payload_offset = 537
+length = 2
+
+[[boundaries]]
+payload_offset = 539
+length = 5
+
+[[boundaries]]
+payload_offset = 544
+length = 6
+
+[[boundaries]]
+payload_offset = 550
+length = 5
+
+[[boundaries]]
+payload_offset = 555
+length = 5
+
+[[boundaries]]
+payload_offset = 560
+length = 6
+
+[[boundaries]]
+payload_offset = 566
+length = 6
+
+[[boundaries]]
+payload_offset = 572
+length = 2
+
+[[boundaries]]
+payload_offset = 574
+length = 5
+
+[[boundaries]]
+payload_offset = 579
+length = 5
+
+[[boundaries]]
+payload_offset = 584
+length = 5
+
+[[boundaries]]
+payload_offset = 589
+length = 6
+
+[[boundaries]]
+payload_offset = 595
+length = 3
+
+[[boundaries]]
+payload_offset = 598
+length = 5
+
+[[boundaries]]
+payload_offset = 604
+length = 6
+
+[[boundaries]]
+payload_offset = 610
+length = 2
+
+[[boundaries]]
+payload_offset = 612
+length = 1
+
+[[boundaries]]
+payload_offset = 613
+length = 1
+
+[[boundaries]]
+payload_offset = 614
+length = 6
+
+[[boundaries]]
+payload_offset = 620
+length = 2
+
+[[boundaries]]
+payload_offset = 622
+length = 1
+
+[[boundaries]]
+payload_offset = 623
+length = 1
+
+[[boundaries]]
+payload_offset = 624
+length = 1
+
+[[boundaries]]
+payload_offset = 625
+length = 1
+
+[[boundaries]]
+payload_offset = 626
+length = 3
+
+[[boundaries]]
+payload_offset = 629
+length = 6
+
+[[boundaries]]
+payload_offset = 635
+length = 6
+
+[[boundaries]]
+payload_offset = 641
+length = 2
+
+[[boundaries]]
+payload_offset = 643
+length = 5
+
+[[boundaries]]
+payload_offset = 648
+length = 6
+
+[[boundaries]]
+payload_offset = 654
+length = 5
+
+[[boundaries]]
+payload_offset = 659
+length = 5
+
+[[boundaries]]
+payload_offset = 664
+length = 6
+
+[[boundaries]]
+payload_offset = 670
+length = 6
+
+[[boundaries]]
+payload_offset = 676
+length = 2
+
+[[boundaries]]
+payload_offset = 678
+length = 5
+
+[[boundaries]]
+payload_offset = 683
+length = 5
+
+[[boundaries]]
+payload_offset = 688
+length = 5
+
+[[boundaries]]
+payload_offset = 693
+length = 6
+
+[[boundaries]]
+payload_offset = 699
+length = 3
+
+[[boundaries]]
+payload_offset = 702
+length = 5
+
+[[boundaries]]
+payload_offset = 708
+length = 6
+
+[[boundaries]]
+payload_offset = 714
+length = 2
+
+[[boundaries]]
+payload_offset = 716
+length = 1
+
+[[boundaries]]
+payload_offset = 717
+length = 1
+
+[[boundaries]]
+payload_offset = 718
+length = 6
+
+[[boundaries]]
+payload_offset = 724
+length = 2
+
+[[boundaries]]
+payload_offset = 726
+length = 1
+
+[[boundaries]]
+payload_offset = 727
+length = 1
+
+[[boundaries]]
+payload_offset = 728
+length = 1
+
+[[boundaries]]
+payload_offset = 729
+length = 1
+
+[[boundaries]]
+payload_offset = 730
+length = 3
+
+[[boundaries]]
+payload_offset = 733
+length = 6
+
+[[boundaries]]
+payload_offset = 739
+length = 6
+
+[[boundaries]]
+payload_offset = 745
+length = 2
+
+[[boundaries]]
+payload_offset = 747
+length = 5
+
+[[boundaries]]
+payload_offset = 752
+length = 6
+
+[[boundaries]]
+payload_offset = 758
+length = 5
+
+[[boundaries]]
+payload_offset = 763
+length = 5
+
+[[boundaries]]
+payload_offset = 768
+length = 6
+
+[[boundaries]]
+payload_offset = 774
+length = 6
+
+[[boundaries]]
+payload_offset = 780
+length = 2
+
+[[boundaries]]
+payload_offset = 782
+length = 5
+
+[[boundaries]]
+payload_offset = 787
+length = 5
+
+[[boundaries]]
+payload_offset = 792
+length = 5
+
+[[boundaries]]
+payload_offset = 797
+length = 6
+
+[[boundaries]]
+payload_offset = 803
+length = 3
+
+[[boundaries]]
+payload_offset = 806
+length = 5
+
+[[boundaries]]
+payload_offset = 812
+length = 6
+
+[[boundaries]]
+payload_offset = 818
+length = 2
+
+[[boundaries]]
+payload_offset = 820
+length = 1
+
+[[boundaries]]
+payload_offset = 821
+length = 1
+
+[[boundaries]]
+payload_offset = 822
+length = 6
+
+[[boundaries]]
+payload_offset = 828
+length = 2
+
+[[boundaries]]
+payload_offset = 830
+length = 1
+
+[[boundaries]]
+payload_offset = 831
+length = 1
+
+[[boundaries]]
+payload_offset = 832
+length = 1
+
+[[boundaries]]
+payload_offset = 833
+length = 1
+
+[[boundaries]]
+payload_offset = 834
+length = 3
+
+[[boundaries]]
+payload_offset = 837
+length = 6
+
+[[boundaries]]
+payload_offset = 843
+length = 6
+
+[[boundaries]]
+payload_offset = 849
+length = 2
+
+[[boundaries]]
+payload_offset = 851
+length = 5
+
+[[boundaries]]
+payload_offset = 856
+length = 6
+
+[[boundaries]]
+payload_offset = 862
+length = 5
+
+[[boundaries]]
+payload_offset = 867
+length = 5
+
+[[boundaries]]
+payload_offset = 872
+length = 6
+
+[[boundaries]]
+payload_offset = 878
+length = 6
+
+[[boundaries]]
+payload_offset = 884
+length = 2
+
+[[boundaries]]
+payload_offset = 886
+length = 5
+
+[[boundaries]]
+payload_offset = 891
+length = 5
+
+[[boundaries]]
+payload_offset = 896
+length = 5
+
+[[boundaries]]
+payload_offset = 901
+length = 6
+
+[[boundaries]]
+payload_offset = 907
+length = 3
+
+[[boundaries]]
+payload_offset = 910
+length = 5
+
+[[boundaries]]
+payload_offset = 916
+length = 6
+
+[[boundaries]]
+payload_offset = 922
+length = 2
+
+[[boundaries]]
+payload_offset = 924
+length = 1
+
+[[boundaries]]
+payload_offset = 925
+length = 1
+
+[[boundaries]]
+payload_offset = 926
+length = 6
+
+[[boundaries]]
+payload_offset = 932
+length = 2
+
+[[boundaries]]
+payload_offset = 934
+length = 1
+
+[[boundaries]]
+payload_offset = 935
+length = 1
+
+[[boundaries]]
+payload_offset = 936
+length = 1
+
+[[boundaries]]
+payload_offset = 937
+length = 1
+
+[[boundaries]]
+payload_offset = 938
+length = 3
+
+[[boundaries]]
+payload_offset = 941
+length = 6
+
+[[boundaries]]
+payload_offset = 947
+length = 6
+
+[[boundaries]]
+payload_offset = 953
+length = 2
+
+[[boundaries]]
+payload_offset = 955
+length = 5
+
+[[boundaries]]
+payload_offset = 960
+length = 6
+
+[[boundaries]]
+payload_offset = 966
+length = 5
+
+[[boundaries]]
+payload_offset = 971
+length = 5
+
+[[boundaries]]
+payload_offset = 976
+length = 6
+
+[[boundaries]]
+payload_offset = 982
+length = 6
+
+[[boundaries]]
+payload_offset = 988
+length = 2
+
+[[boundaries]]
+payload_offset = 990
+length = 5
+
+[[boundaries]]
+payload_offset = 995
+length = 5
+
+[[boundaries]]
+payload_offset = 1000
+length = 5
+
+[[boundaries]]
+payload_offset = 1005
+length = 6
+
+[[boundaries]]
+payload_offset = 1011
+length = 3
+
+[[boundaries]]
+payload_offset = 1014
+length = 5
+
+[[boundaries]]
+payload_offset = 1020
+length = 6
+
+[[boundaries]]
+payload_offset = 1026
+length = 2
+
+[[boundaries]]
+payload_offset = 1028
+length = 1
+
+[[boundaries]]
+payload_offset = 1029
+length = 1
+
+[[boundaries]]
+payload_offset = 1030
+length = 6
+
+[[boundaries]]
+payload_offset = 1036
+length = 2
+
+[[boundaries]]
+payload_offset = 1038
+length = 1
+
+[[boundaries]]
+payload_offset = 1039
+length = 1
+
+[[boundaries]]
+payload_offset = 1040
+length = 3
+
+[[boundaries]]
+payload_offset = 1043
+length = 1
+
+[[boundaries]]
+payload_offset = 1044
+length = 1
+
+[[boundaries]]
+payload_offset = 1045
+length = 1
+
+[[boundaries]]
+payload_offset = 1046
+length = 1
+
+[[boundaries]]
+payload_offset = 1047
+length = 6
+
+[[boundaries]]
+payload_offset = 1053
+length = 2
+
+[[boundaries]]
+payload_offset = 1055
+length = 1

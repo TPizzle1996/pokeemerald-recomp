@@ -249,10 +249,17 @@ C_SRCS := $(foreach src,$(C_SRCS_IN),$(if $(findstring .inc.c,$(src)),,$(src)))
 # (see src/data/graphics/trainers_front_payload.c). The GBA Makefile
 # auto-collects them via its own wildcard.
 ifeq ($(NATIVE_LINUX),1)
+# R13-G3: the shadow staging seam and its generated inventory are NOT
+# linked into the game in G3 (shadow-only; the live VM keeps the
+# compiled field scripts and no consumer resolves through the seam yet).
+# G5 links them at the atomic publication wave. Keeping them out of the
+# link keeps the game binary byte-identical to the G2 milestone.
 C_SRCS := $(filter-out $(C_SUBDIR)/data/graphics/trainers_front_payload.c \
                        $(C_SUBDIR)/data/graphics/trainers_back_payload.c \
                        $(C_SUBDIR)/data/graphics/pokemon_battle_payload.c \
-                       $(C_SUBDIR)/anim_mon_front_pics.c,$(C_SRCS))
+                       $(C_SUBDIR)/anim_mon_front_pics.c \
+                       $(C_SUBDIR)/emerald/resources/emerald_script_compat.c \
+                       $(C_SUBDIR)/emerald/resources/script_native_table.generated.c,$(C_SRCS))
 endif
 C_OBJS := $(patsubst $(C_SUBDIR)/%.c,$(C_BUILDDIR)/%.o,$(C_SRCS))
 

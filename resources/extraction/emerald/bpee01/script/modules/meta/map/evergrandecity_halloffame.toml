@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 2
 export_count = 4
 reloc_count = 15
+instruction_count = 49
 
 [[segments]]
 kind = "bytecode"
@@ -69,6 +70,8 @@ original_encoded_gba = 0x8229901
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/evergrandecity-halloffame-movement-walkintohalloffame1"
 target_export = "EverGrandeCity_HallOfFame_Movement_WalkIntoHallOfFame1"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -78,6 +81,8 @@ original_encoded_gba = 0x8229901
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/evergrandecity-halloffame-movement-walkintohalloffame1"
 target_export = "EverGrandeCity_HallOfFame_Movement_WalkIntoHallOfFame1"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -87,6 +92,8 @@ original_encoded_gba = 0x82725a8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterright"
 target_export = "Common_Movement_WalkInPlaceFasterRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -96,6 +103,8 @@ original_encoded_gba = 0x82725a4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterleft"
 target_export = "Common_Movement_WalkInPlaceFasterLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -105,6 +114,8 @@ original_encoded_gba = 0x822990e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/evergrandecity-halloffame"
 target_export = "EverGrandeCity_HallOfFame_Text_HereWeHonorLeagueChampions"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -114,6 +125,8 @@ original_encoded_gba = 0x8229908
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/evergrandecity-halloffame-movement-walkintohalloffame2"
 target_export = "EverGrandeCity_HallOfFame_Movement_WalkIntoHallOfFame2"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -123,6 +136,8 @@ original_encoded_gba = 0x8229908
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/evergrandecity-halloffame-movement-walkintohalloffame2"
 target_export = "EverGrandeCity_HallOfFame_Movement_WalkIntoHallOfFame2"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -132,6 +147,8 @@ original_encoded_gba = 0x82725a8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterright"
 target_export = "Common_Movement_WalkInPlaceFasterRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -141,6 +158,8 @@ original_encoded_gba = 0x82725a4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterleft"
 target_export = "Common_Movement_WalkInPlaceFasterLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -150,6 +169,8 @@ original_encoded_gba = 0x82299a3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/evergrandecity-halloffame"
 target_export = "EverGrandeCity_HallOfFame_Text_LetsRecordYouAndYourPartnersNames"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -159,6 +180,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -168,6 +191,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -178,6 +203,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/hall-of-fame"
 target_export = "EverGrandeCity_HallOfFame_EventScript_SetGameClearFlags"
 target_offset = 0
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 0
 runtime_resolution_required = true
 
 [[relocs]]
@@ -188,6 +215,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/evergrandecity-halloffame"
 target_export = "EverGrandeCity_HallOfFame_EventScript_GameClearMale"
 target_offset = 189
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 158
 runtime_resolution_required = true
 
 [[relocs]]
@@ -198,4 +227,202 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/evergrandecity-halloffame"
 target_export = "EverGrandeCity_HallOfFame_EventScript_GameClearFemale"
 target_offset = 201
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 170
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 4
+
+[[boundaries]]
+payload_offset = 4
+length = 1
+
+[[boundaries]]
+payload_offset = 5
+length = 1
+
+[[boundaries]]
+payload_offset = 6
+length = 7
+
+[[boundaries]]
+payload_offset = 13
+length = 7
+
+[[boundaries]]
+payload_offset = 20
+length = 3
+
+[[boundaries]]
+payload_offset = 23
+length = 7
+
+[[boundaries]]
+payload_offset = 30
+length = 7
+
+[[boundaries]]
+payload_offset = 37
+length = 3
+
+[[boundaries]]
+payload_offset = 40
+length = 6
+
+[[boundaries]]
+payload_offset = 46
+length = 2
+
+[[boundaries]]
+payload_offset = 48
+length = 1
+
+[[boundaries]]
+payload_offset = 49
+length = 7
+
+[[boundaries]]
+payload_offset = 56
+length = 7
+
+[[boundaries]]
+payload_offset = 63
+length = 3
+
+[[boundaries]]
+payload_offset = 66
+length = 3
+
+[[boundaries]]
+payload_offset = 69
+length = 7
+
+[[boundaries]]
+payload_offset = 76
+length = 7
+
+[[boundaries]]
+payload_offset = 83
+length = 3
+
+[[boundaries]]
+payload_offset = 86
+length = 6
+
+[[boundaries]]
+payload_offset = 92
+length = 2
+
+[[boundaries]]
+payload_offset = 94
+length = 1
+
+[[boundaries]]
+payload_offset = 95
+length = 7
+
+[[boundaries]]
+payload_offset = 102
+length = 7
+
+[[boundaries]]
+payload_offset = 109
+length = 3
+
+[[boundaries]]
+payload_offset = 112
+length = 3
+
+[[boundaries]]
+payload_offset = 115
+length = 3
+
+[[boundaries]]
+payload_offset = 118
+length = 3
+
+[[boundaries]]
+payload_offset = 121
+length = 3
+
+[[boundaries]]
+payload_offset = 124
+length = 5
+
+[[boundaries]]
+payload_offset = 129
+length = 5
+
+[[boundaries]]
+payload_offset = 134
+length = 1
+
+[[boundaries]]
+payload_offset = 135
+length = 5
+
+[[boundaries]]
+payload_offset = 140
+length = 6
+
+[[boundaries]]
+payload_offset = 146
+length = 5
+
+[[boundaries]]
+payload_offset = 151
+length = 6
+
+[[boundaries]]
+payload_offset = 157
+length = 1
+
+[[boundaries]]
+payload_offset = 158
+length = 3
+
+[[boundaries]]
+payload_offset = 161
+length = 3
+
+[[boundaries]]
+payload_offset = 164
+length = 3
+
+[[boundaries]]
+payload_offset = 167
+length = 1
+
+[[boundaries]]
+payload_offset = 168
+length = 1
+
+[[boundaries]]
+payload_offset = 169
+length = 1
+
+[[boundaries]]
+payload_offset = 170
+length = 3
+
+[[boundaries]]
+payload_offset = 173
+length = 3
+
+[[boundaries]]
+payload_offset = 176
+length = 3
+
+[[boundaries]]
+payload_offset = 179
+length = 1
+
+[[boundaries]]
+payload_offset = 180
+length = 1
+
+[[boundaries]]
+payload_offset = 181
+length = 1

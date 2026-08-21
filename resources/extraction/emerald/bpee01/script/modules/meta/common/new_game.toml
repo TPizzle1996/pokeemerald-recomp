@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 2
 reloc_count = 1
+instruction_count = 242
 
 [[segments]]
 kind = "bytecode"
@@ -48,4 +49,974 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/new-game"
 target_export = "EventScript_ResetAllBerries"
 target_offset = 0
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 0
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 4
+
+[[boundaries]]
+payload_offset = 4
+length = 4
+
+[[boundaries]]
+payload_offset = 8
+length = 4
+
+[[boundaries]]
+payload_offset = 12
+length = 4
+
+[[boundaries]]
+payload_offset = 16
+length = 4
+
+[[boundaries]]
+payload_offset = 20
+length = 4
+
+[[boundaries]]
+payload_offset = 24
+length = 4
+
+[[boundaries]]
+payload_offset = 28
+length = 4
+
+[[boundaries]]
+payload_offset = 32
+length = 4
+
+[[boundaries]]
+payload_offset = 36
+length = 4
+
+[[boundaries]]
+payload_offset = 40
+length = 4
+
+[[boundaries]]
+payload_offset = 44
+length = 4
+
+[[boundaries]]
+payload_offset = 48
+length = 4
+
+[[boundaries]]
+payload_offset = 52
+length = 4
+
+[[boundaries]]
+payload_offset = 56
+length = 4
+
+[[boundaries]]
+payload_offset = 60
+length = 4
+
+[[boundaries]]
+payload_offset = 64
+length = 4
+
+[[boundaries]]
+payload_offset = 68
+length = 4
+
+[[boundaries]]
+payload_offset = 72
+length = 4
+
+[[boundaries]]
+payload_offset = 76
+length = 4
+
+[[boundaries]]
+payload_offset = 80
+length = 4
+
+[[boundaries]]
+payload_offset = 84
+length = 4
+
+[[boundaries]]
+payload_offset = 88
+length = 4
+
+[[boundaries]]
+payload_offset = 92
+length = 4
+
+[[boundaries]]
+payload_offset = 96
+length = 4
+
+[[boundaries]]
+payload_offset = 100
+length = 4
+
+[[boundaries]]
+payload_offset = 104
+length = 4
+
+[[boundaries]]
+payload_offset = 108
+length = 4
+
+[[boundaries]]
+payload_offset = 112
+length = 4
+
+[[boundaries]]
+payload_offset = 116
+length = 4
+
+[[boundaries]]
+payload_offset = 120
+length = 4
+
+[[boundaries]]
+payload_offset = 124
+length = 4
+
+[[boundaries]]
+payload_offset = 128
+length = 4
+
+[[boundaries]]
+payload_offset = 132
+length = 4
+
+[[boundaries]]
+payload_offset = 136
+length = 4
+
+[[boundaries]]
+payload_offset = 140
+length = 4
+
+[[boundaries]]
+payload_offset = 144
+length = 4
+
+[[boundaries]]
+payload_offset = 148
+length = 4
+
+[[boundaries]]
+payload_offset = 152
+length = 4
+
+[[boundaries]]
+payload_offset = 156
+length = 4
+
+[[boundaries]]
+payload_offset = 160
+length = 4
+
+[[boundaries]]
+payload_offset = 164
+length = 4
+
+[[boundaries]]
+payload_offset = 168
+length = 4
+
+[[boundaries]]
+payload_offset = 172
+length = 4
+
+[[boundaries]]
+payload_offset = 176
+length = 4
+
+[[boundaries]]
+payload_offset = 180
+length = 4
+
+[[boundaries]]
+payload_offset = 184
+length = 4
+
+[[boundaries]]
+payload_offset = 188
+length = 4
+
+[[boundaries]]
+payload_offset = 192
+length = 4
+
+[[boundaries]]
+payload_offset = 196
+length = 4
+
+[[boundaries]]
+payload_offset = 200
+length = 4
+
+[[boundaries]]
+payload_offset = 204
+length = 4
+
+[[boundaries]]
+payload_offset = 208
+length = 4
+
+[[boundaries]]
+payload_offset = 212
+length = 4
+
+[[boundaries]]
+payload_offset = 216
+length = 4
+
+[[boundaries]]
+payload_offset = 220
+length = 4
+
+[[boundaries]]
+payload_offset = 224
+length = 4
+
+[[boundaries]]
+payload_offset = 228
+length = 4
+
+[[boundaries]]
+payload_offset = 232
+length = 4
+
+[[boundaries]]
+payload_offset = 236
+length = 4
+
+[[boundaries]]
+payload_offset = 240
+length = 4
+
+[[boundaries]]
+payload_offset = 244
+length = 4
+
+[[boundaries]]
+payload_offset = 248
+length = 4
+
+[[boundaries]]
+payload_offset = 252
+length = 4
+
+[[boundaries]]
+payload_offset = 256
+length = 4
+
+[[boundaries]]
+payload_offset = 260
+length = 4
+
+[[boundaries]]
+payload_offset = 264
+length = 4
+
+[[boundaries]]
+payload_offset = 268
+length = 4
+
+[[boundaries]]
+payload_offset = 272
+length = 4
+
+[[boundaries]]
+payload_offset = 276
+length = 4
+
+[[boundaries]]
+payload_offset = 280
+length = 4
+
+[[boundaries]]
+payload_offset = 284
+length = 4
+
+[[boundaries]]
+payload_offset = 288
+length = 4
+
+[[boundaries]]
+payload_offset = 292
+length = 4
+
+[[boundaries]]
+payload_offset = 296
+length = 4
+
+[[boundaries]]
+payload_offset = 300
+length = 4
+
+[[boundaries]]
+payload_offset = 304
+length = 4
+
+[[boundaries]]
+payload_offset = 308
+length = 4
+
+[[boundaries]]
+payload_offset = 312
+length = 4
+
+[[boundaries]]
+payload_offset = 316
+length = 4
+
+[[boundaries]]
+payload_offset = 320
+length = 1
+
+[[boundaries]]
+payload_offset = 321
+length = 3
+
+[[boundaries]]
+payload_offset = 324
+length = 3
+
+[[boundaries]]
+payload_offset = 327
+length = 3
+
+[[boundaries]]
+payload_offset = 330
+length = 3
+
+[[boundaries]]
+payload_offset = 333
+length = 3
+
+[[boundaries]]
+payload_offset = 336
+length = 3
+
+[[boundaries]]
+payload_offset = 339
+length = 3
+
+[[boundaries]]
+payload_offset = 342
+length = 3
+
+[[boundaries]]
+payload_offset = 345
+length = 3
+
+[[boundaries]]
+payload_offset = 348
+length = 3
+
+[[boundaries]]
+payload_offset = 351
+length = 3
+
+[[boundaries]]
+payload_offset = 354
+length = 3
+
+[[boundaries]]
+payload_offset = 357
+length = 3
+
+[[boundaries]]
+payload_offset = 360
+length = 3
+
+[[boundaries]]
+payload_offset = 363
+length = 3
+
+[[boundaries]]
+payload_offset = 366
+length = 3
+
+[[boundaries]]
+payload_offset = 369
+length = 3
+
+[[boundaries]]
+payload_offset = 372
+length = 3
+
+[[boundaries]]
+payload_offset = 375
+length = 3
+
+[[boundaries]]
+payload_offset = 378
+length = 3
+
+[[boundaries]]
+payload_offset = 381
+length = 3
+
+[[boundaries]]
+payload_offset = 384
+length = 3
+
+[[boundaries]]
+payload_offset = 387
+length = 3
+
+[[boundaries]]
+payload_offset = 390
+length = 3
+
+[[boundaries]]
+payload_offset = 393
+length = 3
+
+[[boundaries]]
+payload_offset = 396
+length = 3
+
+[[boundaries]]
+payload_offset = 399
+length = 3
+
+[[boundaries]]
+payload_offset = 402
+length = 3
+
+[[boundaries]]
+payload_offset = 405
+length = 3
+
+[[boundaries]]
+payload_offset = 408
+length = 3
+
+[[boundaries]]
+payload_offset = 411
+length = 3
+
+[[boundaries]]
+payload_offset = 414
+length = 3
+
+[[boundaries]]
+payload_offset = 417
+length = 3
+
+[[boundaries]]
+payload_offset = 420
+length = 3
+
+[[boundaries]]
+payload_offset = 423
+length = 3
+
+[[boundaries]]
+payload_offset = 426
+length = 3
+
+[[boundaries]]
+payload_offset = 429
+length = 3
+
+[[boundaries]]
+payload_offset = 432
+length = 3
+
+[[boundaries]]
+payload_offset = 435
+length = 3
+
+[[boundaries]]
+payload_offset = 438
+length = 3
+
+[[boundaries]]
+payload_offset = 441
+length = 3
+
+[[boundaries]]
+payload_offset = 444
+length = 3
+
+[[boundaries]]
+payload_offset = 447
+length = 3
+
+[[boundaries]]
+payload_offset = 450
+length = 3
+
+[[boundaries]]
+payload_offset = 453
+length = 3
+
+[[boundaries]]
+payload_offset = 456
+length = 3
+
+[[boundaries]]
+payload_offset = 459
+length = 3
+
+[[boundaries]]
+payload_offset = 462
+length = 3
+
+[[boundaries]]
+payload_offset = 465
+length = 3
+
+[[boundaries]]
+payload_offset = 468
+length = 3
+
+[[boundaries]]
+payload_offset = 471
+length = 3
+
+[[boundaries]]
+payload_offset = 474
+length = 3
+
+[[boundaries]]
+payload_offset = 477
+length = 3
+
+[[boundaries]]
+payload_offset = 480
+length = 3
+
+[[boundaries]]
+payload_offset = 483
+length = 3
+
+[[boundaries]]
+payload_offset = 486
+length = 3
+
+[[boundaries]]
+payload_offset = 489
+length = 3
+
+[[boundaries]]
+payload_offset = 492
+length = 3
+
+[[boundaries]]
+payload_offset = 495
+length = 3
+
+[[boundaries]]
+payload_offset = 498
+length = 3
+
+[[boundaries]]
+payload_offset = 501
+length = 3
+
+[[boundaries]]
+payload_offset = 504
+length = 3
+
+[[boundaries]]
+payload_offset = 507
+length = 3
+
+[[boundaries]]
+payload_offset = 510
+length = 3
+
+[[boundaries]]
+payload_offset = 513
+length = 3
+
+[[boundaries]]
+payload_offset = 516
+length = 3
+
+[[boundaries]]
+payload_offset = 519
+length = 3
+
+[[boundaries]]
+payload_offset = 522
+length = 3
+
+[[boundaries]]
+payload_offset = 525
+length = 3
+
+[[boundaries]]
+payload_offset = 528
+length = 3
+
+[[boundaries]]
+payload_offset = 531
+length = 3
+
+[[boundaries]]
+payload_offset = 534
+length = 3
+
+[[boundaries]]
+payload_offset = 537
+length = 3
+
+[[boundaries]]
+payload_offset = 540
+length = 3
+
+[[boundaries]]
+payload_offset = 543
+length = 3
+
+[[boundaries]]
+payload_offset = 546
+length = 3
+
+[[boundaries]]
+payload_offset = 549
+length = 3
+
+[[boundaries]]
+payload_offset = 552
+length = 3
+
+[[boundaries]]
+payload_offset = 555
+length = 3
+
+[[boundaries]]
+payload_offset = 558
+length = 3
+
+[[boundaries]]
+payload_offset = 561
+length = 3
+
+[[boundaries]]
+payload_offset = 564
+length = 3
+
+[[boundaries]]
+payload_offset = 567
+length = 3
+
+[[boundaries]]
+payload_offset = 570
+length = 3
+
+[[boundaries]]
+payload_offset = 573
+length = 3
+
+[[boundaries]]
+payload_offset = 576
+length = 3
+
+[[boundaries]]
+payload_offset = 579
+length = 3
+
+[[boundaries]]
+payload_offset = 582
+length = 3
+
+[[boundaries]]
+payload_offset = 585
+length = 3
+
+[[boundaries]]
+payload_offset = 588
+length = 3
+
+[[boundaries]]
+payload_offset = 591
+length = 3
+
+[[boundaries]]
+payload_offset = 594
+length = 3
+
+[[boundaries]]
+payload_offset = 597
+length = 3
+
+[[boundaries]]
+payload_offset = 600
+length = 3
+
+[[boundaries]]
+payload_offset = 603
+length = 3
+
+[[boundaries]]
+payload_offset = 606
+length = 3
+
+[[boundaries]]
+payload_offset = 609
+length = 3
+
+[[boundaries]]
+payload_offset = 612
+length = 3
+
+[[boundaries]]
+payload_offset = 615
+length = 3
+
+[[boundaries]]
+payload_offset = 618
+length = 3
+
+[[boundaries]]
+payload_offset = 621
+length = 3
+
+[[boundaries]]
+payload_offset = 624
+length = 3
+
+[[boundaries]]
+payload_offset = 627
+length = 3
+
+[[boundaries]]
+payload_offset = 630
+length = 3
+
+[[boundaries]]
+payload_offset = 633
+length = 3
+
+[[boundaries]]
+payload_offset = 636
+length = 3
+
+[[boundaries]]
+payload_offset = 639
+length = 3
+
+[[boundaries]]
+payload_offset = 642
+length = 3
+
+[[boundaries]]
+payload_offset = 645
+length = 3
+
+[[boundaries]]
+payload_offset = 648
+length = 3
+
+[[boundaries]]
+payload_offset = 651
+length = 3
+
+[[boundaries]]
+payload_offset = 654
+length = 3
+
+[[boundaries]]
+payload_offset = 657
+length = 3
+
+[[boundaries]]
+payload_offset = 660
+length = 3
+
+[[boundaries]]
+payload_offset = 663
+length = 3
+
+[[boundaries]]
+payload_offset = 666
+length = 3
+
+[[boundaries]]
+payload_offset = 669
+length = 3
+
+[[boundaries]]
+payload_offset = 672
+length = 3
+
+[[boundaries]]
+payload_offset = 675
+length = 3
+
+[[boundaries]]
+payload_offset = 678
+length = 3
+
+[[boundaries]]
+payload_offset = 681
+length = 3
+
+[[boundaries]]
+payload_offset = 684
+length = 3
+
+[[boundaries]]
+payload_offset = 687
+length = 3
+
+[[boundaries]]
+payload_offset = 690
+length = 3
+
+[[boundaries]]
+payload_offset = 693
+length = 3
+
+[[boundaries]]
+payload_offset = 696
+length = 3
+
+[[boundaries]]
+payload_offset = 699
+length = 3
+
+[[boundaries]]
+payload_offset = 702
+length = 3
+
+[[boundaries]]
+payload_offset = 705
+length = 3
+
+[[boundaries]]
+payload_offset = 708
+length = 3
+
+[[boundaries]]
+payload_offset = 711
+length = 3
+
+[[boundaries]]
+payload_offset = 714
+length = 3
+
+[[boundaries]]
+payload_offset = 717
+length = 3
+
+[[boundaries]]
+payload_offset = 720
+length = 3
+
+[[boundaries]]
+payload_offset = 723
+length = 3
+
+[[boundaries]]
+payload_offset = 726
+length = 3
+
+[[boundaries]]
+payload_offset = 729
+length = 3
+
+[[boundaries]]
+payload_offset = 732
+length = 3
+
+[[boundaries]]
+payload_offset = 735
+length = 3
+
+[[boundaries]]
+payload_offset = 738
+length = 3
+
+[[boundaries]]
+payload_offset = 741
+length = 3
+
+[[boundaries]]
+payload_offset = 744
+length = 3
+
+[[boundaries]]
+payload_offset = 747
+length = 3
+
+[[boundaries]]
+payload_offset = 750
+length = 3
+
+[[boundaries]]
+payload_offset = 753
+length = 3
+
+[[boundaries]]
+payload_offset = 756
+length = 3
+
+[[boundaries]]
+payload_offset = 759
+length = 3
+
+[[boundaries]]
+payload_offset = 762
+length = 3
+
+[[boundaries]]
+payload_offset = 765
+length = 3
+
+[[boundaries]]
+payload_offset = 768
+length = 3
+
+[[boundaries]]
+payload_offset = 771
+length = 3
+
+[[boundaries]]
+payload_offset = 774
+length = 3
+
+[[boundaries]]
+payload_offset = 777
+length = 3
+
+[[boundaries]]
+payload_offset = 780
+length = 3
+
+[[boundaries]]
+payload_offset = 783
+length = 3
+
+[[boundaries]]
+payload_offset = 786
+length = 3
+
+[[boundaries]]
+payload_offset = 789
+length = 3
+
+[[boundaries]]
+payload_offset = 792
+length = 3
+
+[[boundaries]]
+payload_offset = 795
+length = 3
+
+[[boundaries]]
+payload_offset = 798
+length = 5
+
+[[boundaries]]
+payload_offset = 803
+length = 1

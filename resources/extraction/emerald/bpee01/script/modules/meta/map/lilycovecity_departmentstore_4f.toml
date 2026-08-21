@@ -17,6 +17,7 @@ static_data_bytes = 20
 segment_count = 5
 export_count = 7
 reloc_count = 9
+instruction_count = 36
 
 [[segments]]
 kind = "bytecode"
@@ -113,6 +114,8 @@ original_encoded_gba = 0x821fe50
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-departmentstore-4f"
 target_export = "LilycoveCity_DepartmentStore_4F_Text_AttackOrDefenseTM"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -122,6 +125,8 @@ original_encoded_gba = 0x821fec7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-departmentstore-4f"
 target_export = "LilycoveCity_DepartmentStore_4F_Text_FiftyDifferentTMs"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -131,6 +136,8 @@ original_encoded_gba = 0x821ff2d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-departmentstore-4f"
 target_export = "LilycoveCity_DepartmentStore_4F_Text_PokemonOnlyHaveFourMoves"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -140,6 +147,8 @@ original_encoded_gba = 0x8272a21
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/mart-clerk"
 target_export = "gText_HowMayIServeYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -150,6 +159,8 @@ target_class = "MART_TABLE_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstore-4f"
 target_export = "LilycoveCity_DepartmentStore_4F_Pokemart_AttackTMs"
 target_offset = 53
+target_kind = "MART_TABLE"
+target_payload_offset = 53
 runtime_resolution_required = true
 
 [[relocs]]
@@ -159,6 +170,8 @@ original_encoded_gba = 0x8272a3f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/mart-clerk"
 target_export = "gText_PleaseComeAgain"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -168,6 +181,8 @@ original_encoded_gba = 0x8272a21
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/mart-clerk"
 target_export = "gText_HowMayIServeYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -178,6 +193,8 @@ target_class = "MART_TABLE_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstore-4f"
 target_export = "LilycoveCity_DepartmentStore_4F_Pokemart_DefenseTMs"
 target_offset = 89
+target_kind = "MART_TABLE"
+target_payload_offset = 89
 runtime_resolution_required = true
 
 [[relocs]]
@@ -187,4 +204,150 @@ original_encoded_gba = 0x8272a3f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/mart-clerk"
 target_export = "gText_PleaseComeAgain"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 6
+
+[[boundaries]]
+payload_offset = 6
+length = 2
+
+[[boundaries]]
+payload_offset = 8
+length = 1
+
+[[boundaries]]
+payload_offset = 9
+length = 6
+
+[[boundaries]]
+payload_offset = 15
+length = 2
+
+[[boundaries]]
+payload_offset = 17
+length = 1
+
+[[boundaries]]
+payload_offset = 18
+length = 6
+
+[[boundaries]]
+payload_offset = 24
+length = 2
+
+[[boundaries]]
+payload_offset = 26
+length = 1
+
+[[boundaries]]
+payload_offset = 27
+length = 1
+
+[[boundaries]]
+payload_offset = 28
+length = 1
+
+[[boundaries]]
+payload_offset = 29
+length = 5
+
+[[boundaries]]
+payload_offset = 34
+length = 1
+
+[[boundaries]]
+payload_offset = 35
+length = 5
+
+[[boundaries]]
+payload_offset = 40
+length = 6
+
+[[boundaries]]
+payload_offset = 46
+length = 2
+
+[[boundaries]]
+payload_offset = 48
+length = 1
+
+[[boundaries]]
+payload_offset = 49
+length = 1
+
+[[boundaries]]
+payload_offset = 53
+length = 5
+
+[[boundaries]]
+payload_offset = 58
+length = 1
+
+[[boundaries]]
+payload_offset = 59
+length = 3
+
+[[boundaries]]
+payload_offset = 62
+length = 1
+
+[[boundaries]]
+payload_offset = 63
+length = 1
+
+[[boundaries]]
+payload_offset = 64
+length = 1
+
+[[boundaries]]
+payload_offset = 65
+length = 1
+
+[[boundaries]]
+payload_offset = 66
+length = 1
+
+[[boundaries]]
+payload_offset = 67
+length = 5
+
+[[boundaries]]
+payload_offset = 72
+length = 1
+
+[[boundaries]]
+payload_offset = 73
+length = 5
+
+[[boundaries]]
+payload_offset = 78
+length = 6
+
+[[boundaries]]
+payload_offset = 84
+length = 2
+
+[[boundaries]]
+payload_offset = 86
+length = 1
+
+[[boundaries]]
+payload_offset = 87
+length = 1
+
+[[boundaries]]
+payload_offset = 89
+length = 3
+
+[[boundaries]]
+payload_offset = 92
+length = 1
+
+[[boundaries]]
+payload_offset = 93
+length = 8

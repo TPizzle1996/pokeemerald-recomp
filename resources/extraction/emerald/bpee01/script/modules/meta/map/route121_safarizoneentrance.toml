@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 3
 export_count = 12
 reloc_count = 29
+instruction_count = 92
 
 [[segments]]
 kind = "bytecode"
@@ -139,6 +140,8 @@ original_encoded_gba = 0x822bbdd
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route121-safarizoneentrance-movement-exitsafarizone"
 target_export = "Route121_SafariZoneEntrance_Movement_ExitSafariZone"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -148,6 +151,8 @@ original_encoded_gba = 0x82a4d12
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/safari-zone"
 target_export = "Route121_SafariZoneEntrance_Text_WelcomeToSafariZone"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -157,6 +162,8 @@ original_encoded_gba = 0x82a4e46
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/safari-zone"
 target_export = "Route121_SafariZoneEntrance_Text_WelcomeFirstTime"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -167,6 +174,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route121-safarizoneentrance"
 target_export = "Route121_SafariZoneEntrance_EventScript_FirstTimeInfo"
 target_offset = 83
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 58
 runtime_resolution_required = true
 
 [[relocs]]
@@ -176,6 +185,8 @@ original_encoded_gba = 0x82a4e7e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/safari-zone"
 target_export = "Route121_SafariZoneEntrance_Text_ComeInAndEnjoy"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -185,6 +196,8 @@ original_encoded_gba = 0x82a4ea1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/safari-zone"
 target_export = "Route121_SafariZoneEntrance_Text_FirstTimeInfo"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -194,6 +207,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -203,6 +218,8 @@ original_encoded_gba = 0x82a4f74
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/safari-zone"
 target_export = "Route121_SafariZoneEntrance_Text_WouldYouLikeToPlay"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -213,6 +230,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route121-safarizoneentrance"
 target_export = "Route121_SafariZoneEntrance_EventScript_TryEnterSafariZone"
 target_offset = 141
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 116
 runtime_resolution_required = true
 
 [[relocs]]
@@ -222,6 +241,8 @@ original_encoded_gba = 0x82a4fd7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/safari-zone"
 target_export = "Route121_SafariZoneEntrance_Text_PlayAnotherTime"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -232,6 +253,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route121-safarizoneentrance"
 target_export = "Route121_SafariZoneEntrance_EventScript_MovePlayerBackFromCounter"
 target_offset = 331
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 306
 runtime_resolution_required = true
 
 [[relocs]]
@@ -242,6 +265,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route121-safarizoneentrance"
 target_export = "Route121_SafariZoneEntrance_EventScript_NoPokeblockCase"
 target_offset = 303
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 278
 runtime_resolution_required = true
 
 [[relocs]]
@@ -252,6 +277,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route121-safarizoneentrance"
 target_export = "Route121_SafariZoneEntrance_EventScript_CheckHasRoomForPokemon"
 target_offset = 260
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 235
 runtime_resolution_required = true
 
 [[relocs]]
@@ -262,6 +289,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route121-safarizoneentrance"
 target_export = "Route121_SafariZoneEntrance_EventScript_NotEnoughMoney"
 target_offset = 317
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 292
 runtime_resolution_required = true
 
 [[relocs]]
@@ -271,6 +300,8 @@ original_encoded_gba = 0x82a501b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/safari-zone"
 target_export = "Route121_SafariZoneEntrance_Text_ThatWillBe500Please"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -280,6 +311,8 @@ original_encoded_gba = 0x82a5036
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/safari-zone"
 target_export = "Route121_SafariZoneEntrance_Text_HereAreYourSafariBalls"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -289,6 +322,8 @@ original_encoded_gba = 0x82a5052
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/safari-zone"
 target_export = "Route121_SafariZoneEntrance_Text_Received30SafariBalls"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -298,6 +333,8 @@ original_encoded_gba = 0x82a506f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/safari-zone"
 target_export = "Route121_SafariZoneEntrance_Text_PleaseEnjoyYourself"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -307,6 +344,8 @@ original_encoded_gba = 0x822bd18
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route121-safarizoneentrance-movement-entersafarizone"
 target_export = "Route121_SafariZoneEntrance_Movement_EnterSafariZone"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -317,6 +356,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route121-safarizoneentrance"
 target_export = "Route121_SafariZoneEntrance_EventScript_HasRoomForPokemon"
 target_offset = 302
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 277
 runtime_resolution_required = true
 
 [[relocs]]
@@ -327,6 +368,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route121-safarizoneentrance"
 target_export = "Route121_SafariZoneEntrance_EventScript_HasRoomForPokemon"
 target_offset = 302
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 277
 runtime_resolution_required = true
 
 [[relocs]]
@@ -336,6 +379,8 @@ original_encoded_gba = 0x82a50e5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/safari-zone"
 target_export = "Route121_SafariZoneEntrance_Text_PCIsFull"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -346,6 +391,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route121-safarizoneentrance"
 target_export = "Route121_SafariZoneEntrance_EventScript_MovePlayerBackFromCounter"
 target_offset = 331
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 306
 runtime_resolution_required = true
 
 [[relocs]]
@@ -355,6 +402,8 @@ original_encoded_gba = 0x82a5105
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/safari-zone"
 target_export = "Route121_SafariZoneEntrance_Text_YouNeedPokeblockCase"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -365,6 +414,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route121-safarizoneentrance"
 target_export = "Route121_SafariZoneEntrance_EventScript_MovePlayerBackFromCounter"
 target_offset = 331
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 306
 runtime_resolution_required = true
 
 [[relocs]]
@@ -374,6 +425,8 @@ original_encoded_gba = 0x82a4ff7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/safari-zone"
 target_export = "Route121_SafariZoneEntrance_Text_NotEnoughMoney"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -384,6 +437,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route121-safarizoneentrance"
 target_export = "Route121_SafariZoneEntrance_EventScript_MovePlayerBackFromCounter"
 target_offset = 331
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 306
 runtime_resolution_required = true
 
 [[relocs]]
@@ -393,6 +448,8 @@ original_encoded_gba = 0x822bd16
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route121-safarizoneentrance-movement-backawayfromcounter"
 target_export = "Route121_SafariZoneEntrance_Movement_BackAwayFromCounter"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -402,4 +459,374 @@ original_encoded_gba = 0x82a55bb
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/safari-zone"
 target_export = "Route121_SafariZoneEntrance_Text_TrainerTip"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 7
+
+[[boundaries]]
+payload_offset = 8
+length = 3
+
+[[boundaries]]
+payload_offset = 11
+length = 5
+
+[[boundaries]]
+payload_offset = 16
+length = 1
+
+[[boundaries]]
+payload_offset = 17
+length = 1
+
+[[boundaries]]
+payload_offset = 18
+length = 6
+
+[[boundaries]]
+payload_offset = 24
+length = 2
+
+[[boundaries]]
+payload_offset = 26
+length = 1
+
+[[boundaries]]
+payload_offset = 27
+length = 1
+
+[[boundaries]]
+payload_offset = 28
+length = 1
+
+[[boundaries]]
+payload_offset = 29
+length = 6
+
+[[boundaries]]
+payload_offset = 35
+length = 2
+
+[[boundaries]]
+payload_offset = 37
+length = 5
+
+[[boundaries]]
+payload_offset = 42
+length = 6
+
+[[boundaries]]
+payload_offset = 48
+length = 6
+
+[[boundaries]]
+payload_offset = 54
+length = 2
+
+[[boundaries]]
+payload_offset = 56
+length = 1
+
+[[boundaries]]
+payload_offset = 57
+length = 1
+
+[[boundaries]]
+payload_offset = 58
+length = 6
+
+[[boundaries]]
+payload_offset = 64
+length = 2
+
+[[boundaries]]
+payload_offset = 66
+length = 1
+
+[[boundaries]]
+payload_offset = 67
+length = 1
+
+[[boundaries]]
+payload_offset = 68
+length = 1
+
+[[boundaries]]
+payload_offset = 69
+length = 7
+
+[[boundaries]]
+payload_offset = 76
+length = 3
+
+[[boundaries]]
+payload_offset = 79
+length = 4
+
+[[boundaries]]
+payload_offset = 83
+length = 6
+
+[[boundaries]]
+payload_offset = 89
+length = 2
+
+[[boundaries]]
+payload_offset = 91
+length = 5
+
+[[boundaries]]
+payload_offset = 96
+length = 6
+
+[[boundaries]]
+payload_offset = 102
+length = 6
+
+[[boundaries]]
+payload_offset = 108
+length = 2
+
+[[boundaries]]
+payload_offset = 110
+length = 5
+
+[[boundaries]]
+payload_offset = 116
+length = 5
+
+[[boundaries]]
+payload_offset = 121
+length = 5
+
+[[boundaries]]
+payload_offset = 126
+length = 6
+
+[[boundaries]]
+payload_offset = 132
+length = 5
+
+[[boundaries]]
+payload_offset = 137
+length = 6
+
+[[boundaries]]
+payload_offset = 143
+length = 5
+
+[[boundaries]]
+payload_offset = 148
+length = 6
+
+[[boundaries]]
+payload_offset = 154
+length = 3
+
+[[boundaries]]
+payload_offset = 157
+length = 6
+
+[[boundaries]]
+payload_offset = 163
+length = 2
+
+[[boundaries]]
+payload_offset = 165
+length = 6
+
+[[boundaries]]
+payload_offset = 171
+length = 4
+
+[[boundaries]]
+payload_offset = 175
+length = 6
+
+[[boundaries]]
+payload_offset = 181
+length = 2
+
+[[boundaries]]
+payload_offset = 183
+length = 3
+
+[[boundaries]]
+payload_offset = 186
+length = 5
+
+[[boundaries]]
+payload_offset = 191
+length = 1
+
+[[boundaries]]
+payload_offset = 192
+length = 6
+
+[[boundaries]]
+payload_offset = 198
+length = 2
+
+[[boundaries]]
+payload_offset = 200
+length = 1
+
+[[boundaries]]
+payload_offset = 201
+length = 1
+
+[[boundaries]]
+payload_offset = 202
+length = 1
+
+[[boundaries]]
+payload_offset = 203
+length = 1
+
+[[boundaries]]
+payload_offset = 204
+length = 7
+
+[[boundaries]]
+payload_offset = 211
+length = 3
+
+[[boundaries]]
+payload_offset = 214
+length = 3
+
+[[boundaries]]
+payload_offset = 217
+length = 5
+
+[[boundaries]]
+payload_offset = 222
+length = 3
+
+[[boundaries]]
+payload_offset = 225
+length = 8
+
+[[boundaries]]
+payload_offset = 233
+length = 1
+
+[[boundaries]]
+payload_offset = 234
+length = 1
+
+[[boundaries]]
+payload_offset = 235
+length = 1
+
+[[boundaries]]
+payload_offset = 236
+length = 5
+
+[[boundaries]]
+payload_offset = 241
+length = 6
+
+[[boundaries]]
+payload_offset = 247
+length = 5
+
+[[boundaries]]
+payload_offset = 252
+length = 5
+
+[[boundaries]]
+payload_offset = 257
+length = 6
+
+[[boundaries]]
+payload_offset = 263
+length = 6
+
+[[boundaries]]
+payload_offset = 269
+length = 2
+
+[[boundaries]]
+payload_offset = 271
+length = 5
+
+[[boundaries]]
+payload_offset = 277
+length = 1
+
+[[boundaries]]
+payload_offset = 278
+length = 6
+
+[[boundaries]]
+payload_offset = 284
+length = 2
+
+[[boundaries]]
+payload_offset = 286
+length = 5
+
+[[boundaries]]
+payload_offset = 292
+length = 6
+
+[[boundaries]]
+payload_offset = 298
+length = 2
+
+[[boundaries]]
+payload_offset = 300
+length = 5
+
+[[boundaries]]
+payload_offset = 306
+length = 1
+
+[[boundaries]]
+payload_offset = 307
+length = 1
+
+[[boundaries]]
+payload_offset = 308
+length = 1
+
+[[boundaries]]
+payload_offset = 309
+length = 1
+
+[[boundaries]]
+payload_offset = 310
+length = 7
+
+[[boundaries]]
+payload_offset = 317
+length = 3
+
+[[boundaries]]
+payload_offset = 320
+length = 1
+
+[[boundaries]]
+payload_offset = 321
+length = 1
+
+[[boundaries]]
+payload_offset = 322
+length = 6
+
+[[boundaries]]
+payload_offset = 328
+length = 2
+
+[[boundaries]]
+payload_offset = 330
+length = 1

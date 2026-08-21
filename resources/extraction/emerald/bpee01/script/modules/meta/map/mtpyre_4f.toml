@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 1
 reloc_count = 3
+instruction_count = 4
 
 [[segments]]
 kind = "bytecode"
@@ -39,6 +40,8 @@ original_encoded_gba = 0x8231be0
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-4f"
 target_export = "MtPyre_5F_Text_AtsushiIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -48,6 +51,8 @@ original_encoded_gba = 0x8231c08
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-4f"
 target_export = "MtPyre_5F_Text_AtsushiDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -57,4 +62,22 @@ original_encoded_gba = 0x8231c24
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-4f"
 target_export = "MtPyre_5F_Text_AtsushiPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 14
+
+[[boundaries]]
+payload_offset = 14
+length = 6
+
+[[boundaries]]
+payload_offset = 20
+length = 2
+
+[[boundaries]]
+payload_offset = 22
+length = 1

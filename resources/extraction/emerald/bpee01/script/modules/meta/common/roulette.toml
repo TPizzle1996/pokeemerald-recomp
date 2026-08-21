@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 3
 reloc_count = 6
+instruction_count = 21
 
 [[segments]]
 kind = "bytecode"
@@ -56,6 +57,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_NoCoinCase"
 target_offset = 2206
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2205
 runtime_resolution_required = true
 
 [[relocs]]
@@ -66,6 +69,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/roulette"
 target_export = "Roulette_EventScript_Play"
 target_offset = 92
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 92
 runtime_resolution_required = true
 
 [[relocs]]
@@ -76,6 +81,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/roulette"
 target_export = "Roulette_EventScript_Play"
 target_offset = 92
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 92
 runtime_resolution_required = true
 
 [[relocs]]
@@ -86,6 +93,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_NoCoinCase"
 target_offset = 2206
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2205
 runtime_resolution_required = true
 
 [[relocs]]
@@ -96,6 +105,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/roulette"
 target_export = "Roulette_EventScript_Play"
 target_offset = 92
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 92
 runtime_resolution_required = true
 
 [[relocs]]
@@ -106,4 +117,90 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/roulette"
 target_export = "Roulette_EventScript_Play"
 target_offset = 92
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 92
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 5
+
+[[boundaries]]
+payload_offset = 5
+length = 5
+
+[[boundaries]]
+payload_offset = 10
+length = 6
+
+[[boundaries]]
+payload_offset = 16
+length = 5
+
+[[boundaries]]
+payload_offset = 21
+length = 3
+
+[[boundaries]]
+payload_offset = 24
+length = 5
+
+[[boundaries]]
+payload_offset = 29
+length = 6
+
+[[boundaries]]
+payload_offset = 35
+length = 5
+
+[[boundaries]]
+payload_offset = 40
+length = 5
+
+[[boundaries]]
+payload_offset = 46
+length = 5
+
+[[boundaries]]
+payload_offset = 51
+length = 5
+
+[[boundaries]]
+payload_offset = 56
+length = 6
+
+[[boundaries]]
+payload_offset = 62
+length = 5
+
+[[boundaries]]
+payload_offset = 67
+length = 3
+
+[[boundaries]]
+payload_offset = 70
+length = 5
+
+[[boundaries]]
+payload_offset = 75
+length = 6
+
+[[boundaries]]
+payload_offset = 81
+length = 5
+
+[[boundaries]]
+payload_offset = 86
+length = 5
+
+[[boundaries]]
+payload_offset = 92
+length = 3
+
+[[boundaries]]
+payload_offset = 95
+length = 1
+
+[[boundaries]]
+payload_offset = 96
+length = 1

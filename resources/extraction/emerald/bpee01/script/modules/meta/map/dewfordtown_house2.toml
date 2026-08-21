@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 4
 reloc_count = 6
+instruction_count = 25
 
 [[segments]]
 kind = "bytecode"
@@ -64,6 +65,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown-house2"
 target_export = "DewfordTown_House2_EventScript_ExplainSilkScarf"
 target_offset = 58
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 57
 runtime_resolution_required = true
 
 [[relocs]]
@@ -73,6 +76,8 @@ original_encoded_gba = 0x81fe27a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown-house2"
 target_export = "DewfordTown_House2_Text_WantYouToHaveSilkScarf"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -83,6 +88,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown-house2"
 target_export = "DewfordTown_House2_EventScript_NoRoomForScarf"
 target_offset = 48
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 47
 runtime_resolution_required = true
 
 [[relocs]]
@@ -92,6 +99,8 @@ original_encoded_gba = 0x81fe356
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown-house2"
 target_export = "DewfordTown_House2_Text_NoRoom"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -101,6 +110,8 @@ original_encoded_gba = 0x81fe3d1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown-house2"
 target_export = "DewfordTown_House2_Text_ExplainSilkScarf"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -110,4 +121,106 @@ original_encoded_gba = 0x81fe444
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown-house2"
 target_export = "DewfordTown_House2_Text_BrawlySoCool"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 1
+
+[[boundaries]]
+payload_offset = 2
+length = 3
+
+[[boundaries]]
+payload_offset = 5
+length = 6
+
+[[boundaries]]
+payload_offset = 11
+length = 6
+
+[[boundaries]]
+payload_offset = 17
+length = 2
+
+[[boundaries]]
+payload_offset = 19
+length = 5
+
+[[boundaries]]
+payload_offset = 24
+length = 5
+
+[[boundaries]]
+payload_offset = 29
+length = 2
+
+[[boundaries]]
+payload_offset = 31
+length = 5
+
+[[boundaries]]
+payload_offset = 36
+length = 6
+
+[[boundaries]]
+payload_offset = 42
+length = 3
+
+[[boundaries]]
+payload_offset = 45
+length = 1
+
+[[boundaries]]
+payload_offset = 46
+length = 1
+
+[[boundaries]]
+payload_offset = 47
+length = 6
+
+[[boundaries]]
+payload_offset = 53
+length = 2
+
+[[boundaries]]
+payload_offset = 55
+length = 1
+
+[[boundaries]]
+payload_offset = 56
+length = 1
+
+[[boundaries]]
+payload_offset = 57
+length = 6
+
+[[boundaries]]
+payload_offset = 63
+length = 2
+
+[[boundaries]]
+payload_offset = 65
+length = 1
+
+[[boundaries]]
+payload_offset = 66
+length = 1
+
+[[boundaries]]
+payload_offset = 67
+length = 6
+
+[[boundaries]]
+payload_offset = 73
+length = 2
+
+[[boundaries]]
+payload_offset = 75
+length = 1

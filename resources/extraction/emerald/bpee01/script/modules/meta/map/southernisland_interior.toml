@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 15
 reloc_count = 23
+instruction_count = 96
 
 [[segments]]
 kind = "bytecode"
@@ -152,6 +153,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/southernisland-interior"
 target_export = "SouthernIsland_Interior_EventScript_TryRemoveLati"
 target_offset = 21
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 10
 runtime_resolution_required = true
 
 [[relocs]]
@@ -162,6 +165,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-poison"
 target_export = "Common_EventScript_NopReturn"
 target_offset = 146
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 146
 runtime_resolution_required = true
 
 [[relocs]]
@@ -172,6 +177,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/southernisland-interior"
 target_export = "SouthernIsland_Interior_EventScript_SetUpLatios"
 target_offset = 69
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 58
 runtime_resolution_required = true
 
 [[relocs]]
@@ -182,6 +189,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/southernisland-interior"
 target_export = "SouthernIsland_Interior_EventScript_SetUpLatias"
 target_offset = 80
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 69
 runtime_resolution_required = true
 
 [[relocs]]
@@ -192,6 +201,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/southernisland-interior"
 target_export = "SouthernIsland_Interior_EventScript_SetUpPlayerGfx"
 target_offset = 91
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 80
 runtime_resolution_required = true
 
 [[relocs]]
@@ -202,6 +213,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/southernisland-interior"
 target_export = "SouthernIsland_Interior_EventScript_SetBrendanGfx"
 target_offset = 115
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 104
 runtime_resolution_required = true
 
 [[relocs]]
@@ -212,6 +225,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/southernisland-interior"
 target_export = "SouthernIsland_Interior_EventScript_SetMayGfx"
 target_offset = 121
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 110
 runtime_resolution_required = true
 
 [[relocs]]
@@ -222,6 +237,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/southernisland-interior"
 target_export = "SouthernIsland_Interior_EventScript_Lati"
 target_offset = 139
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 128
 runtime_resolution_required = true
 
 [[relocs]]
@@ -232,6 +249,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/southernisland-interior"
 target_export = "SouthernIsland_Interior_EventScript_Sign"
 target_offset = 341
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 330
 runtime_resolution_required = true
 
 [[relocs]]
@@ -242,6 +261,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/southernisland-interior"
 target_export = "SouthernIsland_Interior_EventScript_Sign"
 target_offset = 341
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 330
 runtime_resolution_required = true
 
 [[relocs]]
@@ -252,6 +273,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/southernisland-interior"
 target_export = "SouthernIsland_Interior_EventScript_Sign"
 target_offset = 341
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 330
 runtime_resolution_required = true
 
 [[relocs]]
@@ -262,6 +285,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/southernisland-interior"
 target_export = "SouthernIsland_Interior_EventScript_Sign"
 target_offset = 341
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 330
 runtime_resolution_required = true
 
 [[relocs]]
@@ -271,6 +296,8 @@ original_encoded_gba = 0x8242bca
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/southernisland-interior-movement-camerapanup"
 target_export = "SouthernIsland_Interior_Movement_CameraPanUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -280,6 +307,8 @@ original_encoded_gba = 0x8242bce
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/southernisland-interior-movement-camerapandown"
 target_export = "SouthernIsland_Interior_Movement_CameraPanDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -289,6 +318,8 @@ original_encoded_gba = 0x8242bda
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/southernisland-interior-movement-latiapproach"
 target_export = "SouthernIsland_Interior_Movement_LatiApproach"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -299,6 +330,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/southernisland-interior"
 target_export = "SouthernIsland_Interior_EventScript_SetLatiosBattleVars"
 target_offset = 351
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 340
 runtime_resolution_required = true
 
 [[relocs]]
@@ -309,6 +342,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/southernisland-interior"
 target_export = "SouthernIsland_Interior_EventScript_SetLatiasBattleVars"
 target_offset = 370
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 359
 runtime_resolution_required = true
 
 [[relocs]]
@@ -319,6 +354,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/southernisland-interior"
 target_export = "SouthernIsland_Interior_EventScript_LatiDefeated"
 target_offset = 316
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 305
 runtime_resolution_required = true
 
 [[relocs]]
@@ -329,6 +366,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/southernisland-interior"
 target_export = "SouthernIsland_Interior_EventScript_RanFromLati"
 target_offset = 330
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 319
 runtime_resolution_required = true
 
 [[relocs]]
@@ -339,6 +378,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/southernisland-interior"
 target_export = "SouthernIsland_Interior_EventScript_RanFromLati"
 target_offset = 330
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 319
 runtime_resolution_required = true
 
 [[relocs]]
@@ -349,6 +390,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-poison"
 target_export = "Common_EventScript_LegendaryFlewAway"
 target_offset = 186
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 186
 runtime_resolution_required = true
 
 [[relocs]]
@@ -359,6 +402,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-poison"
 target_export = "Common_EventScript_LegendaryFlewAway"
 target_offset = 186
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 186
 runtime_resolution_required = true
 
 [[relocs]]
@@ -368,4 +413,390 @@ original_encoded_gba = 0x82a6aa1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/event-ticket-1"
 target_export = "SouthernIsland_Interior_Text_Sign"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 6
+
+[[boundaries]]
+payload_offset = 9
+length = 1
+
+[[boundaries]]
+payload_offset = 10
+length = 5
+
+[[boundaries]]
+payload_offset = 15
+length = 5
+
+[[boundaries]]
+payload_offset = 20
+length = 6
+
+[[boundaries]]
+payload_offset = 26
+length = 3
+
+[[boundaries]]
+payload_offset = 29
+length = 1
+
+[[boundaries]]
+payload_offset = 30
+length = 5
+
+[[boundaries]]
+payload_offset = 35
+length = 6
+
+[[boundaries]]
+payload_offset = 41
+length = 5
+
+[[boundaries]]
+payload_offset = 46
+length = 6
+
+[[boundaries]]
+payload_offset = 52
+length = 5
+
+[[boundaries]]
+payload_offset = 57
+length = 1
+
+[[boundaries]]
+payload_offset = 58
+length = 5
+
+[[boundaries]]
+payload_offset = 63
+length = 5
+
+[[boundaries]]
+payload_offset = 68
+length = 1
+
+[[boundaries]]
+payload_offset = 69
+length = 5
+
+[[boundaries]]
+payload_offset = 74
+length = 5
+
+[[boundaries]]
+payload_offset = 79
+length = 1
+
+[[boundaries]]
+payload_offset = 80
+length = 1
+
+[[boundaries]]
+payload_offset = 81
+length = 5
+
+[[boundaries]]
+payload_offset = 86
+length = 6
+
+[[boundaries]]
+payload_offset = 92
+length = 5
+
+[[boundaries]]
+payload_offset = 97
+length = 6
+
+[[boundaries]]
+payload_offset = 103
+length = 1
+
+[[boundaries]]
+payload_offset = 104
+length = 5
+
+[[boundaries]]
+payload_offset = 109
+length = 1
+
+[[boundaries]]
+payload_offset = 110
+length = 5
+
+[[boundaries]]
+payload_offset = 115
+length = 1
+
+[[boundaries]]
+payload_offset = 116
+length = 1
+
+[[boundaries]]
+payload_offset = 117
+length = 5
+
+[[boundaries]]
+payload_offset = 122
+length = 5
+
+[[boundaries]]
+payload_offset = 128
+length = 3
+
+[[boundaries]]
+payload_offset = 131
+length = 6
+
+[[boundaries]]
+payload_offset = 137
+length = 3
+
+[[boundaries]]
+payload_offset = 140
+length = 6
+
+[[boundaries]]
+payload_offset = 146
+length = 3
+
+[[boundaries]]
+payload_offset = 149
+length = 6
+
+[[boundaries]]
+payload_offset = 155
+length = 3
+
+[[boundaries]]
+payload_offset = 158
+length = 6
+
+[[boundaries]]
+payload_offset = 164
+length = 3
+
+[[boundaries]]
+payload_offset = 167
+length = 3
+
+[[boundaries]]
+payload_offset = 170
+length = 3
+
+[[boundaries]]
+payload_offset = 173
+length = 7
+
+[[boundaries]]
+payload_offset = 180
+length = 3
+
+[[boundaries]]
+payload_offset = 183
+length = 3
+
+[[boundaries]]
+payload_offset = 186
+length = 1
+
+[[boundaries]]
+payload_offset = 187
+length = 5
+
+[[boundaries]]
+payload_offset = 192
+length = 3
+
+[[boundaries]]
+payload_offset = 195
+length = 1
+
+[[boundaries]]
+payload_offset = 196
+length = 3
+
+[[boundaries]]
+payload_offset = 199
+length = 3
+
+[[boundaries]]
+payload_offset = 202
+length = 7
+
+[[boundaries]]
+payload_offset = 209
+length = 7
+
+[[boundaries]]
+payload_offset = 216
+length = 3
+
+[[boundaries]]
+payload_offset = 219
+length = 3
+
+[[boundaries]]
+payload_offset = 222
+length = 3
+
+[[boundaries]]
+payload_offset = 225
+length = 5
+
+[[boundaries]]
+payload_offset = 230
+length = 5
+
+[[boundaries]]
+payload_offset = 235
+length = 6
+
+[[boundaries]]
+payload_offset = 241
+length = 5
+
+[[boundaries]]
+payload_offset = 246
+length = 6
+
+[[boundaries]]
+payload_offset = 252
+length = 3
+
+[[boundaries]]
+payload_offset = 255
+length = 3
+
+[[boundaries]]
+payload_offset = 258
+length = 1
+
+[[boundaries]]
+payload_offset = 259
+length = 3
+
+[[boundaries]]
+payload_offset = 262
+length = 5
+
+[[boundaries]]
+payload_offset = 267
+length = 5
+
+[[boundaries]]
+payload_offset = 272
+length = 6
+
+[[boundaries]]
+payload_offset = 278
+length = 5
+
+[[boundaries]]
+payload_offset = 283
+length = 6
+
+[[boundaries]]
+payload_offset = 289
+length = 5
+
+[[boundaries]]
+payload_offset = 294
+length = 6
+
+[[boundaries]]
+payload_offset = 300
+length = 3
+
+[[boundaries]]
+payload_offset = 303
+length = 1
+
+[[boundaries]]
+payload_offset = 304
+length = 1
+
+[[boundaries]]
+payload_offset = 305
+length = 3
+
+[[boundaries]]
+payload_offset = 308
+length = 5
+
+[[boundaries]]
+payload_offset = 313
+length = 5
+
+[[boundaries]]
+payload_offset = 319
+length = 5
+
+[[boundaries]]
+payload_offset = 324
+length = 5
+
+[[boundaries]]
+payload_offset = 330
+length = 6
+
+[[boundaries]]
+payload_offset = 336
+length = 2
+
+[[boundaries]]
+payload_offset = 338
+length = 1
+
+[[boundaries]]
+payload_offset = 339
+length = 1
+
+[[boundaries]]
+payload_offset = 340
+length = 5
+
+[[boundaries]]
+payload_offset = 345
+length = 5
+
+[[boundaries]]
+payload_offset = 350
+length = 5
+
+[[boundaries]]
+payload_offset = 355
+length = 3
+
+[[boundaries]]
+payload_offset = 358
+length = 1
+
+[[boundaries]]
+payload_offset = 359
+length = 5
+
+[[boundaries]]
+payload_offset = 364
+length = 5
+
+[[boundaries]]
+payload_offset = 369
+length = 5
+
+[[boundaries]]
+payload_offset = 374
+length = 3
+
+[[boundaries]]
+payload_offset = 377
+length = 1

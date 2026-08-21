@@ -17,6 +17,7 @@ static_data_bytes = 22
 segment_count = 5
 export_count = 7
 reloc_count = 10
+instruction_count = 37
 
 [[segments]]
 kind = "bytecode"
@@ -113,6 +114,8 @@ original_encoded_gba = 0x8272a21
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/mart-clerk"
 target_export = "gText_HowMayIServeYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -123,6 +126,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/oldaletown-mart"
 target_export = "OldaleTown_Mart_ExpandedItems"
 target_offset = 45
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 44
 runtime_resolution_required = true
 
 [[relocs]]
@@ -133,6 +138,8 @@ target_class = "MART_TABLE_TARGET"
 target_resource_key = "emerald:script/map/oldaletown-mart"
 target_export = "OldaleTown_Mart_Pokemart_Basic"
 target_offset = 32
+target_kind = "MART_TABLE"
+target_payload_offset = 32
 runtime_resolution_required = true
 
 [[relocs]]
@@ -142,6 +149,8 @@ original_encoded_gba = 0x8272a3f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/mart-clerk"
 target_export = "gText_PleaseComeAgain"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -152,6 +161,8 @@ target_class = "MART_TABLE_TARGET"
 target_resource_key = "emerald:script/map/oldaletown-mart"
 target_export = "OldaleTown_Mart_Pokemart_Expanded"
 target_offset = 60
+target_kind = "MART_TABLE"
+target_payload_offset = 60
 runtime_resolution_required = true
 
 [[relocs]]
@@ -161,6 +172,8 @@ original_encoded_gba = 0x8272a3f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/mart-clerk"
 target_export = "gText_PleaseComeAgain"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -171,6 +184,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/oldaletown-mart"
 target_export = "OldaleTown_Mart_EventScript_PokeBallsInStock"
 target_offset = 96
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 95
 runtime_resolution_required = true
 
 [[relocs]]
@@ -180,6 +195,8 @@ original_encoded_gba = 0x81fc2b2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/oldaletown-mart"
 target_export = "OldaleTown_Mart_Text_PokeBallsAreSoldOut"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -189,6 +206,8 @@ original_encoded_gba = 0x81fc2f3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/oldaletown-mart"
 target_export = "OldaleTown_Mart_Text_ImGoingToBuyPokeBalls"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -198,4 +217,154 @@ original_encoded_gba = 0x81fc338
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/oldaletown-mart"
 target_export = "OldaleTown_Mart_Text_RestoreHPWithPotion"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 1
+
+[[boundaries]]
+payload_offset = 2
+length = 5
+
+[[boundaries]]
+payload_offset = 7
+length = 1
+
+[[boundaries]]
+payload_offset = 8
+length = 3
+
+[[boundaries]]
+payload_offset = 11
+length = 6
+
+[[boundaries]]
+payload_offset = 17
+length = 5
+
+[[boundaries]]
+payload_offset = 22
+length = 6
+
+[[boundaries]]
+payload_offset = 28
+length = 2
+
+[[boundaries]]
+payload_offset = 30
+length = 1
+
+[[boundaries]]
+payload_offset = 31
+length = 1
+
+[[boundaries]]
+payload_offset = 32
+length = 1
+
+[[boundaries]]
+payload_offset = 44
+length = 5
+
+[[boundaries]]
+payload_offset = 49
+length = 6
+
+[[boundaries]]
+payload_offset = 55
+length = 2
+
+[[boundaries]]
+payload_offset = 57
+length = 1
+
+[[boundaries]]
+payload_offset = 58
+length = 1
+
+[[boundaries]]
+payload_offset = 60
+length = 5
+
+[[boundaries]]
+payload_offset = 65
+length = 1
+
+[[boundaries]]
+payload_offset = 66
+length = 6
+
+[[boundaries]]
+payload_offset = 72
+length = 1
+
+[[boundaries]]
+payload_offset = 73
+length = 1
+
+[[boundaries]]
+payload_offset = 74
+length = 1
+
+[[boundaries]]
+payload_offset = 75
+length = 1
+
+[[boundaries]]
+payload_offset = 76
+length = 3
+
+[[boundaries]]
+payload_offset = 79
+length = 6
+
+[[boundaries]]
+payload_offset = 85
+length = 6
+
+[[boundaries]]
+payload_offset = 91
+length = 2
+
+[[boundaries]]
+payload_offset = 93
+length = 1
+
+[[boundaries]]
+payload_offset = 94
+length = 1
+
+[[boundaries]]
+payload_offset = 95
+length = 6
+
+[[boundaries]]
+payload_offset = 101
+length = 2
+
+[[boundaries]]
+payload_offset = 103
+length = 1
+
+[[boundaries]]
+payload_offset = 104
+length = 1
+
+[[boundaries]]
+payload_offset = 105
+length = 6
+
+[[boundaries]]
+payload_offset = 111
+length = 2
+
+[[boundaries]]
+payload_offset = 113
+length = 1

@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 6
 reloc_count = 18
+instruction_count = 24
 
 [[segments]]
 kind = "bytecode"
@@ -79,6 +80,8 @@ original_encoded_gba = 0x823695f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/victoryroad-b2f"
 target_export = "VictoryRoad_B2F_Text_VitoIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -88,6 +91,8 @@ original_encoded_gba = 0x82369b3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/victoryroad-b2f"
 target_export = "VictoryRoad_B2F_Text_VitoDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -97,6 +102,8 @@ original_encoded_gba = 0x82369de
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/victoryroad-b2f"
 target_export = "VictoryRoad_B2F_Text_VitoPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -106,6 +113,8 @@ original_encoded_gba = 0x8236a4c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/victoryroad-b2f"
 target_export = "VictoryRoad_B2F_Text_OwenIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -115,6 +124,8 @@ original_encoded_gba = 0x8236a92
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/victoryroad-b2f"
 target_export = "VictoryRoad_B2F_Text_OwenDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -124,6 +135,8 @@ original_encoded_gba = 0x8236aae
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/victoryroad-b2f"
 target_export = "VictoryRoad_B2F_Text_OwenPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -133,6 +146,8 @@ original_encoded_gba = 0x8236af0
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/victoryroad-b2f"
 target_export = "VictoryRoad_B2F_Text_CarolineIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -142,6 +157,8 @@ original_encoded_gba = 0x8236b14
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/victoryroad-b2f"
 target_export = "VictoryRoad_B2F_Text_CarolineDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -151,6 +168,8 @@ original_encoded_gba = 0x8236b2f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/victoryroad-b2f"
 target_export = "VictoryRoad_B2F_Text_CarolinePostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -160,6 +179,8 @@ original_encoded_gba = 0x8236b88
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/victoryroad-b2f"
 target_export = "VictoryRoad_B2F_Text_JulieIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -169,6 +190,8 @@ original_encoded_gba = 0x8236c0a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/victoryroad-b2f"
 target_export = "VictoryRoad_B2F_Text_JulieDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -178,6 +201,8 @@ original_encoded_gba = 0x8236c21
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/victoryroad-b2f"
 target_export = "VictoryRoad_B2F_Text_JuliePostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -187,6 +212,8 @@ original_encoded_gba = 0x8236c67
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/victoryroad-b2f"
 target_export = "VictoryRoad_B2F_Text_FelixIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -196,6 +223,8 @@ original_encoded_gba = 0x8236cab
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/victoryroad-b2f"
 target_export = "VictoryRoad_B2F_Text_FelixDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -205,6 +234,8 @@ original_encoded_gba = 0x8236cba
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/victoryroad-b2f"
 target_export = "VictoryRoad_B2F_Text_FelixPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -214,6 +245,8 @@ original_encoded_gba = 0x8236d27
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/victoryroad-b2f"
 target_export = "VictoryRoad_B2F_Text_DianneIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -223,6 +256,8 @@ original_encoded_gba = 0x8236d6e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/victoryroad-b2f"
 target_export = "VictoryRoad_B2F_Text_DianneDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -232,4 +267,102 @@ original_encoded_gba = 0x8236d8c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/victoryroad-b2f"
 target_export = "VictoryRoad_B2F_Text_DiannePostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 14
+
+[[boundaries]]
+payload_offset = 14
+length = 6
+
+[[boundaries]]
+payload_offset = 20
+length = 2
+
+[[boundaries]]
+payload_offset = 22
+length = 1
+
+[[boundaries]]
+payload_offset = 23
+length = 14
+
+[[boundaries]]
+payload_offset = 37
+length = 6
+
+[[boundaries]]
+payload_offset = 43
+length = 2
+
+[[boundaries]]
+payload_offset = 45
+length = 1
+
+[[boundaries]]
+payload_offset = 46
+length = 14
+
+[[boundaries]]
+payload_offset = 60
+length = 6
+
+[[boundaries]]
+payload_offset = 66
+length = 2
+
+[[boundaries]]
+payload_offset = 68
+length = 1
+
+[[boundaries]]
+payload_offset = 69
+length = 14
+
+[[boundaries]]
+payload_offset = 83
+length = 6
+
+[[boundaries]]
+payload_offset = 89
+length = 2
+
+[[boundaries]]
+payload_offset = 91
+length = 1
+
+[[boundaries]]
+payload_offset = 92
+length = 14
+
+[[boundaries]]
+payload_offset = 106
+length = 6
+
+[[boundaries]]
+payload_offset = 112
+length = 2
+
+[[boundaries]]
+payload_offset = 114
+length = 1
+
+[[boundaries]]
+payload_offset = 115
+length = 14
+
+[[boundaries]]
+payload_offset = 129
+length = 6
+
+[[boundaries]]
+payload_offset = 135
+length = 2
+
+[[boundaries]]
+payload_offset = 137
+length = 1

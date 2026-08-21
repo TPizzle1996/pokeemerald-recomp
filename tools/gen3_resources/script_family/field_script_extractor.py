@@ -566,7 +566,8 @@ def collect_qualified_graph(root, rom, elf, opcode_table, trainer_types):
             if s["value"] not in text_starts and s["value"] not in move_starts: roots.add(s["value"])
 
     terminal = {0x02, 0x03, 0x05, 0x08, 0x0C, 0x0D, 0x24, 0xB9}
-    code_sources, instruction_starts, code_bytes, queue = {}, set(), set(), sorted(roots)
+    code_sources, instruction_starts, instruction_sizes, code_bytes, queue = \
+        {}, set(), {}, set(), sorted(roots)
     seen_roots = set(queue)
     while queue:
         p = queue.pop(0)
@@ -581,7 +582,8 @@ def collect_qualified_graph(root, rom, elf, opcode_table, trainer_types):
                 if not tt: break
                 size, types, operand = tt["encoded_size"], list(tt.get("operand_types", [])), 2
             if size <= 0 or p + size > base + elf.sections[4]["sh_size"]: break
-            instruction_starts.add(p); code_bytes.update(range(p, p + size))
+            instruction_starts.add(p); instruction_sizes[p] = size
+            code_bytes.update(range(p, p + size))
             for typ in types:
                 if typ.startswith("ADDR32"):
                     src, val = p + operand, u32(p + operand)
@@ -638,7 +640,7 @@ def collect_qualified_graph(root, rom, elf, opcode_table, trainer_types):
         elif typ == 5:
             mg_excluded.append((source, typ, sym, struct.unpack_from("<H", rom, source - GEN3_GBA_ROM_BASE)[0]))
     if len(mg_excluded) != 5: fail(f"mystery-gift ABS16 count {len(mg_excluded)} != 5")
-    return operands, len(code_bytes), map_tables, conditional_tables, dispatch_rows, cond_rows, total_rows, len(map_leaf_targets), object_refs, coord_refs, bg_refs, engine, std, mg_excluded
+    return operands, len(code_bytes), map_tables, conditional_tables, dispatch_rows, cond_rows, total_rows, len(map_leaf_targets), object_refs, coord_refs, bg_refs, engine, std, mg_excluded, instruction_starts, instruction_sizes
 
 
 def write_if(path, text, check):
@@ -896,11 +898,13 @@ def main():
 
     print("Extracting qualified relocation-source graph...")
     operands, walked_bytes, map_tables, conditional_tables, dispatch_rows, cond_rows, total_rows, \
-        unique_map_targets, object_refs, coord_refs, bg_refs, engine_relocs, std_relocs, mg_abs16 = \
+        unique_map_targets, object_refs, coord_refs, bg_refs, engine_relocs, std_relocs, mg_abs16, \
+        instruction_starts, instruction_sizes = \
         collect_qualified_graph(root, rom, elf, opcode_table, trainer_types)
     # Physical ownership is a pinned partition, not the span of decoded roots.
     bytecode_bytes = PINNED_BYTECODE_BYTES
-    print(f"  {len(operands)} canonical operands; {walked_bytes} decoded main bytes")
+    print(f"  {len(operands)} canonical operands; {walked_bytes} decoded main bytes; "
+          f"{len(instruction_starts)} instruction starts")
 
     text_ops = [o for o in operands if o["target_class"] == "TEXT_TARGET"]
     unique_text = set(o["target_gba"] for o in text_ops if o["target_gba"] > 0)

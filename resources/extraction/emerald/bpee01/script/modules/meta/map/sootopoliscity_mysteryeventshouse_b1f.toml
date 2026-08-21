@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 2
 export_count = 5
 reloc_count = 7
+instruction_count = 43
 
 [[segments]]
 kind = "bytecode"
@@ -77,6 +78,8 @@ original_encoded_gba = 0x8227ef3
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/sootopoliscity-mysteryeventshouse-b1f-movement-playerenterbasement"
 target_export = "SootopolisCity_MysteryEventsHouse_B1F_Movement_PlayerEnterBasement"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -85,6 +88,8 @@ operand_width = 4
 original_encoded_gba = 0x2021fc4
 target_class = "RAM_DATA_TARGET"
 target_resource_key = ""
+target_kind = "RAM_HOST"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -95,6 +100,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/sootopoliscity-mysteryeventshouse-b1f"
 target_export = "SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleTie"
 target_offset = 128
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 107
 runtime_resolution_required = true
 
 [[relocs]]
@@ -105,6 +112,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/sootopoliscity-mysteryeventshouse-b1f"
 target_export = "SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleWon"
 target_offset = 142
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 121
 runtime_resolution_required = true
 
 [[relocs]]
@@ -115,6 +124,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/sootopoliscity-mysteryeventshouse-b1f"
 target_export = "SootopolisCity_MysteryEventsHouse_B1F_EventScript_BattleLost"
 target_offset = 153
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 132
 runtime_resolution_required = true
 
 [[relocs]]
@@ -124,6 +135,8 @@ original_encoded_gba = 0x8227ef9
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/sootopoliscity-mysteryeventshouse-b1f-movement-playerexitbasement"
 target_export = "SootopolisCity_MysteryEventsHouse_B1F_Movement_PlayerExitBasement"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -133,4 +146,178 @@ original_encoded_gba = 0x8227d40
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-mysteryeventshouse-1f"
 target_export = "SootopolisCity_MysteryEventsHouse_B1F_Text_MatchEndedUpDraw"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 1
+
+[[boundaries]]
+payload_offset = 4
+length = 1
+
+[[boundaries]]
+payload_offset = 5
+length = 7
+
+[[boundaries]]
+payload_offset = 12
+length = 3
+
+[[boundaries]]
+payload_offset = 15
+length = 3
+
+[[boundaries]]
+payload_offset = 18
+length = 6
+
+[[boundaries]]
+payload_offset = 24
+length = 2
+
+[[boundaries]]
+payload_offset = 26
+length = 1
+
+[[boundaries]]
+payload_offset = 27
+length = 5
+
+[[boundaries]]
+payload_offset = 32
+length = 5
+
+[[boundaries]]
+payload_offset = 37
+length = 3
+
+[[boundaries]]
+payload_offset = 40
+length = 1
+
+[[boundaries]]
+payload_offset = 41
+length = 5
+
+[[boundaries]]
+payload_offset = 46
+length = 6
+
+[[boundaries]]
+payload_offset = 52
+length = 5
+
+[[boundaries]]
+payload_offset = 57
+length = 6
+
+[[boundaries]]
+payload_offset = 63
+length = 5
+
+[[boundaries]]
+payload_offset = 68
+length = 6
+
+[[boundaries]]
+payload_offset = 74
+length = 1
+
+[[boundaries]]
+payload_offset = 75
+length = 3
+
+[[boundaries]]
+payload_offset = 78
+length = 7
+
+[[boundaries]]
+payload_offset = 85
+length = 3
+
+[[boundaries]]
+payload_offset = 88
+length = 3
+
+[[boundaries]]
+payload_offset = 91
+length = 5
+
+[[boundaries]]
+payload_offset = 96
+length = 8
+
+[[boundaries]]
+payload_offset = 104
+length = 1
+
+[[boundaries]]
+payload_offset = 105
+length = 1
+
+[[boundaries]]
+payload_offset = 106
+length = 1
+
+[[boundaries]]
+payload_offset = 107
+length = 5
+
+[[boundaries]]
+payload_offset = 112
+length = 6
+
+[[boundaries]]
+payload_offset = 118
+length = 2
+
+[[boundaries]]
+payload_offset = 120
+length = 1
+
+[[boundaries]]
+payload_offset = 121
+length = 5
+
+[[boundaries]]
+payload_offset = 126
+length = 3
+
+[[boundaries]]
+payload_offset = 129
+length = 1
+
+[[boundaries]]
+payload_offset = 130
+length = 1
+
+[[boundaries]]
+payload_offset = 131
+length = 1
+
+[[boundaries]]
+payload_offset = 132
+length = 5
+
+[[boundaries]]
+payload_offset = 137
+length = 3
+
+[[boundaries]]
+payload_offset = 140
+length = 1
+
+[[boundaries]]
+payload_offset = 141
+length = 1
+
+[[boundaries]]
+payload_offset = 142
+length = 1

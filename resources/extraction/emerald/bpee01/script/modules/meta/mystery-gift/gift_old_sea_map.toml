@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 3
 reloc_count = 9
+instruction_count = 0
 
 [[segments]]
 kind = "bytecode"
@@ -56,6 +57,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/mystery-gift/gift-old-sea-map"
 target_export = "MysteryGiftScript_OldSeaMap"
 target_offset = 0
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 0
 runtime_resolution_required = true
 
 [[relocs]]
@@ -66,6 +69,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/mystery-gift/gift-old-sea-map"
 target_export = "OldSeaMap_Obtained"
 target_offset = 100
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 100
 runtime_resolution_required = true
 
 [[relocs]]
@@ -76,6 +81,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/mystery-gift/gift-old-sea-map"
 target_export = "OldSeaMap_Obtained"
 target_offset = 100
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 100
 runtime_resolution_required = true
 
 [[relocs]]
@@ -86,6 +93,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/mystery-gift/gift-old-sea-map"
 target_export = "OldSeaMap_Obtained"
 target_offset = 100
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 100
 runtime_resolution_required = true
 
 [[relocs]]
@@ -95,6 +104,8 @@ original_encoded_gba = 0x8675861
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/mystery-gift/stext-mysterygiftoldseamapforyou"
 target_export = "sText_MysteryGiftOldSeaMapForYou"
+target_kind = "TEXT_LABEL"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -105,6 +116,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/mystery-gift/gift-old-sea-map"
 target_export = "OldSeaMap_NoBagSpace"
 target_offset = 91
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 91
 runtime_resolution_required = true
 
 [[relocs]]
@@ -114,6 +127,8 @@ original_encoded_gba = 0x86758d9
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/mystery-gift/stext-mysterygiftoldseamapuseatport"
 target_export = "sText_MysteryGiftOldSeaMapUseAtPort"
+target_kind = "TEXT_LABEL"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -123,6 +138,8 @@ original_encoded_gba = 0x867596a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/mystery-gift/stext-mysterygiftoldseamapbagfull"
 target_export = "sText_MysteryGiftOldSeaMapBagFull"
+target_kind = "TEXT_LABEL"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -132,4 +149,6 @@ original_encoded_gba = 0x867593d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/mystery-gift/stext-mysterygiftoldseamapthankyou"
 target_export = "sText_MysteryGiftOldSeaMapThankYou"
+target_kind = "TEXT_LABEL"
+target_payload_offset = 4294967295
 runtime_resolution_required = true

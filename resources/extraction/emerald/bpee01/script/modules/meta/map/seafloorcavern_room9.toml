@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 1
 reloc_count = 36
+instruction_count = 157
 
 [[segments]]
 kind = "bytecode"
@@ -39,6 +40,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -48,6 +51,8 @@ original_encoded_gba = 0x823505c
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/seafloorcavern-room9-movement-delay32"
 target_export = "SeafloorCavern_Room9_Movement_Delay32"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -57,6 +62,8 @@ original_encoded_gba = 0x823505f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/seafloorcavern-room9"
 target_export = "SeafloorCavern_Room9_Text_ArchieHoldItRightThere"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -66,6 +73,8 @@ original_encoded_gba = 0x82725a4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterleft"
 target_export = "Common_Movement_WalkInPlaceFasterLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -75,6 +84,8 @@ original_encoded_gba = 0x823502a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/seafloorcavern-room9-movement-archieapproachplayer"
 target_export = "SeafloorCavern_Room9_Movement_ArchieApproachPlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -84,6 +95,8 @@ original_encoded_gba = 0x823507c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/seafloorcavern-room9"
 target_export = "SeafloorCavern_Room9_Text_ArchieSoItWasYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -93,6 +106,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -102,6 +117,8 @@ original_encoded_gba = 0x82350a6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/seafloorcavern-room9"
 target_export = "SeafloorCavern_Room9_Text_ArchieBeholdKyogre"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -111,6 +128,8 @@ original_encoded_gba = 0x827259e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceplayer"
 target_export = "Common_Movement_FacePlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -120,6 +139,8 @@ original_encoded_gba = 0x823512c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/seafloorcavern-room9"
 target_export = "SeafloorCavern_Room9_Text_ArchieYouMustDisappear"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -129,6 +150,8 @@ original_encoded_gba = 0x82351bc
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/seafloorcavern-room9"
 target_export = "SeafloorCavern_Room9_Text_ArchieDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -138,6 +161,8 @@ original_encoded_gba = 0x82351e5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/seafloorcavern-room9"
 target_export = "SeafloorCavern_Room9_Text_ArchieWithThisRedOrb"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -147,6 +172,8 @@ original_encoded_gba = 0x8235279
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/seafloorcavern-room9"
 target_export = "SeafloorCavern_Room9_Text_RedOrbShinesByItself"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -156,6 +183,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -165,6 +194,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -174,6 +205,8 @@ original_encoded_gba = 0x8235040
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/seafloorcavern-room9-movement-kyogreapproach"
 target_export = "SeafloorCavern_Room9_Movement_KyogreApproach"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -183,6 +216,8 @@ original_encoded_gba = 0x823504b
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/seafloorcavern-room9-movement-kyogreexit"
 target_export = "SeafloorCavern_Room9_Movement_KyogreExit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -192,6 +227,8 @@ original_encoded_gba = 0x82352a7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/seafloorcavern-room9"
 target_export = "SeafloorCavern_Room9_Text_ArchieWhereDidKyogreGo"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -201,6 +238,8 @@ original_encoded_gba = 0x82725a4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterleft"
 target_export = "Common_Movement_WalkInPlaceFasterLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -210,6 +249,8 @@ original_encoded_gba = 0x82352f6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/seafloorcavern-room9"
 target_export = "SeafloorCavern_Room9_Text_ArchieAMessageFromOutside"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -219,6 +260,8 @@ original_encoded_gba = 0x8235035
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/seafloorcavern-room9-movement-archielistenmessage"
 target_export = "SeafloorCavern_Room9_Movement_ArchieListenMessage"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -228,6 +271,8 @@ original_encoded_gba = 0x823532b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/seafloorcavern-room9"
 target_export = "SeafloorCavern_Room9_Text_ArchieWhatRainingTooHard"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -237,6 +282,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -246,6 +293,8 @@ original_encoded_gba = 0x823546f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/seafloorcavern-room9"
 target_export = "SeafloorCavern_Room9_Text_ArchieWhyDidKyogreDisappear"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -255,6 +304,8 @@ original_encoded_gba = 0x8235057
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/seafloorcavern-room9-movement-magmagruntarrive"
 target_export = "SeafloorCavern_Room9_Movement_MagmaGruntArrive"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -264,6 +315,8 @@ original_encoded_gba = 0x8235057
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/seafloorcavern-room9-movement-magmagruntarrive"
 target_export = "SeafloorCavern_Room9_Movement_MagmaGruntArrive"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -273,6 +326,8 @@ original_encoded_gba = 0x823504e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/seafloorcavern-room9-movement-maxiearrive"
 target_export = "SeafloorCavern_Room9_Movement_MaxieArrive"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -282,6 +337,8 @@ original_encoded_gba = 0x82725a4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterleft"
 target_export = "Common_Movement_WalkInPlaceFasterLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -291,6 +348,8 @@ original_encoded_gba = 0x82354f0
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/seafloorcavern-room9"
 target_export = "SeafloorCavern_Room9_Text_MaxieWhatHaveYouWrought"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -300,6 +359,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -309,6 +370,8 @@ original_encoded_gba = 0x827259a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-delay48"
 target_export = "Common_Movement_Delay48"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -318,6 +381,8 @@ original_encoded_gba = 0x82355c2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/seafloorcavern-room9"
 target_export = "SeafloorCavern_Room9_Text_ArchieDontGetAllHighAndMighty"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -327,6 +392,8 @@ original_encoded_gba = 0x8235692
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/seafloorcavern-room9"
 target_export = "SeafloorCavern_Room9_Text_MaxieWeDontHaveTimeToArgue"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -336,6 +403,8 @@ original_encoded_gba = 0x8235054
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/seafloorcavern-room9-movement-maxieexit"
 target_export = "SeafloorCavern_Room9_Movement_MaxieExit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -345,6 +414,8 @@ original_encoded_gba = 0x823503a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/seafloorcavern-room9-movement-archieexit"
 target_export = "SeafloorCavern_Room9_Movement_ArchieExit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -354,4 +425,634 @@ original_encoded_gba = 0x8235723
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/seafloorcavern-room9"
 target_export = "SeafloorCavern_Room9_Text_MaxieComeOnPlayer"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 5
+
+[[boundaries]]
+payload_offset = 6
+length = 5
+
+[[boundaries]]
+payload_offset = 11
+length = 5
+
+[[boundaries]]
+payload_offset = 16
+length = 5
+
+[[boundaries]]
+payload_offset = 21
+length = 7
+
+[[boundaries]]
+payload_offset = 28
+length = 3
+
+[[boundaries]]
+payload_offset = 31
+length = 7
+
+[[boundaries]]
+payload_offset = 38
+length = 3
+
+[[boundaries]]
+payload_offset = 41
+length = 4
+
+[[boundaries]]
+payload_offset = 45
+length = 6
+
+[[boundaries]]
+payload_offset = 51
+length = 2
+
+[[boundaries]]
+payload_offset = 53
+length = 1
+
+[[boundaries]]
+payload_offset = 54
+length = 3
+
+[[boundaries]]
+payload_offset = 57
+length = 7
+
+[[boundaries]]
+payload_offset = 64
+length = 3
+
+[[boundaries]]
+payload_offset = 67
+length = 7
+
+[[boundaries]]
+payload_offset = 74
+length = 3
+
+[[boundaries]]
+payload_offset = 77
+length = 6
+
+[[boundaries]]
+payload_offset = 83
+length = 2
+
+[[boundaries]]
+payload_offset = 85
+length = 7
+
+[[boundaries]]
+payload_offset = 92
+length = 3
+
+[[boundaries]]
+payload_offset = 95
+length = 6
+
+[[boundaries]]
+payload_offset = 101
+length = 2
+
+[[boundaries]]
+payload_offset = 103
+length = 7
+
+[[boundaries]]
+payload_offset = 110
+length = 3
+
+[[boundaries]]
+payload_offset = 113
+length = 6
+
+[[boundaries]]
+payload_offset = 119
+length = 2
+
+[[boundaries]]
+payload_offset = 121
+length = 10
+
+[[boundaries]]
+payload_offset = 131
+length = 6
+
+[[boundaries]]
+payload_offset = 137
+length = 2
+
+[[boundaries]]
+payload_offset = 139
+length = 3
+
+[[boundaries]]
+payload_offset = 142
+length = 1
+
+[[boundaries]]
+payload_offset = 143
+length = 3
+
+[[boundaries]]
+payload_offset = 146
+length = 1
+
+[[boundaries]]
+payload_offset = 147
+length = 6
+
+[[boundaries]]
+payload_offset = 153
+length = 2
+
+[[boundaries]]
+payload_offset = 155
+length = 3
+
+[[boundaries]]
+payload_offset = 158
+length = 1
+
+[[boundaries]]
+payload_offset = 159
+length = 5
+
+[[boundaries]]
+payload_offset = 164
+length = 3
+
+[[boundaries]]
+payload_offset = 167
+length = 4
+
+[[boundaries]]
+payload_offset = 171
+length = 4
+
+[[boundaries]]
+payload_offset = 175
+length = 4
+
+[[boundaries]]
+payload_offset = 179
+length = 3
+
+[[boundaries]]
+payload_offset = 182
+length = 3
+
+[[boundaries]]
+payload_offset = 185
+length = 1
+
+[[boundaries]]
+payload_offset = 186
+length = 5
+
+[[boundaries]]
+payload_offset = 191
+length = 3
+
+[[boundaries]]
+payload_offset = 194
+length = 3
+
+[[boundaries]]
+payload_offset = 197
+length = 3
+
+[[boundaries]]
+payload_offset = 200
+length = 7
+
+[[boundaries]]
+payload_offset = 207
+length = 7
+
+[[boundaries]]
+payload_offset = 214
+length = 3
+
+[[boundaries]]
+payload_offset = 217
+length = 3
+
+[[boundaries]]
+payload_offset = 220
+length = 3
+
+[[boundaries]]
+payload_offset = 223
+length = 3
+
+[[boundaries]]
+payload_offset = 226
+length = 1
+
+[[boundaries]]
+payload_offset = 227
+length = 3
+
+[[boundaries]]
+payload_offset = 230
+length = 7
+
+[[boundaries]]
+payload_offset = 237
+length = 3
+
+[[boundaries]]
+payload_offset = 240
+length = 3
+
+[[boundaries]]
+payload_offset = 243
+length = 1
+
+[[boundaries]]
+payload_offset = 244
+length = 5
+
+[[boundaries]]
+payload_offset = 249
+length = 5
+
+[[boundaries]]
+payload_offset = 254
+length = 5
+
+[[boundaries]]
+payload_offset = 259
+length = 5
+
+[[boundaries]]
+payload_offset = 264
+length = 3
+
+[[boundaries]]
+payload_offset = 267
+length = 1
+
+[[boundaries]]
+payload_offset = 268
+length = 7
+
+[[boundaries]]
+payload_offset = 275
+length = 3
+
+[[boundaries]]
+payload_offset = 278
+length = 3
+
+[[boundaries]]
+payload_offset = 281
+length = 3
+
+[[boundaries]]
+payload_offset = 284
+length = 5
+
+[[boundaries]]
+payload_offset = 289
+length = 5
+
+[[boundaries]]
+payload_offset = 294
+length = 5
+
+[[boundaries]]
+payload_offset = 299
+length = 5
+
+[[boundaries]]
+payload_offset = 304
+length = 3
+
+[[boundaries]]
+payload_offset = 307
+length = 1
+
+[[boundaries]]
+payload_offset = 308
+length = 3
+
+[[boundaries]]
+payload_offset = 311
+length = 5
+
+[[boundaries]]
+payload_offset = 316
+length = 5
+
+[[boundaries]]
+payload_offset = 321
+length = 5
+
+[[boundaries]]
+payload_offset = 326
+length = 5
+
+[[boundaries]]
+payload_offset = 331
+length = 6
+
+[[boundaries]]
+payload_offset = 337
+length = 2
+
+[[boundaries]]
+payload_offset = 339
+length = 3
+
+[[boundaries]]
+payload_offset = 342
+length = 7
+
+[[boundaries]]
+payload_offset = 349
+length = 3
+
+[[boundaries]]
+payload_offset = 352
+length = 6
+
+[[boundaries]]
+payload_offset = 358
+length = 2
+
+[[boundaries]]
+payload_offset = 360
+length = 1
+
+[[boundaries]]
+payload_offset = 361
+length = 7
+
+[[boundaries]]
+payload_offset = 368
+length = 3
+
+[[boundaries]]
+payload_offset = 371
+length = 6
+
+[[boundaries]]
+payload_offset = 377
+length = 2
+
+[[boundaries]]
+payload_offset = 379
+length = 1
+
+[[boundaries]]
+payload_offset = 380
+length = 3
+
+[[boundaries]]
+payload_offset = 383
+length = 3
+
+[[boundaries]]
+payload_offset = 386
+length = 7
+
+[[boundaries]]
+payload_offset = 393
+length = 3
+
+[[boundaries]]
+payload_offset = 396
+length = 6
+
+[[boundaries]]
+payload_offset = 402
+length = 2
+
+[[boundaries]]
+payload_offset = 404
+length = 1
+
+[[boundaries]]
+payload_offset = 405
+length = 3
+
+[[boundaries]]
+payload_offset = 408
+length = 3
+
+[[boundaries]]
+payload_offset = 411
+length = 3
+
+[[boundaries]]
+payload_offset = 414
+length = 7
+
+[[boundaries]]
+payload_offset = 421
+length = 7
+
+[[boundaries]]
+payload_offset = 428
+length = 7
+
+[[boundaries]]
+payload_offset = 435
+length = 3
+
+[[boundaries]]
+payload_offset = 438
+length = 7
+
+[[boundaries]]
+payload_offset = 445
+length = 3
+
+[[boundaries]]
+payload_offset = 448
+length = 6
+
+[[boundaries]]
+payload_offset = 454
+length = 2
+
+[[boundaries]]
+payload_offset = 456
+length = 3
+
+[[boundaries]]
+payload_offset = 459
+length = 7
+
+[[boundaries]]
+payload_offset = 466
+length = 3
+
+[[boundaries]]
+payload_offset = 469
+length = 7
+
+[[boundaries]]
+payload_offset = 476
+length = 3
+
+[[boundaries]]
+payload_offset = 479
+length = 6
+
+[[boundaries]]
+payload_offset = 485
+length = 2
+
+[[boundaries]]
+payload_offset = 487
+length = 6
+
+[[boundaries]]
+payload_offset = 493
+length = 2
+
+[[boundaries]]
+payload_offset = 495
+length = 1
+
+[[boundaries]]
+payload_offset = 496
+length = 7
+
+[[boundaries]]
+payload_offset = 503
+length = 7
+
+[[boundaries]]
+payload_offset = 510
+length = 3
+
+[[boundaries]]
+payload_offset = 513
+length = 6
+
+[[boundaries]]
+payload_offset = 519
+length = 2
+
+[[boundaries]]
+payload_offset = 521
+length = 5
+
+[[boundaries]]
+payload_offset = 526
+length = 5
+
+[[boundaries]]
+payload_offset = 531
+length = 3
+
+[[boundaries]]
+payload_offset = 534
+length = 3
+
+[[boundaries]]
+payload_offset = 537
+length = 3
+
+[[boundaries]]
+payload_offset = 540
+length = 3
+
+[[boundaries]]
+payload_offset = 543
+length = 3
+
+[[boundaries]]
+payload_offset = 546
+length = 3
+
+[[boundaries]]
+payload_offset = 549
+length = 3
+
+[[boundaries]]
+payload_offset = 552
+length = 3
+
+[[boundaries]]
+payload_offset = 555
+length = 3
+
+[[boundaries]]
+payload_offset = 558
+length = 3
+
+[[boundaries]]
+payload_offset = 561
+length = 3
+
+[[boundaries]]
+payload_offset = 564
+length = 3
+
+[[boundaries]]
+payload_offset = 567
+length = 3
+
+[[boundaries]]
+payload_offset = 570
+length = 5
+
+[[boundaries]]
+payload_offset = 575
+length = 5
+
+[[boundaries]]
+payload_offset = 580
+length = 3
+
+[[boundaries]]
+payload_offset = 583
+length = 3
+
+[[boundaries]]
+payload_offset = 586
+length = 3
+
+[[boundaries]]
+payload_offset = 589
+length = 3
+
+[[boundaries]]
+payload_offset = 592
+length = 3
+
+[[boundaries]]
+payload_offset = 595
+length = 3
+
+[[boundaries]]
+payload_offset = 598
+length = 8
+
+[[boundaries]]
+payload_offset = 606
+length = 1
+
+[[boundaries]]
+payload_offset = 607
+length = 1
+
+[[boundaries]]
+payload_offset = 608
+length = 1

@@ -17,6 +17,7 @@ static_data_bytes = 52
 segment_count = 5
 export_count = 7
 reloc_count = 9
+instruction_count = 49
 
 [[segments]]
 kind = "bytecode"
@@ -113,6 +114,8 @@ original_encoded_gba = 0x8272a21
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/mart-clerk"
 target_export = "gText_HowMayIServeYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -123,6 +126,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-mart"
 target_export = "PetalburgCity_Mart_EventScript_ExpandedItems"
 target_offset = 62
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 61
 runtime_resolution_required = true
 
 [[relocs]]
@@ -133,6 +138,8 @@ target_class = "MART_TABLE_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-mart"
 target_export = "PetalburgCity_Mart_Pokemart_Basic"
 target_offset = 35
+target_kind = "MART_TABLE"
+target_payload_offset = 35
 runtime_resolution_required = true
 
 [[relocs]]
@@ -142,6 +149,8 @@ original_encoded_gba = 0x8272a3f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/mart-clerk"
 target_export = "gText_PleaseComeAgain"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -152,6 +161,8 @@ target_class = "MART_TABLE_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-mart"
 target_export = "PetalburgCity_Mart_Pokemart_Expanded"
 target_offset = 79
+target_kind = "MART_TABLE"
+target_payload_offset = 79
 runtime_resolution_required = true
 
 [[relocs]]
@@ -161,6 +172,8 @@ original_encoded_gba = 0x8272a3f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/mart-clerk"
 target_export = "gText_PleaseComeAgain"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -170,6 +183,8 @@ original_encoded_gba = 0x8207df1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-mart"
 target_export = "PetalburgCity_Mart_Text_WeakWillGrowStronger"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -179,6 +194,8 @@ original_encoded_gba = 0x8207e60
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-mart"
 target_export = "PetalburgCity_Mart_Text_RepelIsUseful"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -188,4 +205,202 @@ original_encoded_gba = 0x8207eb0
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-mart"
 target_export = "PetalburgCity_Mart_Text_TakeSomeAntidotesWithYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 1
+
+[[boundaries]]
+payload_offset = 2
+length = 5
+
+[[boundaries]]
+payload_offset = 7
+length = 1
+
+[[boundaries]]
+payload_offset = 8
+length = 3
+
+[[boundaries]]
+payload_offset = 11
+length = 6
+
+[[boundaries]]
+payload_offset = 17
+length = 5
+
+[[boundaries]]
+payload_offset = 22
+length = 6
+
+[[boundaries]]
+payload_offset = 28
+length = 2
+
+[[boundaries]]
+payload_offset = 30
+length = 1
+
+[[boundaries]]
+payload_offset = 31
+length = 1
+
+[[boundaries]]
+payload_offset = 35
+length = 5
+
+[[boundaries]]
+payload_offset = 40
+length = 1
+
+[[boundaries]]
+payload_offset = 41
+length = 6
+
+[[boundaries]]
+payload_offset = 47
+length = 5
+
+[[boundaries]]
+payload_offset = 52
+length = 1
+
+[[boundaries]]
+payload_offset = 53
+length = 3
+
+[[boundaries]]
+payload_offset = 56
+length = 1
+
+[[boundaries]]
+payload_offset = 57
+length = 1
+
+[[boundaries]]
+payload_offset = 58
+length = 1
+
+[[boundaries]]
+payload_offset = 59
+length = 1
+
+[[boundaries]]
+payload_offset = 60
+length = 1
+
+[[boundaries]]
+payload_offset = 61
+length = 5
+
+[[boundaries]]
+payload_offset = 66
+length = 6
+
+[[boundaries]]
+payload_offset = 72
+length = 2
+
+[[boundaries]]
+payload_offset = 74
+length = 1
+
+[[boundaries]]
+payload_offset = 75
+length = 1
+
+[[boundaries]]
+payload_offset = 79
+length = 5
+
+[[boundaries]]
+payload_offset = 84
+length = 1
+
+[[boundaries]]
+payload_offset = 85
+length = 5
+
+[[boundaries]]
+payload_offset = 90
+length = 1
+
+[[boundaries]]
+payload_offset = 91
+length = 6
+
+[[boundaries]]
+payload_offset = 97
+length = 3
+
+[[boundaries]]
+payload_offset = 100
+length = 1
+
+[[boundaries]]
+payload_offset = 101
+length = 3
+
+[[boundaries]]
+payload_offset = 104
+length = 1
+
+[[boundaries]]
+payload_offset = 105
+length = 1
+
+[[boundaries]]
+payload_offset = 106
+length = 1
+
+[[boundaries]]
+payload_offset = 107
+length = 1
+
+[[boundaries]]
+payload_offset = 108
+length = 1
+
+[[boundaries]]
+payload_offset = 109
+length = 6
+
+[[boundaries]]
+payload_offset = 115
+length = 2
+
+[[boundaries]]
+payload_offset = 117
+length = 1
+
+[[boundaries]]
+payload_offset = 118
+length = 6
+
+[[boundaries]]
+payload_offset = 124
+length = 2
+
+[[boundaries]]
+payload_offset = 126
+length = 1
+
+[[boundaries]]
+payload_offset = 127
+length = 6
+
+[[boundaries]]
+payload_offset = 133
+length = 2
+
+[[boundaries]]
+payload_offset = 135
+length = 1

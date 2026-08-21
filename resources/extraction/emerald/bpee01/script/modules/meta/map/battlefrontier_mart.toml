@@ -17,6 +17,7 @@ static_data_bytes = 28
 segment_count = 3
 export_count = 5
 reloc_count = 7
+instruction_count = 23
 
 [[segments]]
 kind = "bytecode"
@@ -84,6 +85,8 @@ original_encoded_gba = 0x8272a21
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/mart-clerk"
 target_export = "gText_HowMayIServeYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -94,6 +97,8 @@ target_class = "MART_TABLE_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-mart"
 target_export = "BattleFrontier_Mart_Pokemart"
 target_offset = 24
+target_kind = "MART_TABLE"
+target_payload_offset = 24
 runtime_resolution_required = true
 
 [[relocs]]
@@ -103,6 +108,8 @@ original_encoded_gba = 0x8272a3f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/mart-clerk"
 target_export = "gText_PleaseComeAgain"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -112,6 +119,8 @@ original_encoded_gba = 0x8267b29
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-mart"
 target_export = "BattleFrontier_Mart_Text_ChaperonGrandson"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -121,6 +130,8 @@ original_encoded_gba = 0x82725b0
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-facedown"
 target_export = "Common_Movement_FaceDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -130,6 +141,8 @@ original_encoded_gba = 0x8267b8f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-mart"
 target_export = "BattleFrontier_Mart_Text_ProteinMakeNiceGift"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -139,4 +152,98 @@ original_encoded_gba = 0x8267c01
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-mart"
 target_export = "BattleFrontier_Mart_Text_FacilitiesDontAllowItems"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 1
+
+[[boundaries]]
+payload_offset = 2
+length = 5
+
+[[boundaries]]
+payload_offset = 7
+length = 1
+
+[[boundaries]]
+payload_offset = 8
+length = 5
+
+[[boundaries]]
+payload_offset = 13
+length = 6
+
+[[boundaries]]
+payload_offset = 19
+length = 2
+
+[[boundaries]]
+payload_offset = 21
+length = 1
+
+[[boundaries]]
+payload_offset = 22
+length = 1
+
+[[boundaries]]
+payload_offset = 24
+length = 1
+
+[[boundaries]]
+payload_offset = 54
+length = 6
+
+[[boundaries]]
+payload_offset = 60
+length = 2
+
+[[boundaries]]
+payload_offset = 62
+length = 1
+
+[[boundaries]]
+payload_offset = 63
+length = 1
+
+[[boundaries]]
+payload_offset = 64
+length = 7
+
+[[boundaries]]
+payload_offset = 71
+length = 3
+
+[[boundaries]]
+payload_offset = 74
+length = 6
+
+[[boundaries]]
+payload_offset = 80
+length = 2
+
+[[boundaries]]
+payload_offset = 82
+length = 1
+
+[[boundaries]]
+payload_offset = 83
+length = 1
+
+[[boundaries]]
+payload_offset = 84
+length = 6
+
+[[boundaries]]
+payload_offset = 90
+length = 2
+
+[[boundaries]]
+payload_offset = 92
+length = 1

@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 1
 reloc_count = 4
+instruction_count = 17
 
 [[segments]]
 kind = "bytecode"
@@ -39,6 +40,8 @@ original_encoded_gba = 0x82006fb
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/fallarbortown-battletentcorridor-movement-walktodoor"
 target_export = "FallarborTown_BattleTentCorridor_Movement_WalkToDoor"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -48,6 +51,8 @@ original_encoded_gba = 0x82006fb
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/fallarbortown-battletentcorridor-movement-walktodoor"
 target_export = "FallarborTown_BattleTentCorridor_Movement_WalkToDoor"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -57,6 +62,8 @@ original_encoded_gba = 0x8200701
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/fallarbortown-battletentcorridor-movement-attendantenterdoor"
 target_export = "FallarborTown_BattleTentCorridor_Movement_AttendantEnterDoor"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -66,4 +73,74 @@ original_encoded_gba = 0x8200700
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/fallarbortown-battletentcorridor-movement-playerenterdoor"
 target_export = "FallarborTown_BattleTentCorridor_Movement_PlayerEnterDoor"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 5
+
+[[boundaries]]
+payload_offset = 6
+length = 7
+
+[[boundaries]]
+payload_offset = 13
+length = 7
+
+[[boundaries]]
+payload_offset = 20
+length = 3
+
+[[boundaries]]
+payload_offset = 23
+length = 5
+
+[[boundaries]]
+payload_offset = 28
+length = 1
+
+[[boundaries]]
+payload_offset = 29
+length = 7
+
+[[boundaries]]
+payload_offset = 36
+length = 7
+
+[[boundaries]]
+payload_offset = 43
+length = 3
+
+[[boundaries]]
+payload_offset = 46
+length = 5
+
+[[boundaries]]
+payload_offset = 51
+length = 1
+
+[[boundaries]]
+payload_offset = 52
+length = 5
+
+[[boundaries]]
+payload_offset = 57
+length = 8
+
+[[boundaries]]
+payload_offset = 65
+length = 1
+
+[[boundaries]]
+payload_offset = 66
+length = 1
+
+[[boundaries]]
+payload_offset = 67
+length = 1

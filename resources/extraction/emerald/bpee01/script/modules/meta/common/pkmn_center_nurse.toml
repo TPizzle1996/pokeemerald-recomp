@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 15
 reloc_count = 43
+instruction_count = 105
 
 [[segments]]
 kind = "bytecode"
@@ -152,6 +153,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pkmn-center-nurse"
 target_export = "EventScript_PkmnCenterNurse_GoldCard"
 target_offset = 330
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 330
 runtime_resolution_required = true
 
 [[relocs]]
@@ -161,6 +164,8 @@ original_encoded_gba = 0x82726eb
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/pkmn-center-nurse"
 target_export = "gText_WouldYouLikeToRestYourPkmn"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -171,6 +176,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pkmn-center-nurse"
 target_export = "EventScript_PkmnCenterNurse_HealPkmn"
 target_offset = 60
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 60
 runtime_resolution_required = true
 
 [[relocs]]
@@ -181,6 +188,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pkmn-center-nurse"
 target_export = "EventScript_PkmnCenterNurse_Goodbye"
 target_offset = 54
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 54
 runtime_resolution_required = true
 
 [[relocs]]
@@ -190,6 +199,8 @@ original_encoded_gba = 0x82727db
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/pkmn-center-nurse"
 target_export = "gText_WeHopeToSeeYouAgain"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -200,6 +211,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pkmn-center-nurse"
 target_export = "EventScript_PkmnCenterNurse_IllTakeYourPkmn"
 target_offset = 105
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 105
 runtime_resolution_required = true
 
 [[relocs]]
@@ -210,6 +223,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pkmn-center-nurse"
 target_export = "EventScript_PkmnCenterNurse_IllTakeYourPkmn2"
 target_offset = 111
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 111
 runtime_resolution_required = true
 
 [[relocs]]
@@ -220,6 +235,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pkmn-center-nurse"
 target_export = "EventScript_PkmnCenterNurse_TakeAndHealPkmn"
 target_offset = 117
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 117
 runtime_resolution_required = true
 
 [[relocs]]
@@ -230,6 +247,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pkmn-center-nurse"
 target_export = "EventScript_PkmnCenterNurse_CheckPokerus"
 target_offset = 293
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 293
 runtime_resolution_required = true
 
 [[relocs]]
@@ -240,6 +259,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pkmn-center-nurse"
 target_export = "EventScript_PkmnCenterNurse_CheckTrainerHillAndUnionRoom"
 target_offset = 147
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 147
 runtime_resolution_required = true
 
 [[relocs]]
@@ -249,6 +270,8 @@ original_encoded_gba = 0x8272768
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/pkmn-center-nurse"
 target_export = "gText_IllTakeYourPkmn"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -258,6 +281,8 @@ original_encoded_gba = 0x82729c0
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/pkmn-center-nurse"
 target_export = "gText_IllTakeYourPkmn2"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -267,6 +292,8 @@ original_encoded_gba = 0x82725a4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterleft"
 target_export = "Common_Movement_WalkInPlaceFasterLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -276,6 +303,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -286,6 +315,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pkmn-center-nurse"
 target_export = "EventScript_PkmnCenterNurse_ReturnPkmn"
 target_offset = 196
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 196
 runtime_resolution_required = true
 
 [[relocs]]
@@ -296,6 +327,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pkmn-center-nurse"
 target_export = "EventScript_PkmnCenterNurse_ReturnPkmn"
 target_offset = 196
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 196
 runtime_resolution_required = true
 
 [[relocs]]
@@ -306,6 +339,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pkmn-center-nurse"
 target_export = "EventScript_PkmnCenterNurse_PlayerWaitingInUnionRoom"
 target_offset = 251
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 251
 runtime_resolution_required = true
 
 [[relocs]]
@@ -316,6 +351,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pkmn-center-nurse"
 target_export = "EventScript_PkmnCenterNurse_ReturnPkmn2"
 target_offset = 229
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 229
 runtime_resolution_required = true
 
 [[relocs]]
@@ -325,6 +362,8 @@ original_encoded_gba = 0x8272798
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/pkmn-center-nurse"
 target_export = "gText_RestoredPkmnToFullHealth"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -334,6 +373,8 @@ original_encoded_gba = 0x8271ad0
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/movement-pkmncenternurse-bow"
 target_export = "Movement_PkmnCenterNurse_Bow"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -343,6 +384,8 @@ original_encoded_gba = 0x82727db
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/pkmn-center-nurse"
 target_export = "gText_WeHopeToSeeYouAgain"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -352,6 +395,8 @@ original_encoded_gba = 0x82729f0
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/pkmn-center-nurse"
 target_export = "gText_ThankYouForWaiting"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -361,6 +406,8 @@ original_encoded_gba = 0x8271ad0
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/movement-pkmncenternurse-bow"
 target_export = "Movement_PkmnCenterNurse_Bow"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -370,6 +417,8 @@ original_encoded_gba = 0x8272a07
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/pkmn-center-nurse"
 target_export = "gText_WeHopeToSeeYouAgain2"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -380,6 +429,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pkmn-center-nurse"
 target_export = "EventScript_PkmnCenterNurse_ReturnPkmn"
 target_offset = 196
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 196
 runtime_resolution_required = true
 
 [[relocs]]
@@ -389,6 +440,8 @@ original_encoded_gba = 0x8272798
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/pkmn-center-nurse"
 target_export = "gText_RestoredPkmnToFullHealth"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -398,6 +451,8 @@ original_encoded_gba = 0x8278a48
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/cable-club"
 target_export = "CableClub_Text_PlayerIsWaiting"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -407,6 +462,8 @@ original_encoded_gba = 0x8271ad0
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/movement-pkmncenternurse-bow"
 target_export = "Movement_PkmnCenterNurse_Bow"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -416,6 +473,8 @@ original_encoded_gba = 0x82727db
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/pkmn-center-nurse"
 target_export = "gText_WeHopeToSeeYouAgain"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -426,6 +485,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pkmn-center-nurse"
 target_export = "EventScript_PkmnCenterNurse_ExplainPokerus"
 target_offset = 321
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 321
 runtime_resolution_required = true
 
 [[relocs]]
@@ -436,6 +497,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pkmn-center-nurse"
 target_export = "EventScript_PkmnCenterNurse_CheckTrainerHillAndUnionRoom"
 target_offset = 147
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 147
 runtime_resolution_required = true
 
 [[relocs]]
@@ -445,6 +508,8 @@ original_encoded_gba = 0x8272f07
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/event-scripts"
 target_export = "gText_PokerusExplanation"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -455,6 +520,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pkmn-center-nurse"
 target_export = "EventScript_PkmnCenterNurse_AskForUsual"
 target_offset = 398
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 398
 runtime_resolution_required = true
 
 [[relocs]]
@@ -464,6 +531,8 @@ original_encoded_gba = 0x82727f5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/pkmn-center-nurse"
 target_export = "gText_WelcomeCutShort"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -473,6 +542,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -482,6 +553,8 @@ original_encoded_gba = 0x827259a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-delay48"
 target_export = "Common_Movement_Delay48"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -491,6 +564,8 @@ original_encoded_gba = 0x8272860
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/pkmn-center-nurse"
 target_export = "gText_NoticesGoldCard"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -501,6 +576,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pkmn-center-nurse"
 target_export = "EventScript_PkmnCenterNurse_GoldCardHealPkmn"
 target_offset = 423
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 423
 runtime_resolution_required = true
 
 [[relocs]]
@@ -510,6 +587,8 @@ original_encoded_gba = 0x8272a07
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/pkmn-center-nurse"
 target_export = "gText_WeHopeToSeeYouAgain2"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -519,6 +598,8 @@ original_encoded_gba = 0x8272982
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/pkmn-center-nurse"
 target_export = "gText_YouWantTheUsual"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -529,6 +610,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pkmn-center-nurse"
 target_export = "EventScript_PkmnCenterNurse_GoldCardHealPkmn"
 target_offset = 423
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 423
 runtime_resolution_required = true
 
 [[relocs]]
@@ -538,6 +621,8 @@ original_encoded_gba = 0x8272a07
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/pkmn-center-nurse"
 target_export = "gText_WeHopeToSeeYouAgain2"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -548,4 +633,426 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pkmn-center-nurse"
 target_export = "EventScript_PkmnCenterNurse_HealPkmn"
 target_offset = 60
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 60
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 1
+
+[[boundaries]]
+payload_offset = 2
+length = 5
+
+[[boundaries]]
+payload_offset = 7
+length = 5
+
+[[boundaries]]
+payload_offset = 12
+length = 5
+
+[[boundaries]]
+payload_offset = 17
+length = 6
+
+[[boundaries]]
+payload_offset = 23
+length = 6
+
+[[boundaries]]
+payload_offset = 29
+length = 2
+
+[[boundaries]]
+payload_offset = 31
+length = 5
+
+[[boundaries]]
+payload_offset = 36
+length = 6
+
+[[boundaries]]
+payload_offset = 42
+length = 5
+
+[[boundaries]]
+payload_offset = 47
+length = 6
+
+[[boundaries]]
+payload_offset = 53
+length = 1
+
+[[boundaries]]
+payload_offset = 54
+length = 5
+
+[[boundaries]]
+payload_offset = 59
+length = 1
+
+[[boundaries]]
+payload_offset = 60
+length = 2
+
+[[boundaries]]
+payload_offset = 62
+length = 5
+
+[[boundaries]]
+payload_offset = 67
+length = 6
+
+[[boundaries]]
+payload_offset = 73
+length = 5
+
+[[boundaries]]
+payload_offset = 78
+length = 6
+
+[[boundaries]]
+payload_offset = 84
+length = 1
+
+[[boundaries]]
+payload_offset = 85
+length = 5
+
+[[boundaries]]
+payload_offset = 90
+length = 3
+
+[[boundaries]]
+payload_offset = 93
+length = 6
+
+[[boundaries]]
+payload_offset = 99
+length = 5
+
+[[boundaries]]
+payload_offset = 105
+length = 5
+
+[[boundaries]]
+payload_offset = 110
+length = 1
+
+[[boundaries]]
+payload_offset = 111
+length = 5
+
+[[boundaries]]
+payload_offset = 116
+length = 1
+
+[[boundaries]]
+payload_offset = 117
+length = 7
+
+[[boundaries]]
+payload_offset = 124
+length = 3
+
+[[boundaries]]
+payload_offset = 127
+length = 3
+
+[[boundaries]]
+payload_offset = 130
+length = 3
+
+[[boundaries]]
+payload_offset = 133
+length = 7
+
+[[boundaries]]
+payload_offset = 140
+length = 3
+
+[[boundaries]]
+payload_offset = 143
+length = 3
+
+[[boundaries]]
+payload_offset = 146
+length = 1
+
+[[boundaries]]
+payload_offset = 147
+length = 5
+
+[[boundaries]]
+payload_offset = 152
+length = 5
+
+[[boundaries]]
+payload_offset = 157
+length = 6
+
+[[boundaries]]
+payload_offset = 163
+length = 5
+
+[[boundaries]]
+payload_offset = 168
+length = 5
+
+[[boundaries]]
+payload_offset = 173
+length = 5
+
+[[boundaries]]
+payload_offset = 178
+length = 6
+
+[[boundaries]]
+payload_offset = 184
+length = 5
+
+[[boundaries]]
+payload_offset = 189
+length = 6
+
+[[boundaries]]
+payload_offset = 195
+length = 1
+
+[[boundaries]]
+payload_offset = 196
+length = 5
+
+[[boundaries]]
+payload_offset = 201
+length = 6
+
+[[boundaries]]
+payload_offset = 207
+length = 5
+
+[[boundaries]]
+payload_offset = 212
+length = 1
+
+[[boundaries]]
+payload_offset = 213
+length = 7
+
+[[boundaries]]
+payload_offset = 220
+length = 3
+
+[[boundaries]]
+payload_offset = 223
+length = 5
+
+[[boundaries]]
+payload_offset = 228
+length = 1
+
+[[boundaries]]
+payload_offset = 229
+length = 5
+
+[[boundaries]]
+payload_offset = 234
+length = 1
+
+[[boundaries]]
+payload_offset = 235
+length = 7
+
+[[boundaries]]
+payload_offset = 242
+length = 3
+
+[[boundaries]]
+payload_offset = 245
+length = 5
+
+[[boundaries]]
+payload_offset = 250
+length = 1
+
+[[boundaries]]
+payload_offset = 251
+length = 3
+
+[[boundaries]]
+payload_offset = 254
+length = 6
+
+[[boundaries]]
+payload_offset = 260
+length = 6
+
+[[boundaries]]
+payload_offset = 266
+length = 2
+
+[[boundaries]]
+payload_offset = 268
+length = 3
+
+[[boundaries]]
+payload_offset = 271
+length = 5
+
+[[boundaries]]
+payload_offset = 276
+length = 1
+
+[[boundaries]]
+payload_offset = 277
+length = 7
+
+[[boundaries]]
+payload_offset = 284
+length = 3
+
+[[boundaries]]
+payload_offset = 287
+length = 5
+
+[[boundaries]]
+payload_offset = 292
+length = 1
+
+[[boundaries]]
+payload_offset = 293
+length = 5
+
+[[boundaries]]
+payload_offset = 298
+length = 5
+
+[[boundaries]]
+payload_offset = 303
+length = 6
+
+[[boundaries]]
+payload_offset = 309
+length = 5
+
+[[boundaries]]
+payload_offset = 314
+length = 6
+
+[[boundaries]]
+payload_offset = 320
+length = 1
+
+[[boundaries]]
+payload_offset = 321
+length = 5
+
+[[boundaries]]
+payload_offset = 326
+length = 3
+
+[[boundaries]]
+payload_offset = 329
+length = 1
+
+[[boundaries]]
+payload_offset = 330
+length = 3
+
+[[boundaries]]
+payload_offset = 333
+length = 6
+
+[[boundaries]]
+payload_offset = 339
+length = 3
+
+[[boundaries]]
+payload_offset = 342
+length = 6
+
+[[boundaries]]
+payload_offset = 348
+length = 2
+
+[[boundaries]]
+payload_offset = 350
+length = 3
+
+[[boundaries]]
+payload_offset = 353
+length = 7
+
+[[boundaries]]
+payload_offset = 360
+length = 3
+
+[[boundaries]]
+payload_offset = 363
+length = 7
+
+[[boundaries]]
+payload_offset = 370
+length = 3
+
+[[boundaries]]
+payload_offset = 373
+length = 6
+
+[[boundaries]]
+payload_offset = 379
+length = 2
+
+[[boundaries]]
+payload_offset = 381
+length = 5
+
+[[boundaries]]
+payload_offset = 386
+length = 6
+
+[[boundaries]]
+payload_offset = 392
+length = 5
+
+[[boundaries]]
+payload_offset = 397
+length = 1
+
+[[boundaries]]
+payload_offset = 398
+length = 6
+
+[[boundaries]]
+payload_offset = 404
+length = 2
+
+[[boundaries]]
+payload_offset = 406
+length = 5
+
+[[boundaries]]
+payload_offset = 411
+length = 6
+
+[[boundaries]]
+payload_offset = 417
+length = 5
+
+[[boundaries]]
+payload_offset = 422
+length = 1
+
+[[boundaries]]
+payload_offset = 423
+length = 5
+
+[[boundaries]]
+payload_offset = 428
+length = 5

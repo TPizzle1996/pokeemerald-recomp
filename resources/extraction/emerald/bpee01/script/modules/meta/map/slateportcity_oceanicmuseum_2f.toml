@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 2
 export_count = 19
 reloc_count = 52
+instruction_count = 158
 
 [[segments]]
 kind = "bytecode"
@@ -189,6 +190,8 @@ original_encoded_gba = 0x820bd8d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-oceanicmuseum-2f"
 target_export = "SlateportCity_OceanicMuseum_2F_Text_ThankYouForTheParts"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -198,6 +201,8 @@ original_encoded_gba = 0x820bce4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/slateportcity-oceanicmuseum-2f-movement-firstgruntenter"
 target_export = "SlateportCity_OceanicMuseum_2F_Movement_FirstGruntEnter"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -207,6 +212,8 @@ original_encoded_gba = 0x820bcf3
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/slateportcity-oceanicmuseum-2f-movement-secondgruntenter"
 target_export = "SlateportCity_OceanicMuseum_2F_Movement_SecondGruntEnter"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -216,6 +223,8 @@ original_encoded_gba = 0x820bce8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/slateportcity-oceanicmuseum-2f-movement-firstgruntapproach"
 target_export = "SlateportCity_OceanicMuseum_2F_Movement_FirstGruntApproach"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -225,6 +234,8 @@ original_encoded_gba = 0x820bcf5
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/slateportcity-oceanicmuseum-2f-movement-secondgruntapproach"
 target_export = "SlateportCity_OceanicMuseum_2F_Movement_SecondGruntApproach"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -235,6 +246,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-oceanicmuseum-2f"
 target_export = "SlateportCity_OceanicMuseum_2F_EventScript_PlayerFaceGrunts"
 target_offset = 403
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 402
 runtime_resolution_required = true
 
 [[relocs]]
@@ -245,6 +258,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-oceanicmuseum-2f"
 target_export = "SlateportCity_OceanicMuseum_2F_EventScript_PlayerFaceGrunts"
 target_offset = 403
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 402
 runtime_resolution_required = true
 
 [[relocs]]
@@ -254,6 +269,8 @@ original_encoded_gba = 0x820be40
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-oceanicmuseum-2f"
 target_export = "SlateportCity_OceanicMuseum_2F_Text_WellTakeThoseParts"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -264,6 +281,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-oceanicmuseum-2f"
 target_export = "SlateportCity_OceanicMuseum_2F_EventScript_SternFaceGrunts"
 target_offset = 414
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 413
 runtime_resolution_required = true
 
 [[relocs]]
@@ -273,6 +292,8 @@ original_encoded_gba = 0x820be69
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-oceanicmuseum-2f"
 target_export = "SlateportCity_OceanicMuseum_2F_Text_SternWhoAreYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -282,6 +303,8 @@ original_encoded_gba = 0x820be93
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-oceanicmuseum-2f"
 target_export = "SlateportCity_OceanicMuseum_2F_Text_WereTeamAqua"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -291,6 +314,8 @@ original_encoded_gba = 0x820bce2
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/slateportcity-oceanicmuseum-2f-movement-gruntapproachtobattle"
 target_export = "SlateportCity_OceanicMuseum_2F_Movement_GruntApproachToBattle"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -301,6 +326,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-oceanicmuseum-2f"
 target_export = "SlateportCity_OceanicMuseum_2F_EventScript_PlayerApproachGruntSouth"
 target_offset = 425
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 424
 runtime_resolution_required = true
 
 [[relocs]]
@@ -311,6 +338,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-oceanicmuseum-2f"
 target_export = "SlateportCity_OceanicMuseum_2F_EventScript_PlayerApproachGruntWest"
 target_offset = 436
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 435
 runtime_resolution_required = true
 
 [[relocs]]
@@ -320,6 +349,8 @@ original_encoded_gba = 0x820bee2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-oceanicmuseum-2f"
 target_export = "SlateportCity_OceanicMuseum_2F_Text_Grunt1Defeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -329,6 +360,8 @@ original_encoded_gba = 0x820befa
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-oceanicmuseum-2f"
 target_export = "SlateportCity_OceanicMuseum_2F_Text_BossGoingToBeFurious"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -338,6 +371,8 @@ original_encoded_gba = 0x820bcef
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/slateportcity-oceanicmuseum-2f-movement-gruntdefeated"
 target_export = "SlateportCity_OceanicMuseum_2F_Movement_GruntDefeated"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -347,6 +382,8 @@ original_encoded_gba = 0x820bce2
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/slateportcity-oceanicmuseum-2f-movement-gruntapproachtobattle"
 target_export = "SlateportCity_OceanicMuseum_2F_Movement_GruntApproachToBattle"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -356,6 +393,8 @@ original_encoded_gba = 0x820bf35
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-oceanicmuseum-2f"
 target_export = "SlateportCity_OceanicMuseum_2F_Text_LetMeTakeCareOfThis"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -365,6 +404,8 @@ original_encoded_gba = 0x820bf66
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-oceanicmuseum-2f"
 target_export = "SlateportCity_OceanicMuseum_2F_Text_Grunt2Defeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -374,6 +415,8 @@ original_encoded_gba = 0x820bcef
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/slateportcity-oceanicmuseum-2f-movement-gruntdefeated"
 target_export = "SlateportCity_OceanicMuseum_2F_Movement_GruntDefeated"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -383,6 +426,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -392,6 +437,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -401,6 +448,8 @@ original_encoded_gba = 0x820bf7a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-oceanicmuseum-2f"
 target_export = "SlateportCity_OceanicMuseum_2F_Text_MeddlingKid"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -410,6 +459,8 @@ original_encoded_gba = 0x820bcd8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/slateportcity-oceanicmuseum-2f-movement-archieenter"
 target_export = "SlateportCity_OceanicMuseum_2F_Movement_ArchieEnter"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -419,6 +470,8 @@ original_encoded_gba = 0x820bcfe
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/slateportcity-oceanicmuseum-2f-movement-gruntmoveforarchie"
 target_export = "SlateportCity_OceanicMuseum_2F_Movement_GruntMoveForArchie"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -428,6 +481,8 @@ original_encoded_gba = 0x820bff2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-oceanicmuseum-2f"
 target_export = "SlateportCity_OceanicMuseum_2F_Text_CameToSeeWhatsTakingSoLong"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -437,6 +492,8 @@ original_encoded_gba = 0x820bcd6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/slateportcity-oceanicmuseum-2f-movement-archieapproachplayer"
 target_export = "SlateportCity_OceanicMuseum_2F_Movement_ArchieApproachPlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -446,6 +503,8 @@ original_encoded_gba = 0x820c059
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-oceanicmuseum-2f"
 target_export = "SlateportCity_OceanicMuseum_2F_Text_ArchieWarning"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -455,6 +514,8 @@ original_encoded_gba = 0x82725a8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterright"
 target_export = "Common_Movement_WalkInPlaceFasterRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -464,6 +525,8 @@ original_encoded_gba = 0x820c2be
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-oceanicmuseum-2f"
 target_export = "SlateportCity_OceanicMuseum_2F_Text_SternThankYouForSavingUs"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -474,6 +537,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/kecleon"
 target_export = "Common_EventScript_PlayerHandedOverTheItem"
 target_offset = 265
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 243
 runtime_resolution_required = true
 
 [[relocs]]
@@ -483,6 +548,8 @@ original_encoded_gba = 0x820c36c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-oceanicmuseum-2f"
 target_export = "SlateportCity_OceanicMuseum_2F_Text_SternIveGotToGo"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -493,6 +560,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-oceanicmuseum-2f"
 target_export = "SlateportCity_OceanicMuseum_2F_EventScript_ReadyRegisterBirch"
 target_offset = 397
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 396
 runtime_resolution_required = true
 
 [[relocs]]
@@ -502,6 +571,8 @@ original_encoded_gba = 0x82725a4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterleft"
 target_export = "Common_Movement_WalkInPlaceFasterLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -511,6 +582,8 @@ original_encoded_gba = 0x82725a4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterleft"
 target_export = "Common_Movement_WalkInPlaceFasterLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -520,6 +593,8 @@ original_encoded_gba = 0x820bcbe
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/slateportcity-oceanicmuseum-2f-movement-playerapproachgruntsouth"
 target_export = "SlateportCity_OceanicMuseum_2F_Movement_PlayerApproachGruntSouth"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -529,6 +604,8 @@ original_encoded_gba = 0x820bcc2
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/slateportcity-oceanicmuseum-2f-movement-playerapproachgruntwest"
 target_export = "SlateportCity_OceanicMuseum_2F_Movement_PlayerApproachGruntWest"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -538,6 +615,8 @@ original_encoded_gba = 0x820c4f9
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-oceanicmuseum-2f"
 target_export = "SlateportCity_OceanicMuseum_2F_Text_WaterQualitySample1"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -547,6 +626,8 @@ original_encoded_gba = 0x820c566
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-oceanicmuseum-2f"
 target_export = "SlateportCity_OceanicMuseum_2F_Text_WaterQualitySample2"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -556,6 +637,8 @@ original_encoded_gba = 0x820c5c6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-oceanicmuseum-2f"
 target_export = "SlateportCity_OceanicMuseum_2F_Text_PressureExperiment"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -565,6 +648,8 @@ original_encoded_gba = 0x820c6c7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-oceanicmuseum-2f"
 target_export = "SlateportCity_OceanicMuseum_2F_Text_HoennModel"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -574,6 +659,8 @@ original_encoded_gba = 0x820c72f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-oceanicmuseum-2f"
 target_export = "SlateportCity_OceanicMuseum_2F_Text_DeepSeawaterDisplay"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -583,6 +670,8 @@ original_encoded_gba = 0x820c7c1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-oceanicmuseum-2f"
 target_export = "SlateportCity_OceanicMuseum_2F_Text_SurfaceSeawaterDisplay"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -592,6 +681,8 @@ original_encoded_gba = 0x820c82f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-oceanicmuseum-2f"
 target_export = "SlateportCity_OceanicMuseum_2F_Text_SSTidalReplica"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -601,6 +692,8 @@ original_encoded_gba = 0x820c88b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-oceanicmuseum-2f"
 target_export = "SlateportCity_OceanicMuseum_2F_Text_SubmarineReplica"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -610,6 +703,8 @@ original_encoded_gba = 0x820c8e8
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-oceanicmuseum-2f"
 target_export = "SlateportCity_OceanicMuseum_2F_Text_SumbersibleReplica"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -619,6 +714,8 @@ original_encoded_gba = 0x820c93a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-oceanicmuseum-2f"
 target_export = "SlateportCity_OceanicMuseum_2F_Text_SSAnneReplica"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -628,6 +725,8 @@ original_encoded_gba = 0x820c43f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-oceanicmuseum-2f"
 target_export = "SlateportCity_OceanicMuseum_2F_Text_RemindsMeOfAbandonedShip"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -637,6 +736,8 @@ original_encoded_gba = 0x820c495
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-oceanicmuseum-2f"
 target_export = "SlateportCity_OceanicMuseum_2F_Text_DontRunInMuseum"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -646,6 +747,8 @@ original_encoded_gba = 0x820c4c2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-oceanicmuseum-2f"
 target_export = "SlateportCity_OceanicMuseum_2F_Text_WantToRideSubmarine"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -655,4 +758,638 @@ original_encoded_gba = 0x82725a2
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceoriginaldirection"
 target_export = "Common_Movement_FaceOriginalDirection"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 1
+
+[[boundaries]]
+payload_offset = 2
+length = 6
+
+[[boundaries]]
+payload_offset = 8
+length = 2
+
+[[boundaries]]
+payload_offset = 10
+length = 1
+
+[[boundaries]]
+payload_offset = 11
+length = 4
+
+[[boundaries]]
+payload_offset = 15
+length = 3
+
+[[boundaries]]
+payload_offset = 18
+length = 7
+
+[[boundaries]]
+payload_offset = 25
+length = 3
+
+[[boundaries]]
+payload_offset = 28
+length = 3
+
+[[boundaries]]
+payload_offset = 31
+length = 7
+
+[[boundaries]]
+payload_offset = 38
+length = 3
+
+[[boundaries]]
+payload_offset = 41
+length = 7
+
+[[boundaries]]
+payload_offset = 48
+length = 7
+
+[[boundaries]]
+payload_offset = 55
+length = 3
+
+[[boundaries]]
+payload_offset = 58
+length = 5
+
+[[boundaries]]
+payload_offset = 63
+length = 6
+
+[[boundaries]]
+payload_offset = 69
+length = 5
+
+[[boundaries]]
+payload_offset = 74
+length = 6
+
+[[boundaries]]
+payload_offset = 80
+length = 6
+
+[[boundaries]]
+payload_offset = 86
+length = 2
+
+[[boundaries]]
+payload_offset = 88
+length = 5
+
+[[boundaries]]
+payload_offset = 93
+length = 6
+
+[[boundaries]]
+payload_offset = 99
+length = 6
+
+[[boundaries]]
+payload_offset = 105
+length = 2
+
+[[boundaries]]
+payload_offset = 107
+length = 6
+
+[[boundaries]]
+payload_offset = 113
+length = 2
+
+[[boundaries]]
+payload_offset = 115
+length = 1
+
+[[boundaries]]
+payload_offset = 116
+length = 7
+
+[[boundaries]]
+payload_offset = 123
+length = 3
+
+[[boundaries]]
+payload_offset = 126
+length = 5
+
+[[boundaries]]
+payload_offset = 131
+length = 6
+
+[[boundaries]]
+payload_offset = 137
+length = 5
+
+[[boundaries]]
+payload_offset = 142
+length = 6
+
+[[boundaries]]
+payload_offset = 148
+length = 10
+
+[[boundaries]]
+payload_offset = 158
+length = 6
+
+[[boundaries]]
+payload_offset = 164
+length = 2
+
+[[boundaries]]
+payload_offset = 166
+length = 1
+
+[[boundaries]]
+payload_offset = 167
+length = 7
+
+[[boundaries]]
+payload_offset = 174
+length = 3
+
+[[boundaries]]
+payload_offset = 177
+length = 7
+
+[[boundaries]]
+payload_offset = 184
+length = 3
+
+[[boundaries]]
+payload_offset = 187
+length = 6
+
+[[boundaries]]
+payload_offset = 193
+length = 2
+
+[[boundaries]]
+payload_offset = 195
+length = 10
+
+[[boundaries]]
+payload_offset = 205
+length = 7
+
+[[boundaries]]
+payload_offset = 212
+length = 3
+
+[[boundaries]]
+payload_offset = 215
+length = 7
+
+[[boundaries]]
+payload_offset = 222
+length = 7
+
+[[boundaries]]
+payload_offset = 229
+length = 3
+
+[[boundaries]]
+payload_offset = 232
+length = 6
+
+[[boundaries]]
+payload_offset = 238
+length = 2
+
+[[boundaries]]
+payload_offset = 240
+length = 1
+
+[[boundaries]]
+payload_offset = 241
+length = 3
+
+[[boundaries]]
+payload_offset = 244
+length = 3
+
+[[boundaries]]
+payload_offset = 247
+length = 7
+
+[[boundaries]]
+payload_offset = 254
+length = 7
+
+[[boundaries]]
+payload_offset = 261
+length = 3
+
+[[boundaries]]
+payload_offset = 264
+length = 6
+
+[[boundaries]]
+payload_offset = 270
+length = 2
+
+[[boundaries]]
+payload_offset = 272
+length = 1
+
+[[boundaries]]
+payload_offset = 273
+length = 7
+
+[[boundaries]]
+payload_offset = 280
+length = 3
+
+[[boundaries]]
+payload_offset = 283
+length = 6
+
+[[boundaries]]
+payload_offset = 289
+length = 2
+
+[[boundaries]]
+payload_offset = 291
+length = 1
+
+[[boundaries]]
+payload_offset = 292
+length = 3
+
+[[boundaries]]
+payload_offset = 295
+length = 1
+
+[[boundaries]]
+payload_offset = 296
+length = 2
+
+[[boundaries]]
+payload_offset = 298
+length = 3
+
+[[boundaries]]
+payload_offset = 301
+length = 3
+
+[[boundaries]]
+payload_offset = 304
+length = 3
+
+[[boundaries]]
+payload_offset = 307
+length = 2
+
+[[boundaries]]
+payload_offset = 309
+length = 3
+
+[[boundaries]]
+payload_offset = 312
+length = 3
+
+[[boundaries]]
+payload_offset = 315
+length = 7
+
+[[boundaries]]
+payload_offset = 322
+length = 3
+
+[[boundaries]]
+payload_offset = 325
+length = 6
+
+[[boundaries]]
+payload_offset = 331
+length = 2
+
+[[boundaries]]
+payload_offset = 333
+length = 5
+
+[[boundaries]]
+payload_offset = 338
+length = 5
+
+[[boundaries]]
+payload_offset = 343
+length = 6
+
+[[boundaries]]
+payload_offset = 349
+length = 2
+
+[[boundaries]]
+payload_offset = 351
+length = 1
+
+[[boundaries]]
+payload_offset = 352
+length = 2
+
+[[boundaries]]
+payload_offset = 354
+length = 3
+
+[[boundaries]]
+payload_offset = 357
+length = 1
+
+[[boundaries]]
+payload_offset = 358
+length = 3
+
+[[boundaries]]
+payload_offset = 361
+length = 3
+
+[[boundaries]]
+payload_offset = 364
+length = 3
+
+[[boundaries]]
+payload_offset = 367
+length = 5
+
+[[boundaries]]
+payload_offset = 372
+length = 6
+
+[[boundaries]]
+payload_offset = 378
+length = 3
+
+[[boundaries]]
+payload_offset = 381
+length = 3
+
+[[boundaries]]
+payload_offset = 384
+length = 3
+
+[[boundaries]]
+payload_offset = 387
+length = 5
+
+[[boundaries]]
+payload_offset = 392
+length = 2
+
+[[boundaries]]
+payload_offset = 394
+length = 1
+
+[[boundaries]]
+payload_offset = 395
+length = 1
+
+[[boundaries]]
+payload_offset = 396
+length = 5
+
+[[boundaries]]
+payload_offset = 401
+length = 1
+
+[[boundaries]]
+payload_offset = 402
+length = 7
+
+[[boundaries]]
+payload_offset = 409
+length = 3
+
+[[boundaries]]
+payload_offset = 412
+length = 1
+
+[[boundaries]]
+payload_offset = 413
+length = 7
+
+[[boundaries]]
+payload_offset = 420
+length = 3
+
+[[boundaries]]
+payload_offset = 423
+length = 1
+
+[[boundaries]]
+payload_offset = 424
+length = 7
+
+[[boundaries]]
+payload_offset = 431
+length = 3
+
+[[boundaries]]
+payload_offset = 434
+length = 1
+
+[[boundaries]]
+payload_offset = 435
+length = 7
+
+[[boundaries]]
+payload_offset = 442
+length = 3
+
+[[boundaries]]
+payload_offset = 445
+length = 1
+
+[[boundaries]]
+payload_offset = 446
+length = 6
+
+[[boundaries]]
+payload_offset = 452
+length = 2
+
+[[boundaries]]
+payload_offset = 454
+length = 1
+
+[[boundaries]]
+payload_offset = 455
+length = 6
+
+[[boundaries]]
+payload_offset = 461
+length = 2
+
+[[boundaries]]
+payload_offset = 463
+length = 1
+
+[[boundaries]]
+payload_offset = 464
+length = 6
+
+[[boundaries]]
+payload_offset = 470
+length = 2
+
+[[boundaries]]
+payload_offset = 472
+length = 1
+
+[[boundaries]]
+payload_offset = 473
+length = 6
+
+[[boundaries]]
+payload_offset = 479
+length = 2
+
+[[boundaries]]
+payload_offset = 481
+length = 1
+
+[[boundaries]]
+payload_offset = 482
+length = 6
+
+[[boundaries]]
+payload_offset = 488
+length = 2
+
+[[boundaries]]
+payload_offset = 490
+length = 1
+
+[[boundaries]]
+payload_offset = 491
+length = 6
+
+[[boundaries]]
+payload_offset = 497
+length = 2
+
+[[boundaries]]
+payload_offset = 499
+length = 1
+
+[[boundaries]]
+payload_offset = 500
+length = 6
+
+[[boundaries]]
+payload_offset = 506
+length = 2
+
+[[boundaries]]
+payload_offset = 508
+length = 1
+
+[[boundaries]]
+payload_offset = 509
+length = 6
+
+[[boundaries]]
+payload_offset = 515
+length = 2
+
+[[boundaries]]
+payload_offset = 517
+length = 1
+
+[[boundaries]]
+payload_offset = 518
+length = 6
+
+[[boundaries]]
+payload_offset = 524
+length = 2
+
+[[boundaries]]
+payload_offset = 526
+length = 1
+
+[[boundaries]]
+payload_offset = 527
+length = 6
+
+[[boundaries]]
+payload_offset = 533
+length = 2
+
+[[boundaries]]
+payload_offset = 535
+length = 1
+
+[[boundaries]]
+payload_offset = 536
+length = 6
+
+[[boundaries]]
+payload_offset = 542
+length = 2
+
+[[boundaries]]
+payload_offset = 544
+length = 1
+
+[[boundaries]]
+payload_offset = 545
+length = 6
+
+[[boundaries]]
+payload_offset = 551
+length = 2
+
+[[boundaries]]
+payload_offset = 553
+length = 1
+
+[[boundaries]]
+payload_offset = 554
+length = 1
+
+[[boundaries]]
+payload_offset = 555
+length = 1
+
+[[boundaries]]
+payload_offset = 556
+length = 6
+
+[[boundaries]]
+payload_offset = 562
+length = 2
+
+[[boundaries]]
+payload_offset = 564
+length = 1
+
+[[boundaries]]
+payload_offset = 565
+length = 7
+
+[[boundaries]]
+payload_offset = 572
+length = 3
+
+[[boundaries]]
+payload_offset = 575
+length = 1
+
+[[boundaries]]
+payload_offset = 576
+length = 1

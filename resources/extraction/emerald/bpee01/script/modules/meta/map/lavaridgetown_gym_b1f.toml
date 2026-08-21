@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 11
 reloc_count = 10
+instruction_count = 33
 
 [[segments]]
 kind = "bytecode"
@@ -120,6 +121,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lavaridgetown-gym-b1f"
 target_export = "LavaridgeTown_Gym_B1F_EventScript_SetTrainerTempVars"
 target_offset = 17
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 11
 runtime_resolution_required = true
 
 [[relocs]]
@@ -130,6 +133,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lavaridgetown-gym-b1f"
 target_export = "LavaridgeTown_Gym_B1F_EventScript_CheckBuryTrainers"
 target_offset = 94
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 88
 runtime_resolution_required = true
 
 [[relocs]]
@@ -140,6 +145,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lavaridgetown-gym-b1f"
 target_export = "LavaridgeTown_Gym_B1F_EventScript_SetJaceTempVar"
 target_offset = 51
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 45
 runtime_resolution_required = true
 
 [[relocs]]
@@ -150,6 +157,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lavaridgetown-gym-b1f"
 target_export = "LavaridgeTown_Gym_B1F_EventScript_SetJeffTempVar"
 target_offset = 65
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 59
 runtime_resolution_required = true
 
 [[relocs]]
@@ -160,6 +169,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lavaridgetown-gym-b1f"
 target_export = "LavaridgeTown_Gym_B1F_EventScript_SetEliTempVar"
 target_offset = 79
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 73
 runtime_resolution_required = true
 
 [[relocs]]
@@ -170,6 +181,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lavaridgetown-gym-b1f"
 target_export = "LavaridgeTown_Gym_B1F_EventScript_EndSetTrainerTempVars"
 target_offset = 93
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 87
 runtime_resolution_required = true
 
 [[relocs]]
@@ -180,6 +193,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lavaridgetown-gym-b1f"
 target_export = "LavaridgeTown_Gym_B1F_EventScript_CheckBuryJace"
 target_offset = 107
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 101
 runtime_resolution_required = true
 
 [[relocs]]
@@ -190,6 +205,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lavaridgetown-gym-b1f"
 target_export = "LavaridgeTown_Gym_B1F_EventScript_CheckBuryJeff"
 target_offset = 120
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 114
 runtime_resolution_required = true
 
 [[relocs]]
@@ -200,6 +217,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lavaridgetown-gym-b1f"
 target_export = "LavaridgeTown_Gym_B1F_EventScript_CheckBuryEli"
 target_offset = 133
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 127
 runtime_resolution_required = true
 
 [[relocs]]
@@ -210,4 +229,138 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lavaridgetown-gym-b1f"
 target_export = "LavaridgeTown_Gym_B1F_EventScript_EndCheckBuryTrainers"
 target_offset = 146
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 140
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 5
+
+[[boundaries]]
+payload_offset = 5
+length = 5
+
+[[boundaries]]
+payload_offset = 10
+length = 1
+
+[[boundaries]]
+payload_offset = 11
+length = 5
+
+[[boundaries]]
+payload_offset = 16
+length = 5
+
+[[boundaries]]
+payload_offset = 21
+length = 5
+
+[[boundaries]]
+payload_offset = 26
+length = 5
+
+[[boundaries]]
+payload_offset = 31
+length = 3
+
+[[boundaries]]
+payload_offset = 34
+length = 6
+
+[[boundaries]]
+payload_offset = 40
+length = 5
+
+[[boundaries]]
+payload_offset = 45
+length = 3
+
+[[boundaries]]
+payload_offset = 48
+length = 6
+
+[[boundaries]]
+payload_offset = 54
+length = 5
+
+[[boundaries]]
+payload_offset = 59
+length = 3
+
+[[boundaries]]
+payload_offset = 62
+length = 6
+
+[[boundaries]]
+payload_offset = 68
+length = 5
+
+[[boundaries]]
+payload_offset = 73
+length = 3
+
+[[boundaries]]
+payload_offset = 76
+length = 6
+
+[[boundaries]]
+payload_offset = 82
+length = 5
+
+[[boundaries]]
+payload_offset = 87
+length = 1
+
+[[boundaries]]
+payload_offset = 88
+length = 3
+
+[[boundaries]]
+payload_offset = 91
+length = 6
+
+[[boundaries]]
+payload_offset = 97
+length = 4
+
+[[boundaries]]
+payload_offset = 101
+length = 3
+
+[[boundaries]]
+payload_offset = 104
+length = 6
+
+[[boundaries]]
+payload_offset = 110
+length = 4
+
+[[boundaries]]
+payload_offset = 114
+length = 3
+
+[[boundaries]]
+payload_offset = 117
+length = 6
+
+[[boundaries]]
+payload_offset = 123
+length = 4
+
+[[boundaries]]
+payload_offset = 127
+length = 3
+
+[[boundaries]]
+payload_offset = 130
+length = 6
+
+[[boundaries]]
+payload_offset = 136
+length = 4
+
+[[boundaries]]
+payload_offset = 140
+length = 1

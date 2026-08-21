@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 2
 export_count = 46
 reloc_count = 96
+instruction_count = 284
 
 [[segments]]
 kind = "bytecode"
@@ -406,6 +407,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_EventScript_SetSwitch1Metatiles"
 target_offset = 61
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 55
 runtime_resolution_required = true
 
 [[relocs]]
@@ -416,6 +419,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_EventScript_CheckSwitch2"
 target_offset = 21
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 15
 runtime_resolution_required = true
 
 [[relocs]]
@@ -426,6 +431,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_EventScript_SetSwitch2Metatiles"
 target_offset = 85
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 79
 runtime_resolution_required = true
 
 [[relocs]]
@@ -436,6 +443,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_EventScript_CheckSwitch3"
 target_offset = 36
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 30
 runtime_resolution_required = true
 
 [[relocs]]
@@ -446,6 +455,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_EventScript_SetSwitch3Metatiles"
 target_offset = 109
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 103
 runtime_resolution_required = true
 
 [[relocs]]
@@ -456,6 +467,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_EventScript_CheckSwitch4"
 target_offset = 51
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 45
 runtime_resolution_required = true
 
 [[relocs]]
@@ -466,6 +479,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_EventScript_SetSwitch4Metatiles"
 target_offset = 133
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 127
 runtime_resolution_required = true
 
 [[relocs]]
@@ -476,6 +491,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_EventScript_CheckSwitch2"
 target_offset = 21
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 15
 runtime_resolution_required = true
 
 [[relocs]]
@@ -486,6 +503,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_EventScript_CheckSwitch3"
 target_offset = 36
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 30
 runtime_resolution_required = true
 
 [[relocs]]
@@ -496,6 +515,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_EventScript_CheckSwitch4"
 target_offset = 51
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 45
 runtime_resolution_required = true
 
 [[relocs]]
@@ -505,6 +526,8 @@ original_encoded_gba = 0x8221783
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_TateAndLizaIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -514,6 +537,8 @@ original_encoded_gba = 0x82218ec
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_TateAndLizaDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -523,6 +548,8 @@ original_encoded_gba = 0x8221bce
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_TateAndLizaNeedTwoMons"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -533,6 +560,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_EventScript_TateAndLizaDefeated"
 target_offset = 209
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 203
 runtime_resolution_required = true
 
 [[relocs]]
@@ -543,6 +572,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_EventScript_TateAndLizaRematch"
 target_offset = 382
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 376
 runtime_resolution_required = true
 
 [[relocs]]
@@ -553,6 +584,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_EventScript_GiveCalmMind2"
 target_offset = 311
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 305
 runtime_resolution_required = true
 
 [[relocs]]
@@ -562,6 +595,8 @@ original_encoded_gba = 0x8221b1d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_TateAndLizaPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -571,6 +606,8 @@ original_encoded_gba = 0x822196a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_ReceivedMindBadge"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -581,6 +618,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_PlayGymBadgeFanfare"
 target_offset = 315
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 315
 runtime_resolution_required = true
 
 [[relocs]]
@@ -590,6 +629,8 @@ original_encoded_gba = 0x8221999
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_ExplainMindBadgeTakeThis"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -600,6 +641,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_SetGymTrainers"
 target_offset = 0
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 0
 runtime_resolution_required = true
 
 [[relocs]]
@@ -610,6 +653,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_EventScript_GiveCalmMind"
 target_offset = 347
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 341
 runtime_resolution_required = true
 
 [[relocs]]
@@ -619,6 +664,8 @@ original_encoded_gba = 0x8221aea
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_RegisteredTateAndLiza"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -629,6 +676,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_ShowBagIsFull"
 target_offset = 273
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 273
 runtime_resolution_required = true
 
 [[relocs]]
@@ -638,6 +687,8 @@ original_encoded_gba = 0x8221a40
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_ExplainCalmMind"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -648,6 +699,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_BagIsFull"
 target_offset = 283
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 283
 runtime_resolution_required = true
 
 [[relocs]]
@@ -657,6 +710,8 @@ original_encoded_gba = 0x8221a40
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_ExplainCalmMind"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -666,6 +721,8 @@ original_encoded_gba = 0x8221d0b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_TateAndLizaPreRematch"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -675,6 +732,8 @@ original_encoded_gba = 0x8221e05
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_TateAndLizaRematchDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -684,6 +743,8 @@ original_encoded_gba = 0x8221eb8
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_TateAndLizaRematchNeedTwoMons"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -693,6 +754,8 @@ original_encoded_gba = 0x8221e45
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_TateAndLizaPostRematch"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -703,6 +766,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_EventScript_ClearSwitch1"
 target_offset = 464
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 458
 runtime_resolution_required = true
 
 [[relocs]]
@@ -712,6 +777,8 @@ original_encoded_gba = 0x8220c30
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mossdeepcity-gym-movement-waitafterswitchuse"
 target_export = "MossdeepCity_Gym_Movement_WaitAfterSwitchUse"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -722,6 +789,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_EventScript_DrawMapAfterSwitchUsed"
 target_offset = 456
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 450
 runtime_resolution_required = true
 
 [[relocs]]
@@ -731,6 +800,8 @@ original_encoded_gba = 0x8220c30
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mossdeepcity-gym-movement-waitafterswitchuse"
 target_export = "MossdeepCity_Gym_Movement_WaitAfterSwitchUse"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -741,6 +812,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_EventScript_DrawMapAfterSwitchUsed"
 target_offset = 456
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 450
 runtime_resolution_required = true
 
 [[relocs]]
@@ -751,6 +824,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_EventScript_ClearSwitch2"
 target_offset = 548
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 542
 runtime_resolution_required = true
 
 [[relocs]]
@@ -760,6 +835,8 @@ original_encoded_gba = 0x8220c30
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mossdeepcity-gym-movement-waitafterswitchuse"
 target_export = "MossdeepCity_Gym_Movement_WaitAfterSwitchUse"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -770,6 +847,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_EventScript_DrawMapAfterSwitchUsed"
 target_offset = 456
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 450
 runtime_resolution_required = true
 
 [[relocs]]
@@ -779,6 +858,8 @@ original_encoded_gba = 0x8220c30
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mossdeepcity-gym-movement-waitafterswitchuse"
 target_export = "MossdeepCity_Gym_Movement_WaitAfterSwitchUse"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -789,6 +870,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_EventScript_DrawMapAfterSwitchUsed"
 target_offset = 456
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 450
 runtime_resolution_required = true
 
 [[relocs]]
@@ -799,6 +882,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_EventScript_ClearSwitch3"
 target_offset = 632
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 626
 runtime_resolution_required = true
 
 [[relocs]]
@@ -808,6 +893,8 @@ original_encoded_gba = 0x8220c30
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mossdeepcity-gym-movement-waitafterswitchuse"
 target_export = "MossdeepCity_Gym_Movement_WaitAfterSwitchUse"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -818,6 +905,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_EventScript_DrawMapAfterSwitchUsed"
 target_offset = 456
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 450
 runtime_resolution_required = true
 
 [[relocs]]
@@ -827,6 +916,8 @@ original_encoded_gba = 0x8220c30
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mossdeepcity-gym-movement-waitafterswitchuse"
 target_export = "MossdeepCity_Gym_Movement_WaitAfterSwitchUse"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -837,6 +928,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_EventScript_DrawMapAfterSwitchUsed"
 target_offset = 456
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 450
 runtime_resolution_required = true
 
 [[relocs]]
@@ -847,6 +940,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_EventScript_ClearSwitch4"
 target_offset = 716
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 710
 runtime_resolution_required = true
 
 [[relocs]]
@@ -856,6 +951,8 @@ original_encoded_gba = 0x8220c30
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mossdeepcity-gym-movement-waitafterswitchuse"
 target_export = "MossdeepCity_Gym_Movement_WaitAfterSwitchUse"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -866,6 +963,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_EventScript_DrawMapAfterSwitchUsed"
 target_offset = 456
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 450
 runtime_resolution_required = true
 
 [[relocs]]
@@ -875,6 +974,8 @@ original_encoded_gba = 0x8220c30
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mossdeepcity-gym-movement-waitafterswitchuse"
 target_export = "MossdeepCity_Gym_Movement_WaitAfterSwitchUse"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -885,6 +986,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_EventScript_DrawMapAfterSwitchUsed"
 target_offset = 456
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 450
 runtime_resolution_required = true
 
 [[relocs]]
@@ -894,6 +997,8 @@ original_encoded_gba = 0x8220e5c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_PrestonIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -903,6 +1008,8 @@ original_encoded_gba = 0x8220eac
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_PrestonDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -912,6 +1019,8 @@ original_encoded_gba = 0x8220ed3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_PrestonPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -921,6 +1030,8 @@ original_encoded_gba = 0x8220f02
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_VirgilIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -930,6 +1041,8 @@ original_encoded_gba = 0x8220f1a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_VirgilDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -939,6 +1052,8 @@ original_encoded_gba = 0x8220f3a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_VirgilPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -948,6 +1063,8 @@ original_encoded_gba = 0x8220fb0
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_BlakeIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -957,6 +1074,8 @@ original_encoded_gba = 0x8221024
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_BlakeDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -966,6 +1085,8 @@ original_encoded_gba = 0x8221055
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_BlakePostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -975,6 +1096,8 @@ original_encoded_gba = 0x82210ee
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_HannahIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -984,6 +1107,8 @@ original_encoded_gba = 0x8221152
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_HannahDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -993,6 +1118,8 @@ original_encoded_gba = 0x822116a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_HannahPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1002,6 +1129,8 @@ original_encoded_gba = 0x82211e2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_SamanthaIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1011,6 +1140,8 @@ original_encoded_gba = 0x8221230
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_SamanthaDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1020,6 +1151,8 @@ original_encoded_gba = 0x822123d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_SamanthaPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1029,6 +1162,8 @@ original_encoded_gba = 0x82212a6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_MauraIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1038,6 +1173,8 @@ original_encoded_gba = 0x8221309
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_MauraDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1047,6 +1184,8 @@ original_encoded_gba = 0x822132e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_MauraPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1056,6 +1195,8 @@ original_encoded_gba = 0x82213c2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_SylviaIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1065,6 +1206,8 @@ original_encoded_gba = 0x82213f4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_SylviaDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1074,6 +1217,8 @@ original_encoded_gba = 0x8221412
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_SylviaPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1083,6 +1228,8 @@ original_encoded_gba = 0x8221460
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_NateIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1092,6 +1239,8 @@ original_encoded_gba = 0x82214a7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_NateDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1101,6 +1250,8 @@ original_encoded_gba = 0x82214d3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_NatePostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1110,6 +1261,8 @@ original_encoded_gba = 0x822161b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_MaceyIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1119,6 +1272,8 @@ original_encoded_gba = 0x8221658
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_MaceyDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1128,6 +1283,8 @@ original_encoded_gba = 0x8221680
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_MaceyPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1137,6 +1294,8 @@ original_encoded_gba = 0x822157c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_CliffordIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1146,6 +1305,8 @@ original_encoded_gba = 0x82215b8
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_CliffordDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1155,6 +1316,8 @@ original_encoded_gba = 0x82215e2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_CliffordPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1164,6 +1327,8 @@ original_encoded_gba = 0x82216ee
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_NicholasIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1173,6 +1338,8 @@ original_encoded_gba = 0x822172d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_NicholasDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1182,6 +1349,8 @@ original_encoded_gba = 0x822173a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_NicholasPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1191,6 +1360,8 @@ original_encoded_gba = 0x8221507
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_KathleenIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1200,6 +1371,8 @@ original_encoded_gba = 0x822153b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_KathleenDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1209,6 +1382,8 @@ original_encoded_gba = 0x8221545
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_KathleenPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1219,6 +1394,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_EventScript_GymGuidePostVictory"
 target_offset = 1062
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1056
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1228,6 +1405,8 @@ original_encoded_gba = 0x8220cd5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_GymGuideAdvice"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1237,6 +1416,8 @@ original_encoded_gba = 0x8220e2a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_GymGuidePostVictory"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1247,6 +1428,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_EventScript_GymStatueCertified"
 target_offset = 1107
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1098
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1257,6 +1440,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_EventScript_GymStatue"
 target_offset = 1117
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1108
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1267,6 +1452,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_EventScript_GymStatueCertified"
 target_offset = 1107
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1098
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1277,6 +1464,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_EventScript_GymStatue"
 target_offset = 1117
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1108
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1286,6 +1475,8 @@ original_encoded_gba = 0x8221cca
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_GymStatueCertified"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1295,4 +1486,1142 @@ original_encoded_gba = 0x8221cb0
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-gym"
 target_export = "MossdeepCity_Gym_Text_GymStatue"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 6
+
+[[boundaries]]
+payload_offset = 9
+length = 5
+
+[[boundaries]]
+payload_offset = 15
+length = 3
+
+[[boundaries]]
+payload_offset = 18
+length = 6
+
+[[boundaries]]
+payload_offset = 24
+length = 5
+
+[[boundaries]]
+payload_offset = 30
+length = 3
+
+[[boundaries]]
+payload_offset = 33
+length = 6
+
+[[boundaries]]
+payload_offset = 39
+length = 5
+
+[[boundaries]]
+payload_offset = 45
+length = 3
+
+[[boundaries]]
+payload_offset = 48
+length = 6
+
+[[boundaries]]
+payload_offset = 54
+length = 1
+
+[[boundaries]]
+payload_offset = 55
+length = 9
+
+[[boundaries]]
+payload_offset = 64
+length = 9
+
+[[boundaries]]
+payload_offset = 73
+length = 5
+
+[[boundaries]]
+payload_offset = 79
+length = 9
+
+[[boundaries]]
+payload_offset = 88
+length = 9
+
+[[boundaries]]
+payload_offset = 97
+length = 5
+
+[[boundaries]]
+payload_offset = 103
+length = 9
+
+[[boundaries]]
+payload_offset = 112
+length = 9
+
+[[boundaries]]
+payload_offset = 121
+length = 5
+
+[[boundaries]]
+payload_offset = 127
+length = 9
+
+[[boundaries]]
+payload_offset = 136
+length = 9
+
+[[boundaries]]
+payload_offset = 145
+length = 1
+
+[[boundaries]]
+payload_offset = 146
+length = 22
+
+[[boundaries]]
+payload_offset = 168
+length = 5
+
+[[boundaries]]
+payload_offset = 173
+length = 5
+
+[[boundaries]]
+payload_offset = 178
+length = 6
+
+[[boundaries]]
+payload_offset = 184
+length = 3
+
+[[boundaries]]
+payload_offset = 187
+length = 6
+
+[[boundaries]]
+payload_offset = 193
+length = 6
+
+[[boundaries]]
+payload_offset = 199
+length = 2
+
+[[boundaries]]
+payload_offset = 201
+length = 1
+
+[[boundaries]]
+payload_offset = 202
+length = 1
+
+[[boundaries]]
+payload_offset = 203
+length = 5
+
+[[boundaries]]
+payload_offset = 208
+length = 1
+
+[[boundaries]]
+payload_offset = 209
+length = 5
+
+[[boundaries]]
+payload_offset = 214
+length = 6
+
+[[boundaries]]
+payload_offset = 220
+length = 2
+
+[[boundaries]]
+payload_offset = 222
+length = 3
+
+[[boundaries]]
+payload_offset = 225
+length = 3
+
+[[boundaries]]
+payload_offset = 228
+length = 3
+
+[[boundaries]]
+payload_offset = 231
+length = 3
+
+[[boundaries]]
+payload_offset = 234
+length = 3
+
+[[boundaries]]
+payload_offset = 237
+length = 5
+
+[[boundaries]]
+payload_offset = 242
+length = 5
+
+[[boundaries]]
+payload_offset = 247
+length = 3
+
+[[boundaries]]
+payload_offset = 250
+length = 3
+
+[[boundaries]]
+payload_offset = 253
+length = 3
+
+[[boundaries]]
+payload_offset = 256
+length = 3
+
+[[boundaries]]
+payload_offset = 259
+length = 3
+
+[[boundaries]]
+payload_offset = 262
+length = 5
+
+[[boundaries]]
+payload_offset = 267
+length = 3
+
+[[boundaries]]
+payload_offset = 270
+length = 5
+
+[[boundaries]]
+payload_offset = 275
+length = 5
+
+[[boundaries]]
+payload_offset = 280
+length = 1
+
+[[boundaries]]
+payload_offset = 281
+length = 3
+
+[[boundaries]]
+payload_offset = 284
+length = 3
+
+[[boundaries]]
+payload_offset = 287
+length = 6
+
+[[boundaries]]
+payload_offset = 293
+length = 2
+
+[[boundaries]]
+payload_offset = 295
+length = 1
+
+[[boundaries]]
+payload_offset = 296
+length = 1
+
+[[boundaries]]
+payload_offset = 297
+length = 3
+
+[[boundaries]]
+payload_offset = 300
+length = 3
+
+[[boundaries]]
+payload_offset = 303
+length = 1
+
+[[boundaries]]
+payload_offset = 304
+length = 1
+
+[[boundaries]]
+payload_offset = 305
+length = 5
+
+[[boundaries]]
+payload_offset = 310
+length = 5
+
+[[boundaries]]
+payload_offset = 315
+length = 2
+
+[[boundaries]]
+payload_offset = 317
+length = 5
+
+[[boundaries]]
+payload_offset = 322
+length = 6
+
+[[boundaries]]
+payload_offset = 328
+length = 6
+
+[[boundaries]]
+payload_offset = 334
+length = 2
+
+[[boundaries]]
+payload_offset = 336
+length = 3
+
+[[boundaries]]
+payload_offset = 339
+length = 1
+
+[[boundaries]]
+payload_offset = 340
+length = 1
+
+[[boundaries]]
+payload_offset = 341
+length = 5
+
+[[boundaries]]
+payload_offset = 346
+length = 5
+
+[[boundaries]]
+payload_offset = 351
+length = 2
+
+[[boundaries]]
+payload_offset = 353
+length = 5
+
+[[boundaries]]
+payload_offset = 358
+length = 6
+
+[[boundaries]]
+payload_offset = 364
+length = 6
+
+[[boundaries]]
+payload_offset = 370
+length = 2
+
+[[boundaries]]
+payload_offset = 372
+length = 3
+
+[[boundaries]]
+payload_offset = 375
+length = 1
+
+[[boundaries]]
+payload_offset = 376
+length = 18
+
+[[boundaries]]
+payload_offset = 394
+length = 6
+
+[[boundaries]]
+payload_offset = 400
+length = 2
+
+[[boundaries]]
+payload_offset = 402
+length = 1
+
+[[boundaries]]
+payload_offset = 403
+length = 1
+
+[[boundaries]]
+payload_offset = 404
+length = 3
+
+[[boundaries]]
+payload_offset = 407
+length = 6
+
+[[boundaries]]
+payload_offset = 413
+length = 3
+
+[[boundaries]]
+payload_offset = 416
+length = 7
+
+[[boundaries]]
+payload_offset = 423
+length = 3
+
+[[boundaries]]
+payload_offset = 426
+length = 9
+
+[[boundaries]]
+payload_offset = 435
+length = 9
+
+[[boundaries]]
+payload_offset = 444
+length = 5
+
+[[boundaries]]
+payload_offset = 450
+length = 3
+
+[[boundaries]]
+payload_offset = 453
+length = 3
+
+[[boundaries]]
+payload_offset = 456
+length = 1
+
+[[boundaries]]
+payload_offset = 457
+length = 1
+
+[[boundaries]]
+payload_offset = 458
+length = 3
+
+[[boundaries]]
+payload_offset = 461
+length = 7
+
+[[boundaries]]
+payload_offset = 468
+length = 3
+
+[[boundaries]]
+payload_offset = 471
+length = 9
+
+[[boundaries]]
+payload_offset = 480
+length = 9
+
+[[boundaries]]
+payload_offset = 489
+length = 5
+
+[[boundaries]]
+payload_offset = 495
+length = 1
+
+[[boundaries]]
+payload_offset = 496
+length = 3
+
+[[boundaries]]
+payload_offset = 499
+length = 6
+
+[[boundaries]]
+payload_offset = 505
+length = 3
+
+[[boundaries]]
+payload_offset = 508
+length = 7
+
+[[boundaries]]
+payload_offset = 515
+length = 3
+
+[[boundaries]]
+payload_offset = 518
+length = 9
+
+[[boundaries]]
+payload_offset = 527
+length = 9
+
+[[boundaries]]
+payload_offset = 536
+length = 5
+
+[[boundaries]]
+payload_offset = 542
+length = 3
+
+[[boundaries]]
+payload_offset = 545
+length = 7
+
+[[boundaries]]
+payload_offset = 552
+length = 3
+
+[[boundaries]]
+payload_offset = 555
+length = 9
+
+[[boundaries]]
+payload_offset = 564
+length = 9
+
+[[boundaries]]
+payload_offset = 573
+length = 5
+
+[[boundaries]]
+payload_offset = 579
+length = 1
+
+[[boundaries]]
+payload_offset = 580
+length = 3
+
+[[boundaries]]
+payload_offset = 583
+length = 6
+
+[[boundaries]]
+payload_offset = 589
+length = 3
+
+[[boundaries]]
+payload_offset = 592
+length = 7
+
+[[boundaries]]
+payload_offset = 599
+length = 3
+
+[[boundaries]]
+payload_offset = 602
+length = 9
+
+[[boundaries]]
+payload_offset = 611
+length = 9
+
+[[boundaries]]
+payload_offset = 620
+length = 5
+
+[[boundaries]]
+payload_offset = 626
+length = 3
+
+[[boundaries]]
+payload_offset = 629
+length = 7
+
+[[boundaries]]
+payload_offset = 636
+length = 3
+
+[[boundaries]]
+payload_offset = 639
+length = 9
+
+[[boundaries]]
+payload_offset = 648
+length = 9
+
+[[boundaries]]
+payload_offset = 657
+length = 5
+
+[[boundaries]]
+payload_offset = 663
+length = 1
+
+[[boundaries]]
+payload_offset = 664
+length = 3
+
+[[boundaries]]
+payload_offset = 667
+length = 6
+
+[[boundaries]]
+payload_offset = 673
+length = 3
+
+[[boundaries]]
+payload_offset = 676
+length = 7
+
+[[boundaries]]
+payload_offset = 683
+length = 3
+
+[[boundaries]]
+payload_offset = 686
+length = 9
+
+[[boundaries]]
+payload_offset = 695
+length = 9
+
+[[boundaries]]
+payload_offset = 704
+length = 5
+
+[[boundaries]]
+payload_offset = 710
+length = 3
+
+[[boundaries]]
+payload_offset = 713
+length = 7
+
+[[boundaries]]
+payload_offset = 720
+length = 3
+
+[[boundaries]]
+payload_offset = 723
+length = 9
+
+[[boundaries]]
+payload_offset = 732
+length = 9
+
+[[boundaries]]
+payload_offset = 741
+length = 5
+
+[[boundaries]]
+payload_offset = 747
+length = 1
+
+[[boundaries]]
+payload_offset = 748
+length = 8
+
+[[boundaries]]
+payload_offset = 756
+length = 1
+
+[[boundaries]]
+payload_offset = 757
+length = 1
+
+[[boundaries]]
+payload_offset = 758
+length = 1
+
+[[boundaries]]
+payload_offset = 759
+length = 14
+
+[[boundaries]]
+payload_offset = 773
+length = 6
+
+[[boundaries]]
+payload_offset = 779
+length = 2
+
+[[boundaries]]
+payload_offset = 781
+length = 1
+
+[[boundaries]]
+payload_offset = 782
+length = 14
+
+[[boundaries]]
+payload_offset = 796
+length = 6
+
+[[boundaries]]
+payload_offset = 802
+length = 2
+
+[[boundaries]]
+payload_offset = 804
+length = 1
+
+[[boundaries]]
+payload_offset = 805
+length = 14
+
+[[boundaries]]
+payload_offset = 819
+length = 6
+
+[[boundaries]]
+payload_offset = 825
+length = 2
+
+[[boundaries]]
+payload_offset = 827
+length = 1
+
+[[boundaries]]
+payload_offset = 828
+length = 14
+
+[[boundaries]]
+payload_offset = 842
+length = 6
+
+[[boundaries]]
+payload_offset = 848
+length = 2
+
+[[boundaries]]
+payload_offset = 850
+length = 1
+
+[[boundaries]]
+payload_offset = 851
+length = 14
+
+[[boundaries]]
+payload_offset = 865
+length = 6
+
+[[boundaries]]
+payload_offset = 871
+length = 2
+
+[[boundaries]]
+payload_offset = 873
+length = 1
+
+[[boundaries]]
+payload_offset = 874
+length = 14
+
+[[boundaries]]
+payload_offset = 888
+length = 6
+
+[[boundaries]]
+payload_offset = 894
+length = 2
+
+[[boundaries]]
+payload_offset = 896
+length = 1
+
+[[boundaries]]
+payload_offset = 897
+length = 14
+
+[[boundaries]]
+payload_offset = 911
+length = 6
+
+[[boundaries]]
+payload_offset = 917
+length = 2
+
+[[boundaries]]
+payload_offset = 919
+length = 1
+
+[[boundaries]]
+payload_offset = 920
+length = 14
+
+[[boundaries]]
+payload_offset = 934
+length = 6
+
+[[boundaries]]
+payload_offset = 940
+length = 2
+
+[[boundaries]]
+payload_offset = 942
+length = 1
+
+[[boundaries]]
+payload_offset = 943
+length = 14
+
+[[boundaries]]
+payload_offset = 957
+length = 6
+
+[[boundaries]]
+payload_offset = 963
+length = 2
+
+[[boundaries]]
+payload_offset = 965
+length = 1
+
+[[boundaries]]
+payload_offset = 966
+length = 14
+
+[[boundaries]]
+payload_offset = 980
+length = 6
+
+[[boundaries]]
+payload_offset = 986
+length = 2
+
+[[boundaries]]
+payload_offset = 988
+length = 1
+
+[[boundaries]]
+payload_offset = 989
+length = 14
+
+[[boundaries]]
+payload_offset = 1003
+length = 6
+
+[[boundaries]]
+payload_offset = 1009
+length = 2
+
+[[boundaries]]
+payload_offset = 1011
+length = 1
+
+[[boundaries]]
+payload_offset = 1012
+length = 14
+
+[[boundaries]]
+payload_offset = 1026
+length = 6
+
+[[boundaries]]
+payload_offset = 1032
+length = 2
+
+[[boundaries]]
+payload_offset = 1034
+length = 1
+
+[[boundaries]]
+payload_offset = 1035
+length = 1
+
+[[boundaries]]
+payload_offset = 1036
+length = 1
+
+[[boundaries]]
+payload_offset = 1037
+length = 3
+
+[[boundaries]]
+payload_offset = 1040
+length = 6
+
+[[boundaries]]
+payload_offset = 1046
+length = 6
+
+[[boundaries]]
+payload_offset = 1052
+length = 2
+
+[[boundaries]]
+payload_offset = 1054
+length = 1
+
+[[boundaries]]
+payload_offset = 1055
+length = 1
+
+[[boundaries]]
+payload_offset = 1056
+length = 6
+
+[[boundaries]]
+payload_offset = 1062
+length = 2
+
+[[boundaries]]
+payload_offset = 1064
+length = 1
+
+[[boundaries]]
+payload_offset = 1065
+length = 1
+
+[[boundaries]]
+payload_offset = 1066
+length = 1
+
+[[boundaries]]
+payload_offset = 1067
+length = 3
+
+[[boundaries]]
+payload_offset = 1070
+length = 6
+
+[[boundaries]]
+payload_offset = 1076
+length = 5
+
+[[boundaries]]
+payload_offset = 1082
+length = 1
+
+[[boundaries]]
+payload_offset = 1083
+length = 3
+
+[[boundaries]]
+payload_offset = 1086
+length = 6
+
+[[boundaries]]
+payload_offset = 1092
+length = 5
+
+[[boundaries]]
+payload_offset = 1098
+length = 6
+
+[[boundaries]]
+payload_offset = 1104
+length = 2
+
+[[boundaries]]
+payload_offset = 1106
+length = 1
+
+[[boundaries]]
+payload_offset = 1107
+length = 1
+
+[[boundaries]]
+payload_offset = 1108
+length = 6
+
+[[boundaries]]
+payload_offset = 1114
+length = 2
+
+[[boundaries]]
+payload_offset = 1116
+length = 1
+
+[[boundaries]]
+payload_offset = 1117
+length = 1
+
+[[boundaries]]
+payload_offset = 1118
+length = 3
+
+[[boundaries]]
+payload_offset = 1121
+length = 1
+
+[[boundaries]]
+payload_offset = 1122
+length = 3
+
+[[boundaries]]
+payload_offset = 1125
+length = 3
+
+[[boundaries]]
+payload_offset = 1128
+length = 3
+
+[[boundaries]]
+payload_offset = 1131
+length = 3
+
+[[boundaries]]
+payload_offset = 1134
+length = 1
+
+[[boundaries]]
+payload_offset = 1135
+length = 3
+
+[[boundaries]]
+payload_offset = 1138
+length = 1
+
+[[boundaries]]
+payload_offset = 1139
+length = 1
+
+[[boundaries]]
+payload_offset = 1140
+length = 3
+
+[[boundaries]]
+payload_offset = 1143
+length = 1
+
+[[boundaries]]
+payload_offset = 1144
+length = 3
+
+[[boundaries]]
+payload_offset = 1147
+length = 3
+
+[[boundaries]]
+payload_offset = 1150
+length = 3
+
+[[boundaries]]
+payload_offset = 1153
+length = 3
+
+[[boundaries]]
+payload_offset = 1156
+length = 1
+
+[[boundaries]]
+payload_offset = 1157
+length = 3
+
+[[boundaries]]
+payload_offset = 1160
+length = 1
+
+[[boundaries]]
+payload_offset = 1161
+length = 1
+
+[[boundaries]]
+payload_offset = 1162
+length = 3
+
+[[boundaries]]
+payload_offset = 1165
+length = 1
+
+[[boundaries]]
+payload_offset = 1166
+length = 3
+
+[[boundaries]]
+payload_offset = 1169
+length = 3
+
+[[boundaries]]
+payload_offset = 1172
+length = 3
+
+[[boundaries]]
+payload_offset = 1175
+length = 3
+
+[[boundaries]]
+payload_offset = 1178
+length = 1
+
+[[boundaries]]
+payload_offset = 1179
+length = 3
+
+[[boundaries]]
+payload_offset = 1182
+length = 1
+
+[[boundaries]]
+payload_offset = 1183
+length = 1
+
+[[boundaries]]
+payload_offset = 1184
+length = 3
+
+[[boundaries]]
+payload_offset = 1187
+length = 1
+
+[[boundaries]]
+payload_offset = 1188
+length = 3
+
+[[boundaries]]
+payload_offset = 1191
+length = 3
+
+[[boundaries]]
+payload_offset = 1194
+length = 3
+
+[[boundaries]]
+payload_offset = 1197
+length = 3
+
+[[boundaries]]
+payload_offset = 1200
+length = 1
+
+[[boundaries]]
+payload_offset = 1201
+length = 3
+
+[[boundaries]]
+payload_offset = 1204
+length = 1
+
+[[boundaries]]
+payload_offset = 1205
+length = 1
+
+[[boundaries]]
+payload_offset = 1206
+length = 3
+
+[[boundaries]]
+payload_offset = 1209
+length = 1
+
+[[boundaries]]
+payload_offset = 1210
+length = 3
+
+[[boundaries]]
+payload_offset = 1213
+length = 3
+
+[[boundaries]]
+payload_offset = 1216
+length = 3
+
+[[boundaries]]
+payload_offset = 1219
+length = 3
+
+[[boundaries]]
+payload_offset = 1222
+length = 1
+
+[[boundaries]]
+payload_offset = 1223
+length = 3
+
+[[boundaries]]
+payload_offset = 1226
+length = 1
+
+[[boundaries]]
+payload_offset = 1227
+length = 1

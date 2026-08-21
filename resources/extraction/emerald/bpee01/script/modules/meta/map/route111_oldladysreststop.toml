@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 4
 reloc_count = 9
+instruction_count = 26
 
 [[segments]]
 kind = "bytecode"
@@ -63,6 +64,8 @@ original_encoded_gba = 0x822a978
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route111-oldladysreststop"
 target_export = "Route111_OldLadysRestStop_Text_RestUpHere"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -73,6 +76,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route111-oldladysreststop"
 target_export = "Route111_OldLadysRestStop_EventScript_Rest"
 target_offset = 43
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 37
 runtime_resolution_required = true
 
 [[relocs]]
@@ -83,6 +88,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route111-oldladysreststop"
 target_export = "Route111_OldLadysRestStop_EventScript_DeclineRest"
 target_offset = 88
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 82
 runtime_resolution_required = true
 
 [[relocs]]
@@ -92,6 +99,8 @@ original_encoded_gba = 0x822a9ec
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route111-oldladysreststop"
 target_export = "Route111_OldLadysRestStop_Text_TakeYourTimeRestUp"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -102,6 +111,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_OutOfCenterPartyHeal"
 target_offset = 320
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 320
 runtime_resolution_required = true
 
 [[relocs]]
@@ -111,6 +122,8 @@ original_encoded_gba = 0x822aa16
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route111-oldladysreststop"
 target_export = "Route111_OldLadysRestStop_Text_StillTiredTakeAnotherRest"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -121,6 +134,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route111-oldladysreststop"
 target_export = "Route111_OldLadysRestStop_EventScript_Rest"
 target_offset = 43
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 37
 runtime_resolution_required = true
 
 [[relocs]]
@@ -131,6 +146,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route111-oldladysreststop"
 target_export = "Route111_OldLadysRestStop_EventScript_DeclineRest"
 target_offset = 88
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 82
 runtime_resolution_required = true
 
 [[relocs]]
@@ -140,4 +157,110 @@ original_encoded_gba = 0x822aa8f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route111-oldladysreststop"
 target_export = "Route111_OldLadysRestStop_Text_DontNeedToBeShy"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 1
+
+[[boundaries]]
+payload_offset = 4
+length = 1
+
+[[boundaries]]
+payload_offset = 5
+length = 1
+
+[[boundaries]]
+payload_offset = 6
+length = 6
+
+[[boundaries]]
+payload_offset = 12
+length = 2
+
+[[boundaries]]
+payload_offset = 14
+length = 5
+
+[[boundaries]]
+payload_offset = 19
+length = 6
+
+[[boundaries]]
+payload_offset = 25
+length = 5
+
+[[boundaries]]
+payload_offset = 30
+length = 6
+
+[[boundaries]]
+payload_offset = 36
+length = 1
+
+[[boundaries]]
+payload_offset = 37
+length = 6
+
+[[boundaries]]
+payload_offset = 43
+length = 2
+
+[[boundaries]]
+payload_offset = 45
+length = 1
+
+[[boundaries]]
+payload_offset = 46
+length = 5
+
+[[boundaries]]
+payload_offset = 51
+length = 6
+
+[[boundaries]]
+payload_offset = 57
+length = 2
+
+[[boundaries]]
+payload_offset = 59
+length = 5
+
+[[boundaries]]
+payload_offset = 64
+length = 6
+
+[[boundaries]]
+payload_offset = 70
+length = 5
+
+[[boundaries]]
+payload_offset = 75
+length = 6
+
+[[boundaries]]
+payload_offset = 81
+length = 1
+
+[[boundaries]]
+payload_offset = 82
+length = 6
+
+[[boundaries]]
+payload_offset = 88
+length = 2
+
+[[boundaries]]
+payload_offset = 90
+length = 1
+
+[[boundaries]]
+payload_offset = 91
+length = 1

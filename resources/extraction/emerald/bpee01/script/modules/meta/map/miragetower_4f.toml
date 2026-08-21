@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 5
 reloc_count = 8
+instruction_count = 54
 
 [[segments]]
 kind = "bytecode"
@@ -71,6 +72,8 @@ original_encoded_gba = 0x823adf9
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/miragetower-4f"
 target_export = "MirageTower_4F_Text_TakeRootFossil"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -81,6 +84,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/miragetower-4f"
 target_export = "MirageTower_4F_EventScript_LeaveRootFossil"
 target_offset = 56
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 55
 runtime_resolution_required = true
 
 [[relocs]]
@@ -91,6 +96,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/miragetower-4f"
 target_export = "MirageTower_4F_EventScript_CollapseMirageTower"
 target_offset = 131
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 130
 runtime_resolution_required = true
 
 [[relocs]]
@@ -100,6 +107,8 @@ original_encoded_gba = 0x823ae79
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/miragetower-4f"
 target_export = "MirageTower_4F_Text_LeftRootFossilAlone"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -109,6 +118,8 @@ original_encoded_gba = 0x823ae98
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/miragetower-4f"
 target_export = "MirageTower_4F_Text_TakeClawFossil"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -119,6 +130,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/miragetower-4f"
 target_export = "MirageTower_4F_EventScript_LeaveClawFossil"
 target_offset = 121
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 120
 runtime_resolution_required = true
 
 [[relocs]]
@@ -129,6 +142,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/miragetower-4f"
 target_export = "MirageTower_4F_EventScript_CollapseMirageTower"
 target_offset = 131
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 130
 runtime_resolution_required = true
 
 [[relocs]]
@@ -138,4 +153,222 @@ original_encoded_gba = 0x823af18
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/miragetower-4f"
 target_export = "MirageTower_4F_Text_LeaveClawFossilAlone"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 1
+
+[[boundaries]]
+payload_offset = 2
+length = 6
+
+[[boundaries]]
+payload_offset = 8
+length = 2
+
+[[boundaries]]
+payload_offset = 10
+length = 5
+
+[[boundaries]]
+payload_offset = 15
+length = 6
+
+[[boundaries]]
+payload_offset = 21
+length = 5
+
+[[boundaries]]
+payload_offset = 26
+length = 5
+
+[[boundaries]]
+payload_offset = 31
+length = 2
+
+[[boundaries]]
+payload_offset = 33
+length = 1
+
+[[boundaries]]
+payload_offset = 34
+length = 3
+
+[[boundaries]]
+payload_offset = 37
+length = 3
+
+[[boundaries]]
+payload_offset = 40
+length = 3
+
+[[boundaries]]
+payload_offset = 43
+length = 3
+
+[[boundaries]]
+payload_offset = 46
+length = 3
+
+[[boundaries]]
+payload_offset = 49
+length = 5
+
+[[boundaries]]
+payload_offset = 55
+length = 6
+
+[[boundaries]]
+payload_offset = 61
+length = 2
+
+[[boundaries]]
+payload_offset = 63
+length = 1
+
+[[boundaries]]
+payload_offset = 64
+length = 1
+
+[[boundaries]]
+payload_offset = 65
+length = 1
+
+[[boundaries]]
+payload_offset = 66
+length = 1
+
+[[boundaries]]
+payload_offset = 67
+length = 6
+
+[[boundaries]]
+payload_offset = 73
+length = 2
+
+[[boundaries]]
+payload_offset = 75
+length = 5
+
+[[boundaries]]
+payload_offset = 80
+length = 6
+
+[[boundaries]]
+payload_offset = 86
+length = 5
+
+[[boundaries]]
+payload_offset = 91
+length = 5
+
+[[boundaries]]
+payload_offset = 96
+length = 2
+
+[[boundaries]]
+payload_offset = 98
+length = 1
+
+[[boundaries]]
+payload_offset = 99
+length = 3
+
+[[boundaries]]
+payload_offset = 102
+length = 3
+
+[[boundaries]]
+payload_offset = 105
+length = 3
+
+[[boundaries]]
+payload_offset = 108
+length = 3
+
+[[boundaries]]
+payload_offset = 111
+length = 3
+
+[[boundaries]]
+payload_offset = 114
+length = 5
+
+[[boundaries]]
+payload_offset = 120
+length = 6
+
+[[boundaries]]
+payload_offset = 126
+length = 2
+
+[[boundaries]]
+payload_offset = 128
+length = 1
+
+[[boundaries]]
+payload_offset = 129
+length = 1
+
+[[boundaries]]
+payload_offset = 130
+length = 5
+
+[[boundaries]]
+payload_offset = 135
+length = 5
+
+[[boundaries]]
+payload_offset = 140
+length = 5
+
+[[boundaries]]
+payload_offset = 145
+length = 5
+
+[[boundaries]]
+payload_offset = 150
+length = 3
+
+[[boundaries]]
+payload_offset = 153
+length = 1
+
+[[boundaries]]
+payload_offset = 154
+length = 3
+
+[[boundaries]]
+payload_offset = 157
+length = 1
+
+[[boundaries]]
+payload_offset = 158
+length = 5
+
+[[boundaries]]
+payload_offset = 163
+length = 3
+
+[[boundaries]]
+payload_offset = 166
+length = 8
+
+[[boundaries]]
+payload_offset = 174
+length = 1
+
+[[boundaries]]
+payload_offset = 175
+length = 1
+
+[[boundaries]]
+payload_offset = 176
+length = 1

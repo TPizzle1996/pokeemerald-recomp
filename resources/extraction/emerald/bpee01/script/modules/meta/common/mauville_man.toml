@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 4
 export_count = 38
 reloc_count = 89
+instruction_count = 272
 
 [[segments]]
 kind = "bytecode"
@@ -354,6 +355,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_EventScript_Bard"
 target_offset = 64
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 64
 runtime_resolution_required = true
 
 [[relocs]]
@@ -364,6 +367,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_EventScript_Hipster"
 target_offset = 257
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 257
 runtime_resolution_required = true
 
 [[relocs]]
@@ -374,6 +379,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_EventScript_Trader"
 target_offset = 1134
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 331
 runtime_resolution_required = true
 
 [[relocs]]
@@ -384,6 +391,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_EventScript_Storyteller"
 target_offset = 8420
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 621
 runtime_resolution_required = true
 
 [[relocs]]
@@ -394,6 +403,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_EventScript_Giddy"
 target_offset = 8848
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 850
 runtime_resolution_required = true
 
 [[relocs]]
@@ -403,6 +414,8 @@ original_encoded_gba = 0x829038e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_Text_WouldYouLikeToHearMySong"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -413,6 +426,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_EventScript_PlaySong"
 target_offset = 97
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 97
 runtime_resolution_required = true
 
 [[relocs]]
@@ -423,6 +438,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_EventScript_DeclineSong"
 target_offset = 132
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 132
 runtime_resolution_required = true
 
 [[relocs]]
@@ -433,6 +450,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_EventScript_AskToWriteLyrics"
 target_offset = 142
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 142
 runtime_resolution_required = true
 
 [[relocs]]
@@ -442,6 +461,8 @@ original_encoded_gba = 0x82903e6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_Text_WishICouldPlaySongForOthers"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -451,6 +472,8 @@ original_encoded_gba = 0x82903c0
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_Text_BardFeelingTheBlues1"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -460,6 +483,8 @@ original_encoded_gba = 0x8290421
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_Text_WouldYouLikeToWriteSomeLyrics"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -470,6 +495,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_EventScript_WriteLyrics"
 target_offset = 173
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 173
 runtime_resolution_required = true
 
 [[relocs]]
@@ -480,6 +507,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_EventScript_DeclineWritingLyrics"
 target_offset = 247
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 247
 runtime_resolution_required = true
 
 [[relocs]]
@@ -490,6 +519,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pc"
 target_export = "Common_ShowEasyChatScreen"
 target_offset = 234
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 234
 runtime_resolution_required = true
 
 [[relocs]]
@@ -500,6 +531,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_EventScript_DeclineWritingLyrics"
 target_offset = 247
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 247
 runtime_resolution_required = true
 
 [[relocs]]
@@ -509,6 +542,8 @@ original_encoded_gba = 0x82904c1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_Text_LetMeSingItForYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -518,6 +553,8 @@ original_encoded_gba = 0x82904eb
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_Text_ThatHowYouWantedSongToGo"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -528,6 +565,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_EventScript_WriteLyrics"
 target_offset = 173
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 173
 runtime_resolution_required = true
 
 [[relocs]]
@@ -537,6 +576,8 @@ original_encoded_gba = 0x8290514
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_Text_IllSingThisSongForAWhile"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -546,6 +587,8 @@ original_encoded_gba = 0x829049b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_Text_BardFeelingTheBlues2"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -555,6 +598,8 @@ original_encoded_gba = 0x829054c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_Text_TeachWhatsHipAndHappening"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -565,6 +610,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_EventScript_TryTeachWord"
 target_offset = 294
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 294
 runtime_resolution_required = true
 
 [[relocs]]
@@ -574,6 +621,8 @@ original_encoded_gba = 0x8290598
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_Text_IAlreadyTaughtYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -584,6 +633,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_EventScript_TeachWord"
 target_offset = 318
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 318
 runtime_resolution_required = true
 
 [[relocs]]
@@ -593,6 +644,8 @@ original_encoded_gba = 0x8290602
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_Text_IveGotNothingNewToTeach"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -602,6 +655,8 @@ original_encoded_gba = 0x8290666
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_Text_HaveYouHeardOfPhrase"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -611,6 +666,8 @@ original_encoded_gba = 0x828e1b1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_Text_WantToTradeDecor"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -621,6 +678,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_EventScript_DeclineTrade"
 target_offset = 1181
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 378
 runtime_resolution_required = true
 
 [[relocs]]
@@ -631,6 +690,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_EventScript_AlreadyTraded"
 target_offset = 1191
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 388
 runtime_resolution_required = true
 
 [[relocs]]
@@ -640,6 +701,8 @@ original_encoded_gba = 0x828e23f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_Text_PickADecorItem"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -650,6 +713,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_EventScript_PickDecorToReceive"
 target_offset = 1201
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 398
 runtime_resolution_required = true
 
 [[relocs]]
@@ -659,6 +724,8 @@ original_encoded_gba = 0x828e1e8
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_Text_TraderFeelingTheBlues"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -668,6 +735,8 @@ original_encoded_gba = 0x828e20e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_Text_WeveAlreadyTraded"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -678,6 +747,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_EventScript_CancelPickDecor"
 target_offset = 1266
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 463
 runtime_resolution_required = true
 
 [[relocs]]
@@ -688,6 +759,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_EventScript_InvalidDecor"
 target_offset = 1276
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 473
 runtime_resolution_required = true
 
 [[relocs]]
@@ -697,6 +770,8 @@ original_encoded_gba = 0x828e2a9
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_Text_OnceBelongedToPlayerDoYouWantIt"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -707,6 +782,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_EventScript_PickDifferentDecor"
 target_offset = 1288
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 485
 runtime_resolution_required = true
 
 [[relocs]]
@@ -717,6 +794,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_EventScript_DontHaveAnyDecor"
 target_offset = 1300
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 497
 runtime_resolution_required = true
 
 [[relocs]]
@@ -727,6 +806,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_EventScript_PickDecorToGive"
 target_offset = 1310
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 507
 runtime_resolution_required = true
 
 [[relocs]]
@@ -736,6 +817,8 @@ original_encoded_gba = 0x828e27f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_Text_YouDontWantAnything"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -745,6 +828,8 @@ original_encoded_gba = 0x828e45a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_Text_CantTradeThatOne"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -755,6 +840,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_EventScript_PickDecorToReceive"
 target_offset = 1201
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 398
 runtime_resolution_required = true
 
 [[relocs]]
@@ -764,6 +851,8 @@ original_encoded_gba = 0x828e23f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_Text_PickADecorItem"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -774,6 +863,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_EventScript_PickDecorToReceive"
 target_offset = 1201
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 398
 runtime_resolution_required = true
 
 [[relocs]]
@@ -783,6 +874,8 @@ original_encoded_gba = 0x828e2e3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_Text_YouDontHaveAnyDecor"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -792,6 +885,8 @@ original_encoded_gba = 0x828e323
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_Text_PickTheDecorToTrade"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -802,6 +897,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_EventScript_CancelGiveDecor"
 target_offset = 1390
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 587
 runtime_resolution_required = true
 
 [[relocs]]
@@ -812,6 +909,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_EventScript_DecorInUse"
 target_offset = 1400
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 597
 runtime_resolution_required = true
 
 [[relocs]]
@@ -822,6 +921,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_EventScript_NoRoomForDecor"
 target_offset = 1414
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 611
 runtime_resolution_required = true
 
 [[relocs]]
@@ -831,6 +932,8 @@ original_encoded_gba = 0x828e3c4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_Text_SoWellTradeTheseDecor"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -841,6 +944,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_EventScript_PickDecorToGive"
 target_offset = 1310
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 507
 runtime_resolution_required = true
 
 [[relocs]]
@@ -850,6 +955,8 @@ original_encoded_gba = 0x828e424
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_Text_SendDecorToYourPC"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -859,6 +966,8 @@ original_encoded_gba = 0x828e356
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_Text_YouDontWantToTrade"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -868,6 +977,8 @@ original_encoded_gba = 0x828e3ec
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_Text_ThatDecorIsInUse"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -878,6 +989,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_EventScript_PickDecorToGive"
 target_offset = 1310
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 507
 runtime_resolution_required = true
 
 [[relocs]]
@@ -887,6 +1000,8 @@ original_encoded_gba = 0x828e380
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_Text_YouveNoRoomForThis"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -896,6 +1011,8 @@ original_encoded_gba = 0x828e5f6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_Text_WillYouHearMyTale"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -906,6 +1023,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_EventScript_DeclineStoryteller"
 target_offset = 8627
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 828
 runtime_resolution_required = true
 
 [[relocs]]
@@ -916,6 +1035,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_EventScript_KnowNoTales"
 target_offset = 8564
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 765
 runtime_resolution_required = true
 
 [[relocs]]
@@ -925,6 +1046,8 @@ original_encoded_gba = 0x828e673
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_Text_WhichTaleToTell"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -935,6 +1058,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_EventScript_CancelStorySelection"
 target_offset = 8529
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 730
 runtime_resolution_required = true
 
 [[relocs]]
@@ -945,6 +1070,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_EventScript_AreThereOtherTales"
 target_offset = 8535
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 736
 runtime_resolution_required = true
 
 [[relocs]]
@@ -955,6 +1082,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_EventScript_TellPlayersTale"
 target_offset = 8617
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 818
 runtime_resolution_required = true
 
 [[relocs]]
@@ -965,6 +1094,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_EventScript_DeclineStoryteller"
 target_offset = 8627
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 828
 runtime_resolution_required = true
 
 [[relocs]]
@@ -974,6 +1105,8 @@ original_encoded_gba = 0x828e78a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_Text_CouldThereBeOtherLegends"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -984,6 +1117,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_EventScript_StorytellerEnd"
 target_offset = 8647
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 848
 runtime_resolution_required = true
 
 [[relocs]]
@@ -994,6 +1129,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_EventScript_DoYouHaveAnyTales"
 target_offset = 8572
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 773
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1003,6 +1140,8 @@ original_encoded_gba = 0x828e6ae
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_Text_IKnowNoTales"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1012,6 +1151,8 @@ original_encoded_gba = 0x828e7ee
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_Text_HaveYouAnyLegendaryTales"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1022,6 +1163,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_EventScript_DeclineStoryteller"
 target_offset = 8627
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 828
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1032,6 +1175,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_EventScript_TellPlayersTale"
 target_offset = 8617
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 818
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1041,6 +1186,8 @@ original_encoded_gba = 0x828e881
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_Text_NotWorthyOfLegend"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1050,6 +1197,8 @@ original_encoded_gba = 0x828e726
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_Text_YouDidStatXTimes"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1059,6 +1208,8 @@ original_encoded_gba = 0x828e64d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_Text_StorytellerFeelingTheBlues"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1068,6 +1219,8 @@ original_encoded_gba = 0x828e8d9
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_Text_IWishMorePeopleWereInterested"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1077,6 +1230,8 @@ original_encoded_gba = 0x829022f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_Text_HearMyStory"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1087,6 +1242,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_EventScript_TryTellTale"
 target_offset = 8881
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 883
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1097,6 +1254,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_EventScript_DeclineGiddy"
 target_offset = 8980
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 982
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1107,6 +1266,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_EventScript_GiddyTellTale"
 target_offset = 8947
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 949
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1117,6 +1278,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_EventScript_ToldEnoughTales"
 target_offset = 8990
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 992
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1127,6 +1290,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_EventScript_GiddyStartNewTale"
 target_offset = 8933
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 935
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1137,6 +1302,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_EventScript_ToldEnoughTales"
 target_offset = 8990
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 992
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1146,6 +1313,8 @@ original_encoded_gba = 0x82902a7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_Text_AlsoIWasThinking"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1156,6 +1325,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_EventScript_GiddyTellTale"
 target_offset = 8947
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 949
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1166,6 +1337,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_EventScript_TryTellNewTale"
 target_offset = 8907
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 909
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1176,6 +1349,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_EventScript_TryTellNewTale"
 target_offset = 8907
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 909
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1185,6 +1360,8 @@ original_encoded_gba = 0x8290281
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_Text_GiddyFeelingTheBlues"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1194,4 +1371,1094 @@ original_encoded_gba = 0x82902bd
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/mauville-man"
 target_export = "MauvilleCity_PokemonCenter_1F_Text_WeShouldChatAgain"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 5
+
+[[boundaries]]
+payload_offset = 8
+length = 5
+
+[[boundaries]]
+payload_offset = 13
+length = 6
+
+[[boundaries]]
+payload_offset = 19
+length = 5
+
+[[boundaries]]
+payload_offset = 24
+length = 6
+
+[[boundaries]]
+payload_offset = 30
+length = 5
+
+[[boundaries]]
+payload_offset = 35
+length = 6
+
+[[boundaries]]
+payload_offset = 41
+length = 5
+
+[[boundaries]]
+payload_offset = 46
+length = 6
+
+[[boundaries]]
+payload_offset = 52
+length = 5
+
+[[boundaries]]
+payload_offset = 57
+length = 6
+
+[[boundaries]]
+payload_offset = 63
+length = 1
+
+[[boundaries]]
+payload_offset = 64
+length = 1
+
+[[boundaries]]
+payload_offset = 65
+length = 1
+
+[[boundaries]]
+payload_offset = 66
+length = 6
+
+[[boundaries]]
+payload_offset = 72
+length = 2
+
+[[boundaries]]
+payload_offset = 74
+length = 5
+
+[[boundaries]]
+payload_offset = 79
+length = 6
+
+[[boundaries]]
+payload_offset = 85
+length = 5
+
+[[boundaries]]
+payload_offset = 90
+length = 6
+
+[[boundaries]]
+payload_offset = 96
+length = 1
+
+[[boundaries]]
+payload_offset = 97
+length = 5
+
+[[boundaries]]
+payload_offset = 102
+length = 3
+
+[[boundaries]]
+payload_offset = 105
+length = 3
+
+[[boundaries]]
+payload_offset = 108
+length = 3
+
+[[boundaries]]
+payload_offset = 111
+length = 5
+
+[[boundaries]]
+payload_offset = 116
+length = 6
+
+[[boundaries]]
+payload_offset = 122
+length = 6
+
+[[boundaries]]
+payload_offset = 128
+length = 2
+
+[[boundaries]]
+payload_offset = 130
+length = 1
+
+[[boundaries]]
+payload_offset = 131
+length = 1
+
+[[boundaries]]
+payload_offset = 132
+length = 6
+
+[[boundaries]]
+payload_offset = 138
+length = 2
+
+[[boundaries]]
+payload_offset = 140
+length = 1
+
+[[boundaries]]
+payload_offset = 141
+length = 1
+
+[[boundaries]]
+payload_offset = 142
+length = 6
+
+[[boundaries]]
+payload_offset = 148
+length = 2
+
+[[boundaries]]
+payload_offset = 150
+length = 5
+
+[[boundaries]]
+payload_offset = 155
+length = 6
+
+[[boundaries]]
+payload_offset = 161
+length = 5
+
+[[boundaries]]
+payload_offset = 166
+length = 6
+
+[[boundaries]]
+payload_offset = 172
+length = 1
+
+[[boundaries]]
+payload_offset = 173
+length = 5
+
+[[boundaries]]
+payload_offset = 178
+length = 5
+
+[[boundaries]]
+payload_offset = 183
+length = 1
+
+[[boundaries]]
+payload_offset = 184
+length = 1
+
+[[boundaries]]
+payload_offset = 185
+length = 5
+
+[[boundaries]]
+payload_offset = 190
+length = 6
+
+[[boundaries]]
+payload_offset = 196
+length = 6
+
+[[boundaries]]
+payload_offset = 202
+length = 2
+
+[[boundaries]]
+payload_offset = 204
+length = 5
+
+[[boundaries]]
+payload_offset = 209
+length = 3
+
+[[boundaries]]
+payload_offset = 212
+length = 3
+
+[[boundaries]]
+payload_offset = 215
+length = 6
+
+[[boundaries]]
+payload_offset = 221
+length = 2
+
+[[boundaries]]
+payload_offset = 223
+length = 5
+
+[[boundaries]]
+payload_offset = 228
+length = 6
+
+[[boundaries]]
+payload_offset = 234
+length = 3
+
+[[boundaries]]
+payload_offset = 237
+length = 6
+
+[[boundaries]]
+payload_offset = 243
+length = 2
+
+[[boundaries]]
+payload_offset = 245
+length = 1
+
+[[boundaries]]
+payload_offset = 246
+length = 1
+
+[[boundaries]]
+payload_offset = 247
+length = 6
+
+[[boundaries]]
+payload_offset = 253
+length = 2
+
+[[boundaries]]
+payload_offset = 255
+length = 1
+
+[[boundaries]]
+payload_offset = 256
+length = 1
+
+[[boundaries]]
+payload_offset = 257
+length = 1
+
+[[boundaries]]
+payload_offset = 258
+length = 1
+
+[[boundaries]]
+payload_offset = 259
+length = 3
+
+[[boundaries]]
+payload_offset = 262
+length = 6
+
+[[boundaries]]
+payload_offset = 268
+length = 2
+
+[[boundaries]]
+payload_offset = 270
+length = 3
+
+[[boundaries]]
+payload_offset = 273
+length = 5
+
+[[boundaries]]
+payload_offset = 278
+length = 6
+
+[[boundaries]]
+payload_offset = 284
+length = 6
+
+[[boundaries]]
+payload_offset = 290
+length = 2
+
+[[boundaries]]
+payload_offset = 292
+length = 1
+
+[[boundaries]]
+payload_offset = 293
+length = 1
+
+[[boundaries]]
+payload_offset = 294
+length = 3
+
+[[boundaries]]
+payload_offset = 297
+length = 5
+
+[[boundaries]]
+payload_offset = 302
+length = 6
+
+[[boundaries]]
+payload_offset = 308
+length = 6
+
+[[boundaries]]
+payload_offset = 314
+length = 2
+
+[[boundaries]]
+payload_offset = 316
+length = 1
+
+[[boundaries]]
+payload_offset = 317
+length = 1
+
+[[boundaries]]
+payload_offset = 318
+length = 6
+
+[[boundaries]]
+payload_offset = 324
+length = 2
+
+[[boundaries]]
+payload_offset = 326
+length = 3
+
+[[boundaries]]
+payload_offset = 329
+length = 1
+
+[[boundaries]]
+payload_offset = 330
+length = 1
+
+[[boundaries]]
+payload_offset = 331
+length = 1
+
+[[boundaries]]
+payload_offset = 332
+length = 1
+
+[[boundaries]]
+payload_offset = 333
+length = 6
+
+[[boundaries]]
+payload_offset = 339
+length = 2
+
+[[boundaries]]
+payload_offset = 341
+length = 5
+
+[[boundaries]]
+payload_offset = 346
+length = 6
+
+[[boundaries]]
+payload_offset = 352
+length = 3
+
+[[boundaries]]
+payload_offset = 355
+length = 5
+
+[[boundaries]]
+payload_offset = 360
+length = 6
+
+[[boundaries]]
+payload_offset = 366
+length = 5
+
+[[boundaries]]
+payload_offset = 371
+length = 1
+
+[[boundaries]]
+payload_offset = 372
+length = 5
+
+[[boundaries]]
+payload_offset = 378
+length = 6
+
+[[boundaries]]
+payload_offset = 384
+length = 2
+
+[[boundaries]]
+payload_offset = 386
+length = 1
+
+[[boundaries]]
+payload_offset = 387
+length = 1
+
+[[boundaries]]
+payload_offset = 388
+length = 6
+
+[[boundaries]]
+payload_offset = 394
+length = 2
+
+[[boundaries]]
+payload_offset = 396
+length = 1
+
+[[boundaries]]
+payload_offset = 397
+length = 1
+
+[[boundaries]]
+payload_offset = 398
+length = 3
+
+[[boundaries]]
+payload_offset = 401
+length = 1
+
+[[boundaries]]
+payload_offset = 402
+length = 5
+
+[[boundaries]]
+payload_offset = 407
+length = 6
+
+[[boundaries]]
+payload_offset = 413
+length = 5
+
+[[boundaries]]
+payload_offset = 418
+length = 6
+
+[[boundaries]]
+payload_offset = 424
+length = 6
+
+[[boundaries]]
+payload_offset = 430
+length = 2
+
+[[boundaries]]
+payload_offset = 432
+length = 5
+
+[[boundaries]]
+payload_offset = 437
+length = 6
+
+[[boundaries]]
+payload_offset = 443
+length = 3
+
+[[boundaries]]
+payload_offset = 446
+length = 5
+
+[[boundaries]]
+payload_offset = 451
+length = 6
+
+[[boundaries]]
+payload_offset = 457
+length = 5
+
+[[boundaries]]
+payload_offset = 463
+length = 6
+
+[[boundaries]]
+payload_offset = 469
+length = 2
+
+[[boundaries]]
+payload_offset = 471
+length = 1
+
+[[boundaries]]
+payload_offset = 472
+length = 1
+
+[[boundaries]]
+payload_offset = 473
+length = 5
+
+[[boundaries]]
+payload_offset = 478
+length = 1
+
+[[boundaries]]
+payload_offset = 479
+length = 5
+
+[[boundaries]]
+payload_offset = 485
+length = 5
+
+[[boundaries]]
+payload_offset = 490
+length = 1
+
+[[boundaries]]
+payload_offset = 491
+length = 5
+
+[[boundaries]]
+payload_offset = 497
+length = 6
+
+[[boundaries]]
+payload_offset = 503
+length = 2
+
+[[boundaries]]
+payload_offset = 505
+length = 1
+
+[[boundaries]]
+payload_offset = 506
+length = 1
+
+[[boundaries]]
+payload_offset = 507
+length = 6
+
+[[boundaries]]
+payload_offset = 513
+length = 2
+
+[[boundaries]]
+payload_offset = 515
+length = 3
+
+[[boundaries]]
+payload_offset = 518
+length = 1
+
+[[boundaries]]
+payload_offset = 519
+length = 5
+
+[[boundaries]]
+payload_offset = 524
+length = 6
+
+[[boundaries]]
+payload_offset = 530
+length = 5
+
+[[boundaries]]
+payload_offset = 535
+length = 6
+
+[[boundaries]]
+payload_offset = 541
+length = 3
+
+[[boundaries]]
+payload_offset = 544
+length = 5
+
+[[boundaries]]
+payload_offset = 549
+length = 6
+
+[[boundaries]]
+payload_offset = 555
+length = 6
+
+[[boundaries]]
+payload_offset = 561
+length = 2
+
+[[boundaries]]
+payload_offset = 563
+length = 5
+
+[[boundaries]]
+payload_offset = 568
+length = 6
+
+[[boundaries]]
+payload_offset = 574
+length = 3
+
+[[boundaries]]
+payload_offset = 577
+length = 6
+
+[[boundaries]]
+payload_offset = 583
+length = 2
+
+[[boundaries]]
+payload_offset = 585
+length = 1
+
+[[boundaries]]
+payload_offset = 586
+length = 1
+
+[[boundaries]]
+payload_offset = 587
+length = 6
+
+[[boundaries]]
+payload_offset = 593
+length = 2
+
+[[boundaries]]
+payload_offset = 595
+length = 1
+
+[[boundaries]]
+payload_offset = 596
+length = 1
+
+[[boundaries]]
+payload_offset = 597
+length = 6
+
+[[boundaries]]
+payload_offset = 603
+length = 2
+
+[[boundaries]]
+payload_offset = 605
+length = 5
+
+[[boundaries]]
+payload_offset = 611
+length = 6
+
+[[boundaries]]
+payload_offset = 617
+length = 2
+
+[[boundaries]]
+payload_offset = 619
+length = 1
+
+[[boundaries]]
+payload_offset = 620
+length = 1
+
+[[boundaries]]
+payload_offset = 621
+length = 1
+
+[[boundaries]]
+payload_offset = 622
+length = 1
+
+[[boundaries]]
+payload_offset = 623
+length = 5
+
+[[boundaries]]
+payload_offset = 628
+length = 5
+
+[[boundaries]]
+payload_offset = 633
+length = 5
+
+[[boundaries]]
+payload_offset = 638
+length = 5
+
+[[boundaries]]
+payload_offset = 643
+length = 6
+
+[[boundaries]]
+payload_offset = 649
+length = 2
+
+[[boundaries]]
+payload_offset = 651
+length = 5
+
+[[boundaries]]
+payload_offset = 656
+length = 6
+
+[[boundaries]]
+payload_offset = 662
+length = 5
+
+[[boundaries]]
+payload_offset = 667
+length = 5
+
+[[boundaries]]
+payload_offset = 672
+length = 6
+
+[[boundaries]]
+payload_offset = 678
+length = 5
+
+[[boundaries]]
+payload_offset = 683
+length = 1
+
+[[boundaries]]
+payload_offset = 684
+length = 3
+
+[[boundaries]]
+payload_offset = 687
+length = 1
+
+[[boundaries]]
+payload_offset = 688
+length = 5
+
+[[boundaries]]
+payload_offset = 693
+length = 6
+
+[[boundaries]]
+payload_offset = 699
+length = 5
+
+[[boundaries]]
+payload_offset = 704
+length = 3
+
+[[boundaries]]
+payload_offset = 707
+length = 1
+
+[[boundaries]]
+payload_offset = 708
+length = 1
+
+[[boundaries]]
+payload_offset = 709
+length = 5
+
+[[boundaries]]
+payload_offset = 714
+length = 5
+
+[[boundaries]]
+payload_offset = 719
+length = 6
+
+[[boundaries]]
+payload_offset = 725
+length = 5
+
+[[boundaries]]
+payload_offset = 730
+length = 5
+
+[[boundaries]]
+payload_offset = 736
+length = 6
+
+[[boundaries]]
+payload_offset = 742
+length = 2
+
+[[boundaries]]
+payload_offset = 744
+length = 5
+
+[[boundaries]]
+payload_offset = 749
+length = 5
+
+[[boundaries]]
+payload_offset = 754
+length = 6
+
+[[boundaries]]
+payload_offset = 760
+length = 5
+
+[[boundaries]]
+payload_offset = 765
+length = 6
+
+[[boundaries]]
+payload_offset = 771
+length = 2
+
+[[boundaries]]
+payload_offset = 773
+length = 6
+
+[[boundaries]]
+payload_offset = 779
+length = 2
+
+[[boundaries]]
+payload_offset = 781
+length = 5
+
+[[boundaries]]
+payload_offset = 786
+length = 6
+
+[[boundaries]]
+payload_offset = 792
+length = 5
+
+[[boundaries]]
+payload_offset = 797
+length = 5
+
+[[boundaries]]
+payload_offset = 802
+length = 6
+
+[[boundaries]]
+payload_offset = 808
+length = 6
+
+[[boundaries]]
+payload_offset = 814
+length = 2
+
+[[boundaries]]
+payload_offset = 816
+length = 1
+
+[[boundaries]]
+payload_offset = 817
+length = 1
+
+[[boundaries]]
+payload_offset = 818
+length = 6
+
+[[boundaries]]
+payload_offset = 824
+length = 2
+
+[[boundaries]]
+payload_offset = 826
+length = 1
+
+[[boundaries]]
+payload_offset = 827
+length = 1
+
+[[boundaries]]
+payload_offset = 828
+length = 6
+
+[[boundaries]]
+payload_offset = 834
+length = 2
+
+[[boundaries]]
+payload_offset = 836
+length = 1
+
+[[boundaries]]
+payload_offset = 837
+length = 1
+
+[[boundaries]]
+payload_offset = 838
+length = 6
+
+[[boundaries]]
+payload_offset = 844
+length = 2
+
+[[boundaries]]
+payload_offset = 846
+length = 1
+
+[[boundaries]]
+payload_offset = 847
+length = 1
+
+[[boundaries]]
+payload_offset = 848
+length = 1
+
+[[boundaries]]
+payload_offset = 849
+length = 1
+
+[[boundaries]]
+payload_offset = 850
+length = 1
+
+[[boundaries]]
+payload_offset = 851
+length = 1
+
+[[boundaries]]
+payload_offset = 852
+length = 6
+
+[[boundaries]]
+payload_offset = 858
+length = 2
+
+[[boundaries]]
+payload_offset = 860
+length = 5
+
+[[boundaries]]
+payload_offset = 865
+length = 6
+
+[[boundaries]]
+payload_offset = 871
+length = 5
+
+[[boundaries]]
+payload_offset = 876
+length = 6
+
+[[boundaries]]
+payload_offset = 882
+length = 1
+
+[[boundaries]]
+payload_offset = 883
+length = 3
+
+[[boundaries]]
+payload_offset = 886
+length = 5
+
+[[boundaries]]
+payload_offset = 891
+length = 6
+
+[[boundaries]]
+payload_offset = 897
+length = 5
+
+[[boundaries]]
+payload_offset = 902
+length = 6
+
+[[boundaries]]
+payload_offset = 908
+length = 1
+
+[[boundaries]]
+payload_offset = 909
+length = 3
+
+[[boundaries]]
+payload_offset = 912
+length = 5
+
+[[boundaries]]
+payload_offset = 917
+length = 6
+
+[[boundaries]]
+payload_offset = 923
+length = 5
+
+[[boundaries]]
+payload_offset = 928
+length = 6
+
+[[boundaries]]
+payload_offset = 934
+length = 1
+
+[[boundaries]]
+payload_offset = 935
+length = 6
+
+[[boundaries]]
+payload_offset = 941
+length = 2
+
+[[boundaries]]
+payload_offset = 943
+length = 5
+
+[[boundaries]]
+payload_offset = 949
+length = 3
+
+[[boundaries]]
+payload_offset = 952
+length = 3
+
+[[boundaries]]
+payload_offset = 955
+length = 1
+
+[[boundaries]]
+payload_offset = 956
+length = 3
+
+[[boundaries]]
+payload_offset = 959
+length = 5
+
+[[boundaries]]
+payload_offset = 964
+length = 6
+
+[[boundaries]]
+payload_offset = 970
+length = 5
+
+[[boundaries]]
+payload_offset = 975
+length = 6
+
+[[boundaries]]
+payload_offset = 981
+length = 1
+
+[[boundaries]]
+payload_offset = 982
+length = 6
+
+[[boundaries]]
+payload_offset = 988
+length = 2
+
+[[boundaries]]
+payload_offset = 990
+length = 1
+
+[[boundaries]]
+payload_offset = 991
+length = 1
+
+[[boundaries]]
+payload_offset = 992
+length = 6
+
+[[boundaries]]
+payload_offset = 998
+length = 2
+
+[[boundaries]]
+payload_offset = 1000
+length = 1
+
+[[boundaries]]
+payload_offset = 1001
+length = 1

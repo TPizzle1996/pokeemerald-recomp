@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 5
 reloc_count = 5
+instruction_count = 20
 
 [[segments]]
 kind = "bytecode"
@@ -71,6 +72,8 @@ original_encoded_gba = 0x822b88b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route116-tunnelersresthouse"
 target_export = "Route116_TunnelersRestHouse_Text_WeHadToStopBoring"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -80,6 +83,8 @@ original_encoded_gba = 0x822b99f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route116-tunnelersresthouse"
 target_export = "Route116_TunnelersRestHouse_Text_ManDiggingHisWayToVerdanturf"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -90,6 +95,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route116-tunnelersresthouse"
 target_export = "Route116_TunnelersRestHouse_EventScript_TunnelOpened"
 target_offset = 49
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 43
 runtime_resolution_required = true
 
 [[relocs]]
@@ -99,6 +106,8 @@ original_encoded_gba = 0x822baaf
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route116-tunnelersresthouse"
 target_export = "Route116_TunnelersRestHouse_Text_GetToVerdanturfWithoutTunnel"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -108,4 +117,86 @@ original_encoded_gba = 0x822bb3b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route116-tunnelersresthouse"
 target_export = "Route116_TunnelersRestHouse_Text_TunnelHasGoneThrough"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 1
+
+[[boundaries]]
+payload_offset = 4
+length = 6
+
+[[boundaries]]
+payload_offset = 10
+length = 2
+
+[[boundaries]]
+payload_offset = 12
+length = 1
+
+[[boundaries]]
+payload_offset = 13
+length = 6
+
+[[boundaries]]
+payload_offset = 19
+length = 2
+
+[[boundaries]]
+payload_offset = 21
+length = 1
+
+[[boundaries]]
+payload_offset = 22
+length = 1
+
+[[boundaries]]
+payload_offset = 23
+length = 1
+
+[[boundaries]]
+payload_offset = 24
+length = 3
+
+[[boundaries]]
+payload_offset = 27
+length = 6
+
+[[boundaries]]
+payload_offset = 33
+length = 6
+
+[[boundaries]]
+payload_offset = 39
+length = 2
+
+[[boundaries]]
+payload_offset = 41
+length = 1
+
+[[boundaries]]
+payload_offset = 42
+length = 1
+
+[[boundaries]]
+payload_offset = 43
+length = 6
+
+[[boundaries]]
+payload_offset = 49
+length = 2
+
+[[boundaries]]
+payload_offset = 51
+length = 1
+
+[[boundaries]]
+payload_offset = 52
+length = 1

@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 10
 reloc_count = 20
+instruction_count = 71
 
 [[segments]]
 kind = "bytecode"
@@ -112,6 +113,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/tv"
 target_export = "EventScript_PlayersHouseMovie"
 target_offset = 143
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 143
 runtime_resolution_required = true
 
 [[relocs]]
@@ -122,6 +125,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/tv"
 target_export = "EventScript_PlayersHouseLatiNewsFlash"
 target_offset = 153
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 153
 runtime_resolution_required = true
 
 [[relocs]]
@@ -132,6 +137,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/tv"
 target_export = "EventScript_MomDadMightLikeThis1"
 target_offset = 127
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 127
 runtime_resolution_required = true
 
 [[relocs]]
@@ -142,6 +149,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/tv"
 target_export = "EventScript_MomDadMightLikeThis1"
 target_offset = 127
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 127
 runtime_resolution_required = true
 
 [[relocs]]
@@ -152,6 +161,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/tv"
 target_export = "EventScript_DoInSearchOfTrainers"
 target_offset = 244
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 244
 runtime_resolution_required = true
 
 [[relocs]]
@@ -162,6 +173,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/tv"
 target_export = "EventScript_TryDoPokeNews"
 target_offset = 222
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 222
 runtime_resolution_required = true
 
 [[relocs]]
@@ -172,6 +185,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/tv"
 target_export = "EventScript_MomDadMightLikeThis2"
 target_offset = 205
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 205
 runtime_resolution_required = true
 
 [[relocs]]
@@ -182,6 +197,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/tv"
 target_export = "EventScript_MomDadMightLikeThis2"
 target_offset = 205
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 205
 runtime_resolution_required = true
 
 [[relocs]]
@@ -192,6 +209,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/tv"
 target_export = "EventScript_DoTVShow"
 target_offset = 175
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 175
 runtime_resolution_required = true
 
 [[relocs]]
@@ -201,6 +220,8 @@ original_encoded_gba = 0x8272bcf
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/event-scripts"
 target_export = "gText_MomOrDadMightLikeThisProgram"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -210,6 +231,8 @@ original_encoded_gba = 0x81f7f0f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/littleroottown-brendanshouse-1f"
 target_export = "PlayersHouse_1F_Text_TheresAMovieOnTV"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -219,6 +242,8 @@ original_encoded_gba = 0x81f826f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/littleroottown-brendanshouse-1f"
 target_export = "PlayersHouse_1F_Text_LatiEmergencyNewsFlash"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -229,6 +254,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/tv"
 target_export = "EventScript_DoTVShow"
 target_offset = 175
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 175
 runtime_resolution_required = true
 
 [[relocs]]
@@ -239,6 +266,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/tv"
 target_export = "EventScript_TurnOffTV"
 target_offset = 197
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 197
 runtime_resolution_required = true
 
 [[relocs]]
@@ -248,6 +277,8 @@ original_encoded_gba = 0x8272bcf
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/event-scripts"
 target_export = "gText_MomOrDadMightLikeThisProgram"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -258,6 +289,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/tv"
 target_export = "EventScript_TurnOffTV"
 target_offset = 197
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 197
 runtime_resolution_required = true
 
 [[relocs]]
@@ -268,6 +301,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/tv"
 target_export = "EventScript_TryDoTVShow"
 target_offset = 73
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 73
 runtime_resolution_required = true
 
 [[relocs]]
@@ -278,6 +313,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/tv"
 target_export = "EventScript_TurnOffTV"
 target_offset = 197
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 197
 runtime_resolution_required = true
 
 [[relocs]]
@@ -288,6 +325,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/tv"
 target_export = "EventScript_DoInSearchOfTrainers"
 target_offset = 244
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 244
 runtime_resolution_required = true
 
 [[relocs]]
@@ -298,4 +337,290 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/tv"
 target_export = "EventScript_TurnOffTV"
 target_offset = 197
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 197
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 2
+
+[[boundaries]]
+payload_offset = 3
+length = 3
+
+[[boundaries]]
+payload_offset = 6
+length = 5
+
+[[boundaries]]
+payload_offset = 11
+length = 5
+
+[[boundaries]]
+payload_offset = 16
+length = 6
+
+[[boundaries]]
+payload_offset = 22
+length = 5
+
+[[boundaries]]
+payload_offset = 27
+length = 6
+
+[[boundaries]]
+payload_offset = 33
+length = 3
+
+[[boundaries]]
+payload_offset = 36
+length = 6
+
+[[boundaries]]
+payload_offset = 42
+length = 3
+
+[[boundaries]]
+payload_offset = 45
+length = 6
+
+[[boundaries]]
+payload_offset = 51
+length = 5
+
+[[boundaries]]
+payload_offset = 56
+length = 5
+
+[[boundaries]]
+payload_offset = 61
+length = 6
+
+[[boundaries]]
+payload_offset = 67
+length = 5
+
+[[boundaries]]
+payload_offset = 73
+length = 5
+
+[[boundaries]]
+payload_offset = 78
+length = 5
+
+[[boundaries]]
+payload_offset = 83
+length = 6
+
+[[boundaries]]
+payload_offset = 89
+length = 5
+
+[[boundaries]]
+payload_offset = 94
+length = 5
+
+[[boundaries]]
+payload_offset = 99
+length = 6
+
+[[boundaries]]
+payload_offset = 105
+length = 5
+
+[[boundaries]]
+payload_offset = 110
+length = 5
+
+[[boundaries]]
+payload_offset = 115
+length = 5
+
+[[boundaries]]
+payload_offset = 120
+length = 6
+
+[[boundaries]]
+payload_offset = 126
+length = 1
+
+[[boundaries]]
+payload_offset = 127
+length = 3
+
+[[boundaries]]
+payload_offset = 130
+length = 6
+
+[[boundaries]]
+payload_offset = 136
+length = 2
+
+[[boundaries]]
+payload_offset = 138
+length = 3
+
+[[boundaries]]
+payload_offset = 141
+length = 1
+
+[[boundaries]]
+payload_offset = 142
+length = 1
+
+[[boundaries]]
+payload_offset = 143
+length = 6
+
+[[boundaries]]
+payload_offset = 149
+length = 2
+
+[[boundaries]]
+payload_offset = 151
+length = 1
+
+[[boundaries]]
+payload_offset = 152
+length = 1
+
+[[boundaries]]
+payload_offset = 153
+length = 6
+
+[[boundaries]]
+payload_offset = 159
+length = 2
+
+[[boundaries]]
+payload_offset = 161
+length = 3
+
+[[boundaries]]
+payload_offset = 164
+length = 3
+
+[[boundaries]]
+payload_offset = 167
+length = 3
+
+[[boundaries]]
+payload_offset = 170
+length = 3
+
+[[boundaries]]
+payload_offset = 173
+length = 1
+
+[[boundaries]]
+payload_offset = 174
+length = 1
+
+[[boundaries]]
+payload_offset = 175
+length = 3
+
+[[boundaries]]
+payload_offset = 178
+length = 1
+
+[[boundaries]]
+payload_offset = 179
+length = 1
+
+[[boundaries]]
+payload_offset = 180
+length = 5
+
+[[boundaries]]
+payload_offset = 185
+length = 6
+
+[[boundaries]]
+payload_offset = 191
+length = 5
+
+[[boundaries]]
+payload_offset = 197
+length = 3
+
+[[boundaries]]
+payload_offset = 200
+length = 3
+
+[[boundaries]]
+payload_offset = 203
+length = 1
+
+[[boundaries]]
+payload_offset = 204
+length = 1
+
+[[boundaries]]
+payload_offset = 205
+length = 3
+
+[[boundaries]]
+payload_offset = 208
+length = 6
+
+[[boundaries]]
+payload_offset = 214
+length = 2
+
+[[boundaries]]
+payload_offset = 216
+length = 5
+
+[[boundaries]]
+payload_offset = 222
+length = 3
+
+[[boundaries]]
+payload_offset = 225
+length = 5
+
+[[boundaries]]
+payload_offset = 230
+length = 6
+
+[[boundaries]]
+payload_offset = 236
+length = 1
+
+[[boundaries]]
+payload_offset = 237
+length = 1
+
+[[boundaries]]
+payload_offset = 238
+length = 5
+
+[[boundaries]]
+payload_offset = 244
+length = 3
+
+[[boundaries]]
+payload_offset = 247
+length = 1
+
+[[boundaries]]
+payload_offset = 248
+length = 1
+
+[[boundaries]]
+payload_offset = 249
+length = 5
+
+[[boundaries]]
+payload_offset = 254
+length = 6
+
+[[boundaries]]
+payload_offset = 260
+length = 5

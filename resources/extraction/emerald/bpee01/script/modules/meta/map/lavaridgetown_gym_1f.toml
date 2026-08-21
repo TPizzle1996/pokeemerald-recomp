@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 31
 reloc_count = 74
+instruction_count = 160
 
 [[segments]]
 kind = "bytecode"
@@ -280,6 +281,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_1F_EventScript_SetTrainerTempVars"
 target_offset = 17
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 11
 runtime_resolution_required = true
 
 [[relocs]]
@@ -290,6 +293,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_1F_EventScript_CheckBuryTrainers"
 target_offset = 99
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 93
 runtime_resolution_required = true
 
 [[relocs]]
@@ -300,6 +305,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_1F_EventScript_SetGeraldTempVar"
 target_offset = 56
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 50
 runtime_resolution_required = true
 
 [[relocs]]
@@ -310,6 +317,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_1F_EventScript_SetAxleTempVar"
 target_offset = 70
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 64
 runtime_resolution_required = true
 
 [[relocs]]
@@ -320,6 +329,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_1F_EventScript_SetDanielleTempVar"
 target_offset = 84
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 78
 runtime_resolution_required = true
 
 [[relocs]]
@@ -330,6 +341,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_1F_EventScript_EndSetTrainerTempVars"
 target_offset = 98
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 92
 runtime_resolution_required = true
 
 [[relocs]]
@@ -340,6 +353,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_1F_EventScript_CheckBuryGerald"
 target_offset = 112
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 106
 runtime_resolution_required = true
 
 [[relocs]]
@@ -350,6 +365,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_1F_EventScript_CheckBuryAxle"
 target_offset = 125
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 119
 runtime_resolution_required = true
 
 [[relocs]]
@@ -360,6 +377,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_1F_EventScript_CheckBuryDanielle"
 target_offset = 138
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 132
 runtime_resolution_required = true
 
 [[relocs]]
@@ -370,6 +389,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_1F_EventScript_EndCheckBuryTrainers"
 target_offset = 151
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 145
 runtime_resolution_required = true
 
 [[relocs]]
@@ -379,6 +400,8 @@ original_encoded_gba = 0x81ff0dc
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_1F_Text_FlanneryIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -388,6 +411,8 @@ original_encoded_gba = 0x81ff233
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_1F_Text_FlanneryDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -398,6 +423,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_1F_EventScript_FlanneryDefeated"
 target_offset = 205
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 199
 runtime_resolution_required = true
 
 [[relocs]]
@@ -408,6 +435,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_1F_EventScript_FlanneryRematch"
 target_offset = 368
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 362
 runtime_resolution_required = true
 
 [[relocs]]
@@ -418,6 +447,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_1F_EventScript_GiveOverheat2"
 target_offset = 297
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 291
 runtime_resolution_required = true
 
 [[relocs]]
@@ -427,6 +458,8 @@ original_encoded_gba = 0x81ff546
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_1F_Text_FlanneryPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -436,6 +469,8 @@ original_encoded_gba = 0x81ff32f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_1F_Text_ReceivedHeatBadge"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -446,6 +481,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_PlayGymBadgeFanfare"
 target_offset = 315
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 315
 runtime_resolution_required = true
 
 [[relocs]]
@@ -455,6 +492,8 @@ original_encoded_gba = 0x81ff359
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_1F_Text_ExplainHeatBadgeTakeThis"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -465,6 +504,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pc"
 target_export = "Common_EventScript_ReadyPetalburgGymForBattle"
 target_offset = 242
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 242
 runtime_resolution_required = true
 
 [[relocs]]
@@ -475,6 +516,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_SetGymTrainers"
 target_offset = 0
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 0
 runtime_resolution_required = true
 
 [[relocs]]
@@ -485,6 +528,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_1F_EventScript_GiveOverheat"
 target_offset = 333
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 327
 runtime_resolution_required = true
 
 [[relocs]]
@@ -494,6 +539,8 @@ original_encoded_gba = 0x81ff517
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_1F_Text_RegisteredFlannery"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -504,6 +551,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_ShowBagIsFull"
 target_offset = 273
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 273
 runtime_resolution_required = true
 
 [[relocs]]
@@ -513,6 +562,8 @@ original_encoded_gba = 0x81ff45c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_1F_Text_ExplainOverheat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -523,6 +574,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_BagIsFull"
 target_offset = 283
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 283
 runtime_resolution_required = true
 
 [[relocs]]
@@ -532,6 +585,8 @@ original_encoded_gba = 0x81ff45c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_1F_Text_ExplainOverheat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -541,6 +596,8 @@ original_encoded_gba = 0x81ff601
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_1F_Text_FlanneryPreRematch"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -550,6 +607,8 @@ original_encoded_gba = 0x81ff69f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_1F_Text_FlanneryRematchDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -559,6 +618,8 @@ original_encoded_gba = 0x81ff75e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_1F_Text_FlanneryRematchNeedTwoMons"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -568,6 +629,8 @@ original_encoded_gba = 0x81ff6bf
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_1F_Text_FlanneryPostRematch"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -577,6 +640,8 @@ original_encoded_gba = 0x81feade
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_1F_Text_ColeIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -586,6 +651,8 @@ original_encoded_gba = 0x81feafb
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_1F_Text_ColeDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -596,6 +663,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_EventScript_CheckTrainerScript"
 target_offset = 422
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 416
 runtime_resolution_required = true
 
 [[relocs]]
@@ -605,6 +674,8 @@ original_encoded_gba = 0x81feb1c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_1F_Text_ColePostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -615,6 +686,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_1F_EventScript_SetTrainerTempVars"
 target_offset = 17
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 11
 runtime_resolution_required = true
 
 [[relocs]]
@@ -625,6 +698,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/trainer-script"
 target_export = "EventScript_GotoTrainerScript"
 target_offset = 45
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 45
 runtime_resolution_required = true
 
 [[relocs]]
@@ -634,6 +709,8 @@ original_encoded_gba = 0x81feb7b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_1F_Text_AxleIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -643,6 +720,8 @@ original_encoded_gba = 0x81febc0
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_1F_Text_AxleDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -653,6 +732,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_EventScript_CheckTrainerScript"
 target_offset = 422
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 416
 runtime_resolution_required = true
 
 [[relocs]]
@@ -662,6 +743,8 @@ original_encoded_gba = 0x81febe1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_1F_Text_AxlePostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -671,6 +754,8 @@ original_encoded_gba = 0x81fec31
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_B1F_Text_KeeganIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -680,6 +765,8 @@ original_encoded_gba = 0x81fece3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_B1F_Text_KeeganDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -690,6 +777,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_EventScript_CheckTrainerScript"
 target_offset = 422
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 416
 runtime_resolution_required = true
 
 [[relocs]]
@@ -699,6 +788,8 @@ original_encoded_gba = 0x81fed02
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_B1F_Text_KeeganPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -708,6 +799,8 @@ original_encoded_gba = 0x81fee22
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_1F_Text_DanielleIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -717,6 +810,8 @@ original_encoded_gba = 0x81fee42
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_1F_Text_DanielleDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -727,6 +822,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_EventScript_CheckTrainerScript"
 target_offset = 422
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 416
 runtime_resolution_required = true
 
 [[relocs]]
@@ -736,6 +833,8 @@ original_encoded_gba = 0x81fee5d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_1F_Text_DaniellePostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -745,6 +844,8 @@ original_encoded_gba = 0x81fed72
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_1F_Text_GeraldIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -754,6 +855,8 @@ original_encoded_gba = 0x81fed9e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_1F_Text_GeraldDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -764,6 +867,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_EventScript_CheckTrainerScript"
 target_offset = 422
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 416
 runtime_resolution_required = true
 
 [[relocs]]
@@ -773,6 +878,8 @@ original_encoded_gba = 0x81fedbb
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_1F_Text_GeraldPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -782,6 +889,8 @@ original_encoded_gba = 0x81fee9d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_B1F_Text_JaceIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -791,6 +900,8 @@ original_encoded_gba = 0x81feed5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_B1F_Text_JaceDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -801,6 +912,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_EventScript_CheckTrainerScript"
 target_offset = 422
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 416
 runtime_resolution_required = true
 
 [[relocs]]
@@ -810,6 +923,8 @@ original_encoded_gba = 0x81fef07
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_B1F_Text_JacePostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -819,6 +934,8 @@ original_encoded_gba = 0x81fef60
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_B1F_Text_JeffIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -828,6 +945,8 @@ original_encoded_gba = 0x81fefa7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_B1F_Text_JeffDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -838,6 +957,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_EventScript_CheckTrainerScript"
 target_offset = 422
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 416
 runtime_resolution_required = true
 
 [[relocs]]
@@ -847,6 +968,8 @@ original_encoded_gba = 0x81fefc2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_B1F_Text_JeffPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -856,6 +979,8 @@ original_encoded_gba = 0x81ff025
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_B1F_Text_EliIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -865,6 +990,8 @@ original_encoded_gba = 0x81ff05f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_B1F_Text_EliDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -875,6 +1002,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_EventScript_CheckTrainerScript"
 target_offset = 422
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 416
 runtime_resolution_required = true
 
 [[relocs]]
@@ -884,6 +1013,8 @@ original_encoded_gba = 0x81ff09a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_B1F_Text_EliPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -894,6 +1025,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_1F_EventScript_GymGuidePostVictory"
 target_offset = 653
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 647
 runtime_resolution_required = true
 
 [[relocs]]
@@ -903,6 +1036,8 @@ original_encoded_gba = 0x81fe9bf
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_1F_Text_GymGuideAdvice"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -912,6 +1047,8 @@ original_encoded_gba = 0x81feab8
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_1F_Text_GymGuidePostVictory"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -922,6 +1059,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_1F_EventScript_GymStatueCertified"
 target_offset = 695
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 689
 runtime_resolution_required = true
 
 [[relocs]]
@@ -932,6 +1071,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_1F_EventScript_GymStatue"
 target_offset = 705
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 699
 runtime_resolution_required = true
 
 [[relocs]]
@@ -942,6 +1083,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_1F_EventScript_GymStatueCertified"
 target_offset = 695
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 689
 runtime_resolution_required = true
 
 [[relocs]]
@@ -952,6 +1095,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_1F_EventScript_GymStatue"
 target_offset = 705
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 699
 runtime_resolution_required = true
 
 [[relocs]]
@@ -961,6 +1106,8 @@ original_encoded_gba = 0x81ff5c4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_1F_Text_GymStatueCertified"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -970,4 +1117,646 @@ original_encoded_gba = 0x81ff5a9
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lavaridgetown-gym-1f"
 target_export = "LavaridgeTown_Gym_1F_Text_GymStatue"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 5
+
+[[boundaries]]
+payload_offset = 5
+length = 5
+
+[[boundaries]]
+payload_offset = 10
+length = 1
+
+[[boundaries]]
+payload_offset = 11
+length = 5
+
+[[boundaries]]
+payload_offset = 16
+length = 5
+
+[[boundaries]]
+payload_offset = 21
+length = 5
+
+[[boundaries]]
+payload_offset = 26
+length = 5
+
+[[boundaries]]
+payload_offset = 31
+length = 5
+
+[[boundaries]]
+payload_offset = 36
+length = 3
+
+[[boundaries]]
+payload_offset = 39
+length = 6
+
+[[boundaries]]
+payload_offset = 45
+length = 5
+
+[[boundaries]]
+payload_offset = 50
+length = 3
+
+[[boundaries]]
+payload_offset = 53
+length = 6
+
+[[boundaries]]
+payload_offset = 59
+length = 5
+
+[[boundaries]]
+payload_offset = 64
+length = 3
+
+[[boundaries]]
+payload_offset = 67
+length = 6
+
+[[boundaries]]
+payload_offset = 73
+length = 5
+
+[[boundaries]]
+payload_offset = 78
+length = 3
+
+[[boundaries]]
+payload_offset = 81
+length = 6
+
+[[boundaries]]
+payload_offset = 87
+length = 5
+
+[[boundaries]]
+payload_offset = 92
+length = 1
+
+[[boundaries]]
+payload_offset = 93
+length = 3
+
+[[boundaries]]
+payload_offset = 96
+length = 6
+
+[[boundaries]]
+payload_offset = 102
+length = 4
+
+[[boundaries]]
+payload_offset = 106
+length = 3
+
+[[boundaries]]
+payload_offset = 109
+length = 6
+
+[[boundaries]]
+payload_offset = 115
+length = 4
+
+[[boundaries]]
+payload_offset = 119
+length = 3
+
+[[boundaries]]
+payload_offset = 122
+length = 6
+
+[[boundaries]]
+payload_offset = 128
+length = 4
+
+[[boundaries]]
+payload_offset = 132
+length = 3
+
+[[boundaries]]
+payload_offset = 135
+length = 6
+
+[[boundaries]]
+payload_offset = 141
+length = 4
+
+[[boundaries]]
+payload_offset = 145
+length = 1
+
+[[boundaries]]
+payload_offset = 146
+length = 18
+
+[[boundaries]]
+payload_offset = 164
+length = 5
+
+[[boundaries]]
+payload_offset = 169
+length = 5
+
+[[boundaries]]
+payload_offset = 174
+length = 6
+
+[[boundaries]]
+payload_offset = 180
+length = 3
+
+[[boundaries]]
+payload_offset = 183
+length = 6
+
+[[boundaries]]
+payload_offset = 189
+length = 6
+
+[[boundaries]]
+payload_offset = 195
+length = 2
+
+[[boundaries]]
+payload_offset = 197
+length = 1
+
+[[boundaries]]
+payload_offset = 198
+length = 1
+
+[[boundaries]]
+payload_offset = 199
+length = 5
+
+[[boundaries]]
+payload_offset = 204
+length = 1
+
+[[boundaries]]
+payload_offset = 205
+length = 5
+
+[[boundaries]]
+payload_offset = 210
+length = 6
+
+[[boundaries]]
+payload_offset = 216
+length = 2
+
+[[boundaries]]
+payload_offset = 218
+length = 3
+
+[[boundaries]]
+payload_offset = 221
+length = 3
+
+[[boundaries]]
+payload_offset = 224
+length = 3
+
+[[boundaries]]
+payload_offset = 227
+length = 5
+
+[[boundaries]]
+payload_offset = 232
+length = 5
+
+[[boundaries]]
+payload_offset = 237
+length = 6
+
+[[boundaries]]
+payload_offset = 243
+length = 5
+
+[[boundaries]]
+payload_offset = 248
+length = 5
+
+[[boundaries]]
+payload_offset = 253
+length = 3
+
+[[boundaries]]
+payload_offset = 256
+length = 5
+
+[[boundaries]]
+payload_offset = 261
+length = 5
+
+[[boundaries]]
+payload_offset = 266
+length = 1
+
+[[boundaries]]
+payload_offset = 267
+length = 3
+
+[[boundaries]]
+payload_offset = 270
+length = 3
+
+[[boundaries]]
+payload_offset = 273
+length = 6
+
+[[boundaries]]
+payload_offset = 279
+length = 2
+
+[[boundaries]]
+payload_offset = 281
+length = 1
+
+[[boundaries]]
+payload_offset = 282
+length = 1
+
+[[boundaries]]
+payload_offset = 283
+length = 3
+
+[[boundaries]]
+payload_offset = 286
+length = 3
+
+[[boundaries]]
+payload_offset = 289
+length = 1
+
+[[boundaries]]
+payload_offset = 290
+length = 1
+
+[[boundaries]]
+payload_offset = 291
+length = 5
+
+[[boundaries]]
+payload_offset = 296
+length = 5
+
+[[boundaries]]
+payload_offset = 301
+length = 2
+
+[[boundaries]]
+payload_offset = 303
+length = 5
+
+[[boundaries]]
+payload_offset = 308
+length = 6
+
+[[boundaries]]
+payload_offset = 314
+length = 6
+
+[[boundaries]]
+payload_offset = 320
+length = 2
+
+[[boundaries]]
+payload_offset = 322
+length = 3
+
+[[boundaries]]
+payload_offset = 325
+length = 1
+
+[[boundaries]]
+payload_offset = 326
+length = 1
+
+[[boundaries]]
+payload_offset = 327
+length = 5
+
+[[boundaries]]
+payload_offset = 332
+length = 5
+
+[[boundaries]]
+payload_offset = 337
+length = 2
+
+[[boundaries]]
+payload_offset = 339
+length = 5
+
+[[boundaries]]
+payload_offset = 344
+length = 6
+
+[[boundaries]]
+payload_offset = 350
+length = 6
+
+[[boundaries]]
+payload_offset = 356
+length = 2
+
+[[boundaries]]
+payload_offset = 358
+length = 3
+
+[[boundaries]]
+payload_offset = 361
+length = 1
+
+[[boundaries]]
+payload_offset = 362
+length = 18
+
+[[boundaries]]
+payload_offset = 380
+length = 6
+
+[[boundaries]]
+payload_offset = 386
+length = 2
+
+[[boundaries]]
+payload_offset = 388
+length = 1
+
+[[boundaries]]
+payload_offset = 389
+length = 18
+
+[[boundaries]]
+payload_offset = 407
+length = 6
+
+[[boundaries]]
+payload_offset = 413
+length = 2
+
+[[boundaries]]
+payload_offset = 415
+length = 1
+
+[[boundaries]]
+payload_offset = 416
+length = 5
+
+[[boundaries]]
+payload_offset = 421
+length = 1
+
+[[boundaries]]
+payload_offset = 422
+length = 3
+
+[[boundaries]]
+payload_offset = 425
+length = 5
+
+[[boundaries]]
+payload_offset = 430
+length = 6
+
+[[boundaries]]
+payload_offset = 436
+length = 1
+
+[[boundaries]]
+payload_offset = 437
+length = 18
+
+[[boundaries]]
+payload_offset = 455
+length = 6
+
+[[boundaries]]
+payload_offset = 461
+length = 2
+
+[[boundaries]]
+payload_offset = 463
+length = 1
+
+[[boundaries]]
+payload_offset = 464
+length = 18
+
+[[boundaries]]
+payload_offset = 482
+length = 6
+
+[[boundaries]]
+payload_offset = 488
+length = 2
+
+[[boundaries]]
+payload_offset = 490
+length = 1
+
+[[boundaries]]
+payload_offset = 491
+length = 18
+
+[[boundaries]]
+payload_offset = 509
+length = 6
+
+[[boundaries]]
+payload_offset = 515
+length = 2
+
+[[boundaries]]
+payload_offset = 517
+length = 1
+
+[[boundaries]]
+payload_offset = 518
+length = 18
+
+[[boundaries]]
+payload_offset = 536
+length = 6
+
+[[boundaries]]
+payload_offset = 542
+length = 2
+
+[[boundaries]]
+payload_offset = 544
+length = 1
+
+[[boundaries]]
+payload_offset = 545
+length = 18
+
+[[boundaries]]
+payload_offset = 563
+length = 6
+
+[[boundaries]]
+payload_offset = 569
+length = 2
+
+[[boundaries]]
+payload_offset = 571
+length = 1
+
+[[boundaries]]
+payload_offset = 572
+length = 18
+
+[[boundaries]]
+payload_offset = 590
+length = 6
+
+[[boundaries]]
+payload_offset = 596
+length = 2
+
+[[boundaries]]
+payload_offset = 598
+length = 1
+
+[[boundaries]]
+payload_offset = 599
+length = 18
+
+[[boundaries]]
+payload_offset = 617
+length = 6
+
+[[boundaries]]
+payload_offset = 623
+length = 2
+
+[[boundaries]]
+payload_offset = 625
+length = 1
+
+[[boundaries]]
+payload_offset = 626
+length = 1
+
+[[boundaries]]
+payload_offset = 627
+length = 1
+
+[[boundaries]]
+payload_offset = 628
+length = 3
+
+[[boundaries]]
+payload_offset = 631
+length = 6
+
+[[boundaries]]
+payload_offset = 637
+length = 6
+
+[[boundaries]]
+payload_offset = 643
+length = 2
+
+[[boundaries]]
+payload_offset = 645
+length = 1
+
+[[boundaries]]
+payload_offset = 646
+length = 1
+
+[[boundaries]]
+payload_offset = 647
+length = 6
+
+[[boundaries]]
+payload_offset = 653
+length = 2
+
+[[boundaries]]
+payload_offset = 655
+length = 1
+
+[[boundaries]]
+payload_offset = 656
+length = 1
+
+[[boundaries]]
+payload_offset = 657
+length = 1
+
+[[boundaries]]
+payload_offset = 658
+length = 3
+
+[[boundaries]]
+payload_offset = 661
+length = 6
+
+[[boundaries]]
+payload_offset = 667
+length = 5
+
+[[boundaries]]
+payload_offset = 673
+length = 1
+
+[[boundaries]]
+payload_offset = 674
+length = 3
+
+[[boundaries]]
+payload_offset = 677
+length = 6
+
+[[boundaries]]
+payload_offset = 683
+length = 5
+
+[[boundaries]]
+payload_offset = 689
+length = 6
+
+[[boundaries]]
+payload_offset = 695
+length = 2
+
+[[boundaries]]
+payload_offset = 697
+length = 1
+
+[[boundaries]]
+payload_offset = 698
+length = 1
+
+[[boundaries]]
+payload_offset = 699
+length = 6
+
+[[boundaries]]
+payload_offset = 705
+length = 2
+
+[[boundaries]]
+payload_offset = 707
+length = 1
+
+[[boundaries]]
+payload_offset = 708
+length = 1

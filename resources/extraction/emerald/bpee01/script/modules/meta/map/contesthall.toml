@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 2
 export_count = 69
 reloc_count = 68
+instruction_count = 353
 
 [[segments]]
 kind = "bytecode"
@@ -590,6 +591,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_ReadyContestMusic"
 target_offset = 46
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 20
 runtime_resolution_required = true
 
 [[relocs]]
@@ -600,6 +603,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_AddRandomAudienceMembers"
 target_offset = 193
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 147
 runtime_resolution_required = true
 
 [[relocs]]
@@ -610,6 +615,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_TryWaitForLink"
 target_offset = 1134
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1134
 runtime_resolution_required = true
 
 [[relocs]]
@@ -620,6 +627,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_SaveContestMusicPlayer1"
 target_offset = 110
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 84
 runtime_resolution_required = true
 
 [[relocs]]
@@ -630,6 +639,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_SaveContestMusicPlayer2"
 target_offset = 114
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 88
 runtime_resolution_required = true
 
 [[relocs]]
@@ -640,6 +651,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_SaveContestMusicPlayer3"
 target_offset = 118
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 92
 runtime_resolution_required = true
 
 [[relocs]]
@@ -650,6 +663,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_SaveContestMusicPlayer4"
 target_offset = 122
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 96
 runtime_resolution_required = true
 
 [[relocs]]
@@ -660,6 +675,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_SaveContestMusic"
 target_offset = 126
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 100
 runtime_resolution_required = true
 
 [[relocs]]
@@ -670,6 +687,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_ReShowAudience"
 target_offset = 142
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 116
 runtime_resolution_required = true
 
 [[relocs]]
@@ -680,6 +699,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_CreateAudience"
 target_offset = 938
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 892
 runtime_resolution_required = true
 
 [[relocs]]
@@ -690,6 +711,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/contest-hall"
 target_export = "ContestHall_EventScript_DoContest"
 target_offset = 722
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 722
 runtime_resolution_required = true
 
 [[relocs]]
@@ -700,6 +723,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_SetExitWarp"
 target_offset = 1731
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1685
 runtime_resolution_required = true
 
 [[relocs]]
@@ -710,6 +735,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_CreateAudience"
 target_offset = 938
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 892
 runtime_resolution_required = true
 
 [[relocs]]
@@ -720,6 +747,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_GetRandomAudienceGfxId"
 target_offset = 375
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 329
 runtime_resolution_required = true
 
 [[relocs]]
@@ -730,6 +759,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_SetRandomAudienceGfx"
 target_offset = 215
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 169
 runtime_resolution_required = true
 
 [[relocs]]
@@ -740,6 +771,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_AddRandomAudienceMembers"
 target_offset = 193
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 147
 runtime_resolution_required = true
 
 [[relocs]]
@@ -750,6 +783,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_SetRandomAudience1"
 target_offset = 298
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 252
 runtime_resolution_required = true
 
 [[relocs]]
@@ -760,6 +795,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_SetRandomAudience2"
 target_offset = 309
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 263
 runtime_resolution_required = true
 
 [[relocs]]
@@ -770,6 +807,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_SetRandomAudience3"
 target_offset = 320
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 274
 runtime_resolution_required = true
 
 [[relocs]]
@@ -780,6 +819,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_SetRandomAudience4"
 target_offset = 331
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 285
 runtime_resolution_required = true
 
 [[relocs]]
@@ -790,6 +831,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_SetRandomAudience5"
 target_offset = 342
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 296
 runtime_resolution_required = true
 
 [[relocs]]
@@ -800,6 +843,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_SetRandomAudience6"
 target_offset = 353
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 307
 runtime_resolution_required = true
 
 [[relocs]]
@@ -810,6 +855,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_SetRandomAudience7"
 target_offset = 364
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 318
 runtime_resolution_required = true
 
 [[relocs]]
@@ -820,6 +867,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_RandomAudienceNinjaBoy"
 target_offset = 746
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 700
 runtime_resolution_required = true
 
 [[relocs]]
@@ -830,6 +879,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_RandomAudienceTwin"
 target_offset = 752
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 706
 runtime_resolution_required = true
 
 [[relocs]]
@@ -840,6 +891,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_RandomAudienceBoy1"
 target_offset = 758
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 712
 runtime_resolution_required = true
 
 [[relocs]]
@@ -850,6 +903,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_RandomAudienceGirl1"
 target_offset = 764
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 718
 runtime_resolution_required = true
 
 [[relocs]]
@@ -860,6 +915,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_RandomAudienceGirl2"
 target_offset = 770
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 724
 runtime_resolution_required = true
 
 [[relocs]]
@@ -870,6 +927,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_RandomAudienceLittleBoy"
 target_offset = 776
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 730
 runtime_resolution_required = true
 
 [[relocs]]
@@ -880,6 +939,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_RandomAudienceGirl"
 target_offset = 782
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 736
 runtime_resolution_required = true
 
 [[relocs]]
@@ -890,6 +951,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_RandomAudienceBoy3"
 target_offset = 788
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 742
 runtime_resolution_required = true
 
 [[relocs]]
@@ -900,6 +963,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_RandomAudienceGirl3"
 target_offset = 794
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 748
 runtime_resolution_required = true
 
 [[relocs]]
@@ -910,6 +975,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_RandomAudienceRichBoy"
 target_offset = 800
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 754
 runtime_resolution_required = true
 
 [[relocs]]
@@ -920,6 +987,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_RandomAudienceFatMan"
 target_offset = 806
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 760
 runtime_resolution_required = true
 
 [[relocs]]
@@ -930,6 +999,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_RandomAudiencePokefanF"
 target_offset = 812
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 766
 runtime_resolution_required = true
 
 [[relocs]]
@@ -940,6 +1011,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_RandomAudienceMan1"
 target_offset = 818
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 772
 runtime_resolution_required = true
 
 [[relocs]]
@@ -950,6 +1023,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_RandomAudienceWoman2"
 target_offset = 824
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 778
 runtime_resolution_required = true
 
 [[relocs]]
@@ -960,6 +1035,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_RandomAudienceExpertM"
 target_offset = 830
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 784
 runtime_resolution_required = true
 
 [[relocs]]
@@ -970,6 +1047,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_RandomAudienceExpertF"
 target_offset = 836
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 790
 runtime_resolution_required = true
 
 [[relocs]]
@@ -980,6 +1059,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_RandomAudiencePokefanM"
 target_offset = 842
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 796
 runtime_resolution_required = true
 
 [[relocs]]
@@ -990,6 +1071,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_RandomAudienceWoman4"
 target_offset = 848
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 802
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1000,6 +1083,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_RandomAudienceCook"
 target_offset = 854
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 808
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1010,6 +1095,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_RandomAudienceLass"
 target_offset = 860
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 814
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1020,6 +1107,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_RandomAudienceOldWoman"
 target_offset = 866
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 820
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1030,6 +1119,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_RandomAudienceCamper"
 target_offset = 872
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 826
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1040,6 +1131,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_RandomAudiencePicnicker"
 target_offset = 878
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 832
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1050,6 +1143,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_RandomAudienceMan3"
 target_offset = 884
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 838
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1060,6 +1155,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_RandomAudienceWoman5"
 target_offset = 890
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 844
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1070,6 +1167,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_RandomAudienceYoungster"
 target_offset = 896
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 850
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1080,6 +1179,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_RandomAudienceBugCatcher"
 target_offset = 902
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 856
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1090,6 +1191,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_RandomAudiencePsychicM"
 target_offset = 908
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 862
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1100,6 +1203,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_RandomAudienceSchoolKidM"
 target_offset = 914
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 868
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1110,6 +1215,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_RandomAudienceBlackBelt"
 target_offset = 920
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 874
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1120,6 +1227,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_RandomAudienceBeauty"
 target_offset = 926
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 880
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1130,6 +1239,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_RandomAudienceScientist1"
 target_offset = 932
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 886
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1140,6 +1251,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_CreateWirelessContestAudience"
 target_offset = 1541
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1495
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1150,6 +1263,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_CreateNormalContestAudience"
 target_offset = 1015
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 969
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1160,6 +1275,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_CreateSuperContestAudience"
 target_offset = 1034
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 988
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1170,6 +1287,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_CreateHyperContestAudience"
 target_offset = 1125
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1079
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1180,6 +1299,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_CreateMasterContestAudience"
 target_offset = 1297
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1251
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1190,6 +1311,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_CreateMasterContestAudience"
 target_offset = 1297
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1251
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1200,6 +1323,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_SetExitWarpNormalContest"
 target_offset = 1795
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1749
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1210,6 +1335,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_SetExitWarpSuperContest"
 target_offset = 1805
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1759
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1220,6 +1347,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_SetExitWarpHyperContest"
 target_offset = 1815
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1769
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1230,6 +1359,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_SetExitWarpMasterContest"
 target_offset = 1825
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1779
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1240,6 +1371,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "ContestHall_EventScript_SetExitWarpLinkContest"
 target_offset = 1835
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1789
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1250,6 +1383,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "LilycoveCity_ContestLobby_EventScript_SetPlayerGfxBrendan"
 target_offset = 1869
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1823
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1260,4 +1395,1418 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/contesthall"
 target_export = "LilycoveCity_ContestLobby_EventScript_SetPlayerGfxMay"
 target_offset = 1875
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1829
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 1
+
+[[boundaries]]
+payload_offset = 4
+length = 5
+
+[[boundaries]]
+payload_offset = 9
+length = 5
+
+[[boundaries]]
+payload_offset = 14
+length = 5
+
+[[boundaries]]
+payload_offset = 19
+length = 1
+
+[[boundaries]]
+payload_offset = 20
+length = 5
+
+[[boundaries]]
+payload_offset = 25
+length = 3
+
+[[boundaries]]
+payload_offset = 28
+length = 5
+
+[[boundaries]]
+payload_offset = 33
+length = 6
+
+[[boundaries]]
+payload_offset = 39
+length = 5
+
+[[boundaries]]
+payload_offset = 44
+length = 6
+
+[[boundaries]]
+payload_offset = 50
+length = 5
+
+[[boundaries]]
+payload_offset = 55
+length = 6
+
+[[boundaries]]
+payload_offset = 61
+length = 5
+
+[[boundaries]]
+payload_offset = 66
+length = 6
+
+[[boundaries]]
+payload_offset = 72
+length = 5
+
+[[boundaries]]
+payload_offset = 77
+length = 6
+
+[[boundaries]]
+payload_offset = 83
+length = 1
+
+[[boundaries]]
+payload_offset = 84
+length = 3
+
+[[boundaries]]
+payload_offset = 87
+length = 1
+
+[[boundaries]]
+payload_offset = 88
+length = 3
+
+[[boundaries]]
+payload_offset = 91
+length = 1
+
+[[boundaries]]
+payload_offset = 92
+length = 3
+
+[[boundaries]]
+payload_offset = 95
+length = 1
+
+[[boundaries]]
+payload_offset = 96
+length = 3
+
+[[boundaries]]
+payload_offset = 99
+length = 1
+
+[[boundaries]]
+payload_offset = 100
+length = 3
+
+[[boundaries]]
+payload_offset = 103
+length = 1
+
+[[boundaries]]
+payload_offset = 104
+length = 5
+
+[[boundaries]]
+payload_offset = 109
+length = 6
+
+[[boundaries]]
+payload_offset = 115
+length = 1
+
+[[boundaries]]
+payload_offset = 116
+length = 5
+
+[[boundaries]]
+payload_offset = 121
+length = 1
+
+[[boundaries]]
+payload_offset = 122
+length = 5
+
+[[boundaries]]
+payload_offset = 127
+length = 5
+
+[[boundaries]]
+payload_offset = 132
+length = 1
+
+[[boundaries]]
+payload_offset = 133
+length = 3
+
+[[boundaries]]
+payload_offset = 136
+length = 5
+
+[[boundaries]]
+payload_offset = 141
+length = 5
+
+[[boundaries]]
+payload_offset = 146
+length = 1
+
+[[boundaries]]
+payload_offset = 147
+length = 5
+
+[[boundaries]]
+payload_offset = 152
+length = 5
+
+[[boundaries]]
+payload_offset = 157
+length = 5
+
+[[boundaries]]
+payload_offset = 162
+length = 6
+
+[[boundaries]]
+payload_offset = 168
+length = 1
+
+[[boundaries]]
+payload_offset = 169
+length = 5
+
+[[boundaries]]
+payload_offset = 174
+length = 5
+
+[[boundaries]]
+payload_offset = 179
+length = 6
+
+[[boundaries]]
+payload_offset = 185
+length = 5
+
+[[boundaries]]
+payload_offset = 190
+length = 6
+
+[[boundaries]]
+payload_offset = 196
+length = 5
+
+[[boundaries]]
+payload_offset = 201
+length = 6
+
+[[boundaries]]
+payload_offset = 207
+length = 5
+
+[[boundaries]]
+payload_offset = 212
+length = 6
+
+[[boundaries]]
+payload_offset = 218
+length = 5
+
+[[boundaries]]
+payload_offset = 223
+length = 6
+
+[[boundaries]]
+payload_offset = 229
+length = 5
+
+[[boundaries]]
+payload_offset = 234
+length = 6
+
+[[boundaries]]
+payload_offset = 240
+length = 5
+
+[[boundaries]]
+payload_offset = 245
+length = 6
+
+[[boundaries]]
+payload_offset = 251
+length = 1
+
+[[boundaries]]
+payload_offset = 252
+length = 5
+
+[[boundaries]]
+payload_offset = 257
+length = 5
+
+[[boundaries]]
+payload_offset = 262
+length = 1
+
+[[boundaries]]
+payload_offset = 263
+length = 5
+
+[[boundaries]]
+payload_offset = 268
+length = 5
+
+[[boundaries]]
+payload_offset = 273
+length = 1
+
+[[boundaries]]
+payload_offset = 274
+length = 5
+
+[[boundaries]]
+payload_offset = 279
+length = 5
+
+[[boundaries]]
+payload_offset = 284
+length = 1
+
+[[boundaries]]
+payload_offset = 285
+length = 5
+
+[[boundaries]]
+payload_offset = 290
+length = 5
+
+[[boundaries]]
+payload_offset = 295
+length = 1
+
+[[boundaries]]
+payload_offset = 296
+length = 5
+
+[[boundaries]]
+payload_offset = 301
+length = 5
+
+[[boundaries]]
+payload_offset = 306
+length = 1
+
+[[boundaries]]
+payload_offset = 307
+length = 5
+
+[[boundaries]]
+payload_offset = 312
+length = 5
+
+[[boundaries]]
+payload_offset = 317
+length = 1
+
+[[boundaries]]
+payload_offset = 318
+length = 5
+
+[[boundaries]]
+payload_offset = 323
+length = 5
+
+[[boundaries]]
+payload_offset = 328
+length = 1
+
+[[boundaries]]
+payload_offset = 329
+length = 5
+
+[[boundaries]]
+payload_offset = 334
+length = 3
+
+[[boundaries]]
+payload_offset = 337
+length = 5
+
+[[boundaries]]
+payload_offset = 342
+length = 5
+
+[[boundaries]]
+payload_offset = 347
+length = 5
+
+[[boundaries]]
+payload_offset = 352
+length = 6
+
+[[boundaries]]
+payload_offset = 358
+length = 5
+
+[[boundaries]]
+payload_offset = 363
+length = 6
+
+[[boundaries]]
+payload_offset = 369
+length = 5
+
+[[boundaries]]
+payload_offset = 374
+length = 6
+
+[[boundaries]]
+payload_offset = 380
+length = 5
+
+[[boundaries]]
+payload_offset = 385
+length = 6
+
+[[boundaries]]
+payload_offset = 391
+length = 5
+
+[[boundaries]]
+payload_offset = 396
+length = 6
+
+[[boundaries]]
+payload_offset = 402
+length = 5
+
+[[boundaries]]
+payload_offset = 407
+length = 6
+
+[[boundaries]]
+payload_offset = 413
+length = 5
+
+[[boundaries]]
+payload_offset = 418
+length = 6
+
+[[boundaries]]
+payload_offset = 424
+length = 5
+
+[[boundaries]]
+payload_offset = 429
+length = 6
+
+[[boundaries]]
+payload_offset = 435
+length = 5
+
+[[boundaries]]
+payload_offset = 440
+length = 6
+
+[[boundaries]]
+payload_offset = 446
+length = 5
+
+[[boundaries]]
+payload_offset = 451
+length = 6
+
+[[boundaries]]
+payload_offset = 457
+length = 5
+
+[[boundaries]]
+payload_offset = 462
+length = 6
+
+[[boundaries]]
+payload_offset = 468
+length = 5
+
+[[boundaries]]
+payload_offset = 473
+length = 6
+
+[[boundaries]]
+payload_offset = 479
+length = 5
+
+[[boundaries]]
+payload_offset = 484
+length = 6
+
+[[boundaries]]
+payload_offset = 490
+length = 5
+
+[[boundaries]]
+payload_offset = 495
+length = 6
+
+[[boundaries]]
+payload_offset = 501
+length = 5
+
+[[boundaries]]
+payload_offset = 506
+length = 6
+
+[[boundaries]]
+payload_offset = 512
+length = 5
+
+[[boundaries]]
+payload_offset = 517
+length = 6
+
+[[boundaries]]
+payload_offset = 523
+length = 5
+
+[[boundaries]]
+payload_offset = 528
+length = 6
+
+[[boundaries]]
+payload_offset = 534
+length = 5
+
+[[boundaries]]
+payload_offset = 539
+length = 6
+
+[[boundaries]]
+payload_offset = 545
+length = 5
+
+[[boundaries]]
+payload_offset = 550
+length = 6
+
+[[boundaries]]
+payload_offset = 556
+length = 5
+
+[[boundaries]]
+payload_offset = 561
+length = 6
+
+[[boundaries]]
+payload_offset = 567
+length = 5
+
+[[boundaries]]
+payload_offset = 572
+length = 6
+
+[[boundaries]]
+payload_offset = 578
+length = 5
+
+[[boundaries]]
+payload_offset = 583
+length = 6
+
+[[boundaries]]
+payload_offset = 589
+length = 5
+
+[[boundaries]]
+payload_offset = 594
+length = 6
+
+[[boundaries]]
+payload_offset = 600
+length = 5
+
+[[boundaries]]
+payload_offset = 605
+length = 6
+
+[[boundaries]]
+payload_offset = 611
+length = 5
+
+[[boundaries]]
+payload_offset = 616
+length = 6
+
+[[boundaries]]
+payload_offset = 622
+length = 5
+
+[[boundaries]]
+payload_offset = 627
+length = 6
+
+[[boundaries]]
+payload_offset = 633
+length = 5
+
+[[boundaries]]
+payload_offset = 638
+length = 6
+
+[[boundaries]]
+payload_offset = 644
+length = 5
+
+[[boundaries]]
+payload_offset = 649
+length = 6
+
+[[boundaries]]
+payload_offset = 655
+length = 5
+
+[[boundaries]]
+payload_offset = 660
+length = 6
+
+[[boundaries]]
+payload_offset = 666
+length = 5
+
+[[boundaries]]
+payload_offset = 671
+length = 6
+
+[[boundaries]]
+payload_offset = 677
+length = 5
+
+[[boundaries]]
+payload_offset = 682
+length = 6
+
+[[boundaries]]
+payload_offset = 688
+length = 5
+
+[[boundaries]]
+payload_offset = 693
+length = 6
+
+[[boundaries]]
+payload_offset = 699
+length = 1
+
+[[boundaries]]
+payload_offset = 700
+length = 5
+
+[[boundaries]]
+payload_offset = 705
+length = 1
+
+[[boundaries]]
+payload_offset = 706
+length = 5
+
+[[boundaries]]
+payload_offset = 711
+length = 1
+
+[[boundaries]]
+payload_offset = 712
+length = 5
+
+[[boundaries]]
+payload_offset = 717
+length = 1
+
+[[boundaries]]
+payload_offset = 718
+length = 5
+
+[[boundaries]]
+payload_offset = 723
+length = 1
+
+[[boundaries]]
+payload_offset = 724
+length = 5
+
+[[boundaries]]
+payload_offset = 729
+length = 1
+
+[[boundaries]]
+payload_offset = 730
+length = 5
+
+[[boundaries]]
+payload_offset = 735
+length = 1
+
+[[boundaries]]
+payload_offset = 736
+length = 5
+
+[[boundaries]]
+payload_offset = 741
+length = 1
+
+[[boundaries]]
+payload_offset = 742
+length = 5
+
+[[boundaries]]
+payload_offset = 747
+length = 1
+
+[[boundaries]]
+payload_offset = 748
+length = 5
+
+[[boundaries]]
+payload_offset = 753
+length = 1
+
+[[boundaries]]
+payload_offset = 754
+length = 5
+
+[[boundaries]]
+payload_offset = 759
+length = 1
+
+[[boundaries]]
+payload_offset = 760
+length = 5
+
+[[boundaries]]
+payload_offset = 765
+length = 1
+
+[[boundaries]]
+payload_offset = 766
+length = 5
+
+[[boundaries]]
+payload_offset = 771
+length = 1
+
+[[boundaries]]
+payload_offset = 772
+length = 5
+
+[[boundaries]]
+payload_offset = 777
+length = 1
+
+[[boundaries]]
+payload_offset = 778
+length = 5
+
+[[boundaries]]
+payload_offset = 783
+length = 1
+
+[[boundaries]]
+payload_offset = 784
+length = 5
+
+[[boundaries]]
+payload_offset = 789
+length = 1
+
+[[boundaries]]
+payload_offset = 790
+length = 5
+
+[[boundaries]]
+payload_offset = 795
+length = 1
+
+[[boundaries]]
+payload_offset = 796
+length = 5
+
+[[boundaries]]
+payload_offset = 801
+length = 1
+
+[[boundaries]]
+payload_offset = 802
+length = 5
+
+[[boundaries]]
+payload_offset = 807
+length = 1
+
+[[boundaries]]
+payload_offset = 808
+length = 5
+
+[[boundaries]]
+payload_offset = 813
+length = 1
+
+[[boundaries]]
+payload_offset = 814
+length = 5
+
+[[boundaries]]
+payload_offset = 819
+length = 1
+
+[[boundaries]]
+payload_offset = 820
+length = 5
+
+[[boundaries]]
+payload_offset = 825
+length = 1
+
+[[boundaries]]
+payload_offset = 826
+length = 5
+
+[[boundaries]]
+payload_offset = 831
+length = 1
+
+[[boundaries]]
+payload_offset = 832
+length = 5
+
+[[boundaries]]
+payload_offset = 837
+length = 1
+
+[[boundaries]]
+payload_offset = 838
+length = 5
+
+[[boundaries]]
+payload_offset = 843
+length = 1
+
+[[boundaries]]
+payload_offset = 844
+length = 5
+
+[[boundaries]]
+payload_offset = 849
+length = 1
+
+[[boundaries]]
+payload_offset = 850
+length = 5
+
+[[boundaries]]
+payload_offset = 855
+length = 1
+
+[[boundaries]]
+payload_offset = 856
+length = 5
+
+[[boundaries]]
+payload_offset = 861
+length = 1
+
+[[boundaries]]
+payload_offset = 862
+length = 5
+
+[[boundaries]]
+payload_offset = 867
+length = 1
+
+[[boundaries]]
+payload_offset = 868
+length = 5
+
+[[boundaries]]
+payload_offset = 873
+length = 1
+
+[[boundaries]]
+payload_offset = 874
+length = 5
+
+[[boundaries]]
+payload_offset = 879
+length = 1
+
+[[boundaries]]
+payload_offset = 880
+length = 5
+
+[[boundaries]]
+payload_offset = 885
+length = 1
+
+[[boundaries]]
+payload_offset = 886
+length = 5
+
+[[boundaries]]
+payload_offset = 891
+length = 1
+
+[[boundaries]]
+payload_offset = 892
+length = 5
+
+[[boundaries]]
+payload_offset = 897
+length = 5
+
+[[boundaries]]
+payload_offset = 902
+length = 6
+
+[[boundaries]]
+payload_offset = 908
+length = 5
+
+[[boundaries]]
+payload_offset = 913
+length = 5
+
+[[boundaries]]
+payload_offset = 918
+length = 6
+
+[[boundaries]]
+payload_offset = 924
+length = 5
+
+[[boundaries]]
+payload_offset = 929
+length = 6
+
+[[boundaries]]
+payload_offset = 935
+length = 5
+
+[[boundaries]]
+payload_offset = 940
+length = 6
+
+[[boundaries]]
+payload_offset = 946
+length = 5
+
+[[boundaries]]
+payload_offset = 951
+length = 6
+
+[[boundaries]]
+payload_offset = 957
+length = 5
+
+[[boundaries]]
+payload_offset = 962
+length = 6
+
+[[boundaries]]
+payload_offset = 968
+length = 1
+
+[[boundaries]]
+payload_offset = 969
+length = 9
+
+[[boundaries]]
+payload_offset = 978
+length = 9
+
+[[boundaries]]
+payload_offset = 987
+length = 1
+
+[[boundaries]]
+payload_offset = 988
+length = 9
+
+[[boundaries]]
+payload_offset = 997
+length = 9
+
+[[boundaries]]
+payload_offset = 1006
+length = 9
+
+[[boundaries]]
+payload_offset = 1015
+length = 9
+
+[[boundaries]]
+payload_offset = 1024
+length = 9
+
+[[boundaries]]
+payload_offset = 1033
+length = 9
+
+[[boundaries]]
+payload_offset = 1042
+length = 9
+
+[[boundaries]]
+payload_offset = 1051
+length = 9
+
+[[boundaries]]
+payload_offset = 1060
+length = 9
+
+[[boundaries]]
+payload_offset = 1069
+length = 9
+
+[[boundaries]]
+payload_offset = 1078
+length = 1
+
+[[boundaries]]
+payload_offset = 1079
+length = 9
+
+[[boundaries]]
+payload_offset = 1088
+length = 9
+
+[[boundaries]]
+payload_offset = 1097
+length = 9
+
+[[boundaries]]
+payload_offset = 1106
+length = 9
+
+[[boundaries]]
+payload_offset = 1115
+length = 9
+
+[[boundaries]]
+payload_offset = 1124
+length = 9
+
+[[boundaries]]
+payload_offset = 1133
+length = 9
+
+[[boundaries]]
+payload_offset = 1142
+length = 9
+
+[[boundaries]]
+payload_offset = 1151
+length = 9
+
+[[boundaries]]
+payload_offset = 1160
+length = 9
+
+[[boundaries]]
+payload_offset = 1169
+length = 9
+
+[[boundaries]]
+payload_offset = 1178
+length = 9
+
+[[boundaries]]
+payload_offset = 1187
+length = 9
+
+[[boundaries]]
+payload_offset = 1196
+length = 9
+
+[[boundaries]]
+payload_offset = 1205
+length = 9
+
+[[boundaries]]
+payload_offset = 1214
+length = 9
+
+[[boundaries]]
+payload_offset = 1223
+length = 9
+
+[[boundaries]]
+payload_offset = 1232
+length = 9
+
+[[boundaries]]
+payload_offset = 1241
+length = 9
+
+[[boundaries]]
+payload_offset = 1250
+length = 1
+
+[[boundaries]]
+payload_offset = 1251
+length = 9
+
+[[boundaries]]
+payload_offset = 1260
+length = 9
+
+[[boundaries]]
+payload_offset = 1269
+length = 9
+
+[[boundaries]]
+payload_offset = 1278
+length = 9
+
+[[boundaries]]
+payload_offset = 1287
+length = 9
+
+[[boundaries]]
+payload_offset = 1296
+length = 9
+
+[[boundaries]]
+payload_offset = 1305
+length = 9
+
+[[boundaries]]
+payload_offset = 1314
+length = 9
+
+[[boundaries]]
+payload_offset = 1323
+length = 9
+
+[[boundaries]]
+payload_offset = 1332
+length = 9
+
+[[boundaries]]
+payload_offset = 1341
+length = 9
+
+[[boundaries]]
+payload_offset = 1350
+length = 9
+
+[[boundaries]]
+payload_offset = 1359
+length = 9
+
+[[boundaries]]
+payload_offset = 1368
+length = 9
+
+[[boundaries]]
+payload_offset = 1377
+length = 9
+
+[[boundaries]]
+payload_offset = 1386
+length = 9
+
+[[boundaries]]
+payload_offset = 1395
+length = 9
+
+[[boundaries]]
+payload_offset = 1404
+length = 9
+
+[[boundaries]]
+payload_offset = 1413
+length = 9
+
+[[boundaries]]
+payload_offset = 1422
+length = 9
+
+[[boundaries]]
+payload_offset = 1431
+length = 9
+
+[[boundaries]]
+payload_offset = 1440
+length = 9
+
+[[boundaries]]
+payload_offset = 1449
+length = 9
+
+[[boundaries]]
+payload_offset = 1458
+length = 9
+
+[[boundaries]]
+payload_offset = 1467
+length = 9
+
+[[boundaries]]
+payload_offset = 1476
+length = 9
+
+[[boundaries]]
+payload_offset = 1485
+length = 9
+
+[[boundaries]]
+payload_offset = 1494
+length = 1
+
+[[boundaries]]
+payload_offset = 1495
+length = 9
+
+[[boundaries]]
+payload_offset = 1504
+length = 9
+
+[[boundaries]]
+payload_offset = 1513
+length = 9
+
+[[boundaries]]
+payload_offset = 1522
+length = 9
+
+[[boundaries]]
+payload_offset = 1531
+length = 9
+
+[[boundaries]]
+payload_offset = 1540
+length = 9
+
+[[boundaries]]
+payload_offset = 1549
+length = 9
+
+[[boundaries]]
+payload_offset = 1558
+length = 9
+
+[[boundaries]]
+payload_offset = 1567
+length = 9
+
+[[boundaries]]
+payload_offset = 1576
+length = 9
+
+[[boundaries]]
+payload_offset = 1585
+length = 9
+
+[[boundaries]]
+payload_offset = 1594
+length = 9
+
+[[boundaries]]
+payload_offset = 1603
+length = 9
+
+[[boundaries]]
+payload_offset = 1612
+length = 9
+
+[[boundaries]]
+payload_offset = 1621
+length = 9
+
+[[boundaries]]
+payload_offset = 1630
+length = 9
+
+[[boundaries]]
+payload_offset = 1639
+length = 9
+
+[[boundaries]]
+payload_offset = 1648
+length = 9
+
+[[boundaries]]
+payload_offset = 1657
+length = 9
+
+[[boundaries]]
+payload_offset = 1666
+length = 9
+
+[[boundaries]]
+payload_offset = 1675
+length = 9
+
+[[boundaries]]
+payload_offset = 1684
+length = 1
+
+[[boundaries]]
+payload_offset = 1685
+length = 3
+
+[[boundaries]]
+payload_offset = 1688
+length = 5
+
+[[boundaries]]
+payload_offset = 1693
+length = 5
+
+[[boundaries]]
+payload_offset = 1698
+length = 6
+
+[[boundaries]]
+payload_offset = 1704
+length = 5
+
+[[boundaries]]
+payload_offset = 1709
+length = 6
+
+[[boundaries]]
+payload_offset = 1715
+length = 5
+
+[[boundaries]]
+payload_offset = 1720
+length = 6
+
+[[boundaries]]
+payload_offset = 1726
+length = 5
+
+[[boundaries]]
+payload_offset = 1731
+length = 6
+
+[[boundaries]]
+payload_offset = 1737
+length = 5
+
+[[boundaries]]
+payload_offset = 1742
+length = 6
+
+[[boundaries]]
+payload_offset = 1748
+length = 1
+
+[[boundaries]]
+payload_offset = 1749
+length = 8
+
+[[boundaries]]
+payload_offset = 1757
+length = 1
+
+[[boundaries]]
+payload_offset = 1758
+length = 1
+
+[[boundaries]]
+payload_offset = 1759
+length = 8
+
+[[boundaries]]
+payload_offset = 1767
+length = 1
+
+[[boundaries]]
+payload_offset = 1768
+length = 1
+
+[[boundaries]]
+payload_offset = 1769
+length = 8
+
+[[boundaries]]
+payload_offset = 1777
+length = 1
+
+[[boundaries]]
+payload_offset = 1778
+length = 1
+
+[[boundaries]]
+payload_offset = 1779
+length = 8
+
+[[boundaries]]
+payload_offset = 1787
+length = 1
+
+[[boundaries]]
+payload_offset = 1788
+length = 1
+
+[[boundaries]]
+payload_offset = 1789
+length = 8
+
+[[boundaries]]
+payload_offset = 1797
+length = 1
+
+[[boundaries]]
+payload_offset = 1798
+length = 1
+
+[[boundaries]]
+payload_offset = 1799
+length = 1
+
+[[boundaries]]
+payload_offset = 1800
+length = 5
+
+[[boundaries]]
+payload_offset = 1805
+length = 6
+
+[[boundaries]]
+payload_offset = 1811
+length = 5
+
+[[boundaries]]
+payload_offset = 1816
+length = 6
+
+[[boundaries]]
+payload_offset = 1822
+length = 1
+
+[[boundaries]]
+payload_offset = 1823
+length = 5
+
+[[boundaries]]
+payload_offset = 1828
+length = 1
+
+[[boundaries]]
+payload_offset = 1829
+length = 5
+
+[[boundaries]]
+payload_offset = 1834
+length = 1

@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 8
 export_count = 28
 reloc_count = 50
+instruction_count = 180
 
 [[segments]]
 kind = "bytecode"
@@ -298,6 +299,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-move-scripts"
 target_export = "EventScript_CheckTreeCantCut"
 target_offset = 102
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 100
 runtime_resolution_required = true
 
 [[relocs]]
@@ -308,6 +311,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-move-scripts"
 target_export = "EventScript_CheckTreeCantCut"
 target_offset = 102
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 100
 runtime_resolution_required = true
 
 [[relocs]]
@@ -317,6 +322,8 @@ original_encoded_gba = 0x829072e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/field-move-scripts"
 target_export = "Text_WantToCut"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -327,6 +334,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-move-scripts"
 target_export = "EventScript_CancelCut"
 target_offset = 112
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 110
 runtime_resolution_required = true
 
 [[relocs]]
@@ -336,6 +345,8 @@ original_encoded_gba = 0x8290771
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/field-move-scripts"
 target_export = "Text_MonUsedFieldMove"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -346,6 +357,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-move-scripts"
 target_export = "EventScript_CutTreeDown"
 target_offset = 85
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 85
 runtime_resolution_required = true
 
 [[relocs]]
@@ -356,6 +369,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-move-scripts"
 target_export = "EventScript_CutTreeDown"
 target_offset = 85
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 85
 runtime_resolution_required = true
 
 [[relocs]]
@@ -365,6 +380,8 @@ original_encoded_gba = 0x829071f
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/movement-cuttreedown"
 target_export = "Movement_CutTreeDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -374,6 +391,8 @@ original_encoded_gba = 0x829077d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/field-move-scripts"
 target_export = "Text_CantCut"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -384,6 +403,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-move-scripts"
 target_export = "EventScript_CantSmashRock"
 target_offset = 370
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 246
 runtime_resolution_required = true
 
 [[relocs]]
@@ -394,6 +415,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-move-scripts"
 target_export = "EventScript_CantSmashRock"
 target_offset = 370
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 246
 runtime_resolution_required = true
 
 [[relocs]]
@@ -403,6 +426,8 @@ original_encoded_gba = 0x829083a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/field-move-scripts"
 target_export = "Text_WantToSmash"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -413,6 +438,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-move-scripts"
 target_export = "EventScript_CancelSmash"
 target_offset = 380
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 256
 runtime_resolution_required = true
 
 [[relocs]]
@@ -422,6 +449,8 @@ original_encoded_gba = 0x8290771
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/field-move-scripts"
 target_export = "Text_MonUsedFieldMove"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -432,6 +461,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-move-scripts"
 target_export = "EventScript_SmashRock"
 target_offset = 320
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 198
 runtime_resolution_required = true
 
 [[relocs]]
@@ -442,6 +473,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-move-scripts"
 target_export = "EventScript_SmashRock"
 target_offset = 320
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 198
 runtime_resolution_required = true
 
 [[relocs]]
@@ -451,6 +484,8 @@ original_encoded_gba = 0x829082b
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/movement-smashrock"
 target_export = "Movement_SmashRock"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -461,6 +496,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-move-scripts"
 target_export = "EventScript_EndSmash"
 target_offset = 366
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 244
 runtime_resolution_required = true
 
 [[relocs]]
@@ -471,6 +508,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-move-scripts"
 target_export = "EventScript_EndSmash"
 target_offset = 366
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 244
 runtime_resolution_required = true
 
 [[relocs]]
@@ -480,6 +519,8 @@ original_encoded_gba = 0x829087f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/field-move-scripts"
 target_export = "Text_CantSmash"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -490,6 +531,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-move-scripts"
 target_export = "EventScript_CantStrength"
 target_offset = 602
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 350
 runtime_resolution_required = true
 
 [[relocs]]
@@ -500,6 +543,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-move-scripts"
 target_export = "EventScript_CheckActivatedBoulder"
 target_offset = 612
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 360
 runtime_resolution_required = true
 
 [[relocs]]
@@ -510,6 +555,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-move-scripts"
 target_export = "EventScript_CantStrength"
 target_offset = 602
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 350
 runtime_resolution_required = true
 
 [[relocs]]
@@ -519,6 +566,8 @@ original_encoded_gba = 0x829092c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/field-move-scripts"
 target_export = "Text_WantToStrength"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -529,6 +578,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-move-scripts"
 target_export = "EventScript_CancelStrength"
 target_offset = 622
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 370
 runtime_resolution_required = true
 
 [[relocs]]
@@ -539,6 +590,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-move-scripts"
 target_export = "EventScript_ActivateStrength"
 target_offset = 589
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 337
 runtime_resolution_required = true
 
 [[relocs]]
@@ -549,6 +602,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-move-scripts"
 target_export = "EventScript_ActivateStrength"
 target_offset = 589
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 337
 runtime_resolution_required = true
 
 [[relocs]]
@@ -558,6 +613,8 @@ original_encoded_gba = 0x829098c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/field-move-scripts"
 target_export = "Text_MonUsedStrength"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -567,6 +624,8 @@ original_encoded_gba = 0x82909d6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/field-move-scripts"
 target_export = "Text_CantStrength"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -576,6 +635,8 @@ original_encoded_gba = 0x8290a16
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/field-move-scripts"
 target_export = "Text_StrengthActivated"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -586,6 +647,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-move-scripts"
 target_export = "EventScript_CantWaterfall"
 target_offset = 969
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 432
 runtime_resolution_required = true
 
 [[relocs]]
@@ -595,6 +658,8 @@ original_encoded_gba = 0x8290ac3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/field-move-scripts"
 target_export = "Text_WantToWaterfall"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -605,6 +670,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-move-scripts"
 target_export = "EventScript_EndWaterfall"
 target_offset = 977
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 440
 runtime_resolution_required = true
 
 [[relocs]]
@@ -614,6 +681,8 @@ original_encoded_gba = 0x8290afc
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/field-move-scripts"
 target_export = "Text_MonUsedWaterfall"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -624,6 +693,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-move-scripts"
 target_export = "EventScript_EndWaterfall"
 target_offset = 977
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 440
 runtime_resolution_required = true
 
 [[relocs]]
@@ -633,6 +704,8 @@ original_encoded_gba = 0x8290a8e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/field-move-scripts"
 target_export = "Text_CantWaterfall"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -643,6 +716,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-move-scripts"
 target_export = "EventScript_CantDive"
 target_offset = 1171
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 505
 runtime_resolution_required = true
 
 [[relocs]]
@@ -652,6 +727,8 @@ original_encoded_gba = 0x8290be8
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/field-move-scripts"
 target_export = "Text_WantToDive"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -662,6 +739,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-move-scripts"
 target_export = "EventScript_EndDive"
 target_offset = 1181
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 515
 runtime_resolution_required = true
 
 [[relocs]]
@@ -671,6 +750,8 @@ original_encoded_gba = 0x8290c1a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/field-move-scripts"
 target_export = "Text_MonUsedDive"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -681,6 +762,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-move-scripts"
 target_export = "EventScript_EndDive"
 target_offset = 1181
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 515
 runtime_resolution_required = true
 
 [[relocs]]
@@ -690,6 +773,8 @@ original_encoded_gba = 0x8290baa
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/field-move-scripts"
 target_export = "Text_CantDive"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -700,6 +785,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-move-scripts"
 target_export = "EventScript_CantSurface"
 target_offset = 1246
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 580
 runtime_resolution_required = true
 
 [[relocs]]
@@ -709,6 +796,8 @@ original_encoded_gba = 0x8290c6e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/field-move-scripts"
 target_export = "Text_WantToSurface"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -719,6 +808,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-move-scripts"
 target_export = "EventScript_EndSurface"
 target_offset = 1261
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 595
 runtime_resolution_required = true
 
 [[relocs]]
@@ -728,6 +819,8 @@ original_encoded_gba = 0x8290c1a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/field-move-scripts"
 target_export = "Text_MonUsedDive"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -738,6 +831,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-move-scripts"
 target_export = "EventScript_EndSurface"
 target_offset = 1261
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 595
 runtime_resolution_required = true
 
 [[relocs]]
@@ -747,6 +842,8 @@ original_encoded_gba = 0x8290c28
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/field-move-scripts"
 target_export = "Text_CantSurface"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -757,6 +854,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-move-scripts"
 target_export = "EventScript_EndSurface"
 target_offset = 1261
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 595
 runtime_resolution_required = true
 
 [[relocs]]
@@ -766,4 +865,726 @@ original_encoded_gba = 0x8290cb7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/field-move-scripts"
 target_export = "Text_FailSweetScent"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 3
+
+[[boundaries]]
+payload_offset = 4
+length = 6
+
+[[boundaries]]
+payload_offset = 10
+length = 3
+
+[[boundaries]]
+payload_offset = 13
+length = 5
+
+[[boundaries]]
+payload_offset = 18
+length = 6
+
+[[boundaries]]
+payload_offset = 24
+length = 4
+
+[[boundaries]]
+payload_offset = 28
+length = 4
+
+[[boundaries]]
+payload_offset = 32
+length = 4
+
+[[boundaries]]
+payload_offset = 36
+length = 6
+
+[[boundaries]]
+payload_offset = 42
+length = 2
+
+[[boundaries]]
+payload_offset = 44
+length = 5
+
+[[boundaries]]
+payload_offset = 49
+length = 6
+
+[[boundaries]]
+payload_offset = 55
+length = 6
+
+[[boundaries]]
+payload_offset = 61
+length = 2
+
+[[boundaries]]
+payload_offset = 63
+length = 1
+
+[[boundaries]]
+payload_offset = 64
+length = 3
+
+[[boundaries]]
+payload_offset = 67
+length = 1
+
+[[boundaries]]
+payload_offset = 68
+length = 5
+
+[[boundaries]]
+payload_offset = 74
+length = 1
+
+[[boundaries]]
+payload_offset = 75
+length = 3
+
+[[boundaries]]
+payload_offset = 78
+length = 1
+
+[[boundaries]]
+payload_offset = 79
+length = 5
+
+[[boundaries]]
+payload_offset = 85
+length = 7
+
+[[boundaries]]
+payload_offset = 92
+length = 3
+
+[[boundaries]]
+payload_offset = 95
+length = 3
+
+[[boundaries]]
+payload_offset = 98
+length = 1
+
+[[boundaries]]
+payload_offset = 99
+length = 1
+
+[[boundaries]]
+payload_offset = 100
+length = 6
+
+[[boundaries]]
+payload_offset = 106
+length = 2
+
+[[boundaries]]
+payload_offset = 108
+length = 1
+
+[[boundaries]]
+payload_offset = 109
+length = 1
+
+[[boundaries]]
+payload_offset = 110
+length = 1
+
+[[boundaries]]
+payload_offset = 111
+length = 1
+
+[[boundaries]]
+payload_offset = 112
+length = 1
+
+[[boundaries]]
+payload_offset = 113
+length = 1
+
+[[boundaries]]
+payload_offset = 114
+length = 3
+
+[[boundaries]]
+payload_offset = 117
+length = 6
+
+[[boundaries]]
+payload_offset = 123
+length = 3
+
+[[boundaries]]
+payload_offset = 126
+length = 5
+
+[[boundaries]]
+payload_offset = 131
+length = 6
+
+[[boundaries]]
+payload_offset = 137
+length = 4
+
+[[boundaries]]
+payload_offset = 141
+length = 4
+
+[[boundaries]]
+payload_offset = 145
+length = 4
+
+[[boundaries]]
+payload_offset = 149
+length = 6
+
+[[boundaries]]
+payload_offset = 155
+length = 2
+
+[[boundaries]]
+payload_offset = 157
+length = 5
+
+[[boundaries]]
+payload_offset = 162
+length = 6
+
+[[boundaries]]
+payload_offset = 168
+length = 6
+
+[[boundaries]]
+payload_offset = 174
+length = 2
+
+[[boundaries]]
+payload_offset = 176
+length = 1
+
+[[boundaries]]
+payload_offset = 177
+length = 3
+
+[[boundaries]]
+payload_offset = 180
+length = 1
+
+[[boundaries]]
+payload_offset = 181
+length = 5
+
+[[boundaries]]
+payload_offset = 187
+length = 1
+
+[[boundaries]]
+payload_offset = 188
+length = 3
+
+[[boundaries]]
+payload_offset = 191
+length = 1
+
+[[boundaries]]
+payload_offset = 192
+length = 5
+
+[[boundaries]]
+payload_offset = 198
+length = 7
+
+[[boundaries]]
+payload_offset = 205
+length = 3
+
+[[boundaries]]
+payload_offset = 208
+length = 3
+
+[[boundaries]]
+payload_offset = 211
+length = 5
+
+[[boundaries]]
+payload_offset = 216
+length = 5
+
+[[boundaries]]
+payload_offset = 221
+length = 6
+
+[[boundaries]]
+payload_offset = 227
+length = 3
+
+[[boundaries]]
+payload_offset = 230
+length = 5
+
+[[boundaries]]
+payload_offset = 235
+length = 6
+
+[[boundaries]]
+payload_offset = 241
+length = 1
+
+[[boundaries]]
+payload_offset = 242
+length = 1
+
+[[boundaries]]
+payload_offset = 243
+length = 1
+
+[[boundaries]]
+payload_offset = 244
+length = 1
+
+[[boundaries]]
+payload_offset = 245
+length = 1
+
+[[boundaries]]
+payload_offset = 246
+length = 6
+
+[[boundaries]]
+payload_offset = 252
+length = 2
+
+[[boundaries]]
+payload_offset = 254
+length = 1
+
+[[boundaries]]
+payload_offset = 255
+length = 1
+
+[[boundaries]]
+payload_offset = 256
+length = 1
+
+[[boundaries]]
+payload_offset = 257
+length = 1
+
+[[boundaries]]
+payload_offset = 258
+length = 1
+
+[[boundaries]]
+payload_offset = 259
+length = 1
+
+[[boundaries]]
+payload_offset = 260
+length = 3
+
+[[boundaries]]
+payload_offset = 263
+length = 6
+
+[[boundaries]]
+payload_offset = 269
+length = 3
+
+[[boundaries]]
+payload_offset = 272
+length = 6
+
+[[boundaries]]
+payload_offset = 278
+length = 3
+
+[[boundaries]]
+payload_offset = 281
+length = 5
+
+[[boundaries]]
+payload_offset = 286
+length = 6
+
+[[boundaries]]
+payload_offset = 292
+length = 4
+
+[[boundaries]]
+payload_offset = 296
+length = 6
+
+[[boundaries]]
+payload_offset = 302
+length = 2
+
+[[boundaries]]
+payload_offset = 304
+length = 5
+
+[[boundaries]]
+payload_offset = 309
+length = 6
+
+[[boundaries]]
+payload_offset = 315
+length = 1
+
+[[boundaries]]
+payload_offset = 316
+length = 3
+
+[[boundaries]]
+payload_offset = 319
+length = 1
+
+[[boundaries]]
+payload_offset = 320
+length = 5
+
+[[boundaries]]
+payload_offset = 326
+length = 1
+
+[[boundaries]]
+payload_offset = 327
+length = 3
+
+[[boundaries]]
+payload_offset = 330
+length = 1
+
+[[boundaries]]
+payload_offset = 331
+length = 5
+
+[[boundaries]]
+payload_offset = 337
+length = 3
+
+[[boundaries]]
+payload_offset = 340
+length = 6
+
+[[boundaries]]
+payload_offset = 346
+length = 2
+
+[[boundaries]]
+payload_offset = 348
+length = 1
+
+[[boundaries]]
+payload_offset = 349
+length = 1
+
+[[boundaries]]
+payload_offset = 350
+length = 6
+
+[[boundaries]]
+payload_offset = 356
+length = 2
+
+[[boundaries]]
+payload_offset = 358
+length = 1
+
+[[boundaries]]
+payload_offset = 359
+length = 1
+
+[[boundaries]]
+payload_offset = 360
+length = 6
+
+[[boundaries]]
+payload_offset = 366
+length = 2
+
+[[boundaries]]
+payload_offset = 368
+length = 1
+
+[[boundaries]]
+payload_offset = 369
+length = 1
+
+[[boundaries]]
+payload_offset = 370
+length = 1
+
+[[boundaries]]
+payload_offset = 371
+length = 1
+
+[[boundaries]]
+payload_offset = 372
+length = 1
+
+[[boundaries]]
+payload_offset = 373
+length = 1
+
+[[boundaries]]
+payload_offset = 374
+length = 3
+
+[[boundaries]]
+payload_offset = 377
+length = 5
+
+[[boundaries]]
+payload_offset = 382
+length = 6
+
+[[boundaries]]
+payload_offset = 388
+length = 4
+
+[[boundaries]]
+payload_offset = 392
+length = 4
+
+[[boundaries]]
+payload_offset = 396
+length = 6
+
+[[boundaries]]
+payload_offset = 402
+length = 2
+
+[[boundaries]]
+payload_offset = 404
+length = 5
+
+[[boundaries]]
+payload_offset = 409
+length = 6
+
+[[boundaries]]
+payload_offset = 415
+length = 6
+
+[[boundaries]]
+payload_offset = 421
+length = 2
+
+[[boundaries]]
+payload_offset = 423
+length = 3
+
+[[boundaries]]
+payload_offset = 426
+length = 5
+
+[[boundaries]]
+payload_offset = 431
+length = 1
+
+[[boundaries]]
+payload_offset = 432
+length = 6
+
+[[boundaries]]
+payload_offset = 438
+length = 2
+
+[[boundaries]]
+payload_offset = 440
+length = 1
+
+[[boundaries]]
+payload_offset = 441
+length = 1
+
+[[boundaries]]
+payload_offset = 442
+length = 1
+
+[[boundaries]]
+payload_offset = 443
+length = 3
+
+[[boundaries]]
+payload_offset = 446
+length = 5
+
+[[boundaries]]
+payload_offset = 451
+length = 6
+
+[[boundaries]]
+payload_offset = 457
+length = 4
+
+[[boundaries]]
+payload_offset = 461
+length = 4
+
+[[boundaries]]
+payload_offset = 465
+length = 4
+
+[[boundaries]]
+payload_offset = 469
+length = 6
+
+[[boundaries]]
+payload_offset = 475
+length = 2
+
+[[boundaries]]
+payload_offset = 477
+length = 5
+
+[[boundaries]]
+payload_offset = 482
+length = 6
+
+[[boundaries]]
+payload_offset = 488
+length = 6
+
+[[boundaries]]
+payload_offset = 494
+length = 2
+
+[[boundaries]]
+payload_offset = 496
+length = 3
+
+[[boundaries]]
+payload_offset = 499
+length = 5
+
+[[boundaries]]
+payload_offset = 505
+length = 6
+
+[[boundaries]]
+payload_offset = 511
+length = 2
+
+[[boundaries]]
+payload_offset = 513
+length = 1
+
+[[boundaries]]
+payload_offset = 514
+length = 1
+
+[[boundaries]]
+payload_offset = 515
+length = 1
+
+[[boundaries]]
+payload_offset = 516
+length = 1
+
+[[boundaries]]
+payload_offset = 517
+length = 1
+
+[[boundaries]]
+payload_offset = 518
+length = 3
+
+[[boundaries]]
+payload_offset = 521
+length = 5
+
+[[boundaries]]
+payload_offset = 526
+length = 6
+
+[[boundaries]]
+payload_offset = 532
+length = 4
+
+[[boundaries]]
+payload_offset = 536
+length = 4
+
+[[boundaries]]
+payload_offset = 540
+length = 4
+
+[[boundaries]]
+payload_offset = 544
+length = 6
+
+[[boundaries]]
+payload_offset = 550
+length = 2
+
+[[boundaries]]
+payload_offset = 552
+length = 5
+
+[[boundaries]]
+payload_offset = 557
+length = 6
+
+[[boundaries]]
+payload_offset = 563
+length = 6
+
+[[boundaries]]
+payload_offset = 569
+length = 2
+
+[[boundaries]]
+payload_offset = 571
+length = 3
+
+[[boundaries]]
+payload_offset = 574
+length = 5
+
+[[boundaries]]
+payload_offset = 580
+length = 1
+
+[[boundaries]]
+payload_offset = 581
+length = 6
+
+[[boundaries]]
+payload_offset = 587
+length = 2
+
+[[boundaries]]
+payload_offset = 589
+length = 5
+
+[[boundaries]]
+payload_offset = 595
+length = 1
+
+[[boundaries]]
+payload_offset = 596
+length = 1
+
+[[boundaries]]
+payload_offset = 597
+length = 6
+
+[[boundaries]]
+payload_offset = 603
+length = 2
+
+[[boundaries]]
+payload_offset = 605
+length = 1

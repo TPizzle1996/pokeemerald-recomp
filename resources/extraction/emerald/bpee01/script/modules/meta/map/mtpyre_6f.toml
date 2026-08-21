@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 4
 reloc_count = 12
+instruction_count = 26
 
 [[segments]]
 kind = "bytecode"
@@ -63,6 +64,8 @@ original_encoded_gba = 0x8231db4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-6f"
 target_export = "MtPyre_6F_Text_ValerieIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -72,6 +75,8 @@ original_encoded_gba = 0x8231de2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-6f"
 target_export = "MtPyre_6F_Text_ValerieDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -82,6 +87,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtpyre-6f"
 target_export = "MtPyre_6F_EventScript_RegisterValerie"
 target_offset = 45
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 44
 runtime_resolution_required = true
 
 [[relocs]]
@@ -92,6 +99,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtpyre-6f"
 target_export = "MtPyre_6F_EventScript_RematchValerie"
 target_offset = 76
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 75
 runtime_resolution_required = true
 
 [[relocs]]
@@ -101,6 +110,8 @@ original_encoded_gba = 0x8231dfc
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-6f"
 target_export = "MtPyre_6F_Text_ValeriePostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -110,6 +121,8 @@ original_encoded_gba = 0x8231e43
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-6f"
 target_export = "MtPyre_6F_Text_ValerieRegister"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -119,6 +132,8 @@ original_encoded_gba = 0x8231eb3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-6f"
 target_export = "MtPyre_6F_Text_ValerieRematchIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -128,6 +143,8 @@ original_encoded_gba = 0x8231ecb
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-6f"
 target_export = "MtPyre_6F_Text_ValerieRematchDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -137,6 +154,8 @@ original_encoded_gba = 0x8231ee1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-6f"
 target_export = "MtPyre_6F_Text_ValeriePostRematch"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -146,6 +165,8 @@ original_encoded_gba = 0x8231f11
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-6f"
 target_export = "MtPyre_6F_Text_CedricIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -155,6 +176,8 @@ original_encoded_gba = 0x8231f4a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-6f"
 target_export = "MtPyre_6F_Text_CedricDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -164,4 +187,110 @@ original_encoded_gba = 0x8231f5c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtpyre-6f"
 target_export = "MtPyre_6F_Text_CedricPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 18
+
+[[boundaries]]
+payload_offset = 18
+length = 5
+
+[[boundaries]]
+payload_offset = 23
+length = 5
+
+[[boundaries]]
+payload_offset = 28
+length = 6
+
+[[boundaries]]
+payload_offset = 34
+length = 6
+
+[[boundaries]]
+payload_offset = 40
+length = 2
+
+[[boundaries]]
+payload_offset = 42
+length = 1
+
+[[boundaries]]
+payload_offset = 43
+length = 1
+
+[[boundaries]]
+payload_offset = 44
+length = 3
+
+[[boundaries]]
+payload_offset = 47
+length = 3
+
+[[boundaries]]
+payload_offset = 50
+length = 6
+
+[[boundaries]]
+payload_offset = 56
+length = 2
+
+[[boundaries]]
+payload_offset = 58
+length = 5
+
+[[boundaries]]
+payload_offset = 63
+length = 3
+
+[[boundaries]]
+payload_offset = 66
+length = 5
+
+[[boundaries]]
+payload_offset = 71
+length = 2
+
+[[boundaries]]
+payload_offset = 73
+length = 1
+
+[[boundaries]]
+payload_offset = 74
+length = 1
+
+[[boundaries]]
+payload_offset = 75
+length = 14
+
+[[boundaries]]
+payload_offset = 89
+length = 6
+
+[[boundaries]]
+payload_offset = 95
+length = 2
+
+[[boundaries]]
+payload_offset = 97
+length = 1
+
+[[boundaries]]
+payload_offset = 98
+length = 14
+
+[[boundaries]]
+payload_offset = 112
+length = 6
+
+[[boundaries]]
+payload_offset = 118
+length = 2
+
+[[boundaries]]
+payload_offset = 120
+length = 1

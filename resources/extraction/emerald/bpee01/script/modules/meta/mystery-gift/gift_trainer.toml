@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 2
 reloc_count = 4
+instruction_count = 0
 
 [[segments]]
 kind = "bytecode"
@@ -48,6 +49,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/mystery-gift/gift-trainer"
 target_export = "MysteryGiftScript_VisitingTrainer"
 target_offset = 0
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 0
 runtime_resolution_required = true
 
 [[relocs]]
@@ -58,6 +61,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/mystery-gift/gift-trainer"
 target_export = "MysteryGiftScript_VisitingTrainerArrived"
 target_offset = 30
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 30
 runtime_resolution_required = true
 
 [[relocs]]
@@ -67,6 +72,8 @@ original_encoded_gba = 0x8674eea
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/mystery-gift/stext-mysterygiftvisitingtrainerinstructions"
 target_export = "sText_MysteryGiftVisitingTrainerInstructions"
+target_kind = "TEXT_LABEL"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -76,4 +83,6 @@ original_encoded_gba = 0x8675035
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/mystery-gift/stext-mysterygiftvisitingtrainerarrived"
 target_export = "sText_MysteryGiftVisitingTrainerArrived"
+target_kind = "TEXT_LABEL"
+target_payload_offset = 4294967295
 runtime_resolution_required = true

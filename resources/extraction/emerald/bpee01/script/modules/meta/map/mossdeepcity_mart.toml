@@ -17,6 +17,7 @@ static_data_bytes = 20
 segment_count = 3
 export_count = 5
 reloc_count = 6
+instruction_count = 19
 
 [[segments]]
 kind = "bytecode"
@@ -84,6 +85,8 @@ original_encoded_gba = 0x8272a21
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/mart-clerk"
 target_export = "gText_HowMayIServeYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -94,6 +97,8 @@ target_class = "MART_TABLE_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-mart"
 target_export = "MossdeepCity_Mart_Pokemart"
 target_offset = 24
+target_kind = "MART_TABLE"
+target_payload_offset = 24
 runtime_resolution_required = true
 
 [[relocs]]
@@ -103,6 +108,8 @@ original_encoded_gba = 0x8272a3f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/mart-clerk"
 target_export = "gText_PleaseComeAgain"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -112,6 +119,8 @@ original_encoded_gba = 0x8222411
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-mart"
 target_export = "MossdeepCity_Mart_Text_ReviveIsFantastic"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -121,6 +130,8 @@ original_encoded_gba = 0x82224a0
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-mart"
 target_export = "MossdeepCity_Mart_Text_MaxRepelLastsLongest"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -130,4 +141,82 @@ original_encoded_gba = 0x82224fa
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-mart"
 target_export = "MossdeepCity_Mart_Text_NetAndDiveBallsRare"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 1
+
+[[boundaries]]
+payload_offset = 2
+length = 5
+
+[[boundaries]]
+payload_offset = 7
+length = 1
+
+[[boundaries]]
+payload_offset = 8
+length = 5
+
+[[boundaries]]
+payload_offset = 13
+length = 6
+
+[[boundaries]]
+payload_offset = 19
+length = 2
+
+[[boundaries]]
+payload_offset = 21
+length = 1
+
+[[boundaries]]
+payload_offset = 22
+length = 1
+
+[[boundaries]]
+payload_offset = 24
+length = 1
+
+[[boundaries]]
+payload_offset = 46
+length = 6
+
+[[boundaries]]
+payload_offset = 52
+length = 2
+
+[[boundaries]]
+payload_offset = 54
+length = 1
+
+[[boundaries]]
+payload_offset = 55
+length = 6
+
+[[boundaries]]
+payload_offset = 61
+length = 2
+
+[[boundaries]]
+payload_offset = 63
+length = 1
+
+[[boundaries]]
+payload_offset = 64
+length = 6
+
+[[boundaries]]
+payload_offset = 70
+length = 2
+
+[[boundaries]]
+payload_offset = 72
+length = 1

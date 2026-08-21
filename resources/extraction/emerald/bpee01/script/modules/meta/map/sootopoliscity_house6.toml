@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 4
 reloc_count = 9
+instruction_count = 32
 
 [[segments]]
 kind = "bytecode"
@@ -64,6 +65,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/sootopoliscity-house6"
 target_export = "SootopolisCity_House6_EventScript_ReceivedWailmerDoll"
 target_offset = 72
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 71
 runtime_resolution_required = true
 
 [[relocs]]
@@ -73,6 +76,8 @@ original_encoded_gba = 0x8226fc3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-house6"
 target_export = "SootopolisCity_House6_Text_FirstGuestInWhileTakeDoll"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -83,6 +88,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/sootopoliscity-house6"
 target_export = "SootopolisCity_House6_EventScript_DeclineWailmerDoll"
 target_offset = 62
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 61
 runtime_resolution_required = true
 
 [[relocs]]
@@ -92,6 +99,8 @@ original_encoded_gba = 0x8227034
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-house6"
 target_export = "SootopolisCity_House6_Text_TakeGoodCareOfIt"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -102,6 +111,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/sootopoliscity-house6"
 target_export = "SootopolisCity_House6_EventScript_NoRoomForWailmerDoll"
 target_offset = 82
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 81
 runtime_resolution_required = true
 
 [[relocs]]
@@ -111,6 +122,8 @@ original_encoded_gba = 0x822708f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-house6"
 target_export = "SootopolisCity_House6_Text_DontWantThisDoll"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -120,6 +133,8 @@ original_encoded_gba = 0x82270b7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-house6"
 target_export = "SootopolisCity_House6_Text_LovePlushDolls"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -129,6 +144,8 @@ original_encoded_gba = 0x8272b1a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/obtain-item"
 target_export = "gText_NoRoomLeftForAnother"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -138,4 +155,134 @@ original_encoded_gba = 0x822704a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-house6"
 target_export = "SootopolisCity_House6_Text_IllHoldItForYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 1
+
+[[boundaries]]
+payload_offset = 2
+length = 3
+
+[[boundaries]]
+payload_offset = 5
+length = 6
+
+[[boundaries]]
+payload_offset = 11
+length = 6
+
+[[boundaries]]
+payload_offset = 17
+length = 2
+
+[[boundaries]]
+payload_offset = 19
+length = 5
+
+[[boundaries]]
+payload_offset = 24
+length = 6
+
+[[boundaries]]
+payload_offset = 30
+length = 6
+
+[[boundaries]]
+payload_offset = 36
+length = 2
+
+[[boundaries]]
+payload_offset = 38
+length = 5
+
+[[boundaries]]
+payload_offset = 43
+length = 2
+
+[[boundaries]]
+payload_offset = 45
+length = 5
+
+[[boundaries]]
+payload_offset = 50
+length = 6
+
+[[boundaries]]
+payload_offset = 56
+length = 3
+
+[[boundaries]]
+payload_offset = 59
+length = 1
+
+[[boundaries]]
+payload_offset = 60
+length = 1
+
+[[boundaries]]
+payload_offset = 61
+length = 6
+
+[[boundaries]]
+payload_offset = 67
+length = 2
+
+[[boundaries]]
+payload_offset = 69
+length = 1
+
+[[boundaries]]
+payload_offset = 70
+length = 1
+
+[[boundaries]]
+payload_offset = 71
+length = 6
+
+[[boundaries]]
+payload_offset = 77
+length = 2
+
+[[boundaries]]
+payload_offset = 79
+length = 1
+
+[[boundaries]]
+payload_offset = 80
+length = 1
+
+[[boundaries]]
+payload_offset = 81
+length = 4
+
+[[boundaries]]
+payload_offset = 85
+length = 6
+
+[[boundaries]]
+payload_offset = 91
+length = 2
+
+[[boundaries]]
+payload_offset = 93
+length = 6
+
+[[boundaries]]
+payload_offset = 99
+length = 2
+
+[[boundaries]]
+payload_offset = 101
+length = 1
+
+[[boundaries]]
+payload_offset = 102
+length = 1

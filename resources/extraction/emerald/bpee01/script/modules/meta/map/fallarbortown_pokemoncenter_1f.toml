@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 8
 reloc_count = 11
+instruction_count = 37
 
 [[segments]]
 kind = "bytecode"
@@ -96,6 +97,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/hall-of-fame"
 target_export = "Common_EventScript_UpdateBrineyLocation"
 target_offset = 285
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 285
 runtime_resolution_required = true
 
 [[relocs]]
@@ -106,6 +109,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pkmn-center-nurse"
 target_export = "Common_EventScript_PkmnCenterNurse"
 target_offset = 0
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 0
 runtime_resolution_required = true
 
 [[relocs]]
@@ -115,6 +120,8 @@ original_encoded_gba = 0x8200e22
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fallarbortown-pokemoncenter-1f"
 target_export = "FallarborTown_PokemonCenter_1F_Text_FossilManiacEdgeOfTown"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -124,6 +131,8 @@ original_encoded_gba = 0x8200e8b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fallarbortown-pokemoncenter-1f"
 target_export = "FallarborTown_PokemonCenter_1F_Text_PlantHardyTrees"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -133,6 +142,8 @@ original_encoded_gba = 0x8200c6b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fallarbortown-pokemoncenter-1f"
 target_export = "FallarborTown_PokemonCenter_1F_Text_LanetteGreeting"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -143,6 +154,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/fallarbortown-pokemoncenter-1f"
 target_export = "FallarborTown_PokemonCenter_1F_EventScript_LanetteExitNorth"
 target_offset = 91
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 80
 runtime_resolution_required = true
 
 [[relocs]]
@@ -153,6 +166,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/fallarbortown-pokemoncenter-1f"
 target_export = "FallarborTown_PokemonCenter_1F_EventScript_LanetteExitWest"
 target_offset = 107
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 96
 runtime_resolution_required = true
 
 [[relocs]]
@@ -162,6 +177,8 @@ original_encoded_gba = 0x8200c53
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/fallarbortown-pokemoncenter-1f-movement-lanetteexitnorth"
 target_export = "FallarborTown_PokemonCenter_1F_Movement_LanetteExitNorth"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -172,6 +189,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/fallarbortown-pokemoncenter-1f"
 target_export = "FallarborTown_PokemonCenter_1F_EventScript_LanetteExited"
 target_offset = 123
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 112
 runtime_resolution_required = true
 
 [[relocs]]
@@ -181,6 +200,8 @@ original_encoded_gba = 0x8200c60
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/fallarbortown-pokemoncenter-1f-movement-lanetteexitwest"
 target_export = "FallarborTown_PokemonCenter_1F_Movement_LanetteExitWest"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -191,4 +212,154 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/fallarbortown-pokemoncenter-1f"
 target_export = "FallarborTown_PokemonCenter_1F_EventScript_LanetteExited"
 target_offset = 123
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 112
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 5
+
+[[boundaries]]
+payload_offset = 8
+length = 1
+
+[[boundaries]]
+payload_offset = 9
+length = 5
+
+[[boundaries]]
+payload_offset = 14
+length = 5
+
+[[boundaries]]
+payload_offset = 19
+length = 1
+
+[[boundaries]]
+payload_offset = 20
+length = 1
+
+[[boundaries]]
+payload_offset = 21
+length = 1
+
+[[boundaries]]
+payload_offset = 22
+length = 1
+
+[[boundaries]]
+payload_offset = 23
+length = 6
+
+[[boundaries]]
+payload_offset = 29
+length = 2
+
+[[boundaries]]
+payload_offset = 31
+length = 1
+
+[[boundaries]]
+payload_offset = 32
+length = 6
+
+[[boundaries]]
+payload_offset = 38
+length = 2
+
+[[boundaries]]
+payload_offset = 40
+length = 1
+
+[[boundaries]]
+payload_offset = 41
+length = 1
+
+[[boundaries]]
+payload_offset = 42
+length = 1
+
+[[boundaries]]
+payload_offset = 43
+length = 6
+
+[[boundaries]]
+payload_offset = 49
+length = 2
+
+[[boundaries]]
+payload_offset = 51
+length = 1
+
+[[boundaries]]
+payload_offset = 52
+length = 5
+
+[[boundaries]]
+payload_offset = 57
+length = 5
+
+[[boundaries]]
+payload_offset = 62
+length = 6
+
+[[boundaries]]
+payload_offset = 68
+length = 5
+
+[[boundaries]]
+payload_offset = 73
+length = 6
+
+[[boundaries]]
+payload_offset = 79
+length = 1
+
+[[boundaries]]
+payload_offset = 80
+length = 7
+
+[[boundaries]]
+payload_offset = 87
+length = 3
+
+[[boundaries]]
+payload_offset = 90
+length = 5
+
+[[boundaries]]
+payload_offset = 96
+length = 7
+
+[[boundaries]]
+payload_offset = 103
+length = 3
+
+[[boundaries]]
+payload_offset = 106
+length = 5
+
+[[boundaries]]
+payload_offset = 112
+length = 3
+
+[[boundaries]]
+payload_offset = 115
+length = 3
+
+[[boundaries]]
+payload_offset = 118
+length = 3
+
+[[boundaries]]
+payload_offset = 121
+length = 1
+
+[[boundaries]]
+payload_offset = 122
+length = 1

@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 4
 export_count = 10
 reloc_count = 30
+instruction_count = 111
 
 [[segments]]
 kind = "bytecode"
@@ -130,6 +131,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity-devoncorp-3f"
 target_export = "RustboroCity_DevonCorp_3F_EventScript_SetEmployeePos"
 target_offset = 28
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 12
 runtime_resolution_required = true
 
 [[relocs]]
@@ -139,6 +142,8 @@ original_encoded_gba = 0x8212c37
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-devoncorp-3f"
 target_export = "RustboroCity_DevonCorp_3F_Text_ThisIs3rdFloorWaitHere"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -148,6 +153,8 @@ original_encoded_gba = 0x8212546
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rustborocity-devoncorp-3f-movement-employeewalkoffscreen"
 target_export = "RustboroCity_DevonCorp_3F_Movement_EmployeeWalkOffscreen"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -157,6 +164,8 @@ original_encoded_gba = 0x821254f
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rustborocity-devoncorp-3f-movement-employeereturntoplayer"
 target_export = "RustboroCity_DevonCorp_3F_Movement_EmployeeReturnToPlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -166,6 +175,8 @@ original_encoded_gba = 0x8212de8
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-devoncorp-3f"
 target_export = "RustboroCity_DevonCorp_3F_Text_WordWithPresidentComeWithMe"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -175,6 +186,8 @@ original_encoded_gba = 0x8212534
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rustborocity-devoncorp-3f-movement-leadplayertopresident"
 target_export = "RustboroCity_DevonCorp_3F_Movement_LeadPlayerToPresident"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -184,6 +197,8 @@ original_encoded_gba = 0x8212558
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rustborocity-devoncorp-3f-movement-playerfollowtopresident"
 target_export = "RustboroCity_DevonCorp_3F_Movement_PlayerFollowToPresident"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -193,6 +208,8 @@ original_encoded_gba = 0x8212e2f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-devoncorp-3f"
 target_export = "RustboroCity_DevonCorp_3F_Text_PleaseGoAhead"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -202,6 +219,8 @@ original_encoded_gba = 0x8212543
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rustborocity-devoncorp-3f-movement-employeefacedesk"
 target_export = "RustboroCity_DevonCorp_3F_Movement_EmployeeFaceDesk"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -211,6 +230,8 @@ original_encoded_gba = 0x8212566
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rustborocity-devoncorp-3f-movement-playerapproachdesk"
 target_export = "RustboroCity_DevonCorp_3F_Movement_PlayerApproachDesk"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -220,6 +241,8 @@ original_encoded_gba = 0x8212609
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-devoncorp-3f"
 target_export = "RustboroCity_DevonCorp_3F_Text_MrStoneIHaveFavor"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -229,6 +252,8 @@ original_encoded_gba = 0x821277c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-devoncorp-3f"
 target_export = "RustboroCity_DevonCorp_3F_Text_MrStoneWantYouToHaveThis"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -238,6 +263,8 @@ original_encoded_gba = 0x8212820
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-devoncorp-3f"
 target_export = "RustboroCity_DevonCorp_3F_Text_ReceivedPokenav"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -247,6 +274,8 @@ original_encoded_gba = 0x8212837
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-devoncorp-3f"
 target_export = "RustboroCity_DevonCorp_3F_Text_MrStoneExplainPokenavRestUp"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -257,6 +286,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_OutOfCenterPartyHeal"
 target_offset = 320
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 320
 runtime_resolution_required = true
 
 [[relocs]]
@@ -266,6 +297,8 @@ original_encoded_gba = 0x82129d2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-devoncorp-3f"
 target_export = "RustboroCity_DevonCorp_3F_Text_MrStoneGoWithCautionAndCare"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -276,6 +309,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity-devoncorp-3f"
 target_export = "RustboroCity_DevonCorp_3F_EventScript_MrStoneAfterFavor"
 target_offset = 415
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 318
 runtime_resolution_required = true
 
 [[relocs]]
@@ -286,6 +321,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity-devoncorp-3f"
 target_export = "RustboroCity_DevonCorp_3F_EventScript_GiveExpShare"
 target_offset = 360
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 263
 runtime_resolution_required = true
 
 [[relocs]]
@@ -295,6 +332,8 @@ original_encoded_gba = 0x8212a09
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-devoncorp-3f"
 target_export = "RustboroCity_DevonCorp_3F_Text_CountingOnYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -304,6 +343,8 @@ original_encoded_gba = 0x82725a2
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceoriginaldirection"
 target_export = "Common_Movement_FaceOriginalDirection"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -313,6 +354,8 @@ original_encoded_gba = 0x8212a29
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-devoncorp-3f"
 target_export = "RustboroCity_DevonCorp_3F_Text_ThankYouForDeliveringLetter"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -323,6 +366,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_ShowBagIsFull"
 target_offset = 273
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 273
 runtime_resolution_required = true
 
 [[relocs]]
@@ -332,6 +377,8 @@ original_encoded_gba = 0x8212a9e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-devoncorp-3f"
 target_export = "RustboroCity_DevonCorp_3F_Text_ExplainExpShare"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -341,6 +388,8 @@ original_encoded_gba = 0x82725a2
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceoriginaldirection"
 target_export = "Common_Movement_FaceOriginalDirection"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -350,6 +399,8 @@ original_encoded_gba = 0x8212b78
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-devoncorp-3f"
 target_export = "RustboroCity_DevonCorp_3F_Text_NotFamiliarWithTrends"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -359,6 +410,8 @@ original_encoded_gba = 0x82725a2
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceoriginaldirection"
 target_export = "Common_Movement_FaceOriginalDirection"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -369,6 +422,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity-devoncorp-3f"
 target_export = "RustboroCity_DevonCorp_3F_EventScript_EmployeeBalls"
 target_offset = 457
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 360
 runtime_resolution_required = true
 
 [[relocs]]
@@ -378,6 +433,8 @@ original_encoded_gba = 0x8212e41
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-devoncorp-3f"
 target_export = "RustboroCity_DevonCorp_3F_Text_VisitCaptSternShipyard"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -387,6 +444,8 @@ original_encoded_gba = 0x8212e88
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-devoncorp-3f"
 target_export = "RustboroCity_DevonCorp_3F_Text_RepeatAndTimerHugelyPopular"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -396,4 +455,450 @@ original_encoded_gba = 0x8212ee9
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-devoncorp-3f"
 target_export = "RustboroCity_DevonCorp_3F_Text_RareRocksDisplay"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 5
+
+[[boundaries]]
+payload_offset = 5
+length = 6
+
+[[boundaries]]
+payload_offset = 11
+length = 1
+
+[[boundaries]]
+payload_offset = 12
+length = 7
+
+[[boundaries]]
+payload_offset = 19
+length = 4
+
+[[boundaries]]
+payload_offset = 23
+length = 1
+
+[[boundaries]]
+payload_offset = 24
+length = 4
+
+[[boundaries]]
+payload_offset = 28
+length = 1
+
+[[boundaries]]
+payload_offset = 29
+length = 1
+
+[[boundaries]]
+payload_offset = 30
+length = 6
+
+[[boundaries]]
+payload_offset = 36
+length = 2
+
+[[boundaries]]
+payload_offset = 38
+length = 1
+
+[[boundaries]]
+payload_offset = 39
+length = 7
+
+[[boundaries]]
+payload_offset = 46
+length = 3
+
+[[boundaries]]
+payload_offset = 49
+length = 3
+
+[[boundaries]]
+payload_offset = 52
+length = 7
+
+[[boundaries]]
+payload_offset = 59
+length = 3
+
+[[boundaries]]
+payload_offset = 62
+length = 6
+
+[[boundaries]]
+payload_offset = 68
+length = 2
+
+[[boundaries]]
+payload_offset = 70
+length = 1
+
+[[boundaries]]
+payload_offset = 71
+length = 4
+
+[[boundaries]]
+payload_offset = 75
+length = 7
+
+[[boundaries]]
+payload_offset = 82
+length = 7
+
+[[boundaries]]
+payload_offset = 89
+length = 3
+
+[[boundaries]]
+payload_offset = 92
+length = 6
+
+[[boundaries]]
+payload_offset = 98
+length = 2
+
+[[boundaries]]
+payload_offset = 100
+length = 1
+
+[[boundaries]]
+payload_offset = 101
+length = 1
+
+[[boundaries]]
+payload_offset = 102
+length = 7
+
+[[boundaries]]
+payload_offset = 109
+length = 7
+
+[[boundaries]]
+payload_offset = 116
+length = 3
+
+[[boundaries]]
+payload_offset = 119
+length = 6
+
+[[boundaries]]
+payload_offset = 125
+length = 2
+
+[[boundaries]]
+payload_offset = 127
+length = 5
+
+[[boundaries]]
+payload_offset = 132
+length = 5
+
+[[boundaries]]
+payload_offset = 137
+length = 2
+
+[[boundaries]]
+payload_offset = 139
+length = 6
+
+[[boundaries]]
+payload_offset = 145
+length = 2
+
+[[boundaries]]
+payload_offset = 147
+length = 3
+
+[[boundaries]]
+payload_offset = 150
+length = 5
+
+[[boundaries]]
+payload_offset = 155
+length = 1
+
+[[boundaries]]
+payload_offset = 156
+length = 3
+
+[[boundaries]]
+payload_offset = 159
+length = 3
+
+[[boundaries]]
+payload_offset = 162
+length = 3
+
+[[boundaries]]
+payload_offset = 165
+length = 6
+
+[[boundaries]]
+payload_offset = 171
+length = 2
+
+[[boundaries]]
+payload_offset = 173
+length = 1
+
+[[boundaries]]
+payload_offset = 174
+length = 5
+
+[[boundaries]]
+payload_offset = 179
+length = 6
+
+[[boundaries]]
+payload_offset = 185
+length = 2
+
+[[boundaries]]
+payload_offset = 187
+length = 3
+
+[[boundaries]]
+payload_offset = 190
+length = 3
+
+[[boundaries]]
+payload_offset = 193
+length = 3
+
+[[boundaries]]
+payload_offset = 196
+length = 3
+
+[[boundaries]]
+payload_offset = 199
+length = 3
+
+[[boundaries]]
+payload_offset = 202
+length = 5
+
+[[boundaries]]
+payload_offset = 207
+length = 3
+
+[[boundaries]]
+payload_offset = 210
+length = 5
+
+[[boundaries]]
+payload_offset = 215
+length = 5
+
+[[boundaries]]
+payload_offset = 220
+length = 1
+
+[[boundaries]]
+payload_offset = 221
+length = 1
+
+[[boundaries]]
+payload_offset = 222
+length = 1
+
+[[boundaries]]
+payload_offset = 223
+length = 1
+
+[[boundaries]]
+payload_offset = 224
+length = 3
+
+[[boundaries]]
+payload_offset = 227
+length = 6
+
+[[boundaries]]
+payload_offset = 233
+length = 3
+
+[[boundaries]]
+payload_offset = 236
+length = 6
+
+[[boundaries]]
+payload_offset = 242
+length = 6
+
+[[boundaries]]
+payload_offset = 248
+length = 2
+
+[[boundaries]]
+payload_offset = 250
+length = 1
+
+[[boundaries]]
+payload_offset = 251
+length = 7
+
+[[boundaries]]
+payload_offset = 258
+length = 3
+
+[[boundaries]]
+payload_offset = 261
+length = 1
+
+[[boundaries]]
+payload_offset = 262
+length = 1
+
+[[boundaries]]
+payload_offset = 263
+length = 6
+
+[[boundaries]]
+payload_offset = 269
+length = 2
+
+[[boundaries]]
+payload_offset = 271
+length = 5
+
+[[boundaries]]
+payload_offset = 276
+length = 5
+
+[[boundaries]]
+payload_offset = 281
+length = 2
+
+[[boundaries]]
+payload_offset = 283
+length = 5
+
+[[boundaries]]
+payload_offset = 288
+length = 6
+
+[[boundaries]]
+payload_offset = 294
+length = 3
+
+[[boundaries]]
+payload_offset = 297
+length = 6
+
+[[boundaries]]
+payload_offset = 303
+length = 2
+
+[[boundaries]]
+payload_offset = 305
+length = 1
+
+[[boundaries]]
+payload_offset = 306
+length = 7
+
+[[boundaries]]
+payload_offset = 313
+length = 3
+
+[[boundaries]]
+payload_offset = 316
+length = 1
+
+[[boundaries]]
+payload_offset = 317
+length = 1
+
+[[boundaries]]
+payload_offset = 318
+length = 6
+
+[[boundaries]]
+payload_offset = 324
+length = 2
+
+[[boundaries]]
+payload_offset = 326
+length = 1
+
+[[boundaries]]
+payload_offset = 327
+length = 7
+
+[[boundaries]]
+payload_offset = 334
+length = 3
+
+[[boundaries]]
+payload_offset = 337
+length = 1
+
+[[boundaries]]
+payload_offset = 338
+length = 1
+
+[[boundaries]]
+payload_offset = 339
+length = 1
+
+[[boundaries]]
+payload_offset = 340
+length = 1
+
+[[boundaries]]
+payload_offset = 341
+length = 3
+
+[[boundaries]]
+payload_offset = 344
+length = 6
+
+[[boundaries]]
+payload_offset = 350
+length = 6
+
+[[boundaries]]
+payload_offset = 356
+length = 2
+
+[[boundaries]]
+payload_offset = 358
+length = 1
+
+[[boundaries]]
+payload_offset = 359
+length = 1
+
+[[boundaries]]
+payload_offset = 360
+length = 6
+
+[[boundaries]]
+payload_offset = 366
+length = 2
+
+[[boundaries]]
+payload_offset = 368
+length = 1
+
+[[boundaries]]
+payload_offset = 369
+length = 1
+
+[[boundaries]]
+payload_offset = 370
+length = 6
+
+[[boundaries]]
+payload_offset = 376
+length = 2
+
+[[boundaries]]
+payload_offset = 378
+length = 1

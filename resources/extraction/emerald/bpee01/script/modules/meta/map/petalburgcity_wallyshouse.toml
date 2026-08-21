@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 2
 export_count = 8
 reloc_count = 12
+instruction_count = 52
 
 [[segments]]
 kind = "bytecode"
@@ -101,6 +102,8 @@ original_encoded_gba = 0x820446e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-wallyshouse"
 target_export = "PetalburgCity_WallysHouse_Text_PleaseExcuseUs"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -110,6 +113,8 @@ original_encoded_gba = 0x820461a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-wallyshouse"
 target_export = "PetalburgCity_WallysHouse_Text_SurfGoAllSortsOfPlaces"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -120,6 +125,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-wallyshouse"
 target_export = "PetalburgCity_WallysHouse_EventScript_DefeatedWallyInVictoryRoad"
 target_offset = 131
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 100
 runtime_resolution_required = true
 
 [[relocs]]
@@ -130,6 +137,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-wallyshouse"
 target_export = "PetalburgCity_WallysHouse_EventScript_ReceievedHM03Surf"
 target_offset = 121
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 90
 runtime_resolution_required = true
 
 [[relocs]]
@@ -140,6 +149,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-wallyshouse"
 target_export = "PetalburgCity_WallysHouse_EventScript_PlayedWithWally"
 target_offset = 141
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 110
 runtime_resolution_required = true
 
 [[relocs]]
@@ -149,6 +160,8 @@ original_encoded_gba = 0x82042df
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-wallyshouse"
 target_export = "PetalburgCity_WallysHouse_Text_ThanksForPlayingWithWally"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -158,6 +171,8 @@ original_encoded_gba = 0x8204661
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-wallyshouse"
 target_export = "PetalburgCity_WallysHouse_Text_WallyIsComingHomeSoon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -167,6 +182,8 @@ original_encoded_gba = 0x8204698
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-wallyshouse"
 target_export = "PetalburgCity_WallysHouse_Text_YouMetWallyInEverGrandeCity"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -176,6 +193,8 @@ original_encoded_gba = 0x820444d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-wallyshouse"
 target_export = "PetalburgCity_WallysHouse_Text_WonderHowWallyIsDoing"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -186,6 +205,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-wallyshouse"
 target_export = "PetalburgCity_WallysHouse_EventScript_ReceivedHM03Surf"
 target_offset = 172
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 141
 runtime_resolution_required = true
 
 [[relocs]]
@@ -195,6 +216,8 @@ original_encoded_gba = 0x8204732
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-wallyshouse"
 target_export = "PetalburgCity_WallysHouse_Text_WallyWasReallyHappy"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -204,4 +227,214 @@ original_encoded_gba = 0x82047a7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-wallyshouse"
 target_export = "PetalburgCity_WallysHouse_Text_WallyLeftWithoutTelling"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 4
+
+[[boundaries]]
+payload_offset = 4
+length = 4
+
+[[boundaries]]
+payload_offset = 8
+length = 1
+
+[[boundaries]]
+payload_offset = 9
+length = 1
+
+[[boundaries]]
+payload_offset = 10
+length = 6
+
+[[boundaries]]
+payload_offset = 16
+length = 2
+
+[[boundaries]]
+payload_offset = 18
+length = 5
+
+[[boundaries]]
+payload_offset = 23
+length = 5
+
+[[boundaries]]
+payload_offset = 28
+length = 2
+
+[[boundaries]]
+payload_offset = 30
+length = 3
+
+[[boundaries]]
+payload_offset = 33
+length = 6
+
+[[boundaries]]
+payload_offset = 39
+length = 2
+
+[[boundaries]]
+payload_offset = 41
+length = 5
+
+[[boundaries]]
+payload_offset = 46
+length = 1
+
+[[boundaries]]
+payload_offset = 47
+length = 1
+
+[[boundaries]]
+payload_offset = 48
+length = 1
+
+[[boundaries]]
+payload_offset = 49
+length = 1
+
+[[boundaries]]
+payload_offset = 50
+length = 3
+
+[[boundaries]]
+payload_offset = 53
+length = 6
+
+[[boundaries]]
+payload_offset = 59
+length = 3
+
+[[boundaries]]
+payload_offset = 62
+length = 6
+
+[[boundaries]]
+payload_offset = 68
+length = 3
+
+[[boundaries]]
+payload_offset = 71
+length = 6
+
+[[boundaries]]
+payload_offset = 77
+length = 6
+
+[[boundaries]]
+payload_offset = 83
+length = 2
+
+[[boundaries]]
+payload_offset = 85
+length = 3
+
+[[boundaries]]
+payload_offset = 88
+length = 1
+
+[[boundaries]]
+payload_offset = 89
+length = 1
+
+[[boundaries]]
+payload_offset = 90
+length = 6
+
+[[boundaries]]
+payload_offset = 96
+length = 2
+
+[[boundaries]]
+payload_offset = 98
+length = 1
+
+[[boundaries]]
+payload_offset = 99
+length = 1
+
+[[boundaries]]
+payload_offset = 100
+length = 6
+
+[[boundaries]]
+payload_offset = 106
+length = 2
+
+[[boundaries]]
+payload_offset = 108
+length = 1
+
+[[boundaries]]
+payload_offset = 109
+length = 1
+
+[[boundaries]]
+payload_offset = 110
+length = 6
+
+[[boundaries]]
+payload_offset = 116
+length = 2
+
+[[boundaries]]
+payload_offset = 118
+length = 1
+
+[[boundaries]]
+payload_offset = 119
+length = 1
+
+[[boundaries]]
+payload_offset = 120
+length = 1
+
+[[boundaries]]
+payload_offset = 121
+length = 1
+
+[[boundaries]]
+payload_offset = 122
+length = 3
+
+[[boundaries]]
+payload_offset = 125
+length = 6
+
+[[boundaries]]
+payload_offset = 131
+length = 6
+
+[[boundaries]]
+payload_offset = 137
+length = 2
+
+[[boundaries]]
+payload_offset = 139
+length = 1
+
+[[boundaries]]
+payload_offset = 140
+length = 1
+
+[[boundaries]]
+payload_offset = 141
+length = 6
+
+[[boundaries]]
+payload_offset = 147
+length = 2
+
+[[boundaries]]
+payload_offset = 149
+length = 1
+
+[[boundaries]]
+payload_offset = 150
+length = 1

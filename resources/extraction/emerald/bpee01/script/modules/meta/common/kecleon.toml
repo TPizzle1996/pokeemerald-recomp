@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 2
 export_count = 13
 reloc_count = 19
+instruction_count = 77
 
 [[segments]]
 kind = "bytecode"
@@ -142,6 +143,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/kecleon"
 target_export = "EventScript_Kecleon"
 target_offset = 91
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 91
 runtime_resolution_required = true
 
 [[relocs]]
@@ -152,6 +155,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/kecleon"
 target_export = "EventScript_Kecleon"
 target_offset = 91
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 91
 runtime_resolution_required = true
 
 [[relocs]]
@@ -162,6 +167,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/kecleon"
 target_export = "EventScript_Kecleon"
 target_offset = 91
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 91
 runtime_resolution_required = true
 
 [[relocs]]
@@ -172,6 +179,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/kecleon"
 target_export = "EventScript_Kecleon"
 target_offset = 91
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 91
 runtime_resolution_required = true
 
 [[relocs]]
@@ -182,6 +191,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/kecleon"
 target_export = "EventScript_Kecleon"
 target_offset = 91
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 91
 runtime_resolution_required = true
 
 [[relocs]]
@@ -192,6 +203,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/kecleon"
 target_export = "EventScript_Kecleon"
 target_offset = 91
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 91
 runtime_resolution_required = true
 
 [[relocs]]
@@ -202,6 +215,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/kecleon"
 target_export = "EventScript_Kecleon"
 target_offset = 91
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 91
 runtime_resolution_required = true
 
 [[relocs]]
@@ -212,6 +227,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/kecleon"
 target_export = "EventScript_AskUseDevonScope"
 target_offset = 117
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 117
 runtime_resolution_required = true
 
 [[relocs]]
@@ -221,6 +238,8 @@ original_encoded_gba = 0x81f5d00
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route120"
 target_export = "Kecleon_Text_SomethingUnseeable"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -230,6 +249,8 @@ original_encoded_gba = 0x81f5d23
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route120"
 target_export = "Kecleon_Text_WantToUseDevonScope"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -240,6 +261,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/kecleon"
 target_export = "EventScript_BattleKecleon"
 target_offset = 138
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 138
 runtime_resolution_required = true
 
 [[relocs]]
@@ -249,6 +272,8 @@ original_encoded_gba = 0x81f5d63
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route120"
 target_export = "Kecleon_Text_UseDevonScopeMonAttacked"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -258,6 +283,8 @@ original_encoded_gba = 0x827259e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceplayer"
 target_export = "Common_Movement_FacePlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -267,6 +294,8 @@ original_encoded_gba = 0x82723c7
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/movement-kecleonappears"
 target_export = "Movement_KecleonAppears"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -277,6 +306,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/kecleon"
 target_export = "EventScript_RemoveKecleon"
 target_offset = 230
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 230
 runtime_resolution_required = true
 
 [[relocs]]
@@ -287,6 +318,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/kecleon"
 target_export = "EventScript_RemoveKecleon"
 target_offset = 230
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 230
 runtime_resolution_required = true
 
 [[relocs]]
@@ -297,6 +330,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/kecleon"
 target_export = "EventScript_RemoveKecleon"
 target_offset = 230
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 230
 runtime_resolution_required = true
 
 [[relocs]]
@@ -307,6 +342,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-poison"
 target_export = "Common_EventScript_RemoveStaticPokemon"
 target_offset = 177
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 177
 runtime_resolution_required = true
 
 [[relocs]]
@@ -316,4 +353,314 @@ original_encoded_gba = 0x8273161
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/event-scripts"
 target_export = "gText_PlayerHandedOverTheItem"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 1
+
+[[boundaries]]
+payload_offset = 2
+length = 5
+
+[[boundaries]]
+payload_offset = 7
+length = 5
+
+[[boundaries]]
+payload_offset = 13
+length = 1
+
+[[boundaries]]
+payload_offset = 14
+length = 1
+
+[[boundaries]]
+payload_offset = 15
+length = 5
+
+[[boundaries]]
+payload_offset = 20
+length = 5
+
+[[boundaries]]
+payload_offset = 26
+length = 1
+
+[[boundaries]]
+payload_offset = 27
+length = 1
+
+[[boundaries]]
+payload_offset = 28
+length = 5
+
+[[boundaries]]
+payload_offset = 33
+length = 5
+
+[[boundaries]]
+payload_offset = 39
+length = 1
+
+[[boundaries]]
+payload_offset = 40
+length = 1
+
+[[boundaries]]
+payload_offset = 41
+length = 5
+
+[[boundaries]]
+payload_offset = 46
+length = 5
+
+[[boundaries]]
+payload_offset = 52
+length = 1
+
+[[boundaries]]
+payload_offset = 53
+length = 1
+
+[[boundaries]]
+payload_offset = 54
+length = 5
+
+[[boundaries]]
+payload_offset = 59
+length = 5
+
+[[boundaries]]
+payload_offset = 65
+length = 1
+
+[[boundaries]]
+payload_offset = 66
+length = 1
+
+[[boundaries]]
+payload_offset = 67
+length = 5
+
+[[boundaries]]
+payload_offset = 72
+length = 5
+
+[[boundaries]]
+payload_offset = 78
+length = 1
+
+[[boundaries]]
+payload_offset = 79
+length = 1
+
+[[boundaries]]
+payload_offset = 80
+length = 5
+
+[[boundaries]]
+payload_offset = 85
+length = 5
+
+[[boundaries]]
+payload_offset = 91
+length = 5
+
+[[boundaries]]
+payload_offset = 96
+length = 5
+
+[[boundaries]]
+payload_offset = 101
+length = 6
+
+[[boundaries]]
+payload_offset = 107
+length = 6
+
+[[boundaries]]
+payload_offset = 113
+length = 2
+
+[[boundaries]]
+payload_offset = 115
+length = 1
+
+[[boundaries]]
+payload_offset = 116
+length = 1
+
+[[boundaries]]
+payload_offset = 117
+length = 6
+
+[[boundaries]]
+payload_offset = 123
+length = 2
+
+[[boundaries]]
+payload_offset = 125
+length = 5
+
+[[boundaries]]
+payload_offset = 130
+length = 6
+
+[[boundaries]]
+payload_offset = 136
+length = 1
+
+[[boundaries]]
+payload_offset = 137
+length = 1
+
+[[boundaries]]
+payload_offset = 138
+length = 6
+
+[[boundaries]]
+payload_offset = 144
+length = 2
+
+[[boundaries]]
+payload_offset = 146
+length = 1
+
+[[boundaries]]
+payload_offset = 147
+length = 7
+
+[[boundaries]]
+payload_offset = 154
+length = 3
+
+[[boundaries]]
+payload_offset = 157
+length = 7
+
+[[boundaries]]
+payload_offset = 164
+length = 3
+
+[[boundaries]]
+payload_offset = 167
+length = 1
+
+[[boundaries]]
+payload_offset = 168
+length = 5
+
+[[boundaries]]
+payload_offset = 173
+length = 3
+
+[[boundaries]]
+payload_offset = 176
+length = 1
+
+[[boundaries]]
+payload_offset = 177
+length = 6
+
+[[boundaries]]
+payload_offset = 183
+length = 3
+
+[[boundaries]]
+payload_offset = 186
+length = 1
+
+[[boundaries]]
+payload_offset = 187
+length = 3
+
+[[boundaries]]
+payload_offset = 190
+length = 5
+
+[[boundaries]]
+payload_offset = 195
+length = 5
+
+[[boundaries]]
+payload_offset = 200
+length = 6
+
+[[boundaries]]
+payload_offset = 206
+length = 5
+
+[[boundaries]]
+payload_offset = 211
+length = 6
+
+[[boundaries]]
+payload_offset = 217
+length = 5
+
+[[boundaries]]
+payload_offset = 222
+length = 6
+
+[[boundaries]]
+payload_offset = 228
+length = 1
+
+[[boundaries]]
+payload_offset = 229
+length = 1
+
+[[boundaries]]
+payload_offset = 230
+length = 5
+
+[[boundaries]]
+payload_offset = 236
+length = 2
+
+[[boundaries]]
+payload_offset = 238
+length = 3
+
+[[boundaries]]
+payload_offset = 241
+length = 1
+
+[[boundaries]]
+payload_offset = 242
+length = 1
+
+[[boundaries]]
+payload_offset = 243
+length = 4
+
+[[boundaries]]
+payload_offset = 247
+length = 3
+
+[[boundaries]]
+payload_offset = 250
+length = 5
+
+[[boundaries]]
+payload_offset = 255
+length = 1
+
+[[boundaries]]
+payload_offset = 256
+length = 1
+
+[[boundaries]]
+payload_offset = 257
+length = 5
+
+[[boundaries]]
+payload_offset = 262
+length = 1

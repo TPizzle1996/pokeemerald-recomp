@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 6
 reloc_count = 4
+instruction_count = 16
 
 [[segments]]
 kind = "bytecode"
@@ -79,6 +80,8 @@ original_encoded_gba = 0x81ebb6c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/pacifidlogtown"
 target_export = "PacifidlogTown_Text_NeatHousesOnWater"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -88,6 +91,8 @@ original_encoded_gba = 0x81ebae7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/pacifidlogtown"
 target_export = "PacifidlogTown_Text_FastRunningCurrent"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -97,6 +102,8 @@ original_encoded_gba = 0x81ebbac
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/pacifidlogtown"
 target_export = "PacifidlogTown_Text_SkyPillarTooScary"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -106,4 +113,70 @@ original_encoded_gba = 0x81ebc7a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/pacifidlogtown"
 target_export = "PacifidlogTown_Text_TownSign"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 1
+
+[[boundaries]]
+payload_offset = 4
+length = 2
+
+[[boundaries]]
+payload_offset = 6
+length = 1
+
+[[boundaries]]
+payload_offset = 7
+length = 6
+
+[[boundaries]]
+payload_offset = 13
+length = 2
+
+[[boundaries]]
+payload_offset = 15
+length = 1
+
+[[boundaries]]
+payload_offset = 16
+length = 6
+
+[[boundaries]]
+payload_offset = 22
+length = 2
+
+[[boundaries]]
+payload_offset = 24
+length = 1
+
+[[boundaries]]
+payload_offset = 25
+length = 6
+
+[[boundaries]]
+payload_offset = 31
+length = 2
+
+[[boundaries]]
+payload_offset = 33
+length = 1
+
+[[boundaries]]
+payload_offset = 34
+length = 6
+
+[[boundaries]]
+payload_offset = 40
+length = 2
+
+[[boundaries]]
+payload_offset = 42
+length = 1

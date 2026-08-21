@@ -17,6 +17,7 @@ static_data_bytes = 20
 segment_count = 3
 export_count = 6
 reloc_count = 11
+instruction_count = 38
 
 [[segments]]
 kind = "bytecode"
@@ -92,6 +93,8 @@ original_encoded_gba = 0x8272a21
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/mart-clerk"
 target_export = "gText_HowMayIServeYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -102,6 +105,8 @@ target_class = "MART_TABLE_TARGET"
 target_resource_key = "emerald:script/map/sootopoliscity-mart"
 target_export = "SootopolisCity_Mart_Pokemart"
 target_offset = 23
+target_kind = "MART_TABLE"
+target_payload_offset = 23
 runtime_resolution_required = true
 
 [[relocs]]
@@ -111,6 +116,8 @@ original_encoded_gba = 0x8272a3f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/mart-clerk"
 target_export = "gText_PleaseComeAgain"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -121,6 +128,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/sootopoliscity-mart"
 target_export = "SootopolisCity_Mart_EventScript_FatManNoLegendaries"
 target_offset = 78
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 77
 runtime_resolution_required = true
 
 [[relocs]]
@@ -131,6 +140,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/sootopoliscity-mart"
 target_export = "SootopolisCity_Mart_EventScript_FatManNoLegendaries"
 target_offset = 78
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 77
 runtime_resolution_required = true
 
 [[relocs]]
@@ -140,6 +151,8 @@ original_encoded_gba = 0x822685d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-mart"
 target_export = "SootopolisCity_Mart_Text_TooScaryOutside"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -149,6 +162,8 @@ original_encoded_gba = 0x8226816
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-mart"
 target_export = "SootopolisCity_Mart_Text_PPUpIsGreat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -159,6 +174,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/sootopoliscity-mart"
 target_export = "SootopolisCity_Mart_EventScript_GentlemanNoLegendaries"
 target_offset = 120
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 119
 runtime_resolution_required = true
 
 [[relocs]]
@@ -169,6 +186,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/sootopoliscity-mart"
 target_export = "SootopolisCity_Mart_EventScript_GentlemanNoLegendaries"
 target_offset = 120
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 119
 runtime_resolution_required = true
 
 [[relocs]]
@@ -178,6 +197,8 @@ original_encoded_gba = 0x8226928
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-mart"
 target_export = "SootopolisCity_Mart_Text_DidSomethingAwaken"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -187,4 +208,158 @@ original_encoded_gba = 0x82268af
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-mart"
 target_export = "SootopolisCity_Mart_Text_FullRestoreItemOfDreams"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 1
+
+[[boundaries]]
+payload_offset = 2
+length = 5
+
+[[boundaries]]
+payload_offset = 7
+length = 1
+
+[[boundaries]]
+payload_offset = 8
+length = 5
+
+[[boundaries]]
+payload_offset = 13
+length = 6
+
+[[boundaries]]
+payload_offset = 19
+length = 2
+
+[[boundaries]]
+payload_offset = 21
+length = 1
+
+[[boundaries]]
+payload_offset = 22
+length = 1
+
+[[boundaries]]
+payload_offset = 23
+length = 1
+
+[[boundaries]]
+payload_offset = 45
+length = 1
+
+[[boundaries]]
+payload_offset = 46
+length = 1
+
+[[boundaries]]
+payload_offset = 47
+length = 5
+
+[[boundaries]]
+payload_offset = 52
+length = 6
+
+[[boundaries]]
+payload_offset = 58
+length = 3
+
+[[boundaries]]
+payload_offset = 61
+length = 6
+
+[[boundaries]]
+payload_offset = 67
+length = 6
+
+[[boundaries]]
+payload_offset = 73
+length = 2
+
+[[boundaries]]
+payload_offset = 75
+length = 1
+
+[[boundaries]]
+payload_offset = 76
+length = 1
+
+[[boundaries]]
+payload_offset = 77
+length = 6
+
+[[boundaries]]
+payload_offset = 83
+length = 2
+
+[[boundaries]]
+payload_offset = 85
+length = 1
+
+[[boundaries]]
+payload_offset = 86
+length = 1
+
+[[boundaries]]
+payload_offset = 87
+length = 1
+
+[[boundaries]]
+payload_offset = 88
+length = 1
+
+[[boundaries]]
+payload_offset = 89
+length = 5
+
+[[boundaries]]
+payload_offset = 94
+length = 6
+
+[[boundaries]]
+payload_offset = 100
+length = 3
+
+[[boundaries]]
+payload_offset = 103
+length = 6
+
+[[boundaries]]
+payload_offset = 109
+length = 6
+
+[[boundaries]]
+payload_offset = 115
+length = 2
+
+[[boundaries]]
+payload_offset = 117
+length = 1
+
+[[boundaries]]
+payload_offset = 118
+length = 1
+
+[[boundaries]]
+payload_offset = 119
+length = 6
+
+[[boundaries]]
+payload_offset = 125
+length = 2
+
+[[boundaries]]
+payload_offset = 127
+length = 1
+
+[[boundaries]]
+payload_offset = 128
+length = 1

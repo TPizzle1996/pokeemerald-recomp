@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 13
 reloc_count = 31
+instruction_count = 87
 
 [[segments]]
 kind = "bytecode"
@@ -136,6 +137,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/profile-man"
 target_export = "ProfileMan_EventScript_GivenProfileBefore"
 target_offset = 188
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 188
 runtime_resolution_required = true
 
 [[relocs]]
@@ -145,6 +148,8 @@ original_encoded_gba = 0x8291687
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/profile-man"
 target_export = "ProfileMan_Text_CollectTrainerProfiles"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -155,6 +160,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/profile-man"
 target_export = "ProfileMan_EventScript_AskToSeeProfile"
 target_offset = 25
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 25
 runtime_resolution_required = true
 
 [[relocs]]
@@ -164,6 +171,8 @@ original_encoded_gba = 0x82916ff
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/profile-man"
 target_export = "ProfileMan_Text_MayISeeYourProfile"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -174,6 +183,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/profile-man"
 target_export = "ProfileMan_EventScript_CreateProfile"
 target_offset = 102
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 102
 runtime_resolution_required = true
 
 [[relocs]]
@@ -184,6 +195,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/profile-man"
 target_export = "ProfileMan_EventScript_DeclineShowProfile"
 target_offset = 178
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 178
 runtime_resolution_required = true
 
 [[relocs]]
@@ -194,6 +207,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/profile-man"
 target_export = "ProfileMan_EventScript_Info"
 target_offset = 88
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 88
 runtime_resolution_required = true
 
 [[relocs]]
@@ -204,6 +219,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/profile-man"
 target_export = "ProfileMan_EventScript_DeclineShowProfile"
 target_offset = 178
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 178
 runtime_resolution_required = true
 
 [[relocs]]
@@ -213,6 +230,8 @@ original_encoded_gba = 0x8291729
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/profile-man"
 target_export = "ProfileMan_Text_EasyChatExplanation"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -223,6 +242,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/profile-man"
 target_export = "ProfileMan_EventScript_AskToSeeProfile"
 target_offset = 25
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 25
 runtime_resolution_required = true
 
 [[relocs]]
@@ -232,6 +253,8 @@ original_encoded_gba = 0x8291969
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/profile-man"
 target_export = "ProfileMan_Text_LetsSeeItThen"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -242,6 +265,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pc"
 target_export = "Common_ShowEasyChatScreen"
 target_offset = 234
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 234
 runtime_resolution_required = true
 
 [[relocs]]
@@ -252,6 +277,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/profile-man"
 target_export = "ProfileMan_EventScript_CancelShowProfile"
 target_offset = 146
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 146
 runtime_resolution_required = true
 
 [[relocs]]
@@ -262,6 +289,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/profile-man"
 target_export = "ProfileMan_EventScript_ShowProfile"
 target_offset = 156
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 156
 runtime_resolution_required = true
 
 [[relocs]]
@@ -271,6 +300,8 @@ original_encoded_gba = 0x82919dc
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/profile-man"
 target_export = "ProfileMan_Text_NotIntoItRightNow"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -280,6 +311,8 @@ original_encoded_gba = 0x8291b22
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/profile-man"
 target_export = "ProfileMan_Text_FantasticProfile"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -289,6 +322,8 @@ original_encoded_gba = 0x8291991
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/profile-man"
 target_export = "ProfileMan_Text_ImagineYouWouldHaveWonderfulProfile"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -298,6 +333,8 @@ original_encoded_gba = 0x8291a1b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/profile-man"
 target_export = "ProfileMan_Text_YouHaveWonderfulSmile"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -308,6 +345,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/profile-man"
 target_export = "ProfileMan_EventScript_AskToSeeNewProfile"
 target_offset = 202
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 202
 runtime_resolution_required = true
 
 [[relocs]]
@@ -317,6 +356,8 @@ original_encoded_gba = 0x8291a4f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/profile-man"
 target_export = "ProfileMan_Text_MayISeeYourNewProfile"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -327,6 +368,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/profile-man"
 target_export = "ProfileMan_EventScript_CreateNewProfile"
 target_offset = 279
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 279
 runtime_resolution_required = true
 
 [[relocs]]
@@ -337,6 +380,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/profile-man"
 target_export = "ProfileMan_EventScript_DeclineNewProfile"
 target_offset = 323
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 323
 runtime_resolution_required = true
 
 [[relocs]]
@@ -347,6 +392,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/profile-man"
 target_export = "ProfileMan_EventScript_InfoNewProfile"
 target_offset = 265
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 265
 runtime_resolution_required = true
 
 [[relocs]]
@@ -357,6 +404,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/profile-man"
 target_export = "ProfileMan_EventScript_DeclineNewProfile"
 target_offset = 323
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 323
 runtime_resolution_required = true
 
 [[relocs]]
@@ -366,6 +415,8 @@ original_encoded_gba = 0x8291729
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/profile-man"
 target_export = "ProfileMan_Text_EasyChatExplanation"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -376,6 +427,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/profile-man"
 target_export = "ProfileMan_EventScript_AskToSeeNewProfile"
 target_offset = 202
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 202
 runtime_resolution_required = true
 
 [[relocs]]
@@ -385,6 +438,8 @@ original_encoded_gba = 0x8291a6b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/profile-man"
 target_export = "ProfileMan_Text_EvenBetterThanLastProfile"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -395,6 +450,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pc"
 target_export = "Common_ShowEasyChatScreen"
 target_offset = 234
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 234
 runtime_resolution_required = true
 
 [[relocs]]
@@ -405,6 +462,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/profile-man"
 target_export = "ProfileMan_EventScript_CancelShowProfile"
 target_offset = 146
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 146
 runtime_resolution_required = true
 
 [[relocs]]
@@ -415,6 +474,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/profile-man"
 target_export = "ProfileMan_EventScript_ShowProfile"
 target_offset = 156
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 156
 runtime_resolution_required = true
 
 [[relocs]]
@@ -424,4 +485,354 @@ original_encoded_gba = 0x8291aba
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/profile-man"
 target_export = "ProfileMan_Text_LikeProfileWayItIs"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 1
+
+[[boundaries]]
+payload_offset = 2
+length = 3
+
+[[boundaries]]
+payload_offset = 5
+length = 6
+
+[[boundaries]]
+payload_offset = 11
+length = 6
+
+[[boundaries]]
+payload_offset = 17
+length = 2
+
+[[boundaries]]
+payload_offset = 19
+length = 5
+
+[[boundaries]]
+payload_offset = 25
+length = 6
+
+[[boundaries]]
+payload_offset = 31
+length = 2
+
+[[boundaries]]
+payload_offset = 33
+length = 5
+
+[[boundaries]]
+payload_offset = 38
+length = 5
+
+[[boundaries]]
+payload_offset = 43
+length = 5
+
+[[boundaries]]
+payload_offset = 48
+length = 6
+
+[[boundaries]]
+payload_offset = 54
+length = 5
+
+[[boundaries]]
+payload_offset = 59
+length = 6
+
+[[boundaries]]
+payload_offset = 65
+length = 5
+
+[[boundaries]]
+payload_offset = 70
+length = 6
+
+[[boundaries]]
+payload_offset = 76
+length = 5
+
+[[boundaries]]
+payload_offset = 81
+length = 6
+
+[[boundaries]]
+payload_offset = 87
+length = 1
+
+[[boundaries]]
+payload_offset = 88
+length = 6
+
+[[boundaries]]
+payload_offset = 94
+length = 2
+
+[[boundaries]]
+payload_offset = 96
+length = 5
+
+[[boundaries]]
+payload_offset = 102
+length = 6
+
+[[boundaries]]
+payload_offset = 108
+length = 2
+
+[[boundaries]]
+payload_offset = 110
+length = 1
+
+[[boundaries]]
+payload_offset = 111
+length = 5
+
+[[boundaries]]
+payload_offset = 116
+length = 5
+
+[[boundaries]]
+payload_offset = 121
+length = 1
+
+[[boundaries]]
+payload_offset = 122
+length = 1
+
+[[boundaries]]
+payload_offset = 123
+length = 5
+
+[[boundaries]]
+payload_offset = 128
+length = 6
+
+[[boundaries]]
+payload_offset = 134
+length = 5
+
+[[boundaries]]
+payload_offset = 139
+length = 6
+
+[[boundaries]]
+payload_offset = 145
+length = 1
+
+[[boundaries]]
+payload_offset = 146
+length = 6
+
+[[boundaries]]
+payload_offset = 152
+length = 2
+
+[[boundaries]]
+payload_offset = 154
+length = 1
+
+[[boundaries]]
+payload_offset = 155
+length = 1
+
+[[boundaries]]
+payload_offset = 156
+length = 5
+
+[[boundaries]]
+payload_offset = 161
+length = 3
+
+[[boundaries]]
+payload_offset = 164
+length = 1
+
+[[boundaries]]
+payload_offset = 165
+length = 3
+
+[[boundaries]]
+payload_offset = 168
+length = 6
+
+[[boundaries]]
+payload_offset = 174
+length = 2
+
+[[boundaries]]
+payload_offset = 176
+length = 1
+
+[[boundaries]]
+payload_offset = 177
+length = 1
+
+[[boundaries]]
+payload_offset = 178
+length = 6
+
+[[boundaries]]
+payload_offset = 184
+length = 2
+
+[[boundaries]]
+payload_offset = 186
+length = 1
+
+[[boundaries]]
+payload_offset = 187
+length = 1
+
+[[boundaries]]
+payload_offset = 188
+length = 6
+
+[[boundaries]]
+payload_offset = 194
+length = 2
+
+[[boundaries]]
+payload_offset = 196
+length = 5
+
+[[boundaries]]
+payload_offset = 202
+length = 6
+
+[[boundaries]]
+payload_offset = 208
+length = 2
+
+[[boundaries]]
+payload_offset = 210
+length = 5
+
+[[boundaries]]
+payload_offset = 215
+length = 5
+
+[[boundaries]]
+payload_offset = 220
+length = 5
+
+[[boundaries]]
+payload_offset = 225
+length = 6
+
+[[boundaries]]
+payload_offset = 231
+length = 5
+
+[[boundaries]]
+payload_offset = 236
+length = 6
+
+[[boundaries]]
+payload_offset = 242
+length = 5
+
+[[boundaries]]
+payload_offset = 247
+length = 6
+
+[[boundaries]]
+payload_offset = 253
+length = 5
+
+[[boundaries]]
+payload_offset = 258
+length = 6
+
+[[boundaries]]
+payload_offset = 264
+length = 1
+
+[[boundaries]]
+payload_offset = 265
+length = 6
+
+[[boundaries]]
+payload_offset = 271
+length = 2
+
+[[boundaries]]
+payload_offset = 273
+length = 5
+
+[[boundaries]]
+payload_offset = 279
+length = 6
+
+[[boundaries]]
+payload_offset = 285
+length = 2
+
+[[boundaries]]
+payload_offset = 287
+length = 1
+
+[[boundaries]]
+payload_offset = 288
+length = 5
+
+[[boundaries]]
+payload_offset = 293
+length = 5
+
+[[boundaries]]
+payload_offset = 298
+length = 1
+
+[[boundaries]]
+payload_offset = 299
+length = 1
+
+[[boundaries]]
+payload_offset = 300
+length = 5
+
+[[boundaries]]
+payload_offset = 305
+length = 6
+
+[[boundaries]]
+payload_offset = 311
+length = 5
+
+[[boundaries]]
+payload_offset = 316
+length = 6
+
+[[boundaries]]
+payload_offset = 322
+length = 1
+
+[[boundaries]]
+payload_offset = 323
+length = 6
+
+[[boundaries]]
+payload_offset = 329
+length = 2
+
+[[boundaries]]
+payload_offset = 331
+length = 1
+
+[[boundaries]]
+payload_offset = 332
+length = 1
+
+[[boundaries]]
+payload_offset = 333
+length = 1

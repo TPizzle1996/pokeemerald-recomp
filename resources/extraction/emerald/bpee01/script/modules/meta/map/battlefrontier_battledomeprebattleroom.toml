@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 2
 export_count = 32
 reloc_count = 80
+instruction_count = 256
 
 [[segments]]
 kind = "bytecode"
@@ -294,6 +295,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_ReturnFromBattle"
 target_offset = 974
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 943
 runtime_resolution_required = true
 
 [[relocs]]
@@ -303,6 +306,8 @@ original_encoded_gba = 0x824b652
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battledomeprebattleroom-movement-playerenter"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_Movement_PlayerEnter"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -313,6 +318,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForNextRoundMessage"
 target_offset = 770
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 739
 runtime_resolution_required = true
 
 [[relocs]]
@@ -323,6 +330,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battletowerlobby"
 target_export = "BattleFrontier_EventScript_GetCantRecordBattle"
 target_offset = 613
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 540
 runtime_resolution_required = true
 
 [[relocs]]
@@ -333,6 +342,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRoundNoRecord"
 target_offset = 200
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 169
 runtime_resolution_required = true
 
 [[relocs]]
@@ -343,6 +354,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_ShowOpponentInfo"
 target_offset = 484
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 453
 runtime_resolution_required = true
 
 [[relocs]]
@@ -353,6 +366,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_ShowTourneyTree"
 target_offset = 508
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 477
 runtime_resolution_required = true
 
 [[relocs]]
@@ -363,6 +378,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_ContinueChallenge"
 target_offset = 628
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 597
 runtime_resolution_required = true
 
 [[relocs]]
@@ -373,6 +390,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_AskRecordBattle"
 target_offset = 276
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 245
 runtime_resolution_required = true
 
 [[relocs]]
@@ -383,6 +402,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_AskPauseChallenge"
 target_offset = 336
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 305
 runtime_resolution_required = true
 
 [[relocs]]
@@ -393,6 +414,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_AskRetireChallenge"
 target_offset = 382
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 351
 runtime_resolution_required = true
 
 [[relocs]]
@@ -403,6 +426,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound"
 target_offset = 86
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 55
 runtime_resolution_required = true
 
 [[relocs]]
@@ -413,6 +438,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_ShowOpponentInfo"
 target_offset = 484
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 453
 runtime_resolution_required = true
 
 [[relocs]]
@@ -423,6 +450,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_ShowTourneyTree"
 target_offset = 508
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 477
 runtime_resolution_required = true
 
 [[relocs]]
@@ -433,6 +462,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_ContinueChallenge"
 target_offset = 628
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 597
 runtime_resolution_required = true
 
 [[relocs]]
@@ -443,6 +474,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_AskPauseChallenge"
 target_offset = 336
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 305
 runtime_resolution_required = true
 
 [[relocs]]
@@ -453,6 +486,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_AskRetireChallenge"
 target_offset = 382
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 351
 runtime_resolution_required = true
 
 [[relocs]]
@@ -463,6 +498,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound"
 target_offset = 86
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 55
 runtime_resolution_required = true
 
 [[relocs]]
@@ -472,6 +509,8 @@ original_encoded_gba = 0x824baf7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_Text_RecordLastMatch"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -482,6 +521,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound"
 target_offset = 86
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 55
 runtime_resolution_required = true
 
 [[relocs]]
@@ -492,6 +533,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_RecordBattle"
 target_offset = 326
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -502,6 +545,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound"
 target_offset = 86
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 55
 runtime_resolution_required = true
 
 [[relocs]]
@@ -512,6 +557,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battletowerlobby"
 target_export = "BattleFrontier_EventScript_SaveBattle"
 target_offset = 569
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 496
 runtime_resolution_required = true
 
 [[relocs]]
@@ -522,6 +569,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound"
 target_offset = 86
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 55
 runtime_resolution_required = true
 
 [[relocs]]
@@ -531,6 +580,8 @@ original_encoded_gba = 0x824ba69
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_Text_SaveAndQuitGame"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -541,6 +592,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound"
 target_offset = 86
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 55
 runtime_resolution_required = true
 
 [[relocs]]
@@ -551,6 +604,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_PauseChallenge"
 target_offset = 450
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 419
 runtime_resolution_required = true
 
 [[relocs]]
@@ -561,6 +616,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound"
 target_offset = 86
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 55
 runtime_resolution_required = true
 
 [[relocs]]
@@ -570,6 +627,8 @@ original_encoded_gba = 0x824ba93
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_Text_RetireYourChallenge"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -580,6 +639,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound"
 target_offset = 86
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 55
 runtime_resolution_required = true
 
 [[relocs]]
@@ -590,6 +651,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_RetireChallenge"
 target_offset = 432
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 401
 runtime_resolution_required = true
 
 [[relocs]]
@@ -600,6 +663,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound"
 target_offset = 86
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 55
 runtime_resolution_required = true
 
 [[relocs]]
@@ -610,6 +675,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomebattleroom"
 target_export = "BattleFrontier_BattleDomeBattleRoom_EventScript_WarpToLobbyLost"
 target_offset = 510
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 479
 runtime_resolution_required = true
 
 [[relocs]]
@@ -619,6 +686,8 @@ original_encoded_gba = 0x824bad3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_Text_SavingDataPleaseWait"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -628,6 +697,8 @@ original_encoded_gba = 0x824b9b5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_Text_PlayersNextOpponentIsTrainer"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -638,6 +709,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound"
 target_offset = 86
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 55
 runtime_resolution_required = true
 
 [[relocs]]
@@ -648,6 +721,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_ShowRoundMessage"
 target_offset = 529
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 498
 runtime_resolution_required = true
 
 [[relocs]]
@@ -658,6 +733,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound"
 target_offset = 86
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 55
 runtime_resolution_required = true
 
 [[relocs]]
@@ -668,6 +745,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_TourneyInRound1"
 target_offset = 592
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 561
 runtime_resolution_required = true
 
 [[relocs]]
@@ -678,6 +757,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_TourneyInRound2"
 target_offset = 601
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 570
 runtime_resolution_required = true
 
 [[relocs]]
@@ -688,6 +769,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_TourneyInSemifinals"
 target_offset = 610
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 579
 runtime_resolution_required = true
 
 [[relocs]]
@@ -698,6 +781,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_TourneyInFinals"
 target_offset = 619
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 588
 runtime_resolution_required = true
 
 [[relocs]]
@@ -707,6 +792,8 @@ original_encoded_gba = 0x824b9d9
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_Text_TourneyInRound1"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -716,6 +803,8 @@ original_encoded_gba = 0x824b9fd
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_Text_TourneyInRound2"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -725,6 +814,8 @@ original_encoded_gba = 0x824ba21
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_Text_TourneyInSemifinals"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -734,6 +825,8 @@ original_encoded_gba = 0x824ba46
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_Text_TourneyInFinals"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -743,6 +836,8 @@ original_encoded_gba = 0x824b70c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_Text_ChooseTwoMons"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -753,6 +848,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battletowerlobby"
 target_export = "BattleFrontier_EventScript_GetLvlMode"
 target_offset = 3132
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3041
 runtime_resolution_required = true
 
 [[relocs]]
@@ -763,6 +860,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound"
 target_offset = 86
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 55
 runtime_resolution_required = true
 
 [[relocs]]
@@ -772,6 +871,8 @@ original_encoded_gba = 0x824b748
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_Text_RightThisWay"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -781,6 +882,8 @@ original_encoded_gba = 0x824b64f
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battledomeprebattleroom-movement-attendantmoveaside"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_Movement_AttendantMoveAside"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -790,6 +893,8 @@ original_encoded_gba = 0x824b657
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battledomeprebattleroom-movement-playerwalktodoor"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_Movement_PlayerWalkToDoor"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -799,6 +904,8 @@ original_encoded_gba = 0x824b659
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battledomeprebattleroom-movement-playerenterdoor"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_Movement_PlayerEnterDoor"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -809,6 +916,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForRound1"
 target_offset = 833
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 802
 runtime_resolution_required = true
 
 [[relocs]]
@@ -819,6 +928,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForRound2"
 target_offset = 839
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 808
 runtime_resolution_required = true
 
 [[relocs]]
@@ -829,6 +940,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForSemifinals"
 target_offset = 845
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 814
 runtime_resolution_required = true
 
 [[relocs]]
@@ -839,6 +952,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForFinals"
 target_offset = 851
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 820
 runtime_resolution_required = true
 
 [[relocs]]
@@ -848,6 +963,8 @@ original_encoded_gba = 0x824b65c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForRound1"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -857,6 +974,8 @@ original_encoded_gba = 0x824b689
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForRound2"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -866,6 +985,8 @@ original_encoded_gba = 0x824b6b6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForSemifinals"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -876,6 +997,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForTuckerSilver"
 target_offset = 914
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 883
 runtime_resolution_required = true
 
 [[relocs]]
@@ -886,6 +1009,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForTuckerGold"
 target_offset = 935
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 904
 runtime_resolution_required = true
 
 [[relocs]]
@@ -896,6 +1021,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForTuckerSilver"
 target_offset = 914
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 883
 runtime_resolution_required = true
 
 [[relocs]]
@@ -906,6 +1033,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForTuckerGold"
 target_offset = 935
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 904
 runtime_resolution_required = true
 
 [[relocs]]
@@ -915,6 +1044,8 @@ original_encoded_gba = 0x824b6e3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForFinals"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -925,6 +1056,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForTuckerSilverShort"
 target_offset = 956
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 925
 runtime_resolution_required = true
 
 [[relocs]]
@@ -934,6 +1067,8 @@ original_encoded_gba = 0x824bb2e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForTuckerSilver"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -944,6 +1079,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_ReadyForTuckerGoldShort"
 target_offset = 965
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 934
 runtime_resolution_required = true
 
 [[relocs]]
@@ -953,6 +1090,8 @@ original_encoded_gba = 0x824bbac
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForTuckerGold"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -962,6 +1101,8 @@ original_encoded_gba = 0x824bc2a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForTuckerSilverShort"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -971,6 +1112,8 @@ original_encoded_gba = 0x824bc63
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_Text_ReadyForTuckerGoldShort"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -980,6 +1123,8 @@ original_encoded_gba = 0x824b760
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_Text_RestoreMonsToFullHealth"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -990,6 +1135,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_RoundCompleteMessage"
 target_offset = 1031
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1000
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1000,6 +1147,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_AskReadyForNextRound"
 target_offset = 86
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 55
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1010,6 +1159,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_Round1Complete"
 target_offset = 1083
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1052
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1020,6 +1171,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_Round2Complete"
 target_offset = 1092
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1061
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1030,6 +1183,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_EventScript_SemifinalsComplete"
 target_offset = 1101
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1070
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1039,6 +1194,8 @@ original_encoded_gba = 0x824b7a3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_Text_Round1Complete"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1048,6 +1205,8 @@ original_encoded_gba = 0x824b7f1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_Text_Round2Complete"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1057,4 +1216,1030 @@ original_encoded_gba = 0x824b83f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battledomeprebattleroom"
 target_export = "BattleFrontier_BattleDomePreBattleRoom_Text_SemifinalsComplete"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 5
+
+[[boundaries]]
+payload_offset = 5
+length = 4
+
+[[boundaries]]
+payload_offset = 9
+length = 1
+
+[[boundaries]]
+payload_offset = 10
+length = 5
+
+[[boundaries]]
+payload_offset = 15
+length = 6
+
+[[boundaries]]
+payload_offset = 21
+length = 5
+
+[[boundaries]]
+payload_offset = 26
+length = 5
+
+[[boundaries]]
+payload_offset = 31
+length = 5
+
+[[boundaries]]
+payload_offset = 36
+length = 3
+
+[[boundaries]]
+payload_offset = 39
+length = 5
+
+[[boundaries]]
+payload_offset = 44
+length = 7
+
+[[boundaries]]
+payload_offset = 51
+length = 3
+
+[[boundaries]]
+payload_offset = 54
+length = 1
+
+[[boundaries]]
+payload_offset = 55
+length = 5
+
+[[boundaries]]
+payload_offset = 60
+length = 1
+
+[[boundaries]]
+payload_offset = 61
+length = 5
+
+[[boundaries]]
+payload_offset = 66
+length = 5
+
+[[boundaries]]
+payload_offset = 71
+length = 5
+
+[[boundaries]]
+payload_offset = 76
+length = 6
+
+[[boundaries]]
+payload_offset = 82
+length = 5
+
+[[boundaries]]
+payload_offset = 87
+length = 5
+
+[[boundaries]]
+payload_offset = 92
+length = 5
+
+[[boundaries]]
+payload_offset = 97
+length = 6
+
+[[boundaries]]
+payload_offset = 103
+length = 5
+
+[[boundaries]]
+payload_offset = 108
+length = 6
+
+[[boundaries]]
+payload_offset = 114
+length = 5
+
+[[boundaries]]
+payload_offset = 119
+length = 6
+
+[[boundaries]]
+payload_offset = 125
+length = 5
+
+[[boundaries]]
+payload_offset = 130
+length = 6
+
+[[boundaries]]
+payload_offset = 136
+length = 5
+
+[[boundaries]]
+payload_offset = 141
+length = 6
+
+[[boundaries]]
+payload_offset = 147
+length = 5
+
+[[boundaries]]
+payload_offset = 152
+length = 6
+
+[[boundaries]]
+payload_offset = 158
+length = 5
+
+[[boundaries]]
+payload_offset = 163
+length = 6
+
+[[boundaries]]
+payload_offset = 169
+length = 5
+
+[[boundaries]]
+payload_offset = 174
+length = 5
+
+[[boundaries]]
+payload_offset = 179
+length = 5
+
+[[boundaries]]
+payload_offset = 184
+length = 6
+
+[[boundaries]]
+payload_offset = 190
+length = 5
+
+[[boundaries]]
+payload_offset = 195
+length = 6
+
+[[boundaries]]
+payload_offset = 201
+length = 5
+
+[[boundaries]]
+payload_offset = 206
+length = 6
+
+[[boundaries]]
+payload_offset = 212
+length = 5
+
+[[boundaries]]
+payload_offset = 217
+length = 6
+
+[[boundaries]]
+payload_offset = 223
+length = 5
+
+[[boundaries]]
+payload_offset = 228
+length = 6
+
+[[boundaries]]
+payload_offset = 234
+length = 5
+
+[[boundaries]]
+payload_offset = 239
+length = 6
+
+[[boundaries]]
+payload_offset = 245
+length = 5
+
+[[boundaries]]
+payload_offset = 250
+length = 1
+
+[[boundaries]]
+payload_offset = 251
+length = 6
+
+[[boundaries]]
+payload_offset = 257
+length = 5
+
+[[boundaries]]
+payload_offset = 262
+length = 5
+
+[[boundaries]]
+payload_offset = 267
+length = 6
+
+[[boundaries]]
+payload_offset = 273
+length = 5
+
+[[boundaries]]
+payload_offset = 278
+length = 6
+
+[[boundaries]]
+payload_offset = 284
+length = 5
+
+[[boundaries]]
+payload_offset = 289
+length = 6
+
+[[boundaries]]
+payload_offset = 295
+length = 5
+
+[[boundaries]]
+payload_offset = 300
+length = 5
+
+[[boundaries]]
+payload_offset = 305
+length = 6
+
+[[boundaries]]
+payload_offset = 311
+length = 2
+
+[[boundaries]]
+payload_offset = 313
+length = 5
+
+[[boundaries]]
+payload_offset = 318
+length = 5
+
+[[boundaries]]
+payload_offset = 323
+length = 6
+
+[[boundaries]]
+payload_offset = 329
+length = 5
+
+[[boundaries]]
+payload_offset = 334
+length = 6
+
+[[boundaries]]
+payload_offset = 340
+length = 5
+
+[[boundaries]]
+payload_offset = 345
+length = 6
+
+[[boundaries]]
+payload_offset = 351
+length = 5
+
+[[boundaries]]
+payload_offset = 356
+length = 1
+
+[[boundaries]]
+payload_offset = 357
+length = 6
+
+[[boundaries]]
+payload_offset = 363
+length = 5
+
+[[boundaries]]
+payload_offset = 368
+length = 5
+
+[[boundaries]]
+payload_offset = 373
+length = 6
+
+[[boundaries]]
+payload_offset = 379
+length = 5
+
+[[boundaries]]
+payload_offset = 384
+length = 6
+
+[[boundaries]]
+payload_offset = 390
+length = 5
+
+[[boundaries]]
+payload_offset = 395
+length = 6
+
+[[boundaries]]
+payload_offset = 401
+length = 5
+
+[[boundaries]]
+payload_offset = 406
+length = 5
+
+[[boundaries]]
+payload_offset = 411
+length = 3
+
+[[boundaries]]
+payload_offset = 414
+length = 5
+
+[[boundaries]]
+payload_offset = 419
+length = 5
+
+[[boundaries]]
+payload_offset = 424
+length = 1
+
+[[boundaries]]
+payload_offset = 425
+length = 5
+
+[[boundaries]]
+payload_offset = 430
+length = 5
+
+[[boundaries]]
+payload_offset = 435
+length = 3
+
+[[boundaries]]
+payload_offset = 438
+length = 3
+
+[[boundaries]]
+payload_offset = 441
+length = 1
+
+[[boundaries]]
+payload_offset = 442
+length = 2
+
+[[boundaries]]
+payload_offset = 444
+length = 5
+
+[[boundaries]]
+payload_offset = 449
+length = 3
+
+[[boundaries]]
+payload_offset = 452
+length = 1
+
+[[boundaries]]
+payload_offset = 453
+length = 6
+
+[[boundaries]]
+payload_offset = 459
+length = 2
+
+[[boundaries]]
+payload_offset = 461
+length = 2
+
+[[boundaries]]
+payload_offset = 463
+length = 5
+
+[[boundaries]]
+payload_offset = 468
+length = 3
+
+[[boundaries]]
+payload_offset = 471
+length = 1
+
+[[boundaries]]
+payload_offset = 472
+length = 5
+
+[[boundaries]]
+payload_offset = 477
+length = 5
+
+[[boundaries]]
+payload_offset = 482
+length = 2
+
+[[boundaries]]
+payload_offset = 484
+length = 5
+
+[[boundaries]]
+payload_offset = 489
+length = 3
+
+[[boundaries]]
+payload_offset = 492
+length = 1
+
+[[boundaries]]
+payload_offset = 493
+length = 5
+
+[[boundaries]]
+payload_offset = 498
+length = 5
+
+[[boundaries]]
+payload_offset = 503
+length = 5
+
+[[boundaries]]
+payload_offset = 508
+length = 3
+
+[[boundaries]]
+payload_offset = 511
+length = 5
+
+[[boundaries]]
+payload_offset = 516
+length = 5
+
+[[boundaries]]
+payload_offset = 521
+length = 6
+
+[[boundaries]]
+payload_offset = 527
+length = 5
+
+[[boundaries]]
+payload_offset = 532
+length = 6
+
+[[boundaries]]
+payload_offset = 538
+length = 5
+
+[[boundaries]]
+payload_offset = 543
+length = 6
+
+[[boundaries]]
+payload_offset = 549
+length = 5
+
+[[boundaries]]
+payload_offset = 554
+length = 6
+
+[[boundaries]]
+payload_offset = 560
+length = 1
+
+[[boundaries]]
+payload_offset = 561
+length = 6
+
+[[boundaries]]
+payload_offset = 567
+length = 2
+
+[[boundaries]]
+payload_offset = 569
+length = 1
+
+[[boundaries]]
+payload_offset = 570
+length = 6
+
+[[boundaries]]
+payload_offset = 576
+length = 2
+
+[[boundaries]]
+payload_offset = 578
+length = 1
+
+[[boundaries]]
+payload_offset = 579
+length = 6
+
+[[boundaries]]
+payload_offset = 585
+length = 2
+
+[[boundaries]]
+payload_offset = 587
+length = 1
+
+[[boundaries]]
+payload_offset = 588
+length = 6
+
+[[boundaries]]
+payload_offset = 594
+length = 2
+
+[[boundaries]]
+payload_offset = 596
+length = 1
+
+[[boundaries]]
+payload_offset = 597
+length = 5
+
+[[boundaries]]
+payload_offset = 602
+length = 1
+
+[[boundaries]]
+payload_offset = 603
+length = 1
+
+[[boundaries]]
+payload_offset = 604
+length = 2
+
+[[boundaries]]
+payload_offset = 606
+length = 5
+
+[[boundaries]]
+payload_offset = 611
+length = 5
+
+[[boundaries]]
+payload_offset = 616
+length = 5
+
+[[boundaries]]
+payload_offset = 621
+length = 3
+
+[[boundaries]]
+payload_offset = 624
+length = 1
+
+[[boundaries]]
+payload_offset = 625
+length = 5
+
+[[boundaries]]
+payload_offset = 630
+length = 3
+
+[[boundaries]]
+payload_offset = 633
+length = 5
+
+[[boundaries]]
+payload_offset = 638
+length = 6
+
+[[boundaries]]
+payload_offset = 644
+length = 5
+
+[[boundaries]]
+payload_offset = 649
+length = 5
+
+[[boundaries]]
+payload_offset = 654
+length = 3
+
+[[boundaries]]
+payload_offset = 657
+length = 5
+
+[[boundaries]]
+payload_offset = 662
+length = 3
+
+[[boundaries]]
+payload_offset = 665
+length = 5
+
+[[boundaries]]
+payload_offset = 670
+length = 3
+
+[[boundaries]]
+payload_offset = 673
+length = 6
+
+[[boundaries]]
+payload_offset = 679
+length = 2
+
+[[boundaries]]
+payload_offset = 681
+length = 1
+
+[[boundaries]]
+payload_offset = 682
+length = 7
+
+[[boundaries]]
+payload_offset = 689
+length = 3
+
+[[boundaries]]
+payload_offset = 692
+length = 7
+
+[[boundaries]]
+payload_offset = 699
+length = 3
+
+[[boundaries]]
+payload_offset = 702
+length = 5
+
+[[boundaries]]
+payload_offset = 707
+length = 1
+
+[[boundaries]]
+payload_offset = 708
+length = 7
+
+[[boundaries]]
+payload_offset = 715
+length = 3
+
+[[boundaries]]
+payload_offset = 718
+length = 5
+
+[[boundaries]]
+payload_offset = 723
+length = 1
+
+[[boundaries]]
+payload_offset = 724
+length = 8
+
+[[boundaries]]
+payload_offset = 732
+length = 5
+
+[[boundaries]]
+payload_offset = 737
+length = 1
+
+[[boundaries]]
+payload_offset = 738
+length = 1
+
+[[boundaries]]
+payload_offset = 739
+length = 5
+
+[[boundaries]]
+payload_offset = 744
+length = 5
+
+[[boundaries]]
+payload_offset = 749
+length = 3
+
+[[boundaries]]
+payload_offset = 752
+length = 5
+
+[[boundaries]]
+payload_offset = 757
+length = 5
+
+[[boundaries]]
+payload_offset = 762
+length = 6
+
+[[boundaries]]
+payload_offset = 768
+length = 5
+
+[[boundaries]]
+payload_offset = 773
+length = 6
+
+[[boundaries]]
+payload_offset = 779
+length = 5
+
+[[boundaries]]
+payload_offset = 784
+length = 6
+
+[[boundaries]]
+payload_offset = 790
+length = 5
+
+[[boundaries]]
+payload_offset = 795
+length = 6
+
+[[boundaries]]
+payload_offset = 801
+length = 1
+
+[[boundaries]]
+payload_offset = 802
+length = 5
+
+[[boundaries]]
+payload_offset = 807
+length = 1
+
+[[boundaries]]
+payload_offset = 808
+length = 5
+
+[[boundaries]]
+payload_offset = 813
+length = 1
+
+[[boundaries]]
+payload_offset = 814
+length = 5
+
+[[boundaries]]
+payload_offset = 819
+length = 1
+
+[[boundaries]]
+payload_offset = 820
+length = 5
+
+[[boundaries]]
+payload_offset = 825
+length = 3
+
+[[boundaries]]
+payload_offset = 828
+length = 5
+
+[[boundaries]]
+payload_offset = 833
+length = 5
+
+[[boundaries]]
+payload_offset = 838
+length = 6
+
+[[boundaries]]
+payload_offset = 844
+length = 5
+
+[[boundaries]]
+payload_offset = 849
+length = 6
+
+[[boundaries]]
+payload_offset = 855
+length = 5
+
+[[boundaries]]
+payload_offset = 860
+length = 6
+
+[[boundaries]]
+payload_offset = 866
+length = 5
+
+[[boundaries]]
+payload_offset = 871
+length = 6
+
+[[boundaries]]
+payload_offset = 877
+length = 5
+
+[[boundaries]]
+payload_offset = 882
+length = 1
+
+[[boundaries]]
+payload_offset = 883
+length = 3
+
+[[boundaries]]
+payload_offset = 886
+length = 6
+
+[[boundaries]]
+payload_offset = 892
+length = 6
+
+[[boundaries]]
+payload_offset = 898
+length = 2
+
+[[boundaries]]
+payload_offset = 900
+length = 3
+
+[[boundaries]]
+payload_offset = 903
+length = 1
+
+[[boundaries]]
+payload_offset = 904
+length = 3
+
+[[boundaries]]
+payload_offset = 907
+length = 6
+
+[[boundaries]]
+payload_offset = 913
+length = 6
+
+[[boundaries]]
+payload_offset = 919
+length = 2
+
+[[boundaries]]
+payload_offset = 921
+length = 3
+
+[[boundaries]]
+payload_offset = 924
+length = 1
+
+[[boundaries]]
+payload_offset = 925
+length = 6
+
+[[boundaries]]
+payload_offset = 931
+length = 2
+
+[[boundaries]]
+payload_offset = 933
+length = 1
+
+[[boundaries]]
+payload_offset = 934
+length = 6
+
+[[boundaries]]
+payload_offset = 940
+length = 2
+
+[[boundaries]]
+payload_offset = 942
+length = 1
+
+[[boundaries]]
+payload_offset = 943
+length = 5
+
+[[boundaries]]
+payload_offset = 948
+length = 6
+
+[[boundaries]]
+payload_offset = 954
+length = 2
+
+[[boundaries]]
+payload_offset = 956
+length = 3
+
+[[boundaries]]
+payload_offset = 959
+length = 5
+
+[[boundaries]]
+payload_offset = 964
+length = 5
+
+[[boundaries]]
+payload_offset = 969
+length = 3
+
+[[boundaries]]
+payload_offset = 972
+length = 3
+
+[[boundaries]]
+payload_offset = 975
+length = 1
+
+[[boundaries]]
+payload_offset = 976
+length = 3
+
+[[boundaries]]
+payload_offset = 979
+length = 5
+
+[[boundaries]]
+payload_offset = 984
+length = 2
+
+[[boundaries]]
+payload_offset = 986
+length = 5
+
+[[boundaries]]
+payload_offset = 991
+length = 3
+
+[[boundaries]]
+payload_offset = 994
+length = 1
+
+[[boundaries]]
+payload_offset = 995
+length = 5
+
+[[boundaries]]
+payload_offset = 1000
+length = 5
+
+[[boundaries]]
+payload_offset = 1005
+length = 5
+
+[[boundaries]]
+payload_offset = 1010
+length = 3
+
+[[boundaries]]
+payload_offset = 1013
+length = 5
+
+[[boundaries]]
+payload_offset = 1018
+length = 5
+
+[[boundaries]]
+payload_offset = 1023
+length = 6
+
+[[boundaries]]
+payload_offset = 1029
+length = 5
+
+[[boundaries]]
+payload_offset = 1034
+length = 6
+
+[[boundaries]]
+payload_offset = 1040
+length = 5
+
+[[boundaries]]
+payload_offset = 1045
+length = 6
+
+[[boundaries]]
+payload_offset = 1051
+length = 1
+
+[[boundaries]]
+payload_offset = 1052
+length = 6
+
+[[boundaries]]
+payload_offset = 1058
+length = 2
+
+[[boundaries]]
+payload_offset = 1060
+length = 1
+
+[[boundaries]]
+payload_offset = 1061
+length = 6
+
+[[boundaries]]
+payload_offset = 1067
+length = 2
+
+[[boundaries]]
+payload_offset = 1069
+length = 1
+
+[[boundaries]]
+payload_offset = 1070
+length = 6
+
+[[boundaries]]
+payload_offset = 1076
+length = 2
+
+[[boundaries]]
+payload_offset = 1078
+length = 1

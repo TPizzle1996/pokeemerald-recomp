@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 2
 export_count = 9
 reloc_count = 25
+instruction_count = 59
 
 [[segments]]
 kind = "bytecode"
@@ -110,6 +111,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/aquahideout-b2f"
 target_export = "AquaHideout_B2F_EventScript_PreventMattNoticing"
 target_offset = 16
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 10
 runtime_resolution_required = true
 
 [[relocs]]
@@ -119,6 +122,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -128,6 +133,8 @@ original_encoded_gba = 0x827259e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceplayer"
 target_export = "Common_Movement_FacePlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -137,6 +144,8 @@ original_encoded_gba = 0x8233edd
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/aquahideout-b2f"
 target_export = "AquaHideout_B2F_Text_MattIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -146,6 +155,8 @@ original_encoded_gba = 0x8233f8d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/aquahideout-b2f"
 target_export = "AquaHideout_B2F_Text_MattDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -156,6 +167,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/aquahideout-b2f"
 target_export = "AquaHideout_B2F_EventScript_SubmarineEscape"
 target_offset = 86
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 80
 runtime_resolution_required = true
 
 [[relocs]]
@@ -165,6 +178,8 @@ original_encoded_gba = 0x8233ff2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/aquahideout-b2f"
 target_export = "AquaHideout_B2F_Text_MattPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -174,6 +189,8 @@ original_encoded_gba = 0x82725a4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterleft"
 target_export = "Common_Movement_WalkInPlaceFasterLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -183,6 +200,8 @@ original_encoded_gba = 0x827259e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceplayer"
 target_export = "Common_Movement_FacePlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -192,6 +211,8 @@ original_encoded_gba = 0x8233fa6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/aquahideout-b2f"
 target_export = "AquaHideout_B2F_Text_OurBossGotThroughHisPreparations"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -201,6 +222,8 @@ original_encoded_gba = 0x82725a4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterleft"
 target_export = "Common_Movement_WalkInPlaceFasterLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -210,6 +233,8 @@ original_encoded_gba = 0x8233e80
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/aquahideout-b2f-movement-sumbarinedepartleft"
 target_export = "AquaHideout_B2F_Movement_SumbarineDepartLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -219,6 +244,8 @@ original_encoded_gba = 0x827259e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceplayer"
 target_export = "Common_Movement_FacePlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -228,6 +255,8 @@ original_encoded_gba = 0x8233ff2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/aquahideout-b2f"
 target_export = "AquaHideout_B2F_Text_MattPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -237,6 +266,8 @@ original_encoded_gba = 0x82340b4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/aquahideout-b2f"
 target_export = "AquaHideout_B2F_Text_Grunt4Intro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -246,6 +277,8 @@ original_encoded_gba = 0x82340f0
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/aquahideout-b2f"
 target_export = "AquaHideout_B2F_Text_Grunt4Defeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -256,6 +289,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/aquahideout-b2f"
 target_export = "AquaHideout_B2F_EventScript_Grunt4Defeated"
 target_offset = 214
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 198
 runtime_resolution_required = true
 
 [[relocs]]
@@ -265,6 +300,8 @@ original_encoded_gba = 0x8234112
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/aquahideout-b2f"
 target_export = "AquaHideout_B2F_Text_Grunt4PostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -274,6 +311,8 @@ original_encoded_gba = 0x8234112
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/aquahideout-b2f"
 target_export = "AquaHideout_B2F_Text_Grunt4PostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -283,6 +322,8 @@ original_encoded_gba = 0x823412d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/aquahideout-b2f"
 target_export = "AquaHideout_B2F_Text_Grunt6Intro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -292,6 +333,8 @@ original_encoded_gba = 0x82341ce
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/aquahideout-b2f"
 target_export = "AquaHideout_B2F_Text_Grunt6Defeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -301,6 +344,8 @@ original_encoded_gba = 0x82341fe
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/aquahideout-b2f"
 target_export = "AquaHideout_B2F_Text_Grunt6PostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -310,6 +355,8 @@ original_encoded_gba = 0x823426f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/aquahideout-b2f"
 target_export = "AquaHideout_B2F_Text_Grunt8Intro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -319,6 +366,8 @@ original_encoded_gba = 0x82342cc
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/aquahideout-b2f"
 target_export = "AquaHideout_B2F_Text_Grunt8Defeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -328,4 +377,242 @@ original_encoded_gba = 0x82342ff
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/aquahideout-b2f"
 target_export = "AquaHideout_B2F_Text_Grunt8PostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 6
+
+[[boundaries]]
+payload_offset = 9
+length = 1
+
+[[boundaries]]
+payload_offset = 10
+length = 5
+
+[[boundaries]]
+payload_offset = 15
+length = 1
+
+[[boundaries]]
+payload_offset = 16
+length = 1
+
+[[boundaries]]
+payload_offset = 17
+length = 5
+
+[[boundaries]]
+payload_offset = 22
+length = 3
+
+[[boundaries]]
+payload_offset = 25
+length = 7
+
+[[boundaries]]
+payload_offset = 32
+length = 3
+
+[[boundaries]]
+payload_offset = 35
+length = 7
+
+[[boundaries]]
+payload_offset = 42
+length = 3
+
+[[boundaries]]
+payload_offset = 45
+length = 5
+
+[[boundaries]]
+payload_offset = 50
+length = 1
+
+[[boundaries]]
+payload_offset = 51
+length = 1
+
+[[boundaries]]
+payload_offset = 52
+length = 18
+
+[[boundaries]]
+payload_offset = 70
+length = 6
+
+[[boundaries]]
+payload_offset = 76
+length = 2
+
+[[boundaries]]
+payload_offset = 78
+length = 1
+
+[[boundaries]]
+payload_offset = 79
+length = 1
+
+[[boundaries]]
+payload_offset = 80
+length = 5
+
+[[boundaries]]
+payload_offset = 85
+length = 5
+
+[[boundaries]]
+payload_offset = 90
+length = 7
+
+[[boundaries]]
+payload_offset = 97
+length = 3
+
+[[boundaries]]
+payload_offset = 100
+length = 3
+
+[[boundaries]]
+payload_offset = 103
+length = 7
+
+[[boundaries]]
+payload_offset = 110
+length = 3
+
+[[boundaries]]
+payload_offset = 113
+length = 6
+
+[[boundaries]]
+payload_offset = 119
+length = 2
+
+[[boundaries]]
+payload_offset = 121
+length = 1
+
+[[boundaries]]
+payload_offset = 122
+length = 7
+
+[[boundaries]]
+payload_offset = 129
+length = 7
+
+[[boundaries]]
+payload_offset = 136
+length = 3
+
+[[boundaries]]
+payload_offset = 139
+length = 3
+
+[[boundaries]]
+payload_offset = 142
+length = 3
+
+[[boundaries]]
+payload_offset = 145
+length = 7
+
+[[boundaries]]
+payload_offset = 152
+length = 3
+
+[[boundaries]]
+payload_offset = 155
+length = 6
+
+[[boundaries]]
+payload_offset = 161
+length = 2
+
+[[boundaries]]
+payload_offset = 163
+length = 3
+
+[[boundaries]]
+payload_offset = 166
+length = 3
+
+[[boundaries]]
+payload_offset = 169
+length = 1
+
+[[boundaries]]
+payload_offset = 170
+length = 1
+
+[[boundaries]]
+payload_offset = 171
+length = 18
+
+[[boundaries]]
+payload_offset = 189
+length = 6
+
+[[boundaries]]
+payload_offset = 195
+length = 2
+
+[[boundaries]]
+payload_offset = 197
+length = 1
+
+[[boundaries]]
+payload_offset = 198
+length = 6
+
+[[boundaries]]
+payload_offset = 204
+length = 2
+
+[[boundaries]]
+payload_offset = 206
+length = 1
+
+[[boundaries]]
+payload_offset = 207
+length = 1
+
+[[boundaries]]
+payload_offset = 208
+length = 14
+
+[[boundaries]]
+payload_offset = 222
+length = 6
+
+[[boundaries]]
+payload_offset = 228
+length = 2
+
+[[boundaries]]
+payload_offset = 230
+length = 1
+
+[[boundaries]]
+payload_offset = 231
+length = 14
+
+[[boundaries]]
+payload_offset = 245
+length = 6
+
+[[boundaries]]
+payload_offset = 251
+length = 2
+
+[[boundaries]]
+payload_offset = 253
+length = 1

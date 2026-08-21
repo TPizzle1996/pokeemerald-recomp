@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 14
 reloc_count = 45
+instruction_count = 145
 
 [[segments]]
 kind = "bytecode"
@@ -144,6 +145,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route123-berrymastershouse"
 target_export = "Route123_BerryMastersHouse_EventScript_ReceivedBerryToday"
 target_offset = 123
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 117
 runtime_resolution_required = true
 
 [[relocs]]
@@ -153,6 +156,8 @@ original_encoded_gba = 0x82a7386
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/berries"
 target_export = "Route123_BerryMastersHouse_Text_YoureDeservingOfBerry"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -163,6 +168,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_ShowBagIsFull"
 target_offset = 273
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 273
 runtime_resolution_required = true
 
 [[relocs]]
@@ -172,6 +179,8 @@ original_encoded_gba = 0x82a7428
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/berries"
 target_export = "Route123_BerryMastersHouse_Text_WhyBeStingyTakeAnother"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -182,6 +191,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_ShowBagIsFull"
 target_offset = 273
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 273
 runtime_resolution_required = true
 
 [[relocs]]
@@ -191,6 +202,8 @@ original_encoded_gba = 0x82a7445
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/berries"
 target_export = "Route123_BerryMastersHouse_Text_VisitPrettyPetalFlowerShop"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -200,6 +213,8 @@ original_encoded_gba = 0x82a749e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/berries"
 target_export = "Route123_BerryMastersHouse_Text_DoneForToday"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -210,6 +225,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route123-berrymastershouse"
 target_export = "Route123_BerryMastersHouse_EventScript_ReceivedWifeBerryToday"
 target_offset = 564
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 558
 runtime_resolution_required = true
 
 [[relocs]]
@@ -219,6 +236,8 @@ original_encoded_gba = 0x82a74e6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/berries"
 target_export = "Route123_BerryMastersHouse_Text_HeardAGoodSayingLately"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -229,6 +248,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pc"
 target_export = "Common_ShowEasyChatScreen"
 target_offset = 234
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 234
 runtime_resolution_required = true
 
 [[relocs]]
@@ -239,6 +260,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route123-berrymastershouse"
 target_export = "Route123_BerryMastersHouse_EventScript_GavePhrase"
 target_offset = 206
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 200
 runtime_resolution_required = true
 
 [[relocs]]
@@ -249,6 +272,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route123-berrymastershouse"
 target_export = "Route123_BerryMastersHouse_EventScript_CancelPhrase"
 target_offset = 188
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 182
 runtime_resolution_required = true
 
 [[relocs]]
@@ -258,6 +283,8 @@ original_encoded_gba = 0x82a7682
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/berries"
 target_export = "Route123_BerryMastersHouse_Text_Ah"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -267,6 +294,8 @@ original_encoded_gba = 0x82a761b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/berries"
 target_export = "Route123_BerryMastersHouse_Text_JoyNeverGoesOutOfMyLife"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -277,6 +306,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route123-berrymastershouse"
 target_export = "Route123_BerryMastersHouse_EventScript_GiveNormalBerry"
 target_offset = 273
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 267
 runtime_resolution_required = true
 
 [[relocs]]
@@ -287,6 +318,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route123-berrymastershouse"
 target_export = "Route123_BerryMastersHouse_EventScript_GiveSpelonBerry"
 target_offset = 319
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 313
 runtime_resolution_required = true
 
 [[relocs]]
@@ -297,6 +330,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route123-berrymastershouse"
 target_export = "Route123_BerryMastersHouse_EventScript_GivePamtreBerry"
 target_offset = 368
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 362
 runtime_resolution_required = true
 
 [[relocs]]
@@ -307,6 +342,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route123-berrymastershouse"
 target_export = "Route123_BerryMastersHouse_EventScript_GiveWatmelBerry"
 target_offset = 417
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 411
 runtime_resolution_required = true
 
 [[relocs]]
@@ -317,6 +354,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route123-berrymastershouse"
 target_export = "Route123_BerryMastersHouse_EventScript_GiveDurinBerry"
 target_offset = 466
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 460
 runtime_resolution_required = true
 
 [[relocs]]
@@ -327,6 +366,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route123-berrymastershouse"
 target_export = "Route123_BerryMastersHouse_EventScript_GiveBelueBerry"
 target_offset = 515
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 509
 runtime_resolution_required = true
 
 [[relocs]]
@@ -336,6 +377,8 @@ original_encoded_gba = 0x82a75d0
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/berries"
 target_export = "Route123_BerryMastersHouse_Text_GoodSayingTakeThis"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -346,6 +389,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_ShowBagIsFull"
 target_offset = 273
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 273
 runtime_resolution_required = true
 
 [[relocs]]
@@ -356,6 +401,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route123-berrymastershouse"
 target_export = "Route123_BerryMastersHouse_EventScript_GaveBerry"
 target_offset = 574
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 568
 runtime_resolution_required = true
 
 [[relocs]]
@@ -366,6 +413,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route123-berrymastershouse"
 target_export = "Route123_BerryMastersHouse_EventScript_GiveNormalBerry"
 target_offset = 273
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 267
 runtime_resolution_required = true
 
 [[relocs]]
@@ -375,6 +424,8 @@ original_encoded_gba = 0x82a7583
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/berries"
 target_export = "Route123_BerryMastersHouse_Text_InspirationalTakeThis"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -385,6 +436,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_ShowBagIsFull"
 target_offset = 273
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 273
 runtime_resolution_required = true
 
 [[relocs]]
@@ -395,6 +448,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route123-berrymastershouse"
 target_export = "Route123_BerryMastersHouse_EventScript_GaveBerry"
 target_offset = 574
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 568
 runtime_resolution_required = true
 
 [[relocs]]
@@ -405,6 +460,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route123-berrymastershouse"
 target_export = "Route123_BerryMastersHouse_EventScript_GiveNormalBerry"
 target_offset = 273
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 267
 runtime_resolution_required = true
 
 [[relocs]]
@@ -414,6 +471,8 @@ original_encoded_gba = 0x82a7583
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/berries"
 target_export = "Route123_BerryMastersHouse_Text_InspirationalTakeThis"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -424,6 +483,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_ShowBagIsFull"
 target_offset = 273
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 273
 runtime_resolution_required = true
 
 [[relocs]]
@@ -434,6 +495,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route123-berrymastershouse"
 target_export = "Route123_BerryMastersHouse_EventScript_GaveBerry"
 target_offset = 574
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 568
 runtime_resolution_required = true
 
 [[relocs]]
@@ -444,6 +507,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route123-berrymastershouse"
 target_export = "Route123_BerryMastersHouse_EventScript_GiveNormalBerry"
 target_offset = 273
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 267
 runtime_resolution_required = true
 
 [[relocs]]
@@ -453,6 +518,8 @@ original_encoded_gba = 0x82a7583
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/berries"
 target_export = "Route123_BerryMastersHouse_Text_InspirationalTakeThis"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -463,6 +530,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_ShowBagIsFull"
 target_offset = 273
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 273
 runtime_resolution_required = true
 
 [[relocs]]
@@ -473,6 +542,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route123-berrymastershouse"
 target_export = "Route123_BerryMastersHouse_EventScript_GaveBerry"
 target_offset = 574
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 568
 runtime_resolution_required = true
 
 [[relocs]]
@@ -483,6 +554,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route123-berrymastershouse"
 target_export = "Route123_BerryMastersHouse_EventScript_GiveNormalBerry"
 target_offset = 273
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 267
 runtime_resolution_required = true
 
 [[relocs]]
@@ -492,6 +565,8 @@ original_encoded_gba = 0x82a7583
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/berries"
 target_export = "Route123_BerryMastersHouse_Text_InspirationalTakeThis"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -502,6 +577,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_ShowBagIsFull"
 target_offset = 273
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 273
 runtime_resolution_required = true
 
 [[relocs]]
@@ -512,6 +589,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route123-berrymastershouse"
 target_export = "Route123_BerryMastersHouse_EventScript_GaveBerry"
 target_offset = 574
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 568
 runtime_resolution_required = true
 
 [[relocs]]
@@ -522,6 +601,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route123-berrymastershouse"
 target_export = "Route123_BerryMastersHouse_EventScript_GiveNormalBerry"
 target_offset = 273
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 267
 runtime_resolution_required = true
 
 [[relocs]]
@@ -531,6 +612,8 @@ original_encoded_gba = 0x82a7583
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/berries"
 target_export = "Route123_BerryMastersHouse_Text_InspirationalTakeThis"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -541,6 +624,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_ShowBagIsFull"
 target_offset = 273
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 273
 runtime_resolution_required = true
 
 [[relocs]]
@@ -551,6 +636,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route123-berrymastershouse"
 target_export = "Route123_BerryMastersHouse_EventScript_GaveBerry"
 target_offset = 574
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 568
 runtime_resolution_required = true
 
 [[relocs]]
@@ -560,6 +647,8 @@ original_encoded_gba = 0x82a761b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/berries"
 target_export = "Route123_BerryMastersHouse_Text_JoyNeverGoesOutOfMyLife"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -569,4 +658,586 @@ original_encoded_gba = 0x82a761b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/berries"
 target_export = "Route123_BerryMastersHouse_Text_JoyNeverGoesOutOfMyLife"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 1
+
+[[boundaries]]
+payload_offset = 4
+length = 1
+
+[[boundaries]]
+payload_offset = 5
+length = 1
+
+[[boundaries]]
+payload_offset = 6
+length = 1
+
+[[boundaries]]
+payload_offset = 7
+length = 3
+
+[[boundaries]]
+payload_offset = 10
+length = 6
+
+[[boundaries]]
+payload_offset = 16
+length = 6
+
+[[boundaries]]
+payload_offset = 22
+length = 2
+
+[[boundaries]]
+payload_offset = 24
+length = 3
+
+[[boundaries]]
+payload_offset = 27
+length = 5
+
+[[boundaries]]
+payload_offset = 32
+length = 5
+
+[[boundaries]]
+payload_offset = 37
+length = 5
+
+[[boundaries]]
+payload_offset = 42
+length = 5
+
+[[boundaries]]
+payload_offset = 47
+length = 2
+
+[[boundaries]]
+payload_offset = 49
+length = 5
+
+[[boundaries]]
+payload_offset = 54
+length = 6
+
+[[boundaries]]
+payload_offset = 60
+length = 3
+
+[[boundaries]]
+payload_offset = 63
+length = 6
+
+[[boundaries]]
+payload_offset = 69
+length = 2
+
+[[boundaries]]
+payload_offset = 71
+length = 3
+
+[[boundaries]]
+payload_offset = 74
+length = 5
+
+[[boundaries]]
+payload_offset = 79
+length = 5
+
+[[boundaries]]
+payload_offset = 84
+length = 5
+
+[[boundaries]]
+payload_offset = 89
+length = 5
+
+[[boundaries]]
+payload_offset = 94
+length = 2
+
+[[boundaries]]
+payload_offset = 96
+length = 5
+
+[[boundaries]]
+payload_offset = 101
+length = 6
+
+[[boundaries]]
+payload_offset = 107
+length = 6
+
+[[boundaries]]
+payload_offset = 113
+length = 2
+
+[[boundaries]]
+payload_offset = 115
+length = 1
+
+[[boundaries]]
+payload_offset = 116
+length = 1
+
+[[boundaries]]
+payload_offset = 117
+length = 6
+
+[[boundaries]]
+payload_offset = 123
+length = 2
+
+[[boundaries]]
+payload_offset = 125
+length = 1
+
+[[boundaries]]
+payload_offset = 126
+length = 1
+
+[[boundaries]]
+payload_offset = 127
+length = 1
+
+[[boundaries]]
+payload_offset = 128
+length = 1
+
+[[boundaries]]
+payload_offset = 129
+length = 1
+
+[[boundaries]]
+payload_offset = 130
+length = 3
+
+[[boundaries]]
+payload_offset = 133
+length = 6
+
+[[boundaries]]
+payload_offset = 139
+length = 6
+
+[[boundaries]]
+payload_offset = 145
+length = 2
+
+[[boundaries]]
+payload_offset = 147
+length = 5
+
+[[boundaries]]
+payload_offset = 152
+length = 5
+
+[[boundaries]]
+payload_offset = 157
+length = 1
+
+[[boundaries]]
+payload_offset = 158
+length = 1
+
+[[boundaries]]
+payload_offset = 159
+length = 5
+
+[[boundaries]]
+payload_offset = 164
+length = 6
+
+[[boundaries]]
+payload_offset = 170
+length = 5
+
+[[boundaries]]
+payload_offset = 175
+length = 6
+
+[[boundaries]]
+payload_offset = 181
+length = 1
+
+[[boundaries]]
+payload_offset = 182
+length = 6
+
+[[boundaries]]
+payload_offset = 188
+length = 2
+
+[[boundaries]]
+payload_offset = 190
+length = 6
+
+[[boundaries]]
+payload_offset = 196
+length = 2
+
+[[boundaries]]
+payload_offset = 198
+length = 1
+
+[[boundaries]]
+payload_offset = 199
+length = 1
+
+[[boundaries]]
+payload_offset = 200
+length = 5
+
+[[boundaries]]
+payload_offset = 205
+length = 6
+
+[[boundaries]]
+payload_offset = 211
+length = 5
+
+[[boundaries]]
+payload_offset = 216
+length = 6
+
+[[boundaries]]
+payload_offset = 222
+length = 5
+
+[[boundaries]]
+payload_offset = 227
+length = 6
+
+[[boundaries]]
+payload_offset = 233
+length = 5
+
+[[boundaries]]
+payload_offset = 238
+length = 6
+
+[[boundaries]]
+payload_offset = 244
+length = 5
+
+[[boundaries]]
+payload_offset = 249
+length = 6
+
+[[boundaries]]
+payload_offset = 255
+length = 5
+
+[[boundaries]]
+payload_offset = 260
+length = 6
+
+[[boundaries]]
+payload_offset = 266
+length = 1
+
+[[boundaries]]
+payload_offset = 267
+length = 6
+
+[[boundaries]]
+payload_offset = 273
+length = 2
+
+[[boundaries]]
+payload_offset = 275
+length = 3
+
+[[boundaries]]
+payload_offset = 278
+length = 5
+
+[[boundaries]]
+payload_offset = 283
+length = 5
+
+[[boundaries]]
+payload_offset = 288
+length = 5
+
+[[boundaries]]
+payload_offset = 293
+length = 2
+
+[[boundaries]]
+payload_offset = 295
+length = 5
+
+[[boundaries]]
+payload_offset = 300
+length = 6
+
+[[boundaries]]
+payload_offset = 306
+length = 5
+
+[[boundaries]]
+payload_offset = 313
+length = 3
+
+[[boundaries]]
+payload_offset = 316
+length = 6
+
+[[boundaries]]
+payload_offset = 322
+length = 6
+
+[[boundaries]]
+payload_offset = 328
+length = 2
+
+[[boundaries]]
+payload_offset = 330
+length = 5
+
+[[boundaries]]
+payload_offset = 335
+length = 5
+
+[[boundaries]]
+payload_offset = 340
+length = 2
+
+[[boundaries]]
+payload_offset = 342
+length = 5
+
+[[boundaries]]
+payload_offset = 347
+length = 6
+
+[[boundaries]]
+payload_offset = 353
+length = 3
+
+[[boundaries]]
+payload_offset = 356
+length = 5
+
+[[boundaries]]
+payload_offset = 362
+length = 3
+
+[[boundaries]]
+payload_offset = 365
+length = 6
+
+[[boundaries]]
+payload_offset = 371
+length = 6
+
+[[boundaries]]
+payload_offset = 377
+length = 2
+
+[[boundaries]]
+payload_offset = 379
+length = 5
+
+[[boundaries]]
+payload_offset = 384
+length = 5
+
+[[boundaries]]
+payload_offset = 389
+length = 2
+
+[[boundaries]]
+payload_offset = 391
+length = 5
+
+[[boundaries]]
+payload_offset = 396
+length = 6
+
+[[boundaries]]
+payload_offset = 402
+length = 3
+
+[[boundaries]]
+payload_offset = 405
+length = 5
+
+[[boundaries]]
+payload_offset = 411
+length = 3
+
+[[boundaries]]
+payload_offset = 414
+length = 6
+
+[[boundaries]]
+payload_offset = 420
+length = 6
+
+[[boundaries]]
+payload_offset = 426
+length = 2
+
+[[boundaries]]
+payload_offset = 428
+length = 5
+
+[[boundaries]]
+payload_offset = 433
+length = 5
+
+[[boundaries]]
+payload_offset = 438
+length = 2
+
+[[boundaries]]
+payload_offset = 440
+length = 5
+
+[[boundaries]]
+payload_offset = 445
+length = 6
+
+[[boundaries]]
+payload_offset = 451
+length = 3
+
+[[boundaries]]
+payload_offset = 454
+length = 5
+
+[[boundaries]]
+payload_offset = 460
+length = 3
+
+[[boundaries]]
+payload_offset = 463
+length = 6
+
+[[boundaries]]
+payload_offset = 469
+length = 6
+
+[[boundaries]]
+payload_offset = 475
+length = 2
+
+[[boundaries]]
+payload_offset = 477
+length = 5
+
+[[boundaries]]
+payload_offset = 482
+length = 5
+
+[[boundaries]]
+payload_offset = 487
+length = 2
+
+[[boundaries]]
+payload_offset = 489
+length = 5
+
+[[boundaries]]
+payload_offset = 494
+length = 6
+
+[[boundaries]]
+payload_offset = 500
+length = 3
+
+[[boundaries]]
+payload_offset = 503
+length = 5
+
+[[boundaries]]
+payload_offset = 509
+length = 3
+
+[[boundaries]]
+payload_offset = 512
+length = 6
+
+[[boundaries]]
+payload_offset = 518
+length = 6
+
+[[boundaries]]
+payload_offset = 524
+length = 2
+
+[[boundaries]]
+payload_offset = 526
+length = 5
+
+[[boundaries]]
+payload_offset = 531
+length = 5
+
+[[boundaries]]
+payload_offset = 536
+length = 2
+
+[[boundaries]]
+payload_offset = 538
+length = 5
+
+[[boundaries]]
+payload_offset = 543
+length = 6
+
+[[boundaries]]
+payload_offset = 549
+length = 3
+
+[[boundaries]]
+payload_offset = 552
+length = 5
+
+[[boundaries]]
+payload_offset = 558
+length = 6
+
+[[boundaries]]
+payload_offset = 564
+length = 2
+
+[[boundaries]]
+payload_offset = 566
+length = 1
+
+[[boundaries]]
+payload_offset = 567
+length = 1
+
+[[boundaries]]
+payload_offset = 568
+length = 3
+
+[[boundaries]]
+payload_offset = 571
+length = 6
+
+[[boundaries]]
+payload_offset = 577
+length = 2
+
+[[boundaries]]
+payload_offset = 579
+length = 1
+
+[[boundaries]]
+payload_offset = 580
+length = 1

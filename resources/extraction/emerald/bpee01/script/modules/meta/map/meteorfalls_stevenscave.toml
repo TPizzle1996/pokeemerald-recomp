@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 2
 reloc_count = 9
+instruction_count = 25
 
 [[segments]]
 kind = "bytecode"
@@ -48,6 +49,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/meteorfalls-stevenscave"
 target_export = "MeteorFalls_StevensCave_EventScript_Defeated"
 target_offset = 76
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 75
 runtime_resolution_required = true
 
 [[relocs]]
@@ -57,6 +60,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -66,6 +71,8 @@ original_encoded_gba = 0x827259a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-delay48"
 target_export = "Common_Movement_Delay48"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -75,6 +82,8 @@ original_encoded_gba = 0x827259e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceplayer"
 target_export = "Common_Movement_FacePlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -84,6 +93,8 @@ original_encoded_gba = 0x823b1e1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/meteorfalls-stevenscave"
 target_export = "MeteorFalls_StevensCave_Text_ShouldKnowHowGoodIAmExpectWorst"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -93,6 +104,8 @@ original_encoded_gba = 0x823b32d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/meteorfalls-stevenscave"
 target_export = "MeteorFalls_StevensCave_Text_StevenDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -102,6 +115,8 @@ original_encoded_gba = 0x823b358
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/meteorfalls-stevenscave"
 target_export = "MeteorFalls_StevensCave_Text_MyPredictionCameTrue"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -111,6 +126,8 @@ original_encoded_gba = 0x827259e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceplayer"
 target_export = "Common_Movement_FacePlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -120,4 +137,106 @@ original_encoded_gba = 0x823b358
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/meteorfalls-stevenscave"
 target_export = "MeteorFalls_StevensCave_Text_MyPredictionCameTrue"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 3
+
+[[boundaries]]
+payload_offset = 4
+length = 6
+
+[[boundaries]]
+payload_offset = 10
+length = 1
+
+[[boundaries]]
+payload_offset = 11
+length = 3
+
+[[boundaries]]
+payload_offset = 14
+length = 7
+
+[[boundaries]]
+payload_offset = 21
+length = 3
+
+[[boundaries]]
+payload_offset = 24
+length = 7
+
+[[boundaries]]
+payload_offset = 31
+length = 3
+
+[[boundaries]]
+payload_offset = 34
+length = 7
+
+[[boundaries]]
+payload_offset = 41
+length = 3
+
+[[boundaries]]
+payload_offset = 44
+length = 6
+
+[[boundaries]]
+payload_offset = 50
+length = 2
+
+[[boundaries]]
+payload_offset = 52
+length = 10
+
+[[boundaries]]
+payload_offset = 62
+length = 6
+
+[[boundaries]]
+payload_offset = 68
+length = 2
+
+[[boundaries]]
+payload_offset = 70
+length = 3
+
+[[boundaries]]
+payload_offset = 73
+length = 1
+
+[[boundaries]]
+payload_offset = 74
+length = 1
+
+[[boundaries]]
+payload_offset = 75
+length = 7
+
+[[boundaries]]
+payload_offset = 82
+length = 3
+
+[[boundaries]]
+payload_offset = 85
+length = 6
+
+[[boundaries]]
+payload_offset = 91
+length = 2
+
+[[boundaries]]
+payload_offset = 93
+length = 1
+
+[[boundaries]]
+payload_offset = 94
+length = 1

@@ -17,6 +17,7 @@ static_data_bytes = 20
 segment_count = 3
 export_count = 4
 reloc_count = 5
+instruction_count = 16
 
 [[segments]]
 kind = "bytecode"
@@ -76,6 +77,8 @@ original_encoded_gba = 0x8272a21
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/mart-clerk"
 target_export = "gText_HowMayIServeYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -86,6 +89,8 @@ target_class = "MART_TABLE_TARGET"
 target_resource_key = "emerald:script/map/lavaridgetown-mart"
 target_export = "LavaridgeTown_Mart_Pokemart"
 target_offset = 26
+target_kind = "MART_TABLE"
+target_payload_offset = 26
 runtime_resolution_required = true
 
 [[relocs]]
@@ -95,6 +100,8 @@ original_encoded_gba = 0x8272a3f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/mart-clerk"
 target_export = "gText_PleaseComeAgain"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -104,6 +111,8 @@ original_encoded_gba = 0x81ffa10
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lavaridgetown-mart"
 target_export = "LavaridgeTown_Mart_Text_XSpeedFirstStrike"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -113,4 +122,70 @@ original_encoded_gba = 0x81ffa83
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lavaridgetown-mart"
 target_export = "LavaridgeTown_Mart_Text_LocalSpecialtyOnMtChimney"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 1
+
+[[boundaries]]
+payload_offset = 2
+length = 5
+
+[[boundaries]]
+payload_offset = 7
+length = 1
+
+[[boundaries]]
+payload_offset = 8
+length = 5
+
+[[boundaries]]
+payload_offset = 13
+length = 6
+
+[[boundaries]]
+payload_offset = 19
+length = 2
+
+[[boundaries]]
+payload_offset = 21
+length = 1
+
+[[boundaries]]
+payload_offset = 22
+length = 1
+
+[[boundaries]]
+payload_offset = 26
+length = 1
+
+[[boundaries]]
+payload_offset = 48
+length = 6
+
+[[boundaries]]
+payload_offset = 54
+length = 2
+
+[[boundaries]]
+payload_offset = 56
+length = 1
+
+[[boundaries]]
+payload_offset = 57
+length = 6
+
+[[boundaries]]
+payload_offset = 63
+length = 2
+
+[[boundaries]]
+payload_offset = 65
+length = 1

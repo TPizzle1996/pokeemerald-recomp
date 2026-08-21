@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 9
 reloc_count = 20
+instruction_count = 66
 
 [[segments]]
 kind = "bytecode"
@@ -104,6 +105,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/fallarbortown-cozmoshouse"
 target_export = "FallarborTown_CozmosHouse_EventScript_GaveMeteorite"
 target_offset = 160
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 159
 runtime_resolution_required = true
 
 [[relocs]]
@@ -114,6 +117,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/fallarbortown-cozmoshouse"
 target_export = "FallarborTown_CozmosHouse_EventScript_PlayerHasMeteorite"
 target_offset = 38
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 37
 runtime_resolution_required = true
 
 [[relocs]]
@@ -123,6 +128,8 @@ original_encoded_gba = 0x8200fee
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fallarbortown-cozmoshouse"
 target_export = "FallarborTown_CozmosHouse_Text_MeteoriteWillNeverBeMineNow"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -133,6 +140,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/fallarbortown-cozmoshouse"
 target_export = "FallarborTown_CozmosHouse_EventScript_NoticeMeteorite"
 target_offset = 121
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 120
 runtime_resolution_required = true
 
 [[relocs]]
@@ -143,6 +152,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/fallarbortown-cozmoshouse"
 target_export = "FallarborTown_CozmosHouse_EventScript_AskForMeteorite"
 target_offset = 138
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 137
 runtime_resolution_required = true
 
 [[relocs]]
@@ -153,6 +164,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/fallarbortown-cozmoshouse"
 target_export = "FallarborTown_CozmosHouse_EventScript_DeclineGiveMeteorite"
 target_offset = 147
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 146
 runtime_resolution_required = true
 
 [[relocs]]
@@ -162,6 +175,8 @@ original_encoded_gba = 0x8201159
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fallarbortown-cozmoshouse"
 target_export = "FallarborTown_CozmosHouse_Text_PleaseUseThisTM"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -172,6 +187,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_ShowBagIsFull"
 target_offset = 273
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 273
 runtime_resolution_required = true
 
 [[relocs]]
@@ -182,6 +199,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/kecleon"
 target_export = "Common_EventScript_PlayerHandedOverTheItem"
 target_offset = 265
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 243
 runtime_resolution_required = true
 
 [[relocs]]
@@ -191,6 +210,8 @@ original_encoded_gba = 0x82011a5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fallarbortown-cozmoshouse"
 target_export = "FallarborTown_CozmosHouse_Text_ReallyGoingToHelpMyResearch"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -200,6 +221,8 @@ original_encoded_gba = 0x8200fee
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fallarbortown-cozmoshouse"
 target_export = "FallarborTown_CozmosHouse_Text_MeteoriteWillNeverBeMineNow"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -209,6 +232,8 @@ original_encoded_gba = 0x82010a2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fallarbortown-cozmoshouse"
 target_export = "FallarborTown_CozmosHouse_Text_IsThatMeteoriteMayIHaveIt"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -218,6 +243,8 @@ original_encoded_gba = 0x8201249
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fallarbortown-cozmoshouse"
 target_export = "FallarborTown_CozmosHouse_Text_MayIHaveMeteorite"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -227,6 +254,8 @@ original_encoded_gba = 0x8201212
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fallarbortown-cozmoshouse"
 target_export = "FallarborTown_CozmosHouse_Text_CrushedWithDisappointment"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -236,6 +265,8 @@ original_encoded_gba = 0x82011a5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fallarbortown-cozmoshouse"
 target_export = "FallarborTown_CozmosHouse_Text_ReallyGoingToHelpMyResearch"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -246,6 +277,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/fallarbortown-cozmoshouse"
 target_export = "FallarborTown_CozmosHouse_EventScript_CozmoIsHappy"
 target_offset = 210
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 209
 runtime_resolution_required = true
 
 [[relocs]]
@@ -256,6 +289,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/fallarbortown-cozmoshouse"
 target_export = "FallarborTown_CozmosHouse_EventScript_CozmoIsSad"
 target_offset = 200
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 199
 runtime_resolution_required = true
 
 [[relocs]]
@@ -265,6 +300,8 @@ original_encoded_gba = 0x82012bc
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fallarbortown-cozmoshouse"
 target_export = "FallarborTown_CozmosHouse_Text_CozmoWentToMeteorFalls"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -274,6 +311,8 @@ original_encoded_gba = 0x8201310
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fallarbortown-cozmoshouse"
 target_export = "FallarborTown_CozmosHouse_Text_FeelSorryForCozmo"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -283,4 +322,270 @@ original_encoded_gba = 0x820134b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fallarbortown-cozmoshouse"
 target_export = "FallarborTown_CozmosHouse_Text_CozmoIsSoHappy"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 1
+
+[[boundaries]]
+payload_offset = 2
+length = 3
+
+[[boundaries]]
+payload_offset = 5
+length = 6
+
+[[boundaries]]
+payload_offset = 11
+length = 5
+
+[[boundaries]]
+payload_offset = 16
+length = 5
+
+[[boundaries]]
+payload_offset = 21
+length = 6
+
+[[boundaries]]
+payload_offset = 27
+length = 6
+
+[[boundaries]]
+payload_offset = 33
+length = 2
+
+[[boundaries]]
+payload_offset = 35
+length = 1
+
+[[boundaries]]
+payload_offset = 36
+length = 1
+
+[[boundaries]]
+payload_offset = 37
+length = 3
+
+[[boundaries]]
+payload_offset = 40
+length = 6
+
+[[boundaries]]
+payload_offset = 46
+length = 3
+
+[[boundaries]]
+payload_offset = 49
+length = 6
+
+[[boundaries]]
+payload_offset = 55
+length = 5
+
+[[boundaries]]
+payload_offset = 60
+length = 6
+
+[[boundaries]]
+payload_offset = 66
+length = 6
+
+[[boundaries]]
+payload_offset = 72
+length = 2
+
+[[boundaries]]
+payload_offset = 74
+length = 5
+
+[[boundaries]]
+payload_offset = 79
+length = 5
+
+[[boundaries]]
+payload_offset = 84
+length = 2
+
+[[boundaries]]
+payload_offset = 86
+length = 5
+
+[[boundaries]]
+payload_offset = 91
+length = 6
+
+[[boundaries]]
+payload_offset = 97
+length = 5
+
+[[boundaries]]
+payload_offset = 102
+length = 5
+
+[[boundaries]]
+payload_offset = 107
+length = 3
+
+[[boundaries]]
+payload_offset = 110
+length = 6
+
+[[boundaries]]
+payload_offset = 116
+length = 2
+
+[[boundaries]]
+payload_offset = 118
+length = 1
+
+[[boundaries]]
+payload_offset = 119
+length = 1
+
+[[boundaries]]
+payload_offset = 120
+length = 6
+
+[[boundaries]]
+payload_offset = 126
+length = 2
+
+[[boundaries]]
+payload_offset = 128
+length = 6
+
+[[boundaries]]
+payload_offset = 134
+length = 2
+
+[[boundaries]]
+payload_offset = 136
+length = 1
+
+[[boundaries]]
+payload_offset = 137
+length = 6
+
+[[boundaries]]
+payload_offset = 143
+length = 2
+
+[[boundaries]]
+payload_offset = 145
+length = 1
+
+[[boundaries]]
+payload_offset = 146
+length = 3
+
+[[boundaries]]
+payload_offset = 149
+length = 6
+
+[[boundaries]]
+payload_offset = 155
+length = 2
+
+[[boundaries]]
+payload_offset = 157
+length = 1
+
+[[boundaries]]
+payload_offset = 158
+length = 1
+
+[[boundaries]]
+payload_offset = 159
+length = 6
+
+[[boundaries]]
+payload_offset = 165
+length = 2
+
+[[boundaries]]
+payload_offset = 167
+length = 1
+
+[[boundaries]]
+payload_offset = 168
+length = 1
+
+[[boundaries]]
+payload_offset = 169
+length = 1
+
+[[boundaries]]
+payload_offset = 170
+length = 1
+
+[[boundaries]]
+payload_offset = 171
+length = 3
+
+[[boundaries]]
+payload_offset = 174
+length = 6
+
+[[boundaries]]
+payload_offset = 180
+length = 3
+
+[[boundaries]]
+payload_offset = 183
+length = 6
+
+[[boundaries]]
+payload_offset = 189
+length = 6
+
+[[boundaries]]
+payload_offset = 195
+length = 2
+
+[[boundaries]]
+payload_offset = 197
+length = 1
+
+[[boundaries]]
+payload_offset = 198
+length = 1
+
+[[boundaries]]
+payload_offset = 199
+length = 6
+
+[[boundaries]]
+payload_offset = 205
+length = 2
+
+[[boundaries]]
+payload_offset = 207
+length = 1
+
+[[boundaries]]
+payload_offset = 208
+length = 1
+
+[[boundaries]]
+payload_offset = 209
+length = 6
+
+[[boundaries]]
+payload_offset = 215
+length = 2
+
+[[boundaries]]
+payload_offset = 217
+length = 1
+
+[[boundaries]]
+payload_offset = 218
+length = 1

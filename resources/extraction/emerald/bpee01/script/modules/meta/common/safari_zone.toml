@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 10
 reloc_count = 13
+instruction_count = 57
 
 [[segments]]
 kind = "bytecode"
@@ -111,6 +112,8 @@ original_encoded_gba = 0x82a4bf4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/safari-zone"
 target_export = "SafariZone_Text_WouldYouLikeToExit"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -121,6 +124,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/safari-zone"
 target_export = "SafariZone_EventScript_Retire"
 target_offset = 57
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 57
 runtime_resolution_required = true
 
 [[relocs]]
@@ -131,6 +136,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/safari-zone"
 target_export = "SafariZone_EventScript_Exit"
 target_offset = 17
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 17
 runtime_resolution_required = true
 
 [[relocs]]
@@ -140,6 +147,8 @@ original_encoded_gba = 0x82a4c26
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/safari-zone"
 target_export = "SafariZone_Text_TimesUp"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -150,6 +159,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/safari-zone"
 target_export = "SafariZone_EventScript_Exit"
 target_offset = 17
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 17
 runtime_resolution_required = true
 
 [[relocs]]
@@ -159,6 +170,8 @@ original_encoded_gba = 0x82a4c56
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/safari-zone"
 target_export = "SafariZone_Text_OutOfBalls"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -169,6 +182,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/safari-zone"
 target_export = "SafariZone_EventScript_Exit"
 target_offset = 17
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 17
 runtime_resolution_required = true
 
 [[relocs]]
@@ -179,6 +194,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/safari-zone"
 target_export = "SafariZone_EventScript_PokeblockPresent"
 target_offset = 159
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 159
 runtime_resolution_required = true
 
 [[relocs]]
@@ -188,6 +205,8 @@ original_encoded_gba = 0x82a4c90
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/safari-zone"
 target_export = "SafariZone_Text_PlacePokeblockOnFeeder"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -198,6 +217,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/safari-zone"
 target_export = "SafariZone_EventScript_ChoosePokeblock"
 target_offset = 132
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 132
 runtime_resolution_required = true
 
 [[relocs]]
@@ -208,6 +229,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/safari-zone"
 target_export = "SafariZone_EventScript_PokeblockPlaced"
 target_offset = 150
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 150
 runtime_resolution_required = true
 
 [[relocs]]
@@ -217,6 +240,8 @@ original_encoded_gba = 0x82a4ceb
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/safari-zone"
 target_export = "SafariZone_Text_PokeblockWasPlaced"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -226,4 +251,234 @@ original_encoded_gba = 0x82a4cc5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/safari-zone"
 target_export = "SafariZone_Text_PokeblockStillHere"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 5
+
+[[boundaries]]
+payload_offset = 5
+length = 3
+
+[[boundaries]]
+payload_offset = 8
+length = 8
+
+[[boundaries]]
+payload_offset = 16
+length = 1
+
+[[boundaries]]
+payload_offset = 17
+length = 5
+
+[[boundaries]]
+payload_offset = 22
+length = 3
+
+[[boundaries]]
+payload_offset = 25
+length = 8
+
+[[boundaries]]
+payload_offset = 33
+length = 1
+
+[[boundaries]]
+payload_offset = 34
+length = 1
+
+[[boundaries]]
+payload_offset = 35
+length = 1
+
+[[boundaries]]
+payload_offset = 36
+length = 6
+
+[[boundaries]]
+payload_offset = 42
+length = 2
+
+[[boundaries]]
+payload_offset = 44
+length = 5
+
+[[boundaries]]
+payload_offset = 49
+length = 6
+
+[[boundaries]]
+payload_offset = 55
+length = 1
+
+[[boundaries]]
+payload_offset = 56
+length = 1
+
+[[boundaries]]
+payload_offset = 57
+length = 5
+
+[[boundaries]]
+payload_offset = 62
+length = 1
+
+[[boundaries]]
+payload_offset = 63
+length = 3
+
+[[boundaries]]
+payload_offset = 66
+length = 5
+
+[[boundaries]]
+payload_offset = 71
+length = 1
+
+[[boundaries]]
+payload_offset = 72
+length = 1
+
+[[boundaries]]
+payload_offset = 73
+length = 1
+
+[[boundaries]]
+payload_offset = 74
+length = 5
+
+[[boundaries]]
+payload_offset = 79
+length = 1
+
+[[boundaries]]
+payload_offset = 80
+length = 3
+
+[[boundaries]]
+payload_offset = 83
+length = 5
+
+[[boundaries]]
+payload_offset = 88
+length = 1
+
+[[boundaries]]
+payload_offset = 89
+length = 1
+
+[[boundaries]]
+payload_offset = 90
+length = 1
+
+[[boundaries]]
+payload_offset = 91
+length = 5
+
+[[boundaries]]
+payload_offset = 96
+length = 1
+
+[[boundaries]]
+payload_offset = 97
+length = 3
+
+[[boundaries]]
+payload_offset = 100
+length = 5
+
+[[boundaries]]
+payload_offset = 105
+length = 6
+
+[[boundaries]]
+payload_offset = 111
+length = 6
+
+[[boundaries]]
+payload_offset = 117
+length = 2
+
+[[boundaries]]
+payload_offset = 119
+length = 5
+
+[[boundaries]]
+payload_offset = 124
+length = 6
+
+[[boundaries]]
+payload_offset = 130
+length = 1
+
+[[boundaries]]
+payload_offset = 131
+length = 1
+
+[[boundaries]]
+payload_offset = 132
+length = 2
+
+[[boundaries]]
+payload_offset = 134
+length = 3
+
+[[boundaries]]
+payload_offset = 137
+length = 1
+
+[[boundaries]]
+payload_offset = 138
+length = 5
+
+[[boundaries]]
+payload_offset = 143
+length = 6
+
+[[boundaries]]
+payload_offset = 149
+length = 1
+
+[[boundaries]]
+payload_offset = 150
+length = 5
+
+[[boundaries]]
+payload_offset = 155
+length = 1
+
+[[boundaries]]
+payload_offset = 156
+length = 1
+
+[[boundaries]]
+payload_offset = 157
+length = 1
+
+[[boundaries]]
+payload_offset = 158
+length = 1
+
+[[boundaries]]
+payload_offset = 159
+length = 5
+
+[[boundaries]]
+payload_offset = 164
+length = 1
+
+[[boundaries]]
+payload_offset = 165
+length = 1
+
+[[boundaries]]
+payload_offset = 166
+length = 1
+
+[[boundaries]]
+payload_offset = 167
+length = 1

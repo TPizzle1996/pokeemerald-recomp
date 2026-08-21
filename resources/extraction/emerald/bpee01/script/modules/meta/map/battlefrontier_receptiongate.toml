@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 3
 export_count = 30
 reloc_count = 95
+instruction_count = 205
 
 [[segments]]
 kind = "bytecode"
@@ -283,6 +284,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -292,6 +295,8 @@ original_encoded_gba = 0x827259a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-delay48"
 target_export = "Common_Movement_Delay48"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -301,6 +306,8 @@ original_encoded_gba = 0x8266580
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_Text_FirstTimeHereThisWay"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -310,6 +317,8 @@ original_encoded_gba = 0x82662d2
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-receptiongate-movement-playerapproachcounter"
 target_export = "BattleFrontier_ReceptionGate_Movement_PlayerApproachCounter"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -320,6 +329,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_EventScript_ScottScene"
 target_offset = 79
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 58
 runtime_resolution_required = true
 
 [[relocs]]
@@ -329,6 +340,8 @@ original_encoded_gba = 0x82665b2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_Text_WelcomeToBattleFrontier"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -338,6 +351,8 @@ original_encoded_gba = 0x82665f7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_Text_IssueFrontierPass"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -347,6 +362,8 @@ original_encoded_gba = 0x8266676
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_Text_ObtainedFrontierPass"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -356,6 +373,8 @@ original_encoded_gba = 0x8266695
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_Text_PlacedTrainerCardInFrontierPass"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -365,6 +384,8 @@ original_encoded_gba = 0x82666c6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_Text_EnjoyBattleFrontier"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -374,6 +395,8 @@ original_encoded_gba = 0x8266703
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_Text_IfItIsntPlayerYouCame"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -383,6 +406,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -392,6 +417,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -401,6 +428,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -410,6 +439,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -419,6 +450,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -428,6 +461,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -437,6 +472,8 @@ original_encoded_gba = 0x8266733
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_Text_OhMrScottGoodDay"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -446,6 +483,8 @@ original_encoded_gba = 0x82662f0
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-receptiongate-movement-greeterfacescott"
 target_export = "BattleFrontier_ReceptionGate_Movement_GreeterFaceScott"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -455,6 +494,8 @@ original_encoded_gba = 0x82662f6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-receptiongate-movement-facilityguidefacescott"
 target_export = "BattleFrontier_ReceptionGate_Movement_FacilityGuideFaceScott"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -464,6 +505,8 @@ original_encoded_gba = 0x82662d7
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-receptiongate-movement-playerfacescott"
 target_export = "BattleFrontier_ReceptionGate_Movement_PlayerFaceScott"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -473,6 +516,8 @@ original_encoded_gba = 0x82662e0
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-receptiongate-movement-scottenter"
 target_export = "BattleFrontier_ReceptionGate_Movement_ScottEnter"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -482,6 +527,8 @@ original_encoded_gba = 0x8266764
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_Text_ScottGreatToSeeYouHere"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -491,6 +538,8 @@ original_encoded_gba = 0x82662e8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-receptiongate-movement-scottexit"
 target_export = "BattleFrontier_ReceptionGate_Movement_ScottExit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -500,6 +549,8 @@ original_encoded_gba = 0x82665b2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_Text_WelcomeToBattleFrontier"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -509,6 +560,8 @@ original_encoded_gba = 0x82666c6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_Text_EnjoyBattleFrontier"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -518,6 +571,8 @@ original_encoded_gba = 0x8266857
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_Text_YourGuideToFacilities"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -528,6 +583,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_EventScript_ChooseFacilityToLearnAbout"
 target_offset = 326
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 263
 runtime_resolution_required = true
 
 [[relocs]]
@@ -537,6 +594,8 @@ original_encoded_gba = 0x826689d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_Text_LearnAboutWhich2"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -547,6 +606,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_EventScript_BattleTower"
 target_offset = 468
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 405
 runtime_resolution_required = true
 
 [[relocs]]
@@ -557,6 +618,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_EventScript_BattleDome"
 target_offset = 482
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 419
 runtime_resolution_required = true
 
 [[relocs]]
@@ -567,6 +630,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_EventScript_BattlePalace"
 target_offset = 496
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 433
 runtime_resolution_required = true
 
 [[relocs]]
@@ -577,6 +642,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_EventScript_BattleArena"
 target_offset = 510
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 447
 runtime_resolution_required = true
 
 [[relocs]]
@@ -587,6 +654,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_EventScript_BattleFactory"
 target_offset = 524
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 461
 runtime_resolution_required = true
 
 [[relocs]]
@@ -597,6 +666,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_EventScript_BattlePike"
 target_offset = 538
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 475
 runtime_resolution_required = true
 
 [[relocs]]
@@ -607,6 +678,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_EventScript_BattlePyramid"
 target_offset = 552
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 489
 runtime_resolution_required = true
 
 [[relocs]]
@@ -617,6 +690,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_EventScript_RankingHall"
 target_offset = 566
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 503
 runtime_resolution_required = true
 
 [[relocs]]
@@ -627,6 +702,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_EventScript_ExchangeCorner"
 target_offset = 580
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 517
 runtime_resolution_required = true
 
 [[relocs]]
@@ -637,6 +714,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_EventScript_ExitFacilityGuide"
 target_offset = 594
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 531
 runtime_resolution_required = true
 
 [[relocs]]
@@ -647,6 +726,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_EventScript_ExitFacilityGuide"
 target_offset = 594
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 531
 runtime_resolution_required = true
 
 [[relocs]]
@@ -656,6 +737,8 @@ original_encoded_gba = 0x82668c2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_Text_BattleTowerInfo"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -666,6 +749,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_EventScript_ChooseFacilityToLearnAbout"
 target_offset = 326
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 263
 runtime_resolution_required = true
 
 [[relocs]]
@@ -675,6 +760,8 @@ original_encoded_gba = 0x826696f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_Text_BattleDomeInfo"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -685,6 +772,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_EventScript_ChooseFacilityToLearnAbout"
 target_offset = 326
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 263
 runtime_resolution_required = true
 
 [[relocs]]
@@ -694,6 +783,8 @@ original_encoded_gba = 0x8266a34
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_Text_BattlePalaceInfo"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -704,6 +795,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_EventScript_ChooseFacilityToLearnAbout"
 target_offset = 326
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 263
 runtime_resolution_required = true
 
 [[relocs]]
@@ -713,6 +806,8 @@ original_encoded_gba = 0x8266ac2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_Text_BattleArenaInfo"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -723,6 +818,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_EventScript_ChooseFacilityToLearnAbout"
 target_offset = 326
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 263
 runtime_resolution_required = true
 
 [[relocs]]
@@ -732,6 +829,8 @@ original_encoded_gba = 0x8266b5d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_Text_BattleFactoryInfo"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -742,6 +841,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_EventScript_ChooseFacilityToLearnAbout"
 target_offset = 326
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 263
 runtime_resolution_required = true
 
 [[relocs]]
@@ -751,6 +852,8 @@ original_encoded_gba = 0x8266c24
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_Text_BattlePikeInfo"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -761,6 +864,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_EventScript_ChooseFacilityToLearnAbout"
 target_offset = 326
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 263
 runtime_resolution_required = true
 
 [[relocs]]
@@ -770,6 +875,8 @@ original_encoded_gba = 0x8266cbb
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_Text_BattlePyramidInfo"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -780,6 +887,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_EventScript_ChooseFacilityToLearnAbout"
 target_offset = 326
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 263
 runtime_resolution_required = true
 
 [[relocs]]
@@ -789,6 +898,8 @@ original_encoded_gba = 0x8266d1c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_Text_RankingHallInfo"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -799,6 +910,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_EventScript_ChooseFacilityToLearnAbout"
 target_offset = 326
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 263
 runtime_resolution_required = true
 
 [[relocs]]
@@ -808,6 +921,8 @@ original_encoded_gba = 0x8266dcb
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_Text_ExchangeCornerInfo"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -818,6 +933,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_EventScript_ChooseFacilityToLearnAbout"
 target_offset = 326
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 263
 runtime_resolution_required = true
 
 [[relocs]]
@@ -827,6 +944,8 @@ original_encoded_gba = 0x82666c6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_Text_EnjoyBattleFrontier"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -836,6 +955,8 @@ original_encoded_gba = 0x8266e66
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_Text_YourGuideToRules"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -846,6 +967,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_EventScript_ChooseRuleToLearnAbout"
 target_offset = 620
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 557
 runtime_resolution_required = true
 
 [[relocs]]
@@ -855,6 +978,8 @@ original_encoded_gba = 0x8266ee0
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_Text_LearnAboutWhat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -865,6 +990,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_EventScript_LevelMode"
 target_offset = 714
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 651
 runtime_resolution_required = true
 
 [[relocs]]
@@ -875,6 +1002,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_EventScript_Level50"
 target_offset = 728
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 665
 runtime_resolution_required = true
 
 [[relocs]]
@@ -885,6 +1014,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_EventScript_OpenLevel"
 target_offset = 742
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 679
 runtime_resolution_required = true
 
 [[relocs]]
@@ -895,6 +1026,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_EventScript_MonEntry"
 target_offset = 756
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 693
 runtime_resolution_required = true
 
 [[relocs]]
@@ -905,6 +1038,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_EventScript_HoldItems"
 target_offset = 770
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 707
 runtime_resolution_required = true
 
 [[relocs]]
@@ -915,6 +1050,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_EventScript_ExitRulesGuide"
 target_offset = 784
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 721
 runtime_resolution_required = true
 
 [[relocs]]
@@ -925,6 +1062,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_EventScript_ExitRulesGuide"
 target_offset = 784
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 721
 runtime_resolution_required = true
 
 [[relocs]]
@@ -934,6 +1073,8 @@ original_encoded_gba = 0x8266f04
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_Text_LevelModeInfo"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -944,6 +1085,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_EventScript_ChooseRuleToLearnAbout"
 target_offset = 620
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 557
 runtime_resolution_required = true
 
 [[relocs]]
@@ -953,6 +1096,8 @@ original_encoded_gba = 0x8266f69
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_Text_Level50Info"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -963,6 +1108,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_EventScript_ChooseRuleToLearnAbout"
 target_offset = 620
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 557
 runtime_resolution_required = true
 
 [[relocs]]
@@ -972,6 +1119,8 @@ original_encoded_gba = 0x8267080
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_Text_OpenLevelInfo"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -982,6 +1131,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_EventScript_ChooseRuleToLearnAbout"
 target_offset = 620
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 557
 runtime_resolution_required = true
 
 [[relocs]]
@@ -991,6 +1142,8 @@ original_encoded_gba = 0x826716a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_Text_MonEntryInfo"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1001,6 +1154,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_EventScript_ChooseRuleToLearnAbout"
 target_offset = 620
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 557
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1010,6 +1165,8 @@ original_encoded_gba = 0x8267298
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_Text_HoldItemsInfo"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1020,6 +1177,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_EventScript_ChooseRuleToLearnAbout"
 target_offset = 620
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 557
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1029,6 +1188,8 @@ original_encoded_gba = 0x82666c6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_Text_EnjoyBattleFrontier"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1038,6 +1199,8 @@ original_encoded_gba = 0x8267357
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_Text_YourGuideToFrontierPass"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1048,6 +1211,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_EventScript_ChooseFrontierPassInfoToLearnAbout"
 target_offset = 810
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 747
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1057,6 +1222,8 @@ original_encoded_gba = 0x826737c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_Text_LearnAboutWhich1"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1067,6 +1234,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_EventScript_Symbols"
 target_offset = 882
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 819
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1077,6 +1246,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_EventScript_RecordBattle"
 target_offset = 896
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 833
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1087,6 +1258,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_EventScript_BattlePoints"
 target_offset = 910
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 847
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1097,6 +1270,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_EventScript_ExitFrontierPassGuide"
 target_offset = 924
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 861
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1107,6 +1282,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_EventScript_ExitFrontierPassGuide"
 target_offset = 924
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 861
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1116,6 +1293,8 @@ original_encoded_gba = 0x82673a1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_Text_SymbolsInfo"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1126,6 +1305,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_EventScript_ChooseFrontierPassInfoToLearnAbout"
 target_offset = 810
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 747
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1135,6 +1316,8 @@ original_encoded_gba = 0x82674f3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_Text_RecordedBattleInfo"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1145,6 +1328,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_EventScript_ChooseFrontierPassInfoToLearnAbout"
 target_offset = 810
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 747
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1154,6 +1339,8 @@ original_encoded_gba = 0x826761c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_Text_BattlePointsInfo"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1164,6 +1351,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_EventScript_ChooseFrontierPassInfoToLearnAbout"
 target_offset = 810
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 747
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1173,4 +1362,826 @@ original_encoded_gba = 0x82666c6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-receptiongate"
 target_export = "BattleFrontier_ReceptionGate_Text_EnjoyBattleFrontier"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 1
+
+[[boundaries]]
+payload_offset = 4
+length = 1
+
+[[boundaries]]
+payload_offset = 5
+length = 5
+
+[[boundaries]]
+payload_offset = 10
+length = 3
+
+[[boundaries]]
+payload_offset = 13
+length = 7
+
+[[boundaries]]
+payload_offset = 20
+length = 3
+
+[[boundaries]]
+payload_offset = 23
+length = 7
+
+[[boundaries]]
+payload_offset = 30
+length = 3
+
+[[boundaries]]
+payload_offset = 33
+length = 6
+
+[[boundaries]]
+payload_offset = 39
+length = 2
+
+[[boundaries]]
+payload_offset = 41
+length = 1
+
+[[boundaries]]
+payload_offset = 42
+length = 7
+
+[[boundaries]]
+payload_offset = 49
+length = 3
+
+[[boundaries]]
+payload_offset = 52
+length = 5
+
+[[boundaries]]
+payload_offset = 58
+length = 6
+
+[[boundaries]]
+payload_offset = 64
+length = 2
+
+[[boundaries]]
+payload_offset = 66
+length = 6
+
+[[boundaries]]
+payload_offset = 72
+length = 2
+
+[[boundaries]]
+payload_offset = 74
+length = 3
+
+[[boundaries]]
+payload_offset = 77
+length = 5
+
+[[boundaries]]
+payload_offset = 82
+length = 1
+
+[[boundaries]]
+payload_offset = 83
+length = 1
+
+[[boundaries]]
+payload_offset = 84
+length = 6
+
+[[boundaries]]
+payload_offset = 90
+length = 2
+
+[[boundaries]]
+payload_offset = 92
+length = 3
+
+[[boundaries]]
+payload_offset = 95
+length = 6
+
+[[boundaries]]
+payload_offset = 101
+length = 2
+
+[[boundaries]]
+payload_offset = 103
+length = 6
+
+[[boundaries]]
+payload_offset = 109
+length = 2
+
+[[boundaries]]
+payload_offset = 111
+length = 1
+
+[[boundaries]]
+payload_offset = 112
+length = 7
+
+[[boundaries]]
+payload_offset = 119
+length = 7
+
+[[boundaries]]
+payload_offset = 126
+length = 7
+
+[[boundaries]]
+payload_offset = 133
+length = 3
+
+[[boundaries]]
+payload_offset = 136
+length = 3
+
+[[boundaries]]
+payload_offset = 139
+length = 7
+
+[[boundaries]]
+payload_offset = 146
+length = 7
+
+[[boundaries]]
+payload_offset = 153
+length = 7
+
+[[boundaries]]
+payload_offset = 160
+length = 3
+
+[[boundaries]]
+payload_offset = 163
+length = 6
+
+[[boundaries]]
+payload_offset = 169
+length = 2
+
+[[boundaries]]
+payload_offset = 171
+length = 1
+
+[[boundaries]]
+payload_offset = 172
+length = 7
+
+[[boundaries]]
+payload_offset = 179
+length = 7
+
+[[boundaries]]
+payload_offset = 186
+length = 7
+
+[[boundaries]]
+payload_offset = 193
+length = 7
+
+[[boundaries]]
+payload_offset = 200
+length = 3
+
+[[boundaries]]
+payload_offset = 203
+length = 6
+
+[[boundaries]]
+payload_offset = 209
+length = 2
+
+[[boundaries]]
+payload_offset = 211
+length = 1
+
+[[boundaries]]
+payload_offset = 212
+length = 7
+
+[[boundaries]]
+payload_offset = 219
+length = 3
+
+[[boundaries]]
+payload_offset = 222
+length = 3
+
+[[boundaries]]
+payload_offset = 225
+length = 1
+
+[[boundaries]]
+payload_offset = 226
+length = 1
+
+[[boundaries]]
+payload_offset = 227
+length = 1
+
+[[boundaries]]
+payload_offset = 228
+length = 1
+
+[[boundaries]]
+payload_offset = 229
+length = 6
+
+[[boundaries]]
+payload_offset = 235
+length = 2
+
+[[boundaries]]
+payload_offset = 237
+length = 6
+
+[[boundaries]]
+payload_offset = 243
+length = 2
+
+[[boundaries]]
+payload_offset = 245
+length = 1
+
+[[boundaries]]
+payload_offset = 246
+length = 1
+
+[[boundaries]]
+payload_offset = 247
+length = 1
+
+[[boundaries]]
+payload_offset = 248
+length = 1
+
+[[boundaries]]
+payload_offset = 249
+length = 6
+
+[[boundaries]]
+payload_offset = 255
+length = 2
+
+[[boundaries]]
+payload_offset = 257
+length = 5
+
+[[boundaries]]
+payload_offset = 263
+length = 5
+
+[[boundaries]]
+payload_offset = 268
+length = 1
+
+[[boundaries]]
+payload_offset = 269
+length = 5
+
+[[boundaries]]
+payload_offset = 274
+length = 3
+
+[[boundaries]]
+payload_offset = 277
+length = 1
+
+[[boundaries]]
+payload_offset = 278
+length = 5
+
+[[boundaries]]
+payload_offset = 283
+length = 5
+
+[[boundaries]]
+payload_offset = 288
+length = 6
+
+[[boundaries]]
+payload_offset = 294
+length = 5
+
+[[boundaries]]
+payload_offset = 299
+length = 6
+
+[[boundaries]]
+payload_offset = 305
+length = 5
+
+[[boundaries]]
+payload_offset = 310
+length = 6
+
+[[boundaries]]
+payload_offset = 316
+length = 5
+
+[[boundaries]]
+payload_offset = 321
+length = 6
+
+[[boundaries]]
+payload_offset = 327
+length = 5
+
+[[boundaries]]
+payload_offset = 332
+length = 6
+
+[[boundaries]]
+payload_offset = 338
+length = 5
+
+[[boundaries]]
+payload_offset = 343
+length = 6
+
+[[boundaries]]
+payload_offset = 349
+length = 5
+
+[[boundaries]]
+payload_offset = 354
+length = 6
+
+[[boundaries]]
+payload_offset = 360
+length = 5
+
+[[boundaries]]
+payload_offset = 365
+length = 6
+
+[[boundaries]]
+payload_offset = 371
+length = 5
+
+[[boundaries]]
+payload_offset = 376
+length = 6
+
+[[boundaries]]
+payload_offset = 382
+length = 5
+
+[[boundaries]]
+payload_offset = 387
+length = 6
+
+[[boundaries]]
+payload_offset = 393
+length = 5
+
+[[boundaries]]
+payload_offset = 398
+length = 6
+
+[[boundaries]]
+payload_offset = 404
+length = 1
+
+[[boundaries]]
+payload_offset = 405
+length = 6
+
+[[boundaries]]
+payload_offset = 411
+length = 2
+
+[[boundaries]]
+payload_offset = 413
+length = 5
+
+[[boundaries]]
+payload_offset = 419
+length = 6
+
+[[boundaries]]
+payload_offset = 425
+length = 2
+
+[[boundaries]]
+payload_offset = 427
+length = 5
+
+[[boundaries]]
+payload_offset = 433
+length = 6
+
+[[boundaries]]
+payload_offset = 439
+length = 2
+
+[[boundaries]]
+payload_offset = 441
+length = 5
+
+[[boundaries]]
+payload_offset = 447
+length = 6
+
+[[boundaries]]
+payload_offset = 453
+length = 2
+
+[[boundaries]]
+payload_offset = 455
+length = 5
+
+[[boundaries]]
+payload_offset = 461
+length = 6
+
+[[boundaries]]
+payload_offset = 467
+length = 2
+
+[[boundaries]]
+payload_offset = 469
+length = 5
+
+[[boundaries]]
+payload_offset = 475
+length = 6
+
+[[boundaries]]
+payload_offset = 481
+length = 2
+
+[[boundaries]]
+payload_offset = 483
+length = 5
+
+[[boundaries]]
+payload_offset = 489
+length = 6
+
+[[boundaries]]
+payload_offset = 495
+length = 2
+
+[[boundaries]]
+payload_offset = 497
+length = 5
+
+[[boundaries]]
+payload_offset = 503
+length = 6
+
+[[boundaries]]
+payload_offset = 509
+length = 2
+
+[[boundaries]]
+payload_offset = 511
+length = 5
+
+[[boundaries]]
+payload_offset = 517
+length = 6
+
+[[boundaries]]
+payload_offset = 523
+length = 2
+
+[[boundaries]]
+payload_offset = 525
+length = 5
+
+[[boundaries]]
+payload_offset = 531
+length = 6
+
+[[boundaries]]
+payload_offset = 537
+length = 2
+
+[[boundaries]]
+payload_offset = 539
+length = 1
+
+[[boundaries]]
+payload_offset = 540
+length = 1
+
+[[boundaries]]
+payload_offset = 541
+length = 1
+
+[[boundaries]]
+payload_offset = 542
+length = 1
+
+[[boundaries]]
+payload_offset = 543
+length = 6
+
+[[boundaries]]
+payload_offset = 549
+length = 2
+
+[[boundaries]]
+payload_offset = 551
+length = 5
+
+[[boundaries]]
+payload_offset = 557
+length = 5
+
+[[boundaries]]
+payload_offset = 562
+length = 1
+
+[[boundaries]]
+payload_offset = 563
+length = 5
+
+[[boundaries]]
+payload_offset = 568
+length = 5
+
+[[boundaries]]
+payload_offset = 573
+length = 5
+
+[[boundaries]]
+payload_offset = 578
+length = 6
+
+[[boundaries]]
+payload_offset = 584
+length = 5
+
+[[boundaries]]
+payload_offset = 589
+length = 6
+
+[[boundaries]]
+payload_offset = 595
+length = 5
+
+[[boundaries]]
+payload_offset = 600
+length = 6
+
+[[boundaries]]
+payload_offset = 606
+length = 5
+
+[[boundaries]]
+payload_offset = 611
+length = 6
+
+[[boundaries]]
+payload_offset = 617
+length = 5
+
+[[boundaries]]
+payload_offset = 622
+length = 6
+
+[[boundaries]]
+payload_offset = 628
+length = 5
+
+[[boundaries]]
+payload_offset = 633
+length = 6
+
+[[boundaries]]
+payload_offset = 639
+length = 5
+
+[[boundaries]]
+payload_offset = 644
+length = 6
+
+[[boundaries]]
+payload_offset = 650
+length = 1
+
+[[boundaries]]
+payload_offset = 651
+length = 6
+
+[[boundaries]]
+payload_offset = 657
+length = 2
+
+[[boundaries]]
+payload_offset = 659
+length = 5
+
+[[boundaries]]
+payload_offset = 665
+length = 6
+
+[[boundaries]]
+payload_offset = 671
+length = 2
+
+[[boundaries]]
+payload_offset = 673
+length = 5
+
+[[boundaries]]
+payload_offset = 679
+length = 6
+
+[[boundaries]]
+payload_offset = 685
+length = 2
+
+[[boundaries]]
+payload_offset = 687
+length = 5
+
+[[boundaries]]
+payload_offset = 693
+length = 6
+
+[[boundaries]]
+payload_offset = 699
+length = 2
+
+[[boundaries]]
+payload_offset = 701
+length = 5
+
+[[boundaries]]
+payload_offset = 707
+length = 6
+
+[[boundaries]]
+payload_offset = 713
+length = 2
+
+[[boundaries]]
+payload_offset = 715
+length = 5
+
+[[boundaries]]
+payload_offset = 721
+length = 6
+
+[[boundaries]]
+payload_offset = 727
+length = 2
+
+[[boundaries]]
+payload_offset = 729
+length = 1
+
+[[boundaries]]
+payload_offset = 730
+length = 1
+
+[[boundaries]]
+payload_offset = 731
+length = 1
+
+[[boundaries]]
+payload_offset = 732
+length = 1
+
+[[boundaries]]
+payload_offset = 733
+length = 6
+
+[[boundaries]]
+payload_offset = 739
+length = 2
+
+[[boundaries]]
+payload_offset = 741
+length = 5
+
+[[boundaries]]
+payload_offset = 747
+length = 5
+
+[[boundaries]]
+payload_offset = 752
+length = 1
+
+[[boundaries]]
+payload_offset = 753
+length = 5
+
+[[boundaries]]
+payload_offset = 758
+length = 5
+
+[[boundaries]]
+payload_offset = 763
+length = 5
+
+[[boundaries]]
+payload_offset = 768
+length = 6
+
+[[boundaries]]
+payload_offset = 774
+length = 5
+
+[[boundaries]]
+payload_offset = 779
+length = 6
+
+[[boundaries]]
+payload_offset = 785
+length = 5
+
+[[boundaries]]
+payload_offset = 790
+length = 6
+
+[[boundaries]]
+payload_offset = 796
+length = 5
+
+[[boundaries]]
+payload_offset = 801
+length = 6
+
+[[boundaries]]
+payload_offset = 807
+length = 5
+
+[[boundaries]]
+payload_offset = 812
+length = 6
+
+[[boundaries]]
+payload_offset = 818
+length = 1
+
+[[boundaries]]
+payload_offset = 819
+length = 6
+
+[[boundaries]]
+payload_offset = 825
+length = 2
+
+[[boundaries]]
+payload_offset = 827
+length = 5
+
+[[boundaries]]
+payload_offset = 833
+length = 6
+
+[[boundaries]]
+payload_offset = 839
+length = 2
+
+[[boundaries]]
+payload_offset = 841
+length = 5
+
+[[boundaries]]
+payload_offset = 847
+length = 6
+
+[[boundaries]]
+payload_offset = 853
+length = 2
+
+[[boundaries]]
+payload_offset = 855
+length = 5
+
+[[boundaries]]
+payload_offset = 861
+length = 6
+
+[[boundaries]]
+payload_offset = 867
+length = 2
+
+[[boundaries]]
+payload_offset = 869
+length = 1
+
+[[boundaries]]
+payload_offset = 870
+length = 1

@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 8
 reloc_count = 9
+instruction_count = 43
 
 [[segments]]
 kind = "bytecode"
@@ -96,6 +97,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pc-transfer"
 target_export = "EventScript_TransferredSomeonesPC"
 target_offset = 48
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 48
 runtime_resolution_required = true
 
 [[relocs]]
@@ -106,6 +109,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pc-transfer"
 target_export = "EventScript_TransferredLanettesPC"
 target_offset = 91
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 91
 runtime_resolution_required = true
 
 [[relocs]]
@@ -116,6 +121,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pc-transfer"
 target_export = "EventScript_SomeonesPCBoxFull"
 target_offset = 73
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 73
 runtime_resolution_required = true
 
 [[relocs]]
@@ -125,6 +132,8 @@ original_encoded_gba = 0x8273216
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/pc-transfer"
 target_export = "gText_PkmnTransferredSomeonesPC"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -134,6 +143,8 @@ original_encoded_gba = 0x8273296
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/pc-transfer"
 target_export = "gText_PkmnTransferredSomeonesPCBoxFull"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -144,6 +155,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pc-transfer"
 target_export = "EventScript_LanettesPCBoxFull"
 target_offset = 116
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 116
 runtime_resolution_required = true
 
 [[relocs]]
@@ -153,6 +166,8 @@ original_encoded_gba = 0x8273256
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/pc-transfer"
 target_export = "gText_PkmnTransferredLanettesPC"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -162,6 +177,8 @@ original_encoded_gba = 0x82732d9
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/pc-transfer"
 target_export = "gText_PkmnTransferredLanettesPCBoxFull"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -171,4 +188,178 @@ original_encoded_gba = 0x827331c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/pc-transfer"
 target_export = "gText_NoMoreRoomForPokemon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 5
+
+[[boundaries]]
+payload_offset = 6
+length = 5
+
+[[boundaries]]
+payload_offset = 11
+length = 1
+
+[[boundaries]]
+payload_offset = 12
+length = 2
+
+[[boundaries]]
+payload_offset = 14
+length = 3
+
+[[boundaries]]
+payload_offset = 17
+length = 1
+
+[[boundaries]]
+payload_offset = 18
+length = 1
+
+[[boundaries]]
+payload_offset = 19
+length = 1
+
+[[boundaries]]
+payload_offset = 20
+length = 1
+
+[[boundaries]]
+payload_offset = 21
+length = 4
+
+[[boundaries]]
+payload_offset = 25
+length = 4
+
+[[boundaries]]
+payload_offset = 29
+length = 3
+
+[[boundaries]]
+payload_offset = 32
+length = 6
+
+[[boundaries]]
+payload_offset = 38
+length = 3
+
+[[boundaries]]
+payload_offset = 41
+length = 6
+
+[[boundaries]]
+payload_offset = 47
+length = 1
+
+[[boundaries]]
+payload_offset = 48
+length = 5
+
+[[boundaries]]
+payload_offset = 53
+length = 5
+
+[[boundaries]]
+payload_offset = 58
+length = 6
+
+[[boundaries]]
+payload_offset = 64
+length = 6
+
+[[boundaries]]
+payload_offset = 70
+length = 2
+
+[[boundaries]]
+payload_offset = 72
+length = 1
+
+[[boundaries]]
+payload_offset = 73
+length = 5
+
+[[boundaries]]
+payload_offset = 78
+length = 4
+
+[[boundaries]]
+payload_offset = 82
+length = 6
+
+[[boundaries]]
+payload_offset = 88
+length = 2
+
+[[boundaries]]
+payload_offset = 90
+length = 1
+
+[[boundaries]]
+payload_offset = 91
+length = 5
+
+[[boundaries]]
+payload_offset = 96
+length = 5
+
+[[boundaries]]
+payload_offset = 101
+length = 6
+
+[[boundaries]]
+payload_offset = 107
+length = 6
+
+[[boundaries]]
+payload_offset = 113
+length = 2
+
+[[boundaries]]
+payload_offset = 115
+length = 1
+
+[[boundaries]]
+payload_offset = 116
+length = 5
+
+[[boundaries]]
+payload_offset = 121
+length = 4
+
+[[boundaries]]
+payload_offset = 125
+length = 6
+
+[[boundaries]]
+payload_offset = 131
+length = 2
+
+[[boundaries]]
+payload_offset = 133
+length = 1
+
+[[boundaries]]
+payload_offset = 134
+length = 6
+
+[[boundaries]]
+payload_offset = 140
+length = 2
+
+[[boundaries]]
+payload_offset = 142
+length = 1
+
+[[boundaries]]
+payload_offset = 143
+length = 1

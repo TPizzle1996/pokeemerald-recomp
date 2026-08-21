@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 2
 reloc_count = 4
+instruction_count = 7
 
 [[segments]]
 kind = "bytecode"
@@ -47,6 +48,8 @@ original_encoded_gba = 0x8237a60
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/abandonedship-corridors-1f"
 target_export = "AbandonedShip_Corridors_1F_Text_IsntItFunHere"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -56,6 +59,8 @@ original_encoded_gba = 0x82379c5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/abandonedship-corridors-1f"
 target_export = "AbandonedShip_Corridors_1F_Text_CharlieIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -65,6 +70,8 @@ original_encoded_gba = 0x8237a01
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/abandonedship-corridors-1f"
 target_export = "AbandonedShip_Corridors_1F_Text_CharlieDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -74,4 +81,34 @@ original_encoded_gba = 0x8237a1b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/abandonedship-corridors-1f"
 target_export = "AbandonedShip_Corridors_1F_Text_CharliePostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 6
+
+[[boundaries]]
+payload_offset = 6
+length = 2
+
+[[boundaries]]
+payload_offset = 8
+length = 1
+
+[[boundaries]]
+payload_offset = 9
+length = 14
+
+[[boundaries]]
+payload_offset = 23
+length = 6
+
+[[boundaries]]
+payload_offset = 29
+length = 2
+
+[[boundaries]]
+payload_offset = 31
+length = 1

@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 2
 export_count = 6
 reloc_count = 10
+instruction_count = 42
 
 [[segments]]
 kind = "bytecode"
@@ -86,6 +87,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtchimney-cablecarstation"
 target_export = "MtChimney_CableCarStation_EventScript_MoveAttendantAside"
 target_offset = 23
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 12
 runtime_resolution_required = true
 
 [[relocs]]
@@ -95,6 +98,8 @@ original_encoded_gba = 0x822acb4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mtchimney-cablecarstation-movement-exitcablecar"
 target_export = "MtChimney_CableCarStation_Movement_ExitCableCar"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -104,6 +109,8 @@ original_encoded_gba = 0x822acaa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mtchimney-cablecarstation-movement-followplayeroutfromcablecar"
 target_export = "MtChimney_CableCarStation_Movement_FollowPlayerOutFromCableCar"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -113,6 +120,8 @@ original_encoded_gba = 0x822acb9
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney-cablecarstation"
 target_export = "MtChimney_CableCarStation_Text_CableCarReadyGetOn"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -123,6 +132,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtchimney-cablecarstation"
 target_export = "MtChimney_CableCarStation_EventScript_RideCableCar"
 target_offset = 114
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 93
 runtime_resolution_required = true
 
 [[relocs]]
@@ -133,6 +144,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtchimney-cablecarstation"
 target_export = "MtChimney_CableCarStation_EventScript_DeclineRide"
 target_offset = 161
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 140
 runtime_resolution_required = true
 
 [[relocs]]
@@ -142,6 +155,8 @@ original_encoded_gba = 0x822acf8
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney-cablecarstation"
 target_export = "MtChimney_CableCarStation_Text_StepThisWay"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -151,6 +166,8 @@ original_encoded_gba = 0x822aca5
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mtchimney-cablecarstation-movement-leadplayertocablecar"
 target_export = "MtChimney_CableCarStation_Movement_LeadPlayerToCableCar"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -160,6 +177,8 @@ original_encoded_gba = 0x822acaf
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mtchimney-cablecarstation-movement-boardcablecar"
 target_export = "MtChimney_CableCarStation_Movement_BoardCableCar"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -169,4 +188,174 @@ original_encoded_gba = 0x822ad0e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney-cablecarstation"
 target_export = "MtChimney_CableCarStation_Text_RideAnotherTime"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 5
+
+[[boundaries]]
+payload_offset = 5
+length = 6
+
+[[boundaries]]
+payload_offset = 11
+length = 1
+
+[[boundaries]]
+payload_offset = 12
+length = 7
+
+[[boundaries]]
+payload_offset = 19
+length = 4
+
+[[boundaries]]
+payload_offset = 23
+length = 1
+
+[[boundaries]]
+payload_offset = 24
+length = 1
+
+[[boundaries]]
+payload_offset = 25
+length = 7
+
+[[boundaries]]
+payload_offset = 32
+length = 7
+
+[[boundaries]]
+payload_offset = 39
+length = 3
+
+[[boundaries]]
+payload_offset = 42
+length = 5
+
+[[boundaries]]
+payload_offset = 47
+length = 7
+
+[[boundaries]]
+payload_offset = 54
+length = 4
+
+[[boundaries]]
+payload_offset = 58
+length = 1
+
+[[boundaries]]
+payload_offset = 59
+length = 1
+
+[[boundaries]]
+payload_offset = 60
+length = 1
+
+[[boundaries]]
+payload_offset = 61
+length = 1
+
+[[boundaries]]
+payload_offset = 62
+length = 6
+
+[[boundaries]]
+payload_offset = 68
+length = 2
+
+[[boundaries]]
+payload_offset = 70
+length = 5
+
+[[boundaries]]
+payload_offset = 75
+length = 6
+
+[[boundaries]]
+payload_offset = 81
+length = 5
+
+[[boundaries]]
+payload_offset = 86
+length = 6
+
+[[boundaries]]
+payload_offset = 92
+length = 1
+
+[[boundaries]]
+payload_offset = 93
+length = 6
+
+[[boundaries]]
+payload_offset = 99
+length = 2
+
+[[boundaries]]
+payload_offset = 101
+length = 1
+
+[[boundaries]]
+payload_offset = 102
+length = 7
+
+[[boundaries]]
+payload_offset = 109
+length = 7
+
+[[boundaries]]
+payload_offset = 116
+length = 3
+
+[[boundaries]]
+payload_offset = 119
+length = 5
+
+[[boundaries]]
+payload_offset = 124
+length = 5
+
+[[boundaries]]
+payload_offset = 129
+length = 2
+
+[[boundaries]]
+payload_offset = 131
+length = 3
+
+[[boundaries]]
+payload_offset = 134
+length = 3
+
+[[boundaries]]
+payload_offset = 137
+length = 1
+
+[[boundaries]]
+payload_offset = 138
+length = 1
+
+[[boundaries]]
+payload_offset = 139
+length = 1
+
+[[boundaries]]
+payload_offset = 140
+length = 6
+
+[[boundaries]]
+payload_offset = 146
+length = 2
+
+[[boundaries]]
+payload_offset = 148
+length = 1
+
+[[boundaries]]
+payload_offset = 149
+length = 1

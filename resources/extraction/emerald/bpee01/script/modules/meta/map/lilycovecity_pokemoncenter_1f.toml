@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 8
 reloc_count = 8
+instruction_count = 33
 
 [[segments]]
 kind = "bytecode"
@@ -96,6 +97,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemoncenter-1f"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_SetLilycoveLadyGfx"
 target_offset = 20
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 9
 runtime_resolution_required = true
 
 [[relocs]]
@@ -106,6 +109,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemoncenter-1f"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_HideContestLadyMon"
 target_offset = 46
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 35
 runtime_resolution_required = true
 
 [[relocs]]
@@ -116,6 +121,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemoncenter-1f"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_ShowContestLadyMon"
 target_offset = 50
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 39
 runtime_resolution_required = true
 
 [[relocs]]
@@ -126,6 +133,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pkmn-center-nurse"
 target_export = "Common_EventScript_PkmnCenterNurse"
 target_offset = 0
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 0
 runtime_resolution_required = true
 
 [[relocs]]
@@ -135,6 +144,8 @@ original_encoded_gba = 0x821c61e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-pokemoncenter-1f"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_HowManyKindsOfPokemon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -145,6 +156,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemoncenter-1f"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_ManiacBadTeamGone"
 target_offset = 98
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 87
 runtime_resolution_required = true
 
 [[relocs]]
@@ -154,6 +167,8 @@ original_encoded_gba = 0x821c69d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-pokemoncenter-1f"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_HeardAboutRottenScoundrels"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -163,4 +178,138 @@ original_encoded_gba = 0x821c6f6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-pokemoncenter-1f"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_HaventSeenRottenScoundrels"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 5
+
+[[boundaries]]
+payload_offset = 9
+length = 3
+
+[[boundaries]]
+payload_offset = 12
+length = 5
+
+[[boundaries]]
+payload_offset = 17
+length = 6
+
+[[boundaries]]
+payload_offset = 23
+length = 5
+
+[[boundaries]]
+payload_offset = 28
+length = 6
+
+[[boundaries]]
+payload_offset = 34
+length = 1
+
+[[boundaries]]
+payload_offset = 35
+length = 3
+
+[[boundaries]]
+payload_offset = 38
+length = 1
+
+[[boundaries]]
+payload_offset = 39
+length = 3
+
+[[boundaries]]
+payload_offset = 42
+length = 1
+
+[[boundaries]]
+payload_offset = 43
+length = 5
+
+[[boundaries]]
+payload_offset = 48
+length = 5
+
+[[boundaries]]
+payload_offset = 53
+length = 1
+
+[[boundaries]]
+payload_offset = 54
+length = 1
+
+[[boundaries]]
+payload_offset = 55
+length = 1
+
+[[boundaries]]
+payload_offset = 56
+length = 1
+
+[[boundaries]]
+payload_offset = 57
+length = 6
+
+[[boundaries]]
+payload_offset = 63
+length = 2
+
+[[boundaries]]
+payload_offset = 65
+length = 1
+
+[[boundaries]]
+payload_offset = 66
+length = 1
+
+[[boundaries]]
+payload_offset = 67
+length = 1
+
+[[boundaries]]
+payload_offset = 68
+length = 3
+
+[[boundaries]]
+payload_offset = 71
+length = 6
+
+[[boundaries]]
+payload_offset = 77
+length = 6
+
+[[boundaries]]
+payload_offset = 83
+length = 2
+
+[[boundaries]]
+payload_offset = 85
+length = 1
+
+[[boundaries]]
+payload_offset = 86
+length = 1
+
+[[boundaries]]
+payload_offset = 87
+length = 6
+
+[[boundaries]]
+payload_offset = 93
+length = 2
+
+[[boundaries]]
+payload_offset = 95
+length = 1
+
+[[boundaries]]
+payload_offset = 96
+length = 1

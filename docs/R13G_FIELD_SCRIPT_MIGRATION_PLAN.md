@@ -857,6 +857,49 @@ standard-script staging, dynamic-buffer resolver, and failure matrix in shadow
 mode. Gate: resolver parity for all 16,704 operands and fault injection with
 no publication/consumer changes.
 
+**G3 COMPLETE (2026-08-21) — confirmed facts** (report:
+`docs/R13G3_SCRIPT_COMPAT_SHADOW_REPORT.md`):
+
+- `EmeraldScriptCompat` (include/emerald/resources/emerald_script_compat.h +
+  src/emerald/resources/emerald_script_compat.c) stages a deterministic
+  shadow generation: 523 spans (210,880 B arena, bytewise id order, 16-aligned,
+  byte-identical to the pack - zero operand patching), a 15,874-row live source
+  index + 830 GBA routing rows (16,704 sources total), a 12,016-row dynamic
+  encoded-GBA target index, 51,814 instruction boundaries, staged 11-entry
+  gStdScripts and a staged 3,501-row F rebind plan. Shadow state only: no range
+  registration, no live publication.
+- **Parity: 16,704/16,704, zero mismatches**, run on two generations at
+  different arena bases with identical canonical aggregates (the test's
+  cross-base checksum). Target sub-kinds measured and pinned: SCRIPT_PAYLOAD
+  8,198 + SCRIPT_ROUTING 7 + SCRIPT_BRIDGE 3; TEXT_BUNDLE_MEMBER 6,187 +
+  TEXT_LABEL 20; MOVEMENT_RESOURCE 2,009; MART_TABLE 38 + DISPATCH 198 +
+  BRAILLE 26; RAM_HOST 18. Dispositions: 8,236 staged-arena / 8,216 sibling
+  seam / 3 compiled bridge / 18 host RAM (gStringVar4) / 231 deferred
+  (routing dispatch + braille pending + 7 routing-class script targets).
+  95 root / 8,113 interior re-pinned in the seam.
+- **Boundary model:** the G1 census walk plus a supplementary walk seeded
+  from every script entry point (chains stop before census-decoded starts).
+  2,115 opaque bytes (data / dynamically-reached code, incl. the 8
+  mystery-gift modules' 692 B - their virtual-address opcode family is not
+  in the generated grammar; adding it is a G4 prerequisite). Export position
+  classes: 466 offset-zero / 39 typed-data (mart spans) / 19 opaque / decoded
+  instruction starts.
+- **State-v5 invariant:** the range index stays at exactly 5,854 ranges with
+  zero script-family ranges and zero intersection with the shadow arena
+  (asserted in the focused test after staging/restage/clear/restage). The
+  seam TU references no live execution surface (isolation sweep gate).
+- **Pack/resource invariant:** 20,988 entries, byte-identical; the G2
+  payloads untouched; the meta enrichment (instruction_count / target_kind /
+  target_payload_offset / per-module boundaries) is additive and `--check`
+  regenerates all 1,059 artifacts byte-identically.
+- **Fault matrix:** 21 injected faults (20 table mutations + the
+  deterministic partial-allocation failure) each refused with the exact
+  pinned status; pack-variant RESOURCE faults covered in the main suite; the
+  focused test passes 7,1xx checks incl. the ASan/UBSan variant.
+- **Game binaries unchanged:** the seam is not linked in G3 (shadow-only) -
+  the fresh release/DINFO builds are byte-identical to G2 and
+  `--verify-game-data` passes.
+
 ### G4 — State-v5 execution readiness
 
 Relocate the already captured Context1 state, stable dynamic vaddress anchor,

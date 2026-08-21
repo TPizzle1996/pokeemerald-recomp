@@ -17,6 +17,7 @@ static_data_bytes = 36
 segment_count = 5
 export_count = 6
 reloc_count = 8
+instruction_count = 30
 
 [[segments]]
 kind = "bytecode"
@@ -105,6 +106,8 @@ original_encoded_gba = 0x8218078
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-decorationshop"
 target_export = "FortreeCity_DecorationShop_Text_MerchandiseSentToPC"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -114,6 +117,8 @@ original_encoded_gba = 0x82180ed
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-decorationshop"
 target_export = "FortreeCity_DecorationShop_Text_BuyingDeskForDolls"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -123,6 +128,8 @@ original_encoded_gba = 0x8272a21
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/mart-clerk"
 target_export = "gText_HowMayIServeYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -133,6 +140,8 @@ target_class = "MART_TABLE_TARGET"
 target_resource_key = "emerald:script/map/fortreecity-decorationshop"
 target_export = "FortreeCity_DecorationShop_PokemartDecor_Desks"
 target_offset = 42
+target_kind = "MART_TABLE"
+target_payload_offset = 42
 runtime_resolution_required = true
 
 [[relocs]]
@@ -142,6 +151,8 @@ original_encoded_gba = 0x8272a3f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/mart-clerk"
 target_export = "gText_PleaseComeAgain"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -151,6 +162,8 @@ original_encoded_gba = 0x8272a21
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/mart-clerk"
 target_export = "gText_HowMayIServeYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -161,6 +174,8 @@ target_class = "MART_TABLE_TARGET"
 target_resource_key = "emerald:script/map/fortreecity-decorationshop"
 target_export = "FortreeCity_DecorationShop_PokemartDecor_Chairs"
 target_offset = 86
+target_kind = "MART_TABLE"
+target_payload_offset = 86
 runtime_resolution_required = true
 
 [[relocs]]
@@ -170,4 +185,126 @@ original_encoded_gba = 0x8272a3f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/mart-clerk"
 target_export = "gText_PleaseComeAgain"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 6
+
+[[boundaries]]
+payload_offset = 6
+length = 2
+
+[[boundaries]]
+payload_offset = 8
+length = 1
+
+[[boundaries]]
+payload_offset = 9
+length = 6
+
+[[boundaries]]
+payload_offset = 15
+length = 2
+
+[[boundaries]]
+payload_offset = 17
+length = 1
+
+[[boundaries]]
+payload_offset = 18
+length = 1
+
+[[boundaries]]
+payload_offset = 19
+length = 1
+
+[[boundaries]]
+payload_offset = 20
+length = 5
+
+[[boundaries]]
+payload_offset = 25
+length = 1
+
+[[boundaries]]
+payload_offset = 26
+length = 5
+
+[[boundaries]]
+payload_offset = 31
+length = 6
+
+[[boundaries]]
+payload_offset = 37
+length = 2
+
+[[boundaries]]
+payload_offset = 39
+length = 1
+
+[[boundaries]]
+payload_offset = 40
+length = 1
+
+[[boundaries]]
+payload_offset = 42
+length = 1
+
+[[boundaries]]
+payload_offset = 43
+length = 1
+
+[[boundaries]]
+payload_offset = 44
+length = 1
+
+[[boundaries]]
+payload_offset = 62
+length = 1
+
+[[boundaries]]
+payload_offset = 63
+length = 1
+
+[[boundaries]]
+payload_offset = 64
+length = 5
+
+[[boundaries]]
+payload_offset = 69
+length = 1
+
+[[boundaries]]
+payload_offset = 70
+length = 5
+
+[[boundaries]]
+payload_offset = 75
+length = 6
+
+[[boundaries]]
+payload_offset = 81
+length = 2
+
+[[boundaries]]
+payload_offset = 83
+length = 1
+
+[[boundaries]]
+payload_offset = 84
+length = 1
+
+[[boundaries]]
+payload_offset = 86
+length = 3
+
+[[boundaries]]
+payload_offset = 89
+length = 1
+
+[[boundaries]]
+payload_offset = 90
+length = 1

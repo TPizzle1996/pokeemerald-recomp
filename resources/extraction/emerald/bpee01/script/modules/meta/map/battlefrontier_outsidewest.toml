@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 2
 export_count = 45
 reloc_count = 74
+instruction_count = 228
 
 [[segments]]
 kind = "bytecode"
@@ -397,6 +398,8 @@ original_encoded_gba = 0x823d808
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_Text_MayISeeYourTicket"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -407,6 +410,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_EventScript_NoSSTicket"
 target_offset = 109
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 103
 runtime_resolution_required = true
 
 [[relocs]]
@@ -416,6 +421,8 @@ original_encoded_gba = 0x823d89d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_Text_WhereWouldYouLikeToGo"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -426,6 +433,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_EventScript_ChooseFerryDestination"
 target_offset = 53
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 47
 runtime_resolution_required = true
 
 [[relocs]]
@@ -436,6 +445,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_EventScript_FerryToSlateport"
 target_offset = 119
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 113
 runtime_resolution_required = true
 
 [[relocs]]
@@ -446,6 +457,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_EventScript_FerryToLilycove"
 target_offset = 162
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 156
 runtime_resolution_required = true
 
 [[relocs]]
@@ -456,6 +469,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_EventScript_CancelFerrySelect"
 target_offset = 247
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 241
 runtime_resolution_required = true
 
 [[relocs]]
@@ -466,6 +481,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_EventScript_CancelFerrySelect"
 target_offset = 247
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 241
 runtime_resolution_required = true
 
 [[relocs]]
@@ -475,6 +492,8 @@ original_encoded_gba = 0x823d842
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_Text_MustHaveTicketToBoard"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -484,6 +503,8 @@ original_encoded_gba = 0x823d8f2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_Text_SlateportItIs"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -494,6 +515,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_EventScript_ChooseNewFerryDestination"
 target_offset = 205
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 199
 runtime_resolution_required = true
 
 [[relocs]]
@@ -503,6 +526,8 @@ original_encoded_gba = 0x823d94b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_Text_PleaseBoardFerry"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -513,6 +538,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_EventScript_BoardFerry"
 target_offset = 217
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 211
 runtime_resolution_required = true
 
 [[relocs]]
@@ -522,6 +549,8 @@ original_encoded_gba = 0x823d90e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_Text_LilycoveItIs"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -532,6 +561,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_EventScript_ChooseNewFerryDestination"
 target_offset = 205
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 199
 runtime_resolution_required = true
 
 [[relocs]]
@@ -541,6 +572,8 @@ original_encoded_gba = 0x823d94b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_Text_PleaseBoardFerry"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -551,6 +584,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_EventScript_BoardFerry"
 target_offset = 217
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 211
 runtime_resolution_required = true
 
 [[relocs]]
@@ -560,6 +595,8 @@ original_encoded_gba = 0x823d97a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_Text_ThenWhereWouldYouLikeToGo"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -570,6 +607,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_EventScript_ChooseFerryDestination"
 target_offset = 53
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 47
 runtime_resolution_required = true
 
 [[relocs]]
@@ -579,6 +618,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -589,6 +630,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/prof-birch"
 target_export = "Common_EventScript_FerryDepartIsland"
 target_offset = 419
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 409
 runtime_resolution_required = true
 
 [[relocs]]
@@ -598,6 +641,8 @@ original_encoded_gba = 0x823d929
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_Text_SailWithUsAnotherTime"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -607,6 +652,8 @@ original_encoded_gba = 0x823d6f7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_Text_BattleDomeSign"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -616,6 +663,8 @@ original_encoded_gba = 0x823d737
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_Text_BattleFactorySign"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -625,6 +674,8 @@ original_encoded_gba = 0x823d772
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_Text_BattlePikeSign"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -634,6 +685,8 @@ original_encoded_gba = 0x823d7a6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_Text_ThisIsBattleTower"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -643,6 +696,8 @@ original_encoded_gba = 0x823d9dd
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_Text_CantFindBattleTower"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -652,6 +707,8 @@ original_encoded_gba = 0x823d99c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_Text_BestOutOfAllMyFriends"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -661,6 +718,8 @@ original_encoded_gba = 0x823da60
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_Text_GotSeasickOnWayHere"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -670,6 +729,8 @@ original_encoded_gba = 0x82725a0
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceawayplayer"
 target_export = "Common_Movement_FaceAwayPlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -679,6 +740,8 @@ original_encoded_gba = 0x823dabf
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_Text_OnlyToughTrainersBroughtHere"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -689,6 +752,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_EventScript_FactoryChallengersTalk"
 target_offset = 355
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 349
 runtime_resolution_required = true
 
 [[relocs]]
@@ -699,6 +764,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_EventScript_FactoryChallengersTalk"
 target_offset = 355
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 349
 runtime_resolution_required = true
 
 [[relocs]]
@@ -708,6 +775,8 @@ original_encoded_gba = 0x82725a8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterright"
 target_export = "Common_Movement_WalkInPlaceFasterRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -717,6 +786,8 @@ original_encoded_gba = 0x823db7d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_Text_SureWeCanChallengeWithNoMons"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -726,6 +797,8 @@ original_encoded_gba = 0x82725a4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterleft"
 target_export = "Common_Movement_WalkInPlaceFasterLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -735,6 +808,8 @@ original_encoded_gba = 0x823dbce
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_Text_BigGuySaidIllLendYouMons"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -744,6 +819,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -753,6 +830,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -763,6 +842,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_EventScript_CamperFaceFactory"
 target_offset = 473
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 467
 runtime_resolution_required = true
 
 [[relocs]]
@@ -773,6 +854,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_EventScript_CamperAlreadyFacingFactory"
 target_offset = 484
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 478
 runtime_resolution_required = true
 
 [[relocs]]
@@ -783,6 +866,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_EventScript_CamperFaceFactory"
 target_offset = 473
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 467
 runtime_resolution_required = true
 
 [[relocs]]
@@ -793,6 +878,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_EventScript_CamperFaceFactory"
 target_offset = 473
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 467
 runtime_resolution_required = true
 
 [[relocs]]
@@ -802,6 +889,8 @@ original_encoded_gba = 0x823dc36
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_Text_WhosRaisingThoseRentalMons"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -811,6 +900,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -820,6 +911,8 @@ original_encoded_gba = 0x823dcb0
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_Text_ScaredOfPikeBecauseSeviper"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -830,6 +923,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_EventScript_GirlShudderNorth"
 target_offset = 540
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 534
 runtime_resolution_required = true
 
 [[relocs]]
@@ -840,6 +935,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_EventScript_GirlShudderSouth"
 target_offset = 551
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 545
 runtime_resolution_required = true
 
 [[relocs]]
@@ -850,6 +947,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_EventScript_GirlShudderWest"
 target_offset = 562
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 556
 runtime_resolution_required = true
 
 [[relocs]]
@@ -860,6 +959,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_EventScript_GirlShudderEast"
 target_offset = 573
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 567
 runtime_resolution_required = true
 
 [[relocs]]
@@ -869,6 +970,8 @@ original_encoded_gba = 0x823d629
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-outsidewest-movement-girlshuddernorth"
 target_export = "BattleFrontier_OutsideWest_Movement_GirlShudderNorth"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -878,6 +981,8 @@ original_encoded_gba = 0x823d62c
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-outsidewest-movement-girlshuddersouth"
 target_export = "BattleFrontier_OutsideWest_Movement_GirlShudderSouth"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -887,6 +992,8 @@ original_encoded_gba = 0x823d62f
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-outsidewest-movement-girlshudderwest"
 target_export = "BattleFrontier_OutsideWest_Movement_GirlShudderWest"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -896,6 +1003,8 @@ original_encoded_gba = 0x823d632
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-outsidewest-movement-girlshuddereast"
 target_export = "BattleFrontier_OutsideWest_Movement_GirlShudderEast"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -905,6 +1014,8 @@ original_encoded_gba = 0x823dd3b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_Text_LetsPlayRockPaperScissors"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -915,6 +1026,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_EventScript_WomanWonRockPaperScissors"
 target_offset = 626
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 608
 runtime_resolution_required = true
 
 [[relocs]]
@@ -925,6 +1038,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_EventScript_WomanLostRockPaperScissors"
 target_offset = 636
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 618
 runtime_resolution_required = true
 
 [[relocs]]
@@ -934,6 +1049,8 @@ original_encoded_gba = 0x823dd7a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_Text_WonIllTakePikeChallenge"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -943,6 +1060,8 @@ original_encoded_gba = 0x823ddad
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_Text_LostIllPutOffPikeChallenge"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -952,6 +1071,8 @@ original_encoded_gba = 0x823de15
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_Text_ChooseFishingOverBattling"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -961,6 +1082,8 @@ original_encoded_gba = 0x823df7d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_Text_DomeIsHereGrandpa"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -970,6 +1093,8 @@ original_encoded_gba = 0x823defd
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_Text_YoureOffToChallengeDome"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -979,6 +1104,8 @@ original_encoded_gba = 0x823deb4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_Text_KeepBattlingUntilIGetSymbol"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -988,6 +1115,8 @@ original_encoded_gba = 0x823dfbf
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_Text_WontLetGentlemenBeatMe"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -997,6 +1126,8 @@ original_encoded_gba = 0x823e01e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_Text_NothingHereNotLongAgo"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1006,6 +1137,8 @@ original_encoded_gba = 0x823e09f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_Text_FinallyArrivedAtFrontier"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1015,6 +1148,8 @@ original_encoded_gba = 0x823e102
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_Text_SquareFilledWithToughPeople"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1024,6 +1159,8 @@ original_encoded_gba = 0x823e154
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_Text_MetOlderGirlAtPike"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1033,6 +1170,8 @@ original_encoded_gba = 0x823e273
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_Text_LastTimeOurEyesMet"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1042,6 +1181,8 @@ original_encoded_gba = 0x823e2e9
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_Text_DomeAceLookedBecauseOfMyCheering"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1051,6 +1192,8 @@ original_encoded_gba = 0x823e37e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_Text_DomeAceIsMine"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1060,6 +1203,8 @@ original_encoded_gba = 0x823e410
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_Text_FansOverThereUsedToBeTrainers"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1069,6 +1214,8 @@ original_encoded_gba = 0x82725a2
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceoriginaldirection"
 target_export = "Common_Movement_FaceOriginalDirection"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1078,4 +1225,918 @@ original_encoded_gba = 0x823e5a5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-outsidewest"
 target_export = "BattleFrontier_OutsideWest_Text_MonWithLongTailInFrontier"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 5
+
+[[boundaries]]
+payload_offset = 5
+length = 3
+
+[[boundaries]]
+payload_offset = 8
+length = 1
+
+[[boundaries]]
+payload_offset = 9
+length = 1
+
+[[boundaries]]
+payload_offset = 10
+length = 1
+
+[[boundaries]]
+payload_offset = 11
+length = 6
+
+[[boundaries]]
+payload_offset = 17
+length = 2
+
+[[boundaries]]
+payload_offset = 19
+length = 5
+
+[[boundaries]]
+payload_offset = 24
+length = 5
+
+[[boundaries]]
+payload_offset = 29
+length = 6
+
+[[boundaries]]
+payload_offset = 35
+length = 5
+
+[[boundaries]]
+payload_offset = 40
+length = 1
+
+[[boundaries]]
+payload_offset = 41
+length = 5
+
+[[boundaries]]
+payload_offset = 47
+length = 6
+
+[[boundaries]]
+payload_offset = 53
+length = 5
+
+[[boundaries]]
+payload_offset = 58
+length = 5
+
+[[boundaries]]
+payload_offset = 63
+length = 6
+
+[[boundaries]]
+payload_offset = 69
+length = 5
+
+[[boundaries]]
+payload_offset = 74
+length = 6
+
+[[boundaries]]
+payload_offset = 80
+length = 5
+
+[[boundaries]]
+payload_offset = 85
+length = 6
+
+[[boundaries]]
+payload_offset = 91
+length = 5
+
+[[boundaries]]
+payload_offset = 96
+length = 6
+
+[[boundaries]]
+payload_offset = 102
+length = 1
+
+[[boundaries]]
+payload_offset = 103
+length = 6
+
+[[boundaries]]
+payload_offset = 109
+length = 2
+
+[[boundaries]]
+payload_offset = 111
+length = 1
+
+[[boundaries]]
+payload_offset = 112
+length = 1
+
+[[boundaries]]
+payload_offset = 113
+length = 6
+
+[[boundaries]]
+payload_offset = 119
+length = 2
+
+[[boundaries]]
+payload_offset = 121
+length = 5
+
+[[boundaries]]
+payload_offset = 126
+length = 6
+
+[[boundaries]]
+payload_offset = 132
+length = 6
+
+[[boundaries]]
+payload_offset = 138
+length = 2
+
+[[boundaries]]
+payload_offset = 140
+length = 5
+
+[[boundaries]]
+payload_offset = 145
+length = 8
+
+[[boundaries]]
+payload_offset = 153
+length = 1
+
+[[boundaries]]
+payload_offset = 154
+length = 1
+
+[[boundaries]]
+payload_offset = 155
+length = 1
+
+[[boundaries]]
+payload_offset = 156
+length = 6
+
+[[boundaries]]
+payload_offset = 162
+length = 2
+
+[[boundaries]]
+payload_offset = 164
+length = 5
+
+[[boundaries]]
+payload_offset = 169
+length = 6
+
+[[boundaries]]
+payload_offset = 175
+length = 6
+
+[[boundaries]]
+payload_offset = 181
+length = 2
+
+[[boundaries]]
+payload_offset = 183
+length = 5
+
+[[boundaries]]
+payload_offset = 188
+length = 8
+
+[[boundaries]]
+payload_offset = 196
+length = 1
+
+[[boundaries]]
+payload_offset = 197
+length = 1
+
+[[boundaries]]
+payload_offset = 198
+length = 1
+
+[[boundaries]]
+payload_offset = 199
+length = 5
+
+[[boundaries]]
+payload_offset = 204
+length = 1
+
+[[boundaries]]
+payload_offset = 205
+length = 5
+
+[[boundaries]]
+payload_offset = 211
+length = 1
+
+[[boundaries]]
+payload_offset = 212
+length = 7
+
+[[boundaries]]
+payload_offset = 219
+length = 3
+
+[[boundaries]]
+payload_offset = 222
+length = 3
+
+[[boundaries]]
+payload_offset = 225
+length = 5
+
+[[boundaries]]
+payload_offset = 230
+length = 5
+
+[[boundaries]]
+payload_offset = 235
+length = 5
+
+[[boundaries]]
+payload_offset = 240
+length = 1
+
+[[boundaries]]
+payload_offset = 241
+length = 6
+
+[[boundaries]]
+payload_offset = 247
+length = 2
+
+[[boundaries]]
+payload_offset = 249
+length = 1
+
+[[boundaries]]
+payload_offset = 250
+length = 1
+
+[[boundaries]]
+payload_offset = 251
+length = 6
+
+[[boundaries]]
+payload_offset = 257
+length = 2
+
+[[boundaries]]
+payload_offset = 259
+length = 1
+
+[[boundaries]]
+payload_offset = 260
+length = 6
+
+[[boundaries]]
+payload_offset = 266
+length = 2
+
+[[boundaries]]
+payload_offset = 268
+length = 1
+
+[[boundaries]]
+payload_offset = 269
+length = 6
+
+[[boundaries]]
+payload_offset = 275
+length = 2
+
+[[boundaries]]
+payload_offset = 277
+length = 1
+
+[[boundaries]]
+payload_offset = 278
+length = 6
+
+[[boundaries]]
+payload_offset = 284
+length = 2
+
+[[boundaries]]
+payload_offset = 286
+length = 1
+
+[[boundaries]]
+payload_offset = 287
+length = 6
+
+[[boundaries]]
+payload_offset = 293
+length = 2
+
+[[boundaries]]
+payload_offset = 295
+length = 1
+
+[[boundaries]]
+payload_offset = 296
+length = 6
+
+[[boundaries]]
+payload_offset = 302
+length = 2
+
+[[boundaries]]
+payload_offset = 304
+length = 1
+
+[[boundaries]]
+payload_offset = 305
+length = 1
+
+[[boundaries]]
+payload_offset = 306
+length = 1
+
+[[boundaries]]
+payload_offset = 307
+length = 5
+
+[[boundaries]]
+payload_offset = 312
+length = 1
+
+[[boundaries]]
+payload_offset = 313
+length = 7
+
+[[boundaries]]
+payload_offset = 320
+length = 3
+
+[[boundaries]]
+payload_offset = 323
+length = 1
+
+[[boundaries]]
+payload_offset = 324
+length = 1
+
+[[boundaries]]
+payload_offset = 325
+length = 1
+
+[[boundaries]]
+payload_offset = 326
+length = 6
+
+[[boundaries]]
+payload_offset = 332
+length = 2
+
+[[boundaries]]
+payload_offset = 334
+length = 1
+
+[[boundaries]]
+payload_offset = 335
+length = 1
+
+[[boundaries]]
+payload_offset = 336
+length = 5
+
+[[boundaries]]
+payload_offset = 342
+length = 1
+
+[[boundaries]]
+payload_offset = 343
+length = 5
+
+[[boundaries]]
+payload_offset = 349
+length = 7
+
+[[boundaries]]
+payload_offset = 356
+length = 3
+
+[[boundaries]]
+payload_offset = 359
+length = 6
+
+[[boundaries]]
+payload_offset = 365
+length = 2
+
+[[boundaries]]
+payload_offset = 367
+length = 7
+
+[[boundaries]]
+payload_offset = 374
+length = 3
+
+[[boundaries]]
+payload_offset = 377
+length = 6
+
+[[boundaries]]
+payload_offset = 383
+length = 2
+
+[[boundaries]]
+payload_offset = 385
+length = 1
+
+[[boundaries]]
+payload_offset = 386
+length = 3
+
+[[boundaries]]
+payload_offset = 389
+length = 7
+
+[[boundaries]]
+payload_offset = 396
+length = 7
+
+[[boundaries]]
+payload_offset = 403
+length = 3
+
+[[boundaries]]
+payload_offset = 406
+length = 1
+
+[[boundaries]]
+payload_offset = 407
+length = 1
+
+[[boundaries]]
+payload_offset = 408
+length = 1
+
+[[boundaries]]
+payload_offset = 409
+length = 1
+
+[[boundaries]]
+payload_offset = 410
+length = 3
+
+[[boundaries]]
+payload_offset = 413
+length = 5
+
+[[boundaries]]
+payload_offset = 418
+length = 6
+
+[[boundaries]]
+payload_offset = 424
+length = 5
+
+[[boundaries]]
+payload_offset = 429
+length = 6
+
+[[boundaries]]
+payload_offset = 435
+length = 5
+
+[[boundaries]]
+payload_offset = 440
+length = 6
+
+[[boundaries]]
+payload_offset = 446
+length = 5
+
+[[boundaries]]
+payload_offset = 451
+length = 6
+
+[[boundaries]]
+payload_offset = 457
+length = 6
+
+[[boundaries]]
+payload_offset = 463
+length = 2
+
+[[boundaries]]
+payload_offset = 465
+length = 1
+
+[[boundaries]]
+payload_offset = 466
+length = 1
+
+[[boundaries]]
+payload_offset = 467
+length = 7
+
+[[boundaries]]
+payload_offset = 474
+length = 3
+
+[[boundaries]]
+payload_offset = 477
+length = 1
+
+[[boundaries]]
+payload_offset = 478
+length = 1
+
+[[boundaries]]
+payload_offset = 479
+length = 1
+
+[[boundaries]]
+payload_offset = 480
+length = 1
+
+[[boundaries]]
+payload_offset = 481
+length = 5
+
+[[boundaries]]
+payload_offset = 486
+length = 1
+
+[[boundaries]]
+payload_offset = 487
+length = 5
+
+[[boundaries]]
+payload_offset = 492
+length = 6
+
+[[boundaries]]
+payload_offset = 498
+length = 5
+
+[[boundaries]]
+payload_offset = 503
+length = 6
+
+[[boundaries]]
+payload_offset = 509
+length = 5
+
+[[boundaries]]
+payload_offset = 514
+length = 6
+
+[[boundaries]]
+payload_offset = 520
+length = 5
+
+[[boundaries]]
+payload_offset = 525
+length = 6
+
+[[boundaries]]
+payload_offset = 531
+length = 1
+
+[[boundaries]]
+payload_offset = 532
+length = 1
+
+[[boundaries]]
+payload_offset = 533
+length = 1
+
+[[boundaries]]
+payload_offset = 534
+length = 7
+
+[[boundaries]]
+payload_offset = 541
+length = 3
+
+[[boundaries]]
+payload_offset = 544
+length = 1
+
+[[boundaries]]
+payload_offset = 545
+length = 7
+
+[[boundaries]]
+payload_offset = 552
+length = 3
+
+[[boundaries]]
+payload_offset = 555
+length = 1
+
+[[boundaries]]
+payload_offset = 556
+length = 7
+
+[[boundaries]]
+payload_offset = 563
+length = 3
+
+[[boundaries]]
+payload_offset = 566
+length = 1
+
+[[boundaries]]
+payload_offset = 567
+length = 7
+
+[[boundaries]]
+payload_offset = 574
+length = 3
+
+[[boundaries]]
+payload_offset = 577
+length = 1
+
+[[boundaries]]
+payload_offset = 578
+length = 1
+
+[[boundaries]]
+payload_offset = 579
+length = 1
+
+[[boundaries]]
+payload_offset = 580
+length = 6
+
+[[boundaries]]
+payload_offset = 586
+length = 2
+
+[[boundaries]]
+payload_offset = 588
+length = 3
+
+[[boundaries]]
+payload_offset = 591
+length = 5
+
+[[boundaries]]
+payload_offset = 596
+length = 6
+
+[[boundaries]]
+payload_offset = 602
+length = 5
+
+[[boundaries]]
+payload_offset = 608
+length = 6
+
+[[boundaries]]
+payload_offset = 614
+length = 2
+
+[[boundaries]]
+payload_offset = 616
+length = 1
+
+[[boundaries]]
+payload_offset = 617
+length = 1
+
+[[boundaries]]
+payload_offset = 618
+length = 6
+
+[[boundaries]]
+payload_offset = 624
+length = 2
+
+[[boundaries]]
+payload_offset = 626
+length = 1
+
+[[boundaries]]
+payload_offset = 627
+length = 1
+
+[[boundaries]]
+payload_offset = 628
+length = 6
+
+[[boundaries]]
+payload_offset = 634
+length = 2
+
+[[boundaries]]
+payload_offset = 636
+length = 1
+
+[[boundaries]]
+payload_offset = 637
+length = 6
+
+[[boundaries]]
+payload_offset = 643
+length = 2
+
+[[boundaries]]
+payload_offset = 645
+length = 1
+
+[[boundaries]]
+payload_offset = 646
+length = 6
+
+[[boundaries]]
+payload_offset = 652
+length = 2
+
+[[boundaries]]
+payload_offset = 654
+length = 1
+
+[[boundaries]]
+payload_offset = 655
+length = 6
+
+[[boundaries]]
+payload_offset = 661
+length = 2
+
+[[boundaries]]
+payload_offset = 663
+length = 1
+
+[[boundaries]]
+payload_offset = 664
+length = 6
+
+[[boundaries]]
+payload_offset = 670
+length = 2
+
+[[boundaries]]
+payload_offset = 672
+length = 1
+
+[[boundaries]]
+payload_offset = 673
+length = 6
+
+[[boundaries]]
+payload_offset = 679
+length = 2
+
+[[boundaries]]
+payload_offset = 681
+length = 1
+
+[[boundaries]]
+payload_offset = 682
+length = 6
+
+[[boundaries]]
+payload_offset = 688
+length = 2
+
+[[boundaries]]
+payload_offset = 690
+length = 1
+
+[[boundaries]]
+payload_offset = 691
+length = 6
+
+[[boundaries]]
+payload_offset = 697
+length = 2
+
+[[boundaries]]
+payload_offset = 699
+length = 1
+
+[[boundaries]]
+payload_offset = 700
+length = 6
+
+[[boundaries]]
+payload_offset = 706
+length = 2
+
+[[boundaries]]
+payload_offset = 708
+length = 1
+
+[[boundaries]]
+payload_offset = 709
+length = 1
+
+[[boundaries]]
+payload_offset = 710
+length = 6
+
+[[boundaries]]
+payload_offset = 716
+length = 2
+
+[[boundaries]]
+payload_offset = 718
+length = 1
+
+[[boundaries]]
+payload_offset = 719
+length = 1
+
+[[boundaries]]
+payload_offset = 720
+length = 1
+
+[[boundaries]]
+payload_offset = 721
+length = 6
+
+[[boundaries]]
+payload_offset = 727
+length = 2
+
+[[boundaries]]
+payload_offset = 729
+length = 1
+
+[[boundaries]]
+payload_offset = 730
+length = 1
+
+[[boundaries]]
+payload_offset = 731
+length = 6
+
+[[boundaries]]
+payload_offset = 737
+length = 2
+
+[[boundaries]]
+payload_offset = 739
+length = 1
+
+[[boundaries]]
+payload_offset = 740
+length = 1
+
+[[boundaries]]
+payload_offset = 741
+length = 1
+
+[[boundaries]]
+payload_offset = 742
+length = 6
+
+[[boundaries]]
+payload_offset = 748
+length = 2
+
+[[boundaries]]
+payload_offset = 750
+length = 1
+
+[[boundaries]]
+payload_offset = 751
+length = 7
+
+[[boundaries]]
+payload_offset = 758
+length = 3
+
+[[boundaries]]
+payload_offset = 761
+length = 1
+
+[[boundaries]]
+payload_offset = 762
+length = 1
+
+[[boundaries]]
+payload_offset = 763
+length = 6
+
+[[boundaries]]
+payload_offset = 769
+length = 2
+
+[[boundaries]]
+payload_offset = 771
+length = 1

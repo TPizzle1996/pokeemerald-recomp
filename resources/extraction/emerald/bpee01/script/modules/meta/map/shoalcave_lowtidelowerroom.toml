@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 7
 reloc_count = 9
+instruction_count = 42
 
 [[segments]]
 kind = "bytecode"
@@ -88,6 +89,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/shoalcave-lowtidelowerroom"
 target_export = "ShoalCave_LowTideLowerRoom_EventScript_SetShoalItemMetatiles"
 target_offset = 12
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 6
 runtime_resolution_required = true
 
 [[relocs]]
@@ -98,6 +101,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/shoalcave-lowtidelowerroom"
 target_export = "ShoalCave_LowTideLowerRoom_EventScript_SetShoalItemMetatilesEnd"
 target_offset = 31
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 25
 runtime_resolution_required = true
 
 [[relocs]]
@@ -108,6 +113,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/shoalcave-lowtidelowerroom"
 target_export = "ShoalCave_LowTideLowerRoom_EventScript_ReceivedShoalSalt"
 target_offset = 82
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 76
 runtime_resolution_required = true
 
 [[relocs]]
@@ -118,6 +125,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_ShowBagIsFull"
 target_offset = 273
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 273
 runtime_resolution_required = true
 
 [[relocs]]
@@ -127,6 +136,8 @@ original_encoded_gba = 0x82a8169
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/shoal-cave"
 target_export = "ShoalCave_Text_WasShoalSaltNowNothing"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -137,6 +148,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/shoalcave-lowtidelowerroom"
 target_export = "ShoalCave_LowTideLowerRoom_EventScript_ReceivedFocusBand"
 target_offset = 139
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 133
 runtime_resolution_required = true
 
 [[relocs]]
@@ -146,6 +159,8 @@ original_encoded_gba = 0x82371eb
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/shoalcave-lowtidelowerroom"
 target_export = "ShoalCave_LowTideLowerRoom_Text_CanOvercomeColdWithFocus"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -156,6 +171,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_ShowBagIsFull"
 target_offset = 273
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 273
 runtime_resolution_required = true
 
 [[relocs]]
@@ -165,4 +182,174 @@ original_encoded_gba = 0x823728d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/shoalcave-lowtidelowerroom"
 target_export = "ShoalCave_LowTideLowerRoom_Text_EverythingStartsWithFocus"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 5
+
+[[boundaries]]
+payload_offset = 5
+length = 1
+
+[[boundaries]]
+payload_offset = 6
+length = 3
+
+[[boundaries]]
+payload_offset = 9
+length = 6
+
+[[boundaries]]
+payload_offset = 15
+length = 9
+
+[[boundaries]]
+payload_offset = 24
+length = 1
+
+[[boundaries]]
+payload_offset = 25
+length = 1
+
+[[boundaries]]
+payload_offset = 26
+length = 1
+
+[[boundaries]]
+payload_offset = 27
+length = 3
+
+[[boundaries]]
+payload_offset = 30
+length = 6
+
+[[boundaries]]
+payload_offset = 36
+length = 5
+
+[[boundaries]]
+payload_offset = 41
+length = 5
+
+[[boundaries]]
+payload_offset = 46
+length = 2
+
+[[boundaries]]
+payload_offset = 48
+length = 5
+
+[[boundaries]]
+payload_offset = 53
+length = 6
+
+[[boundaries]]
+payload_offset = 59
+length = 9
+
+[[boundaries]]
+payload_offset = 68
+length = 3
+
+[[boundaries]]
+payload_offset = 71
+length = 3
+
+[[boundaries]]
+payload_offset = 74
+length = 1
+
+[[boundaries]]
+payload_offset = 75
+length = 1
+
+[[boundaries]]
+payload_offset = 76
+length = 6
+
+[[boundaries]]
+payload_offset = 82
+length = 2
+
+[[boundaries]]
+payload_offset = 84
+length = 1
+
+[[boundaries]]
+payload_offset = 85
+length = 1
+
+[[boundaries]]
+payload_offset = 86
+length = 1
+
+[[boundaries]]
+payload_offset = 87
+length = 1
+
+[[boundaries]]
+payload_offset = 88
+length = 3
+
+[[boundaries]]
+payload_offset = 91
+length = 6
+
+[[boundaries]]
+payload_offset = 97
+length = 6
+
+[[boundaries]]
+payload_offset = 103
+length = 2
+
+[[boundaries]]
+payload_offset = 105
+length = 5
+
+[[boundaries]]
+payload_offset = 110
+length = 5
+
+[[boundaries]]
+payload_offset = 115
+length = 2
+
+[[boundaries]]
+payload_offset = 117
+length = 5
+
+[[boundaries]]
+payload_offset = 122
+length = 6
+
+[[boundaries]]
+payload_offset = 128
+length = 3
+
+[[boundaries]]
+payload_offset = 131
+length = 1
+
+[[boundaries]]
+payload_offset = 132
+length = 1
+
+[[boundaries]]
+payload_offset = 133
+length = 6
+
+[[boundaries]]
+payload_offset = 139
+length = 2
+
+[[boundaries]]
+payload_offset = 141
+length = 1
+
+[[boundaries]]
+payload_offset = 142
+length = 1

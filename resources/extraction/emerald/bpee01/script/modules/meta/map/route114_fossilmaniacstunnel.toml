@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 8
 reloc_count = 11
+instruction_count = 43
 
 [[segments]]
 kind = "bytecode"
@@ -96,6 +97,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route114-fossilmaniacstunnel"
 target_export = "Route114_FossilManiacsTunnel_EventScript_MoveFossilManiac"
 target_offset = 21
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 10
 runtime_resolution_required = true
 
 [[relocs]]
@@ -106,6 +109,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route114-fossilmaniacstunnel"
 target_export = "Route114_FossilManiacsTunnel_EventScript_CloseDesertUnderpass"
 target_offset = 43
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 32
 runtime_resolution_required = true
 
 [[relocs]]
@@ -115,6 +120,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -124,6 +131,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -133,6 +142,8 @@ original_encoded_gba = 0x822b1f7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route114-fossilmaniacstunnel"
 target_export = "Route114_FossilManiacsTunnel_Text_NotSafeThatWay"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -143,6 +154,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route114-fossilmaniacstunnel"
 target_export = "Route114_FossilManiacsTunnel_EventScript_PlayerRevivedFossil"
 target_offset = 158
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 147
 runtime_resolution_required = true
 
 [[relocs]]
@@ -153,6 +166,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route114-fossilmaniacstunnel"
 target_export = "Route114_FossilManiacsTunnel_EventScript_PlayerHasFossil"
 target_offset = 148
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 137
 runtime_resolution_required = true
 
 [[relocs]]
@@ -163,6 +178,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route114-fossilmaniacstunnel"
 target_export = "Route114_FossilManiacsTunnel_EventScript_PlayerHasFossil"
 target_offset = 148
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 137
 runtime_resolution_required = true
 
 [[relocs]]
@@ -172,6 +189,8 @@ original_encoded_gba = 0x822afd0
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route114-fossilmaniacstunnel"
 target_export = "Route114_FossilManiacsTunnel_Text_LookInDesertForFossils"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -181,6 +200,8 @@ original_encoded_gba = 0x822b0d6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route114-fossilmaniacstunnel"
 target_export = "Route114_FossilManiacsTunnel_Text_DevonCorpRevivingFossils"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -190,4 +211,178 @@ original_encoded_gba = 0x822b1cc
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route114-fossilmaniacstunnel"
 target_export = "Route114_FossilManiacsTunnel_Text_FossilsAreWonderful"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 6
+
+[[boundaries]]
+payload_offset = 9
+length = 1
+
+[[boundaries]]
+payload_offset = 10
+length = 7
+
+[[boundaries]]
+payload_offset = 17
+length = 4
+
+[[boundaries]]
+payload_offset = 21
+length = 1
+
+[[boundaries]]
+payload_offset = 22
+length = 3
+
+[[boundaries]]
+payload_offset = 25
+length = 6
+
+[[boundaries]]
+payload_offset = 31
+length = 1
+
+[[boundaries]]
+payload_offset = 32
+length = 9
+
+[[boundaries]]
+payload_offset = 41
+length = 9
+
+[[boundaries]]
+payload_offset = 50
+length = 1
+
+[[boundaries]]
+payload_offset = 51
+length = 1
+
+[[boundaries]]
+payload_offset = 52
+length = 7
+
+[[boundaries]]
+payload_offset = 59
+length = 7
+
+[[boundaries]]
+payload_offset = 66
+length = 3
+
+[[boundaries]]
+payload_offset = 69
+length = 6
+
+[[boundaries]]
+payload_offset = 75
+length = 2
+
+[[boundaries]]
+payload_offset = 77
+length = 5
+
+[[boundaries]]
+payload_offset = 82
+length = 1
+
+[[boundaries]]
+payload_offset = 83
+length = 1
+
+[[boundaries]]
+payload_offset = 84
+length = 1
+
+[[boundaries]]
+payload_offset = 85
+length = 1
+
+[[boundaries]]
+payload_offset = 86
+length = 3
+
+[[boundaries]]
+payload_offset = 89
+length = 6
+
+[[boundaries]]
+payload_offset = 95
+length = 5
+
+[[boundaries]]
+payload_offset = 100
+length = 5
+
+[[boundaries]]
+payload_offset = 105
+length = 6
+
+[[boundaries]]
+payload_offset = 111
+length = 5
+
+[[boundaries]]
+payload_offset = 116
+length = 5
+
+[[boundaries]]
+payload_offset = 121
+length = 6
+
+[[boundaries]]
+payload_offset = 127
+length = 6
+
+[[boundaries]]
+payload_offset = 133
+length = 2
+
+[[boundaries]]
+payload_offset = 135
+length = 1
+
+[[boundaries]]
+payload_offset = 136
+length = 1
+
+[[boundaries]]
+payload_offset = 137
+length = 6
+
+[[boundaries]]
+payload_offset = 143
+length = 2
+
+[[boundaries]]
+payload_offset = 145
+length = 1
+
+[[boundaries]]
+payload_offset = 146
+length = 1
+
+[[boundaries]]
+payload_offset = 147
+length = 6
+
+[[boundaries]]
+payload_offset = 153
+length = 2
+
+[[boundaries]]
+payload_offset = 155
+length = 1
+
+[[boundaries]]
+payload_offset = 156
+length = 1

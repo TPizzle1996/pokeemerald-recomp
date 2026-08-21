@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 9
 reloc_count = 6
+instruction_count = 30
 
 [[segments]]
 kind = "bytecode"
@@ -104,6 +105,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/rival-graphics"
 target_export = "EventScript_SetupRivalGfxIdFemale"
 target_offset = 24
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 24
 runtime_resolution_required = true
 
 [[relocs]]
@@ -114,6 +117,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/rival-graphics"
 target_export = "EventScript_SetupRivalGfxIdMale"
 target_offset = 30
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 30
 runtime_resolution_required = true
 
 [[relocs]]
@@ -124,6 +129,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/rival-graphics"
 target_export = "EventScript_SetupRivalOnBikeGfxIdFemale"
 target_offset = 60
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 60
 runtime_resolution_required = true
 
 [[relocs]]
@@ -134,6 +141,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/rival-graphics"
 target_export = "EventScript_SetupRivalOnBikeGfxIdMale"
 target_offset = 66
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 66
 runtime_resolution_required = true
 
 [[relocs]]
@@ -144,6 +153,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/rival-graphics"
 target_export = "EventScript_SetupRivalGfxIdMale2"
 target_offset = 96
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 96
 runtime_resolution_required = true
 
 [[relocs]]
@@ -154,4 +165,126 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/rival-graphics"
 target_export = "EventScript_SetupRivalGfxIdFemale2"
 target_offset = 102
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 102
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 5
+
+[[boundaries]]
+payload_offset = 6
+length = 6
+
+[[boundaries]]
+payload_offset = 12
+length = 5
+
+[[boundaries]]
+payload_offset = 17
+length = 6
+
+[[boundaries]]
+payload_offset = 23
+length = 1
+
+[[boundaries]]
+payload_offset = 24
+length = 5
+
+[[boundaries]]
+payload_offset = 29
+length = 1
+
+[[boundaries]]
+payload_offset = 30
+length = 5
+
+[[boundaries]]
+payload_offset = 35
+length = 1
+
+[[boundaries]]
+payload_offset = 36
+length = 1
+
+[[boundaries]]
+payload_offset = 37
+length = 5
+
+[[boundaries]]
+payload_offset = 42
+length = 6
+
+[[boundaries]]
+payload_offset = 48
+length = 5
+
+[[boundaries]]
+payload_offset = 53
+length = 6
+
+[[boundaries]]
+payload_offset = 59
+length = 1
+
+[[boundaries]]
+payload_offset = 60
+length = 5
+
+[[boundaries]]
+payload_offset = 65
+length = 1
+
+[[boundaries]]
+payload_offset = 66
+length = 5
+
+[[boundaries]]
+payload_offset = 71
+length = 1
+
+[[boundaries]]
+payload_offset = 72
+length = 1
+
+[[boundaries]]
+payload_offset = 73
+length = 5
+
+[[boundaries]]
+payload_offset = 78
+length = 6
+
+[[boundaries]]
+payload_offset = 84
+length = 5
+
+[[boundaries]]
+payload_offset = 89
+length = 6
+
+[[boundaries]]
+payload_offset = 95
+length = 1
+
+[[boundaries]]
+payload_offset = 96
+length = 5
+
+[[boundaries]]
+payload_offset = 101
+length = 1
+
+[[boundaries]]
+payload_offset = 102
+length = 5
+
+[[boundaries]]
+payload_offset = 107
+length = 1

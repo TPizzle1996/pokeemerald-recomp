@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 15
 reloc_count = 35
+instruction_count = 98
 
 [[segments]]
 kind = "bytecode"
@@ -152,6 +153,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstoreelevator"
 target_export = "LilycoveCity_DepartmentStoreElevator_EventScript_SetFloor"
 target_offset = 473
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 472
 runtime_resolution_required = true
 
 [[relocs]]
@@ -161,6 +164,8 @@ original_encoded_gba = 0x8272c1d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/event-scripts"
 target_export = "gText_WhichFloorWouldYouLike"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -171,6 +176,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstoreelevator"
 target_export = "LilycoveCity_DepartmentStoreElevator_EventScript_ChooseFloorFrom5th"
 target_offset = 102
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 101
 runtime_resolution_required = true
 
 [[relocs]]
@@ -181,6 +188,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstoreelevator"
 target_export = "LilycoveCity_DepartmentStoreElevator_EventScript_ChooseFloorFrom4th"
 target_offset = 114
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 113
 runtime_resolution_required = true
 
 [[relocs]]
@@ -191,6 +200,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstoreelevator"
 target_export = "LilycoveCity_DepartmentStoreElevator_EventScript_ChooseFloorFrom3rd"
 target_offset = 126
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 125
 runtime_resolution_required = true
 
 [[relocs]]
@@ -201,6 +212,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstoreelevator"
 target_export = "LilycoveCity_DepartmentStoreElevator_EventScript_ChooseFloorFrom2nd"
 target_offset = 138
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 137
 runtime_resolution_required = true
 
 [[relocs]]
@@ -211,6 +224,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstoreelevator"
 target_export = "LilycoveCity_DepartmentStoreElevator_EventScript_ChooseFloorFrom1st"
 target_offset = 150
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 149
 runtime_resolution_required = true
 
 [[relocs]]
@@ -221,6 +236,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstoreelevator"
 target_export = "LilycoveCity_DepartmentStoreElevator_EventScript_ChooseFloor"
 target_offset = 162
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 161
 runtime_resolution_required = true
 
 [[relocs]]
@@ -231,6 +248,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstoreelevator"
 target_export = "LilycoveCity_DepartmentStoreElevator_EventScript_ChooseFloor"
 target_offset = 162
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 161
 runtime_resolution_required = true
 
 [[relocs]]
@@ -241,6 +260,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstoreelevator"
 target_export = "LilycoveCity_DepartmentStoreElevator_EventScript_ChooseFloor"
 target_offset = 162
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 161
 runtime_resolution_required = true
 
 [[relocs]]
@@ -251,6 +272,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstoreelevator"
 target_export = "LilycoveCity_DepartmentStoreElevator_EventScript_ChooseFloor"
 target_offset = 162
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 161
 runtime_resolution_required = true
 
 [[relocs]]
@@ -261,6 +284,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstoreelevator"
 target_export = "LilycoveCity_DepartmentStoreElevator_EventScript_ChooseFloor"
 target_offset = 162
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 161
 runtime_resolution_required = true
 
 [[relocs]]
@@ -271,6 +296,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstoreelevator"
 target_export = "LilycoveCity_DepartmentStoreElevator_EventScript_5thFloor"
 target_offset = 405
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 404
 runtime_resolution_required = true
 
 [[relocs]]
@@ -281,6 +308,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstoreelevator"
 target_export = "LilycoveCity_DepartmentStoreElevator_EventScript_4thFloor"
 target_offset = 365
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 364
 runtime_resolution_required = true
 
 [[relocs]]
@@ -291,6 +320,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstoreelevator"
 target_export = "LilycoveCity_DepartmentStoreElevator_EventScript_3rdFloor"
 target_offset = 325
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 324
 runtime_resolution_required = true
 
 [[relocs]]
@@ -301,6 +332,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstoreelevator"
 target_export = "LilycoveCity_DepartmentStoreElevator_EventScript_2ndFloor"
 target_offset = 285
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 284
 runtime_resolution_required = true
 
 [[relocs]]
@@ -311,6 +344,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstoreelevator"
 target_export = "LilycoveCity_DepartmentStoreElevator_EventScript_1stFloor"
 target_offset = 245
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 244
 runtime_resolution_required = true
 
 [[relocs]]
@@ -321,6 +356,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstoreelevator"
 target_export = "LilycoveCity_DepartmentStoreElevator_EventScript_ExitFloorSelect"
 target_offset = 445
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 444
 runtime_resolution_required = true
 
 [[relocs]]
@@ -331,6 +368,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstoreelevator"
 target_export = "LilycoveCity_DepartmentStoreElevator_EventScript_ExitFloorSelect"
 target_offset = 445
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 444
 runtime_resolution_required = true
 
 [[relocs]]
@@ -341,6 +380,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstoreelevator"
 target_export = "LilycoveCity_DepartmentStoreElevator_EventScript_ExitFloorSelect"
 target_offset = 445
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 444
 runtime_resolution_required = true
 
 [[relocs]]
@@ -351,6 +392,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstoreelevator"
 target_export = "LilycoveCity_DepartmentStoreElevator_EventScript_MoveElevator"
 target_offset = 450
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 449
 runtime_resolution_required = true
 
 [[relocs]]
@@ -361,6 +404,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstoreelevator"
 target_export = "LilycoveCity_DepartmentStoreElevator_EventScript_ExitFloorSelect"
 target_offset = 445
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 444
 runtime_resolution_required = true
 
 [[relocs]]
@@ -371,6 +416,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstoreelevator"
 target_export = "LilycoveCity_DepartmentStoreElevator_EventScript_ExitFloorSelect"
 target_offset = 445
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 444
 runtime_resolution_required = true
 
 [[relocs]]
@@ -381,6 +428,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstoreelevator"
 target_export = "LilycoveCity_DepartmentStoreElevator_EventScript_MoveElevator"
 target_offset = 450
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 449
 runtime_resolution_required = true
 
 [[relocs]]
@@ -391,6 +440,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstoreelevator"
 target_export = "LilycoveCity_DepartmentStoreElevator_EventScript_ExitFloorSelect"
 target_offset = 445
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 444
 runtime_resolution_required = true
 
 [[relocs]]
@@ -401,6 +452,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstoreelevator"
 target_export = "LilycoveCity_DepartmentStoreElevator_EventScript_ExitFloorSelect"
 target_offset = 445
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 444
 runtime_resolution_required = true
 
 [[relocs]]
@@ -411,6 +464,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstoreelevator"
 target_export = "LilycoveCity_DepartmentStoreElevator_EventScript_MoveElevator"
 target_offset = 450
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 449
 runtime_resolution_required = true
 
 [[relocs]]
@@ -421,6 +476,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstoreelevator"
 target_export = "LilycoveCity_DepartmentStoreElevator_EventScript_ExitFloorSelect"
 target_offset = 445
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 444
 runtime_resolution_required = true
 
 [[relocs]]
@@ -431,6 +488,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstoreelevator"
 target_export = "LilycoveCity_DepartmentStoreElevator_EventScript_ExitFloorSelect"
 target_offset = 445
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 444
 runtime_resolution_required = true
 
 [[relocs]]
@@ -441,6 +500,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstoreelevator"
 target_export = "LilycoveCity_DepartmentStoreElevator_EventScript_MoveElevator"
 target_offset = 450
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 449
 runtime_resolution_required = true
 
 [[relocs]]
@@ -451,6 +512,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstoreelevator"
 target_export = "LilycoveCity_DepartmentStoreElevator_EventScript_ExitFloorSelect"
 target_offset = 445
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 444
 runtime_resolution_required = true
 
 [[relocs]]
@@ -461,6 +524,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstoreelevator"
 target_export = "LilycoveCity_DepartmentStoreElevator_EventScript_ExitFloorSelect"
 target_offset = 445
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 444
 runtime_resolution_required = true
 
 [[relocs]]
@@ -471,6 +536,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstoreelevator"
 target_export = "LilycoveCity_DepartmentStoreElevator_EventScript_MoveElevator"
 target_offset = 450
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 449
 runtime_resolution_required = true
 
 [[relocs]]
@@ -481,6 +548,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstoreelevator"
 target_export = "LilycoveCity_DepartmentStoreElevator_EventScript_ExitFloorSelect"
 target_offset = 445
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 444
 runtime_resolution_required = true
 
 [[relocs]]
@@ -490,4 +559,398 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 1
+
+[[boundaries]]
+payload_offset = 2
+length = 5
+
+[[boundaries]]
+payload_offset = 7
+length = 3
+
+[[boundaries]]
+payload_offset = 10
+length = 6
+
+[[boundaries]]
+payload_offset = 16
+length = 5
+
+[[boundaries]]
+payload_offset = 21
+length = 3
+
+[[boundaries]]
+payload_offset = 24
+length = 5
+
+[[boundaries]]
+payload_offset = 29
+length = 1
+
+[[boundaries]]
+payload_offset = 30
+length = 5
+
+[[boundaries]]
+payload_offset = 35
+length = 5
+
+[[boundaries]]
+payload_offset = 40
+length = 5
+
+[[boundaries]]
+payload_offset = 45
+length = 5
+
+[[boundaries]]
+payload_offset = 50
+length = 6
+
+[[boundaries]]
+payload_offset = 56
+length = 5
+
+[[boundaries]]
+payload_offset = 61
+length = 6
+
+[[boundaries]]
+payload_offset = 67
+length = 5
+
+[[boundaries]]
+payload_offset = 72
+length = 6
+
+[[boundaries]]
+payload_offset = 78
+length = 5
+
+[[boundaries]]
+payload_offset = 83
+length = 6
+
+[[boundaries]]
+payload_offset = 89
+length = 5
+
+[[boundaries]]
+payload_offset = 94
+length = 6
+
+[[boundaries]]
+payload_offset = 100
+length = 1
+
+[[boundaries]]
+payload_offset = 101
+length = 6
+
+[[boundaries]]
+payload_offset = 107
+length = 5
+
+[[boundaries]]
+payload_offset = 113
+length = 6
+
+[[boundaries]]
+payload_offset = 119
+length = 5
+
+[[boundaries]]
+payload_offset = 125
+length = 6
+
+[[boundaries]]
+payload_offset = 131
+length = 5
+
+[[boundaries]]
+payload_offset = 137
+length = 6
+
+[[boundaries]]
+payload_offset = 143
+length = 5
+
+[[boundaries]]
+payload_offset = 149
+length = 6
+
+[[boundaries]]
+payload_offset = 155
+length = 5
+
+[[boundaries]]
+payload_offset = 161
+length = 5
+
+[[boundaries]]
+payload_offset = 166
+length = 5
+
+[[boundaries]]
+payload_offset = 171
+length = 6
+
+[[boundaries]]
+payload_offset = 177
+length = 5
+
+[[boundaries]]
+payload_offset = 182
+length = 6
+
+[[boundaries]]
+payload_offset = 188
+length = 5
+
+[[boundaries]]
+payload_offset = 193
+length = 6
+
+[[boundaries]]
+payload_offset = 199
+length = 5
+
+[[boundaries]]
+payload_offset = 204
+length = 6
+
+[[boundaries]]
+payload_offset = 210
+length = 5
+
+[[boundaries]]
+payload_offset = 215
+length = 6
+
+[[boundaries]]
+payload_offset = 221
+length = 5
+
+[[boundaries]]
+payload_offset = 226
+length = 6
+
+[[boundaries]]
+payload_offset = 232
+length = 5
+
+[[boundaries]]
+payload_offset = 237
+length = 6
+
+[[boundaries]]
+payload_offset = 243
+length = 1
+
+[[boundaries]]
+payload_offset = 244
+length = 5
+
+[[boundaries]]
+payload_offset = 249
+length = 8
+
+[[boundaries]]
+payload_offset = 257
+length = 5
+
+[[boundaries]]
+payload_offset = 262
+length = 6
+
+[[boundaries]]
+payload_offset = 268
+length = 5
+
+[[boundaries]]
+payload_offset = 273
+length = 5
+
+[[boundaries]]
+payload_offset = 278
+length = 5
+
+[[boundaries]]
+payload_offset = 284
+length = 5
+
+[[boundaries]]
+payload_offset = 289
+length = 8
+
+[[boundaries]]
+payload_offset = 297
+length = 5
+
+[[boundaries]]
+payload_offset = 302
+length = 6
+
+[[boundaries]]
+payload_offset = 308
+length = 5
+
+[[boundaries]]
+payload_offset = 313
+length = 5
+
+[[boundaries]]
+payload_offset = 318
+length = 5
+
+[[boundaries]]
+payload_offset = 324
+length = 5
+
+[[boundaries]]
+payload_offset = 329
+length = 8
+
+[[boundaries]]
+payload_offset = 337
+length = 5
+
+[[boundaries]]
+payload_offset = 342
+length = 6
+
+[[boundaries]]
+payload_offset = 348
+length = 5
+
+[[boundaries]]
+payload_offset = 353
+length = 5
+
+[[boundaries]]
+payload_offset = 358
+length = 5
+
+[[boundaries]]
+payload_offset = 364
+length = 5
+
+[[boundaries]]
+payload_offset = 369
+length = 8
+
+[[boundaries]]
+payload_offset = 377
+length = 5
+
+[[boundaries]]
+payload_offset = 382
+length = 6
+
+[[boundaries]]
+payload_offset = 388
+length = 5
+
+[[boundaries]]
+payload_offset = 393
+length = 5
+
+[[boundaries]]
+payload_offset = 398
+length = 5
+
+[[boundaries]]
+payload_offset = 404
+length = 5
+
+[[boundaries]]
+payload_offset = 409
+length = 8
+
+[[boundaries]]
+payload_offset = 417
+length = 5
+
+[[boundaries]]
+payload_offset = 422
+length = 6
+
+[[boundaries]]
+payload_offset = 428
+length = 5
+
+[[boundaries]]
+payload_offset = 433
+length = 5
+
+[[boundaries]]
+payload_offset = 438
+length = 5
+
+[[boundaries]]
+payload_offset = 444
+length = 3
+
+[[boundaries]]
+payload_offset = 447
+length = 1
+
+[[boundaries]]
+payload_offset = 448
+length = 1
+
+[[boundaries]]
+payload_offset = 449
+length = 3
+
+[[boundaries]]
+payload_offset = 452
+length = 1
+
+[[boundaries]]
+payload_offset = 453
+length = 7
+
+[[boundaries]]
+payload_offset = 460
+length = 3
+
+[[boundaries]]
+payload_offset = 463
+length = 1
+
+[[boundaries]]
+payload_offset = 464
+length = 3
+
+[[boundaries]]
+payload_offset = 467
+length = 1
+
+[[boundaries]]
+payload_offset = 468
+length = 3
+
+[[boundaries]]
+payload_offset = 471
+length = 1
+
+[[boundaries]]
+payload_offset = 472
+length = 3
+
+[[boundaries]]
+payload_offset = 475
+length = 1

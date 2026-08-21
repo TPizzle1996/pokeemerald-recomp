@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 2
 export_count = 5
 reloc_count = 7
+instruction_count = 22
 
 [[segments]]
 kind = "bytecode"
@@ -78,6 +79,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battletowercorridor"
 target_export = "BattleFrontier_BattleTowerCorridor_EventScript_OpenFarDoor"
 target_offset = 41
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 30
 runtime_resolution_required = true
 
 [[relocs]]
@@ -88,6 +91,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battletowercorridor"
 target_export = "BattleFrontier_BattleTowerCorridor_EventScript_WalkToFarDoor"
 target_offset = 108
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 87
 runtime_resolution_required = true
 
 [[relocs]]
@@ -97,6 +102,8 @@ original_encoded_gba = 0x8241b3a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battletowercorridor-movement-attendantwalktodoor"
 target_export = "BattleFrontier_BattleTowerCorridor_Movement_AttendantWalkToDoor"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -106,6 +113,8 @@ original_encoded_gba = 0x8241b39
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battletowercorridor-movement-playerwalktodoor"
 target_export = "BattleFrontier_BattleTowerCorridor_Movement_PlayerWalkToDoor"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -116,6 +125,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battletowercorridor"
 target_export = "BattleFrontier_BattleTowerCorridor_EventScript_WarpToBattleRoom"
 target_offset = 125
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 104
 runtime_resolution_required = true
 
 [[relocs]]
@@ -125,6 +136,8 @@ original_encoded_gba = 0x8241b37
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battletowercorridor-movement-attendantwalktofardoor"
 target_export = "BattleFrontier_BattleTowerCorridor_Movement_AttendantWalkToFarDoor"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -134,4 +147,94 @@ original_encoded_gba = 0x8241b36
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battletowercorridor-movement-playerwalktofardoor"
 target_export = "BattleFrontier_BattleTowerCorridor_Movement_PlayerWalkToFarDoor"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 5
+
+[[boundaries]]
+payload_offset = 5
+length = 6
+
+[[boundaries]]
+payload_offset = 11
+length = 9
+
+[[boundaries]]
+payload_offset = 20
+length = 9
+
+[[boundaries]]
+payload_offset = 29
+length = 1
+
+[[boundaries]]
+payload_offset = 30
+length = 9
+
+[[boundaries]]
+payload_offset = 39
+length = 9
+
+[[boundaries]]
+payload_offset = 48
+length = 1
+
+[[boundaries]]
+payload_offset = 49
+length = 5
+
+[[boundaries]]
+payload_offset = 54
+length = 5
+
+[[boundaries]]
+payload_offset = 59
+length = 6
+
+[[boundaries]]
+payload_offset = 65
+length = 7
+
+[[boundaries]]
+payload_offset = 72
+length = 7
+
+[[boundaries]]
+payload_offset = 79
+length = 3
+
+[[boundaries]]
+payload_offset = 82
+length = 5
+
+[[boundaries]]
+payload_offset = 87
+length = 7
+
+[[boundaries]]
+payload_offset = 94
+length = 7
+
+[[boundaries]]
+payload_offset = 101
+length = 3
+
+[[boundaries]]
+payload_offset = 104
+length = 5
+
+[[boundaries]]
+payload_offset = 109
+length = 8
+
+[[boundaries]]
+payload_offset = 117
+length = 1
+
+[[boundaries]]
+payload_offset = 118
+length = 1

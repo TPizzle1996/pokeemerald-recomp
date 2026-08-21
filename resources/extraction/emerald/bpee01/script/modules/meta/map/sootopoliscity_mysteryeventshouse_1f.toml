@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 3
 export_count = 15
 reloc_count = 35
+instruction_count = 113
 
 [[segments]]
 kind = "bytecode"
@@ -164,6 +165,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/sootopoliscity-mysteryeventshouse-1f"
 target_export = "SootopolisCity_MysteryEventsHouse_1F_EventScript_SetTrainerVisitingLayout"
 target_offset = 42
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 31
 runtime_resolution_required = true
 
 [[relocs]]
@@ -174,6 +177,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/sootopoliscity-mysteryeventshouse-1f"
 target_export = "SootopolisCity_MysteryEventsHouse_1F_EventScript_MoveOldManToDoor"
 target_offset = 62
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 51
 runtime_resolution_required = true
 
 [[relocs]]
@@ -183,6 +188,8 @@ original_encoded_gba = 0x8227a1f
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/sootopoliscity-mysteryeventshouse-1f-movement-playerexitstairs"
 target_export = "SootopolisCity_MysteryEventsHouse_1F_Movement_PlayerExitStairs"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -192,6 +199,8 @@ original_encoded_gba = 0x8227a21
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/sootopoliscity-mysteryeventshouse-1f-movement-oldmanwalkbehindplayer"
 target_export = "SootopolisCity_MysteryEventsHouse_1F_Movement_OldManWalkBehindPlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -201,6 +210,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -211,6 +222,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/sootopoliscity-mysteryeventshouse-1f"
 target_export = "SootopolisCity_MysteryEventsHouse_1F_EventScript_BattleWonComment"
 target_offset = 177
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 140
 runtime_resolution_required = true
 
 [[relocs]]
@@ -221,6 +234,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/sootopoliscity-mysteryeventshouse-1f"
 target_export = "SootopolisCity_MysteryEventsHouse_1F_EventScript_BattleLostComment"
 target_offset = 186
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 149
 runtime_resolution_required = true
 
 [[relocs]]
@@ -231,6 +246,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/sootopoliscity-mysteryeventshouse-1f"
 target_export = "SootopolisCity_MysteryEventsHouse_1F_EventScript_BattleTiedComment"
 target_offset = 195
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 158
 runtime_resolution_required = true
 
 [[relocs]]
@@ -240,6 +257,8 @@ original_encoded_gba = 0x8227db8
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-mysteryeventshouse-1f"
 target_export = "SootopolisCity_MysteryEventsHouse_1F_Text_ThatWasSuperlative"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -249,6 +268,8 @@ original_encoded_gba = 0x8227e03
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-mysteryeventshouse-1f"
 target_export = "SootopolisCity_MysteryEventsHouse_1F_Text_TooBadForYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -258,6 +279,8 @@ original_encoded_gba = 0x8227d5b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-mysteryeventshouse-1f"
 target_export = "SootopolisCity_MysteryEventsHouse_1F_Text_BrilliantStandoff"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -268,6 +291,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/sootopoliscity-mysteryeventshouse-1f"
 target_export = "SootopolisCity_MysteryEventsHouse_1F_EventScript_InvalidVisitingTrainer"
 target_offset = 251
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 209
 runtime_resolution_required = true
 
 [[relocs]]
@@ -278,6 +303,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/sootopoliscity-mysteryeventshouse-1f"
 target_export = "SootopolisCity_MysteryEventsHouse_1F_EventScript_TrainerVisiting"
 target_offset = 261
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 219
 runtime_resolution_required = true
 
 [[relocs]]
@@ -287,6 +314,8 @@ original_encoded_gba = 0x8227b46
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-mysteryeventshouse-1f"
 target_export = "SootopolisCity_MysteryEventsHouse_1F_Text_OnlyAmusementWatchingBattles"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -296,6 +325,8 @@ original_encoded_gba = 0x8227b46
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-mysteryeventshouse-1f"
 target_export = "SootopolisCity_MysteryEventsHouse_1F_Text_OnlyAmusementWatchingBattles"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -305,6 +336,8 @@ original_encoded_gba = 0x8227bfc
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-mysteryeventshouse-1f"
 target_export = "SootopolisCity_MysteryEventsHouse_1F_Text_ChallengeVisitingTrainer"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -315,6 +348,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/sootopoliscity-mysteryeventshouse-1f"
 target_export = "SootopolisCity_MysteryEventsHouse_1F_EventScript_DeclineBattle"
 target_offset = 399
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 357
 runtime_resolution_required = true
 
 [[relocs]]
@@ -325,6 +360,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/sootopoliscity-mysteryeventshouse-1f"
 target_export = "SootopolisCity_MysteryEventsHouse_1F_EventScript_ChooseParty"
 target_offset = 412
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 370
 runtime_resolution_required = true
 
 [[relocs]]
@@ -335,6 +372,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/sootopoliscity-mysteryeventshouse-1f"
 target_export = "SootopolisCity_MysteryEventsHouse_1F_EventScript_DeclineBattle"
 target_offset = 399
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 357
 runtime_resolution_required = true
 
 [[relocs]]
@@ -344,6 +383,8 @@ original_encoded_gba = 0x8227ceb
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-mysteryeventshouse-1f"
 target_export = "SootopolisCity_MysteryEventsHouse_1F_Text_SaveProgressBeforeBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -354,6 +395,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/sootopoliscity-mysteryeventshouse-1f"
 target_export = "SootopolisCity_MysteryEventsHouse_1F_EventScript_DeclineBattle"
 target_offset = 399
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 357
 runtime_resolution_required = true
 
 [[relocs]]
@@ -364,6 +407,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/std-msgbox"
 target_export = "Common_EventScript_SaveGame"
 target_offset = 58
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 58
 runtime_resolution_required = true
 
 [[relocs]]
@@ -374,6 +419,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/sootopoliscity-mysteryeventshouse-1f"
 target_export = "SootopolisCity_MysteryEventsHouse_1F_EventScript_DeclineBattle"
 target_offset = 399
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 357
 runtime_resolution_required = true
 
 [[relocs]]
@@ -383,6 +430,8 @@ original_encoded_gba = 0x8227d21
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-mysteryeventshouse-1f"
 target_export = "SootopolisCity_MysteryEventsHouse_1F_Text_HopeToSeeGoodMatch"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -393,6 +442,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/sootopoliscity-mysteryeventshouse-1f"
 target_export = "SootopolisCity_MysteryEventsHouse_1F_EventScript_EnterBasementNorth"
 target_offset = 427
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 385
 runtime_resolution_required = true
 
 [[relocs]]
@@ -403,6 +454,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/sootopoliscity-mysteryeventshouse-1f"
 target_export = "SootopolisCity_MysteryEventsHouse_1F_EventScript_EnterBasementEast"
 target_offset = 445
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 403
 runtime_resolution_required = true
 
 [[relocs]]
@@ -413,6 +466,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/sootopoliscity-mysteryeventshouse-1f"
 target_export = "SootopolisCity_MysteryEventsHouse_1F_EventScript_EnterBasementWest"
 target_offset = 463
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 421
 runtime_resolution_required = true
 
 [[relocs]]
@@ -422,6 +477,8 @@ original_encoded_gba = 0x8227c44
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-mysteryeventshouse-1f"
 target_export = "SootopolisCity_MysteryEventsHouse_1F_Text_YouWontBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -431,6 +488,8 @@ original_encoded_gba = 0x8227c84
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-mysteryeventshouse-1f"
 target_export = "SootopolisCity_MysteryEventsHouse_1F_Text_KeepItTo3On3"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -440,6 +499,8 @@ original_encoded_gba = 0x8227b40
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/sootopoliscity-mysteryeventshouse-1f-movement-oldmanmoveasideleft"
 target_export = "SootopolisCity_MysteryEventsHouse_1F_Movement_OldManMoveAsideLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -449,6 +510,8 @@ original_encoded_gba = 0x8227b34
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/sootopoliscity-mysteryeventshouse-1f-movement-playerenterbasementnorth"
 target_export = "SootopolisCity_MysteryEventsHouse_1F_Movement_PlayerEnterBasementNorth"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -458,6 +521,8 @@ original_encoded_gba = 0x8227b43
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/sootopoliscity-mysteryeventshouse-1f-movement-oldmanmoveasideright"
 target_export = "SootopolisCity_MysteryEventsHouse_1F_Movement_OldManMoveAsideRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -467,6 +532,8 @@ original_encoded_gba = 0x8227b38
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/sootopoliscity-mysteryeventshouse-1f-movement-playerenterbasementeast"
 target_export = "SootopolisCity_MysteryEventsHouse_1F_Movement_PlayerEnterBasementEast"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -476,6 +543,8 @@ original_encoded_gba = 0x8227b40
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/sootopoliscity-mysteryeventshouse-1f-movement-oldmanmoveasideleft"
 target_export = "SootopolisCity_MysteryEventsHouse_1F_Movement_OldManMoveAsideLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -485,4 +554,458 @@ original_encoded_gba = 0x8227b3c
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/sootopoliscity-mysteryeventshouse-1f-movement-playerenterbasementwest"
 target_export = "SootopolisCity_MysteryEventsHouse_1F_Movement_PlayerEnterBasementWest"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 5
+
+[[boundaries]]
+payload_offset = 5
+length = 3
+
+[[boundaries]]
+payload_offset = 8
+length = 5
+
+[[boundaries]]
+payload_offset = 13
+length = 6
+
+[[boundaries]]
+payload_offset = 19
+length = 5
+
+[[boundaries]]
+payload_offset = 24
+length = 6
+
+[[boundaries]]
+payload_offset = 30
+length = 1
+
+[[boundaries]]
+payload_offset = 31
+length = 5
+
+[[boundaries]]
+payload_offset = 36
+length = 7
+
+[[boundaries]]
+payload_offset = 43
+length = 4
+
+[[boundaries]]
+payload_offset = 47
+length = 3
+
+[[boundaries]]
+payload_offset = 50
+length = 1
+
+[[boundaries]]
+payload_offset = 51
+length = 7
+
+[[boundaries]]
+payload_offset = 58
+length = 4
+
+[[boundaries]]
+payload_offset = 62
+length = 1
+
+[[boundaries]]
+payload_offset = 63
+length = 1
+
+[[boundaries]]
+payload_offset = 64
+length = 7
+
+[[boundaries]]
+payload_offset = 71
+length = 3
+
+[[boundaries]]
+payload_offset = 74
+length = 7
+
+[[boundaries]]
+payload_offset = 81
+length = 3
+
+[[boundaries]]
+payload_offset = 84
+length = 3
+
+[[boundaries]]
+payload_offset = 87
+length = 7
+
+[[boundaries]]
+payload_offset = 94
+length = 3
+
+[[boundaries]]
+payload_offset = 97
+length = 5
+
+[[boundaries]]
+payload_offset = 102
+length = 6
+
+[[boundaries]]
+payload_offset = 108
+length = 5
+
+[[boundaries]]
+payload_offset = 113
+length = 6
+
+[[boundaries]]
+payload_offset = 119
+length = 5
+
+[[boundaries]]
+payload_offset = 124
+length = 6
+
+[[boundaries]]
+payload_offset = 130
+length = 3
+
+[[boundaries]]
+payload_offset = 133
+length = 5
+
+[[boundaries]]
+payload_offset = 138
+length = 1
+
+[[boundaries]]
+payload_offset = 139
+length = 1
+
+[[boundaries]]
+payload_offset = 140
+length = 6
+
+[[boundaries]]
+payload_offset = 146
+length = 2
+
+[[boundaries]]
+payload_offset = 148
+length = 1
+
+[[boundaries]]
+payload_offset = 149
+length = 6
+
+[[boundaries]]
+payload_offset = 155
+length = 2
+
+[[boundaries]]
+payload_offset = 157
+length = 1
+
+[[boundaries]]
+payload_offset = 158
+length = 6
+
+[[boundaries]]
+payload_offset = 164
+length = 2
+
+[[boundaries]]
+payload_offset = 166
+length = 1
+
+[[boundaries]]
+payload_offset = 167
+length = 1
+
+[[boundaries]]
+payload_offset = 168
+length = 1
+
+[[boundaries]]
+payload_offset = 169
+length = 5
+
+[[boundaries]]
+payload_offset = 174
+length = 3
+
+[[boundaries]]
+payload_offset = 177
+length = 5
+
+[[boundaries]]
+payload_offset = 182
+length = 6
+
+[[boundaries]]
+payload_offset = 188
+length = 5
+
+[[boundaries]]
+payload_offset = 193
+length = 6
+
+[[boundaries]]
+payload_offset = 199
+length = 6
+
+[[boundaries]]
+payload_offset = 205
+length = 2
+
+[[boundaries]]
+payload_offset = 207
+length = 1
+
+[[boundaries]]
+payload_offset = 208
+length = 1
+
+[[boundaries]]
+payload_offset = 209
+length = 6
+
+[[boundaries]]
+payload_offset = 215
+length = 2
+
+[[boundaries]]
+payload_offset = 217
+length = 1
+
+[[boundaries]]
+payload_offset = 218
+length = 1
+
+[[boundaries]]
+payload_offset = 219
+length = 3
+
+[[boundaries]]
+payload_offset = 222
+length = 3
+
+[[boundaries]]
+payload_offset = 225
+length = 6
+
+[[boundaries]]
+payload_offset = 231
+length = 2
+
+[[boundaries]]
+payload_offset = 233
+length = 5
+
+[[boundaries]]
+payload_offset = 238
+length = 6
+
+[[boundaries]]
+payload_offset = 244
+length = 5
+
+[[boundaries]]
+payload_offset = 249
+length = 5
+
+[[boundaries]]
+payload_offset = 254
+length = 6
+
+[[boundaries]]
+payload_offset = 260
+length = 6
+
+[[boundaries]]
+payload_offset = 266
+length = 2
+
+[[boundaries]]
+payload_offset = 268
+length = 5
+
+[[boundaries]]
+payload_offset = 273
+length = 6
+
+[[boundaries]]
+payload_offset = 279
+length = 3
+
+[[boundaries]]
+payload_offset = 282
+length = 5
+
+[[boundaries]]
+payload_offset = 287
+length = 5
+
+[[boundaries]]
+payload_offset = 292
+length = 6
+
+[[boundaries]]
+payload_offset = 298
+length = 3
+
+[[boundaries]]
+payload_offset = 301
+length = 3
+
+[[boundaries]]
+payload_offset = 304
+length = 6
+
+[[boundaries]]
+payload_offset = 310
+length = 2
+
+[[boundaries]]
+payload_offset = 312
+length = 1
+
+[[boundaries]]
+payload_offset = 313
+length = 5
+
+[[boundaries]]
+payload_offset = 318
+length = 6
+
+[[boundaries]]
+payload_offset = 324
+length = 5
+
+[[boundaries]]
+payload_offset = 329
+length = 6
+
+[[boundaries]]
+payload_offset = 335
+length = 5
+
+[[boundaries]]
+payload_offset = 340
+length = 6
+
+[[boundaries]]
+payload_offset = 346
+length = 8
+
+[[boundaries]]
+payload_offset = 354
+length = 1
+
+[[boundaries]]
+payload_offset = 355
+length = 1
+
+[[boundaries]]
+payload_offset = 356
+length = 1
+
+[[boundaries]]
+payload_offset = 357
+length = 3
+
+[[boundaries]]
+payload_offset = 360
+length = 6
+
+[[boundaries]]
+payload_offset = 366
+length = 2
+
+[[boundaries]]
+payload_offset = 368
+length = 1
+
+[[boundaries]]
+payload_offset = 369
+length = 1
+
+[[boundaries]]
+payload_offset = 370
+length = 6
+
+[[boundaries]]
+payload_offset = 376
+length = 2
+
+[[boundaries]]
+payload_offset = 378
+length = 2
+
+[[boundaries]]
+payload_offset = 380
+length = 3
+
+[[boundaries]]
+payload_offset = 383
+length = 1
+
+[[boundaries]]
+payload_offset = 384
+length = 1
+
+[[boundaries]]
+payload_offset = 385
+length = 7
+
+[[boundaries]]
+payload_offset = 392
+length = 7
+
+[[boundaries]]
+payload_offset = 399
+length = 3
+
+[[boundaries]]
+payload_offset = 402
+length = 1
+
+[[boundaries]]
+payload_offset = 403
+length = 7
+
+[[boundaries]]
+payload_offset = 410
+length = 7
+
+[[boundaries]]
+payload_offset = 417
+length = 3
+
+[[boundaries]]
+payload_offset = 420
+length = 1
+
+[[boundaries]]
+payload_offset = 421
+length = 7
+
+[[boundaries]]
+payload_offset = 428
+length = 7
+
+[[boundaries]]
+payload_offset = 435
+length = 3
+
+[[boundaries]]
+payload_offset = 438
+length = 1

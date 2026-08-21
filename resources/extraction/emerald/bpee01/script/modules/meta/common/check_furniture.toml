@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 2
 export_count = 8
 reloc_count = 8
+instruction_count = 24
 
 [[segments]]
 kind = "bytecode"
@@ -101,6 +102,8 @@ original_encoded_gba = 0x82a81e5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/check-furniture"
 target_export = "Text_PictureBookShelf"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -110,6 +113,8 @@ original_encoded_gba = 0x82a820d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/check-furniture"
 target_export = "Text_BookShelf"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -119,6 +124,8 @@ original_encoded_gba = 0x82a8232
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/check-furniture"
 target_export = "Text_PokemonCenterBookShelf"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -128,6 +135,8 @@ original_encoded_gba = 0x82a8276
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/check-furniture"
 target_export = "Text_Vase"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -137,6 +146,8 @@ original_encoded_gba = 0x82a82b3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/check-furniture"
 target_export = "Text_EmptyTrashCan"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -146,6 +157,8 @@ original_encoded_gba = 0x82a82bf
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/check-furniture"
 target_export = "Text_ShopShelf"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -155,6 +168,8 @@ original_encoded_gba = 0x82a82f7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/check-furniture"
 target_export = "Text_Blueprint"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -164,4 +179,102 @@ original_encoded_gba = 0x8272c98
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/event-scripts"
 target_export = "gText_SelectWithoutRegisteredItem"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 6
+
+[[boundaries]]
+payload_offset = 6
+length = 2
+
+[[boundaries]]
+payload_offset = 8
+length = 1
+
+[[boundaries]]
+payload_offset = 9
+length = 6
+
+[[boundaries]]
+payload_offset = 15
+length = 2
+
+[[boundaries]]
+payload_offset = 17
+length = 1
+
+[[boundaries]]
+payload_offset = 18
+length = 6
+
+[[boundaries]]
+payload_offset = 24
+length = 2
+
+[[boundaries]]
+payload_offset = 26
+length = 1
+
+[[boundaries]]
+payload_offset = 27
+length = 6
+
+[[boundaries]]
+payload_offset = 33
+length = 2
+
+[[boundaries]]
+payload_offset = 35
+length = 1
+
+[[boundaries]]
+payload_offset = 36
+length = 6
+
+[[boundaries]]
+payload_offset = 42
+length = 2
+
+[[boundaries]]
+payload_offset = 44
+length = 1
+
+[[boundaries]]
+payload_offset = 45
+length = 6
+
+[[boundaries]]
+payload_offset = 51
+length = 2
+
+[[boundaries]]
+payload_offset = 53
+length = 1
+
+[[boundaries]]
+payload_offset = 54
+length = 6
+
+[[boundaries]]
+payload_offset = 60
+length = 2
+
+[[boundaries]]
+payload_offset = 62
+length = 1
+
+[[boundaries]]
+payload_offset = 63
+length = 6
+
+[[boundaries]]
+payload_offset = 69
+length = 2
+
+[[boundaries]]
+payload_offset = 71
+length = 1

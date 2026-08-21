@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 6
 reloc_count = 3
+instruction_count = 27
 
 [[segments]]
 kind = "bytecode"
@@ -80,6 +81,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/underwater-seafloorcavern"
 target_export = "Underwater_SeafloorCavern_EventScript_HideSubmarine"
 target_offset = 29
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 13
 runtime_resolution_required = true
 
 [[relocs]]
@@ -90,6 +93,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/underwater-seafloorcavern"
 target_export = "Underwater_SeafloorCavern_EventScript_SetSubmarineGoneMetatiles"
 target_offset = 43
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 27
 runtime_resolution_required = true
 
 [[relocs]]
@@ -99,4 +104,114 @@ original_encoded_gba = 0x82343e5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/underwater-seafloorcavern"
 target_export = "Underwater_SeafloorCavern_Text_SubExplorer1"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 3
+
+[[boundaries]]
+payload_offset = 6
+length = 6
+
+[[boundaries]]
+payload_offset = 12
+length = 1
+
+[[boundaries]]
+payload_offset = 13
+length = 3
+
+[[boundaries]]
+payload_offset = 16
+length = 1
+
+[[boundaries]]
+payload_offset = 17
+length = 3
+
+[[boundaries]]
+payload_offset = 20
+length = 6
+
+[[boundaries]]
+payload_offset = 26
+length = 1
+
+[[boundaries]]
+payload_offset = 27
+length = 9
+
+[[boundaries]]
+payload_offset = 36
+length = 9
+
+[[boundaries]]
+payload_offset = 45
+length = 9
+
+[[boundaries]]
+payload_offset = 54
+length = 9
+
+[[boundaries]]
+payload_offset = 63
+length = 9
+
+[[boundaries]]
+payload_offset = 72
+length = 9
+
+[[boundaries]]
+payload_offset = 81
+length = 9
+
+[[boundaries]]
+payload_offset = 90
+length = 9
+
+[[boundaries]]
+payload_offset = 99
+length = 9
+
+[[boundaries]]
+payload_offset = 108
+length = 9
+
+[[boundaries]]
+payload_offset = 117
+length = 9
+
+[[boundaries]]
+payload_offset = 126
+length = 9
+
+[[boundaries]]
+payload_offset = 135
+length = 1
+
+[[boundaries]]
+payload_offset = 136
+length = 8
+
+[[boundaries]]
+payload_offset = 144
+length = 1
+
+[[boundaries]]
+payload_offset = 145
+length = 6
+
+[[boundaries]]
+payload_offset = 151
+length = 2
+
+[[boundaries]]
+payload_offset = 153
+length = 1

@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 7
 reloc_count = 13
+instruction_count = 23
 
 [[segments]]
 kind = "bytecode"
@@ -88,6 +89,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle1"
 target_export = "Route110_TrickHousePuzzle1_EventScript_OpenDoor"
 target_offset = 18
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 12
 runtime_resolution_required = true
 
 [[relocs]]
@@ -98,6 +101,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle1"
 target_export = "Route110_TrickHousePuzzle1_EventScript_FoundScroll"
 target_offset = 46
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 40
 runtime_resolution_required = true
 
 [[relocs]]
@@ -108,6 +113,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhouseentrance"
 target_export = "Route110_TrickHousePuzzle_EventScript_ReadScrollAgain"
 target_offset = 2443
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2331
 runtime_resolution_required = true
 
 [[relocs]]
@@ -118,6 +125,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhouseentrance"
 target_export = "Route110_TrickHousePuzzle_EventScript_FoundScroll"
 target_offset = 2453
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2341
 runtime_resolution_required = true
 
 [[relocs]]
@@ -127,6 +136,8 @@ original_encoded_gba = 0x826b9fb
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhousepuzzle1"
 target_export = "Route110_TrickHousePuzzle1_Text_SallyIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -136,6 +147,8 @@ original_encoded_gba = 0x826ba3f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhousepuzzle1"
 target_export = "Route110_TrickHousePuzzle1_Text_SallyDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -145,6 +158,8 @@ original_encoded_gba = 0x826ba57
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhousepuzzle1"
 target_export = "Route110_TrickHousePuzzle1_Text_SallyPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -154,6 +169,8 @@ original_encoded_gba = 0x826ba82
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhousepuzzle1"
 target_export = "Route110_TrickHousePuzzle1_Text_EddieIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -163,6 +180,8 @@ original_encoded_gba = 0x826bab0
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhousepuzzle1"
 target_export = "Route110_TrickHousePuzzle1_Text_EddieDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -172,6 +191,8 @@ original_encoded_gba = 0x826bac3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhousepuzzle1"
 target_export = "Route110_TrickHousePuzzle1_Text_EddiePostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -181,6 +202,8 @@ original_encoded_gba = 0x826bb10
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhousepuzzle1"
 target_export = "Route110_TrickHousePuzzle1_Text_RobinIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -190,6 +213,8 @@ original_encoded_gba = 0x826bb2e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhousepuzzle1"
 target_export = "Route110_TrickHousePuzzle1_Text_RobinDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -199,4 +224,98 @@ original_encoded_gba = 0x826bb52
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhousepuzzle1"
 target_export = "Route110_TrickHousePuzzle1_Text_RobinPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 5
+
+[[boundaries]]
+payload_offset = 5
+length = 6
+
+[[boundaries]]
+payload_offset = 11
+length = 1
+
+[[boundaries]]
+payload_offset = 12
+length = 9
+
+[[boundaries]]
+payload_offset = 21
+length = 1
+
+[[boundaries]]
+payload_offset = 22
+length = 1
+
+[[boundaries]]
+payload_offset = 23
+length = 5
+
+[[boundaries]]
+payload_offset = 28
+length = 6
+
+[[boundaries]]
+payload_offset = 34
+length = 5
+
+[[boundaries]]
+payload_offset = 40
+length = 5
+
+[[boundaries]]
+payload_offset = 45
+length = 5
+
+[[boundaries]]
+payload_offset = 51
+length = 14
+
+[[boundaries]]
+payload_offset = 65
+length = 6
+
+[[boundaries]]
+payload_offset = 71
+length = 2
+
+[[boundaries]]
+payload_offset = 73
+length = 1
+
+[[boundaries]]
+payload_offset = 74
+length = 14
+
+[[boundaries]]
+payload_offset = 88
+length = 6
+
+[[boundaries]]
+payload_offset = 94
+length = 2
+
+[[boundaries]]
+payload_offset = 96
+length = 1
+
+[[boundaries]]
+payload_offset = 97
+length = 14
+
+[[boundaries]]
+payload_offset = 111
+length = 6
+
+[[boundaries]]
+payload_offset = 117
+length = 2
+
+[[boundaries]]
+payload_offset = 119
+length = 1

@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 5
 export_count = 123
 reloc_count = 312
+instruction_count = 839
 
 [[segments]]
 kind = "bytecode"
@@ -1040,6 +1041,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_OpenUnlockedDoors"
 target_offset = 44
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 23
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1050,6 +1053,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_UnlockAllDoors"
 target_offset = 118
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 97
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1060,6 +1065,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_OpenGymEntranceDoors"
 target_offset = 3285
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3064
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1070,6 +1077,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_OpenSpeedRoomDoors"
 target_offset = 3318
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3097
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1080,6 +1089,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_OpenAccuracyRoomDoors"
 target_offset = 3351
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3130
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1090,6 +1101,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_OpenConfusionRoomDoors"
 target_offset = 3384
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3163
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1100,6 +1113,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_OpenDefenseRoomDoors"
 target_offset = 3417
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3196
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1110,6 +1125,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_OpenRecoveryRoomDoors"
 target_offset = 3450
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3229
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1120,6 +1137,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_OpenStrengthRoomDoors"
 target_offset = 3483
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3262
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1130,6 +1149,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_OpenOHKORoomDoors"
 target_offset = 3516
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1140,6 +1161,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_OpenGymEntranceDoors"
 target_offset = 3285
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3064
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1150,6 +1173,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_OpenSpeedRoomDoors"
 target_offset = 3318
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3097
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1160,6 +1185,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_OpenAccuracyRoomDoors"
 target_offset = 3351
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3130
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1170,6 +1197,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_OpenConfusionRoomDoors"
 target_offset = 3384
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3163
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1180,6 +1209,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_OpenDefenseRoomDoors"
 target_offset = 3417
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3196
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1190,6 +1221,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_OpenRecoveryRoomDoors"
 target_offset = 3450
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3229
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1200,6 +1233,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_OpenStrengthRoomDoors"
 target_offset = 3483
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3262
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1210,6 +1245,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_OpenOHKORoomDoors"
 target_offset = 3516
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1220,6 +1257,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_MoveWallyToEntrance"
 target_offset = 196
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 175
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1230,6 +1269,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_MoveNormanToEntrance"
 target_offset = 204
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 183
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1240,6 +1281,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_CheckNormanForRematch"
 target_offset = 212
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 191
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1250,6 +1293,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_DontMoveNormanToFront"
 target_offset = 252
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 231
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1260,6 +1305,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_DontMoveNormanToFront"
 target_offset = 252
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 231
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1269,6 +1316,8 @@ original_encoded_gba = 0x8205b32
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_DadSoDidItWorkOut"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1278,6 +1327,8 @@ original_encoded_gba = 0x8205b4c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_WallyThankYouBye"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1287,6 +1338,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1296,6 +1349,8 @@ original_encoded_gba = 0x82049ec
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/petalburgcity-gym-movement-wallyexitgym"
 target_export = "PetalburgCity_Gym_Movement_WallyExitGym"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1305,6 +1360,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1314,6 +1371,8 @@ original_encoded_gba = 0x8205c40
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_DadGoCollectBadges"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1324,6 +1383,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_NormanNoBadges"
 target_offset = 1217
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1171
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1334,6 +1395,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_NormanOneBadge"
 target_offset = 1227
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1181
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1344,6 +1407,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_NormanTwoBadges"
 target_offset = 1237
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1191
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1354,6 +1419,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_NormanThreeBadges"
 target_offset = 1247
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1201
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1364,6 +1431,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_NormanBattle"
 target_offset = 1458
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1412
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1374,6 +1443,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_NormanPostBattle"
 target_offset = 1271
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1225
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1384,6 +1455,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_NormanRematch"
 target_offset = 1322
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1276
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1393,6 +1466,8 @@ original_encoded_gba = 0x82057a2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_DadYoureHereWithYourPokemon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1403,6 +1478,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_BeginWallyTutorialSouth"
 target_offset = 503
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 457
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1413,6 +1490,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_BeginWallyTutorialNorth"
 target_offset = 514
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 468
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1423,6 +1502,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_BeginWallyTutorialWest"
 target_offset = 525
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 479
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1433,6 +1514,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_BeginWallyTutorialEast"
 target_offset = 536
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 490
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1443,6 +1526,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_BeginWallyTutorial"
 target_offset = 547
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 501
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1453,6 +1538,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_BeginWallyTutorial"
 target_offset = 547
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 501
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1463,6 +1550,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_BeginWallyTutorial"
 target_offset = 547
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 501
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1473,6 +1562,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_BeginWallyTutorial"
 target_offset = 547
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 501
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1483,6 +1574,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_WallyArriveSouth"
 target_offset = 936
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 890
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1493,6 +1586,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_WallyArriveNorth"
 target_offset = 954
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 908
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1503,6 +1598,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_WallyArriveWestEast"
 target_offset = 982
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 936
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1513,6 +1610,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_WallyArriveWestEast"
 target_offset = 982
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 936
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1522,6 +1621,8 @@ original_encoded_gba = 0x82058b1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_WallyIdLikeAPokemon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1531,6 +1632,8 @@ original_encoded_gba = 0x82058db
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_DadOhYoureWallyRight"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1540,6 +1643,8 @@ original_encoded_gba = 0x8205910
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_WallyIveNeverCaughtAPokemon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1549,6 +1654,8 @@ original_encoded_gba = 0x82059d8
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_DadHmISee"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1559,6 +1666,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_NormanAddressPlayerSouth"
 target_offset = 1086
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1040
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1569,6 +1678,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_NormanAddressPlayerNorth"
 target_offset = 1097
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1051
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1579,6 +1690,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_NormanAddressPlayerWest"
 target_offset = 1115
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1069
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1589,6 +1702,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_NormanAddressPlayerEast"
 target_offset = 1133
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1087
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1598,6 +1713,8 @@ original_encoded_gba = 0x82059e8
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_DadPlayerGoWithWally"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1608,6 +1725,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_NormanAddressWallySouth"
 target_offset = 1151
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1105
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1618,6 +1737,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_NormanAddressWallyNorth"
 target_offset = 1162
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1116
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1628,6 +1749,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_NormanAddressWallyWest"
 target_offset = 1173
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1127
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1638,6 +1761,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_NormanAddressWallyEast"
 target_offset = 1184
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1138
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1647,6 +1772,8 @@ original_encoded_gba = 0x8205a46
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_IllLoanYouMyZigzagoon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1656,6 +1783,8 @@ original_encoded_gba = 0x8205a89
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_WallyThankYouAndDadGivesPokeBall"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1665,6 +1794,8 @@ original_encoded_gba = 0x8205af4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_WallyOhWowThankYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1675,6 +1806,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_NormanFaceDoorSouth"
 target_offset = 1257
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1211
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1685,6 +1818,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_NormanFaceDoorNorth"
 target_offset = 1258
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1212
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1695,6 +1830,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_NormanFaceDoorWest"
 target_offset = 1269
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1223
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1705,6 +1842,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_NormanFaceDoorEast"
 target_offset = 1270
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1224
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1715,6 +1854,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_WallyFacePlayer"
 target_offset = 1195
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1149
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1725,6 +1866,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_WallyFaceDown"
 target_offset = 1206
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1160
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1735,6 +1878,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_WallyFacePlayer"
 target_offset = 1195
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1149
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1745,6 +1890,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_WallyFacePlayer"
 target_offset = 1195
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1149
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1754,6 +1901,8 @@ original_encoded_gba = 0x8205b0f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_WouldYouReallyComeWithMe"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1764,6 +1913,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_ExitGymWithWallySouth"
 target_offset = 1007
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 961
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1774,6 +1925,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_ExitGymWithWallyNorth"
 target_offset = 1032
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 986
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1784,6 +1937,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_ExitGymWithWallyWest"
 target_offset = 1050
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1004
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1794,6 +1949,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_ExitGymWithWallyEast"
 target_offset = 1068
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1022
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1803,6 +1960,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1812,6 +1971,8 @@ original_encoded_gba = 0x82050eb
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/petalburgcity-gym-movement-wallyarrive"
 target_export = "PetalburgCity_Gym_Movement_WallyArrive"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1821,6 +1982,8 @@ original_encoded_gba = 0x82050e1
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/petalburgcity-gym-movement-wallyarrivenorth"
 target_export = "PetalburgCity_Gym_Movement_WallyArriveNorth"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1830,6 +1993,8 @@ original_encoded_gba = 0x82725a8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterright"
 target_export = "Common_Movement_WalkInPlaceFasterRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1839,6 +2004,8 @@ original_encoded_gba = 0x82725a8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterright"
 target_export = "Common_Movement_WalkInPlaceFasterRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1848,6 +2015,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1857,6 +2026,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1866,6 +2037,8 @@ original_encoded_gba = 0x82050eb
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/petalburgcity-gym-movement-wallyarrive"
 target_export = "PetalburgCity_Gym_Movement_WallyArrive"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1875,6 +2048,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1884,6 +2059,8 @@ original_encoded_gba = 0x8205102
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/petalburgcity-gym-movement-wallyexitsouthwest"
 target_export = "PetalburgCity_Gym_Movement_WallyExitSouthWest"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1893,6 +2070,8 @@ original_encoded_gba = 0x8205111
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/petalburgcity-gym-movement-playerexitwithwallysouth"
 target_export = "PetalburgCity_Gym_Movement_PlayerExitWithWallySouth"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1902,6 +2081,8 @@ original_encoded_gba = 0x82050f2
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/petalburgcity-gym-movement-wallyexitnorth"
 target_export = "PetalburgCity_Gym_Movement_WallyExitNorth"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1911,6 +2092,8 @@ original_encoded_gba = 0x8205109
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/petalburgcity-gym-movement-playerexitwithwallynorth"
 target_export = "PetalburgCity_Gym_Movement_PlayerExitWithWallyNorth"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1920,6 +2103,8 @@ original_encoded_gba = 0x8205102
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/petalburgcity-gym-movement-wallyexitsouthwest"
 target_export = "PetalburgCity_Gym_Movement_WallyExitSouthWest"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1929,6 +2114,8 @@ original_encoded_gba = 0x820511b
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/petalburgcity-gym-movement-playerexitwithwallywest"
 target_export = "PetalburgCity_Gym_Movement_PlayerExitWithWallyWest"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1938,6 +2125,8 @@ original_encoded_gba = 0x82050fa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/petalburgcity-gym-movement-wallyexiteast"
 target_export = "PetalburgCity_Gym_Movement_WallyExitEast"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1947,6 +2136,8 @@ original_encoded_gba = 0x8205123
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/petalburgcity-gym-movement-playerexitwithwallyeast"
 target_export = "PetalburgCity_Gym_Movement_PlayerExitWithWallyEast"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1956,6 +2147,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1965,6 +2158,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1974,6 +2169,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1983,6 +2180,8 @@ original_encoded_gba = 0x82725a8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterright"
 target_export = "Common_Movement_WalkInPlaceFasterRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1992,6 +2191,8 @@ original_encoded_gba = 0x82725a4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterleft"
 target_export = "Common_Movement_WalkInPlaceFasterLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2001,6 +2202,8 @@ original_encoded_gba = 0x82725a4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterleft"
 target_export = "Common_Movement_WalkInPlaceFasterLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2010,6 +2213,8 @@ original_encoded_gba = 0x82725a8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterright"
 target_export = "Common_Movement_WalkInPlaceFasterRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2019,6 +2224,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2028,6 +2235,8 @@ original_encoded_gba = 0x82725a8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterright"
 target_export = "Common_Movement_WalkInPlaceFasterRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2037,6 +2246,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2046,6 +2257,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2055,6 +2268,8 @@ original_encoded_gba = 0x827259e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceplayer"
 target_export = "Common_Movement_FacePlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2064,6 +2279,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2073,6 +2290,8 @@ original_encoded_gba = 0x8205db4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_NormanGoToRustboro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2082,6 +2301,8 @@ original_encoded_gba = 0x8205eae
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_NormanGoToDewford"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2091,6 +2312,8 @@ original_encoded_gba = 0x8205f87
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_YouHaveGottenStronger"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2100,6 +2323,8 @@ original_encoded_gba = 0x8205f87
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_YouHaveGottenStronger"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2109,6 +2334,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2119,6 +2346,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_ShouldGiveEnigmaBerry"
 target_offset = 1349
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1303
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2129,6 +2358,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_GiveEnigmaBerry"
 target_offset = 1428
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1382
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2139,6 +2370,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_GiveFacade2"
 target_offset = 1315
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1269
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2149,6 +2382,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_NoAmountOfTrainingIsEnough"
 target_offset = 2212
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1991
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2158,6 +2393,8 @@ original_encoded_gba = 0x8206417
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_DadGoingToKeepTraining"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2168,6 +2405,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_GiveFacade"
 target_offset = 1609
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1563
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2177,6 +2416,8 @@ original_encoded_gba = 0x82074a2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_NormanPreRematch"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2186,6 +2427,8 @@ original_encoded_gba = 0x82075ce
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_NormanRematchDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2195,6 +2438,8 @@ original_encoded_gba = 0x820764a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_NormanRematchNeedTwoMons"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2204,6 +2449,8 @@ original_encoded_gba = 0x82075f7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_NormanPostRematch"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2214,6 +2461,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_DontGiveEnigmaBerry"
 target_offset = 1422
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1376
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2224,6 +2473,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_DontGiveEnigmaBerry"
 target_offset = 1422
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1376
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2234,6 +2485,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_DontGiveEnigmaBerry"
 target_offset = 1422
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1376
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2244,6 +2497,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_DontGiveEnigmaBerry"
 target_offset = 1422
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1376
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2253,6 +2508,8 @@ original_encoded_gba = 0x82a6d3d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/berries"
 target_export = "PetalburgCity_Gym_Text_GiveEnigmaBerry"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2263,6 +2520,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_ShowBagIsFull"
 target_offset = 273
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 273
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2272,6 +2531,8 @@ original_encoded_gba = 0x8205fe5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_NormanIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2281,6 +2542,8 @@ original_encoded_gba = 0x8206107
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_NormanDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2290,6 +2553,8 @@ original_encoded_gba = 0x8206162
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_ReceivedBalanceBadge"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2300,6 +2565,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_PlayGymBadgeFanfare"
 target_offset = 315
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 315
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2309,6 +2576,8 @@ original_encoded_gba = 0x820618a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_ExplainBalanceBadgeTakeThis"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2319,6 +2588,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/prof-birch"
 target_export = "EventScript_HideMrBriney"
 target_offset = 331
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 323
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2329,6 +2600,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_SetGymTrainers"
 target_offset = 0
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 0
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2339,6 +2612,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_UnlockAllDoors"
 target_offset = 118
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 97
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2349,6 +2624,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_GiveFacade"
 target_offset = 1609
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1563
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2358,6 +2635,8 @@ original_encoded_gba = 0x82062fb
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_DadHappyAndSad"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2368,6 +2647,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_WallysDadArrivesNorth"
 target_offset = 1644
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1598
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2378,6 +2659,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_WallysDadArrivesWest"
 target_offset = 1664
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1618
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2388,6 +2671,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_WallysDadArrivesEast"
 target_offset = 1654
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1608
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2398,6 +2683,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_BagIsFull"
 target_offset = 283
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 283
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2407,6 +2694,8 @@ original_encoded_gba = 0x8206254
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_ExplainFacade"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2417,6 +2706,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_WallysDadArrives"
 target_offset = 1674
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1628
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2427,6 +2718,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_WallysDadArrives"
 target_offset = 1674
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1628
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2437,6 +2730,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_WallysDadArrives"
 target_offset = 1674
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1628
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2446,6 +2741,8 @@ original_encoded_gba = 0x82050bb
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/petalburgcity-gym-movement-wallysdadentergym"
 target_export = "PetalburgCity_Gym_Movement_WallysDadEnterGym"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2455,6 +2752,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2464,6 +2763,8 @@ original_encoded_gba = 0x827259a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-delay48"
 target_export = "Common_Movement_Delay48"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2474,6 +2775,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_WallysDadApproachPlayerNorth"
 target_offset = 1892
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1846
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2484,6 +2787,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_WallysDadApproachPlayerEast"
 target_offset = 1920
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1874
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2494,6 +2799,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_WallysDadApproachPlayerWest"
 target_offset = 1948
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1902
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2503,6 +2810,8 @@ original_encoded_gba = 0x8206377
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_PleaseComeWithMe"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2513,6 +2822,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_WallysDadFaceNormanNorth"
 target_offset = 1859
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1813
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2523,6 +2834,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_WallysDadFaceNormanEast"
 target_offset = 1870
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1824
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2533,6 +2846,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_WallysDadFaceNormanWest"
 target_offset = 1881
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1835
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2542,6 +2857,8 @@ original_encoded_gba = 0x82063ca
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_LetMeBorrowPlayer"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2552,6 +2869,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_ExitGymWithWallysDadNorth"
 target_offset = 1976
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1930
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2562,6 +2881,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_ExitGymWithWallysDadEast"
 target_offset = 2001
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1955
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2572,6 +2893,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_ExitGymWithWallysDadWest"
 target_offset = 2019
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1973
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2581,6 +2904,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2590,6 +2915,8 @@ original_encoded_gba = 0x82725a8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterright"
 target_export = "Common_Movement_WalkInPlaceFasterRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2599,6 +2926,8 @@ original_encoded_gba = 0x82725a4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterleft"
 target_export = "Common_Movement_WalkInPlaceFasterLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2608,6 +2937,8 @@ original_encoded_gba = 0x82050c3
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/petalburgcity-gym-movement-wallysdadapproachplayernorth"
 target_export = "PetalburgCity_Gym_Movement_WallysDadApproachPlayerNorth"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2617,6 +2948,8 @@ original_encoded_gba = 0x82725a4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterleft"
 target_export = "Common_Movement_WalkInPlaceFasterLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2626,6 +2959,8 @@ original_encoded_gba = 0x82725a4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterleft"
 target_export = "Common_Movement_WalkInPlaceFasterLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2635,6 +2970,8 @@ original_encoded_gba = 0x82050ca
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/petalburgcity-gym-movement-wallysdadapproachplayereast"
 target_export = "PetalburgCity_Gym_Movement_WallysDadApproachPlayerEast"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2644,6 +2981,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2653,6 +2992,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2662,6 +3003,8 @@ original_encoded_gba = 0x82050d0
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/petalburgcity-gym-movement-wallysdadapproachplayerwest"
 target_export = "PetalburgCity_Gym_Movement_WallysDadApproachPlayerWest"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2671,6 +3014,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2680,6 +3025,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2689,6 +3036,8 @@ original_encoded_gba = 0x820507e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/petalburgcity-gym-movement-wallysdadexitnorth"
 target_export = "PetalburgCity_Gym_Movement_WallysDadExitNorth"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2698,6 +3047,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2707,6 +3058,8 @@ original_encoded_gba = 0x82050a1
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/petalburgcity-gym-movement-playerexitwithwallysdadnorth"
 target_export = "PetalburgCity_Gym_Movement_PlayerExitWithWallysDadNorth"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2716,6 +3069,8 @@ original_encoded_gba = 0x8205089
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/petalburgcity-gym-movement-wallysdadexiteast"
 target_export = "PetalburgCity_Gym_Movement_WallysDadExitEast"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2725,6 +3080,8 @@ original_encoded_gba = 0x82050a9
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/petalburgcity-gym-movement-playerexitwithwallysdadeast"
 target_export = "PetalburgCity_Gym_Movement_PlayerExitWithWallysDadEast"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2734,6 +3091,8 @@ original_encoded_gba = 0x8205094
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/petalburgcity-gym-movement-wallysdadexitwest"
 target_export = "PetalburgCity_Gym_Movement_WallysDadExitWest"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2743,6 +3102,8 @@ original_encoded_gba = 0x82050b1
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/petalburgcity-gym-movement-playerexitwithwallysdadwest"
 target_export = "PetalburgCity_Gym_Movement_PlayerExitWithWallysDadWest"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2752,6 +3113,8 @@ original_encoded_gba = 0x82064c3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_DadNoAmountOfTrainingIsEnough"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2762,6 +3125,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_DoorLocked"
 target_offset = 2292
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2071
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2771,6 +3136,8 @@ original_encoded_gba = 0x820721e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_EnterSpeedRoom"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2781,6 +3148,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_EnterRoom"
 target_offset = 2275
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2054
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2791,6 +3160,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_DontEnterRoom"
 target_offset = 2290
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2069
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2800,6 +3171,8 @@ original_encoded_gba = 0x82071f4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_DoorAppearsLocked"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2810,6 +3183,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_DoorLocked"
 target_offset = 2292
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2071
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2819,6 +3194,8 @@ original_encoded_gba = 0x8207280
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_EnterAccuracyRoom"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2829,6 +3206,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_EnterRoom"
 target_offset = 2275
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2054
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2839,6 +3218,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_DontEnterRoom"
 target_offset = 2290
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2069
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2849,6 +3230,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_DoorLocked"
 target_offset = 2292
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2071
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2858,6 +3241,8 @@ original_encoded_gba = 0x82072bb
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_EnterConfusionRoom"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2868,6 +3253,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_EnterRoom"
 target_offset = 2275
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2054
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2878,6 +3265,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_DontEnterRoom"
 target_offset = 2290
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2069
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2888,6 +3277,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_DoorLocked"
 target_offset = 2292
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2071
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2897,6 +3288,8 @@ original_encoded_gba = 0x82072f7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_EnterDefenseRoom"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2907,6 +3300,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_EnterRoom"
 target_offset = 2275
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2054
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2917,6 +3312,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_DontEnterRoom"
 target_offset = 2290
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2069
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2927,6 +3324,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_DoorLocked"
 target_offset = 2292
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2071
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2936,6 +3335,8 @@ original_encoded_gba = 0x82072f7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_EnterDefenseRoom"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2946,6 +3347,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_EnterRoom"
 target_offset = 2275
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2054
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2956,6 +3359,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_DontEnterRoom"
 target_offset = 2290
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2069
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2966,6 +3371,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_DoorLocked"
 target_offset = 2292
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2071
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2975,6 +3382,8 @@ original_encoded_gba = 0x8207331
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_EnterRecoveryRoom"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2985,6 +3394,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_EnterRoom"
 target_offset = 2275
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2054
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2995,6 +3406,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_DontEnterRoom"
 target_offset = 2290
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2069
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3005,6 +3418,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_DoorLocked"
 target_offset = 2292
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2071
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3014,6 +3429,8 @@ original_encoded_gba = 0x820736c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_EnterStrengthRoom"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3024,6 +3441,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_EnterRoom"
 target_offset = 2275
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2054
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3034,6 +3453,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_DontEnterRoom"
 target_offset = 2290
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2069
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3044,6 +3465,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_DoorLocked"
 target_offset = 2292
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2071
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3053,6 +3476,8 @@ original_encoded_gba = 0x820736c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_EnterStrengthRoom"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3063,6 +3488,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_EnterRoom"
 target_offset = 2275
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2054
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3073,6 +3500,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_DontEnterRoom"
 target_offset = 2290
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2069
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3083,6 +3512,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_DoorLocked"
 target_offset = 2292
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2071
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3092,6 +3523,8 @@ original_encoded_gba = 0x82073a7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_EnterOHKORoom"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3102,6 +3535,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_EnterRoom"
 target_offset = 2275
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2054
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3112,6 +3547,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_DontEnterRoom"
 target_offset = 2290
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2069
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3122,6 +3559,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_DoorLocked"
 target_offset = 2292
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2071
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3131,6 +3570,8 @@ original_encoded_gba = 0x82073a7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_EnterOHKORoom"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3141,6 +3582,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_EnterRoom"
 target_offset = 2275
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2054
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3151,6 +3594,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_DontEnterRoom"
 target_offset = 2290
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2069
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3161,6 +3606,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_DoorLocked"
 target_offset = 2292
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2071
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3170,6 +3617,8 @@ original_encoded_gba = 0x82073e4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_EnterGymLeadersRoom"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3180,6 +3629,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_EnterRoom"
 target_offset = 2275
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2054
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3190,6 +3641,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_DontEnterRoom"
 target_offset = 2290
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2069
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3200,6 +3653,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_DoorLocked"
 target_offset = 2292
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2071
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3209,6 +3664,8 @@ original_encoded_gba = 0x82073e4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_EnterGymLeadersRoom"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3219,6 +3676,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_EnterRoom"
 target_offset = 2275
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2054
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3229,6 +3688,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_DontEnterRoom"
 target_offset = 2290
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2069
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3238,6 +3699,8 @@ original_encoded_gba = 0x820674f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_RandallIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3247,6 +3710,8 @@ original_encoded_gba = 0x82067b9
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_RandallDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3257,6 +3722,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_SlideOpenSpeedRoomDoors"
 target_offset = 2901
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2680
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3267,6 +3734,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_RandallPostBadge"
 target_offset = 2916
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2695
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3276,6 +3745,8 @@ original_encoded_gba = 0x82067d8
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_RandallPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3286,6 +3757,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_OpenSpeedRoomDoors"
 target_offset = 3318
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3097
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3295,6 +3768,8 @@ original_encoded_gba = 0x820685e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_RandallPostBadge"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3304,6 +3779,8 @@ original_encoded_gba = 0x82068fd
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_ParkerIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3313,6 +3790,8 @@ original_encoded_gba = 0x820694f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_ParkerDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3323,6 +3802,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_SlideOpenConfusionRoomDoors"
 target_offset = 2961
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2740
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3333,6 +3814,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_ParkerPostBadge"
 target_offset = 2976
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2755
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3342,6 +3825,8 @@ original_encoded_gba = 0x8206996
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_ParkerPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3352,6 +3837,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_OpenConfusionRoomDoors"
 target_offset = 3384
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3163
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3361,6 +3848,8 @@ original_encoded_gba = 0x82069d9
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_ParkerPostBadge"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3370,6 +3859,8 @@ original_encoded_gba = 0x8206a1b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_GeorgeIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3379,6 +3870,8 @@ original_encoded_gba = 0x8206ab8
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_GeorgeDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3389,6 +3882,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_SlideOpenRecoveryRoomDoors"
 target_offset = 3021
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2800
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3399,6 +3894,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_GeorgePostBadge"
 target_offset = 3036
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2815
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3408,6 +3905,8 @@ original_encoded_gba = 0x8206ae9
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_GeorgePostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3418,6 +3917,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_OpenRecoveryRoomDoors"
 target_offset = 3450
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3229
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3427,6 +3928,8 @@ original_encoded_gba = 0x8206bb1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_GeorgePostBadge"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3436,6 +3939,8 @@ original_encoded_gba = 0x8206bf4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_BerkeIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3445,6 +3950,8 @@ original_encoded_gba = 0x8206c7d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_BerkeDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3455,6 +3962,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_SlideOpenOHKORoomDoors"
 target_offset = 3081
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2860
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3465,6 +3974,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_BerkePostBadge"
 target_offset = 3096
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2875
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3474,6 +3985,8 @@ original_encoded_gba = 0x8206c9f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_BerkePostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3484,6 +3997,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_OpenOHKORoomDoors"
 target_offset = 3516
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3493,6 +4008,8 @@ original_encoded_gba = 0x8206d56
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_BerkePostBadge"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3502,6 +4019,8 @@ original_encoded_gba = 0x8206db2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_MaryIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3511,6 +4030,8 @@ original_encoded_gba = 0x8206e0d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_MaryDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3521,6 +4042,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_SlideOpenAccuracyRoomDoors"
 target_offset = 3141
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2920
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3531,6 +4054,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_MaryPostBadge"
 target_offset = 3156
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2935
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3540,6 +4065,8 @@ original_encoded_gba = 0x8206e26
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_MaryPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3550,6 +4077,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_OpenAccuracyRoomDoors"
 target_offset = 3351
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3130
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3559,6 +4088,8 @@ original_encoded_gba = 0x8206ed8
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_MaryPostBadge"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3568,6 +4099,8 @@ original_encoded_gba = 0x8206f44
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_AlexiaIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3577,6 +4110,8 @@ original_encoded_gba = 0x8206f82
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_AlexiaDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3587,6 +4122,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_SlideOpenDefenseRoomDoors"
 target_offset = 3201
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2980
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3597,6 +4134,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_AlexiaPostBadge"
 target_offset = 3216
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2995
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3606,6 +4145,8 @@ original_encoded_gba = 0x8206f9f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_AlexiaPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3616,6 +4157,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_OpenDefenseRoomDoors"
 target_offset = 3417
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3196
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3625,6 +4168,8 @@ original_encoded_gba = 0x8207069
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_AlexiaPostBadge"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3634,6 +4179,8 @@ original_encoded_gba = 0x8207088
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_JodyIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3643,6 +4190,8 @@ original_encoded_gba = 0x82070e6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_JodyDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3653,6 +4202,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_SlideOpenStrengthRoomDoors"
 target_offset = 3261
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3040
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3663,6 +4214,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_JodyPostBadge"
 target_offset = 3276
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3055
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3672,6 +4225,8 @@ original_encoded_gba = 0x82070fb
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_JodyPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3682,6 +4237,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_OpenStrengthRoomDoors"
 target_offset = 3483
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3262
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3691,6 +4248,8 @@ original_encoded_gba = 0x8207170
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_JodyPostBadge"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3701,6 +4260,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_SlideOpenRoomDoors"
 target_offset = 3773
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3552
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3711,6 +4272,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_UnlockRoomDoors"
 target_offset = 3778
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3557
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3721,6 +4284,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_SetEntranceRoomDoorMetatiles"
 target_offset = 3549
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3328
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3731,6 +4296,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_SlideOpenRoomDoors"
 target_offset = 3773
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3552
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3741,6 +4308,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_UnlockRoomDoors"
 target_offset = 3778
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3557
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3751,6 +4320,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_SetSpeedRoomDoorMetatiles"
 target_offset = 3586
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3365
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3761,6 +4332,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_SlideOpenRoomDoors"
 target_offset = 3773
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3552
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3771,6 +4344,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_UnlockRoomDoors"
 target_offset = 3778
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3557
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3781,6 +4356,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_SetAccuracyRoomDoorMetatiles"
 target_offset = 3623
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3402
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3791,6 +4368,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_SlideOpenRoomDoors"
 target_offset = 3773
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3552
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3801,6 +4380,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_UnlockRoomDoors"
 target_offset = 3778
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3557
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3811,6 +4392,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_SetConfusionRoomDoorMetatiles"
 target_offset = 3660
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3439
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3821,6 +4404,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_SlideOpenRoomDoors"
 target_offset = 3773
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3552
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3831,6 +4416,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_UnlockRoomDoors"
 target_offset = 3778
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3557
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3841,6 +4428,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_SetDefenseRoomDoorMetatiles"
 target_offset = 3679
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3458
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3851,6 +4440,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_SlideOpenRoomDoors"
 target_offset = 3773
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3552
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3861,6 +4452,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_UnlockRoomDoors"
 target_offset = 3778
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3557
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3871,6 +4464,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_SetRecoveryRoomDoorMetatiles"
 target_offset = 3716
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3495
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3881,6 +4476,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_SlideOpenRoomDoors"
 target_offset = 3773
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3552
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3891,6 +4488,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_UnlockRoomDoors"
 target_offset = 3778
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3557
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3901,6 +4500,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_SetStrengthRoomDoorMetatiles"
 target_offset = 3735
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3514
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3911,6 +4512,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_SlideOpenRoomDoors"
 target_offset = 3773
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3552
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3921,6 +4524,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_UnlockRoomDoors"
 target_offset = 3778
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3557
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3931,6 +4536,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_SetOHKORoomDoorMetatiles"
 target_offset = 3754
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3533
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3941,6 +4548,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_GymGuidePostVictory"
 target_offset = 3803
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3582
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3950,6 +4559,8 @@ original_encoded_gba = 0x8206542
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_GymGuideAdvice"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3959,6 +4570,8 @@ original_encoded_gba = 0x82066f3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_GymGuidePostVictory"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3969,6 +4582,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_GymStatueCertified"
 target_offset = 3845
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3624
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3979,6 +4594,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_GymStatue"
 target_offset = 3855
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3634
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3989,6 +4606,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_GymStatueCertified"
 target_offset = 3845
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3624
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3999,6 +4618,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_EventScript_GymStatue"
 target_offset = 3855
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 3634
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4008,6 +4629,8 @@ original_encoded_gba = 0x8207467
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_GymStatueCertified"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -4017,4 +4640,3362 @@ original_encoded_gba = 0x820744c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgcity-gym"
 target_export = "PetalburgCity_Gym_Text_GymStatue"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 5
+
+[[boundaries]]
+payload_offset = 5
+length = 6
+
+[[boundaries]]
+payload_offset = 11
+length = 5
+
+[[boundaries]]
+payload_offset = 16
+length = 6
+
+[[boundaries]]
+payload_offset = 22
+length = 1
+
+[[boundaries]]
+payload_offset = 23
+length = 5
+
+[[boundaries]]
+payload_offset = 28
+length = 5
+
+[[boundaries]]
+payload_offset = 33
+length = 3
+
+[[boundaries]]
+payload_offset = 36
+length = 6
+
+[[boundaries]]
+payload_offset = 42
+length = 3
+
+[[boundaries]]
+payload_offset = 45
+length = 6
+
+[[boundaries]]
+payload_offset = 51
+length = 3
+
+[[boundaries]]
+payload_offset = 54
+length = 6
+
+[[boundaries]]
+payload_offset = 60
+length = 3
+
+[[boundaries]]
+payload_offset = 63
+length = 6
+
+[[boundaries]]
+payload_offset = 69
+length = 3
+
+[[boundaries]]
+payload_offset = 72
+length = 6
+
+[[boundaries]]
+payload_offset = 78
+length = 3
+
+[[boundaries]]
+payload_offset = 81
+length = 6
+
+[[boundaries]]
+payload_offset = 87
+length = 3
+
+[[boundaries]]
+payload_offset = 90
+length = 6
+
+[[boundaries]]
+payload_offset = 96
+length = 1
+
+[[boundaries]]
+payload_offset = 97
+length = 5
+
+[[boundaries]]
+payload_offset = 102
+length = 5
+
+[[boundaries]]
+payload_offset = 107
+length = 5
+
+[[boundaries]]
+payload_offset = 112
+length = 5
+
+[[boundaries]]
+payload_offset = 117
+length = 5
+
+[[boundaries]]
+payload_offset = 122
+length = 5
+
+[[boundaries]]
+payload_offset = 127
+length = 5
+
+[[boundaries]]
+payload_offset = 132
+length = 5
+
+[[boundaries]]
+payload_offset = 137
+length = 5
+
+[[boundaries]]
+payload_offset = 142
+length = 1
+
+[[boundaries]]
+payload_offset = 143
+length = 5
+
+[[boundaries]]
+payload_offset = 148
+length = 6
+
+[[boundaries]]
+payload_offset = 154
+length = 5
+
+[[boundaries]]
+payload_offset = 159
+length = 6
+
+[[boundaries]]
+payload_offset = 165
+length = 3
+
+[[boundaries]]
+payload_offset = 168
+length = 6
+
+[[boundaries]]
+payload_offset = 174
+length = 1
+
+[[boundaries]]
+payload_offset = 175
+length = 7
+
+[[boundaries]]
+payload_offset = 182
+length = 1
+
+[[boundaries]]
+payload_offset = 183
+length = 7
+
+[[boundaries]]
+payload_offset = 190
+length = 1
+
+[[boundaries]]
+payload_offset = 191
+length = 5
+
+[[boundaries]]
+payload_offset = 196
+length = 5
+
+[[boundaries]]
+payload_offset = 201
+length = 5
+
+[[boundaries]]
+payload_offset = 206
+length = 6
+
+[[boundaries]]
+payload_offset = 212
+length = 5
+
+[[boundaries]]
+payload_offset = 217
+length = 6
+
+[[boundaries]]
+payload_offset = 223
+length = 7
+
+[[boundaries]]
+payload_offset = 230
+length = 1
+
+[[boundaries]]
+payload_offset = 231
+length = 5
+
+[[boundaries]]
+payload_offset = 236
+length = 1
+
+[[boundaries]]
+payload_offset = 237
+length = 4
+
+[[boundaries]]
+payload_offset = 241
+length = 1
+
+[[boundaries]]
+payload_offset = 242
+length = 1
+
+[[boundaries]]
+payload_offset = 243
+length = 6
+
+[[boundaries]]
+payload_offset = 249
+length = 2
+
+[[boundaries]]
+payload_offset = 251
+length = 6
+
+[[boundaries]]
+payload_offset = 257
+length = 2
+
+[[boundaries]]
+payload_offset = 259
+length = 1
+
+[[boundaries]]
+payload_offset = 260
+length = 7
+
+[[boundaries]]
+payload_offset = 267
+length = 7
+
+[[boundaries]]
+payload_offset = 274
+length = 3
+
+[[boundaries]]
+payload_offset = 277
+length = 3
+
+[[boundaries]]
+payload_offset = 280
+length = 3
+
+[[boundaries]]
+payload_offset = 283
+length = 3
+
+[[boundaries]]
+payload_offset = 286
+length = 3
+
+[[boundaries]]
+payload_offset = 289
+length = 7
+
+[[boundaries]]
+payload_offset = 296
+length = 3
+
+[[boundaries]]
+payload_offset = 299
+length = 6
+
+[[boundaries]]
+payload_offset = 305
+length = 2
+
+[[boundaries]]
+payload_offset = 307
+length = 5
+
+[[boundaries]]
+payload_offset = 312
+length = 1
+
+[[boundaries]]
+payload_offset = 313
+length = 1
+
+[[boundaries]]
+payload_offset = 314
+length = 1
+
+[[boundaries]]
+payload_offset = 315
+length = 1
+
+[[boundaries]]
+payload_offset = 316
+length = 5
+
+[[boundaries]]
+payload_offset = 321
+length = 5
+
+[[boundaries]]
+payload_offset = 326
+length = 6
+
+[[boundaries]]
+payload_offset = 332
+length = 5
+
+[[boundaries]]
+payload_offset = 337
+length = 6
+
+[[boundaries]]
+payload_offset = 343
+length = 5
+
+[[boundaries]]
+payload_offset = 348
+length = 6
+
+[[boundaries]]
+payload_offset = 354
+length = 5
+
+[[boundaries]]
+payload_offset = 359
+length = 6
+
+[[boundaries]]
+payload_offset = 365
+length = 5
+
+[[boundaries]]
+payload_offset = 370
+length = 6
+
+[[boundaries]]
+payload_offset = 376
+length = 5
+
+[[boundaries]]
+payload_offset = 381
+length = 6
+
+[[boundaries]]
+payload_offset = 387
+length = 5
+
+[[boundaries]]
+payload_offset = 392
+length = 6
+
+[[boundaries]]
+payload_offset = 398
+length = 6
+
+[[boundaries]]
+payload_offset = 404
+length = 2
+
+[[boundaries]]
+payload_offset = 406
+length = 1
+
+[[boundaries]]
+payload_offset = 407
+length = 5
+
+[[boundaries]]
+payload_offset = 412
+length = 5
+
+[[boundaries]]
+payload_offset = 417
+length = 6
+
+[[boundaries]]
+payload_offset = 423
+length = 5
+
+[[boundaries]]
+payload_offset = 428
+length = 6
+
+[[boundaries]]
+payload_offset = 434
+length = 5
+
+[[boundaries]]
+payload_offset = 439
+length = 6
+
+[[boundaries]]
+payload_offset = 445
+length = 5
+
+[[boundaries]]
+payload_offset = 450
+length = 6
+
+[[boundaries]]
+payload_offset = 456
+length = 1
+
+[[boundaries]]
+payload_offset = 457
+length = 5
+
+[[boundaries]]
+payload_offset = 462
+length = 5
+
+[[boundaries]]
+payload_offset = 468
+length = 5
+
+[[boundaries]]
+payload_offset = 473
+length = 5
+
+[[boundaries]]
+payload_offset = 479
+length = 5
+
+[[boundaries]]
+payload_offset = 484
+length = 5
+
+[[boundaries]]
+payload_offset = 490
+length = 5
+
+[[boundaries]]
+payload_offset = 495
+length = 5
+
+[[boundaries]]
+payload_offset = 501
+length = 3
+
+[[boundaries]]
+payload_offset = 504
+length = 3
+
+[[boundaries]]
+payload_offset = 507
+length = 5
+
+[[boundaries]]
+payload_offset = 512
+length = 6
+
+[[boundaries]]
+payload_offset = 518
+length = 5
+
+[[boundaries]]
+payload_offset = 523
+length = 6
+
+[[boundaries]]
+payload_offset = 529
+length = 5
+
+[[boundaries]]
+payload_offset = 534
+length = 6
+
+[[boundaries]]
+payload_offset = 540
+length = 5
+
+[[boundaries]]
+payload_offset = 545
+length = 6
+
+[[boundaries]]
+payload_offset = 551
+length = 6
+
+[[boundaries]]
+payload_offset = 557
+length = 2
+
+[[boundaries]]
+payload_offset = 559
+length = 6
+
+[[boundaries]]
+payload_offset = 565
+length = 2
+
+[[boundaries]]
+payload_offset = 567
+length = 6
+
+[[boundaries]]
+payload_offset = 573
+length = 2
+
+[[boundaries]]
+payload_offset = 575
+length = 6
+
+[[boundaries]]
+payload_offset = 581
+length = 2
+
+[[boundaries]]
+payload_offset = 583
+length = 5
+
+[[boundaries]]
+payload_offset = 588
+length = 6
+
+[[boundaries]]
+payload_offset = 594
+length = 5
+
+[[boundaries]]
+payload_offset = 599
+length = 6
+
+[[boundaries]]
+payload_offset = 605
+length = 5
+
+[[boundaries]]
+payload_offset = 610
+length = 6
+
+[[boundaries]]
+payload_offset = 616
+length = 5
+
+[[boundaries]]
+payload_offset = 621
+length = 6
+
+[[boundaries]]
+payload_offset = 627
+length = 6
+
+[[boundaries]]
+payload_offset = 633
+length = 2
+
+[[boundaries]]
+payload_offset = 635
+length = 5
+
+[[boundaries]]
+payload_offset = 640
+length = 6
+
+[[boundaries]]
+payload_offset = 646
+length = 5
+
+[[boundaries]]
+payload_offset = 651
+length = 6
+
+[[boundaries]]
+payload_offset = 657
+length = 5
+
+[[boundaries]]
+payload_offset = 662
+length = 6
+
+[[boundaries]]
+payload_offset = 668
+length = 5
+
+[[boundaries]]
+payload_offset = 673
+length = 6
+
+[[boundaries]]
+payload_offset = 679
+length = 6
+
+[[boundaries]]
+payload_offset = 685
+length = 2
+
+[[boundaries]]
+payload_offset = 687
+length = 6
+
+[[boundaries]]
+payload_offset = 693
+length = 2
+
+[[boundaries]]
+payload_offset = 695
+length = 6
+
+[[boundaries]]
+payload_offset = 701
+length = 2
+
+[[boundaries]]
+payload_offset = 703
+length = 5
+
+[[boundaries]]
+payload_offset = 708
+length = 6
+
+[[boundaries]]
+payload_offset = 714
+length = 5
+
+[[boundaries]]
+payload_offset = 719
+length = 6
+
+[[boundaries]]
+payload_offset = 725
+length = 5
+
+[[boundaries]]
+payload_offset = 730
+length = 6
+
+[[boundaries]]
+payload_offset = 736
+length = 5
+
+[[boundaries]]
+payload_offset = 741
+length = 6
+
+[[boundaries]]
+payload_offset = 747
+length = 5
+
+[[boundaries]]
+payload_offset = 752
+length = 6
+
+[[boundaries]]
+payload_offset = 758
+length = 5
+
+[[boundaries]]
+payload_offset = 763
+length = 6
+
+[[boundaries]]
+payload_offset = 769
+length = 5
+
+[[boundaries]]
+payload_offset = 774
+length = 6
+
+[[boundaries]]
+payload_offset = 780
+length = 5
+
+[[boundaries]]
+payload_offset = 785
+length = 6
+
+[[boundaries]]
+payload_offset = 791
+length = 6
+
+[[boundaries]]
+payload_offset = 797
+length = 2
+
+[[boundaries]]
+payload_offset = 799
+length = 1
+
+[[boundaries]]
+payload_offset = 800
+length = 3
+
+[[boundaries]]
+payload_offset = 803
+length = 4
+
+[[boundaries]]
+payload_offset = 807
+length = 5
+
+[[boundaries]]
+payload_offset = 812
+length = 6
+
+[[boundaries]]
+payload_offset = 818
+length = 5
+
+[[boundaries]]
+payload_offset = 823
+length = 6
+
+[[boundaries]]
+payload_offset = 829
+length = 5
+
+[[boundaries]]
+payload_offset = 834
+length = 6
+
+[[boundaries]]
+payload_offset = 840
+length = 5
+
+[[boundaries]]
+payload_offset = 845
+length = 6
+
+[[boundaries]]
+payload_offset = 851
+length = 3
+
+[[boundaries]]
+payload_offset = 854
+length = 3
+
+[[boundaries]]
+payload_offset = 857
+length = 5
+
+[[boundaries]]
+payload_offset = 862
+length = 5
+
+[[boundaries]]
+payload_offset = 867
+length = 3
+
+[[boundaries]]
+payload_offset = 870
+length = 3
+
+[[boundaries]]
+payload_offset = 873
+length = 3
+
+[[boundaries]]
+payload_offset = 876
+length = 3
+
+[[boundaries]]
+payload_offset = 879
+length = 8
+
+[[boundaries]]
+payload_offset = 887
+length = 1
+
+[[boundaries]]
+payload_offset = 888
+length = 1
+
+[[boundaries]]
+payload_offset = 889
+length = 1
+
+[[boundaries]]
+payload_offset = 890
+length = 7
+
+[[boundaries]]
+payload_offset = 897
+length = 7
+
+[[boundaries]]
+payload_offset = 904
+length = 3
+
+[[boundaries]]
+payload_offset = 907
+length = 1
+
+[[boundaries]]
+payload_offset = 908
+length = 7
+
+[[boundaries]]
+payload_offset = 915
+length = 3
+
+[[boundaries]]
+payload_offset = 918
+length = 7
+
+[[boundaries]]
+payload_offset = 925
+length = 7
+
+[[boundaries]]
+payload_offset = 932
+length = 3
+
+[[boundaries]]
+payload_offset = 935
+length = 1
+
+[[boundaries]]
+payload_offset = 936
+length = 7
+
+[[boundaries]]
+payload_offset = 943
+length = 7
+
+[[boundaries]]
+payload_offset = 950
+length = 7
+
+[[boundaries]]
+payload_offset = 957
+length = 3
+
+[[boundaries]]
+payload_offset = 960
+length = 1
+
+[[boundaries]]
+payload_offset = 961
+length = 7
+
+[[boundaries]]
+payload_offset = 968
+length = 7
+
+[[boundaries]]
+payload_offset = 975
+length = 7
+
+[[boundaries]]
+payload_offset = 982
+length = 3
+
+[[boundaries]]
+payload_offset = 985
+length = 1
+
+[[boundaries]]
+payload_offset = 986
+length = 7
+
+[[boundaries]]
+payload_offset = 993
+length = 7
+
+[[boundaries]]
+payload_offset = 1000
+length = 3
+
+[[boundaries]]
+payload_offset = 1003
+length = 1
+
+[[boundaries]]
+payload_offset = 1004
+length = 7
+
+[[boundaries]]
+payload_offset = 1011
+length = 7
+
+[[boundaries]]
+payload_offset = 1018
+length = 3
+
+[[boundaries]]
+payload_offset = 1021
+length = 1
+
+[[boundaries]]
+payload_offset = 1022
+length = 7
+
+[[boundaries]]
+payload_offset = 1029
+length = 7
+
+[[boundaries]]
+payload_offset = 1036
+length = 3
+
+[[boundaries]]
+payload_offset = 1039
+length = 1
+
+[[boundaries]]
+payload_offset = 1040
+length = 7
+
+[[boundaries]]
+payload_offset = 1047
+length = 3
+
+[[boundaries]]
+payload_offset = 1050
+length = 1
+
+[[boundaries]]
+payload_offset = 1051
+length = 7
+
+[[boundaries]]
+payload_offset = 1058
+length = 7
+
+[[boundaries]]
+payload_offset = 1065
+length = 3
+
+[[boundaries]]
+payload_offset = 1068
+length = 1
+
+[[boundaries]]
+payload_offset = 1069
+length = 7
+
+[[boundaries]]
+payload_offset = 1076
+length = 7
+
+[[boundaries]]
+payload_offset = 1083
+length = 3
+
+[[boundaries]]
+payload_offset = 1086
+length = 1
+
+[[boundaries]]
+payload_offset = 1087
+length = 7
+
+[[boundaries]]
+payload_offset = 1094
+length = 7
+
+[[boundaries]]
+payload_offset = 1101
+length = 3
+
+[[boundaries]]
+payload_offset = 1104
+length = 1
+
+[[boundaries]]
+payload_offset = 1105
+length = 7
+
+[[boundaries]]
+payload_offset = 1112
+length = 3
+
+[[boundaries]]
+payload_offset = 1115
+length = 1
+
+[[boundaries]]
+payload_offset = 1116
+length = 7
+
+[[boundaries]]
+payload_offset = 1123
+length = 3
+
+[[boundaries]]
+payload_offset = 1126
+length = 1
+
+[[boundaries]]
+payload_offset = 1127
+length = 7
+
+[[boundaries]]
+payload_offset = 1134
+length = 3
+
+[[boundaries]]
+payload_offset = 1137
+length = 1
+
+[[boundaries]]
+payload_offset = 1138
+length = 7
+
+[[boundaries]]
+payload_offset = 1145
+length = 3
+
+[[boundaries]]
+payload_offset = 1148
+length = 1
+
+[[boundaries]]
+payload_offset = 1149
+length = 7
+
+[[boundaries]]
+payload_offset = 1156
+length = 3
+
+[[boundaries]]
+payload_offset = 1159
+length = 1
+
+[[boundaries]]
+payload_offset = 1160
+length = 7
+
+[[boundaries]]
+payload_offset = 1167
+length = 3
+
+[[boundaries]]
+payload_offset = 1170
+length = 1
+
+[[boundaries]]
+payload_offset = 1171
+length = 6
+
+[[boundaries]]
+payload_offset = 1177
+length = 2
+
+[[boundaries]]
+payload_offset = 1179
+length = 1
+
+[[boundaries]]
+payload_offset = 1180
+length = 1
+
+[[boundaries]]
+payload_offset = 1181
+length = 6
+
+[[boundaries]]
+payload_offset = 1187
+length = 2
+
+[[boundaries]]
+payload_offset = 1189
+length = 1
+
+[[boundaries]]
+payload_offset = 1190
+length = 1
+
+[[boundaries]]
+payload_offset = 1191
+length = 6
+
+[[boundaries]]
+payload_offset = 1197
+length = 2
+
+[[boundaries]]
+payload_offset = 1199
+length = 1
+
+[[boundaries]]
+payload_offset = 1200
+length = 1
+
+[[boundaries]]
+payload_offset = 1201
+length = 6
+
+[[boundaries]]
+payload_offset = 1207
+length = 2
+
+[[boundaries]]
+payload_offset = 1209
+length = 1
+
+[[boundaries]]
+payload_offset = 1210
+length = 1
+
+[[boundaries]]
+payload_offset = 1211
+length = 1
+
+[[boundaries]]
+payload_offset = 1212
+length = 7
+
+[[boundaries]]
+payload_offset = 1219
+length = 3
+
+[[boundaries]]
+payload_offset = 1222
+length = 1
+
+[[boundaries]]
+payload_offset = 1223
+length = 1
+
+[[boundaries]]
+payload_offset = 1224
+length = 1
+
+[[boundaries]]
+payload_offset = 1225
+length = 5
+
+[[boundaries]]
+payload_offset = 1230
+length = 5
+
+[[boundaries]]
+payload_offset = 1235
+length = 6
+
+[[boundaries]]
+payload_offset = 1241
+length = 3
+
+[[boundaries]]
+payload_offset = 1244
+length = 6
+
+[[boundaries]]
+payload_offset = 1250
+length = 3
+
+[[boundaries]]
+payload_offset = 1253
+length = 6
+
+[[boundaries]]
+payload_offset = 1259
+length = 6
+
+[[boundaries]]
+payload_offset = 1265
+length = 2
+
+[[boundaries]]
+payload_offset = 1267
+length = 1
+
+[[boundaries]]
+payload_offset = 1268
+length = 1
+
+[[boundaries]]
+payload_offset = 1269
+length = 5
+
+[[boundaries]]
+payload_offset = 1274
+length = 1
+
+[[boundaries]]
+payload_offset = 1275
+length = 1
+
+[[boundaries]]
+payload_offset = 1276
+length = 18
+
+[[boundaries]]
+payload_offset = 1294
+length = 6
+
+[[boundaries]]
+payload_offset = 1300
+length = 2
+
+[[boundaries]]
+payload_offset = 1302
+length = 1
+
+[[boundaries]]
+payload_offset = 1303
+length = 5
+
+[[boundaries]]
+payload_offset = 1308
+length = 5
+
+[[boundaries]]
+payload_offset = 1313
+length = 6
+
+[[boundaries]]
+payload_offset = 1319
+length = 5
+
+[[boundaries]]
+payload_offset = 1324
+length = 5
+
+[[boundaries]]
+payload_offset = 1329
+length = 6
+
+[[boundaries]]
+payload_offset = 1335
+length = 5
+
+[[boundaries]]
+payload_offset = 1340
+length = 5
+
+[[boundaries]]
+payload_offset = 1345
+length = 6
+
+[[boundaries]]
+payload_offset = 1351
+length = 5
+
+[[boundaries]]
+payload_offset = 1356
+length = 6
+
+[[boundaries]]
+payload_offset = 1362
+length = 6
+
+[[boundaries]]
+payload_offset = 1368
+length = 2
+
+[[boundaries]]
+payload_offset = 1370
+length = 5
+
+[[boundaries]]
+payload_offset = 1375
+length = 1
+
+[[boundaries]]
+payload_offset = 1376
+length = 5
+
+[[boundaries]]
+payload_offset = 1381
+length = 1
+
+[[boundaries]]
+payload_offset = 1382
+length = 5
+
+[[boundaries]]
+payload_offset = 1387
+length = 5
+
+[[boundaries]]
+payload_offset = 1392
+length = 2
+
+[[boundaries]]
+payload_offset = 1394
+length = 5
+
+[[boundaries]]
+payload_offset = 1399
+length = 6
+
+[[boundaries]]
+payload_offset = 1405
+length = 5
+
+[[boundaries]]
+payload_offset = 1410
+length = 1
+
+[[boundaries]]
+payload_offset = 1411
+length = 1
+
+[[boundaries]]
+payload_offset = 1412
+length = 6
+
+[[boundaries]]
+payload_offset = 1418
+length = 2
+
+[[boundaries]]
+payload_offset = 1420
+length = 10
+
+[[boundaries]]
+payload_offset = 1430
+length = 5
+
+[[boundaries]]
+payload_offset = 1435
+length = 1
+
+[[boundaries]]
+payload_offset = 1436
+length = 5
+
+[[boundaries]]
+payload_offset = 1441
+length = 6
+
+[[boundaries]]
+payload_offset = 1447
+length = 2
+
+[[boundaries]]
+payload_offset = 1449
+length = 3
+
+[[boundaries]]
+payload_offset = 1452
+length = 5
+
+[[boundaries]]
+payload_offset = 1457
+length = 3
+
+[[boundaries]]
+payload_offset = 1460
+length = 3
+
+[[boundaries]]
+payload_offset = 1463
+length = 5
+
+[[boundaries]]
+payload_offset = 1468
+length = 3
+
+[[boundaries]]
+payload_offset = 1471
+length = 3
+
+[[boundaries]]
+payload_offset = 1474
+length = 5
+
+[[boundaries]]
+payload_offset = 1479
+length = 5
+
+[[boundaries]]
+payload_offset = 1484
+length = 3
+
+[[boundaries]]
+payload_offset = 1487
+length = 5
+
+[[boundaries]]
+payload_offset = 1492
+length = 3
+
+[[boundaries]]
+payload_offset = 1495
+length = 5
+
+[[boundaries]]
+payload_offset = 1500
+length = 3
+
+[[boundaries]]
+payload_offset = 1503
+length = 6
+
+[[boundaries]]
+payload_offset = 1509
+length = 2
+
+[[boundaries]]
+payload_offset = 1511
+length = 1
+
+[[boundaries]]
+payload_offset = 1512
+length = 3
+
+[[boundaries]]
+payload_offset = 1515
+length = 3
+
+[[boundaries]]
+payload_offset = 1518
+length = 3
+
+[[boundaries]]
+payload_offset = 1521
+length = 3
+
+[[boundaries]]
+payload_offset = 1524
+length = 5
+
+[[boundaries]]
+payload_offset = 1529
+length = 5
+
+[[boundaries]]
+payload_offset = 1534
+length = 6
+
+[[boundaries]]
+payload_offset = 1540
+length = 5
+
+[[boundaries]]
+payload_offset = 1545
+length = 6
+
+[[boundaries]]
+payload_offset = 1551
+length = 5
+
+[[boundaries]]
+payload_offset = 1556
+length = 6
+
+[[boundaries]]
+payload_offset = 1562
+length = 1
+
+[[boundaries]]
+payload_offset = 1563
+length = 5
+
+[[boundaries]]
+payload_offset = 1568
+length = 5
+
+[[boundaries]]
+payload_offset = 1573
+length = 2
+
+[[boundaries]]
+payload_offset = 1575
+length = 5
+
+[[boundaries]]
+payload_offset = 1580
+length = 6
+
+[[boundaries]]
+payload_offset = 1586
+length = 3
+
+[[boundaries]]
+payload_offset = 1589
+length = 6
+
+[[boundaries]]
+payload_offset = 1595
+length = 2
+
+[[boundaries]]
+payload_offset = 1597
+length = 1
+
+[[boundaries]]
+payload_offset = 1598
+length = 5
+
+[[boundaries]]
+payload_offset = 1603
+length = 5
+
+[[boundaries]]
+payload_offset = 1608
+length = 5
+
+[[boundaries]]
+payload_offset = 1613
+length = 5
+
+[[boundaries]]
+payload_offset = 1618
+length = 5
+
+[[boundaries]]
+payload_offset = 1623
+length = 5
+
+[[boundaries]]
+payload_offset = 1628
+length = 7
+
+[[boundaries]]
+payload_offset = 1635
+length = 3
+
+[[boundaries]]
+payload_offset = 1638
+length = 3
+
+[[boundaries]]
+payload_offset = 1641
+length = 7
+
+[[boundaries]]
+payload_offset = 1648
+length = 3
+
+[[boundaries]]
+payload_offset = 1651
+length = 7
+
+[[boundaries]]
+payload_offset = 1658
+length = 3
+
+[[boundaries]]
+payload_offset = 1661
+length = 3
+
+[[boundaries]]
+payload_offset = 1664
+length = 5
+
+[[boundaries]]
+payload_offset = 1669
+length = 6
+
+[[boundaries]]
+payload_offset = 1675
+length = 5
+
+[[boundaries]]
+payload_offset = 1680
+length = 6
+
+[[boundaries]]
+payload_offset = 1686
+length = 5
+
+[[boundaries]]
+payload_offset = 1691
+length = 6
+
+[[boundaries]]
+payload_offset = 1697
+length = 6
+
+[[boundaries]]
+payload_offset = 1703
+length = 2
+
+[[boundaries]]
+payload_offset = 1705
+length = 1
+
+[[boundaries]]
+payload_offset = 1706
+length = 3
+
+[[boundaries]]
+payload_offset = 1709
+length = 5
+
+[[boundaries]]
+payload_offset = 1714
+length = 6
+
+[[boundaries]]
+payload_offset = 1720
+length = 5
+
+[[boundaries]]
+payload_offset = 1725
+length = 6
+
+[[boundaries]]
+payload_offset = 1731
+length = 5
+
+[[boundaries]]
+payload_offset = 1736
+length = 6
+
+[[boundaries]]
+payload_offset = 1742
+length = 6
+
+[[boundaries]]
+payload_offset = 1748
+length = 2
+
+[[boundaries]]
+payload_offset = 1750
+length = 1
+
+[[boundaries]]
+payload_offset = 1751
+length = 3
+
+[[boundaries]]
+payload_offset = 1754
+length = 4
+
+[[boundaries]]
+payload_offset = 1758
+length = 5
+
+[[boundaries]]
+payload_offset = 1763
+length = 6
+
+[[boundaries]]
+payload_offset = 1769
+length = 5
+
+[[boundaries]]
+payload_offset = 1774
+length = 6
+
+[[boundaries]]
+payload_offset = 1780
+length = 5
+
+[[boundaries]]
+payload_offset = 1785
+length = 6
+
+[[boundaries]]
+payload_offset = 1791
+length = 3
+
+[[boundaries]]
+payload_offset = 1794
+length = 5
+
+[[boundaries]]
+payload_offset = 1799
+length = 3
+
+[[boundaries]]
+payload_offset = 1802
+length = 8
+
+[[boundaries]]
+payload_offset = 1810
+length = 1
+
+[[boundaries]]
+payload_offset = 1811
+length = 1
+
+[[boundaries]]
+payload_offset = 1812
+length = 1
+
+[[boundaries]]
+payload_offset = 1813
+length = 7
+
+[[boundaries]]
+payload_offset = 1820
+length = 3
+
+[[boundaries]]
+payload_offset = 1823
+length = 1
+
+[[boundaries]]
+payload_offset = 1824
+length = 7
+
+[[boundaries]]
+payload_offset = 1831
+length = 3
+
+[[boundaries]]
+payload_offset = 1834
+length = 1
+
+[[boundaries]]
+payload_offset = 1835
+length = 7
+
+[[boundaries]]
+payload_offset = 1842
+length = 3
+
+[[boundaries]]
+payload_offset = 1845
+length = 1
+
+[[boundaries]]
+payload_offset = 1846
+length = 7
+
+[[boundaries]]
+payload_offset = 1853
+length = 3
+
+[[boundaries]]
+payload_offset = 1856
+length = 7
+
+[[boundaries]]
+payload_offset = 1863
+length = 7
+
+[[boundaries]]
+payload_offset = 1870
+length = 3
+
+[[boundaries]]
+payload_offset = 1873
+length = 1
+
+[[boundaries]]
+payload_offset = 1874
+length = 7
+
+[[boundaries]]
+payload_offset = 1881
+length = 3
+
+[[boundaries]]
+payload_offset = 1884
+length = 7
+
+[[boundaries]]
+payload_offset = 1891
+length = 7
+
+[[boundaries]]
+payload_offset = 1898
+length = 3
+
+[[boundaries]]
+payload_offset = 1901
+length = 1
+
+[[boundaries]]
+payload_offset = 1902
+length = 7
+
+[[boundaries]]
+payload_offset = 1909
+length = 3
+
+[[boundaries]]
+payload_offset = 1912
+length = 7
+
+[[boundaries]]
+payload_offset = 1919
+length = 7
+
+[[boundaries]]
+payload_offset = 1926
+length = 3
+
+[[boundaries]]
+payload_offset = 1929
+length = 1
+
+[[boundaries]]
+payload_offset = 1930
+length = 7
+
+[[boundaries]]
+payload_offset = 1937
+length = 7
+
+[[boundaries]]
+payload_offset = 1944
+length = 7
+
+[[boundaries]]
+payload_offset = 1951
+length = 3
+
+[[boundaries]]
+payload_offset = 1954
+length = 1
+
+[[boundaries]]
+payload_offset = 1955
+length = 7
+
+[[boundaries]]
+payload_offset = 1962
+length = 7
+
+[[boundaries]]
+payload_offset = 1969
+length = 3
+
+[[boundaries]]
+payload_offset = 1972
+length = 1
+
+[[boundaries]]
+payload_offset = 1973
+length = 7
+
+[[boundaries]]
+payload_offset = 1980
+length = 7
+
+[[boundaries]]
+payload_offset = 1987
+length = 3
+
+[[boundaries]]
+payload_offset = 1990
+length = 1
+
+[[boundaries]]
+payload_offset = 1991
+length = 6
+
+[[boundaries]]
+payload_offset = 1997
+length = 2
+
+[[boundaries]]
+payload_offset = 1999
+length = 1
+
+[[boundaries]]
+payload_offset = 2000
+length = 1
+
+[[boundaries]]
+payload_offset = 2001
+length = 1
+
+[[boundaries]]
+payload_offset = 2002
+length = 5
+
+[[boundaries]]
+payload_offset = 2007
+length = 6
+
+[[boundaries]]
+payload_offset = 2013
+length = 5
+
+[[boundaries]]
+payload_offset = 2018
+length = 5
+
+[[boundaries]]
+payload_offset = 2023
+length = 6
+
+[[boundaries]]
+payload_offset = 2029
+length = 2
+
+[[boundaries]]
+payload_offset = 2031
+length = 5
+
+[[boundaries]]
+payload_offset = 2036
+length = 6
+
+[[boundaries]]
+payload_offset = 2042
+length = 5
+
+[[boundaries]]
+payload_offset = 2047
+length = 6
+
+[[boundaries]]
+payload_offset = 2053
+length = 1
+
+[[boundaries]]
+payload_offset = 2054
+length = 1
+
+[[boundaries]]
+payload_offset = 2055
+length = 3
+
+[[boundaries]]
+payload_offset = 2058
+length = 8
+
+[[boundaries]]
+payload_offset = 2066
+length = 1
+
+[[boundaries]]
+payload_offset = 2067
+length = 1
+
+[[boundaries]]
+payload_offset = 2068
+length = 1
+
+[[boundaries]]
+payload_offset = 2069
+length = 1
+
+[[boundaries]]
+payload_offset = 2070
+length = 1
+
+[[boundaries]]
+payload_offset = 2071
+length = 6
+
+[[boundaries]]
+payload_offset = 2077
+length = 2
+
+[[boundaries]]
+payload_offset = 2079
+length = 1
+
+[[boundaries]]
+payload_offset = 2080
+length = 1
+
+[[boundaries]]
+payload_offset = 2081
+length = 1
+
+[[boundaries]]
+payload_offset = 2082
+length = 5
+
+[[boundaries]]
+payload_offset = 2087
+length = 6
+
+[[boundaries]]
+payload_offset = 2093
+length = 5
+
+[[boundaries]]
+payload_offset = 2098
+length = 5
+
+[[boundaries]]
+payload_offset = 2103
+length = 6
+
+[[boundaries]]
+payload_offset = 2109
+length = 2
+
+[[boundaries]]
+payload_offset = 2111
+length = 5
+
+[[boundaries]]
+payload_offset = 2116
+length = 6
+
+[[boundaries]]
+payload_offset = 2122
+length = 5
+
+[[boundaries]]
+payload_offset = 2127
+length = 6
+
+[[boundaries]]
+payload_offset = 2133
+length = 1
+
+[[boundaries]]
+payload_offset = 2134
+length = 1
+
+[[boundaries]]
+payload_offset = 2135
+length = 3
+
+[[boundaries]]
+payload_offset = 2138
+length = 6
+
+[[boundaries]]
+payload_offset = 2144
+length = 5
+
+[[boundaries]]
+payload_offset = 2149
+length = 5
+
+[[boundaries]]
+payload_offset = 2154
+length = 6
+
+[[boundaries]]
+payload_offset = 2160
+length = 2
+
+[[boundaries]]
+payload_offset = 2162
+length = 5
+
+[[boundaries]]
+payload_offset = 2167
+length = 6
+
+[[boundaries]]
+payload_offset = 2173
+length = 5
+
+[[boundaries]]
+payload_offset = 2178
+length = 6
+
+[[boundaries]]
+payload_offset = 2184
+length = 1
+
+[[boundaries]]
+payload_offset = 2185
+length = 1
+
+[[boundaries]]
+payload_offset = 2186
+length = 3
+
+[[boundaries]]
+payload_offset = 2189
+length = 6
+
+[[boundaries]]
+payload_offset = 2195
+length = 5
+
+[[boundaries]]
+payload_offset = 2200
+length = 5
+
+[[boundaries]]
+payload_offset = 2205
+length = 6
+
+[[boundaries]]
+payload_offset = 2211
+length = 2
+
+[[boundaries]]
+payload_offset = 2213
+length = 5
+
+[[boundaries]]
+payload_offset = 2218
+length = 6
+
+[[boundaries]]
+payload_offset = 2224
+length = 5
+
+[[boundaries]]
+payload_offset = 2229
+length = 6
+
+[[boundaries]]
+payload_offset = 2235
+length = 1
+
+[[boundaries]]
+payload_offset = 2236
+length = 1
+
+[[boundaries]]
+payload_offset = 2237
+length = 3
+
+[[boundaries]]
+payload_offset = 2240
+length = 6
+
+[[boundaries]]
+payload_offset = 2246
+length = 5
+
+[[boundaries]]
+payload_offset = 2251
+length = 5
+
+[[boundaries]]
+payload_offset = 2256
+length = 6
+
+[[boundaries]]
+payload_offset = 2262
+length = 2
+
+[[boundaries]]
+payload_offset = 2264
+length = 5
+
+[[boundaries]]
+payload_offset = 2269
+length = 6
+
+[[boundaries]]
+payload_offset = 2275
+length = 5
+
+[[boundaries]]
+payload_offset = 2280
+length = 6
+
+[[boundaries]]
+payload_offset = 2286
+length = 1
+
+[[boundaries]]
+payload_offset = 2287
+length = 1
+
+[[boundaries]]
+payload_offset = 2288
+length = 3
+
+[[boundaries]]
+payload_offset = 2291
+length = 6
+
+[[boundaries]]
+payload_offset = 2297
+length = 5
+
+[[boundaries]]
+payload_offset = 2302
+length = 5
+
+[[boundaries]]
+payload_offset = 2307
+length = 6
+
+[[boundaries]]
+payload_offset = 2313
+length = 2
+
+[[boundaries]]
+payload_offset = 2315
+length = 5
+
+[[boundaries]]
+payload_offset = 2320
+length = 6
+
+[[boundaries]]
+payload_offset = 2326
+length = 5
+
+[[boundaries]]
+payload_offset = 2331
+length = 6
+
+[[boundaries]]
+payload_offset = 2337
+length = 1
+
+[[boundaries]]
+payload_offset = 2338
+length = 1
+
+[[boundaries]]
+payload_offset = 2339
+length = 3
+
+[[boundaries]]
+payload_offset = 2342
+length = 6
+
+[[boundaries]]
+payload_offset = 2348
+length = 5
+
+[[boundaries]]
+payload_offset = 2353
+length = 5
+
+[[boundaries]]
+payload_offset = 2358
+length = 6
+
+[[boundaries]]
+payload_offset = 2364
+length = 2
+
+[[boundaries]]
+payload_offset = 2366
+length = 5
+
+[[boundaries]]
+payload_offset = 2371
+length = 6
+
+[[boundaries]]
+payload_offset = 2377
+length = 5
+
+[[boundaries]]
+payload_offset = 2382
+length = 6
+
+[[boundaries]]
+payload_offset = 2388
+length = 1
+
+[[boundaries]]
+payload_offset = 2389
+length = 1
+
+[[boundaries]]
+payload_offset = 2390
+length = 3
+
+[[boundaries]]
+payload_offset = 2393
+length = 6
+
+[[boundaries]]
+payload_offset = 2399
+length = 5
+
+[[boundaries]]
+payload_offset = 2404
+length = 5
+
+[[boundaries]]
+payload_offset = 2409
+length = 6
+
+[[boundaries]]
+payload_offset = 2415
+length = 2
+
+[[boundaries]]
+payload_offset = 2417
+length = 5
+
+[[boundaries]]
+payload_offset = 2422
+length = 6
+
+[[boundaries]]
+payload_offset = 2428
+length = 5
+
+[[boundaries]]
+payload_offset = 2433
+length = 6
+
+[[boundaries]]
+payload_offset = 2439
+length = 1
+
+[[boundaries]]
+payload_offset = 2440
+length = 1
+
+[[boundaries]]
+payload_offset = 2441
+length = 3
+
+[[boundaries]]
+payload_offset = 2444
+length = 6
+
+[[boundaries]]
+payload_offset = 2450
+length = 5
+
+[[boundaries]]
+payload_offset = 2455
+length = 5
+
+[[boundaries]]
+payload_offset = 2460
+length = 6
+
+[[boundaries]]
+payload_offset = 2466
+length = 2
+
+[[boundaries]]
+payload_offset = 2468
+length = 5
+
+[[boundaries]]
+payload_offset = 2473
+length = 6
+
+[[boundaries]]
+payload_offset = 2479
+length = 5
+
+[[boundaries]]
+payload_offset = 2484
+length = 6
+
+[[boundaries]]
+payload_offset = 2490
+length = 1
+
+[[boundaries]]
+payload_offset = 2491
+length = 1
+
+[[boundaries]]
+payload_offset = 2492
+length = 3
+
+[[boundaries]]
+payload_offset = 2495
+length = 6
+
+[[boundaries]]
+payload_offset = 2501
+length = 5
+
+[[boundaries]]
+payload_offset = 2506
+length = 5
+
+[[boundaries]]
+payload_offset = 2511
+length = 6
+
+[[boundaries]]
+payload_offset = 2517
+length = 2
+
+[[boundaries]]
+payload_offset = 2519
+length = 5
+
+[[boundaries]]
+payload_offset = 2524
+length = 6
+
+[[boundaries]]
+payload_offset = 2530
+length = 5
+
+[[boundaries]]
+payload_offset = 2535
+length = 6
+
+[[boundaries]]
+payload_offset = 2541
+length = 1
+
+[[boundaries]]
+payload_offset = 2542
+length = 1
+
+[[boundaries]]
+payload_offset = 2543
+length = 3
+
+[[boundaries]]
+payload_offset = 2546
+length = 6
+
+[[boundaries]]
+payload_offset = 2552
+length = 5
+
+[[boundaries]]
+payload_offset = 2557
+length = 5
+
+[[boundaries]]
+payload_offset = 2562
+length = 6
+
+[[boundaries]]
+payload_offset = 2568
+length = 2
+
+[[boundaries]]
+payload_offset = 2570
+length = 5
+
+[[boundaries]]
+payload_offset = 2575
+length = 6
+
+[[boundaries]]
+payload_offset = 2581
+length = 5
+
+[[boundaries]]
+payload_offset = 2586
+length = 6
+
+[[boundaries]]
+payload_offset = 2592
+length = 1
+
+[[boundaries]]
+payload_offset = 2593
+length = 1
+
+[[boundaries]]
+payload_offset = 2594
+length = 3
+
+[[boundaries]]
+payload_offset = 2597
+length = 6
+
+[[boundaries]]
+payload_offset = 2603
+length = 5
+
+[[boundaries]]
+payload_offset = 2608
+length = 5
+
+[[boundaries]]
+payload_offset = 2613
+length = 6
+
+[[boundaries]]
+payload_offset = 2619
+length = 2
+
+[[boundaries]]
+payload_offset = 2621
+length = 5
+
+[[boundaries]]
+payload_offset = 2626
+length = 6
+
+[[boundaries]]
+payload_offset = 2632
+length = 5
+
+[[boundaries]]
+payload_offset = 2637
+length = 6
+
+[[boundaries]]
+payload_offset = 2643
+length = 1
+
+[[boundaries]]
+payload_offset = 2644
+length = 18
+
+[[boundaries]]
+payload_offset = 2662
+length = 3
+
+[[boundaries]]
+payload_offset = 2665
+length = 6
+
+[[boundaries]]
+payload_offset = 2671
+length = 6
+
+[[boundaries]]
+payload_offset = 2677
+length = 2
+
+[[boundaries]]
+payload_offset = 2679
+length = 1
+
+[[boundaries]]
+payload_offset = 2680
+length = 5
+
+[[boundaries]]
+payload_offset = 2685
+length = 5
+
+[[boundaries]]
+payload_offset = 2690
+length = 3
+
+[[boundaries]]
+payload_offset = 2693
+length = 1
+
+[[boundaries]]
+payload_offset = 2694
+length = 1
+
+[[boundaries]]
+payload_offset = 2695
+length = 6
+
+[[boundaries]]
+payload_offset = 2701
+length = 2
+
+[[boundaries]]
+payload_offset = 2703
+length = 1
+
+[[boundaries]]
+payload_offset = 2704
+length = 18
+
+[[boundaries]]
+payload_offset = 2722
+length = 3
+
+[[boundaries]]
+payload_offset = 2725
+length = 6
+
+[[boundaries]]
+payload_offset = 2731
+length = 6
+
+[[boundaries]]
+payload_offset = 2737
+length = 2
+
+[[boundaries]]
+payload_offset = 2739
+length = 1
+
+[[boundaries]]
+payload_offset = 2740
+length = 5
+
+[[boundaries]]
+payload_offset = 2745
+length = 5
+
+[[boundaries]]
+payload_offset = 2750
+length = 3
+
+[[boundaries]]
+payload_offset = 2753
+length = 1
+
+[[boundaries]]
+payload_offset = 2754
+length = 1
+
+[[boundaries]]
+payload_offset = 2755
+length = 6
+
+[[boundaries]]
+payload_offset = 2761
+length = 2
+
+[[boundaries]]
+payload_offset = 2763
+length = 1
+
+[[boundaries]]
+payload_offset = 2764
+length = 18
+
+[[boundaries]]
+payload_offset = 2782
+length = 3
+
+[[boundaries]]
+payload_offset = 2785
+length = 6
+
+[[boundaries]]
+payload_offset = 2791
+length = 6
+
+[[boundaries]]
+payload_offset = 2797
+length = 2
+
+[[boundaries]]
+payload_offset = 2799
+length = 1
+
+[[boundaries]]
+payload_offset = 2800
+length = 5
+
+[[boundaries]]
+payload_offset = 2805
+length = 5
+
+[[boundaries]]
+payload_offset = 2810
+length = 3
+
+[[boundaries]]
+payload_offset = 2813
+length = 1
+
+[[boundaries]]
+payload_offset = 2814
+length = 1
+
+[[boundaries]]
+payload_offset = 2815
+length = 6
+
+[[boundaries]]
+payload_offset = 2821
+length = 2
+
+[[boundaries]]
+payload_offset = 2823
+length = 1
+
+[[boundaries]]
+payload_offset = 2824
+length = 18
+
+[[boundaries]]
+payload_offset = 2842
+length = 3
+
+[[boundaries]]
+payload_offset = 2845
+length = 6
+
+[[boundaries]]
+payload_offset = 2851
+length = 6
+
+[[boundaries]]
+payload_offset = 2857
+length = 2
+
+[[boundaries]]
+payload_offset = 2859
+length = 1
+
+[[boundaries]]
+payload_offset = 2860
+length = 5
+
+[[boundaries]]
+payload_offset = 2865
+length = 5
+
+[[boundaries]]
+payload_offset = 2870
+length = 3
+
+[[boundaries]]
+payload_offset = 2873
+length = 1
+
+[[boundaries]]
+payload_offset = 2874
+length = 1
+
+[[boundaries]]
+payload_offset = 2875
+length = 6
+
+[[boundaries]]
+payload_offset = 2881
+length = 2
+
+[[boundaries]]
+payload_offset = 2883
+length = 1
+
+[[boundaries]]
+payload_offset = 2884
+length = 18
+
+[[boundaries]]
+payload_offset = 2902
+length = 3
+
+[[boundaries]]
+payload_offset = 2905
+length = 6
+
+[[boundaries]]
+payload_offset = 2911
+length = 6
+
+[[boundaries]]
+payload_offset = 2917
+length = 2
+
+[[boundaries]]
+payload_offset = 2919
+length = 1
+
+[[boundaries]]
+payload_offset = 2920
+length = 5
+
+[[boundaries]]
+payload_offset = 2925
+length = 5
+
+[[boundaries]]
+payload_offset = 2930
+length = 3
+
+[[boundaries]]
+payload_offset = 2933
+length = 1
+
+[[boundaries]]
+payload_offset = 2934
+length = 1
+
+[[boundaries]]
+payload_offset = 2935
+length = 6
+
+[[boundaries]]
+payload_offset = 2941
+length = 2
+
+[[boundaries]]
+payload_offset = 2943
+length = 1
+
+[[boundaries]]
+payload_offset = 2944
+length = 18
+
+[[boundaries]]
+payload_offset = 2962
+length = 3
+
+[[boundaries]]
+payload_offset = 2965
+length = 6
+
+[[boundaries]]
+payload_offset = 2971
+length = 6
+
+[[boundaries]]
+payload_offset = 2977
+length = 2
+
+[[boundaries]]
+payload_offset = 2979
+length = 1
+
+[[boundaries]]
+payload_offset = 2980
+length = 5
+
+[[boundaries]]
+payload_offset = 2985
+length = 5
+
+[[boundaries]]
+payload_offset = 2990
+length = 3
+
+[[boundaries]]
+payload_offset = 2993
+length = 1
+
+[[boundaries]]
+payload_offset = 2994
+length = 1
+
+[[boundaries]]
+payload_offset = 2995
+length = 6
+
+[[boundaries]]
+payload_offset = 3001
+length = 2
+
+[[boundaries]]
+payload_offset = 3003
+length = 1
+
+[[boundaries]]
+payload_offset = 3004
+length = 18
+
+[[boundaries]]
+payload_offset = 3022
+length = 3
+
+[[boundaries]]
+payload_offset = 3025
+length = 6
+
+[[boundaries]]
+payload_offset = 3031
+length = 6
+
+[[boundaries]]
+payload_offset = 3037
+length = 2
+
+[[boundaries]]
+payload_offset = 3039
+length = 1
+
+[[boundaries]]
+payload_offset = 3040
+length = 5
+
+[[boundaries]]
+payload_offset = 3045
+length = 5
+
+[[boundaries]]
+payload_offset = 3050
+length = 3
+
+[[boundaries]]
+payload_offset = 3053
+length = 1
+
+[[boundaries]]
+payload_offset = 3054
+length = 1
+
+[[boundaries]]
+payload_offset = 3055
+length = 6
+
+[[boundaries]]
+payload_offset = 3061
+length = 2
+
+[[boundaries]]
+payload_offset = 3063
+length = 1
+
+[[boundaries]]
+payload_offset = 3064
+length = 5
+
+[[boundaries]]
+payload_offset = 3069
+length = 5
+
+[[boundaries]]
+payload_offset = 3074
+length = 6
+
+[[boundaries]]
+payload_offset = 3080
+length = 5
+
+[[boundaries]]
+payload_offset = 3085
+length = 6
+
+[[boundaries]]
+payload_offset = 3091
+length = 5
+
+[[boundaries]]
+payload_offset = 3096
+length = 1
+
+[[boundaries]]
+payload_offset = 3097
+length = 5
+
+[[boundaries]]
+payload_offset = 3102
+length = 5
+
+[[boundaries]]
+payload_offset = 3107
+length = 6
+
+[[boundaries]]
+payload_offset = 3113
+length = 5
+
+[[boundaries]]
+payload_offset = 3118
+length = 6
+
+[[boundaries]]
+payload_offset = 3124
+length = 5
+
+[[boundaries]]
+payload_offset = 3129
+length = 1
+
+[[boundaries]]
+payload_offset = 3130
+length = 5
+
+[[boundaries]]
+payload_offset = 3135
+length = 5
+
+[[boundaries]]
+payload_offset = 3140
+length = 6
+
+[[boundaries]]
+payload_offset = 3146
+length = 5
+
+[[boundaries]]
+payload_offset = 3151
+length = 6
+
+[[boundaries]]
+payload_offset = 3157
+length = 5
+
+[[boundaries]]
+payload_offset = 3162
+length = 1
+
+[[boundaries]]
+payload_offset = 3163
+length = 5
+
+[[boundaries]]
+payload_offset = 3168
+length = 5
+
+[[boundaries]]
+payload_offset = 3173
+length = 6
+
+[[boundaries]]
+payload_offset = 3179
+length = 5
+
+[[boundaries]]
+payload_offset = 3184
+length = 6
+
+[[boundaries]]
+payload_offset = 3190
+length = 5
+
+[[boundaries]]
+payload_offset = 3195
+length = 1
+
+[[boundaries]]
+payload_offset = 3196
+length = 5
+
+[[boundaries]]
+payload_offset = 3201
+length = 5
+
+[[boundaries]]
+payload_offset = 3206
+length = 6
+
+[[boundaries]]
+payload_offset = 3212
+length = 5
+
+[[boundaries]]
+payload_offset = 3217
+length = 6
+
+[[boundaries]]
+payload_offset = 3223
+length = 5
+
+[[boundaries]]
+payload_offset = 3228
+length = 1
+
+[[boundaries]]
+payload_offset = 3229
+length = 5
+
+[[boundaries]]
+payload_offset = 3234
+length = 5
+
+[[boundaries]]
+payload_offset = 3239
+length = 6
+
+[[boundaries]]
+payload_offset = 3245
+length = 5
+
+[[boundaries]]
+payload_offset = 3250
+length = 6
+
+[[boundaries]]
+payload_offset = 3256
+length = 5
+
+[[boundaries]]
+payload_offset = 3261
+length = 1
+
+[[boundaries]]
+payload_offset = 3262
+length = 5
+
+[[boundaries]]
+payload_offset = 3267
+length = 5
+
+[[boundaries]]
+payload_offset = 3272
+length = 6
+
+[[boundaries]]
+payload_offset = 3278
+length = 5
+
+[[boundaries]]
+payload_offset = 3283
+length = 6
+
+[[boundaries]]
+payload_offset = 3289
+length = 5
+
+[[boundaries]]
+payload_offset = 3294
+length = 1
+
+[[boundaries]]
+payload_offset = 3295
+length = 5
+
+[[boundaries]]
+payload_offset = 3300
+length = 5
+
+[[boundaries]]
+payload_offset = 3305
+length = 6
+
+[[boundaries]]
+payload_offset = 3311
+length = 5
+
+[[boundaries]]
+payload_offset = 3316
+length = 6
+
+[[boundaries]]
+payload_offset = 3322
+length = 5
+
+[[boundaries]]
+payload_offset = 3327
+length = 1
+
+[[boundaries]]
+payload_offset = 3328
+length = 9
+
+[[boundaries]]
+payload_offset = 3337
+length = 9
+
+[[boundaries]]
+payload_offset = 3346
+length = 9
+
+[[boundaries]]
+payload_offset = 3355
+length = 9
+
+[[boundaries]]
+payload_offset = 3364
+length = 1
+
+[[boundaries]]
+payload_offset = 3365
+length = 9
+
+[[boundaries]]
+payload_offset = 3374
+length = 9
+
+[[boundaries]]
+payload_offset = 3383
+length = 9
+
+[[boundaries]]
+payload_offset = 3392
+length = 9
+
+[[boundaries]]
+payload_offset = 3401
+length = 1
+
+[[boundaries]]
+payload_offset = 3402
+length = 9
+
+[[boundaries]]
+payload_offset = 3411
+length = 9
+
+[[boundaries]]
+payload_offset = 3420
+length = 9
+
+[[boundaries]]
+payload_offset = 3429
+length = 9
+
+[[boundaries]]
+payload_offset = 3438
+length = 1
+
+[[boundaries]]
+payload_offset = 3439
+length = 9
+
+[[boundaries]]
+payload_offset = 3448
+length = 9
+
+[[boundaries]]
+payload_offset = 3457
+length = 1
+
+[[boundaries]]
+payload_offset = 3458
+length = 9
+
+[[boundaries]]
+payload_offset = 3467
+length = 9
+
+[[boundaries]]
+payload_offset = 3476
+length = 9
+
+[[boundaries]]
+payload_offset = 3485
+length = 9
+
+[[boundaries]]
+payload_offset = 3494
+length = 1
+
+[[boundaries]]
+payload_offset = 3495
+length = 9
+
+[[boundaries]]
+payload_offset = 3504
+length = 9
+
+[[boundaries]]
+payload_offset = 3513
+length = 1
+
+[[boundaries]]
+payload_offset = 3514
+length = 9
+
+[[boundaries]]
+payload_offset = 3523
+length = 9
+
+[[boundaries]]
+payload_offset = 3532
+length = 1
+
+[[boundaries]]
+payload_offset = 3533
+length = 9
+
+[[boundaries]]
+payload_offset = 3542
+length = 9
+
+[[boundaries]]
+payload_offset = 3551
+length = 1
+
+[[boundaries]]
+payload_offset = 3552
+length = 3
+
+[[boundaries]]
+payload_offset = 3555
+length = 1
+
+[[boundaries]]
+payload_offset = 3556
+length = 1
+
+[[boundaries]]
+payload_offset = 3557
+length = 3
+
+[[boundaries]]
+payload_offset = 3560
+length = 1
+
+[[boundaries]]
+payload_offset = 3561
+length = 1
+
+[[boundaries]]
+payload_offset = 3562
+length = 1
+
+[[boundaries]]
+payload_offset = 3563
+length = 3
+
+[[boundaries]]
+payload_offset = 3566
+length = 6
+
+[[boundaries]]
+payload_offset = 3572
+length = 6
+
+[[boundaries]]
+payload_offset = 3578
+length = 2
+
+[[boundaries]]
+payload_offset = 3580
+length = 1
+
+[[boundaries]]
+payload_offset = 3581
+length = 1
+
+[[boundaries]]
+payload_offset = 3582
+length = 6
+
+[[boundaries]]
+payload_offset = 3588
+length = 2
+
+[[boundaries]]
+payload_offset = 3590
+length = 1
+
+[[boundaries]]
+payload_offset = 3591
+length = 1
+
+[[boundaries]]
+payload_offset = 3592
+length = 1
+
+[[boundaries]]
+payload_offset = 3593
+length = 3
+
+[[boundaries]]
+payload_offset = 3596
+length = 6
+
+[[boundaries]]
+payload_offset = 3602
+length = 5
+
+[[boundaries]]
+payload_offset = 3608
+length = 1
+
+[[boundaries]]
+payload_offset = 3609
+length = 3
+
+[[boundaries]]
+payload_offset = 3612
+length = 6
+
+[[boundaries]]
+payload_offset = 3618
+length = 5
+
+[[boundaries]]
+payload_offset = 3624
+length = 6
+
+[[boundaries]]
+payload_offset = 3630
+length = 2
+
+[[boundaries]]
+payload_offset = 3632
+length = 1
+
+[[boundaries]]
+payload_offset = 3633
+length = 1
+
+[[boundaries]]
+payload_offset = 3634
+length = 6
+
+[[boundaries]]
+payload_offset = 3640
+length = 2
+
+[[boundaries]]
+payload_offset = 3642
+length = 1
+
+[[boundaries]]
+payload_offset = 3643
+length = 1

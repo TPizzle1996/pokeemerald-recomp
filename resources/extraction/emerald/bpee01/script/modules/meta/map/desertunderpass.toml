@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 4
 reloc_count = 2
+instruction_count = 22
 
 [[segments]]
 kind = "bytecode"
@@ -64,6 +65,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/desertunderpass"
 target_export = "DesertUnderpass_EventScript_GiveClawFossil"
 target_offset = 32
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 26
 runtime_resolution_required = true
 
 [[relocs]]
@@ -74,4 +77,94 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/desertunderpass"
 target_export = "DesertUnderpass_EventScript_GiveRootFossil"
 target_offset = 49
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 43
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 1
+
+[[boundaries]]
+payload_offset = 4
+length = 1
+
+[[boundaries]]
+payload_offset = 5
+length = 1
+
+[[boundaries]]
+payload_offset = 6
+length = 3
+
+[[boundaries]]
+payload_offset = 9
+length = 6
+
+[[boundaries]]
+payload_offset = 15
+length = 3
+
+[[boundaries]]
+payload_offset = 18
+length = 6
+
+[[boundaries]]
+payload_offset = 24
+length = 1
+
+[[boundaries]]
+payload_offset = 25
+length = 1
+
+[[boundaries]]
+payload_offset = 26
+length = 5
+
+[[boundaries]]
+payload_offset = 31
+length = 5
+
+[[boundaries]]
+payload_offset = 36
+length = 2
+
+[[boundaries]]
+payload_offset = 38
+length = 3
+
+[[boundaries]]
+payload_offset = 41
+length = 1
+
+[[boundaries]]
+payload_offset = 42
+length = 1
+
+[[boundaries]]
+payload_offset = 43
+length = 5
+
+[[boundaries]]
+payload_offset = 48
+length = 5
+
+[[boundaries]]
+payload_offset = 53
+length = 2
+
+[[boundaries]]
+payload_offset = 55
+length = 3
+
+[[boundaries]]
+payload_offset = 58
+length = 1
+
+[[boundaries]]
+payload_offset = 59
+length = 1

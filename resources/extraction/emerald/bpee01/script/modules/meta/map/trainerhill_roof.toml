@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 10
 reloc_count = 23
+instruction_count = 61
 
 [[segments]]
 kind = "bytecode"
@@ -112,6 +113,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/trainerhill-roof"
 target_export = "TrainerHill_Roof_EventScript_Arrived"
 target_offset = 67
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 56
 runtime_resolution_required = true
 
 [[relocs]]
@@ -122,6 +125,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/trainerhill-roof"
 target_export = "TrainerHill_Roof_EventScript_GivePrize"
 target_offset = 75
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 64
 runtime_resolution_required = true
 
 [[relocs]]
@@ -132,6 +137,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/trainerhill-roof"
 target_export = "TrainerHill_Roof_EventScript_AlreadyReceivedPrize"
 target_offset = 257
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 246
 runtime_resolution_required = true
 
 [[relocs]]
@@ -141,6 +148,8 @@ original_encoded_gba = 0x8268986
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/trainerhill-entrance"
 target_export = "TrainerHill_Roof_Text_YouFinallyCameBravo"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -151,6 +160,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/trainerhill-roof"
 target_export = "TrainerHill_Roof_EventScript_ReceivePrize"
 target_offset = 121
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 110
 runtime_resolution_required = true
 
 [[relocs]]
@@ -161,6 +172,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/trainerhill-roof"
 target_export = "TrainerHill_Roof_EventScript_NoRoomForPrize"
 target_offset = 144
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 133
 runtime_resolution_required = true
 
 [[relocs]]
@@ -171,6 +184,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/trainerhill-roof"
 target_export = "TrainerHill_Roof_EventScript_CheckFinalTime"
 target_offset = 173
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 162
 runtime_resolution_required = true
 
 [[relocs]]
@@ -180,6 +195,8 @@ original_encoded_gba = 0x8268ac5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/trainerhill-entrance"
 target_export = "TrainerHill_Roof_Text_HaveTheMostMarvelousGift"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -189,6 +206,8 @@ original_encoded_gba = 0x8272a78
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/obtain-item"
 target_export = "gText_ObtainedTheItem"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -199,6 +218,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/trainerhill-roof"
 target_export = "TrainerHill_Roof_EventScript_CheckFinalTime"
 target_offset = 173
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 162
 runtime_resolution_required = true
 
 [[relocs]]
@@ -208,6 +229,8 @@ original_encoded_gba = 0x8268ac5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/trainerhill-entrance"
 target_export = "TrainerHill_Roof_Text_HaveTheMostMarvelousGift"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -217,6 +240,8 @@ original_encoded_gba = 0x8272a89
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/obtain-item"
 target_export = "gText_TheBagIsFull"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -226,6 +251,8 @@ original_encoded_gba = 0x8268b07
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/trainerhill-entrance"
 target_export = "TrainerHill_Roof_Text_FullUpBeBackLaterForThis"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -236,6 +263,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/trainerhill-roof"
 target_export = "TrainerHill_Roof_EventScript_CheckFinalTime"
 target_offset = 173
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 162
 runtime_resolution_required = true
 
 [[relocs]]
@@ -246,6 +275,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/trainerhill-roof"
 target_export = "TrainerHill_Roof_EventScript_NewRecord"
 target_offset = 219
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 208
 runtime_resolution_required = true
 
 [[relocs]]
@@ -256,6 +287,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/trainerhill-roof"
 target_export = "TrainerHill_Roof_EventScript_NoNewRecord"
 target_offset = 233
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 222
 runtime_resolution_required = true
 
 [[relocs]]
@@ -266,6 +299,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/trainerhill-roof"
 target_export = "TrainerHill_Roof_EventScript_EndSpeakToOwner"
 target_offset = 247
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 236
 runtime_resolution_required = true
 
 [[relocs]]
@@ -275,6 +310,8 @@ original_encoded_gba = 0x8268b43
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/trainerhill-entrance"
 target_export = "TrainerHill_Roof_Text_GotHereMarvelouslyQuickly"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -285,6 +322,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/trainerhill-roof"
 target_export = "TrainerHill_Roof_EventScript_EndSpeakToOwner"
 target_offset = 247
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 236
 runtime_resolution_required = true
 
 [[relocs]]
@@ -294,6 +333,8 @@ original_encoded_gba = 0x8268c03
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/trainerhill-entrance"
 target_export = "TrainerHill_Roof_Text_YouWerentVeryQuick"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -304,6 +345,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/trainerhill-roof"
 target_export = "TrainerHill_Roof_EventScript_EndSpeakToOwner"
 target_offset = 247
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 236
 runtime_resolution_required = true
 
 [[relocs]]
@@ -313,6 +356,8 @@ original_encoded_gba = 0x8268c31
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/trainerhill-entrance"
 target_export = "TrainerHill_Roof_Text_ArriveZippierNextTime"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -322,4 +367,250 @@ original_encoded_gba = 0x8268c31
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/trainerhill-entrance"
 target_export = "TrainerHill_Roof_Text_ArriveZippierNextTime"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 5
+
+[[boundaries]]
+payload_offset = 5
+length = 3
+
+[[boundaries]]
+payload_offset = 8
+length = 1
+
+[[boundaries]]
+payload_offset = 9
+length = 1
+
+[[boundaries]]
+payload_offset = 10
+length = 5
+
+[[boundaries]]
+payload_offset = 15
+length = 3
+
+[[boundaries]]
+payload_offset = 18
+length = 5
+
+[[boundaries]]
+payload_offset = 23
+length = 5
+
+[[boundaries]]
+payload_offset = 28
+length = 6
+
+[[boundaries]]
+payload_offset = 34
+length = 5
+
+[[boundaries]]
+payload_offset = 39
+length = 6
+
+[[boundaries]]
+payload_offset = 45
+length = 5
+
+[[boundaries]]
+payload_offset = 50
+length = 6
+
+[[boundaries]]
+payload_offset = 56
+length = 6
+
+[[boundaries]]
+payload_offset = 62
+length = 2
+
+[[boundaries]]
+payload_offset = 64
+length = 5
+
+[[boundaries]]
+payload_offset = 69
+length = 3
+
+[[boundaries]]
+payload_offset = 72
+length = 5
+
+[[boundaries]]
+payload_offset = 77
+length = 5
+
+[[boundaries]]
+payload_offset = 82
+length = 6
+
+[[boundaries]]
+payload_offset = 88
+length = 5
+
+[[boundaries]]
+payload_offset = 93
+length = 6
+
+[[boundaries]]
+payload_offset = 99
+length = 5
+
+[[boundaries]]
+payload_offset = 104
+length = 6
+
+[[boundaries]]
+payload_offset = 110
+length = 6
+
+[[boundaries]]
+payload_offset = 116
+length = 2
+
+[[boundaries]]
+payload_offset = 118
+length = 3
+
+[[boundaries]]
+payload_offset = 121
+length = 5
+
+[[boundaries]]
+payload_offset = 126
+length = 1
+
+[[boundaries]]
+payload_offset = 127
+length = 1
+
+[[boundaries]]
+payload_offset = 128
+length = 5
+
+[[boundaries]]
+payload_offset = 133
+length = 6
+
+[[boundaries]]
+payload_offset = 139
+length = 2
+
+[[boundaries]]
+payload_offset = 141
+length = 6
+
+[[boundaries]]
+payload_offset = 147
+length = 2
+
+[[boundaries]]
+payload_offset = 149
+length = 6
+
+[[boundaries]]
+payload_offset = 155
+length = 2
+
+[[boundaries]]
+payload_offset = 157
+length = 5
+
+[[boundaries]]
+payload_offset = 162
+length = 5
+
+[[boundaries]]
+payload_offset = 167
+length = 3
+
+[[boundaries]]
+payload_offset = 170
+length = 5
+
+[[boundaries]]
+payload_offset = 175
+length = 5
+
+[[boundaries]]
+payload_offset = 180
+length = 6
+
+[[boundaries]]
+payload_offset = 186
+length = 5
+
+[[boundaries]]
+payload_offset = 191
+length = 6
+
+[[boundaries]]
+payload_offset = 197
+length = 5
+
+[[boundaries]]
+payload_offset = 202
+length = 6
+
+[[boundaries]]
+payload_offset = 208
+length = 6
+
+[[boundaries]]
+payload_offset = 214
+length = 2
+
+[[boundaries]]
+payload_offset = 216
+length = 5
+
+[[boundaries]]
+payload_offset = 222
+length = 6
+
+[[boundaries]]
+payload_offset = 228
+length = 2
+
+[[boundaries]]
+payload_offset = 230
+length = 5
+
+[[boundaries]]
+payload_offset = 236
+length = 6
+
+[[boundaries]]
+payload_offset = 242
+length = 2
+
+[[boundaries]]
+payload_offset = 244
+length = 1
+
+[[boundaries]]
+payload_offset = 245
+length = 1
+
+[[boundaries]]
+payload_offset = 246
+length = 6
+
+[[boundaries]]
+payload_offset = 252
+length = 2
+
+[[boundaries]]
+payload_offset = 254
+length = 1
+
+[[boundaries]]
+payload_offset = 255
+length = 1

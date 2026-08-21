@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 2
 export_count = 5
 reloc_count = 3
+instruction_count = 25
 
 [[segments]]
 kind = "bytecode"
@@ -78,6 +79,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/battle-pike"
 target_export = "BattleFrontier_BattlePikeRoom_EventScript_ResetSketchedMoves"
 target_offset = 1110
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1074
 runtime_resolution_required = true
 
 [[relocs]]
@@ -88,6 +91,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomwildmons"
 target_export = "BattleFrontier_BattlePikeRoomWildMons_EventScript_SetLost"
 target_offset = 137
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 93
 runtime_resolution_required = true
 
 [[relocs]]
@@ -98,4 +103,106 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomwildmons"
 target_export = "BattleFrontier_BattlePikeRoomWildMons_EventScript_SetLost"
 target_offset = 137
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 93
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 5
+
+[[boundaries]]
+payload_offset = 5
+length = 5
+
+[[boundaries]]
+payload_offset = 10
+length = 3
+
+[[boundaries]]
+payload_offset = 13
+length = 1
+
+[[boundaries]]
+payload_offset = 14
+length = 5
+
+[[boundaries]]
+payload_offset = 19
+length = 5
+
+[[boundaries]]
+payload_offset = 24
+length = 5
+
+[[boundaries]]
+payload_offset = 29
+length = 3
+
+[[boundaries]]
+payload_offset = 32
+length = 8
+
+[[boundaries]]
+payload_offset = 40
+length = 1
+
+[[boundaries]]
+payload_offset = 41
+length = 1
+
+[[boundaries]]
+payload_offset = 42
+length = 5
+
+[[boundaries]]
+payload_offset = 47
+length = 4
+
+[[boundaries]]
+payload_offset = 51
+length = 1
+
+[[boundaries]]
+payload_offset = 52
+length = 5
+
+[[boundaries]]
+payload_offset = 57
+length = 5
+
+[[boundaries]]
+payload_offset = 62
+length = 5
+
+[[boundaries]]
+payload_offset = 67
+length = 3
+
+[[boundaries]]
+payload_offset = 70
+length = 5
+
+[[boundaries]]
+payload_offset = 75
+length = 6
+
+[[boundaries]]
+payload_offset = 81
+length = 5
+
+[[boundaries]]
+payload_offset = 86
+length = 6
+
+[[boundaries]]
+payload_offset = 92
+length = 1
+
+[[boundaries]]
+payload_offset = 93
+length = 5
+
+[[boundaries]]
+payload_offset = 98
+length = 1

@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 6
 reloc_count = 3
+instruction_count = 39
 
 [[segments]]
 kind = "bytecode"
@@ -80,6 +81,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/insideoftruck"
 target_export = "InsideOfTruck_EventScript_SetIntroFlagsMale"
 target_offset = 70
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 59
 runtime_resolution_required = true
 
 [[relocs]]
@@ -90,6 +93,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/insideoftruck"
 target_export = "InsideOfTruck_EventScript_SetIntroFlagsFemale"
 target_offset = 108
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 97
 runtime_resolution_required = true
 
 [[relocs]]
@@ -99,4 +104,162 @@ original_encoded_gba = 0x823bf75
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/insideoftruck"
 target_export = "InsideOfTruck_Text_BoxPrintedWithMonLogo"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 9
+
+[[boundaries]]
+payload_offset = 9
+length = 9
+
+[[boundaries]]
+payload_offset = 18
+length = 9
+
+[[boundaries]]
+payload_offset = 27
+length = 1
+
+[[boundaries]]
+payload_offset = 28
+length = 2
+
+[[boundaries]]
+payload_offset = 30
+length = 1
+
+[[boundaries]]
+payload_offset = 31
+length = 1
+
+[[boundaries]]
+payload_offset = 32
+length = 3
+
+[[boundaries]]
+payload_offset = 35
+length = 1
+
+[[boundaries]]
+payload_offset = 36
+length = 5
+
+[[boundaries]]
+payload_offset = 41
+length = 6
+
+[[boundaries]]
+payload_offset = 47
+length = 5
+
+[[boundaries]]
+payload_offset = 52
+length = 6
+
+[[boundaries]]
+payload_offset = 58
+length = 1
+
+[[boundaries]]
+payload_offset = 59
+length = 3
+
+[[boundaries]]
+payload_offset = 62
+length = 5
+
+[[boundaries]]
+payload_offset = 67
+length = 3
+
+[[boundaries]]
+payload_offset = 70
+length = 3
+
+[[boundaries]]
+payload_offset = 73
+length = 3
+
+[[boundaries]]
+payload_offset = 76
+length = 3
+
+[[boundaries]]
+payload_offset = 79
+length = 3
+
+[[boundaries]]
+payload_offset = 82
+length = 5
+
+[[boundaries]]
+payload_offset = 87
+length = 8
+
+[[boundaries]]
+payload_offset = 95
+length = 1
+
+[[boundaries]]
+payload_offset = 96
+length = 1
+
+[[boundaries]]
+payload_offset = 97
+length = 3
+
+[[boundaries]]
+payload_offset = 100
+length = 5
+
+[[boundaries]]
+payload_offset = 105
+length = 3
+
+[[boundaries]]
+payload_offset = 108
+length = 3
+
+[[boundaries]]
+payload_offset = 111
+length = 3
+
+[[boundaries]]
+payload_offset = 114
+length = 3
+
+[[boundaries]]
+payload_offset = 117
+length = 3
+
+[[boundaries]]
+payload_offset = 120
+length = 5
+
+[[boundaries]]
+payload_offset = 125
+length = 8
+
+[[boundaries]]
+payload_offset = 133
+length = 1
+
+[[boundaries]]
+payload_offset = 134
+length = 1
+
+[[boundaries]]
+payload_offset = 135
+length = 6
+
+[[boundaries]]
+payload_offset = 141
+length = 2
+
+[[boundaries]]
+payload_offset = 143
+length = 1

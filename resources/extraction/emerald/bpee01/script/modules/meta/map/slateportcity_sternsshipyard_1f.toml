@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 8
 reloc_count = 20
+instruction_count = 58
 
 [[segments]]
 kind = "bytecode"
@@ -96,6 +97,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-sternsshipyard-1f"
 target_export = "SlateportCity_SternsShipyard_1F_EventScript_FerryReady"
 target_offset = 83
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 82
 runtime_resolution_required = true
 
 [[relocs]]
@@ -106,6 +109,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-sternsshipyard-1f"
 target_export = "SlateportCity_SternsShipyard_1F_EventScript_BrineyJoined"
 target_offset = 103
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 102
 runtime_resolution_required = true
 
 [[relocs]]
@@ -116,6 +121,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-sternsshipyard-1f"
 target_export = "SlateportCity_SternsShipyard_1F_EventScript_NeedVeteran"
 target_offset = 154
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 153
 runtime_resolution_required = true
 
 [[relocs]]
@@ -126,6 +133,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-sternsshipyard-1f"
 target_export = "SlateportCity_SternsShipyard_1F_EventScript_GoFindStern"
 target_offset = 123
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 122
 runtime_resolution_required = true
 
 [[relocs]]
@@ -135,6 +144,8 @@ original_encoded_gba = 0x8208008
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-sternsshipyard-1f"
 target_export = "SlateportCity_SternsShipyard_1F_Text_CantMakeHeadsOrTails"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -144,6 +155,8 @@ original_encoded_gba = 0x827259e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceplayer"
 target_export = "Common_Movement_FacePlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -153,6 +166,8 @@ original_encoded_gba = 0x82080a5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-sternsshipyard-1f"
 target_export = "SlateportCity_SternsShipyard_1F_Text_MeetDockDeliverToStern"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -162,6 +177,8 @@ original_encoded_gba = 0x82725a2
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceoriginaldirection"
 target_export = "Common_Movement_FaceOriginalDirection"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -171,6 +188,8 @@ original_encoded_gba = 0x827259e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceplayer"
 target_export = "Common_Movement_FacePlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -180,6 +199,8 @@ original_encoded_gba = 0x8208323
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-sternsshipyard-1f"
 target_export = "SlateportCity_SternsShipyard_1F_Text_FerryIsReady"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -189,6 +210,8 @@ original_encoded_gba = 0x827259e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceplayer"
 target_export = "Common_Movement_FacePlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -198,6 +221,8 @@ original_encoded_gba = 0x82082a8
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-sternsshipyard-1f"
 target_export = "SlateportCity_SternsShipyard_1F_Text_BrineyJoinedUs"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -207,6 +232,8 @@ original_encoded_gba = 0x827259e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceplayer"
 target_export = "Common_Movement_FacePlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -216,6 +243,8 @@ original_encoded_gba = 0x82081a5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-sternsshipyard-1f"
 target_export = "SlateportCity_SternsShipyard_1F_Text_CouldYouFindStern"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -225,6 +254,8 @@ original_encoded_gba = 0x82725a2
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceoriginaldirection"
 target_export = "Common_Movement_FaceOriginalDirection"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -234,6 +265,8 @@ original_encoded_gba = 0x827259e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceplayer"
 target_export = "Common_Movement_FacePlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -243,6 +276,8 @@ original_encoded_gba = 0x8208213
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-sternsshipyard-1f"
 target_export = "SlateportCity_SternsShipyard_1F_Text_CouldUseAdviceFromVeteran"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -252,6 +287,8 @@ original_encoded_gba = 0x8208558
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-sternsshipyard-1f"
 target_export = "SlateportCity_SternsShipyard_1F_Text_SeaIsLikeLivingThing"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -261,6 +298,8 @@ original_encoded_gba = 0x82085ff
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-sternsshipyard-1f"
 target_export = "SlateportCity_SternsShipyard_1F_Text_GetSeasickEasily"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -270,4 +309,238 @@ original_encoded_gba = 0x82083ee
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-sternsshipyard-1f"
 target_export = "SlateportCity_SternsShipyard_1F_Text_DecidedToHelpDock"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 3
+
+[[boundaries]]
+payload_offset = 4
+length = 6
+
+[[boundaries]]
+payload_offset = 10
+length = 3
+
+[[boundaries]]
+payload_offset = 13
+length = 6
+
+[[boundaries]]
+payload_offset = 19
+length = 3
+
+[[boundaries]]
+payload_offset = 22
+length = 6
+
+[[boundaries]]
+payload_offset = 28
+length = 3
+
+[[boundaries]]
+payload_offset = 31
+length = 6
+
+[[boundaries]]
+payload_offset = 37
+length = 6
+
+[[boundaries]]
+payload_offset = 43
+length = 2
+
+[[boundaries]]
+payload_offset = 45
+length = 7
+
+[[boundaries]]
+payload_offset = 52
+length = 3
+
+[[boundaries]]
+payload_offset = 55
+length = 6
+
+[[boundaries]]
+payload_offset = 61
+length = 2
+
+[[boundaries]]
+payload_offset = 63
+length = 1
+
+[[boundaries]]
+payload_offset = 64
+length = 7
+
+[[boundaries]]
+payload_offset = 71
+length = 3
+
+[[boundaries]]
+payload_offset = 74
+length = 3
+
+[[boundaries]]
+payload_offset = 77
+length = 3
+
+[[boundaries]]
+payload_offset = 80
+length = 1
+
+[[boundaries]]
+payload_offset = 81
+length = 1
+
+[[boundaries]]
+payload_offset = 82
+length = 7
+
+[[boundaries]]
+payload_offset = 89
+length = 3
+
+[[boundaries]]
+payload_offset = 92
+length = 6
+
+[[boundaries]]
+payload_offset = 98
+length = 2
+
+[[boundaries]]
+payload_offset = 100
+length = 1
+
+[[boundaries]]
+payload_offset = 101
+length = 1
+
+[[boundaries]]
+payload_offset = 102
+length = 7
+
+[[boundaries]]
+payload_offset = 109
+length = 3
+
+[[boundaries]]
+payload_offset = 112
+length = 6
+
+[[boundaries]]
+payload_offset = 118
+length = 2
+
+[[boundaries]]
+payload_offset = 120
+length = 1
+
+[[boundaries]]
+payload_offset = 121
+length = 1
+
+[[boundaries]]
+payload_offset = 122
+length = 7
+
+[[boundaries]]
+payload_offset = 129
+length = 3
+
+[[boundaries]]
+payload_offset = 132
+length = 6
+
+[[boundaries]]
+payload_offset = 138
+length = 2
+
+[[boundaries]]
+payload_offset = 140
+length = 1
+
+[[boundaries]]
+payload_offset = 141
+length = 7
+
+[[boundaries]]
+payload_offset = 148
+length = 3
+
+[[boundaries]]
+payload_offset = 151
+length = 1
+
+[[boundaries]]
+payload_offset = 152
+length = 1
+
+[[boundaries]]
+payload_offset = 153
+length = 7
+
+[[boundaries]]
+payload_offset = 160
+length = 3
+
+[[boundaries]]
+payload_offset = 163
+length = 6
+
+[[boundaries]]
+payload_offset = 169
+length = 2
+
+[[boundaries]]
+payload_offset = 171
+length = 1
+
+[[boundaries]]
+payload_offset = 172
+length = 1
+
+[[boundaries]]
+payload_offset = 173
+length = 6
+
+[[boundaries]]
+payload_offset = 179
+length = 2
+
+[[boundaries]]
+payload_offset = 181
+length = 1
+
+[[boundaries]]
+payload_offset = 182
+length = 6
+
+[[boundaries]]
+payload_offset = 188
+length = 2
+
+[[boundaries]]
+payload_offset = 190
+length = 1
+
+[[boundaries]]
+payload_offset = 191
+length = 6
+
+[[boundaries]]
+payload_offset = 197
+length = 2
+
+[[boundaries]]
+payload_offset = 199
+length = 1

@@ -33,6 +33,23 @@ core_dir="$root/src/gen3/resources"
 emerald_dir="$root/src/emerald/resources"
 
 tmp="$(mktemp -d)"
+export ROOT="$root"
+# R13-G2 script catalog declares 523 identities; 56 routing-only ids have
+# no pack entry. The session's construction catalog must match the pack's
+# provider surface, so this harness passes the 467 embedded ids only.
+python3 - <<PYFILT > "$tmp/script_embedded_catalog.toml"
+import re, os
+cat = open(os.environ["ROOT"] + "/resources/extraction/emerald/bpee01/script/modules/catalog.generated.toml").read()
+man = open(os.environ["ROOT"] + "/resources/extraction/emerald/bpee01/script/modules/manifest.production.toml").read()
+ids = set(re.findall(r'^id = "([^"]+)"$', man, re.M))
+header, rest = cat.split("[[resources]]", 1)
+print(header, end="")
+for block in rest.split("[[resources]]"):
+    i = re.search(r'id = "([^"]+)"', block)
+    if i and i.group(1) in ids:
+        print("[[resources]]" + block, end="")
+PYFILT
+
 trap 'rm -rf "$tmp"' EXIT
 
 echo "== compiling production compat proof (real native flags + R4 session) =="
@@ -81,4 +98,5 @@ echo "== running =="
     --catalog "$root/resources/extraction/emerald/bpee01/multiboot/catalog.generated.toml" \
     --catalog "$root/resources/extraction/emerald/bpee01/text/catalog.generated.toml" \
     --catalog "$root/resources/extraction/emerald/bpee01/gameplay/catalog.generated.toml" \
+    --catalog "$tmp/script_embedded_catalog.toml" \
     --descriptor "$root/resources/extraction/emerald/bpee01/trainer_front_family.toml"

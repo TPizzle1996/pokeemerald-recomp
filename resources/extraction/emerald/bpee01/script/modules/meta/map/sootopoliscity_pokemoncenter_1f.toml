@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 6
 reloc_count = 9
+instruction_count = 36
 
 [[segments]]
 kind = "bytecode"
@@ -80,6 +81,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pkmn-center-nurse"
 target_export = "Common_EventScript_PkmnCenterNurse"
 target_offset = 0
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 0
 runtime_resolution_required = true
 
 [[relocs]]
@@ -90,6 +93,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/sootopoliscity-pokemoncenter-1f"
 target_export = "SootopolisCity_PokemonCenter_1F_EventScript_GentlemanNoLegendaries"
 target_offset = 61
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 50
 runtime_resolution_required = true
 
 [[relocs]]
@@ -100,6 +105,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/sootopoliscity-pokemoncenter-1f"
 target_export = "SootopolisCity_PokemonCenter_1F_EventScript_GentlemanNoLegendaries"
 target_offset = 61
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 50
 runtime_resolution_required = true
 
 [[relocs]]
@@ -109,6 +116,8 @@ original_encoded_gba = 0x822664b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-pokemoncenter-1f"
 target_export = "SootopolisCity_PokemonCenter_1F_Text_EveryoneTakenRefuge"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -118,6 +127,8 @@ original_encoded_gba = 0x8226562
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-pokemoncenter-1f"
 target_export = "SootopolisCity_PokemonCenter_1F_Text_WallaceToughestInHoenn"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -128,6 +139,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/sootopoliscity-pokemoncenter-1f"
 target_export = "SootopolisCity_PokemonCenter_1F_EventScript_WomanNoLegendaries"
 target_offset = 103
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 92
 runtime_resolution_required = true
 
 [[relocs]]
@@ -138,6 +151,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/sootopoliscity-pokemoncenter-1f"
 target_export = "SootopolisCity_PokemonCenter_1F_EventScript_WomanNoLegendaries"
 target_offset = 103
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 92
 runtime_resolution_required = true
 
 [[relocs]]
@@ -147,6 +162,8 @@ original_encoded_gba = 0x822672f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-pokemoncenter-1f"
 target_export = "SootopolisCity_PokemonCenter_1F_Text_ArentPokemonOurFriends"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -156,4 +173,150 @@ original_encoded_gba = 0x82266b9
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/sootopoliscity-pokemoncenter-1f"
 target_export = "SootopolisCity_PokemonCenter_1F_Text_AlwaysBeFriendsWithPokemon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 1
+
+[[boundaries]]
+payload_offset = 4
+length = 5
+
+[[boundaries]]
+payload_offset = 9
+length = 5
+
+[[boundaries]]
+payload_offset = 14
+length = 1
+
+[[boundaries]]
+payload_offset = 15
+length = 1
+
+[[boundaries]]
+payload_offset = 16
+length = 1
+
+[[boundaries]]
+payload_offset = 17
+length = 1
+
+[[boundaries]]
+payload_offset = 18
+length = 1
+
+[[boundaries]]
+payload_offset = 19
+length = 1
+
+[[boundaries]]
+payload_offset = 20
+length = 5
+
+[[boundaries]]
+payload_offset = 25
+length = 6
+
+[[boundaries]]
+payload_offset = 31
+length = 3
+
+[[boundaries]]
+payload_offset = 34
+length = 6
+
+[[boundaries]]
+payload_offset = 40
+length = 6
+
+[[boundaries]]
+payload_offset = 46
+length = 2
+
+[[boundaries]]
+payload_offset = 48
+length = 1
+
+[[boundaries]]
+payload_offset = 49
+length = 1
+
+[[boundaries]]
+payload_offset = 50
+length = 6
+
+[[boundaries]]
+payload_offset = 56
+length = 2
+
+[[boundaries]]
+payload_offset = 58
+length = 1
+
+[[boundaries]]
+payload_offset = 59
+length = 1
+
+[[boundaries]]
+payload_offset = 60
+length = 1
+
+[[boundaries]]
+payload_offset = 61
+length = 1
+
+[[boundaries]]
+payload_offset = 62
+length = 5
+
+[[boundaries]]
+payload_offset = 67
+length = 6
+
+[[boundaries]]
+payload_offset = 73
+length = 3
+
+[[boundaries]]
+payload_offset = 76
+length = 6
+
+[[boundaries]]
+payload_offset = 82
+length = 6
+
+[[boundaries]]
+payload_offset = 88
+length = 2
+
+[[boundaries]]
+payload_offset = 90
+length = 1
+
+[[boundaries]]
+payload_offset = 91
+length = 1
+
+[[boundaries]]
+payload_offset = 92
+length = 6
+
+[[boundaries]]
+payload_offset = 98
+length = 2
+
+[[boundaries]]
+payload_offset = 100
+length = 1
+
+[[boundaries]]
+payload_offset = 101
+length = 1

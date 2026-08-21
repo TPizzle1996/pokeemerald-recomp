@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 11
 reloc_count = 19
+instruction_count = 58
 
 [[segments]]
 kind = "bytecode"
@@ -120,6 +121,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route119-weatherinstitute-1f"
 target_export = "Route119_WeatherInstitute_1F_EventScript_SetLittleBoyPos"
 target_offset = 18
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 12
 runtime_resolution_required = true
 
 [[relocs]]
@@ -130,6 +133,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route119-weatherinstitute-1f"
 target_export = "Route119_WeatherInstitute_1F_EventScript_LittleBoyTeamAquaHere"
 target_offset = 56
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 50
 runtime_resolution_required = true
 
 [[relocs]]
@@ -139,6 +144,8 @@ original_encoded_gba = 0x826fce5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route119-weatherinstitute-1f"
 target_export = "Route119_WeatherInstitute_1F_Text_WowYoureStrong"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -148,6 +155,8 @@ original_encoded_gba = 0x826fcb7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route119-weatherinstitute-1f"
 target_export = "Route119_WeatherInstitute_1F_Text_EveryoneWentUpstairs"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -158,6 +167,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route119-weatherinstitute-1f"
 target_export = "Route119_WeatherInstitute_1F_EventScript_StudyingRain"
 target_offset = 127
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 121
 runtime_resolution_required = true
 
 [[relocs]]
@@ -168,6 +179,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route119-weatherinstitute-1f"
 target_export = "Route119_WeatherInstitute_1F_EventScript_LegendaryDefeated"
 target_offset = 121
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 115
 runtime_resolution_required = true
 
 [[relocs]]
@@ -178,6 +191,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route119-weatherinstitute-1f"
 target_export = "Route119_WeatherInstitute_1F_EventScript_LegendaryDefeated"
 target_offset = 121
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 115
 runtime_resolution_required = true
 
 [[relocs]]
@@ -188,6 +203,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route119-weatherinstitute-1f"
 target_export = "Route119_WeatherInstitute_1F_EventScript_StudyingRain"
 target_offset = 127
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 121
 runtime_resolution_required = true
 
 [[relocs]]
@@ -197,6 +214,8 @@ original_encoded_gba = 0x826fde8
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route119-weatherinstitute-1f"
 target_export = "Route119_WeatherInstitute_1F_Text_NoticingAbnormalWeather"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -206,6 +225,8 @@ original_encoded_gba = 0x826fd2e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route119-weatherinstitute-1f"
 target_export = "Route119_WeatherInstitute_1F_Text_ProfStudyingRain"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -215,6 +236,8 @@ original_encoded_gba = 0x826fe94
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route119-weatherinstitute-1f"
 target_export = "Route119_WeatherInstitute_1F_Text_WhatWereAquasUpTo"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -224,6 +247,8 @@ original_encoded_gba = 0x826fefc
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route119-weatherinstitute-1f"
 target_export = "Route119_WeatherInstitute_1F_Text_TakeRestInBed"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -234,6 +259,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_OutOfCenterPartyHeal"
 target_offset = 320
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 320
 runtime_resolution_required = true
 
 [[relocs]]
@@ -243,6 +270,8 @@ original_encoded_gba = 0x826fb57
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route119-weatherinstitute-1f"
 target_export = "Route119_WeatherInstitute_1F_Text_Grunt1Intro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -252,6 +281,8 @@ original_encoded_gba = 0x826fbbb
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route119-weatherinstitute-1f"
 target_export = "Route119_WeatherInstitute_1F_Text_Grunt1Defeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -261,6 +292,8 @@ original_encoded_gba = 0x826fbd7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route119-weatherinstitute-1f"
 target_export = "Route119_WeatherInstitute_1F_Text_Grunt1PostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -270,6 +303,8 @@ original_encoded_gba = 0x826fc34
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route119-weatherinstitute-1f"
 target_export = "Route119_WeatherInstitute_1F_Text_Grunt4Intro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -279,6 +314,8 @@ original_encoded_gba = 0x826fc52
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route119-weatherinstitute-1f"
 target_export = "Route119_WeatherInstitute_1F_Text_Grunt4Defeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -288,4 +325,238 @@ original_encoded_gba = 0x826fc60
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route119-weatherinstitute-1f"
 target_export = "Route119_WeatherInstitute_1F_Text_Grunt4PostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 5
+
+[[boundaries]]
+payload_offset = 5
+length = 6
+
+[[boundaries]]
+payload_offset = 11
+length = 1
+
+[[boundaries]]
+payload_offset = 12
+length = 7
+
+[[boundaries]]
+payload_offset = 19
+length = 4
+
+[[boundaries]]
+payload_offset = 23
+length = 1
+
+[[boundaries]]
+payload_offset = 24
+length = 1
+
+[[boundaries]]
+payload_offset = 25
+length = 1
+
+[[boundaries]]
+payload_offset = 26
+length = 3
+
+[[boundaries]]
+payload_offset = 29
+length = 5
+
+[[boundaries]]
+payload_offset = 34
+length = 6
+
+[[boundaries]]
+payload_offset = 40
+length = 6
+
+[[boundaries]]
+payload_offset = 46
+length = 2
+
+[[boundaries]]
+payload_offset = 48
+length = 1
+
+[[boundaries]]
+payload_offset = 49
+length = 1
+
+[[boundaries]]
+payload_offset = 50
+length = 6
+
+[[boundaries]]
+payload_offset = 56
+length = 2
+
+[[boundaries]]
+payload_offset = 58
+length = 1
+
+[[boundaries]]
+payload_offset = 59
+length = 1
+
+[[boundaries]]
+payload_offset = 60
+length = 1
+
+[[boundaries]]
+payload_offset = 61
+length = 1
+
+[[boundaries]]
+payload_offset = 62
+length = 3
+
+[[boundaries]]
+payload_offset = 65
+length = 6
+
+[[boundaries]]
+payload_offset = 71
+length = 5
+
+[[boundaries]]
+payload_offset = 76
+length = 3
+
+[[boundaries]]
+payload_offset = 79
+length = 6
+
+[[boundaries]]
+payload_offset = 85
+length = 3
+
+[[boundaries]]
+payload_offset = 88
+length = 6
+
+[[boundaries]]
+payload_offset = 94
+length = 5
+
+[[boundaries]]
+payload_offset = 99
+length = 6
+
+[[boundaries]]
+payload_offset = 105
+length = 6
+
+[[boundaries]]
+payload_offset = 111
+length = 2
+
+[[boundaries]]
+payload_offset = 113
+length = 1
+
+[[boundaries]]
+payload_offset = 114
+length = 1
+
+[[boundaries]]
+payload_offset = 115
+length = 5
+
+[[boundaries]]
+payload_offset = 120
+length = 1
+
+[[boundaries]]
+payload_offset = 121
+length = 6
+
+[[boundaries]]
+payload_offset = 127
+length = 2
+
+[[boundaries]]
+payload_offset = 129
+length = 1
+
+[[boundaries]]
+payload_offset = 130
+length = 1
+
+[[boundaries]]
+payload_offset = 131
+length = 6
+
+[[boundaries]]
+payload_offset = 137
+length = 2
+
+[[boundaries]]
+payload_offset = 139
+length = 1
+
+[[boundaries]]
+payload_offset = 140
+length = 1
+
+[[boundaries]]
+payload_offset = 141
+length = 6
+
+[[boundaries]]
+payload_offset = 147
+length = 2
+
+[[boundaries]]
+payload_offset = 149
+length = 1
+
+[[boundaries]]
+payload_offset = 150
+length = 5
+
+[[boundaries]]
+payload_offset = 155
+length = 1
+
+[[boundaries]]
+payload_offset = 156
+length = 1
+
+[[boundaries]]
+payload_offset = 157
+length = 14
+
+[[boundaries]]
+payload_offset = 171
+length = 6
+
+[[boundaries]]
+payload_offset = 177
+length = 2
+
+[[boundaries]]
+payload_offset = 179
+length = 1
+
+[[boundaries]]
+payload_offset = 180
+length = 14
+
+[[boundaries]]
+payload_offset = 194
+length = 6
+
+[[boundaries]]
+payload_offset = 200
+length = 2
+
+[[boundaries]]
+payload_offset = 202
+length = 1

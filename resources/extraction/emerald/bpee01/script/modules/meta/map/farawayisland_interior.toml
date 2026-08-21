@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 3
 export_count = 16
 reloc_count = 29
+instruction_count = 113
 
 [[segments]]
 kind = "bytecode"
@@ -172,6 +173,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/farawayisland-interior"
 target_export = "FarawayIsland_Interior_EventScript_TrySetMewAboveGrass"
 target_offset = 31
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 10
 runtime_resolution_required = true
 
 [[relocs]]
@@ -182,6 +185,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/farawayisland-interior"
 target_export = "FarawayIsland_Interior_EventScript_SetMewAboveGrass"
 target_offset = 81
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 60
 runtime_resolution_required = true
 
 [[relocs]]
@@ -192,6 +197,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/farawayisland-interior"
 target_export = "FarawayIsland_Interior_EventScript_SetMewAboveGrass"
 target_offset = 81
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 60
 runtime_resolution_required = true
 
 [[relocs]]
@@ -202,6 +209,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/farawayisland-interior"
 target_export = "FarawayIsland_Interior_EventScript_SetMewAboveGrass"
 target_offset = 81
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 60
 runtime_resolution_required = true
 
 [[relocs]]
@@ -212,6 +221,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/farawayisland-interior"
 target_export = "FarawayIsland_Interior_EventScript_SetMewAboveGrass"
 target_offset = 81
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 60
 runtime_resolution_required = true
 
 [[relocs]]
@@ -222,6 +233,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/farawayisland-interior"
 target_export = "FarawayIsland_Interior_EventScript_TryRemoveMew"
 target_offset = 100
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 79
 runtime_resolution_required = true
 
 [[relocs]]
@@ -232,6 +245,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-poison"
 target_export = "Common_EventScript_NopReturn"
 target_offset = 146
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 146
 runtime_resolution_required = true
 
 [[relocs]]
@@ -242,6 +257,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/farawayisland-interior"
 target_export = "FarawayIsland_Interior_EventScript_TryShowMew"
 target_offset = 140
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 119
 runtime_resolution_required = true
 
 [[relocs]]
@@ -252,6 +269,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-poison"
 target_export = "Common_EventScript_NopReturn"
 target_offset = 146
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 146
 runtime_resolution_required = true
 
 [[relocs]]
@@ -261,6 +280,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -270,6 +291,8 @@ original_encoded_gba = 0x827259a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-delay48"
 target_export = "Common_Movement_Delay48"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -279,6 +302,8 @@ original_encoded_gba = 0x8267dce
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/farawayisland-interior-movement-mewmoveandhide"
 target_export = "FarawayIsland_Interior_Movement_MewMoveAndHide"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -288,6 +313,8 @@ original_encoded_gba = 0x8267dd4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/farawayisland-interior-movement-mewappear"
 target_export = "FarawayIsland_Interior_Movement_MewAppear"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -297,6 +324,8 @@ original_encoded_gba = 0x82c6dff
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/event-ticket-2"
 target_export = "FarawayIsland_Interior_Text_Mew"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -307,6 +336,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/farawayisland-interior"
 target_export = "FarawayIsland_Interior_EventScript_FoundMewNorth"
 target_offset = 437
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 370
 runtime_resolution_required = true
 
 [[relocs]]
@@ -317,6 +348,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/farawayisland-interior"
 target_export = "FarawayIsland_Interior_EventScript_FoundMewSouth"
 target_offset = 448
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 381
 runtime_resolution_required = true
 
 [[relocs]]
@@ -327,6 +360,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/farawayisland-interior"
 target_export = "FarawayIsland_Interior_EventScript_FoundMewWest"
 target_offset = 459
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 392
 runtime_resolution_required = true
 
 [[relocs]]
@@ -337,6 +372,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/farawayisland-interior"
 target_export = "FarawayIsland_Interior_EventScript_FoundMewEast"
 target_offset = 470
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 403
 runtime_resolution_required = true
 
 [[relocs]]
@@ -347,6 +384,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/farawayisland-interior"
 target_export = "FarawayIsland_Interior_EventScript_MewDefeated"
 target_offset = 412
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 345
 runtime_resolution_required = true
 
 [[relocs]]
@@ -357,6 +396,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/farawayisland-interior"
 target_export = "FarawayIsland_Interior_EventScript_PlayerOrMewRan"
 target_offset = 426
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 359
 runtime_resolution_required = true
 
 [[relocs]]
@@ -367,6 +408,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/farawayisland-interior"
 target_export = "FarawayIsland_Interior_EventScript_PlayerOrMewRan"
 target_offset = 426
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 359
 runtime_resolution_required = true
 
 [[relocs]]
@@ -377,6 +420,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/farawayisland-interior"
 target_export = "FarawayIsland_Interior_EventScript_PlayerOrMewRan"
 target_offset = 426
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 359
 runtime_resolution_required = true
 
 [[relocs]]
@@ -387,6 +432,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-poison"
 target_export = "Common_EventScript_LegendaryFlewAway"
 target_offset = 186
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 186
 runtime_resolution_required = true
 
 [[relocs]]
@@ -397,6 +444,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-poison"
 target_export = "Common_EventScript_LegendaryFlewAway"
 target_offset = 186
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 186
 runtime_resolution_required = true
 
 [[relocs]]
@@ -406,6 +455,8 @@ original_encoded_gba = 0x8267dd6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/farawayisland-interior-movement-mewfloatupnorth"
 target_export = "FarawayIsland_Interior_Movement_MewFloatUpNorth"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -415,6 +466,8 @@ original_encoded_gba = 0x8267ddd
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/farawayisland-interior-movement-mewfloatupsouth"
 target_export = "FarawayIsland_Interior_Movement_MewFloatUpSouth"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -424,6 +477,8 @@ original_encoded_gba = 0x8267de4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/farawayisland-interior-movement-mewfloatupwest"
 target_export = "FarawayIsland_Interior_Movement_MewFloatUpWest"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -433,6 +488,8 @@ original_encoded_gba = 0x8267deb
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/farawayisland-interior-movement-mewfloatupeast"
 target_export = "FarawayIsland_Interior_Movement_MewFloatUpEast"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -442,4 +499,458 @@ original_encoded_gba = 0x8267ef1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/farawayisland-interior"
 target_export = "FarawayIsland_Interior_Text_TheFeelingOfBeingWatchedFaded"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 6
+
+[[boundaries]]
+payload_offset = 9
+length = 1
+
+[[boundaries]]
+payload_offset = 10
+length = 5
+
+[[boundaries]]
+payload_offset = 15
+length = 5
+
+[[boundaries]]
+payload_offset = 20
+length = 6
+
+[[boundaries]]
+payload_offset = 26
+length = 5
+
+[[boundaries]]
+payload_offset = 31
+length = 6
+
+[[boundaries]]
+payload_offset = 37
+length = 5
+
+[[boundaries]]
+payload_offset = 42
+length = 6
+
+[[boundaries]]
+payload_offset = 48
+length = 5
+
+[[boundaries]]
+payload_offset = 53
+length = 6
+
+[[boundaries]]
+payload_offset = 59
+length = 1
+
+[[boundaries]]
+payload_offset = 60
+length = 5
+
+[[boundaries]]
+payload_offset = 65
+length = 3
+
+[[boundaries]]
+payload_offset = 68
+length = 1
+
+[[boundaries]]
+payload_offset = 69
+length = 3
+
+[[boundaries]]
+payload_offset = 72
+length = 6
+
+[[boundaries]]
+payload_offset = 78
+length = 1
+
+[[boundaries]]
+payload_offset = 79
+length = 5
+
+[[boundaries]]
+payload_offset = 84
+length = 5
+
+[[boundaries]]
+payload_offset = 89
+length = 6
+
+[[boundaries]]
+payload_offset = 95
+length = 3
+
+[[boundaries]]
+payload_offset = 98
+length = 1
+
+[[boundaries]]
+payload_offset = 99
+length = 5
+
+[[boundaries]]
+payload_offset = 104
+length = 5
+
+[[boundaries]]
+payload_offset = 109
+length = 3
+
+[[boundaries]]
+payload_offset = 112
+length = 6
+
+[[boundaries]]
+payload_offset = 118
+length = 1
+
+[[boundaries]]
+payload_offset = 119
+length = 3
+
+[[boundaries]]
+payload_offset = 122
+length = 6
+
+[[boundaries]]
+payload_offset = 128
+length = 3
+
+[[boundaries]]
+payload_offset = 131
+length = 5
+
+[[boundaries]]
+payload_offset = 136
+length = 1
+
+[[boundaries]]
+payload_offset = 137
+length = 1
+
+[[boundaries]]
+payload_offset = 138
+length = 3
+
+[[boundaries]]
+payload_offset = 141
+length = 7
+
+[[boundaries]]
+payload_offset = 148
+length = 3
+
+[[boundaries]]
+payload_offset = 151
+length = 7
+
+[[boundaries]]
+payload_offset = 158
+length = 3
+
+[[boundaries]]
+payload_offset = 161
+length = 7
+
+[[boundaries]]
+payload_offset = 168
+length = 3
+
+[[boundaries]]
+payload_offset = 171
+length = 3
+
+[[boundaries]]
+payload_offset = 174
+length = 5
+
+[[boundaries]]
+payload_offset = 179
+length = 1
+
+[[boundaries]]
+payload_offset = 180
+length = 1
+
+[[boundaries]]
+payload_offset = 181
+length = 1
+
+[[boundaries]]
+payload_offset = 182
+length = 1
+
+[[boundaries]]
+payload_offset = 183
+length = 7
+
+[[boundaries]]
+payload_offset = 190
+length = 3
+
+[[boundaries]]
+payload_offset = 193
+length = 5
+
+[[boundaries]]
+payload_offset = 198
+length = 3
+
+[[boundaries]]
+payload_offset = 201
+length = 5
+
+[[boundaries]]
+payload_offset = 206
+length = 1
+
+[[boundaries]]
+payload_offset = 207
+length = 5
+
+[[boundaries]]
+payload_offset = 212
+length = 5
+
+[[boundaries]]
+payload_offset = 217
+length = 6
+
+[[boundaries]]
+payload_offset = 223
+length = 5
+
+[[boundaries]]
+payload_offset = 228
+length = 6
+
+[[boundaries]]
+payload_offset = 234
+length = 5
+
+[[boundaries]]
+payload_offset = 239
+length = 6
+
+[[boundaries]]
+payload_offset = 245
+length = 5
+
+[[boundaries]]
+payload_offset = 250
+length = 6
+
+[[boundaries]]
+payload_offset = 256
+length = 3
+
+[[boundaries]]
+payload_offset = 259
+length = 3
+
+[[boundaries]]
+payload_offset = 262
+length = 1
+
+[[boundaries]]
+payload_offset = 263
+length = 5
+
+[[boundaries]]
+payload_offset = 268
+length = 5
+
+[[boundaries]]
+payload_offset = 273
+length = 5
+
+[[boundaries]]
+payload_offset = 278
+length = 3
+
+[[boundaries]]
+payload_offset = 281
+length = 3
+
+[[boundaries]]
+payload_offset = 284
+length = 3
+
+[[boundaries]]
+payload_offset = 287
+length = 1
+
+[[boundaries]]
+payload_offset = 288
+length = 3
+
+[[boundaries]]
+payload_offset = 291
+length = 5
+
+[[boundaries]]
+payload_offset = 296
+length = 5
+
+[[boundaries]]
+payload_offset = 301
+length = 6
+
+[[boundaries]]
+payload_offset = 307
+length = 5
+
+[[boundaries]]
+payload_offset = 312
+length = 6
+
+[[boundaries]]
+payload_offset = 318
+length = 5
+
+[[boundaries]]
+payload_offset = 323
+length = 6
+
+[[boundaries]]
+payload_offset = 329
+length = 5
+
+[[boundaries]]
+payload_offset = 334
+length = 6
+
+[[boundaries]]
+payload_offset = 340
+length = 3
+
+[[boundaries]]
+payload_offset = 343
+length = 1
+
+[[boundaries]]
+payload_offset = 344
+length = 1
+
+[[boundaries]]
+payload_offset = 345
+length = 3
+
+[[boundaries]]
+payload_offset = 348
+length = 5
+
+[[boundaries]]
+payload_offset = 353
+length = 5
+
+[[boundaries]]
+payload_offset = 359
+length = 5
+
+[[boundaries]]
+payload_offset = 364
+length = 5
+
+[[boundaries]]
+payload_offset = 370
+length = 7
+
+[[boundaries]]
+payload_offset = 377
+length = 3
+
+[[boundaries]]
+payload_offset = 380
+length = 1
+
+[[boundaries]]
+payload_offset = 381
+length = 7
+
+[[boundaries]]
+payload_offset = 388
+length = 3
+
+[[boundaries]]
+payload_offset = 391
+length = 1
+
+[[boundaries]]
+payload_offset = 392
+length = 7
+
+[[boundaries]]
+payload_offset = 399
+length = 3
+
+[[boundaries]]
+payload_offset = 402
+length = 1
+
+[[boundaries]]
+payload_offset = 403
+length = 7
+
+[[boundaries]]
+payload_offset = 410
+length = 3
+
+[[boundaries]]
+payload_offset = 413
+length = 1
+
+[[boundaries]]
+payload_offset = 414
+length = 1
+
+[[boundaries]]
+payload_offset = 415
+length = 2
+
+[[boundaries]]
+payload_offset = 417
+length = 3
+
+[[boundaries]]
+payload_offset = 420
+length = 3
+
+[[boundaries]]
+payload_offset = 423
+length = 2
+
+[[boundaries]]
+payload_offset = 425
+length = 6
+
+[[boundaries]]
+payload_offset = 431
+length = 2
+
+[[boundaries]]
+payload_offset = 433
+length = 1
+
+[[boundaries]]
+payload_offset = 434
+length = 1
+
+[[boundaries]]
+payload_offset = 435
+length = 1

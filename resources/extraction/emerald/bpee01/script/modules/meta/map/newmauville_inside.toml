@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 21
 reloc_count = 27
+instruction_count = 217
 
 [[segments]]
 kind = "bytecode"
@@ -200,6 +201,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/newmauville-inside"
 target_export = "NewMauville_Inside_EventScript_SetBarrierStateBlueButton"
 target_offset = 178
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 162
 runtime_resolution_required = true
 
 [[relocs]]
@@ -210,6 +213,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/newmauville-inside"
 target_export = "NewMauville_Inside_EventScript_SetBarrierStateGreenButton"
 target_offset = 512
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 496
 runtime_resolution_required = true
 
 [[relocs]]
@@ -220,6 +225,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/newmauville-inside"
 target_export = "NewMauville_Inside_EventScript_TryRemoveVoltorb"
 target_offset = 48
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 32
 runtime_resolution_required = true
 
 [[relocs]]
@@ -230,6 +237,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-poison"
 target_export = "Common_EventScript_NopReturn"
 target_offset = 146
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 146
 runtime_resolution_required = true
 
 [[relocs]]
@@ -240,6 +249,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/newmauville-inside"
 target_export = "NewMauville_Inside_EventScript_ShowVoltorb1"
 target_offset = 106
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 90
 runtime_resolution_required = true
 
 [[relocs]]
@@ -250,6 +261,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/newmauville-inside"
 target_export = "NewMauville_Inside_EventScript_ShowVoltorb2"
 target_offset = 110
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 94
 runtime_resolution_required = true
 
 [[relocs]]
@@ -260,6 +273,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/newmauville-inside"
 target_export = "NewMauville_Inside_EventScript_ShowVoltorb3"
 target_offset = 114
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 98
 runtime_resolution_required = true
 
 [[relocs]]
@@ -270,6 +285,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/newmauville-inside"
 target_export = "NewMauville_Inside_EventScript_SetGeneratorOffMetatiles"
 target_offset = 867
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 851
 runtime_resolution_required = true
 
 [[relocs]]
@@ -280,6 +297,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/newmauville-inside"
 target_export = "NewMauville_Inside_EventScript_SetBarrierStateBlueButton"
 target_offset = 178
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 162
 runtime_resolution_required = true
 
 [[relocs]]
@@ -290,6 +309,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/newmauville-inside"
 target_export = "NewMauville_Inside_EventScript_SetBarrierStateGreenButton"
 target_offset = 512
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 496
 runtime_resolution_required = true
 
 [[relocs]]
@@ -299,6 +320,8 @@ original_encoded_gba = 0x8237932
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/newmauville-inside"
 target_export = "NewMauville_Inside_Text_SteppedOnSwitchGeneratorStopped"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -309,6 +332,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/newmauville-inside"
 target_export = "NewMauville_Inside_EventScript_SetGeneratorOffMetatiles"
 target_offset = 867
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 851
 runtime_resolution_required = true
 
 [[relocs]]
@@ -319,6 +344,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/newmauville-inside"
 target_export = "NewMauville_Inside_EventScript_GeneratorOff"
 target_offset = 974
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 958
 runtime_resolution_required = true
 
 [[relocs]]
@@ -328,6 +355,8 @@ original_encoded_gba = 0x8237896
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/newmauville-inside"
 target_export = "NewMauville_Inside_Text_GeneratorRadiatingHeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -337,6 +366,8 @@ original_encoded_gba = 0x8237916
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/newmauville-inside"
 target_export = "NewMauville_Inside_Text_GeneratorQuietedDown"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -347,6 +378,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/newmauville-inside"
 target_export = "NewMauville_Inside_EventScript_DefeatedVoltorb1"
 target_offset = 1052
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1036
 runtime_resolution_required = true
 
 [[relocs]]
@@ -357,6 +390,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/newmauville-inside"
 target_export = "NewMauville_Inside_EventScript_DefeatedVoltorb1"
 target_offset = 1052
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1036
 runtime_resolution_required = true
 
 [[relocs]]
@@ -367,6 +402,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/newmauville-inside"
 target_export = "NewMauville_Inside_EventScript_DefeatedVoltorb1"
 target_offset = 1052
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1036
 runtime_resolution_required = true
 
 [[relocs]]
@@ -377,6 +414,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-poison"
 target_export = "Common_EventScript_RemoveStaticPokemon"
 target_offset = 177
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 177
 runtime_resolution_required = true
 
 [[relocs]]
@@ -387,6 +426,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/newmauville-inside"
 target_export = "NewMauville_Inside_EventScript_DefeatedVoltorb2"
 target_offset = 1129
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1113
 runtime_resolution_required = true
 
 [[relocs]]
@@ -397,6 +438,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/newmauville-inside"
 target_export = "NewMauville_Inside_EventScript_DefeatedVoltorb2"
 target_offset = 1129
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1113
 runtime_resolution_required = true
 
 [[relocs]]
@@ -407,6 +450,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/newmauville-inside"
 target_export = "NewMauville_Inside_EventScript_DefeatedVoltorb2"
 target_offset = 1129
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1113
 runtime_resolution_required = true
 
 [[relocs]]
@@ -417,6 +462,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-poison"
 target_export = "Common_EventScript_RemoveStaticPokemon"
 target_offset = 177
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 177
 runtime_resolution_required = true
 
 [[relocs]]
@@ -427,6 +474,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/newmauville-inside"
 target_export = "NewMauville_Inside_EventScript_DefeatedVoltorb3"
 target_offset = 1206
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1190
 runtime_resolution_required = true
 
 [[relocs]]
@@ -437,6 +486,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/newmauville-inside"
 target_export = "NewMauville_Inside_EventScript_DefeatedVoltorb3"
 target_offset = 1206
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1190
 runtime_resolution_required = true
 
 [[relocs]]
@@ -447,6 +498,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/newmauville-inside"
 target_export = "NewMauville_Inside_EventScript_DefeatedVoltorb3"
 target_offset = 1206
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1190
 runtime_resolution_required = true
 
 [[relocs]]
@@ -457,4 +510,874 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-poison"
 target_export = "Common_EventScript_RemoveStaticPokemon"
 target_offset = 177
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 177
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 5
+
+[[boundaries]]
+payload_offset = 5
+length = 6
+
+[[boundaries]]
+payload_offset = 11
+length = 5
+
+[[boundaries]]
+payload_offset = 16
+length = 6
+
+[[boundaries]]
+payload_offset = 22
+length = 3
+
+[[boundaries]]
+payload_offset = 25
+length = 6
+
+[[boundaries]]
+payload_offset = 31
+length = 1
+
+[[boundaries]]
+payload_offset = 32
+length = 5
+
+[[boundaries]]
+payload_offset = 37
+length = 5
+
+[[boundaries]]
+payload_offset = 42
+length = 6
+
+[[boundaries]]
+payload_offset = 48
+length = 3
+
+[[boundaries]]
+payload_offset = 51
+length = 1
+
+[[boundaries]]
+payload_offset = 52
+length = 5
+
+[[boundaries]]
+payload_offset = 57
+length = 5
+
+[[boundaries]]
+payload_offset = 62
+length = 3
+
+[[boundaries]]
+payload_offset = 65
+length = 6
+
+[[boundaries]]
+payload_offset = 71
+length = 3
+
+[[boundaries]]
+payload_offset = 74
+length = 6
+
+[[boundaries]]
+payload_offset = 80
+length = 3
+
+[[boundaries]]
+payload_offset = 83
+length = 6
+
+[[boundaries]]
+payload_offset = 89
+length = 1
+
+[[boundaries]]
+payload_offset = 90
+length = 3
+
+[[boundaries]]
+payload_offset = 93
+length = 1
+
+[[boundaries]]
+payload_offset = 94
+length = 3
+
+[[boundaries]]
+payload_offset = 97
+length = 1
+
+[[boundaries]]
+payload_offset = 98
+length = 3
+
+[[boundaries]]
+payload_offset = 101
+length = 1
+
+[[boundaries]]
+payload_offset = 102
+length = 5
+
+[[boundaries]]
+payload_offset = 107
+length = 6
+
+[[boundaries]]
+payload_offset = 113
+length = 1
+
+[[boundaries]]
+payload_offset = 114
+length = 1
+
+[[boundaries]]
+payload_offset = 115
+length = 5
+
+[[boundaries]]
+payload_offset = 120
+length = 5
+
+[[boundaries]]
+payload_offset = 125
+length = 3
+
+[[boundaries]]
+payload_offset = 128
+length = 5
+
+[[boundaries]]
+payload_offset = 133
+length = 3
+
+[[boundaries]]
+payload_offset = 136
+length = 1
+
+[[boundaries]]
+payload_offset = 137
+length = 1
+
+[[boundaries]]
+payload_offset = 138
+length = 1
+
+[[boundaries]]
+payload_offset = 139
+length = 5
+
+[[boundaries]]
+payload_offset = 144
+length = 5
+
+[[boundaries]]
+payload_offset = 149
+length = 3
+
+[[boundaries]]
+payload_offset = 152
+length = 5
+
+[[boundaries]]
+payload_offset = 157
+length = 3
+
+[[boundaries]]
+payload_offset = 160
+length = 1
+
+[[boundaries]]
+payload_offset = 161
+length = 1
+
+[[boundaries]]
+payload_offset = 162
+length = 9
+
+[[boundaries]]
+payload_offset = 171
+length = 9
+
+[[boundaries]]
+payload_offset = 180
+length = 9
+
+[[boundaries]]
+payload_offset = 189
+length = 9
+
+[[boundaries]]
+payload_offset = 198
+length = 9
+
+[[boundaries]]
+payload_offset = 207
+length = 9
+
+[[boundaries]]
+payload_offset = 216
+length = 9
+
+[[boundaries]]
+payload_offset = 225
+length = 9
+
+[[boundaries]]
+payload_offset = 234
+length = 9
+
+[[boundaries]]
+payload_offset = 243
+length = 9
+
+[[boundaries]]
+payload_offset = 252
+length = 9
+
+[[boundaries]]
+payload_offset = 261
+length = 9
+
+[[boundaries]]
+payload_offset = 270
+length = 9
+
+[[boundaries]]
+payload_offset = 279
+length = 9
+
+[[boundaries]]
+payload_offset = 288
+length = 9
+
+[[boundaries]]
+payload_offset = 297
+length = 9
+
+[[boundaries]]
+payload_offset = 306
+length = 9
+
+[[boundaries]]
+payload_offset = 315
+length = 9
+
+[[boundaries]]
+payload_offset = 324
+length = 9
+
+[[boundaries]]
+payload_offset = 333
+length = 9
+
+[[boundaries]]
+payload_offset = 342
+length = 9
+
+[[boundaries]]
+payload_offset = 351
+length = 9
+
+[[boundaries]]
+payload_offset = 360
+length = 9
+
+[[boundaries]]
+payload_offset = 369
+length = 9
+
+[[boundaries]]
+payload_offset = 378
+length = 9
+
+[[boundaries]]
+payload_offset = 387
+length = 9
+
+[[boundaries]]
+payload_offset = 396
+length = 9
+
+[[boundaries]]
+payload_offset = 405
+length = 9
+
+[[boundaries]]
+payload_offset = 414
+length = 9
+
+[[boundaries]]
+payload_offset = 423
+length = 9
+
+[[boundaries]]
+payload_offset = 432
+length = 9
+
+[[boundaries]]
+payload_offset = 441
+length = 9
+
+[[boundaries]]
+payload_offset = 450
+length = 9
+
+[[boundaries]]
+payload_offset = 459
+length = 9
+
+[[boundaries]]
+payload_offset = 468
+length = 9
+
+[[boundaries]]
+payload_offset = 477
+length = 9
+
+[[boundaries]]
+payload_offset = 486
+length = 9
+
+[[boundaries]]
+payload_offset = 495
+length = 1
+
+[[boundaries]]
+payload_offset = 496
+length = 9
+
+[[boundaries]]
+payload_offset = 505
+length = 9
+
+[[boundaries]]
+payload_offset = 514
+length = 9
+
+[[boundaries]]
+payload_offset = 523
+length = 9
+
+[[boundaries]]
+payload_offset = 532
+length = 9
+
+[[boundaries]]
+payload_offset = 541
+length = 9
+
+[[boundaries]]
+payload_offset = 550
+length = 9
+
+[[boundaries]]
+payload_offset = 559
+length = 9
+
+[[boundaries]]
+payload_offset = 568
+length = 9
+
+[[boundaries]]
+payload_offset = 577
+length = 9
+
+[[boundaries]]
+payload_offset = 586
+length = 9
+
+[[boundaries]]
+payload_offset = 595
+length = 9
+
+[[boundaries]]
+payload_offset = 604
+length = 9
+
+[[boundaries]]
+payload_offset = 613
+length = 9
+
+[[boundaries]]
+payload_offset = 622
+length = 9
+
+[[boundaries]]
+payload_offset = 631
+length = 9
+
+[[boundaries]]
+payload_offset = 640
+length = 9
+
+[[boundaries]]
+payload_offset = 649
+length = 9
+
+[[boundaries]]
+payload_offset = 658
+length = 9
+
+[[boundaries]]
+payload_offset = 667
+length = 9
+
+[[boundaries]]
+payload_offset = 676
+length = 9
+
+[[boundaries]]
+payload_offset = 685
+length = 9
+
+[[boundaries]]
+payload_offset = 694
+length = 9
+
+[[boundaries]]
+payload_offset = 703
+length = 9
+
+[[boundaries]]
+payload_offset = 712
+length = 9
+
+[[boundaries]]
+payload_offset = 721
+length = 9
+
+[[boundaries]]
+payload_offset = 730
+length = 9
+
+[[boundaries]]
+payload_offset = 739
+length = 9
+
+[[boundaries]]
+payload_offset = 748
+length = 9
+
+[[boundaries]]
+payload_offset = 757
+length = 9
+
+[[boundaries]]
+payload_offset = 766
+length = 9
+
+[[boundaries]]
+payload_offset = 775
+length = 9
+
+[[boundaries]]
+payload_offset = 784
+length = 9
+
+[[boundaries]]
+payload_offset = 793
+length = 9
+
+[[boundaries]]
+payload_offset = 802
+length = 9
+
+[[boundaries]]
+payload_offset = 811
+length = 9
+
+[[boundaries]]
+payload_offset = 820
+length = 9
+
+[[boundaries]]
+payload_offset = 829
+length = 1
+
+[[boundaries]]
+payload_offset = 830
+length = 1
+
+[[boundaries]]
+payload_offset = 831
+length = 6
+
+[[boundaries]]
+payload_offset = 837
+length = 2
+
+[[boundaries]]
+payload_offset = 839
+length = 5
+
+[[boundaries]]
+payload_offset = 844
+length = 5
+
+[[boundaries]]
+payload_offset = 849
+length = 1
+
+[[boundaries]]
+payload_offset = 850
+length = 1
+
+[[boundaries]]
+payload_offset = 851
+length = 9
+
+[[boundaries]]
+payload_offset = 860
+length = 9
+
+[[boundaries]]
+payload_offset = 869
+length = 9
+
+[[boundaries]]
+payload_offset = 878
+length = 9
+
+[[boundaries]]
+payload_offset = 887
+length = 9
+
+[[boundaries]]
+payload_offset = 896
+length = 9
+
+[[boundaries]]
+payload_offset = 905
+length = 9
+
+[[boundaries]]
+payload_offset = 914
+length = 9
+
+[[boundaries]]
+payload_offset = 923
+length = 9
+
+[[boundaries]]
+payload_offset = 932
+length = 3
+
+[[boundaries]]
+payload_offset = 935
+length = 1
+
+[[boundaries]]
+payload_offset = 936
+length = 1
+
+[[boundaries]]
+payload_offset = 937
+length = 5
+
+[[boundaries]]
+payload_offset = 942
+length = 6
+
+[[boundaries]]
+payload_offset = 948
+length = 6
+
+[[boundaries]]
+payload_offset = 954
+length = 2
+
+[[boundaries]]
+payload_offset = 956
+length = 1
+
+[[boundaries]]
+payload_offset = 957
+length = 1
+
+[[boundaries]]
+payload_offset = 958
+length = 6
+
+[[boundaries]]
+payload_offset = 964
+length = 2
+
+[[boundaries]]
+payload_offset = 966
+length = 1
+
+[[boundaries]]
+payload_offset = 967
+length = 1
+
+[[boundaries]]
+payload_offset = 968
+length = 1
+
+[[boundaries]]
+payload_offset = 969
+length = 1
+
+[[boundaries]]
+payload_offset = 970
+length = 6
+
+[[boundaries]]
+payload_offset = 976
+length = 1
+
+[[boundaries]]
+payload_offset = 977
+length = 5
+
+[[boundaries]]
+payload_offset = 982
+length = 3
+
+[[boundaries]]
+payload_offset = 985
+length = 1
+
+[[boundaries]]
+payload_offset = 986
+length = 3
+
+[[boundaries]]
+payload_offset = 989
+length = 1
+
+[[boundaries]]
+payload_offset = 990
+length = 3
+
+[[boundaries]]
+payload_offset = 993
+length = 5
+
+[[boundaries]]
+payload_offset = 998
+length = 5
+
+[[boundaries]]
+payload_offset = 1003
+length = 6
+
+[[boundaries]]
+payload_offset = 1009
+length = 5
+
+[[boundaries]]
+payload_offset = 1014
+length = 6
+
+[[boundaries]]
+payload_offset = 1020
+length = 5
+
+[[boundaries]]
+payload_offset = 1025
+length = 6
+
+[[boundaries]]
+payload_offset = 1031
+length = 3
+
+[[boundaries]]
+payload_offset = 1034
+length = 1
+
+[[boundaries]]
+payload_offset = 1035
+length = 1
+
+[[boundaries]]
+payload_offset = 1036
+length = 3
+
+[[boundaries]]
+payload_offset = 1039
+length = 5
+
+[[boundaries]]
+payload_offset = 1045
+length = 1
+
+[[boundaries]]
+payload_offset = 1046
+length = 1
+
+[[boundaries]]
+payload_offset = 1047
+length = 6
+
+[[boundaries]]
+payload_offset = 1053
+length = 1
+
+[[boundaries]]
+payload_offset = 1054
+length = 5
+
+[[boundaries]]
+payload_offset = 1059
+length = 3
+
+[[boundaries]]
+payload_offset = 1062
+length = 1
+
+[[boundaries]]
+payload_offset = 1063
+length = 3
+
+[[boundaries]]
+payload_offset = 1066
+length = 1
+
+[[boundaries]]
+payload_offset = 1067
+length = 3
+
+[[boundaries]]
+payload_offset = 1070
+length = 5
+
+[[boundaries]]
+payload_offset = 1075
+length = 5
+
+[[boundaries]]
+payload_offset = 1080
+length = 6
+
+[[boundaries]]
+payload_offset = 1086
+length = 5
+
+[[boundaries]]
+payload_offset = 1091
+length = 6
+
+[[boundaries]]
+payload_offset = 1097
+length = 5
+
+[[boundaries]]
+payload_offset = 1102
+length = 6
+
+[[boundaries]]
+payload_offset = 1108
+length = 3
+
+[[boundaries]]
+payload_offset = 1111
+length = 1
+
+[[boundaries]]
+payload_offset = 1112
+length = 1
+
+[[boundaries]]
+payload_offset = 1113
+length = 3
+
+[[boundaries]]
+payload_offset = 1116
+length = 5
+
+[[boundaries]]
+payload_offset = 1122
+length = 1
+
+[[boundaries]]
+payload_offset = 1123
+length = 1
+
+[[boundaries]]
+payload_offset = 1124
+length = 6
+
+[[boundaries]]
+payload_offset = 1130
+length = 1
+
+[[boundaries]]
+payload_offset = 1131
+length = 5
+
+[[boundaries]]
+payload_offset = 1136
+length = 3
+
+[[boundaries]]
+payload_offset = 1139
+length = 1
+
+[[boundaries]]
+payload_offset = 1140
+length = 3
+
+[[boundaries]]
+payload_offset = 1143
+length = 1
+
+[[boundaries]]
+payload_offset = 1144
+length = 3
+
+[[boundaries]]
+payload_offset = 1147
+length = 5
+
+[[boundaries]]
+payload_offset = 1152
+length = 5
+
+[[boundaries]]
+payload_offset = 1157
+length = 6
+
+[[boundaries]]
+payload_offset = 1163
+length = 5
+
+[[boundaries]]
+payload_offset = 1168
+length = 6
+
+[[boundaries]]
+payload_offset = 1174
+length = 5
+
+[[boundaries]]
+payload_offset = 1179
+length = 6
+
+[[boundaries]]
+payload_offset = 1185
+length = 3
+
+[[boundaries]]
+payload_offset = 1188
+length = 1
+
+[[boundaries]]
+payload_offset = 1189
+length = 1
+
+[[boundaries]]
+payload_offset = 1190
+length = 3
+
+[[boundaries]]
+payload_offset = 1193
+length = 5

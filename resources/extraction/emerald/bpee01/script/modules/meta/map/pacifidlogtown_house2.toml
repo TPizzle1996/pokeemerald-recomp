@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 11
 reloc_count = 24
+instruction_count = 92
 
 [[segments]]
 kind = "bytecode"
@@ -120,6 +121,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/pacifidlogtown-house2"
 target_export = "PacifidlogTown_House2_EventScript_UpdateFanClubTMFlag"
 target_offset = 77
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 76
 runtime_resolution_required = true
 
 [[relocs]]
@@ -130,6 +133,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/pacifidlogtown-house2"
 target_export = "PacifidlogTown_House2_EventScript_ComeBackInXDays"
 target_offset = 237
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 236
 runtime_resolution_required = true
 
 [[relocs]]
@@ -140,6 +145,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/pacifidlogtown-house2"
 target_export = "PacifidlogTown_House2_EventScript_MonAssessment"
 target_offset = 103
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 102
 runtime_resolution_required = true
 
 [[relocs]]
@@ -150,6 +157,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/pacifidlogtown-house2"
 target_export = "PacifidlogTown_House2_EventScript_FirstMonAssessment"
 target_offset = 112
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 111
 runtime_resolution_required = true
 
 [[relocs]]
@@ -160,6 +169,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/pacifidlogtown-house2"
 target_export = "PacifidlogTown_House2_EventScript_GiveReturn"
 target_offset = 133
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 132
 runtime_resolution_required = true
 
 [[relocs]]
@@ -170,6 +181,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/pacifidlogtown-house2"
 target_export = "PacifidlogTown_House2_EventScript_PutInEffort"
 target_offset = 180
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 179
 runtime_resolution_required = true
 
 [[relocs]]
@@ -180,6 +193,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/pacifidlogtown-house2"
 target_export = "PacifidlogTown_House2_EventScript_GiveFrustration"
 target_offset = 190
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 189
 runtime_resolution_required = true
 
 [[relocs]]
@@ -190,6 +205,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-poison"
 target_export = "Common_EventScript_NopReturn"
 target_offset = 146
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 146
 runtime_resolution_required = true
 
 [[relocs]]
@@ -200,6 +217,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/pacifidlogtown-house2"
 target_export = "PacifidlogTown_House2_EventScript_ClearReceivedFanClubTM"
 target_offset = 129
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 128
 runtime_resolution_required = true
 
 [[relocs]]
@@ -209,6 +228,8 @@ original_encoded_gba = 0x820395b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/pacifidlogtown-house2"
 target_export = "PacifidlogTown_House2_Text_AhYourPokemon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -218,6 +239,8 @@ original_encoded_gba = 0x82038c7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/pacifidlogtown-house2"
 target_export = "PacifidlogTown_House2_Text_ChairmansYoungerBrotherOnVacation"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -227,6 +250,8 @@ original_encoded_gba = 0x820395b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/pacifidlogtown-house2"
 target_export = "PacifidlogTown_House2_Text_AhYourPokemon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -236,6 +261,8 @@ original_encoded_gba = 0x820396d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/pacifidlogtown-house2"
 target_export = "PacifidlogTown_House2_Text_AdoringPokemonTakeThis"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -246,6 +273,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_ShowBagIsFull"
 target_offset = 273
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 273
 runtime_resolution_required = true
 
 [[relocs]]
@@ -255,6 +284,8 @@ original_encoded_gba = 0x8203a85
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/pacifidlogtown-house2"
 target_export = "PacifidlogTown_House2_Text_ExplainReturnFrustration"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -264,6 +295,8 @@ original_encoded_gba = 0x82039ce
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/pacifidlogtown-house2"
 target_export = "PacifidlogTown_House2_Text_PutInSomeMoreEffort"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -273,6 +306,8 @@ original_encoded_gba = 0x8203a2f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/pacifidlogtown-house2"
 target_export = "PacifidlogTown_House2_Text_ViciousPokemonTakeThis"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -283,6 +318,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_ShowBagIsFull"
 target_offset = 273
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 273
 runtime_resolution_required = true
 
 [[relocs]]
@@ -292,6 +329,8 @@ original_encoded_gba = 0x8203a85
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/pacifidlogtown-house2"
 target_export = "PacifidlogTown_House2_Text_ExplainReturnFrustration"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -301,6 +340,8 @@ original_encoded_gba = 0x8203af4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/pacifidlogtown-house2"
 target_export = "PacifidlogTown_House2_Text_GetGoodTMInXDays"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -310,6 +351,8 @@ original_encoded_gba = 0x8203b8d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/pacifidlogtown-house2"
 target_export = "PacifidlogTown_House2_Text_Rurii"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -319,6 +362,8 @@ original_encoded_gba = 0x8203b9d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/pacifidlogtown-house2"
 target_export = "PacifidlogTown_House2_Text_VeryFriendlyWithTrainer"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -328,6 +373,8 @@ original_encoded_gba = 0x8203bce
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/pacifidlogtown-house2"
 target_export = "PacifidlogTown_House2_Text_Rururi"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -337,4 +384,374 @@ original_encoded_gba = 0x8203bdf
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/pacifidlogtown-house2"
 target_export = "PacifidlogTown_House2_Text_DoesntLikeTrainerVeryMuch"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 1
+
+[[boundaries]]
+payload_offset = 2
+length = 1
+
+[[boundaries]]
+payload_offset = 3
+length = 5
+
+[[boundaries]]
+payload_offset = 8
+length = 3
+
+[[boundaries]]
+payload_offset = 11
+length = 6
+
+[[boundaries]]
+payload_offset = 17
+length = 3
+
+[[boundaries]]
+payload_offset = 20
+length = 6
+
+[[boundaries]]
+payload_offset = 26
+length = 3
+
+[[boundaries]]
+payload_offset = 29
+length = 6
+
+[[boundaries]]
+payload_offset = 35
+length = 3
+
+[[boundaries]]
+payload_offset = 38
+length = 5
+
+[[boundaries]]
+payload_offset = 43
+length = 5
+
+[[boundaries]]
+payload_offset = 48
+length = 6
+
+[[boundaries]]
+payload_offset = 54
+length = 5
+
+[[boundaries]]
+payload_offset = 59
+length = 5
+
+[[boundaries]]
+payload_offset = 64
+length = 6
+
+[[boundaries]]
+payload_offset = 70
+length = 5
+
+[[boundaries]]
+payload_offset = 76
+length = 3
+
+[[boundaries]]
+payload_offset = 79
+length = 6
+
+[[boundaries]]
+payload_offset = 85
+length = 5
+
+[[boundaries]]
+payload_offset = 90
+length = 5
+
+[[boundaries]]
+payload_offset = 95
+length = 6
+
+[[boundaries]]
+payload_offset = 101
+length = 1
+
+[[boundaries]]
+payload_offset = 102
+length = 6
+
+[[boundaries]]
+payload_offset = 108
+length = 2
+
+[[boundaries]]
+payload_offset = 110
+length = 1
+
+[[boundaries]]
+payload_offset = 111
+length = 6
+
+[[boundaries]]
+payload_offset = 117
+length = 2
+
+[[boundaries]]
+payload_offset = 119
+length = 6
+
+[[boundaries]]
+payload_offset = 125
+length = 2
+
+[[boundaries]]
+payload_offset = 127
+length = 1
+
+[[boundaries]]
+payload_offset = 128
+length = 3
+
+[[boundaries]]
+payload_offset = 131
+length = 1
+
+[[boundaries]]
+payload_offset = 132
+length = 6
+
+[[boundaries]]
+payload_offset = 138
+length = 2
+
+[[boundaries]]
+payload_offset = 140
+length = 5
+
+[[boundaries]]
+payload_offset = 145
+length = 5
+
+[[boundaries]]
+payload_offset = 150
+length = 2
+
+[[boundaries]]
+payload_offset = 152
+length = 5
+
+[[boundaries]]
+payload_offset = 157
+length = 6
+
+[[boundaries]]
+payload_offset = 163
+length = 3
+
+[[boundaries]]
+payload_offset = 166
+length = 3
+
+[[boundaries]]
+payload_offset = 169
+length = 6
+
+[[boundaries]]
+payload_offset = 175
+length = 2
+
+[[boundaries]]
+payload_offset = 177
+length = 1
+
+[[boundaries]]
+payload_offset = 178
+length = 1
+
+[[boundaries]]
+payload_offset = 179
+length = 6
+
+[[boundaries]]
+payload_offset = 185
+length = 2
+
+[[boundaries]]
+payload_offset = 187
+length = 1
+
+[[boundaries]]
+payload_offset = 188
+length = 1
+
+[[boundaries]]
+payload_offset = 189
+length = 6
+
+[[boundaries]]
+payload_offset = 195
+length = 2
+
+[[boundaries]]
+payload_offset = 197
+length = 5
+
+[[boundaries]]
+payload_offset = 202
+length = 5
+
+[[boundaries]]
+payload_offset = 207
+length = 2
+
+[[boundaries]]
+payload_offset = 209
+length = 5
+
+[[boundaries]]
+payload_offset = 214
+length = 6
+
+[[boundaries]]
+payload_offset = 220
+length = 3
+
+[[boundaries]]
+payload_offset = 223
+length = 3
+
+[[boundaries]]
+payload_offset = 226
+length = 6
+
+[[boundaries]]
+payload_offset = 232
+length = 2
+
+[[boundaries]]
+payload_offset = 234
+length = 1
+
+[[boundaries]]
+payload_offset = 235
+length = 1
+
+[[boundaries]]
+payload_offset = 236
+length = 5
+
+[[boundaries]]
+payload_offset = 241
+length = 4
+
+[[boundaries]]
+payload_offset = 245
+length = 6
+
+[[boundaries]]
+payload_offset = 251
+length = 2
+
+[[boundaries]]
+payload_offset = 253
+length = 1
+
+[[boundaries]]
+payload_offset = 254
+length = 1
+
+[[boundaries]]
+payload_offset = 255
+length = 1
+
+[[boundaries]]
+payload_offset = 256
+length = 1
+
+[[boundaries]]
+payload_offset = 257
+length = 1
+
+[[boundaries]]
+payload_offset = 258
+length = 5
+
+[[boundaries]]
+payload_offset = 263
+length = 6
+
+[[boundaries]]
+payload_offset = 269
+length = 2
+
+[[boundaries]]
+payload_offset = 271
+length = 1
+
+[[boundaries]]
+payload_offset = 272
+length = 6
+
+[[boundaries]]
+payload_offset = 278
+length = 2
+
+[[boundaries]]
+payload_offset = 280
+length = 1
+
+[[boundaries]]
+payload_offset = 281
+length = 1
+
+[[boundaries]]
+payload_offset = 282
+length = 1
+
+[[boundaries]]
+payload_offset = 283
+length = 1
+
+[[boundaries]]
+payload_offset = 284
+length = 1
+
+[[boundaries]]
+payload_offset = 285
+length = 5
+
+[[boundaries]]
+payload_offset = 290
+length = 6
+
+[[boundaries]]
+payload_offset = 296
+length = 2
+
+[[boundaries]]
+payload_offset = 298
+length = 1
+
+[[boundaries]]
+payload_offset = 299
+length = 6
+
+[[boundaries]]
+payload_offset = 305
+length = 2
+
+[[boundaries]]
+payload_offset = 307
+length = 1
+
+[[boundaries]]
+payload_offset = 308
+length = 1

@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 8
 reloc_count = 11
+instruction_count = 44
 
 [[segments]]
 kind = "bytecode"
@@ -96,6 +97,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/evergrandecity-pokemoncenter-1f"
 target_export = "EverGrandeCity_PokemonCenter_1F_EventScript_TryShowScott"
 target_offset = 24
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 13
 runtime_resolution_required = true
 
 [[relocs]]
@@ -106,6 +109,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-poison"
 target_export = "Common_EventScript_NopReturn"
 target_offset = 146
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 146
 runtime_resolution_required = true
 
 [[relocs]]
@@ -116,6 +121,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pkmn-center-nurse"
 target_export = "Common_EventScript_PkmnCenterNurse"
 target_offset = 0
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 0
 runtime_resolution_required = true
 
 [[relocs]]
@@ -125,6 +132,8 @@ original_encoded_gba = 0x8229ada
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/evergrandecity-pokemoncenter-1f"
 target_export = "EverGrandeCity_PokemonCenter_1F_Text_LeagueAfterVictoryRoad"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -134,6 +143,8 @@ original_encoded_gba = 0x8229b62
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/evergrandecity-pokemoncenter-1f"
 target_export = "EverGrandeCity_PokemonCenter_1F_Text_BelieveInYourPokemon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -143,6 +154,8 @@ original_encoded_gba = 0x8229bf1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/evergrandecity-pokemoncenter-1f"
 target_export = "EverGrandeCity_PokemonCenter_1F_Text_ScottHappyForYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -153,6 +166,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/evergrandecity-pokemoncenter-1f"
 target_export = "EverGrandeCity_PokemonCenter_1F_EventScript_ScottExitNorth"
 target_offset = 130
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 119
 runtime_resolution_required = true
 
 [[relocs]]
@@ -163,6 +178,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/evergrandecity-pokemoncenter-1f"
 target_export = "EverGrandeCity_PokemonCenter_1F_EventScript_ScottExit"
 target_offset = 141
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 130
 runtime_resolution_required = true
 
 [[relocs]]
@@ -173,6 +190,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/evergrandecity-pokemoncenter-1f"
 target_export = "EverGrandeCity_PokemonCenter_1F_EventScript_ScottExit"
 target_offset = 141
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 130
 runtime_resolution_required = true
 
 [[relocs]]
@@ -182,6 +201,8 @@ original_encoded_gba = 0x8229acc
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/evergrandecity-pokemoncenter-1f-movement-scottexitnorth"
 target_export = "EverGrandeCity_PokemonCenter_1F_Movement_ScottExitNorth"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -191,4 +212,182 @@ original_encoded_gba = 0x8229ad3
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/evergrandecity-pokemoncenter-1f-movement-scottexit"
 target_export = "EverGrandeCity_PokemonCenter_1F_Movement_ScottExit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 3
+
+[[boundaries]]
+payload_offset = 6
+length = 6
+
+[[boundaries]]
+payload_offset = 12
+length = 1
+
+[[boundaries]]
+payload_offset = 13
+length = 3
+
+[[boundaries]]
+payload_offset = 16
+length = 6
+
+[[boundaries]]
+payload_offset = 22
+length = 3
+
+[[boundaries]]
+payload_offset = 25
+length = 1
+
+[[boundaries]]
+payload_offset = 26
+length = 5
+
+[[boundaries]]
+payload_offset = 31
+length = 5
+
+[[boundaries]]
+payload_offset = 36
+length = 1
+
+[[boundaries]]
+payload_offset = 37
+length = 1
+
+[[boundaries]]
+payload_offset = 38
+length = 1
+
+[[boundaries]]
+payload_offset = 39
+length = 1
+
+[[boundaries]]
+payload_offset = 40
+length = 6
+
+[[boundaries]]
+payload_offset = 46
+length = 2
+
+[[boundaries]]
+payload_offset = 48
+length = 1
+
+[[boundaries]]
+payload_offset = 49
+length = 6
+
+[[boundaries]]
+payload_offset = 55
+length = 2
+
+[[boundaries]]
+payload_offset = 57
+length = 1
+
+[[boundaries]]
+payload_offset = 58
+length = 1
+
+[[boundaries]]
+payload_offset = 59
+length = 1
+
+[[boundaries]]
+payload_offset = 60
+length = 6
+
+[[boundaries]]
+payload_offset = 66
+length = 2
+
+[[boundaries]]
+payload_offset = 68
+length = 1
+
+[[boundaries]]
+payload_offset = 69
+length = 5
+
+[[boundaries]]
+payload_offset = 74
+length = 6
+
+[[boundaries]]
+payload_offset = 80
+length = 5
+
+[[boundaries]]
+payload_offset = 85
+length = 6
+
+[[boundaries]]
+payload_offset = 91
+length = 5
+
+[[boundaries]]
+payload_offset = 96
+length = 6
+
+[[boundaries]]
+payload_offset = 102
+length = 5
+
+[[boundaries]]
+payload_offset = 107
+length = 3
+
+[[boundaries]]
+payload_offset = 110
+length = 3
+
+[[boundaries]]
+payload_offset = 113
+length = 1
+
+[[boundaries]]
+payload_offset = 114
+length = 3
+
+[[boundaries]]
+payload_offset = 117
+length = 1
+
+[[boundaries]]
+payload_offset = 118
+length = 1
+
+[[boundaries]]
+payload_offset = 119
+length = 7
+
+[[boundaries]]
+payload_offset = 126
+length = 3
+
+[[boundaries]]
+payload_offset = 129
+length = 1
+
+[[boundaries]]
+payload_offset = 130
+length = 7
+
+[[boundaries]]
+payload_offset = 137
+length = 3
+
+[[boundaries]]
+payload_offset = 140
+length = 1

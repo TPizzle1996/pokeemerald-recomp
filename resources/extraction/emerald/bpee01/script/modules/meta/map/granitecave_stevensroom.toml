@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 5
 reloc_count = 17
+instruction_count = 54
 
 [[segments]]
 kind = "bytecode"
@@ -71,6 +72,8 @@ original_encoded_gba = 0x822dd5a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/granitecave-stevensroom"
 target_export = "GraniteCave_StevensRoom_Text_ImStevenLetterForMe"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -81,6 +84,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/kecleon"
 target_export = "Common_EventScript_PlayerHandedOverTheItem"
 target_offset = 265
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 243
 runtime_resolution_required = true
 
 [[relocs]]
@@ -90,6 +95,8 @@ original_encoded_gba = 0x822ddbd
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/granitecave-stevensroom"
 target_export = "GraniteCave_StevensRoom_Text_ThankYouTakeThis"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -100,6 +107,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/granitecave-stevensroom"
 target_export = "GraniteCave_StevensRoom_EventScript_BagFull"
 target_offset = 194
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 193
 runtime_resolution_required = true
 
 [[relocs]]
@@ -109,6 +118,8 @@ original_encoded_gba = 0x822de6b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/granitecave-stevensroom"
 target_export = "GraniteCave_StevensRoom_Text_CouldBecomeChampionLetsRegister"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -118,6 +129,8 @@ original_encoded_gba = 0x822df6a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/granitecave-stevensroom"
 target_export = "GraniteCave_StevensRoom_Text_RegisteredSteven"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -127,6 +140,8 @@ original_encoded_gba = 0x822df8c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/granitecave-stevensroom"
 target_export = "GraniteCave_StevensRoom_Text_IveGotToHurryAlong"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -137,6 +152,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/granitecave-stevensroom"
 target_export = "GraniteCave_StevensRoom_EventScript_StevenExitNorth"
 target_offset = 147
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 146
 runtime_resolution_required = true
 
 [[relocs]]
@@ -147,6 +164,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/granitecave-stevensroom"
 target_export = "GraniteCave_StevensRoom_EventScript_StevenExitSouth"
 target_offset = 176
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 175
 runtime_resolution_required = true
 
 [[relocs]]
@@ -157,6 +176,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/granitecave-stevensroom"
 target_export = "GraniteCave_StevensRoom_EventScript_StevenExitWestEast"
 target_offset = 158
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 157
 runtime_resolution_required = true
 
 [[relocs]]
@@ -167,6 +188,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/granitecave-stevensroom"
 target_export = "GraniteCave_StevensRoom_EventScript_StevenExitWestEast"
 target_offset = 158
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 157
 runtime_resolution_required = true
 
 [[relocs]]
@@ -176,6 +199,8 @@ original_encoded_gba = 0x822dd45
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/granitecave-stevensroom-movement-stevenexit"
 target_export = "GraniteCave_StevensRoom_Movement_StevenExit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -185,6 +210,8 @@ original_encoded_gba = 0x822dd4c
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/granitecave-stevensroom-movement-playerturntowardexit"
 target_export = "GraniteCave_StevensRoom_Movement_PlayerTurnTowardExit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -194,6 +221,8 @@ original_encoded_gba = 0x822dd45
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/granitecave-stevensroom-movement-stevenexit"
 target_export = "GraniteCave_StevensRoom_Movement_StevenExit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -203,6 +232,8 @@ original_encoded_gba = 0x822dd4c
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/granitecave-stevensroom-movement-playerturntowardexit"
 target_export = "GraniteCave_StevensRoom_Movement_PlayerTurnTowardExit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -212,6 +243,8 @@ original_encoded_gba = 0x822dd51
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/granitecave-stevensroom-movement-stevenexitsouth"
 target_export = "GraniteCave_StevensRoom_Movement_StevenExitSouth"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -221,4 +254,222 @@ original_encoded_gba = 0x822dfaa
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/granitecave-stevensroom"
 target_export = "GraniteCave_StevensRoom_Text_OhBagIsFull"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 1
+
+[[boundaries]]
+payload_offset = 2
+length = 6
+
+[[boundaries]]
+payload_offset = 8
+length = 2
+
+[[boundaries]]
+payload_offset = 10
+length = 5
+
+[[boundaries]]
+payload_offset = 15
+length = 5
+
+[[boundaries]]
+payload_offset = 20
+length = 3
+
+[[boundaries]]
+payload_offset = 23
+length = 6
+
+[[boundaries]]
+payload_offset = 29
+length = 2
+
+[[boundaries]]
+payload_offset = 31
+length = 5
+
+[[boundaries]]
+payload_offset = 36
+length = 5
+
+[[boundaries]]
+payload_offset = 41
+length = 2
+
+[[boundaries]]
+payload_offset = 43
+length = 5
+
+[[boundaries]]
+payload_offset = 48
+length = 6
+
+[[boundaries]]
+payload_offset = 54
+length = 6
+
+[[boundaries]]
+payload_offset = 60
+length = 2
+
+[[boundaries]]
+payload_offset = 62
+length = 1
+
+[[boundaries]]
+payload_offset = 63
+length = 3
+
+[[boundaries]]
+payload_offset = 66
+length = 3
+
+[[boundaries]]
+payload_offset = 69
+length = 6
+
+[[boundaries]]
+payload_offset = 75
+length = 2
+
+[[boundaries]]
+payload_offset = 77
+length = 1
+
+[[boundaries]]
+payload_offset = 78
+length = 1
+
+[[boundaries]]
+payload_offset = 79
+length = 3
+
+[[boundaries]]
+payload_offset = 82
+length = 3
+
+[[boundaries]]
+payload_offset = 85
+length = 6
+
+[[boundaries]]
+payload_offset = 91
+length = 2
+
+[[boundaries]]
+payload_offset = 93
+length = 1
+
+[[boundaries]]
+payload_offset = 94
+length = 5
+
+[[boundaries]]
+payload_offset = 99
+length = 6
+
+[[boundaries]]
+payload_offset = 105
+length = 5
+
+[[boundaries]]
+payload_offset = 110
+length = 6
+
+[[boundaries]]
+payload_offset = 116
+length = 5
+
+[[boundaries]]
+payload_offset = 121
+length = 6
+
+[[boundaries]]
+payload_offset = 127
+length = 5
+
+[[boundaries]]
+payload_offset = 132
+length = 6
+
+[[boundaries]]
+payload_offset = 138
+length = 3
+
+[[boundaries]]
+payload_offset = 141
+length = 3
+
+[[boundaries]]
+payload_offset = 144
+length = 1
+
+[[boundaries]]
+payload_offset = 145
+length = 1
+
+[[boundaries]]
+payload_offset = 146
+length = 7
+
+[[boundaries]]
+payload_offset = 153
+length = 3
+
+[[boundaries]]
+payload_offset = 156
+length = 1
+
+[[boundaries]]
+payload_offset = 157
+length = 7
+
+[[boundaries]]
+payload_offset = 164
+length = 7
+
+[[boundaries]]
+payload_offset = 171
+length = 3
+
+[[boundaries]]
+payload_offset = 174
+length = 1
+
+[[boundaries]]
+payload_offset = 175
+length = 7
+
+[[boundaries]]
+payload_offset = 182
+length = 7
+
+[[boundaries]]
+payload_offset = 189
+length = 3
+
+[[boundaries]]
+payload_offset = 192
+length = 1
+
+[[boundaries]]
+payload_offset = 193
+length = 6
+
+[[boundaries]]
+payload_offset = 199
+length = 2
+
+[[boundaries]]
+payload_offset = 201
+length = 1

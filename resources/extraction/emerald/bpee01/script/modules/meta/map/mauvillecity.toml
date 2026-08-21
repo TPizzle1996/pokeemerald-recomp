@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 2
 export_count = 31
 reloc_count = 88
+instruction_count = 254
 
 [[segments]]
 kind = "bytecode"
@@ -286,6 +287,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity"
 target_export = "MauvilleCity_EventScript_MoveWattsonBackToGym"
 target_offset = 36
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 30
 runtime_resolution_required = true
 
 [[relocs]]
@@ -295,6 +298,8 @@ original_encoded_gba = 0x81e0301
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity"
 target_export = "MauvilleCity_Text_NurseHurtMonBackToHealth"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -304,6 +309,8 @@ original_encoded_gba = 0x81e037c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity"
 target_export = "MauvilleCity_Text_AllSortsOfPeopleComeThrough"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -313,6 +320,8 @@ original_encoded_gba = 0x81e03fb
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity"
 target_export = "MauvilleCity_Text_RydelVeryGenerous"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -322,6 +331,8 @@ original_encoded_gba = 0x81e044a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity"
 target_export = "MauvilleCity_Text_PokemonCanJumpYouOnBike"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -331,6 +342,8 @@ original_encoded_gba = 0x81e0485
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity"
 target_export = "MauvilleCity_Text_CitySign"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -340,6 +353,8 @@ original_encoded_gba = 0x81e04b7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity"
 target_export = "MauvilleCity_Text_GymSign"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -349,6 +364,8 @@ original_encoded_gba = 0x81e0504
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity"
 target_export = "MauvilleCity_Text_BikeShopSign"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -358,6 +375,8 @@ original_encoded_gba = 0x81e053c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity"
 target_export = "MauvilleCity_Text_GameCornerSign"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -368,6 +387,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity"
 target_export = "MauvilleCity_EventScript_TVExplained"
 target_offset = 142
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 136
 runtime_resolution_required = true
 
 [[relocs]]
@@ -377,6 +398,8 @@ original_encoded_gba = 0x81e056a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity"
 target_export = "MauvilleCity_Text_ExplainTV"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -386,6 +409,8 @@ original_encoded_gba = 0x81e0699
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity"
 target_export = "MauvilleCity_Text_BeenCheckingOutTV"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -396,6 +421,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity"
 target_export = "MauvilleCity_EventScript_UncleAskPlayerToBattleWally"
 target_offset = 184
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 178
 runtime_resolution_required = true
 
 [[relocs]]
@@ -405,6 +432,8 @@ original_encoded_gba = 0x81df7dc
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity"
 target_export = "MauvilleCity_Text_UncleHesTooPeppy"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -414,6 +443,8 @@ original_encoded_gba = 0x82725a2
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceoriginaldirection"
 target_export = "Common_Movement_FaceOriginalDirection"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -423,6 +454,8 @@ original_encoded_gba = 0x81dfaa5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity"
 target_export = "MauvilleCity_Text_UncleCanYouBattleWally"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -432,6 +465,8 @@ original_encoded_gba = 0x82725a2
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceoriginaldirection"
 target_export = "Common_Movement_FaceOriginalDirection"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -442,6 +477,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity"
 target_export = "MauvilleCity_EventScript_WallyRequestBattleAgain"
 target_offset = 779
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 773
 runtime_resolution_required = true
 
 [[relocs]]
@@ -451,6 +488,8 @@ original_encoded_gba = 0x82725a8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterright"
 target_export = "Common_Movement_WalkInPlaceFasterRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -460,6 +499,8 @@ original_encoded_gba = 0x81df845
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity"
 target_export = "MauvilleCity_Text_WallyWantToChallengeGym"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -469,6 +510,8 @@ original_encoded_gba = 0x81df8b9
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity"
 target_export = "MauvilleCity_Text_UncleYourePushingIt"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -478,6 +521,8 @@ original_encoded_gba = 0x81df963
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity"
 target_export = "MauvilleCity_Text_WallyWeCanBeatAnyone"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -487,6 +532,8 @@ original_encoded_gba = 0x827259e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceplayer"
 target_export = "Common_Movement_FacePlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -496,6 +543,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -505,6 +554,8 @@ original_encoded_gba = 0x827259a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-delay48"
 target_export = "Common_Movement_Delay48"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -514,6 +565,8 @@ original_encoded_gba = 0x81df9b2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity"
 target_export = "MauvilleCity_Text_WallyWillYouBattleMe"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -524,6 +577,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity"
 target_export = "MauvilleCity_EventScript_BattleWallyPrompt"
 target_offset = 296
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 290
 runtime_resolution_required = true
 
 [[relocs]]
@@ -534,6 +589,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity"
 target_export = "MauvilleCity_EventScript_BattleWally"
 target_offset = 693
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 687
 runtime_resolution_required = true
 
 [[relocs]]
@@ -544,6 +601,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity"
 target_export = "MauvilleCity_EventScript_DeclineWallyBattle"
 target_offset = 766
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 760
 runtime_resolution_required = true
 
 [[relocs]]
@@ -554,6 +613,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity"
 target_export = "MauvilleCity_EventScript_WallyAndUncleExitNorth"
 target_offset = 347
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 341
 runtime_resolution_required = true
 
 [[relocs]]
@@ -564,6 +625,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity"
 target_export = "MauvilleCity_EventScript_WallyAndUncleExitEast"
 target_offset = 440
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 434
 runtime_resolution_required = true
 
 [[relocs]]
@@ -573,6 +636,8 @@ original_encoded_gba = 0x81df6df
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mauvillecity-movement-playerwatchwallyexitnorth1"
 target_export = "MauvilleCity_Movement_PlayerWatchWallyExitNorth1"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -582,6 +647,8 @@ original_encoded_gba = 0x81df6a8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mauvillecity-movement-wallyexitnorth1"
 target_export = "MauvilleCity_Movement_WallyExitNorth1"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -591,6 +658,8 @@ original_encoded_gba = 0x81df6e2
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mauvillecity-movement-wallysuncleexitnorth1"
 target_export = "MauvilleCity_Movement_WallysUncleExitNorth1"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -600,6 +669,8 @@ original_encoded_gba = 0x82725a8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterright"
 target_export = "Common_Movement_WalkInPlaceFasterRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -609,6 +680,8 @@ original_encoded_gba = 0x81df6ee
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mauvillecity-movement-playerfaceunclenorth"
 target_export = "MauvilleCity_Movement_PlayerFaceUncleNorth"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -618,6 +691,8 @@ original_encoded_gba = 0x81df6f3
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mauvillecity-movement-wallysuncleapproachplayernorth"
 target_export = "MauvilleCity_Movement_WallysUncleApproachPlayerNorth"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -627,6 +702,8 @@ original_encoded_gba = 0x81dfd34
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity"
 target_export = "MauvilleCity_Text_UncleVisitUsSometime"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -636,6 +713,8 @@ original_encoded_gba = 0x81df6cc
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mauvillecity-movement-playerwatchwallyexitnorth2"
 target_export = "MauvilleCity_Movement_PlayerWatchWallyExitNorth2"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -645,6 +724,8 @@ original_encoded_gba = 0x81df6fa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mauvillecity-movement-wallysuncleexitnorth2"
 target_export = "MauvilleCity_Movement_WallysUncleExitNorth2"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -654,6 +735,8 @@ original_encoded_gba = 0x81df6b4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mauvillecity-movement-wallyexitnorth2"
 target_export = "MauvilleCity_Movement_WallyExitNorth2"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -664,6 +747,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity"
 target_export = "MauvilleCity_EventScript_DefeatedWally"
 target_offset = 526
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 520
 runtime_resolution_required = true
 
 [[relocs]]
@@ -673,6 +758,8 @@ original_encoded_gba = 0x81df6dc
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mauvillecity-movement-playerwatchwallyexiteast1"
 target_export = "MauvilleCity_Movement_PlayerWatchWallyExitEast1"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -682,6 +769,8 @@ original_encoded_gba = 0x81df6ae
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mauvillecity-movement-wallyexiteast1"
 target_export = "MauvilleCity_Movement_WallyExitEast1"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -691,6 +780,8 @@ original_encoded_gba = 0x81df6e8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mauvillecity-movement-wallysuncleexiteast1"
 target_export = "MauvilleCity_Movement_WallysUncleExitEast1"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -700,6 +791,8 @@ original_encoded_gba = 0x82725a8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterright"
 target_export = "Common_Movement_WalkInPlaceFasterRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -709,6 +802,8 @@ original_encoded_gba = 0x81df6f7
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mauvillecity-movement-wallysuncleapproachplayereast"
 target_export = "MauvilleCity_Movement_WallysUncleApproachPlayerEast"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -718,6 +813,8 @@ original_encoded_gba = 0x81dfd34
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity"
 target_export = "MauvilleCity_Text_UncleVisitUsSometime"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -727,6 +824,8 @@ original_encoded_gba = 0x81df6d0
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mauvillecity-movement-playerwatchwallyexiteast2"
 target_export = "MauvilleCity_Movement_PlayerWatchWallyExitEast2"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -736,6 +835,8 @@ original_encoded_gba = 0x81df703
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mauvillecity-movement-wallysuncleexiteast2"
 target_export = "MauvilleCity_Movement_WallysUncleExitEast2"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -745,6 +846,8 @@ original_encoded_gba = 0x81df6c0
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mauvillecity-movement-wallyexiteast2"
 target_export = "MauvilleCity_Movement_WallyExitEast2"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -755,6 +858,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity"
 target_export = "MauvilleCity_EventScript_DefeatedWally"
 target_offset = 526
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 520
 runtime_resolution_required = true
 
 [[relocs]]
@@ -765,6 +870,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity"
 target_export = "MauvilleCity_EventScript_ScottApproachPlayerNorth"
 target_offset = 622
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 616
 runtime_resolution_required = true
 
 [[relocs]]
@@ -775,6 +882,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity"
 target_export = "MauvilleCity_EventScript_ScottApproachPlayerEast"
 target_offset = 636
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 630
 runtime_resolution_required = true
 
 [[relocs]]
@@ -784,6 +893,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -793,6 +904,8 @@ original_encoded_gba = 0x81dfed5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity"
 target_export = "MauvilleCity_Text_ScottYouDidntHoldBack"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -803,6 +916,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity"
 target_export = "MauvilleCity_EventScript_ScottExitNorth"
 target_offset = 657
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 651
 runtime_resolution_required = true
 
 [[relocs]]
@@ -813,6 +928,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity"
 target_export = "MauvilleCity_EventScript_ScottExitEast"
 target_offset = 675
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 669
 runtime_resolution_required = true
 
 [[relocs]]
@@ -822,6 +939,8 @@ original_encoded_gba = 0x81df70d
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mauvillecity-movement-scottapproachplayernorth"
 target_export = "MauvilleCity_Movement_ScottApproachPlayerNorth"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -831,6 +950,8 @@ original_encoded_gba = 0x81df719
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mauvillecity-movement-scottapproachplayereast"
 target_export = "MauvilleCity_Movement_ScottApproachPlayerEast"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -840,6 +961,8 @@ original_encoded_gba = 0x81df6d5
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mauvillecity-movement-playerwatchscottexitnorth"
 target_export = "MauvilleCity_Movement_PlayerWatchScottExitNorth"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -849,6 +972,8 @@ original_encoded_gba = 0x81df725
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mauvillecity-movement-scottexitnorth"
 target_export = "MauvilleCity_Movement_ScottExitNorth"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -858,6 +983,8 @@ original_encoded_gba = 0x81df6d8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mauvillecity-movement-playerwatchscottexiteast"
 target_export = "MauvilleCity_Movement_PlayerWatchScottExitEast"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -867,6 +994,8 @@ original_encoded_gba = 0x81df72f
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mauvillecity-movement-scottexiteast"
 target_export = "MauvilleCity_Movement_ScottExitEast"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -876,6 +1005,8 @@ original_encoded_gba = 0x81dfb6d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity"
 target_export = "MauvilleCity_Text_WallyHereICome"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -885,6 +1016,8 @@ original_encoded_gba = 0x81dfb96
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity"
 target_export = "MauvilleCity_Text_WallyDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -894,6 +1027,8 @@ original_encoded_gba = 0x82725a8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterright"
 target_export = "Common_Movement_WalkInPlaceFasterRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -903,6 +1038,8 @@ original_encoded_gba = 0x81dfbc3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity"
 target_export = "MauvilleCity_Text_WallyIllGoBackToVerdanturf"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -912,6 +1049,8 @@ original_encoded_gba = 0x827259e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceplayer"
 target_export = "Common_Movement_FacePlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -921,6 +1060,8 @@ original_encoded_gba = 0x81dfbed
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity"
 target_export = "MauvilleCity_Text_ThankYouNotEnoughToBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -930,6 +1071,8 @@ original_encoded_gba = 0x82725a8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterright"
 target_export = "Common_Movement_WalkInPlaceFasterRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -939,6 +1082,8 @@ original_encoded_gba = 0x81dfc8a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity"
 target_export = "MauvilleCity_Text_UncleNoNeedToBeDown"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -948,6 +1093,8 @@ original_encoded_gba = 0x81dfa4a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity"
 target_export = "MauvilleCity_Text_WallyMyUncleWontKnowImStrong"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -957,6 +1104,8 @@ original_encoded_gba = 0x827259e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceplayer"
 target_export = "Common_Movement_FacePlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -966,6 +1115,8 @@ original_encoded_gba = 0x81dfb42
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity"
 target_export = "MauvilleCity_Text_WallyPleaseBattleMe"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -976,6 +1127,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity"
 target_export = "MauvilleCity_EventScript_BattleWallyPrompt"
 target_offset = 296
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 290
 runtime_resolution_required = true
 
 [[relocs]]
@@ -986,6 +1139,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity"
 target_export = "MauvilleCity_EventScript_ReceivedThunderbolt"
 target_offset = 1067
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 915
 runtime_resolution_required = true
 
 [[relocs]]
@@ -996,6 +1151,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity"
 target_export = "MauvilleCity_EventScript_CompletedNewMauville"
 target_offset = 1023
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 871
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1006,6 +1163,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity"
 target_export = "MauvilleCity_EventScript_BegunNewMauville"
 target_offset = 1013
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 861
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1015,6 +1174,8 @@ original_encoded_gba = 0x81dffe4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity"
 target_export = "MauvilleCity_Text_WattsonNeedFavorTakeKey"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1024,6 +1185,8 @@ original_encoded_gba = 0x81e0154
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity"
 target_export = "MauvilleCity_Text_WattsonWontBeChallenge"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1033,6 +1196,8 @@ original_encoded_gba = 0x81e0154
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity"
 target_export = "MauvilleCity_Text_WattsonWontBeChallenge"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1042,6 +1207,8 @@ original_encoded_gba = 0x81e020e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity"
 target_export = "MauvilleCity_Text_WattsonThanksTakeTM"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1052,6 +1219,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_ShowBagIsFull"
 target_offset = 273
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 273
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1061,6 +1230,8 @@ original_encoded_gba = 0x81e02aa
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity"
 target_export = "MauvilleCity_Text_WattsonYoungTakeCharge"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1070,6 +1241,8 @@ original_encoded_gba = 0x81e02aa
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity"
 target_export = "MauvilleCity_Text_WattsonYoungTakeCharge"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1079,6 +1252,8 @@ original_encoded_gba = 0x81dfdfb
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity"
 target_export = "MauvilleCity_Text_WallyPokenavCall"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1088,4 +1263,1022 @@ original_encoded_gba = 0x81dfeb4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity"
 target_export = "MauvilleCity_Text_RegisteredWally"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 3
+
+[[boundaries]]
+payload_offset = 6
+length = 3
+
+[[boundaries]]
+payload_offset = 9
+length = 3
+
+[[boundaries]]
+payload_offset = 12
+length = 3
+
+[[boundaries]]
+payload_offset = 15
+length = 5
+
+[[boundaries]]
+payload_offset = 20
+length = 3
+
+[[boundaries]]
+payload_offset = 23
+length = 6
+
+[[boundaries]]
+payload_offset = 29
+length = 1
+
+[[boundaries]]
+payload_offset = 30
+length = 3
+
+[[boundaries]]
+payload_offset = 33
+length = 3
+
+[[boundaries]]
+payload_offset = 36
+length = 3
+
+[[boundaries]]
+payload_offset = 39
+length = 1
+
+[[boundaries]]
+payload_offset = 40
+length = 6
+
+[[boundaries]]
+payload_offset = 46
+length = 2
+
+[[boundaries]]
+payload_offset = 48
+length = 1
+
+[[boundaries]]
+payload_offset = 49
+length = 6
+
+[[boundaries]]
+payload_offset = 55
+length = 2
+
+[[boundaries]]
+payload_offset = 57
+length = 1
+
+[[boundaries]]
+payload_offset = 58
+length = 6
+
+[[boundaries]]
+payload_offset = 64
+length = 2
+
+[[boundaries]]
+payload_offset = 66
+length = 1
+
+[[boundaries]]
+payload_offset = 67
+length = 6
+
+[[boundaries]]
+payload_offset = 73
+length = 2
+
+[[boundaries]]
+payload_offset = 75
+length = 1
+
+[[boundaries]]
+payload_offset = 76
+length = 6
+
+[[boundaries]]
+payload_offset = 82
+length = 2
+
+[[boundaries]]
+payload_offset = 84
+length = 1
+
+[[boundaries]]
+payload_offset = 85
+length = 6
+
+[[boundaries]]
+payload_offset = 91
+length = 2
+
+[[boundaries]]
+payload_offset = 93
+length = 1
+
+[[boundaries]]
+payload_offset = 94
+length = 6
+
+[[boundaries]]
+payload_offset = 100
+length = 2
+
+[[boundaries]]
+payload_offset = 102
+length = 1
+
+[[boundaries]]
+payload_offset = 103
+length = 6
+
+[[boundaries]]
+payload_offset = 109
+length = 2
+
+[[boundaries]]
+payload_offset = 111
+length = 1
+
+[[boundaries]]
+payload_offset = 112
+length = 1
+
+[[boundaries]]
+payload_offset = 113
+length = 1
+
+[[boundaries]]
+payload_offset = 114
+length = 3
+
+[[boundaries]]
+payload_offset = 117
+length = 6
+
+[[boundaries]]
+payload_offset = 123
+length = 6
+
+[[boundaries]]
+payload_offset = 129
+length = 2
+
+[[boundaries]]
+payload_offset = 131
+length = 3
+
+[[boundaries]]
+payload_offset = 134
+length = 1
+
+[[boundaries]]
+payload_offset = 135
+length = 1
+
+[[boundaries]]
+payload_offset = 136
+length = 6
+
+[[boundaries]]
+payload_offset = 142
+length = 2
+
+[[boundaries]]
+payload_offset = 144
+length = 1
+
+[[boundaries]]
+payload_offset = 145
+length = 1
+
+[[boundaries]]
+payload_offset = 146
+length = 1
+
+[[boundaries]]
+payload_offset = 147
+length = 1
+
+[[boundaries]]
+payload_offset = 148
+length = 3
+
+[[boundaries]]
+payload_offset = 151
+length = 6
+
+[[boundaries]]
+payload_offset = 157
+length = 6
+
+[[boundaries]]
+payload_offset = 163
+length = 2
+
+[[boundaries]]
+payload_offset = 165
+length = 1
+
+[[boundaries]]
+payload_offset = 166
+length = 7
+
+[[boundaries]]
+payload_offset = 173
+length = 3
+
+[[boundaries]]
+payload_offset = 176
+length = 1
+
+[[boundaries]]
+payload_offset = 177
+length = 1
+
+[[boundaries]]
+payload_offset = 178
+length = 6
+
+[[boundaries]]
+payload_offset = 184
+length = 2
+
+[[boundaries]]
+payload_offset = 186
+length = 1
+
+[[boundaries]]
+payload_offset = 187
+length = 7
+
+[[boundaries]]
+payload_offset = 194
+length = 3
+
+[[boundaries]]
+payload_offset = 197
+length = 1
+
+[[boundaries]]
+payload_offset = 198
+length = 1
+
+[[boundaries]]
+payload_offset = 199
+length = 1
+
+[[boundaries]]
+payload_offset = 200
+length = 3
+
+[[boundaries]]
+payload_offset = 203
+length = 6
+
+[[boundaries]]
+payload_offset = 209
+length = 7
+
+[[boundaries]]
+payload_offset = 216
+length = 3
+
+[[boundaries]]
+payload_offset = 219
+length = 6
+
+[[boundaries]]
+payload_offset = 225
+length = 2
+
+[[boundaries]]
+payload_offset = 227
+length = 6
+
+[[boundaries]]
+payload_offset = 233
+length = 2
+
+[[boundaries]]
+payload_offset = 235
+length = 6
+
+[[boundaries]]
+payload_offset = 241
+length = 2
+
+[[boundaries]]
+payload_offset = 243
+length = 7
+
+[[boundaries]]
+payload_offset = 250
+length = 3
+
+[[boundaries]]
+payload_offset = 253
+length = 3
+
+[[boundaries]]
+payload_offset = 256
+length = 7
+
+[[boundaries]]
+payload_offset = 263
+length = 3
+
+[[boundaries]]
+payload_offset = 266
+length = 7
+
+[[boundaries]]
+payload_offset = 273
+length = 3
+
+[[boundaries]]
+payload_offset = 276
+length = 6
+
+[[boundaries]]
+payload_offset = 282
+length = 2
+
+[[boundaries]]
+payload_offset = 284
+length = 5
+
+[[boundaries]]
+payload_offset = 290
+length = 5
+
+[[boundaries]]
+payload_offset = 295
+length = 6
+
+[[boundaries]]
+payload_offset = 301
+length = 5
+
+[[boundaries]]
+payload_offset = 306
+length = 6
+
+[[boundaries]]
+payload_offset = 312
+length = 1
+
+[[boundaries]]
+payload_offset = 313
+length = 5
+
+[[boundaries]]
+payload_offset = 318
+length = 5
+
+[[boundaries]]
+payload_offset = 323
+length = 6
+
+[[boundaries]]
+payload_offset = 329
+length = 5
+
+[[boundaries]]
+payload_offset = 334
+length = 6
+
+[[boundaries]]
+payload_offset = 340
+length = 1
+
+[[boundaries]]
+payload_offset = 341
+length = 7
+
+[[boundaries]]
+payload_offset = 348
+length = 7
+
+[[boundaries]]
+payload_offset = 355
+length = 7
+
+[[boundaries]]
+payload_offset = 362
+length = 3
+
+[[boundaries]]
+payload_offset = 365
+length = 7
+
+[[boundaries]]
+payload_offset = 372
+length = 3
+
+[[boundaries]]
+payload_offset = 375
+length = 3
+
+[[boundaries]]
+payload_offset = 378
+length = 7
+
+[[boundaries]]
+payload_offset = 385
+length = 7
+
+[[boundaries]]
+payload_offset = 392
+length = 3
+
+[[boundaries]]
+payload_offset = 395
+length = 6
+
+[[boundaries]]
+payload_offset = 401
+length = 2
+
+[[boundaries]]
+payload_offset = 403
+length = 1
+
+[[boundaries]]
+payload_offset = 404
+length = 7
+
+[[boundaries]]
+payload_offset = 411
+length = 7
+
+[[boundaries]]
+payload_offset = 418
+length = 7
+
+[[boundaries]]
+payload_offset = 425
+length = 3
+
+[[boundaries]]
+payload_offset = 428
+length = 5
+
+[[boundaries]]
+payload_offset = 434
+length = 7
+
+[[boundaries]]
+payload_offset = 441
+length = 7
+
+[[boundaries]]
+payload_offset = 448
+length = 7
+
+[[boundaries]]
+payload_offset = 455
+length = 3
+
+[[boundaries]]
+payload_offset = 458
+length = 7
+
+[[boundaries]]
+payload_offset = 465
+length = 3
+
+[[boundaries]]
+payload_offset = 468
+length = 3
+
+[[boundaries]]
+payload_offset = 471
+length = 7
+
+[[boundaries]]
+payload_offset = 478
+length = 3
+
+[[boundaries]]
+payload_offset = 481
+length = 6
+
+[[boundaries]]
+payload_offset = 487
+length = 2
+
+[[boundaries]]
+payload_offset = 489
+length = 1
+
+[[boundaries]]
+payload_offset = 490
+length = 7
+
+[[boundaries]]
+payload_offset = 497
+length = 7
+
+[[boundaries]]
+payload_offset = 504
+length = 7
+
+[[boundaries]]
+payload_offset = 511
+length = 3
+
+[[boundaries]]
+payload_offset = 514
+length = 5
+
+[[boundaries]]
+payload_offset = 520
+length = 3
+
+[[boundaries]]
+payload_offset = 523
+length = 3
+
+[[boundaries]]
+payload_offset = 526
+length = 3
+
+[[boundaries]]
+payload_offset = 529
+length = 3
+
+[[boundaries]]
+payload_offset = 532
+length = 3
+
+[[boundaries]]
+payload_offset = 535
+length = 5
+
+[[boundaries]]
+payload_offset = 540
+length = 3
+
+[[boundaries]]
+payload_offset = 543
+length = 5
+
+[[boundaries]]
+payload_offset = 548
+length = 6
+
+[[boundaries]]
+payload_offset = 554
+length = 5
+
+[[boundaries]]
+payload_offset = 559
+length = 6
+
+[[boundaries]]
+payload_offset = 565
+length = 7
+
+[[boundaries]]
+payload_offset = 572
+length = 3
+
+[[boundaries]]
+payload_offset = 575
+length = 6
+
+[[boundaries]]
+payload_offset = 581
+length = 2
+
+[[boundaries]]
+payload_offset = 583
+length = 1
+
+[[boundaries]]
+payload_offset = 584
+length = 5
+
+[[boundaries]]
+payload_offset = 589
+length = 5
+
+[[boundaries]]
+payload_offset = 594
+length = 6
+
+[[boundaries]]
+payload_offset = 600
+length = 5
+
+[[boundaries]]
+payload_offset = 605
+length = 6
+
+[[boundaries]]
+payload_offset = 611
+length = 3
+
+[[boundaries]]
+payload_offset = 614
+length = 1
+
+[[boundaries]]
+payload_offset = 615
+length = 1
+
+[[boundaries]]
+payload_offset = 616
+length = 3
+
+[[boundaries]]
+payload_offset = 619
+length = 7
+
+[[boundaries]]
+payload_offset = 626
+length = 3
+
+[[boundaries]]
+payload_offset = 629
+length = 1
+
+[[boundaries]]
+payload_offset = 630
+length = 7
+
+[[boundaries]]
+payload_offset = 637
+length = 3
+
+[[boundaries]]
+payload_offset = 640
+length = 7
+
+[[boundaries]]
+payload_offset = 647
+length = 3
+
+[[boundaries]]
+payload_offset = 650
+length = 1
+
+[[boundaries]]
+payload_offset = 651
+length = 7
+
+[[boundaries]]
+payload_offset = 658
+length = 7
+
+[[boundaries]]
+payload_offset = 665
+length = 3
+
+[[boundaries]]
+payload_offset = 668
+length = 1
+
+[[boundaries]]
+payload_offset = 669
+length = 7
+
+[[boundaries]]
+payload_offset = 676
+length = 7
+
+[[boundaries]]
+payload_offset = 683
+length = 3
+
+[[boundaries]]
+payload_offset = 686
+length = 1
+
+[[boundaries]]
+payload_offset = 687
+length = 6
+
+[[boundaries]]
+payload_offset = 693
+length = 2
+
+[[boundaries]]
+payload_offset = 695
+length = 10
+
+[[boundaries]]
+payload_offset = 705
+length = 7
+
+[[boundaries]]
+payload_offset = 712
+length = 3
+
+[[boundaries]]
+payload_offset = 715
+length = 6
+
+[[boundaries]]
+payload_offset = 721
+length = 2
+
+[[boundaries]]
+payload_offset = 723
+length = 7
+
+[[boundaries]]
+payload_offset = 730
+length = 3
+
+[[boundaries]]
+payload_offset = 733
+length = 6
+
+[[boundaries]]
+payload_offset = 739
+length = 2
+
+[[boundaries]]
+payload_offset = 741
+length = 7
+
+[[boundaries]]
+payload_offset = 748
+length = 3
+
+[[boundaries]]
+payload_offset = 751
+length = 6
+
+[[boundaries]]
+payload_offset = 757
+length = 2
+
+[[boundaries]]
+payload_offset = 759
+length = 1
+
+[[boundaries]]
+payload_offset = 760
+length = 3
+
+[[boundaries]]
+payload_offset = 763
+length = 6
+
+[[boundaries]]
+payload_offset = 769
+length = 2
+
+[[boundaries]]
+payload_offset = 771
+length = 1
+
+[[boundaries]]
+payload_offset = 772
+length = 1
+
+[[boundaries]]
+payload_offset = 773
+length = 7
+
+[[boundaries]]
+payload_offset = 780
+length = 3
+
+[[boundaries]]
+payload_offset = 783
+length = 6
+
+[[boundaries]]
+payload_offset = 789
+length = 2
+
+[[boundaries]]
+payload_offset = 791
+length = 5
+
+[[boundaries]]
+payload_offset = 797
+length = 1
+
+[[boundaries]]
+payload_offset = 798
+length = 1
+
+[[boundaries]]
+payload_offset = 799
+length = 3
+
+[[boundaries]]
+payload_offset = 802
+length = 6
+
+[[boundaries]]
+payload_offset = 808
+length = 5
+
+[[boundaries]]
+payload_offset = 813
+length = 6
+
+[[boundaries]]
+payload_offset = 819
+length = 3
+
+[[boundaries]]
+payload_offset = 822
+length = 6
+
+[[boundaries]]
+payload_offset = 828
+length = 6
+
+[[boundaries]]
+payload_offset = 834
+length = 2
+
+[[boundaries]]
+payload_offset = 836
+length = 5
+
+[[boundaries]]
+payload_offset = 841
+length = 5
+
+[[boundaries]]
+payload_offset = 846
+length = 2
+
+[[boundaries]]
+payload_offset = 848
+length = 3
+
+[[boundaries]]
+payload_offset = 851
+length = 6
+
+[[boundaries]]
+payload_offset = 857
+length = 2
+
+[[boundaries]]
+payload_offset = 859
+length = 1
+
+[[boundaries]]
+payload_offset = 860
+length = 1
+
+[[boundaries]]
+payload_offset = 861
+length = 6
+
+[[boundaries]]
+payload_offset = 867
+length = 2
+
+[[boundaries]]
+payload_offset = 869
+length = 1
+
+[[boundaries]]
+payload_offset = 870
+length = 1
+
+[[boundaries]]
+payload_offset = 871
+length = 6
+
+[[boundaries]]
+payload_offset = 877
+length = 2
+
+[[boundaries]]
+payload_offset = 879
+length = 5
+
+[[boundaries]]
+payload_offset = 884
+length = 5
+
+[[boundaries]]
+payload_offset = 889
+length = 2
+
+[[boundaries]]
+payload_offset = 891
+length = 5
+
+[[boundaries]]
+payload_offset = 896
+length = 6
+
+[[boundaries]]
+payload_offset = 902
+length = 3
+
+[[boundaries]]
+payload_offset = 905
+length = 6
+
+[[boundaries]]
+payload_offset = 911
+length = 2
+
+[[boundaries]]
+payload_offset = 913
+length = 1
+
+[[boundaries]]
+payload_offset = 914
+length = 1
+
+[[boundaries]]
+payload_offset = 915
+length = 6
+
+[[boundaries]]
+payload_offset = 921
+length = 2
+
+[[boundaries]]
+payload_offset = 923
+length = 1
+
+[[boundaries]]
+payload_offset = 924
+length = 1
+
+[[boundaries]]
+payload_offset = 925
+length = 1
+
+[[boundaries]]
+payload_offset = 926
+length = 5
+
+[[boundaries]]
+payload_offset = 931
+length = 1
+
+[[boundaries]]
+payload_offset = 932
+length = 3
+
+[[boundaries]]
+payload_offset = 935
+length = 3
+
+[[boundaries]]
+payload_offset = 938
+length = 6
+
+[[boundaries]]
+payload_offset = 944
+length = 2
+
+[[boundaries]]
+payload_offset = 946
+length = 1
+
+[[boundaries]]
+payload_offset = 947
+length = 1
+
+[[boundaries]]
+payload_offset = 948
+length = 3
+
+[[boundaries]]
+payload_offset = 951
+length = 3
+
+[[boundaries]]
+payload_offset = 954
+length = 3
+
+[[boundaries]]
+payload_offset = 957
+length = 1
+
+[[boundaries]]
+payload_offset = 958
+length = 1

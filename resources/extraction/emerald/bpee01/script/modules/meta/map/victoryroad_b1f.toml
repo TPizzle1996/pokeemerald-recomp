@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 5
 reloc_count = 15
+instruction_count = 20
 
 [[segments]]
 kind = "bytecode"
@@ -71,6 +72,8 @@ original_encoded_gba = 0x8236558
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/victoryroad-b1f"
 target_export = "VictoryRoad_B1F_Text_SamuelIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -80,6 +83,8 @@ original_encoded_gba = 0x82365ad
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/victoryroad-b1f"
 target_export = "VictoryRoad_B1F_Text_SamuelDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -89,6 +94,8 @@ original_encoded_gba = 0x82365c4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/victoryroad-b1f"
 target_export = "VictoryRoad_B1F_Text_SamuelPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -98,6 +105,8 @@ original_encoded_gba = 0x82365fd
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/victoryroad-b1f"
 target_export = "VictoryRoad_B1F_Text_ShannonIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -107,6 +116,8 @@ original_encoded_gba = 0x823664d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/victoryroad-b1f"
 target_export = "VictoryRoad_B1F_Text_ShannonDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -116,6 +127,8 @@ original_encoded_gba = 0x8236678
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/victoryroad-b1f"
 target_export = "VictoryRoad_B1F_Text_ShannonPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -125,6 +138,8 @@ original_encoded_gba = 0x82366c2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/victoryroad-b1f"
 target_export = "VictoryRoad_B1F_Text_MichelleIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -134,6 +149,8 @@ original_encoded_gba = 0x823670b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/victoryroad-b1f"
 target_export = "VictoryRoad_B1F_Text_MichelleDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -143,6 +160,8 @@ original_encoded_gba = 0x823671b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/victoryroad-b1f"
 target_export = "VictoryRoad_B1F_Text_MichellePostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -152,6 +171,8 @@ original_encoded_gba = 0x8236757
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/victoryroad-b1f"
 target_export = "VictoryRoad_B1F_Text_MitchellIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -161,6 +182,8 @@ original_encoded_gba = 0x8236780
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/victoryroad-b1f"
 target_export = "VictoryRoad_B1F_Text_MitchellDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -170,6 +193,8 @@ original_encoded_gba = 0x82367a7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/victoryroad-b1f"
 target_export = "VictoryRoad_B1F_Text_MitchellPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -179,6 +204,8 @@ original_encoded_gba = 0x82367fd
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/victoryroad-b1f"
 target_export = "VictoryRoad_B1F_Text_HalleIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -188,6 +215,8 @@ original_encoded_gba = 0x823683b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/victoryroad-b1f"
 target_export = "VictoryRoad_B1F_Text_HalleDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -197,4 +226,86 @@ original_encoded_gba = 0x823684c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/victoryroad-b1f"
 target_export = "VictoryRoad_B1F_Text_HallePostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 14
+
+[[boundaries]]
+payload_offset = 14
+length = 6
+
+[[boundaries]]
+payload_offset = 20
+length = 2
+
+[[boundaries]]
+payload_offset = 22
+length = 1
+
+[[boundaries]]
+payload_offset = 23
+length = 14
+
+[[boundaries]]
+payload_offset = 37
+length = 6
+
+[[boundaries]]
+payload_offset = 43
+length = 2
+
+[[boundaries]]
+payload_offset = 45
+length = 1
+
+[[boundaries]]
+payload_offset = 46
+length = 14
+
+[[boundaries]]
+payload_offset = 60
+length = 6
+
+[[boundaries]]
+payload_offset = 66
+length = 2
+
+[[boundaries]]
+payload_offset = 68
+length = 1
+
+[[boundaries]]
+payload_offset = 69
+length = 14
+
+[[boundaries]]
+payload_offset = 83
+length = 6
+
+[[boundaries]]
+payload_offset = 89
+length = 2
+
+[[boundaries]]
+payload_offset = 91
+length = 1
+
+[[boundaries]]
+payload_offset = 92
+length = 14
+
+[[boundaries]]
+payload_offset = 106
+length = 6
+
+[[boundaries]]
+payload_offset = 112
+length = 2
+
+[[boundaries]]
+payload_offset = 114
+length = 1

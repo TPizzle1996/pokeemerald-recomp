@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 9
 reloc_count = 11
+instruction_count = 0
 
 [[segments]]
 kind = "bytecode"
@@ -104,6 +105,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/mystery-gift/gift-pichu"
 target_export = "MysteryGiftScript_SurfPichu"
 target_offset = 0
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 0
 runtime_resolution_required = true
 
 [[relocs]]
@@ -114,6 +117,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/mystery-gift/gift-pichu"
 target_export = "SurfPichu_GiveIfPossible"
 target_offset = 15
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 15
 runtime_resolution_required = true
 
 [[relocs]]
@@ -124,6 +129,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/mystery-gift/gift-pichu"
 target_export = "SurfPichu_FullParty"
 target_offset = 54
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 54
 runtime_resolution_required = true
 
 [[relocs]]
@@ -134,6 +141,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/mystery-gift/gift-pichu"
 target_export = "SurfPichu_GiveEgg"
 target_offset = 65
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 65
 runtime_resolution_required = true
 
 [[relocs]]
@@ -143,6 +152,8 @@ original_encoded_gba = 0x8674dde
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/mystery-gift/stext-mysterygiftegg"
 target_export = "sText_MysteryGiftEgg"
+target_kind = "TEXT_LABEL"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -152,6 +163,8 @@ original_encoded_gba = 0x8674e6a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/mystery-gift/stext-fullparty"
 target_export = "sText_FullParty"
+target_kind = "TEXT_LABEL"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -162,6 +175,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/mystery-gift/gift-pichu"
 target_export = "SurfPichu_Slot1"
 target_offset = 131
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 131
 runtime_resolution_required = true
 
 [[relocs]]
@@ -172,6 +187,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/mystery-gift/gift-pichu"
 target_export = "SurfPichu_Slot2"
 target_offset = 137
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 137
 runtime_resolution_required = true
 
 [[relocs]]
@@ -182,6 +199,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/mystery-gift/gift-pichu"
 target_export = "SurfPichu_Slot3"
 target_offset = 143
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 143
 runtime_resolution_required = true
 
 [[relocs]]
@@ -192,6 +211,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/mystery-gift/gift-pichu"
 target_export = "SurfPichu_Slot4"
 target_offset = 149
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 149
 runtime_resolution_required = true
 
 [[relocs]]
@@ -202,4 +223,6 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/mystery-gift/gift-pichu"
 target_export = "SurfPichu_Slot5"
 target_offset = 155
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 155
 runtime_resolution_required = true

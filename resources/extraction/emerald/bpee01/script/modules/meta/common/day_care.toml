@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 2
 export_count = 29
 reloc_count = 78
+instruction_count = 248
 
 [[segments]]
 kind = "bytecode"
@@ -270,6 +271,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/day-care"
 target_export = "Route117_EventScript_DaycareEggWaiting"
 target_offset = 53
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 53
 runtime_resolution_required = true
 
 [[relocs]]
@@ -280,6 +283,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/day-care"
 target_export = "Route117_EventScript_CheckOnOneMon"
 target_offset = 185
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 185
 runtime_resolution_required = true
 
 [[relocs]]
@@ -290,6 +295,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/day-care"
 target_export = "Route117_EventScript_CheckOnTwoMons"
 target_offset = 208
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 208
 runtime_resolution_required = true
 
 [[relocs]]
@@ -299,6 +306,8 @@ original_encoded_gba = 0x8291fcf
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/day-care"
 target_export = "Route117_Text_SeeWifeIfYoudLikeMeToRaiseMon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -308,6 +317,8 @@ original_encoded_gba = 0x829205d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/day-care"
 target_export = "Route117_Text_DoYouWantEgg"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -318,6 +329,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/day-care"
 target_export = "Route117_EventScript_DaycareAcceptEgg"
 target_offset = 107
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 107
 runtime_resolution_required = true
 
 [[relocs]]
@@ -327,6 +340,8 @@ original_encoded_gba = 0x82922c6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/day-care"
 target_export = "Route117_Text_IWillKeepDoYouWantIt"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -337,6 +352,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/day-care"
 target_export = "Route117_EventScript_DaycareAcceptEgg"
 target_offset = 107
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 107
 runtime_resolution_required = true
 
 [[relocs]]
@@ -346,6 +363,8 @@ original_encoded_gba = 0x8292149
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/day-care"
 target_export = "Route117_Text_IllKeepIt"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -356,6 +375,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/day-care"
 target_export = "Route117_EventScript_DaycareReceiveEgg"
 target_offset = 133
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 133
 runtime_resolution_required = true
 
 [[relocs]]
@@ -365,6 +386,8 @@ original_encoded_gba = 0x829216a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/day-care"
 target_export = "Route117_Text_YouHaveNoRoomForIt"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -374,6 +397,8 @@ original_encoded_gba = 0x82921a4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/day-care"
 target_export = "Route117_Text_ReceivedEgg"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -383,6 +408,8 @@ original_encoded_gba = 0x82921cf
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/day-care"
 target_export = "Route117_Text_TakeGoodCareOfIt"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -393,6 +420,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/day-care"
 target_export = "Route117_EventScript_MonReceivedMail"
 target_offset = 176
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 176
 runtime_resolution_required = true
 
 [[relocs]]
@@ -402,6 +431,8 @@ original_encoded_gba = 0x82921e5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/day-care"
 target_export = "Route117_Text_FriendlyWithOtherTrainersMon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -411,6 +442,8 @@ original_encoded_gba = 0x8292114
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/day-care"
 target_export = "Route117_Text_YourMonIsDoingFine"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -421,6 +454,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/day-care"
 target_export = "Route117_EventScript_CheckMonReceivedMail"
 target_offset = 159
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 159
 runtime_resolution_required = true
 
 [[relocs]]
@@ -430,6 +465,8 @@ original_encoded_gba = 0x8292299
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/day-care"
 target_export = "Route117_Text_YourMonsAreDoingFine"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -440,6 +477,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/day-care"
 target_export = "Route117_EventScript_CheckMonReceivedMail"
 target_offset = 159
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 159
 runtime_resolution_required = true
 
 [[relocs]]
@@ -450,6 +489,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/day-care"
 target_export = "Route117_EventScript_CheckMonReceivedMail"
 target_offset = 159
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 159
 runtime_resolution_required = true
 
 [[relocs]]
@@ -460,6 +501,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/day-care"
 target_export = "Route117_PokemonDayCare_EventScript_EggWaiting"
 target_offset = 499
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 499
 runtime_resolution_required = true
 
 [[relocs]]
@@ -470,6 +513,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/day-care"
 target_export = "Route117_PokemonDayCare_EventScript_OneMonInDaycare"
 target_offset = 535
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 535
 runtime_resolution_required = true
 
 [[relocs]]
@@ -480,6 +525,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/day-care"
 target_export = "Route117_PokemonDayCare_EventScript_TwoMonsInDaycare"
 target_offset = 836
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 816
 runtime_resolution_required = true
 
 [[relocs]]
@@ -489,6 +536,8 @@ original_encoded_gba = 0x82922f4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/day-care"
 target_export = "Route117_PokemonDayCare_Text_WouldYouLikeUsToRaiseAMon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -499,6 +548,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/day-care"
 target_export = "Route117_PokemonDayCare_EventScript_GiveMonToRaise"
 target_offset = 318
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 318
 runtime_resolution_required = true
 
 [[relocs]]
@@ -508,6 +559,8 @@ original_encoded_gba = 0x8292416
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/day-care"
 target_export = "Route117_PokemonDayCare_Text_FineThenComeAgain"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -518,6 +571,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/day-care"
 target_export = "Route117_PokemonDayCare_EventScript_OnlyOneMon"
 target_offset = 469
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 469
 runtime_resolution_required = true
 
 [[relocs]]
@@ -528,6 +583,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/day-care"
 target_export = "Route117_PokemonDayCare_EventScript_OnlyTwoAliveMons"
 target_offset = 489
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 489
 runtime_resolution_required = true
 
 [[relocs]]
@@ -537,6 +594,8 @@ original_encoded_gba = 0x8292349
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/day-care"
 target_export = "Route117_PokemonDayCare_Text_WhichMonShouldWeRaise"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -547,6 +606,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/day-care"
 target_export = "Route117_PokemonDayCare_EventScript_ComeAgain"
 target_offset = 434
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 434
 runtime_resolution_required = true
 
 [[relocs]]
@@ -557,6 +618,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/day-care"
 target_export = "Route117_PokemonDayCare_EventScript_OnlyOneAliveMon"
 target_offset = 479
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 479
 runtime_resolution_required = true
 
 [[relocs]]
@@ -566,6 +629,8 @@ original_encoded_gba = 0x8292370
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/day-care"
 target_export = "Route117_PokemonDayCare_Text_WellRaiseYourMon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -576,6 +641,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/day-care"
 target_export = "Route117_PokemonDayCare_EventScript_CanRaiseOneMore"
 target_offset = 444
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 444
 runtime_resolution_required = true
 
 [[relocs]]
@@ -585,6 +652,8 @@ original_encoded_gba = 0x8292476
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/day-care"
 target_export = "Route117_PokemonDayCare_Text_ComeAgain"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -594,6 +663,8 @@ original_encoded_gba = 0x82923af
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/day-care"
 target_export = "Route117_PokemonDayCare_Text_WeCanRaiseOneMore"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -604,6 +675,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/day-care"
 target_export = "Route117_PokemonDayCare_EventScript_GiveMonToRaise"
 target_offset = 318
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 318
 runtime_resolution_required = true
 
 [[relocs]]
@@ -614,6 +687,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/day-care"
 target_export = "Route117_PokemonDayCare_EventScript_ComeAgain"
 target_offset = 434
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 434
 runtime_resolution_required = true
 
 [[relocs]]
@@ -623,6 +698,8 @@ original_encoded_gba = 0x82925bb
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/day-care"
 target_export = "Route117_PokemonDayCare_Text_YouHaveJustOneMon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -632,6 +709,8 @@ original_encoded_gba = 0x8292617
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/day-care"
 target_export = "Route117_PokemonDayCare_Text_WhatWillYouBattleWith"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -641,6 +720,8 @@ original_encoded_gba = 0x829266d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/day-care"
 target_export = "Route117_PokemonDayCare_Text_YoullBeLeftWithJustOne"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -650,6 +731,8 @@ original_encoded_gba = 0x82923f6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/day-care"
 target_export = "Route117_PokemonDayCare_Text_HusbandWasLookingForYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -659,6 +742,8 @@ original_encoded_gba = 0x82924cc
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/day-care"
 target_export = "Route117_PokemonDayCare_Text_YourMonHasGrownXLevels"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -669,6 +754,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/day-care"
 target_export = "Route117_PokemonDayCare_EventScript_YourMonHasGrownXLevels"
 target_offset = 509
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 509
 runtime_resolution_required = true
 
 [[relocs]]
@@ -678,6 +765,8 @@ original_encoded_gba = 0x8292488
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/day-care"
 target_export = "Route117_PokemonDayCare_Text_GoodToSeeYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -688,6 +777,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/day-care"
 target_export = "Route117_PokemonDayCare_EventScript_DisplayLevelsGained"
 target_offset = 518
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 518
 runtime_resolution_required = true
 
 [[relocs]]
@@ -697,6 +788,8 @@ original_encoded_gba = 0x82923af
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/day-care"
 target_export = "Route117_PokemonDayCare_Text_WeCanRaiseOneMore"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -707,6 +800,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/day-care"
 target_export = "Route117_PokemonDayCare_EventScript_GiveMonToRaise"
 target_offset = 318
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 318
 runtime_resolution_required = true
 
 [[relocs]]
@@ -716,6 +811,8 @@ original_encoded_gba = 0x82925f6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/day-care"
 target_export = "Route117_PokemonDayCare_Text_TakeYourMonBack"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -726,6 +823,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/day-care"
 target_export = "Route117_PokemonDayCare_EventScript_TryRetrieveMon"
 target_offset = 597
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 597
 runtime_resolution_required = true
 
 [[relocs]]
@@ -736,6 +835,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/day-care"
 target_export = "Route117_PokemonDayCare_EventScript_ComeAgain"
 target_offset = 434
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 434
 runtime_resolution_required = true
 
 [[relocs]]
@@ -746,6 +847,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/day-care"
 target_export = "Route117_PokemonDayCare_EventScript_NoRoom"
 target_offset = 805
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 805
 runtime_resolution_required = true
 
 [[relocs]]
@@ -756,6 +859,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/day-care"
 target_export = "Route117_PokemonDayCare_EventScript_CostPrompt"
 target_offset = 660
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 660
 runtime_resolution_required = true
 
 [[relocs]]
@@ -766,6 +871,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/day-care"
 target_export = "Route117_PokemonDayCare_EventScript_ComeAgain"
 target_offset = 434
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 434
 runtime_resolution_required = true
 
 [[relocs]]
@@ -776,6 +883,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/day-care"
 target_export = "Route117_PokemonDayCare_EventScript_CostPrompt"
 target_offset = 660
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 660
 runtime_resolution_required = true
 
 [[relocs]]
@@ -785,6 +894,8 @@ original_encoded_gba = 0x8292549
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/day-care"
 target_export = "Route117_PokemonDayCare_Text_ItWillCostX"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -795,6 +906,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/day-care"
 target_export = "Route117_PokemonDayCare_EventScript_CheckEnoughMoney"
 target_offset = 688
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 688
 runtime_resolution_required = true
 
 [[relocs]]
@@ -805,6 +918,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/day-care"
 target_export = "Route117_PokemonDayCare_EventScript_ComeAgain"
 target_offset = 434
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 434
 runtime_resolution_required = true
 
 [[relocs]]
@@ -815,6 +930,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/day-care"
 target_export = "Route117_PokemonDayCare_EventScript_RetrieveMon"
 target_offset = 714
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 714
 runtime_resolution_required = true
 
 [[relocs]]
@@ -824,6 +941,8 @@ original_encoded_gba = 0x8292432
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/day-care"
 target_export = "Route117_PokemonDayCare_Text_NotEnoughMoney"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -833,6 +952,8 @@ original_encoded_gba = 0x8291f47
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route117-pokemondaycare-movement-retrievedaycaremon"
 target_export = "Route117_PokemonDayCare_Movement_RetrieveDaycareMon"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -842,6 +963,8 @@ original_encoded_gba = 0x8292575
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/day-care"
 target_export = "Route117_PokemonDayCare_Text_HeresYourMon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -851,6 +974,8 @@ original_encoded_gba = 0x8292593
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/day-care"
 target_export = "Route117_PokemonDayCare_Text_TookBackMon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -861,6 +986,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/day-care"
 target_export = "Route117_PokemonDayCare_EventScript_AskRetrieveOtherMon"
 target_offset = 780
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 780
 runtime_resolution_required = true
 
 [[relocs]]
@@ -871,6 +998,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/day-care"
 target_export = "Route117_PokemonDayCare_EventScript_ComeAgain"
 target_offset = 434
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 434
 runtime_resolution_required = true
 
 [[relocs]]
@@ -880,6 +1009,8 @@ original_encoded_gba = 0x829244f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/day-care"
 target_export = "Route117_PokemonDayCare_Text_TakeOtherOneBackToo"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -890,6 +1021,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/day-care"
 target_export = "Route117_PokemonDayCare_EventScript_TryRetrieveMon"
 target_offset = 597
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 597
 runtime_resolution_required = true
 
 [[relocs]]
@@ -900,6 +1033,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/day-care"
 target_export = "Route117_PokemonDayCare_EventScript_ComeAgain"
 target_offset = 434
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 434
 runtime_resolution_required = true
 
 [[relocs]]
@@ -909,6 +1044,8 @@ original_encoded_gba = 0x82924ef
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/day-care"
 target_export = "Route117_PokemonDayCare_Text_YourTeamIsFull"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -918,6 +1055,8 @@ original_encoded_gba = 0x8292488
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/day-care"
 target_export = "Route117_PokemonDayCare_Text_GoodToSeeYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -928,6 +1067,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/day-care"
 target_export = "Route117_PokemonDayCare_EventScript_DisplayLevelsGained"
 target_offset = 518
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 518
 runtime_resolution_required = true
 
 [[relocs]]
@@ -938,6 +1079,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/day-care"
 target_export = "Route117_PokemonDayCare_EventScript_DisplayLevelsGained"
 target_offset = 518
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 518
 runtime_resolution_required = true
 
 [[relocs]]
@@ -947,6 +1090,8 @@ original_encoded_gba = 0x82925f6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/day-care"
 target_export = "Route117_PokemonDayCare_Text_TakeYourMonBack"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -957,6 +1102,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/day-care"
 target_export = "Route117_PokemonDayCare_EventScript_TryRetrieveMon"
 target_offset = 597
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 597
 runtime_resolution_required = true
 
 [[relocs]]
@@ -966,6 +1113,8 @@ original_encoded_gba = 0x8292476
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/day-care"
 target_export = "Route117_PokemonDayCare_Text_ComeAgain"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -976,6 +1125,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/day-care"
 target_export = "Route117_PokemonDayCare_EventScript_ComeAgain"
 target_offset = 434
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 434
 runtime_resolution_required = true
 
 [[relocs]]
@@ -985,6 +1136,8 @@ original_encoded_gba = 0x8292575
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/day-care"
 target_export = "Route117_PokemonDayCare_Text_HeresYourMon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -994,6 +1147,8 @@ original_encoded_gba = 0x8292476
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/day-care"
 target_export = "Route117_PokemonDayCare_Text_ComeAgain"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1003,4 +1158,998 @@ original_encoded_gba = 0x8292668
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/day-care"
 target_export = "Text_EggHatchHuh"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 1
+
+[[boundaries]]
+payload_offset = 2
+length = 3
+
+[[boundaries]]
+payload_offset = 5
+length = 5
+
+[[boundaries]]
+payload_offset = 10
+length = 5
+
+[[boundaries]]
+payload_offset = 15
+length = 6
+
+[[boundaries]]
+payload_offset = 21
+length = 5
+
+[[boundaries]]
+payload_offset = 26
+length = 6
+
+[[boundaries]]
+payload_offset = 32
+length = 5
+
+[[boundaries]]
+payload_offset = 37
+length = 6
+
+[[boundaries]]
+payload_offset = 43
+length = 6
+
+[[boundaries]]
+payload_offset = 49
+length = 2
+
+[[boundaries]]
+payload_offset = 51
+length = 1
+
+[[boundaries]]
+payload_offset = 52
+length = 1
+
+[[boundaries]]
+payload_offset = 53
+length = 6
+
+[[boundaries]]
+payload_offset = 59
+length = 2
+
+[[boundaries]]
+payload_offset = 61
+length = 5
+
+[[boundaries]]
+payload_offset = 66
+length = 6
+
+[[boundaries]]
+payload_offset = 72
+length = 6
+
+[[boundaries]]
+payload_offset = 78
+length = 2
+
+[[boundaries]]
+payload_offset = 80
+length = 5
+
+[[boundaries]]
+payload_offset = 85
+length = 6
+
+[[boundaries]]
+payload_offset = 91
+length = 6
+
+[[boundaries]]
+payload_offset = 97
+length = 2
+
+[[boundaries]]
+payload_offset = 99
+length = 3
+
+[[boundaries]]
+payload_offset = 102
+length = 3
+
+[[boundaries]]
+payload_offset = 105
+length = 1
+
+[[boundaries]]
+payload_offset = 106
+length = 1
+
+[[boundaries]]
+payload_offset = 107
+length = 5
+
+[[boundaries]]
+payload_offset = 112
+length = 5
+
+[[boundaries]]
+payload_offset = 117
+length = 6
+
+[[boundaries]]
+payload_offset = 123
+length = 6
+
+[[boundaries]]
+payload_offset = 129
+length = 2
+
+[[boundaries]]
+payload_offset = 131
+length = 1
+
+[[boundaries]]
+payload_offset = 132
+length = 1
+
+[[boundaries]]
+payload_offset = 133
+length = 5
+
+[[boundaries]]
+payload_offset = 138
+length = 3
+
+[[boundaries]]
+payload_offset = 141
+length = 1
+
+[[boundaries]]
+payload_offset = 142
+length = 1
+
+[[boundaries]]
+payload_offset = 143
+length = 6
+
+[[boundaries]]
+payload_offset = 149
+length = 2
+
+[[boundaries]]
+payload_offset = 151
+length = 3
+
+[[boundaries]]
+payload_offset = 154
+length = 3
+
+[[boundaries]]
+payload_offset = 157
+length = 1
+
+[[boundaries]]
+payload_offset = 158
+length = 1
+
+[[boundaries]]
+payload_offset = 159
+length = 5
+
+[[boundaries]]
+payload_offset = 164
+length = 5
+
+[[boundaries]]
+payload_offset = 169
+length = 6
+
+[[boundaries]]
+payload_offset = 175
+length = 1
+
+[[boundaries]]
+payload_offset = 176
+length = 6
+
+[[boundaries]]
+payload_offset = 182
+length = 2
+
+[[boundaries]]
+payload_offset = 184
+length = 1
+
+[[boundaries]]
+payload_offset = 185
+length = 3
+
+[[boundaries]]
+payload_offset = 188
+length = 6
+
+[[boundaries]]
+payload_offset = 194
+length = 2
+
+[[boundaries]]
+payload_offset = 196
+length = 5
+
+[[boundaries]]
+payload_offset = 201
+length = 5
+
+[[boundaries]]
+payload_offset = 206
+length = 1
+
+[[boundaries]]
+payload_offset = 207
+length = 1
+
+[[boundaries]]
+payload_offset = 208
+length = 3
+
+[[boundaries]]
+payload_offset = 211
+length = 6
+
+[[boundaries]]
+payload_offset = 217
+length = 2
+
+[[boundaries]]
+payload_offset = 219
+length = 3
+
+[[boundaries]]
+payload_offset = 222
+length = 3
+
+[[boundaries]]
+payload_offset = 225
+length = 1
+
+[[boundaries]]
+payload_offset = 226
+length = 1
+
+[[boundaries]]
+payload_offset = 227
+length = 5
+
+[[boundaries]]
+payload_offset = 232
+length = 5
+
+[[boundaries]]
+payload_offset = 237
+length = 5
+
+[[boundaries]]
+payload_offset = 242
+length = 5
+
+[[boundaries]]
+payload_offset = 247
+length = 1
+
+[[boundaries]]
+payload_offset = 248
+length = 1
+
+[[boundaries]]
+payload_offset = 249
+length = 1
+
+[[boundaries]]
+payload_offset = 250
+length = 1
+
+[[boundaries]]
+payload_offset = 251
+length = 5
+
+[[boundaries]]
+payload_offset = 256
+length = 5
+
+[[boundaries]]
+payload_offset = 261
+length = 6
+
+[[boundaries]]
+payload_offset = 267
+length = 5
+
+[[boundaries]]
+payload_offset = 272
+length = 6
+
+[[boundaries]]
+payload_offset = 278
+length = 5
+
+[[boundaries]]
+payload_offset = 283
+length = 6
+
+[[boundaries]]
+payload_offset = 289
+length = 6
+
+[[boundaries]]
+payload_offset = 295
+length = 2
+
+[[boundaries]]
+payload_offset = 297
+length = 5
+
+[[boundaries]]
+payload_offset = 302
+length = 6
+
+[[boundaries]]
+payload_offset = 308
+length = 6
+
+[[boundaries]]
+payload_offset = 314
+length = 2
+
+[[boundaries]]
+payload_offset = 316
+length = 1
+
+[[boundaries]]
+payload_offset = 317
+length = 1
+
+[[boundaries]]
+payload_offset = 318
+length = 5
+
+[[boundaries]]
+payload_offset = 323
+length = 5
+
+[[boundaries]]
+payload_offset = 328
+length = 6
+
+[[boundaries]]
+payload_offset = 334
+length = 5
+
+[[boundaries]]
+payload_offset = 339
+length = 5
+
+[[boundaries]]
+payload_offset = 344
+length = 6
+
+[[boundaries]]
+payload_offset = 350
+length = 6
+
+[[boundaries]]
+payload_offset = 356
+length = 2
+
+[[boundaries]]
+payload_offset = 358
+length = 2
+
+[[boundaries]]
+payload_offset = 360
+length = 3
+
+[[boundaries]]
+payload_offset = 363
+length = 1
+
+[[boundaries]]
+payload_offset = 364
+length = 5
+
+[[boundaries]]
+payload_offset = 369
+length = 6
+
+[[boundaries]]
+payload_offset = 375
+length = 5
+
+[[boundaries]]
+payload_offset = 380
+length = 5
+
+[[boundaries]]
+payload_offset = 385
+length = 6
+
+[[boundaries]]
+payload_offset = 391
+length = 5
+
+[[boundaries]]
+payload_offset = 396
+length = 1
+
+[[boundaries]]
+payload_offset = 397
+length = 5
+
+[[boundaries]]
+payload_offset = 402
+length = 6
+
+[[boundaries]]
+payload_offset = 408
+length = 2
+
+[[boundaries]]
+payload_offset = 410
+length = 1
+
+[[boundaries]]
+payload_offset = 411
+length = 3
+
+[[boundaries]]
+payload_offset = 414
+length = 2
+
+[[boundaries]]
+payload_offset = 416
+length = 5
+
+[[boundaries]]
+payload_offset = 421
+length = 5
+
+[[boundaries]]
+payload_offset = 426
+length = 6
+
+[[boundaries]]
+payload_offset = 432
+length = 1
+
+[[boundaries]]
+payload_offset = 433
+length = 1
+
+[[boundaries]]
+payload_offset = 434
+length = 6
+
+[[boundaries]]
+payload_offset = 440
+length = 2
+
+[[boundaries]]
+payload_offset = 442
+length = 1
+
+[[boundaries]]
+payload_offset = 443
+length = 1
+
+[[boundaries]]
+payload_offset = 444
+length = 6
+
+[[boundaries]]
+payload_offset = 450
+length = 2
+
+[[boundaries]]
+payload_offset = 452
+length = 5
+
+[[boundaries]]
+payload_offset = 457
+length = 6
+
+[[boundaries]]
+payload_offset = 463
+length = 5
+
+[[boundaries]]
+payload_offset = 469
+length = 6
+
+[[boundaries]]
+payload_offset = 475
+length = 2
+
+[[boundaries]]
+payload_offset = 477
+length = 1
+
+[[boundaries]]
+payload_offset = 478
+length = 1
+
+[[boundaries]]
+payload_offset = 479
+length = 6
+
+[[boundaries]]
+payload_offset = 485
+length = 2
+
+[[boundaries]]
+payload_offset = 487
+length = 1
+
+[[boundaries]]
+payload_offset = 488
+length = 1
+
+[[boundaries]]
+payload_offset = 489
+length = 6
+
+[[boundaries]]
+payload_offset = 495
+length = 2
+
+[[boundaries]]
+payload_offset = 497
+length = 1
+
+[[boundaries]]
+payload_offset = 498
+length = 1
+
+[[boundaries]]
+payload_offset = 499
+length = 6
+
+[[boundaries]]
+payload_offset = 505
+length = 2
+
+[[boundaries]]
+payload_offset = 507
+length = 1
+
+[[boundaries]]
+payload_offset = 508
+length = 1
+
+[[boundaries]]
+payload_offset = 509
+length = 6
+
+[[boundaries]]
+payload_offset = 515
+length = 2
+
+[[boundaries]]
+payload_offset = 517
+length = 1
+
+[[boundaries]]
+payload_offset = 518
+length = 5
+
+[[boundaries]]
+payload_offset = 523
+length = 5
+
+[[boundaries]]
+payload_offset = 528
+length = 6
+
+[[boundaries]]
+payload_offset = 534
+length = 1
+
+[[boundaries]]
+payload_offset = 535
+length = 6
+
+[[boundaries]]
+payload_offset = 541
+length = 2
+
+[[boundaries]]
+payload_offset = 543
+length = 5
+
+[[boundaries]]
+payload_offset = 548
+length = 5
+
+[[boundaries]]
+payload_offset = 553
+length = 6
+
+[[boundaries]]
+payload_offset = 559
+length = 2
+
+[[boundaries]]
+payload_offset = 561
+length = 5
+
+[[boundaries]]
+payload_offset = 566
+length = 6
+
+[[boundaries]]
+payload_offset = 572
+length = 6
+
+[[boundaries]]
+payload_offset = 578
+length = 2
+
+[[boundaries]]
+payload_offset = 580
+length = 5
+
+[[boundaries]]
+payload_offset = 585
+length = 6
+
+[[boundaries]]
+payload_offset = 591
+length = 5
+
+[[boundaries]]
+payload_offset = 597
+length = 5
+
+[[boundaries]]
+payload_offset = 602
+length = 5
+
+[[boundaries]]
+payload_offset = 607
+length = 6
+
+[[boundaries]]
+payload_offset = 613
+length = 5
+
+[[boundaries]]
+payload_offset = 618
+length = 5
+
+[[boundaries]]
+payload_offset = 623
+length = 5
+
+[[boundaries]]
+payload_offset = 628
+length = 6
+
+[[boundaries]]
+payload_offset = 634
+length = 3
+
+[[boundaries]]
+payload_offset = 637
+length = 1
+
+[[boundaries]]
+payload_offset = 638
+length = 5
+
+[[boundaries]]
+payload_offset = 643
+length = 5
+
+[[boundaries]]
+payload_offset = 648
+length = 6
+
+[[boundaries]]
+payload_offset = 654
+length = 5
+
+[[boundaries]]
+payload_offset = 660
+length = 3
+
+[[boundaries]]
+payload_offset = 663
+length = 6
+
+[[boundaries]]
+payload_offset = 669
+length = 2
+
+[[boundaries]]
+payload_offset = 671
+length = 5
+
+[[boundaries]]
+payload_offset = 676
+length = 6
+
+[[boundaries]]
+payload_offset = 682
+length = 5
+
+[[boundaries]]
+payload_offset = 688
+length = 5
+
+[[boundaries]]
+payload_offset = 693
+length = 5
+
+[[boundaries]]
+payload_offset = 698
+length = 6
+
+[[boundaries]]
+payload_offset = 704
+length = 6
+
+[[boundaries]]
+payload_offset = 710
+length = 2
+
+[[boundaries]]
+payload_offset = 712
+length = 1
+
+[[boundaries]]
+payload_offset = 713
+length = 1
+
+[[boundaries]]
+payload_offset = 714
+length = 7
+
+[[boundaries]]
+payload_offset = 721
+length = 3
+
+[[boundaries]]
+payload_offset = 724
+length = 5
+
+[[boundaries]]
+payload_offset = 729
+length = 3
+
+[[boundaries]]
+payload_offset = 732
+length = 3
+
+[[boundaries]]
+payload_offset = 735
+length = 6
+
+[[boundaries]]
+payload_offset = 741
+length = 2
+
+[[boundaries]]
+payload_offset = 743
+length = 1
+
+[[boundaries]]
+payload_offset = 744
+length = 5
+
+[[boundaries]]
+payload_offset = 749
+length = 6
+
+[[boundaries]]
+payload_offset = 755
+length = 2
+
+[[boundaries]]
+payload_offset = 757
+length = 1
+
+[[boundaries]]
+payload_offset = 758
+length = 5
+
+[[boundaries]]
+payload_offset = 763
+length = 5
+
+[[boundaries]]
+payload_offset = 768
+length = 6
+
+[[boundaries]]
+payload_offset = 774
+length = 5
+
+[[boundaries]]
+payload_offset = 780
+length = 6
+
+[[boundaries]]
+payload_offset = 786
+length = 2
+
+[[boundaries]]
+payload_offset = 788
+length = 5
+
+[[boundaries]]
+payload_offset = 793
+length = 6
+
+[[boundaries]]
+payload_offset = 799
+length = 5
+
+[[boundaries]]
+payload_offset = 805
+length = 6
+
+[[boundaries]]
+payload_offset = 811
+length = 2
+
+[[boundaries]]
+payload_offset = 813
+length = 1
+
+[[boundaries]]
+payload_offset = 814
+length = 1
+
+[[boundaries]]
+payload_offset = 815
+length = 1
+
+[[boundaries]]
+payload_offset = 816
+length = 6
+
+[[boundaries]]
+payload_offset = 822
+length = 2
+
+[[boundaries]]
+payload_offset = 824
+length = 5
+
+[[boundaries]]
+payload_offset = 829
+length = 5
+
+[[boundaries]]
+payload_offset = 834
+length = 5
+
+[[boundaries]]
+payload_offset = 839
+length = 5
+
+[[boundaries]]
+payload_offset = 844
+length = 6
+
+[[boundaries]]
+payload_offset = 850
+length = 2
+
+[[boundaries]]
+payload_offset = 852
+length = 5
+
+[[boundaries]]
+payload_offset = 857
+length = 6
+
+[[boundaries]]
+payload_offset = 863
+length = 6
+
+[[boundaries]]
+payload_offset = 869
+length = 2
+
+[[boundaries]]
+payload_offset = 871
+length = 1
+
+[[boundaries]]
+payload_offset = 872
+length = 1
+
+[[boundaries]]
+payload_offset = 873
+length = 3
+
+[[boundaries]]
+payload_offset = 876
+length = 1
+
+[[boundaries]]
+payload_offset = 877
+length = 5
+
+[[boundaries]]
+payload_offset = 882
+length = 6
+
+[[boundaries]]
+payload_offset = 888
+length = 5
+
+[[boundaries]]
+payload_offset = 893
+length = 5
+
+[[boundaries]]
+payload_offset = 898
+length = 6
+
+[[boundaries]]
+payload_offset = 904
+length = 2
+
+[[boundaries]]
+payload_offset = 906
+length = 6
+
+[[boundaries]]
+payload_offset = 912
+length = 2
+
+[[boundaries]]
+payload_offset = 914
+length = 1
+
+[[boundaries]]
+payload_offset = 915
+length = 1
+
+[[boundaries]]
+payload_offset = 916
+length = 1
+
+[[boundaries]]
+payload_offset = 917
+length = 6
+
+[[boundaries]]
+payload_offset = 923
+length = 2
+
+[[boundaries]]
+payload_offset = 925
+length = 3
+
+[[boundaries]]
+payload_offset = 928
+length = 1
+
+[[boundaries]]
+payload_offset = 929
+length = 1
+
+[[boundaries]]
+payload_offset = 930
+length = 1

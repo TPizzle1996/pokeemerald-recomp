@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 5
 reloc_count = 7
+instruction_count = 29
 
 [[segments]]
 kind = "bytecode"
@@ -71,6 +72,8 @@ original_encoded_gba = 0x8222146
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-house2"
 target_export = "MossdeepCity_House2_Text_SisterMailsBoyfriendInFortree"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -80,6 +83,8 @@ original_encoded_gba = 0x82221a6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-house2"
 target_export = "MossdeepCity_House2_Text_PokemonCarriesMailBackAndForth"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -89,6 +94,8 @@ original_encoded_gba = 0x822222e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-house2"
 target_export = "MossdeepCity_House2_Text_Wingull"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -99,6 +106,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-house2"
 target_export = "MossdeepCity_House2_EventScript_WingullExitNorth"
 target_offset = 70
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 69
 runtime_resolution_required = true
 
 [[relocs]]
@@ -109,6 +118,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-house2"
 target_export = "MossdeepCity_House2_EventScript_WingullExitWest"
 target_offset = 81
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 80
 runtime_resolution_required = true
 
 [[relocs]]
@@ -118,6 +129,8 @@ original_encoded_gba = 0x822213a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mossdeepcity-house2-movement-wingullexitnorth"
 target_export = "MossdeepCity_House2_Movement_WingullExitNorth"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -127,4 +140,122 @@ original_encoded_gba = 0x8222141
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mossdeepcity-house2-movement-wingullexiteast"
 target_export = "MossdeepCity_House2_Movement_WingullExitEast"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 6
+
+[[boundaries]]
+payload_offset = 6
+length = 2
+
+[[boundaries]]
+payload_offset = 8
+length = 1
+
+[[boundaries]]
+payload_offset = 9
+length = 6
+
+[[boundaries]]
+payload_offset = 15
+length = 2
+
+[[boundaries]]
+payload_offset = 17
+length = 1
+
+[[boundaries]]
+payload_offset = 18
+length = 1
+
+[[boundaries]]
+payload_offset = 19
+length = 1
+
+[[boundaries]]
+payload_offset = 20
+length = 1
+
+[[boundaries]]
+payload_offset = 21
+length = 5
+
+[[boundaries]]
+payload_offset = 26
+length = 6
+
+[[boundaries]]
+payload_offset = 32
+length = 2
+
+[[boundaries]]
+payload_offset = 34
+length = 1
+
+[[boundaries]]
+payload_offset = 35
+length = 1
+
+[[boundaries]]
+payload_offset = 36
+length = 3
+
+[[boundaries]]
+payload_offset = 39
+length = 3
+
+[[boundaries]]
+payload_offset = 42
+length = 5
+
+[[boundaries]]
+payload_offset = 47
+length = 6
+
+[[boundaries]]
+payload_offset = 53
+length = 5
+
+[[boundaries]]
+payload_offset = 58
+length = 6
+
+[[boundaries]]
+payload_offset = 64
+length = 3
+
+[[boundaries]]
+payload_offset = 67
+length = 1
+
+[[boundaries]]
+payload_offset = 68
+length = 1
+
+[[boundaries]]
+payload_offset = 69
+length = 7
+
+[[boundaries]]
+payload_offset = 76
+length = 3
+
+[[boundaries]]
+payload_offset = 79
+length = 1
+
+[[boundaries]]
+payload_offset = 80
+length = 7
+
+[[boundaries]]
+payload_offset = 87
+length = 3
+
+[[boundaries]]
+payload_offset = 90
+length = 1

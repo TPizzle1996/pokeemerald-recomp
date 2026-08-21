@@ -17,6 +17,7 @@ static_data_bytes = 20
 segment_count = 3
 export_count = 4
 reloc_count = 5
+instruction_count = 25
 
 [[segments]]
 kind = "bytecode"
@@ -76,6 +77,8 @@ original_encoded_gba = 0x8272a21
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/mart-clerk"
 target_export = "gText_HowMayIServeYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -86,6 +89,8 @@ target_class = "MART_TABLE_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-mart"
 target_export = "SlateportCity_Mart_Pokemart"
 target_offset = 23
+target_kind = "MART_TABLE"
+target_payload_offset = 23
 runtime_resolution_required = true
 
 [[relocs]]
@@ -95,6 +100,8 @@ original_encoded_gba = 0x8272a3f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/mart-clerk"
 target_export = "gText_PleaseComeAgain"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -104,6 +111,8 @@ original_encoded_gba = 0x820dc88
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-mart"
 target_export = "SlateportCity_Mart_Text_SomeItemsOnlyAtMart"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -113,4 +122,106 @@ original_encoded_gba = 0x820dcf8
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-mart"
 target_export = "SlateportCity_Mart_Text_GreatBallIsBetter"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 1
+
+[[boundaries]]
+payload_offset = 2
+length = 5
+
+[[boundaries]]
+payload_offset = 7
+length = 1
+
+[[boundaries]]
+payload_offset = 8
+length = 5
+
+[[boundaries]]
+payload_offset = 13
+length = 6
+
+[[boundaries]]
+payload_offset = 19
+length = 2
+
+[[boundaries]]
+payload_offset = 21
+length = 1
+
+[[boundaries]]
+payload_offset = 22
+length = 1
+
+[[boundaries]]
+payload_offset = 23
+length = 5
+
+[[boundaries]]
+payload_offset = 28
+length = 1
+
+[[boundaries]]
+payload_offset = 29
+length = 5
+
+[[boundaries]]
+payload_offset = 34
+length = 1
+
+[[boundaries]]
+payload_offset = 35
+length = 3
+
+[[boundaries]]
+payload_offset = 38
+length = 1
+
+[[boundaries]]
+payload_offset = 39
+length = 3
+
+[[boundaries]]
+payload_offset = 42
+length = 1
+
+[[boundaries]]
+payload_offset = 43
+length = 1
+
+[[boundaries]]
+payload_offset = 44
+length = 1
+
+[[boundaries]]
+payload_offset = 45
+length = 6
+
+[[boundaries]]
+payload_offset = 51
+length = 2
+
+[[boundaries]]
+payload_offset = 53
+length = 1
+
+[[boundaries]]
+payload_offset = 54
+length = 6
+
+[[boundaries]]
+payload_offset = 60
+length = 2
+
+[[boundaries]]
+payload_offset = 62
+length = 1

@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 2
 export_count = 13
 reloc_count = 17
+instruction_count = 104
 
 [[segments]]
 kind = "bytecode"
@@ -142,6 +143,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/skypillar-top"
 target_export = "SkyPillar_Top_EventScript_TryRemoveRayquaza"
 target_offset = 26
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 10
 runtime_resolution_required = true
 
 [[relocs]]
@@ -152,6 +155,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-poison"
 target_export = "Common_EventScript_NopReturn"
 target_offset = 146
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 146
 runtime_resolution_required = true
 
 [[relocs]]
@@ -162,6 +167,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/skypillar-top"
 target_export = "SkyPillar_Top_EventScript_SetCleanLayout"
 target_offset = 69
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 53
 runtime_resolution_required = true
 
 [[relocs]]
@@ -172,6 +179,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/skypillar-top"
 target_export = "SkyPillar_Top_EventScript_TryShowRayquaza"
 target_offset = 77
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 61
 runtime_resolution_required = true
 
 [[relocs]]
@@ -182,6 +191,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/skypillar-top"
 target_export = "SkyPillar_Top_EventScript_ShowRayquaza"
 target_offset = 87
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 71
 runtime_resolution_required = true
 
 [[relocs]]
@@ -192,6 +203,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/skypillar-top"
 target_export = "SkyPillar_Top_EventScript_DefeatedRayquaza"
 target_offset = 176
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 150
 runtime_resolution_required = true
 
 [[relocs]]
@@ -202,6 +215,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/skypillar-top"
 target_export = "SkyPillar_Top_EventScript_RanFromRayquaza"
 target_offset = 185
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 159
 runtime_resolution_required = true
 
 [[relocs]]
@@ -212,6 +227,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/skypillar-top"
 target_export = "SkyPillar_Top_EventScript_RanFromRayquaza"
 target_offset = 185
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 159
 runtime_resolution_required = true
 
 [[relocs]]
@@ -222,6 +239,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/skypillar-top"
 target_export = "SkyPillar_Top_EventScript_DefeatedRayquaza2"
 target_offset = 196
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 170
 runtime_resolution_required = true
 
 [[relocs]]
@@ -232,6 +251,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/skypillar-top"
 target_export = "SkyPillar_Top_EventScript_RanFromRayquaza2"
 target_offset = 205
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 179
 runtime_resolution_required = true
 
 [[relocs]]
@@ -241,6 +262,8 @@ original_encoded_gba = 0x8273204
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/event-scripts"
 target_export = "gText_LegendaryFlewAway"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -250,6 +273,8 @@ original_encoded_gba = 0x82725b2
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceup"
 target_export = "Common_Movement_FaceUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -259,6 +284,8 @@ original_encoded_gba = 0x8239858
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/skypillar-top-movement-camerapanup"
 target_export = "SkyPillar_Top_Movement_CameraPanUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -268,6 +295,8 @@ original_encoded_gba = 0x823983a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/skypillar-top-movement-rayquazastir"
 target_export = "SkyPillar_Top_Movement_RayquazaStir"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -277,6 +306,8 @@ original_encoded_gba = 0x823984b
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/skypillar-top-movement-rayquazaflyoff"
 target_export = "SkyPillar_Top_Movement_RayquazaFlyOff"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -286,6 +317,8 @@ original_encoded_gba = 0x8239860
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/skypillar-top"
 target_export = "SkyPillar_Top_Text_RayquazaFlewOff"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -295,4 +328,422 @@ original_encoded_gba = 0x823985c
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/skypillar-top-movement-camerapandown"
 target_export = "SkyPillar_Top_Movement_CameraPanDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 6
+
+[[boundaries]]
+payload_offset = 9
+length = 1
+
+[[boundaries]]
+payload_offset = 10
+length = 5
+
+[[boundaries]]
+payload_offset = 15
+length = 5
+
+[[boundaries]]
+payload_offset = 20
+length = 6
+
+[[boundaries]]
+payload_offset = 26
+length = 3
+
+[[boundaries]]
+payload_offset = 29
+length = 1
+
+[[boundaries]]
+payload_offset = 30
+length = 5
+
+[[boundaries]]
+payload_offset = 35
+length = 6
+
+[[boundaries]]
+payload_offset = 41
+length = 5
+
+[[boundaries]]
+payload_offset = 46
+length = 6
+
+[[boundaries]]
+payload_offset = 52
+length = 1
+
+[[boundaries]]
+payload_offset = 53
+length = 3
+
+[[boundaries]]
+payload_offset = 56
+length = 4
+
+[[boundaries]]
+payload_offset = 60
+length = 1
+
+[[boundaries]]
+payload_offset = 61
+length = 3
+
+[[boundaries]]
+payload_offset = 64
+length = 6
+
+[[boundaries]]
+payload_offset = 70
+length = 1
+
+[[boundaries]]
+payload_offset = 71
+length = 3
+
+[[boundaries]]
+payload_offset = 74
+length = 1
+
+[[boundaries]]
+payload_offset = 75
+length = 4
+
+[[boundaries]]
+payload_offset = 79
+length = 1
+
+[[boundaries]]
+payload_offset = 80
+length = 1
+
+[[boundaries]]
+payload_offset = 81
+length = 1
+
+[[boundaries]]
+payload_offset = 82
+length = 5
+
+[[boundaries]]
+payload_offset = 87
+length = 3
+
+[[boundaries]]
+payload_offset = 90
+length = 1
+
+[[boundaries]]
+payload_offset = 91
+length = 6
+
+[[boundaries]]
+payload_offset = 97
+length = 3
+
+[[boundaries]]
+payload_offset = 100
+length = 3
+
+[[boundaries]]
+payload_offset = 103
+length = 1
+
+[[boundaries]]
+payload_offset = 104
+length = 3
+
+[[boundaries]]
+payload_offset = 107
+length = 5
+
+[[boundaries]]
+payload_offset = 112
+length = 5
+
+[[boundaries]]
+payload_offset = 117
+length = 6
+
+[[boundaries]]
+payload_offset = 123
+length = 5
+
+[[boundaries]]
+payload_offset = 128
+length = 6
+
+[[boundaries]]
+payload_offset = 134
+length = 5
+
+[[boundaries]]
+payload_offset = 139
+length = 6
+
+[[boundaries]]
+payload_offset = 145
+length = 3
+
+[[boundaries]]
+payload_offset = 148
+length = 1
+
+[[boundaries]]
+payload_offset = 149
+length = 1
+
+[[boundaries]]
+payload_offset = 150
+length = 3
+
+[[boundaries]]
+payload_offset = 153
+length = 5
+
+[[boundaries]]
+payload_offset = 159
+length = 5
+
+[[boundaries]]
+payload_offset = 164
+length = 5
+
+[[boundaries]]
+payload_offset = 170
+length = 2
+
+[[boundaries]]
+payload_offset = 172
+length = 3
+
+[[boundaries]]
+payload_offset = 175
+length = 2
+
+[[boundaries]]
+payload_offset = 177
+length = 1
+
+[[boundaries]]
+payload_offset = 178
+length = 1
+
+[[boundaries]]
+payload_offset = 179
+length = 2
+
+[[boundaries]]
+payload_offset = 181
+length = 3
+
+[[boundaries]]
+payload_offset = 184
+length = 2
+
+[[boundaries]]
+payload_offset = 186
+length = 4
+
+[[boundaries]]
+payload_offset = 190
+length = 6
+
+[[boundaries]]
+payload_offset = 196
+length = 2
+
+[[boundaries]]
+payload_offset = 198
+length = 1
+
+[[boundaries]]
+payload_offset = 199
+length = 1
+
+[[boundaries]]
+payload_offset = 200
+length = 1
+
+[[boundaries]]
+payload_offset = 201
+length = 2
+
+[[boundaries]]
+payload_offset = 203
+length = 7
+
+[[boundaries]]
+payload_offset = 210
+length = 3
+
+[[boundaries]]
+payload_offset = 213
+length = 3
+
+[[boundaries]]
+payload_offset = 216
+length = 7
+
+[[boundaries]]
+payload_offset = 223
+length = 3
+
+[[boundaries]]
+payload_offset = 226
+length = 3
+
+[[boundaries]]
+payload_offset = 229
+length = 7
+
+[[boundaries]]
+payload_offset = 236
+length = 3
+
+[[boundaries]]
+payload_offset = 239
+length = 1
+
+[[boundaries]]
+payload_offset = 240
+length = 5
+
+[[boundaries]]
+payload_offset = 245
+length = 5
+
+[[boundaries]]
+payload_offset = 250
+length = 5
+
+[[boundaries]]
+payload_offset = 255
+length = 5
+
+[[boundaries]]
+payload_offset = 260
+length = 5
+
+[[boundaries]]
+payload_offset = 265
+length = 3
+
+[[boundaries]]
+payload_offset = 268
+length = 1
+
+[[boundaries]]
+payload_offset = 269
+length = 1
+
+[[boundaries]]
+payload_offset = 270
+length = 5
+
+[[boundaries]]
+payload_offset = 275
+length = 5
+
+[[boundaries]]
+payload_offset = 280
+length = 5
+
+[[boundaries]]
+payload_offset = 285
+length = 5
+
+[[boundaries]]
+payload_offset = 290
+length = 5
+
+[[boundaries]]
+payload_offset = 295
+length = 3
+
+[[boundaries]]
+payload_offset = 298
+length = 1
+
+[[boundaries]]
+payload_offset = 299
+length = 1
+
+[[boundaries]]
+payload_offset = 300
+length = 7
+
+[[boundaries]]
+payload_offset = 307
+length = 3
+
+[[boundaries]]
+payload_offset = 310
+length = 3
+
+[[boundaries]]
+payload_offset = 313
+length = 6
+
+[[boundaries]]
+payload_offset = 319
+length = 2
+
+[[boundaries]]
+payload_offset = 321
+length = 1
+
+[[boundaries]]
+payload_offset = 322
+length = 3
+
+[[boundaries]]
+payload_offset = 325
+length = 2
+
+[[boundaries]]
+payload_offset = 327
+length = 3
+
+[[boundaries]]
+payload_offset = 330
+length = 7
+
+[[boundaries]]
+payload_offset = 337
+length = 3
+
+[[boundaries]]
+payload_offset = 340
+length = 3
+
+[[boundaries]]
+payload_offset = 343
+length = 5
+
+[[boundaries]]
+payload_offset = 348
+length = 5
+
+[[boundaries]]
+payload_offset = 353
+length = 5
+
+[[boundaries]]
+payload_offset = 358
+length = 1
+
+[[boundaries]]
+payload_offset = 359
+length = 1

@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 8
 reloc_count = 10
+instruction_count = 65
 
 [[segments]]
 kind = "bytecode"
@@ -96,6 +97,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/navelrock-bottom"
 target_export = "NavelRock_Bottom_EventScript_HideLugia"
 target_offset = 30
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 19
 runtime_resolution_required = true
 
 [[relocs]]
@@ -106,6 +109,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/navelrock-bottom"
 target_export = "NavelRock_Bottom_EventScript_TryShowLugia"
 target_offset = 34
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 23
 runtime_resolution_required = true
 
 [[relocs]]
@@ -116,6 +121,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-poison"
 target_export = "Common_EventScript_NopReturn"
 target_offset = 146
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 146
 runtime_resolution_required = true
 
 [[relocs]]
@@ -126,6 +133,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/navelrock-bottom"
 target_export = "NavelRock_Bottom_EventScript_TryRemoveLugia"
 target_offset = 57
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 46
 runtime_resolution_required = true
 
 [[relocs]]
@@ -136,6 +145,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-poison"
 target_export = "Common_EventScript_NopReturn"
 target_offset = 146
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 146
 runtime_resolution_required = true
 
 [[relocs]]
@@ -146,6 +157,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/navelrock-bottom"
 target_export = "NavelRock_Bottom_EventScript_DefeatedLugia"
 target_offset = 225
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 214
 runtime_resolution_required = true
 
 [[relocs]]
@@ -156,6 +169,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/navelrock-bottom"
 target_export = "NavelRock_Bottom_EventScript_RanFromLugia"
 target_offset = 239
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 228
 runtime_resolution_required = true
 
 [[relocs]]
@@ -166,6 +181,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/navelrock-bottom"
 target_export = "NavelRock_Bottom_EventScript_RanFromLugia"
 target_offset = 239
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 228
 runtime_resolution_required = true
 
 [[relocs]]
@@ -176,6 +193,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-poison"
 target_export = "Common_EventScript_LegendaryFlewAway"
 target_offset = 186
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 186
 runtime_resolution_required = true
 
 [[relocs]]
@@ -186,4 +205,266 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-poison"
 target_export = "Common_EventScript_LegendaryFlewAway"
 target_offset = 186
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 186
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 6
+
+[[boundaries]]
+payload_offset = 9
+length = 3
+
+[[boundaries]]
+payload_offset = 12
+length = 6
+
+[[boundaries]]
+payload_offset = 18
+length = 1
+
+[[boundaries]]
+payload_offset = 19
+length = 3
+
+[[boundaries]]
+payload_offset = 22
+length = 1
+
+[[boundaries]]
+payload_offset = 23
+length = 3
+
+[[boundaries]]
+payload_offset = 26
+length = 6
+
+[[boundaries]]
+payload_offset = 32
+length = 3
+
+[[boundaries]]
+payload_offset = 35
+length = 1
+
+[[boundaries]]
+payload_offset = 36
+length = 3
+
+[[boundaries]]
+payload_offset = 39
+length = 6
+
+[[boundaries]]
+payload_offset = 45
+length = 1
+
+[[boundaries]]
+payload_offset = 46
+length = 5
+
+[[boundaries]]
+payload_offset = 51
+length = 5
+
+[[boundaries]]
+payload_offset = 56
+length = 6
+
+[[boundaries]]
+payload_offset = 62
+length = 3
+
+[[boundaries]]
+payload_offset = 65
+length = 1
+
+[[boundaries]]
+payload_offset = 66
+length = 1
+
+[[boundaries]]
+payload_offset = 67
+length = 1
+
+[[boundaries]]
+payload_offset = 68
+length = 1
+
+[[boundaries]]
+payload_offset = 69
+length = 3
+
+[[boundaries]]
+payload_offset = 72
+length = 3
+
+[[boundaries]]
+payload_offset = 75
+length = 5
+
+[[boundaries]]
+payload_offset = 80
+length = 5
+
+[[boundaries]]
+payload_offset = 85
+length = 5
+
+[[boundaries]]
+payload_offset = 90
+length = 5
+
+[[boundaries]]
+payload_offset = 95
+length = 3
+
+[[boundaries]]
+payload_offset = 98
+length = 3
+
+[[boundaries]]
+payload_offset = 101
+length = 3
+
+[[boundaries]]
+payload_offset = 104
+length = 5
+
+[[boundaries]]
+payload_offset = 109
+length = 5
+
+[[boundaries]]
+payload_offset = 114
+length = 5
+
+[[boundaries]]
+payload_offset = 119
+length = 5
+
+[[boundaries]]
+payload_offset = 124
+length = 3
+
+[[boundaries]]
+payload_offset = 127
+length = 3
+
+[[boundaries]]
+payload_offset = 130
+length = 3
+
+[[boundaries]]
+payload_offset = 133
+length = 1
+
+[[boundaries]]
+payload_offset = 134
+length = 5
+
+[[boundaries]]
+payload_offset = 139
+length = 1
+
+[[boundaries]]
+payload_offset = 140
+length = 3
+
+[[boundaries]]
+payload_offset = 143
+length = 5
+
+[[boundaries]]
+payload_offset = 148
+length = 5
+
+[[boundaries]]
+payload_offset = 153
+length = 5
+
+[[boundaries]]
+payload_offset = 158
+length = 3
+
+[[boundaries]]
+payload_offset = 161
+length = 3
+
+[[boundaries]]
+payload_offset = 164
+length = 3
+
+[[boundaries]]
+payload_offset = 167
+length = 1
+
+[[boundaries]]
+payload_offset = 168
+length = 3
+
+[[boundaries]]
+payload_offset = 171
+length = 5
+
+[[boundaries]]
+payload_offset = 176
+length = 5
+
+[[boundaries]]
+payload_offset = 181
+length = 6
+
+[[boundaries]]
+payload_offset = 187
+length = 5
+
+[[boundaries]]
+payload_offset = 192
+length = 6
+
+[[boundaries]]
+payload_offset = 198
+length = 5
+
+[[boundaries]]
+payload_offset = 203
+length = 6
+
+[[boundaries]]
+payload_offset = 209
+length = 3
+
+[[boundaries]]
+payload_offset = 212
+length = 1
+
+[[boundaries]]
+payload_offset = 213
+length = 1
+
+[[boundaries]]
+payload_offset = 214
+length = 3
+
+[[boundaries]]
+payload_offset = 217
+length = 5
+
+[[boundaries]]
+payload_offset = 222
+length = 5
+
+[[boundaries]]
+payload_offset = 228
+length = 5
+
+[[boundaries]]
+payload_offset = 233
+length = 5

@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 5
 reloc_count = 7
+instruction_count = 39
 
 [[segments]]
 kind = "bytecode"
@@ -72,6 +73,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/newmauville-entrance"
 target_export = "NewMauville_Entrance_EventScript_CloseDoor"
 target_offset = 23
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 12
 runtime_resolution_required = true
 
 [[relocs]]
@@ -81,6 +84,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -90,6 +95,8 @@ original_encoded_gba = 0x8237382
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/newmauville-entrance"
 target_export = "NewMauville_Entrance_Text_DoorIsLocked"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -100,6 +107,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/newmauville-entrance"
 target_export = "NewMauville_Entrance_EventScript_DontOpenDoor"
 target_offset = 211
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 200
 runtime_resolution_required = true
 
 [[relocs]]
@@ -109,6 +118,8 @@ original_encoded_gba = 0x8237396
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/newmauville-entrance"
 target_export = "NewMauville_Entrance_Text_UseBasementKey"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -119,6 +130,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/newmauville-entrance"
 target_export = "NewMauville_Entrance_EventScript_DontOpenDoor"
 target_offset = 211
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 200
 runtime_resolution_required = true
 
 [[relocs]]
@@ -128,4 +141,162 @@ original_encoded_gba = 0x82373ac
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/newmauville-entrance"
 target_export = "NewMauville_Entrance_Text_UsedBasementKey"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 5
+
+[[boundaries]]
+payload_offset = 5
+length = 6
+
+[[boundaries]]
+payload_offset = 11
+length = 1
+
+[[boundaries]]
+payload_offset = 12
+length = 9
+
+[[boundaries]]
+payload_offset = 21
+length = 9
+
+[[boundaries]]
+payload_offset = 30
+length = 9
+
+[[boundaries]]
+payload_offset = 39
+length = 9
+
+[[boundaries]]
+payload_offset = 48
+length = 9
+
+[[boundaries]]
+payload_offset = 57
+length = 9
+
+[[boundaries]]
+payload_offset = 66
+length = 1
+
+[[boundaries]]
+payload_offset = 67
+length = 3
+
+[[boundaries]]
+payload_offset = 70
+length = 1
+
+[[boundaries]]
+payload_offset = 71
+length = 1
+
+[[boundaries]]
+payload_offset = 72
+length = 7
+
+[[boundaries]]
+payload_offset = 79
+length = 3
+
+[[boundaries]]
+payload_offset = 82
+length = 6
+
+[[boundaries]]
+payload_offset = 88
+length = 2
+
+[[boundaries]]
+payload_offset = 90
+length = 5
+
+[[boundaries]]
+payload_offset = 95
+length = 5
+
+[[boundaries]]
+payload_offset = 100
+length = 6
+
+[[boundaries]]
+payload_offset = 106
+length = 6
+
+[[boundaries]]
+payload_offset = 112
+length = 2
+
+[[boundaries]]
+payload_offset = 114
+length = 5
+
+[[boundaries]]
+payload_offset = 119
+length = 6
+
+[[boundaries]]
+payload_offset = 125
+length = 6
+
+[[boundaries]]
+payload_offset = 131
+length = 2
+
+[[boundaries]]
+payload_offset = 133
+length = 9
+
+[[boundaries]]
+payload_offset = 142
+length = 9
+
+[[boundaries]]
+payload_offset = 151
+length = 9
+
+[[boundaries]]
+payload_offset = 160
+length = 9
+
+[[boundaries]]
+payload_offset = 169
+length = 9
+
+[[boundaries]]
+payload_offset = 178
+length = 9
+
+[[boundaries]]
+payload_offset = 187
+length = 3
+
+[[boundaries]]
+payload_offset = 190
+length = 3
+
+[[boundaries]]
+payload_offset = 193
+length = 5
+
+[[boundaries]]
+payload_offset = 198
+length = 1
+
+[[boundaries]]
+payload_offset = 199
+length = 1
+
+[[boundaries]]
+payload_offset = 200
+length = 1
+
+[[boundaries]]
+payload_offset = 201
+length = 1

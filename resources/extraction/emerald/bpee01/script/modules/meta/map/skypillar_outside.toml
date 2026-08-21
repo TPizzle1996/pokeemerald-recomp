@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 3
 export_count = 8
 reloc_count = 16
+instruction_count = 79
 
 [[segments]]
 kind = "bytecode"
@@ -108,6 +109,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/skypillar-outside"
 target_export = "SkyPillar_Outside_EventScript_HideMapNamePopup"
 target_offset = 39
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 23
 runtime_resolution_required = true
 
 [[relocs]]
@@ -118,6 +121,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/skypillar-outside"
 target_export = "SkyPillar_Outside_EventScript_CheckSetAbnormalWeather"
 target_offset = 43
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 27
 runtime_resolution_required = true
 
 [[relocs]]
@@ -128,6 +133,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_SetAbnormalWeather"
 target_offset = 311
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 311
 runtime_resolution_required = true
 
 [[relocs]]
@@ -138,6 +145,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/skypillar-outside"
 target_export = "SkyPillar_Outside_EventScript_OpenDoor"
 target_offset = 63
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 47
 runtime_resolution_required = true
 
 [[relocs]]
@@ -147,6 +156,8 @@ original_encoded_gba = 0x82393d3
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/skypillar-outside-movement-wallaceapproachplayer"
 target_export = "SkyPillar_Outside_Movement_WallaceApproachPlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -156,6 +167,8 @@ original_encoded_gba = 0x82725a4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterleft"
 target_export = "Common_Movement_WalkInPlaceFasterLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -165,6 +178,8 @@ original_encoded_gba = 0x8239416
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/skypillar-outside"
 target_export = "SkyPillar_Outside_Text_OpenedDoorToSkyPillar"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -174,6 +189,8 @@ original_encoded_gba = 0x82394bc
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/skypillar-outside"
 target_export = "SkyPillar_Outside_Text_EarthquakeNotMomentToWaste"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -183,6 +200,8 @@ original_encoded_gba = 0x82393eb
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/skypillar-outside-movement-playerclimbskypillar"
 target_export = "SkyPillar_Outside_Movement_PlayerClimbSkyPillar"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -192,6 +211,8 @@ original_encoded_gba = 0x82393de
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/skypillar-outside-movement-wallaceclimbskypillar"
 target_export = "SkyPillar_Outside_Movement_WallaceClimbSkyPillar"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -201,6 +222,8 @@ original_encoded_gba = 0x82725a4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterleft"
 target_export = "Common_Movement_WalkInPlaceFasterLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -210,6 +233,8 @@ original_encoded_gba = 0x82725a8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterright"
 target_export = "Common_Movement_WalkInPlaceFasterRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -219,6 +244,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -228,6 +255,8 @@ original_encoded_gba = 0x823950c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/skypillar-outside"
 target_export = "SkyPillar_Outside_Text_SituationGettingWorse"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -237,6 +266,8 @@ original_encoded_gba = 0x823953a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/skypillar-outside"
 target_export = "SkyPillar_Outside_Text_GotToGoBackForSootopolis"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -246,4 +277,322 @@ original_encoded_gba = 0x8239402
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/skypillar-outside"
 target_export = "SkyPillar_Outside_Text_DoorIsClosed"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 5
+
+[[boundaries]]
+payload_offset = 5
+length = 6
+
+[[boundaries]]
+payload_offset = 11
+length = 5
+
+[[boundaries]]
+payload_offset = 16
+length = 6
+
+[[boundaries]]
+payload_offset = 22
+length = 1
+
+[[boundaries]]
+payload_offset = 23
+length = 3
+
+[[boundaries]]
+payload_offset = 26
+length = 1
+
+[[boundaries]]
+payload_offset = 27
+length = 3
+
+[[boundaries]]
+payload_offset = 30
+length = 6
+
+[[boundaries]]
+payload_offset = 36
+length = 1
+
+[[boundaries]]
+payload_offset = 37
+length = 3
+
+[[boundaries]]
+payload_offset = 40
+length = 6
+
+[[boundaries]]
+payload_offset = 46
+length = 1
+
+[[boundaries]]
+payload_offset = 47
+length = 9
+
+[[boundaries]]
+payload_offset = 56
+length = 9
+
+[[boundaries]]
+payload_offset = 65
+length = 1
+
+[[boundaries]]
+payload_offset = 66
+length = 1
+
+[[boundaries]]
+payload_offset = 67
+length = 7
+
+[[boundaries]]
+payload_offset = 74
+length = 3
+
+[[boundaries]]
+payload_offset = 77
+length = 7
+
+[[boundaries]]
+payload_offset = 84
+length = 3
+
+[[boundaries]]
+payload_offset = 87
+length = 6
+
+[[boundaries]]
+payload_offset = 93
+length = 2
+
+[[boundaries]]
+payload_offset = 95
+length = 1
+
+[[boundaries]]
+payload_offset = 96
+length = 3
+
+[[boundaries]]
+payload_offset = 99
+length = 5
+
+[[boundaries]]
+payload_offset = 104
+length = 5
+
+[[boundaries]]
+payload_offset = 109
+length = 5
+
+[[boundaries]]
+payload_offset = 114
+length = 5
+
+[[boundaries]]
+payload_offset = 119
+length = 3
+
+[[boundaries]]
+payload_offset = 122
+length = 1
+
+[[boundaries]]
+payload_offset = 123
+length = 3
+
+[[boundaries]]
+payload_offset = 126
+length = 6
+
+[[boundaries]]
+payload_offset = 132
+length = 2
+
+[[boundaries]]
+payload_offset = 134
+length = 1
+
+[[boundaries]]
+payload_offset = 135
+length = 7
+
+[[boundaries]]
+payload_offset = 142
+length = 7
+
+[[boundaries]]
+payload_offset = 149
+length = 3
+
+[[boundaries]]
+payload_offset = 152
+length = 5
+
+[[boundaries]]
+payload_offset = 157
+length = 5
+
+[[boundaries]]
+payload_offset = 162
+length = 5
+
+[[boundaries]]
+payload_offset = 167
+length = 5
+
+[[boundaries]]
+payload_offset = 172
+length = 3
+
+[[boundaries]]
+payload_offset = 175
+length = 1
+
+[[boundaries]]
+payload_offset = 176
+length = 3
+
+[[boundaries]]
+payload_offset = 179
+length = 7
+
+[[boundaries]]
+payload_offset = 186
+length = 3
+
+[[boundaries]]
+payload_offset = 189
+length = 3
+
+[[boundaries]]
+payload_offset = 192
+length = 7
+
+[[boundaries]]
+payload_offset = 199
+length = 3
+
+[[boundaries]]
+payload_offset = 202
+length = 3
+
+[[boundaries]]
+payload_offset = 205
+length = 7
+
+[[boundaries]]
+payload_offset = 212
+length = 3
+
+[[boundaries]]
+payload_offset = 215
+length = 3
+
+[[boundaries]]
+payload_offset = 218
+length = 6
+
+[[boundaries]]
+payload_offset = 224
+length = 2
+
+[[boundaries]]
+payload_offset = 226
+length = 1
+
+[[boundaries]]
+payload_offset = 227
+length = 3
+
+[[boundaries]]
+payload_offset = 230
+length = 3
+
+[[boundaries]]
+payload_offset = 233
+length = 1
+
+[[boundaries]]
+payload_offset = 234
+length = 3
+
+[[boundaries]]
+payload_offset = 237
+length = 1
+
+[[boundaries]]
+payload_offset = 238
+length = 3
+
+[[boundaries]]
+payload_offset = 241
+length = 6
+
+[[boundaries]]
+payload_offset = 247
+length = 2
+
+[[boundaries]]
+payload_offset = 249
+length = 1
+
+[[boundaries]]
+payload_offset = 250
+length = 3
+
+[[boundaries]]
+payload_offset = 253
+length = 2
+
+[[boundaries]]
+payload_offset = 255
+length = 3
+
+[[boundaries]]
+payload_offset = 258
+length = 5
+
+[[boundaries]]
+payload_offset = 263
+length = 3
+
+[[boundaries]]
+payload_offset = 266
+length = 3
+
+[[boundaries]]
+payload_offset = 269
+length = 2
+
+[[boundaries]]
+payload_offset = 271
+length = 1
+
+[[boundaries]]
+payload_offset = 272
+length = 1
+
+[[boundaries]]
+payload_offset = 273
+length = 1
+
+[[boundaries]]
+payload_offset = 274
+length = 6
+
+[[boundaries]]
+payload_offset = 280
+length = 2
+
+[[boundaries]]
+payload_offset = 282
+length = 1

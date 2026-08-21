@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 2
 export_count = 27
 reloc_count = 66
+instruction_count = 211
 
 [[segments]]
 kind = "bytecode"
@@ -254,6 +255,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown"
 target_export = "DewfordTown_EventScript_ReturnToPetalburgPrompt"
 target_offset = 126
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 120
 runtime_resolution_required = true
 
 [[relocs]]
@@ -263,6 +266,8 @@ original_encoded_gba = 0x81e9c8a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown"
 target_export = "DewfordTown_Text_WhereAreWeBound"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -273,6 +278,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown"
 target_export = "DewfordTown_EventScript_ChoosePetalburg"
 target_offset = 83
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 77
 runtime_resolution_required = true
 
 [[relocs]]
@@ -283,6 +290,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown"
 target_export = "DewfordTown_EventScript_ChooseSlateport"
 target_offset = 99
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 93
 runtime_resolution_required = true
 
 [[relocs]]
@@ -293,6 +302,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown"
 target_export = "DewfordTown_EventScript_CancelSailSelect"
 target_offset = 115
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 109
 runtime_resolution_required = true
 
 [[relocs]]
@@ -303,6 +314,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown"
 target_export = "DewfordTown_EventScript_CancelSailSelect"
 target_offset = 115
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 109
 runtime_resolution_required = true
 
 [[relocs]]
@@ -312,6 +325,8 @@ original_encoded_gba = 0x81e9ce5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown"
 target_export = "DewfordTown_Text_PetalburgWereSettingSail"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -322,6 +337,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown"
 target_export = "DewfordTown_EventScript_SailToPetalburg"
 target_offset = 345
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 339
 runtime_resolution_required = true
 
 [[relocs]]
@@ -331,6 +348,8 @@ original_encoded_gba = 0x81e9d3a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown"
 target_export = "DewfordTown_Text_SlateportWereSettingSail"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -341,6 +360,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown"
 target_export = "DewfordTown_EventScript_SailToSlateport"
 target_offset = 480
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 474
 runtime_resolution_required = true
 
 [[relocs]]
@@ -350,6 +371,8 @@ original_encoded_gba = 0x81e9d8f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown"
 target_export = "DewfordTown_Text_JustTellMeWhenYouNeedToSetSail"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -359,6 +382,8 @@ original_encoded_gba = 0x81e9b24
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown"
 target_export = "DewfordTown_Text_SetSailBackToPetalburg"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -369,6 +394,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown"
 target_export = "DewfordTown_EventScript_SailBackToPetalburg"
 target_offset = 155
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 149
 runtime_resolution_required = true
 
 [[relocs]]
@@ -378,6 +405,8 @@ original_encoded_gba = 0x81e9bd9
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown"
 target_export = "DewfordTown_Text_GoDeliverIllBeWaiting"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -387,6 +416,8 @@ original_encoded_gba = 0x81e9b7f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown"
 target_export = "DewfordTown_Text_PetalburgWereSettingSail2"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -397,6 +428,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown"
 target_export = "DewfordTown_EventScript_SailToPetalburg"
 target_offset = 345
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 339
 runtime_resolution_required = true
 
 [[relocs]]
@@ -406,6 +439,8 @@ original_encoded_gba = 0x81e99a8
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown"
 target_export = "DewfordTown_Text_TinyIslandCommunity"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -415,6 +450,8 @@ original_encoded_gba = 0x81e9a0f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown"
 target_export = "DewfordTown_Text_TownSign"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -424,6 +461,8 @@ original_encoded_gba = 0x81e9a3d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown"
 target_export = "DewfordTown_Text_GymSign"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -433,6 +472,8 @@ original_encoded_gba = 0x81e9a7f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown"
 target_export = "DewfordTown_Text_HallSign"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -443,6 +484,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown"
 target_export = "DewfordTown_EventScript_HowsFishing"
 target_offset = 291
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 285
 runtime_resolution_required = true
 
 [[relocs]]
@@ -452,6 +495,8 @@ original_encoded_gba = 0x81e9dd1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown"
 target_export = "DewfordTown_Text_GettingItchToFish"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -462,6 +507,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown"
 target_export = "DewfordTown_EventScript_GiveOldRod"
 target_offset = 248
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 242
 runtime_resolution_required = true
 
 [[relocs]]
@@ -472,6 +519,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown"
 target_export = "DewfordTown_EventScript_NotGettingItchToFish"
 target_offset = 281
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 275
 runtime_resolution_required = true
 
 [[relocs]]
@@ -481,6 +530,8 @@ original_encoded_gba = 0x81e9e14
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown"
 target_export = "DewfordTown_Text_GiveYouOneOfMyRods"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -490,6 +541,8 @@ original_encoded_gba = 0x81e9e65
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown"
 target_export = "DewfordTown_Text_ThrowInFishingAdvice"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -499,6 +552,8 @@ original_encoded_gba = 0x81e9f92
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown"
 target_export = "DewfordTown_Text_ThatsTooBadThen"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -508,6 +563,8 @@ original_encoded_gba = 0x81e9fb8
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown"
 target_export = "DewfordTown_Text_HowsYourFishing"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -518,6 +575,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown"
 target_export = "DewfordTown_EventScript_FishingExcellent"
 target_offset = 325
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 319
 runtime_resolution_required = true
 
 [[relocs]]
@@ -528,6 +587,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown"
 target_export = "DewfordTown_EventScript_FishingNotSoGood"
 target_offset = 335
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 329
 runtime_resolution_required = true
 
 [[relocs]]
@@ -537,6 +598,8 @@ original_encoded_gba = 0x81e9fd0
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown"
 target_export = "DewfordTown_Text_GreatHaulInSomeBigOnes"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -546,6 +609,8 @@ original_encoded_gba = 0x81ea004
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown"
 target_export = "DewfordTown_Text_FishingAdvice"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -556,6 +621,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pc"
 target_export = "EventScript_BackupMrBrineyLocation"
 target_offset = 259
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 259
 runtime_resolution_required = true
 
 [[relocs]]
@@ -565,6 +632,8 @@ original_encoded_gba = 0x81e991d
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/dewfordtown-movement-brineyboardboat"
 target_export = "DewfordTown_Movement_BrineyBoardBoat"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -574,6 +643,8 @@ original_encoded_gba = 0x81e9911
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/dewfordtown-movement-playerboardboat"
 target_export = "DewfordTown_Movement_PlayerBoardBoat"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -584,6 +655,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_PlayBrineysBoatMusic"
 target_offset = 349
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 349
 runtime_resolution_required = true
 
 [[relocs]]
@@ -593,6 +666,8 @@ original_encoded_gba = 0x81e97a2
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/dewfordtown-movement-sailtopetalburg"
 target_export = "DewfordTown_Movement_SailToPetalburg"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -602,6 +677,8 @@ original_encoded_gba = 0x81e97a2
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/dewfordtown-movement-sailtopetalburg"
 target_export = "DewfordTown_Movement_SailToPetalburg"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -612,6 +689,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_StopBrineysBoatMusic"
 target_offset = 357
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 357
 runtime_resolution_required = true
 
 [[relocs]]
@@ -621,6 +700,8 @@ original_encoded_gba = 0x81e9914
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/dewfordtown-movement-exitboatpetalburg"
 target_export = "DewfordTown_Movement_ExitBoatPetalburg"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -631,6 +712,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pc"
 target_export = "EventScript_BackupMrBrineyLocation"
 target_offset = 259
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 259
 runtime_resolution_required = true
 
 [[relocs]]
@@ -640,6 +723,8 @@ original_encoded_gba = 0x81e991d
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/dewfordtown-movement-brineyboardboat"
 target_export = "DewfordTown_Movement_BrineyBoardBoat"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -649,6 +734,8 @@ original_encoded_gba = 0x81e9911
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/dewfordtown-movement-playerboardboat"
 target_export = "DewfordTown_Movement_PlayerBoardBoat"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -659,6 +746,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_PlayBrineysBoatMusic"
 target_offset = 349
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 349
 runtime_resolution_required = true
 
 [[relocs]]
@@ -668,6 +757,8 @@ original_encoded_gba = 0x81e9865
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/dewfordtown-movement-sailtoslateport"
 target_export = "DewfordTown_Movement_SailToSlateport"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -677,6 +768,8 @@ original_encoded_gba = 0x81e9865
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/dewfordtown-movement-sailtoslateport"
 target_export = "DewfordTown_Movement_SailToSlateport"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -687,6 +780,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_StopBrineysBoatMusic"
 target_offset = 357
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 357
 runtime_resolution_required = true
 
 [[relocs]]
@@ -696,6 +791,8 @@ original_encoded_gba = 0x81e9918
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/dewfordtown-movement-exitboatslateport"
 target_export = "DewfordTown_Movement_ExitBoatSlateport"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -705,6 +802,8 @@ original_encoded_gba = 0x81e991f
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/dewfordtown-movement-brineyexitboat"
 target_export = "DewfordTown_Movement_BrineyExitBoat"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -715,6 +814,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown"
 target_export = "DewfordTown_EventScript_LandedSlateportDeliverGoods"
 target_offset = 649
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 643
 runtime_resolution_required = true
 
 [[relocs]]
@@ -725,6 +826,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown"
 target_export = "DewfordTown_EventScript_LandedSlateport"
 target_offset = 658
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 652
 runtime_resolution_required = true
 
 [[relocs]]
@@ -734,6 +837,8 @@ original_encoded_gba = 0x81eec1d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route109"
 target_export = "DewfordTown_Text_BrineyLandedInSlateportDeliverGoods"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -743,6 +848,8 @@ original_encoded_gba = 0x81eeda7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route109"
 target_export = "DewfordTown_Text_BrineyLandedInSlateport"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -753,6 +860,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pc"
 target_export = "Common_EventScript_BufferTrendyPhrase"
 target_offset = 249
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 249
 runtime_resolution_required = true
 
 [[relocs]]
@@ -762,6 +871,8 @@ original_encoded_gba = 0x81ea136
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown"
 target_export = "DewfordTown_Text_XIsTheBiggestHappeningThingRight"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -772,6 +883,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown"
 target_export = "DewfordTown_EventScript_ConfirmTrendyPhrase"
 target_offset = 1089
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 699
 runtime_resolution_required = true
 
 [[relocs]]
@@ -782,6 +895,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown"
 target_export = "DewfordTown_EventScript_RejectTrendyPhrase"
 target_offset = 1099
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 709
 runtime_resolution_required = true
 
 [[relocs]]
@@ -791,6 +906,8 @@ original_encoded_gba = 0x81ea491
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown"
 target_export = "DewfordTown_Text_YeahDefinitionOfInRightNow"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -800,6 +917,8 @@ original_encoded_gba = 0x81ea242
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown"
 target_export = "DewfordTown_Text_TellMeWhatsNewAndIn"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -810,6 +929,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pc"
 target_export = "Common_ShowEasyChatScreen"
 target_offset = 234
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 234
 runtime_resolution_required = true
 
 [[relocs]]
@@ -820,6 +941,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown"
 target_export = "DewfordTown_EventScript_GiveNewTrendyPhrase"
 target_offset = 1142
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 752
 runtime_resolution_required = true
 
 [[relocs]]
@@ -830,6 +953,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown"
 target_export = "DewfordTown_EventScript_CancelNewTrendyPhrase"
 target_offset = 1165
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 775
 runtime_resolution_required = true
 
 [[relocs]]
@@ -840,6 +965,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown"
 target_export = "DewfordTown_EventScript_PhraseNotTrendyEnough"
 target_offset = 1175
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 785
 runtime_resolution_required = true
 
 [[relocs]]
@@ -849,6 +976,8 @@ original_encoded_gba = 0x81ea2aa
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown"
 target_export = "DewfordTown_Text_OfCourseIKnowAboutThat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -858,6 +987,8 @@ original_encoded_gba = 0x81ea443
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown"
 target_export = "DewfordTown_Text_HearOfAnyTrendsComeShareWithMe"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -867,4 +998,850 @@ original_encoded_gba = 0x81ea3fe
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown"
 target_export = "DewfordTown_Text_XHuhIThinkYIsCool"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 1
+
+[[boundaries]]
+payload_offset = 4
+length = 1
+
+[[boundaries]]
+payload_offset = 5
+length = 1
+
+[[boundaries]]
+payload_offset = 6
+length = 3
+
+[[boundaries]]
+payload_offset = 9
+length = 6
+
+[[boundaries]]
+payload_offset = 15
+length = 5
+
+[[boundaries]]
+payload_offset = 20
+length = 1
+
+[[boundaries]]
+payload_offset = 21
+length = 6
+
+[[boundaries]]
+payload_offset = 27
+length = 5
+
+[[boundaries]]
+payload_offset = 32
+length = 5
+
+[[boundaries]]
+payload_offset = 37
+length = 6
+
+[[boundaries]]
+payload_offset = 43
+length = 5
+
+[[boundaries]]
+payload_offset = 48
+length = 6
+
+[[boundaries]]
+payload_offset = 54
+length = 5
+
+[[boundaries]]
+payload_offset = 59
+length = 6
+
+[[boundaries]]
+payload_offset = 65
+length = 5
+
+[[boundaries]]
+payload_offset = 70
+length = 6
+
+[[boundaries]]
+payload_offset = 76
+length = 1
+
+[[boundaries]]
+payload_offset = 77
+length = 6
+
+[[boundaries]]
+payload_offset = 83
+length = 2
+
+[[boundaries]]
+payload_offset = 85
+length = 1
+
+[[boundaries]]
+payload_offset = 86
+length = 5
+
+[[boundaries]]
+payload_offset = 93
+length = 6
+
+[[boundaries]]
+payload_offset = 99
+length = 2
+
+[[boundaries]]
+payload_offset = 101
+length = 1
+
+[[boundaries]]
+payload_offset = 102
+length = 5
+
+[[boundaries]]
+payload_offset = 109
+length = 6
+
+[[boundaries]]
+payload_offset = 115
+length = 2
+
+[[boundaries]]
+payload_offset = 117
+length = 1
+
+[[boundaries]]
+payload_offset = 118
+length = 1
+
+[[boundaries]]
+payload_offset = 119
+length = 1
+
+[[boundaries]]
+payload_offset = 120
+length = 6
+
+[[boundaries]]
+payload_offset = 126
+length = 2
+
+[[boundaries]]
+payload_offset = 128
+length = 5
+
+[[boundaries]]
+payload_offset = 133
+length = 6
+
+[[boundaries]]
+payload_offset = 139
+length = 6
+
+[[boundaries]]
+payload_offset = 145
+length = 2
+
+[[boundaries]]
+payload_offset = 147
+length = 1
+
+[[boundaries]]
+payload_offset = 148
+length = 1
+
+[[boundaries]]
+payload_offset = 149
+length = 6
+
+[[boundaries]]
+payload_offset = 155
+length = 2
+
+[[boundaries]]
+payload_offset = 157
+length = 1
+
+[[boundaries]]
+payload_offset = 158
+length = 5
+
+[[boundaries]]
+payload_offset = 164
+length = 6
+
+[[boundaries]]
+payload_offset = 170
+length = 2
+
+[[boundaries]]
+payload_offset = 172
+length = 1
+
+[[boundaries]]
+payload_offset = 173
+length = 6
+
+[[boundaries]]
+payload_offset = 179
+length = 2
+
+[[boundaries]]
+payload_offset = 181
+length = 1
+
+[[boundaries]]
+payload_offset = 182
+length = 6
+
+[[boundaries]]
+payload_offset = 188
+length = 2
+
+[[boundaries]]
+payload_offset = 190
+length = 1
+
+[[boundaries]]
+payload_offset = 191
+length = 6
+
+[[boundaries]]
+payload_offset = 197
+length = 2
+
+[[boundaries]]
+payload_offset = 199
+length = 1
+
+[[boundaries]]
+payload_offset = 200
+length = 1
+
+[[boundaries]]
+payload_offset = 201
+length = 1
+
+[[boundaries]]
+payload_offset = 202
+length = 3
+
+[[boundaries]]
+payload_offset = 205
+length = 6
+
+[[boundaries]]
+payload_offset = 211
+length = 6
+
+[[boundaries]]
+payload_offset = 217
+length = 2
+
+[[boundaries]]
+payload_offset = 219
+length = 5
+
+[[boundaries]]
+payload_offset = 224
+length = 6
+
+[[boundaries]]
+payload_offset = 230
+length = 5
+
+[[boundaries]]
+payload_offset = 235
+length = 6
+
+[[boundaries]]
+payload_offset = 241
+length = 1
+
+[[boundaries]]
+payload_offset = 242
+length = 6
+
+[[boundaries]]
+payload_offset = 248
+length = 2
+
+[[boundaries]]
+payload_offset = 250
+length = 5
+
+[[boundaries]]
+payload_offset = 255
+length = 5
+
+[[boundaries]]
+payload_offset = 260
+length = 2
+
+[[boundaries]]
+payload_offset = 262
+length = 3
+
+[[boundaries]]
+payload_offset = 265
+length = 6
+
+[[boundaries]]
+payload_offset = 271
+length = 2
+
+[[boundaries]]
+payload_offset = 273
+length = 1
+
+[[boundaries]]
+payload_offset = 274
+length = 1
+
+[[boundaries]]
+payload_offset = 275
+length = 6
+
+[[boundaries]]
+payload_offset = 281
+length = 2
+
+[[boundaries]]
+payload_offset = 283
+length = 1
+
+[[boundaries]]
+payload_offset = 284
+length = 1
+
+[[boundaries]]
+payload_offset = 285
+length = 5
+
+[[boundaries]]
+payload_offset = 290
+length = 1
+
+[[boundaries]]
+payload_offset = 291
+length = 5
+
+[[boundaries]]
+payload_offset = 296
+length = 5
+
+[[boundaries]]
+payload_offset = 301
+length = 6
+
+[[boundaries]]
+payload_offset = 307
+length = 5
+
+[[boundaries]]
+payload_offset = 312
+length = 6
+
+[[boundaries]]
+payload_offset = 318
+length = 1
+
+[[boundaries]]
+payload_offset = 319
+length = 6
+
+[[boundaries]]
+payload_offset = 325
+length = 2
+
+[[boundaries]]
+payload_offset = 327
+length = 1
+
+[[boundaries]]
+payload_offset = 328
+length = 1
+
+[[boundaries]]
+payload_offset = 329
+length = 6
+
+[[boundaries]]
+payload_offset = 335
+length = 2
+
+[[boundaries]]
+payload_offset = 337
+length = 1
+
+[[boundaries]]
+payload_offset = 338
+length = 1
+
+[[boundaries]]
+payload_offset = 339
+length = 5
+
+[[boundaries]]
+payload_offset = 344
+length = 6
+
+[[boundaries]]
+payload_offset = 350
+length = 6
+
+[[boundaries]]
+payload_offset = 356
+length = 7
+
+[[boundaries]]
+payload_offset = 363
+length = 3
+
+[[boundaries]]
+payload_offset = 366
+length = 3
+
+[[boundaries]]
+payload_offset = 369
+length = 7
+
+[[boundaries]]
+payload_offset = 376
+length = 3
+
+[[boundaries]]
+payload_offset = 379
+length = 5
+
+[[boundaries]]
+payload_offset = 384
+length = 5
+
+[[boundaries]]
+payload_offset = 389
+length = 7
+
+[[boundaries]]
+payload_offset = 396
+length = 7
+
+[[boundaries]]
+payload_offset = 403
+length = 3
+
+[[boundaries]]
+payload_offset = 406
+length = 5
+
+[[boundaries]]
+payload_offset = 411
+length = 5
+
+[[boundaries]]
+payload_offset = 416
+length = 7
+
+[[boundaries]]
+payload_offset = 423
+length = 3
+
+[[boundaries]]
+payload_offset = 426
+length = 5
+
+[[boundaries]]
+payload_offset = 431
+length = 3
+
+[[boundaries]]
+payload_offset = 434
+length = 3
+
+[[boundaries]]
+payload_offset = 437
+length = 3
+
+[[boundaries]]
+payload_offset = 440
+length = 3
+
+[[boundaries]]
+payload_offset = 443
+length = 5
+
+[[boundaries]]
+payload_offset = 448
+length = 5
+
+[[boundaries]]
+payload_offset = 453
+length = 5
+
+[[boundaries]]
+payload_offset = 458
+length = 8
+
+[[boundaries]]
+payload_offset = 466
+length = 5
+
+[[boundaries]]
+payload_offset = 471
+length = 1
+
+[[boundaries]]
+payload_offset = 472
+length = 1
+
+[[boundaries]]
+payload_offset = 473
+length = 1
+
+[[boundaries]]
+payload_offset = 474
+length = 5
+
+[[boundaries]]
+payload_offset = 479
+length = 6
+
+[[boundaries]]
+payload_offset = 485
+length = 6
+
+[[boundaries]]
+payload_offset = 491
+length = 7
+
+[[boundaries]]
+payload_offset = 498
+length = 3
+
+[[boundaries]]
+payload_offset = 501
+length = 3
+
+[[boundaries]]
+payload_offset = 504
+length = 7
+
+[[boundaries]]
+payload_offset = 511
+length = 3
+
+[[boundaries]]
+payload_offset = 514
+length = 5
+
+[[boundaries]]
+payload_offset = 519
+length = 5
+
+[[boundaries]]
+payload_offset = 524
+length = 7
+
+[[boundaries]]
+payload_offset = 531
+length = 7
+
+[[boundaries]]
+payload_offset = 538
+length = 3
+
+[[boundaries]]
+payload_offset = 541
+length = 5
+
+[[boundaries]]
+payload_offset = 546
+length = 5
+
+[[boundaries]]
+payload_offset = 551
+length = 7
+
+[[boundaries]]
+payload_offset = 558
+length = 3
+
+[[boundaries]]
+payload_offset = 561
+length = 7
+
+[[boundaries]]
+payload_offset = 568
+length = 3
+
+[[boundaries]]
+payload_offset = 571
+length = 6
+
+[[boundaries]]
+payload_offset = 577
+length = 7
+
+[[boundaries]]
+payload_offset = 584
+length = 3
+
+[[boundaries]]
+payload_offset = 587
+length = 3
+
+[[boundaries]]
+payload_offset = 590
+length = 3
+
+[[boundaries]]
+payload_offset = 593
+length = 3
+
+[[boundaries]]
+payload_offset = 596
+length = 3
+
+[[boundaries]]
+payload_offset = 599
+length = 5
+
+[[boundaries]]
+payload_offset = 604
+length = 3
+
+[[boundaries]]
+payload_offset = 607
+length = 6
+
+[[boundaries]]
+payload_offset = 613
+length = 3
+
+[[boundaries]]
+payload_offset = 616
+length = 6
+
+[[boundaries]]
+payload_offset = 622
+length = 1
+
+[[boundaries]]
+payload_offset = 623
+length = 5
+
+[[boundaries]]
+payload_offset = 628
+length = 5
+
+[[boundaries]]
+payload_offset = 633
+length = 5
+
+[[boundaries]]
+payload_offset = 638
+length = 3
+
+[[boundaries]]
+payload_offset = 641
+length = 1
+
+[[boundaries]]
+payload_offset = 642
+length = 1
+
+[[boundaries]]
+payload_offset = 643
+length = 6
+
+[[boundaries]]
+payload_offset = 649
+length = 2
+
+[[boundaries]]
+payload_offset = 651
+length = 1
+
+[[boundaries]]
+payload_offset = 652
+length = 6
+
+[[boundaries]]
+payload_offset = 658
+length = 2
+
+[[boundaries]]
+payload_offset = 660
+length = 1
+
+[[boundaries]]
+payload_offset = 661
+length = 1
+
+[[boundaries]]
+payload_offset = 662
+length = 1
+
+[[boundaries]]
+payload_offset = 663
+length = 5
+
+[[boundaries]]
+payload_offset = 668
+length = 6
+
+[[boundaries]]
+payload_offset = 674
+length = 2
+
+[[boundaries]]
+payload_offset = 676
+length = 5
+
+[[boundaries]]
+payload_offset = 681
+length = 6
+
+[[boundaries]]
+payload_offset = 687
+length = 5
+
+[[boundaries]]
+payload_offset = 692
+length = 6
+
+[[boundaries]]
+payload_offset = 698
+length = 1
+
+[[boundaries]]
+payload_offset = 699
+length = 6
+
+[[boundaries]]
+payload_offset = 705
+length = 2
+
+[[boundaries]]
+payload_offset = 707
+length = 1
+
+[[boundaries]]
+payload_offset = 708
+length = 1
+
+[[boundaries]]
+payload_offset = 709
+length = 6
+
+[[boundaries]]
+payload_offset = 715
+length = 2
+
+[[boundaries]]
+payload_offset = 717
+length = 5
+
+[[boundaries]]
+payload_offset = 722
+length = 5
+
+[[boundaries]]
+payload_offset = 727
+length = 1
+
+[[boundaries]]
+payload_offset = 728
+length = 1
+
+[[boundaries]]
+payload_offset = 729
+length = 5
+
+[[boundaries]]
+payload_offset = 734
+length = 6
+
+[[boundaries]]
+payload_offset = 740
+length = 5
+
+[[boundaries]]
+payload_offset = 745
+length = 6
+
+[[boundaries]]
+payload_offset = 751
+length = 1
+
+[[boundaries]]
+payload_offset = 752
+length = 2
+
+[[boundaries]]
+payload_offset = 754
+length = 5
+
+[[boundaries]]
+payload_offset = 759
+length = 6
+
+[[boundaries]]
+payload_offset = 765
+length = 6
+
+[[boundaries]]
+payload_offset = 771
+length = 2
+
+[[boundaries]]
+payload_offset = 773
+length = 1
+
+[[boundaries]]
+payload_offset = 774
+length = 1
+
+[[boundaries]]
+payload_offset = 775
+length = 6
+
+[[boundaries]]
+payload_offset = 781
+length = 2
+
+[[boundaries]]
+payload_offset = 783
+length = 1
+
+[[boundaries]]
+payload_offset = 784
+length = 1
+
+[[boundaries]]
+payload_offset = 785
+length = 6
+
+[[boundaries]]
+payload_offset = 791
+length = 2
+
+[[boundaries]]
+payload_offset = 793
+length = 1
+
+[[boundaries]]
+payload_offset = 794
+length = 1

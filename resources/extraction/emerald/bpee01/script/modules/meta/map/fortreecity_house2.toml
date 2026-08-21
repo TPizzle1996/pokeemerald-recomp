@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 4
 reloc_count = 14
+instruction_count = 48
 
 [[segments]]
 kind = "bytecode"
@@ -64,6 +65,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/fortreecity-house2"
 target_export = "FortreeCity_House2_EventScript_ExplainHiddenPower"
 target_offset = 164
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 163
 runtime_resolution_required = true
 
 [[relocs]]
@@ -74,6 +77,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/fortreecity-house2"
 target_export = "FortreeCity_House2_EventScript_Greeting"
 target_offset = 152
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 151
 runtime_resolution_required = true
 
 [[relocs]]
@@ -83,6 +88,8 @@ original_encoded_gba = 0x82178d6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-house2"
 target_export = "FortreeCity_House2_Text_CoinInWhichHand"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -93,6 +100,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/fortreecity-house2"
 target_export = "FortreeCity_House2_EventScript_WrongGuess"
 target_offset = 174
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 173
 runtime_resolution_required = true
 
 [[relocs]]
@@ -102,6 +111,8 @@ original_encoded_gba = 0x821796a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-house2"
 target_export = "FortreeCity_House2_Text_CorrectTryAgainWhichHand"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -112,6 +123,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/fortreecity-house2"
 target_export = "FortreeCity_House2_EventScript_WrongGuess"
 target_offset = 174
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 173
 runtime_resolution_required = true
 
 [[relocs]]
@@ -121,6 +134,8 @@ original_encoded_gba = 0x82179c9
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-house2"
 target_export = "FortreeCity_House2_Text_CorrectTryAgainWhichHand2"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -131,6 +146,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/fortreecity-house2"
 target_export = "FortreeCity_House2_EventScript_WrongGuess"
 target_offset = 174
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 173
 runtime_resolution_required = true
 
 [[relocs]]
@@ -140,6 +157,8 @@ original_encoded_gba = 0x8217a28
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-house2"
 target_export = "FortreeCity_House2_Text_YourHiddenPowerHasAwoken"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -150,6 +169,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_ShowBagIsFull"
 target_offset = 273
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 273
 runtime_resolution_required = true
 
 [[relocs]]
@@ -159,6 +180,8 @@ original_encoded_gba = 0x8217a91
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-house2"
 target_export = "FortreeCity_House2_Text_ExplainHiddenPower"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -168,6 +191,8 @@ original_encoded_gba = 0x8217882
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-house2"
 target_export = "FortreeCity_House2_Text_HiddenPowersArousedByNature"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -177,6 +202,8 @@ original_encoded_gba = 0x8217a91
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-house2"
 target_export = "FortreeCity_House2_Text_ExplainHiddenPower"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -186,4 +213,198 @@ original_encoded_gba = 0x8217ac7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-house2"
 target_export = "FortreeCity_House2_Text_YouGuessedWrong"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 1
+
+[[boundaries]]
+payload_offset = 2
+length = 3
+
+[[boundaries]]
+payload_offset = 5
+length = 6
+
+[[boundaries]]
+payload_offset = 11
+length = 3
+
+[[boundaries]]
+payload_offset = 14
+length = 6
+
+[[boundaries]]
+payload_offset = 20
+length = 6
+
+[[boundaries]]
+payload_offset = 26
+length = 2
+
+[[boundaries]]
+payload_offset = 28
+length = 5
+
+[[boundaries]]
+payload_offset = 33
+length = 5
+
+[[boundaries]]
+payload_offset = 38
+length = 5
+
+[[boundaries]]
+payload_offset = 43
+length = 6
+
+[[boundaries]]
+payload_offset = 49
+length = 6
+
+[[boundaries]]
+payload_offset = 55
+length = 2
+
+[[boundaries]]
+payload_offset = 57
+length = 5
+
+[[boundaries]]
+payload_offset = 62
+length = 5
+
+[[boundaries]]
+payload_offset = 67
+length = 5
+
+[[boundaries]]
+payload_offset = 72
+length = 6
+
+[[boundaries]]
+payload_offset = 78
+length = 6
+
+[[boundaries]]
+payload_offset = 84
+length = 2
+
+[[boundaries]]
+payload_offset = 86
+length = 5
+
+[[boundaries]]
+payload_offset = 91
+length = 5
+
+[[boundaries]]
+payload_offset = 96
+length = 5
+
+[[boundaries]]
+payload_offset = 101
+length = 6
+
+[[boundaries]]
+payload_offset = 107
+length = 6
+
+[[boundaries]]
+payload_offset = 113
+length = 2
+
+[[boundaries]]
+payload_offset = 115
+length = 5
+
+[[boundaries]]
+payload_offset = 120
+length = 5
+
+[[boundaries]]
+payload_offset = 125
+length = 2
+
+[[boundaries]]
+payload_offset = 127
+length = 5
+
+[[boundaries]]
+payload_offset = 132
+length = 6
+
+[[boundaries]]
+payload_offset = 138
+length = 3
+
+[[boundaries]]
+payload_offset = 141
+length = 6
+
+[[boundaries]]
+payload_offset = 147
+length = 2
+
+[[boundaries]]
+payload_offset = 149
+length = 1
+
+[[boundaries]]
+payload_offset = 150
+length = 1
+
+[[boundaries]]
+payload_offset = 151
+length = 6
+
+[[boundaries]]
+payload_offset = 157
+length = 2
+
+[[boundaries]]
+payload_offset = 159
+length = 3
+
+[[boundaries]]
+payload_offset = 162
+length = 1
+
+[[boundaries]]
+payload_offset = 163
+length = 6
+
+[[boundaries]]
+payload_offset = 169
+length = 2
+
+[[boundaries]]
+payload_offset = 171
+length = 1
+
+[[boundaries]]
+payload_offset = 172
+length = 1
+
+[[boundaries]]
+payload_offset = 173
+length = 6
+
+[[boundaries]]
+payload_offset = 179
+length = 2
+
+[[boundaries]]
+payload_offset = 181
+length = 1
+
+[[boundaries]]
+payload_offset = 182
+length = 1

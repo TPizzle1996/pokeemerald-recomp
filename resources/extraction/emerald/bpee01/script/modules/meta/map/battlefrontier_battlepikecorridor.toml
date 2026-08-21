@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 2
 export_count = 2
 reloc_count = 5
+instruction_count = 31
 
 [[segments]]
 kind = "bytecode"
@@ -53,6 +54,8 @@ original_encoded_gba = 0x825c80b
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battlepikecorridor-movement-playerentercorridor"
 target_export = "BattleFrontier_BattlePikeCorridor_Movement_PlayerEnterCorridor"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -62,6 +65,8 @@ original_encoded_gba = 0x825c812
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battlepikecorridor-movement-attendantentercorridor"
 target_export = "BattleFrontier_BattlePikeCorridor_Movement_AttendantEnterCorridor"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -71,6 +76,8 @@ original_encoded_gba = 0x825c817
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepikecorridor"
 target_export = "BattleFrontier_BattlePikeCorridor_Text_YourChallengeHasBegun"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -80,6 +87,8 @@ original_encoded_gba = 0x825c80e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battlepikecorridor-movement-playerexitcorridor"
 target_export = "BattleFrontier_BattlePikeCorridor_Movement_PlayerExitCorridor"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -90,4 +99,130 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikelobby"
 target_export = "BattleFrontier_BattlePike_EventScript_CloseCurtain"
 target_offset = 1155
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1095
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 5
+
+[[boundaries]]
+payload_offset = 8
+length = 5
+
+[[boundaries]]
+payload_offset = 13
+length = 5
+
+[[boundaries]]
+payload_offset = 18
+length = 3
+
+[[boundaries]]
+payload_offset = 21
+length = 5
+
+[[boundaries]]
+payload_offset = 26
+length = 3
+
+[[boundaries]]
+payload_offset = 29
+length = 5
+
+[[boundaries]]
+payload_offset = 34
+length = 5
+
+[[boundaries]]
+payload_offset = 39
+length = 3
+
+[[boundaries]]
+payload_offset = 42
+length = 7
+
+[[boundaries]]
+payload_offset = 49
+length = 7
+
+[[boundaries]]
+payload_offset = 56
+length = 3
+
+[[boundaries]]
+payload_offset = 59
+length = 1
+
+[[boundaries]]
+payload_offset = 60
+length = 6
+
+[[boundaries]]
+payload_offset = 66
+length = 2
+
+[[boundaries]]
+payload_offset = 68
+length = 1
+
+[[boundaries]]
+payload_offset = 69
+length = 1
+
+[[boundaries]]
+payload_offset = 70
+length = 7
+
+[[boundaries]]
+payload_offset = 77
+length = 3
+
+[[boundaries]]
+payload_offset = 80
+length = 5
+
+[[boundaries]]
+payload_offset = 85
+length = 5
+
+[[boundaries]]
+payload_offset = 90
+length = 5
+
+[[boundaries]]
+payload_offset = 95
+length = 3
+
+[[boundaries]]
+payload_offset = 98
+length = 5
+
+[[boundaries]]
+payload_offset = 103
+length = 8
+
+[[boundaries]]
+payload_offset = 111
+length = 1
+
+[[boundaries]]
+payload_offset = 112
+length = 1
+
+[[boundaries]]
+payload_offset = 113
+length = 5
+
+[[boundaries]]
+payload_offset = 118
+length = 4
+
+[[boundaries]]
+payload_offset = 122
+length = 1

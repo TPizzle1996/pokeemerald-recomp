@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 4
 export_count = 32
 reloc_count = 63
+instruction_count = 245
 
 [[segments]]
 kind = "bytecode"
@@ -305,6 +306,8 @@ original_encoded_gba = 0x82c5dfa
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/battle-tent"
 target_export = "SlateportCity_BattleTentLobby_Text_DidntSaveBeforeQuitting"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -314,6 +317,8 @@ original_encoded_gba = 0x82c5c6f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/battle-tent"
 target_export = "SlateportCity_BattleTentLobby_Text_WonThreeMatchesReturnMons"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -323,6 +328,8 @@ original_encoded_gba = 0x82c5d14
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/battle-tent"
 target_export = "SlateportCity_BattleTentLobby_Text_AwardYouThisPrize"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -333,6 +340,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-battletentlobby"
 target_export = "SlateportCity_BattleTentLobby_EventScript_NoRoomForPrize"
 target_offset = 250
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 187
 runtime_resolution_required = true
 
 [[relocs]]
@@ -342,6 +351,8 @@ original_encoded_gba = 0x823f68c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battletowerlobby"
 target_export = "BattleFrontier_BattleTowerLobby_Text_ReceivedPrize"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -352,6 +363,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-battletentlobby"
 target_export = "SlateportCity_BattleTentLobby_EventScript_EndGivePrize"
 target_offset = 305
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 242
 runtime_resolution_required = true
 
 [[relocs]]
@@ -361,6 +374,8 @@ original_encoded_gba = 0x82c5d52
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/battle-tent"
 target_export = "SlateportCity_BattleTentLobby_Text_NoRoomInBagMakeRoom"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -371,6 +386,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-battletentlobby"
 target_export = "SlateportCity_BattleTentLobby_EventScript_EndGivePrize"
 target_offset = 305
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 242
 runtime_resolution_required = true
 
 [[relocs]]
@@ -380,6 +397,8 @@ original_encoded_gba = 0x82c5ba2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/battle-tent"
 target_export = "SlateportCity_BattleTentLobby_Text_ReturnRentalMonsSaveResults"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -389,6 +408,8 @@ original_encoded_gba = 0x82c5aa5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/battle-tent"
 target_export = "SlateportCity_BattleTentLobby_Text_LookForwardToNextVisit"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -398,6 +419,8 @@ original_encoded_gba = 0x82c5da7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/battle-tent"
 target_export = "SlateportCity_BattleTentLobby_Text_BeenWaitingForYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -408,6 +431,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-battletentlobby"
 target_export = "SlateportCity_BattleTentLobby_EventScript_EnterChallenge"
 target_offset = 636
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 573
 runtime_resolution_required = true
 
 [[relocs]]
@@ -418,6 +443,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-battletentlobby"
 target_export = "SlateportCity_BattleTentLobby_EventScript_GivePrize"
 target_offset = 185
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 122
 runtime_resolution_required = true
 
 [[relocs]]
@@ -427,6 +454,8 @@ original_encoded_gba = 0x82c5810
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/battle-tent"
 target_export = "SlateportCity_BattleTentLobby_Text_WelcomeToBattleTent"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -436,6 +465,8 @@ original_encoded_gba = 0x82c586a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/battle-tent"
 target_export = "SlateportCity_BattleTentLobby_Text_TakeChallenge"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -446,6 +477,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-battletentlobby"
 target_export = "SlateportCity_BattleTentLobby_EventScript_TryEnterChallenge"
 target_offset = 470
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 407
 runtime_resolution_required = true
 
 [[relocs]]
@@ -456,6 +489,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-battletentlobby"
 target_export = "SlateportCity_BattleTentLobby_EventScript_ExplainChallenge"
 target_offset = 727
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 649
 runtime_resolution_required = true
 
 [[relocs]]
@@ -466,6 +501,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-battletentlobby"
 target_export = "SlateportCity_BattleTentLobby_EventScript_CancelChallenge"
 target_offset = 766
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 688
 runtime_resolution_required = true
 
 [[relocs]]
@@ -476,6 +513,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-battletentlobby"
 target_export = "SlateportCity_BattleTentLobby_EventScript_CancelChallenge"
 target_offset = 766
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 688
 runtime_resolution_required = true
 
 [[relocs]]
@@ -485,6 +524,8 @@ original_encoded_gba = 0x82c5b06
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/battle-tent"
 target_export = "SlateportCity_BattleTentLobby_Text_SaveBeforeChallenge"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -495,6 +536,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-battletentlobby"
 target_export = "SlateportCity_BattleTentLobby_EventScript_LoadPartyCancelChallenge"
 target_offset = 763
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 685
 runtime_resolution_required = true
 
 [[relocs]]
@@ -505,6 +548,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-battletentlobby"
 target_export = "SlateportCity_BattleTentLobby_EventScript_SaveBeforeChallenge"
 target_offset = 544
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 481
 runtime_resolution_required = true
 
 [[relocs]]
@@ -515,6 +560,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-battletentlobby"
 target_export = "SlateportCity_BattleTentLobby_EventScript_LoadPartyCancelChallenge"
 target_offset = 763
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 685
 runtime_resolution_required = true
 
 [[relocs]]
@@ -525,6 +572,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/std-msgbox"
 target_export = "Common_EventScript_SaveGame"
 target_offset = 58
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 58
 runtime_resolution_required = true
 
 [[relocs]]
@@ -535,6 +584,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-battletentlobby"
 target_export = "SlateportCity_BattleTentLobby_EventScript_CancelChallengeSaveFailed"
 target_offset = 740
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 662
 runtime_resolution_required = true
 
 [[relocs]]
@@ -544,6 +595,8 @@ original_encoded_gba = 0x82c5b8c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/battle-tent"
 target_export = "SlateportCity_BattleTentLobby_Text_StepThisWay"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -554,6 +607,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-battletentlobby"
 target_export = "SlateportCity_BattleTentLobby_EventScript_WalkToDoor"
 target_offset = 665
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 602
 runtime_resolution_required = true
 
 [[relocs]]
@@ -563,6 +618,8 @@ original_encoded_gba = 0x82089f8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/slateportcity-battletentlobby-movement-attendantwalktodoor"
 target_export = "SlateportCity_BattleTentLobby_Movement_AttendantWalkToDoor"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -572,6 +629,8 @@ original_encoded_gba = 0x82089ff
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/slateportcity-battletentlobby-movement-playerwalktodoor"
 target_export = "SlateportCity_BattleTentLobby_Movement_PlayerWalkToDoor"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -581,6 +640,8 @@ original_encoded_gba = 0x82089fc
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/slateportcity-battletentlobby-movement-attendantenterdoor"
 target_export = "SlateportCity_BattleTentLobby_Movement_AttendantEnterDoor"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -590,6 +651,8 @@ original_encoded_gba = 0x8208a03
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/slateportcity-battletentlobby-movement-playerenterdoor"
 target_export = "SlateportCity_BattleTentLobby_Movement_PlayerEnterDoor"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -599,6 +662,8 @@ original_encoded_gba = 0x82c589c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/battle-tent"
 target_export = "SlateportCity_BattleTentLobby_Text_ExplainSlateportTent"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -609,6 +674,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-battletentlobby"
 target_export = "SlateportCity_BattleTentLobby_EventScript_AskEnterChallenge"
 target_offset = 410
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 347
 runtime_resolution_required = true
 
 [[relocs]]
@@ -619,6 +686,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-battletentlobby"
 target_export = "SlateportCity_BattleTentLobby_EventScript_CancelChallenge"
 target_offset = 766
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 688
 runtime_resolution_required = true
 
 [[relocs]]
@@ -628,6 +697,8 @@ original_encoded_gba = 0x82c5aa5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/battle-tent"
 target_export = "SlateportCity_BattleTentLobby_Text_LookForwardToNextVisit"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -638,6 +709,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-battletentlobby"
 target_export = "SlateportCity_BattleTentLobby_EventScript_ReceivedTorment"
 target_offset = 836
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 753
 runtime_resolution_required = true
 
 [[relocs]]
@@ -647,6 +720,8 @@ original_encoded_gba = 0x8208b4e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-battletentlobby"
 target_export = "SlateportCity_BattleTentLobby_Text_CouldntFindMonForMe"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -657,6 +732,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_ShowBagIsFull"
 target_offset = 273
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 273
 runtime_resolution_required = true
 
 [[relocs]]
@@ -666,6 +743,8 @@ original_encoded_gba = 0x8208c5c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-battletentlobby"
 target_export = "SlateportCity_BattleTentLobby_Text_ExplainTorment"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -675,6 +754,8 @@ original_encoded_gba = 0x8208c5c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-battletentlobby"
 target_export = "SlateportCity_BattleTentLobby_Text_ExplainTorment"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -684,6 +765,8 @@ original_encoded_gba = 0x8208d27
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-battletentlobby"
 target_export = "SlateportCity_BattleTentLobby_Text_IllTryUsingBugMons"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -693,6 +776,8 @@ original_encoded_gba = 0x8208da6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-battletentlobby"
 target_export = "SlateportCity_BattleTentLobby_Text_BattleEvenWithoutToughMons"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -702,6 +787,8 @@ original_encoded_gba = 0x8208df1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/slateportcity-battletentlobby"
 target_export = "SlateportCity_BattleTentLobby_Text_NiceIfMoreSelection"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -711,6 +798,8 @@ original_encoded_gba = 0x8259721
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlefactorylobby"
 target_export = "BattleFrontier_BattleFactoryLobby_Text_RulesAreListed"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -721,6 +810,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-battletentlobby"
 target_export = "SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard"
 target_offset = 888
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 805
 runtime_resolution_required = true
 
 [[relocs]]
@@ -730,6 +821,8 @@ original_encoded_gba = 0x8259743
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlefactorylobby"
 target_export = "BattleFrontier_BattleFactoryLobby_Text_ReadWhichHeading"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -740,6 +833,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-battletentlobby"
 target_export = "SlateportCity_BattleTentLobby_EventScript_RulesBasics"
 target_offset = 982
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 899
 runtime_resolution_required = true
 
 [[relocs]]
@@ -750,6 +845,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-battletentlobby"
 target_export = "SlateportCity_BattleTentLobby_EventScript_RulesSwapPartner"
 target_offset = 996
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 913
 runtime_resolution_required = true
 
 [[relocs]]
@@ -760,6 +857,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-battletentlobby"
 target_export = "SlateportCity_BattleTentLobby_EventScript_RulesSwapNumber"
 target_offset = 1010
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 927
 runtime_resolution_required = true
 
 [[relocs]]
@@ -770,6 +869,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-battletentlobby"
 target_export = "SlateportCity_BattleTentLobby_EventScript_RulesSwapNotes"
 target_offset = 1024
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 941
 runtime_resolution_required = true
 
 [[relocs]]
@@ -780,6 +881,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-battletentlobby"
 target_export = "SlateportCity_BattleTentLobby_EventScript_RulesMons"
 target_offset = 1038
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 955
 runtime_resolution_required = true
 
 [[relocs]]
@@ -790,6 +893,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-battletentlobby"
 target_export = "SlateportCity_BattleTentLobby_EventScript_ExitRules"
 target_offset = 1052
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 969
 runtime_resolution_required = true
 
 [[relocs]]
@@ -800,6 +905,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-battletentlobby"
 target_export = "SlateportCity_BattleTentLobby_EventScript_ExitRules"
 target_offset = 1052
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 969
 runtime_resolution_required = true
 
 [[relocs]]
@@ -809,6 +916,8 @@ original_encoded_gba = 0x82c5f08
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/battle-tent"
 target_export = "SlateportCity_BattleTentLobby_Text_ExplainBasicRules"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -819,6 +928,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-battletentlobby"
 target_export = "SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard"
 target_offset = 888
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 805
 runtime_resolution_required = true
 
 [[relocs]]
@@ -828,6 +939,8 @@ original_encoded_gba = 0x82c5f9d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/battle-tent"
 target_export = "SlateportCity_BattleTentLobby_Text_ExplainSwapPartnerRules"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -838,6 +951,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-battletentlobby"
 target_export = "SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard"
 target_offset = 888
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 805
 runtime_resolution_required = true
 
 [[relocs]]
@@ -847,6 +962,8 @@ original_encoded_gba = 0x82c6020
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/battle-tent"
 target_export = "SlateportCity_BattleTentLobby_Text_ExplainSwapNumberRules"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -857,6 +974,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-battletentlobby"
 target_export = "SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard"
 target_offset = 888
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 805
 runtime_resolution_required = true
 
 [[relocs]]
@@ -866,6 +985,8 @@ original_encoded_gba = 0x82c60c0
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/battle-tent"
 target_export = "SlateportCity_BattleTentLobby_Text_ExplainSwapNotes"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -876,6 +997,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-battletentlobby"
 target_export = "SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard"
 target_offset = 888
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 805
 runtime_resolution_required = true
 
 [[relocs]]
@@ -885,6 +1008,8 @@ original_encoded_gba = 0x82c61fe
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/battle-tent"
 target_export = "SlateportCity_BattleTentLobby_Text_ExplainMonRules"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -895,4 +1020,986 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/slateportcity-battletentlobby"
 target_export = "SlateportCity_BattleTentLobby_EventScript_ReadRulesBoard"
 target_offset = 888
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 805
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 5
+
+[[boundaries]]
+payload_offset = 5
+length = 4
+
+[[boundaries]]
+payload_offset = 9
+length = 1
+
+[[boundaries]]
+payload_offset = 10
+length = 5
+
+[[boundaries]]
+payload_offset = 15
+length = 3
+
+[[boundaries]]
+payload_offset = 18
+length = 1
+
+[[boundaries]]
+payload_offset = 19
+length = 1
+
+[[boundaries]]
+payload_offset = 20
+length = 6
+
+[[boundaries]]
+payload_offset = 26
+length = 2
+
+[[boundaries]]
+payload_offset = 28
+length = 1
+
+[[boundaries]]
+payload_offset = 29
+length = 5
+
+[[boundaries]]
+payload_offset = 34
+length = 5
+
+[[boundaries]]
+payload_offset = 39
+length = 5
+
+[[boundaries]]
+payload_offset = 44
+length = 3
+
+[[boundaries]]
+payload_offset = 47
+length = 5
+
+[[boundaries]]
+payload_offset = 52
+length = 5
+
+[[boundaries]]
+payload_offset = 57
+length = 5
+
+[[boundaries]]
+payload_offset = 62
+length = 5
+
+[[boundaries]]
+payload_offset = 67
+length = 3
+
+[[boundaries]]
+payload_offset = 70
+length = 1
+
+[[boundaries]]
+payload_offset = 71
+length = 1
+
+[[boundaries]]
+payload_offset = 72
+length = 1
+
+[[boundaries]]
+payload_offset = 73
+length = 5
+
+[[boundaries]]
+payload_offset = 78
+length = 1
+
+[[boundaries]]
+payload_offset = 79
+length = 5
+
+[[boundaries]]
+payload_offset = 84
+length = 3
+
+[[boundaries]]
+payload_offset = 87
+length = 5
+
+[[boundaries]]
+payload_offset = 92
+length = 5
+
+[[boundaries]]
+payload_offset = 97
+length = 5
+
+[[boundaries]]
+payload_offset = 102
+length = 3
+
+[[boundaries]]
+payload_offset = 105
+length = 5
+
+[[boundaries]]
+payload_offset = 110
+length = 5
+
+[[boundaries]]
+payload_offset = 115
+length = 3
+
+[[boundaries]]
+payload_offset = 118
+length = 3
+
+[[boundaries]]
+payload_offset = 121
+length = 1
+
+[[boundaries]]
+payload_offset = 122
+length = 6
+
+[[boundaries]]
+payload_offset = 128
+length = 2
+
+[[boundaries]]
+payload_offset = 130
+length = 5
+
+[[boundaries]]
+payload_offset = 135
+length = 3
+
+[[boundaries]]
+payload_offset = 138
+length = 5
+
+[[boundaries]]
+payload_offset = 143
+length = 5
+
+[[boundaries]]
+payload_offset = 148
+length = 6
+
+[[boundaries]]
+payload_offset = 154
+length = 5
+
+[[boundaries]]
+payload_offset = 159
+length = 5
+
+[[boundaries]]
+payload_offset = 164
+length = 5
+
+[[boundaries]]
+payload_offset = 169
+length = 3
+
+[[boundaries]]
+payload_offset = 172
+length = 5
+
+[[boundaries]]
+payload_offset = 177
+length = 1
+
+[[boundaries]]
+payload_offset = 178
+length = 3
+
+[[boundaries]]
+payload_offset = 181
+length = 1
+
+[[boundaries]]
+payload_offset = 182
+length = 5
+
+[[boundaries]]
+payload_offset = 187
+length = 6
+
+[[boundaries]]
+payload_offset = 193
+length = 2
+
+[[boundaries]]
+payload_offset = 195
+length = 5
+
+[[boundaries]]
+payload_offset = 200
+length = 1
+
+[[boundaries]]
+payload_offset = 201
+length = 5
+
+[[boundaries]]
+payload_offset = 206
+length = 1
+
+[[boundaries]]
+payload_offset = 207
+length = 5
+
+[[boundaries]]
+payload_offset = 212
+length = 5
+
+[[boundaries]]
+payload_offset = 217
+length = 5
+
+[[boundaries]]
+payload_offset = 222
+length = 3
+
+[[boundaries]]
+payload_offset = 225
+length = 5
+
+[[boundaries]]
+payload_offset = 230
+length = 5
+
+[[boundaries]]
+payload_offset = 235
+length = 3
+
+[[boundaries]]
+payload_offset = 238
+length = 3
+
+[[boundaries]]
+payload_offset = 241
+length = 1
+
+[[boundaries]]
+payload_offset = 242
+length = 6
+
+[[boundaries]]
+payload_offset = 248
+length = 2
+
+[[boundaries]]
+payload_offset = 250
+length = 1
+
+[[boundaries]]
+payload_offset = 251
+length = 5
+
+[[boundaries]]
+payload_offset = 256
+length = 1
+
+[[boundaries]]
+payload_offset = 257
+length = 1
+
+[[boundaries]]
+payload_offset = 258
+length = 1
+
+[[boundaries]]
+payload_offset = 259
+length = 5
+
+[[boundaries]]
+payload_offset = 264
+length = 1
+
+[[boundaries]]
+payload_offset = 265
+length = 5
+
+[[boundaries]]
+payload_offset = 270
+length = 5
+
+[[boundaries]]
+payload_offset = 275
+length = 3
+
+[[boundaries]]
+payload_offset = 278
+length = 3
+
+[[boundaries]]
+payload_offset = 281
+length = 1
+
+[[boundaries]]
+payload_offset = 282
+length = 5
+
+[[boundaries]]
+payload_offset = 287
+length = 5
+
+[[boundaries]]
+payload_offset = 292
+length = 5
+
+[[boundaries]]
+payload_offset = 297
+length = 3
+
+[[boundaries]]
+payload_offset = 300
+length = 5
+
+[[boundaries]]
+payload_offset = 305
+length = 5
+
+[[boundaries]]
+payload_offset = 310
+length = 5
+
+[[boundaries]]
+payload_offset = 315
+length = 1
+
+[[boundaries]]
+payload_offset = 316
+length = 1
+
+[[boundaries]]
+payload_offset = 317
+length = 5
+
+[[boundaries]]
+payload_offset = 322
+length = 3
+
+[[boundaries]]
+payload_offset = 325
+length = 5
+
+[[boundaries]]
+payload_offset = 330
+length = 6
+
+[[boundaries]]
+payload_offset = 336
+length = 3
+
+[[boundaries]]
+payload_offset = 339
+length = 6
+
+[[boundaries]]
+payload_offset = 345
+length = 2
+
+[[boundaries]]
+payload_offset = 347
+length = 5
+
+[[boundaries]]
+payload_offset = 352
+length = 1
+
+[[boundaries]]
+payload_offset = 353
+length = 5
+
+[[boundaries]]
+payload_offset = 358
+length = 5
+
+[[boundaries]]
+payload_offset = 363
+length = 5
+
+[[boundaries]]
+payload_offset = 368
+length = 6
+
+[[boundaries]]
+payload_offset = 374
+length = 5
+
+[[boundaries]]
+payload_offset = 379
+length = 6
+
+[[boundaries]]
+payload_offset = 385
+length = 5
+
+[[boundaries]]
+payload_offset = 390
+length = 6
+
+[[boundaries]]
+payload_offset = 396
+length = 5
+
+[[boundaries]]
+payload_offset = 401
+length = 6
+
+[[boundaries]]
+payload_offset = 407
+length = 5
+
+[[boundaries]]
+payload_offset = 412
+length = 5
+
+[[boundaries]]
+payload_offset = 417
+length = 5
+
+[[boundaries]]
+payload_offset = 422
+length = 5
+
+[[boundaries]]
+payload_offset = 427
+length = 5
+
+[[boundaries]]
+payload_offset = 432
+length = 3
+
+[[boundaries]]
+payload_offset = 435
+length = 6
+
+[[boundaries]]
+payload_offset = 441
+length = 2
+
+[[boundaries]]
+payload_offset = 443
+length = 5
+
+[[boundaries]]
+payload_offset = 448
+length = 5
+
+[[boundaries]]
+payload_offset = 453
+length = 6
+
+[[boundaries]]
+payload_offset = 459
+length = 5
+
+[[boundaries]]
+payload_offset = 464
+length = 6
+
+[[boundaries]]
+payload_offset = 470
+length = 5
+
+[[boundaries]]
+payload_offset = 475
+length = 6
+
+[[boundaries]]
+payload_offset = 481
+length = 5
+
+[[boundaries]]
+payload_offset = 486
+length = 5
+
+[[boundaries]]
+payload_offset = 491
+length = 5
+
+[[boundaries]]
+payload_offset = 496
+length = 3
+
+[[boundaries]]
+payload_offset = 499
+length = 5
+
+[[boundaries]]
+payload_offset = 504
+length = 3
+
+[[boundaries]]
+payload_offset = 507
+length = 5
+
+[[boundaries]]
+payload_offset = 512
+length = 5
+
+[[boundaries]]
+payload_offset = 517
+length = 5
+
+[[boundaries]]
+payload_offset = 522
+length = 3
+
+[[boundaries]]
+payload_offset = 525
+length = 5
+
+[[boundaries]]
+payload_offset = 530
+length = 5
+
+[[boundaries]]
+payload_offset = 535
+length = 5
+
+[[boundaries]]
+payload_offset = 540
+length = 3
+
+[[boundaries]]
+payload_offset = 543
+length = 1
+
+[[boundaries]]
+payload_offset = 544
+length = 3
+
+[[boundaries]]
+payload_offset = 547
+length = 5
+
+[[boundaries]]
+payload_offset = 552
+length = 5
+
+[[boundaries]]
+payload_offset = 557
+length = 5
+
+[[boundaries]]
+payload_offset = 562
+length = 6
+
+[[boundaries]]
+payload_offset = 568
+length = 5
+
+[[boundaries]]
+payload_offset = 573
+length = 6
+
+[[boundaries]]
+payload_offset = 579
+length = 2
+
+[[boundaries]]
+payload_offset = 581
+length = 1
+
+[[boundaries]]
+payload_offset = 582
+length = 5
+
+[[boundaries]]
+payload_offset = 587
+length = 8
+
+[[boundaries]]
+payload_offset = 595
+length = 5
+
+[[boundaries]]
+payload_offset = 600
+length = 1
+
+[[boundaries]]
+payload_offset = 601
+length = 1
+
+[[boundaries]]
+payload_offset = 602
+length = 7
+
+[[boundaries]]
+payload_offset = 609
+length = 7
+
+[[boundaries]]
+payload_offset = 616
+length = 3
+
+[[boundaries]]
+payload_offset = 619
+length = 5
+
+[[boundaries]]
+payload_offset = 624
+length = 1
+
+[[boundaries]]
+payload_offset = 625
+length = 7
+
+[[boundaries]]
+payload_offset = 632
+length = 7
+
+[[boundaries]]
+payload_offset = 639
+length = 3
+
+[[boundaries]]
+payload_offset = 642
+length = 5
+
+[[boundaries]]
+payload_offset = 647
+length = 1
+
+[[boundaries]]
+payload_offset = 648
+length = 1
+
+[[boundaries]]
+payload_offset = 649
+length = 6
+
+[[boundaries]]
+payload_offset = 655
+length = 2
+
+[[boundaries]]
+payload_offset = 657
+length = 5
+
+[[boundaries]]
+payload_offset = 662
+length = 5
+
+[[boundaries]]
+payload_offset = 667
+length = 5
+
+[[boundaries]]
+payload_offset = 672
+length = 5
+
+[[boundaries]]
+payload_offset = 677
+length = 3
+
+[[boundaries]]
+payload_offset = 680
+length = 5
+
+[[boundaries]]
+payload_offset = 685
+length = 3
+
+[[boundaries]]
+payload_offset = 688
+length = 6
+
+[[boundaries]]
+payload_offset = 694
+length = 2
+
+[[boundaries]]
+payload_offset = 696
+length = 1
+
+[[boundaries]]
+payload_offset = 697
+length = 1
+
+[[boundaries]]
+payload_offset = 698
+length = 1
+
+[[boundaries]]
+payload_offset = 699
+length = 1
+
+[[boundaries]]
+payload_offset = 700
+length = 3
+
+[[boundaries]]
+payload_offset = 703
+length = 6
+
+[[boundaries]]
+payload_offset = 709
+length = 6
+
+[[boundaries]]
+payload_offset = 715
+length = 2
+
+[[boundaries]]
+payload_offset = 717
+length = 5
+
+[[boundaries]]
+payload_offset = 722
+length = 5
+
+[[boundaries]]
+payload_offset = 727
+length = 2
+
+[[boundaries]]
+payload_offset = 729
+length = 5
+
+[[boundaries]]
+payload_offset = 734
+length = 6
+
+[[boundaries]]
+payload_offset = 740
+length = 3
+
+[[boundaries]]
+payload_offset = 743
+length = 6
+
+[[boundaries]]
+payload_offset = 749
+length = 2
+
+[[boundaries]]
+payload_offset = 751
+length = 1
+
+[[boundaries]]
+payload_offset = 752
+length = 1
+
+[[boundaries]]
+payload_offset = 753
+length = 6
+
+[[boundaries]]
+payload_offset = 759
+length = 2
+
+[[boundaries]]
+payload_offset = 761
+length = 1
+
+[[boundaries]]
+payload_offset = 762
+length = 1
+
+[[boundaries]]
+payload_offset = 763
+length = 6
+
+[[boundaries]]
+payload_offset = 769
+length = 2
+
+[[boundaries]]
+payload_offset = 771
+length = 1
+
+[[boundaries]]
+payload_offset = 772
+length = 6
+
+[[boundaries]]
+payload_offset = 778
+length = 2
+
+[[boundaries]]
+payload_offset = 780
+length = 1
+
+[[boundaries]]
+payload_offset = 781
+length = 6
+
+[[boundaries]]
+payload_offset = 787
+length = 2
+
+[[boundaries]]
+payload_offset = 789
+length = 1
+
+[[boundaries]]
+payload_offset = 790
+length = 1
+
+[[boundaries]]
+payload_offset = 791
+length = 6
+
+[[boundaries]]
+payload_offset = 797
+length = 2
+
+[[boundaries]]
+payload_offset = 799
+length = 5
+
+[[boundaries]]
+payload_offset = 805
+length = 5
+
+[[boundaries]]
+payload_offset = 810
+length = 1
+
+[[boundaries]]
+payload_offset = 811
+length = 5
+
+[[boundaries]]
+payload_offset = 816
+length = 5
+
+[[boundaries]]
+payload_offset = 821
+length = 5
+
+[[boundaries]]
+payload_offset = 826
+length = 6
+
+[[boundaries]]
+payload_offset = 832
+length = 5
+
+[[boundaries]]
+payload_offset = 837
+length = 6
+
+[[boundaries]]
+payload_offset = 843
+length = 5
+
+[[boundaries]]
+payload_offset = 848
+length = 6
+
+[[boundaries]]
+payload_offset = 854
+length = 5
+
+[[boundaries]]
+payload_offset = 859
+length = 6
+
+[[boundaries]]
+payload_offset = 865
+length = 5
+
+[[boundaries]]
+payload_offset = 870
+length = 6
+
+[[boundaries]]
+payload_offset = 876
+length = 5
+
+[[boundaries]]
+payload_offset = 881
+length = 6
+
+[[boundaries]]
+payload_offset = 887
+length = 5
+
+[[boundaries]]
+payload_offset = 892
+length = 6
+
+[[boundaries]]
+payload_offset = 898
+length = 1
+
+[[boundaries]]
+payload_offset = 899
+length = 6
+
+[[boundaries]]
+payload_offset = 905
+length = 2
+
+[[boundaries]]
+payload_offset = 907
+length = 5
+
+[[boundaries]]
+payload_offset = 913
+length = 6
+
+[[boundaries]]
+payload_offset = 919
+length = 2
+
+[[boundaries]]
+payload_offset = 921
+length = 5
+
+[[boundaries]]
+payload_offset = 927
+length = 6
+
+[[boundaries]]
+payload_offset = 933
+length = 2
+
+[[boundaries]]
+payload_offset = 935
+length = 5
+
+[[boundaries]]
+payload_offset = 941
+length = 6
+
+[[boundaries]]
+payload_offset = 947
+length = 2
+
+[[boundaries]]
+payload_offset = 949
+length = 5
+
+[[boundaries]]
+payload_offset = 955
+length = 6
+
+[[boundaries]]
+payload_offset = 961
+length = 2
+
+[[boundaries]]
+payload_offset = 963
+length = 5
+
+[[boundaries]]
+payload_offset = 969
+length = 1
+
+[[boundaries]]
+payload_offset = 970
+length = 1

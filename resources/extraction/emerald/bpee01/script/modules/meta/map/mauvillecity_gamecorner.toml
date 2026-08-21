@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 72
 reloc_count = 160
+instruction_count = 566
 
 [[segments]]
 kind = "bytecode"
@@ -607,6 +608,8 @@ original_encoded_gba = 0x8210460
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_Text_ThisIsMauvilleGameCorner"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -617,6 +620,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_NeedCoinCase"
 target_offset = 255
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 254
 runtime_resolution_required = true
 
 [[relocs]]
@@ -626,6 +631,8 @@ original_encoded_gba = 0x82104df
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_Text_WereYouLookingForCoins"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -636,6 +643,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_ChooseCoinsDefault50"
 target_offset = 45
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 44
 runtime_resolution_required = true
 
 [[relocs]]
@@ -646,6 +655,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_Buy50Coins"
 target_offset = 123
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 122
 runtime_resolution_required = true
 
 [[relocs]]
@@ -656,6 +667,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_Buy500Coins"
 target_offset = 189
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 188
 runtime_resolution_required = true
 
 [[relocs]]
@@ -666,6 +679,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_CancelBuyCoins"
 target_offset = 281
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 280
 runtime_resolution_required = true
 
 [[relocs]]
@@ -676,6 +691,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_Buy50Coins"
 target_offset = 123
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 122
 runtime_resolution_required = true
 
 [[relocs]]
@@ -686,6 +703,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_Buy500Coins"
 target_offset = 189
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 188
 runtime_resolution_required = true
 
 [[relocs]]
@@ -696,6 +715,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_CancelBuyCoins"
 target_offset = 281
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 280
 runtime_resolution_required = true
 
 [[relocs]]
@@ -706,6 +727,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_NoRoomForCoins"
 target_offset = 297
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 296
 runtime_resolution_required = true
 
 [[relocs]]
@@ -716,6 +739,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_NotEnoughMoney"
 target_offset = 265
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 264
 runtime_resolution_required = true
 
 [[relocs]]
@@ -725,6 +750,8 @@ original_encoded_gba = 0x8210529
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_Text_ThankYouHereAreYourCoins"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -735,6 +762,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_NoRoomForCoins"
 target_offset = 297
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 296
 runtime_resolution_required = true
 
 [[relocs]]
@@ -745,6 +774,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_NotEnoughMoney"
 target_offset = 265
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 264
 runtime_resolution_required = true
 
 [[relocs]]
@@ -754,6 +785,8 @@ original_encoded_gba = 0x8210529
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_Text_ThankYouHereAreYourCoins"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -763,6 +796,8 @@ original_encoded_gba = 0x821047e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_Text_NeedCoinCaseForCoins"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -772,6 +807,8 @@ original_encoded_gba = 0x8210553
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_Text_DontHaveEnoughMoney"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -781,6 +818,8 @@ original_encoded_gba = 0x821059a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_Text_DontNeedCoinsThen"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -790,6 +829,8 @@ original_encoded_gba = 0x821057e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_Text_CoinCaseIsFull"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -799,6 +840,8 @@ original_encoded_gba = 0x82105d7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_Text_ExchangeCoinsForPrizes"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -809,6 +852,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_ChooseDollPrizeMessage"
 target_offset = 341
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 340
 runtime_resolution_required = true
 
 [[relocs]]
@@ -818,6 +863,8 @@ original_encoded_gba = 0x821060d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_Text_WhichPrize"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -828,6 +875,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_ChooseDollPrize"
 target_offset = 371
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 370
 runtime_resolution_required = true
 
 [[relocs]]
@@ -837,6 +886,8 @@ original_encoded_gba = 0x821060d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_Text_WhichPrize"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -847,6 +898,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_ChooseDollPrize"
 target_offset = 371
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 370
 runtime_resolution_required = true
 
 [[relocs]]
@@ -857,6 +910,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_TreeckoDoll"
 target_offset = 431
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 430
 runtime_resolution_required = true
 
 [[relocs]]
@@ -867,6 +922,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_TorchicDoll"
 target_offset = 445
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 444
 runtime_resolution_required = true
 
 [[relocs]]
@@ -877,6 +934,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_MudkipDoll"
 target_offset = 459
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 458
 runtime_resolution_required = true
 
 [[relocs]]
@@ -887,6 +946,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_CancelDollSelect"
 target_offset = 730
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 729
 runtime_resolution_required = true
 
 [[relocs]]
@@ -897,6 +958,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_CancelDollSelect"
 target_offset = 730
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 729
 runtime_resolution_required = true
 
 [[relocs]]
@@ -907,6 +970,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_ConfirmDollPrize"
 target_offset = 473
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 472
 runtime_resolution_required = true
 
 [[relocs]]
@@ -917,6 +982,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_ConfirmDollPrize"
 target_offset = 473
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 472
 runtime_resolution_required = true
 
 [[relocs]]
@@ -927,6 +994,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_ConfirmDollPrize"
 target_offset = 473
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 472
 runtime_resolution_required = true
 
 [[relocs]]
@@ -936,6 +1005,8 @@ original_encoded_gba = 0x8210705
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_Text_SoYourChoiceIsX"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -946,6 +1017,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_CancelDollSelect"
 target_offset = 730
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 729
 runtime_resolution_required = true
 
 [[relocs]]
@@ -956,6 +1029,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_BuyTreeckoDoll"
 target_offset = 531
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 530
 runtime_resolution_required = true
 
 [[relocs]]
@@ -966,6 +1041,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_BuyTorchicDoll"
 target_offset = 589
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 588
 runtime_resolution_required = true
 
 [[relocs]]
@@ -976,6 +1053,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_BuyMudkipDoll"
 target_offset = 647
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 646
 runtime_resolution_required = true
 
 [[relocs]]
@@ -986,6 +1065,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_NotEnoughCoinsForDoll"
 target_offset = 705
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 704
 runtime_resolution_required = true
 
 [[relocs]]
@@ -996,6 +1077,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_NoRoomForDoll"
 target_offset = 719
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 718
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1005,6 +1088,8 @@ original_encoded_gba = 0x8210646
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_Text_SendToYourHomePC"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1015,6 +1100,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_ReturnToChooseDollPrize"
 target_offset = 360
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 359
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1025,6 +1112,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_NotEnoughCoinsForDoll"
 target_offset = 705
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 704
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1035,6 +1124,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_NoRoomForDoll"
 target_offset = 719
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 718
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1044,6 +1135,8 @@ original_encoded_gba = 0x8210646
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_Text_SendToYourHomePC"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1054,6 +1147,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_ReturnToChooseDollPrize"
 target_offset = 360
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 359
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1064,6 +1159,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_NotEnoughCoinsForDoll"
 target_offset = 705
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 704
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1074,6 +1171,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_NoRoomForDoll"
 target_offset = 719
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 718
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1083,6 +1182,8 @@ original_encoded_gba = 0x8210646
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_Text_SendToYourHomePC"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1093,6 +1194,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_ReturnToChooseDollPrize"
 target_offset = 360
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 359
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1102,6 +1205,8 @@ original_encoded_gba = 0x8210673
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_Text_NotEnoughCoins"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1112,6 +1217,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_ReturnToChooseDollPrize"
 target_offset = 360
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 359
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1122,6 +1229,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_NoRoomForDecor"
 target_offset = 302
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 302
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1132,6 +1241,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_ReturnToChooseDollPrize"
 target_offset = 360
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 359
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1141,6 +1252,8 @@ original_encoded_gba = 0x82106bf
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_Text_OhIsThatSo"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1150,6 +1263,8 @@ original_encoded_gba = 0x82105d7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_Text_ExchangeCoinsForPrizes"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1160,6 +1275,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_ChooseTMPrizeMessage"
 target_offset = 771
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 770
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1169,6 +1286,8 @@ original_encoded_gba = 0x821060d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_Text_WhichPrize"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1179,6 +1298,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_ChooseTMPrize"
 target_offset = 801
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 800
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1188,6 +1309,8 @@ original_encoded_gba = 0x821060d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_Text_WhichPrize"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1198,6 +1321,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_ChooseTMPrize"
 target_offset = 801
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 800
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1208,6 +1333,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_TM32"
 target_offset = 883
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 882
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1218,6 +1345,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_TM29"
 target_offset = 902
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 901
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1228,6 +1357,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_TM35"
 target_offset = 921
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 920
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1238,6 +1369,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_TM24"
 target_offset = 940
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 939
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1248,6 +1381,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_TM13"
 target_offset = 959
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 958
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1258,6 +1393,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_CancelTMSelect"
 target_offset = 1376
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1375
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1268,6 +1405,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_CancelTMSelect"
 target_offset = 1376
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1375
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1278,6 +1417,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_ConfirmTMPrize"
 target_offset = 978
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 977
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1288,6 +1429,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_ConfirmTMPrize"
 target_offset = 978
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 977
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1298,6 +1441,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_ConfirmTMPrize"
 target_offset = 978
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 977
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1308,6 +1453,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_ConfirmTMPrize"
 target_offset = 978
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 977
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1318,6 +1465,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_ConfirmTMPrize"
 target_offset = 978
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 977
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1327,6 +1476,8 @@ original_encoded_gba = 0x8210629
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_Text_SoYourChoiceIsTheTMX"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1337,6 +1488,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_CancelTMSelect"
 target_offset = 1376
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1375
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1347,6 +1500,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_BuyTM32"
 target_offset = 1061
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1060
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1357,6 +1512,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_BuyTM29"
 target_offset = 1119
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1118
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1367,6 +1524,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_BuyTM35"
 target_offset = 1177
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1176
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1377,6 +1536,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_BuyTM24"
 target_offset = 1235
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1234
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1387,6 +1548,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_BuyTM13"
 target_offset = 1293
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1292
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1397,6 +1560,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_NotEnoughCoinsForTM"
 target_offset = 1351
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1350
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1407,6 +1572,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_NoRoomForTM"
 target_offset = 1365
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1364
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1416,6 +1583,8 @@ original_encoded_gba = 0x821071b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_Text_HereYouGo"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1426,6 +1595,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_ReturnToChooseTMPrize"
 target_offset = 790
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 789
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1436,6 +1607,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_NotEnoughCoinsForTM"
 target_offset = 1351
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1350
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1446,6 +1619,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_NoRoomForTM"
 target_offset = 1365
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1364
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1455,6 +1630,8 @@ original_encoded_gba = 0x821071b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_Text_HereYouGo"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1465,6 +1642,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_ReturnToChooseTMPrize"
 target_offset = 790
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 789
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1475,6 +1654,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_NotEnoughCoinsForTM"
 target_offset = 1351
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1350
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1485,6 +1666,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_NoRoomForTM"
 target_offset = 1365
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1364
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1494,6 +1677,8 @@ original_encoded_gba = 0x821071b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_Text_HereYouGo"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1504,6 +1689,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_ReturnToChooseTMPrize"
 target_offset = 790
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 789
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1514,6 +1701,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_NotEnoughCoinsForTM"
 target_offset = 1351
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1350
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1524,6 +1713,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_NoRoomForTM"
 target_offset = 1365
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1364
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1533,6 +1724,8 @@ original_encoded_gba = 0x821071b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_Text_HereYouGo"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1543,6 +1736,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_ReturnToChooseTMPrize"
 target_offset = 790
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 789
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1553,6 +1748,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_NotEnoughCoinsForTM"
 target_offset = 1351
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1350
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1563,6 +1760,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_NoRoomForTM"
 target_offset = 1365
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1364
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1572,6 +1771,8 @@ original_encoded_gba = 0x821071b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_Text_HereYouGo"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1582,6 +1783,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_ReturnToChooseTMPrize"
 target_offset = 790
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 789
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1591,6 +1794,8 @@ original_encoded_gba = 0x8210673
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_Text_NotEnoughCoins"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1601,6 +1806,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_ReturnToChooseTMPrize"
 target_offset = 790
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 789
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1611,6 +1818,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_BagIsFull"
 target_offset = 283
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 283
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1621,6 +1830,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_ReturnToChooseTMPrize"
 target_offset = 790
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 789
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1630,6 +1841,8 @@ original_encoded_gba = 0x82106bf
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_Text_OhIsThatSo"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1639,6 +1852,8 @@ original_encoded_gba = 0x82109d3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_Text_CoinsAreNeededToPlay"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1648,6 +1863,8 @@ original_encoded_gba = 0x8210a05
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_Text_RouletteOnlyLuck"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1658,6 +1875,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_ReceivedStarterDoll"
 target_offset = 1627
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1626
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1667,6 +1886,8 @@ original_encoded_gba = 0x8210750
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_Text_GotTwoOfSameDollWantOne"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1677,6 +1898,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_DeclineStarterDoll"
 target_offset = 1617
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1616
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1687,6 +1910,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_GiveTreeckoDoll"
 target_offset = 1476
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1475
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1697,6 +1922,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_GiveTorchicDoll"
 target_offset = 1518
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1517
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1707,6 +1934,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_GiveMudkipDoll"
 target_offset = 1560
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1559
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1717,6 +1946,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_NoRoomForStarterDoll"
 target_offset = 1602
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1601
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1726,6 +1957,8 @@ original_encoded_gba = 0x821079c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_Text_HereYouGo2"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1736,6 +1969,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_ReceivedStarterDoll"
 target_offset = 1627
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1626
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1746,6 +1981,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_NoRoomForStarterDoll"
 target_offset = 1602
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1601
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1755,6 +1992,8 @@ original_encoded_gba = 0x821079c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_Text_HereYouGo2"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1765,6 +2004,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_ReceivedStarterDoll"
 target_offset = 1627
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1626
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1775,6 +2016,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_NoRoomForStarterDoll"
 target_offset = 1602
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1601
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1784,6 +2027,8 @@ original_encoded_gba = 0x821079c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_Text_HereYouGo2"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1794,6 +2039,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_ReceivedStarterDoll"
 target_offset = 1627
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1626
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1804,6 +2051,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_NoRoomForDecor"
 target_offset = 302
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 302
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1813,6 +2062,8 @@ original_encoded_gba = 0x82107a9
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_Text_YouWantItButNotNow"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1822,6 +2073,8 @@ original_encoded_gba = 0x82107ce
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_Text_DontBeNegative"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1831,6 +2084,8 @@ original_encoded_gba = 0x82107fb
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_Text_CantWinJackpot"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1841,6 +2096,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_TryGive20Coins"
 target_offset = 1669
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1668
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1850,6 +2107,8 @@ original_encoded_gba = 0x8210830
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_Text_NeedCoinCaseGoNextDoor"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1860,6 +2119,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_NPCReturnToSlots"
 target_offset = 1777
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1776
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1870,6 +2131,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_PokefanMNormal"
 target_offset = 1715
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1714
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1880,6 +2143,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_PokefanMNormal"
 target_offset = 1715
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1714
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1889,6 +2154,8 @@ original_encoded_gba = 0x82108a0
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_Text_LuckOnlyLastSoLongTakeCoins"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1899,6 +2166,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_PokefanMNormal"
 target_offset = 1715
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1714
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1908,6 +2177,8 @@ original_encoded_gba = 0x82108ef
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_Text_MauvilleSomethingForEveryone"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1918,6 +2189,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_NPCReturnToSlots"
 target_offset = 1777
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1776
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1927,6 +2200,8 @@ original_encoded_gba = 0x8210932
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_Text_RouletteTablesDifferentRates"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1937,6 +2212,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_NPCReturnToSlots"
 target_offset = 1777
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1776
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1946,6 +2223,8 @@ original_encoded_gba = 0x821098e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_Text_EasyToLoseTrackOfTime"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1956,6 +2235,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_NPCReturnToSlots"
 target_offset = 1777
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1776
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1965,6 +2246,8 @@ original_encoded_gba = 0x8210a51
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_Text_UpTo3CoinsCanBeUsed"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1975,6 +2258,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_NPCReturnToSlots"
 target_offset = 1777
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1776
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1984,6 +2269,8 @@ original_encoded_gba = 0x82725a2
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceoriginaldirection"
 target_export = "Common_Movement_FaceOriginalDirection"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1993,6 +2280,8 @@ original_encoded_gba = 0x8210a82
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_Text_DifficultToStopOn7"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2003,6 +2292,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_NPCReturnToSlots"
 target_offset = 1777
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1776
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2012,6 +2303,8 @@ original_encoded_gba = 0x8210b04
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_Text_HeresSomeSlotsInfo"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2022,6 +2315,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_NPCReturnToSlots"
 target_offset = 1777
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1776
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2032,6 +2327,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_NoCoinCase"
 target_offset = 2206
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2205
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2042,6 +2339,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_NoCoinCase"
 target_offset = 2206
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2205
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2052,6 +2351,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_NoCoinCase"
 target_offset = 2206
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2205
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2062,6 +2363,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_NoCoinCase"
 target_offset = 2206
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2205
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2072,6 +2375,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_NoCoinCase"
 target_offset = 2206
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2205
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2082,6 +2387,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_NoCoinCase"
 target_offset = 2206
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2205
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2092,6 +2399,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_NoCoinCase"
 target_offset = 2206
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2205
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2102,6 +2411,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_NoCoinCase"
 target_offset = 2206
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2205
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2112,6 +2423,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_NoCoinCase"
 target_offset = 2206
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2205
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2122,6 +2435,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_NoCoinCase"
 target_offset = 2206
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2205
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2132,6 +2447,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_NoCoinCase"
 target_offset = 2206
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2205
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2142,6 +2459,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_EventScript_NoCoinCase"
 target_offset = 2206
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2205
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2151,4 +2470,2270 @@ original_encoded_gba = 0x8210c2e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-gamecorner"
 target_export = "MauvilleCity_GameCorner_Text_CantPlayWithNoCoinCase"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 1
+
+[[boundaries]]
+payload_offset = 2
+length = 6
+
+[[boundaries]]
+payload_offset = 8
+length = 2
+
+[[boundaries]]
+payload_offset = 10
+length = 5
+
+[[boundaries]]
+payload_offset = 15
+length = 5
+
+[[boundaries]]
+payload_offset = 20
+length = 6
+
+[[boundaries]]
+payload_offset = 26
+length = 5
+
+[[boundaries]]
+payload_offset = 31
+length = 1
+
+[[boundaries]]
+payload_offset = 32
+length = 4
+
+[[boundaries]]
+payload_offset = 36
+length = 3
+
+[[boundaries]]
+payload_offset = 39
+length = 5
+
+[[boundaries]]
+payload_offset = 44
+length = 6
+
+[[boundaries]]
+payload_offset = 50
+length = 5
+
+[[boundaries]]
+payload_offset = 55
+length = 5
+
+[[boundaries]]
+payload_offset = 60
+length = 6
+
+[[boundaries]]
+payload_offset = 66
+length = 5
+
+[[boundaries]]
+payload_offset = 71
+length = 6
+
+[[boundaries]]
+payload_offset = 77
+length = 5
+
+[[boundaries]]
+payload_offset = 83
+length = 6
+
+[[boundaries]]
+payload_offset = 89
+length = 5
+
+[[boundaries]]
+payload_offset = 94
+length = 5
+
+[[boundaries]]
+payload_offset = 99
+length = 6
+
+[[boundaries]]
+payload_offset = 105
+length = 5
+
+[[boundaries]]
+payload_offset = 110
+length = 6
+
+[[boundaries]]
+payload_offset = 116
+length = 5
+
+[[boundaries]]
+payload_offset = 122
+length = 3
+
+[[boundaries]]
+payload_offset = 125
+length = 5
+
+[[boundaries]]
+payload_offset = 130
+length = 6
+
+[[boundaries]]
+payload_offset = 136
+length = 6
+
+[[boundaries]]
+payload_offset = 142
+length = 5
+
+[[boundaries]]
+payload_offset = 147
+length = 6
+
+[[boundaries]]
+payload_offset = 153
+length = 3
+
+[[boundaries]]
+payload_offset = 156
+length = 6
+
+[[boundaries]]
+payload_offset = 162
+length = 4
+
+[[boundaries]]
+payload_offset = 166
+length = 3
+
+[[boundaries]]
+payload_offset = 169
+length = 3
+
+[[boundaries]]
+payload_offset = 172
+length = 6
+
+[[boundaries]]
+payload_offset = 178
+length = 2
+
+[[boundaries]]
+payload_offset = 180
+length = 1
+
+[[boundaries]]
+payload_offset = 181
+length = 1
+
+[[boundaries]]
+payload_offset = 182
+length = 1
+
+[[boundaries]]
+payload_offset = 183
+length = 3
+
+[[boundaries]]
+payload_offset = 186
+length = 1
+
+[[boundaries]]
+payload_offset = 187
+length = 1
+
+[[boundaries]]
+payload_offset = 188
+length = 3
+
+[[boundaries]]
+payload_offset = 191
+length = 5
+
+[[boundaries]]
+payload_offset = 196
+length = 6
+
+[[boundaries]]
+payload_offset = 202
+length = 6
+
+[[boundaries]]
+payload_offset = 208
+length = 5
+
+[[boundaries]]
+payload_offset = 213
+length = 6
+
+[[boundaries]]
+payload_offset = 219
+length = 3
+
+[[boundaries]]
+payload_offset = 222
+length = 6
+
+[[boundaries]]
+payload_offset = 228
+length = 4
+
+[[boundaries]]
+payload_offset = 232
+length = 3
+
+[[boundaries]]
+payload_offset = 235
+length = 3
+
+[[boundaries]]
+payload_offset = 238
+length = 6
+
+[[boundaries]]
+payload_offset = 244
+length = 2
+
+[[boundaries]]
+payload_offset = 246
+length = 1
+
+[[boundaries]]
+payload_offset = 247
+length = 1
+
+[[boundaries]]
+payload_offset = 248
+length = 1
+
+[[boundaries]]
+payload_offset = 249
+length = 3
+
+[[boundaries]]
+payload_offset = 252
+length = 1
+
+[[boundaries]]
+payload_offset = 253
+length = 1
+
+[[boundaries]]
+payload_offset = 254
+length = 6
+
+[[boundaries]]
+payload_offset = 260
+length = 2
+
+[[boundaries]]
+payload_offset = 262
+length = 1
+
+[[boundaries]]
+payload_offset = 263
+length = 1
+
+[[boundaries]]
+payload_offset = 264
+length = 6
+
+[[boundaries]]
+payload_offset = 270
+length = 2
+
+[[boundaries]]
+payload_offset = 272
+length = 1
+
+[[boundaries]]
+payload_offset = 273
+length = 1
+
+[[boundaries]]
+payload_offset = 274
+length = 1
+
+[[boundaries]]
+payload_offset = 275
+length = 3
+
+[[boundaries]]
+payload_offset = 278
+length = 1
+
+[[boundaries]]
+payload_offset = 279
+length = 1
+
+[[boundaries]]
+payload_offset = 280
+length = 6
+
+[[boundaries]]
+payload_offset = 286
+length = 2
+
+[[boundaries]]
+payload_offset = 288
+length = 1
+
+[[boundaries]]
+payload_offset = 289
+length = 1
+
+[[boundaries]]
+payload_offset = 290
+length = 1
+
+[[boundaries]]
+payload_offset = 291
+length = 3
+
+[[boundaries]]
+payload_offset = 294
+length = 1
+
+[[boundaries]]
+payload_offset = 295
+length = 1
+
+[[boundaries]]
+payload_offset = 296
+length = 6
+
+[[boundaries]]
+payload_offset = 302
+length = 2
+
+[[boundaries]]
+payload_offset = 304
+length = 1
+
+[[boundaries]]
+payload_offset = 305
+length = 1
+
+[[boundaries]]
+payload_offset = 306
+length = 1
+
+[[boundaries]]
+payload_offset = 307
+length = 3
+
+[[boundaries]]
+payload_offset = 310
+length = 1
+
+[[boundaries]]
+payload_offset = 311
+length = 1
+
+[[boundaries]]
+payload_offset = 312
+length = 1
+
+[[boundaries]]
+payload_offset = 313
+length = 1
+
+[[boundaries]]
+payload_offset = 314
+length = 6
+
+[[boundaries]]
+payload_offset = 320
+length = 2
+
+[[boundaries]]
+payload_offset = 322
+length = 5
+
+[[boundaries]]
+payload_offset = 327
+length = 5
+
+[[boundaries]]
+payload_offset = 332
+length = 6
+
+[[boundaries]]
+payload_offset = 338
+length = 1
+
+[[boundaries]]
+payload_offset = 339
+length = 1
+
+[[boundaries]]
+payload_offset = 340
+length = 5
+
+[[boundaries]]
+payload_offset = 345
+length = 1
+
+[[boundaries]]
+payload_offset = 346
+length = 5
+
+[[boundaries]]
+payload_offset = 351
+length = 3
+
+[[boundaries]]
+payload_offset = 354
+length = 5
+
+[[boundaries]]
+payload_offset = 359
+length = 5
+
+[[boundaries]]
+payload_offset = 364
+length = 1
+
+[[boundaries]]
+payload_offset = 365
+length = 5
+
+[[boundaries]]
+payload_offset = 370
+length = 5
+
+[[boundaries]]
+payload_offset = 375
+length = 5
+
+[[boundaries]]
+payload_offset = 380
+length = 5
+
+[[boundaries]]
+payload_offset = 385
+length = 6
+
+[[boundaries]]
+payload_offset = 391
+length = 5
+
+[[boundaries]]
+payload_offset = 396
+length = 6
+
+[[boundaries]]
+payload_offset = 402
+length = 5
+
+[[boundaries]]
+payload_offset = 407
+length = 6
+
+[[boundaries]]
+payload_offset = 413
+length = 5
+
+[[boundaries]]
+payload_offset = 418
+length = 6
+
+[[boundaries]]
+payload_offset = 424
+length = 5
+
+[[boundaries]]
+payload_offset = 430
+length = 5
+
+[[boundaries]]
+payload_offset = 435
+length = 4
+
+[[boundaries]]
+payload_offset = 439
+length = 5
+
+[[boundaries]]
+payload_offset = 444
+length = 5
+
+[[boundaries]]
+payload_offset = 449
+length = 4
+
+[[boundaries]]
+payload_offset = 453
+length = 5
+
+[[boundaries]]
+payload_offset = 458
+length = 5
+
+[[boundaries]]
+payload_offset = 463
+length = 4
+
+[[boundaries]]
+payload_offset = 467
+length = 5
+
+[[boundaries]]
+payload_offset = 472
+length = 6
+
+[[boundaries]]
+payload_offset = 478
+length = 2
+
+[[boundaries]]
+payload_offset = 480
+length = 5
+
+[[boundaries]]
+payload_offset = 485
+length = 6
+
+[[boundaries]]
+payload_offset = 491
+length = 5
+
+[[boundaries]]
+payload_offset = 496
+length = 5
+
+[[boundaries]]
+payload_offset = 501
+length = 6
+
+[[boundaries]]
+payload_offset = 507
+length = 5
+
+[[boundaries]]
+payload_offset = 512
+length = 6
+
+[[boundaries]]
+payload_offset = 518
+length = 5
+
+[[boundaries]]
+payload_offset = 523
+length = 6
+
+[[boundaries]]
+payload_offset = 529
+length = 1
+
+[[boundaries]]
+payload_offset = 530
+length = 3
+
+[[boundaries]]
+payload_offset = 533
+length = 5
+
+[[boundaries]]
+payload_offset = 538
+length = 6
+
+[[boundaries]]
+payload_offset = 544
+length = 4
+
+[[boundaries]]
+payload_offset = 548
+length = 3
+
+[[boundaries]]
+payload_offset = 551
+length = 5
+
+[[boundaries]]
+payload_offset = 556
+length = 6
+
+[[boundaries]]
+payload_offset = 562
+length = 3
+
+[[boundaries]]
+payload_offset = 565
+length = 3
+
+[[boundaries]]
+payload_offset = 568
+length = 3
+
+[[boundaries]]
+payload_offset = 571
+length = 3
+
+[[boundaries]]
+payload_offset = 574
+length = 6
+
+[[boundaries]]
+payload_offset = 580
+length = 2
+
+[[boundaries]]
+payload_offset = 582
+length = 5
+
+[[boundaries]]
+payload_offset = 588
+length = 3
+
+[[boundaries]]
+payload_offset = 591
+length = 5
+
+[[boundaries]]
+payload_offset = 596
+length = 6
+
+[[boundaries]]
+payload_offset = 602
+length = 4
+
+[[boundaries]]
+payload_offset = 606
+length = 3
+
+[[boundaries]]
+payload_offset = 609
+length = 5
+
+[[boundaries]]
+payload_offset = 614
+length = 6
+
+[[boundaries]]
+payload_offset = 620
+length = 3
+
+[[boundaries]]
+payload_offset = 623
+length = 3
+
+[[boundaries]]
+payload_offset = 626
+length = 3
+
+[[boundaries]]
+payload_offset = 629
+length = 3
+
+[[boundaries]]
+payload_offset = 632
+length = 6
+
+[[boundaries]]
+payload_offset = 638
+length = 2
+
+[[boundaries]]
+payload_offset = 640
+length = 5
+
+[[boundaries]]
+payload_offset = 646
+length = 3
+
+[[boundaries]]
+payload_offset = 649
+length = 5
+
+[[boundaries]]
+payload_offset = 654
+length = 6
+
+[[boundaries]]
+payload_offset = 660
+length = 4
+
+[[boundaries]]
+payload_offset = 664
+length = 3
+
+[[boundaries]]
+payload_offset = 667
+length = 5
+
+[[boundaries]]
+payload_offset = 672
+length = 6
+
+[[boundaries]]
+payload_offset = 678
+length = 3
+
+[[boundaries]]
+payload_offset = 681
+length = 3
+
+[[boundaries]]
+payload_offset = 684
+length = 3
+
+[[boundaries]]
+payload_offset = 687
+length = 3
+
+[[boundaries]]
+payload_offset = 690
+length = 6
+
+[[boundaries]]
+payload_offset = 696
+length = 2
+
+[[boundaries]]
+payload_offset = 698
+length = 5
+
+[[boundaries]]
+payload_offset = 704
+length = 6
+
+[[boundaries]]
+payload_offset = 710
+length = 2
+
+[[boundaries]]
+payload_offset = 712
+length = 5
+
+[[boundaries]]
+payload_offset = 718
+length = 5
+
+[[boundaries]]
+payload_offset = 723
+length = 5
+
+[[boundaries]]
+payload_offset = 729
+length = 6
+
+[[boundaries]]
+payload_offset = 735
+length = 2
+
+[[boundaries]]
+payload_offset = 737
+length = 3
+
+[[boundaries]]
+payload_offset = 740
+length = 1
+
+[[boundaries]]
+payload_offset = 741
+length = 1
+
+[[boundaries]]
+payload_offset = 742
+length = 1
+
+[[boundaries]]
+payload_offset = 743
+length = 1
+
+[[boundaries]]
+payload_offset = 744
+length = 6
+
+[[boundaries]]
+payload_offset = 750
+length = 2
+
+[[boundaries]]
+payload_offset = 752
+length = 5
+
+[[boundaries]]
+payload_offset = 757
+length = 5
+
+[[boundaries]]
+payload_offset = 762
+length = 6
+
+[[boundaries]]
+payload_offset = 768
+length = 1
+
+[[boundaries]]
+payload_offset = 769
+length = 1
+
+[[boundaries]]
+payload_offset = 770
+length = 5
+
+[[boundaries]]
+payload_offset = 775
+length = 1
+
+[[boundaries]]
+payload_offset = 776
+length = 5
+
+[[boundaries]]
+payload_offset = 781
+length = 3
+
+[[boundaries]]
+payload_offset = 784
+length = 5
+
+[[boundaries]]
+payload_offset = 789
+length = 5
+
+[[boundaries]]
+payload_offset = 794
+length = 1
+
+[[boundaries]]
+payload_offset = 795
+length = 5
+
+[[boundaries]]
+payload_offset = 800
+length = 5
+
+[[boundaries]]
+payload_offset = 805
+length = 5
+
+[[boundaries]]
+payload_offset = 810
+length = 5
+
+[[boundaries]]
+payload_offset = 815
+length = 6
+
+[[boundaries]]
+payload_offset = 821
+length = 5
+
+[[boundaries]]
+payload_offset = 826
+length = 6
+
+[[boundaries]]
+payload_offset = 832
+length = 5
+
+[[boundaries]]
+payload_offset = 837
+length = 6
+
+[[boundaries]]
+payload_offset = 843
+length = 5
+
+[[boundaries]]
+payload_offset = 848
+length = 6
+
+[[boundaries]]
+payload_offset = 854
+length = 5
+
+[[boundaries]]
+payload_offset = 859
+length = 6
+
+[[boundaries]]
+payload_offset = 865
+length = 5
+
+[[boundaries]]
+payload_offset = 870
+length = 6
+
+[[boundaries]]
+payload_offset = 876
+length = 5
+
+[[boundaries]]
+payload_offset = 882
+length = 5
+
+[[boundaries]]
+payload_offset = 887
+length = 4
+
+[[boundaries]]
+payload_offset = 891
+length = 5
+
+[[boundaries]]
+payload_offset = 896
+length = 5
+
+[[boundaries]]
+payload_offset = 901
+length = 5
+
+[[boundaries]]
+payload_offset = 906
+length = 4
+
+[[boundaries]]
+payload_offset = 910
+length = 5
+
+[[boundaries]]
+payload_offset = 915
+length = 5
+
+[[boundaries]]
+payload_offset = 920
+length = 5
+
+[[boundaries]]
+payload_offset = 925
+length = 4
+
+[[boundaries]]
+payload_offset = 929
+length = 5
+
+[[boundaries]]
+payload_offset = 934
+length = 5
+
+[[boundaries]]
+payload_offset = 939
+length = 5
+
+[[boundaries]]
+payload_offset = 944
+length = 4
+
+[[boundaries]]
+payload_offset = 948
+length = 5
+
+[[boundaries]]
+payload_offset = 953
+length = 5
+
+[[boundaries]]
+payload_offset = 958
+length = 5
+
+[[boundaries]]
+payload_offset = 963
+length = 4
+
+[[boundaries]]
+payload_offset = 967
+length = 5
+
+[[boundaries]]
+payload_offset = 972
+length = 5
+
+[[boundaries]]
+payload_offset = 977
+length = 3
+
+[[boundaries]]
+payload_offset = 980
+length = 6
+
+[[boundaries]]
+payload_offset = 986
+length = 2
+
+[[boundaries]]
+payload_offset = 988
+length = 5
+
+[[boundaries]]
+payload_offset = 993
+length = 6
+
+[[boundaries]]
+payload_offset = 999
+length = 5
+
+[[boundaries]]
+payload_offset = 1004
+length = 5
+
+[[boundaries]]
+payload_offset = 1009
+length = 6
+
+[[boundaries]]
+payload_offset = 1015
+length = 5
+
+[[boundaries]]
+payload_offset = 1020
+length = 6
+
+[[boundaries]]
+payload_offset = 1026
+length = 5
+
+[[boundaries]]
+payload_offset = 1031
+length = 6
+
+[[boundaries]]
+payload_offset = 1037
+length = 5
+
+[[boundaries]]
+payload_offset = 1042
+length = 6
+
+[[boundaries]]
+payload_offset = 1048
+length = 5
+
+[[boundaries]]
+payload_offset = 1053
+length = 6
+
+[[boundaries]]
+payload_offset = 1059
+length = 1
+
+[[boundaries]]
+payload_offset = 1060
+length = 3
+
+[[boundaries]]
+payload_offset = 1063
+length = 5
+
+[[boundaries]]
+payload_offset = 1068
+length = 6
+
+[[boundaries]]
+payload_offset = 1074
+length = 5
+
+[[boundaries]]
+payload_offset = 1079
+length = 5
+
+[[boundaries]]
+payload_offset = 1084
+length = 6
+
+[[boundaries]]
+payload_offset = 1090
+length = 3
+
+[[boundaries]]
+payload_offset = 1093
+length = 5
+
+[[boundaries]]
+payload_offset = 1098
+length = 3
+
+[[boundaries]]
+payload_offset = 1101
+length = 3
+
+[[boundaries]]
+payload_offset = 1104
+length = 6
+
+[[boundaries]]
+payload_offset = 1110
+length = 2
+
+[[boundaries]]
+payload_offset = 1112
+length = 5
+
+[[boundaries]]
+payload_offset = 1118
+length = 3
+
+[[boundaries]]
+payload_offset = 1121
+length = 5
+
+[[boundaries]]
+payload_offset = 1126
+length = 6
+
+[[boundaries]]
+payload_offset = 1132
+length = 5
+
+[[boundaries]]
+payload_offset = 1137
+length = 5
+
+[[boundaries]]
+payload_offset = 1142
+length = 6
+
+[[boundaries]]
+payload_offset = 1148
+length = 3
+
+[[boundaries]]
+payload_offset = 1151
+length = 5
+
+[[boundaries]]
+payload_offset = 1156
+length = 3
+
+[[boundaries]]
+payload_offset = 1159
+length = 3
+
+[[boundaries]]
+payload_offset = 1162
+length = 6
+
+[[boundaries]]
+payload_offset = 1168
+length = 2
+
+[[boundaries]]
+payload_offset = 1170
+length = 5
+
+[[boundaries]]
+payload_offset = 1176
+length = 3
+
+[[boundaries]]
+payload_offset = 1179
+length = 5
+
+[[boundaries]]
+payload_offset = 1184
+length = 6
+
+[[boundaries]]
+payload_offset = 1190
+length = 5
+
+[[boundaries]]
+payload_offset = 1195
+length = 5
+
+[[boundaries]]
+payload_offset = 1200
+length = 6
+
+[[boundaries]]
+payload_offset = 1206
+length = 3
+
+[[boundaries]]
+payload_offset = 1209
+length = 5
+
+[[boundaries]]
+payload_offset = 1214
+length = 3
+
+[[boundaries]]
+payload_offset = 1217
+length = 3
+
+[[boundaries]]
+payload_offset = 1220
+length = 6
+
+[[boundaries]]
+payload_offset = 1226
+length = 2
+
+[[boundaries]]
+payload_offset = 1228
+length = 5
+
+[[boundaries]]
+payload_offset = 1234
+length = 3
+
+[[boundaries]]
+payload_offset = 1237
+length = 5
+
+[[boundaries]]
+payload_offset = 1242
+length = 6
+
+[[boundaries]]
+payload_offset = 1248
+length = 5
+
+[[boundaries]]
+payload_offset = 1253
+length = 5
+
+[[boundaries]]
+payload_offset = 1258
+length = 6
+
+[[boundaries]]
+payload_offset = 1264
+length = 3
+
+[[boundaries]]
+payload_offset = 1267
+length = 5
+
+[[boundaries]]
+payload_offset = 1272
+length = 3
+
+[[boundaries]]
+payload_offset = 1275
+length = 3
+
+[[boundaries]]
+payload_offset = 1278
+length = 6
+
+[[boundaries]]
+payload_offset = 1284
+length = 2
+
+[[boundaries]]
+payload_offset = 1286
+length = 5
+
+[[boundaries]]
+payload_offset = 1292
+length = 3
+
+[[boundaries]]
+payload_offset = 1295
+length = 5
+
+[[boundaries]]
+payload_offset = 1300
+length = 6
+
+[[boundaries]]
+payload_offset = 1306
+length = 5
+
+[[boundaries]]
+payload_offset = 1311
+length = 5
+
+[[boundaries]]
+payload_offset = 1316
+length = 6
+
+[[boundaries]]
+payload_offset = 1322
+length = 3
+
+[[boundaries]]
+payload_offset = 1325
+length = 5
+
+[[boundaries]]
+payload_offset = 1330
+length = 3
+
+[[boundaries]]
+payload_offset = 1333
+length = 3
+
+[[boundaries]]
+payload_offset = 1336
+length = 6
+
+[[boundaries]]
+payload_offset = 1342
+length = 2
+
+[[boundaries]]
+payload_offset = 1344
+length = 5
+
+[[boundaries]]
+payload_offset = 1350
+length = 6
+
+[[boundaries]]
+payload_offset = 1356
+length = 2
+
+[[boundaries]]
+payload_offset = 1358
+length = 5
+
+[[boundaries]]
+payload_offset = 1364
+length = 5
+
+[[boundaries]]
+payload_offset = 1369
+length = 5
+
+[[boundaries]]
+payload_offset = 1375
+length = 6
+
+[[boundaries]]
+payload_offset = 1381
+length = 2
+
+[[boundaries]]
+payload_offset = 1383
+length = 3
+
+[[boundaries]]
+payload_offset = 1386
+length = 1
+
+[[boundaries]]
+payload_offset = 1387
+length = 1
+
+[[boundaries]]
+payload_offset = 1388
+length = 6
+
+[[boundaries]]
+payload_offset = 1394
+length = 2
+
+[[boundaries]]
+payload_offset = 1396
+length = 1
+
+[[boundaries]]
+payload_offset = 1397
+length = 6
+
+[[boundaries]]
+payload_offset = 1403
+length = 2
+
+[[boundaries]]
+payload_offset = 1405
+length = 1
+
+[[boundaries]]
+payload_offset = 1406
+length = 1
+
+[[boundaries]]
+payload_offset = 1407
+length = 1
+
+[[boundaries]]
+payload_offset = 1408
+length = 3
+
+[[boundaries]]
+payload_offset = 1411
+length = 6
+
+[[boundaries]]
+payload_offset = 1417
+length = 6
+
+[[boundaries]]
+payload_offset = 1423
+length = 2
+
+[[boundaries]]
+payload_offset = 1425
+length = 5
+
+[[boundaries]]
+payload_offset = 1430
+length = 6
+
+[[boundaries]]
+payload_offset = 1436
+length = 5
+
+[[boundaries]]
+payload_offset = 1441
+length = 5
+
+[[boundaries]]
+payload_offset = 1446
+length = 6
+
+[[boundaries]]
+payload_offset = 1452
+length = 5
+
+[[boundaries]]
+payload_offset = 1457
+length = 6
+
+[[boundaries]]
+payload_offset = 1463
+length = 5
+
+[[boundaries]]
+payload_offset = 1468
+length = 6
+
+[[boundaries]]
+payload_offset = 1474
+length = 1
+
+[[boundaries]]
+payload_offset = 1475
+length = 4
+
+[[boundaries]]
+payload_offset = 1479
+length = 3
+
+[[boundaries]]
+payload_offset = 1482
+length = 5
+
+[[boundaries]]
+payload_offset = 1487
+length = 6
+
+[[boundaries]]
+payload_offset = 1493
+length = 6
+
+[[boundaries]]
+payload_offset = 1499
+length = 2
+
+[[boundaries]]
+payload_offset = 1501
+length = 5
+
+[[boundaries]]
+payload_offset = 1506
+length = 2
+
+[[boundaries]]
+payload_offset = 1508
+length = 3
+
+[[boundaries]]
+payload_offset = 1511
+length = 5
+
+[[boundaries]]
+payload_offset = 1517
+length = 4
+
+[[boundaries]]
+payload_offset = 1521
+length = 3
+
+[[boundaries]]
+payload_offset = 1524
+length = 5
+
+[[boundaries]]
+payload_offset = 1529
+length = 6
+
+[[boundaries]]
+payload_offset = 1535
+length = 6
+
+[[boundaries]]
+payload_offset = 1541
+length = 2
+
+[[boundaries]]
+payload_offset = 1543
+length = 5
+
+[[boundaries]]
+payload_offset = 1548
+length = 2
+
+[[boundaries]]
+payload_offset = 1550
+length = 3
+
+[[boundaries]]
+payload_offset = 1553
+length = 5
+
+[[boundaries]]
+payload_offset = 1559
+length = 4
+
+[[boundaries]]
+payload_offset = 1563
+length = 3
+
+[[boundaries]]
+payload_offset = 1566
+length = 5
+
+[[boundaries]]
+payload_offset = 1571
+length = 6
+
+[[boundaries]]
+payload_offset = 1577
+length = 6
+
+[[boundaries]]
+payload_offset = 1583
+length = 2
+
+[[boundaries]]
+payload_offset = 1585
+length = 5
+
+[[boundaries]]
+payload_offset = 1590
+length = 2
+
+[[boundaries]]
+payload_offset = 1592
+length = 3
+
+[[boundaries]]
+payload_offset = 1595
+length = 5
+
+[[boundaries]]
+payload_offset = 1601
+length = 5
+
+[[boundaries]]
+payload_offset = 1606
+length = 6
+
+[[boundaries]]
+payload_offset = 1612
+length = 2
+
+[[boundaries]]
+payload_offset = 1614
+length = 1
+
+[[boundaries]]
+payload_offset = 1615
+length = 1
+
+[[boundaries]]
+payload_offset = 1616
+length = 6
+
+[[boundaries]]
+payload_offset = 1622
+length = 2
+
+[[boundaries]]
+payload_offset = 1624
+length = 1
+
+[[boundaries]]
+payload_offset = 1625
+length = 1
+
+[[boundaries]]
+payload_offset = 1626
+length = 6
+
+[[boundaries]]
+payload_offset = 1632
+length = 2
+
+[[boundaries]]
+payload_offset = 1634
+length = 1
+
+[[boundaries]]
+payload_offset = 1635
+length = 1
+
+[[boundaries]]
+payload_offset = 1636
+length = 1
+
+[[boundaries]]
+payload_offset = 1637
+length = 1
+
+[[boundaries]]
+payload_offset = 1638
+length = 5
+
+[[boundaries]]
+payload_offset = 1643
+length = 5
+
+[[boundaries]]
+payload_offset = 1648
+length = 6
+
+[[boundaries]]
+payload_offset = 1654
+length = 6
+
+[[boundaries]]
+payload_offset = 1660
+length = 2
+
+[[boundaries]]
+payload_offset = 1662
+length = 5
+
+[[boundaries]]
+payload_offset = 1668
+length = 3
+
+[[boundaries]]
+payload_offset = 1671
+length = 6
+
+[[boundaries]]
+payload_offset = 1677
+length = 3
+
+[[boundaries]]
+payload_offset = 1680
+length = 5
+
+[[boundaries]]
+payload_offset = 1685
+length = 6
+
+[[boundaries]]
+payload_offset = 1691
+length = 3
+
+[[boundaries]]
+payload_offset = 1694
+length = 3
+
+[[boundaries]]
+payload_offset = 1697
+length = 6
+
+[[boundaries]]
+payload_offset = 1703
+length = 2
+
+[[boundaries]]
+payload_offset = 1705
+length = 3
+
+[[boundaries]]
+payload_offset = 1708
+length = 5
+
+[[boundaries]]
+payload_offset = 1714
+length = 6
+
+[[boundaries]]
+payload_offset = 1720
+length = 2
+
+[[boundaries]]
+payload_offset = 1722
+length = 5
+
+[[boundaries]]
+payload_offset = 1728
+length = 1
+
+[[boundaries]]
+payload_offset = 1729
+length = 1
+
+[[boundaries]]
+payload_offset = 1730
+length = 6
+
+[[boundaries]]
+payload_offset = 1736
+length = 2
+
+[[boundaries]]
+payload_offset = 1738
+length = 5
+
+[[boundaries]]
+payload_offset = 1744
+length = 1
+
+[[boundaries]]
+payload_offset = 1745
+length = 1
+
+[[boundaries]]
+payload_offset = 1746
+length = 6
+
+[[boundaries]]
+payload_offset = 1752
+length = 2
+
+[[boundaries]]
+payload_offset = 1754
+length = 5
+
+[[boundaries]]
+payload_offset = 1760
+length = 1
+
+[[boundaries]]
+payload_offset = 1761
+length = 1
+
+[[boundaries]]
+payload_offset = 1762
+length = 6
+
+[[boundaries]]
+payload_offset = 1768
+length = 2
+
+[[boundaries]]
+payload_offset = 1770
+length = 5
+
+[[boundaries]]
+payload_offset = 1776
+length = 1
+
+[[boundaries]]
+payload_offset = 1777
+length = 7
+
+[[boundaries]]
+payload_offset = 1784
+length = 3
+
+[[boundaries]]
+payload_offset = 1787
+length = 1
+
+[[boundaries]]
+payload_offset = 1788
+length = 1
+
+[[boundaries]]
+payload_offset = 1789
+length = 1
+
+[[boundaries]]
+payload_offset = 1790
+length = 1
+
+[[boundaries]]
+payload_offset = 1791
+length = 6
+
+[[boundaries]]
+payload_offset = 1797
+length = 2
+
+[[boundaries]]
+payload_offset = 1799
+length = 5
+
+[[boundaries]]
+payload_offset = 1805
+length = 1
+
+[[boundaries]]
+payload_offset = 1806
+length = 1
+
+[[boundaries]]
+payload_offset = 1807
+length = 6
+
+[[boundaries]]
+payload_offset = 1813
+length = 2
+
+[[boundaries]]
+payload_offset = 1815
+length = 5
+
+[[boundaries]]
+payload_offset = 1821
+length = 1
+
+[[boundaries]]
+payload_offset = 1822
+length = 5
+
+[[boundaries]]
+payload_offset = 1827
+length = 5
+
+[[boundaries]]
+payload_offset = 1832
+length = 6
+
+[[boundaries]]
+payload_offset = 1838
+length = 5
+
+[[boundaries]]
+payload_offset = 1843
+length = 5
+
+[[boundaries]]
+payload_offset = 1848
+length = 3
+
+[[boundaries]]
+payload_offset = 1851
+length = 1
+
+[[boundaries]]
+payload_offset = 1852
+length = 1
+
+[[boundaries]]
+payload_offset = 1853
+length = 1
+
+[[boundaries]]
+payload_offset = 1854
+length = 5
+
+[[boundaries]]
+payload_offset = 1859
+length = 5
+
+[[boundaries]]
+payload_offset = 1864
+length = 6
+
+[[boundaries]]
+payload_offset = 1870
+length = 5
+
+[[boundaries]]
+payload_offset = 1875
+length = 5
+
+[[boundaries]]
+payload_offset = 1880
+length = 3
+
+[[boundaries]]
+payload_offset = 1883
+length = 1
+
+[[boundaries]]
+payload_offset = 1884
+length = 1
+
+[[boundaries]]
+payload_offset = 1885
+length = 1
+
+[[boundaries]]
+payload_offset = 1886
+length = 5
+
+[[boundaries]]
+payload_offset = 1891
+length = 5
+
+[[boundaries]]
+payload_offset = 1896
+length = 6
+
+[[boundaries]]
+payload_offset = 1902
+length = 5
+
+[[boundaries]]
+payload_offset = 1907
+length = 5
+
+[[boundaries]]
+payload_offset = 1912
+length = 3
+
+[[boundaries]]
+payload_offset = 1915
+length = 1
+
+[[boundaries]]
+payload_offset = 1916
+length = 1
+
+[[boundaries]]
+payload_offset = 1917
+length = 1
+
+[[boundaries]]
+payload_offset = 1918
+length = 5
+
+[[boundaries]]
+payload_offset = 1923
+length = 5
+
+[[boundaries]]
+payload_offset = 1928
+length = 6
+
+[[boundaries]]
+payload_offset = 1934
+length = 5
+
+[[boundaries]]
+payload_offset = 1939
+length = 5
+
+[[boundaries]]
+payload_offset = 1944
+length = 3
+
+[[boundaries]]
+payload_offset = 1947
+length = 1
+
+[[boundaries]]
+payload_offset = 1948
+length = 1
+
+[[boundaries]]
+payload_offset = 1949
+length = 1
+
+[[boundaries]]
+payload_offset = 1950
+length = 5
+
+[[boundaries]]
+payload_offset = 1955
+length = 5
+
+[[boundaries]]
+payload_offset = 1960
+length = 6
+
+[[boundaries]]
+payload_offset = 1966
+length = 5
+
+[[boundaries]]
+payload_offset = 1971
+length = 5
+
+[[boundaries]]
+payload_offset = 1976
+length = 3
+
+[[boundaries]]
+payload_offset = 1979
+length = 1
+
+[[boundaries]]
+payload_offset = 1980
+length = 1
+
+[[boundaries]]
+payload_offset = 1981
+length = 1
+
+[[boundaries]]
+payload_offset = 1982
+length = 5
+
+[[boundaries]]
+payload_offset = 1987
+length = 5
+
+[[boundaries]]
+payload_offset = 1992
+length = 6
+
+[[boundaries]]
+payload_offset = 1998
+length = 5
+
+[[boundaries]]
+payload_offset = 2003
+length = 5
+
+[[boundaries]]
+payload_offset = 2008
+length = 3
+
+[[boundaries]]
+payload_offset = 2011
+length = 1
+
+[[boundaries]]
+payload_offset = 2012
+length = 1
+
+[[boundaries]]
+payload_offset = 2013
+length = 1
+
+[[boundaries]]
+payload_offset = 2014
+length = 5
+
+[[boundaries]]
+payload_offset = 2019
+length = 5
+
+[[boundaries]]
+payload_offset = 2024
+length = 6
+
+[[boundaries]]
+payload_offset = 2030
+length = 5
+
+[[boundaries]]
+payload_offset = 2035
+length = 5
+
+[[boundaries]]
+payload_offset = 2040
+length = 3
+
+[[boundaries]]
+payload_offset = 2043
+length = 1
+
+[[boundaries]]
+payload_offset = 2044
+length = 1
+
+[[boundaries]]
+payload_offset = 2045
+length = 1
+
+[[boundaries]]
+payload_offset = 2046
+length = 5
+
+[[boundaries]]
+payload_offset = 2051
+length = 5
+
+[[boundaries]]
+payload_offset = 2056
+length = 6
+
+[[boundaries]]
+payload_offset = 2062
+length = 5
+
+[[boundaries]]
+payload_offset = 2067
+length = 5
+
+[[boundaries]]
+payload_offset = 2072
+length = 3
+
+[[boundaries]]
+payload_offset = 2075
+length = 1
+
+[[boundaries]]
+payload_offset = 2076
+length = 1
+
+[[boundaries]]
+payload_offset = 2077
+length = 1
+
+[[boundaries]]
+payload_offset = 2078
+length = 5
+
+[[boundaries]]
+payload_offset = 2083
+length = 5
+
+[[boundaries]]
+payload_offset = 2088
+length = 6
+
+[[boundaries]]
+payload_offset = 2094
+length = 5
+
+[[boundaries]]
+payload_offset = 2099
+length = 5
+
+[[boundaries]]
+payload_offset = 2104
+length = 3
+
+[[boundaries]]
+payload_offset = 2107
+length = 1
+
+[[boundaries]]
+payload_offset = 2108
+length = 1
+
+[[boundaries]]
+payload_offset = 2109
+length = 1
+
+[[boundaries]]
+payload_offset = 2110
+length = 5
+
+[[boundaries]]
+payload_offset = 2115
+length = 5
+
+[[boundaries]]
+payload_offset = 2120
+length = 6
+
+[[boundaries]]
+payload_offset = 2126
+length = 5
+
+[[boundaries]]
+payload_offset = 2131
+length = 5
+
+[[boundaries]]
+payload_offset = 2136
+length = 3
+
+[[boundaries]]
+payload_offset = 2139
+length = 1
+
+[[boundaries]]
+payload_offset = 2140
+length = 1
+
+[[boundaries]]
+payload_offset = 2141
+length = 1
+
+[[boundaries]]
+payload_offset = 2142
+length = 5
+
+[[boundaries]]
+payload_offset = 2147
+length = 5
+
+[[boundaries]]
+payload_offset = 2152
+length = 6
+
+[[boundaries]]
+payload_offset = 2158
+length = 5
+
+[[boundaries]]
+payload_offset = 2163
+length = 5
+
+[[boundaries]]
+payload_offset = 2168
+length = 3
+
+[[boundaries]]
+payload_offset = 2171
+length = 1
+
+[[boundaries]]
+payload_offset = 2172
+length = 1
+
+[[boundaries]]
+payload_offset = 2173
+length = 1
+
+[[boundaries]]
+payload_offset = 2174
+length = 5
+
+[[boundaries]]
+payload_offset = 2179
+length = 5
+
+[[boundaries]]
+payload_offset = 2184
+length = 6
+
+[[boundaries]]
+payload_offset = 2190
+length = 5
+
+[[boundaries]]
+payload_offset = 2195
+length = 5
+
+[[boundaries]]
+payload_offset = 2200
+length = 3
+
+[[boundaries]]
+payload_offset = 2203
+length = 1
+
+[[boundaries]]
+payload_offset = 2204
+length = 1
+
+[[boundaries]]
+payload_offset = 2205
+length = 6
+
+[[boundaries]]
+payload_offset = 2211
+length = 2
+
+[[boundaries]]
+payload_offset = 2213
+length = 1
+
+[[boundaries]]
+payload_offset = 2214
+length = 1

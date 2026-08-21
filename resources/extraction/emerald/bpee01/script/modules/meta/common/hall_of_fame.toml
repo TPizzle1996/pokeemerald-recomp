@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 16
 reloc_count = 16
+instruction_count = 102
 
 [[segments]]
 kind = "bytecode"
@@ -160,6 +161,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/hall-of-fame"
 target_export = "EverGrandeCity_HallOfFame_EventScript_ResetDefeatedEventLegendaries"
 target_offset = 104
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 104
 runtime_resolution_required = true
 
 [[relocs]]
@@ -170,6 +173,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/hall-of-fame"
 target_export = "EverGrandeCity_HallOfFame_EventScript_SetDesertUnderpassCommentReady"
 target_offset = 120
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 120
 runtime_resolution_required = true
 
 [[relocs]]
@@ -180,6 +185,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/hall-of-fame"
 target_export = "EverGrandeCity_HallOfFame_EventScript_ResetEliteFour"
 target_offset = 267
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 267
 runtime_resolution_required = true
 
 [[relocs]]
@@ -190,6 +197,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/hall-of-fame"
 target_export = "EverGrandeCity_HallOfFame_EventScript_ReadyReceiveSSTicketEvent"
 target_offset = 130
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 130
 runtime_resolution_required = true
 
 [[relocs]]
@@ -200,6 +209,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/hall-of-fame"
 target_export = "EverGrandeCity_HallOfFame_EventScript_ShowStevensHouseBeldum"
 target_offset = 126
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 126
 runtime_resolution_required = true
 
 [[relocs]]
@@ -210,6 +221,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/hall-of-fame"
 target_export = "EverGrandeCity_HallOfFame_EventScript_ReadyDexUpgradeEvent"
 target_offset = 144
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 144
 runtime_resolution_required = true
 
 [[relocs]]
@@ -220,6 +233,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/hall-of-fame"
 target_export = "EverGrandeCity_HallOfFame_EventScript_ResetEliteFour"
 target_offset = 267
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 267
 runtime_resolution_required = true
 
 [[relocs]]
@@ -230,6 +245,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/hall-of-fame"
 target_export = "EventScript_ResetMrBriney"
 target_offset = 161
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 161
 runtime_resolution_required = true
 
 [[relocs]]
@@ -240,6 +257,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/hall-of-fame"
 target_export = "EventScript_MoveMrBrineyToHouse"
 target_offset = 195
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 195
 runtime_resolution_required = true
 
 [[relocs]]
@@ -250,6 +269,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/hall-of-fame"
 target_export = "EventScript_MoveMrBrineyToDewford"
 target_offset = 217
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 217
 runtime_resolution_required = true
 
 [[relocs]]
@@ -260,6 +281,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/hall-of-fame"
 target_export = "EventScript_MoveMrBrineyToRoute109"
 target_offset = 242
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 242
 runtime_resolution_required = true
 
 [[relocs]]
@@ -270,6 +293,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-poison"
 target_export = "Common_EventScript_NopReturn"
 target_offset = 146
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 146
 runtime_resolution_required = true
 
 [[relocs]]
@@ -280,6 +305,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-poison"
 target_export = "Common_EventScript_NopReturn"
 target_offset = 146
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 146
 runtime_resolution_required = true
 
 [[relocs]]
@@ -290,6 +317,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/hall-of-fame"
 target_export = "EventScript_SetBrineyLocation_House"
 target_offset = 331
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 331
 runtime_resolution_required = true
 
 [[relocs]]
@@ -300,6 +329,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/hall-of-fame"
 target_export = "EventScript_SetBrineyLocation_Dewford"
 target_offset = 337
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 337
 runtime_resolution_required = true
 
 [[relocs]]
@@ -310,4 +341,414 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/hall-of-fame"
 target_export = "EventScript_SetBrineyLocation_Route109"
 target_offset = 343
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 343
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 3
+
+[[boundaries]]
+payload_offset = 6
+length = 5
+
+[[boundaries]]
+payload_offset = 11
+length = 5
+
+[[boundaries]]
+payload_offset = 16
+length = 6
+
+[[boundaries]]
+payload_offset = 22
+length = 3
+
+[[boundaries]]
+payload_offset = 25
+length = 5
+
+[[boundaries]]
+payload_offset = 30
+length = 3
+
+[[boundaries]]
+payload_offset = 33
+length = 3
+
+[[boundaries]]
+payload_offset = 36
+length = 3
+
+[[boundaries]]
+payload_offset = 39
+length = 5
+
+[[boundaries]]
+payload_offset = 44
+length = 3
+
+[[boundaries]]
+payload_offset = 47
+length = 3
+
+[[boundaries]]
+payload_offset = 50
+length = 3
+
+[[boundaries]]
+payload_offset = 53
+length = 3
+
+[[boundaries]]
+payload_offset = 56
+length = 3
+
+[[boundaries]]
+payload_offset = 59
+length = 3
+
+[[boundaries]]
+payload_offset = 62
+length = 3
+
+[[boundaries]]
+payload_offset = 65
+length = 3
+
+[[boundaries]]
+payload_offset = 68
+length = 3
+
+[[boundaries]]
+payload_offset = 71
+length = 6
+
+[[boundaries]]
+payload_offset = 77
+length = 3
+
+[[boundaries]]
+payload_offset = 80
+length = 6
+
+[[boundaries]]
+payload_offset = 86
+length = 3
+
+[[boundaries]]
+payload_offset = 89
+length = 3
+
+[[boundaries]]
+payload_offset = 92
+length = 5
+
+[[boundaries]]
+payload_offset = 97
+length = 6
+
+[[boundaries]]
+payload_offset = 103
+length = 1
+
+[[boundaries]]
+payload_offset = 104
+length = 3
+
+[[boundaries]]
+payload_offset = 107
+length = 3
+
+[[boundaries]]
+payload_offset = 110
+length = 3
+
+[[boundaries]]
+payload_offset = 113
+length = 3
+
+[[boundaries]]
+payload_offset = 116
+length = 3
+
+[[boundaries]]
+payload_offset = 119
+length = 1
+
+[[boundaries]]
+payload_offset = 120
+length = 5
+
+[[boundaries]]
+payload_offset = 125
+length = 1
+
+[[boundaries]]
+payload_offset = 126
+length = 3
+
+[[boundaries]]
+payload_offset = 129
+length = 1
+
+[[boundaries]]
+payload_offset = 130
+length = 5
+
+[[boundaries]]
+payload_offset = 135
+length = 5
+
+[[boundaries]]
+payload_offset = 140
+length = 3
+
+[[boundaries]]
+payload_offset = 143
+length = 1
+
+[[boundaries]]
+payload_offset = 144
+length = 5
+
+[[boundaries]]
+payload_offset = 149
+length = 1
+
+[[boundaries]]
+payload_offset = 150
+length = 5
+
+[[boundaries]]
+payload_offset = 155
+length = 5
+
+[[boundaries]]
+payload_offset = 161
+length = 5
+
+[[boundaries]]
+payload_offset = 166
+length = 6
+
+[[boundaries]]
+payload_offset = 172
+length = 5
+
+[[boundaries]]
+payload_offset = 177
+length = 6
+
+[[boundaries]]
+payload_offset = 183
+length = 5
+
+[[boundaries]]
+payload_offset = 188
+length = 6
+
+[[boundaries]]
+payload_offset = 194
+length = 1
+
+[[boundaries]]
+payload_offset = 195
+length = 3
+
+[[boundaries]]
+payload_offset = 198
+length = 3
+
+[[boundaries]]
+payload_offset = 201
+length = 3
+
+[[boundaries]]
+payload_offset = 204
+length = 3
+
+[[boundaries]]
+payload_offset = 207
+length = 3
+
+[[boundaries]]
+payload_offset = 210
+length = 3
+
+[[boundaries]]
+payload_offset = 213
+length = 3
+
+[[boundaries]]
+payload_offset = 216
+length = 1
+
+[[boundaries]]
+payload_offset = 217
+length = 3
+
+[[boundaries]]
+payload_offset = 220
+length = 3
+
+[[boundaries]]
+payload_offset = 223
+length = 3
+
+[[boundaries]]
+payload_offset = 226
+length = 3
+
+[[boundaries]]
+payload_offset = 229
+length = 3
+
+[[boundaries]]
+payload_offset = 232
+length = 3
+
+[[boundaries]]
+payload_offset = 235
+length = 3
+
+[[boundaries]]
+payload_offset = 238
+length = 3
+
+[[boundaries]]
+payload_offset = 241
+length = 1
+
+[[boundaries]]
+payload_offset = 242
+length = 3
+
+[[boundaries]]
+payload_offset = 245
+length = 3
+
+[[boundaries]]
+payload_offset = 248
+length = 3
+
+[[boundaries]]
+payload_offset = 251
+length = 3
+
+[[boundaries]]
+payload_offset = 254
+length = 3
+
+[[boundaries]]
+payload_offset = 257
+length = 3
+
+[[boundaries]]
+payload_offset = 260
+length = 3
+
+[[boundaries]]
+payload_offset = 263
+length = 3
+
+[[boundaries]]
+payload_offset = 266
+length = 1
+
+[[boundaries]]
+payload_offset = 267
+length = 3
+
+[[boundaries]]
+payload_offset = 270
+length = 3
+
+[[boundaries]]
+payload_offset = 273
+length = 3
+
+[[boundaries]]
+payload_offset = 276
+length = 3
+
+[[boundaries]]
+payload_offset = 279
+length = 5
+
+[[boundaries]]
+payload_offset = 284
+length = 1
+
+[[boundaries]]
+payload_offset = 285
+length = 3
+
+[[boundaries]]
+payload_offset = 288
+length = 6
+
+[[boundaries]]
+payload_offset = 294
+length = 3
+
+[[boundaries]]
+payload_offset = 297
+length = 6
+
+[[boundaries]]
+payload_offset = 303
+length = 3
+
+[[boundaries]]
+payload_offset = 306
+length = 6
+
+[[boundaries]]
+payload_offset = 312
+length = 3
+
+[[boundaries]]
+payload_offset = 315
+length = 6
+
+[[boundaries]]
+payload_offset = 321
+length = 3
+
+[[boundaries]]
+payload_offset = 324
+length = 6
+
+[[boundaries]]
+payload_offset = 330
+length = 1
+
+[[boundaries]]
+payload_offset = 331
+length = 5
+
+[[boundaries]]
+payload_offset = 336
+length = 1
+
+[[boundaries]]
+payload_offset = 337
+length = 5
+
+[[boundaries]]
+payload_offset = 342
+length = 1
+
+[[boundaries]]
+payload_offset = 343
+length = 5
+
+[[boundaries]]
+payload_offset = 348
+length = 1

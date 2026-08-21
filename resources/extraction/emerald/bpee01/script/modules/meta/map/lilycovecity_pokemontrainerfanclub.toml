@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 2
 export_count = 64
 reloc_count = 127
+instruction_count = 489
 
 [[segments]]
 kind = "bytecode"
@@ -549,6 +550,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -558,6 +561,8 @@ original_encoded_gba = 0x821cf00
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Text_OhWowItsPlayer"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -567,6 +572,8 @@ original_encoded_gba = 0x821c7fd
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/lilycovecity-pokemontrainerfanclub-movement-littlegirlwatchplayer"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Movement_LittleGirlWatchPlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -576,6 +583,8 @@ original_encoded_gba = 0x821c7f5
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/lilycovecity-pokemontrainerfanclub-movement-fanapproachplayer"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Movement_FanApproachPlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -585,6 +594,8 @@ original_encoded_gba = 0x82725a8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterright"
 target_export = "Common_Movement_WalkInPlaceFasterRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -594,6 +605,8 @@ original_encoded_gba = 0x821cf12
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Text_HeardAboutYouImYourFan"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -603,6 +616,8 @@ original_encoded_gba = 0x821c804
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/lilycovecity-pokemontrainerfanclub-movement-littlegirlmoveclosertoplayer"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Movement_LittleGirlMoveCloserToPlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -612,6 +627,8 @@ original_encoded_gba = 0x82725a4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterleft"
 target_export = "Common_Movement_WalkInPlaceFasterLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -621,6 +638,8 @@ original_encoded_gba = 0x821c807
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/lilycovecity-pokemontrainerfanclub-movement-littlegirlhidefromplayer"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Movement_LittleGirlHideFromPlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -631,6 +650,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_HideOrShowInterviewer"
 target_offset = 341
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 296
 runtime_resolution_required = true
 
 [[relocs]]
@@ -641,6 +662,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_SetFanMemberPositionsForFirstFanMeeting"
 target_offset = 627
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 582
 runtime_resolution_required = true
 
 [[relocs]]
@@ -651,6 +674,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_UpdateFanMemberPositions"
 target_offset = 164
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 119
 runtime_resolution_required = true
 
 [[relocs]]
@@ -661,6 +686,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_CheckSetUpTVShow"
 target_offset = 368
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 323
 runtime_resolution_required = true
 
 [[relocs]]
@@ -671,6 +698,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember1ToFarTable"
 target_offset = 563
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 518
 runtime_resolution_required = true
 
 [[relocs]]
@@ -681,6 +710,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember2ToFarTable"
 target_offset = 571
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 526
 runtime_resolution_required = true
 
 [[relocs]]
@@ -691,6 +722,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember3ToFarTable"
 target_offset = 579
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 534
 runtime_resolution_required = true
 
 [[relocs]]
@@ -701,6 +734,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember4ToFarTable"
 target_offset = 587
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 542
 runtime_resolution_required = true
 
 [[relocs]]
@@ -711,6 +746,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember5ToFarTable"
 target_offset = 595
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 550
 runtime_resolution_required = true
 
 [[relocs]]
@@ -721,6 +758,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember6ToFarTable"
 target_offset = 603
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 558
 runtime_resolution_required = true
 
 [[relocs]]
@@ -731,6 +770,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember7ToFarTable"
 target_offset = 611
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 566
 runtime_resolution_required = true
 
 [[relocs]]
@@ -741,6 +782,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember8ToFarTable"
 target_offset = 619
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 574
 runtime_resolution_required = true
 
 [[relocs]]
@@ -751,6 +794,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_HideInterviewer"
 target_offset = 364
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 319
 runtime_resolution_required = true
 
 [[relocs]]
@@ -761,6 +806,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_CountNotPlayersFan"
 target_offset = 553
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 508
 runtime_resolution_required = true
 
 [[relocs]]
@@ -771,6 +818,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_CountNotPlayersFan"
 target_offset = 553
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 508
 runtime_resolution_required = true
 
 [[relocs]]
@@ -781,6 +830,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_CountNotPlayersFan"
 target_offset = 553
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 508
 runtime_resolution_required = true
 
 [[relocs]]
@@ -791,6 +842,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_CountNotPlayersFan"
 target_offset = 553
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 508
 runtime_resolution_required = true
 
 [[relocs]]
@@ -801,6 +854,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_CountNotPlayersFan"
 target_offset = 553
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 508
 runtime_resolution_required = true
 
 [[relocs]]
@@ -811,6 +866,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_CountNotPlayersFan"
 target_offset = 553
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 508
 runtime_resolution_required = true
 
 [[relocs]]
@@ -821,6 +878,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_CountNotPlayersFan"
 target_offset = 553
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 508
 runtime_resolution_required = true
 
 [[relocs]]
@@ -831,6 +890,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_CountNotPlayersFan"
 target_offset = 553
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 508
 runtime_resolution_required = true
 
 [[relocs]]
@@ -841,6 +902,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_TrySetUpTVShow"
 target_offset = 559
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 514
 runtime_resolution_required = true
 
 [[relocs]]
@@ -851,6 +914,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_CheckSetUpTVShow"
 target_offset = 368
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 323
 runtime_resolution_required = true
 
 [[relocs]]
@@ -861,6 +926,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember2ToFarTable"
 target_offset = 571
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 526
 runtime_resolution_required = true
 
 [[relocs]]
@@ -871,6 +938,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember4ToFarTable"
 target_offset = 587
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 542
 runtime_resolution_required = true
 
 [[relocs]]
@@ -881,6 +950,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember5ToFarTable"
 target_offset = 595
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 550
 runtime_resolution_required = true
 
 [[relocs]]
@@ -891,6 +962,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember7ToFarTable"
 target_offset = 611
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 566
 runtime_resolution_required = true
 
 [[relocs]]
@@ -901,6 +974,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_MoveMember8ToFarTable"
 target_offset = 619
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 574
 runtime_resolution_required = true
 
 [[relocs]]
@@ -911,6 +986,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_ManPlayerNotChampion"
 target_offset = 767
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 722
 runtime_resolution_required = true
 
 [[relocs]]
@@ -921,6 +998,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_ManPlayersFan"
 target_offset = 721
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 676
 runtime_resolution_required = true
 
 [[relocs]]
@@ -931,6 +1010,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_ManOnlyNonFan"
 target_offset = 757
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 712
 runtime_resolution_required = true
 
 [[relocs]]
@@ -940,6 +1021,8 @@ original_encoded_gba = 0x821d12a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Text_TrainersPowerIsOutOfTheOrdinary"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -950,6 +1033,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_ManOnlyFan"
 target_offset = 747
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 702
 runtime_resolution_required = true
 
 [[relocs]]
@@ -959,6 +1044,8 @@ original_encoded_gba = 0x821d094
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Text_YoureOneWeWantToWin"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -968,6 +1055,8 @@ original_encoded_gba = 0x821d0bb
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Text_OthersDontKnowYoureTheBest"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -977,6 +1066,8 @@ original_encoded_gba = 0x821d1b5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Text_TrainerIsBestNoOneWantsToListen"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -986,6 +1077,8 @@ original_encoded_gba = 0x821d20c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Text_HearingAboutToughNewTrainer"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -996,6 +1089,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_LassPlayerNotChampion"
 target_offset = 886
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 841
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1006,6 +1101,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_LassPlayersFan"
 target_offset = 840
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 795
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1016,6 +1113,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_LassOnlyNonFan"
 target_offset = 876
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 831
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1025,6 +1124,8 @@ original_encoded_gba = 0x821d347
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Text_ICantHelpLikingBrawly"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1035,6 +1136,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_LassOnlyFan"
 target_offset = 866
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 821
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1044,6 +1147,8 @@ original_encoded_gba = 0x821d2a6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Text_ImPullingForYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1053,6 +1158,8 @@ original_encoded_gba = 0x821d2ce
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Text_BrawlyNoImYourFan"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1062,6 +1169,8 @@ original_encoded_gba = 0x821d377
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Text_NobodyUnderstandsBrawly"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1071,6 +1180,8 @@ original_encoded_gba = 0x821d3ee
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Text_MyFavoriteTrainerIsBrawly"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1081,6 +1192,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanMPlayerNotChampion"
 target_offset = 1005
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 960
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1091,6 +1204,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanMPlayersFan"
 target_offset = 959
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 914
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1101,6 +1216,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanMOnlyNonFan"
 target_offset = 995
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 950
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1110,6 +1227,8 @@ original_encoded_gba = 0x821d52e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Text_LongWayToGoComparedToNorman"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1120,6 +1239,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_PokefanMOnlyFan"
 target_offset = 985
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 940
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1129,6 +1250,8 @@ original_encoded_gba = 0x821d438
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Text_YouveSurpassedYourFather"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1138,6 +1261,8 @@ original_encoded_gba = 0x821d4a3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Text_YourFatherNeverGaveUpSoKeepOnBattling"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1147,6 +1272,8 @@ original_encoded_gba = 0x821d5dc
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Text_YouAndNormanAreDifferent"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1156,6 +1283,8 @@ original_encoded_gba = 0x821d69c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Text_WeDiscussStrongestTrainers"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1166,6 +1295,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirlPlayerNotChampion"
 target_offset = 1124
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1079
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1176,6 +1307,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirlPlayersFan"
 target_offset = 1078
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1033
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1186,6 +1319,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirlOnlyNonFan"
 target_offset = 1114
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1069
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1195,6 +1330,8 @@ original_encoded_gba = 0x821d822
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Text_EveryoneThinksTrainerIsCool"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1205,6 +1342,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_LittleGirlOnlyFan"
 target_offset = 1104
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1059
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1214,6 +1353,8 @@ original_encoded_gba = 0x821d751
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Text_OhWoweeItsPlayer"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1223,6 +1364,8 @@ original_encoded_gba = 0x821d79b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Text_AlwaysCheerForYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1232,6 +1375,8 @@ original_encoded_gba = 0x821d857
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Text_TrainerIsReallyCoolItsJustMe"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1241,6 +1386,8 @@ original_encoded_gba = 0x821d8c4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Text_WishThereWasTrainerLikeThat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1251,6 +1398,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_NinjaBoyPlayersFan"
 target_offset = 1186
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1141
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1261,6 +1410,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_NinjaBoyOnlyNonFan"
 target_offset = 1222
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1177
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1270,6 +1421,8 @@ original_encoded_gba = 0x821d9d1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Text_TrainerIsWickedlyCool"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1280,6 +1433,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_NinjaBoyOnlyFan"
 target_offset = 1212
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1167
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1289,6 +1444,8 @@ original_encoded_gba = 0x821d921
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Text_WantToBeStrongLikeYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1298,6 +1455,8 @@ original_encoded_gba = 0x821d96a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Text_OnlyOneWhoCheersForYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1307,6 +1466,8 @@ original_encoded_gba = 0x821da0d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Text_NeverGoingToStopBeingTrainersFan"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1317,6 +1478,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_BoyPlayersFan"
 target_offset = 1284
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1239
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1327,6 +1490,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_BoyOnlyNonFan"
 target_offset = 1320
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1275
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1336,6 +1501,8 @@ original_encoded_gba = 0x821db69
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Text_ThinkTrainerIsNumberOne"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1346,6 +1513,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_BoyOnlyFan"
 target_offset = 1310
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1265
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1355,6 +1524,8 @@ original_encoded_gba = 0x821da73
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Text_YoureAmazingAfterAll"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1364,6 +1535,8 @@ original_encoded_gba = 0x821daf5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Text_ImInYourCorner"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1373,6 +1546,8 @@ original_encoded_gba = 0x821dbfb
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Text_YoureMaybeStrongerThanTrainer"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1383,6 +1558,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_WomanPlayersFan"
 target_offset = 1382
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1337
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1393,6 +1570,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_WomanOnlyNonFan"
 target_offset = 1418
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1373
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1402,6 +1581,8 @@ original_encoded_gba = 0x821dd36
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Text_TrainerIsStandout"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1412,6 +1593,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_WomanOnlyFan"
 target_offset = 1408
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1363
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1421,6 +1604,8 @@ original_encoded_gba = 0x821dc68
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Text_YouChangedMyMind"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1430,6 +1615,8 @@ original_encoded_gba = 0x821dcd6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Text_YouBattleAttractivelyInToughSituation"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1439,6 +1626,8 @@ original_encoded_gba = 0x821ddce
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Text_NoOneCanKnockYouButTrainerStronger"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1449,6 +1638,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_ExpertFPlayersFan"
 target_offset = 1480
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1435
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1459,6 +1650,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_ExpertFOnlyNonFan"
 target_offset = 1516
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1471
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1468,6 +1661,8 @@ original_encoded_gba = 0x821deff
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Text_HaventRealizedPotential"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1478,6 +1673,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_ExpertFOnlyFan"
 target_offset = 1506
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1461
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1487,6 +1684,8 @@ original_encoded_gba = 0x821de72
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Text_YouImpressive"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1496,6 +1695,8 @@ original_encoded_gba = 0x821de83
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Text_OnlyIRecognizeYourTrueWorth"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1505,6 +1706,8 @@ original_encoded_gba = 0x821df51
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Text_YourePowerfulButNotTrueStrength"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1515,6 +1718,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_AlreadyInterviewed"
 target_offset = 1896
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1851
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1525,6 +1730,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_Interview"
 target_offset = 1547
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1502
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1535,6 +1742,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_AlreadyInterviewed2"
 target_offset = 1914
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1869
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1544,6 +1753,8 @@ original_encoded_gba = 0x8281bcb
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/tv"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Text_WhatsYourOpinionOfTrainer"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1554,6 +1765,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pc"
 target_export = "Common_ShowEasyChatScreen"
 target_offset = 234
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 234
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1564,6 +1777,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_SubmitOpinion"
 target_offset = 1627
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1582
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1574,6 +1789,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_CancelGiveOpinion"
 target_offset = 1641
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1596
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1583,6 +1800,8 @@ original_encoded_gba = 0x8281c06
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/tv"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Text_ThatsWhatYouThink"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1593,6 +1812,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_RateTrainer"
 target_offset = 1736
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1691
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1602,6 +1823,8 @@ original_encoded_gba = 0x8281c3d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/tv"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Text_HaveYouForgottenTrainer"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1612,6 +1835,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_ForgetTrainer"
 target_offset = 1857
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1812
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1622,6 +1847,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_AskForOpinion"
 target_offset = 1680
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1635
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1631,6 +1858,8 @@ original_encoded_gba = 0x8281c65
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/tv"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Text_WhatsYourOpinionOfTrainer2"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1641,6 +1870,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pc"
 target_export = "Common_ShowEasyChatScreen"
 target_offset = 234
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 234
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1651,6 +1882,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_SubmitOpinion"
 target_offset = 1627
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1582
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1661,6 +1894,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_CancelGiveOpinion"
 target_offset = 1641
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1596
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1670,6 +1905,8 @@ original_encoded_gba = 0x8281c95
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/tv"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Text_HowStrongRateTrainer"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1680,6 +1917,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_CancelRateTrainer"
 target_offset = 1818
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1773
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1690,6 +1929,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_CancelRateTrainer"
 target_offset = 1818
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1773
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1700,6 +1941,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_CompleteInterview"
 target_offset = 1875
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1830
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1709,6 +1952,8 @@ original_encoded_gba = 0x8281ccd
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/tv"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Text_HaveYouForgottenTrainer2"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1719,6 +1964,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_ForgetTrainer"
 target_offset = 1857
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1812
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1729,6 +1976,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-pokemontrainerfanclub"
 target_export = "LilycoveCity_PokemonTrainerFanClub_EventScript_RateTrainer"
 target_offset = 1736
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1691
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1738,6 +1987,8 @@ original_encoded_gba = 0x8281cf5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/tv"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Text_YouShouldMeetTrainer"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1747,6 +1998,8 @@ original_encoded_gba = 0x8281d40
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/tv"
 target_export = "LilycoveCity_PokemonTrainerFanClub_Text_ThankYouIllShareThisInfo"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1756,4 +2009,1962 @@ original_encoded_gba = 0x8281db4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/tv"
 target_export = "LilycoveCity_PokemonTrainerFanClub_HopeYouCatchTVSpecial"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 7
+
+[[boundaries]]
+payload_offset = 8
+length = 3
+
+[[boundaries]]
+payload_offset = 11
+length = 6
+
+[[boundaries]]
+payload_offset = 17
+length = 2
+
+[[boundaries]]
+payload_offset = 19
+length = 7
+
+[[boundaries]]
+payload_offset = 26
+length = 7
+
+[[boundaries]]
+payload_offset = 33
+length = 3
+
+[[boundaries]]
+payload_offset = 36
+length = 7
+
+[[boundaries]]
+payload_offset = 43
+length = 3
+
+[[boundaries]]
+payload_offset = 46
+length = 6
+
+[[boundaries]]
+payload_offset = 52
+length = 2
+
+[[boundaries]]
+payload_offset = 54
+length = 7
+
+[[boundaries]]
+payload_offset = 61
+length = 3
+
+[[boundaries]]
+payload_offset = 64
+length = 7
+
+[[boundaries]]
+payload_offset = 71
+length = 3
+
+[[boundaries]]
+payload_offset = 74
+length = 7
+
+[[boundaries]]
+payload_offset = 81
+length = 3
+
+[[boundaries]]
+payload_offset = 84
+length = 5
+
+[[boundaries]]
+payload_offset = 89
+length = 1
+
+[[boundaries]]
+payload_offset = 90
+length = 1
+
+[[boundaries]]
+payload_offset = 91
+length = 5
+
+[[boundaries]]
+payload_offset = 96
+length = 5
+
+[[boundaries]]
+payload_offset = 101
+length = 6
+
+[[boundaries]]
+payload_offset = 107
+length = 5
+
+[[boundaries]]
+payload_offset = 112
+length = 6
+
+[[boundaries]]
+payload_offset = 118
+length = 1
+
+[[boundaries]]
+payload_offset = 119
+length = 3
+
+[[boundaries]]
+payload_offset = 122
+length = 5
+
+[[boundaries]]
+payload_offset = 127
+length = 5
+
+[[boundaries]]
+payload_offset = 132
+length = 5
+
+[[boundaries]]
+payload_offset = 137
+length = 5
+
+[[boundaries]]
+payload_offset = 142
+length = 6
+
+[[boundaries]]
+payload_offset = 148
+length = 5
+
+[[boundaries]]
+payload_offset = 153
+length = 5
+
+[[boundaries]]
+payload_offset = 158
+length = 5
+
+[[boundaries]]
+payload_offset = 163
+length = 6
+
+[[boundaries]]
+payload_offset = 169
+length = 5
+
+[[boundaries]]
+payload_offset = 174
+length = 5
+
+[[boundaries]]
+payload_offset = 179
+length = 5
+
+[[boundaries]]
+payload_offset = 184
+length = 6
+
+[[boundaries]]
+payload_offset = 190
+length = 5
+
+[[boundaries]]
+payload_offset = 195
+length = 5
+
+[[boundaries]]
+payload_offset = 200
+length = 5
+
+[[boundaries]]
+payload_offset = 205
+length = 6
+
+[[boundaries]]
+payload_offset = 211
+length = 5
+
+[[boundaries]]
+payload_offset = 216
+length = 5
+
+[[boundaries]]
+payload_offset = 221
+length = 5
+
+[[boundaries]]
+payload_offset = 226
+length = 6
+
+[[boundaries]]
+payload_offset = 232
+length = 5
+
+[[boundaries]]
+payload_offset = 237
+length = 5
+
+[[boundaries]]
+payload_offset = 242
+length = 5
+
+[[boundaries]]
+payload_offset = 247
+length = 6
+
+[[boundaries]]
+payload_offset = 253
+length = 5
+
+[[boundaries]]
+payload_offset = 258
+length = 5
+
+[[boundaries]]
+payload_offset = 263
+length = 5
+
+[[boundaries]]
+payload_offset = 268
+length = 6
+
+[[boundaries]]
+payload_offset = 274
+length = 5
+
+[[boundaries]]
+payload_offset = 279
+length = 5
+
+[[boundaries]]
+payload_offset = 284
+length = 5
+
+[[boundaries]]
+payload_offset = 289
+length = 6
+
+[[boundaries]]
+payload_offset = 295
+length = 1
+
+[[boundaries]]
+payload_offset = 296
+length = 5
+
+[[boundaries]]
+payload_offset = 301
+length = 5
+
+[[boundaries]]
+payload_offset = 306
+length = 6
+
+[[boundaries]]
+payload_offset = 312
+length = 3
+
+[[boundaries]]
+payload_offset = 315
+length = 3
+
+[[boundaries]]
+payload_offset = 318
+length = 1
+
+[[boundaries]]
+payload_offset = 319
+length = 3
+
+[[boundaries]]
+payload_offset = 322
+length = 1
+
+[[boundaries]]
+payload_offset = 323
+length = 5
+
+[[boundaries]]
+payload_offset = 328
+length = 5
+
+[[boundaries]]
+payload_offset = 333
+length = 5
+
+[[boundaries]]
+payload_offset = 338
+length = 5
+
+[[boundaries]]
+payload_offset = 343
+length = 6
+
+[[boundaries]]
+payload_offset = 349
+length = 5
+
+[[boundaries]]
+payload_offset = 354
+length = 5
+
+[[boundaries]]
+payload_offset = 359
+length = 5
+
+[[boundaries]]
+payload_offset = 364
+length = 6
+
+[[boundaries]]
+payload_offset = 370
+length = 5
+
+[[boundaries]]
+payload_offset = 375
+length = 5
+
+[[boundaries]]
+payload_offset = 380
+length = 5
+
+[[boundaries]]
+payload_offset = 385
+length = 6
+
+[[boundaries]]
+payload_offset = 391
+length = 5
+
+[[boundaries]]
+payload_offset = 396
+length = 5
+
+[[boundaries]]
+payload_offset = 401
+length = 5
+
+[[boundaries]]
+payload_offset = 406
+length = 6
+
+[[boundaries]]
+payload_offset = 412
+length = 5
+
+[[boundaries]]
+payload_offset = 417
+length = 5
+
+[[boundaries]]
+payload_offset = 422
+length = 5
+
+[[boundaries]]
+payload_offset = 427
+length = 6
+
+[[boundaries]]
+payload_offset = 433
+length = 5
+
+[[boundaries]]
+payload_offset = 438
+length = 5
+
+[[boundaries]]
+payload_offset = 443
+length = 5
+
+[[boundaries]]
+payload_offset = 448
+length = 6
+
+[[boundaries]]
+payload_offset = 454
+length = 5
+
+[[boundaries]]
+payload_offset = 459
+length = 5
+
+[[boundaries]]
+payload_offset = 464
+length = 5
+
+[[boundaries]]
+payload_offset = 469
+length = 6
+
+[[boundaries]]
+payload_offset = 475
+length = 5
+
+[[boundaries]]
+payload_offset = 480
+length = 5
+
+[[boundaries]]
+payload_offset = 485
+length = 5
+
+[[boundaries]]
+payload_offset = 490
+length = 6
+
+[[boundaries]]
+payload_offset = 496
+length = 5
+
+[[boundaries]]
+payload_offset = 501
+length = 6
+
+[[boundaries]]
+payload_offset = 507
+length = 1
+
+[[boundaries]]
+payload_offset = 508
+length = 5
+
+[[boundaries]]
+payload_offset = 513
+length = 1
+
+[[boundaries]]
+payload_offset = 514
+length = 3
+
+[[boundaries]]
+payload_offset = 517
+length = 1
+
+[[boundaries]]
+payload_offset = 518
+length = 7
+
+[[boundaries]]
+payload_offset = 525
+length = 1
+
+[[boundaries]]
+payload_offset = 526
+length = 7
+
+[[boundaries]]
+payload_offset = 533
+length = 1
+
+[[boundaries]]
+payload_offset = 534
+length = 7
+
+[[boundaries]]
+payload_offset = 541
+length = 1
+
+[[boundaries]]
+payload_offset = 542
+length = 7
+
+[[boundaries]]
+payload_offset = 549
+length = 1
+
+[[boundaries]]
+payload_offset = 550
+length = 7
+
+[[boundaries]]
+payload_offset = 557
+length = 1
+
+[[boundaries]]
+payload_offset = 558
+length = 7
+
+[[boundaries]]
+payload_offset = 565
+length = 1
+
+[[boundaries]]
+payload_offset = 566
+length = 7
+
+[[boundaries]]
+payload_offset = 573
+length = 1
+
+[[boundaries]]
+payload_offset = 574
+length = 7
+
+[[boundaries]]
+payload_offset = 581
+length = 1
+
+[[boundaries]]
+payload_offset = 582
+length = 5
+
+[[boundaries]]
+payload_offset = 587
+length = 5
+
+[[boundaries]]
+payload_offset = 592
+length = 5
+
+[[boundaries]]
+payload_offset = 597
+length = 5
+
+[[boundaries]]
+payload_offset = 602
+length = 5
+
+[[boundaries]]
+payload_offset = 607
+length = 5
+
+[[boundaries]]
+payload_offset = 612
+length = 1
+
+[[boundaries]]
+payload_offset = 613
+length = 1
+
+[[boundaries]]
+payload_offset = 614
+length = 1
+
+[[boundaries]]
+payload_offset = 615
+length = 5
+
+[[boundaries]]
+payload_offset = 620
+length = 3
+
+[[boundaries]]
+payload_offset = 623
+length = 5
+
+[[boundaries]]
+payload_offset = 628
+length = 6
+
+[[boundaries]]
+payload_offset = 634
+length = 5
+
+[[boundaries]]
+payload_offset = 639
+length = 5
+
+[[boundaries]]
+payload_offset = 644
+length = 6
+
+[[boundaries]]
+payload_offset = 650
+length = 5
+
+[[boundaries]]
+payload_offset = 655
+length = 5
+
+[[boundaries]]
+payload_offset = 660
+length = 6
+
+[[boundaries]]
+payload_offset = 666
+length = 6
+
+[[boundaries]]
+payload_offset = 672
+length = 2
+
+[[boundaries]]
+payload_offset = 674
+length = 1
+
+[[boundaries]]
+payload_offset = 675
+length = 1
+
+[[boundaries]]
+payload_offset = 676
+length = 5
+
+[[boundaries]]
+payload_offset = 681
+length = 5
+
+[[boundaries]]
+payload_offset = 686
+length = 6
+
+[[boundaries]]
+payload_offset = 692
+length = 6
+
+[[boundaries]]
+payload_offset = 698
+length = 2
+
+[[boundaries]]
+payload_offset = 700
+length = 1
+
+[[boundaries]]
+payload_offset = 701
+length = 1
+
+[[boundaries]]
+payload_offset = 702
+length = 6
+
+[[boundaries]]
+payload_offset = 708
+length = 2
+
+[[boundaries]]
+payload_offset = 710
+length = 1
+
+[[boundaries]]
+payload_offset = 711
+length = 1
+
+[[boundaries]]
+payload_offset = 712
+length = 6
+
+[[boundaries]]
+payload_offset = 718
+length = 2
+
+[[boundaries]]
+payload_offset = 720
+length = 1
+
+[[boundaries]]
+payload_offset = 721
+length = 1
+
+[[boundaries]]
+payload_offset = 722
+length = 6
+
+[[boundaries]]
+payload_offset = 728
+length = 2
+
+[[boundaries]]
+payload_offset = 730
+length = 1
+
+[[boundaries]]
+payload_offset = 731
+length = 1
+
+[[boundaries]]
+payload_offset = 732
+length = 1
+
+[[boundaries]]
+payload_offset = 733
+length = 1
+
+[[boundaries]]
+payload_offset = 734
+length = 5
+
+[[boundaries]]
+payload_offset = 739
+length = 3
+
+[[boundaries]]
+payload_offset = 742
+length = 5
+
+[[boundaries]]
+payload_offset = 747
+length = 6
+
+[[boundaries]]
+payload_offset = 753
+length = 5
+
+[[boundaries]]
+payload_offset = 758
+length = 5
+
+[[boundaries]]
+payload_offset = 763
+length = 6
+
+[[boundaries]]
+payload_offset = 769
+length = 5
+
+[[boundaries]]
+payload_offset = 774
+length = 5
+
+[[boundaries]]
+payload_offset = 779
+length = 6
+
+[[boundaries]]
+payload_offset = 785
+length = 6
+
+[[boundaries]]
+payload_offset = 791
+length = 2
+
+[[boundaries]]
+payload_offset = 793
+length = 1
+
+[[boundaries]]
+payload_offset = 794
+length = 1
+
+[[boundaries]]
+payload_offset = 795
+length = 5
+
+[[boundaries]]
+payload_offset = 800
+length = 5
+
+[[boundaries]]
+payload_offset = 805
+length = 6
+
+[[boundaries]]
+payload_offset = 811
+length = 6
+
+[[boundaries]]
+payload_offset = 817
+length = 2
+
+[[boundaries]]
+payload_offset = 819
+length = 1
+
+[[boundaries]]
+payload_offset = 820
+length = 1
+
+[[boundaries]]
+payload_offset = 821
+length = 6
+
+[[boundaries]]
+payload_offset = 827
+length = 2
+
+[[boundaries]]
+payload_offset = 829
+length = 1
+
+[[boundaries]]
+payload_offset = 830
+length = 1
+
+[[boundaries]]
+payload_offset = 831
+length = 6
+
+[[boundaries]]
+payload_offset = 837
+length = 2
+
+[[boundaries]]
+payload_offset = 839
+length = 1
+
+[[boundaries]]
+payload_offset = 840
+length = 1
+
+[[boundaries]]
+payload_offset = 841
+length = 6
+
+[[boundaries]]
+payload_offset = 847
+length = 2
+
+[[boundaries]]
+payload_offset = 849
+length = 1
+
+[[boundaries]]
+payload_offset = 850
+length = 1
+
+[[boundaries]]
+payload_offset = 851
+length = 1
+
+[[boundaries]]
+payload_offset = 852
+length = 1
+
+[[boundaries]]
+payload_offset = 853
+length = 5
+
+[[boundaries]]
+payload_offset = 858
+length = 3
+
+[[boundaries]]
+payload_offset = 861
+length = 5
+
+[[boundaries]]
+payload_offset = 866
+length = 6
+
+[[boundaries]]
+payload_offset = 872
+length = 5
+
+[[boundaries]]
+payload_offset = 877
+length = 5
+
+[[boundaries]]
+payload_offset = 882
+length = 6
+
+[[boundaries]]
+payload_offset = 888
+length = 5
+
+[[boundaries]]
+payload_offset = 893
+length = 5
+
+[[boundaries]]
+payload_offset = 898
+length = 6
+
+[[boundaries]]
+payload_offset = 904
+length = 6
+
+[[boundaries]]
+payload_offset = 910
+length = 2
+
+[[boundaries]]
+payload_offset = 912
+length = 1
+
+[[boundaries]]
+payload_offset = 913
+length = 1
+
+[[boundaries]]
+payload_offset = 914
+length = 5
+
+[[boundaries]]
+payload_offset = 919
+length = 5
+
+[[boundaries]]
+payload_offset = 924
+length = 6
+
+[[boundaries]]
+payload_offset = 930
+length = 6
+
+[[boundaries]]
+payload_offset = 936
+length = 2
+
+[[boundaries]]
+payload_offset = 938
+length = 1
+
+[[boundaries]]
+payload_offset = 939
+length = 1
+
+[[boundaries]]
+payload_offset = 940
+length = 6
+
+[[boundaries]]
+payload_offset = 946
+length = 2
+
+[[boundaries]]
+payload_offset = 948
+length = 1
+
+[[boundaries]]
+payload_offset = 949
+length = 1
+
+[[boundaries]]
+payload_offset = 950
+length = 6
+
+[[boundaries]]
+payload_offset = 956
+length = 2
+
+[[boundaries]]
+payload_offset = 958
+length = 1
+
+[[boundaries]]
+payload_offset = 959
+length = 1
+
+[[boundaries]]
+payload_offset = 960
+length = 6
+
+[[boundaries]]
+payload_offset = 966
+length = 2
+
+[[boundaries]]
+payload_offset = 968
+length = 1
+
+[[boundaries]]
+payload_offset = 969
+length = 1
+
+[[boundaries]]
+payload_offset = 970
+length = 1
+
+[[boundaries]]
+payload_offset = 971
+length = 1
+
+[[boundaries]]
+payload_offset = 972
+length = 5
+
+[[boundaries]]
+payload_offset = 977
+length = 3
+
+[[boundaries]]
+payload_offset = 980
+length = 5
+
+[[boundaries]]
+payload_offset = 985
+length = 6
+
+[[boundaries]]
+payload_offset = 991
+length = 5
+
+[[boundaries]]
+payload_offset = 996
+length = 5
+
+[[boundaries]]
+payload_offset = 1001
+length = 6
+
+[[boundaries]]
+payload_offset = 1007
+length = 5
+
+[[boundaries]]
+payload_offset = 1012
+length = 5
+
+[[boundaries]]
+payload_offset = 1017
+length = 6
+
+[[boundaries]]
+payload_offset = 1023
+length = 6
+
+[[boundaries]]
+payload_offset = 1029
+length = 2
+
+[[boundaries]]
+payload_offset = 1031
+length = 1
+
+[[boundaries]]
+payload_offset = 1032
+length = 1
+
+[[boundaries]]
+payload_offset = 1033
+length = 5
+
+[[boundaries]]
+payload_offset = 1038
+length = 5
+
+[[boundaries]]
+payload_offset = 1043
+length = 6
+
+[[boundaries]]
+payload_offset = 1049
+length = 6
+
+[[boundaries]]
+payload_offset = 1055
+length = 2
+
+[[boundaries]]
+payload_offset = 1057
+length = 1
+
+[[boundaries]]
+payload_offset = 1058
+length = 1
+
+[[boundaries]]
+payload_offset = 1059
+length = 6
+
+[[boundaries]]
+payload_offset = 1065
+length = 2
+
+[[boundaries]]
+payload_offset = 1067
+length = 1
+
+[[boundaries]]
+payload_offset = 1068
+length = 1
+
+[[boundaries]]
+payload_offset = 1069
+length = 6
+
+[[boundaries]]
+payload_offset = 1075
+length = 2
+
+[[boundaries]]
+payload_offset = 1077
+length = 1
+
+[[boundaries]]
+payload_offset = 1078
+length = 1
+
+[[boundaries]]
+payload_offset = 1079
+length = 6
+
+[[boundaries]]
+payload_offset = 1085
+length = 2
+
+[[boundaries]]
+payload_offset = 1087
+length = 1
+
+[[boundaries]]
+payload_offset = 1088
+length = 1
+
+[[boundaries]]
+payload_offset = 1089
+length = 1
+
+[[boundaries]]
+payload_offset = 1090
+length = 1
+
+[[boundaries]]
+payload_offset = 1091
+length = 5
+
+[[boundaries]]
+payload_offset = 1096
+length = 3
+
+[[boundaries]]
+payload_offset = 1099
+length = 5
+
+[[boundaries]]
+payload_offset = 1104
+length = 5
+
+[[boundaries]]
+payload_offset = 1109
+length = 6
+
+[[boundaries]]
+payload_offset = 1115
+length = 5
+
+[[boundaries]]
+payload_offset = 1120
+length = 5
+
+[[boundaries]]
+payload_offset = 1125
+length = 6
+
+[[boundaries]]
+payload_offset = 1131
+length = 6
+
+[[boundaries]]
+payload_offset = 1137
+length = 2
+
+[[boundaries]]
+payload_offset = 1139
+length = 1
+
+[[boundaries]]
+payload_offset = 1140
+length = 1
+
+[[boundaries]]
+payload_offset = 1141
+length = 5
+
+[[boundaries]]
+payload_offset = 1146
+length = 5
+
+[[boundaries]]
+payload_offset = 1151
+length = 6
+
+[[boundaries]]
+payload_offset = 1157
+length = 6
+
+[[boundaries]]
+payload_offset = 1163
+length = 2
+
+[[boundaries]]
+payload_offset = 1165
+length = 1
+
+[[boundaries]]
+payload_offset = 1166
+length = 1
+
+[[boundaries]]
+payload_offset = 1167
+length = 6
+
+[[boundaries]]
+payload_offset = 1173
+length = 2
+
+[[boundaries]]
+payload_offset = 1175
+length = 1
+
+[[boundaries]]
+payload_offset = 1176
+length = 1
+
+[[boundaries]]
+payload_offset = 1177
+length = 6
+
+[[boundaries]]
+payload_offset = 1183
+length = 2
+
+[[boundaries]]
+payload_offset = 1185
+length = 1
+
+[[boundaries]]
+payload_offset = 1186
+length = 1
+
+[[boundaries]]
+payload_offset = 1187
+length = 1
+
+[[boundaries]]
+payload_offset = 1188
+length = 1
+
+[[boundaries]]
+payload_offset = 1189
+length = 5
+
+[[boundaries]]
+payload_offset = 1194
+length = 3
+
+[[boundaries]]
+payload_offset = 1197
+length = 5
+
+[[boundaries]]
+payload_offset = 1202
+length = 5
+
+[[boundaries]]
+payload_offset = 1207
+length = 6
+
+[[boundaries]]
+payload_offset = 1213
+length = 5
+
+[[boundaries]]
+payload_offset = 1218
+length = 5
+
+[[boundaries]]
+payload_offset = 1223
+length = 6
+
+[[boundaries]]
+payload_offset = 1229
+length = 6
+
+[[boundaries]]
+payload_offset = 1235
+length = 2
+
+[[boundaries]]
+payload_offset = 1237
+length = 1
+
+[[boundaries]]
+payload_offset = 1238
+length = 1
+
+[[boundaries]]
+payload_offset = 1239
+length = 5
+
+[[boundaries]]
+payload_offset = 1244
+length = 5
+
+[[boundaries]]
+payload_offset = 1249
+length = 6
+
+[[boundaries]]
+payload_offset = 1255
+length = 6
+
+[[boundaries]]
+payload_offset = 1261
+length = 2
+
+[[boundaries]]
+payload_offset = 1263
+length = 1
+
+[[boundaries]]
+payload_offset = 1264
+length = 1
+
+[[boundaries]]
+payload_offset = 1265
+length = 6
+
+[[boundaries]]
+payload_offset = 1271
+length = 2
+
+[[boundaries]]
+payload_offset = 1273
+length = 1
+
+[[boundaries]]
+payload_offset = 1274
+length = 1
+
+[[boundaries]]
+payload_offset = 1275
+length = 6
+
+[[boundaries]]
+payload_offset = 1281
+length = 2
+
+[[boundaries]]
+payload_offset = 1283
+length = 1
+
+[[boundaries]]
+payload_offset = 1284
+length = 1
+
+[[boundaries]]
+payload_offset = 1285
+length = 1
+
+[[boundaries]]
+payload_offset = 1286
+length = 1
+
+[[boundaries]]
+payload_offset = 1287
+length = 5
+
+[[boundaries]]
+payload_offset = 1292
+length = 3
+
+[[boundaries]]
+payload_offset = 1295
+length = 5
+
+[[boundaries]]
+payload_offset = 1300
+length = 5
+
+[[boundaries]]
+payload_offset = 1305
+length = 6
+
+[[boundaries]]
+payload_offset = 1311
+length = 5
+
+[[boundaries]]
+payload_offset = 1316
+length = 5
+
+[[boundaries]]
+payload_offset = 1321
+length = 6
+
+[[boundaries]]
+payload_offset = 1327
+length = 6
+
+[[boundaries]]
+payload_offset = 1333
+length = 2
+
+[[boundaries]]
+payload_offset = 1335
+length = 1
+
+[[boundaries]]
+payload_offset = 1336
+length = 1
+
+[[boundaries]]
+payload_offset = 1337
+length = 5
+
+[[boundaries]]
+payload_offset = 1342
+length = 5
+
+[[boundaries]]
+payload_offset = 1347
+length = 6
+
+[[boundaries]]
+payload_offset = 1353
+length = 6
+
+[[boundaries]]
+payload_offset = 1359
+length = 2
+
+[[boundaries]]
+payload_offset = 1361
+length = 1
+
+[[boundaries]]
+payload_offset = 1362
+length = 1
+
+[[boundaries]]
+payload_offset = 1363
+length = 6
+
+[[boundaries]]
+payload_offset = 1369
+length = 2
+
+[[boundaries]]
+payload_offset = 1371
+length = 1
+
+[[boundaries]]
+payload_offset = 1372
+length = 1
+
+[[boundaries]]
+payload_offset = 1373
+length = 6
+
+[[boundaries]]
+payload_offset = 1379
+length = 2
+
+[[boundaries]]
+payload_offset = 1381
+length = 1
+
+[[boundaries]]
+payload_offset = 1382
+length = 1
+
+[[boundaries]]
+payload_offset = 1383
+length = 1
+
+[[boundaries]]
+payload_offset = 1384
+length = 1
+
+[[boundaries]]
+payload_offset = 1385
+length = 5
+
+[[boundaries]]
+payload_offset = 1390
+length = 3
+
+[[boundaries]]
+payload_offset = 1393
+length = 5
+
+[[boundaries]]
+payload_offset = 1398
+length = 5
+
+[[boundaries]]
+payload_offset = 1403
+length = 6
+
+[[boundaries]]
+payload_offset = 1409
+length = 5
+
+[[boundaries]]
+payload_offset = 1414
+length = 5
+
+[[boundaries]]
+payload_offset = 1419
+length = 6
+
+[[boundaries]]
+payload_offset = 1425
+length = 6
+
+[[boundaries]]
+payload_offset = 1431
+length = 2
+
+[[boundaries]]
+payload_offset = 1433
+length = 1
+
+[[boundaries]]
+payload_offset = 1434
+length = 1
+
+[[boundaries]]
+payload_offset = 1435
+length = 5
+
+[[boundaries]]
+payload_offset = 1440
+length = 5
+
+[[boundaries]]
+payload_offset = 1445
+length = 6
+
+[[boundaries]]
+payload_offset = 1451
+length = 6
+
+[[boundaries]]
+payload_offset = 1457
+length = 2
+
+[[boundaries]]
+payload_offset = 1459
+length = 1
+
+[[boundaries]]
+payload_offset = 1460
+length = 1
+
+[[boundaries]]
+payload_offset = 1461
+length = 6
+
+[[boundaries]]
+payload_offset = 1467
+length = 2
+
+[[boundaries]]
+payload_offset = 1469
+length = 1
+
+[[boundaries]]
+payload_offset = 1470
+length = 1
+
+[[boundaries]]
+payload_offset = 1471
+length = 6
+
+[[boundaries]]
+payload_offset = 1477
+length = 2
+
+[[boundaries]]
+payload_offset = 1479
+length = 1
+
+[[boundaries]]
+payload_offset = 1480
+length = 1
+
+[[boundaries]]
+payload_offset = 1481
+length = 1
+
+[[boundaries]]
+payload_offset = 1482
+length = 1
+
+[[boundaries]]
+payload_offset = 1483
+length = 3
+
+[[boundaries]]
+payload_offset = 1486
+length = 6
+
+[[boundaries]]
+payload_offset = 1492
+length = 3
+
+[[boundaries]]
+payload_offset = 1495
+length = 6
+
+[[boundaries]]
+payload_offset = 1501
+length = 1
+
+[[boundaries]]
+payload_offset = 1502
+length = 5
+
+[[boundaries]]
+payload_offset = 1507
+length = 3
+
+[[boundaries]]
+payload_offset = 1510
+length = 5
+
+[[boundaries]]
+payload_offset = 1515
+length = 6
+
+[[boundaries]]
+payload_offset = 1521
+length = 5
+
+[[boundaries]]
+payload_offset = 1526
+length = 5
+
+[[boundaries]]
+payload_offset = 1531
+length = 3
+
+[[boundaries]]
+payload_offset = 1534
+length = 6
+
+[[boundaries]]
+payload_offset = 1540
+length = 2
+
+[[boundaries]]
+payload_offset = 1542
+length = 5
+
+[[boundaries]]
+payload_offset = 1547
+length = 5
+
+[[boundaries]]
+payload_offset = 1552
+length = 5
+
+[[boundaries]]
+payload_offset = 1557
+length = 1
+
+[[boundaries]]
+payload_offset = 1558
+length = 1
+
+[[boundaries]]
+payload_offset = 1559
+length = 5
+
+[[boundaries]]
+payload_offset = 1564
+length = 6
+
+[[boundaries]]
+payload_offset = 1570
+length = 5
+
+[[boundaries]]
+payload_offset = 1575
+length = 6
+
+[[boundaries]]
+payload_offset = 1581
+length = 1
+
+[[boundaries]]
+payload_offset = 1582
+length = 6
+
+[[boundaries]]
+payload_offset = 1588
+length = 2
+
+[[boundaries]]
+payload_offset = 1590
+length = 5
+
+[[boundaries]]
+payload_offset = 1596
+length = 5
+
+[[boundaries]]
+payload_offset = 1601
+length = 3
+
+[[boundaries]]
+payload_offset = 1604
+length = 6
+
+[[boundaries]]
+payload_offset = 1610
+length = 2
+
+[[boundaries]]
+payload_offset = 1612
+length = 5
+
+[[boundaries]]
+payload_offset = 1617
+length = 6
+
+[[boundaries]]
+payload_offset = 1623
+length = 5
+
+[[boundaries]]
+payload_offset = 1628
+length = 6
+
+[[boundaries]]
+payload_offset = 1634
+length = 1
+
+[[boundaries]]
+payload_offset = 1635
+length = 5
+
+[[boundaries]]
+payload_offset = 1640
+length = 3
+
+[[boundaries]]
+payload_offset = 1643
+length = 6
+
+[[boundaries]]
+payload_offset = 1649
+length = 2
+
+[[boundaries]]
+payload_offset = 1651
+length = 5
+
+[[boundaries]]
+payload_offset = 1656
+length = 5
+
+[[boundaries]]
+payload_offset = 1661
+length = 5
+
+[[boundaries]]
+payload_offset = 1666
+length = 1
+
+[[boundaries]]
+payload_offset = 1667
+length = 1
+
+[[boundaries]]
+payload_offset = 1668
+length = 5
+
+[[boundaries]]
+payload_offset = 1673
+length = 6
+
+[[boundaries]]
+payload_offset = 1679
+length = 5
+
+[[boundaries]]
+payload_offset = 1684
+length = 6
+
+[[boundaries]]
+payload_offset = 1690
+length = 1
+
+[[boundaries]]
+payload_offset = 1691
+length = 5
+
+[[boundaries]]
+payload_offset = 1696
+length = 3
+
+[[boundaries]]
+payload_offset = 1699
+length = 5
+
+[[boundaries]]
+payload_offset = 1704
+length = 1
+
+[[boundaries]]
+payload_offset = 1705
+length = 5
+
+[[boundaries]]
+payload_offset = 1710
+length = 3
+
+[[boundaries]]
+payload_offset = 1713
+length = 1
+
+[[boundaries]]
+payload_offset = 1714
+length = 5
+
+[[boundaries]]
+payload_offset = 1719
+length = 5
+
+[[boundaries]]
+payload_offset = 1724
+length = 5
+
+[[boundaries]]
+payload_offset = 1729
+length = 6
+
+[[boundaries]]
+payload_offset = 1735
+length = 5
+
+[[boundaries]]
+payload_offset = 1740
+length = 6
+
+[[boundaries]]
+payload_offset = 1746
+length = 5
+
+[[boundaries]]
+payload_offset = 1751
+length = 3
+
+[[boundaries]]
+payload_offset = 1754
+length = 5
+
+[[boundaries]]
+payload_offset = 1759
+length = 5
+
+[[boundaries]]
+payload_offset = 1764
+length = 3
+
+[[boundaries]]
+payload_offset = 1767
+length = 5
+
+[[boundaries]]
+payload_offset = 1773
+length = 5
+
+[[boundaries]]
+payload_offset = 1778
+length = 3
+
+[[boundaries]]
+payload_offset = 1781
+length = 6
+
+[[boundaries]]
+payload_offset = 1787
+length = 2
+
+[[boundaries]]
+payload_offset = 1789
+length = 5
+
+[[boundaries]]
+payload_offset = 1794
+length = 6
+
+[[boundaries]]
+payload_offset = 1800
+length = 5
+
+[[boundaries]]
+payload_offset = 1805
+length = 6
+
+[[boundaries]]
+payload_offset = 1811
+length = 1
+
+[[boundaries]]
+payload_offset = 1812
+length = 5
+
+[[boundaries]]
+payload_offset = 1817
+length = 3
+
+[[boundaries]]
+payload_offset = 1820
+length = 6
+
+[[boundaries]]
+payload_offset = 1826
+length = 2
+
+[[boundaries]]
+payload_offset = 1828
+length = 1
+
+[[boundaries]]
+payload_offset = 1829
+length = 1
+
+[[boundaries]]
+payload_offset = 1830
+length = 5
+
+[[boundaries]]
+payload_offset = 1835
+length = 3
+
+[[boundaries]]
+payload_offset = 1838
+length = 6
+
+[[boundaries]]
+payload_offset = 1844
+length = 2
+
+[[boundaries]]
+payload_offset = 1846
+length = 3
+
+[[boundaries]]
+payload_offset = 1849
+length = 1
+
+[[boundaries]]
+payload_offset = 1850
+length = 1
+
+[[boundaries]]
+payload_offset = 1851
+length = 5
+
+[[boundaries]]
+payload_offset = 1856
+length = 3
+
+[[boundaries]]
+payload_offset = 1859
+length = 6
+
+[[boundaries]]
+payload_offset = 1865
+length = 2
+
+[[boundaries]]
+payload_offset = 1867
+length = 1
+
+[[boundaries]]
+payload_offset = 1868
+length = 1
+
+[[boundaries]]
+payload_offset = 1869
+length = 1

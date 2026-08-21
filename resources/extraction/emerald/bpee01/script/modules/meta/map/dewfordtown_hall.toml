@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 2
 export_count = 34
 reloc_count = 85
+instruction_count = 232
 
 [[segments]]
 kind = "bytecode"
@@ -310,6 +311,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pc"
 target_export = "Common_EventScript_BufferTrendyPhrase"
 target_offset = 249
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 249
 runtime_resolution_required = true
 
 [[relocs]]
@@ -320,6 +323,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_EventScript_GirlBoredOfTrend"
 target_offset = 32
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 31
 runtime_resolution_required = true
 
 [[relocs]]
@@ -329,6 +334,8 @@ original_encoded_gba = 0x81fd818
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_Text_CantImagineLifeWithoutTrend"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -338,6 +345,8 @@ original_encoded_gba = 0x81fd877
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_Text_GettingBoredOfTrend"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -348,6 +357,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pc"
 target_export = "Common_EventScript_BufferTrendyPhrase"
 target_offset = 249
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 249
 runtime_resolution_required = true
 
 [[relocs]]
@@ -357,6 +368,8 @@ original_encoded_gba = 0x81fd8ed
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_Text_TeachingMonAboutTrend"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -367,6 +380,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pc"
 target_export = "Common_EventScript_BufferTrendyPhrase"
 target_offset = 249
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 249
 runtime_resolution_required = true
 
 [[relocs]]
@@ -376,6 +391,8 @@ original_encoded_gba = 0x81fd948
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_Text_DeepLinkBetweenXAndY"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -386,6 +403,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_EventScript_ConfirmTrendLink"
 target_offset = 100
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 99
 runtime_resolution_required = true
 
 [[relocs]]
@@ -396,6 +415,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_EventScript_RejectTrendLink"
 target_offset = 110
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 109
 runtime_resolution_required = true
 
 [[relocs]]
@@ -405,6 +426,8 @@ original_encoded_gba = 0x81fd9b3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_Text_MyHunchWasRight"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -414,6 +437,8 @@ original_encoded_gba = 0x81fda06
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_Text_NotEasyToKeepUp"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -424,6 +449,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pc"
 target_export = "Common_EventScript_BufferTrendyPhrase"
 target_offset = 249
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 249
 runtime_resolution_required = true
 
 [[relocs]]
@@ -433,6 +460,8 @@ original_encoded_gba = 0x81fda5c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_Text_TVShowAboutTrend"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -442,6 +471,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -452,6 +483,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pc"
 target_export = "Common_EventScript_BufferTrendyPhrase"
 target_offset = 249
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 249
 runtime_resolution_required = true
 
 [[relocs]]
@@ -461,6 +494,8 @@ original_encoded_gba = 0x81fda99
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_Text_IsTrendMorePopularAcrossSea"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -470,6 +505,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -480,6 +517,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pc"
 target_export = "Common_EventScript_BufferTrendyPhrase"
 target_offset = 249
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 249
 runtime_resolution_required = true
 
 [[relocs]]
@@ -489,6 +528,8 @@ original_encoded_gba = 0x81fdac4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_Text_CollectTrendMerchandise"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -499,6 +540,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pc"
 target_export = "Common_EventScript_BufferTrendyPhrase"
 target_offset = 249
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 249
 runtime_resolution_required = true
 
 [[relocs]]
@@ -508,6 +551,8 @@ original_encoded_gba = 0x81fdb89
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_Text_BooksAboutTrend"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -518,6 +563,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pc"
 target_export = "Common_EventScript_BufferTrendyPhrase"
 target_offset = 249
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 249
 runtime_resolution_required = true
 
 [[relocs]]
@@ -528,6 +575,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_EventScript_ScreamTitle"
 target_offset = 312
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 311
 runtime_resolution_required = true
 
 [[relocs]]
@@ -538,6 +587,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_EventScript_ScreamTitle"
 target_offset = 312
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 311
 runtime_resolution_required = true
 
 [[relocs]]
@@ -548,6 +599,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_EventScript_SmileTitle"
 target_offset = 322
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 321
 runtime_resolution_required = true
 
 [[relocs]]
@@ -558,6 +611,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_EventScript_ScreamTitle"
 target_offset = 312
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 311
 runtime_resolution_required = true
 
 [[relocs]]
@@ -568,6 +623,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_EventScript_LastTitle"
 target_offset = 332
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 331
 runtime_resolution_required = true
 
 [[relocs]]
@@ -578,6 +635,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_EventScript_LastTitle"
 target_offset = 332
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 331
 runtime_resolution_required = true
 
 [[relocs]]
@@ -588,6 +647,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_EventScript_BirthTitle"
 target_offset = 342
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 341
 runtime_resolution_required = true
 
 [[relocs]]
@@ -598,6 +659,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_EventScript_LastTitle"
 target_offset = 332
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 331
 runtime_resolution_required = true
 
 [[relocs]]
@@ -607,6 +670,8 @@ original_encoded_gba = 0x81fdc05
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_Text_TrendsScream"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -616,6 +681,8 @@ original_encoded_gba = 0x81fdc21
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_Text_TrendsSmile"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -625,6 +692,8 @@ original_encoded_gba = 0x81fdc3c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_Text_LastTrend"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -634,6 +703,8 @@ original_encoded_gba = 0x81fdc57
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_Text_BirthOfTrend"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -644,6 +715,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_EventScript_DoTrendDebate"
 target_offset = 376
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 375
 runtime_resolution_required = true
 
 [[relocs]]
@@ -654,6 +727,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_EventScript_DoTrendDebate"
 target_offset = 376
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 375
 runtime_resolution_required = true
 
 [[relocs]]
@@ -664,6 +739,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pc"
 target_export = "Common_EventScript_BufferTrendyPhrase"
 target_offset = 249
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 249
 runtime_resolution_required = true
 
 [[relocs]]
@@ -674,6 +751,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_EventScript_TrendDebate1"
 target_offset = 478
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 477
 runtime_resolution_required = true
 
 [[relocs]]
@@ -684,6 +763,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_EventScript_TrendDebate1"
 target_offset = 478
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 477
 runtime_resolution_required = true
 
 [[relocs]]
@@ -694,6 +775,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_EventScript_TrendDebate2"
 target_offset = 506
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 505
 runtime_resolution_required = true
 
 [[relocs]]
@@ -704,6 +787,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_EventScript_TrendDebate2"
 target_offset = 506
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 505
 runtime_resolution_required = true
 
 [[relocs]]
@@ -714,6 +799,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_EventScript_TrendDebate3"
 target_offset = 534
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 533
 runtime_resolution_required = true
 
 [[relocs]]
@@ -724,6 +811,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_EventScript_TrendDebate3"
 target_offset = 534
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 533
 runtime_resolution_required = true
 
 [[relocs]]
@@ -734,6 +823,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_EventScript_TrendDebate4"
 target_offset = 562
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 561
 runtime_resolution_required = true
 
 [[relocs]]
@@ -744,6 +835,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_EventScript_TrendDebate5"
 target_offset = 590
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 589
 runtime_resolution_required = true
 
 [[relocs]]
@@ -754,6 +847,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_EventScript_DebateReact1"
 target_offset = 619
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 618
 runtime_resolution_required = true
 
 [[relocs]]
@@ -763,6 +858,8 @@ original_encoded_gba = 0x81fdc76
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_Text_SawTrendCoolestThing"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -773,6 +870,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_EventScript_DebateReact2"
 target_offset = 675
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 674
 runtime_resolution_required = true
 
 [[relocs]]
@@ -782,6 +881,8 @@ original_encoded_gba = 0x81fdce2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_Text_AllegedTrendNotAuthentic"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -792,6 +893,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_EventScript_DebateReact1"
 target_offset = 619
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 618
 runtime_resolution_required = true
 
 [[relocs]]
@@ -801,6 +904,8 @@ original_encoded_gba = 0x81fdd95
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_Text_ComposedTrendThemeSong"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -811,6 +916,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_EventScript_DebateReact2"
 target_offset = 675
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 674
 runtime_resolution_required = true
 
 [[relocs]]
@@ -820,6 +927,8 @@ original_encoded_gba = 0x81fde0e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_Text_WorkOnYourSinging"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -830,6 +939,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_EventScript_DebateReact1"
 target_offset = 619
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 618
 runtime_resolution_required = true
 
 [[relocs]]
@@ -839,6 +950,8 @@ original_encoded_gba = 0x81fde77
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_Text_OrganizeTrendParty"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -849,6 +962,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_EventScript_DebateReact2"
 target_offset = 675
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 674
 runtime_resolution_required = true
 
 [[relocs]]
@@ -858,6 +973,8 @@ original_encoded_gba = 0x81fded8
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_Text_BrilliantIndeed"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -868,6 +985,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_EventScript_DebateReact1"
 target_offset = 619
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 618
 runtime_resolution_required = true
 
 [[relocs]]
@@ -877,6 +996,8 @@ original_encoded_gba = 0x81fdf72
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_Text_TrendHasBecomePartOfLife"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -887,6 +1008,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_EventScript_DebateReact2"
 target_offset = 675
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 674
 runtime_resolution_required = true
 
 [[relocs]]
@@ -896,6 +1019,8 @@ original_encoded_gba = 0x81fdff1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_Text_TrendWeighsHeavilyOnMind"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -906,6 +1031,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_EventScript_DebateReact1"
 target_offset = 619
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 618
 runtime_resolution_required = true
 
 [[relocs]]
@@ -915,6 +1042,8 @@ original_encoded_gba = 0x81fe09a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_Text_IfWeTeamUpWellBeInvincible"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -925,6 +1054,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_EventScript_DebateReact2"
 target_offset = 675
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 674
 runtime_resolution_required = true
 
 [[relocs]]
@@ -934,6 +1065,8 @@ original_encoded_gba = 0x81fe0f2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_Text_WellBeTrendDuo"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -943,6 +1076,8 @@ original_encoded_gba = 0x81fd7d6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/dewfordtown-hall-movement-psychicwalkinplaceleft"
 target_export = "DewfordTown_Hall_Movement_PsychicWalkInPlaceLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -953,6 +1088,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_EventScript_PlayerReactWest"
 target_offset = 652
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 651
 runtime_resolution_required = true
 
 [[relocs]]
@@ -963,6 +1100,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_EventScript_DontMovePlayer2"
 target_offset = 674
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 673
 runtime_resolution_required = true
 
 [[relocs]]
@@ -973,6 +1112,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_EventScript_DontMovePlayer1"
 target_offset = 618
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 617
 runtime_resolution_required = true
 
 [[relocs]]
@@ -982,6 +1123,8 @@ original_encoded_gba = 0x82725a8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterright"
 target_export = "Common_Movement_WalkInPlaceFasterRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -991,6 +1134,8 @@ original_encoded_gba = 0x81fd7d8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/dewfordtown-hall-movement-schoolkidwalkinplaceright"
 target_export = "DewfordTown_Hall_Movement_SchoolKidWalkInPlaceRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1001,6 +1146,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_EventScript_PlayerReactNorthSouth"
 target_offset = 708
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 707
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1011,6 +1158,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_EventScript_PlayerReactEast"
 target_offset = 753
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 752
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1021,6 +1170,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_EventScript_PlayerWalkInPlaceUp"
 target_offset = 731
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 730
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1031,6 +1182,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_EventScript_PlayerWalkInPlaceDown"
 target_offset = 742
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 741
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1040,6 +1193,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1049,6 +1204,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1059,6 +1216,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_EventScript_DontMovePlayer1"
 target_offset = 618
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 617
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1068,6 +1227,8 @@ original_encoded_gba = 0x82725a4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterleft"
 target_export = "Common_Movement_WalkInPlaceFasterLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1078,6 +1239,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pc"
 target_export = "Common_EventScript_BufferTrendyPhrase"
 target_offset = 249
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 249
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1088,6 +1251,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_EventScript_ReceivedSludgeBomb"
 target_offset = 831
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 826
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1097,6 +1262,8 @@ original_encoded_gba = 0x81fe142
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_Text_GiveYouSludgeBomb"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1107,6 +1274,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_ShowBagIsFull"
 target_offset = 273
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 273
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1116,4 +1285,934 @@ original_encoded_gba = 0x81fe1ed
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/dewfordtown-hall"
 target_export = "DewfordTown_Hall_Text_LoveSludgeBombButTrendInToo"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 1
+
+[[boundaries]]
+payload_offset = 2
+length = 5
+
+[[boundaries]]
+payload_offset = 7
+length = 3
+
+[[boundaries]]
+payload_offset = 10
+length = 5
+
+[[boundaries]]
+payload_offset = 15
+length = 6
+
+[[boundaries]]
+payload_offset = 21
+length = 6
+
+[[boundaries]]
+payload_offset = 27
+length = 2
+
+[[boundaries]]
+payload_offset = 29
+length = 1
+
+[[boundaries]]
+payload_offset = 30
+length = 1
+
+[[boundaries]]
+payload_offset = 31
+length = 6
+
+[[boundaries]]
+payload_offset = 37
+length = 2
+
+[[boundaries]]
+payload_offset = 39
+length = 1
+
+[[boundaries]]
+payload_offset = 40
+length = 1
+
+[[boundaries]]
+payload_offset = 41
+length = 1
+
+[[boundaries]]
+payload_offset = 42
+length = 1
+
+[[boundaries]]
+payload_offset = 43
+length = 5
+
+[[boundaries]]
+payload_offset = 48
+length = 6
+
+[[boundaries]]
+payload_offset = 54
+length = 2
+
+[[boundaries]]
+payload_offset = 56
+length = 1
+
+[[boundaries]]
+payload_offset = 57
+length = 1
+
+[[boundaries]]
+payload_offset = 58
+length = 1
+
+[[boundaries]]
+payload_offset = 59
+length = 1
+
+[[boundaries]]
+payload_offset = 60
+length = 5
+
+[[boundaries]]
+payload_offset = 65
+length = 3
+
+[[boundaries]]
+payload_offset = 68
+length = 6
+
+[[boundaries]]
+payload_offset = 74
+length = 2
+
+[[boundaries]]
+payload_offset = 76
+length = 5
+
+[[boundaries]]
+payload_offset = 81
+length = 6
+
+[[boundaries]]
+payload_offset = 87
+length = 5
+
+[[boundaries]]
+payload_offset = 92
+length = 6
+
+[[boundaries]]
+payload_offset = 98
+length = 1
+
+[[boundaries]]
+payload_offset = 99
+length = 6
+
+[[boundaries]]
+payload_offset = 105
+length = 2
+
+[[boundaries]]
+payload_offset = 107
+length = 1
+
+[[boundaries]]
+payload_offset = 108
+length = 1
+
+[[boundaries]]
+payload_offset = 109
+length = 6
+
+[[boundaries]]
+payload_offset = 115
+length = 2
+
+[[boundaries]]
+payload_offset = 117
+length = 1
+
+[[boundaries]]
+payload_offset = 118
+length = 1
+
+[[boundaries]]
+payload_offset = 119
+length = 1
+
+[[boundaries]]
+payload_offset = 120
+length = 1
+
+[[boundaries]]
+payload_offset = 121
+length = 5
+
+[[boundaries]]
+payload_offset = 126
+length = 6
+
+[[boundaries]]
+payload_offset = 132
+length = 2
+
+[[boundaries]]
+payload_offset = 134
+length = 1
+
+[[boundaries]]
+payload_offset = 135
+length = 7
+
+[[boundaries]]
+payload_offset = 142
+length = 3
+
+[[boundaries]]
+payload_offset = 145
+length = 1
+
+[[boundaries]]
+payload_offset = 146
+length = 1
+
+[[boundaries]]
+payload_offset = 147
+length = 1
+
+[[boundaries]]
+payload_offset = 148
+length = 1
+
+[[boundaries]]
+payload_offset = 149
+length = 5
+
+[[boundaries]]
+payload_offset = 154
+length = 6
+
+[[boundaries]]
+payload_offset = 160
+length = 2
+
+[[boundaries]]
+payload_offset = 162
+length = 1
+
+[[boundaries]]
+payload_offset = 163
+length = 7
+
+[[boundaries]]
+payload_offset = 170
+length = 3
+
+[[boundaries]]
+payload_offset = 173
+length = 1
+
+[[boundaries]]
+payload_offset = 174
+length = 1
+
+[[boundaries]]
+payload_offset = 175
+length = 1
+
+[[boundaries]]
+payload_offset = 176
+length = 1
+
+[[boundaries]]
+payload_offset = 177
+length = 5
+
+[[boundaries]]
+payload_offset = 182
+length = 6
+
+[[boundaries]]
+payload_offset = 188
+length = 2
+
+[[boundaries]]
+payload_offset = 190
+length = 1
+
+[[boundaries]]
+payload_offset = 191
+length = 1
+
+[[boundaries]]
+payload_offset = 192
+length = 1
+
+[[boundaries]]
+payload_offset = 193
+length = 5
+
+[[boundaries]]
+payload_offset = 198
+length = 6
+
+[[boundaries]]
+payload_offset = 204
+length = 2
+
+[[boundaries]]
+payload_offset = 206
+length = 1
+
+[[boundaries]]
+payload_offset = 207
+length = 1
+
+[[boundaries]]
+payload_offset = 208
+length = 1
+
+[[boundaries]]
+payload_offset = 209
+length = 5
+
+[[boundaries]]
+payload_offset = 214
+length = 3
+
+[[boundaries]]
+payload_offset = 217
+length = 5
+
+[[boundaries]]
+payload_offset = 222
+length = 5
+
+[[boundaries]]
+payload_offset = 227
+length = 6
+
+[[boundaries]]
+payload_offset = 233
+length = 5
+
+[[boundaries]]
+payload_offset = 238
+length = 6
+
+[[boundaries]]
+payload_offset = 244
+length = 5
+
+[[boundaries]]
+payload_offset = 249
+length = 6
+
+[[boundaries]]
+payload_offset = 255
+length = 5
+
+[[boundaries]]
+payload_offset = 260
+length = 6
+
+[[boundaries]]
+payload_offset = 266
+length = 5
+
+[[boundaries]]
+payload_offset = 271
+length = 6
+
+[[boundaries]]
+payload_offset = 277
+length = 5
+
+[[boundaries]]
+payload_offset = 282
+length = 6
+
+[[boundaries]]
+payload_offset = 288
+length = 5
+
+[[boundaries]]
+payload_offset = 293
+length = 6
+
+[[boundaries]]
+payload_offset = 299
+length = 5
+
+[[boundaries]]
+payload_offset = 304
+length = 6
+
+[[boundaries]]
+payload_offset = 310
+length = 1
+
+[[boundaries]]
+payload_offset = 311
+length = 6
+
+[[boundaries]]
+payload_offset = 317
+length = 2
+
+[[boundaries]]
+payload_offset = 319
+length = 1
+
+[[boundaries]]
+payload_offset = 320
+length = 1
+
+[[boundaries]]
+payload_offset = 321
+length = 6
+
+[[boundaries]]
+payload_offset = 327
+length = 2
+
+[[boundaries]]
+payload_offset = 329
+length = 1
+
+[[boundaries]]
+payload_offset = 330
+length = 1
+
+[[boundaries]]
+payload_offset = 331
+length = 6
+
+[[boundaries]]
+payload_offset = 337
+length = 2
+
+[[boundaries]]
+payload_offset = 339
+length = 1
+
+[[boundaries]]
+payload_offset = 340
+length = 1
+
+[[boundaries]]
+payload_offset = 341
+length = 6
+
+[[boundaries]]
+payload_offset = 347
+length = 2
+
+[[boundaries]]
+payload_offset = 349
+length = 1
+
+[[boundaries]]
+payload_offset = 350
+length = 1
+
+[[boundaries]]
+payload_offset = 351
+length = 1
+
+[[boundaries]]
+payload_offset = 352
+length = 5
+
+[[boundaries]]
+payload_offset = 357
+length = 5
+
+[[boundaries]]
+payload_offset = 363
+length = 1
+
+[[boundaries]]
+payload_offset = 364
+length = 5
+
+[[boundaries]]
+payload_offset = 369
+length = 5
+
+[[boundaries]]
+payload_offset = 375
+length = 5
+
+[[boundaries]]
+payload_offset = 380
+length = 3
+
+[[boundaries]]
+payload_offset = 383
+length = 5
+
+[[boundaries]]
+payload_offset = 388
+length = 5
+
+[[boundaries]]
+payload_offset = 393
+length = 6
+
+[[boundaries]]
+payload_offset = 399
+length = 5
+
+[[boundaries]]
+payload_offset = 404
+length = 6
+
+[[boundaries]]
+payload_offset = 410
+length = 5
+
+[[boundaries]]
+payload_offset = 415
+length = 6
+
+[[boundaries]]
+payload_offset = 421
+length = 5
+
+[[boundaries]]
+payload_offset = 426
+length = 6
+
+[[boundaries]]
+payload_offset = 432
+length = 5
+
+[[boundaries]]
+payload_offset = 437
+length = 6
+
+[[boundaries]]
+payload_offset = 443
+length = 5
+
+[[boundaries]]
+payload_offset = 448
+length = 6
+
+[[boundaries]]
+payload_offset = 454
+length = 5
+
+[[boundaries]]
+payload_offset = 459
+length = 6
+
+[[boundaries]]
+payload_offset = 465
+length = 5
+
+[[boundaries]]
+payload_offset = 470
+length = 6
+
+[[boundaries]]
+payload_offset = 476
+length = 1
+
+[[boundaries]]
+payload_offset = 477
+length = 5
+
+[[boundaries]]
+payload_offset = 482
+length = 6
+
+[[boundaries]]
+payload_offset = 488
+length = 2
+
+[[boundaries]]
+payload_offset = 490
+length = 5
+
+[[boundaries]]
+payload_offset = 495
+length = 6
+
+[[boundaries]]
+payload_offset = 501
+length = 2
+
+[[boundaries]]
+payload_offset = 503
+length = 1
+
+[[boundaries]]
+payload_offset = 504
+length = 1
+
+[[boundaries]]
+payload_offset = 505
+length = 5
+
+[[boundaries]]
+payload_offset = 510
+length = 6
+
+[[boundaries]]
+payload_offset = 516
+length = 2
+
+[[boundaries]]
+payload_offset = 518
+length = 5
+
+[[boundaries]]
+payload_offset = 523
+length = 6
+
+[[boundaries]]
+payload_offset = 529
+length = 2
+
+[[boundaries]]
+payload_offset = 531
+length = 1
+
+[[boundaries]]
+payload_offset = 532
+length = 1
+
+[[boundaries]]
+payload_offset = 533
+length = 5
+
+[[boundaries]]
+payload_offset = 538
+length = 6
+
+[[boundaries]]
+payload_offset = 544
+length = 2
+
+[[boundaries]]
+payload_offset = 546
+length = 5
+
+[[boundaries]]
+payload_offset = 551
+length = 6
+
+[[boundaries]]
+payload_offset = 557
+length = 2
+
+[[boundaries]]
+payload_offset = 559
+length = 1
+
+[[boundaries]]
+payload_offset = 560
+length = 1
+
+[[boundaries]]
+payload_offset = 561
+length = 5
+
+[[boundaries]]
+payload_offset = 566
+length = 6
+
+[[boundaries]]
+payload_offset = 572
+length = 2
+
+[[boundaries]]
+payload_offset = 574
+length = 5
+
+[[boundaries]]
+payload_offset = 579
+length = 6
+
+[[boundaries]]
+payload_offset = 585
+length = 2
+
+[[boundaries]]
+payload_offset = 587
+length = 1
+
+[[boundaries]]
+payload_offset = 588
+length = 1
+
+[[boundaries]]
+payload_offset = 589
+length = 5
+
+[[boundaries]]
+payload_offset = 594
+length = 6
+
+[[boundaries]]
+payload_offset = 600
+length = 2
+
+[[boundaries]]
+payload_offset = 602
+length = 5
+
+[[boundaries]]
+payload_offset = 607
+length = 6
+
+[[boundaries]]
+payload_offset = 613
+length = 2
+
+[[boundaries]]
+payload_offset = 615
+length = 1
+
+[[boundaries]]
+payload_offset = 616
+length = 1
+
+[[boundaries]]
+payload_offset = 617
+length = 1
+
+[[boundaries]]
+payload_offset = 618
+length = 7
+
+[[boundaries]]
+payload_offset = 625
+length = 3
+
+[[boundaries]]
+payload_offset = 628
+length = 5
+
+[[boundaries]]
+payload_offset = 633
+length = 6
+
+[[boundaries]]
+payload_offset = 639
+length = 5
+
+[[boundaries]]
+payload_offset = 644
+length = 6
+
+[[boundaries]]
+payload_offset = 650
+length = 1
+
+[[boundaries]]
+payload_offset = 651
+length = 5
+
+[[boundaries]]
+payload_offset = 656
+length = 6
+
+[[boundaries]]
+payload_offset = 662
+length = 7
+
+[[boundaries]]
+payload_offset = 669
+length = 3
+
+[[boundaries]]
+payload_offset = 672
+length = 1
+
+[[boundaries]]
+payload_offset = 673
+length = 1
+
+[[boundaries]]
+payload_offset = 674
+length = 7
+
+[[boundaries]]
+payload_offset = 681
+length = 3
+
+[[boundaries]]
+payload_offset = 684
+length = 5
+
+[[boundaries]]
+payload_offset = 689
+length = 6
+
+[[boundaries]]
+payload_offset = 695
+length = 5
+
+[[boundaries]]
+payload_offset = 700
+length = 6
+
+[[boundaries]]
+payload_offset = 706
+length = 1
+
+[[boundaries]]
+payload_offset = 707
+length = 5
+
+[[boundaries]]
+payload_offset = 712
+length = 6
+
+[[boundaries]]
+payload_offset = 718
+length = 5
+
+[[boundaries]]
+payload_offset = 723
+length = 6
+
+[[boundaries]]
+payload_offset = 729
+length = 1
+
+[[boundaries]]
+payload_offset = 730
+length = 7
+
+[[boundaries]]
+payload_offset = 737
+length = 3
+
+[[boundaries]]
+payload_offset = 740
+length = 1
+
+[[boundaries]]
+payload_offset = 741
+length = 7
+
+[[boundaries]]
+payload_offset = 748
+length = 3
+
+[[boundaries]]
+payload_offset = 751
+length = 1
+
+[[boundaries]]
+payload_offset = 752
+length = 5
+
+[[boundaries]]
+payload_offset = 757
+length = 6
+
+[[boundaries]]
+payload_offset = 763
+length = 7
+
+[[boundaries]]
+payload_offset = 770
+length = 3
+
+[[boundaries]]
+payload_offset = 773
+length = 1
+
+[[boundaries]]
+payload_offset = 774
+length = 1
+
+[[boundaries]]
+payload_offset = 775
+length = 1
+
+[[boundaries]]
+payload_offset = 776
+length = 5
+
+[[boundaries]]
+payload_offset = 781
+length = 3
+
+[[boundaries]]
+payload_offset = 784
+length = 6
+
+[[boundaries]]
+payload_offset = 790
+length = 6
+
+[[boundaries]]
+payload_offset = 796
+length = 2
+
+[[boundaries]]
+payload_offset = 798
+length = 5
+
+[[boundaries]]
+payload_offset = 803
+length = 5
+
+[[boundaries]]
+payload_offset = 808
+length = 2
+
+[[boundaries]]
+payload_offset = 810
+length = 5
+
+[[boundaries]]
+payload_offset = 815
+length = 6
+
+[[boundaries]]
+payload_offset = 821
+length = 3
+
+[[boundaries]]
+payload_offset = 824
+length = 1
+
+[[boundaries]]
+payload_offset = 825
+length = 1
+
+[[boundaries]]
+payload_offset = 826
+length = 6
+
+[[boundaries]]
+payload_offset = 832
+length = 2
+
+[[boundaries]]
+payload_offset = 834
+length = 1
+
+[[boundaries]]
+payload_offset = 835
+length = 1

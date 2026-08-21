@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 4
 reloc_count = 4
+instruction_count = 9
 
 [[segments]]
 kind = "bytecode"
@@ -64,6 +65,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/cable-club"
 target_export = "CableClub_EventScript_Colosseum"
 target_offset = 1000
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 857
 runtime_resolution_required = true
 
 [[relocs]]
@@ -74,6 +77,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/cable-club"
 target_export = "CableClub_EventScript_TradeCenter"
 target_offset = 1507
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1364
 runtime_resolution_required = true
 
 [[relocs]]
@@ -84,6 +89,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/cable-club"
 target_export = "CableClub_EventScript_RecordCorner"
 target_offset = 1804
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1661
 runtime_resolution_required = true
 
 [[relocs]]
@@ -93,4 +100,42 @@ original_encoded_gba = 0x8222364
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-pokemoncenter-2f"
 target_export = "MossdeepCity_PokemonCenter_2F_Text_Woman5"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 5
+
+[[boundaries]]
+payload_offset = 5
+length = 1
+
+[[boundaries]]
+payload_offset = 6
+length = 5
+
+[[boundaries]]
+payload_offset = 11
+length = 1
+
+[[boundaries]]
+payload_offset = 12
+length = 5
+
+[[boundaries]]
+payload_offset = 17
+length = 1
+
+[[boundaries]]
+payload_offset = 18
+length = 6
+
+[[boundaries]]
+payload_offset = 24
+length = 2
+
+[[boundaries]]
+payload_offset = 26
+length = 1

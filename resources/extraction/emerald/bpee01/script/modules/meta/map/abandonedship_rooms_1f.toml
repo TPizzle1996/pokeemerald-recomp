@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 5
 reloc_count = 13
+instruction_count = 29
 
 [[segments]]
 kind = "bytecode"
@@ -71,6 +72,8 @@ original_encoded_gba = 0x8237b15
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/abandonedship-rooms-1f"
 target_export = "AbandonedShip_Rooms_1F_Text_TakingALookAround"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -80,6 +83,8 @@ original_encoded_gba = 0x8237d0c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/abandonedship-rooms-1f"
 target_export = "AbandonedShip_Rooms_1F_Text_DemetriusIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -89,6 +94,8 @@ original_encoded_gba = 0x8237d2a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/abandonedship-rooms-1f"
 target_export = "AbandonedShip_Rooms_1F_Text_DemetriusDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -98,6 +105,8 @@ original_encoded_gba = 0x8237d41
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/abandonedship-rooms-1f"
 target_export = "AbandonedShip_Rooms_1F_Text_DemetriusPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -107,6 +116,8 @@ original_encoded_gba = 0x8237b76
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/abandonedship-rooms-1f"
 target_export = "AbandonedShip_Rooms_1F_Text_ThaliaIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -116,6 +127,8 @@ original_encoded_gba = 0x8237bb8
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/abandonedship-rooms-1f"
 target_export = "AbandonedShip_Rooms_1F_Text_ThaliaDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -126,6 +139,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/abandonedship-rooms-1f"
 target_export = "AbandonedShip_Rooms_1F_EventScript_RegisterThalia"
 target_offset = 77
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 76
 runtime_resolution_required = true
 
 [[relocs]]
@@ -136,6 +151,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/abandonedship-rooms-1f"
 target_export = "AbandonedShip_Rooms_1F_EventScript_ThaliaRematch"
 target_offset = 108
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 107
 runtime_resolution_required = true
 
 [[relocs]]
@@ -145,6 +162,8 @@ original_encoded_gba = 0x8237bdb
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/abandonedship-rooms-1f"
 target_export = "AbandonedShip_Rooms_1F_Text_ThaliaPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -154,6 +173,8 @@ original_encoded_gba = 0x8237c2a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/abandonedship-rooms-1f"
 target_export = "AbandonedShip_Rooms_1F_Text_ThaliaRegister"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -163,6 +184,8 @@ original_encoded_gba = 0x8237c69
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/abandonedship-rooms-1f"
 target_export = "AbandonedShip_Rooms_1F_Text_ThaliaRematchIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -172,6 +195,8 @@ original_encoded_gba = 0x8237cb2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/abandonedship-rooms-1f"
 target_export = "AbandonedShip_Rooms_1F_Text_ThaliaRematchDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -181,4 +206,122 @@ original_encoded_gba = 0x8237cc9
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/abandonedship-rooms-1f"
 target_export = "AbandonedShip_Rooms_1F_Text_ThaliaPostRematch"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 6
+
+[[boundaries]]
+payload_offset = 6
+length = 2
+
+[[boundaries]]
+payload_offset = 8
+length = 1
+
+[[boundaries]]
+payload_offset = 9
+length = 14
+
+[[boundaries]]
+payload_offset = 23
+length = 6
+
+[[boundaries]]
+payload_offset = 29
+length = 2
+
+[[boundaries]]
+payload_offset = 31
+length = 1
+
+[[boundaries]]
+payload_offset = 32
+length = 18
+
+[[boundaries]]
+payload_offset = 50
+length = 5
+
+[[boundaries]]
+payload_offset = 55
+length = 5
+
+[[boundaries]]
+payload_offset = 60
+length = 6
+
+[[boundaries]]
+payload_offset = 66
+length = 6
+
+[[boundaries]]
+payload_offset = 72
+length = 2
+
+[[boundaries]]
+payload_offset = 74
+length = 1
+
+[[boundaries]]
+payload_offset = 75
+length = 1
+
+[[boundaries]]
+payload_offset = 76
+length = 3
+
+[[boundaries]]
+payload_offset = 79
+length = 3
+
+[[boundaries]]
+payload_offset = 82
+length = 6
+
+[[boundaries]]
+payload_offset = 88
+length = 2
+
+[[boundaries]]
+payload_offset = 90
+length = 5
+
+[[boundaries]]
+payload_offset = 95
+length = 3
+
+[[boundaries]]
+payload_offset = 98
+length = 5
+
+[[boundaries]]
+payload_offset = 103
+length = 2
+
+[[boundaries]]
+payload_offset = 105
+length = 1
+
+[[boundaries]]
+payload_offset = 106
+length = 1
+
+[[boundaries]]
+payload_offset = 107
+length = 14
+
+[[boundaries]]
+payload_offset = 121
+length = 6
+
+[[boundaries]]
+payload_offset = 127
+length = 2
+
+[[boundaries]]
+payload_offset = 129
+length = 1

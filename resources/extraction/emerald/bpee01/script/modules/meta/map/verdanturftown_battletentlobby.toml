@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 3
 export_count = 39
 reloc_count = 81
+instruction_count = 315
 
 [[segments]]
 kind = "bytecode"
@@ -355,6 +356,8 @@ original_encoded_gba = 0x824e636
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepalacelobby"
 target_export = "BattleFrontier_BattlePalaceLobby_Text_FailedToSaveBeforeEndingChallenge"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -364,6 +367,8 @@ original_encoded_gba = 0x82c5731
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/battle-tent"
 target_export = "VerdanturfTown_BattleTentLobby_Text_AchievedThreeWinStreak"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -373,6 +378,8 @@ original_encoded_gba = 0x82c5791
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/battle-tent"
 target_export = "VerdanturfTown_BattleTentLobby_Text_FeatWillBeRecorded"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -382,6 +389,8 @@ original_encoded_gba = 0x82c57cd
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/battle-tent"
 target_export = "VerdanturfTown_BattleTentLobby_Text_PresentYouWithPrize"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -392,6 +401,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-battletentlobby"
 target_export = "VerdanturfTown_BattleTentLobby_EventScript_NoRoomForPrize"
 target_offset = 269
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 206
 runtime_resolution_required = true
 
 [[relocs]]
@@ -401,6 +412,8 @@ original_encoded_gba = 0x824a554
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battledomelobby"
 target_export = "BattleFrontier_BattleDomeLobby_Text_ReceivedPrize"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -410,6 +423,8 @@ original_encoded_gba = 0x82c539a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/battle-tent"
 target_export = "VerdanturfTown_BattleTentLobby_Text_ReturnFortified"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -419,6 +434,8 @@ original_encoded_gba = 0x824e57b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepalacelobby"
 target_export = "BattleFrontier_BattlePalaceLobby_Text_NoSpaceForPrize"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -428,6 +445,8 @@ original_encoded_gba = 0x82c5731
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/battle-tent"
 target_export = "VerdanturfTown_BattleTentLobby_Text_AchievedThreeWinStreak"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -438,6 +457,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-battletentlobby"
 target_export = "VerdanturfTown_BattleTentLobby_EventScript_GivePrize"
 target_offset = 193
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 130
 runtime_resolution_required = true
 
 [[relocs]]
@@ -447,6 +468,8 @@ original_encoded_gba = 0x82c56b8
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/battle-tent"
 target_export = "VerdanturfTown_BattleTentLobby_Text_ResultsWillBeRecorded"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -456,6 +479,8 @@ original_encoded_gba = 0x82c539a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/battle-tent"
 target_export = "VerdanturfTown_BattleTentLobby_Text_ReturnFortified"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -465,6 +490,8 @@ original_encoded_gba = 0x824e5d8
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepalacelobby"
 target_export = "BattleFrontier_BattlePalaceLobby_Text_WeHaveBeenWaiting"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -474,6 +501,8 @@ original_encoded_gba = 0x824e5f6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepalacelobby"
 target_export = "BattleFrontier_BattlePalaceLobby_Text_MustSaveBeforeChallenge"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -484,6 +513,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-battletentlobby"
 target_export = "VerdanturfTown_BattleTentLobby_EventScript_EnterChallenge"
 target_offset = 734
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 671
 runtime_resolution_required = true
 
 [[relocs]]
@@ -494,6 +525,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-battletentlobby"
 target_export = "VerdanturfTown_BattleTentLobby_EventScript_PrizeWaiting"
 target_offset = 286
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 223
 runtime_resolution_required = true
 
 [[relocs]]
@@ -503,6 +536,8 @@ original_encoded_gba = 0x82c50c3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/battle-tent"
 target_export = "VerdanturfTown_BattleTentLobby_Text_WelcomeToBattleTent"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -512,6 +547,8 @@ original_encoded_gba = 0x82c5129
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/battle-tent"
 target_export = "VerdanturfTown_BattleTentLobby_Text_TakeChallenge"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -522,6 +559,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-battletentlobby"
 target_export = "VerdanturfTown_BattleTentLobby_EventScript_TryEnterChallenge"
 target_offset = 511
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 448
 runtime_resolution_required = true
 
 [[relocs]]
@@ -532,6 +571,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-battletentlobby"
 target_export = "VerdanturfTown_BattleTentLobby_EventScript_ExplainChallenge"
 target_offset = 779
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 716
 runtime_resolution_required = true
 
 [[relocs]]
@@ -542,6 +583,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-battletentlobby"
 target_export = "VerdanturfTown_BattleTentLobby_EventScript_CancelChallenge"
 target_offset = 871
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 808
 runtime_resolution_required = true
 
 [[relocs]]
@@ -552,6 +595,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-battletentlobby"
 target_export = "VerdanturfTown_BattleTentLobby_EventScript_CancelChallenge"
 target_offset = 871
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 808
 runtime_resolution_required = true
 
 [[relocs]]
@@ -562,6 +607,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-battletentlobby"
 target_export = "VerdanturfTown_BattleTentLobby_EventScript_NotEnoughValidMons"
 target_offset = 792
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 729
 runtime_resolution_required = true
 
 [[relocs]]
@@ -571,6 +618,8 @@ original_encoded_gba = 0x82c5633
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/battle-tent"
 target_export = "VerdanturfTown_BattleTentLobby_Text_SelectThreeMons"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -581,6 +630,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-battletentlobby"
 target_export = "VerdanturfTown_BattleTentLobby_EventScript_LoadPartyCancelChallenge"
 target_offset = 868
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 805
 runtime_resolution_required = true
 
 [[relocs]]
@@ -590,6 +641,8 @@ original_encoded_gba = 0x82c5662
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/battle-tent"
 target_export = "VerdanturfTown_BattleTentLobby_Text_SaveBeforeChallenge"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -600,6 +653,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-battletentlobby"
 target_export = "VerdanturfTown_BattleTentLobby_EventScript_LoadPartyCancelChallenge"
 target_offset = 868
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 805
 runtime_resolution_required = true
 
 [[relocs]]
@@ -610,6 +665,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-battletentlobby"
 target_export = "VerdanturfTown_BattleTentLobby_EventScript_SaveBeforeChallenge"
 target_offset = 644
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 581
 runtime_resolution_required = true
 
 [[relocs]]
@@ -620,6 +677,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-battletentlobby"
 target_export = "VerdanturfTown_BattleTentLobby_EventScript_LoadPartyCancelChallenge"
 target_offset = 868
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 805
 runtime_resolution_required = true
 
 [[relocs]]
@@ -630,6 +689,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/std-msgbox"
 target_export = "Common_EventScript_SaveGame"
 target_offset = 58
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 58
 runtime_resolution_required = true
 
 [[relocs]]
@@ -640,6 +701,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-battletentlobby"
 target_export = "VerdanturfTown_BattleTentLobby_EventScript_CancelChallengeSaveFailed"
 target_offset = 845
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 782
 runtime_resolution_required = true
 
 [[relocs]]
@@ -649,6 +712,8 @@ original_encoded_gba = 0x82c56a2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/battle-tent"
 target_export = "VerdanturfTown_BattleTentLobby_Text_NowFollowMe"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -659,6 +724,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-battletentlobby"
 target_export = "VerdanturfTown_BattleTentLobby_EventScript_WalkToDoor"
 target_offset = 881
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 818
 runtime_resolution_required = true
 
 [[relocs]]
@@ -668,6 +735,8 @@ original_encoded_gba = 0x82c5163
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/battle-tent"
 target_export = "VerdanturfTown_BattleTentLobby_Text_ExplainVerdanturfTent"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -678,6 +747,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-battletentlobby"
 target_export = "VerdanturfTown_BattleTentLobby_EventScript_AskEnterChallenge"
 target_offset = 451
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 388
 runtime_resolution_required = true
 
 [[relocs]]
@@ -688,6 +759,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-battletentlobby"
 target_export = "VerdanturfTown_BattleTentLobby_EventScript_NotEnoughValidMonsLv50"
 target_offset = 819
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 756
 runtime_resolution_required = true
 
 [[relocs]]
@@ -698,6 +771,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-battletentlobby"
 target_export = "VerdanturfTown_BattleTentLobby_EventScript_NotEnoughValidMonsLvOpen"
 target_offset = 832
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 769
 runtime_resolution_required = true
 
 [[relocs]]
@@ -707,6 +782,8 @@ original_encoded_gba = 0x82c543d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/battle-tent"
 target_export = "VerdanturfTown_BattleTentLobby_Text_NotEnoughValidMonsLv50"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -717,6 +794,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-battletentlobby"
 target_export = "VerdanturfTown_BattleTentLobby_EventScript_EndCancelChallenge"
 target_offset = 879
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 816
 runtime_resolution_required = true
 
 [[relocs]]
@@ -726,6 +805,8 @@ original_encoded_gba = 0x82c5538
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/battle-tent"
 target_export = "VerdanturfTown_BattleTentLobby_Text_NotEnoughValidMonsLvOpen"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -736,6 +817,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-battletentlobby"
 target_export = "VerdanturfTown_BattleTentLobby_EventScript_EndCancelChallenge"
 target_offset = 879
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 816
 runtime_resolution_required = true
 
 [[relocs]]
@@ -746,6 +829,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-battletentlobby"
 target_export = "VerdanturfTown_BattleTentLobby_EventScript_CancelChallenge"
 target_offset = 871
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 808
 runtime_resolution_required = true
 
 [[relocs]]
@@ -755,6 +840,8 @@ original_encoded_gba = 0x82c539a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/battle-tent"
 target_export = "VerdanturfTown_BattleTentLobby_Text_ReturnFortified"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -764,6 +851,8 @@ original_encoded_gba = 0x8201a70
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/verdanturftown-battletentlobby-movement-walktodoor"
 target_export = "VerdanturfTown_BattleTentLobby_Movement_WalkToDoor"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -773,6 +862,8 @@ original_encoded_gba = 0x8201a70
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/verdanturftown-battletentlobby-movement-walktodoor"
 target_export = "VerdanturfTown_BattleTentLobby_Movement_WalkToDoor"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -782,6 +873,8 @@ original_encoded_gba = 0x8201a74
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/verdanturftown-battletentlobby-movement-attendantenterdoor"
 target_export = "VerdanturfTown_BattleTentLobby_Movement_AttendantEnterDoor"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -791,6 +884,8 @@ original_encoded_gba = 0x8201a77
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/verdanturftown-battletentlobby-movement-playerenterdoor"
 target_export = "VerdanturfTown_BattleTentLobby_Movement_PlayerEnterDoor"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -801,6 +896,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-battletentlobby"
 target_export = "VerdanturfTown_BattleTentLobby_EventScript_ReceivedAttract"
 target_offset = 994
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 920
 runtime_resolution_required = true
 
 [[relocs]]
@@ -810,6 +907,8 @@ original_encoded_gba = 0x8201d9e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/verdanturftown-battletentlobby"
 target_export = "VerdanturfTown_BattleTentLobby_Text_AttractionRunsDeep"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -820,6 +919,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_ShowBagIsFull"
 target_offset = 273
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 273
 runtime_resolution_required = true
 
 [[relocs]]
@@ -829,6 +930,8 @@ original_encoded_gba = 0x8201e43
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/verdanturftown-battletentlobby"
 target_export = "VerdanturfTown_BattleTentLobby_Text_AttractionMutual"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -838,6 +941,8 @@ original_encoded_gba = 0x8201e43
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/verdanturftown-battletentlobby"
 target_export = "VerdanturfTown_BattleTentLobby_Text_AttractionMutual"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -847,6 +952,8 @@ original_encoded_gba = 0x8201eb1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/verdanturftown-battletentlobby"
 target_export = "VerdanturfTown_BattleTentLobby_Text_TaughtWhatKindsOfMoves"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -856,6 +963,8 @@ original_encoded_gba = 0x8201bd4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/verdanturftown-battletentlobby"
 target_export = "VerdanturfTown_BattleTentLobby_Text_MonsReluctantToUseDislikedMoves"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -866,6 +975,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-battletentlobby"
 target_export = "VerdanturfTown_BattleTentLobby_EventScript_ScottAlreadySpokenTo"
 target_offset = 1053
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 979
 runtime_resolution_required = true
 
 [[relocs]]
@@ -875,6 +986,8 @@ original_encoded_gba = 0x8201f3f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/verdanturftown-battletentlobby"
 target_export = "VerdanturfTown_BattleTentLobby_Text_ScottCanMeetToughTrainers"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -884,6 +997,8 @@ original_encoded_gba = 0x8202025
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/verdanturftown-battletentlobby"
 target_export = "VerdanturfTown_BattleTentLobby_Text_ScottVisitRegularly"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -893,6 +1008,8 @@ original_encoded_gba = 0x8201d11
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/verdanturftown-battletentlobby"
 target_export = "VerdanturfTown_BattleTentLobby_Text_GentleMonsScaryIfAngry"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -902,6 +1019,8 @@ original_encoded_gba = 0x82c6878
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/battle-tent"
 target_export = "VerdanturfTown_BattleTentLobby_Text_RulesAreListed"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -912,6 +1031,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-battletentlobby"
 target_export = "VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard"
 target_offset = 1089
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1015
 runtime_resolution_required = true
 
 [[relocs]]
@@ -921,6 +1042,8 @@ original_encoded_gba = 0x824ef88
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepalacelobby"
 target_export = "BattleFrontier_BattlePalaceLobby_Text_ReadWhichHeading"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -931,6 +1054,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-battletentlobby"
 target_export = "VerdanturfTown_BattleTentLobby_EventScript_RulesLevel"
 target_offset = 1198
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1124
 runtime_resolution_required = true
 
 [[relocs]]
@@ -941,6 +1066,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-battletentlobby"
 target_export = "VerdanturfTown_BattleTentLobby_EventScript_RulesBasics"
 target_offset = 1212
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1138
 runtime_resolution_required = true
 
 [[relocs]]
@@ -951,6 +1078,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-battletentlobby"
 target_export = "VerdanturfTown_BattleTentLobby_EventScript_RulesNature"
 target_offset = 1226
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1152
 runtime_resolution_required = true
 
 [[relocs]]
@@ -961,6 +1090,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-battletentlobby"
 target_export = "VerdanturfTown_BattleTentLobby_EventScript_RulesMoves"
 target_offset = 1240
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1166
 runtime_resolution_required = true
 
 [[relocs]]
@@ -971,6 +1102,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-battletentlobby"
 target_export = "VerdanturfTown_BattleTentLobby_EventScript_RulesUnderpowered"
 target_offset = 1254
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1180
 runtime_resolution_required = true
 
 [[relocs]]
@@ -981,6 +1114,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-battletentlobby"
 target_export = "VerdanturfTown_BattleTentLobby_EventScript_RulesWhenInDanger"
 target_offset = 1268
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1194
 runtime_resolution_required = true
 
 [[relocs]]
@@ -991,6 +1126,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-battletentlobby"
 target_export = "VerdanturfTown_BattleTentLobby_EventScript_ExitRules"
 target_offset = 1282
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1208
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1001,6 +1138,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-battletentlobby"
 target_export = "VerdanturfTown_BattleTentLobby_EventScript_ExitRules"
 target_offset = 1282
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1208
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1010,6 +1149,8 @@ original_encoded_gba = 0x82c67cd
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/battle-tent"
 target_export = "BattleTentLobby_Text_ExplainLevelRules"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1020,6 +1161,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-battletentlobby"
 target_export = "VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard"
 target_offset = 1089
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1015
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1029,6 +1172,8 @@ original_encoded_gba = 0x824efab
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepalacelobby"
 target_export = "BattleFrontier_BattlePalaceLobby_Text_ExplainRulesBasics"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1039,6 +1184,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-battletentlobby"
 target_export = "VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard"
 target_offset = 1089
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1015
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1048,6 +1195,8 @@ original_encoded_gba = 0x824f049
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepalacelobby"
 target_export = "BattleFrontier_BattlePalaceLobby_Text_ExplainRulesNature"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1058,6 +1207,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-battletentlobby"
 target_export = "VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard"
 target_offset = 1089
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1015
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1067,6 +1218,8 @@ original_encoded_gba = 0x824f190
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepalacelobby"
 target_export = "BattleFrontier_BattlePalaceLobby_Text_ExplainRulesMoves"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1077,6 +1230,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-battletentlobby"
 target_export = "VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard"
 target_offset = 1089
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1015
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1086,6 +1241,8 @@ original_encoded_gba = 0x824f2e8
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepalacelobby"
 target_export = "BattleFrontier_BattlePalaceLobby_Text_ExplainRulesUnderpowered"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1096,6 +1253,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-battletentlobby"
 target_export = "VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard"
 target_offset = 1089
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1015
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1105,6 +1264,8 @@ original_encoded_gba = 0x824f3f4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepalacelobby"
 target_export = "BattleFrontier_BattlePalaceLobby_Text_ExplainRulesWhenInDanger"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1115,4 +1276,1266 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-battletentlobby"
 target_export = "VerdanturfTown_BattleTentLobby_EventScript_ReadRulesBoard"
 target_offset = 1089
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1015
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 5
+
+[[boundaries]]
+payload_offset = 5
+length = 4
+
+[[boundaries]]
+payload_offset = 9
+length = 1
+
+[[boundaries]]
+payload_offset = 10
+length = 5
+
+[[boundaries]]
+payload_offset = 15
+length = 3
+
+[[boundaries]]
+payload_offset = 18
+length = 1
+
+[[boundaries]]
+payload_offset = 19
+length = 1
+
+[[boundaries]]
+payload_offset = 20
+length = 6
+
+[[boundaries]]
+payload_offset = 26
+length = 2
+
+[[boundaries]]
+payload_offset = 28
+length = 1
+
+[[boundaries]]
+payload_offset = 29
+length = 5
+
+[[boundaries]]
+payload_offset = 34
+length = 5
+
+[[boundaries]]
+payload_offset = 39
+length = 5
+
+[[boundaries]]
+payload_offset = 44
+length = 3
+
+[[boundaries]]
+payload_offset = 47
+length = 5
+
+[[boundaries]]
+payload_offset = 52
+length = 5
+
+[[boundaries]]
+payload_offset = 57
+length = 5
+
+[[boundaries]]
+payload_offset = 62
+length = 5
+
+[[boundaries]]
+payload_offset = 67
+length = 3
+
+[[boundaries]]
+payload_offset = 70
+length = 1
+
+[[boundaries]]
+payload_offset = 71
+length = 1
+
+[[boundaries]]
+payload_offset = 72
+length = 1
+
+[[boundaries]]
+payload_offset = 73
+length = 6
+
+[[boundaries]]
+payload_offset = 79
+length = 2
+
+[[boundaries]]
+payload_offset = 81
+length = 5
+
+[[boundaries]]
+payload_offset = 86
+length = 1
+
+[[boundaries]]
+payload_offset = 87
+length = 5
+
+[[boundaries]]
+payload_offset = 92
+length = 3
+
+[[boundaries]]
+payload_offset = 95
+length = 5
+
+[[boundaries]]
+payload_offset = 100
+length = 5
+
+[[boundaries]]
+payload_offset = 105
+length = 5
+
+[[boundaries]]
+payload_offset = 110
+length = 3
+
+[[boundaries]]
+payload_offset = 113
+length = 5
+
+[[boundaries]]
+payload_offset = 118
+length = 5
+
+[[boundaries]]
+payload_offset = 123
+length = 3
+
+[[boundaries]]
+payload_offset = 126
+length = 3
+
+[[boundaries]]
+payload_offset = 129
+length = 1
+
+[[boundaries]]
+payload_offset = 130
+length = 6
+
+[[boundaries]]
+payload_offset = 136
+length = 2
+
+[[boundaries]]
+payload_offset = 138
+length = 5
+
+[[boundaries]]
+payload_offset = 143
+length = 3
+
+[[boundaries]]
+payload_offset = 146
+length = 5
+
+[[boundaries]]
+payload_offset = 151
+length = 5
+
+[[boundaries]]
+payload_offset = 156
+length = 6
+
+[[boundaries]]
+payload_offset = 162
+length = 5
+
+[[boundaries]]
+payload_offset = 167
+length = 5
+
+[[boundaries]]
+payload_offset = 172
+length = 5
+
+[[boundaries]]
+payload_offset = 177
+length = 3
+
+[[boundaries]]
+payload_offset = 180
+length = 5
+
+[[boundaries]]
+payload_offset = 185
+length = 1
+
+[[boundaries]]
+payload_offset = 186
+length = 3
+
+[[boundaries]]
+payload_offset = 189
+length = 1
+
+[[boundaries]]
+payload_offset = 190
+length = 6
+
+[[boundaries]]
+payload_offset = 196
+length = 2
+
+[[boundaries]]
+payload_offset = 198
+length = 1
+
+[[boundaries]]
+payload_offset = 199
+length = 5
+
+[[boundaries]]
+payload_offset = 204
+length = 1
+
+[[boundaries]]
+payload_offset = 205
+length = 1
+
+[[boundaries]]
+payload_offset = 206
+length = 6
+
+[[boundaries]]
+payload_offset = 212
+length = 2
+
+[[boundaries]]
+payload_offset = 214
+length = 1
+
+[[boundaries]]
+payload_offset = 215
+length = 1
+
+[[boundaries]]
+payload_offset = 216
+length = 5
+
+[[boundaries]]
+payload_offset = 221
+length = 1
+
+[[boundaries]]
+payload_offset = 222
+length = 1
+
+[[boundaries]]
+payload_offset = 223
+length = 1
+
+[[boundaries]]
+payload_offset = 224
+length = 6
+
+[[boundaries]]
+payload_offset = 230
+length = 2
+
+[[boundaries]]
+payload_offset = 232
+length = 5
+
+[[boundaries]]
+payload_offset = 238
+length = 1
+
+[[boundaries]]
+payload_offset = 239
+length = 5
+
+[[boundaries]]
+payload_offset = 244
+length = 1
+
+[[boundaries]]
+payload_offset = 245
+length = 5
+
+[[boundaries]]
+payload_offset = 250
+length = 5
+
+[[boundaries]]
+payload_offset = 255
+length = 5
+
+[[boundaries]]
+payload_offset = 260
+length = 3
+
+[[boundaries]]
+payload_offset = 263
+length = 5
+
+[[boundaries]]
+payload_offset = 268
+length = 5
+
+[[boundaries]]
+payload_offset = 273
+length = 3
+
+[[boundaries]]
+payload_offset = 276
+length = 3
+
+[[boundaries]]
+payload_offset = 279
+length = 1
+
+[[boundaries]]
+payload_offset = 280
+length = 6
+
+[[boundaries]]
+payload_offset = 286
+length = 2
+
+[[boundaries]]
+payload_offset = 288
+length = 1
+
+[[boundaries]]
+payload_offset = 289
+length = 5
+
+[[boundaries]]
+payload_offset = 294
+length = 1
+
+[[boundaries]]
+payload_offset = 295
+length = 1
+
+[[boundaries]]
+payload_offset = 296
+length = 1
+
+[[boundaries]]
+payload_offset = 297
+length = 6
+
+[[boundaries]]
+payload_offset = 303
+length = 2
+
+[[boundaries]]
+payload_offset = 305
+length = 5
+
+[[boundaries]]
+payload_offset = 310
+length = 1
+
+[[boundaries]]
+payload_offset = 311
+length = 5
+
+[[boundaries]]
+payload_offset = 316
+length = 5
+
+[[boundaries]]
+payload_offset = 321
+length = 3
+
+[[boundaries]]
+payload_offset = 324
+length = 3
+
+[[boundaries]]
+payload_offset = 327
+length = 1
+
+[[boundaries]]
+payload_offset = 328
+length = 5
+
+[[boundaries]]
+payload_offset = 333
+length = 5
+
+[[boundaries]]
+payload_offset = 338
+length = 5
+
+[[boundaries]]
+payload_offset = 343
+length = 3
+
+[[boundaries]]
+payload_offset = 346
+length = 5
+
+[[boundaries]]
+payload_offset = 351
+length = 5
+
+[[boundaries]]
+payload_offset = 356
+length = 1
+
+[[boundaries]]
+payload_offset = 357
+length = 1
+
+[[boundaries]]
+payload_offset = 358
+length = 5
+
+[[boundaries]]
+payload_offset = 363
+length = 3
+
+[[boundaries]]
+payload_offset = 366
+length = 5
+
+[[boundaries]]
+payload_offset = 371
+length = 6
+
+[[boundaries]]
+payload_offset = 377
+length = 3
+
+[[boundaries]]
+payload_offset = 380
+length = 6
+
+[[boundaries]]
+payload_offset = 386
+length = 2
+
+[[boundaries]]
+payload_offset = 388
+length = 5
+
+[[boundaries]]
+payload_offset = 393
+length = 1
+
+[[boundaries]]
+payload_offset = 394
+length = 5
+
+[[boundaries]]
+payload_offset = 399
+length = 5
+
+[[boundaries]]
+payload_offset = 404
+length = 5
+
+[[boundaries]]
+payload_offset = 409
+length = 6
+
+[[boundaries]]
+payload_offset = 415
+length = 5
+
+[[boundaries]]
+payload_offset = 420
+length = 6
+
+[[boundaries]]
+payload_offset = 426
+length = 5
+
+[[boundaries]]
+payload_offset = 431
+length = 6
+
+[[boundaries]]
+payload_offset = 437
+length = 5
+
+[[boundaries]]
+payload_offset = 442
+length = 6
+
+[[boundaries]]
+payload_offset = 448
+length = 5
+
+[[boundaries]]
+payload_offset = 453
+length = 5
+
+[[boundaries]]
+payload_offset = 458
+length = 5
+
+[[boundaries]]
+payload_offset = 463
+length = 5
+
+[[boundaries]]
+payload_offset = 468
+length = 3
+
+[[boundaries]]
+payload_offset = 471
+length = 5
+
+[[boundaries]]
+payload_offset = 476
+length = 6
+
+[[boundaries]]
+payload_offset = 482
+length = 5
+
+[[boundaries]]
+payload_offset = 487
+length = 5
+
+[[boundaries]]
+payload_offset = 492
+length = 5
+
+[[boundaries]]
+payload_offset = 497
+length = 3
+
+[[boundaries]]
+payload_offset = 500
+length = 6
+
+[[boundaries]]
+payload_offset = 506
+length = 2
+
+[[boundaries]]
+payload_offset = 508
+length = 2
+
+[[boundaries]]
+payload_offset = 510
+length = 5
+
+[[boundaries]]
+payload_offset = 515
+length = 5
+
+[[boundaries]]
+payload_offset = 520
+length = 3
+
+[[boundaries]]
+payload_offset = 523
+length = 1
+
+[[boundaries]]
+payload_offset = 524
+length = 5
+
+[[boundaries]]
+payload_offset = 529
+length = 6
+
+[[boundaries]]
+payload_offset = 535
+length = 6
+
+[[boundaries]]
+payload_offset = 541
+length = 2
+
+[[boundaries]]
+payload_offset = 543
+length = 5
+
+[[boundaries]]
+payload_offset = 548
+length = 5
+
+[[boundaries]]
+payload_offset = 553
+length = 6
+
+[[boundaries]]
+payload_offset = 559
+length = 5
+
+[[boundaries]]
+payload_offset = 564
+length = 6
+
+[[boundaries]]
+payload_offset = 570
+length = 5
+
+[[boundaries]]
+payload_offset = 575
+length = 6
+
+[[boundaries]]
+payload_offset = 581
+length = 5
+
+[[boundaries]]
+payload_offset = 586
+length = 5
+
+[[boundaries]]
+payload_offset = 591
+length = 5
+
+[[boundaries]]
+payload_offset = 596
+length = 3
+
+[[boundaries]]
+payload_offset = 599
+length = 5
+
+[[boundaries]]
+payload_offset = 604
+length = 3
+
+[[boundaries]]
+payload_offset = 607
+length = 5
+
+[[boundaries]]
+payload_offset = 612
+length = 5
+
+[[boundaries]]
+payload_offset = 617
+length = 5
+
+[[boundaries]]
+payload_offset = 622
+length = 3
+
+[[boundaries]]
+payload_offset = 625
+length = 5
+
+[[boundaries]]
+payload_offset = 630
+length = 5
+
+[[boundaries]]
+payload_offset = 635
+length = 5
+
+[[boundaries]]
+payload_offset = 640
+length = 3
+
+[[boundaries]]
+payload_offset = 643
+length = 3
+
+[[boundaries]]
+payload_offset = 646
+length = 1
+
+[[boundaries]]
+payload_offset = 647
+length = 3
+
+[[boundaries]]
+payload_offset = 650
+length = 5
+
+[[boundaries]]
+payload_offset = 655
+length = 5
+
+[[boundaries]]
+payload_offset = 660
+length = 5
+
+[[boundaries]]
+payload_offset = 665
+length = 6
+
+[[boundaries]]
+payload_offset = 671
+length = 3
+
+[[boundaries]]
+payload_offset = 674
+length = 5
+
+[[boundaries]]
+payload_offset = 679
+length = 5
+
+[[boundaries]]
+payload_offset = 684
+length = 3
+
+[[boundaries]]
+payload_offset = 687
+length = 6
+
+[[boundaries]]
+payload_offset = 693
+length = 2
+
+[[boundaries]]
+payload_offset = 695
+length = 1
+
+[[boundaries]]
+payload_offset = 696
+length = 5
+
+[[boundaries]]
+payload_offset = 701
+length = 8
+
+[[boundaries]]
+payload_offset = 709
+length = 5
+
+[[boundaries]]
+payload_offset = 714
+length = 1
+
+[[boundaries]]
+payload_offset = 715
+length = 1
+
+[[boundaries]]
+payload_offset = 716
+length = 6
+
+[[boundaries]]
+payload_offset = 722
+length = 2
+
+[[boundaries]]
+payload_offset = 724
+length = 5
+
+[[boundaries]]
+payload_offset = 729
+length = 5
+
+[[boundaries]]
+payload_offset = 734
+length = 5
+
+[[boundaries]]
+payload_offset = 739
+length = 6
+
+[[boundaries]]
+payload_offset = 745
+length = 5
+
+[[boundaries]]
+payload_offset = 750
+length = 6
+
+[[boundaries]]
+payload_offset = 756
+length = 6
+
+[[boundaries]]
+payload_offset = 762
+length = 2
+
+[[boundaries]]
+payload_offset = 764
+length = 5
+
+[[boundaries]]
+payload_offset = 769
+length = 6
+
+[[boundaries]]
+payload_offset = 775
+length = 2
+
+[[boundaries]]
+payload_offset = 777
+length = 5
+
+[[boundaries]]
+payload_offset = 782
+length = 5
+
+[[boundaries]]
+payload_offset = 787
+length = 5
+
+[[boundaries]]
+payload_offset = 792
+length = 5
+
+[[boundaries]]
+payload_offset = 797
+length = 3
+
+[[boundaries]]
+payload_offset = 800
+length = 5
+
+[[boundaries]]
+payload_offset = 805
+length = 3
+
+[[boundaries]]
+payload_offset = 808
+length = 6
+
+[[boundaries]]
+payload_offset = 814
+length = 2
+
+[[boundaries]]
+payload_offset = 816
+length = 1
+
+[[boundaries]]
+payload_offset = 817
+length = 1
+
+[[boundaries]]
+payload_offset = 818
+length = 7
+
+[[boundaries]]
+payload_offset = 825
+length = 7
+
+[[boundaries]]
+payload_offset = 832
+length = 3
+
+[[boundaries]]
+payload_offset = 835
+length = 5
+
+[[boundaries]]
+payload_offset = 840
+length = 1
+
+[[boundaries]]
+payload_offset = 841
+length = 7
+
+[[boundaries]]
+payload_offset = 848
+length = 7
+
+[[boundaries]]
+payload_offset = 855
+length = 3
+
+[[boundaries]]
+payload_offset = 858
+length = 5
+
+[[boundaries]]
+payload_offset = 863
+length = 1
+
+[[boundaries]]
+payload_offset = 864
+length = 1
+
+[[boundaries]]
+payload_offset = 865
+length = 1
+
+[[boundaries]]
+payload_offset = 866
+length = 1
+
+[[boundaries]]
+payload_offset = 867
+length = 3
+
+[[boundaries]]
+payload_offset = 870
+length = 6
+
+[[boundaries]]
+payload_offset = 876
+length = 6
+
+[[boundaries]]
+payload_offset = 882
+length = 2
+
+[[boundaries]]
+payload_offset = 884
+length = 5
+
+[[boundaries]]
+payload_offset = 889
+length = 5
+
+[[boundaries]]
+payload_offset = 894
+length = 2
+
+[[boundaries]]
+payload_offset = 896
+length = 5
+
+[[boundaries]]
+payload_offset = 901
+length = 6
+
+[[boundaries]]
+payload_offset = 907
+length = 3
+
+[[boundaries]]
+payload_offset = 910
+length = 6
+
+[[boundaries]]
+payload_offset = 916
+length = 2
+
+[[boundaries]]
+payload_offset = 918
+length = 1
+
+[[boundaries]]
+payload_offset = 919
+length = 1
+
+[[boundaries]]
+payload_offset = 920
+length = 6
+
+[[boundaries]]
+payload_offset = 926
+length = 2
+
+[[boundaries]]
+payload_offset = 928
+length = 1
+
+[[boundaries]]
+payload_offset = 929
+length = 1
+
+[[boundaries]]
+payload_offset = 930
+length = 6
+
+[[boundaries]]
+payload_offset = 936
+length = 2
+
+[[boundaries]]
+payload_offset = 938
+length = 1
+
+[[boundaries]]
+payload_offset = 939
+length = 1
+
+[[boundaries]]
+payload_offset = 940
+length = 6
+
+[[boundaries]]
+payload_offset = 946
+length = 2
+
+[[boundaries]]
+payload_offset = 948
+length = 1
+
+[[boundaries]]
+payload_offset = 949
+length = 1
+
+[[boundaries]]
+payload_offset = 950
+length = 1
+
+[[boundaries]]
+payload_offset = 951
+length = 1
+
+[[boundaries]]
+payload_offset = 952
+length = 3
+
+[[boundaries]]
+payload_offset = 955
+length = 6
+
+[[boundaries]]
+payload_offset = 961
+length = 6
+
+[[boundaries]]
+payload_offset = 967
+length = 2
+
+[[boundaries]]
+payload_offset = 969
+length = 5
+
+[[boundaries]]
+payload_offset = 974
+length = 3
+
+[[boundaries]]
+payload_offset = 977
+length = 1
+
+[[boundaries]]
+payload_offset = 978
+length = 1
+
+[[boundaries]]
+payload_offset = 979
+length = 6
+
+[[boundaries]]
+payload_offset = 985
+length = 2
+
+[[boundaries]]
+payload_offset = 987
+length = 1
+
+[[boundaries]]
+payload_offset = 988
+length = 1
+
+[[boundaries]]
+payload_offset = 989
+length = 1
+
+[[boundaries]]
+payload_offset = 990
+length = 6
+
+[[boundaries]]
+payload_offset = 996
+length = 2
+
+[[boundaries]]
+payload_offset = 998
+length = 1
+
+[[boundaries]]
+payload_offset = 999
+length = 1
+
+[[boundaries]]
+payload_offset = 1000
+length = 1
+
+[[boundaries]]
+payload_offset = 1001
+length = 6
+
+[[boundaries]]
+payload_offset = 1007
+length = 2
+
+[[boundaries]]
+payload_offset = 1009
+length = 5
+
+[[boundaries]]
+payload_offset = 1015
+length = 5
+
+[[boundaries]]
+payload_offset = 1020
+length = 1
+
+[[boundaries]]
+payload_offset = 1021
+length = 5
+
+[[boundaries]]
+payload_offset = 1026
+length = 3
+
+[[boundaries]]
+payload_offset = 1029
+length = 1
+
+[[boundaries]]
+payload_offset = 1030
+length = 5
+
+[[boundaries]]
+payload_offset = 1035
+length = 5
+
+[[boundaries]]
+payload_offset = 1040
+length = 6
+
+[[boundaries]]
+payload_offset = 1046
+length = 5
+
+[[boundaries]]
+payload_offset = 1051
+length = 6
+
+[[boundaries]]
+payload_offset = 1057
+length = 5
+
+[[boundaries]]
+payload_offset = 1062
+length = 6
+
+[[boundaries]]
+payload_offset = 1068
+length = 5
+
+[[boundaries]]
+payload_offset = 1073
+length = 6
+
+[[boundaries]]
+payload_offset = 1079
+length = 5
+
+[[boundaries]]
+payload_offset = 1084
+length = 6
+
+[[boundaries]]
+payload_offset = 1090
+length = 5
+
+[[boundaries]]
+payload_offset = 1095
+length = 6
+
+[[boundaries]]
+payload_offset = 1101
+length = 5
+
+[[boundaries]]
+payload_offset = 1106
+length = 6
+
+[[boundaries]]
+payload_offset = 1112
+length = 5
+
+[[boundaries]]
+payload_offset = 1117
+length = 6
+
+[[boundaries]]
+payload_offset = 1123
+length = 1
+
+[[boundaries]]
+payload_offset = 1124
+length = 6
+
+[[boundaries]]
+payload_offset = 1130
+length = 2
+
+[[boundaries]]
+payload_offset = 1132
+length = 5
+
+[[boundaries]]
+payload_offset = 1138
+length = 6
+
+[[boundaries]]
+payload_offset = 1144
+length = 2
+
+[[boundaries]]
+payload_offset = 1146
+length = 5
+
+[[boundaries]]
+payload_offset = 1152
+length = 6
+
+[[boundaries]]
+payload_offset = 1158
+length = 2
+
+[[boundaries]]
+payload_offset = 1160
+length = 5
+
+[[boundaries]]
+payload_offset = 1166
+length = 6
+
+[[boundaries]]
+payload_offset = 1172
+length = 2
+
+[[boundaries]]
+payload_offset = 1174
+length = 5
+
+[[boundaries]]
+payload_offset = 1180
+length = 6
+
+[[boundaries]]
+payload_offset = 1186
+length = 2
+
+[[boundaries]]
+payload_offset = 1188
+length = 5
+
+[[boundaries]]
+payload_offset = 1194
+length = 6
+
+[[boundaries]]
+payload_offset = 1200
+length = 2
+
+[[boundaries]]
+payload_offset = 1202
+length = 5
+
+[[boundaries]]
+payload_offset = 1208
+length = 1
+
+[[boundaries]]
+payload_offset = 1209
+length = 1

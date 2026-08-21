@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 5
 reloc_count = 4
+instruction_count = 17
 
 [[segments]]
 kind = "bytecode"
@@ -72,6 +73,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pkmn-center-nurse"
 target_export = "Common_EventScript_PkmnCenterNurse"
 target_offset = 0
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 0
 runtime_resolution_required = true
 
 [[relocs]]
@@ -81,6 +84,8 @@ original_encoded_gba = 0x82034df
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/pacifidlogtown-pokemoncenter-1f"
 target_export = "PacifidlogTown_PokemonCenter_1F_Text_WhatColorTrainerCard"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -90,6 +95,8 @@ original_encoded_gba = 0x820350f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/pacifidlogtown-pokemoncenter-1f"
 target_export = "PacifidlogTown_PokemonCenter_1F_Text_OnColonyOfCorsola"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -99,4 +106,74 @@ original_encoded_gba = 0x820356f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/pacifidlogtown-pokemoncenter-1f"
 target_export = "PacifidlogTown_PokemonCenter_1F_Text_AncestorsLivedOnBoats"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 1
+
+[[boundaries]]
+payload_offset = 4
+length = 5
+
+[[boundaries]]
+payload_offset = 9
+length = 5
+
+[[boundaries]]
+payload_offset = 14
+length = 1
+
+[[boundaries]]
+payload_offset = 15
+length = 1
+
+[[boundaries]]
+payload_offset = 16
+length = 1
+
+[[boundaries]]
+payload_offset = 17
+length = 1
+
+[[boundaries]]
+payload_offset = 18
+length = 6
+
+[[boundaries]]
+payload_offset = 24
+length = 2
+
+[[boundaries]]
+payload_offset = 26
+length = 1
+
+[[boundaries]]
+payload_offset = 27
+length = 6
+
+[[boundaries]]
+payload_offset = 33
+length = 2
+
+[[boundaries]]
+payload_offset = 35
+length = 1
+
+[[boundaries]]
+payload_offset = 36
+length = 6
+
+[[boundaries]]
+payload_offset = 42
+length = 2
+
+[[boundaries]]
+payload_offset = 44
+length = 1

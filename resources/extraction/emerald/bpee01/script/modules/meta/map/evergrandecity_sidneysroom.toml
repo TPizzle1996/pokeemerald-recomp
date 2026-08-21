@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 3
 export_count = 9
 reloc_count = 12
+instruction_count = 38
 
 [[segments]]
 kind = "bytecode"
@@ -116,6 +117,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/evergrandecity-sidneysroom"
 target_export = "EverGrandeCity_SidneysRoom_EventScript_ResetAdvanceToNextRoom"
 target_offset = 49
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 28
 runtime_resolution_required = true
 
 [[relocs]]
@@ -126,6 +129,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/evergrandecity-sidneysroom"
 target_export = "EverGrandeCity_SidneysRoom_EventScript_CloseDoor"
 target_offset = 55
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 34
 runtime_resolution_required = true
 
 [[relocs]]
@@ -136,6 +141,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/elite-four"
 target_export = "PokemonLeague_EliteFour_EventScript_ResetAdvanceToNextRoom"
 target_offset = 196
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 196
 runtime_resolution_required = true
 
 [[relocs]]
@@ -146,6 +153,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/elite-four"
 target_export = "PokemonLeague_EliteFour_EventScript_CloseDoor"
 target_offset = 359
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 359
 runtime_resolution_required = true
 
 [[relocs]]
@@ -156,6 +165,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/elite-four"
 target_export = "PokemonLeague_EliteFour_EventScript_WalkInCloseDoor"
 target_offset = 125
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 125
 runtime_resolution_required = true
 
 [[relocs]]
@@ -166,6 +177,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/evergrandecity-sidneysroom"
 target_export = "EverGrandeCity_SidneysRoom_EventScript_PostBattleSpeech"
 target_offset = 138
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 97
 runtime_resolution_required = true
 
 [[relocs]]
@@ -175,6 +188,8 @@ original_encoded_gba = 0x8227fa7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/evergrandecity-sidneysroom"
 target_export = "EverGrandeCity_SidneysRoom_Text_IntroSpeech"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -184,6 +199,8 @@ original_encoded_gba = 0x82280a2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/evergrandecity-sidneysroom"
 target_export = "EverGrandeCity_SidneysRoom_Text_Defeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -194,6 +211,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/evergrandecity-sidneysroom"
 target_export = "EverGrandeCity_SidneysRoom_EventScript_Defeated"
 target_offset = 148
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 107
 runtime_resolution_required = true
 
 [[relocs]]
@@ -203,6 +222,8 @@ original_encoded_gba = 0x82280ec
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/evergrandecity-sidneysroom"
 target_export = "EverGrandeCity_SidneysRoom_Text_PostBattleSpeech"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -213,6 +234,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/elite-four"
 target_export = "PokemonLeague_EliteFour_SetAdvanceToNextRoomMetatiles"
 target_offset = 0
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 0
 runtime_resolution_required = true
 
 [[relocs]]
@@ -222,4 +245,158 @@ original_encoded_gba = 0x82280ec
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/evergrandecity-sidneysroom"
 target_export = "EverGrandeCity_SidneysRoom_Text_PostBattleSpeech"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 3
+
+[[boundaries]]
+payload_offset = 6
+length = 1
+
+[[boundaries]]
+payload_offset = 7
+length = 3
+
+[[boundaries]]
+payload_offset = 10
+length = 6
+
+[[boundaries]]
+payload_offset = 16
+length = 5
+
+[[boundaries]]
+payload_offset = 21
+length = 6
+
+[[boundaries]]
+payload_offset = 27
+length = 1
+
+[[boundaries]]
+payload_offset = 28
+length = 5
+
+[[boundaries]]
+payload_offset = 33
+length = 1
+
+[[boundaries]]
+payload_offset = 34
+length = 5
+
+[[boundaries]]
+payload_offset = 39
+length = 1
+
+[[boundaries]]
+payload_offset = 40
+length = 4
+
+[[boundaries]]
+payload_offset = 44
+length = 1
+
+[[boundaries]]
+payload_offset = 45
+length = 1
+
+[[boundaries]]
+payload_offset = 46
+length = 5
+
+[[boundaries]]
+payload_offset = 51
+length = 5
+
+[[boundaries]]
+payload_offset = 56
+length = 1
+
+[[boundaries]]
+payload_offset = 57
+length = 1
+
+[[boundaries]]
+payload_offset = 58
+length = 1
+
+[[boundaries]]
+payload_offset = 59
+length = 1
+
+[[boundaries]]
+payload_offset = 60
+length = 3
+
+[[boundaries]]
+payload_offset = 63
+length = 6
+
+[[boundaries]]
+payload_offset = 69
+length = 4
+
+[[boundaries]]
+payload_offset = 73
+length = 6
+
+[[boundaries]]
+payload_offset = 79
+length = 2
+
+[[boundaries]]
+payload_offset = 81
+length = 10
+
+[[boundaries]]
+payload_offset = 91
+length = 5
+
+[[boundaries]]
+payload_offset = 97
+length = 6
+
+[[boundaries]]
+payload_offset = 103
+length = 2
+
+[[boundaries]]
+payload_offset = 105
+length = 1
+
+[[boundaries]]
+payload_offset = 106
+length = 1
+
+[[boundaries]]
+payload_offset = 107
+length = 3
+
+[[boundaries]]
+payload_offset = 110
+length = 5
+
+[[boundaries]]
+payload_offset = 115
+length = 6
+
+[[boundaries]]
+payload_offset = 121
+length = 2
+
+[[boundaries]]
+payload_offset = 123
+length = 1
+
+[[boundaries]]
+payload_offset = 124
+length = 1

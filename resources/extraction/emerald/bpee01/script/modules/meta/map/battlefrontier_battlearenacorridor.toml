@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 1
 reloc_count = 6
+instruction_count = 17
 
 [[segments]]
 kind = "bytecode"
@@ -39,6 +40,8 @@ original_encoded_gba = 0x825742f
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battlearenacorridor-movement-attendantwalktodoor"
 target_export = "BattleFrontier_BattleArenaCorridor_Movement_AttendantWalkToDoor"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -48,6 +51,8 @@ original_encoded_gba = 0x8257417
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battlearenacorridor-movement-playerwalktodoor"
 target_export = "BattleFrontier_BattleArenaCorridor_Movement_PlayerWalkToDoor"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -57,6 +62,8 @@ original_encoded_gba = 0x8257444
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battlearenacorridor-movement-attendantfaceplayer"
 target_export = "BattleFrontier_BattleArenaCorridor_Movement_AttendantFacePlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -66,6 +73,8 @@ original_encoded_gba = 0x8257449
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlearenacorridor"
 target_export = "BattleFrontier_BattleArenaCorridor_Text_PleaseStepIn"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -75,6 +84,8 @@ original_encoded_gba = 0x8257446
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battlearenacorridor-movement-attendantmoveoutofway"
 target_export = "BattleFrontier_BattleArenaCorridor_Movement_AttendantMoveOutOfWay"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -84,4 +95,74 @@ original_encoded_gba = 0x825742c
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battlearenacorridor-movement-playerenterdoor"
 target_export = "BattleFrontier_BattleArenaCorridor_Movement_PlayerEnterDoor"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 5
+
+[[boundaries]]
+payload_offset = 8
+length = 7
+
+[[boundaries]]
+payload_offset = 15
+length = 7
+
+[[boundaries]]
+payload_offset = 22
+length = 3
+
+[[boundaries]]
+payload_offset = 25
+length = 7
+
+[[boundaries]]
+payload_offset = 32
+length = 3
+
+[[boundaries]]
+payload_offset = 35
+length = 6
+
+[[boundaries]]
+payload_offset = 41
+length = 2
+
+[[boundaries]]
+payload_offset = 43
+length = 7
+
+[[boundaries]]
+payload_offset = 50
+length = 3
+
+[[boundaries]]
+payload_offset = 53
+length = 7
+
+[[boundaries]]
+payload_offset = 60
+length = 3
+
+[[boundaries]]
+payload_offset = 63
+length = 5
+
+[[boundaries]]
+payload_offset = 68
+length = 8
+
+[[boundaries]]
+payload_offset = 76
+length = 1
+
+[[boundaries]]
+payload_offset = 77
+length = 1

@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 1
 reloc_count = 1
+instruction_count = 2
 
 [[segments]]
 kind = "bytecode"
@@ -40,4 +41,14 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/abnormal-weather"
 target_export = "AbnormalWeather_Underwater_SetupEscapeWarp"
 target_offset = 2320
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2320
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 5
+
+[[boundaries]]
+payload_offset = 5
+length = 1

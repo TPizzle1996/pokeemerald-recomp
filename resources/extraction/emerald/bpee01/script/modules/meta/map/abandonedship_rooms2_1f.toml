@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 8
 reloc_count = 28
+instruction_count = 48
 
 [[segments]]
 kind = "bytecode"
@@ -95,6 +96,8 @@ original_encoded_gba = 0x823819d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/abandonedship-rooms2-1f"
 target_export = "AbandonedShip_Rooms2_1F_Text_DanIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -104,6 +107,8 @@ original_encoded_gba = 0x82381da
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/abandonedship-rooms2-1f"
 target_export = "AbandonedShip_Rooms2_1F_Text_DanDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -113,6 +118,8 @@ original_encoded_gba = 0x8238257
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/abandonedship-rooms2-1f"
 target_export = "AbandonedShip_Rooms2_1F_Text_DanNotEnoughMons"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -123,6 +130,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/abandonedship-rooms2-1f"
 target_export = "AbandonedShip_Rooms2_1F_EventScript_RegisterDan"
 target_offset = 49
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 48
 runtime_resolution_required = true
 
 [[relocs]]
@@ -133,6 +142,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/abandonedship-rooms2-1f"
 target_export = "AbandonedShip_Rooms2_1F_EventScript_DanRematch"
 target_offset = 74
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 73
 runtime_resolution_required = true
 
 [[relocs]]
@@ -142,6 +153,8 @@ original_encoded_gba = 0x823820f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/abandonedship-rooms2-1f"
 target_export = "AbandonedShip_Rooms2_1F_Text_DanPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -151,6 +164,8 @@ original_encoded_gba = 0x82383bb
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/abandonedship-rooms2-1f"
 target_export = "AbandonedShip_Rooms2_1F_Text_KiraRegister"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -160,6 +175,8 @@ original_encoded_gba = 0x82383ff
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/abandonedship-rooms2-1f"
 target_export = "AbandonedShip_Rooms2_1F_Text_DanRematchIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -169,6 +186,8 @@ original_encoded_gba = 0x8238473
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/abandonedship-rooms2-1f"
 target_export = "AbandonedShip_Rooms2_1F_Text_DanRematchDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -178,6 +197,8 @@ original_encoded_gba = 0x8238509
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/abandonedship-rooms2-1f"
 target_export = "AbandonedShip_Rooms2_1F_Text_DanRematchNotEnoughMons"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -187,6 +208,8 @@ original_encoded_gba = 0x8238491
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/abandonedship-rooms2-1f"
 target_export = "AbandonedShip_Rooms2_1F_Text_DanPostRematch"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -196,6 +219,8 @@ original_encoded_gba = 0x82382a4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/abandonedship-rooms2-1f"
 target_export = "AbandonedShip_Rooms2_1F_Text_KiraIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -205,6 +230,8 @@ original_encoded_gba = 0x82382f4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/abandonedship-rooms2-1f"
 target_export = "AbandonedShip_Rooms2_1F_Text_KiraDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -214,6 +241,8 @@ original_encoded_gba = 0x823836f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/abandonedship-rooms2-1f"
 target_export = "AbandonedShip_Rooms2_1F_Text_KiraNotEnoughMons"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -224,6 +253,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/abandonedship-rooms2-1f"
 target_export = "AbandonedShip_Rooms2_1F_EventScript_RegisterKira"
 target_offset = 149
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 148
 runtime_resolution_required = true
 
 [[relocs]]
@@ -234,6 +265,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/abandonedship-rooms2-1f"
 target_export = "AbandonedShip_Rooms2_1F_EventScript_KiraRematch"
 target_offset = 174
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 173
 runtime_resolution_required = true
 
 [[relocs]]
@@ -243,6 +276,8 @@ original_encoded_gba = 0x823830a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/abandonedship-rooms2-1f"
 target_export = "AbandonedShip_Rooms2_1F_Text_KiraPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -252,6 +287,8 @@ original_encoded_gba = 0x82383bb
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/abandonedship-rooms2-1f"
 target_export = "AbandonedShip_Rooms2_1F_Text_KiraRegister"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -261,6 +298,8 @@ original_encoded_gba = 0x8238556
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/abandonedship-rooms2-1f"
 target_export = "AbandonedShip_Rooms2_1F_Text_KiraRematchIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -270,6 +309,8 @@ original_encoded_gba = 0x82385f2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/abandonedship-rooms2-1f"
 target_export = "AbandonedShip_Rooms2_1F_Text_KiraRematchDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -279,6 +320,8 @@ original_encoded_gba = 0x8238668
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/abandonedship-rooms2-1f"
 target_export = "AbandonedShip_Rooms2_1F_Text_KiraRematchNotEnoughMons"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -288,6 +331,8 @@ original_encoded_gba = 0x823860b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/abandonedship-rooms2-1f"
 target_export = "AbandonedShip_Rooms2_1F_Text_KiraPostRematch"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -297,6 +342,8 @@ original_encoded_gba = 0x82386b4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/abandonedship-rooms2-1f"
 target_export = "AbandonedShip_Rooms2_1F_Text_JaniIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -306,6 +353,8 @@ original_encoded_gba = 0x82386e8
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/abandonedship-rooms2-1f"
 target_export = "AbandonedShip_Rooms2_1F_Text_JaniDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -315,6 +364,8 @@ original_encoded_gba = 0x8238708
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/abandonedship-rooms2-1f"
 target_export = "AbandonedShip_Rooms2_1F_Text_JaniPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -324,6 +375,8 @@ original_encoded_gba = 0x823873f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/abandonedship-rooms2-1f"
 target_export = "AbandonedShip_Rooms2_1F_Text_GarrisonIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -333,6 +386,8 @@ original_encoded_gba = 0x8238779
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/abandonedship-rooms2-1f"
 target_export = "AbandonedShip_Rooms2_1F_Text_GarrisonDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -342,4 +397,198 @@ original_encoded_gba = 0x82387a9
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/abandonedship-rooms2-1f"
 target_export = "AbandonedShip_Rooms2_1F_Text_GarrisonPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 22
+
+[[boundaries]]
+payload_offset = 22
+length = 5
+
+[[boundaries]]
+payload_offset = 27
+length = 5
+
+[[boundaries]]
+payload_offset = 32
+length = 6
+
+[[boundaries]]
+payload_offset = 38
+length = 6
+
+[[boundaries]]
+payload_offset = 44
+length = 2
+
+[[boundaries]]
+payload_offset = 46
+length = 1
+
+[[boundaries]]
+payload_offset = 47
+length = 1
+
+[[boundaries]]
+payload_offset = 48
+length = 6
+
+[[boundaries]]
+payload_offset = 54
+length = 2
+
+[[boundaries]]
+payload_offset = 56
+length = 5
+
+[[boundaries]]
+payload_offset = 61
+length = 3
+
+[[boundaries]]
+payload_offset = 64
+length = 5
+
+[[boundaries]]
+payload_offset = 69
+length = 2
+
+[[boundaries]]
+payload_offset = 71
+length = 1
+
+[[boundaries]]
+payload_offset = 72
+length = 1
+
+[[boundaries]]
+payload_offset = 73
+length = 18
+
+[[boundaries]]
+payload_offset = 91
+length = 6
+
+[[boundaries]]
+payload_offset = 97
+length = 2
+
+[[boundaries]]
+payload_offset = 99
+length = 1
+
+[[boundaries]]
+payload_offset = 100
+length = 22
+
+[[boundaries]]
+payload_offset = 122
+length = 5
+
+[[boundaries]]
+payload_offset = 127
+length = 5
+
+[[boundaries]]
+payload_offset = 132
+length = 6
+
+[[boundaries]]
+payload_offset = 138
+length = 6
+
+[[boundaries]]
+payload_offset = 144
+length = 2
+
+[[boundaries]]
+payload_offset = 146
+length = 1
+
+[[boundaries]]
+payload_offset = 147
+length = 1
+
+[[boundaries]]
+payload_offset = 148
+length = 6
+
+[[boundaries]]
+payload_offset = 154
+length = 2
+
+[[boundaries]]
+payload_offset = 156
+length = 5
+
+[[boundaries]]
+payload_offset = 161
+length = 3
+
+[[boundaries]]
+payload_offset = 164
+length = 5
+
+[[boundaries]]
+payload_offset = 169
+length = 2
+
+[[boundaries]]
+payload_offset = 171
+length = 1
+
+[[boundaries]]
+payload_offset = 172
+length = 1
+
+[[boundaries]]
+payload_offset = 173
+length = 18
+
+[[boundaries]]
+payload_offset = 191
+length = 6
+
+[[boundaries]]
+payload_offset = 197
+length = 2
+
+[[boundaries]]
+payload_offset = 199
+length = 1
+
+[[boundaries]]
+payload_offset = 200
+length = 14
+
+[[boundaries]]
+payload_offset = 214
+length = 6
+
+[[boundaries]]
+payload_offset = 220
+length = 2
+
+[[boundaries]]
+payload_offset = 222
+length = 1
+
+[[boundaries]]
+payload_offset = 223
+length = 14
+
+[[boundaries]]
+payload_offset = 237
+length = 6
+
+[[boundaries]]
+payload_offset = 243
+length = 2
+
+[[boundaries]]
+payload_offset = 245
+length = 1

@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 2
 export_count = 41
 reloc_count = 133
+instruction_count = 504
 
 [[segments]]
 kind = "bytecode"
@@ -366,6 +367,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_EnterSingleBattleRoom"
 target_offset = 116
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 85
 runtime_resolution_required = true
 
 [[relocs]]
@@ -376,6 +379,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_EnterFullHealRoom"
 target_offset = 956
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 925
 runtime_resolution_required = true
 
 [[relocs]]
@@ -386,6 +391,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_EnterStatusRoom"
 target_offset = 1203
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1172
 runtime_resolution_required = true
 
 [[relocs]]
@@ -396,6 +403,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_EnterHardBattleRoom"
 target_offset = 223
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 192
 runtime_resolution_required = true
 
 [[relocs]]
@@ -406,6 +415,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_EnterDoubleBattleRoom"
 target_offset = 1004
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 973
 runtime_resolution_required = true
 
 [[relocs]]
@@ -416,6 +427,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_EnterBrainRoom"
 target_offset = 365
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 334
 runtime_resolution_required = true
 
 [[relocs]]
@@ -425,6 +438,8 @@ original_encoded_gba = 0x825d795
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battlepikeroomnormal-movement-approachplayer"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Movement_ApproachPlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -433,6 +448,8 @@ operand_width = 4
 original_encoded_gba = 0x2021fc4
 target_class = "RAM_DATA_TARGET"
 target_resource_key = ""
+target_kind = "RAM_HOST"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -443,6 +460,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_WonSingleBattle"
 target_offset = 212
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 181
 runtime_resolution_required = true
 
 [[relocs]]
@@ -452,6 +471,8 @@ original_encoded_gba = 0x825d798
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battlepikeroomnormal-movement-npcexit"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Movement_NPCExit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -461,6 +482,8 @@ original_encoded_gba = 0x825ddfe
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Text_BattleSomewhatToughTrainer"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -470,6 +493,8 @@ original_encoded_gba = 0x825d795
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battlepikeroomnormal-movement-approachplayer"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Movement_ApproachPlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -478,6 +503,8 @@ operand_width = 4
 original_encoded_gba = 0x2021fc4
 target_class = "RAM_DATA_TARGET"
 target_resource_key = ""
+target_kind = "RAM_HOST"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -488,6 +515,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_WonHardBattle"
 target_offset = 307
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 276
 runtime_resolution_required = true
 
 [[relocs]]
@@ -498,6 +527,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_WarpToLobbyLost"
 target_offset = 184
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 153
 runtime_resolution_required = true
 
 [[relocs]]
@@ -507,6 +538,8 @@ original_encoded_gba = 0x825d798
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battlepikeroomnormal-movement-npcexit"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Movement_NPCExit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -516,6 +549,8 @@ original_encoded_gba = 0x825d7b6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battlepikeroomnormal-movement-healnpcapproachplayer"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Movement_HealNPCApproachPlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -525,6 +560,8 @@ original_encoded_gba = 0x825de3f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Text_RestoreToFullHealth"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -534,6 +571,8 @@ original_encoded_gba = 0x825de94
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Text_EnjoyRestOfChallenge2"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -543,6 +582,8 @@ original_encoded_gba = 0x825d798
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battlepikeroomnormal-movement-npcexit"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Movement_NPCExit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -552,6 +593,8 @@ original_encoded_gba = 0x825d7df
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battlepikeroomnormal-movement-prequeenhealnpcapproachplayer"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Movement_PreQueenHealNPCApproachPlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -562,6 +605,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_PreQueenNoHeal"
 target_offset = 906
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 875
 runtime_resolution_required = true
 
 [[relocs]]
@@ -572,6 +617,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_PreQueenHealOneMon"
 target_offset = 920
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 889
 runtime_resolution_required = true
 
 [[relocs]]
@@ -582,6 +629,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_PreQueenHealTwoMons"
 target_offset = 938
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 907
 runtime_resolution_required = true
 
 [[relocs]]
@@ -591,6 +640,8 @@ original_encoded_gba = 0x825e311
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Text_ShallFetchOurMaster"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -600,6 +651,8 @@ original_encoded_gba = 0x825d9b0
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battlepikeroomnormal-movement-camerapanup"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Movement_CameraPanUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -609,6 +662,8 @@ original_encoded_gba = 0x825d7e2
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battlepikeroomnormal-movement-healnpcexitforlucy"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Movement_HealNPCExitForLucy"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -619,6 +674,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_SetCurtainTilesLittleClosed"
 target_offset = 1941
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1822
 runtime_resolution_required = true
 
 [[relocs]]
@@ -629,6 +686,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_SetCurtainTilesMostlyClosed"
 target_offset = 1874
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1755
 runtime_resolution_required = true
 
 [[relocs]]
@@ -639,6 +698,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_SetCurtainTilesClosed"
 target_offset = 2075
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1956
 runtime_resolution_required = true
 
 [[relocs]]
@@ -649,6 +710,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_SetCurtainTilesMostlyClosed"
 target_offset = 1874
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1755
 runtime_resolution_required = true
 
 [[relocs]]
@@ -659,6 +722,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_SetCurtainTilesLittleClosed"
 target_offset = 1941
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1822
 runtime_resolution_required = true
 
 [[relocs]]
@@ -669,6 +734,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_SetCurtainTilesOpen"
 target_offset = 2008
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1889
 runtime_resolution_required = true
 
 [[relocs]]
@@ -678,6 +745,8 @@ original_encoded_gba = 0x825d7e7
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battlepikeroomnormal-movement-lucyenter"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Movement_LucyEnter"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -688,6 +757,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_IntroLucyGold"
 target_offset = 708
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 677
 runtime_resolution_required = true
 
 [[relocs]]
@@ -698,6 +769,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_BattleLucySilver"
 target_offset = 619
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 588
 runtime_resolution_required = true
 
 [[relocs]]
@@ -708,6 +781,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_BattleLucyGold"
 target_offset = 753
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 722
 runtime_resolution_required = true
 
 [[relocs]]
@@ -718,6 +793,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_BattleLucySilver"
 target_offset = 619
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 588
 runtime_resolution_required = true
 
 [[relocs]]
@@ -727,6 +804,8 @@ original_encoded_gba = 0x825ded2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Text_ImThePikeQueen"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -736,6 +815,8 @@ original_encoded_gba = 0x825df71
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Text_HopeYouDidntUseUpLuck"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -746,6 +827,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_DoPikeQueenBattle"
 target_offset = 1577
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1546
 runtime_resolution_required = true
 
 [[relocs]]
@@ -756,6 +839,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_DefeatedLucySilver"
 target_offset = 648
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 617
 runtime_resolution_required = true
 
 [[relocs]]
@@ -766,6 +851,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_WarpToLobbyLost"
 target_offset = 184
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 153
 runtime_resolution_required = true
 
 [[relocs]]
@@ -776,6 +863,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_DefeatedLucy"
 target_offset = 843
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 812
 runtime_resolution_required = true
 
 [[relocs]]
@@ -785,6 +874,8 @@ original_encoded_gba = 0x825dfa2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Text_LucyShowMeFrontierPass"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -794,6 +885,8 @@ original_encoded_gba = 0x825dfd0
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Text_ReceivedLuckSymbol"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -803,6 +896,8 @@ original_encoded_gba = 0x825e003
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Text_AllThereIsDisappear"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -813,6 +908,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_DefeatedLucy"
 target_offset = 843
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 812
 runtime_resolution_required = true
 
 [[relocs]]
@@ -823,6 +920,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_BattleLucyGold"
 target_offset = 753
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 722
 runtime_resolution_required = true
 
 [[relocs]]
@@ -832,6 +931,8 @@ original_encoded_gba = 0x825e02c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Text_LucyYouAgain"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -841,6 +942,8 @@ original_encoded_gba = 0x825e0e8
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Text_NowComeOn"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -851,6 +954,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_DoPikeQueenBattle"
 target_offset = 1577
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1546
 runtime_resolution_required = true
 
 [[relocs]]
@@ -861,6 +966,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_DefeatedLucyGold"
 target_offset = 782
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 751
 runtime_resolution_required = true
 
 [[relocs]]
@@ -871,6 +978,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_WarpToLobbyLost"
 target_offset = 184
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 153
 runtime_resolution_required = true
 
 [[relocs]]
@@ -881,6 +990,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_DefeatedLucy"
 target_offset = 843
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 812
 runtime_resolution_required = true
 
 [[relocs]]
@@ -890,6 +1001,8 @@ original_encoded_gba = 0x825e0f6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Text_LucyFrontierPass"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -899,6 +1012,8 @@ original_encoded_gba = 0x825e118
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Text_LuckSymbolTookGoldenShine"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -908,6 +1023,8 @@ original_encoded_gba = 0x825e140
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Text_IWontForget"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -918,6 +1035,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_DefeatedLucy"
 target_offset = 843
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 812
 runtime_resolution_required = true
 
 [[relocs]]
@@ -927,6 +1046,8 @@ original_encoded_gba = 0x825d7ea
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battlepikeroomnormal-movement-lucymoveaside"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Movement_LucyMoveAside"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -936,6 +1057,8 @@ original_encoded_gba = 0x825d7dc
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battlepikeroomnormal-movement-playerwalkup2"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Movement_PlayerWalkUp2"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -946,6 +1069,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/battle-pike"
 target_export = "BattleFrontier_BattlePikeRoom_EventScript_WarpToFinalRoom"
 target_offset = 809
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 773
 runtime_resolution_required = true
 
 [[relocs]]
@@ -955,6 +1080,8 @@ original_encoded_gba = 0x825e15d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Text_ChoseRoomNoHeal"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -965,6 +1092,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_LucyEnter"
 target_offset = 425
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 394
 runtime_resolution_required = true
 
 [[relocs]]
@@ -974,6 +1103,8 @@ original_encoded_gba = 0x825e1dd
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Text_ChoseRoomHealOne"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -984,6 +1115,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_LucyEnter"
 target_offset = 425
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 394
 runtime_resolution_required = true
 
 [[relocs]]
@@ -993,6 +1126,8 @@ original_encoded_gba = 0x825e238
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Text_ChoseRoomHealTwo"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1003,6 +1138,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_LucyEnter"
 target_offset = 425
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 394
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1012,6 +1149,8 @@ original_encoded_gba = 0x825d795
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battlepikeroomnormal-movement-approachplayer"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Movement_ApproachPlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1021,6 +1160,8 @@ original_encoded_gba = 0x825d9b6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Text_WillRestoreToFullHealth"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1030,6 +1171,8 @@ original_encoded_gba = 0x825da13
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Text_EnjoyRestOfChallenge"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1039,6 +1182,8 @@ original_encoded_gba = 0x825d798
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battlepikeroomnormal-movement-npcexit"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Movement_NPCExit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1048,6 +1193,8 @@ original_encoded_gba = 0x825d7c1
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battlepikeroomnormal-movement-trainer1walkright"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Movement_Trainer1WalkRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1057,6 +1204,8 @@ original_encoded_gba = 0x825d7c3
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battlepikeroomnormal-movement-trainer2walkleft"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Movement_Trainer2WalkLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1066,6 +1215,8 @@ original_encoded_gba = 0x825d7c5
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battlepikeroomnormal-movement-doubletrainerswalkdown"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Movement_DoubleTrainersWalkDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1075,6 +1226,8 @@ original_encoded_gba = 0x825d7c5
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battlepikeroomnormal-movement-doubletrainerswalkdown"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Movement_DoubleTrainersWalkDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1084,6 +1237,8 @@ original_encoded_gba = 0x825d7c8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battlepikeroomnormal-movement-trainer1faceplayer"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Movement_Trainer1FacePlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1093,6 +1248,8 @@ original_encoded_gba = 0x825d7ca
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battlepikeroomnormal-movement-trainer2faceplayer"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Movement_Trainer2FacePlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1102,6 +1259,8 @@ original_encoded_gba = 0x825d7bb
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battlepikeroomnormal-movement-playerfacetrainer1"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Movement_PlayerFaceTrainer1"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1110,6 +1269,8 @@ operand_width = 4
 original_encoded_gba = 0x2021fc4
 target_class = "RAM_DATA_TARGET"
 target_resource_key = ""
+target_kind = "RAM_HOST"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1119,6 +1280,8 @@ original_encoded_gba = 0x825d7bd
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battlepikeroomnormal-movement-playerfacetrainer2"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Movement_PlayerFaceTrainer2"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1127,6 +1290,8 @@ operand_width = 4
 original_encoded_gba = 0x2021fc4
 target_class = "RAM_DATA_TARGET"
 target_resource_key = ""
+target_kind = "RAM_HOST"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1137,6 +1302,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_WonDoubleBattle"
 target_offset = 1162
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1131
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1147,6 +1314,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_WarpToLobbyLost"
 target_offset = 184
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 153
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1156,6 +1325,8 @@ original_encoded_gba = 0x825d7bd
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battlepikeroomnormal-movement-playerfacetrainer2"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Movement_PlayerFaceTrainer2"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1165,6 +1336,8 @@ original_encoded_gba = 0x825d7cc
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battlepikeroomnormal-movement-trainer1exit"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Movement_Trainer1Exit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1174,6 +1347,8 @@ original_encoded_gba = 0x825d7d4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battlepikeroomnormal-movement-trainer2exit"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Movement_Trainer2Exit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1183,6 +1358,8 @@ original_encoded_gba = 0x825d7bf
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battlepikeroomnormal-movement-playerfaceup"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Movement_PlayerFaceUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1192,6 +1369,8 @@ original_encoded_gba = 0x825dbd1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Text_WatchOut"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1201,6 +1380,8 @@ original_encoded_gba = 0x825d7aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battlepikeroomnormal-movement-monapproachplayer"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Movement_MonApproachPlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1211,6 +1392,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_KirliaAttack"
 target_offset = 1265
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1234
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1221,6 +1404,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_DusclopsAttack"
 target_offset = 1411
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1380
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1230,6 +1415,8 @@ original_encoded_gba = 0x825dd3f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Text_AttacksWhenStartled"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1239,6 +1426,8 @@ original_encoded_gba = 0x825dbe4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Text_KirliaStop"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1249,6 +1438,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_KirliaUsedToxic"
 target_offset = 1535
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1504
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1259,6 +1450,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_KirliaUsedWillOWisp"
 target_offset = 1542
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1511
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1269,6 +1462,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_KirliaUsedThunderWave"
 target_offset = 1549
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1518
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1279,6 +1474,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_KirliaUsedHypnosis"
 target_offset = 1556
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1525
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1288,6 +1485,8 @@ original_encoded_gba = 0x825d7a2
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battlepikeroomnormal-movement-npcapproachmon"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Movement_NPCApproachMon"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1297,6 +1496,8 @@ original_encoded_gba = 0x825d7b1
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battlepikeroomnormal-movement-monfacenpc"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Movement_MonFaceNPC"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1306,6 +1507,8 @@ original_encoded_gba = 0x825dcaf
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Text_ThatsEnough"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1315,6 +1518,8 @@ original_encoded_gba = 0x825d7b3
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battlepikeroomnormal-movement-monmoveaside"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Movement_MonMoveAside"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1324,6 +1529,8 @@ original_encoded_gba = 0x825d7a4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battlepikeroomnormal-movement-statusnpcapproachplayer"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Movement_StatusNPCApproachPlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1333,6 +1540,8 @@ original_encoded_gba = 0x825dccf
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Text_ApologizeForKirlia"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1342,6 +1551,8 @@ original_encoded_gba = 0x825dc01
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Text_DusclopsStop"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1352,6 +1563,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_DusclopsUsedIceBeam"
 target_offset = 1563
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1532
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1362,6 +1575,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_DusclopsUsedWillOWisp"
 target_offset = 1570
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1539
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1371,6 +1586,8 @@ original_encoded_gba = 0x825d7a2
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battlepikeroomnormal-movement-npcapproachmon"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Movement_NPCApproachMon"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1380,6 +1597,8 @@ original_encoded_gba = 0x825d7b1
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battlepikeroomnormal-movement-monfacenpc"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Movement_MonFaceNPC"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1389,6 +1608,8 @@ original_encoded_gba = 0x825dcaf
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Text_ThatsEnough"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1398,6 +1619,8 @@ original_encoded_gba = 0x825d7b3
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battlepikeroomnormal-movement-monmoveaside"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Movement_MonMoveAside"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1407,6 +1630,8 @@ original_encoded_gba = 0x825d7a4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battlepikeroomnormal-movement-statusnpcapproachplayer"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Movement_StatusNPCApproachPlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1416,6 +1641,8 @@ original_encoded_gba = 0x825dd06
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Text_ApologizeForDusclops"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1425,6 +1652,8 @@ original_encoded_gba = 0x825dc20
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Text_KirliaUsedToxic"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1434,6 +1663,8 @@ original_encoded_gba = 0x825dc63
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Text_KirliaUsedWillOWisp"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1443,6 +1674,8 @@ original_encoded_gba = 0x825dc49
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Text_KirliaUsedThunderWave"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1452,6 +1685,8 @@ original_encoded_gba = 0x825dc33
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Text_KirliaUsedHypnosis"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1461,6 +1696,8 @@ original_encoded_gba = 0x825dc97
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Text_DusclopsUsedIceBeam"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1470,6 +1707,8 @@ original_encoded_gba = 0x825dc7c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Text_DusclopsUsedWillOWisp"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1479,6 +1718,8 @@ original_encoded_gba = 0x825d7dc
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battlepikeroomnormal-movement-playerwalkup2"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Movement_PlayerWalkUp2"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1489,6 +1730,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_NormalNPC"
 target_offset = 1737
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1618
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1499,6 +1742,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_StatusNPC"
 target_offset = 1759
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1640
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1509,6 +1754,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_HealNPC"
 target_offset = 1772
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1653
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1517,6 +1764,8 @@ operand_width = 4
 original_encoded_gba = 0x2021fc4
 target_class = "RAM_DATA_TARGET"
 target_resource_key = ""
+target_kind = "RAM_HOST"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1526,6 +1775,8 @@ original_encoded_gba = 0x825dda3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Text_ApologizeHopeMonsAreFine"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1536,6 +1787,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_WillRestoreTwoMons"
 target_offset = 1839
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1720
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1546,6 +1799,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_EventScript_WillRestoreOneMon"
 target_offset = 1827
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1708
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1555,6 +1810,8 @@ original_encoded_gba = 0x825dabe
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Text_BestOfLuckFarewell"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1564,6 +1821,8 @@ original_encoded_gba = 0x825d79e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battlepikeroomnormal-movement-healnpcexit"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Movement_HealNPCExit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1573,6 +1832,8 @@ original_encoded_gba = 0x825da51
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Text_WillRestoreOneMon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1582,6 +1843,8 @@ original_encoded_gba = 0x825e32e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Text_WillRestoreTwoMons"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1591,6 +1854,8 @@ original_encoded_gba = 0x825dde6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-battlepikeroomnormal"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Text_Silence"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1600,4 +1865,2022 @@ original_encoded_gba = 0x825d7b4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/battlefrontier-battlepikeroomnormal-movement-monfaceright"
 target_export = "BattleFrontier_BattlePikeRoomNormal_Movement_MonFaceRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 5
+
+[[boundaries]]
+payload_offset = 5
+length = 5
+
+[[boundaries]]
+payload_offset = 10
+length = 3
+
+[[boundaries]]
+payload_offset = 13
+length = 5
+
+[[boundaries]]
+payload_offset = 18
+length = 5
+
+[[boundaries]]
+payload_offset = 23
+length = 6
+
+[[boundaries]]
+payload_offset = 29
+length = 5
+
+[[boundaries]]
+payload_offset = 34
+length = 6
+
+[[boundaries]]
+payload_offset = 40
+length = 5
+
+[[boundaries]]
+payload_offset = 45
+length = 6
+
+[[boundaries]]
+payload_offset = 51
+length = 5
+
+[[boundaries]]
+payload_offset = 56
+length = 6
+
+[[boundaries]]
+payload_offset = 62
+length = 5
+
+[[boundaries]]
+payload_offset = 67
+length = 6
+
+[[boundaries]]
+payload_offset = 73
+length = 5
+
+[[boundaries]]
+payload_offset = 78
+length = 6
+
+[[boundaries]]
+payload_offset = 84
+length = 1
+
+[[boundaries]]
+payload_offset = 85
+length = 1
+
+[[boundaries]]
+payload_offset = 86
+length = 3
+
+[[boundaries]]
+payload_offset = 89
+length = 7
+
+[[boundaries]]
+payload_offset = 96
+length = 3
+
+[[boundaries]]
+payload_offset = 99
+length = 5
+
+[[boundaries]]
+payload_offset = 104
+length = 5
+
+[[boundaries]]
+payload_offset = 109
+length = 3
+
+[[boundaries]]
+payload_offset = 112
+length = 6
+
+[[boundaries]]
+payload_offset = 118
+length = 2
+
+[[boundaries]]
+payload_offset = 120
+length = 1
+
+[[boundaries]]
+payload_offset = 121
+length = 1
+
+[[boundaries]]
+payload_offset = 122
+length = 1
+
+[[boundaries]]
+payload_offset = 123
+length = 5
+
+[[boundaries]]
+payload_offset = 128
+length = 5
+
+[[boundaries]]
+payload_offset = 133
+length = 3
+
+[[boundaries]]
+payload_offset = 136
+length = 1
+
+[[boundaries]]
+payload_offset = 137
+length = 5
+
+[[boundaries]]
+payload_offset = 142
+length = 5
+
+[[boundaries]]
+payload_offset = 147
+length = 6
+
+[[boundaries]]
+payload_offset = 153
+length = 5
+
+[[boundaries]]
+payload_offset = 158
+length = 5
+
+[[boundaries]]
+payload_offset = 163
+length = 5
+
+[[boundaries]]
+payload_offset = 168
+length = 3
+
+[[boundaries]]
+payload_offset = 171
+length = 8
+
+[[boundaries]]
+payload_offset = 179
+length = 1
+
+[[boundaries]]
+payload_offset = 180
+length = 1
+
+[[boundaries]]
+payload_offset = 181
+length = 7
+
+[[boundaries]]
+payload_offset = 188
+length = 3
+
+[[boundaries]]
+payload_offset = 191
+length = 1
+
+[[boundaries]]
+payload_offset = 192
+length = 1
+
+[[boundaries]]
+payload_offset = 193
+length = 3
+
+[[boundaries]]
+payload_offset = 196
+length = 6
+
+[[boundaries]]
+payload_offset = 202
+length = 2
+
+[[boundaries]]
+payload_offset = 204
+length = 1
+
+[[boundaries]]
+payload_offset = 205
+length = 1
+
+[[boundaries]]
+payload_offset = 206
+length = 7
+
+[[boundaries]]
+payload_offset = 213
+length = 3
+
+[[boundaries]]
+payload_offset = 216
+length = 5
+
+[[boundaries]]
+payload_offset = 221
+length = 5
+
+[[boundaries]]
+payload_offset = 226
+length = 3
+
+[[boundaries]]
+payload_offset = 229
+length = 6
+
+[[boundaries]]
+payload_offset = 235
+length = 2
+
+[[boundaries]]
+payload_offset = 237
+length = 1
+
+[[boundaries]]
+payload_offset = 238
+length = 1
+
+[[boundaries]]
+payload_offset = 239
+length = 1
+
+[[boundaries]]
+payload_offset = 240
+length = 5
+
+[[boundaries]]
+payload_offset = 245
+length = 5
+
+[[boundaries]]
+payload_offset = 250
+length = 3
+
+[[boundaries]]
+payload_offset = 253
+length = 1
+
+[[boundaries]]
+payload_offset = 254
+length = 5
+
+[[boundaries]]
+payload_offset = 259
+length = 5
+
+[[boundaries]]
+payload_offset = 264
+length = 6
+
+[[boundaries]]
+payload_offset = 270
+length = 5
+
+[[boundaries]]
+payload_offset = 276
+length = 7
+
+[[boundaries]]
+payload_offset = 283
+length = 3
+
+[[boundaries]]
+payload_offset = 286
+length = 7
+
+[[boundaries]]
+payload_offset = 293
+length = 3
+
+[[boundaries]]
+payload_offset = 296
+length = 1
+
+[[boundaries]]
+payload_offset = 297
+length = 1
+
+[[boundaries]]
+payload_offset = 298
+length = 6
+
+[[boundaries]]
+payload_offset = 304
+length = 2
+
+[[boundaries]]
+payload_offset = 306
+length = 3
+
+[[boundaries]]
+payload_offset = 309
+length = 1
+
+[[boundaries]]
+payload_offset = 310
+length = 3
+
+[[boundaries]]
+payload_offset = 313
+length = 6
+
+[[boundaries]]
+payload_offset = 319
+length = 2
+
+[[boundaries]]
+payload_offset = 321
+length = 1
+
+[[boundaries]]
+payload_offset = 322
+length = 1
+
+[[boundaries]]
+payload_offset = 323
+length = 7
+
+[[boundaries]]
+payload_offset = 330
+length = 3
+
+[[boundaries]]
+payload_offset = 333
+length = 1
+
+[[boundaries]]
+payload_offset = 334
+length = 3
+
+[[boundaries]]
+payload_offset = 337
+length = 1
+
+[[boundaries]]
+payload_offset = 338
+length = 7
+
+[[boundaries]]
+payload_offset = 345
+length = 3
+
+[[boundaries]]
+payload_offset = 348
+length = 5
+
+[[boundaries]]
+payload_offset = 353
+length = 3
+
+[[boundaries]]
+payload_offset = 356
+length = 5
+
+[[boundaries]]
+payload_offset = 361
+length = 5
+
+[[boundaries]]
+payload_offset = 366
+length = 6
+
+[[boundaries]]
+payload_offset = 372
+length = 5
+
+[[boundaries]]
+payload_offset = 377
+length = 6
+
+[[boundaries]]
+payload_offset = 383
+length = 5
+
+[[boundaries]]
+payload_offset = 388
+length = 6
+
+[[boundaries]]
+payload_offset = 394
+length = 6
+
+[[boundaries]]
+payload_offset = 400
+length = 2
+
+[[boundaries]]
+payload_offset = 402
+length = 1
+
+[[boundaries]]
+payload_offset = 403
+length = 3
+
+[[boundaries]]
+payload_offset = 406
+length = 7
+
+[[boundaries]]
+payload_offset = 413
+length = 7
+
+[[boundaries]]
+payload_offset = 420
+length = 3
+
+[[boundaries]]
+payload_offset = 423
+length = 3
+
+[[boundaries]]
+payload_offset = 426
+length = 5
+
+[[boundaries]]
+payload_offset = 431
+length = 3
+
+[[boundaries]]
+payload_offset = 434
+length = 5
+
+[[boundaries]]
+payload_offset = 439
+length = 3
+
+[[boundaries]]
+payload_offset = 442
+length = 5
+
+[[boundaries]]
+payload_offset = 447
+length = 3
+
+[[boundaries]]
+payload_offset = 450
+length = 1
+
+[[boundaries]]
+payload_offset = 451
+length = 3
+
+[[boundaries]]
+payload_offset = 454
+length = 3
+
+[[boundaries]]
+payload_offset = 457
+length = 3
+
+[[boundaries]]
+payload_offset = 460
+length = 5
+
+[[boundaries]]
+payload_offset = 465
+length = 5
+
+[[boundaries]]
+payload_offset = 470
+length = 3
+
+[[boundaries]]
+payload_offset = 473
+length = 5
+
+[[boundaries]]
+payload_offset = 478
+length = 3
+
+[[boundaries]]
+payload_offset = 481
+length = 5
+
+[[boundaries]]
+payload_offset = 486
+length = 1
+
+[[boundaries]]
+payload_offset = 487
+length = 7
+
+[[boundaries]]
+payload_offset = 494
+length = 3
+
+[[boundaries]]
+payload_offset = 497
+length = 5
+
+[[boundaries]]
+payload_offset = 502
+length = 3
+
+[[boundaries]]
+payload_offset = 505
+length = 5
+
+[[boundaries]]
+payload_offset = 510
+length = 5
+
+[[boundaries]]
+payload_offset = 515
+length = 6
+
+[[boundaries]]
+payload_offset = 521
+length = 5
+
+[[boundaries]]
+payload_offset = 526
+length = 6
+
+[[boundaries]]
+payload_offset = 532
+length = 5
+
+[[boundaries]]
+payload_offset = 537
+length = 6
+
+[[boundaries]]
+payload_offset = 543
+length = 5
+
+[[boundaries]]
+payload_offset = 548
+length = 5
+
+[[boundaries]]
+payload_offset = 553
+length = 3
+
+[[boundaries]]
+payload_offset = 556
+length = 5
+
+[[boundaries]]
+payload_offset = 561
+length = 6
+
+[[boundaries]]
+payload_offset = 567
+length = 6
+
+[[boundaries]]
+payload_offset = 573
+length = 2
+
+[[boundaries]]
+payload_offset = 575
+length = 5
+
+[[boundaries]]
+payload_offset = 580
+length = 5
+
+[[boundaries]]
+payload_offset = 585
+length = 3
+
+[[boundaries]]
+payload_offset = 588
+length = 6
+
+[[boundaries]]
+payload_offset = 594
+length = 2
+
+[[boundaries]]
+payload_offset = 596
+length = 5
+
+[[boundaries]]
+payload_offset = 601
+length = 5
+
+[[boundaries]]
+payload_offset = 606
+length = 6
+
+[[boundaries]]
+payload_offset = 612
+length = 5
+
+[[boundaries]]
+payload_offset = 617
+length = 5
+
+[[boundaries]]
+payload_offset = 622
+length = 3
+
+[[boundaries]]
+payload_offset = 625
+length = 5
+
+[[boundaries]]
+payload_offset = 630
+length = 6
+
+[[boundaries]]
+payload_offset = 636
+length = 6
+
+[[boundaries]]
+payload_offset = 642
+length = 2
+
+[[boundaries]]
+payload_offset = 644
+length = 1
+
+[[boundaries]]
+payload_offset = 645
+length = 3
+
+[[boundaries]]
+payload_offset = 648
+length = 5
+
+[[boundaries]]
+payload_offset = 653
+length = 1
+
+[[boundaries]]
+payload_offset = 654
+length = 1
+
+[[boundaries]]
+payload_offset = 655
+length = 5
+
+[[boundaries]]
+payload_offset = 660
+length = 3
+
+[[boundaries]]
+payload_offset = 663
+length = 6
+
+[[boundaries]]
+payload_offset = 669
+length = 2
+
+[[boundaries]]
+payload_offset = 671
+length = 1
+
+[[boundaries]]
+payload_offset = 672
+length = 5
+
+[[boundaries]]
+payload_offset = 677
+length = 5
+
+[[boundaries]]
+payload_offset = 682
+length = 5
+
+[[boundaries]]
+payload_offset = 687
+length = 3
+
+[[boundaries]]
+payload_offset = 690
+length = 5
+
+[[boundaries]]
+payload_offset = 695
+length = 6
+
+[[boundaries]]
+payload_offset = 701
+length = 6
+
+[[boundaries]]
+payload_offset = 707
+length = 2
+
+[[boundaries]]
+payload_offset = 709
+length = 5
+
+[[boundaries]]
+payload_offset = 714
+length = 5
+
+[[boundaries]]
+payload_offset = 719
+length = 3
+
+[[boundaries]]
+payload_offset = 722
+length = 6
+
+[[boundaries]]
+payload_offset = 728
+length = 2
+
+[[boundaries]]
+payload_offset = 730
+length = 5
+
+[[boundaries]]
+payload_offset = 735
+length = 5
+
+[[boundaries]]
+payload_offset = 740
+length = 6
+
+[[boundaries]]
+payload_offset = 746
+length = 5
+
+[[boundaries]]
+payload_offset = 751
+length = 5
+
+[[boundaries]]
+payload_offset = 756
+length = 3
+
+[[boundaries]]
+payload_offset = 759
+length = 5
+
+[[boundaries]]
+payload_offset = 764
+length = 6
+
+[[boundaries]]
+payload_offset = 770
+length = 6
+
+[[boundaries]]
+payload_offset = 776
+length = 2
+
+[[boundaries]]
+payload_offset = 778
+length = 1
+
+[[boundaries]]
+payload_offset = 779
+length = 3
+
+[[boundaries]]
+payload_offset = 782
+length = 5
+
+[[boundaries]]
+payload_offset = 787
+length = 1
+
+[[boundaries]]
+payload_offset = 788
+length = 1
+
+[[boundaries]]
+payload_offset = 789
+length = 5
+
+[[boundaries]]
+payload_offset = 794
+length = 3
+
+[[boundaries]]
+payload_offset = 797
+length = 6
+
+[[boundaries]]
+payload_offset = 803
+length = 2
+
+[[boundaries]]
+payload_offset = 805
+length = 1
+
+[[boundaries]]
+payload_offset = 806
+length = 5
+
+[[boundaries]]
+payload_offset = 812
+length = 7
+
+[[boundaries]]
+payload_offset = 819
+length = 3
+
+[[boundaries]]
+payload_offset = 822
+length = 7
+
+[[boundaries]]
+payload_offset = 829
+length = 3
+
+[[boundaries]]
+payload_offset = 832
+length = 5
+
+[[boundaries]]
+payload_offset = 837
+length = 5
+
+[[boundaries]]
+payload_offset = 842
+length = 3
+
+[[boundaries]]
+payload_offset = 845
+length = 5
+
+[[boundaries]]
+payload_offset = 850
+length = 5
+
+[[boundaries]]
+payload_offset = 855
+length = 5
+
+[[boundaries]]
+payload_offset = 860
+length = 5
+
+[[boundaries]]
+payload_offset = 865
+length = 3
+
+[[boundaries]]
+payload_offset = 868
+length = 5
+
+[[boundaries]]
+payload_offset = 873
+length = 1
+
+[[boundaries]]
+payload_offset = 874
+length = 1
+
+[[boundaries]]
+payload_offset = 875
+length = 6
+
+[[boundaries]]
+payload_offset = 881
+length = 2
+
+[[boundaries]]
+payload_offset = 883
+length = 5
+
+[[boundaries]]
+payload_offset = 889
+length = 6
+
+[[boundaries]]
+payload_offset = 895
+length = 2
+
+[[boundaries]]
+payload_offset = 897
+length = 3
+
+[[boundaries]]
+payload_offset = 900
+length = 1
+
+[[boundaries]]
+payload_offset = 901
+length = 5
+
+[[boundaries]]
+payload_offset = 907
+length = 6
+
+[[boundaries]]
+payload_offset = 913
+length = 2
+
+[[boundaries]]
+payload_offset = 915
+length = 3
+
+[[boundaries]]
+payload_offset = 918
+length = 1
+
+[[boundaries]]
+payload_offset = 919
+length = 5
+
+[[boundaries]]
+payload_offset = 925
+length = 1
+
+[[boundaries]]
+payload_offset = 926
+length = 3
+
+[[boundaries]]
+payload_offset = 929
+length = 7
+
+[[boundaries]]
+payload_offset = 936
+length = 3
+
+[[boundaries]]
+payload_offset = 939
+length = 5
+
+[[boundaries]]
+payload_offset = 944
+length = 1
+
+[[boundaries]]
+payload_offset = 945
+length = 3
+
+[[boundaries]]
+payload_offset = 948
+length = 1
+
+[[boundaries]]
+payload_offset = 949
+length = 3
+
+[[boundaries]]
+payload_offset = 952
+length = 6
+
+[[boundaries]]
+payload_offset = 958
+length = 2
+
+[[boundaries]]
+payload_offset = 960
+length = 1
+
+[[boundaries]]
+payload_offset = 961
+length = 7
+
+[[boundaries]]
+payload_offset = 968
+length = 3
+
+[[boundaries]]
+payload_offset = 971
+length = 1
+
+[[boundaries]]
+payload_offset = 972
+length = 1
+
+[[boundaries]]
+payload_offset = 973
+length = 1
+
+[[boundaries]]
+payload_offset = 974
+length = 3
+
+[[boundaries]]
+payload_offset = 977
+length = 7
+
+[[boundaries]]
+payload_offset = 984
+length = 7
+
+[[boundaries]]
+payload_offset = 991
+length = 3
+
+[[boundaries]]
+payload_offset = 994
+length = 7
+
+[[boundaries]]
+payload_offset = 1001
+length = 7
+
+[[boundaries]]
+payload_offset = 1008
+length = 3
+
+[[boundaries]]
+payload_offset = 1011
+length = 7
+
+[[boundaries]]
+payload_offset = 1018
+length = 7
+
+[[boundaries]]
+payload_offset = 1025
+length = 3
+
+[[boundaries]]
+payload_offset = 1028
+length = 7
+
+[[boundaries]]
+payload_offset = 1035
+length = 3
+
+[[boundaries]]
+payload_offset = 1038
+length = 5
+
+[[boundaries]]
+payload_offset = 1043
+length = 5
+
+[[boundaries]]
+payload_offset = 1048
+length = 3
+
+[[boundaries]]
+payload_offset = 1051
+length = 6
+
+[[boundaries]]
+payload_offset = 1057
+length = 2
+
+[[boundaries]]
+payload_offset = 1059
+length = 1
+
+[[boundaries]]
+payload_offset = 1060
+length = 3
+
+[[boundaries]]
+payload_offset = 1063
+length = 7
+
+[[boundaries]]
+payload_offset = 1070
+length = 3
+
+[[boundaries]]
+payload_offset = 1073
+length = 5
+
+[[boundaries]]
+payload_offset = 1078
+length = 5
+
+[[boundaries]]
+payload_offset = 1083
+length = 3
+
+[[boundaries]]
+payload_offset = 1086
+length = 6
+
+[[boundaries]]
+payload_offset = 1092
+length = 2
+
+[[boundaries]]
+payload_offset = 1094
+length = 1
+
+[[boundaries]]
+payload_offset = 1095
+length = 5
+
+[[boundaries]]
+payload_offset = 1100
+length = 5
+
+[[boundaries]]
+payload_offset = 1105
+length = 3
+
+[[boundaries]]
+payload_offset = 1108
+length = 1
+
+[[boundaries]]
+payload_offset = 1109
+length = 5
+
+[[boundaries]]
+payload_offset = 1114
+length = 5
+
+[[boundaries]]
+payload_offset = 1119
+length = 6
+
+[[boundaries]]
+payload_offset = 1125
+length = 5
+
+[[boundaries]]
+payload_offset = 1131
+length = 7
+
+[[boundaries]]
+payload_offset = 1138
+length = 3
+
+[[boundaries]]
+payload_offset = 1141
+length = 7
+
+[[boundaries]]
+payload_offset = 1148
+length = 3
+
+[[boundaries]]
+payload_offset = 1151
+length = 7
+
+[[boundaries]]
+payload_offset = 1158
+length = 3
+
+[[boundaries]]
+payload_offset = 1161
+length = 7
+
+[[boundaries]]
+payload_offset = 1168
+length = 3
+
+[[boundaries]]
+payload_offset = 1171
+length = 1
+
+[[boundaries]]
+payload_offset = 1172
+length = 1
+
+[[boundaries]]
+payload_offset = 1173
+length = 5
+
+[[boundaries]]
+payload_offset = 1178
+length = 7
+
+[[boundaries]]
+payload_offset = 1185
+length = 3
+
+[[boundaries]]
+payload_offset = 1188
+length = 5
+
+[[boundaries]]
+payload_offset = 1193
+length = 3
+
+[[boundaries]]
+payload_offset = 1196
+length = 5
+
+[[boundaries]]
+payload_offset = 1201
+length = 5
+
+[[boundaries]]
+payload_offset = 1206
+length = 6
+
+[[boundaries]]
+payload_offset = 1212
+length = 5
+
+[[boundaries]]
+payload_offset = 1217
+length = 6
+
+[[boundaries]]
+payload_offset = 1223
+length = 6
+
+[[boundaries]]
+payload_offset = 1229
+length = 2
+
+[[boundaries]]
+payload_offset = 1231
+length = 1
+
+[[boundaries]]
+payload_offset = 1232
+length = 1
+
+[[boundaries]]
+payload_offset = 1233
+length = 1
+
+[[boundaries]]
+payload_offset = 1234
+length = 6
+
+[[boundaries]]
+payload_offset = 1240
+length = 2
+
+[[boundaries]]
+payload_offset = 1242
+length = 1
+
+[[boundaries]]
+payload_offset = 1243
+length = 1
+
+[[boundaries]]
+payload_offset = 1244
+length = 5
+
+[[boundaries]]
+payload_offset = 1249
+length = 1
+
+[[boundaries]]
+payload_offset = 1250
+length = 5
+
+[[boundaries]]
+payload_offset = 1255
+length = 3
+
+[[boundaries]]
+payload_offset = 1258
+length = 5
+
+[[boundaries]]
+payload_offset = 1263
+length = 6
+
+[[boundaries]]
+payload_offset = 1269
+length = 5
+
+[[boundaries]]
+payload_offset = 1274
+length = 6
+
+[[boundaries]]
+payload_offset = 1280
+length = 5
+
+[[boundaries]]
+payload_offset = 1285
+length = 6
+
+[[boundaries]]
+payload_offset = 1291
+length = 5
+
+[[boundaries]]
+payload_offset = 1296
+length = 6
+
+[[boundaries]]
+payload_offset = 1302
+length = 5
+
+[[boundaries]]
+payload_offset = 1307
+length = 3
+
+[[boundaries]]
+payload_offset = 1310
+length = 1
+
+[[boundaries]]
+payload_offset = 1311
+length = 7
+
+[[boundaries]]
+payload_offset = 1318
+length = 3
+
+[[boundaries]]
+payload_offset = 1321
+length = 7
+
+[[boundaries]]
+payload_offset = 1328
+length = 3
+
+[[boundaries]]
+payload_offset = 1331
+length = 1
+
+[[boundaries]]
+payload_offset = 1332
+length = 5
+
+[[boundaries]]
+payload_offset = 1337
+length = 1
+
+[[boundaries]]
+payload_offset = 1338
+length = 6
+
+[[boundaries]]
+payload_offset = 1344
+length = 2
+
+[[boundaries]]
+payload_offset = 1346
+length = 1
+
+[[boundaries]]
+payload_offset = 1347
+length = 5
+
+[[boundaries]]
+payload_offset = 1352
+length = 1
+
+[[boundaries]]
+payload_offset = 1353
+length = 1
+
+[[boundaries]]
+payload_offset = 1354
+length = 7
+
+[[boundaries]]
+payload_offset = 1361
+length = 7
+
+[[boundaries]]
+payload_offset = 1368
+length = 3
+
+[[boundaries]]
+payload_offset = 1371
+length = 6
+
+[[boundaries]]
+payload_offset = 1377
+length = 2
+
+[[boundaries]]
+payload_offset = 1379
+length = 1
+
+[[boundaries]]
+payload_offset = 1380
+length = 6
+
+[[boundaries]]
+payload_offset = 1386
+length = 2
+
+[[boundaries]]
+payload_offset = 1388
+length = 1
+
+[[boundaries]]
+payload_offset = 1389
+length = 1
+
+[[boundaries]]
+payload_offset = 1390
+length = 5
+
+[[boundaries]]
+payload_offset = 1395
+length = 1
+
+[[boundaries]]
+payload_offset = 1396
+length = 5
+
+[[boundaries]]
+payload_offset = 1401
+length = 3
+
+[[boundaries]]
+payload_offset = 1404
+length = 5
+
+[[boundaries]]
+payload_offset = 1409
+length = 6
+
+[[boundaries]]
+payload_offset = 1415
+length = 5
+
+[[boundaries]]
+payload_offset = 1420
+length = 6
+
+[[boundaries]]
+payload_offset = 1426
+length = 5
+
+[[boundaries]]
+payload_offset = 1431
+length = 3
+
+[[boundaries]]
+payload_offset = 1434
+length = 1
+
+[[boundaries]]
+payload_offset = 1435
+length = 7
+
+[[boundaries]]
+payload_offset = 1442
+length = 3
+
+[[boundaries]]
+payload_offset = 1445
+length = 7
+
+[[boundaries]]
+payload_offset = 1452
+length = 3
+
+[[boundaries]]
+payload_offset = 1455
+length = 1
+
+[[boundaries]]
+payload_offset = 1456
+length = 5
+
+[[boundaries]]
+payload_offset = 1461
+length = 1
+
+[[boundaries]]
+payload_offset = 1462
+length = 6
+
+[[boundaries]]
+payload_offset = 1468
+length = 2
+
+[[boundaries]]
+payload_offset = 1470
+length = 1
+
+[[boundaries]]
+payload_offset = 1471
+length = 5
+
+[[boundaries]]
+payload_offset = 1476
+length = 1
+
+[[boundaries]]
+payload_offset = 1477
+length = 1
+
+[[boundaries]]
+payload_offset = 1478
+length = 7
+
+[[boundaries]]
+payload_offset = 1485
+length = 7
+
+[[boundaries]]
+payload_offset = 1492
+length = 3
+
+[[boundaries]]
+payload_offset = 1495
+length = 6
+
+[[boundaries]]
+payload_offset = 1501
+length = 2
+
+[[boundaries]]
+payload_offset = 1503
+length = 1
+
+[[boundaries]]
+payload_offset = 1504
+length = 5
+
+[[boundaries]]
+payload_offset = 1509
+length = 1
+
+[[boundaries]]
+payload_offset = 1510
+length = 1
+
+[[boundaries]]
+payload_offset = 1511
+length = 5
+
+[[boundaries]]
+payload_offset = 1516
+length = 1
+
+[[boundaries]]
+payload_offset = 1517
+length = 1
+
+[[boundaries]]
+payload_offset = 1518
+length = 5
+
+[[boundaries]]
+payload_offset = 1523
+length = 1
+
+[[boundaries]]
+payload_offset = 1524
+length = 1
+
+[[boundaries]]
+payload_offset = 1525
+length = 5
+
+[[boundaries]]
+payload_offset = 1530
+length = 1
+
+[[boundaries]]
+payload_offset = 1531
+length = 1
+
+[[boundaries]]
+payload_offset = 1532
+length = 5
+
+[[boundaries]]
+payload_offset = 1537
+length = 1
+
+[[boundaries]]
+payload_offset = 1538
+length = 1
+
+[[boundaries]]
+payload_offset = 1539
+length = 5
+
+[[boundaries]]
+payload_offset = 1544
+length = 1
+
+[[boundaries]]
+payload_offset = 1545
+length = 1
+
+[[boundaries]]
+payload_offset = 1546
+length = 1
+
+[[boundaries]]
+payload_offset = 1547
+length = 7
+
+[[boundaries]]
+payload_offset = 1554
+length = 3
+
+[[boundaries]]
+payload_offset = 1557
+length = 5
+
+[[boundaries]]
+payload_offset = 1562
+length = 5
+
+[[boundaries]]
+payload_offset = 1567
+length = 3
+
+[[boundaries]]
+payload_offset = 1570
+length = 1
+
+[[boundaries]]
+payload_offset = 1571
+length = 1
+
+[[boundaries]]
+payload_offset = 1572
+length = 5
+
+[[boundaries]]
+payload_offset = 1577
+length = 3
+
+[[boundaries]]
+payload_offset = 1580
+length = 5
+
+[[boundaries]]
+payload_offset = 1585
+length = 5
+
+[[boundaries]]
+payload_offset = 1590
+length = 6
+
+[[boundaries]]
+payload_offset = 1596
+length = 5
+
+[[boundaries]]
+payload_offset = 1601
+length = 6
+
+[[boundaries]]
+payload_offset = 1607
+length = 5
+
+[[boundaries]]
+payload_offset = 1612
+length = 6
+
+[[boundaries]]
+payload_offset = 1618
+length = 1
+
+[[boundaries]]
+payload_offset = 1619
+length = 1
+
+[[boundaries]]
+payload_offset = 1620
+length = 5
+
+[[boundaries]]
+payload_offset = 1625
+length = 3
+
+[[boundaries]]
+payload_offset = 1628
+length = 6
+
+[[boundaries]]
+payload_offset = 1634
+length = 2
+
+[[boundaries]]
+payload_offset = 1636
+length = 1
+
+[[boundaries]]
+payload_offset = 1637
+length = 1
+
+[[boundaries]]
+payload_offset = 1638
+length = 1
+
+[[boundaries]]
+payload_offset = 1639
+length = 1
+
+[[boundaries]]
+payload_offset = 1640
+length = 1
+
+[[boundaries]]
+payload_offset = 1641
+length = 1
+
+[[boundaries]]
+payload_offset = 1642
+length = 6
+
+[[boundaries]]
+payload_offset = 1648
+length = 2
+
+[[boundaries]]
+payload_offset = 1650
+length = 1
+
+[[boundaries]]
+payload_offset = 1651
+length = 1
+
+[[boundaries]]
+payload_offset = 1652
+length = 1
+
+[[boundaries]]
+payload_offset = 1653
+length = 5
+
+[[boundaries]]
+payload_offset = 1658
+length = 3
+
+[[boundaries]]
+payload_offset = 1661
+length = 5
+
+[[boundaries]]
+payload_offset = 1666
+length = 6
+
+[[boundaries]]
+payload_offset = 1672
+length = 5
+
+[[boundaries]]
+payload_offset = 1677
+length = 6
+
+[[boundaries]]
+payload_offset = 1683
+length = 3
+
+[[boundaries]]
+payload_offset = 1686
+length = 1
+
+[[boundaries]]
+payload_offset = 1687
+length = 6
+
+[[boundaries]]
+payload_offset = 1693
+length = 2
+
+[[boundaries]]
+payload_offset = 1695
+length = 1
+
+[[boundaries]]
+payload_offset = 1696
+length = 1
+
+[[boundaries]]
+payload_offset = 1697
+length = 7
+
+[[boundaries]]
+payload_offset = 1704
+length = 3
+
+[[boundaries]]
+payload_offset = 1707
+length = 1
+
+[[boundaries]]
+payload_offset = 1708
+length = 1
+
+[[boundaries]]
+payload_offset = 1709
+length = 1
+
+[[boundaries]]
+payload_offset = 1710
+length = 6
+
+[[boundaries]]
+payload_offset = 1716
+length = 2
+
+[[boundaries]]
+payload_offset = 1718
+length = 1
+
+[[boundaries]]
+payload_offset = 1719
+length = 1
+
+[[boundaries]]
+payload_offset = 1720
+length = 1
+
+[[boundaries]]
+payload_offset = 1721
+length = 1
+
+[[boundaries]]
+payload_offset = 1722
+length = 6
+
+[[boundaries]]
+payload_offset = 1728
+length = 2
+
+[[boundaries]]
+payload_offset = 1730
+length = 1
+
+[[boundaries]]
+payload_offset = 1731
+length = 1
+
+[[boundaries]]
+payload_offset = 1732
+length = 1
+
+[[boundaries]]
+payload_offset = 1733
+length = 1
+
+[[boundaries]]
+payload_offset = 1734
+length = 6
+
+[[boundaries]]
+payload_offset = 1740
+length = 2
+
+[[boundaries]]
+payload_offset = 1742
+length = 1
+
+[[boundaries]]
+payload_offset = 1743
+length = 1
+
+[[boundaries]]
+payload_offset = 1744
+length = 7
+
+[[boundaries]]
+payload_offset = 1751
+length = 3
+
+[[boundaries]]
+payload_offset = 1754
+length = 1
+
+[[boundaries]]
+payload_offset = 1755
+length = 9
+
+[[boundaries]]
+payload_offset = 1764
+length = 9
+
+[[boundaries]]
+payload_offset = 1773
+length = 9
+
+[[boundaries]]
+payload_offset = 1782
+length = 9
+
+[[boundaries]]
+payload_offset = 1791
+length = 9
+
+[[boundaries]]
+payload_offset = 1800
+length = 9
+
+[[boundaries]]
+payload_offset = 1809
+length = 9
+
+[[boundaries]]
+payload_offset = 1818
+length = 3
+
+[[boundaries]]
+payload_offset = 1821
+length = 1
+
+[[boundaries]]
+payload_offset = 1822
+length = 9
+
+[[boundaries]]
+payload_offset = 1831
+length = 9
+
+[[boundaries]]
+payload_offset = 1840
+length = 9
+
+[[boundaries]]
+payload_offset = 1849
+length = 9
+
+[[boundaries]]
+payload_offset = 1858
+length = 9
+
+[[boundaries]]
+payload_offset = 1867
+length = 9
+
+[[boundaries]]
+payload_offset = 1876
+length = 9
+
+[[boundaries]]
+payload_offset = 1885
+length = 3
+
+[[boundaries]]
+payload_offset = 1888
+length = 1
+
+[[boundaries]]
+payload_offset = 1889
+length = 9
+
+[[boundaries]]
+payload_offset = 1898
+length = 9
+
+[[boundaries]]
+payload_offset = 1907
+length = 9
+
+[[boundaries]]
+payload_offset = 1916
+length = 9
+
+[[boundaries]]
+payload_offset = 1925
+length = 9
+
+[[boundaries]]
+payload_offset = 1934
+length = 9
+
+[[boundaries]]
+payload_offset = 1943
+length = 9
+
+[[boundaries]]
+payload_offset = 1952
+length = 3
+
+[[boundaries]]
+payload_offset = 1955
+length = 1
+
+[[boundaries]]
+payload_offset = 1956
+length = 9
+
+[[boundaries]]
+payload_offset = 1965
+length = 9
+
+[[boundaries]]
+payload_offset = 1974
+length = 9
+
+[[boundaries]]
+payload_offset = 1983
+length = 9
+
+[[boundaries]]
+payload_offset = 1992
+length = 9
+
+[[boundaries]]
+payload_offset = 2001
+length = 9
+
+[[boundaries]]
+payload_offset = 2010
+length = 9
+
+[[boundaries]]
+payload_offset = 2019
+length = 3
+
+[[boundaries]]
+payload_offset = 2022
+length = 1

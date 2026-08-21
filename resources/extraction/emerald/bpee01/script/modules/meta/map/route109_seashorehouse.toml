@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 14
 reloc_count = 31
+instruction_count = 100
 
 [[segments]]
 kind = "bytecode"
@@ -144,6 +145,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route109-seashorehouse"
 target_export = "Route109_SeashoreHouse_EventScript_AlreadyReceivedSodaPop"
 target_offset = 108
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 102
 runtime_resolution_required = true
 
 [[relocs]]
@@ -154,6 +157,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route109-seashorehouse"
 target_export = "Route109_SeashoreHouse_EventScript_DefeatedTrainers"
 target_offset = 62
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 56
 runtime_resolution_required = true
 
 [[relocs]]
@@ -164,6 +169,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route109-seashorehouse"
 target_export = "Route109_SeashoreHouse_EventScript_AlreadyGaveIntroduction"
 target_offset = 52
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 46
 runtime_resolution_required = true
 
 [[relocs]]
@@ -173,6 +180,8 @@ original_encoded_gba = 0x8269555
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route109-seashorehouse"
 target_export = "Route109_SeashoreHouse_Text_SeashoreHouseIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -182,6 +191,8 @@ original_encoded_gba = 0x8269635
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route109-seashorehouse"
 target_export = "Route109_SeashoreHouse_Text_ShowMeSomeHotMatches"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -191,6 +202,8 @@ original_encoded_gba = 0x8269685
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route109-seashorehouse"
 target_export = "Route109_SeashoreHouse_Text_TakeTheseSodaPopBottles"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -201,6 +214,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route109-seashorehouse"
 target_export = "Route109_SeashoreHouse_EventScript_BagFull"
 target_offset = 98
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 92
 runtime_resolution_required = true
 
 [[relocs]]
@@ -210,6 +225,8 @@ original_encoded_gba = 0x826973a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route109-seashorehouse"
 target_export = "Route109_SeashoreHouse_Text_BagFull"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -219,6 +236,8 @@ original_encoded_gba = 0x826977e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route109-seashorehouse"
 target_export = "Route109_SeashoreHouse_Text_WantToBuySodaPop"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -229,6 +248,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route109-seashorehouse"
 target_export = "Route109_SeashoreHouse_EventScript_BuySodaPop"
 target_offset = 144
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 138
 runtime_resolution_required = true
 
 [[relocs]]
@@ -238,6 +259,8 @@ original_encoded_gba = 0x82697ef
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route109-seashorehouse"
 target_export = "Route109_SeashoreHouse_Text_ThatsTooBad"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -248,6 +271,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route109-seashorehouse"
 target_export = "Route109_SeashoreHouse_EventScript_NotEnoughMoney"
 target_offset = 212
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 206
 runtime_resolution_required = true
 
 [[relocs]]
@@ -258,6 +283,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route109-seashorehouse"
 target_export = "Route109_SeashoreHouse_EventScript_NotEnoughSpace"
 target_offset = 225
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 219
 runtime_resolution_required = true
 
 [[relocs]]
@@ -267,6 +294,8 @@ original_encoded_gba = 0x82697c8
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route109-seashorehouse"
 target_export = "Route109_SeashoreHouse_Text_HereYouGo"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -276,6 +305,8 @@ original_encoded_gba = 0x82697d5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route109-seashorehouse"
 target_export = "Route109_SeashoreHouse_Text_NotEnoughMoney"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -285,6 +316,8 @@ original_encoded_gba = 0x8272ad0
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/obtain-item"
 target_export = "gText_TooBadBagIsFull"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -294,6 +327,8 @@ original_encoded_gba = 0x8269803
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route109-seashorehouse"
 target_export = "Route109_SeashoreHouse_Text_DwayneIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -303,6 +338,8 @@ original_encoded_gba = 0x8269867
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route109-seashorehouse"
 target_export = "Route109_SeashoreHouse_Text_DwayneDefeated"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -313,6 +350,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route109-seashorehouse"
 target_export = "Route109_SeashoreHouse_EventScript_CheckTrainersCompletion"
 target_offset = 319
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 313
 runtime_resolution_required = true
 
 [[relocs]]
@@ -322,6 +361,8 @@ original_encoded_gba = 0x826989d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route109-seashorehouse"
 target_export = "Route109_SeashoreHouse_Text_DwaynePostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -331,6 +372,8 @@ original_encoded_gba = 0x82698e3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route109-seashorehouse"
 target_export = "Route109_SeashoreHouse_Text_JohannaIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -340,6 +383,8 @@ original_encoded_gba = 0x8269947
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route109-seashorehouse"
 target_export = "Route109_SeashoreHouse_Text_JohannaDefeated"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -350,6 +395,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route109-seashorehouse"
 target_export = "Route109_SeashoreHouse_EventScript_CheckTrainersCompletion"
 target_offset = 319
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 313
 runtime_resolution_required = true
 
 [[relocs]]
@@ -359,6 +406,8 @@ original_encoded_gba = 0x8269953
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route109-seashorehouse"
 target_export = "Route109_SeashoreHouse_Text_JohannaPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -368,6 +417,8 @@ original_encoded_gba = 0x8269986
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route109-seashorehouse"
 target_export = "Route109_SeashoreHouse_Text_SimonIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -377,6 +428,8 @@ original_encoded_gba = 0x82699c5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route109-seashorehouse"
 target_export = "Route109_SeashoreHouse_Text_SimonDefeated"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -387,6 +440,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route109-seashorehouse"
 target_export = "Route109_SeashoreHouse_EventScript_CheckTrainersCompletion"
 target_offset = 319
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 313
 runtime_resolution_required = true
 
 [[relocs]]
@@ -396,6 +451,8 @@ original_encoded_gba = 0x82699df
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route109-seashorehouse"
 target_export = "Route109_SeashoreHouse_Text_SimonPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -406,6 +463,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route109-seashorehouse"
 target_export = "Route109_SeashoreHouse_EventScript_TrainersNotCompleted"
 target_offset = 351
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 345
 runtime_resolution_required = true
 
 [[relocs]]
@@ -416,6 +475,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route109-seashorehouse"
 target_export = "Route109_SeashoreHouse_EventScript_TrainersNotCompleted"
 target_offset = 351
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 345
 runtime_resolution_required = true
 
 [[relocs]]
@@ -426,4 +487,406 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route109-seashorehouse"
 target_export = "Route109_SeashoreHouse_EventScript_TrainersNotCompleted"
 target_offset = 351
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 345
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 1
+
+[[boundaries]]
+payload_offset = 4
+length = 1
+
+[[boundaries]]
+payload_offset = 5
+length = 1
+
+[[boundaries]]
+payload_offset = 6
+length = 3
+
+[[boundaries]]
+payload_offset = 9
+length = 6
+
+[[boundaries]]
+payload_offset = 15
+length = 3
+
+[[boundaries]]
+payload_offset = 18
+length = 6
+
+[[boundaries]]
+payload_offset = 24
+length = 3
+
+[[boundaries]]
+payload_offset = 27
+length = 6
+
+[[boundaries]]
+payload_offset = 33
+length = 6
+
+[[boundaries]]
+payload_offset = 39
+length = 2
+
+[[boundaries]]
+payload_offset = 41
+length = 3
+
+[[boundaries]]
+payload_offset = 44
+length = 1
+
+[[boundaries]]
+payload_offset = 45
+length = 1
+
+[[boundaries]]
+payload_offset = 46
+length = 6
+
+[[boundaries]]
+payload_offset = 52
+length = 2
+
+[[boundaries]]
+payload_offset = 54
+length = 1
+
+[[boundaries]]
+payload_offset = 55
+length = 1
+
+[[boundaries]]
+payload_offset = 56
+length = 6
+
+[[boundaries]]
+payload_offset = 62
+length = 2
+
+[[boundaries]]
+payload_offset = 64
+length = 5
+
+[[boundaries]]
+payload_offset = 69
+length = 5
+
+[[boundaries]]
+payload_offset = 74
+length = 2
+
+[[boundaries]]
+payload_offset = 76
+length = 5
+
+[[boundaries]]
+payload_offset = 81
+length = 6
+
+[[boundaries]]
+payload_offset = 87
+length = 3
+
+[[boundaries]]
+payload_offset = 90
+length = 1
+
+[[boundaries]]
+payload_offset = 91
+length = 1
+
+[[boundaries]]
+payload_offset = 92
+length = 6
+
+[[boundaries]]
+payload_offset = 98
+length = 2
+
+[[boundaries]]
+payload_offset = 100
+length = 1
+
+[[boundaries]]
+payload_offset = 101
+length = 1
+
+[[boundaries]]
+payload_offset = 102
+length = 4
+
+[[boundaries]]
+payload_offset = 106
+length = 6
+
+[[boundaries]]
+payload_offset = 112
+length = 2
+
+[[boundaries]]
+payload_offset = 114
+length = 5
+
+[[boundaries]]
+payload_offset = 119
+length = 6
+
+[[boundaries]]
+payload_offset = 125
+length = 6
+
+[[boundaries]]
+payload_offset = 131
+length = 2
+
+[[boundaries]]
+payload_offset = 133
+length = 1
+
+[[boundaries]]
+payload_offset = 134
+length = 1
+
+[[boundaries]]
+payload_offset = 135
+length = 1
+
+[[boundaries]]
+payload_offset = 136
+length = 1
+
+[[boundaries]]
+payload_offset = 137
+length = 1
+
+[[boundaries]]
+payload_offset = 138
+length = 6
+
+[[boundaries]]
+payload_offset = 144
+length = 5
+
+[[boundaries]]
+payload_offset = 149
+length = 6
+
+[[boundaries]]
+payload_offset = 155
+length = 5
+
+[[boundaries]]
+payload_offset = 160
+length = 5
+
+[[boundaries]]
+payload_offset = 165
+length = 6
+
+[[boundaries]]
+payload_offset = 171
+length = 6
+
+[[boundaries]]
+payload_offset = 177
+length = 2
+
+[[boundaries]]
+payload_offset = 179
+length = 6
+
+[[boundaries]]
+payload_offset = 185
+length = 4
+
+[[boundaries]]
+payload_offset = 189
+length = 5
+
+[[boundaries]]
+payload_offset = 194
+length = 5
+
+[[boundaries]]
+payload_offset = 199
+length = 2
+
+[[boundaries]]
+payload_offset = 201
+length = 1
+
+[[boundaries]]
+payload_offset = 202
+length = 1
+
+[[boundaries]]
+payload_offset = 203
+length = 1
+
+[[boundaries]]
+payload_offset = 204
+length = 1
+
+[[boundaries]]
+payload_offset = 205
+length = 1
+
+[[boundaries]]
+payload_offset = 206
+length = 6
+
+[[boundaries]]
+payload_offset = 212
+length = 2
+
+[[boundaries]]
+payload_offset = 214
+length = 1
+
+[[boundaries]]
+payload_offset = 215
+length = 1
+
+[[boundaries]]
+payload_offset = 216
+length = 1
+
+[[boundaries]]
+payload_offset = 217
+length = 1
+
+[[boundaries]]
+payload_offset = 218
+length = 1
+
+[[boundaries]]
+payload_offset = 219
+length = 6
+
+[[boundaries]]
+payload_offset = 225
+length = 2
+
+[[boundaries]]
+payload_offset = 227
+length = 1
+
+[[boundaries]]
+payload_offset = 228
+length = 1
+
+[[boundaries]]
+payload_offset = 229
+length = 1
+
+[[boundaries]]
+payload_offset = 230
+length = 1
+
+[[boundaries]]
+payload_offset = 231
+length = 1
+
+[[boundaries]]
+payload_offset = 232
+length = 18
+
+[[boundaries]]
+payload_offset = 250
+length = 6
+
+[[boundaries]]
+payload_offset = 256
+length = 2
+
+[[boundaries]]
+payload_offset = 258
+length = 1
+
+[[boundaries]]
+payload_offset = 259
+length = 18
+
+[[boundaries]]
+payload_offset = 277
+length = 6
+
+[[boundaries]]
+payload_offset = 283
+length = 2
+
+[[boundaries]]
+payload_offset = 285
+length = 1
+
+[[boundaries]]
+payload_offset = 286
+length = 18
+
+[[boundaries]]
+payload_offset = 304
+length = 6
+
+[[boundaries]]
+payload_offset = 310
+length = 2
+
+[[boundaries]]
+payload_offset = 312
+length = 1
+
+[[boundaries]]
+payload_offset = 313
+length = 3
+
+[[boundaries]]
+payload_offset = 316
+length = 6
+
+[[boundaries]]
+payload_offset = 322
+length = 3
+
+[[boundaries]]
+payload_offset = 325
+length = 6
+
+[[boundaries]]
+payload_offset = 331
+length = 3
+
+[[boundaries]]
+payload_offset = 334
+length = 6
+
+[[boundaries]]
+payload_offset = 340
+length = 3
+
+[[boundaries]]
+payload_offset = 343
+length = 1
+
+[[boundaries]]
+payload_offset = 344
+length = 1
+
+[[boundaries]]
+payload_offset = 345
+length = 1
+
+[[boundaries]]
+payload_offset = 346
+length = 1

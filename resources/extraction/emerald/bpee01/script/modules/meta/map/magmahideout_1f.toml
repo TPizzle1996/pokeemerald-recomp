@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 3
 reloc_count = 6
+instruction_count = 10
 
 [[segments]]
 kind = "bytecode"
@@ -55,6 +56,8 @@ original_encoded_gba = 0x82398ba
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/magmahideout-1f"
 target_export = "MagmaHideout_1F_Text_Grunt1Intro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -64,6 +67,8 @@ original_encoded_gba = 0x8239964
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/magmahideout-1f"
 target_export = "MagmaHideout_1F_Text_Grunt1Defeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -73,6 +78,8 @@ original_encoded_gba = 0x82399b1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/magmahideout-1f"
 target_export = "MagmaHideout_1F_Text_Grunt1PostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -82,6 +89,8 @@ original_encoded_gba = 0x82399f5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/magmahideout-1f"
 target_export = "MagmaHideout_1F_Text_Grunt2Intro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -91,6 +100,8 @@ original_encoded_gba = 0x8239aba
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/magmahideout-1f"
 target_export = "MagmaHideout_1F_Text_Grunt2Defeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -100,4 +111,46 @@ original_encoded_gba = 0x8239acd
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/magmahideout-1f"
 target_export = "MagmaHideout_1F_Text_Grunt2PostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 5
+
+[[boundaries]]
+payload_offset = 5
+length = 1
+
+[[boundaries]]
+payload_offset = 6
+length = 14
+
+[[boundaries]]
+payload_offset = 20
+length = 6
+
+[[boundaries]]
+payload_offset = 26
+length = 2
+
+[[boundaries]]
+payload_offset = 28
+length = 1
+
+[[boundaries]]
+payload_offset = 29
+length = 14
+
+[[boundaries]]
+payload_offset = 43
+length = 6
+
+[[boundaries]]
+payload_offset = 49
+length = 2
+
+[[boundaries]]
+payload_offset = 51
+length = 1

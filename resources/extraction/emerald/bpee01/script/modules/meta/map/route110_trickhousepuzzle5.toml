@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 114
 reloc_count = 243
+instruction_count = 632
 
 [[segments]]
 kind = "bytecode"
@@ -944,6 +945,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_FoundScroll"
 target_offset = 55
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 49
 runtime_resolution_required = true
 
 [[relocs]]
@@ -954,6 +957,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhouseentrance"
 target_export = "Route110_TrickHousePuzzle_EventScript_ReadScrollAgain"
 target_offset = 2443
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2331
 runtime_resolution_required = true
 
 [[relocs]]
@@ -964,6 +969,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhouseentrance"
 target_export = "Route110_TrickHousePuzzle_EventScript_FoundScroll"
 target_offset = 2453
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2341
 runtime_resolution_required = true
 
 [[relocs]]
@@ -973,6 +980,8 @@ original_encoded_gba = 0x827259e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceplayer"
 target_export = "Common_Movement_FacePlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -983,6 +992,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_CorrectGoThrough"
 target_offset = 1722
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1716
 runtime_resolution_required = true
 
 [[relocs]]
@@ -993,6 +1004,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll1Activate"
 target_offset = 507
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 501
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1002,6 +1015,8 @@ original_encoded_gba = 0x827259e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceplayer"
 target_export = "Common_Movement_FacePlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1012,6 +1027,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_CorrectGoThrough"
 target_offset = 1722
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1716
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1022,6 +1039,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate"
 target_offset = 634
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 628
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1031,6 +1050,8 @@ original_encoded_gba = 0x827259e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceplayer"
 target_export = "Common_Movement_FacePlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1041,6 +1062,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_CorrectGoThrough"
 target_offset = 1722
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1716
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1051,6 +1074,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll3Activate"
 target_offset = 772
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 766
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1060,6 +1085,8 @@ original_encoded_gba = 0x827259e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceplayer"
 target_export = "Common_Movement_FacePlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1070,6 +1097,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_CorrectGoThrough"
 target_offset = 1722
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1716
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1080,6 +1109,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate"
 target_offset = 899
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 893
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1089,6 +1120,8 @@ original_encoded_gba = 0x827259e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceplayer"
 target_export = "Common_Movement_FacePlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1099,6 +1132,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_CorrectGoThrough"
 target_offset = 1722
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1716
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1109,6 +1144,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll5Activate"
 target_offset = 1026
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1020
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1119,6 +1156,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll1Activate"
 target_offset = 507
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 501
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1129,6 +1168,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll1Activate"
 target_offset = 507
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 501
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1139,6 +1180,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll1Activate"
 target_offset = 507
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 501
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1149,6 +1192,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll1Activate"
 target_offset = 507
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 501
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1159,6 +1204,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll1Activate"
 target_offset = 507
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 501
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1169,6 +1216,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate"
 target_offset = 634
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 628
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1179,6 +1228,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate"
 target_offset = 634
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 628
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1189,6 +1240,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate"
 target_offset = 634
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 628
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1199,6 +1252,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate"
 target_offset = 634
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 628
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1209,6 +1264,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate"
 target_offset = 634
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 628
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1219,6 +1276,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll2Activate"
 target_offset = 634
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 628
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1229,6 +1288,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll3Activate"
 target_offset = 772
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 766
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1239,6 +1300,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll3Activate"
 target_offset = 772
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 766
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1249,6 +1312,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll3Activate"
 target_offset = 772
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 766
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1259,6 +1324,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll3Activate"
 target_offset = 772
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 766
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1269,6 +1336,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll3Activate"
 target_offset = 772
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 766
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1279,6 +1348,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate"
 target_offset = 899
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 893
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1289,6 +1360,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate"
 target_offset = 899
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 893
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1299,6 +1372,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate"
 target_offset = 899
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 893
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1309,6 +1384,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate"
 target_offset = 899
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 893
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1319,6 +1396,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate"
 target_offset = 899
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 893
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1329,6 +1408,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll4Activate"
 target_offset = 899
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 893
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1339,6 +1420,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll5Activate"
 target_offset = 1026
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1020
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1348,6 +1431,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1357,6 +1442,8 @@ original_encoded_gba = 0x827259a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-delay48"
 target_export = "Common_Movement_Delay48"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1367,6 +1454,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft1"
 target_offset = 1732
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1726
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1377,6 +1466,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft2"
 target_offset = 1788
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1782
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1387,6 +1478,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft3"
 target_offset = 1844
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1838
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1397,6 +1490,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft4"
 target_offset = 1900
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1894
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1406,6 +1501,8 @@ original_encoded_gba = 0x826d6ce
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_Text_Mechadoll1Intro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1416,6 +1513,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll1Quiz1"
 target_offset = 1109
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1103
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1426,6 +1525,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll1Quiz2"
 target_offset = 1144
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1138
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1436,6 +1537,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll1Quiz3"
 target_offset = 1179
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1173
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1445,6 +1548,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1454,6 +1559,8 @@ original_encoded_gba = 0x827259a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-delay48"
 target_export = "Common_Movement_Delay48"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1464,6 +1571,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight1"
 target_offset = 2012
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2006
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1474,6 +1583,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight2"
 target_offset = 2068
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2062
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1484,6 +1595,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight3"
 target_offset = 2124
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2118
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1494,6 +1607,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight4"
 target_offset = 2180
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2174
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1504,6 +1619,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_MechadollWalkRight5"
 target_offset = 2236
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2230
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1513,6 +1630,8 @@ original_encoded_gba = 0x826d8ea
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_Text_Mechadoll2Intro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1523,6 +1642,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll2Quiz1"
 target_offset = 1214
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1208
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1533,6 +1654,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll2Quiz2"
 target_offset = 1249
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1243
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1543,6 +1666,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll2Quiz3"
 target_offset = 1284
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1278
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1552,6 +1677,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1561,6 +1688,8 @@ original_encoded_gba = 0x827259a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-delay48"
 target_export = "Common_Movement_Delay48"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1571,6 +1700,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft1"
 target_offset = 1732
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1726
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1581,6 +1712,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft2"
 target_offset = 1788
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1782
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1591,6 +1724,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft3"
 target_offset = 1844
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1838
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1601,6 +1736,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft4"
 target_offset = 1900
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1894
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1610,6 +1747,8 @@ original_encoded_gba = 0x826da1e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_Text_Mechadoll3Intro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1620,6 +1759,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll3Quiz1"
 target_offset = 1319
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1313
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1630,6 +1771,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll3Quiz2"
 target_offset = 1354
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1348
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1640,6 +1783,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll3Quiz3"
 target_offset = 1389
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1383
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1649,6 +1794,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1658,6 +1805,8 @@ original_encoded_gba = 0x827259a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-delay48"
 target_export = "Common_Movement_Delay48"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1668,6 +1817,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft1"
 target_offset = 1732
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1726
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1678,6 +1829,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft2"
 target_offset = 1788
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1782
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1688,6 +1841,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft3"
 target_offset = 1844
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1838
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1698,6 +1853,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_MechadollWalkLeft4"
 target_offset = 1900
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1894
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1707,6 +1864,8 @@ original_encoded_gba = 0x826db4c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_Text_Mechadoll4Intro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1717,6 +1876,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll4Quiz1"
 target_offset = 1424
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1418
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1727,6 +1888,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll4Quiz2"
 target_offset = 1459
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1453
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1737,6 +1900,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll4Quiz3"
 target_offset = 1494
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1488
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1746,6 +1911,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1755,6 +1922,8 @@ original_encoded_gba = 0x827259a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-delay48"
 target_export = "Common_Movement_Delay48"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1764,6 +1933,8 @@ original_encoded_gba = 0x826dc78
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_Text_Mechadoll5Intro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1774,6 +1945,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll5Quiz1"
 target_offset = 1529
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1523
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1784,6 +1957,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll5Quiz2"
 target_offset = 1564
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1558
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1794,6 +1969,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll5Quiz3"
 target_offset = 1599
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1593
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1803,6 +1980,8 @@ original_encoded_gba = 0x826d757
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_Text_Mechadoll1Quiz1"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1813,6 +1992,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_CorrectAnswer"
 target_offset = 1712
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1706
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1823,6 +2004,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer"
 target_offset = 1634
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1628
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1832,6 +2015,8 @@ original_encoded_gba = 0x826d7aa
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_Text_Mechadoll1Quiz2"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1842,6 +2027,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_CorrectAnswer"
 target_offset = 1712
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1706
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1852,6 +2039,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer"
 target_offset = 1634
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1628
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1861,6 +2050,8 @@ original_encoded_gba = 0x826d7fc
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_Text_Mechadoll1Quiz3"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1871,6 +2062,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_CorrectAnswer"
 target_offset = 1712
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1706
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1881,6 +2074,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer"
 target_offset = 1634
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1628
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1890,6 +2085,8 @@ original_encoded_gba = 0x826d940
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_Text_Mechadoll2Quiz1"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1900,6 +2097,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_CorrectAnswer"
 target_offset = 1712
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1706
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1910,6 +2109,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer"
 target_offset = 1634
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1628
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1919,6 +2120,8 @@ original_encoded_gba = 0x826d98c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_Text_Mechadoll2Quiz2"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1929,6 +2132,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_CorrectAnswer"
 target_offset = 1712
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1706
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1939,6 +2144,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer"
 target_offset = 1634
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1628
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1948,6 +2155,8 @@ original_encoded_gba = 0x826d9ce
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_Text_Mechadoll2Quiz3"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1958,6 +2167,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_CorrectAnswer"
 target_offset = 1712
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1706
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1968,6 +2179,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer"
 target_offset = 1634
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1628
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1977,6 +2190,8 @@ original_encoded_gba = 0x826da64
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_Text_Mechadoll3Quiz1"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1987,6 +2202,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_CorrectAnswer"
 target_offset = 1712
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1706
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1997,6 +2214,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer"
 target_offset = 1634
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1628
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2006,6 +2225,8 @@ original_encoded_gba = 0x826daad
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_Text_Mechadoll3Quiz2"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2016,6 +2237,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_CorrectAnswer"
 target_offset = 1712
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1706
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2026,6 +2249,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer"
 target_offset = 1634
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1628
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2035,6 +2260,8 @@ original_encoded_gba = 0x826daff
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_Text_Mechadoll3Quiz3"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2045,6 +2272,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_CorrectAnswer"
 target_offset = 1712
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1706
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2055,6 +2284,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer"
 target_offset = 1634
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1628
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2064,6 +2295,8 @@ original_encoded_gba = 0x826db94
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_Text_Mechadoll4Quiz1"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2074,6 +2307,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_CorrectAnswer"
 target_offset = 1712
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1706
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2084,6 +2319,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer"
 target_offset = 1634
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1628
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2093,6 +2330,8 @@ original_encoded_gba = 0x826dbd7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_Text_Mechadoll4Quiz2"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2103,6 +2342,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_CorrectAnswer"
 target_offset = 1712
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1706
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2113,6 +2354,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer"
 target_offset = 1634
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1628
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2122,6 +2365,8 @@ original_encoded_gba = 0x826dc2a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_Text_Mechadoll4Quiz3"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2132,6 +2377,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_CorrectAnswer"
 target_offset = 1712
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1706
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2142,6 +2389,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer"
 target_offset = 1634
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1628
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2151,6 +2400,8 @@ original_encoded_gba = 0x826dccb
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_Text_Mechadoll5Quiz1"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2161,6 +2412,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_CorrectAnswer"
 target_offset = 1712
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1706
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2171,6 +2424,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer"
 target_offset = 1634
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1628
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2180,6 +2435,8 @@ original_encoded_gba = 0x826dd1b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_Text_Mechadoll5Quiz2"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2190,6 +2447,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_CorrectAnswer"
 target_offset = 1712
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1706
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2200,6 +2459,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer"
 target_offset = 1634
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1628
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2209,6 +2470,8 @@ original_encoded_gba = 0x826dd5f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_Text_Mechadoll5Quiz3"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2219,6 +2482,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_CorrectAnswer"
 target_offset = 1712
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1706
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2229,6 +2494,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_IncorrectAnswer"
 target_offset = 1634
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1628
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2238,6 +2505,8 @@ original_encoded_gba = 0x826d883
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_Text_DisappointmentError"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2247,6 +2516,8 @@ original_encoded_gba = 0x826d632
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-mechadollshake"
 target_export = "Route110_TrickHousePuzzle5_Movement_MechadollShake"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2256,6 +2527,8 @@ original_encoded_gba = 0x826d632
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-mechadollshake"
 target_export = "Route110_TrickHousePuzzle5_Movement_MechadollShake"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2265,6 +2538,8 @@ original_encoded_gba = 0x826d632
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-mechadollshake"
 target_export = "Route110_TrickHousePuzzle5_Movement_MechadollShake"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2274,6 +2549,8 @@ original_encoded_gba = 0x826d632
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-mechadollshake"
 target_export = "Route110_TrickHousePuzzle5_Movement_MechadollShake"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2283,6 +2560,8 @@ original_encoded_gba = 0x826d632
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-mechadollshake"
 target_export = "Route110_TrickHousePuzzle5_Movement_MechadollShake"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2292,6 +2571,8 @@ original_encoded_gba = 0x826d8a1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_Text_Wahahahaha"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2301,6 +2582,8 @@ original_encoded_gba = 0x826d8c9
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_Text_WaitForNextChallenge"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2311,6 +2594,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_CorrectGoThrough"
 target_offset = 1722
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1716
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2320,6 +2605,8 @@ original_encoded_gba = 0x826d84d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_Text_CorrectGoThrough"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2330,6 +2617,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkLeft1"
 target_offset = 2292
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2286
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2340,6 +2629,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkLeft1"
 target_offset = 2303
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2297
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2350,6 +2641,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkLeft1"
 target_offset = 2314
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2308
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2360,6 +2653,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkLeft1"
 target_offset = 2325
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2319
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2370,6 +2665,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkLeft1"
 target_offset = 2336
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2330
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2380,6 +2677,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkLeft2"
 target_offset = 2347
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2341
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2390,6 +2689,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkLeft2"
 target_offset = 2358
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2352
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2400,6 +2701,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkLeft2"
 target_offset = 2369
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2363
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2410,6 +2713,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkLeft2"
 target_offset = 2380
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2374
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2420,6 +2725,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkLeft2"
 target_offset = 2391
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2385
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2430,6 +2737,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkLeft3"
 target_offset = 2402
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2396
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2440,6 +2749,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkLeft3"
 target_offset = 2413
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2407
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2450,6 +2761,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkLeft3"
 target_offset = 2424
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2418
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2460,6 +2773,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkLeft3"
 target_offset = 2435
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2429
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2470,6 +2785,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkLeft3"
 target_offset = 2446
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2440
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2480,6 +2797,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkLeft4"
 target_offset = 2457
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2451
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2490,6 +2809,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkLeft4"
 target_offset = 2468
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2462
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2500,6 +2821,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkLeft4"
 target_offset = 2479
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2473
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2510,6 +2833,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkLeft4"
 target_offset = 2490
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2484
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2520,6 +2845,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkLeft4"
 target_offset = 2501
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2495
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2530,6 +2857,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkLeft5"
 target_offset = 2512
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2506
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2540,6 +2869,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkLeft5"
 target_offset = 2523
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2517
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2550,6 +2881,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkLeft5"
 target_offset = 2534
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2528
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2560,6 +2893,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkLeft5"
 target_offset = 2545
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2539
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2570,6 +2905,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkLeft5"
 target_offset = 2556
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2550
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2580,6 +2917,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkRight1"
 target_offset = 2567
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2561
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2590,6 +2929,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkRight1"
 target_offset = 2578
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2572
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2600,6 +2941,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkRight1"
 target_offset = 2589
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2583
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2610,6 +2953,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkRight1"
 target_offset = 2600
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2594
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2620,6 +2965,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkRight1"
 target_offset = 2611
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2605
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2630,6 +2977,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkRight2"
 target_offset = 2622
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2616
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2640,6 +2989,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkRight2"
 target_offset = 2633
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2627
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2650,6 +3001,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkRight2"
 target_offset = 2644
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2638
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2660,6 +3013,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkRight2"
 target_offset = 2655
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2649
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2670,6 +3025,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkRight2"
 target_offset = 2666
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2660
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2680,6 +3037,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkRight3"
 target_offset = 2677
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2671
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2690,6 +3049,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkRight3"
 target_offset = 2688
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2682
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2700,6 +3061,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkRight3"
 target_offset = 2699
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2693
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2710,6 +3073,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkRight3"
 target_offset = 2710
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2704
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2720,6 +3085,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkRight3"
 target_offset = 2721
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2715
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2730,6 +3097,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkRight4"
 target_offset = 2732
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2726
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2740,6 +3109,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkRight4"
 target_offset = 2743
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2737
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2750,6 +3121,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkRight4"
 target_offset = 2754
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2748
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2760,6 +3133,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkRight4"
 target_offset = 2765
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2759
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2770,6 +3145,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkRight4"
 target_offset = 2776
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2770
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2780,6 +3157,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll1WalkRight5"
 target_offset = 2787
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2781
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2790,6 +3169,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll2WalkRight5"
 target_offset = 2798
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2792
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2800,6 +3181,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll3WalkRight5"
 target_offset = 2809
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2803
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2810,6 +3193,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll4WalkRight5"
 target_offset = 2820
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2814
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2820,6 +3205,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle5"
 target_export = "Route110_TrickHousePuzzle5_EventScript_Mechadoll5WalkRight5"
 target_offset = 2831
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2825
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2829,6 +3216,8 @@ original_encoded_gba = 0x826d60a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkleft1"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkLeft1"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2838,6 +3227,8 @@ original_encoded_gba = 0x826d60a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkleft1"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkLeft1"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2847,6 +3238,8 @@ original_encoded_gba = 0x826d60a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkleft1"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkLeft1"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2856,6 +3249,8 @@ original_encoded_gba = 0x826d60a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkleft1"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkLeft1"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2865,6 +3260,8 @@ original_encoded_gba = 0x826d60a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkleft1"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkLeft1"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2874,6 +3271,8 @@ original_encoded_gba = 0x826d60c
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkleft2"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkLeft2"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2883,6 +3282,8 @@ original_encoded_gba = 0x826d60c
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkleft2"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkLeft2"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2892,6 +3293,8 @@ original_encoded_gba = 0x826d60c
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkleft2"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkLeft2"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2901,6 +3304,8 @@ original_encoded_gba = 0x826d60c
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkleft2"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkLeft2"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2910,6 +3315,8 @@ original_encoded_gba = 0x826d60c
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkleft2"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkLeft2"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2919,6 +3326,8 @@ original_encoded_gba = 0x826d60f
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkleft3"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkLeft3"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2928,6 +3337,8 @@ original_encoded_gba = 0x826d60f
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkleft3"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkLeft3"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2937,6 +3348,8 @@ original_encoded_gba = 0x826d60f
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkleft3"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkLeft3"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2946,6 +3359,8 @@ original_encoded_gba = 0x826d60f
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkleft3"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkLeft3"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2955,6 +3370,8 @@ original_encoded_gba = 0x826d60f
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkleft3"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkLeft3"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2964,6 +3381,8 @@ original_encoded_gba = 0x826d613
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkleft4"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkLeft4"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2973,6 +3392,8 @@ original_encoded_gba = 0x826d613
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkleft4"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkLeft4"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2982,6 +3403,8 @@ original_encoded_gba = 0x826d613
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkleft4"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkLeft4"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2991,6 +3414,8 @@ original_encoded_gba = 0x826d613
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkleft4"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkLeft4"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3000,6 +3425,8 @@ original_encoded_gba = 0x826d613
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkleft4"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkLeft4"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3009,6 +3436,8 @@ original_encoded_gba = 0x826d618
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkleft5"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkLeft5"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3018,6 +3447,8 @@ original_encoded_gba = 0x826d618
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkleft5"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkLeft5"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3027,6 +3458,8 @@ original_encoded_gba = 0x826d618
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkleft5"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkLeft5"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3036,6 +3469,8 @@ original_encoded_gba = 0x826d618
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkleft5"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkLeft5"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3045,6 +3480,8 @@ original_encoded_gba = 0x826d618
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkleft5"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkLeft5"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3054,6 +3491,8 @@ original_encoded_gba = 0x826d61e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkright1"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkRight1"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3063,6 +3502,8 @@ original_encoded_gba = 0x826d61e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkright1"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkRight1"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3072,6 +3513,8 @@ original_encoded_gba = 0x826d61e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkright1"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkRight1"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3081,6 +3524,8 @@ original_encoded_gba = 0x826d61e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkright1"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkRight1"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3090,6 +3535,8 @@ original_encoded_gba = 0x826d61e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkright1"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkRight1"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3099,6 +3546,8 @@ original_encoded_gba = 0x826d620
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkright2"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkRight2"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3108,6 +3557,8 @@ original_encoded_gba = 0x826d620
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkright2"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkRight2"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3117,6 +3568,8 @@ original_encoded_gba = 0x826d620
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkright2"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkRight2"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3126,6 +3579,8 @@ original_encoded_gba = 0x826d620
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkright2"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkRight2"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3135,6 +3590,8 @@ original_encoded_gba = 0x826d620
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkright2"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkRight2"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3144,6 +3601,8 @@ original_encoded_gba = 0x826d623
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkright3"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkRight3"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3153,6 +3612,8 @@ original_encoded_gba = 0x826d623
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkright3"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkRight3"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3162,6 +3623,8 @@ original_encoded_gba = 0x826d623
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkright3"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkRight3"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3171,6 +3634,8 @@ original_encoded_gba = 0x826d623
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkright3"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkRight3"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3180,6 +3645,8 @@ original_encoded_gba = 0x826d623
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkright3"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkRight3"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3189,6 +3656,8 @@ original_encoded_gba = 0x826d627
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkright4"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkRight4"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3198,6 +3667,8 @@ original_encoded_gba = 0x826d627
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkright4"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkRight4"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3207,6 +3678,8 @@ original_encoded_gba = 0x826d627
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkright4"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkRight4"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3216,6 +3689,8 @@ original_encoded_gba = 0x826d627
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkright4"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkRight4"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3225,6 +3700,8 @@ original_encoded_gba = 0x826d627
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkright4"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkRight4"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3234,6 +3711,8 @@ original_encoded_gba = 0x826d62c
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkright5"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkRight5"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3243,6 +3722,8 @@ original_encoded_gba = 0x826d62c
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkright5"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkRight5"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3252,6 +3733,8 @@ original_encoded_gba = 0x826d62c
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkright5"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkRight5"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3261,6 +3744,8 @@ original_encoded_gba = 0x826d62c
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkright5"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkRight5"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3270,4 +3755,2534 @@ original_encoded_gba = 0x826d62c
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/route110-trickhousepuzzle5-movement-walkright5"
 target_export = "Route110_TrickHousePuzzle5_Movement_WalkRight5"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 5
+
+[[boundaries]]
+payload_offset = 5
+length = 5
+
+[[boundaries]]
+payload_offset = 10
+length = 5
+
+[[boundaries]]
+payload_offset = 15
+length = 5
+
+[[boundaries]]
+payload_offset = 20
+length = 5
+
+[[boundaries]]
+payload_offset = 25
+length = 5
+
+[[boundaries]]
+payload_offset = 30
+length = 1
+
+[[boundaries]]
+payload_offset = 31
+length = 1
+
+[[boundaries]]
+payload_offset = 32
+length = 5
+
+[[boundaries]]
+payload_offset = 37
+length = 6
+
+[[boundaries]]
+payload_offset = 43
+length = 5
+
+[[boundaries]]
+payload_offset = 49
+length = 5
+
+[[boundaries]]
+payload_offset = 54
+length = 5
+
+[[boundaries]]
+payload_offset = 60
+length = 1
+
+[[boundaries]]
+payload_offset = 61
+length = 7
+
+[[boundaries]]
+payload_offset = 68
+length = 3
+
+[[boundaries]]
+payload_offset = 71
+length = 5
+
+[[boundaries]]
+payload_offset = 76
+length = 6
+
+[[boundaries]]
+payload_offset = 82
+length = 5
+
+[[boundaries]]
+payload_offset = 87
+length = 5
+
+[[boundaries]]
+payload_offset = 93
+length = 1
+
+[[boundaries]]
+payload_offset = 94
+length = 7
+
+[[boundaries]]
+payload_offset = 101
+length = 3
+
+[[boundaries]]
+payload_offset = 104
+length = 5
+
+[[boundaries]]
+payload_offset = 109
+length = 6
+
+[[boundaries]]
+payload_offset = 115
+length = 5
+
+[[boundaries]]
+payload_offset = 120
+length = 5
+
+[[boundaries]]
+payload_offset = 126
+length = 1
+
+[[boundaries]]
+payload_offset = 127
+length = 7
+
+[[boundaries]]
+payload_offset = 134
+length = 3
+
+[[boundaries]]
+payload_offset = 137
+length = 5
+
+[[boundaries]]
+payload_offset = 142
+length = 6
+
+[[boundaries]]
+payload_offset = 148
+length = 5
+
+[[boundaries]]
+payload_offset = 153
+length = 5
+
+[[boundaries]]
+payload_offset = 159
+length = 1
+
+[[boundaries]]
+payload_offset = 160
+length = 7
+
+[[boundaries]]
+payload_offset = 167
+length = 3
+
+[[boundaries]]
+payload_offset = 170
+length = 5
+
+[[boundaries]]
+payload_offset = 175
+length = 6
+
+[[boundaries]]
+payload_offset = 181
+length = 5
+
+[[boundaries]]
+payload_offset = 186
+length = 5
+
+[[boundaries]]
+payload_offset = 192
+length = 1
+
+[[boundaries]]
+payload_offset = 193
+length = 7
+
+[[boundaries]]
+payload_offset = 200
+length = 3
+
+[[boundaries]]
+payload_offset = 203
+length = 5
+
+[[boundaries]]
+payload_offset = 208
+length = 6
+
+[[boundaries]]
+payload_offset = 214
+length = 5
+
+[[boundaries]]
+payload_offset = 219
+length = 5
+
+[[boundaries]]
+payload_offset = 225
+length = 1
+
+[[boundaries]]
+payload_offset = 226
+length = 5
+
+[[boundaries]]
+payload_offset = 231
+length = 5
+
+[[boundaries]]
+payload_offset = 237
+length = 1
+
+[[boundaries]]
+payload_offset = 238
+length = 5
+
+[[boundaries]]
+payload_offset = 243
+length = 5
+
+[[boundaries]]
+payload_offset = 249
+length = 1
+
+[[boundaries]]
+payload_offset = 250
+length = 5
+
+[[boundaries]]
+payload_offset = 255
+length = 5
+
+[[boundaries]]
+payload_offset = 261
+length = 1
+
+[[boundaries]]
+payload_offset = 262
+length = 5
+
+[[boundaries]]
+payload_offset = 267
+length = 5
+
+[[boundaries]]
+payload_offset = 273
+length = 1
+
+[[boundaries]]
+payload_offset = 274
+length = 5
+
+[[boundaries]]
+payload_offset = 279
+length = 5
+
+[[boundaries]]
+payload_offset = 285
+length = 1
+
+[[boundaries]]
+payload_offset = 286
+length = 5
+
+[[boundaries]]
+payload_offset = 291
+length = 5
+
+[[boundaries]]
+payload_offset = 297
+length = 1
+
+[[boundaries]]
+payload_offset = 298
+length = 5
+
+[[boundaries]]
+payload_offset = 303
+length = 5
+
+[[boundaries]]
+payload_offset = 309
+length = 1
+
+[[boundaries]]
+payload_offset = 310
+length = 5
+
+[[boundaries]]
+payload_offset = 315
+length = 5
+
+[[boundaries]]
+payload_offset = 321
+length = 1
+
+[[boundaries]]
+payload_offset = 322
+length = 5
+
+[[boundaries]]
+payload_offset = 327
+length = 5
+
+[[boundaries]]
+payload_offset = 333
+length = 1
+
+[[boundaries]]
+payload_offset = 334
+length = 5
+
+[[boundaries]]
+payload_offset = 339
+length = 5
+
+[[boundaries]]
+payload_offset = 345
+length = 1
+
+[[boundaries]]
+payload_offset = 346
+length = 5
+
+[[boundaries]]
+payload_offset = 351
+length = 5
+
+[[boundaries]]
+payload_offset = 357
+length = 1
+
+[[boundaries]]
+payload_offset = 358
+length = 5
+
+[[boundaries]]
+payload_offset = 363
+length = 5
+
+[[boundaries]]
+payload_offset = 369
+length = 1
+
+[[boundaries]]
+payload_offset = 370
+length = 5
+
+[[boundaries]]
+payload_offset = 375
+length = 5
+
+[[boundaries]]
+payload_offset = 381
+length = 1
+
+[[boundaries]]
+payload_offset = 382
+length = 5
+
+[[boundaries]]
+payload_offset = 387
+length = 5
+
+[[boundaries]]
+payload_offset = 393
+length = 1
+
+[[boundaries]]
+payload_offset = 394
+length = 5
+
+[[boundaries]]
+payload_offset = 399
+length = 5
+
+[[boundaries]]
+payload_offset = 405
+length = 1
+
+[[boundaries]]
+payload_offset = 406
+length = 5
+
+[[boundaries]]
+payload_offset = 411
+length = 5
+
+[[boundaries]]
+payload_offset = 417
+length = 1
+
+[[boundaries]]
+payload_offset = 418
+length = 5
+
+[[boundaries]]
+payload_offset = 423
+length = 5
+
+[[boundaries]]
+payload_offset = 429
+length = 1
+
+[[boundaries]]
+payload_offset = 430
+length = 5
+
+[[boundaries]]
+payload_offset = 435
+length = 5
+
+[[boundaries]]
+payload_offset = 441
+length = 1
+
+[[boundaries]]
+payload_offset = 442
+length = 5
+
+[[boundaries]]
+payload_offset = 447
+length = 5
+
+[[boundaries]]
+payload_offset = 453
+length = 1
+
+[[boundaries]]
+payload_offset = 454
+length = 5
+
+[[boundaries]]
+payload_offset = 459
+length = 5
+
+[[boundaries]]
+payload_offset = 465
+length = 1
+
+[[boundaries]]
+payload_offset = 466
+length = 5
+
+[[boundaries]]
+payload_offset = 471
+length = 5
+
+[[boundaries]]
+payload_offset = 477
+length = 1
+
+[[boundaries]]
+payload_offset = 478
+length = 5
+
+[[boundaries]]
+payload_offset = 483
+length = 5
+
+[[boundaries]]
+payload_offset = 489
+length = 1
+
+[[boundaries]]
+payload_offset = 490
+length = 5
+
+[[boundaries]]
+payload_offset = 495
+length = 5
+
+[[boundaries]]
+payload_offset = 501
+length = 5
+
+[[boundaries]]
+payload_offset = 506
+length = 5
+
+[[boundaries]]
+payload_offset = 511
+length = 3
+
+[[boundaries]]
+payload_offset = 514
+length = 7
+
+[[boundaries]]
+payload_offset = 521
+length = 3
+
+[[boundaries]]
+payload_offset = 524
+length = 7
+
+[[boundaries]]
+payload_offset = 531
+length = 3
+
+[[boundaries]]
+payload_offset = 534
+length = 5
+
+[[boundaries]]
+payload_offset = 539
+length = 6
+
+[[boundaries]]
+payload_offset = 545
+length = 5
+
+[[boundaries]]
+payload_offset = 550
+length = 6
+
+[[boundaries]]
+payload_offset = 556
+length = 5
+
+[[boundaries]]
+payload_offset = 561
+length = 6
+
+[[boundaries]]
+payload_offset = 567
+length = 5
+
+[[boundaries]]
+payload_offset = 572
+length = 6
+
+[[boundaries]]
+payload_offset = 578
+length = 6
+
+[[boundaries]]
+payload_offset = 584
+length = 2
+
+[[boundaries]]
+payload_offset = 586
+length = 3
+
+[[boundaries]]
+payload_offset = 589
+length = 5
+
+[[boundaries]]
+payload_offset = 594
+length = 5
+
+[[boundaries]]
+payload_offset = 599
+length = 6
+
+[[boundaries]]
+payload_offset = 605
+length = 5
+
+[[boundaries]]
+payload_offset = 610
+length = 6
+
+[[boundaries]]
+payload_offset = 616
+length = 5
+
+[[boundaries]]
+payload_offset = 621
+length = 6
+
+[[boundaries]]
+payload_offset = 627
+length = 1
+
+[[boundaries]]
+payload_offset = 628
+length = 5
+
+[[boundaries]]
+payload_offset = 633
+length = 5
+
+[[boundaries]]
+payload_offset = 638
+length = 3
+
+[[boundaries]]
+payload_offset = 641
+length = 7
+
+[[boundaries]]
+payload_offset = 648
+length = 3
+
+[[boundaries]]
+payload_offset = 651
+length = 7
+
+[[boundaries]]
+payload_offset = 658
+length = 3
+
+[[boundaries]]
+payload_offset = 661
+length = 5
+
+[[boundaries]]
+payload_offset = 666
+length = 6
+
+[[boundaries]]
+payload_offset = 672
+length = 5
+
+[[boundaries]]
+payload_offset = 677
+length = 6
+
+[[boundaries]]
+payload_offset = 683
+length = 5
+
+[[boundaries]]
+payload_offset = 688
+length = 6
+
+[[boundaries]]
+payload_offset = 694
+length = 5
+
+[[boundaries]]
+payload_offset = 699
+length = 6
+
+[[boundaries]]
+payload_offset = 705
+length = 5
+
+[[boundaries]]
+payload_offset = 710
+length = 6
+
+[[boundaries]]
+payload_offset = 716
+length = 6
+
+[[boundaries]]
+payload_offset = 722
+length = 2
+
+[[boundaries]]
+payload_offset = 724
+length = 3
+
+[[boundaries]]
+payload_offset = 727
+length = 5
+
+[[boundaries]]
+payload_offset = 732
+length = 5
+
+[[boundaries]]
+payload_offset = 737
+length = 6
+
+[[boundaries]]
+payload_offset = 743
+length = 5
+
+[[boundaries]]
+payload_offset = 748
+length = 6
+
+[[boundaries]]
+payload_offset = 754
+length = 5
+
+[[boundaries]]
+payload_offset = 759
+length = 6
+
+[[boundaries]]
+payload_offset = 765
+length = 1
+
+[[boundaries]]
+payload_offset = 766
+length = 5
+
+[[boundaries]]
+payload_offset = 771
+length = 5
+
+[[boundaries]]
+payload_offset = 776
+length = 3
+
+[[boundaries]]
+payload_offset = 779
+length = 7
+
+[[boundaries]]
+payload_offset = 786
+length = 3
+
+[[boundaries]]
+payload_offset = 789
+length = 7
+
+[[boundaries]]
+payload_offset = 796
+length = 3
+
+[[boundaries]]
+payload_offset = 799
+length = 5
+
+[[boundaries]]
+payload_offset = 804
+length = 6
+
+[[boundaries]]
+payload_offset = 810
+length = 5
+
+[[boundaries]]
+payload_offset = 815
+length = 6
+
+[[boundaries]]
+payload_offset = 821
+length = 5
+
+[[boundaries]]
+payload_offset = 826
+length = 6
+
+[[boundaries]]
+payload_offset = 832
+length = 5
+
+[[boundaries]]
+payload_offset = 837
+length = 6
+
+[[boundaries]]
+payload_offset = 843
+length = 6
+
+[[boundaries]]
+payload_offset = 849
+length = 2
+
+[[boundaries]]
+payload_offset = 851
+length = 3
+
+[[boundaries]]
+payload_offset = 854
+length = 5
+
+[[boundaries]]
+payload_offset = 859
+length = 5
+
+[[boundaries]]
+payload_offset = 864
+length = 6
+
+[[boundaries]]
+payload_offset = 870
+length = 5
+
+[[boundaries]]
+payload_offset = 875
+length = 6
+
+[[boundaries]]
+payload_offset = 881
+length = 5
+
+[[boundaries]]
+payload_offset = 886
+length = 6
+
+[[boundaries]]
+payload_offset = 892
+length = 1
+
+[[boundaries]]
+payload_offset = 893
+length = 5
+
+[[boundaries]]
+payload_offset = 898
+length = 5
+
+[[boundaries]]
+payload_offset = 903
+length = 3
+
+[[boundaries]]
+payload_offset = 906
+length = 7
+
+[[boundaries]]
+payload_offset = 913
+length = 3
+
+[[boundaries]]
+payload_offset = 916
+length = 7
+
+[[boundaries]]
+payload_offset = 923
+length = 3
+
+[[boundaries]]
+payload_offset = 926
+length = 5
+
+[[boundaries]]
+payload_offset = 931
+length = 6
+
+[[boundaries]]
+payload_offset = 937
+length = 5
+
+[[boundaries]]
+payload_offset = 942
+length = 6
+
+[[boundaries]]
+payload_offset = 948
+length = 5
+
+[[boundaries]]
+payload_offset = 953
+length = 6
+
+[[boundaries]]
+payload_offset = 959
+length = 5
+
+[[boundaries]]
+payload_offset = 964
+length = 6
+
+[[boundaries]]
+payload_offset = 970
+length = 6
+
+[[boundaries]]
+payload_offset = 976
+length = 2
+
+[[boundaries]]
+payload_offset = 978
+length = 3
+
+[[boundaries]]
+payload_offset = 981
+length = 5
+
+[[boundaries]]
+payload_offset = 986
+length = 5
+
+[[boundaries]]
+payload_offset = 991
+length = 6
+
+[[boundaries]]
+payload_offset = 997
+length = 5
+
+[[boundaries]]
+payload_offset = 1002
+length = 6
+
+[[boundaries]]
+payload_offset = 1008
+length = 5
+
+[[boundaries]]
+payload_offset = 1013
+length = 6
+
+[[boundaries]]
+payload_offset = 1019
+length = 1
+
+[[boundaries]]
+payload_offset = 1020
+length = 5
+
+[[boundaries]]
+payload_offset = 1025
+length = 5
+
+[[boundaries]]
+payload_offset = 1030
+length = 3
+
+[[boundaries]]
+payload_offset = 1033
+length = 7
+
+[[boundaries]]
+payload_offset = 1040
+length = 3
+
+[[boundaries]]
+payload_offset = 1043
+length = 7
+
+[[boundaries]]
+payload_offset = 1050
+length = 3
+
+[[boundaries]]
+payload_offset = 1053
+length = 6
+
+[[boundaries]]
+payload_offset = 1059
+length = 2
+
+[[boundaries]]
+payload_offset = 1061
+length = 3
+
+[[boundaries]]
+payload_offset = 1064
+length = 5
+
+[[boundaries]]
+payload_offset = 1069
+length = 5
+
+[[boundaries]]
+payload_offset = 1074
+length = 6
+
+[[boundaries]]
+payload_offset = 1080
+length = 5
+
+[[boundaries]]
+payload_offset = 1085
+length = 6
+
+[[boundaries]]
+payload_offset = 1091
+length = 5
+
+[[boundaries]]
+payload_offset = 1096
+length = 6
+
+[[boundaries]]
+payload_offset = 1102
+length = 1
+
+[[boundaries]]
+payload_offset = 1103
+length = 6
+
+[[boundaries]]
+payload_offset = 1109
+length = 2
+
+[[boundaries]]
+payload_offset = 1111
+length = 5
+
+[[boundaries]]
+payload_offset = 1116
+length = 5
+
+[[boundaries]]
+payload_offset = 1121
+length = 5
+
+[[boundaries]]
+payload_offset = 1126
+length = 6
+
+[[boundaries]]
+payload_offset = 1132
+length = 5
+
+[[boundaries]]
+payload_offset = 1138
+length = 6
+
+[[boundaries]]
+payload_offset = 1144
+length = 2
+
+[[boundaries]]
+payload_offset = 1146
+length = 5
+
+[[boundaries]]
+payload_offset = 1151
+length = 5
+
+[[boundaries]]
+payload_offset = 1156
+length = 5
+
+[[boundaries]]
+payload_offset = 1161
+length = 6
+
+[[boundaries]]
+payload_offset = 1167
+length = 5
+
+[[boundaries]]
+payload_offset = 1173
+length = 6
+
+[[boundaries]]
+payload_offset = 1179
+length = 2
+
+[[boundaries]]
+payload_offset = 1181
+length = 5
+
+[[boundaries]]
+payload_offset = 1186
+length = 5
+
+[[boundaries]]
+payload_offset = 1191
+length = 5
+
+[[boundaries]]
+payload_offset = 1196
+length = 6
+
+[[boundaries]]
+payload_offset = 1202
+length = 5
+
+[[boundaries]]
+payload_offset = 1208
+length = 6
+
+[[boundaries]]
+payload_offset = 1214
+length = 2
+
+[[boundaries]]
+payload_offset = 1216
+length = 5
+
+[[boundaries]]
+payload_offset = 1221
+length = 5
+
+[[boundaries]]
+payload_offset = 1226
+length = 5
+
+[[boundaries]]
+payload_offset = 1231
+length = 6
+
+[[boundaries]]
+payload_offset = 1237
+length = 5
+
+[[boundaries]]
+payload_offset = 1243
+length = 6
+
+[[boundaries]]
+payload_offset = 1249
+length = 2
+
+[[boundaries]]
+payload_offset = 1251
+length = 5
+
+[[boundaries]]
+payload_offset = 1256
+length = 5
+
+[[boundaries]]
+payload_offset = 1261
+length = 5
+
+[[boundaries]]
+payload_offset = 1266
+length = 6
+
+[[boundaries]]
+payload_offset = 1272
+length = 5
+
+[[boundaries]]
+payload_offset = 1278
+length = 6
+
+[[boundaries]]
+payload_offset = 1284
+length = 2
+
+[[boundaries]]
+payload_offset = 1286
+length = 5
+
+[[boundaries]]
+payload_offset = 1291
+length = 5
+
+[[boundaries]]
+payload_offset = 1296
+length = 5
+
+[[boundaries]]
+payload_offset = 1301
+length = 6
+
+[[boundaries]]
+payload_offset = 1307
+length = 5
+
+[[boundaries]]
+payload_offset = 1313
+length = 6
+
+[[boundaries]]
+payload_offset = 1319
+length = 2
+
+[[boundaries]]
+payload_offset = 1321
+length = 5
+
+[[boundaries]]
+payload_offset = 1326
+length = 5
+
+[[boundaries]]
+payload_offset = 1331
+length = 5
+
+[[boundaries]]
+payload_offset = 1336
+length = 6
+
+[[boundaries]]
+payload_offset = 1342
+length = 5
+
+[[boundaries]]
+payload_offset = 1348
+length = 6
+
+[[boundaries]]
+payload_offset = 1354
+length = 2
+
+[[boundaries]]
+payload_offset = 1356
+length = 5
+
+[[boundaries]]
+payload_offset = 1361
+length = 5
+
+[[boundaries]]
+payload_offset = 1366
+length = 5
+
+[[boundaries]]
+payload_offset = 1371
+length = 6
+
+[[boundaries]]
+payload_offset = 1377
+length = 5
+
+[[boundaries]]
+payload_offset = 1383
+length = 6
+
+[[boundaries]]
+payload_offset = 1389
+length = 2
+
+[[boundaries]]
+payload_offset = 1391
+length = 5
+
+[[boundaries]]
+payload_offset = 1396
+length = 5
+
+[[boundaries]]
+payload_offset = 1401
+length = 5
+
+[[boundaries]]
+payload_offset = 1406
+length = 6
+
+[[boundaries]]
+payload_offset = 1412
+length = 5
+
+[[boundaries]]
+payload_offset = 1418
+length = 6
+
+[[boundaries]]
+payload_offset = 1424
+length = 2
+
+[[boundaries]]
+payload_offset = 1426
+length = 5
+
+[[boundaries]]
+payload_offset = 1431
+length = 5
+
+[[boundaries]]
+payload_offset = 1436
+length = 5
+
+[[boundaries]]
+payload_offset = 1441
+length = 6
+
+[[boundaries]]
+payload_offset = 1447
+length = 5
+
+[[boundaries]]
+payload_offset = 1453
+length = 6
+
+[[boundaries]]
+payload_offset = 1459
+length = 2
+
+[[boundaries]]
+payload_offset = 1461
+length = 5
+
+[[boundaries]]
+payload_offset = 1466
+length = 5
+
+[[boundaries]]
+payload_offset = 1471
+length = 5
+
+[[boundaries]]
+payload_offset = 1476
+length = 6
+
+[[boundaries]]
+payload_offset = 1482
+length = 5
+
+[[boundaries]]
+payload_offset = 1488
+length = 6
+
+[[boundaries]]
+payload_offset = 1494
+length = 2
+
+[[boundaries]]
+payload_offset = 1496
+length = 5
+
+[[boundaries]]
+payload_offset = 1501
+length = 5
+
+[[boundaries]]
+payload_offset = 1506
+length = 5
+
+[[boundaries]]
+payload_offset = 1511
+length = 6
+
+[[boundaries]]
+payload_offset = 1517
+length = 5
+
+[[boundaries]]
+payload_offset = 1523
+length = 6
+
+[[boundaries]]
+payload_offset = 1529
+length = 2
+
+[[boundaries]]
+payload_offset = 1531
+length = 5
+
+[[boundaries]]
+payload_offset = 1536
+length = 5
+
+[[boundaries]]
+payload_offset = 1541
+length = 5
+
+[[boundaries]]
+payload_offset = 1546
+length = 6
+
+[[boundaries]]
+payload_offset = 1552
+length = 5
+
+[[boundaries]]
+payload_offset = 1558
+length = 6
+
+[[boundaries]]
+payload_offset = 1564
+length = 2
+
+[[boundaries]]
+payload_offset = 1566
+length = 5
+
+[[boundaries]]
+payload_offset = 1571
+length = 5
+
+[[boundaries]]
+payload_offset = 1576
+length = 5
+
+[[boundaries]]
+payload_offset = 1581
+length = 6
+
+[[boundaries]]
+payload_offset = 1587
+length = 5
+
+[[boundaries]]
+payload_offset = 1593
+length = 6
+
+[[boundaries]]
+payload_offset = 1599
+length = 2
+
+[[boundaries]]
+payload_offset = 1601
+length = 5
+
+[[boundaries]]
+payload_offset = 1606
+length = 5
+
+[[boundaries]]
+payload_offset = 1611
+length = 5
+
+[[boundaries]]
+payload_offset = 1616
+length = 6
+
+[[boundaries]]
+payload_offset = 1622
+length = 5
+
+[[boundaries]]
+payload_offset = 1628
+length = 1
+
+[[boundaries]]
+payload_offset = 1629
+length = 3
+
+[[boundaries]]
+payload_offset = 1632
+length = 6
+
+[[boundaries]]
+payload_offset = 1638
+length = 2
+
+[[boundaries]]
+payload_offset = 1640
+length = 7
+
+[[boundaries]]
+payload_offset = 1647
+length = 7
+
+[[boundaries]]
+payload_offset = 1654
+length = 7
+
+[[boundaries]]
+payload_offset = 1661
+length = 7
+
+[[boundaries]]
+payload_offset = 1668
+length = 7
+
+[[boundaries]]
+payload_offset = 1675
+length = 6
+
+[[boundaries]]
+payload_offset = 1681
+length = 2
+
+[[boundaries]]
+payload_offset = 1683
+length = 3
+
+[[boundaries]]
+payload_offset = 1686
+length = 6
+
+[[boundaries]]
+payload_offset = 1692
+length = 2
+
+[[boundaries]]
+payload_offset = 1694
+length = 1
+
+[[boundaries]]
+payload_offset = 1695
+length = 8
+
+[[boundaries]]
+payload_offset = 1703
+length = 1
+
+[[boundaries]]
+payload_offset = 1704
+length = 1
+
+[[boundaries]]
+payload_offset = 1705
+length = 1
+
+[[boundaries]]
+payload_offset = 1706
+length = 1
+
+[[boundaries]]
+payload_offset = 1707
+length = 3
+
+[[boundaries]]
+payload_offset = 1710
+length = 5
+
+[[boundaries]]
+payload_offset = 1716
+length = 6
+
+[[boundaries]]
+payload_offset = 1722
+length = 2
+
+[[boundaries]]
+payload_offset = 1724
+length = 1
+
+[[boundaries]]
+payload_offset = 1725
+length = 1
+
+[[boundaries]]
+payload_offset = 1726
+length = 5
+
+[[boundaries]]
+payload_offset = 1731
+length = 6
+
+[[boundaries]]
+payload_offset = 1737
+length = 5
+
+[[boundaries]]
+payload_offset = 1742
+length = 6
+
+[[boundaries]]
+payload_offset = 1748
+length = 5
+
+[[boundaries]]
+payload_offset = 1753
+length = 6
+
+[[boundaries]]
+payload_offset = 1759
+length = 5
+
+[[boundaries]]
+payload_offset = 1764
+length = 6
+
+[[boundaries]]
+payload_offset = 1770
+length = 5
+
+[[boundaries]]
+payload_offset = 1775
+length = 6
+
+[[boundaries]]
+payload_offset = 1781
+length = 1
+
+[[boundaries]]
+payload_offset = 1782
+length = 5
+
+[[boundaries]]
+payload_offset = 1787
+length = 6
+
+[[boundaries]]
+payload_offset = 1793
+length = 5
+
+[[boundaries]]
+payload_offset = 1798
+length = 6
+
+[[boundaries]]
+payload_offset = 1804
+length = 5
+
+[[boundaries]]
+payload_offset = 1809
+length = 6
+
+[[boundaries]]
+payload_offset = 1815
+length = 5
+
+[[boundaries]]
+payload_offset = 1820
+length = 6
+
+[[boundaries]]
+payload_offset = 1826
+length = 5
+
+[[boundaries]]
+payload_offset = 1831
+length = 6
+
+[[boundaries]]
+payload_offset = 1837
+length = 1
+
+[[boundaries]]
+payload_offset = 1838
+length = 5
+
+[[boundaries]]
+payload_offset = 1843
+length = 6
+
+[[boundaries]]
+payload_offset = 1849
+length = 5
+
+[[boundaries]]
+payload_offset = 1854
+length = 6
+
+[[boundaries]]
+payload_offset = 1860
+length = 5
+
+[[boundaries]]
+payload_offset = 1865
+length = 6
+
+[[boundaries]]
+payload_offset = 1871
+length = 5
+
+[[boundaries]]
+payload_offset = 1876
+length = 6
+
+[[boundaries]]
+payload_offset = 1882
+length = 5
+
+[[boundaries]]
+payload_offset = 1887
+length = 6
+
+[[boundaries]]
+payload_offset = 1893
+length = 1
+
+[[boundaries]]
+payload_offset = 1894
+length = 5
+
+[[boundaries]]
+payload_offset = 1899
+length = 6
+
+[[boundaries]]
+payload_offset = 1905
+length = 5
+
+[[boundaries]]
+payload_offset = 1910
+length = 6
+
+[[boundaries]]
+payload_offset = 1916
+length = 5
+
+[[boundaries]]
+payload_offset = 1921
+length = 6
+
+[[boundaries]]
+payload_offset = 1927
+length = 5
+
+[[boundaries]]
+payload_offset = 1932
+length = 6
+
+[[boundaries]]
+payload_offset = 1938
+length = 5
+
+[[boundaries]]
+payload_offset = 1943
+length = 6
+
+[[boundaries]]
+payload_offset = 1949
+length = 1
+
+[[boundaries]]
+payload_offset = 1950
+length = 5
+
+[[boundaries]]
+payload_offset = 1955
+length = 6
+
+[[boundaries]]
+payload_offset = 1961
+length = 5
+
+[[boundaries]]
+payload_offset = 1966
+length = 6
+
+[[boundaries]]
+payload_offset = 1972
+length = 5
+
+[[boundaries]]
+payload_offset = 1977
+length = 6
+
+[[boundaries]]
+payload_offset = 1983
+length = 5
+
+[[boundaries]]
+payload_offset = 1988
+length = 6
+
+[[boundaries]]
+payload_offset = 1994
+length = 5
+
+[[boundaries]]
+payload_offset = 1999
+length = 6
+
+[[boundaries]]
+payload_offset = 2005
+length = 1
+
+[[boundaries]]
+payload_offset = 2006
+length = 5
+
+[[boundaries]]
+payload_offset = 2011
+length = 6
+
+[[boundaries]]
+payload_offset = 2017
+length = 5
+
+[[boundaries]]
+payload_offset = 2022
+length = 6
+
+[[boundaries]]
+payload_offset = 2028
+length = 5
+
+[[boundaries]]
+payload_offset = 2033
+length = 6
+
+[[boundaries]]
+payload_offset = 2039
+length = 5
+
+[[boundaries]]
+payload_offset = 2044
+length = 6
+
+[[boundaries]]
+payload_offset = 2050
+length = 5
+
+[[boundaries]]
+payload_offset = 2055
+length = 6
+
+[[boundaries]]
+payload_offset = 2061
+length = 1
+
+[[boundaries]]
+payload_offset = 2062
+length = 5
+
+[[boundaries]]
+payload_offset = 2067
+length = 6
+
+[[boundaries]]
+payload_offset = 2073
+length = 5
+
+[[boundaries]]
+payload_offset = 2078
+length = 6
+
+[[boundaries]]
+payload_offset = 2084
+length = 5
+
+[[boundaries]]
+payload_offset = 2089
+length = 6
+
+[[boundaries]]
+payload_offset = 2095
+length = 5
+
+[[boundaries]]
+payload_offset = 2100
+length = 6
+
+[[boundaries]]
+payload_offset = 2106
+length = 5
+
+[[boundaries]]
+payload_offset = 2111
+length = 6
+
+[[boundaries]]
+payload_offset = 2117
+length = 1
+
+[[boundaries]]
+payload_offset = 2118
+length = 5
+
+[[boundaries]]
+payload_offset = 2123
+length = 6
+
+[[boundaries]]
+payload_offset = 2129
+length = 5
+
+[[boundaries]]
+payload_offset = 2134
+length = 6
+
+[[boundaries]]
+payload_offset = 2140
+length = 5
+
+[[boundaries]]
+payload_offset = 2145
+length = 6
+
+[[boundaries]]
+payload_offset = 2151
+length = 5
+
+[[boundaries]]
+payload_offset = 2156
+length = 6
+
+[[boundaries]]
+payload_offset = 2162
+length = 5
+
+[[boundaries]]
+payload_offset = 2167
+length = 6
+
+[[boundaries]]
+payload_offset = 2173
+length = 1
+
+[[boundaries]]
+payload_offset = 2174
+length = 5
+
+[[boundaries]]
+payload_offset = 2179
+length = 6
+
+[[boundaries]]
+payload_offset = 2185
+length = 5
+
+[[boundaries]]
+payload_offset = 2190
+length = 6
+
+[[boundaries]]
+payload_offset = 2196
+length = 5
+
+[[boundaries]]
+payload_offset = 2201
+length = 6
+
+[[boundaries]]
+payload_offset = 2207
+length = 5
+
+[[boundaries]]
+payload_offset = 2212
+length = 6
+
+[[boundaries]]
+payload_offset = 2218
+length = 5
+
+[[boundaries]]
+payload_offset = 2223
+length = 6
+
+[[boundaries]]
+payload_offset = 2229
+length = 1
+
+[[boundaries]]
+payload_offset = 2230
+length = 5
+
+[[boundaries]]
+payload_offset = 2235
+length = 6
+
+[[boundaries]]
+payload_offset = 2241
+length = 5
+
+[[boundaries]]
+payload_offset = 2246
+length = 6
+
+[[boundaries]]
+payload_offset = 2252
+length = 5
+
+[[boundaries]]
+payload_offset = 2257
+length = 6
+
+[[boundaries]]
+payload_offset = 2263
+length = 5
+
+[[boundaries]]
+payload_offset = 2268
+length = 6
+
+[[boundaries]]
+payload_offset = 2274
+length = 5
+
+[[boundaries]]
+payload_offset = 2279
+length = 6
+
+[[boundaries]]
+payload_offset = 2285
+length = 1
+
+[[boundaries]]
+payload_offset = 2286
+length = 7
+
+[[boundaries]]
+payload_offset = 2293
+length = 3
+
+[[boundaries]]
+payload_offset = 2296
+length = 1
+
+[[boundaries]]
+payload_offset = 2297
+length = 7
+
+[[boundaries]]
+payload_offset = 2304
+length = 3
+
+[[boundaries]]
+payload_offset = 2307
+length = 1
+
+[[boundaries]]
+payload_offset = 2308
+length = 7
+
+[[boundaries]]
+payload_offset = 2315
+length = 3
+
+[[boundaries]]
+payload_offset = 2318
+length = 1
+
+[[boundaries]]
+payload_offset = 2319
+length = 7
+
+[[boundaries]]
+payload_offset = 2326
+length = 3
+
+[[boundaries]]
+payload_offset = 2329
+length = 1
+
+[[boundaries]]
+payload_offset = 2330
+length = 7
+
+[[boundaries]]
+payload_offset = 2337
+length = 3
+
+[[boundaries]]
+payload_offset = 2340
+length = 1
+
+[[boundaries]]
+payload_offset = 2341
+length = 7
+
+[[boundaries]]
+payload_offset = 2348
+length = 3
+
+[[boundaries]]
+payload_offset = 2351
+length = 1
+
+[[boundaries]]
+payload_offset = 2352
+length = 7
+
+[[boundaries]]
+payload_offset = 2359
+length = 3
+
+[[boundaries]]
+payload_offset = 2362
+length = 1
+
+[[boundaries]]
+payload_offset = 2363
+length = 7
+
+[[boundaries]]
+payload_offset = 2370
+length = 3
+
+[[boundaries]]
+payload_offset = 2373
+length = 1
+
+[[boundaries]]
+payload_offset = 2374
+length = 7
+
+[[boundaries]]
+payload_offset = 2381
+length = 3
+
+[[boundaries]]
+payload_offset = 2384
+length = 1
+
+[[boundaries]]
+payload_offset = 2385
+length = 7
+
+[[boundaries]]
+payload_offset = 2392
+length = 3
+
+[[boundaries]]
+payload_offset = 2395
+length = 1
+
+[[boundaries]]
+payload_offset = 2396
+length = 7
+
+[[boundaries]]
+payload_offset = 2403
+length = 3
+
+[[boundaries]]
+payload_offset = 2406
+length = 1
+
+[[boundaries]]
+payload_offset = 2407
+length = 7
+
+[[boundaries]]
+payload_offset = 2414
+length = 3
+
+[[boundaries]]
+payload_offset = 2417
+length = 1
+
+[[boundaries]]
+payload_offset = 2418
+length = 7
+
+[[boundaries]]
+payload_offset = 2425
+length = 3
+
+[[boundaries]]
+payload_offset = 2428
+length = 1
+
+[[boundaries]]
+payload_offset = 2429
+length = 7
+
+[[boundaries]]
+payload_offset = 2436
+length = 3
+
+[[boundaries]]
+payload_offset = 2439
+length = 1
+
+[[boundaries]]
+payload_offset = 2440
+length = 7
+
+[[boundaries]]
+payload_offset = 2447
+length = 3
+
+[[boundaries]]
+payload_offset = 2450
+length = 1
+
+[[boundaries]]
+payload_offset = 2451
+length = 7
+
+[[boundaries]]
+payload_offset = 2458
+length = 3
+
+[[boundaries]]
+payload_offset = 2461
+length = 1
+
+[[boundaries]]
+payload_offset = 2462
+length = 7
+
+[[boundaries]]
+payload_offset = 2469
+length = 3
+
+[[boundaries]]
+payload_offset = 2472
+length = 1
+
+[[boundaries]]
+payload_offset = 2473
+length = 7
+
+[[boundaries]]
+payload_offset = 2480
+length = 3
+
+[[boundaries]]
+payload_offset = 2483
+length = 1
+
+[[boundaries]]
+payload_offset = 2484
+length = 7
+
+[[boundaries]]
+payload_offset = 2491
+length = 3
+
+[[boundaries]]
+payload_offset = 2494
+length = 1
+
+[[boundaries]]
+payload_offset = 2495
+length = 7
+
+[[boundaries]]
+payload_offset = 2502
+length = 3
+
+[[boundaries]]
+payload_offset = 2505
+length = 1
+
+[[boundaries]]
+payload_offset = 2506
+length = 7
+
+[[boundaries]]
+payload_offset = 2513
+length = 3
+
+[[boundaries]]
+payload_offset = 2516
+length = 1
+
+[[boundaries]]
+payload_offset = 2517
+length = 7
+
+[[boundaries]]
+payload_offset = 2524
+length = 3
+
+[[boundaries]]
+payload_offset = 2527
+length = 1
+
+[[boundaries]]
+payload_offset = 2528
+length = 7
+
+[[boundaries]]
+payload_offset = 2535
+length = 3
+
+[[boundaries]]
+payload_offset = 2538
+length = 1
+
+[[boundaries]]
+payload_offset = 2539
+length = 7
+
+[[boundaries]]
+payload_offset = 2546
+length = 3
+
+[[boundaries]]
+payload_offset = 2549
+length = 1
+
+[[boundaries]]
+payload_offset = 2550
+length = 7
+
+[[boundaries]]
+payload_offset = 2557
+length = 3
+
+[[boundaries]]
+payload_offset = 2560
+length = 1
+
+[[boundaries]]
+payload_offset = 2561
+length = 7
+
+[[boundaries]]
+payload_offset = 2568
+length = 3
+
+[[boundaries]]
+payload_offset = 2571
+length = 1
+
+[[boundaries]]
+payload_offset = 2572
+length = 7
+
+[[boundaries]]
+payload_offset = 2579
+length = 3
+
+[[boundaries]]
+payload_offset = 2582
+length = 1
+
+[[boundaries]]
+payload_offset = 2583
+length = 7
+
+[[boundaries]]
+payload_offset = 2590
+length = 3
+
+[[boundaries]]
+payload_offset = 2593
+length = 1
+
+[[boundaries]]
+payload_offset = 2594
+length = 7
+
+[[boundaries]]
+payload_offset = 2601
+length = 3
+
+[[boundaries]]
+payload_offset = 2604
+length = 1
+
+[[boundaries]]
+payload_offset = 2605
+length = 7
+
+[[boundaries]]
+payload_offset = 2612
+length = 3
+
+[[boundaries]]
+payload_offset = 2615
+length = 1
+
+[[boundaries]]
+payload_offset = 2616
+length = 7
+
+[[boundaries]]
+payload_offset = 2623
+length = 3
+
+[[boundaries]]
+payload_offset = 2626
+length = 1
+
+[[boundaries]]
+payload_offset = 2627
+length = 7
+
+[[boundaries]]
+payload_offset = 2634
+length = 3
+
+[[boundaries]]
+payload_offset = 2637
+length = 1
+
+[[boundaries]]
+payload_offset = 2638
+length = 7
+
+[[boundaries]]
+payload_offset = 2645
+length = 3
+
+[[boundaries]]
+payload_offset = 2648
+length = 1
+
+[[boundaries]]
+payload_offset = 2649
+length = 7
+
+[[boundaries]]
+payload_offset = 2656
+length = 3
+
+[[boundaries]]
+payload_offset = 2659
+length = 1
+
+[[boundaries]]
+payload_offset = 2660
+length = 7
+
+[[boundaries]]
+payload_offset = 2667
+length = 3
+
+[[boundaries]]
+payload_offset = 2670
+length = 1
+
+[[boundaries]]
+payload_offset = 2671
+length = 7
+
+[[boundaries]]
+payload_offset = 2678
+length = 3
+
+[[boundaries]]
+payload_offset = 2681
+length = 1
+
+[[boundaries]]
+payload_offset = 2682
+length = 7
+
+[[boundaries]]
+payload_offset = 2689
+length = 3
+
+[[boundaries]]
+payload_offset = 2692
+length = 1
+
+[[boundaries]]
+payload_offset = 2693
+length = 7
+
+[[boundaries]]
+payload_offset = 2700
+length = 3
+
+[[boundaries]]
+payload_offset = 2703
+length = 1
+
+[[boundaries]]
+payload_offset = 2704
+length = 7
+
+[[boundaries]]
+payload_offset = 2711
+length = 3
+
+[[boundaries]]
+payload_offset = 2714
+length = 1
+
+[[boundaries]]
+payload_offset = 2715
+length = 7
+
+[[boundaries]]
+payload_offset = 2722
+length = 3
+
+[[boundaries]]
+payload_offset = 2725
+length = 1
+
+[[boundaries]]
+payload_offset = 2726
+length = 7
+
+[[boundaries]]
+payload_offset = 2733
+length = 3
+
+[[boundaries]]
+payload_offset = 2736
+length = 1
+
+[[boundaries]]
+payload_offset = 2737
+length = 7
+
+[[boundaries]]
+payload_offset = 2744
+length = 3
+
+[[boundaries]]
+payload_offset = 2747
+length = 1
+
+[[boundaries]]
+payload_offset = 2748
+length = 7
+
+[[boundaries]]
+payload_offset = 2755
+length = 3
+
+[[boundaries]]
+payload_offset = 2758
+length = 1
+
+[[boundaries]]
+payload_offset = 2759
+length = 7
+
+[[boundaries]]
+payload_offset = 2766
+length = 3
+
+[[boundaries]]
+payload_offset = 2769
+length = 1
+
+[[boundaries]]
+payload_offset = 2770
+length = 7
+
+[[boundaries]]
+payload_offset = 2777
+length = 3
+
+[[boundaries]]
+payload_offset = 2780
+length = 1
+
+[[boundaries]]
+payload_offset = 2781
+length = 7
+
+[[boundaries]]
+payload_offset = 2788
+length = 3
+
+[[boundaries]]
+payload_offset = 2791
+length = 1
+
+[[boundaries]]
+payload_offset = 2792
+length = 7
+
+[[boundaries]]
+payload_offset = 2799
+length = 3
+
+[[boundaries]]
+payload_offset = 2802
+length = 1
+
+[[boundaries]]
+payload_offset = 2803
+length = 7
+
+[[boundaries]]
+payload_offset = 2810
+length = 3
+
+[[boundaries]]
+payload_offset = 2813
+length = 1
+
+[[boundaries]]
+payload_offset = 2814
+length = 7
+
+[[boundaries]]
+payload_offset = 2821
+length = 3
+
+[[boundaries]]
+payload_offset = 2824
+length = 1
+
+[[boundaries]]
+payload_offset = 2825
+length = 7
+
+[[boundaries]]
+payload_offset = 2832
+length = 3
+
+[[boundaries]]
+payload_offset = 2835
+length = 1

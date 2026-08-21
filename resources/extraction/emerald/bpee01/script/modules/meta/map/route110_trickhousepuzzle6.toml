@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 2
 export_count = 7
 reloc_count = 12
+instruction_count = 22
 
 [[segments]]
 kind = "bytecode"
@@ -94,6 +95,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhousepuzzle6"
 target_export = "Route110_TrickHousePuzzle6_EventScript_FoundScroll"
 target_offset = 47
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 26
 runtime_resolution_required = true
 
 [[relocs]]
@@ -104,6 +107,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhouseentrance"
 target_export = "Route110_TrickHousePuzzle_EventScript_ReadScrollAgain"
 target_offset = 2443
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2331
 runtime_resolution_required = true
 
 [[relocs]]
@@ -114,6 +119,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route110-trickhouseentrance"
 target_export = "Route110_TrickHousePuzzle_EventScript_FoundScroll"
 target_offset = 2453
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2341
 runtime_resolution_required = true
 
 [[relocs]]
@@ -123,6 +130,8 @@ original_encoded_gba = 0x826de93
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhousepuzzle6"
 target_export = "Route110_TrickHousePuzzle6_Text_SophiaIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -132,6 +141,8 @@ original_encoded_gba = 0x826ded2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhousepuzzle6"
 target_export = "Route110_TrickHousePuzzle6_Text_SophiaDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -141,6 +152,8 @@ original_encoded_gba = 0x826def3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhousepuzzle6"
 target_export = "Route110_TrickHousePuzzle6_Text_SophiaPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -150,6 +163,8 @@ original_encoded_gba = 0x826df55
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhousepuzzle6"
 target_export = "Route110_TrickHousePuzzle6_Text_BennyIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -159,6 +174,8 @@ original_encoded_gba = 0x826df8d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhousepuzzle6"
 target_export = "Route110_TrickHousePuzzle6_Text_BennyDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -168,6 +185,8 @@ original_encoded_gba = 0x826dfa0
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhousepuzzle6"
 target_export = "Route110_TrickHousePuzzle6_Text_BennyPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -177,6 +196,8 @@ original_encoded_gba = 0x826dfd7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhousepuzzle6"
 target_export = "Route110_TrickHousePuzzle6_Text_SebastianIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -186,6 +207,8 @@ original_encoded_gba = 0x826e004
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhousepuzzle6"
 target_export = "Route110_TrickHousePuzzle6_Text_SebastianDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -195,4 +218,94 @@ original_encoded_gba = 0x826e048
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route110-trickhousepuzzle6"
 target_export = "Route110_TrickHousePuzzle6_Text_SebastianPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 1
+
+[[boundaries]]
+payload_offset = 4
+length = 3
+
+[[boundaries]]
+payload_offset = 7
+length = 1
+
+[[boundaries]]
+payload_offset = 8
+length = 1
+
+[[boundaries]]
+payload_offset = 9
+length = 5
+
+[[boundaries]]
+payload_offset = 14
+length = 6
+
+[[boundaries]]
+payload_offset = 20
+length = 5
+
+[[boundaries]]
+payload_offset = 26
+length = 5
+
+[[boundaries]]
+payload_offset = 31
+length = 5
+
+[[boundaries]]
+payload_offset = 37
+length = 14
+
+[[boundaries]]
+payload_offset = 51
+length = 6
+
+[[boundaries]]
+payload_offset = 57
+length = 2
+
+[[boundaries]]
+payload_offset = 59
+length = 1
+
+[[boundaries]]
+payload_offset = 60
+length = 14
+
+[[boundaries]]
+payload_offset = 74
+length = 6
+
+[[boundaries]]
+payload_offset = 80
+length = 2
+
+[[boundaries]]
+payload_offset = 82
+length = 1
+
+[[boundaries]]
+payload_offset = 83
+length = 14
+
+[[boundaries]]
+payload_offset = 97
+length = 6
+
+[[boundaries]]
+payload_offset = 103
+length = 2
+
+[[boundaries]]
+payload_offset = 105
+length = 1

@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 13
 reloc_count = 21
+instruction_count = 76
 
 [[segments]]
 kind = "bytecode"
@@ -136,6 +137,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-wandashouse"
 target_export = "VerdanturfTown_WandasHouse_EventScript_WallyShortSpeech"
 target_offset = 25
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 24
 runtime_resolution_required = true
 
 [[relocs]]
@@ -145,6 +148,8 @@ original_encoded_gba = 0x8202993
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/verdanturftown-wandashouse"
 target_export = "VerdanturfTown_WandasHouse_Text_StrongerSpeech"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -154,6 +159,8 @@ original_encoded_gba = 0x8202abe
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/verdanturftown-wandashouse"
 target_export = "VerdanturfTown_WandasHouse_Text_StrongerSpeechShort"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -164,6 +171,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-wandashouse"
 target_export = "VerdanturfTown_WandasHouse_EventScript_WallysUncleEverGrande"
 target_offset = 75
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 74
 runtime_resolution_required = true
 
 [[relocs]]
@@ -174,6 +183,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-wandashouse"
 target_export = "VerdanturfTown_WandasHouse_EventScript_WallysUncleSlippedOff"
 target_offset = 65
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 64
 runtime_resolution_required = true
 
 [[relocs]]
@@ -183,6 +194,8 @@ original_encoded_gba = 0x8202b37
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/verdanturftown-wandashouse"
 target_export = "VerdanturfTown_WandasHouse_Text_WallysNextDoor"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -192,6 +205,8 @@ original_encoded_gba = 0x8202c20
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/verdanturftown-wandashouse"
 target_export = "VerdanturfTown_WandasHouse_Text_WallySlippedOff"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -201,6 +216,8 @@ original_encoded_gba = 0x8202c4e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/verdanturftown-wandashouse"
 target_export = "VerdanturfTown_WandasHouse_Text_WallyGoneThatFar"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -210,6 +227,8 @@ original_encoded_gba = 0x8202e00
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/verdanturftown-wandashouse"
 target_export = "VerdanturfTown_WandasHouse_Text_CanSeeGirlfriendEveryDay"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -220,6 +239,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-wandashouse"
 target_export = "VerdanturfTown_WandasHouse_EventScript_WandaDontWorry"
 target_offset = 134
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 133
 runtime_resolution_required = true
 
 [[relocs]]
@@ -230,6 +251,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-wandashouse"
 target_export = "VerdanturfTown_WandasHouse_EventScript_MeetWanda"
 target_offset = 124
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 123
 runtime_resolution_required = true
 
 [[relocs]]
@@ -239,6 +262,8 @@ original_encoded_gba = 0x8202d91
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/verdanturftown-wandashouse"
 target_export = "VerdanturfTown_WandasHouse_Text_DontWorryAboutWally"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -248,6 +273,8 @@ original_encoded_gba = 0x8202ccf
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/verdanturftown-wandashouse"
 target_export = "VerdanturfTown_WandasHouse_Text_MeetWanda"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -257,6 +284,8 @@ original_encoded_gba = 0x8202d91
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/verdanturftown-wandashouse"
 target_export = "VerdanturfTown_WandasHouse_Text_DontWorryAboutWally"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -267,6 +296,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-wandashouse"
 target_export = "VerdanturfTown_WandasHouse_EventScript_WallysAuntEverGrande"
 target_offset = 203
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 202
 runtime_resolution_required = true
 
 [[relocs]]
@@ -277,6 +308,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-wandashouse"
 target_export = "VerdanturfTown_WandasHouse_EventScript_WallysAuntAnythingHappened"
 target_offset = 193
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 192
 runtime_resolution_required = true
 
 [[relocs]]
@@ -287,6 +320,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/verdanturftown-wandashouse"
 target_export = "VerdanturfTown_WandasHouse_EventScript_WallysAuntTunnelOpen"
 target_offset = 183
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 182
 runtime_resolution_required = true
 
 [[relocs]]
@@ -296,6 +331,8 @@ original_encoded_gba = 0x8202e47
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/verdanturftown-wandashouse"
 target_export = "VerdanturfTown_WandasHouse_Text_DaughtersBoyfriendDriven"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -305,6 +342,8 @@ original_encoded_gba = 0x8202f19
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/verdanturftown-wandashouse"
 target_export = "VerdanturfTown_WandasHouse_Text_DaughtersBoyfriendWasDigging"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -314,6 +353,8 @@ original_encoded_gba = 0x8202f73
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/verdanturftown-wandashouse"
 target_export = "VerdanturfTown_WandasHouse_Text_IfAnythingHappenedToWally"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -323,4 +364,310 @@ original_encoded_gba = 0x8202fdb
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/verdanturftown-wandashouse"
 target_export = "VerdanturfTown_WandasHouse_Text_WallyWasInEverGrande"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 1
+
+[[boundaries]]
+payload_offset = 2
+length = 3
+
+[[boundaries]]
+payload_offset = 5
+length = 6
+
+[[boundaries]]
+payload_offset = 11
+length = 6
+
+[[boundaries]]
+payload_offset = 17
+length = 2
+
+[[boundaries]]
+payload_offset = 19
+length = 3
+
+[[boundaries]]
+payload_offset = 22
+length = 1
+
+[[boundaries]]
+payload_offset = 23
+length = 1
+
+[[boundaries]]
+payload_offset = 24
+length = 6
+
+[[boundaries]]
+payload_offset = 30
+length = 2
+
+[[boundaries]]
+payload_offset = 32
+length = 1
+
+[[boundaries]]
+payload_offset = 33
+length = 1
+
+[[boundaries]]
+payload_offset = 34
+length = 1
+
+[[boundaries]]
+payload_offset = 35
+length = 1
+
+[[boundaries]]
+payload_offset = 36
+length = 3
+
+[[boundaries]]
+payload_offset = 39
+length = 6
+
+[[boundaries]]
+payload_offset = 45
+length = 3
+
+[[boundaries]]
+payload_offset = 48
+length = 6
+
+[[boundaries]]
+payload_offset = 54
+length = 6
+
+[[boundaries]]
+payload_offset = 60
+length = 2
+
+[[boundaries]]
+payload_offset = 62
+length = 1
+
+[[boundaries]]
+payload_offset = 63
+length = 1
+
+[[boundaries]]
+payload_offset = 64
+length = 6
+
+[[boundaries]]
+payload_offset = 70
+length = 2
+
+[[boundaries]]
+payload_offset = 72
+length = 1
+
+[[boundaries]]
+payload_offset = 73
+length = 1
+
+[[boundaries]]
+payload_offset = 74
+length = 6
+
+[[boundaries]]
+payload_offset = 80
+length = 2
+
+[[boundaries]]
+payload_offset = 82
+length = 1
+
+[[boundaries]]
+payload_offset = 83
+length = 1
+
+[[boundaries]]
+payload_offset = 84
+length = 6
+
+[[boundaries]]
+payload_offset = 90
+length = 2
+
+[[boundaries]]
+payload_offset = 92
+length = 1
+
+[[boundaries]]
+payload_offset = 93
+length = 1
+
+[[boundaries]]
+payload_offset = 94
+length = 1
+
+[[boundaries]]
+payload_offset = 95
+length = 3
+
+[[boundaries]]
+payload_offset = 98
+length = 6
+
+[[boundaries]]
+payload_offset = 104
+length = 3
+
+[[boundaries]]
+payload_offset = 107
+length = 6
+
+[[boundaries]]
+payload_offset = 113
+length = 6
+
+[[boundaries]]
+payload_offset = 119
+length = 2
+
+[[boundaries]]
+payload_offset = 121
+length = 1
+
+[[boundaries]]
+payload_offset = 122
+length = 1
+
+[[boundaries]]
+payload_offset = 123
+length = 6
+
+[[boundaries]]
+payload_offset = 129
+length = 2
+
+[[boundaries]]
+payload_offset = 131
+length = 1
+
+[[boundaries]]
+payload_offset = 132
+length = 1
+
+[[boundaries]]
+payload_offset = 133
+length = 6
+
+[[boundaries]]
+payload_offset = 139
+length = 2
+
+[[boundaries]]
+payload_offset = 141
+length = 1
+
+[[boundaries]]
+payload_offset = 142
+length = 1
+
+[[boundaries]]
+payload_offset = 143
+length = 1
+
+[[boundaries]]
+payload_offset = 144
+length = 1
+
+[[boundaries]]
+payload_offset = 145
+length = 3
+
+[[boundaries]]
+payload_offset = 148
+length = 6
+
+[[boundaries]]
+payload_offset = 154
+length = 3
+
+[[boundaries]]
+payload_offset = 157
+length = 6
+
+[[boundaries]]
+payload_offset = 163
+length = 3
+
+[[boundaries]]
+payload_offset = 166
+length = 6
+
+[[boundaries]]
+payload_offset = 172
+length = 6
+
+[[boundaries]]
+payload_offset = 178
+length = 2
+
+[[boundaries]]
+payload_offset = 180
+length = 1
+
+[[boundaries]]
+payload_offset = 181
+length = 1
+
+[[boundaries]]
+payload_offset = 182
+length = 6
+
+[[boundaries]]
+payload_offset = 188
+length = 2
+
+[[boundaries]]
+payload_offset = 190
+length = 1
+
+[[boundaries]]
+payload_offset = 191
+length = 1
+
+[[boundaries]]
+payload_offset = 192
+length = 6
+
+[[boundaries]]
+payload_offset = 198
+length = 2
+
+[[boundaries]]
+payload_offset = 200
+length = 1
+
+[[boundaries]]
+payload_offset = 201
+length = 1
+
+[[boundaries]]
+payload_offset = 202
+length = 6
+
+[[boundaries]]
+payload_offset = 208
+length = 2
+
+[[boundaries]]
+payload_offset = 210
+length = 1
+
+[[boundaries]]
+payload_offset = 211
+length = 1

@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 11
 reloc_count = 15
+instruction_count = 54
 
 [[segments]]
 kind = "bytecode"
@@ -120,6 +121,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-covelilymotel-2f"
 target_export = "LilycoveCity_CoveLilyMotel_2F_EventScript_ShowMeCompletedDex"
 target_offset = 39
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 38
 runtime_resolution_required = true
 
 [[relocs]]
@@ -130,6 +133,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-covelilymotel-2f"
 target_export = "LilycoveCity_CoveLilyMotel_2F_EventScript_ShowDiploma"
 target_offset = 61
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 60
 runtime_resolution_required = true
 
 [[relocs]]
@@ -140,6 +145,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-covelilymotel-2f"
 target_export = "LilycoveCity_CoveLilyMotel_2F_EventScript_AllHoennMonsFanfare"
 target_offset = 48
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 47
 runtime_resolution_required = true
 
 [[relocs]]
@@ -149,6 +156,8 @@ original_encoded_gba = 0x8218774
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-covelilymotel-2f"
 target_export = "LilycoveCity_CoveLilyMotel_2F_Text_ShowMeCompletedDex"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -159,6 +168,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-covelilymotel-2f"
 target_export = "LilycoveCity_CoveLilyMotel_2F_EventScript_ShowDiploma"
 target_offset = 61
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 60
 runtime_resolution_required = true
 
 [[relocs]]
@@ -168,6 +179,8 @@ original_encoded_gba = 0x821881c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-covelilymotel-2f"
 target_export = "LilycoveCity_CoveLilyMotel_2F_Text_FilledPokedexGiveYouThis"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -178,6 +191,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_PlayGymBadgeFanfare"
 target_offset = 315
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 315
 runtime_resolution_required = true
 
 [[relocs]]
@@ -187,6 +202,8 @@ original_encoded_gba = 0x82188d6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-covelilymotel-2f"
 target_export = "LilycoveCity_CoveLilyMotel_2F_Text_ImTheProgrammer"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -196,6 +213,8 @@ original_encoded_gba = 0x821892b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-covelilymotel-2f"
 target_export = "LilycoveCity_CoveLilyMotel_2F_Text_ImTheGraphicArtist"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -205,6 +224,8 @@ original_encoded_gba = 0x821896c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-covelilymotel-2f"
 target_export = "LilycoveCity_CoveLilyMotel_2F_Text_GirlsAreCute"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -214,6 +235,8 @@ original_encoded_gba = 0x8218a21
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-covelilymotel-2f"
 target_export = "LilycoveCity_CoveLilyMotel_2F_Text_SeaBreezeTicklesHeart"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -223,6 +246,8 @@ original_encoded_gba = 0x8218a5b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-covelilymotel-2f"
 target_export = "LilycoveCity_CoveLilyMotel_2F_Text_NeverLeaveWithoutGameBoy"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -233,6 +258,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-covelilymotel-2f"
 target_export = "LilycoveCity_CoveLilyMotel_2F_EventScript_MetScott"
 target_offset = 152
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 151
 runtime_resolution_required = true
 
 [[relocs]]
@@ -242,6 +269,8 @@ original_encoded_gba = 0x8218acf
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-covelilymotel-2f"
 target_export = "LilycoveCity_CoveLilyMotel_2F_Text_SnoozingPreferBattles"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -251,4 +280,222 @@ original_encoded_gba = 0x8218c33
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-covelilymotel-2f"
 target_export = "LilycoveCity_CoveLilyMotel_2F_Text_ContestsDoTakeStrategy"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 1
+
+[[boundaries]]
+payload_offset = 2
+length = 3
+
+[[boundaries]]
+payload_offset = 5
+length = 6
+
+[[boundaries]]
+payload_offset = 11
+length = 3
+
+[[boundaries]]
+payload_offset = 14
+length = 6
+
+[[boundaries]]
+payload_offset = 20
+length = 5
+
+[[boundaries]]
+payload_offset = 25
+length = 5
+
+[[boundaries]]
+payload_offset = 30
+length = 6
+
+[[boundaries]]
+payload_offset = 36
+length = 1
+
+[[boundaries]]
+payload_offset = 37
+length = 1
+
+[[boundaries]]
+payload_offset = 38
+length = 6
+
+[[boundaries]]
+payload_offset = 44
+length = 2
+
+[[boundaries]]
+payload_offset = 46
+length = 1
+
+[[boundaries]]
+payload_offset = 47
+length = 3
+
+[[boundaries]]
+payload_offset = 50
+length = 3
+
+[[boundaries]]
+payload_offset = 53
+length = 1
+
+[[boundaries]]
+payload_offset = 54
+length = 5
+
+[[boundaries]]
+payload_offset = 60
+length = 5
+
+[[boundaries]]
+payload_offset = 65
+length = 1
+
+[[boundaries]]
+payload_offset = 66
+length = 5
+
+[[boundaries]]
+payload_offset = 71
+length = 3
+
+[[boundaries]]
+payload_offset = 74
+length = 1
+
+[[boundaries]]
+payload_offset = 75
+length = 1
+
+[[boundaries]]
+payload_offset = 76
+length = 1
+
+[[boundaries]]
+payload_offset = 77
+length = 6
+
+[[boundaries]]
+payload_offset = 83
+length = 2
+
+[[boundaries]]
+payload_offset = 85
+length = 1
+
+[[boundaries]]
+payload_offset = 86
+length = 6
+
+[[boundaries]]
+payload_offset = 92
+length = 2
+
+[[boundaries]]
+payload_offset = 94
+length = 1
+
+[[boundaries]]
+payload_offset = 95
+length = 6
+
+[[boundaries]]
+payload_offset = 101
+length = 2
+
+[[boundaries]]
+payload_offset = 103
+length = 1
+
+[[boundaries]]
+payload_offset = 104
+length = 6
+
+[[boundaries]]
+payload_offset = 110
+length = 2
+
+[[boundaries]]
+payload_offset = 112
+length = 1
+
+[[boundaries]]
+payload_offset = 113
+length = 6
+
+[[boundaries]]
+payload_offset = 119
+length = 2
+
+[[boundaries]]
+payload_offset = 121
+length = 1
+
+[[boundaries]]
+payload_offset = 122
+length = 1
+
+[[boundaries]]
+payload_offset = 123
+length = 1
+
+[[boundaries]]
+payload_offset = 124
+length = 3
+
+[[boundaries]]
+payload_offset = 127
+length = 6
+
+[[boundaries]]
+payload_offset = 133
+length = 6
+
+[[boundaries]]
+payload_offset = 139
+length = 2
+
+[[boundaries]]
+payload_offset = 141
+length = 5
+
+[[boundaries]]
+payload_offset = 146
+length = 3
+
+[[boundaries]]
+payload_offset = 149
+length = 1
+
+[[boundaries]]
+payload_offset = 150
+length = 1
+
+[[boundaries]]
+payload_offset = 151
+length = 6
+
+[[boundaries]]
+payload_offset = 157
+length = 2
+
+[[boundaries]]
+payload_offset = 159
+length = 1
+
+[[boundaries]]
+payload_offset = 160
+length = 1

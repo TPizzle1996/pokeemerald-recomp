@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 6
 export_count = 91
 reloc_count = 242
+instruction_count = 703
 
 [[segments]]
 kind = "bytecode"
@@ -790,6 +791,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/rival-graphics"
 target_export = "Common_EventScript_SetupRivalGfxId"
 target_offset = 0
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 0
 runtime_resolution_required = true
 
 [[relocs]]
@@ -800,6 +803,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_HideMapNamePopup"
 target_offset = 74
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 63
 runtime_resolution_required = true
 
 [[relocs]]
@@ -810,6 +815,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_PositionScientistForExit"
 target_offset = 47
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 36
 runtime_resolution_required = true
 
 [[relocs]]
@@ -820,6 +827,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_PositionScientistLeftExit"
 target_offset = 66
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 55
 runtime_resolution_required = true
 
 [[relocs]]
@@ -829,6 +838,8 @@ original_encoded_gba = 0x81e0850
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rustborocity-movement-playerwalkdown"
 target_export = "RustboroCity_Movement_PlayerWalkDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -838,6 +849,8 @@ original_encoded_gba = 0x81e0852
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rustborocity-movement-scientistapproachplayer"
 target_export = "RustboroCity_Movement_ScientistApproachPlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -847,6 +860,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -856,6 +871,8 @@ original_encoded_gba = 0x827259a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-delay48"
 target_export = "Common_Movement_Delay48"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -865,6 +882,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -874,6 +893,8 @@ original_encoded_gba = 0x81e084e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rustborocity-movement-scientistwalkinplacedown"
 target_export = "RustboroCity_Movement_ScientistWalkInPlaceDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -883,6 +904,8 @@ original_encoded_gba = 0x81e22a5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_DevelopedNewPokenavFeature"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -892,6 +915,8 @@ original_encoded_gba = 0x82725a4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterleft"
 target_export = "Common_Movement_WalkInPlaceFasterLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -901,6 +926,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -910,6 +937,8 @@ original_encoded_gba = 0x81e2331
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_AddedMatchCallPleaseCallMrStone"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -920,6 +949,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_MatchCallTutorial"
 target_offset = 256
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 235
 runtime_resolution_required = true
 
 [[relocs]]
@@ -929,6 +960,8 @@ original_encoded_gba = 0x81e2449
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_PleaseSelectPokenav"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -939,6 +972,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_MatchCallTutorial"
 target_offset = 256
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 235
 runtime_resolution_required = true
 
 [[relocs]]
@@ -949,6 +984,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_PleaseSelectPokenav"
 target_offset = 239
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 218
 runtime_resolution_required = true
 
 [[relocs]]
@@ -959,6 +996,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_PleaseSelectPokenav"
 target_offset = 239
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 218
 runtime_resolution_required = true
 
 [[relocs]]
@@ -969,6 +1008,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_PleaseSelectPokenav"
 target_offset = 239
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 218
 runtime_resolution_required = true
 
 [[relocs]]
@@ -979,6 +1020,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_PleaseSelectPokenav"
 target_offset = 239
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 218
 runtime_resolution_required = true
 
 [[relocs]]
@@ -989,6 +1032,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_PleaseSelectPokenav"
 target_offset = 239
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 218
 runtime_resolution_required = true
 
 [[relocs]]
@@ -999,6 +1044,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_PleaseSelectPokenav"
 target_offset = 239
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 218
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1009,6 +1056,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_PleaseSelectPokenav"
 target_offset = 239
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 218
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1019,6 +1068,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_PleaseSelectPokenav"
 target_offset = 239
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 218
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1028,6 +1079,8 @@ original_encoded_gba = 0x81e2464
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_IdBetterGetBackToWork"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1037,6 +1090,8 @@ original_encoded_gba = 0x81e085d
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rustborocity-movement-scientistleave"
 target_export = "RustboroCity_Movement_ScientistLeave"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1047,6 +1102,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_FatManSawGrunt"
 target_offset = 439
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 401
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1056,6 +1113,8 @@ original_encoded_gba = 0x81e123f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_WeShortenItToDevon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1065,6 +1124,8 @@ original_encoded_gba = 0x81e12ac
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_SneakyLookingManWentAroundCorner"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1074,6 +1135,8 @@ original_encoded_gba = 0x81e1407
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_YoureNewAroundHere"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1083,6 +1146,8 @@ original_encoded_gba = 0x81e1480
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_GymLeaderIsntEasyWithFire"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1093,6 +1158,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_Man1HaveBadge"
 target_offset = 491
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 453
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1102,6 +1169,8 @@ original_encoded_gba = 0x81e130d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_HaveYouChallengedGym"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1111,6 +1180,8 @@ original_encoded_gba = 0x81e139e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_HeyThatsRustborosGymBadge"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1121,6 +1192,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_Boy2BrineyLeftTunnel"
 target_offset = 522
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 484
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1130,6 +1203,8 @@ original_encoded_gba = 0x81e1520
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_MrBrineyWalksInTheTunnel"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1139,6 +1214,8 @@ original_encoded_gba = 0x81e1589
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_MrBrineyLovesPeeko"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1148,6 +1225,8 @@ original_encoded_gba = 0x81e1633
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_WowYouHavePokemon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1157,6 +1236,8 @@ original_encoded_gba = 0x81e1695
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_CatchRarePokemonIfIGoToSchool"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1166,6 +1247,8 @@ original_encoded_gba = 0x81e20a6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_TunnelNearingCompletion"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1175,6 +1258,8 @@ original_encoded_gba = 0x81e2128
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_DevonCorpSign"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1184,6 +1269,8 @@ original_encoded_gba = 0x81e2167
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_GymSign"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1193,6 +1280,8 @@ original_encoded_gba = 0x81e21b3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_DevonCorpBranchOfficeSign"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1202,6 +1291,8 @@ original_encoded_gba = 0x81e220b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_CitySign"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1211,6 +1302,8 @@ original_encoded_gba = 0x81e2253
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_TrainersSchoolSign"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1220,6 +1313,8 @@ original_encoded_gba = 0x81e2296
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_CuttersHouse"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1229,6 +1324,8 @@ original_encoded_gba = 0x81e16f4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_PokemonCanChangeLookFromExp"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1238,6 +1335,8 @@ original_encoded_gba = 0x82725a2
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceoriginaldirection"
 target_export = "Common_Movement_FaceOriginalDirection"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1247,6 +1346,8 @@ original_encoded_gba = 0x81e174b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_PokemonChangeShape"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1256,6 +1357,8 @@ original_encoded_gba = 0x82725a2
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceoriginaldirection"
 target_export = "Common_Movement_FaceOriginalDirection"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1265,6 +1368,8 @@ original_encoded_gba = 0x81e1789
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_TradePokemonGrowFast"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1275,6 +1380,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_StolenGoodsScene"
 target_offset = 784
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 746
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1285,6 +1392,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_StolenGoodsScene"
 target_offset = 784
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 746
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1295,6 +1404,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_StolenGoodsScene"
 target_offset = 784
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 746
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1305,6 +1416,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_StolenGoodsScene"
 target_offset = 784
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 746
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1315,6 +1428,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_StolenGoodsScene"
 target_offset = 784
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 746
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1324,6 +1439,8 @@ original_encoded_gba = 0x81e17fe
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_OutOfTheWay"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1333,6 +1450,8 @@ original_encoded_gba = 0x81e0aa0
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rustborocity-movement-gruntescape"
 target_export = "RustboroCity_Movement_GruntEscape"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1342,6 +1461,8 @@ original_encoded_gba = 0x81e0ab1
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rustborocity-movement-employeechasegrunt1"
 target_export = "RustboroCity_Movement_EmployeeChaseGrunt1"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1351,6 +1472,8 @@ original_encoded_gba = 0x81e1817
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_WaitDontTakeMyGoods"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1360,6 +1483,8 @@ original_encoded_gba = 0x81e0ab9
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rustborocity-movement-employeechasegrunt2"
 target_export = "RustboroCity_Movement_EmployeeChaseGrunt2"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1369,6 +1494,8 @@ original_encoded_gba = 0x81e1904
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_ShadyCharacterTookOffTowardsTunnel"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1378,6 +1505,8 @@ original_encoded_gba = 0x81e194d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_YouGotItThankYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1387,6 +1516,8 @@ original_encoded_gba = 0x81e0ac1
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rustborocity-movement-employeeapproachup"
 target_export = "RustboroCity_Movement_EmployeeApproachUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1396,6 +1527,8 @@ original_encoded_gba = 0x81e0ac5
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rustborocity-movement-employeeapproachleft"
 target_export = "RustboroCity_Movement_EmployeeApproachLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1405,6 +1538,8 @@ original_encoded_gba = 0x81e0aca
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rustborocity-movement-employeeapproachright"
 target_export = "RustboroCity_Movement_EmployeeApproachRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1414,6 +1549,8 @@ original_encoded_gba = 0x81e0acf
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rustborocity-movement-employeeapproachdown"
 target_export = "RustboroCity_Movement_EmployeeApproachDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1423,6 +1560,8 @@ original_encoded_gba = 0x81e0ad5
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rustborocity-movement-employeeapproachplayerfar"
 target_export = "RustboroCity_Movement_EmployeeApproachPlayerFar"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1432,6 +1571,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1442,6 +1583,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_ReturnGoodsSpokeToEmployee"
 target_offset = 1077
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 960
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1451,6 +1594,8 @@ original_encoded_gba = 0x81e1904
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_ShadyCharacterTookOffTowardsTunnel"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1461,6 +1606,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_ReturnGoods"
 target_offset = 1438
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1319
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1471,6 +1618,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_EmployeeAskToGetGoods"
 target_offset = 1137
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1020
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1481,6 +1630,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_EmployeeAskToGetGoods"
 target_offset = 1137
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1020
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1491,6 +1642,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_EmployeeAskToGetGoods"
 target_offset = 1137
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1020
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1501,6 +1654,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_EmployeeAskToGetGoods"
 target_offset = 1137
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1020
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1511,6 +1666,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_EmployeeFacePlayerUp1"
 target_offset = 1202
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1085
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1521,6 +1678,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_EmployeeFacePlayerLeft1"
 target_offset = 1246
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1129
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1531,6 +1690,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_EmployeeFacePlayerDown1"
 target_offset = 1290
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1173
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1541,6 +1702,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_EmployeeApproachPlayerDown1"
 target_offset = 1334
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1217
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1550,6 +1713,8 @@ original_encoded_gba = 0x81e183e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_HelpMeIWasRobbed"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1559,6 +1724,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1568,6 +1735,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1577,6 +1746,8 @@ original_encoded_gba = 0x827259a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-delay48"
 target_export = "Common_Movement_Delay48"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1586,6 +1757,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1595,6 +1768,8 @@ original_encoded_gba = 0x82725a4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterleft"
 target_export = "Common_Movement_WalkInPlaceFasterLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1604,6 +1779,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1613,6 +1790,8 @@ original_encoded_gba = 0x827259a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-delay48"
 target_export = "Common_Movement_Delay48"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1622,6 +1801,8 @@ original_encoded_gba = 0x82725ac
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceright"
 target_export = "Common_Movement_FaceRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1631,6 +1812,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1640,6 +1823,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1649,6 +1834,8 @@ original_encoded_gba = 0x827259a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-delay48"
 target_export = "Common_Movement_Delay48"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1658,6 +1845,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1667,6 +1856,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1676,6 +1867,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1685,6 +1878,8 @@ original_encoded_gba = 0x827259a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-delay48"
 target_export = "Common_Movement_Delay48"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1694,6 +1889,8 @@ original_encoded_gba = 0x81e0c29
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rustborocity-movement-employeeapproachplayerdown"
 target_export = "RustboroCity_Movement_EmployeeApproachPlayerDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1703,6 +1900,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1713,6 +1912,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_ReturnGoods"
 target_offset = 1438
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1319
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1723,6 +1924,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_ReturnGoods"
 target_offset = 1438
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1319
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1733,6 +1936,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_ReturnGoods"
 target_offset = 1438
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1319
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1743,6 +1948,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_ReturnGoods"
 target_offset = 1438
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1319
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1753,6 +1960,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_EmployeeFacePlayerUp2"
 target_offset = 1567
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1448
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1763,6 +1972,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_EmployeeFacePlayerLeft2"
 target_offset = 1611
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1492
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1773,6 +1984,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_EmployeeFacePlayerDown2"
 target_offset = 1655
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1536
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1783,6 +1996,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_EmployeeApproachPlayerDown2"
 target_offset = 1699
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1580
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1793,6 +2008,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_EmployeeFacePlayerRight"
 target_offset = 1753
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1634
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1802,6 +2019,8 @@ original_encoded_gba = 0x81e194d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_YouGotItThankYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1812,6 +2031,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_BagFull"
 target_offset = 1558
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1439
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1821,6 +2042,8 @@ original_encoded_gba = 0x81e1a21
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_PleaseComeWithMe"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1830,6 +2053,8 @@ original_encoded_gba = 0x81e19e5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_YoureLoadedWithItems"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1839,6 +2064,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1848,6 +2075,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1857,6 +2086,8 @@ original_encoded_gba = 0x827259a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-delay48"
 target_export = "Common_Movement_Delay48"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1866,6 +2097,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1875,6 +2108,8 @@ original_encoded_gba = 0x82725a8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterright"
 target_export = "Common_Movement_WalkInPlaceFasterRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1884,6 +2119,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1893,6 +2130,8 @@ original_encoded_gba = 0x827259a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-delay48"
 target_export = "Common_Movement_Delay48"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1902,6 +2141,8 @@ original_encoded_gba = 0x82725ae
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceleft"
 target_export = "Common_Movement_FaceLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1911,6 +2152,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1920,6 +2163,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1929,6 +2174,8 @@ original_encoded_gba = 0x827259a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-delay48"
 target_export = "Common_Movement_Delay48"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1938,6 +2185,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1947,6 +2196,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1956,6 +2207,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1965,6 +2218,8 @@ original_encoded_gba = 0x827259a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-delay48"
 target_export = "Common_Movement_Delay48"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1974,6 +2229,8 @@ original_encoded_gba = 0x81e0c29
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rustborocity-movement-employeeapproachplayerdown"
 target_export = "RustboroCity_Movement_EmployeeApproachPlayerDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1983,6 +2240,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1992,6 +2251,8 @@ original_encoded_gba = 0x82725a4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterleft"
 target_export = "Common_Movement_WalkInPlaceFasterLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2001,6 +2262,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2010,6 +2273,8 @@ original_encoded_gba = 0x827259a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-delay48"
 target_export = "Common_Movement_Delay48"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2020,6 +2285,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_PlayRivalMusic"
 target_offset = 1812
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1693
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2029,6 +2296,8 @@ original_encoded_gba = 0x827259e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceplayer"
 target_export = "Common_Movement_FacePlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2039,6 +2308,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_RivalEncounter"
 target_offset = 2358
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2239
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2049,6 +2320,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_PlayMayMusic"
 target_offset = 1836
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1717
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2059,6 +2332,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_PlayBrendanMusic"
 target_offset = 1841
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1722
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2069,6 +2344,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_PlayRivalMusic"
 target_offset = 1812
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1693
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2078,6 +2355,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2087,6 +2366,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2096,6 +2377,8 @@ original_encoded_gba = 0x827259a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-delay48"
 target_export = "Common_Movement_Delay48"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2105,6 +2388,8 @@ original_encoded_gba = 0x81e120e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rustborocity-movement-rivalapproachplayer0"
 target_export = "RustboroCity_Movement_RivalApproachPlayer0"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2114,6 +2399,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2124,6 +2411,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_RivalEncounter"
 target_offset = 2358
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2239
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2134,6 +2423,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_PlayRivalMusic"
 target_offset = 1812
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1693
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2143,6 +2434,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2152,6 +2445,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2161,6 +2456,8 @@ original_encoded_gba = 0x827259a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-delay48"
 target_export = "Common_Movement_Delay48"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2170,6 +2467,8 @@ original_encoded_gba = 0x81e1215
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rustborocity-movement-rivalapproachplayer1"
 target_export = "RustboroCity_Movement_RivalApproachPlayer1"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2179,6 +2478,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2189,6 +2490,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_RivalEncounter"
 target_offset = 2358
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2239
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2199,6 +2502,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_PlayRivalMusic"
 target_offset = 1812
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1693
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2208,6 +2513,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2217,6 +2524,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2226,6 +2535,8 @@ original_encoded_gba = 0x827259a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-delay48"
 target_export = "Common_Movement_Delay48"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2235,6 +2546,8 @@ original_encoded_gba = 0x81e121b
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rustborocity-movement-rivalapproachplayer2"
 target_export = "RustboroCity_Movement_RivalApproachPlayer2"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2244,6 +2557,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2254,6 +2569,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_RivalEncounter"
 target_offset = 2358
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2239
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2264,6 +2581,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_PlayRivalMusic"
 target_offset = 1812
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1693
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2273,6 +2592,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2282,6 +2603,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2291,6 +2614,8 @@ original_encoded_gba = 0x827259a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-delay48"
 target_export = "Common_Movement_Delay48"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2300,6 +2625,8 @@ original_encoded_gba = 0x81e1220
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rustborocity-movement-rivalapproachplayer3"
 target_export = "RustboroCity_Movement_RivalApproachPlayer3"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2309,6 +2636,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2319,6 +2648,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_RivalEncounter"
 target_offset = 2358
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2239
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2329,6 +2660,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_PlayRivalMusic"
 target_offset = 1812
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1693
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2338,6 +2671,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2347,6 +2682,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2356,6 +2693,8 @@ original_encoded_gba = 0x827259a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-delay48"
 target_export = "Common_Movement_Delay48"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2365,6 +2704,8 @@ original_encoded_gba = 0x81e1224
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rustborocity-movement-rivalapproachplayer4"
 target_export = "RustboroCity_Movement_RivalApproachPlayer4"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2374,6 +2715,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2384,6 +2727,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_RivalEncounter"
 target_offset = 2358
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2239
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2394,6 +2739,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_PlayRivalMusic"
 target_offset = 1812
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1693
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2403,6 +2750,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2412,6 +2761,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2421,6 +2772,8 @@ original_encoded_gba = 0x827259a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-delay48"
 target_export = "Common_Movement_Delay48"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2430,6 +2783,8 @@ original_encoded_gba = 0x81e1227
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rustborocity-movement-rivalapproachplayer5"
 target_export = "RustboroCity_Movement_RivalApproachPlayer5"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2439,6 +2794,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2449,6 +2806,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_RivalEncounter"
 target_offset = 2358
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2239
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2459,6 +2818,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_PlayRivalMusic"
 target_offset = 1812
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1693
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2468,6 +2829,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2477,6 +2840,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2486,6 +2851,8 @@ original_encoded_gba = 0x827259a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-delay48"
 target_export = "Common_Movement_Delay48"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2495,6 +2862,8 @@ original_encoded_gba = 0x81e122b
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rustborocity-movement-rivalapproachplayer6"
 target_export = "RustboroCity_Movement_RivalApproachPlayer6"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2504,6 +2873,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2514,6 +2885,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_RivalEncounter"
 target_offset = 2358
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2239
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2524,6 +2897,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_PlayRivalMusic"
 target_offset = 1812
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1693
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2533,6 +2908,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2542,6 +2919,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2551,6 +2930,8 @@ original_encoded_gba = 0x827259a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-delay48"
 target_export = "Common_Movement_Delay48"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2560,6 +2941,8 @@ original_encoded_gba = 0x81e1230
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rustborocity-movement-rivalapproachplayer7"
 target_export = "RustboroCity_Movement_RivalApproachPlayer7"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2569,6 +2952,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2579,6 +2964,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_RivalEncounter"
 target_offset = 2358
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2239
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2589,6 +2976,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_MayEncounter"
 target_offset = 2382
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2263
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2599,6 +2988,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_BrendanEncounter"
 target_offset = 2647
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2528
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2609,6 +3000,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_MayBrineyHint"
 target_offset = 2564
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2445
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2619,6 +3012,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_MayAskToBattle"
 target_offset = 2483
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2364
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2628,6 +3023,8 @@ original_encoded_gba = 0x81e1a49
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_MayHiLetsRegister"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2637,6 +3034,8 @@ original_encoded_gba = 0x81e1adb
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_RegisteredMay"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2646,6 +3045,8 @@ original_encoded_gba = 0x81e1afa
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_MayPassedBrineyWantToBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2656,6 +3057,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_BattleMay"
 target_offset = 2517
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2398
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2665,6 +3068,8 @@ original_encoded_gba = 0x81e1bd3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_MayOhHaventRaisedPokemonEnough"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2675,6 +3080,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_RestoreBgm"
 target_offset = 2585
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2466
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2684,6 +3091,8 @@ original_encoded_gba = 0x81e1c48
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_MayWantToBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2694,6 +3103,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_BattleMay"
 target_offset = 2517
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2398
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2703,6 +3114,8 @@ original_encoded_gba = 0x81e1bd3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_MayOhHaventRaisedPokemonEnough"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2712,6 +3125,8 @@ original_encoded_gba = 0x81e1c84
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_MayImNotGoingToLose"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2722,6 +3137,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_BattleMayTreecko"
 target_offset = 2590
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2471
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2732,6 +3149,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_BattleMayTorchic"
 target_offset = 2609
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2490
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2742,6 +3161,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_BattleMayMudkip"
 target_offset = 2628
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2509
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2751,6 +3172,8 @@ original_encoded_gba = 0x81e1ce7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_MayMrBrineyHint"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2761,6 +3184,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_RestoreBgm"
 target_offset = 2585
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2466
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2770,6 +3195,8 @@ original_encoded_gba = 0x81e1cc1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_MayDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2780,6 +3207,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_MayBrineyHint"
 target_offset = 2564
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2445
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2789,6 +3218,8 @@ original_encoded_gba = 0x81e1cc1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_MayDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2799,6 +3230,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_MayBrineyHint"
 target_offset = 2564
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2445
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2808,6 +3241,8 @@ original_encoded_gba = 0x81e1cc1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_MayDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2818,6 +3253,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_MayBrineyHint"
 target_offset = 2564
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2445
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2828,6 +3265,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_BrendanBrineyHint"
 target_offset = 2819
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2700
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2838,6 +3277,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_BrendanAskToBattle"
 target_offset = 2743
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2624
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2847,6 +3288,8 @@ original_encoded_gba = 0x81e1d7d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_BrendanHiLetsRegister"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2856,6 +3299,8 @@ original_encoded_gba = 0x81e1e11
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_RegisteredBrendan"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2865,6 +3310,8 @@ original_encoded_gba = 0x81e1e34
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_BrendanPassedBrineyWantToBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2875,6 +3322,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_BattleBrendan"
 target_offset = 2772
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2653
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2884,6 +3333,8 @@ original_encoded_gba = 0x81e1f2f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_BrendanNoConfidenceInPokemon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2894,6 +3345,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_RestoreBgm"
 target_offset = 2585
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2466
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2903,6 +3356,8 @@ original_encoded_gba = 0x81e1f76
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_BrendanWantToBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2913,6 +3368,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_BattleBrendan"
 target_offset = 2772
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2653
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2922,6 +3379,8 @@ original_encoded_gba = 0x81e1f2f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_BrendanNoConfidenceInPokemon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2931,6 +3390,8 @@ original_encoded_gba = 0x81e1fa9
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_BrendanIWontGoEasy"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2941,6 +3402,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_BattleBrendanTreecko"
 target_offset = 2840
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2721
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2951,6 +3414,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_BattleBrendanTorchic"
 target_offset = 2859
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2740
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2961,6 +3426,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_BattleBrendanMudkip"
 target_offset = 2878
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2759
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2970,6 +3437,8 @@ original_encoded_gba = 0x81e2002
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_BrendanMrBrineyHint"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2980,6 +3449,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_RestoreBgm"
 target_offset = 2585
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2466
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2989,6 +3460,8 @@ original_encoded_gba = 0x81e1fe9
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_BrendanDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2999,6 +3472,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_BrendanBrineyHint"
 target_offset = 2819
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2700
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3008,6 +3483,8 @@ original_encoded_gba = 0x81e1fe9
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_BrendanDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3018,6 +3495,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_BrendanBrineyHint"
 target_offset = 2819
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2700
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3027,6 +3506,8 @@ original_encoded_gba = 0x81e1fe9
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_BrendanDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3037,6 +3518,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity"
 target_export = "RustboroCity_EventScript_BrendanBrineyHint"
 target_offset = 2819
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 2700
 runtime_resolution_required = true
 
 [[relocs]]
@@ -3046,4 +3529,2818 @@ original_encoded_gba = 0x81e249d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity"
 target_export = "RustboroCity_Text_YouCanHave2On2Battle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 5
+
+[[boundaries]]
+payload_offset = 8
+length = 5
+
+[[boundaries]]
+payload_offset = 13
+length = 6
+
+[[boundaries]]
+payload_offset = 19
+length = 5
+
+[[boundaries]]
+payload_offset = 24
+length = 5
+
+[[boundaries]]
+payload_offset = 29
+length = 6
+
+[[boundaries]]
+payload_offset = 35
+length = 1
+
+[[boundaries]]
+payload_offset = 36
+length = 5
+
+[[boundaries]]
+payload_offset = 41
+length = 6
+
+[[boundaries]]
+payload_offset = 47
+length = 7
+
+[[boundaries]]
+payload_offset = 54
+length = 1
+
+[[boundaries]]
+payload_offset = 55
+length = 7
+
+[[boundaries]]
+payload_offset = 62
+length = 1
+
+[[boundaries]]
+payload_offset = 63
+length = 3
+
+[[boundaries]]
+payload_offset = 66
+length = 1
+
+[[boundaries]]
+payload_offset = 67
+length = 1
+
+[[boundaries]]
+payload_offset = 68
+length = 5
+
+[[boundaries]]
+payload_offset = 73
+length = 7
+
+[[boundaries]]
+payload_offset = 80
+length = 3
+
+[[boundaries]]
+payload_offset = 83
+length = 3
+
+[[boundaries]]
+payload_offset = 86
+length = 3
+
+[[boundaries]]
+payload_offset = 89
+length = 3
+
+[[boundaries]]
+payload_offset = 92
+length = 7
+
+[[boundaries]]
+payload_offset = 99
+length = 3
+
+[[boundaries]]
+payload_offset = 102
+length = 3
+
+[[boundaries]]
+payload_offset = 105
+length = 7
+
+[[boundaries]]
+payload_offset = 112
+length = 3
+
+[[boundaries]]
+payload_offset = 115
+length = 7
+
+[[boundaries]]
+payload_offset = 122
+length = 3
+
+[[boundaries]]
+payload_offset = 125
+length = 7
+
+[[boundaries]]
+payload_offset = 132
+length = 3
+
+[[boundaries]]
+payload_offset = 135
+length = 7
+
+[[boundaries]]
+payload_offset = 142
+length = 3
+
+[[boundaries]]
+payload_offset = 145
+length = 6
+
+[[boundaries]]
+payload_offset = 151
+length = 2
+
+[[boundaries]]
+payload_offset = 153
+length = 1
+
+[[boundaries]]
+payload_offset = 154
+length = 3
+
+[[boundaries]]
+payload_offset = 157
+length = 7
+
+[[boundaries]]
+payload_offset = 164
+length = 3
+
+[[boundaries]]
+payload_offset = 167
+length = 3
+
+[[boundaries]]
+payload_offset = 170
+length = 3
+
+[[boundaries]]
+payload_offset = 173
+length = 3
+
+[[boundaries]]
+payload_offset = 176
+length = 3
+
+[[boundaries]]
+payload_offset = 179
+length = 3
+
+[[boundaries]]
+payload_offset = 182
+length = 3
+
+[[boundaries]]
+payload_offset = 185
+length = 3
+
+[[boundaries]]
+payload_offset = 188
+length = 3
+
+[[boundaries]]
+payload_offset = 191
+length = 7
+
+[[boundaries]]
+payload_offset = 198
+length = 3
+
+[[boundaries]]
+payload_offset = 201
+length = 6
+
+[[boundaries]]
+payload_offset = 207
+length = 2
+
+[[boundaries]]
+payload_offset = 209
+length = 1
+
+[[boundaries]]
+payload_offset = 210
+length = 3
+
+[[boundaries]]
+payload_offset = 213
+length = 5
+
+[[boundaries]]
+payload_offset = 218
+length = 6
+
+[[boundaries]]
+payload_offset = 224
+length = 2
+
+[[boundaries]]
+payload_offset = 226
+length = 1
+
+[[boundaries]]
+payload_offset = 227
+length = 3
+
+[[boundaries]]
+payload_offset = 230
+length = 5
+
+[[boundaries]]
+payload_offset = 235
+length = 3
+
+[[boundaries]]
+payload_offset = 238
+length = 3
+
+[[boundaries]]
+payload_offset = 241
+length = 1
+
+[[boundaries]]
+payload_offset = 242
+length = 5
+
+[[boundaries]]
+payload_offset = 247
+length = 5
+
+[[boundaries]]
+payload_offset = 252
+length = 6
+
+[[boundaries]]
+payload_offset = 258
+length = 5
+
+[[boundaries]]
+payload_offset = 263
+length = 6
+
+[[boundaries]]
+payload_offset = 269
+length = 5
+
+[[boundaries]]
+payload_offset = 274
+length = 6
+
+[[boundaries]]
+payload_offset = 280
+length = 5
+
+[[boundaries]]
+payload_offset = 285
+length = 6
+
+[[boundaries]]
+payload_offset = 291
+length = 5
+
+[[boundaries]]
+payload_offset = 296
+length = 6
+
+[[boundaries]]
+payload_offset = 302
+length = 5
+
+[[boundaries]]
+payload_offset = 307
+length = 6
+
+[[boundaries]]
+payload_offset = 313
+length = 5
+
+[[boundaries]]
+payload_offset = 318
+length = 6
+
+[[boundaries]]
+payload_offset = 324
+length = 5
+
+[[boundaries]]
+payload_offset = 329
+length = 6
+
+[[boundaries]]
+payload_offset = 335
+length = 3
+
+[[boundaries]]
+payload_offset = 338
+length = 1
+
+[[boundaries]]
+payload_offset = 339
+length = 3
+
+[[boundaries]]
+payload_offset = 342
+length = 6
+
+[[boundaries]]
+payload_offset = 348
+length = 2
+
+[[boundaries]]
+payload_offset = 350
+length = 1
+
+[[boundaries]]
+payload_offset = 351
+length = 7
+
+[[boundaries]]
+payload_offset = 358
+length = 3
+
+[[boundaries]]
+payload_offset = 361
+length = 3
+
+[[boundaries]]
+payload_offset = 364
+length = 3
+
+[[boundaries]]
+payload_offset = 367
+length = 3
+
+[[boundaries]]
+payload_offset = 370
+length = 5
+
+[[boundaries]]
+payload_offset = 375
+length = 3
+
+[[boundaries]]
+payload_offset = 378
+length = 1
+
+[[boundaries]]
+payload_offset = 379
+length = 1
+
+[[boundaries]]
+payload_offset = 380
+length = 1
+
+[[boundaries]]
+payload_offset = 381
+length = 1
+
+[[boundaries]]
+payload_offset = 382
+length = 3
+
+[[boundaries]]
+payload_offset = 385
+length = 6
+
+[[boundaries]]
+payload_offset = 391
+length = 6
+
+[[boundaries]]
+payload_offset = 397
+length = 2
+
+[[boundaries]]
+payload_offset = 399
+length = 1
+
+[[boundaries]]
+payload_offset = 400
+length = 1
+
+[[boundaries]]
+payload_offset = 401
+length = 6
+
+[[boundaries]]
+payload_offset = 407
+length = 2
+
+[[boundaries]]
+payload_offset = 409
+length = 1
+
+[[boundaries]]
+payload_offset = 410
+length = 1
+
+[[boundaries]]
+payload_offset = 411
+length = 1
+
+[[boundaries]]
+payload_offset = 412
+length = 1
+
+[[boundaries]]
+payload_offset = 413
+length = 6
+
+[[boundaries]]
+payload_offset = 419
+length = 2
+
+[[boundaries]]
+payload_offset = 421
+length = 1
+
+[[boundaries]]
+payload_offset = 422
+length = 1
+
+[[boundaries]]
+payload_offset = 423
+length = 6
+
+[[boundaries]]
+payload_offset = 429
+length = 2
+
+[[boundaries]]
+payload_offset = 431
+length = 1
+
+[[boundaries]]
+payload_offset = 432
+length = 1
+
+[[boundaries]]
+payload_offset = 433
+length = 1
+
+[[boundaries]]
+payload_offset = 434
+length = 3
+
+[[boundaries]]
+payload_offset = 437
+length = 6
+
+[[boundaries]]
+payload_offset = 443
+length = 6
+
+[[boundaries]]
+payload_offset = 449
+length = 2
+
+[[boundaries]]
+payload_offset = 451
+length = 1
+
+[[boundaries]]
+payload_offset = 452
+length = 1
+
+[[boundaries]]
+payload_offset = 453
+length = 6
+
+[[boundaries]]
+payload_offset = 459
+length = 2
+
+[[boundaries]]
+payload_offset = 461
+length = 1
+
+[[boundaries]]
+payload_offset = 462
+length = 1
+
+[[boundaries]]
+payload_offset = 463
+length = 1
+
+[[boundaries]]
+payload_offset = 464
+length = 1
+
+[[boundaries]]
+payload_offset = 465
+length = 3
+
+[[boundaries]]
+payload_offset = 468
+length = 6
+
+[[boundaries]]
+payload_offset = 474
+length = 6
+
+[[boundaries]]
+payload_offset = 480
+length = 2
+
+[[boundaries]]
+payload_offset = 482
+length = 1
+
+[[boundaries]]
+payload_offset = 483
+length = 1
+
+[[boundaries]]
+payload_offset = 484
+length = 6
+
+[[boundaries]]
+payload_offset = 490
+length = 2
+
+[[boundaries]]
+payload_offset = 492
+length = 1
+
+[[boundaries]]
+payload_offset = 493
+length = 1
+
+[[boundaries]]
+payload_offset = 494
+length = 6
+
+[[boundaries]]
+payload_offset = 500
+length = 2
+
+[[boundaries]]
+payload_offset = 502
+length = 1
+
+[[boundaries]]
+payload_offset = 503
+length = 6
+
+[[boundaries]]
+payload_offset = 509
+length = 2
+
+[[boundaries]]
+payload_offset = 511
+length = 1
+
+[[boundaries]]
+payload_offset = 512
+length = 6
+
+[[boundaries]]
+payload_offset = 518
+length = 2
+
+[[boundaries]]
+payload_offset = 520
+length = 1
+
+[[boundaries]]
+payload_offset = 521
+length = 6
+
+[[boundaries]]
+payload_offset = 527
+length = 2
+
+[[boundaries]]
+payload_offset = 529
+length = 1
+
+[[boundaries]]
+payload_offset = 530
+length = 6
+
+[[boundaries]]
+payload_offset = 536
+length = 2
+
+[[boundaries]]
+payload_offset = 538
+length = 1
+
+[[boundaries]]
+payload_offset = 539
+length = 6
+
+[[boundaries]]
+payload_offset = 545
+length = 2
+
+[[boundaries]]
+payload_offset = 547
+length = 1
+
+[[boundaries]]
+payload_offset = 548
+length = 6
+
+[[boundaries]]
+payload_offset = 554
+length = 2
+
+[[boundaries]]
+payload_offset = 556
+length = 1
+
+[[boundaries]]
+payload_offset = 557
+length = 6
+
+[[boundaries]]
+payload_offset = 563
+length = 2
+
+[[boundaries]]
+payload_offset = 565
+length = 1
+
+[[boundaries]]
+payload_offset = 566
+length = 6
+
+[[boundaries]]
+payload_offset = 572
+length = 2
+
+[[boundaries]]
+payload_offset = 574
+length = 1
+
+[[boundaries]]
+payload_offset = 575
+length = 1
+
+[[boundaries]]
+payload_offset = 576
+length = 1
+
+[[boundaries]]
+payload_offset = 577
+length = 6
+
+[[boundaries]]
+payload_offset = 583
+length = 2
+
+[[boundaries]]
+payload_offset = 585
+length = 7
+
+[[boundaries]]
+payload_offset = 592
+length = 3
+
+[[boundaries]]
+payload_offset = 595
+length = 1
+
+[[boundaries]]
+payload_offset = 596
+length = 1
+
+[[boundaries]]
+payload_offset = 597
+length = 1
+
+[[boundaries]]
+payload_offset = 598
+length = 1
+
+[[boundaries]]
+payload_offset = 599
+length = 6
+
+[[boundaries]]
+payload_offset = 605
+length = 2
+
+[[boundaries]]
+payload_offset = 607
+length = 7
+
+[[boundaries]]
+payload_offset = 614
+length = 3
+
+[[boundaries]]
+payload_offset = 617
+length = 1
+
+[[boundaries]]
+payload_offset = 618
+length = 1
+
+[[boundaries]]
+payload_offset = 619
+length = 1
+
+[[boundaries]]
+payload_offset = 620
+length = 1
+
+[[boundaries]]
+payload_offset = 621
+length = 6
+
+[[boundaries]]
+payload_offset = 627
+length = 2
+
+[[boundaries]]
+payload_offset = 629
+length = 1
+
+[[boundaries]]
+payload_offset = 630
+length = 1
+
+[[boundaries]]
+payload_offset = 631
+length = 1
+
+[[boundaries]]
+payload_offset = 632
+length = 7
+
+[[boundaries]]
+payload_offset = 639
+length = 4
+
+[[boundaries]]
+payload_offset = 643
+length = 5
+
+[[boundaries]]
+payload_offset = 648
+length = 5
+
+[[boundaries]]
+payload_offset = 654
+length = 1
+
+[[boundaries]]
+payload_offset = 655
+length = 7
+
+[[boundaries]]
+payload_offset = 662
+length = 4
+
+[[boundaries]]
+payload_offset = 666
+length = 5
+
+[[boundaries]]
+payload_offset = 671
+length = 5
+
+[[boundaries]]
+payload_offset = 677
+length = 1
+
+[[boundaries]]
+payload_offset = 678
+length = 7
+
+[[boundaries]]
+payload_offset = 685
+length = 4
+
+[[boundaries]]
+payload_offset = 689
+length = 5
+
+[[boundaries]]
+payload_offset = 694
+length = 5
+
+[[boundaries]]
+payload_offset = 700
+length = 1
+
+[[boundaries]]
+payload_offset = 701
+length = 7
+
+[[boundaries]]
+payload_offset = 708
+length = 4
+
+[[boundaries]]
+payload_offset = 712
+length = 5
+
+[[boundaries]]
+payload_offset = 717
+length = 5
+
+[[boundaries]]
+payload_offset = 723
+length = 1
+
+[[boundaries]]
+payload_offset = 724
+length = 7
+
+[[boundaries]]
+payload_offset = 731
+length = 4
+
+[[boundaries]]
+payload_offset = 735
+length = 5
+
+[[boundaries]]
+payload_offset = 740
+length = 5
+
+[[boundaries]]
+payload_offset = 746
+length = 6
+
+[[boundaries]]
+payload_offset = 752
+length = 2
+
+[[boundaries]]
+payload_offset = 754
+length = 1
+
+[[boundaries]]
+payload_offset = 755
+length = 4
+
+[[boundaries]]
+payload_offset = 759
+length = 3
+
+[[boundaries]]
+payload_offset = 762
+length = 3
+
+[[boundaries]]
+payload_offset = 765
+length = 7
+
+[[boundaries]]
+payload_offset = 772
+length = 3
+
+[[boundaries]]
+payload_offset = 775
+length = 3
+
+[[boundaries]]
+payload_offset = 778
+length = 7
+
+[[boundaries]]
+payload_offset = 785
+length = 3
+
+[[boundaries]]
+payload_offset = 788
+length = 6
+
+[[boundaries]]
+payload_offset = 794
+length = 2
+
+[[boundaries]]
+payload_offset = 796
+length = 1
+
+[[boundaries]]
+payload_offset = 797
+length = 7
+
+[[boundaries]]
+payload_offset = 804
+length = 3
+
+[[boundaries]]
+payload_offset = 807
+length = 1
+
+[[boundaries]]
+payload_offset = 808
+length = 3
+
+[[boundaries]]
+payload_offset = 811
+length = 7
+
+[[boundaries]]
+payload_offset = 818
+length = 3
+
+[[boundaries]]
+payload_offset = 821
+length = 3
+
+[[boundaries]]
+payload_offset = 824
+length = 5
+
+[[boundaries]]
+payload_offset = 829
+length = 5
+
+[[boundaries]]
+payload_offset = 834
+length = 5
+
+[[boundaries]]
+payload_offset = 839
+length = 3
+
+[[boundaries]]
+payload_offset = 842
+length = 3
+
+[[boundaries]]
+payload_offset = 845
+length = 3
+
+[[boundaries]]
+payload_offset = 848
+length = 3
+
+[[boundaries]]
+payload_offset = 851
+length = 3
+
+[[boundaries]]
+payload_offset = 854
+length = 1
+
+[[boundaries]]
+payload_offset = 855
+length = 1
+
+[[boundaries]]
+payload_offset = 856
+length = 6
+
+[[boundaries]]
+payload_offset = 862
+length = 2
+
+[[boundaries]]
+payload_offset = 864
+length = 1
+
+[[boundaries]]
+payload_offset = 865
+length = 6
+
+[[boundaries]]
+payload_offset = 871
+length = 2
+
+[[boundaries]]
+payload_offset = 873
+length = 1
+
+[[boundaries]]
+payload_offset = 874
+length = 7
+
+[[boundaries]]
+payload_offset = 881
+length = 3
+
+[[boundaries]]
+payload_offset = 884
+length = 1
+
+[[boundaries]]
+payload_offset = 885
+length = 7
+
+[[boundaries]]
+payload_offset = 892
+length = 3
+
+[[boundaries]]
+payload_offset = 895
+length = 1
+
+[[boundaries]]
+payload_offset = 896
+length = 7
+
+[[boundaries]]
+payload_offset = 903
+length = 3
+
+[[boundaries]]
+payload_offset = 906
+length = 1
+
+[[boundaries]]
+payload_offset = 907
+length = 7
+
+[[boundaries]]
+payload_offset = 914
+length = 3
+
+[[boundaries]]
+payload_offset = 917
+length = 1
+
+[[boundaries]]
+payload_offset = 918
+length = 7
+
+[[boundaries]]
+payload_offset = 925
+length = 3
+
+[[boundaries]]
+payload_offset = 928
+length = 7
+
+[[boundaries]]
+payload_offset = 935
+length = 3
+
+[[boundaries]]
+payload_offset = 938
+length = 1
+
+[[boundaries]]
+payload_offset = 939
+length = 1
+
+[[boundaries]]
+payload_offset = 940
+length = 1
+
+[[boundaries]]
+payload_offset = 941
+length = 3
+
+[[boundaries]]
+payload_offset = 944
+length = 6
+
+[[boundaries]]
+payload_offset = 950
+length = 6
+
+[[boundaries]]
+payload_offset = 956
+length = 2
+
+[[boundaries]]
+payload_offset = 958
+length = 1
+
+[[boundaries]]
+payload_offset = 959
+length = 1
+
+[[boundaries]]
+payload_offset = 960
+length = 1
+
+[[boundaries]]
+payload_offset = 961
+length = 5
+
+[[boundaries]]
+payload_offset = 966
+length = 5
+
+[[boundaries]]
+payload_offset = 972
+length = 1
+
+[[boundaries]]
+payload_offset = 973
+length = 5
+
+[[boundaries]]
+payload_offset = 978
+length = 5
+
+[[boundaries]]
+payload_offset = 984
+length = 1
+
+[[boundaries]]
+payload_offset = 985
+length = 5
+
+[[boundaries]]
+payload_offset = 990
+length = 5
+
+[[boundaries]]
+payload_offset = 996
+length = 1
+
+[[boundaries]]
+payload_offset = 997
+length = 5
+
+[[boundaries]]
+payload_offset = 1002
+length = 5
+
+[[boundaries]]
+payload_offset = 1008
+length = 1
+
+[[boundaries]]
+payload_offset = 1009
+length = 5
+
+[[boundaries]]
+payload_offset = 1014
+length = 5
+
+[[boundaries]]
+payload_offset = 1020
+length = 5
+
+[[boundaries]]
+payload_offset = 1025
+length = 6
+
+[[boundaries]]
+payload_offset = 1031
+length = 5
+
+[[boundaries]]
+payload_offset = 1036
+length = 6
+
+[[boundaries]]
+payload_offset = 1042
+length = 5
+
+[[boundaries]]
+payload_offset = 1047
+length = 6
+
+[[boundaries]]
+payload_offset = 1053
+length = 5
+
+[[boundaries]]
+payload_offset = 1058
+length = 6
+
+[[boundaries]]
+payload_offset = 1064
+length = 3
+
+[[boundaries]]
+payload_offset = 1067
+length = 5
+
+[[boundaries]]
+payload_offset = 1072
+length = 3
+
+[[boundaries]]
+payload_offset = 1075
+length = 6
+
+[[boundaries]]
+payload_offset = 1081
+length = 2
+
+[[boundaries]]
+payload_offset = 1083
+length = 1
+
+[[boundaries]]
+payload_offset = 1084
+length = 1
+
+[[boundaries]]
+payload_offset = 1085
+length = 7
+
+[[boundaries]]
+payload_offset = 1092
+length = 3
+
+[[boundaries]]
+payload_offset = 1095
+length = 3
+
+[[boundaries]]
+payload_offset = 1098
+length = 7
+
+[[boundaries]]
+payload_offset = 1105
+length = 3
+
+[[boundaries]]
+payload_offset = 1108
+length = 7
+
+[[boundaries]]
+payload_offset = 1115
+length = 3
+
+[[boundaries]]
+payload_offset = 1118
+length = 7
+
+[[boundaries]]
+payload_offset = 1125
+length = 3
+
+[[boundaries]]
+payload_offset = 1128
+length = 1
+
+[[boundaries]]
+payload_offset = 1129
+length = 7
+
+[[boundaries]]
+payload_offset = 1136
+length = 3
+
+[[boundaries]]
+payload_offset = 1139
+length = 3
+
+[[boundaries]]
+payload_offset = 1142
+length = 7
+
+[[boundaries]]
+payload_offset = 1149
+length = 3
+
+[[boundaries]]
+payload_offset = 1152
+length = 7
+
+[[boundaries]]
+payload_offset = 1159
+length = 3
+
+[[boundaries]]
+payload_offset = 1162
+length = 7
+
+[[boundaries]]
+payload_offset = 1169
+length = 3
+
+[[boundaries]]
+payload_offset = 1172
+length = 1
+
+[[boundaries]]
+payload_offset = 1173
+length = 7
+
+[[boundaries]]
+payload_offset = 1180
+length = 3
+
+[[boundaries]]
+payload_offset = 1183
+length = 3
+
+[[boundaries]]
+payload_offset = 1186
+length = 7
+
+[[boundaries]]
+payload_offset = 1193
+length = 3
+
+[[boundaries]]
+payload_offset = 1196
+length = 7
+
+[[boundaries]]
+payload_offset = 1203
+length = 3
+
+[[boundaries]]
+payload_offset = 1206
+length = 7
+
+[[boundaries]]
+payload_offset = 1213
+length = 3
+
+[[boundaries]]
+payload_offset = 1216
+length = 1
+
+[[boundaries]]
+payload_offset = 1217
+length = 7
+
+[[boundaries]]
+payload_offset = 1224
+length = 3
+
+[[boundaries]]
+payload_offset = 1227
+length = 3
+
+[[boundaries]]
+payload_offset = 1230
+length = 7
+
+[[boundaries]]
+payload_offset = 1237
+length = 3
+
+[[boundaries]]
+payload_offset = 1240
+length = 7
+
+[[boundaries]]
+payload_offset = 1247
+length = 3
+
+[[boundaries]]
+payload_offset = 1250
+length = 7
+
+[[boundaries]]
+payload_offset = 1257
+length = 3
+
+[[boundaries]]
+payload_offset = 1260
+length = 7
+
+[[boundaries]]
+payload_offset = 1267
+length = 3
+
+[[boundaries]]
+payload_offset = 1270
+length = 1
+
+[[boundaries]]
+payload_offset = 1271
+length = 1
+
+[[boundaries]]
+payload_offset = 1272
+length = 5
+
+[[boundaries]]
+payload_offset = 1277
+length = 5
+
+[[boundaries]]
+payload_offset = 1283
+length = 1
+
+[[boundaries]]
+payload_offset = 1284
+length = 5
+
+[[boundaries]]
+payload_offset = 1289
+length = 5
+
+[[boundaries]]
+payload_offset = 1295
+length = 1
+
+[[boundaries]]
+payload_offset = 1296
+length = 5
+
+[[boundaries]]
+payload_offset = 1301
+length = 5
+
+[[boundaries]]
+payload_offset = 1307
+length = 1
+
+[[boundaries]]
+payload_offset = 1308
+length = 5
+
+[[boundaries]]
+payload_offset = 1313
+length = 5
+
+[[boundaries]]
+payload_offset = 1319
+length = 5
+
+[[boundaries]]
+payload_offset = 1324
+length = 6
+
+[[boundaries]]
+payload_offset = 1330
+length = 5
+
+[[boundaries]]
+payload_offset = 1335
+length = 6
+
+[[boundaries]]
+payload_offset = 1341
+length = 5
+
+[[boundaries]]
+payload_offset = 1346
+length = 6
+
+[[boundaries]]
+payload_offset = 1352
+length = 5
+
+[[boundaries]]
+payload_offset = 1357
+length = 6
+
+[[boundaries]]
+payload_offset = 1363
+length = 5
+
+[[boundaries]]
+payload_offset = 1368
+length = 6
+
+[[boundaries]]
+payload_offset = 1374
+length = 6
+
+[[boundaries]]
+payload_offset = 1380
+length = 2
+
+[[boundaries]]
+payload_offset = 1382
+length = 5
+
+[[boundaries]]
+payload_offset = 1387
+length = 5
+
+[[boundaries]]
+payload_offset = 1392
+length = 2
+
+[[boundaries]]
+payload_offset = 1394
+length = 5
+
+[[boundaries]]
+payload_offset = 1399
+length = 6
+
+[[boundaries]]
+payload_offset = 1405
+length = 6
+
+[[boundaries]]
+payload_offset = 1411
+length = 2
+
+[[boundaries]]
+payload_offset = 1413
+length = 1
+
+[[boundaries]]
+payload_offset = 1414
+length = 3
+
+[[boundaries]]
+payload_offset = 1417
+length = 3
+
+[[boundaries]]
+payload_offset = 1420
+length = 5
+
+[[boundaries]]
+payload_offset = 1425
+length = 3
+
+[[boundaries]]
+payload_offset = 1428
+length = 8
+
+[[boundaries]]
+payload_offset = 1436
+length = 1
+
+[[boundaries]]
+payload_offset = 1437
+length = 1
+
+[[boundaries]]
+payload_offset = 1438
+length = 1
+
+[[boundaries]]
+payload_offset = 1439
+length = 6
+
+[[boundaries]]
+payload_offset = 1445
+length = 2
+
+[[boundaries]]
+payload_offset = 1447
+length = 1
+
+[[boundaries]]
+payload_offset = 1448
+length = 7
+
+[[boundaries]]
+payload_offset = 1455
+length = 3
+
+[[boundaries]]
+payload_offset = 1458
+length = 3
+
+[[boundaries]]
+payload_offset = 1461
+length = 7
+
+[[boundaries]]
+payload_offset = 1468
+length = 3
+
+[[boundaries]]
+payload_offset = 1471
+length = 7
+
+[[boundaries]]
+payload_offset = 1478
+length = 3
+
+[[boundaries]]
+payload_offset = 1481
+length = 7
+
+[[boundaries]]
+payload_offset = 1488
+length = 3
+
+[[boundaries]]
+payload_offset = 1491
+length = 1
+
+[[boundaries]]
+payload_offset = 1492
+length = 7
+
+[[boundaries]]
+payload_offset = 1499
+length = 3
+
+[[boundaries]]
+payload_offset = 1502
+length = 3
+
+[[boundaries]]
+payload_offset = 1505
+length = 7
+
+[[boundaries]]
+payload_offset = 1512
+length = 3
+
+[[boundaries]]
+payload_offset = 1515
+length = 7
+
+[[boundaries]]
+payload_offset = 1522
+length = 3
+
+[[boundaries]]
+payload_offset = 1525
+length = 7
+
+[[boundaries]]
+payload_offset = 1532
+length = 3
+
+[[boundaries]]
+payload_offset = 1535
+length = 1
+
+[[boundaries]]
+payload_offset = 1536
+length = 7
+
+[[boundaries]]
+payload_offset = 1543
+length = 3
+
+[[boundaries]]
+payload_offset = 1546
+length = 3
+
+[[boundaries]]
+payload_offset = 1549
+length = 7
+
+[[boundaries]]
+payload_offset = 1556
+length = 3
+
+[[boundaries]]
+payload_offset = 1559
+length = 7
+
+[[boundaries]]
+payload_offset = 1566
+length = 3
+
+[[boundaries]]
+payload_offset = 1569
+length = 7
+
+[[boundaries]]
+payload_offset = 1576
+length = 3
+
+[[boundaries]]
+payload_offset = 1579
+length = 1
+
+[[boundaries]]
+payload_offset = 1580
+length = 7
+
+[[boundaries]]
+payload_offset = 1587
+length = 3
+
+[[boundaries]]
+payload_offset = 1590
+length = 3
+
+[[boundaries]]
+payload_offset = 1593
+length = 7
+
+[[boundaries]]
+payload_offset = 1600
+length = 3
+
+[[boundaries]]
+payload_offset = 1603
+length = 7
+
+[[boundaries]]
+payload_offset = 1610
+length = 3
+
+[[boundaries]]
+payload_offset = 1613
+length = 7
+
+[[boundaries]]
+payload_offset = 1620
+length = 3
+
+[[boundaries]]
+payload_offset = 1623
+length = 7
+
+[[boundaries]]
+payload_offset = 1630
+length = 3
+
+[[boundaries]]
+payload_offset = 1633
+length = 1
+
+[[boundaries]]
+payload_offset = 1634
+length = 7
+
+[[boundaries]]
+payload_offset = 1641
+length = 3
+
+[[boundaries]]
+payload_offset = 1644
+length = 3
+
+[[boundaries]]
+payload_offset = 1647
+length = 7
+
+[[boundaries]]
+payload_offset = 1654
+length = 3
+
+[[boundaries]]
+payload_offset = 1657
+length = 7
+
+[[boundaries]]
+payload_offset = 1664
+length = 3
+
+[[boundaries]]
+payload_offset = 1667
+length = 1
+
+[[boundaries]]
+payload_offset = 1668
+length = 1
+
+[[boundaries]]
+payload_offset = 1669
+length = 3
+
+[[boundaries]]
+payload_offset = 1672
+length = 6
+
+[[boundaries]]
+payload_offset = 1678
+length = 7
+
+[[boundaries]]
+payload_offset = 1685
+length = 3
+
+[[boundaries]]
+payload_offset = 1688
+length = 5
+
+[[boundaries]]
+payload_offset = 1693
+length = 1
+
+[[boundaries]]
+payload_offset = 1694
+length = 5
+
+[[boundaries]]
+payload_offset = 1699
+length = 6
+
+[[boundaries]]
+payload_offset = 1705
+length = 5
+
+[[boundaries]]
+payload_offset = 1710
+length = 6
+
+[[boundaries]]
+payload_offset = 1716
+length = 1
+
+[[boundaries]]
+payload_offset = 1717
+length = 4
+
+[[boundaries]]
+payload_offset = 1721
+length = 1
+
+[[boundaries]]
+payload_offset = 1722
+length = 4
+
+[[boundaries]]
+payload_offset = 1726
+length = 1
+
+[[boundaries]]
+payload_offset = 1727
+length = 1
+
+[[boundaries]]
+payload_offset = 1728
+length = 5
+
+[[boundaries]]
+payload_offset = 1733
+length = 7
+
+[[boundaries]]
+payload_offset = 1740
+length = 3
+
+[[boundaries]]
+payload_offset = 1743
+length = 3
+
+[[boundaries]]
+payload_offset = 1746
+length = 7
+
+[[boundaries]]
+payload_offset = 1753
+length = 3
+
+[[boundaries]]
+payload_offset = 1756
+length = 7
+
+[[boundaries]]
+payload_offset = 1763
+length = 3
+
+[[boundaries]]
+payload_offset = 1766
+length = 7
+
+[[boundaries]]
+payload_offset = 1773
+length = 3
+
+[[boundaries]]
+payload_offset = 1776
+length = 7
+
+[[boundaries]]
+payload_offset = 1783
+length = 3
+
+[[boundaries]]
+payload_offset = 1786
+length = 5
+
+[[boundaries]]
+payload_offset = 1791
+length = 1
+
+[[boundaries]]
+payload_offset = 1792
+length = 5
+
+[[boundaries]]
+payload_offset = 1797
+length = 7
+
+[[boundaries]]
+payload_offset = 1804
+length = 3
+
+[[boundaries]]
+payload_offset = 1807
+length = 3
+
+[[boundaries]]
+payload_offset = 1810
+length = 7
+
+[[boundaries]]
+payload_offset = 1817
+length = 3
+
+[[boundaries]]
+payload_offset = 1820
+length = 7
+
+[[boundaries]]
+payload_offset = 1827
+length = 3
+
+[[boundaries]]
+payload_offset = 1830
+length = 7
+
+[[boundaries]]
+payload_offset = 1837
+length = 3
+
+[[boundaries]]
+payload_offset = 1840
+length = 7
+
+[[boundaries]]
+payload_offset = 1847
+length = 3
+
+[[boundaries]]
+payload_offset = 1850
+length = 5
+
+[[boundaries]]
+payload_offset = 1855
+length = 1
+
+[[boundaries]]
+payload_offset = 1856
+length = 5
+
+[[boundaries]]
+payload_offset = 1861
+length = 7
+
+[[boundaries]]
+payload_offset = 1868
+length = 3
+
+[[boundaries]]
+payload_offset = 1871
+length = 3
+
+[[boundaries]]
+payload_offset = 1874
+length = 7
+
+[[boundaries]]
+payload_offset = 1881
+length = 3
+
+[[boundaries]]
+payload_offset = 1884
+length = 7
+
+[[boundaries]]
+payload_offset = 1891
+length = 3
+
+[[boundaries]]
+payload_offset = 1894
+length = 7
+
+[[boundaries]]
+payload_offset = 1901
+length = 3
+
+[[boundaries]]
+payload_offset = 1904
+length = 7
+
+[[boundaries]]
+payload_offset = 1911
+length = 3
+
+[[boundaries]]
+payload_offset = 1914
+length = 5
+
+[[boundaries]]
+payload_offset = 1919
+length = 1
+
+[[boundaries]]
+payload_offset = 1920
+length = 5
+
+[[boundaries]]
+payload_offset = 1925
+length = 7
+
+[[boundaries]]
+payload_offset = 1932
+length = 3
+
+[[boundaries]]
+payload_offset = 1935
+length = 3
+
+[[boundaries]]
+payload_offset = 1938
+length = 7
+
+[[boundaries]]
+payload_offset = 1945
+length = 3
+
+[[boundaries]]
+payload_offset = 1948
+length = 7
+
+[[boundaries]]
+payload_offset = 1955
+length = 3
+
+[[boundaries]]
+payload_offset = 1958
+length = 7
+
+[[boundaries]]
+payload_offset = 1965
+length = 3
+
+[[boundaries]]
+payload_offset = 1968
+length = 7
+
+[[boundaries]]
+payload_offset = 1975
+length = 3
+
+[[boundaries]]
+payload_offset = 1978
+length = 5
+
+[[boundaries]]
+payload_offset = 1983
+length = 1
+
+[[boundaries]]
+payload_offset = 1984
+length = 5
+
+[[boundaries]]
+payload_offset = 1989
+length = 7
+
+[[boundaries]]
+payload_offset = 1996
+length = 3
+
+[[boundaries]]
+payload_offset = 1999
+length = 3
+
+[[boundaries]]
+payload_offset = 2002
+length = 7
+
+[[boundaries]]
+payload_offset = 2009
+length = 3
+
+[[boundaries]]
+payload_offset = 2012
+length = 7
+
+[[boundaries]]
+payload_offset = 2019
+length = 3
+
+[[boundaries]]
+payload_offset = 2022
+length = 7
+
+[[boundaries]]
+payload_offset = 2029
+length = 3
+
+[[boundaries]]
+payload_offset = 2032
+length = 7
+
+[[boundaries]]
+payload_offset = 2039
+length = 3
+
+[[boundaries]]
+payload_offset = 2042
+length = 5
+
+[[boundaries]]
+payload_offset = 2047
+length = 1
+
+[[boundaries]]
+payload_offset = 2048
+length = 5
+
+[[boundaries]]
+payload_offset = 2053
+length = 7
+
+[[boundaries]]
+payload_offset = 2060
+length = 3
+
+[[boundaries]]
+payload_offset = 2063
+length = 3
+
+[[boundaries]]
+payload_offset = 2066
+length = 7
+
+[[boundaries]]
+payload_offset = 2073
+length = 3
+
+[[boundaries]]
+payload_offset = 2076
+length = 7
+
+[[boundaries]]
+payload_offset = 2083
+length = 3
+
+[[boundaries]]
+payload_offset = 2086
+length = 7
+
+[[boundaries]]
+payload_offset = 2093
+length = 3
+
+[[boundaries]]
+payload_offset = 2096
+length = 7
+
+[[boundaries]]
+payload_offset = 2103
+length = 3
+
+[[boundaries]]
+payload_offset = 2106
+length = 5
+
+[[boundaries]]
+payload_offset = 2111
+length = 1
+
+[[boundaries]]
+payload_offset = 2112
+length = 5
+
+[[boundaries]]
+payload_offset = 2117
+length = 7
+
+[[boundaries]]
+payload_offset = 2124
+length = 3
+
+[[boundaries]]
+payload_offset = 2127
+length = 3
+
+[[boundaries]]
+payload_offset = 2130
+length = 7
+
+[[boundaries]]
+payload_offset = 2137
+length = 3
+
+[[boundaries]]
+payload_offset = 2140
+length = 7
+
+[[boundaries]]
+payload_offset = 2147
+length = 3
+
+[[boundaries]]
+payload_offset = 2150
+length = 7
+
+[[boundaries]]
+payload_offset = 2157
+length = 3
+
+[[boundaries]]
+payload_offset = 2160
+length = 7
+
+[[boundaries]]
+payload_offset = 2167
+length = 3
+
+[[boundaries]]
+payload_offset = 2170
+length = 5
+
+[[boundaries]]
+payload_offset = 2175
+length = 1
+
+[[boundaries]]
+payload_offset = 2176
+length = 5
+
+[[boundaries]]
+payload_offset = 2181
+length = 7
+
+[[boundaries]]
+payload_offset = 2188
+length = 3
+
+[[boundaries]]
+payload_offset = 2191
+length = 3
+
+[[boundaries]]
+payload_offset = 2194
+length = 7
+
+[[boundaries]]
+payload_offset = 2201
+length = 3
+
+[[boundaries]]
+payload_offset = 2204
+length = 7
+
+[[boundaries]]
+payload_offset = 2211
+length = 3
+
+[[boundaries]]
+payload_offset = 2214
+length = 7
+
+[[boundaries]]
+payload_offset = 2221
+length = 3
+
+[[boundaries]]
+payload_offset = 2224
+length = 7
+
+[[boundaries]]
+payload_offset = 2231
+length = 3
+
+[[boundaries]]
+payload_offset = 2234
+length = 5
+
+[[boundaries]]
+payload_offset = 2239
+length = 1
+
+[[boundaries]]
+payload_offset = 2240
+length = 5
+
+[[boundaries]]
+payload_offset = 2245
+length = 6
+
+[[boundaries]]
+payload_offset = 2251
+length = 5
+
+[[boundaries]]
+payload_offset = 2256
+length = 6
+
+[[boundaries]]
+payload_offset = 2262
+length = 1
+
+[[boundaries]]
+payload_offset = 2263
+length = 3
+
+[[boundaries]]
+payload_offset = 2266
+length = 6
+
+[[boundaries]]
+payload_offset = 2272
+length = 3
+
+[[boundaries]]
+payload_offset = 2275
+length = 6
+
+[[boundaries]]
+payload_offset = 2281
+length = 3
+
+[[boundaries]]
+payload_offset = 2284
+length = 6
+
+[[boundaries]]
+payload_offset = 2290
+length = 2
+
+[[boundaries]]
+payload_offset = 2292
+length = 1
+
+[[boundaries]]
+payload_offset = 2293
+length = 3
+
+[[boundaries]]
+payload_offset = 2296
+length = 3
+
+[[boundaries]]
+payload_offset = 2299
+length = 6
+
+[[boundaries]]
+payload_offset = 2305
+length = 2
+
+[[boundaries]]
+payload_offset = 2307
+length = 1
+
+[[boundaries]]
+payload_offset = 2308
+length = 1
+
+[[boundaries]]
+payload_offset = 2309
+length = 3
+
+[[boundaries]]
+payload_offset = 2312
+length = 3
+
+[[boundaries]]
+payload_offset = 2315
+length = 5
+
+[[boundaries]]
+payload_offset = 2320
+length = 5
+
+[[boundaries]]
+payload_offset = 2325
+length = 5
+
+[[boundaries]]
+payload_offset = 2330
+length = 6
+
+[[boundaries]]
+payload_offset = 2336
+length = 2
+
+[[boundaries]]
+payload_offset = 2338
+length = 5
+
+[[boundaries]]
+payload_offset = 2343
+length = 6
+
+[[boundaries]]
+payload_offset = 2349
+length = 6
+
+[[boundaries]]
+payload_offset = 2355
+length = 2
+
+[[boundaries]]
+payload_offset = 2357
+length = 5
+
+[[boundaries]]
+payload_offset = 2362
+length = 1
+
+[[boundaries]]
+payload_offset = 2363
+length = 1
+
+[[boundaries]]
+payload_offset = 2364
+length = 5
+
+[[boundaries]]
+payload_offset = 2369
+length = 6
+
+[[boundaries]]
+payload_offset = 2375
+length = 2
+
+[[boundaries]]
+payload_offset = 2377
+length = 5
+
+[[boundaries]]
+payload_offset = 2382
+length = 6
+
+[[boundaries]]
+payload_offset = 2388
+length = 6
+
+[[boundaries]]
+payload_offset = 2394
+length = 2
+
+[[boundaries]]
+payload_offset = 2396
+length = 1
+
+[[boundaries]]
+payload_offset = 2397
+length = 1
+
+[[boundaries]]
+payload_offset = 2398
+length = 6
+
+[[boundaries]]
+payload_offset = 2404
+length = 2
+
+[[boundaries]]
+payload_offset = 2406
+length = 5
+
+[[boundaries]]
+payload_offset = 2411
+length = 5
+
+[[boundaries]]
+payload_offset = 2416
+length = 6
+
+[[boundaries]]
+payload_offset = 2422
+length = 5
+
+[[boundaries]]
+payload_offset = 2427
+length = 6
+
+[[boundaries]]
+payload_offset = 2433
+length = 5
+
+[[boundaries]]
+payload_offset = 2438
+length = 6
+
+[[boundaries]]
+payload_offset = 2444
+length = 1
+
+[[boundaries]]
+payload_offset = 2445
+length = 6
+
+[[boundaries]]
+payload_offset = 2451
+length = 2
+
+[[boundaries]]
+payload_offset = 2453
+length = 5
+
+[[boundaries]]
+payload_offset = 2458
+length = 6
+
+[[boundaries]]
+payload_offset = 2464
+length = 1
+
+[[boundaries]]
+payload_offset = 2465
+length = 1
+
+[[boundaries]]
+payload_offset = 2466
+length = 3
+
+[[boundaries]]
+payload_offset = 2469
+length = 1
+
+[[boundaries]]
+payload_offset = 2470
+length = 1
+
+[[boundaries]]
+payload_offset = 2471
+length = 10
+
+[[boundaries]]
+payload_offset = 2481
+length = 3
+
+[[boundaries]]
+payload_offset = 2484
+length = 5
+
+[[boundaries]]
+payload_offset = 2490
+length = 10
+
+[[boundaries]]
+payload_offset = 2500
+length = 3
+
+[[boundaries]]
+payload_offset = 2503
+length = 5
+
+[[boundaries]]
+payload_offset = 2509
+length = 10
+
+[[boundaries]]
+payload_offset = 2519
+length = 3
+
+[[boundaries]]
+payload_offset = 2522
+length = 5
+
+[[boundaries]]
+payload_offset = 2528
+length = 3
+
+[[boundaries]]
+payload_offset = 2531
+length = 6
+
+[[boundaries]]
+payload_offset = 2537
+length = 3
+
+[[boundaries]]
+payload_offset = 2540
+length = 6
+
+[[boundaries]]
+payload_offset = 2546
+length = 3
+
+[[boundaries]]
+payload_offset = 2549
+length = 6
+
+[[boundaries]]
+payload_offset = 2555
+length = 2
+
+[[boundaries]]
+payload_offset = 2557
+length = 1
+
+[[boundaries]]
+payload_offset = 2558
+length = 3
+
+[[boundaries]]
+payload_offset = 2561
+length = 3
+
+[[boundaries]]
+payload_offset = 2564
+length = 6
+
+[[boundaries]]
+payload_offset = 2570
+length = 2
+
+[[boundaries]]
+payload_offset = 2572
+length = 1
+
+[[boundaries]]
+payload_offset = 2573
+length = 1
+
+[[boundaries]]
+payload_offset = 2574
+length = 3
+
+[[boundaries]]
+payload_offset = 2577
+length = 3
+
+[[boundaries]]
+payload_offset = 2580
+length = 5
+
+[[boundaries]]
+payload_offset = 2585
+length = 5
+
+[[boundaries]]
+payload_offset = 2590
+length = 6
+
+[[boundaries]]
+payload_offset = 2596
+length = 2
+
+[[boundaries]]
+payload_offset = 2598
+length = 5
+
+[[boundaries]]
+payload_offset = 2603
+length = 6
+
+[[boundaries]]
+payload_offset = 2609
+length = 6
+
+[[boundaries]]
+payload_offset = 2615
+length = 2
+
+[[boundaries]]
+payload_offset = 2617
+length = 5
+
+[[boundaries]]
+payload_offset = 2622
+length = 1
+
+[[boundaries]]
+payload_offset = 2623
+length = 1
+
+[[boundaries]]
+payload_offset = 2624
+length = 6
+
+[[boundaries]]
+payload_offset = 2630
+length = 2
+
+[[boundaries]]
+payload_offset = 2632
+length = 5
+
+[[boundaries]]
+payload_offset = 2637
+length = 6
+
+[[boundaries]]
+payload_offset = 2643
+length = 6
+
+[[boundaries]]
+payload_offset = 2649
+length = 2
+
+[[boundaries]]
+payload_offset = 2651
+length = 1
+
+[[boundaries]]
+payload_offset = 2652
+length = 1
+
+[[boundaries]]
+payload_offset = 2653
+length = 6
+
+[[boundaries]]
+payload_offset = 2659
+length = 2
+
+[[boundaries]]
+payload_offset = 2661
+length = 5
+
+[[boundaries]]
+payload_offset = 2666
+length = 5
+
+[[boundaries]]
+payload_offset = 2671
+length = 6
+
+[[boundaries]]
+payload_offset = 2677
+length = 5
+
+[[boundaries]]
+payload_offset = 2682
+length = 6
+
+[[boundaries]]
+payload_offset = 2688
+length = 5
+
+[[boundaries]]
+payload_offset = 2693
+length = 6
+
+[[boundaries]]
+payload_offset = 2699
+length = 1
+
+[[boundaries]]
+payload_offset = 2700
+length = 6
+
+[[boundaries]]
+payload_offset = 2706
+length = 2
+
+[[boundaries]]
+payload_offset = 2708
+length = 5
+
+[[boundaries]]
+payload_offset = 2713
+length = 6
+
+[[boundaries]]
+payload_offset = 2719
+length = 1
+
+[[boundaries]]
+payload_offset = 2720
+length = 1
+
+[[boundaries]]
+payload_offset = 2721
+length = 10
+
+[[boundaries]]
+payload_offset = 2731
+length = 3
+
+[[boundaries]]
+payload_offset = 2734
+length = 5
+
+[[boundaries]]
+payload_offset = 2740
+length = 10
+
+[[boundaries]]
+payload_offset = 2750
+length = 3
+
+[[boundaries]]
+payload_offset = 2753
+length = 5
+
+[[boundaries]]
+payload_offset = 2759
+length = 10
+
+[[boundaries]]
+payload_offset = 2769
+length = 3
+
+[[boundaries]]
+payload_offset = 2772
+length = 5
+
+[[boundaries]]
+payload_offset = 2778
+length = 6
+
+[[boundaries]]
+payload_offset = 2784
+length = 2
+
+[[boundaries]]
+payload_offset = 2786
+length = 1

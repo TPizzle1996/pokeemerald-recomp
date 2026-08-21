@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 51
 reloc_count = 162
+instruction_count = 413
 
 [[segments]]
 kind = "bytecode"
@@ -439,6 +440,8 @@ original_encoded_gba = 0x825f7fa
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_Text_WelcomePleaseChoosePrize"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -448,6 +451,8 @@ original_encoded_gba = 0x825ff12
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_Text_ThankYouVisitWithPoints"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -458,6 +463,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_TryGivePrize"
 target_offset = 89
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 88
 runtime_resolution_required = true
 
 [[relocs]]
@@ -467,6 +474,8 @@ original_encoded_gba = 0x825fe86
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_Text_DontHaveEnoughPoints"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -477,6 +486,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ChooseDecor1"
 target_offset = 277
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 276
 runtime_resolution_required = true
 
 [[relocs]]
@@ -487,6 +498,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ChooseDecor2"
 target_offset = 798
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 797
 runtime_resolution_required = true
 
 [[relocs]]
@@ -497,6 +510,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ChooseVitamin"
 target_offset = 1089
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1088
 runtime_resolution_required = true
 
 [[relocs]]
@@ -507,6 +522,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ChooseHoldItem"
 target_offset = 1426
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1425
 runtime_resolution_required = true
 
 [[relocs]]
@@ -517,6 +534,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_TryGiveDecor"
 target_offset = 117
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 116
 runtime_resolution_required = true
 
 [[relocs]]
@@ -527,6 +546,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_TryGiveDecor"
 target_offset = 117
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 116
 runtime_resolution_required = true
 
 [[relocs]]
@@ -537,6 +558,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_TryGiveItem"
 target_offset = 186
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 185
 runtime_resolution_required = true
 
 [[relocs]]
@@ -547,6 +570,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_NoRoomForDecor"
 target_offset = 173
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 172
 runtime_resolution_required = true
 
 [[relocs]]
@@ -556,6 +581,8 @@ original_encoded_gba = 0x825fe45
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_Text_WellSendItToPC"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -566,6 +593,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ChooseDecor1"
 target_offset = 277
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 276
 runtime_resolution_required = true
 
 [[relocs]]
@@ -576,6 +605,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ChooseDecor2"
 target_offset = 798
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 797
 runtime_resolution_required = true
 
 [[relocs]]
@@ -585,6 +616,8 @@ original_encoded_gba = 0x825feb9
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_Text_PCIsFull"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -595,6 +628,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_BagFull"
 target_offset = 246
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 245
 runtime_resolution_required = true
 
 [[relocs]]
@@ -604,6 +639,8 @@ original_encoded_gba = 0x825fe72
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_Text_HereIsYourPrize"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -614,6 +651,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ChooseVitamin"
 target_offset = 1089
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1088
 runtime_resolution_required = true
 
 [[relocs]]
@@ -624,6 +663,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ChooseHoldItem"
 target_offset = 1426
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1425
 runtime_resolution_required = true
 
 [[relocs]]
@@ -633,6 +674,8 @@ original_encoded_gba = 0x825fee3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_Text_DontHaveSpaceToHoldIt"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -643,6 +686,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ClerkWelcome"
 target_offset = 1
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 0
 runtime_resolution_required = true
 
 [[relocs]]
@@ -653,6 +698,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ChooseDecor1"
 target_offset = 277
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 276
 runtime_resolution_required = true
 
 [[relocs]]
@@ -663,6 +710,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_KissPoster"
 target_offset = 430
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 429
 runtime_resolution_required = true
 
 [[relocs]]
@@ -673,6 +722,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_KissCushion"
 target_offset = 465
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 464
 runtime_resolution_required = true
 
 [[relocs]]
@@ -683,6 +734,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_SmoochumDoll"
 target_offset = 500
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 499
 runtime_resolution_required = true
 
 [[relocs]]
@@ -693,6 +746,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_TogepiDoll"
 target_offset = 535
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 534
 runtime_resolution_required = true
 
 [[relocs]]
@@ -703,6 +758,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_MeowthDoll"
 target_offset = 570
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 569
 runtime_resolution_required = true
 
 [[relocs]]
@@ -713,6 +770,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ClefairyDoll"
 target_offset = 605
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 604
 runtime_resolution_required = true
 
 [[relocs]]
@@ -723,6 +782,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_DittoDoll"
 target_offset = 640
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 639
 runtime_resolution_required = true
 
 [[relocs]]
@@ -733,6 +794,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_CyndaquilDoll"
 target_offset = 675
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 674
 runtime_resolution_required = true
 
 [[relocs]]
@@ -743,6 +806,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ChikoritaDoll"
 target_offset = 710
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 709
 runtime_resolution_required = true
 
 [[relocs]]
@@ -753,6 +818,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_TotodileDoll"
 target_offset = 745
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 744
 runtime_resolution_required = true
 
 [[relocs]]
@@ -763,6 +830,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye"
 target_offset = 13
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 12
 runtime_resolution_required = true
 
 [[relocs]]
@@ -773,6 +842,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye"
 target_offset = 13
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 12
 runtime_resolution_required = true
 
 [[relocs]]
@@ -782,6 +853,8 @@ original_encoded_gba = 0x825f8b6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_Text_ConfirmKissPoster"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -792,6 +865,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ChooseDecor1"
 target_offset = 277
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 276
 runtime_resolution_required = true
 
 [[relocs]]
@@ -802,6 +877,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchasePrize"
 target_offset = 26
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 25
 runtime_resolution_required = true
 
 [[relocs]]
@@ -811,6 +888,8 @@ original_encoded_gba = 0x825f8e6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_Text_ConfirmKissCushion"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -821,6 +900,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ChooseDecor1"
 target_offset = 277
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 276
 runtime_resolution_required = true
 
 [[relocs]]
@@ -831,6 +912,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchasePrize"
 target_offset = 26
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 25
 runtime_resolution_required = true
 
 [[relocs]]
@@ -840,6 +923,8 @@ original_encoded_gba = 0x825f917
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_Text_ConfirmSmoochumDoll"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -850,6 +935,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ChooseDecor1"
 target_offset = 277
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 276
 runtime_resolution_required = true
 
 [[relocs]]
@@ -860,6 +947,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchasePrize"
 target_offset = 26
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 25
 runtime_resolution_required = true
 
 [[relocs]]
@@ -869,6 +958,8 @@ original_encoded_gba = 0x825f949
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_Text_ConfirmTogepiDoll"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -879,6 +970,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ChooseDecor1"
 target_offset = 277
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 276
 runtime_resolution_required = true
 
 [[relocs]]
@@ -889,6 +982,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchasePrize"
 target_offset = 26
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 25
 runtime_resolution_required = true
 
 [[relocs]]
@@ -898,6 +993,8 @@ original_encoded_gba = 0x825f979
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_Text_ConfirmMeowthDoll"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -908,6 +1005,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ChooseDecor1"
 target_offset = 277
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 276
 runtime_resolution_required = true
 
 [[relocs]]
@@ -918,6 +1017,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchasePrize"
 target_offset = 26
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 25
 runtime_resolution_required = true
 
 [[relocs]]
@@ -927,6 +1028,8 @@ original_encoded_gba = 0x825f9a9
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_Text_ConfirmClefairyDoll"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -937,6 +1040,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ChooseDecor1"
 target_offset = 277
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 276
 runtime_resolution_required = true
 
 [[relocs]]
@@ -947,6 +1052,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchasePrize"
 target_offset = 26
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 25
 runtime_resolution_required = true
 
 [[relocs]]
@@ -956,6 +1063,8 @@ original_encoded_gba = 0x825f9db
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_Text_ConfirmDittoDoll"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -966,6 +1075,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ChooseDecor1"
 target_offset = 277
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 276
 runtime_resolution_required = true
 
 [[relocs]]
@@ -976,6 +1087,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchasePrize"
 target_offset = 26
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 25
 runtime_resolution_required = true
 
 [[relocs]]
@@ -985,6 +1098,8 @@ original_encoded_gba = 0x825fa0a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_Text_ConfirmCyndaquilDoll"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -995,6 +1110,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ChooseDecor1"
 target_offset = 277
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 276
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1005,6 +1122,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchasePrize"
 target_offset = 26
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 25
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1014,6 +1133,8 @@ original_encoded_gba = 0x825fa3d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_Text_ConfirmChikoritaDoll"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1024,6 +1145,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ChooseDecor1"
 target_offset = 277
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 276
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1034,6 +1157,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchasePrize"
 target_offset = 26
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 25
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1043,6 +1168,8 @@ original_encoded_gba = 0x825fa70
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_Text_ConfirmTotodileDoll"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1053,6 +1180,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ChooseDecor1"
 target_offset = 277
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 276
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1063,6 +1192,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchasePrize"
 target_offset = 26
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 25
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1073,6 +1204,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ClerkWelcome"
 target_offset = 1
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 0
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1083,6 +1216,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ChooseDecor2"
 target_offset = 798
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 797
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1093,6 +1228,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_LaprasDoll"
 target_offset = 896
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 895
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1103,6 +1240,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_SnorlaxDoll"
 target_offset = 931
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 930
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1113,6 +1252,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_VenusaurDoll"
 target_offset = 966
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 965
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1123,6 +1264,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_CharizardDoll"
 target_offset = 1001
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1000
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1133,6 +1276,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_BlastoiseDoll"
 target_offset = 1036
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1035
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1143,6 +1288,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye"
 target_offset = 13
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 12
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1153,6 +1300,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye"
 target_offset = 13
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 12
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1162,6 +1311,8 @@ original_encoded_gba = 0x825faa2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_Text_ConfirmLaprasDoll"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1172,6 +1323,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ChooseDecor2"
 target_offset = 798
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 797
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1182,6 +1335,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchasePrize"
 target_offset = 26
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 25
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1191,6 +1346,8 @@ original_encoded_gba = 0x825fad2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_Text_ConfirmSnorlaxDoll"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1201,6 +1358,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ChooseDecor2"
 target_offset = 798
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 797
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1211,6 +1370,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchasePrize"
 target_offset = 26
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 25
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1220,6 +1381,8 @@ original_encoded_gba = 0x825fb03
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_Text_ConfirmVenusaurDoll"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1230,6 +1393,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ChooseDecor2"
 target_offset = 798
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 797
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1240,6 +1405,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchasePrize"
 target_offset = 26
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 25
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1249,6 +1416,8 @@ original_encoded_gba = 0x825fb35
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_Text_ConfirmCharizardDoll"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1259,6 +1428,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ChooseDecor2"
 target_offset = 798
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 797
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1269,6 +1440,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchasePrize"
 target_offset = 26
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 25
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1278,6 +1451,8 @@ original_encoded_gba = 0x825fb68
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_Text_ConfirmBlastoiseDoll"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1288,6 +1463,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ChooseDecor2"
 target_offset = 798
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 797
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1298,6 +1475,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchasePrize"
 target_offset = 26
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 25
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1308,6 +1487,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ClerkWelcome"
 target_offset = 1
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 0
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1318,6 +1499,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ChooseVitamin"
 target_offset = 1089
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1088
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1328,6 +1511,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_Protein"
 target_offset = 1198
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1197
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1338,6 +1523,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_Calcium"
 target_offset = 1233
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1232
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1348,6 +1535,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_Iron"
 target_offset = 1268
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1267
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1358,6 +1547,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_Zinc"
 target_offset = 1303
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1302
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1368,6 +1559,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_Carbos"
 target_offset = 1338
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1337
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1378,6 +1571,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_HPUp"
 target_offset = 1373
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1372
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1388,6 +1583,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye"
 target_offset = 13
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 12
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1398,6 +1595,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye"
 target_offset = 13
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 12
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1407,6 +1606,8 @@ original_encoded_gba = 0x825fb9b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_Text_ConfirmProtein"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1417,6 +1618,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ChooseVitamin"
 target_offset = 1089
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1088
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1427,6 +1630,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchasePrize"
 target_offset = 26
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 25
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1436,6 +1641,8 @@ original_encoded_gba = 0x825fbc7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_Text_ConfirmCalcium"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1446,6 +1653,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ChooseVitamin"
 target_offset = 1089
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1088
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1456,6 +1665,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchasePrize"
 target_offset = 26
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 25
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1465,6 +1676,8 @@ original_encoded_gba = 0x825fbf3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_Text_ConfirmIron"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1475,6 +1688,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ChooseVitamin"
 target_offset = 1089
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1088
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1485,6 +1700,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchasePrize"
 target_offset = 26
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 25
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1494,6 +1711,8 @@ original_encoded_gba = 0x825fc1c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_Text_ConfirmZinc"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1504,6 +1723,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ChooseVitamin"
 target_offset = 1089
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1088
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1514,6 +1735,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchasePrize"
 target_offset = 26
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 25
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1523,6 +1746,8 @@ original_encoded_gba = 0x825fc45
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_Text_ConfirmCarbos"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1533,6 +1758,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ChooseVitamin"
 target_offset = 1089
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1088
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1543,6 +1770,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchasePrize"
 target_offset = 26
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 25
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1552,6 +1781,8 @@ original_encoded_gba = 0x825fc70
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_Text_ConfirmHPUp"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1562,6 +1793,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ChooseVitamin"
 target_offset = 1089
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1088
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1572,6 +1805,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchasePrize"
 target_offset = 26
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 25
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1582,6 +1817,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ClerkWelcome"
 target_offset = 1
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 0
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1592,6 +1829,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ChooseHoldItem"
 target_offset = 1426
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1425
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1602,6 +1841,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_Leftovers"
 target_offset = 1568
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1567
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1612,6 +1853,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_WhiteHerb"
 target_offset = 1603
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1602
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1622,6 +1865,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_QuickClaw"
 target_offset = 1638
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1637
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1632,6 +1877,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_MentalHerb"
 target_offset = 1673
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1672
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1642,6 +1889,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_Brightpowder"
 target_offset = 1708
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1707
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1652,6 +1901,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ChoiceBand"
 target_offset = 1743
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1742
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1662,6 +1913,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_KingsRock"
 target_offset = 1778
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1777
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1672,6 +1925,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_FocusBand"
 target_offset = 1813
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1812
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1682,6 +1937,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ScopeLens"
 target_offset = 1848
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1847
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1692,6 +1949,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye"
 target_offset = 13
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 12
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1702,6 +1961,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye"
 target_offset = 13
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 12
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1711,6 +1972,8 @@ original_encoded_gba = 0x825fe17
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_Text_ConfirmLeftovers"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1721,6 +1984,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ChooseHoldItem"
 target_offset = 1426
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1425
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1731,6 +1996,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchasePrize"
 target_offset = 26
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 25
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1740,6 +2007,8 @@ original_encoded_gba = 0x825fccb
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_Text_ConfirmWhiteHerb"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1750,6 +2019,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ChooseHoldItem"
 target_offset = 1426
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1425
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1760,6 +2031,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchasePrize"
 target_offset = 26
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 25
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1769,6 +2042,8 @@ original_encoded_gba = 0x825fcfa
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_Text_ConfirmQuickClaw"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1779,6 +2054,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ChooseHoldItem"
 target_offset = 1426
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1425
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1789,6 +2066,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchasePrize"
 target_offset = 26
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 25
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1798,6 +2077,8 @@ original_encoded_gba = 0x825fd29
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_Text_ConfirmMentalHerb"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1808,6 +2089,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ChooseHoldItem"
 target_offset = 1426
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1425
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1818,6 +2101,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchasePrize"
 target_offset = 26
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 25
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1827,6 +2112,8 @@ original_encoded_gba = 0x825fc9a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_Text_ConfirmBrightpowder"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1837,6 +2124,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ChooseHoldItem"
 target_offset = 1426
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1425
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1847,6 +2136,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchasePrize"
 target_offset = 26
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 25
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1856,6 +2147,8 @@ original_encoded_gba = 0x825fd59
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_Text_ConfirmChoiceBand"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1866,6 +2159,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ChooseHoldItem"
 target_offset = 1426
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1425
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1876,6 +2171,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchasePrize"
 target_offset = 26
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 25
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1885,6 +2182,8 @@ original_encoded_gba = 0x825fd89
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_Text_ConfirmKingsRock"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1895,6 +2194,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ChooseHoldItem"
 target_offset = 1426
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1425
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1905,6 +2206,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchasePrize"
 target_offset = 26
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 25
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1914,6 +2217,8 @@ original_encoded_gba = 0x825fdb9
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_Text_ConfirmFocusBand"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1924,6 +2229,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ChooseHoldItem"
 target_offset = 1426
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1425
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1934,6 +2241,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchasePrize"
 target_offset = 26
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 25
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1943,6 +2252,8 @@ original_encoded_gba = 0x825fde8
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_Text_ConfirmScopeLens"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1953,6 +2264,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_ChooseHoldItem"
 target_offset = 1426
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1425
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1963,6 +2276,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchasePrize"
 target_offset = 26
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 25
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1972,6 +2287,8 @@ original_encoded_gba = 0x8260099
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_Text_GoGetYourOwnDoll"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1981,6 +2298,8 @@ original_encoded_gba = 0x826002e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_Text_ItemsWillGetMonTougher"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1990,6 +2309,8 @@ original_encoded_gba = 0x825ffd0
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_Text_GetYouAnythingYouWant"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1999,6 +2320,8 @@ original_encoded_gba = 0x825ff5d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_Text_WishIHadAllDolls"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2008,4 +2331,1658 @@ original_encoded_gba = 0x826012d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-exchangeservicecorner"
 target_export = "BattleFrontier_ExchangeServiceCorner_Text_MoreBattlePointsForRecord"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 6
+
+[[boundaries]]
+payload_offset = 6
+length = 2
+
+[[boundaries]]
+payload_offset = 8
+length = 3
+
+[[boundaries]]
+payload_offset = 11
+length = 1
+
+[[boundaries]]
+payload_offset = 12
+length = 6
+
+[[boundaries]]
+payload_offset = 18
+length = 2
+
+[[boundaries]]
+payload_offset = 20
+length = 3
+
+[[boundaries]]
+payload_offset = 23
+length = 1
+
+[[boundaries]]
+payload_offset = 24
+length = 1
+
+[[boundaries]]
+payload_offset = 25
+length = 5
+
+[[boundaries]]
+payload_offset = 30
+length = 5
+
+[[boundaries]]
+payload_offset = 35
+length = 6
+
+[[boundaries]]
+payload_offset = 41
+length = 6
+
+[[boundaries]]
+payload_offset = 47
+length = 2
+
+[[boundaries]]
+payload_offset = 49
+length = 5
+
+[[boundaries]]
+payload_offset = 54
+length = 6
+
+[[boundaries]]
+payload_offset = 60
+length = 5
+
+[[boundaries]]
+payload_offset = 65
+length = 6
+
+[[boundaries]]
+payload_offset = 71
+length = 5
+
+[[boundaries]]
+payload_offset = 76
+length = 6
+
+[[boundaries]]
+payload_offset = 82
+length = 5
+
+[[boundaries]]
+payload_offset = 88
+length = 5
+
+[[boundaries]]
+payload_offset = 93
+length = 6
+
+[[boundaries]]
+payload_offset = 99
+length = 5
+
+[[boundaries]]
+payload_offset = 104
+length = 6
+
+[[boundaries]]
+payload_offset = 110
+length = 5
+
+[[boundaries]]
+payload_offset = 116
+length = 3
+
+[[boundaries]]
+payload_offset = 119
+length = 5
+
+[[boundaries]]
+payload_offset = 124
+length = 6
+
+[[boundaries]]
+payload_offset = 130
+length = 5
+
+[[boundaries]]
+payload_offset = 135
+length = 3
+
+[[boundaries]]
+payload_offset = 138
+length = 3
+
+[[boundaries]]
+payload_offset = 141
+length = 3
+
+[[boundaries]]
+payload_offset = 144
+length = 3
+
+[[boundaries]]
+payload_offset = 147
+length = 6
+
+[[boundaries]]
+payload_offset = 153
+length = 2
+
+[[boundaries]]
+payload_offset = 155
+length = 5
+
+[[boundaries]]
+payload_offset = 160
+length = 6
+
+[[boundaries]]
+payload_offset = 166
+length = 5
+
+[[boundaries]]
+payload_offset = 172
+length = 6
+
+[[boundaries]]
+payload_offset = 178
+length = 2
+
+[[boundaries]]
+payload_offset = 180
+length = 3
+
+[[boundaries]]
+payload_offset = 183
+length = 1
+
+[[boundaries]]
+payload_offset = 184
+length = 1
+
+[[boundaries]]
+payload_offset = 185
+length = 5
+
+[[boundaries]]
+payload_offset = 190
+length = 5
+
+[[boundaries]]
+payload_offset = 195
+length = 6
+
+[[boundaries]]
+payload_offset = 201
+length = 5
+
+[[boundaries]]
+payload_offset = 206
+length = 3
+
+[[boundaries]]
+payload_offset = 209
+length = 5
+
+[[boundaries]]
+payload_offset = 214
+length = 3
+
+[[boundaries]]
+payload_offset = 217
+length = 3
+
+[[boundaries]]
+payload_offset = 220
+length = 6
+
+[[boundaries]]
+payload_offset = 226
+length = 2
+
+[[boundaries]]
+payload_offset = 228
+length = 5
+
+[[boundaries]]
+payload_offset = 233
+length = 6
+
+[[boundaries]]
+payload_offset = 239
+length = 5
+
+[[boundaries]]
+payload_offset = 245
+length = 6
+
+[[boundaries]]
+payload_offset = 251
+length = 2
+
+[[boundaries]]
+payload_offset = 253
+length = 3
+
+[[boundaries]]
+payload_offset = 256
+length = 1
+
+[[boundaries]]
+payload_offset = 257
+length = 1
+
+[[boundaries]]
+payload_offset = 258
+length = 1
+
+[[boundaries]]
+payload_offset = 259
+length = 1
+
+[[boundaries]]
+payload_offset = 260
+length = 5
+
+[[boundaries]]
+payload_offset = 265
+length = 5
+
+[[boundaries]]
+payload_offset = 270
+length = 5
+
+[[boundaries]]
+payload_offset = 276
+length = 5
+
+[[boundaries]]
+payload_offset = 281
+length = 3
+
+[[boundaries]]
+payload_offset = 284
+length = 3
+
+[[boundaries]]
+payload_offset = 287
+length = 1
+
+[[boundaries]]
+payload_offset = 288
+length = 3
+
+[[boundaries]]
+payload_offset = 291
+length = 5
+
+[[boundaries]]
+payload_offset = 296
+length = 5
+
+[[boundaries]]
+payload_offset = 301
+length = 6
+
+[[boundaries]]
+payload_offset = 307
+length = 5
+
+[[boundaries]]
+payload_offset = 312
+length = 6
+
+[[boundaries]]
+payload_offset = 318
+length = 5
+
+[[boundaries]]
+payload_offset = 323
+length = 6
+
+[[boundaries]]
+payload_offset = 329
+length = 5
+
+[[boundaries]]
+payload_offset = 334
+length = 6
+
+[[boundaries]]
+payload_offset = 340
+length = 5
+
+[[boundaries]]
+payload_offset = 345
+length = 6
+
+[[boundaries]]
+payload_offset = 351
+length = 5
+
+[[boundaries]]
+payload_offset = 356
+length = 6
+
+[[boundaries]]
+payload_offset = 362
+length = 5
+
+[[boundaries]]
+payload_offset = 367
+length = 6
+
+[[boundaries]]
+payload_offset = 373
+length = 5
+
+[[boundaries]]
+payload_offset = 378
+length = 6
+
+[[boundaries]]
+payload_offset = 384
+length = 5
+
+[[boundaries]]
+payload_offset = 389
+length = 6
+
+[[boundaries]]
+payload_offset = 395
+length = 5
+
+[[boundaries]]
+payload_offset = 400
+length = 6
+
+[[boundaries]]
+payload_offset = 406
+length = 5
+
+[[boundaries]]
+payload_offset = 411
+length = 6
+
+[[boundaries]]
+payload_offset = 417
+length = 5
+
+[[boundaries]]
+payload_offset = 422
+length = 6
+
+[[boundaries]]
+payload_offset = 428
+length = 1
+
+[[boundaries]]
+payload_offset = 429
+length = 6
+
+[[boundaries]]
+payload_offset = 435
+length = 2
+
+[[boundaries]]
+payload_offset = 437
+length = 5
+
+[[boundaries]]
+payload_offset = 442
+length = 6
+
+[[boundaries]]
+payload_offset = 448
+length = 5
+
+[[boundaries]]
+payload_offset = 453
+length = 5
+
+[[boundaries]]
+payload_offset = 458
+length = 5
+
+[[boundaries]]
+payload_offset = 464
+length = 6
+
+[[boundaries]]
+payload_offset = 470
+length = 2
+
+[[boundaries]]
+payload_offset = 472
+length = 5
+
+[[boundaries]]
+payload_offset = 477
+length = 6
+
+[[boundaries]]
+payload_offset = 483
+length = 5
+
+[[boundaries]]
+payload_offset = 488
+length = 5
+
+[[boundaries]]
+payload_offset = 493
+length = 5
+
+[[boundaries]]
+payload_offset = 499
+length = 6
+
+[[boundaries]]
+payload_offset = 505
+length = 2
+
+[[boundaries]]
+payload_offset = 507
+length = 5
+
+[[boundaries]]
+payload_offset = 512
+length = 6
+
+[[boundaries]]
+payload_offset = 518
+length = 5
+
+[[boundaries]]
+payload_offset = 523
+length = 5
+
+[[boundaries]]
+payload_offset = 528
+length = 5
+
+[[boundaries]]
+payload_offset = 534
+length = 6
+
+[[boundaries]]
+payload_offset = 540
+length = 2
+
+[[boundaries]]
+payload_offset = 542
+length = 5
+
+[[boundaries]]
+payload_offset = 547
+length = 6
+
+[[boundaries]]
+payload_offset = 553
+length = 5
+
+[[boundaries]]
+payload_offset = 558
+length = 5
+
+[[boundaries]]
+payload_offset = 563
+length = 5
+
+[[boundaries]]
+payload_offset = 569
+length = 6
+
+[[boundaries]]
+payload_offset = 575
+length = 2
+
+[[boundaries]]
+payload_offset = 577
+length = 5
+
+[[boundaries]]
+payload_offset = 582
+length = 6
+
+[[boundaries]]
+payload_offset = 588
+length = 5
+
+[[boundaries]]
+payload_offset = 593
+length = 5
+
+[[boundaries]]
+payload_offset = 598
+length = 5
+
+[[boundaries]]
+payload_offset = 604
+length = 6
+
+[[boundaries]]
+payload_offset = 610
+length = 2
+
+[[boundaries]]
+payload_offset = 612
+length = 5
+
+[[boundaries]]
+payload_offset = 617
+length = 6
+
+[[boundaries]]
+payload_offset = 623
+length = 5
+
+[[boundaries]]
+payload_offset = 628
+length = 5
+
+[[boundaries]]
+payload_offset = 633
+length = 5
+
+[[boundaries]]
+payload_offset = 639
+length = 6
+
+[[boundaries]]
+payload_offset = 645
+length = 2
+
+[[boundaries]]
+payload_offset = 647
+length = 5
+
+[[boundaries]]
+payload_offset = 652
+length = 6
+
+[[boundaries]]
+payload_offset = 658
+length = 5
+
+[[boundaries]]
+payload_offset = 663
+length = 5
+
+[[boundaries]]
+payload_offset = 668
+length = 5
+
+[[boundaries]]
+payload_offset = 674
+length = 6
+
+[[boundaries]]
+payload_offset = 680
+length = 2
+
+[[boundaries]]
+payload_offset = 682
+length = 5
+
+[[boundaries]]
+payload_offset = 687
+length = 6
+
+[[boundaries]]
+payload_offset = 693
+length = 5
+
+[[boundaries]]
+payload_offset = 698
+length = 5
+
+[[boundaries]]
+payload_offset = 703
+length = 5
+
+[[boundaries]]
+payload_offset = 709
+length = 6
+
+[[boundaries]]
+payload_offset = 715
+length = 2
+
+[[boundaries]]
+payload_offset = 717
+length = 5
+
+[[boundaries]]
+payload_offset = 722
+length = 6
+
+[[boundaries]]
+payload_offset = 728
+length = 5
+
+[[boundaries]]
+payload_offset = 733
+length = 5
+
+[[boundaries]]
+payload_offset = 738
+length = 5
+
+[[boundaries]]
+payload_offset = 744
+length = 6
+
+[[boundaries]]
+payload_offset = 750
+length = 2
+
+[[boundaries]]
+payload_offset = 752
+length = 5
+
+[[boundaries]]
+payload_offset = 757
+length = 6
+
+[[boundaries]]
+payload_offset = 763
+length = 5
+
+[[boundaries]]
+payload_offset = 768
+length = 5
+
+[[boundaries]]
+payload_offset = 773
+length = 5
+
+[[boundaries]]
+payload_offset = 779
+length = 1
+
+[[boundaries]]
+payload_offset = 780
+length = 1
+
+[[boundaries]]
+payload_offset = 781
+length = 5
+
+[[boundaries]]
+payload_offset = 786
+length = 5
+
+[[boundaries]]
+payload_offset = 791
+length = 5
+
+[[boundaries]]
+payload_offset = 797
+length = 5
+
+[[boundaries]]
+payload_offset = 802
+length = 3
+
+[[boundaries]]
+payload_offset = 805
+length = 3
+
+[[boundaries]]
+payload_offset = 808
+length = 1
+
+[[boundaries]]
+payload_offset = 809
+length = 3
+
+[[boundaries]]
+payload_offset = 812
+length = 5
+
+[[boundaries]]
+payload_offset = 817
+length = 5
+
+[[boundaries]]
+payload_offset = 822
+length = 6
+
+[[boundaries]]
+payload_offset = 828
+length = 5
+
+[[boundaries]]
+payload_offset = 833
+length = 6
+
+[[boundaries]]
+payload_offset = 839
+length = 5
+
+[[boundaries]]
+payload_offset = 844
+length = 6
+
+[[boundaries]]
+payload_offset = 850
+length = 5
+
+[[boundaries]]
+payload_offset = 855
+length = 6
+
+[[boundaries]]
+payload_offset = 861
+length = 5
+
+[[boundaries]]
+payload_offset = 866
+length = 6
+
+[[boundaries]]
+payload_offset = 872
+length = 5
+
+[[boundaries]]
+payload_offset = 877
+length = 6
+
+[[boundaries]]
+payload_offset = 883
+length = 5
+
+[[boundaries]]
+payload_offset = 888
+length = 6
+
+[[boundaries]]
+payload_offset = 894
+length = 1
+
+[[boundaries]]
+payload_offset = 895
+length = 6
+
+[[boundaries]]
+payload_offset = 901
+length = 2
+
+[[boundaries]]
+payload_offset = 903
+length = 5
+
+[[boundaries]]
+payload_offset = 908
+length = 6
+
+[[boundaries]]
+payload_offset = 914
+length = 5
+
+[[boundaries]]
+payload_offset = 919
+length = 5
+
+[[boundaries]]
+payload_offset = 924
+length = 5
+
+[[boundaries]]
+payload_offset = 930
+length = 6
+
+[[boundaries]]
+payload_offset = 936
+length = 2
+
+[[boundaries]]
+payload_offset = 938
+length = 5
+
+[[boundaries]]
+payload_offset = 943
+length = 6
+
+[[boundaries]]
+payload_offset = 949
+length = 5
+
+[[boundaries]]
+payload_offset = 954
+length = 5
+
+[[boundaries]]
+payload_offset = 959
+length = 5
+
+[[boundaries]]
+payload_offset = 965
+length = 6
+
+[[boundaries]]
+payload_offset = 971
+length = 2
+
+[[boundaries]]
+payload_offset = 973
+length = 5
+
+[[boundaries]]
+payload_offset = 978
+length = 6
+
+[[boundaries]]
+payload_offset = 984
+length = 5
+
+[[boundaries]]
+payload_offset = 989
+length = 5
+
+[[boundaries]]
+payload_offset = 994
+length = 5
+
+[[boundaries]]
+payload_offset = 1000
+length = 6
+
+[[boundaries]]
+payload_offset = 1006
+length = 2
+
+[[boundaries]]
+payload_offset = 1008
+length = 5
+
+[[boundaries]]
+payload_offset = 1013
+length = 6
+
+[[boundaries]]
+payload_offset = 1019
+length = 5
+
+[[boundaries]]
+payload_offset = 1024
+length = 5
+
+[[boundaries]]
+payload_offset = 1029
+length = 5
+
+[[boundaries]]
+payload_offset = 1035
+length = 6
+
+[[boundaries]]
+payload_offset = 1041
+length = 2
+
+[[boundaries]]
+payload_offset = 1043
+length = 5
+
+[[boundaries]]
+payload_offset = 1048
+length = 6
+
+[[boundaries]]
+payload_offset = 1054
+length = 5
+
+[[boundaries]]
+payload_offset = 1059
+length = 5
+
+[[boundaries]]
+payload_offset = 1064
+length = 5
+
+[[boundaries]]
+payload_offset = 1070
+length = 1
+
+[[boundaries]]
+payload_offset = 1071
+length = 1
+
+[[boundaries]]
+payload_offset = 1072
+length = 5
+
+[[boundaries]]
+payload_offset = 1077
+length = 5
+
+[[boundaries]]
+payload_offset = 1082
+length = 5
+
+[[boundaries]]
+payload_offset = 1088
+length = 5
+
+[[boundaries]]
+payload_offset = 1093
+length = 3
+
+[[boundaries]]
+payload_offset = 1096
+length = 3
+
+[[boundaries]]
+payload_offset = 1099
+length = 1
+
+[[boundaries]]
+payload_offset = 1100
+length = 3
+
+[[boundaries]]
+payload_offset = 1103
+length = 5
+
+[[boundaries]]
+payload_offset = 1108
+length = 5
+
+[[boundaries]]
+payload_offset = 1113
+length = 6
+
+[[boundaries]]
+payload_offset = 1119
+length = 5
+
+[[boundaries]]
+payload_offset = 1124
+length = 6
+
+[[boundaries]]
+payload_offset = 1130
+length = 5
+
+[[boundaries]]
+payload_offset = 1135
+length = 6
+
+[[boundaries]]
+payload_offset = 1141
+length = 5
+
+[[boundaries]]
+payload_offset = 1146
+length = 6
+
+[[boundaries]]
+payload_offset = 1152
+length = 5
+
+[[boundaries]]
+payload_offset = 1157
+length = 6
+
+[[boundaries]]
+payload_offset = 1163
+length = 5
+
+[[boundaries]]
+payload_offset = 1168
+length = 6
+
+[[boundaries]]
+payload_offset = 1174
+length = 5
+
+[[boundaries]]
+payload_offset = 1179
+length = 6
+
+[[boundaries]]
+payload_offset = 1185
+length = 5
+
+[[boundaries]]
+payload_offset = 1190
+length = 6
+
+[[boundaries]]
+payload_offset = 1196
+length = 1
+
+[[boundaries]]
+payload_offset = 1197
+length = 6
+
+[[boundaries]]
+payload_offset = 1203
+length = 2
+
+[[boundaries]]
+payload_offset = 1205
+length = 5
+
+[[boundaries]]
+payload_offset = 1210
+length = 6
+
+[[boundaries]]
+payload_offset = 1216
+length = 5
+
+[[boundaries]]
+payload_offset = 1221
+length = 5
+
+[[boundaries]]
+payload_offset = 1226
+length = 5
+
+[[boundaries]]
+payload_offset = 1232
+length = 6
+
+[[boundaries]]
+payload_offset = 1238
+length = 2
+
+[[boundaries]]
+payload_offset = 1240
+length = 5
+
+[[boundaries]]
+payload_offset = 1245
+length = 6
+
+[[boundaries]]
+payload_offset = 1251
+length = 5
+
+[[boundaries]]
+payload_offset = 1256
+length = 5
+
+[[boundaries]]
+payload_offset = 1261
+length = 5
+
+[[boundaries]]
+payload_offset = 1267
+length = 6
+
+[[boundaries]]
+payload_offset = 1273
+length = 2
+
+[[boundaries]]
+payload_offset = 1275
+length = 5
+
+[[boundaries]]
+payload_offset = 1280
+length = 6
+
+[[boundaries]]
+payload_offset = 1286
+length = 5
+
+[[boundaries]]
+payload_offset = 1291
+length = 5
+
+[[boundaries]]
+payload_offset = 1296
+length = 5
+
+[[boundaries]]
+payload_offset = 1302
+length = 6
+
+[[boundaries]]
+payload_offset = 1308
+length = 2
+
+[[boundaries]]
+payload_offset = 1310
+length = 5
+
+[[boundaries]]
+payload_offset = 1315
+length = 6
+
+[[boundaries]]
+payload_offset = 1321
+length = 5
+
+[[boundaries]]
+payload_offset = 1326
+length = 5
+
+[[boundaries]]
+payload_offset = 1331
+length = 5
+
+[[boundaries]]
+payload_offset = 1337
+length = 6
+
+[[boundaries]]
+payload_offset = 1343
+length = 2
+
+[[boundaries]]
+payload_offset = 1345
+length = 5
+
+[[boundaries]]
+payload_offset = 1350
+length = 6
+
+[[boundaries]]
+payload_offset = 1356
+length = 5
+
+[[boundaries]]
+payload_offset = 1361
+length = 5
+
+[[boundaries]]
+payload_offset = 1366
+length = 5
+
+[[boundaries]]
+payload_offset = 1372
+length = 6
+
+[[boundaries]]
+payload_offset = 1378
+length = 2
+
+[[boundaries]]
+payload_offset = 1380
+length = 5
+
+[[boundaries]]
+payload_offset = 1385
+length = 6
+
+[[boundaries]]
+payload_offset = 1391
+length = 5
+
+[[boundaries]]
+payload_offset = 1396
+length = 5
+
+[[boundaries]]
+payload_offset = 1401
+length = 5
+
+[[boundaries]]
+payload_offset = 1407
+length = 1
+
+[[boundaries]]
+payload_offset = 1408
+length = 1
+
+[[boundaries]]
+payload_offset = 1409
+length = 5
+
+[[boundaries]]
+payload_offset = 1414
+length = 5
+
+[[boundaries]]
+payload_offset = 1419
+length = 5
+
+[[boundaries]]
+payload_offset = 1425
+length = 5
+
+[[boundaries]]
+payload_offset = 1430
+length = 3
+
+[[boundaries]]
+payload_offset = 1433
+length = 3
+
+[[boundaries]]
+payload_offset = 1436
+length = 1
+
+[[boundaries]]
+payload_offset = 1437
+length = 3
+
+[[boundaries]]
+payload_offset = 1440
+length = 5
+
+[[boundaries]]
+payload_offset = 1445
+length = 5
+
+[[boundaries]]
+payload_offset = 1450
+length = 6
+
+[[boundaries]]
+payload_offset = 1456
+length = 5
+
+[[boundaries]]
+payload_offset = 1461
+length = 6
+
+[[boundaries]]
+payload_offset = 1467
+length = 5
+
+[[boundaries]]
+payload_offset = 1472
+length = 6
+
+[[boundaries]]
+payload_offset = 1478
+length = 5
+
+[[boundaries]]
+payload_offset = 1483
+length = 6
+
+[[boundaries]]
+payload_offset = 1489
+length = 5
+
+[[boundaries]]
+payload_offset = 1494
+length = 6
+
+[[boundaries]]
+payload_offset = 1500
+length = 5
+
+[[boundaries]]
+payload_offset = 1505
+length = 6
+
+[[boundaries]]
+payload_offset = 1511
+length = 5
+
+[[boundaries]]
+payload_offset = 1516
+length = 6
+
+[[boundaries]]
+payload_offset = 1522
+length = 5
+
+[[boundaries]]
+payload_offset = 1527
+length = 6
+
+[[boundaries]]
+payload_offset = 1533
+length = 5
+
+[[boundaries]]
+payload_offset = 1538
+length = 6
+
+[[boundaries]]
+payload_offset = 1544
+length = 5
+
+[[boundaries]]
+payload_offset = 1549
+length = 6
+
+[[boundaries]]
+payload_offset = 1555
+length = 5
+
+[[boundaries]]
+payload_offset = 1560
+length = 6
+
+[[boundaries]]
+payload_offset = 1566
+length = 1
+
+[[boundaries]]
+payload_offset = 1567
+length = 6
+
+[[boundaries]]
+payload_offset = 1573
+length = 2
+
+[[boundaries]]
+payload_offset = 1575
+length = 5
+
+[[boundaries]]
+payload_offset = 1580
+length = 6
+
+[[boundaries]]
+payload_offset = 1586
+length = 5
+
+[[boundaries]]
+payload_offset = 1591
+length = 5
+
+[[boundaries]]
+payload_offset = 1596
+length = 5
+
+[[boundaries]]
+payload_offset = 1602
+length = 6
+
+[[boundaries]]
+payload_offset = 1608
+length = 2
+
+[[boundaries]]
+payload_offset = 1610
+length = 5
+
+[[boundaries]]
+payload_offset = 1615
+length = 6
+
+[[boundaries]]
+payload_offset = 1621
+length = 5
+
+[[boundaries]]
+payload_offset = 1626
+length = 5
+
+[[boundaries]]
+payload_offset = 1631
+length = 5
+
+[[boundaries]]
+payload_offset = 1637
+length = 6
+
+[[boundaries]]
+payload_offset = 1643
+length = 2
+
+[[boundaries]]
+payload_offset = 1645
+length = 5
+
+[[boundaries]]
+payload_offset = 1650
+length = 6
+
+[[boundaries]]
+payload_offset = 1656
+length = 5
+
+[[boundaries]]
+payload_offset = 1661
+length = 5
+
+[[boundaries]]
+payload_offset = 1666
+length = 5
+
+[[boundaries]]
+payload_offset = 1672
+length = 6
+
+[[boundaries]]
+payload_offset = 1678
+length = 2
+
+[[boundaries]]
+payload_offset = 1680
+length = 5
+
+[[boundaries]]
+payload_offset = 1685
+length = 6
+
+[[boundaries]]
+payload_offset = 1691
+length = 5
+
+[[boundaries]]
+payload_offset = 1696
+length = 5
+
+[[boundaries]]
+payload_offset = 1701
+length = 5
+
+[[boundaries]]
+payload_offset = 1707
+length = 6
+
+[[boundaries]]
+payload_offset = 1713
+length = 2
+
+[[boundaries]]
+payload_offset = 1715
+length = 5
+
+[[boundaries]]
+payload_offset = 1720
+length = 6
+
+[[boundaries]]
+payload_offset = 1726
+length = 5
+
+[[boundaries]]
+payload_offset = 1731
+length = 5
+
+[[boundaries]]
+payload_offset = 1736
+length = 5
+
+[[boundaries]]
+payload_offset = 1742
+length = 6
+
+[[boundaries]]
+payload_offset = 1748
+length = 2
+
+[[boundaries]]
+payload_offset = 1750
+length = 5
+
+[[boundaries]]
+payload_offset = 1755
+length = 6
+
+[[boundaries]]
+payload_offset = 1761
+length = 5
+
+[[boundaries]]
+payload_offset = 1766
+length = 5
+
+[[boundaries]]
+payload_offset = 1771
+length = 5
+
+[[boundaries]]
+payload_offset = 1777
+length = 6
+
+[[boundaries]]
+payload_offset = 1783
+length = 2
+
+[[boundaries]]
+payload_offset = 1785
+length = 5
+
+[[boundaries]]
+payload_offset = 1790
+length = 6
+
+[[boundaries]]
+payload_offset = 1796
+length = 5
+
+[[boundaries]]
+payload_offset = 1801
+length = 5
+
+[[boundaries]]
+payload_offset = 1806
+length = 5
+
+[[boundaries]]
+payload_offset = 1812
+length = 6
+
+[[boundaries]]
+payload_offset = 1818
+length = 2
+
+[[boundaries]]
+payload_offset = 1820
+length = 5
+
+[[boundaries]]
+payload_offset = 1825
+length = 6
+
+[[boundaries]]
+payload_offset = 1831
+length = 5
+
+[[boundaries]]
+payload_offset = 1836
+length = 5
+
+[[boundaries]]
+payload_offset = 1841
+length = 5
+
+[[boundaries]]
+payload_offset = 1847
+length = 6
+
+[[boundaries]]
+payload_offset = 1853
+length = 2
+
+[[boundaries]]
+payload_offset = 1855
+length = 5
+
+[[boundaries]]
+payload_offset = 1860
+length = 6
+
+[[boundaries]]
+payload_offset = 1866
+length = 5
+
+[[boundaries]]
+payload_offset = 1871
+length = 5
+
+[[boundaries]]
+payload_offset = 1876
+length = 5
+
+[[boundaries]]
+payload_offset = 1882
+length = 6
+
+[[boundaries]]
+payload_offset = 1888
+length = 2
+
+[[boundaries]]
+payload_offset = 1890
+length = 1
+
+[[boundaries]]
+payload_offset = 1891
+length = 6
+
+[[boundaries]]
+payload_offset = 1897
+length = 2
+
+[[boundaries]]
+payload_offset = 1899
+length = 1
+
+[[boundaries]]
+payload_offset = 1900
+length = 1
+
+[[boundaries]]
+payload_offset = 1901
+length = 6
+
+[[boundaries]]
+payload_offset = 1907
+length = 2
+
+[[boundaries]]
+payload_offset = 1909
+length = 1
+
+[[boundaries]]
+payload_offset = 1910
+length = 1
+
+[[boundaries]]
+payload_offset = 1911
+length = 6
+
+[[boundaries]]
+payload_offset = 1917
+length = 2
+
+[[boundaries]]
+payload_offset = 1919
+length = 1
+
+[[boundaries]]
+payload_offset = 1920
+length = 6
+
+[[boundaries]]
+payload_offset = 1926
+length = 2
+
+[[boundaries]]
+payload_offset = 1928
+length = 1

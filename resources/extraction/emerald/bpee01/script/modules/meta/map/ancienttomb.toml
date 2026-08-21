@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 12
 reloc_count = 13
+instruction_count = 67
 
 [[segments]]
 kind = "bytecode"
@@ -128,6 +129,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/ancienttomb"
 target_export = "AncientTomb_EventScript_TryRemoveRegisteel"
 target_offset = 26
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 10
 runtime_resolution_required = true
 
 [[relocs]]
@@ -138,6 +141,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-poison"
 target_export = "Common_EventScript_NopReturn"
 target_offset = 146
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 146
 runtime_resolution_required = true
 
 [[relocs]]
@@ -148,6 +153,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/ancienttomb"
 target_export = "AncientTomb_EventScript_ShowRegisteel"
 target_offset = 59
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 43
 runtime_resolution_required = true
 
 [[relocs]]
@@ -158,6 +165,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/ancienttomb"
 target_export = "AncientTomb_EventScript_HideRegiEntrance"
 target_offset = 73
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 57
 runtime_resolution_required = true
 
 [[relocs]]
@@ -168,6 +177,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/ancienttomb"
 target_export = "AncientTomb_EventScript_BigHoleInWall"
 target_offset = 147
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 131
 runtime_resolution_required = true
 
 [[relocs]]
@@ -177,6 +188,8 @@ original_encoded_gba = 0x82a6d06
 target_class = "MART_TABLE_TARGET"
 target_resource_key = "emerald:text/braille/ancienttomb-braille-shineinthemiddle"
 target_export = "AncientTomb_Braille_ShineInTheMiddle"
+target_kind = "BRAILLE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -186,6 +199,8 @@ original_encoded_gba = 0x827304e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/event-scripts"
 target_export = "gText_BigHoleInTheWall"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -195,6 +210,8 @@ original_encoded_gba = 0x82a6d06
 target_class = "MART_TABLE_TARGET"
 target_resource_key = "emerald:text/braille/ancienttomb-braille-shineinthemiddle"
 target_export = "AncientTomb_Braille_ShineInTheMiddle"
+target_kind = "BRAILLE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -205,6 +222,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/ancienttomb"
 target_export = "AncientTomb_EventScript_DefeatedRegisteel"
 target_offset = 238
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 222
 runtime_resolution_required = true
 
 [[relocs]]
@@ -215,6 +234,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/ancienttomb"
 target_export = "AncientTomb_EventScript_RanFromRegisteel"
 target_offset = 247
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 231
 runtime_resolution_required = true
 
 [[relocs]]
@@ -225,6 +246,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/ancienttomb"
 target_export = "AncientTomb_EventScript_RanFromRegisteel"
 target_offset = 247
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 231
 runtime_resolution_required = true
 
 [[relocs]]
@@ -235,6 +258,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-poison"
 target_export = "Common_EventScript_RemoveStaticPokemon"
 target_offset = 177
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 177
 runtime_resolution_required = true
 
 [[relocs]]
@@ -245,4 +270,274 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-poison"
 target_export = "Common_EventScript_LegendaryFlewAway"
 target_offset = 186
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 186
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 6
+
+[[boundaries]]
+payload_offset = 9
+length = 1
+
+[[boundaries]]
+payload_offset = 10
+length = 5
+
+[[boundaries]]
+payload_offset = 15
+length = 5
+
+[[boundaries]]
+payload_offset = 20
+length = 6
+
+[[boundaries]]
+payload_offset = 26
+length = 3
+
+[[boundaries]]
+payload_offset = 29
+length = 1
+
+[[boundaries]]
+payload_offset = 30
+length = 3
+
+[[boundaries]]
+payload_offset = 33
+length = 3
+
+[[boundaries]]
+payload_offset = 36
+length = 6
+
+[[boundaries]]
+payload_offset = 42
+length = 1
+
+[[boundaries]]
+payload_offset = 43
+length = 3
+
+[[boundaries]]
+payload_offset = 46
+length = 1
+
+[[boundaries]]
+payload_offset = 47
+length = 3
+
+[[boundaries]]
+payload_offset = 50
+length = 6
+
+[[boundaries]]
+payload_offset = 56
+length = 1
+
+[[boundaries]]
+payload_offset = 57
+length = 9
+
+[[boundaries]]
+payload_offset = 66
+length = 9
+
+[[boundaries]]
+payload_offset = 75
+length = 9
+
+[[boundaries]]
+payload_offset = 84
+length = 9
+
+[[boundaries]]
+payload_offset = 93
+length = 9
+
+[[boundaries]]
+payload_offset = 102
+length = 9
+
+[[boundaries]]
+payload_offset = 111
+length = 1
+
+[[boundaries]]
+payload_offset = 112
+length = 1
+
+[[boundaries]]
+payload_offset = 113
+length = 3
+
+[[boundaries]]
+payload_offset = 116
+length = 6
+
+[[boundaries]]
+payload_offset = 122
+length = 5
+
+[[boundaries]]
+payload_offset = 127
+length = 1
+
+[[boundaries]]
+payload_offset = 128
+length = 1
+
+[[boundaries]]
+payload_offset = 129
+length = 1
+
+[[boundaries]]
+payload_offset = 130
+length = 1
+
+[[boundaries]]
+payload_offset = 131
+length = 6
+
+[[boundaries]]
+payload_offset = 137
+length = 2
+
+[[boundaries]]
+payload_offset = 139
+length = 1
+
+[[boundaries]]
+payload_offset = 140
+length = 1
+
+[[boundaries]]
+payload_offset = 141
+length = 1
+
+[[boundaries]]
+payload_offset = 142
+length = 5
+
+[[boundaries]]
+payload_offset = 147
+length = 1
+
+[[boundaries]]
+payload_offset = 148
+length = 1
+
+[[boundaries]]
+payload_offset = 149
+length = 1
+
+[[boundaries]]
+payload_offset = 150
+length = 1
+
+[[boundaries]]
+payload_offset = 151
+length = 1
+
+[[boundaries]]
+payload_offset = 152
+length = 1
+
+[[boundaries]]
+payload_offset = 153
+length = 1
+
+[[boundaries]]
+payload_offset = 154
+length = 5
+
+[[boundaries]]
+payload_offset = 159
+length = 3
+
+[[boundaries]]
+payload_offset = 162
+length = 1
+
+[[boundaries]]
+payload_offset = 163
+length = 6
+
+[[boundaries]]
+payload_offset = 169
+length = 3
+
+[[boundaries]]
+payload_offset = 172
+length = 3
+
+[[boundaries]]
+payload_offset = 175
+length = 1
+
+[[boundaries]]
+payload_offset = 176
+length = 3
+
+[[boundaries]]
+payload_offset = 179
+length = 5
+
+[[boundaries]]
+payload_offset = 184
+length = 5
+
+[[boundaries]]
+payload_offset = 189
+length = 6
+
+[[boundaries]]
+payload_offset = 195
+length = 5
+
+[[boundaries]]
+payload_offset = 200
+length = 6
+
+[[boundaries]]
+payload_offset = 206
+length = 5
+
+[[boundaries]]
+payload_offset = 211
+length = 6
+
+[[boundaries]]
+payload_offset = 217
+length = 3
+
+[[boundaries]]
+payload_offset = 220
+length = 1
+
+[[boundaries]]
+payload_offset = 221
+length = 1
+
+[[boundaries]]
+payload_offset = 222
+length = 3
+
+[[boundaries]]
+payload_offset = 225
+length = 5
+
+[[boundaries]]
+payload_offset = 231
+length = 5
+
+[[boundaries]]
+payload_offset = 236
+length = 5

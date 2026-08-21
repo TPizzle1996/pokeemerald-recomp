@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 26
 reloc_count = 58
+instruction_count = 151
 
 [[segments]]
 kind = "bytecode"
@@ -240,6 +241,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_EventScript_AskSwitchBikes"
 target_offset = 217
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 216
 runtime_resolution_required = true
 
 [[relocs]]
@@ -250,6 +253,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_EventScript_SkipGreeting"
 target_offset = 60
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 59
 runtime_resolution_required = true
 
 [[relocs]]
@@ -259,6 +264,8 @@ original_encoded_gba = 0x820ee22
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_Text_RydelGreeting"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -268,6 +275,8 @@ original_encoded_gba = 0x820ee99
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_Text_DidYouComeFromFarAway"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -278,6 +287,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_EventScript_YesFar"
 target_offset = 143
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 142
 runtime_resolution_required = true
 
 [[relocs]]
@@ -288,6 +299,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_EventScript_NotFar"
 target_offset = 130
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 129
 runtime_resolution_required = true
 
 [[relocs]]
@@ -297,6 +310,8 @@ original_encoded_gba = 0x820ee99
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_Text_DidYouComeFromFarAway"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -307,6 +322,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_EventScript_YesFar"
 target_offset = 143
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 142
 runtime_resolution_required = true
 
 [[relocs]]
@@ -317,6 +334,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_EventScript_NotFar"
 target_offset = 130
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 129
 runtime_resolution_required = true
 
 [[relocs]]
@@ -326,6 +345,8 @@ original_encoded_gba = 0x820ef32
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_Text_ExplainBikesChooseWhichOne"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -336,6 +357,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_EventScript_GetMachBike"
 target_offset = 152
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 151
 runtime_resolution_required = true
 
 [[relocs]]
@@ -346,6 +369,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_EventScript_GetAcroBike"
 target_offset = 178
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 177
 runtime_resolution_required = true
 
 [[relocs]]
@@ -355,6 +380,8 @@ original_encoded_gba = 0x820eee8
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_Text_GuessYouDontNeedBike"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -365,6 +392,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_EventScript_ChooseBike"
 target_offset = 91
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 90
 runtime_resolution_required = true
 
 [[relocs]]
@@ -374,6 +403,8 @@ original_encoded_gba = 0x820f18d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_Text_ChoseMachBike"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -384,6 +415,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_EventScript_ComeBackToSwitchBikes"
 target_offset = 204
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 203
 runtime_resolution_required = true
 
 [[relocs]]
@@ -393,6 +426,8 @@ original_encoded_gba = 0x820f1a5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_Text_ChoseAcroBike"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -403,6 +438,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_EventScript_ComeBackToSwitchBikes"
 target_offset = 204
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 203
 runtime_resolution_required = true
 
 [[relocs]]
@@ -412,6 +449,8 @@ original_encoded_gba = 0x820f1bd
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_Text_ComeBackToSwitchBikes"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -421,6 +460,8 @@ original_encoded_gba = 0x820f1fb
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_Text_WantToSwitchBikes"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -431,6 +472,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_EventScript_SwitchBikes"
 target_offset = 248
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 247
 runtime_resolution_required = true
 
 [[relocs]]
@@ -441,6 +484,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_EventScript_KeepBike"
 target_offset = 298
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 297
 runtime_resolution_required = true
 
 [[relocs]]
@@ -450,6 +495,8 @@ original_encoded_gba = 0x820f22f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_Text_IllSwitchBikes"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -460,6 +507,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_EventScript_SwitchAcroForMach"
 target_offset = 308
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 307
 runtime_resolution_required = true
 
 [[relocs]]
@@ -470,6 +519,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_EventScript_SwitchMachForAcro"
 target_offset = 341
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 340
 runtime_resolution_required = true
 
 [[relocs]]
@@ -479,6 +530,8 @@ original_encoded_gba = 0x820f2f3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_Text_OhYourBikeIsInPC"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -488,6 +541,8 @@ original_encoded_gba = 0x820f2c4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_Text_HappyYouLikeIt"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -497,6 +552,8 @@ original_encoded_gba = 0x820f294
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_Text_ExchangedAcroForMach"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -507,6 +564,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_EventScript_ComeBackToSwitchBikes"
 target_offset = 204
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 203
 runtime_resolution_required = true
 
 [[relocs]]
@@ -516,6 +575,8 @@ original_encoded_gba = 0x820f263
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_Text_ExchangedMachForAcro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -526,6 +587,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_EventScript_ComeBackToSwitchBikes"
 target_offset = 204
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 203
 runtime_resolution_required = true
 
 [[relocs]]
@@ -535,6 +598,8 @@ original_encoded_gba = 0x820f3c3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_Text_HandbooksAreInBack"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -544,6 +609,8 @@ original_encoded_gba = 0x820f445
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_Text_MachHandbookWhichPage"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -554,6 +621,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_EventScript_ChooseMachHandbookPage"
 target_offset = 395
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 394
 runtime_resolution_required = true
 
 [[relocs]]
@@ -564,6 +633,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_EventScript_HowToRide"
 target_offset = 461
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 460
 runtime_resolution_required = true
 
 [[relocs]]
@@ -574,6 +645,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_EventScript_HowToTurn"
 target_offset = 473
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 472
 runtime_resolution_required = true
 
 [[relocs]]
@@ -584,6 +657,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_EventScript_SandySlopes"
 target_offset = 485
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 484
 runtime_resolution_required = true
 
 [[relocs]]
@@ -594,6 +669,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_EventScript_ExitMachHandbook"
 target_offset = 497
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 496
 runtime_resolution_required = true
 
 [[relocs]]
@@ -604,6 +681,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_EventScript_ExitMachHandbook"
 target_offset = 497
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 496
 runtime_resolution_required = true
 
 [[relocs]]
@@ -613,6 +692,8 @@ original_encoded_gba = 0x820f487
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_Text_HowToRideMachBike"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -623,6 +704,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_EventScript_ChooseMachHandbookPage"
 target_offset = 395
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 394
 runtime_resolution_required = true
 
 [[relocs]]
@@ -632,6 +715,8 @@ original_encoded_gba = 0x820f550
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_Text_HowToTurnMachBike"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -642,6 +727,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_EventScript_ChooseMachHandbookPage"
 target_offset = 395
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 394
 runtime_resolution_required = true
 
 [[relocs]]
@@ -651,6 +738,8 @@ original_encoded_gba = 0x820f61a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_Text_SandySlopes"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -661,6 +750,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_EventScript_ChooseMachHandbookPage"
 target_offset = 395
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 394
 runtime_resolution_required = true
 
 [[relocs]]
@@ -670,6 +761,8 @@ original_encoded_gba = 0x820f6ed
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_Text_AcroHandbookWhichPage"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -680,6 +773,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_EventScript_ChooseAcroHandbookPage"
 target_offset = 511
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 510
 runtime_resolution_required = true
 
 [[relocs]]
@@ -690,6 +785,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_EventScript_Wheelies"
 target_offset = 577
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 576
 runtime_resolution_required = true
 
 [[relocs]]
@@ -700,6 +797,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_EventScript_BunnyHops"
 target_offset = 589
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 588
 runtime_resolution_required = true
 
 [[relocs]]
@@ -710,6 +809,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_EventScript_Jumps"
 target_offset = 601
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 600
 runtime_resolution_required = true
 
 [[relocs]]
@@ -720,6 +821,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_EventScript_ExitAcroHandbook"
 target_offset = 613
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 612
 runtime_resolution_required = true
 
 [[relocs]]
@@ -730,6 +833,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_EventScript_ExitAcroHandbook"
 target_offset = 613
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 612
 runtime_resolution_required = true
 
 [[relocs]]
@@ -739,6 +844,8 @@ original_encoded_gba = 0x820f72f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_Text_Wheelies"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -749,6 +856,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_EventScript_ChooseAcroHandbookPage"
 target_offset = 511
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 510
 runtime_resolution_required = true
 
 [[relocs]]
@@ -758,6 +867,8 @@ original_encoded_gba = 0x820f7f5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_Text_BunnyHops"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -768,6 +879,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_EventScript_ChooseAcroHandbookPage"
 target_offset = 511
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 510
 runtime_resolution_required = true
 
 [[relocs]]
@@ -777,6 +890,8 @@ original_encoded_gba = 0x820f898
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_Text_Jumps"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -787,4 +902,610 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mauvillecity-bikeshop"
 target_export = "MauvilleCity_BikeShop_EventScript_ChooseAcroHandbookPage"
 target_offset = 511
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 510
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 1
+
+[[boundaries]]
+payload_offset = 2
+length = 3
+
+[[boundaries]]
+payload_offset = 5
+length = 6
+
+[[boundaries]]
+payload_offset = 11
+length = 3
+
+[[boundaries]]
+payload_offset = 14
+length = 6
+
+[[boundaries]]
+payload_offset = 20
+length = 6
+
+[[boundaries]]
+payload_offset = 26
+length = 2
+
+[[boundaries]]
+payload_offset = 28
+length = 6
+
+[[boundaries]]
+payload_offset = 34
+length = 2
+
+[[boundaries]]
+payload_offset = 36
+length = 5
+
+[[boundaries]]
+payload_offset = 41
+length = 6
+
+[[boundaries]]
+payload_offset = 47
+length = 5
+
+[[boundaries]]
+payload_offset = 52
+length = 6
+
+[[boundaries]]
+payload_offset = 58
+length = 1
+
+[[boundaries]]
+payload_offset = 59
+length = 6
+
+[[boundaries]]
+payload_offset = 65
+length = 2
+
+[[boundaries]]
+payload_offset = 67
+length = 5
+
+[[boundaries]]
+payload_offset = 72
+length = 6
+
+[[boundaries]]
+payload_offset = 78
+length = 5
+
+[[boundaries]]
+payload_offset = 83
+length = 6
+
+[[boundaries]]
+payload_offset = 89
+length = 1
+
+[[boundaries]]
+payload_offset = 90
+length = 5
+
+[[boundaries]]
+payload_offset = 95
+length = 1
+
+[[boundaries]]
+payload_offset = 96
+length = 5
+
+[[boundaries]]
+payload_offset = 101
+length = 5
+
+[[boundaries]]
+payload_offset = 106
+length = 5
+
+[[boundaries]]
+payload_offset = 111
+length = 6
+
+[[boundaries]]
+payload_offset = 117
+length = 5
+
+[[boundaries]]
+payload_offset = 122
+length = 6
+
+[[boundaries]]
+payload_offset = 128
+length = 1
+
+[[boundaries]]
+payload_offset = 129
+length = 3
+
+[[boundaries]]
+payload_offset = 132
+length = 6
+
+[[boundaries]]
+payload_offset = 138
+length = 2
+
+[[boundaries]]
+payload_offset = 140
+length = 1
+
+[[boundaries]]
+payload_offset = 141
+length = 1
+
+[[boundaries]]
+payload_offset = 142
+length = 3
+
+[[boundaries]]
+payload_offset = 145
+length = 5
+
+[[boundaries]]
+payload_offset = 151
+length = 6
+
+[[boundaries]]
+payload_offset = 157
+length = 2
+
+[[boundaries]]
+payload_offset = 159
+length = 5
+
+[[boundaries]]
+payload_offset = 164
+length = 5
+
+[[boundaries]]
+payload_offset = 169
+length = 2
+
+[[boundaries]]
+payload_offset = 171
+length = 5
+
+[[boundaries]]
+payload_offset = 177
+length = 6
+
+[[boundaries]]
+payload_offset = 183
+length = 2
+
+[[boundaries]]
+payload_offset = 185
+length = 5
+
+[[boundaries]]
+payload_offset = 190
+length = 5
+
+[[boundaries]]
+payload_offset = 195
+length = 2
+
+[[boundaries]]
+payload_offset = 197
+length = 5
+
+[[boundaries]]
+payload_offset = 203
+length = 6
+
+[[boundaries]]
+payload_offset = 209
+length = 2
+
+[[boundaries]]
+payload_offset = 211
+length = 3
+
+[[boundaries]]
+payload_offset = 214
+length = 1
+
+[[boundaries]]
+payload_offset = 215
+length = 1
+
+[[boundaries]]
+payload_offset = 216
+length = 6
+
+[[boundaries]]
+payload_offset = 222
+length = 2
+
+[[boundaries]]
+payload_offset = 224
+length = 5
+
+[[boundaries]]
+payload_offset = 229
+length = 6
+
+[[boundaries]]
+payload_offset = 235
+length = 5
+
+[[boundaries]]
+payload_offset = 240
+length = 6
+
+[[boundaries]]
+payload_offset = 246
+length = 1
+
+[[boundaries]]
+payload_offset = 247
+length = 6
+
+[[boundaries]]
+payload_offset = 253
+length = 2
+
+[[boundaries]]
+payload_offset = 255
+length = 5
+
+[[boundaries]]
+payload_offset = 260
+length = 5
+
+[[boundaries]]
+payload_offset = 265
+length = 6
+
+[[boundaries]]
+payload_offset = 271
+length = 5
+
+[[boundaries]]
+payload_offset = 276
+length = 5
+
+[[boundaries]]
+payload_offset = 281
+length = 6
+
+[[boundaries]]
+payload_offset = 287
+length = 6
+
+[[boundaries]]
+payload_offset = 293
+length = 2
+
+[[boundaries]]
+payload_offset = 295
+length = 1
+
+[[boundaries]]
+payload_offset = 296
+length = 1
+
+[[boundaries]]
+payload_offset = 297
+length = 6
+
+[[boundaries]]
+payload_offset = 303
+length = 2
+
+[[boundaries]]
+payload_offset = 305
+length = 1
+
+[[boundaries]]
+payload_offset = 306
+length = 1
+
+[[boundaries]]
+payload_offset = 307
+length = 2
+
+[[boundaries]]
+payload_offset = 309
+length = 6
+
+[[boundaries]]
+payload_offset = 315
+length = 2
+
+[[boundaries]]
+payload_offset = 317
+length = 5
+
+[[boundaries]]
+payload_offset = 322
+length = 5
+
+[[boundaries]]
+payload_offset = 327
+length = 5
+
+[[boundaries]]
+payload_offset = 332
+length = 2
+
+[[boundaries]]
+payload_offset = 334
+length = 5
+
+[[boundaries]]
+payload_offset = 340
+length = 2
+
+[[boundaries]]
+payload_offset = 342
+length = 6
+
+[[boundaries]]
+payload_offset = 348
+length = 2
+
+[[boundaries]]
+payload_offset = 350
+length = 5
+
+[[boundaries]]
+payload_offset = 355
+length = 5
+
+[[boundaries]]
+payload_offset = 360
+length = 5
+
+[[boundaries]]
+payload_offset = 365
+length = 2
+
+[[boundaries]]
+payload_offset = 367
+length = 5
+
+[[boundaries]]
+payload_offset = 373
+length = 6
+
+[[boundaries]]
+payload_offset = 379
+length = 2
+
+[[boundaries]]
+payload_offset = 381
+length = 1
+
+[[boundaries]]
+payload_offset = 382
+length = 5
+
+[[boundaries]]
+payload_offset = 387
+length = 1
+
+[[boundaries]]
+payload_offset = 388
+length = 5
+
+[[boundaries]]
+payload_offset = 394
+length = 5
+
+[[boundaries]]
+payload_offset = 399
+length = 5
+
+[[boundaries]]
+payload_offset = 404
+length = 5
+
+[[boundaries]]
+payload_offset = 409
+length = 6
+
+[[boundaries]]
+payload_offset = 415
+length = 5
+
+[[boundaries]]
+payload_offset = 420
+length = 6
+
+[[boundaries]]
+payload_offset = 426
+length = 5
+
+[[boundaries]]
+payload_offset = 431
+length = 6
+
+[[boundaries]]
+payload_offset = 437
+length = 5
+
+[[boundaries]]
+payload_offset = 442
+length = 6
+
+[[boundaries]]
+payload_offset = 448
+length = 5
+
+[[boundaries]]
+payload_offset = 453
+length = 6
+
+[[boundaries]]
+payload_offset = 459
+length = 1
+
+[[boundaries]]
+payload_offset = 460
+length = 5
+
+[[boundaries]]
+payload_offset = 465
+length = 1
+
+[[boundaries]]
+payload_offset = 466
+length = 5
+
+[[boundaries]]
+payload_offset = 472
+length = 5
+
+[[boundaries]]
+payload_offset = 477
+length = 1
+
+[[boundaries]]
+payload_offset = 478
+length = 5
+
+[[boundaries]]
+payload_offset = 484
+length = 5
+
+[[boundaries]]
+payload_offset = 489
+length = 1
+
+[[boundaries]]
+payload_offset = 490
+length = 5
+
+[[boundaries]]
+payload_offset = 496
+length = 1
+
+[[boundaries]]
+payload_offset = 497
+length = 1
+
+[[boundaries]]
+payload_offset = 498
+length = 5
+
+[[boundaries]]
+payload_offset = 503
+length = 1
+
+[[boundaries]]
+payload_offset = 504
+length = 5
+
+[[boundaries]]
+payload_offset = 510
+length = 5
+
+[[boundaries]]
+payload_offset = 515
+length = 5
+
+[[boundaries]]
+payload_offset = 520
+length = 5
+
+[[boundaries]]
+payload_offset = 525
+length = 6
+
+[[boundaries]]
+payload_offset = 531
+length = 5
+
+[[boundaries]]
+payload_offset = 536
+length = 6
+
+[[boundaries]]
+payload_offset = 542
+length = 5
+
+[[boundaries]]
+payload_offset = 547
+length = 6
+
+[[boundaries]]
+payload_offset = 553
+length = 5
+
+[[boundaries]]
+payload_offset = 558
+length = 6
+
+[[boundaries]]
+payload_offset = 564
+length = 5
+
+[[boundaries]]
+payload_offset = 569
+length = 6
+
+[[boundaries]]
+payload_offset = 575
+length = 1
+
+[[boundaries]]
+payload_offset = 576
+length = 5
+
+[[boundaries]]
+payload_offset = 581
+length = 1
+
+[[boundaries]]
+payload_offset = 582
+length = 5
+
+[[boundaries]]
+payload_offset = 588
+length = 5
+
+[[boundaries]]
+payload_offset = 593
+length = 1
+
+[[boundaries]]
+payload_offset = 594
+length = 5
+
+[[boundaries]]
+payload_offset = 600
+length = 5
+
+[[boundaries]]
+payload_offset = 605
+length = 1
+
+[[boundaries]]
+payload_offset = 606
+length = 5
+
+[[boundaries]]
+payload_offset = 612
+length = 1
+
+[[boundaries]]
+payload_offset = 613
+length = 1

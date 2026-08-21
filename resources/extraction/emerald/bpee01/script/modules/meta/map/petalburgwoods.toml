@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 2
 export_count = 20
 reloc_count = 75
+instruction_count = 190
 
 [[segments]]
 kind = "bytecode"
@@ -198,6 +199,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgwoods"
 target_export = "PetalburgWoods_EventScript_DevonResearcherIntro"
 target_offset = 334
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 333
 runtime_resolution_required = true
 
 [[relocs]]
@@ -207,6 +210,8 @@ original_encoded_gba = 0x822e1cb
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/petalburgwoods-movement-devonresearcherapproachplayerleft"
 target_export = "PetalburgWoods_Movement_DevonResearcherApproachPlayerLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -216,6 +221,8 @@ original_encoded_gba = 0x822e34f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgwoods"
 target_export = "PetalburgWoods_Text_HaveYouSeenShroomish"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -225,6 +232,8 @@ original_encoded_gba = 0x822e209
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/petalburgwoods-movement-aquaentrance"
 target_export = "PetalburgWoods_Movement_AquaEntrance"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -234,6 +243,8 @@ original_encoded_gba = 0x822e3aa
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgwoods"
 target_export = "PetalburgWoods_Text_IWasGoingToAmbushYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -243,6 +254,8 @@ original_encoded_gba = 0x822e1f6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/petalburgwoods-movement-aquaapproachresearcherleft"
 target_export = "PetalburgWoods_Movement_AquaApproachResearcherLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -252,6 +265,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -261,6 +276,8 @@ original_encoded_gba = 0x822e428
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgwoods"
 target_export = "PetalburgWoods_Text_HandOverThosePapers"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -270,6 +287,8 @@ original_encoded_gba = 0x822e1e4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/petalburgwoods-movement-devonresearcherfleetoplayerleft"
 target_export = "PetalburgWoods_Movement_DevonResearcherFleeToPlayerLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -279,6 +298,8 @@ original_encoded_gba = 0x822e457
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgwoods"
 target_export = "PetalburgWoods_Text_YouHaveToHelpMe"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -288,6 +309,8 @@ original_encoded_gba = 0x822e20e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/petalburgwoods-movement-aquaapproachplayer"
 target_export = "PetalburgWoods_Movement_AquaApproachPlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -297,6 +320,8 @@ original_encoded_gba = 0x822e4a5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgwoods"
 target_export = "PetalburgWoods_Text_NoOneCrossesTeamAqua"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -306,6 +331,8 @@ original_encoded_gba = 0x822e542
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgwoods"
 target_export = "PetalburgWoods_Text_YoureKiddingMe"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -315,6 +342,8 @@ original_encoded_gba = 0x822e1f9
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/petalburgwoods-movement-aquabackoff"
 target_export = "PetalburgWoods_Movement_AquaBackOff"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -325,6 +354,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgwoods"
 target_export = "PetalburgWoods_EventScript_DevonResearcherPostBattle"
 target_offset = 354
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 353
 runtime_resolution_required = true
 
 [[relocs]]
@@ -334,6 +365,8 @@ original_encoded_gba = 0x822e1e0
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/petalburgwoods-movement-watchresearcherleave"
 target_export = "PetalburgWoods_Movement_WatchResearcherLeave"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -343,6 +376,8 @@ original_encoded_gba = 0x822e1c2
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/petalburgwoods-movement-devonresearcherexitleft"
 target_export = "PetalburgWoods_Movement_DevonResearcherExitLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -353,6 +388,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgwoods"
 target_export = "PetalburgWoods_EventScript_RemoveDevonResearcher"
 target_offset = 465
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 464
 runtime_resolution_required = true
 
 [[relocs]]
@@ -363,6 +400,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgwoods"
 target_export = "PetalburgWoods_EventScript_DevonResearcherIntro"
 target_offset = 334
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 333
 runtime_resolution_required = true
 
 [[relocs]]
@@ -372,6 +411,8 @@ original_encoded_gba = 0x822e1d0
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/petalburgwoods-movement-devonresearcherapproachplayerright"
 target_export = "PetalburgWoods_Movement_DevonResearcherApproachPlayerRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -381,6 +422,8 @@ original_encoded_gba = 0x82725a4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterleft"
 target_export = "Common_Movement_WalkInPlaceFasterLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -390,6 +433,8 @@ original_encoded_gba = 0x822e34f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgwoods"
 target_export = "PetalburgWoods_Text_HaveYouSeenShroomish"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -399,6 +444,8 @@ original_encoded_gba = 0x822e209
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/petalburgwoods-movement-aquaentrance"
 target_export = "PetalburgWoods_Movement_AquaEntrance"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -408,6 +455,8 @@ original_encoded_gba = 0x822e3aa
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgwoods"
 target_export = "PetalburgWoods_Text_IWasGoingToAmbushYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -417,6 +466,8 @@ original_encoded_gba = 0x822e205
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/petalburgwoods-movement-aquaapproachresearcherright"
 target_export = "PetalburgWoods_Movement_AquaApproachResearcherRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -426,6 +477,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -435,6 +488,8 @@ original_encoded_gba = 0x822e428
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgwoods"
 target_export = "PetalburgWoods_Text_HandOverThosePapers"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -444,6 +499,8 @@ original_encoded_gba = 0x822e1ea
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/petalburgwoods-movement-devonresearcherfleetoplayerright"
 target_export = "PetalburgWoods_Movement_DevonResearcherFleeToPlayerRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -453,6 +510,8 @@ original_encoded_gba = 0x822e457
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgwoods"
 target_export = "PetalburgWoods_Text_YouHaveToHelpMe"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -462,6 +521,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -471,6 +532,8 @@ original_encoded_gba = 0x822e4a5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgwoods"
 target_export = "PetalburgWoods_Text_NoOneCrossesTeamAqua"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -480,6 +543,8 @@ original_encoded_gba = 0x822e542
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgwoods"
 target_export = "PetalburgWoods_Text_YoureKiddingMe"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -489,6 +554,8 @@ original_encoded_gba = 0x822e1f9
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/petalburgwoods-movement-aquabackoff"
 target_export = "PetalburgWoods_Movement_AquaBackOff"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -499,6 +566,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgwoods"
 target_export = "PetalburgWoods_EventScript_DevonResearcherPostBattle"
 target_offset = 354
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 353
 runtime_resolution_required = true
 
 [[relocs]]
@@ -508,6 +577,8 @@ original_encoded_gba = 0x822e1e0
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/petalburgwoods-movement-watchresearcherleave"
 target_export = "PetalburgWoods_Movement_WatchResearcherLeave"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -517,6 +588,8 @@ original_encoded_gba = 0x822e1d7
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/petalburgwoods-movement-devonresearcherexitright"
 target_export = "PetalburgWoods_Movement_DevonResearcherExitRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -527,6 +600,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgwoods"
 target_export = "PetalburgWoods_EventScript_RemoveDevonResearcher"
 target_offset = 465
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 464
 runtime_resolution_required = true
 
 [[relocs]]
@@ -536,6 +611,8 @@ original_encoded_gba = 0x822e1b1
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/petalburgwoods-movement-devonresearcherlookaround"
 target_export = "PetalburgWoods_Movement_DevonResearcherLookAround"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -545,6 +622,8 @@ original_encoded_gba = 0x822e332
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgwoods"
 target_export = "PetalburgWoods_Text_NotAOneToBeFound"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -554,6 +633,8 @@ original_encoded_gba = 0x822e563
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgwoods"
 target_export = "PetalburgWoods_Text_YouveGotSomeNerve"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -563,6 +644,8 @@ original_encoded_gba = 0x822e1fd
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/petalburgwoods-movement-aquarunaway"
 target_export = "PetalburgWoods_Movement_AquaRunAway"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -572,6 +655,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -581,6 +666,8 @@ original_encoded_gba = 0x822e63d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgwoods"
 target_export = "PetalburgWoods_Text_ThatWasAwfullyClose"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -591,6 +678,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgwoods"
 target_export = "PetalburgWoods_EventScript_BagFull"
 target_offset = 423
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 422
 runtime_resolution_required = true
 
 [[relocs]]
@@ -601,6 +690,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgwoods"
 target_export = "PetalburgWoods_EventScript_DevonResearcherFinish"
 target_offset = 437
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 436
 runtime_resolution_required = true
 
 [[relocs]]
@@ -610,6 +701,8 @@ original_encoded_gba = 0x822e741
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgwoods"
 target_export = "PetalburgWoods_Text_YoureLoadedWithItems"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -620,6 +713,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgwoods"
 target_export = "PetalburgWoods_EventScript_DevonResearcherFinish"
 target_offset = 437
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 436
 runtime_resolution_required = true
 
 [[relocs]]
@@ -629,6 +724,8 @@ original_encoded_gba = 0x822e6c7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgwoods"
 target_export = "PetalburgWoods_Text_TeamAquaAfterSomethingInRustboro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -638,6 +735,8 @@ original_encoded_gba = 0x822e1ee
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/petalburgwoods-movement-devonresearcherstartexit"
 target_export = "PetalburgWoods_Movement_DevonResearcherStartExit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -647,6 +746,8 @@ original_encoded_gba = 0x822e712
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgwoods"
 target_export = "PetalburgWoods_Text_ICantBeWastingTime"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -656,6 +757,8 @@ original_encoded_gba = 0x822ea0c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgwoods"
 target_export = "PetalburgWoods_Text_StayOutOfTallGrass"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -665,6 +768,8 @@ original_encoded_gba = 0x822ea8b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgwoods"
 target_export = "PetalburgWoods_Text_HiddenItemsExplanation"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -675,6 +780,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgwoods"
 target_export = "PetalburgWoods_EventScript_ExplainMiracleSeed"
 target_offset = 635
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 539
 runtime_resolution_required = true
 
 [[relocs]]
@@ -684,6 +791,8 @@ original_encoded_gba = 0x822eafe
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgwoods"
 target_export = "PetalburgWoods_Text_TryUsingThisItem"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -694,6 +803,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_ShowBagIsFull"
 target_offset = 273
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 273
 runtime_resolution_required = true
 
 [[relocs]]
@@ -703,6 +814,8 @@ original_encoded_gba = 0x822eb63
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgwoods"
 target_export = "PetalburgWoods_Text_MiracleSeedExplanation"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -712,6 +825,8 @@ original_encoded_gba = 0x822ec10
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgwoods"
 target_export = "PetalburgWoods_Text_TrainerTipsExperience"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -721,6 +836,8 @@ original_encoded_gba = 0x822ed07
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgwoods"
 target_export = "PetalburgWoods_Text_TrainerTipsPP"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -730,6 +847,8 @@ original_encoded_gba = 0x822e77d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgwoods"
 target_export = "PetalburgWoods_Text_GoBugPokemonTeam"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -739,6 +858,8 @@ original_encoded_gba = 0x822e7c1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgwoods"
 target_export = "PetalburgWoods_Text_ICouldntWin"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -748,6 +869,8 @@ original_encoded_gba = 0x822e7ef
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgwoods"
 target_export = "PetalburgWoods_Text_ImOutOfPokeBalls"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -757,6 +880,8 @@ original_encoded_gba = 0x822e827
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgwoods"
 target_export = "PetalburgWoods_Text_InstantlyPopularWithBugPokemon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -766,6 +891,8 @@ original_encoded_gba = 0x822e86b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgwoods"
 target_export = "PetalburgWoods_Text_CantBePopularIfILose"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -776,6 +903,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgwoods"
 target_export = "PetalburgWoods_EventScript_TryRegisterJames"
 target_offset = 751
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 655
 runtime_resolution_required = true
 
 [[relocs]]
@@ -786,6 +915,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgwoods"
 target_export = "PetalburgWoods_EventScript_JamesRematch"
 target_offset = 837
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 741
 runtime_resolution_required = true
 
 [[relocs]]
@@ -796,6 +927,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgwoods"
 target_export = "PetalburgWoods_EventScript_TryRegisterJames2"
 target_offset = 793
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 697
 runtime_resolution_required = true
 
 [[relocs]]
@@ -805,6 +938,8 @@ original_encoded_gba = 0x822e889
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgwoods"
 target_export = "PetalburgWoods_Text_PeopleRespectYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -815,6 +950,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgwoods"
 target_export = "PetalburgWoods_EventScript_RegisterJames"
 target_offset = 768
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 672
 runtime_resolution_required = true
 
 [[relocs]]
@@ -824,6 +961,8 @@ original_encoded_gba = 0x822e8c3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgwoods"
 target_export = "PetalburgWoods_Text_IWantRematch1"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -834,6 +973,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/petalburgwoods"
 target_export = "PetalburgWoods_EventScript_RegisterJames2"
 target_offset = 812
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 716
 runtime_resolution_required = true
 
 [[relocs]]
@@ -843,6 +984,8 @@ original_encoded_gba = 0x822e889
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgwoods"
 target_export = "PetalburgWoods_Text_PeopleRespectYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -852,6 +995,8 @@ original_encoded_gba = 0x822e914
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgwoods"
 target_export = "PetalburgWoods_Text_IWantRematch2"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -861,6 +1006,8 @@ original_encoded_gba = 0x822e966
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgwoods"
 target_export = "PetalburgWoods_Text_MyPokemonHaveGrown"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -870,6 +1017,8 @@ original_encoded_gba = 0x822e998
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgwoods"
 target_export = "PetalburgWoods_Text_CantBePopularIfLose"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -879,4 +1028,766 @@ original_encoded_gba = 0x822e9b6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/petalburgwoods"
 target_export = "PetalburgWoods_Text_IveBeenTrainingHard"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 5
+
+[[boundaries]]
+payload_offset = 6
+length = 7
+
+[[boundaries]]
+payload_offset = 13
+length = 3
+
+[[boundaries]]
+payload_offset = 16
+length = 6
+
+[[boundaries]]
+payload_offset = 22
+length = 2
+
+[[boundaries]]
+payload_offset = 24
+length = 1
+
+[[boundaries]]
+payload_offset = 25
+length = 4
+
+[[boundaries]]
+payload_offset = 29
+length = 7
+
+[[boundaries]]
+payload_offset = 36
+length = 3
+
+[[boundaries]]
+payload_offset = 39
+length = 6
+
+[[boundaries]]
+payload_offset = 45
+length = 2
+
+[[boundaries]]
+payload_offset = 47
+length = 1
+
+[[boundaries]]
+payload_offset = 48
+length = 7
+
+[[boundaries]]
+payload_offset = 55
+length = 3
+
+[[boundaries]]
+payload_offset = 58
+length = 7
+
+[[boundaries]]
+payload_offset = 65
+length = 3
+
+[[boundaries]]
+payload_offset = 68
+length = 6
+
+[[boundaries]]
+payload_offset = 74
+length = 2
+
+[[boundaries]]
+payload_offset = 76
+length = 1
+
+[[boundaries]]
+payload_offset = 77
+length = 7
+
+[[boundaries]]
+payload_offset = 84
+length = 3
+
+[[boundaries]]
+payload_offset = 87
+length = 6
+
+[[boundaries]]
+payload_offset = 93
+length = 2
+
+[[boundaries]]
+payload_offset = 95
+length = 1
+
+[[boundaries]]
+payload_offset = 96
+length = 7
+
+[[boundaries]]
+payload_offset = 103
+length = 3
+
+[[boundaries]]
+payload_offset = 106
+length = 6
+
+[[boundaries]]
+payload_offset = 112
+length = 2
+
+[[boundaries]]
+payload_offset = 114
+length = 10
+
+[[boundaries]]
+payload_offset = 124
+length = 7
+
+[[boundaries]]
+payload_offset = 131
+length = 3
+
+[[boundaries]]
+payload_offset = 134
+length = 5
+
+[[boundaries]]
+payload_offset = 139
+length = 7
+
+[[boundaries]]
+payload_offset = 146
+length = 7
+
+[[boundaries]]
+payload_offset = 153
+length = 3
+
+[[boundaries]]
+payload_offset = 156
+length = 5
+
+[[boundaries]]
+payload_offset = 162
+length = 1
+
+[[boundaries]]
+payload_offset = 163
+length = 5
+
+[[boundaries]]
+payload_offset = 168
+length = 7
+
+[[boundaries]]
+payload_offset = 175
+length = 3
+
+[[boundaries]]
+payload_offset = 178
+length = 7
+
+[[boundaries]]
+payload_offset = 185
+length = 3
+
+[[boundaries]]
+payload_offset = 188
+length = 6
+
+[[boundaries]]
+payload_offset = 194
+length = 2
+
+[[boundaries]]
+payload_offset = 196
+length = 1
+
+[[boundaries]]
+payload_offset = 197
+length = 4
+
+[[boundaries]]
+payload_offset = 201
+length = 7
+
+[[boundaries]]
+payload_offset = 208
+length = 3
+
+[[boundaries]]
+payload_offset = 211
+length = 6
+
+[[boundaries]]
+payload_offset = 217
+length = 2
+
+[[boundaries]]
+payload_offset = 219
+length = 1
+
+[[boundaries]]
+payload_offset = 220
+length = 7
+
+[[boundaries]]
+payload_offset = 227
+length = 3
+
+[[boundaries]]
+payload_offset = 230
+length = 7
+
+[[boundaries]]
+payload_offset = 237
+length = 3
+
+[[boundaries]]
+payload_offset = 240
+length = 6
+
+[[boundaries]]
+payload_offset = 246
+length = 2
+
+[[boundaries]]
+payload_offset = 248
+length = 1
+
+[[boundaries]]
+payload_offset = 249
+length = 7
+
+[[boundaries]]
+payload_offset = 256
+length = 3
+
+[[boundaries]]
+payload_offset = 259
+length = 6
+
+[[boundaries]]
+payload_offset = 265
+length = 2
+
+[[boundaries]]
+payload_offset = 267
+length = 7
+
+[[boundaries]]
+payload_offset = 274
+length = 3
+
+[[boundaries]]
+payload_offset = 277
+length = 6
+
+[[boundaries]]
+payload_offset = 283
+length = 2
+
+[[boundaries]]
+payload_offset = 285
+length = 10
+
+[[boundaries]]
+payload_offset = 295
+length = 7
+
+[[boundaries]]
+payload_offset = 302
+length = 3
+
+[[boundaries]]
+payload_offset = 305
+length = 5
+
+[[boundaries]]
+payload_offset = 310
+length = 7
+
+[[boundaries]]
+payload_offset = 317
+length = 7
+
+[[boundaries]]
+payload_offset = 324
+length = 3
+
+[[boundaries]]
+payload_offset = 327
+length = 5
+
+[[boundaries]]
+payload_offset = 333
+length = 7
+
+[[boundaries]]
+payload_offset = 340
+length = 3
+
+[[boundaries]]
+payload_offset = 343
+length = 6
+
+[[boundaries]]
+payload_offset = 349
+length = 2
+
+[[boundaries]]
+payload_offset = 351
+length = 1
+
+[[boundaries]]
+payload_offset = 352
+length = 1
+
+[[boundaries]]
+payload_offset = 353
+length = 6
+
+[[boundaries]]
+payload_offset = 359
+length = 2
+
+[[boundaries]]
+payload_offset = 361
+length = 1
+
+[[boundaries]]
+payload_offset = 362
+length = 7
+
+[[boundaries]]
+payload_offset = 369
+length = 3
+
+[[boundaries]]
+payload_offset = 372
+length = 3
+
+[[boundaries]]
+payload_offset = 375
+length = 7
+
+[[boundaries]]
+payload_offset = 382
+length = 3
+
+[[boundaries]]
+payload_offset = 385
+length = 6
+
+[[boundaries]]
+payload_offset = 391
+length = 2
+
+[[boundaries]]
+payload_offset = 393
+length = 5
+
+[[boundaries]]
+payload_offset = 398
+length = 5
+
+[[boundaries]]
+payload_offset = 403
+length = 2
+
+[[boundaries]]
+payload_offset = 405
+length = 5
+
+[[boundaries]]
+payload_offset = 410
+length = 6
+
+[[boundaries]]
+payload_offset = 416
+length = 5
+
+[[boundaries]]
+payload_offset = 422
+length = 6
+
+[[boundaries]]
+payload_offset = 428
+length = 2
+
+[[boundaries]]
+payload_offset = 430
+length = 5
+
+[[boundaries]]
+payload_offset = 436
+length = 6
+
+[[boundaries]]
+payload_offset = 442
+length = 2
+
+[[boundaries]]
+payload_offset = 444
+length = 7
+
+[[boundaries]]
+payload_offset = 451
+length = 3
+
+[[boundaries]]
+payload_offset = 454
+length = 6
+
+[[boundaries]]
+payload_offset = 460
+length = 2
+
+[[boundaries]]
+payload_offset = 462
+length = 1
+
+[[boundaries]]
+payload_offset = 463
+length = 1
+
+[[boundaries]]
+payload_offset = 464
+length = 3
+
+[[boundaries]]
+payload_offset = 467
+length = 5
+
+[[boundaries]]
+payload_offset = 472
+length = 1
+
+[[boundaries]]
+payload_offset = 473
+length = 1
+
+[[boundaries]]
+payload_offset = 474
+length = 6
+
+[[boundaries]]
+payload_offset = 480
+length = 2
+
+[[boundaries]]
+payload_offset = 482
+length = 1
+
+[[boundaries]]
+payload_offset = 483
+length = 6
+
+[[boundaries]]
+payload_offset = 489
+length = 2
+
+[[boundaries]]
+payload_offset = 491
+length = 1
+
+[[boundaries]]
+payload_offset = 492
+length = 1
+
+[[boundaries]]
+payload_offset = 493
+length = 1
+
+[[boundaries]]
+payload_offset = 494
+length = 3
+
+[[boundaries]]
+payload_offset = 497
+length = 6
+
+[[boundaries]]
+payload_offset = 503
+length = 6
+
+[[boundaries]]
+payload_offset = 509
+length = 2
+
+[[boundaries]]
+payload_offset = 511
+length = 5
+
+[[boundaries]]
+payload_offset = 516
+length = 5
+
+[[boundaries]]
+payload_offset = 521
+length = 2
+
+[[boundaries]]
+payload_offset = 523
+length = 5
+
+[[boundaries]]
+payload_offset = 528
+length = 6
+
+[[boundaries]]
+payload_offset = 534
+length = 3
+
+[[boundaries]]
+payload_offset = 537
+length = 1
+
+[[boundaries]]
+payload_offset = 538
+length = 1
+
+[[boundaries]]
+payload_offset = 539
+length = 6
+
+[[boundaries]]
+payload_offset = 545
+length = 2
+
+[[boundaries]]
+payload_offset = 547
+length = 1
+
+[[boundaries]]
+payload_offset = 548
+length = 1
+
+[[boundaries]]
+payload_offset = 549
+length = 6
+
+[[boundaries]]
+payload_offset = 555
+length = 2
+
+[[boundaries]]
+payload_offset = 557
+length = 1
+
+[[boundaries]]
+payload_offset = 558
+length = 6
+
+[[boundaries]]
+payload_offset = 564
+length = 2
+
+[[boundaries]]
+payload_offset = 566
+length = 1
+
+[[boundaries]]
+payload_offset = 567
+length = 14
+
+[[boundaries]]
+payload_offset = 581
+length = 6
+
+[[boundaries]]
+payload_offset = 587
+length = 2
+
+[[boundaries]]
+payload_offset = 589
+length = 1
+
+[[boundaries]]
+payload_offset = 590
+length = 18
+
+[[boundaries]]
+payload_offset = 608
+length = 5
+
+[[boundaries]]
+payload_offset = 613
+length = 5
+
+[[boundaries]]
+payload_offset = 618
+length = 6
+
+[[boundaries]]
+payload_offset = 624
+length = 5
+
+[[boundaries]]
+payload_offset = 629
+length = 5
+
+[[boundaries]]
+payload_offset = 634
+length = 5
+
+[[boundaries]]
+payload_offset = 639
+length = 6
+
+[[boundaries]]
+payload_offset = 645
+length = 6
+
+[[boundaries]]
+payload_offset = 651
+length = 2
+
+[[boundaries]]
+payload_offset = 653
+length = 1
+
+[[boundaries]]
+payload_offset = 654
+length = 1
+
+[[boundaries]]
+payload_offset = 655
+length = 3
+
+[[boundaries]]
+payload_offset = 658
+length = 3
+
+[[boundaries]]
+payload_offset = 661
+length = 3
+
+[[boundaries]]
+payload_offset = 664
+length = 6
+
+[[boundaries]]
+payload_offset = 670
+length = 1
+
+[[boundaries]]
+payload_offset = 671
+length = 1
+
+[[boundaries]]
+payload_offset = 672
+length = 6
+
+[[boundaries]]
+payload_offset = 678
+length = 2
+
+[[boundaries]]
+payload_offset = 680
+length = 5
+
+[[boundaries]]
+payload_offset = 685
+length = 3
+
+[[boundaries]]
+payload_offset = 688
+length = 5
+
+[[boundaries]]
+payload_offset = 693
+length = 2
+
+[[boundaries]]
+payload_offset = 695
+length = 1
+
+[[boundaries]]
+payload_offset = 696
+length = 1
+
+[[boundaries]]
+payload_offset = 697
+length = 3
+
+[[boundaries]]
+payload_offset = 700
+length = 6
+
+[[boundaries]]
+payload_offset = 706
+length = 6
+
+[[boundaries]]
+payload_offset = 712
+length = 2
+
+[[boundaries]]
+payload_offset = 714
+length = 1
+
+[[boundaries]]
+payload_offset = 715
+length = 1
+
+[[boundaries]]
+payload_offset = 716
+length = 6
+
+[[boundaries]]
+payload_offset = 722
+length = 2
+
+[[boundaries]]
+payload_offset = 724
+length = 5
+
+[[boundaries]]
+payload_offset = 729
+length = 3
+
+[[boundaries]]
+payload_offset = 732
+length = 5
+
+[[boundaries]]
+payload_offset = 737
+length = 2
+
+[[boundaries]]
+payload_offset = 739
+length = 1
+
+[[boundaries]]
+payload_offset = 740
+length = 1
+
+[[boundaries]]
+payload_offset = 741
+length = 14
+
+[[boundaries]]
+payload_offset = 755
+length = 6
+
+[[boundaries]]
+payload_offset = 761
+length = 2
+
+[[boundaries]]
+payload_offset = 763
+length = 1

@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 2
 reloc_count = 2
+instruction_count = 6
 
 [[segments]]
 kind = "bytecode"
@@ -47,6 +48,8 @@ original_encoded_gba = 0x8203371
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/verdanturftown-house"
 target_export = "VerdanturfTown_House_Text_TrainersGatherAtPokemonLeague"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -56,4 +59,30 @@ original_encoded_gba = 0x82033ee
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/verdanturftown-house"
 target_export = "VerdanturfTown_House_Text_DefeatEliteFourInARow"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 6
+
+[[boundaries]]
+payload_offset = 6
+length = 2
+
+[[boundaries]]
+payload_offset = 8
+length = 1
+
+[[boundaries]]
+payload_offset = 9
+length = 6
+
+[[boundaries]]
+payload_offset = 15
+length = 2
+
+[[boundaries]]
+payload_offset = 17
+length = 1

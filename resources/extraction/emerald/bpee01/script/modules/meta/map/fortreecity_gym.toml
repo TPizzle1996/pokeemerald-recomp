@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 2
 export_count = 19
 reloc_count = 47
+instruction_count = 112
 
 [[segments]]
 kind = "bytecode"
@@ -189,6 +190,8 @@ original_encoded_gba = 0x8216d75
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-gym"
 target_export = "FortreeCity_Gym_Text_WinonaIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -198,6 +201,8 @@ original_encoded_gba = 0x8216e60
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-gym"
 target_export = "FortreeCity_Gym_Text_WinonaDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -208,6 +213,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/fortreecity-gym"
 target_export = "FortreeCity_Gym_EventScript_WinonaDefeated"
 target_offset = 82
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 61
 runtime_resolution_required = true
 
 [[relocs]]
@@ -218,6 +225,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/fortreecity-gym"
 target_export = "FortreeCity_Gym_EventScript_WinonaRematch"
 target_offset = 226
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 205
 runtime_resolution_required = true
 
 [[relocs]]
@@ -228,6 +237,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/fortreecity-gym"
 target_export = "FortreeCity_Gym_EventScript_GiveAerialAce2"
 target_offset = 155
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 134
 runtime_resolution_required = true
 
 [[relocs]]
@@ -237,6 +248,8 @@ original_encoded_gba = 0x8217071
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-gym"
 target_export = "FortreeCity_Gym_Text_WinonaPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -246,6 +259,8 @@ original_encoded_gba = 0x8216eec
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-gym"
 target_export = "FortreeCity_Gym_Text_ReceivedFeatherBadge"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -256,6 +271,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_PlayGymBadgeFanfare"
 target_offset = 315
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 315
 runtime_resolution_required = true
 
 [[relocs]]
@@ -265,6 +282,8 @@ original_encoded_gba = 0x8216f17
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-gym"
 target_export = "FortreeCity_Gym_Text_ExplainFeatherBadgeTakeThis"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -275,6 +294,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_SetGymTrainers"
 target_offset = 0
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 0
 runtime_resolution_required = true
 
 [[relocs]]
@@ -285,6 +306,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/fortreecity-gym"
 target_export = "FortreeCity_Gym_EventScript_GiveAerialAce"
 target_offset = 191
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 170
 runtime_resolution_required = true
 
 [[relocs]]
@@ -294,6 +317,8 @@ original_encoded_gba = 0x8217044
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-gym"
 target_export = "FortreeCity_Gym_Text_RegisteredWinona"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -304,6 +329,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_ShowBagIsFull"
 target_offset = 273
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 273
 runtime_resolution_required = true
 
 [[relocs]]
@@ -313,6 +340,8 @@ original_encoded_gba = 0x8216fec
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-gym"
 target_export = "FortreeCity_Gym_Text_ExplainAerialAce"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -323,6 +352,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_BagIsFull"
 target_offset = 283
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 283
 runtime_resolution_required = true
 
 [[relocs]]
@@ -332,6 +363,8 @@ original_encoded_gba = 0x8216fec
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-gym"
 target_export = "FortreeCity_Gym_Text_ExplainAerialAce"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -341,6 +374,8 @@ original_encoded_gba = 0x8217100
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-gym"
 target_export = "FortreeCity_Gym_Text_WinonaPreRematch"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -350,6 +385,8 @@ original_encoded_gba = 0x82171e6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-gym"
 target_export = "FortreeCity_Gym_Text_WinonaRematchDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -359,6 +396,8 @@ original_encoded_gba = 0x8217292
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-gym"
 target_export = "FortreeCity_Gym_Text_WinonaRematchNeedTwoMons"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -368,6 +407,8 @@ original_encoded_gba = 0x821720b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-gym"
 target_export = "FortreeCity_Gym_Text_WinonaPostRematch"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -377,6 +418,8 @@ original_encoded_gba = 0x82168a2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-gym"
 target_export = "FortreeCity_Gym_Text_JaredIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -386,6 +429,8 @@ original_encoded_gba = 0x82168d3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-gym"
 target_export = "FortreeCity_Gym_Text_JaredDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -395,6 +440,8 @@ original_encoded_gba = 0x82168e7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-gym"
 target_export = "FortreeCity_Gym_Text_JaredPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -404,6 +451,8 @@ original_encoded_gba = 0x821695a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-gym"
 target_export = "FortreeCity_Gym_Text_EdwardoIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -413,6 +462,8 @@ original_encoded_gba = 0x82169c7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-gym"
 target_export = "FortreeCity_Gym_Text_EdwardoDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -422,6 +473,8 @@ original_encoded_gba = 0x82169f1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-gym"
 target_export = "FortreeCity_Gym_Text_EdwardoPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -431,6 +484,8 @@ original_encoded_gba = 0x8216a66
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-gym"
 target_export = "FortreeCity_Gym_Text_FlintIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -440,6 +495,8 @@ original_encoded_gba = 0x8216ac4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-gym"
 target_export = "FortreeCity_Gym_Text_FlintDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -449,6 +506,8 @@ original_encoded_gba = 0x8216ad7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-gym"
 target_export = "FortreeCity_Gym_Text_FlintPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -458,6 +517,8 @@ original_encoded_gba = 0x8216b1a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-gym"
 target_export = "FortreeCity_Gym_Text_AshleyIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -467,6 +528,8 @@ original_encoded_gba = 0x8216b51
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-gym"
 target_export = "FortreeCity_Gym_Text_AshleyDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -476,6 +539,8 @@ original_encoded_gba = 0x8216b5f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-gym"
 target_export = "FortreeCity_Gym_Text_AshleyPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -485,6 +550,8 @@ original_encoded_gba = 0x8216b9e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-gym"
 target_export = "FortreeCity_Gym_Text_HumbertoIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -494,6 +561,8 @@ original_encoded_gba = 0x8216c18
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-gym"
 target_export = "FortreeCity_Gym_Text_HumbertoDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -503,6 +572,8 @@ original_encoded_gba = 0x8216c32
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-gym"
 target_export = "FortreeCity_Gym_Text_HumbertoPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -512,6 +583,8 @@ original_encoded_gba = 0x8216c96
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-gym"
 target_export = "FortreeCity_Gym_Text_DariusIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -521,6 +594,8 @@ original_encoded_gba = 0x8216cf2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-gym"
 target_export = "FortreeCity_Gym_Text_DariusDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -530,6 +605,8 @@ original_encoded_gba = 0x8216d0f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-gym"
 target_export = "FortreeCity_Gym_Text_DariusPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -540,6 +617,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/fortreecity-gym"
 target_export = "FortreeCity_Gym_EventScript_GymGuidePostVictory"
 target_offset = 412
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 391
 runtime_resolution_required = true
 
 [[relocs]]
@@ -549,6 +628,8 @@ original_encoded_gba = 0x8216785
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-gym"
 target_export = "FortreeCity_Gym_Text_GymGuideAdvice"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -558,6 +639,8 @@ original_encoded_gba = 0x821687d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-gym"
 target_export = "FortreeCity_Gym_Text_GymGuidePostVictory"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -568,6 +651,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/fortreecity-gym"
 target_export = "FortreeCity_Gym_EventScript_GymStatueCertified"
 target_offset = 454
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 433
 runtime_resolution_required = true
 
 [[relocs]]
@@ -578,6 +663,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/fortreecity-gym"
 target_export = "FortreeCity_Gym_EventScript_GymStatue"
 target_offset = 464
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 443
 runtime_resolution_required = true
 
 [[relocs]]
@@ -588,6 +675,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/fortreecity-gym"
 target_export = "FortreeCity_Gym_EventScript_GymStatueCertified"
 target_offset = 454
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 433
 runtime_resolution_required = true
 
 [[relocs]]
@@ -598,6 +687,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/fortreecity-gym"
 target_export = "FortreeCity_Gym_EventScript_GymStatue"
 target_offset = 464
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 443
 runtime_resolution_required = true
 
 [[relocs]]
@@ -607,6 +698,8 @@ original_encoded_gba = 0x82170c7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-gym"
 target_export = "FortreeCity_Gym_Text_GymStatueCertified"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -616,4 +709,454 @@ original_encoded_gba = 0x82170ae
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fortreecity-gym"
 target_export = "FortreeCity_Gym_Text_GymStatue"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 1
+
+[[boundaries]]
+payload_offset = 4
+length = 3
+
+[[boundaries]]
+payload_offset = 7
+length = 1
+
+[[boundaries]]
+payload_offset = 8
+length = 18
+
+[[boundaries]]
+payload_offset = 26
+length = 5
+
+[[boundaries]]
+payload_offset = 31
+length = 5
+
+[[boundaries]]
+payload_offset = 36
+length = 6
+
+[[boundaries]]
+payload_offset = 42
+length = 3
+
+[[boundaries]]
+payload_offset = 45
+length = 6
+
+[[boundaries]]
+payload_offset = 51
+length = 6
+
+[[boundaries]]
+payload_offset = 57
+length = 2
+
+[[boundaries]]
+payload_offset = 59
+length = 1
+
+[[boundaries]]
+payload_offset = 60
+length = 1
+
+[[boundaries]]
+payload_offset = 61
+length = 5
+
+[[boundaries]]
+payload_offset = 66
+length = 1
+
+[[boundaries]]
+payload_offset = 67
+length = 5
+
+[[boundaries]]
+payload_offset = 72
+length = 6
+
+[[boundaries]]
+payload_offset = 78
+length = 2
+
+[[boundaries]]
+payload_offset = 80
+length = 3
+
+[[boundaries]]
+payload_offset = 83
+length = 3
+
+[[boundaries]]
+payload_offset = 86
+length = 5
+
+[[boundaries]]
+payload_offset = 91
+length = 5
+
+[[boundaries]]
+payload_offset = 96
+length = 5
+
+[[boundaries]]
+payload_offset = 101
+length = 1
+
+[[boundaries]]
+payload_offset = 102
+length = 3
+
+[[boundaries]]
+payload_offset = 105
+length = 3
+
+[[boundaries]]
+payload_offset = 108
+length = 6
+
+[[boundaries]]
+payload_offset = 114
+length = 2
+
+[[boundaries]]
+payload_offset = 116
+length = 1
+
+[[boundaries]]
+payload_offset = 117
+length = 1
+
+[[boundaries]]
+payload_offset = 118
+length = 3
+
+[[boundaries]]
+payload_offset = 121
+length = 3
+
+[[boundaries]]
+payload_offset = 124
+length = 5
+
+[[boundaries]]
+payload_offset = 129
+length = 3
+
+[[boundaries]]
+payload_offset = 132
+length = 1
+
+[[boundaries]]
+payload_offset = 133
+length = 1
+
+[[boundaries]]
+payload_offset = 134
+length = 5
+
+[[boundaries]]
+payload_offset = 139
+length = 5
+
+[[boundaries]]
+payload_offset = 144
+length = 2
+
+[[boundaries]]
+payload_offset = 146
+length = 5
+
+[[boundaries]]
+payload_offset = 151
+length = 6
+
+[[boundaries]]
+payload_offset = 157
+length = 6
+
+[[boundaries]]
+payload_offset = 163
+length = 2
+
+[[boundaries]]
+payload_offset = 165
+length = 3
+
+[[boundaries]]
+payload_offset = 168
+length = 1
+
+[[boundaries]]
+payload_offset = 169
+length = 1
+
+[[boundaries]]
+payload_offset = 170
+length = 5
+
+[[boundaries]]
+payload_offset = 175
+length = 5
+
+[[boundaries]]
+payload_offset = 180
+length = 2
+
+[[boundaries]]
+payload_offset = 182
+length = 5
+
+[[boundaries]]
+payload_offset = 187
+length = 6
+
+[[boundaries]]
+payload_offset = 193
+length = 6
+
+[[boundaries]]
+payload_offset = 199
+length = 2
+
+[[boundaries]]
+payload_offset = 201
+length = 3
+
+[[boundaries]]
+payload_offset = 204
+length = 1
+
+[[boundaries]]
+payload_offset = 205
+length = 18
+
+[[boundaries]]
+payload_offset = 223
+length = 6
+
+[[boundaries]]
+payload_offset = 229
+length = 2
+
+[[boundaries]]
+payload_offset = 231
+length = 1
+
+[[boundaries]]
+payload_offset = 232
+length = 14
+
+[[boundaries]]
+payload_offset = 246
+length = 6
+
+[[boundaries]]
+payload_offset = 252
+length = 2
+
+[[boundaries]]
+payload_offset = 254
+length = 1
+
+[[boundaries]]
+payload_offset = 255
+length = 14
+
+[[boundaries]]
+payload_offset = 269
+length = 6
+
+[[boundaries]]
+payload_offset = 275
+length = 2
+
+[[boundaries]]
+payload_offset = 277
+length = 1
+
+[[boundaries]]
+payload_offset = 278
+length = 14
+
+[[boundaries]]
+payload_offset = 292
+length = 6
+
+[[boundaries]]
+payload_offset = 298
+length = 2
+
+[[boundaries]]
+payload_offset = 300
+length = 1
+
+[[boundaries]]
+payload_offset = 301
+length = 14
+
+[[boundaries]]
+payload_offset = 315
+length = 6
+
+[[boundaries]]
+payload_offset = 321
+length = 2
+
+[[boundaries]]
+payload_offset = 323
+length = 1
+
+[[boundaries]]
+payload_offset = 324
+length = 14
+
+[[boundaries]]
+payload_offset = 338
+length = 6
+
+[[boundaries]]
+payload_offset = 344
+length = 2
+
+[[boundaries]]
+payload_offset = 346
+length = 1
+
+[[boundaries]]
+payload_offset = 347
+length = 14
+
+[[boundaries]]
+payload_offset = 361
+length = 6
+
+[[boundaries]]
+payload_offset = 367
+length = 2
+
+[[boundaries]]
+payload_offset = 369
+length = 1
+
+[[boundaries]]
+payload_offset = 370
+length = 1
+
+[[boundaries]]
+payload_offset = 371
+length = 1
+
+[[boundaries]]
+payload_offset = 372
+length = 3
+
+[[boundaries]]
+payload_offset = 375
+length = 6
+
+[[boundaries]]
+payload_offset = 381
+length = 6
+
+[[boundaries]]
+payload_offset = 387
+length = 2
+
+[[boundaries]]
+payload_offset = 389
+length = 1
+
+[[boundaries]]
+payload_offset = 390
+length = 1
+
+[[boundaries]]
+payload_offset = 391
+length = 6
+
+[[boundaries]]
+payload_offset = 397
+length = 2
+
+[[boundaries]]
+payload_offset = 399
+length = 1
+
+[[boundaries]]
+payload_offset = 400
+length = 1
+
+[[boundaries]]
+payload_offset = 401
+length = 1
+
+[[boundaries]]
+payload_offset = 402
+length = 3
+
+[[boundaries]]
+payload_offset = 405
+length = 6
+
+[[boundaries]]
+payload_offset = 411
+length = 5
+
+[[boundaries]]
+payload_offset = 417
+length = 1
+
+[[boundaries]]
+payload_offset = 418
+length = 3
+
+[[boundaries]]
+payload_offset = 421
+length = 6
+
+[[boundaries]]
+payload_offset = 427
+length = 5
+
+[[boundaries]]
+payload_offset = 433
+length = 6
+
+[[boundaries]]
+payload_offset = 439
+length = 2
+
+[[boundaries]]
+payload_offset = 441
+length = 1
+
+[[boundaries]]
+payload_offset = 442
+length = 1
+
+[[boundaries]]
+payload_offset = 443
+length = 6
+
+[[boundaries]]
+payload_offset = 449
+length = 2
+
+[[boundaries]]
+payload_offset = 451
+length = 1
+
+[[boundaries]]
+payload_offset = 452
+length = 1

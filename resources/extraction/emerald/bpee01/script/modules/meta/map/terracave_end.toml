@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 7
 reloc_count = 10
+instruction_count = 46
 
 [[segments]]
 kind = "bytecode"
@@ -88,6 +89,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/terracave-end"
 target_export = "TerraCave_End_EventScript_TryRemoveGroudon"
 target_offset = 21
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 10
 runtime_resolution_required = true
 
 [[relocs]]
@@ -98,6 +101,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-poison"
 target_export = "Common_EventScript_NopReturn"
 target_offset = 146
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 146
 runtime_resolution_required = true
 
 [[relocs]]
@@ -108,6 +113,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/terracave-end"
 target_export = "TerraCave_End_EventScript_ShowGroudon"
 target_offset = 51
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 40
 runtime_resolution_required = true
 
 [[relocs]]
@@ -117,6 +124,8 @@ original_encoded_gba = 0x82725b2
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceup"
 target_export = "Common_Movement_FaceUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -126,6 +135,8 @@ original_encoded_gba = 0x823b16e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/terracave-end-movement-groudonapproach"
 target_export = "TerraCave_End_Movement_GroudonApproach"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -136,6 +147,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/terracave-end"
 target_export = "TerraCave_End_EventScript_DefeatedGroudon"
 target_offset = 165
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 154
 runtime_resolution_required = true
 
 [[relocs]]
@@ -146,6 +159,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/terracave-end"
 target_export = "TerraCave_End_EventScript_RanFromGroudon"
 target_offset = 179
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 168
 runtime_resolution_required = true
 
 [[relocs]]
@@ -156,6 +171,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/terracave-end"
 target_export = "TerraCave_End_EventScript_RanFromGroudon"
 target_offset = 179
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 168
 runtime_resolution_required = true
 
 [[relocs]]
@@ -166,6 +183,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-poison"
 target_export = "Common_EventScript_RemoveStaticPokemon"
 target_offset = 177
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 177
 runtime_resolution_required = true
 
 [[relocs]]
@@ -176,4 +195,190 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-poison"
 target_export = "Common_EventScript_LegendaryFlewAway"
 target_offset = 186
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 186
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 6
+
+[[boundaries]]
+payload_offset = 9
+length = 1
+
+[[boundaries]]
+payload_offset = 10
+length = 5
+
+[[boundaries]]
+payload_offset = 15
+length = 5
+
+[[boundaries]]
+payload_offset = 20
+length = 6
+
+[[boundaries]]
+payload_offset = 26
+length = 3
+
+[[boundaries]]
+payload_offset = 29
+length = 1
+
+[[boundaries]]
+payload_offset = 30
+length = 3
+
+[[boundaries]]
+payload_offset = 33
+length = 6
+
+[[boundaries]]
+payload_offset = 39
+length = 1
+
+[[boundaries]]
+payload_offset = 40
+length = 3
+
+[[boundaries]]
+payload_offset = 43
+length = 5
+
+[[boundaries]]
+payload_offset = 48
+length = 1
+
+[[boundaries]]
+payload_offset = 49
+length = 1
+
+[[boundaries]]
+payload_offset = 50
+length = 7
+
+[[boundaries]]
+payload_offset = 57
+length = 3
+
+[[boundaries]]
+payload_offset = 60
+length = 7
+
+[[boundaries]]
+payload_offset = 67
+length = 3
+
+[[boundaries]]
+payload_offset = 70
+length = 1
+
+[[boundaries]]
+payload_offset = 71
+length = 5
+
+[[boundaries]]
+payload_offset = 76
+length = 3
+
+[[boundaries]]
+payload_offset = 79
+length = 1
+
+[[boundaries]]
+payload_offset = 80
+length = 5
+
+[[boundaries]]
+payload_offset = 85
+length = 6
+
+[[boundaries]]
+payload_offset = 91
+length = 3
+
+[[boundaries]]
+payload_offset = 94
+length = 3
+
+[[boundaries]]
+payload_offset = 97
+length = 1
+
+[[boundaries]]
+payload_offset = 98
+length = 3
+
+[[boundaries]]
+payload_offset = 101
+length = 5
+
+[[boundaries]]
+payload_offset = 106
+length = 5
+
+[[boundaries]]
+payload_offset = 111
+length = 5
+
+[[boundaries]]
+payload_offset = 116
+length = 6
+
+[[boundaries]]
+payload_offset = 122
+length = 5
+
+[[boundaries]]
+payload_offset = 127
+length = 6
+
+[[boundaries]]
+payload_offset = 133
+length = 5
+
+[[boundaries]]
+payload_offset = 138
+length = 6
+
+[[boundaries]]
+payload_offset = 144
+length = 5
+
+[[boundaries]]
+payload_offset = 149
+length = 3
+
+[[boundaries]]
+payload_offset = 152
+length = 1
+
+[[boundaries]]
+payload_offset = 153
+length = 1
+
+[[boundaries]]
+payload_offset = 154
+length = 5
+
+[[boundaries]]
+payload_offset = 159
+length = 3
+
+[[boundaries]]
+payload_offset = 162
+length = 5
+
+[[boundaries]]
+payload_offset = 168
+length = 5
+
+[[boundaries]]
+payload_offset = 173
+length = 5

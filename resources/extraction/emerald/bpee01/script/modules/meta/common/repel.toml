@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 1
 reloc_count = 1
+instruction_count = 3
 
 [[segments]]
 kind = "bytecode"
@@ -39,4 +40,18 @@ original_encoded_gba = 0x82a4b33
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/repel"
 target_export = "Text_RepelWoreOff"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 6
+
+[[boundaries]]
+payload_offset = 6
+length = 2
+
+[[boundaries]]
+payload_offset = 8
+length = 1

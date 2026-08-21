@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 14
 reloc_count = 38
+instruction_count = 92
 
 [[segments]]
 kind = "bytecode"
@@ -143,6 +144,8 @@ original_encoded_gba = 0x821362a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-gym"
 target_export = "RustboroCity_Gym_Text_RoxanneIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -152,6 +155,8 @@ original_encoded_gba = 0x821370b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-gym"
 target_export = "RustboroCity_Gym_Text_RoxanneDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -162,6 +167,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity-gym"
 target_export = "RustboroCity_Gym_EventScript_RoxanneDefeated"
 target_offset = 54
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 53
 runtime_resolution_required = true
 
 [[relocs]]
@@ -172,6 +179,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity-gym"
 target_export = "RustboroCity_Gym_EventScript_RoxanneRematch"
 target_offset = 152
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 151
 runtime_resolution_required = true
 
 [[relocs]]
@@ -182,6 +191,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity-gym"
 target_export = "RustboroCity_Gym_EventScript_GiveRockTomb"
 target_offset = 116
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 115
 runtime_resolution_required = true
 
 [[relocs]]
@@ -191,6 +202,8 @@ original_encoded_gba = 0x82139a7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-gym"
 target_export = "RustboroCity_Gym_Text_RoxannePostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -200,6 +213,8 @@ original_encoded_gba = 0x82137ec
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-gym"
 target_export = "RustboroCity_Gym_Text_ReceivedStoneBadge"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -210,6 +225,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_PlayGymBadgeFanfare"
 target_offset = 315
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 315
 runtime_resolution_required = true
 
 [[relocs]]
@@ -219,6 +236,8 @@ original_encoded_gba = 0x8213816
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-gym"
 target_export = "RustboroCity_Gym_Text_StoneBadgeInfoTakeThis"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -229,6 +248,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_SetGymTrainers"
 target_offset = 0
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 0
 runtime_resolution_required = true
 
 [[relocs]]
@@ -239,6 +260,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pc"
 target_export = "Common_EventScript_ReadyPetalburgGymForBattle"
 target_offset = 242
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 242
 runtime_resolution_required = true
 
 [[relocs]]
@@ -249,6 +272,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity-gym"
 target_export = "RustboroCity_Gym_EventScript_GiveRockTomb"
 target_offset = 116
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 115
 runtime_resolution_required = true
 
 [[relocs]]
@@ -259,6 +284,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_ShowBagIsFull"
 target_offset = 273
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 273
 runtime_resolution_required = true
 
 [[relocs]]
@@ -268,6 +295,8 @@ original_encoded_gba = 0x82138b1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-gym"
 target_export = "RustboroCity_Gym_Text_ExplainRockTomb"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -277,6 +306,8 @@ original_encoded_gba = 0x8213c2f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-gym"
 target_export = "RustboroCity_Gym_Text_RoxannePreRematch"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -286,6 +317,8 @@ original_encoded_gba = 0x8213cf9
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-gym"
 target_export = "RustboroCity_Gym_Text_RoxanneRematchDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -295,6 +328,8 @@ original_encoded_gba = 0x8213d93
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-gym"
 target_export = "RustboroCity_Gym_Text_RoxanneRematchNeedTwoMons"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -304,6 +339,8 @@ original_encoded_gba = 0x8213d12
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-gym"
 target_export = "RustboroCity_Gym_Text_RoxannePostRematch"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -313,6 +350,8 @@ original_encoded_gba = 0x82133e9
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-gym"
 target_export = "RustboroCity_Gym_Text_JoshIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -322,6 +361,8 @@ original_encoded_gba = 0x821342d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-gym"
 target_export = "RustboroCity_Gym_Text_JoshDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -331,6 +372,8 @@ original_encoded_gba = 0x8213447
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-gym"
 target_export = "RustboroCity_Gym_Text_JoshPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -340,6 +383,8 @@ original_encoded_gba = 0x8213486
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-gym"
 target_export = "RustboroCity_Gym_Text_TommyIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -349,6 +394,8 @@ original_encoded_gba = 0x82134c6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-gym"
 target_export = "RustboroCity_Gym_Text_TommyDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -358,6 +405,8 @@ original_encoded_gba = 0x82134e6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-gym"
 target_export = "RustboroCity_Gym_Text_TommyPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -367,6 +416,8 @@ original_encoded_gba = 0x8213533
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-gym"
 target_export = "RustboroCity_Gym_Text_MarcIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -376,6 +427,8 @@ original_encoded_gba = 0x8213589
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-gym"
 target_export = "RustboroCity_Gym_Text_MarcDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -385,6 +438,8 @@ original_encoded_gba = 0x82135c0
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-gym"
 target_export = "RustboroCity_Gym_Text_MarcPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -395,6 +450,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity-gym"
 target_export = "RustboroCity_Gym_EventScript_GymGuidePostVictory"
 target_offset = 269
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 268
 runtime_resolution_required = true
 
 [[relocs]]
@@ -404,6 +461,8 @@ original_encoded_gba = 0x821309d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-gym"
 target_export = "RustboroCity_Gym_Text_GymGuideAdvice"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -413,6 +472,8 @@ original_encoded_gba = 0x82132e2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-gym"
 target_export = "RustboroCity_Gym_Text_GymGuidePostVictory"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -423,6 +484,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity-gym"
 target_export = "RustboroCity_Gym_EventScript_GymStatueCertified"
 target_offset = 311
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 310
 runtime_resolution_required = true
 
 [[relocs]]
@@ -433,6 +496,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity-gym"
 target_export = "RustboroCity_Gym_EventScript_GymStatue"
 target_offset = 321
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 320
 runtime_resolution_required = true
 
 [[relocs]]
@@ -443,6 +508,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity-gym"
 target_export = "RustboroCity_Gym_EventScript_GymStatueCertified"
 target_offset = 311
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 310
 runtime_resolution_required = true
 
 [[relocs]]
@@ -453,6 +520,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rustborocity-gym"
 target_export = "RustboroCity_Gym_EventScript_GymStatue"
 target_offset = 321
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 320
 runtime_resolution_required = true
 
 [[relocs]]
@@ -462,6 +531,8 @@ original_encoded_gba = 0x8213a3b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-gym"
 target_export = "RustboroCity_Gym_Text_GymStatueCertified"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -471,6 +542,8 @@ original_encoded_gba = 0x8213a21
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-gym"
 target_export = "RustboroCity_Gym_Text_GymStatue"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -480,6 +553,8 @@ original_encoded_gba = 0x8213a76
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-gym"
 target_export = "RustboroCity_Gym_Text_RoxanneRegisterCall"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -489,4 +564,374 @@ original_encoded_gba = 0x8213c01
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rustborocity-gym"
 target_export = "RustboroCity_Gym_Text_RegisteredRoxanne"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 18
+
+[[boundaries]]
+payload_offset = 18
+length = 5
+
+[[boundaries]]
+payload_offset = 23
+length = 5
+
+[[boundaries]]
+payload_offset = 28
+length = 6
+
+[[boundaries]]
+payload_offset = 34
+length = 3
+
+[[boundaries]]
+payload_offset = 37
+length = 6
+
+[[boundaries]]
+payload_offset = 43
+length = 6
+
+[[boundaries]]
+payload_offset = 49
+length = 2
+
+[[boundaries]]
+payload_offset = 51
+length = 1
+
+[[boundaries]]
+payload_offset = 52
+length = 1
+
+[[boundaries]]
+payload_offset = 53
+length = 5
+
+[[boundaries]]
+payload_offset = 58
+length = 1
+
+[[boundaries]]
+payload_offset = 59
+length = 5
+
+[[boundaries]]
+payload_offset = 64
+length = 6
+
+[[boundaries]]
+payload_offset = 70
+length = 2
+
+[[boundaries]]
+payload_offset = 72
+length = 3
+
+[[boundaries]]
+payload_offset = 75
+length = 3
+
+[[boundaries]]
+payload_offset = 78
+length = 5
+
+[[boundaries]]
+payload_offset = 83
+length = 5
+
+[[boundaries]]
+payload_offset = 88
+length = 5
+
+[[boundaries]]
+payload_offset = 93
+length = 5
+
+[[boundaries]]
+payload_offset = 98
+length = 5
+
+[[boundaries]]
+payload_offset = 103
+length = 6
+
+[[boundaries]]
+payload_offset = 109
+length = 5
+
+[[boundaries]]
+payload_offset = 115
+length = 5
+
+[[boundaries]]
+payload_offset = 120
+length = 5
+
+[[boundaries]]
+payload_offset = 125
+length = 2
+
+[[boundaries]]
+payload_offset = 127
+length = 5
+
+[[boundaries]]
+payload_offset = 132
+length = 6
+
+[[boundaries]]
+payload_offset = 138
+length = 3
+
+[[boundaries]]
+payload_offset = 141
+length = 6
+
+[[boundaries]]
+payload_offset = 147
+length = 2
+
+[[boundaries]]
+payload_offset = 149
+length = 1
+
+[[boundaries]]
+payload_offset = 150
+length = 1
+
+[[boundaries]]
+payload_offset = 151
+length = 18
+
+[[boundaries]]
+payload_offset = 169
+length = 6
+
+[[boundaries]]
+payload_offset = 175
+length = 2
+
+[[boundaries]]
+payload_offset = 177
+length = 1
+
+[[boundaries]]
+payload_offset = 178
+length = 14
+
+[[boundaries]]
+payload_offset = 192
+length = 6
+
+[[boundaries]]
+payload_offset = 198
+length = 2
+
+[[boundaries]]
+payload_offset = 200
+length = 1
+
+[[boundaries]]
+payload_offset = 201
+length = 14
+
+[[boundaries]]
+payload_offset = 215
+length = 6
+
+[[boundaries]]
+payload_offset = 221
+length = 2
+
+[[boundaries]]
+payload_offset = 223
+length = 1
+
+[[boundaries]]
+payload_offset = 224
+length = 14
+
+[[boundaries]]
+payload_offset = 238
+length = 6
+
+[[boundaries]]
+payload_offset = 244
+length = 2
+
+[[boundaries]]
+payload_offset = 246
+length = 1
+
+[[boundaries]]
+payload_offset = 247
+length = 1
+
+[[boundaries]]
+payload_offset = 248
+length = 1
+
+[[boundaries]]
+payload_offset = 249
+length = 3
+
+[[boundaries]]
+payload_offset = 252
+length = 6
+
+[[boundaries]]
+payload_offset = 258
+length = 6
+
+[[boundaries]]
+payload_offset = 264
+length = 2
+
+[[boundaries]]
+payload_offset = 266
+length = 1
+
+[[boundaries]]
+payload_offset = 267
+length = 1
+
+[[boundaries]]
+payload_offset = 268
+length = 6
+
+[[boundaries]]
+payload_offset = 274
+length = 2
+
+[[boundaries]]
+payload_offset = 276
+length = 1
+
+[[boundaries]]
+payload_offset = 277
+length = 1
+
+[[boundaries]]
+payload_offset = 278
+length = 1
+
+[[boundaries]]
+payload_offset = 279
+length = 3
+
+[[boundaries]]
+payload_offset = 282
+length = 6
+
+[[boundaries]]
+payload_offset = 288
+length = 5
+
+[[boundaries]]
+payload_offset = 294
+length = 1
+
+[[boundaries]]
+payload_offset = 295
+length = 3
+
+[[boundaries]]
+payload_offset = 298
+length = 6
+
+[[boundaries]]
+payload_offset = 304
+length = 5
+
+[[boundaries]]
+payload_offset = 310
+length = 6
+
+[[boundaries]]
+payload_offset = 316
+length = 2
+
+[[boundaries]]
+payload_offset = 318
+length = 1
+
+[[boundaries]]
+payload_offset = 319
+length = 1
+
+[[boundaries]]
+payload_offset = 320
+length = 6
+
+[[boundaries]]
+payload_offset = 326
+length = 2
+
+[[boundaries]]
+payload_offset = 328
+length = 1
+
+[[boundaries]]
+payload_offset = 329
+length = 1
+
+[[boundaries]]
+payload_offset = 330
+length = 1
+
+[[boundaries]]
+payload_offset = 331
+length = 5
+
+[[boundaries]]
+payload_offset = 336
+length = 1
+
+[[boundaries]]
+payload_offset = 337
+length = 3
+
+[[boundaries]]
+payload_offset = 340
+length = 3
+
+[[boundaries]]
+payload_offset = 343
+length = 6
+
+[[boundaries]]
+payload_offset = 349
+length = 2
+
+[[boundaries]]
+payload_offset = 351
+length = 1
+
+[[boundaries]]
+payload_offset = 352
+length = 1
+
+[[boundaries]]
+payload_offset = 353
+length = 3
+
+[[boundaries]]
+payload_offset = 356
+length = 3
+
+[[boundaries]]
+payload_offset = 359
+length = 3
+
+[[boundaries]]
+payload_offset = 362
+length = 1
+
+[[boundaries]]
+payload_offset = 363
+length = 1

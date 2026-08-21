@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 2
 reloc_count = 0
+instruction_count = 4
 
 [[segments]]
 kind = "bytecode"
@@ -39,3 +40,19 @@ provenance_offset = 2338759
 payload_offset = 4
 boundary_kind = "interior"
 aliases = []
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 1
+
+[[boundaries]]
+payload_offset = 4
+length = 8
+
+[[boundaries]]
+payload_offset = 12
+length = 1

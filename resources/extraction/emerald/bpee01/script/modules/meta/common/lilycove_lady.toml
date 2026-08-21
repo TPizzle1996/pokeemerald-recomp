@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 2
 export_count = 73
 reloc_count = 146
+instruction_count = 465
 
 [[segments]]
 kind = "bytecode"
@@ -622,6 +623,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_QuizLady"
 target_offset = 489
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 489
 runtime_resolution_required = true
 
 [[relocs]]
@@ -632,6 +635,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_FavorLady"
 target_offset = 42
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 42
 runtime_resolution_required = true
 
 [[relocs]]
@@ -642,6 +647,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_ContestLady"
 target_offset = 1215
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1215
 runtime_resolution_required = true
 
 [[relocs]]
@@ -651,6 +658,8 @@ original_encoded_gba = 0x82a8a69
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_ImTheFavorLady"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -661,6 +670,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_FavorLadyReady"
 target_offset = 101
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 101
 runtime_resolution_required = true
 
 [[relocs]]
@@ -671,6 +682,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_FavorLadyCompleted"
 target_offset = 91
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 91
 runtime_resolution_required = true
 
 [[relocs]]
@@ -681,6 +694,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_FavorLadyPrize"
 target_offset = 421
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 421
 runtime_resolution_required = true
 
 [[relocs]]
@@ -690,6 +705,8 @@ original_encoded_gba = 0x82a8ab1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_ThankYouForLastTime"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -699,6 +716,8 @@ original_encoded_gba = 0x82a8a7d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_ObsessedWithThing"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -709,6 +728,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_RequestItem"
 target_offset = 202
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 202
 runtime_resolution_required = true
 
 [[relocs]]
@@ -719,6 +740,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_TellAboutPlayersItem"
 target_offset = 140
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 140
 runtime_resolution_required = true
 
 [[relocs]]
@@ -729,6 +752,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_PlayerGaveBadThing"
 target_offset = 174
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 174
 runtime_resolution_required = true
 
 [[relocs]]
@@ -739,6 +764,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_PlayerGaveGreatThing"
 target_offset = 188
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 188
 runtime_resolution_required = true
 
 [[relocs]]
@@ -748,6 +775,8 @@ original_encoded_gba = 0x82a8ace
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_PlayerGaveMeBadThing"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -758,6 +787,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_RequestItem"
 target_offset = 202
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 202
 runtime_resolution_required = true
 
 [[relocs]]
@@ -767,6 +798,8 @@ original_encoded_gba = 0x82a8b36
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_PlayerGaveMeGreatThing"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -777,6 +810,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_RequestItem"
 target_offset = 202
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 202
 runtime_resolution_required = true
 
 [[relocs]]
@@ -786,6 +821,8 @@ original_encoded_gba = 0x82a8b69
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_WillYouShareThing"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -796,6 +833,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_DeclineFavor"
 target_offset = 233
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 233
 runtime_resolution_required = true
 
 [[relocs]]
@@ -806,6 +845,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_AcceptFavor"
 target_offset = 243
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 243
 runtime_resolution_required = true
 
 [[relocs]]
@@ -815,6 +856,8 @@ original_encoded_gba = 0x82a8bcd
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_IsThatSoGoodbye"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -824,6 +867,8 @@ original_encoded_gba = 0x82a8bad
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_WhatWillYouGiveMe"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -834,6 +879,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_ChooseFavorItem"
 target_offset = 257
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 257
 runtime_resolution_required = true
 
 [[relocs]]
@@ -844,6 +891,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_AskQuitChooseFavorItem"
 target_offset = 291
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 291
 runtime_resolution_required = true
 
 [[relocs]]
@@ -854,6 +903,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_GiveFavorItem"
 target_offset = 322
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 322
 runtime_resolution_required = true
 
 [[relocs]]
@@ -863,6 +914,8 @@ original_encoded_gba = 0x82a8bee
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_NotWillingToShare"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -873,6 +926,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_DeclineFavor"
 target_offset = 233
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 233
 runtime_resolution_required = true
 
 [[relocs]]
@@ -883,6 +938,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_ChooseFavorItem"
 target_offset = 257
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 257
 runtime_resolution_required = true
 
 [[relocs]]
@@ -893,6 +950,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_DidntLikeFavorItem"
 target_offset = 350
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 350
 runtime_resolution_required = true
 
 [[relocs]]
@@ -903,6 +962,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_CheckLovedItem"
 target_offset = 363
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 363
 runtime_resolution_required = true
 
 [[relocs]]
@@ -912,6 +973,8 @@ original_encoded_gba = 0x82a8c0f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_IllTryToCherishIt"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -922,6 +985,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_LikedFavorItem"
 target_offset = 391
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 391
 runtime_resolution_required = true
 
 [[relocs]]
@@ -932,6 +997,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_LovedFavorItem"
 target_offset = 404
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 404
 runtime_resolution_required = true
 
 [[relocs]]
@@ -941,6 +1008,8 @@ original_encoded_gba = 0x82a8c6f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_IWillCherishThis"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -950,6 +1019,8 @@ original_encoded_gba = 0x82a8cc8
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_IWillTreasureThis"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -960,6 +1031,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_FavorLadyPrize"
 target_offset = 421
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 421
 runtime_resolution_required = true
 
 [[relocs]]
@@ -969,6 +1042,8 @@ original_encoded_gba = 0x82a8d5d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_IllGiveYouThisInReturn"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -979,6 +1054,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_NoRoomForFavorPrize"
 target_offset = 474
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 474
 runtime_resolution_required = true
 
 [[relocs]]
@@ -989,6 +1066,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_ReceivedFavorPrize"
 target_offset = 484
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 484
 runtime_resolution_required = true
 
 [[relocs]]
@@ -998,6 +1077,8 @@ original_encoded_gba = 0x82a8dbd
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_YouDontHaveSpaceForIt"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1007,6 +1088,8 @@ original_encoded_gba = 0x82a8e2b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_ImTheQuizLady"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1017,6 +1100,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_HasQuiz"
 target_offset = 538
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 538
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1027,6 +1112,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_CheckMadeQuiz"
 target_offset = 577
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 577
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1037,6 +1124,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_ReadyGivePrize"
 target_offset = 897
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 897
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1047,6 +1136,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_WaitingToTakeYourQuiz"
 target_offset = 605
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 605
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1057,6 +1148,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_PlayerQuizReady"
 target_offset = 615
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 615
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1067,6 +1160,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_LadyQuizReady"
 target_offset = 629
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 629
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1077,6 +1172,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_AskMakeQuiz"
 target_offset = 1006
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1006
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1087,6 +1184,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_WaitingToTakeYourQuiz"
 target_offset = 605
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 605
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1096,6 +1195,8 @@ original_encoded_gba = 0x82a8e4e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_WaitingToTakeYourQuiz"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1105,6 +1206,8 @@ original_encoded_gba = 0x82a8eac
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_WaitingForChallenger"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1115,6 +1218,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_AskTakeQuiz"
 target_offset = 643
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 643
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1124,6 +1229,8 @@ original_encoded_gba = 0x82a8eac
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_WaitingForChallenger"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1134,6 +1241,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_AskTakeQuiz"
 target_offset = 643
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 643
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1143,6 +1252,8 @@ original_encoded_gba = 0x82a8eec
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_TakeQuizChallenge"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1153,6 +1264,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_TakeQuiz"
 target_offset = 689
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 689
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1163,6 +1276,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_DeclineQuiz"
 target_offset = 679
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 679
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1172,6 +1287,8 @@ original_encoded_gba = 0x82a8f65
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_HowBoringBye"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1182,6 +1299,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_ShowQuestion"
 target_offset = 737
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 737
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1192,6 +1311,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_GetAnswer"
 target_offset = 747
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 747
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1202,6 +1323,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_AskQuitQuiz"
 target_offset = 757
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 757
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1212,6 +1335,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_SubmitQuizResponse"
 target_offset = 798
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 798
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1222,6 +1347,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_CheckQuizTakingState"
 target_offset = 714
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 714
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1232,6 +1359,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_CheckQuizTakingState"
 target_offset = 714
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 714
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1241,6 +1370,8 @@ original_encoded_gba = 0x82a8f7e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_YoureGoingToQuit"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1251,6 +1382,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_QuitTakingQuiz"
 target_offset = 788
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 788
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1261,6 +1394,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_TakeQuiz"
 target_offset = 689
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 689
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1270,6 +1405,8 @@ original_encoded_gba = 0x82a8f9a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_TakeTheQuizAnotherTime"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1279,6 +1416,8 @@ original_encoded_gba = 0x82a8f4d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_WaitForAnswer"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1289,6 +1428,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_IncorrectResponse"
 target_offset = 860
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 860
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1299,6 +1440,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_CorrectResponse"
 target_offset = 837
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 837
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1308,6 +1451,8 @@ original_encoded_gba = 0x82a8fc7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_YouGotItRight"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1318,6 +1463,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_ReadyGivePrize"
 target_offset = 897
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 897
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1327,6 +1474,8 @@ original_encoded_gba = 0x82a90a5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_WrongTheCorrectAnswerIs"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1336,6 +1485,8 @@ original_encoded_gba = 0x82a90cd
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_IGetToKeepPrize"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1346,6 +1497,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_AskMakeQuiz"
 target_offset = 1006
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1006
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1356,6 +1509,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_GivePrize1"
 target_offset = 925
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 925
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1366,6 +1521,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_GivePrize0"
 target_offset = 939
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 939
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1375,6 +1532,8 @@ original_encoded_gba = 0x82a9007
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_YouGotItRightYouveWonPersonsPrize"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1385,6 +1544,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_GivePrize"
 target_offset = 953
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 953
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1394,6 +1555,8 @@ original_encoded_gba = 0x82a9007
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_YouGotItRightYouveWonPersonsPrize"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1404,6 +1567,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_GivePrize"
 target_offset = 953
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 953
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1414,6 +1579,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_NoSpaceForQuizPrize"
 target_offset = 993
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 993
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1424,6 +1591,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_AskMakeQuiz"
 target_offset = 1006
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1006
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1433,6 +1602,8 @@ original_encoded_gba = 0x82a906a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_YourBagIsFilledUp"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1442,6 +1613,8 @@ original_encoded_gba = 0x82a90fb
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_MakeYourOwnQuiz"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1452,6 +1625,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_MakeQuiz"
 target_offset = 1050
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1050
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1462,6 +1637,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_DeclineMakeQuiz"
 target_offset = 1037
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1037
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1471,6 +1648,8 @@ original_encoded_gba = 0x82a9131
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_MaybeNextTime"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1480,6 +1659,8 @@ original_encoded_gba = 0x82a9153
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_PickYourPrize"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1490,6 +1671,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_AskQuitChoosingPrize"
 target_offset = 1092
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1092
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1500,6 +1683,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_WriteQuiz"
 target_offset = 1123
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1123
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1509,6 +1694,8 @@ original_encoded_gba = 0x82a9212
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_QuitChoosingPrize"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1519,6 +1706,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_DeclineMakeQuiz"
 target_offset = 1037
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1037
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1529,6 +1718,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_PickPrize"
 target_offset = 1058
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1058
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1538,6 +1729,8 @@ original_encoded_gba = 0x82a9270
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_WriteYourQuiz"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1548,6 +1741,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_AskQuitWritingQuizQuestion"
 target_offset = 1165
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1165
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1558,6 +1753,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_FinishMakingQuiz"
 target_offset = 1196
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1196
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1567,6 +1764,8 @@ original_encoded_gba = 0x82a92d3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_QuitWritingQuizQuestion"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1577,6 +1776,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_DeclineMakeQuiz"
 target_offset = 1037
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1037
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1587,6 +1788,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_WriteQuizQuestion"
 target_offset = 1142
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1142
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1596,6 +1799,8 @@ original_encoded_gba = 0x82a9336
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_IllLookForAChallenger"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1605,6 +1810,8 @@ original_encoded_gba = 0x82a93a7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_ImTheContestLady"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1615,6 +1822,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_NotGivenPokeblock"
 target_offset = 1253
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1253
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1625,6 +1834,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_GivenPokeblock"
 target_offset = 1281
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1281
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1635,6 +1846,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_AskForPokeblock"
 target_offset = 1291
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1291
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1645,6 +1858,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_GivenPokeblock"
 target_offset = 1281
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1281
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1654,6 +1869,8 @@ original_encoded_gba = 0x82a93d6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_ThankForPokeblock"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1663,6 +1880,8 @@ original_encoded_gba = 0x82a93f4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_MyFriendDisplaysQuality"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1673,6 +1892,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_NoPokeblockCase"
 target_offset = 1603
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1603
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1682,6 +1903,8 @@ original_encoded_gba = 0x82a94e8
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_AskingForOnePokeblock"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1692,6 +1915,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_DeclineGivePokeblock"
 target_offset = 1349
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1349
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1702,6 +1927,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_ChoosePokeblock"
 target_offset = 1359
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1359
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1711,6 +1938,8 @@ original_encoded_gba = 0x82a9556
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_WhatACheapskate"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1721,6 +1950,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_AskQuitGivingPokeblock"
 target_offset = 1388
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1388
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1731,6 +1962,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_GivePokeblock"
 target_offset = 1419
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1419
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1740,6 +1973,8 @@ original_encoded_gba = 0x82a9537
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_ICantHaveOnePokeblock"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1750,6 +1985,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_DeclineGivePokeblock"
 target_offset = 1349
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1349
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1760,6 +1997,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_ChoosePokeblock"
 target_offset = 1359
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1359
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1769,6 +2008,8 @@ original_encoded_gba = 0x82a9571
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_IllUseYourPokeblock"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1779,6 +2020,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_FeedPokeblock"
 target_offset = 1439
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1439
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1788,6 +2031,8 @@ original_encoded_gba = 0x82a89b8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/lilycovecity-pokemoncenter-1f-movement-ladyfacemon"
 target_export = "LilycoveCity_PokemonCenter_1F_Movement_LadyFaceMon"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1797,6 +2042,8 @@ original_encoded_gba = 0x82a89bb
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/lilycovecity-pokemoncenter-1f-movement-monfacelady"
 target_export = "LilycoveCity_PokemonCenter_1F_Movement_MonFaceLady"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1807,6 +2054,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_MonEnjoyPokeblock"
 target_offset = 1492
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1492
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1817,6 +2066,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_FinishFeedPokeblock"
 target_offset = 1505
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1505
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1826,6 +2077,8 @@ original_encoded_gba = 0x82a89c2
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/lilycovecity-pokemoncenter-1f-movement-monjump"
 target_export = "LilycoveCity_PokemonCenter_1F_Movement_MonJump"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1835,6 +2088,8 @@ original_encoded_gba = 0x82a89c0
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/lilycovecity-pokemoncenter-1f-movement-ladyfaceplayer"
 target_export = "LilycoveCity_PokemonCenter_1F_Movement_LadyFacePlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1845,6 +2100,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_MonDislikedPokeblock"
 target_offset = 1541
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1541
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1855,6 +2112,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_MonLikedPokeblock"
 target_offset = 1555
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1555
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1864,6 +2123,8 @@ original_encoded_gba = 0x82a95ad
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_NoChangeThanks"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1874,6 +2135,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_CheckAirContestLadyShow"
 target_offset = 1572
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1572
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1883,6 +2146,8 @@ original_encoded_gba = 0x82a9605
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_ReallyImprovedThanks"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1893,6 +2158,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_CheckAirContestLadyShow"
 target_offset = 1572
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1572
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1903,6 +2170,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_AirContestLadyShow"
 target_offset = 1590
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1590
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1912,6 +2181,8 @@ original_encoded_gba = 0x82a9669
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_ReadyToEnterContests"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1921,6 +2192,8 @@ original_encoded_gba = 0x82a9451
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_DontHaveAPokeblockCase"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1931,6 +2204,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_Zigzagoon"
 target_offset = 1695
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1680
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1941,6 +2216,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_Skitty"
 target_offset = 1714
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1699
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1951,6 +2228,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_Poochyena"
 target_offset = 1733
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1718
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1961,6 +2240,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_Kecleon"
 target_offset = 1752
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1737
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1971,6 +2252,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_EventScript_Pikachu"
 target_offset = 1771
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1756
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1980,6 +2263,8 @@ original_encoded_gba = 0x82a96da
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_Zigzagoon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1989,6 +2274,8 @@ original_encoded_gba = 0x82a970e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_Skitty"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1998,6 +2285,8 @@ original_encoded_gba = 0x82a96f6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_Poochyena"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2007,6 +2296,8 @@ original_encoded_gba = 0x82a96e6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_Kecleon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -2016,4 +2307,1866 @@ original_encoded_gba = 0x82a9703
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/lilycove-lady"
 target_export = "LilycoveCity_PokemonCenter_1F_Text_Pikachu"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 5
+
+[[boundaries]]
+payload_offset = 8
+length = 5
+
+[[boundaries]]
+payload_offset = 13
+length = 6
+
+[[boundaries]]
+payload_offset = 19
+length = 5
+
+[[boundaries]]
+payload_offset = 24
+length = 6
+
+[[boundaries]]
+payload_offset = 30
+length = 5
+
+[[boundaries]]
+payload_offset = 35
+length = 6
+
+[[boundaries]]
+payload_offset = 41
+length = 1
+
+[[boundaries]]
+payload_offset = 42
+length = 1
+
+[[boundaries]]
+payload_offset = 43
+length = 1
+
+[[boundaries]]
+payload_offset = 44
+length = 6
+
+[[boundaries]]
+payload_offset = 50
+length = 2
+
+[[boundaries]]
+payload_offset = 52
+length = 5
+
+[[boundaries]]
+payload_offset = 57
+length = 5
+
+[[boundaries]]
+payload_offset = 62
+length = 6
+
+[[boundaries]]
+payload_offset = 68
+length = 5
+
+[[boundaries]]
+payload_offset = 73
+length = 6
+
+[[boundaries]]
+payload_offset = 79
+length = 5
+
+[[boundaries]]
+payload_offset = 84
+length = 6
+
+[[boundaries]]
+payload_offset = 90
+length = 1
+
+[[boundaries]]
+payload_offset = 91
+length = 6
+
+[[boundaries]]
+payload_offset = 97
+length = 2
+
+[[boundaries]]
+payload_offset = 99
+length = 1
+
+[[boundaries]]
+payload_offset = 100
+length = 1
+
+[[boundaries]]
+payload_offset = 101
+length = 3
+
+[[boundaries]]
+payload_offset = 104
+length = 6
+
+[[boundaries]]
+payload_offset = 110
+length = 2
+
+[[boundaries]]
+payload_offset = 112
+length = 5
+
+[[boundaries]]
+payload_offset = 117
+length = 5
+
+[[boundaries]]
+payload_offset = 122
+length = 6
+
+[[boundaries]]
+payload_offset = 128
+length = 5
+
+[[boundaries]]
+payload_offset = 133
+length = 6
+
+[[boundaries]]
+payload_offset = 139
+length = 1
+
+[[boundaries]]
+payload_offset = 140
+length = 3
+
+[[boundaries]]
+payload_offset = 143
+length = 3
+
+[[boundaries]]
+payload_offset = 146
+length = 5
+
+[[boundaries]]
+payload_offset = 151
+length = 5
+
+[[boundaries]]
+payload_offset = 156
+length = 6
+
+[[boundaries]]
+payload_offset = 162
+length = 5
+
+[[boundaries]]
+payload_offset = 167
+length = 6
+
+[[boundaries]]
+payload_offset = 173
+length = 1
+
+[[boundaries]]
+payload_offset = 174
+length = 6
+
+[[boundaries]]
+payload_offset = 180
+length = 2
+
+[[boundaries]]
+payload_offset = 182
+length = 5
+
+[[boundaries]]
+payload_offset = 188
+length = 6
+
+[[boundaries]]
+payload_offset = 194
+length = 2
+
+[[boundaries]]
+payload_offset = 196
+length = 5
+
+[[boundaries]]
+payload_offset = 202
+length = 6
+
+[[boundaries]]
+payload_offset = 208
+length = 2
+
+[[boundaries]]
+payload_offset = 210
+length = 5
+
+[[boundaries]]
+payload_offset = 215
+length = 6
+
+[[boundaries]]
+payload_offset = 221
+length = 5
+
+[[boundaries]]
+payload_offset = 226
+length = 6
+
+[[boundaries]]
+payload_offset = 232
+length = 1
+
+[[boundaries]]
+payload_offset = 233
+length = 6
+
+[[boundaries]]
+payload_offset = 239
+length = 2
+
+[[boundaries]]
+payload_offset = 241
+length = 1
+
+[[boundaries]]
+payload_offset = 242
+length = 1
+
+[[boundaries]]
+payload_offset = 243
+length = 6
+
+[[boundaries]]
+payload_offset = 249
+length = 2
+
+[[boundaries]]
+payload_offset = 251
+length = 5
+
+[[boundaries]]
+payload_offset = 257
+length = 2
+
+[[boundaries]]
+payload_offset = 259
+length = 5
+
+[[boundaries]]
+payload_offset = 264
+length = 3
+
+[[boundaries]]
+payload_offset = 267
+length = 1
+
+[[boundaries]]
+payload_offset = 268
+length = 5
+
+[[boundaries]]
+payload_offset = 273
+length = 6
+
+[[boundaries]]
+payload_offset = 279
+length = 5
+
+[[boundaries]]
+payload_offset = 284
+length = 6
+
+[[boundaries]]
+payload_offset = 290
+length = 1
+
+[[boundaries]]
+payload_offset = 291
+length = 6
+
+[[boundaries]]
+payload_offset = 297
+length = 2
+
+[[boundaries]]
+payload_offset = 299
+length = 5
+
+[[boundaries]]
+payload_offset = 304
+length = 6
+
+[[boundaries]]
+payload_offset = 310
+length = 5
+
+[[boundaries]]
+payload_offset = 315
+length = 6
+
+[[boundaries]]
+payload_offset = 321
+length = 1
+
+[[boundaries]]
+payload_offset = 322
+length = 5
+
+[[boundaries]]
+payload_offset = 327
+length = 5
+
+[[boundaries]]
+payload_offset = 332
+length = 6
+
+[[boundaries]]
+payload_offset = 338
+length = 5
+
+[[boundaries]]
+payload_offset = 343
+length = 6
+
+[[boundaries]]
+payload_offset = 349
+length = 1
+
+[[boundaries]]
+payload_offset = 350
+length = 3
+
+[[boundaries]]
+payload_offset = 353
+length = 6
+
+[[boundaries]]
+payload_offset = 359
+length = 2
+
+[[boundaries]]
+payload_offset = 361
+length = 1
+
+[[boundaries]]
+payload_offset = 362
+length = 1
+
+[[boundaries]]
+payload_offset = 363
+length = 5
+
+[[boundaries]]
+payload_offset = 368
+length = 5
+
+[[boundaries]]
+payload_offset = 373
+length = 6
+
+[[boundaries]]
+payload_offset = 379
+length = 5
+
+[[boundaries]]
+payload_offset = 384
+length = 6
+
+[[boundaries]]
+payload_offset = 390
+length = 1
+
+[[boundaries]]
+payload_offset = 391
+length = 3
+
+[[boundaries]]
+payload_offset = 394
+length = 6
+
+[[boundaries]]
+payload_offset = 400
+length = 2
+
+[[boundaries]]
+payload_offset = 402
+length = 1
+
+[[boundaries]]
+payload_offset = 403
+length = 1
+
+[[boundaries]]
+payload_offset = 404
+length = 3
+
+[[boundaries]]
+payload_offset = 407
+length = 6
+
+[[boundaries]]
+payload_offset = 413
+length = 2
+
+[[boundaries]]
+payload_offset = 415
+length = 5
+
+[[boundaries]]
+payload_offset = 421
+length = 5
+
+[[boundaries]]
+payload_offset = 426
+length = 5
+
+[[boundaries]]
+payload_offset = 431
+length = 6
+
+[[boundaries]]
+payload_offset = 437
+length = 2
+
+[[boundaries]]
+payload_offset = 439
+length = 5
+
+[[boundaries]]
+payload_offset = 444
+length = 5
+
+[[boundaries]]
+payload_offset = 449
+length = 2
+
+[[boundaries]]
+payload_offset = 451
+length = 5
+
+[[boundaries]]
+payload_offset = 456
+length = 6
+
+[[boundaries]]
+payload_offset = 462
+length = 5
+
+[[boundaries]]
+payload_offset = 467
+length = 6
+
+[[boundaries]]
+payload_offset = 473
+length = 1
+
+[[boundaries]]
+payload_offset = 474
+length = 6
+
+[[boundaries]]
+payload_offset = 480
+length = 2
+
+[[boundaries]]
+payload_offset = 482
+length = 1
+
+[[boundaries]]
+payload_offset = 483
+length = 1
+
+[[boundaries]]
+payload_offset = 484
+length = 3
+
+[[boundaries]]
+payload_offset = 487
+length = 1
+
+[[boundaries]]
+payload_offset = 488
+length = 1
+
+[[boundaries]]
+payload_offset = 489
+length = 1
+
+[[boundaries]]
+payload_offset = 490
+length = 1
+
+[[boundaries]]
+payload_offset = 491
+length = 6
+
+[[boundaries]]
+payload_offset = 497
+length = 2
+
+[[boundaries]]
+payload_offset = 499
+length = 5
+
+[[boundaries]]
+payload_offset = 504
+length = 5
+
+[[boundaries]]
+payload_offset = 509
+length = 6
+
+[[boundaries]]
+payload_offset = 515
+length = 5
+
+[[boundaries]]
+payload_offset = 520
+length = 6
+
+[[boundaries]]
+payload_offset = 526
+length = 5
+
+[[boundaries]]
+payload_offset = 531
+length = 6
+
+[[boundaries]]
+payload_offset = 537
+length = 1
+
+[[boundaries]]
+payload_offset = 538
+length = 5
+
+[[boundaries]]
+payload_offset = 543
+length = 5
+
+[[boundaries]]
+payload_offset = 548
+length = 6
+
+[[boundaries]]
+payload_offset = 554
+length = 5
+
+[[boundaries]]
+payload_offset = 559
+length = 6
+
+[[boundaries]]
+payload_offset = 565
+length = 5
+
+[[boundaries]]
+payload_offset = 570
+length = 6
+
+[[boundaries]]
+payload_offset = 576
+length = 1
+
+[[boundaries]]
+payload_offset = 577
+length = 5
+
+[[boundaries]]
+payload_offset = 582
+length = 5
+
+[[boundaries]]
+payload_offset = 587
+length = 6
+
+[[boundaries]]
+payload_offset = 593
+length = 5
+
+[[boundaries]]
+payload_offset = 598
+length = 6
+
+[[boundaries]]
+payload_offset = 604
+length = 1
+
+[[boundaries]]
+payload_offset = 605
+length = 6
+
+[[boundaries]]
+payload_offset = 611
+length = 2
+
+[[boundaries]]
+payload_offset = 613
+length = 1
+
+[[boundaries]]
+payload_offset = 614
+length = 1
+
+[[boundaries]]
+payload_offset = 615
+length = 6
+
+[[boundaries]]
+payload_offset = 621
+length = 2
+
+[[boundaries]]
+payload_offset = 623
+length = 5
+
+[[boundaries]]
+payload_offset = 629
+length = 6
+
+[[boundaries]]
+payload_offset = 635
+length = 2
+
+[[boundaries]]
+payload_offset = 637
+length = 5
+
+[[boundaries]]
+payload_offset = 643
+length = 5
+
+[[boundaries]]
+payload_offset = 648
+length = 6
+
+[[boundaries]]
+payload_offset = 654
+length = 2
+
+[[boundaries]]
+payload_offset = 656
+length = 5
+
+[[boundaries]]
+payload_offset = 661
+length = 6
+
+[[boundaries]]
+payload_offset = 667
+length = 5
+
+[[boundaries]]
+payload_offset = 672
+length = 6
+
+[[boundaries]]
+payload_offset = 678
+length = 1
+
+[[boundaries]]
+payload_offset = 679
+length = 6
+
+[[boundaries]]
+payload_offset = 685
+length = 2
+
+[[boundaries]]
+payload_offset = 687
+length = 1
+
+[[boundaries]]
+payload_offset = 688
+length = 1
+
+[[boundaries]]
+payload_offset = 689
+length = 3
+
+[[boundaries]]
+payload_offset = 692
+length = 5
+
+[[boundaries]]
+payload_offset = 697
+length = 6
+
+[[boundaries]]
+payload_offset = 703
+length = 5
+
+[[boundaries]]
+payload_offset = 708
+length = 6
+
+[[boundaries]]
+payload_offset = 714
+length = 5
+
+[[boundaries]]
+payload_offset = 719
+length = 6
+
+[[boundaries]]
+payload_offset = 725
+length = 5
+
+[[boundaries]]
+payload_offset = 730
+length = 6
+
+[[boundaries]]
+payload_offset = 736
+length = 1
+
+[[boundaries]]
+payload_offset = 737
+length = 3
+
+[[boundaries]]
+payload_offset = 740
+length = 1
+
+[[boundaries]]
+payload_offset = 741
+length = 5
+
+[[boundaries]]
+payload_offset = 747
+length = 3
+
+[[boundaries]]
+payload_offset = 750
+length = 1
+
+[[boundaries]]
+payload_offset = 751
+length = 5
+
+[[boundaries]]
+payload_offset = 757
+length = 6
+
+[[boundaries]]
+payload_offset = 763
+length = 2
+
+[[boundaries]]
+payload_offset = 765
+length = 5
+
+[[boundaries]]
+payload_offset = 770
+length = 6
+
+[[boundaries]]
+payload_offset = 776
+length = 5
+
+[[boundaries]]
+payload_offset = 781
+length = 6
+
+[[boundaries]]
+payload_offset = 787
+length = 1
+
+[[boundaries]]
+payload_offset = 788
+length = 6
+
+[[boundaries]]
+payload_offset = 794
+length = 2
+
+[[boundaries]]
+payload_offset = 796
+length = 1
+
+[[boundaries]]
+payload_offset = 797
+length = 1
+
+[[boundaries]]
+payload_offset = 798
+length = 3
+
+[[boundaries]]
+payload_offset = 801
+length = 6
+
+[[boundaries]]
+payload_offset = 807
+length = 2
+
+[[boundaries]]
+payload_offset = 809
+length = 5
+
+[[boundaries]]
+payload_offset = 814
+length = 5
+
+[[boundaries]]
+payload_offset = 819
+length = 6
+
+[[boundaries]]
+payload_offset = 825
+length = 5
+
+[[boundaries]]
+payload_offset = 830
+length = 6
+
+[[boundaries]]
+payload_offset = 836
+length = 1
+
+[[boundaries]]
+payload_offset = 837
+length = 3
+
+[[boundaries]]
+payload_offset = 840
+length = 3
+
+[[boundaries]]
+payload_offset = 843
+length = 3
+
+[[boundaries]]
+payload_offset = 846
+length = 6
+
+[[boundaries]]
+payload_offset = 852
+length = 2
+
+[[boundaries]]
+payload_offset = 854
+length = 5
+
+[[boundaries]]
+payload_offset = 860
+length = 3
+
+[[boundaries]]
+payload_offset = 863
+length = 3
+
+[[boundaries]]
+payload_offset = 866
+length = 3
+
+[[boundaries]]
+payload_offset = 869
+length = 3
+
+[[boundaries]]
+payload_offset = 872
+length = 3
+
+[[boundaries]]
+payload_offset = 875
+length = 6
+
+[[boundaries]]
+payload_offset = 881
+length = 2
+
+[[boundaries]]
+payload_offset = 883
+length = 6
+
+[[boundaries]]
+payload_offset = 889
+length = 2
+
+[[boundaries]]
+payload_offset = 891
+length = 5
+
+[[boundaries]]
+payload_offset = 897
+length = 5
+
+[[boundaries]]
+payload_offset = 902
+length = 5
+
+[[boundaries]]
+payload_offset = 907
+length = 6
+
+[[boundaries]]
+payload_offset = 913
+length = 5
+
+[[boundaries]]
+payload_offset = 918
+length = 6
+
+[[boundaries]]
+payload_offset = 924
+length = 1
+
+[[boundaries]]
+payload_offset = 925
+length = 6
+
+[[boundaries]]
+payload_offset = 931
+length = 2
+
+[[boundaries]]
+payload_offset = 933
+length = 5
+
+[[boundaries]]
+payload_offset = 939
+length = 6
+
+[[boundaries]]
+payload_offset = 945
+length = 2
+
+[[boundaries]]
+payload_offset = 947
+length = 5
+
+[[boundaries]]
+payload_offset = 953
+length = 5
+
+[[boundaries]]
+payload_offset = 958
+length = 3
+
+[[boundaries]]
+payload_offset = 961
+length = 3
+
+[[boundaries]]
+payload_offset = 964
+length = 5
+
+[[boundaries]]
+payload_offset = 969
+length = 5
+
+[[boundaries]]
+payload_offset = 974
+length = 2
+
+[[boundaries]]
+payload_offset = 976
+length = 5
+
+[[boundaries]]
+payload_offset = 981
+length = 6
+
+[[boundaries]]
+payload_offset = 987
+length = 5
+
+[[boundaries]]
+payload_offset = 993
+length = 6
+
+[[boundaries]]
+payload_offset = 999
+length = 2
+
+[[boundaries]]
+payload_offset = 1001
+length = 3
+
+[[boundaries]]
+payload_offset = 1004
+length = 1
+
+[[boundaries]]
+payload_offset = 1005
+length = 1
+
+[[boundaries]]
+payload_offset = 1006
+length = 6
+
+[[boundaries]]
+payload_offset = 1012
+length = 2
+
+[[boundaries]]
+payload_offset = 1014
+length = 5
+
+[[boundaries]]
+payload_offset = 1019
+length = 6
+
+[[boundaries]]
+payload_offset = 1025
+length = 5
+
+[[boundaries]]
+payload_offset = 1030
+length = 6
+
+[[boundaries]]
+payload_offset = 1036
+length = 1
+
+[[boundaries]]
+payload_offset = 1037
+length = 3
+
+[[boundaries]]
+payload_offset = 1040
+length = 6
+
+[[boundaries]]
+payload_offset = 1046
+length = 2
+
+[[boundaries]]
+payload_offset = 1048
+length = 1
+
+[[boundaries]]
+payload_offset = 1049
+length = 1
+
+[[boundaries]]
+payload_offset = 1050
+length = 6
+
+[[boundaries]]
+payload_offset = 1056
+length = 2
+
+[[boundaries]]
+payload_offset = 1058
+length = 2
+
+[[boundaries]]
+payload_offset = 1060
+length = 5
+
+[[boundaries]]
+payload_offset = 1065
+length = 3
+
+[[boundaries]]
+payload_offset = 1068
+length = 1
+
+[[boundaries]]
+payload_offset = 1069
+length = 5
+
+[[boundaries]]
+payload_offset = 1074
+length = 6
+
+[[boundaries]]
+payload_offset = 1080
+length = 5
+
+[[boundaries]]
+payload_offset = 1085
+length = 6
+
+[[boundaries]]
+payload_offset = 1091
+length = 1
+
+[[boundaries]]
+payload_offset = 1092
+length = 6
+
+[[boundaries]]
+payload_offset = 1098
+length = 2
+
+[[boundaries]]
+payload_offset = 1100
+length = 5
+
+[[boundaries]]
+payload_offset = 1105
+length = 6
+
+[[boundaries]]
+payload_offset = 1111
+length = 5
+
+[[boundaries]]
+payload_offset = 1116
+length = 6
+
+[[boundaries]]
+payload_offset = 1122
+length = 1
+
+[[boundaries]]
+payload_offset = 1123
+length = 6
+
+[[boundaries]]
+payload_offset = 1129
+length = 2
+
+[[boundaries]]
+payload_offset = 1131
+length = 3
+
+[[boundaries]]
+payload_offset = 1134
+length = 3
+
+[[boundaries]]
+payload_offset = 1137
+length = 5
+
+[[boundaries]]
+payload_offset = 1142
+length = 2
+
+[[boundaries]]
+payload_offset = 1144
+length = 3
+
+[[boundaries]]
+payload_offset = 1147
+length = 1
+
+[[boundaries]]
+payload_offset = 1148
+length = 5
+
+[[boundaries]]
+payload_offset = 1153
+length = 6
+
+[[boundaries]]
+payload_offset = 1159
+length = 5
+
+[[boundaries]]
+payload_offset = 1165
+length = 6
+
+[[boundaries]]
+payload_offset = 1171
+length = 2
+
+[[boundaries]]
+payload_offset = 1173
+length = 5
+
+[[boundaries]]
+payload_offset = 1178
+length = 6
+
+[[boundaries]]
+payload_offset = 1184
+length = 5
+
+[[boundaries]]
+payload_offset = 1189
+length = 6
+
+[[boundaries]]
+payload_offset = 1195
+length = 1
+
+[[boundaries]]
+payload_offset = 1196
+length = 3
+
+[[boundaries]]
+payload_offset = 1199
+length = 3
+
+[[boundaries]]
+payload_offset = 1202
+length = 3
+
+[[boundaries]]
+payload_offset = 1205
+length = 6
+
+[[boundaries]]
+payload_offset = 1211
+length = 2
+
+[[boundaries]]
+payload_offset = 1213
+length = 1
+
+[[boundaries]]
+payload_offset = 1214
+length = 1
+
+[[boundaries]]
+payload_offset = 1215
+length = 1
+
+[[boundaries]]
+payload_offset = 1216
+length = 1
+
+[[boundaries]]
+payload_offset = 1217
+length = 6
+
+[[boundaries]]
+payload_offset = 1223
+length = 2
+
+[[boundaries]]
+payload_offset = 1225
+length = 5
+
+[[boundaries]]
+payload_offset = 1230
+length = 5
+
+[[boundaries]]
+payload_offset = 1235
+length = 6
+
+[[boundaries]]
+payload_offset = 1241
+length = 5
+
+[[boundaries]]
+payload_offset = 1246
+length = 6
+
+[[boundaries]]
+payload_offset = 1252
+length = 1
+
+[[boundaries]]
+payload_offset = 1253
+length = 5
+
+[[boundaries]]
+payload_offset = 1258
+length = 5
+
+[[boundaries]]
+payload_offset = 1263
+length = 6
+
+[[boundaries]]
+payload_offset = 1269
+length = 5
+
+[[boundaries]]
+payload_offset = 1274
+length = 6
+
+[[boundaries]]
+payload_offset = 1280
+length = 1
+
+[[boundaries]]
+payload_offset = 1281
+length = 6
+
+[[boundaries]]
+payload_offset = 1287
+length = 2
+
+[[boundaries]]
+payload_offset = 1289
+length = 1
+
+[[boundaries]]
+payload_offset = 1290
+length = 1
+
+[[boundaries]]
+payload_offset = 1291
+length = 3
+
+[[boundaries]]
+payload_offset = 1294
+length = 6
+
+[[boundaries]]
+payload_offset = 1300
+length = 2
+
+[[boundaries]]
+payload_offset = 1302
+length = 5
+
+[[boundaries]]
+payload_offset = 1307
+length = 5
+
+[[boundaries]]
+payload_offset = 1312
+length = 6
+
+[[boundaries]]
+payload_offset = 1318
+length = 6
+
+[[boundaries]]
+payload_offset = 1324
+length = 2
+
+[[boundaries]]
+payload_offset = 1326
+length = 5
+
+[[boundaries]]
+payload_offset = 1331
+length = 6
+
+[[boundaries]]
+payload_offset = 1337
+length = 5
+
+[[boundaries]]
+payload_offset = 1342
+length = 6
+
+[[boundaries]]
+payload_offset = 1348
+length = 1
+
+[[boundaries]]
+payload_offset = 1349
+length = 6
+
+[[boundaries]]
+payload_offset = 1355
+length = 2
+
+[[boundaries]]
+payload_offset = 1357
+length = 1
+
+[[boundaries]]
+payload_offset = 1358
+length = 1
+
+[[boundaries]]
+payload_offset = 1359
+length = 2
+
+[[boundaries]]
+payload_offset = 1361
+length = 3
+
+[[boundaries]]
+payload_offset = 1364
+length = 1
+
+[[boundaries]]
+payload_offset = 1365
+length = 5
+
+[[boundaries]]
+payload_offset = 1370
+length = 6
+
+[[boundaries]]
+payload_offset = 1376
+length = 5
+
+[[boundaries]]
+payload_offset = 1381
+length = 6
+
+[[boundaries]]
+payload_offset = 1387
+length = 1
+
+[[boundaries]]
+payload_offset = 1388
+length = 6
+
+[[boundaries]]
+payload_offset = 1394
+length = 2
+
+[[boundaries]]
+payload_offset = 1396
+length = 5
+
+[[boundaries]]
+payload_offset = 1401
+length = 6
+
+[[boundaries]]
+payload_offset = 1407
+length = 5
+
+[[boundaries]]
+payload_offset = 1412
+length = 6
+
+[[boundaries]]
+payload_offset = 1418
+length = 1
+
+[[boundaries]]
+payload_offset = 1419
+length = 6
+
+[[boundaries]]
+payload_offset = 1425
+length = 2
+
+[[boundaries]]
+payload_offset = 1427
+length = 3
+
+[[boundaries]]
+payload_offset = 1430
+length = 3
+
+[[boundaries]]
+payload_offset = 1433
+length = 5
+
+[[boundaries]]
+payload_offset = 1439
+length = 7
+
+[[boundaries]]
+payload_offset = 1446
+length = 3
+
+[[boundaries]]
+payload_offset = 1449
+length = 3
+
+[[boundaries]]
+payload_offset = 1452
+length = 7
+
+[[boundaries]]
+payload_offset = 1459
+length = 3
+
+[[boundaries]]
+payload_offset = 1462
+length = 3
+
+[[boundaries]]
+payload_offset = 1465
+length = 1
+
+[[boundaries]]
+payload_offset = 1466
+length = 5
+
+[[boundaries]]
+payload_offset = 1471
+length = 3
+
+[[boundaries]]
+payload_offset = 1474
+length = 1
+
+[[boundaries]]
+payload_offset = 1475
+length = 5
+
+[[boundaries]]
+payload_offset = 1480
+length = 6
+
+[[boundaries]]
+payload_offset = 1486
+length = 5
+
+[[boundaries]]
+payload_offset = 1492
+length = 7
+
+[[boundaries]]
+payload_offset = 1499
+length = 3
+
+[[boundaries]]
+payload_offset = 1502
+length = 3
+
+[[boundaries]]
+payload_offset = 1505
+length = 7
+
+[[boundaries]]
+payload_offset = 1512
+length = 3
+
+[[boundaries]]
+payload_offset = 1515
+length = 3
+
+[[boundaries]]
+payload_offset = 1518
+length = 5
+
+[[boundaries]]
+payload_offset = 1523
+length = 6
+
+[[boundaries]]
+payload_offset = 1529
+length = 5
+
+[[boundaries]]
+payload_offset = 1534
+length = 6
+
+[[boundaries]]
+payload_offset = 1540
+length = 1
+
+[[boundaries]]
+payload_offset = 1541
+length = 6
+
+[[boundaries]]
+payload_offset = 1547
+length = 2
+
+[[boundaries]]
+payload_offset = 1549
+length = 5
+
+[[boundaries]]
+payload_offset = 1555
+length = 3
+
+[[boundaries]]
+payload_offset = 1558
+length = 6
+
+[[boundaries]]
+payload_offset = 1564
+length = 2
+
+[[boundaries]]
+payload_offset = 1566
+length = 5
+
+[[boundaries]]
+payload_offset = 1572
+length = 5
+
+[[boundaries]]
+payload_offset = 1577
+length = 5
+
+[[boundaries]]
+payload_offset = 1582
+length = 6
+
+[[boundaries]]
+payload_offset = 1588
+length = 1
+
+[[boundaries]]
+payload_offset = 1589
+length = 1
+
+[[boundaries]]
+payload_offset = 1590
+length = 6
+
+[[boundaries]]
+payload_offset = 1596
+length = 2
+
+[[boundaries]]
+payload_offset = 1598
+length = 3
+
+[[boundaries]]
+payload_offset = 1601
+length = 1
+
+[[boundaries]]
+payload_offset = 1602
+length = 1
+
+[[boundaries]]
+payload_offset = 1603
+length = 6
+
+[[boundaries]]
+payload_offset = 1609
+length = 2
+
+[[boundaries]]
+payload_offset = 1611
+length = 1
+
+[[boundaries]]
+payload_offset = 1612
+length = 1
+
+[[boundaries]]
+payload_offset = 1613
+length = 5
+
+[[boundaries]]
+payload_offset = 1618
+length = 3
+
+[[boundaries]]
+payload_offset = 1621
+length = 3
+
+[[boundaries]]
+payload_offset = 1624
+length = 5
+
+[[boundaries]]
+payload_offset = 1629
+length = 6
+
+[[boundaries]]
+payload_offset = 1635
+length = 5
+
+[[boundaries]]
+payload_offset = 1640
+length = 6
+
+[[boundaries]]
+payload_offset = 1646
+length = 5
+
+[[boundaries]]
+payload_offset = 1651
+length = 6
+
+[[boundaries]]
+payload_offset = 1657
+length = 5
+
+[[boundaries]]
+payload_offset = 1662
+length = 6
+
+[[boundaries]]
+payload_offset = 1668
+length = 5
+
+[[boundaries]]
+payload_offset = 1673
+length = 6
+
+[[boundaries]]
+payload_offset = 1679
+length = 1
+
+[[boundaries]]
+payload_offset = 1680
+length = 1
+
+[[boundaries]]
+payload_offset = 1681
+length = 1
+
+[[boundaries]]
+payload_offset = 1682
+length = 1
+
+[[boundaries]]
+payload_offset = 1683
+length = 5
+
+[[boundaries]]
+payload_offset = 1688
+length = 6
+
+[[boundaries]]
+payload_offset = 1694
+length = 2
+
+[[boundaries]]
+payload_offset = 1696
+length = 1
+
+[[boundaries]]
+payload_offset = 1697
+length = 1
+
+[[boundaries]]
+payload_offset = 1698
+length = 1
+
+[[boundaries]]
+payload_offset = 1699
+length = 1
+
+[[boundaries]]
+payload_offset = 1700
+length = 1
+
+[[boundaries]]
+payload_offset = 1701
+length = 1
+
+[[boundaries]]
+payload_offset = 1702
+length = 5
+
+[[boundaries]]
+payload_offset = 1707
+length = 6
+
+[[boundaries]]
+payload_offset = 1713
+length = 2
+
+[[boundaries]]
+payload_offset = 1715
+length = 1
+
+[[boundaries]]
+payload_offset = 1716
+length = 1
+
+[[boundaries]]
+payload_offset = 1717
+length = 1
+
+[[boundaries]]
+payload_offset = 1718
+length = 1
+
+[[boundaries]]
+payload_offset = 1719
+length = 1
+
+[[boundaries]]
+payload_offset = 1720
+length = 1
+
+[[boundaries]]
+payload_offset = 1721
+length = 5
+
+[[boundaries]]
+payload_offset = 1726
+length = 6
+
+[[boundaries]]
+payload_offset = 1732
+length = 2
+
+[[boundaries]]
+payload_offset = 1734
+length = 1
+
+[[boundaries]]
+payload_offset = 1735
+length = 1
+
+[[boundaries]]
+payload_offset = 1736
+length = 1
+
+[[boundaries]]
+payload_offset = 1737
+length = 1
+
+[[boundaries]]
+payload_offset = 1738
+length = 1
+
+[[boundaries]]
+payload_offset = 1739
+length = 1
+
+[[boundaries]]
+payload_offset = 1740
+length = 5
+
+[[boundaries]]
+payload_offset = 1745
+length = 6
+
+[[boundaries]]
+payload_offset = 1751
+length = 2
+
+[[boundaries]]
+payload_offset = 1753
+length = 1
+
+[[boundaries]]
+payload_offset = 1754
+length = 1
+
+[[boundaries]]
+payload_offset = 1755
+length = 1
+
+[[boundaries]]
+payload_offset = 1756
+length = 1
+
+[[boundaries]]
+payload_offset = 1757
+length = 1
+
+[[boundaries]]
+payload_offset = 1758
+length = 1
+
+[[boundaries]]
+payload_offset = 1759
+length = 5
+
+[[boundaries]]
+payload_offset = 1764
+length = 6
+
+[[boundaries]]
+payload_offset = 1770
+length = 2
+
+[[boundaries]]
+payload_offset = 1772
+length = 1
+
+[[boundaries]]
+payload_offset = 1773
+length = 1
+
+[[boundaries]]
+payload_offset = 1774
+length = 1

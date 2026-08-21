@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 2
 export_count = 5
 reloc_count = 38
+instruction_count = 104
 
 [[segments]]
 kind = "bytecode"
@@ -78,6 +79,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/meteorfalls-1f-1r"
 target_export = "MeteorFalls_1F_1R_EventScript_OpenStevensCave"
 target_offset = 16
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 10
 runtime_resolution_required = true
 
 [[relocs]]
@@ -87,6 +90,8 @@ original_encoded_gba = 0x82725b0
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-facedown"
 target_export = "Common_Movement_FaceDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -96,6 +101,8 @@ original_encoded_gba = 0x82725b4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacedown"
 target_export = "Common_Movement_WalkInPlaceDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -105,6 +112,8 @@ original_encoded_gba = 0x822bf47
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/meteorfalls-1f-1r"
 target_export = "MeteorFalls_1F_1R_Text_WithThisMeteorite"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -114,6 +123,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -123,6 +134,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -132,6 +145,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -141,6 +156,8 @@ original_encoded_gba = 0x827259a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-delay48"
 target_export = "Common_Movement_Delay48"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -150,6 +167,8 @@ original_encoded_gba = 0x822bf84
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/meteorfalls-1f-1r"
 target_export = "MeteorFalls_1F_1R_Text_DontExpectMercyFromMagma"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -159,6 +178,8 @@ original_encoded_gba = 0x822bec0
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/meteorfalls-1f-1r-movement-magmagruntapproachplayer"
 target_export = "MeteorFalls_1F_1R_Movement_MagmaGruntApproachPlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -168,6 +189,8 @@ original_encoded_gba = 0x822bfe4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/meteorfalls-1f-1r"
 target_export = "MeteorFalls_1F_1R_Text_HoldItRightThereMagma"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -177,6 +200,8 @@ original_encoded_gba = 0x82725a4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterleft"
 target_export = "Common_Movement_WalkInPlaceFasterLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -186,6 +211,8 @@ original_encoded_gba = 0x82725a4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterleft"
 target_export = "Common_Movement_WalkInPlaceFasterLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -195,6 +222,8 @@ original_encoded_gba = 0x82725a4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterleft"
 target_export = "Common_Movement_WalkInPlaceFasterLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -204,6 +233,8 @@ original_encoded_gba = 0x822bed9
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/meteorfalls-1f-1r-movement-archiearrive"
 target_export = "MeteorFalls_1F_1R_Movement_ArchieArrive"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -213,6 +244,8 @@ original_encoded_gba = 0x822bee0
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/meteorfalls-1f-1r-movement-aquagrunt1arrive"
 target_export = "MeteorFalls_1F_1R_Movement_AquaGrunt1Arrive"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -222,6 +255,8 @@ original_encoded_gba = 0x822bee8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/meteorfalls-1f-1r-movement-aquagrunt2arrive"
 target_export = "MeteorFalls_1F_1R_Movement_AquaGrunt2Arrive"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -231,6 +266,8 @@ original_encoded_gba = 0x82725a4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterleft"
 target_export = "Common_Movement_WalkInPlaceFasterLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -240,6 +277,8 @@ original_encoded_gba = 0x82725a4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterleft"
 target_export = "Common_Movement_WalkInPlaceFasterLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -249,6 +288,8 @@ original_encoded_gba = 0x822c04e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/meteorfalls-1f-1r"
 target_export = "MeteorFalls_1F_1R_Text_BeSeeingYouTeamAqua"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -258,6 +299,8 @@ original_encoded_gba = 0x822bf1d
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/meteorfalls-1f-1r-movement-pushplayeroutofway"
 target_export = "MeteorFalls_1F_1R_Movement_PushPlayerOutOfWay"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -267,6 +310,8 @@ original_encoded_gba = 0x822bec4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/meteorfalls-1f-1r-movement-magmagrunt1exit"
 target_export = "MeteorFalls_1F_1R_Movement_MagmaGrunt1Exit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -276,6 +321,8 @@ original_encoded_gba = 0x822bece
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/meteorfalls-1f-1r-movement-magmagrunt2exit"
 target_export = "MeteorFalls_1F_1R_Movement_MagmaGrunt2Exit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -285,6 +332,8 @@ original_encoded_gba = 0x822bef8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/meteorfalls-1f-1r-movement-archieapproachplayer"
 target_export = "MeteorFalls_1F_1R_Movement_ArchieApproachPlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -294,6 +343,8 @@ original_encoded_gba = 0x822c11c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/meteorfalls-1f-1r"
 target_export = "MeteorFalls_1F_1R_Text_ArchieSeenYouBefore"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -303,6 +354,8 @@ original_encoded_gba = 0x822bf08
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/meteorfalls-1f-1r-movement-aquagrunt1approacharchie"
 target_export = "MeteorFalls_1F_1R_Movement_AquaGrunt1ApproachArchie"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -312,6 +365,8 @@ original_encoded_gba = 0x822bf18
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/meteorfalls-1f-1r-movement-aquagrunt2approacharchie"
 target_export = "MeteorFalls_1F_1R_Movement_AquaGrunt2ApproachArchie"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -321,6 +376,8 @@ original_encoded_gba = 0x822c268
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/meteorfalls-1f-1r"
 target_export = "MeteorFalls_1F_1R_Text_BossWeShouldChaseMagma"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -330,6 +387,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -339,6 +398,8 @@ original_encoded_gba = 0x822c292
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/meteorfalls-1f-1r"
 target_export = "MeteorFalls_1F_1R_Text_ArchieYesNoTellingWhatMagmaWillDo"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -348,6 +409,8 @@ original_encoded_gba = 0x82725a4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterleft"
 target_export = "Common_Movement_WalkInPlaceFasterLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -357,6 +420,8 @@ original_encoded_gba = 0x822c2fc
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/meteorfalls-1f-1r"
 target_export = "MeteorFalls_1F_1R_Text_ArchieFarewell"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -366,6 +431,8 @@ original_encoded_gba = 0x822bef0
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/meteorfalls-1f-1r-movement-archieexit"
 target_export = "MeteorFalls_1F_1R_Movement_ArchieExit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -375,6 +442,8 @@ original_encoded_gba = 0x822befe
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/meteorfalls-1f-1r-movement-aquagrunt1exit"
 target_export = "MeteorFalls_1F_1R_Movement_AquaGrunt1Exit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -384,6 +453,8 @@ original_encoded_gba = 0x822bf0d
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/meteorfalls-1f-1r-movement-aquagrunt2exit"
 target_export = "MeteorFalls_1F_1R_Movement_AquaGrunt2Exit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -394,6 +465,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/meteorfalls-1f-1r"
 target_export = "MeteorFalls_1F_1R_EventScript_MetCozmo"
 target_offset = 531
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 424
 runtime_resolution_required = true
 
 [[relocs]]
@@ -403,6 +476,8 @@ original_encoded_gba = 0x822c342
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/meteorfalls-1f-1r"
 target_export = "MeteorFalls_1F_1R_Text_MeetProfCozmo"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -412,4 +487,422 @@ original_encoded_gba = 0x822c47d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/meteorfalls-1f-1r"
 target_export = "MeteorFalls_1F_1R_Text_WhatsTeamMagmaDoingAtMtChimney"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 6
+
+[[boundaries]]
+payload_offset = 9
+length = 1
+
+[[boundaries]]
+payload_offset = 10
+length = 9
+
+[[boundaries]]
+payload_offset = 19
+length = 9
+
+[[boundaries]]
+payload_offset = 28
+length = 9
+
+[[boundaries]]
+payload_offset = 37
+length = 9
+
+[[boundaries]]
+payload_offset = 46
+length = 1
+
+[[boundaries]]
+payload_offset = 47
+length = 1
+
+[[boundaries]]
+payload_offset = 48
+length = 4
+
+[[boundaries]]
+payload_offset = 52
+length = 7
+
+[[boundaries]]
+payload_offset = 59
+length = 3
+
+[[boundaries]]
+payload_offset = 62
+length = 3
+
+[[boundaries]]
+payload_offset = 65
+length = 7
+
+[[boundaries]]
+payload_offset = 72
+length = 3
+
+[[boundaries]]
+payload_offset = 75
+length = 6
+
+[[boundaries]]
+payload_offset = 81
+length = 2
+
+[[boundaries]]
+payload_offset = 83
+length = 1
+
+[[boundaries]]
+payload_offset = 84
+length = 7
+
+[[boundaries]]
+payload_offset = 91
+length = 7
+
+[[boundaries]]
+payload_offset = 98
+length = 3
+
+[[boundaries]]
+payload_offset = 101
+length = 3
+
+[[boundaries]]
+payload_offset = 104
+length = 7
+
+[[boundaries]]
+payload_offset = 111
+length = 3
+
+[[boundaries]]
+payload_offset = 114
+length = 7
+
+[[boundaries]]
+payload_offset = 121
+length = 3
+
+[[boundaries]]
+payload_offset = 124
+length = 6
+
+[[boundaries]]
+payload_offset = 130
+length = 2
+
+[[boundaries]]
+payload_offset = 132
+length = 1
+
+[[boundaries]]
+payload_offset = 133
+length = 7
+
+[[boundaries]]
+payload_offset = 140
+length = 3
+
+[[boundaries]]
+payload_offset = 143
+length = 6
+
+[[boundaries]]
+payload_offset = 149
+length = 2
+
+[[boundaries]]
+payload_offset = 151
+length = 1
+
+[[boundaries]]
+payload_offset = 152
+length = 7
+
+[[boundaries]]
+payload_offset = 159
+length = 7
+
+[[boundaries]]
+payload_offset = 166
+length = 7
+
+[[boundaries]]
+payload_offset = 173
+length = 3
+
+[[boundaries]]
+payload_offset = 176
+length = 3
+
+[[boundaries]]
+payload_offset = 179
+length = 3
+
+[[boundaries]]
+payload_offset = 182
+length = 3
+
+[[boundaries]]
+payload_offset = 185
+length = 4
+
+[[boundaries]]
+payload_offset = 189
+length = 7
+
+[[boundaries]]
+payload_offset = 196
+length = 7
+
+[[boundaries]]
+payload_offset = 203
+length = 7
+
+[[boundaries]]
+payload_offset = 210
+length = 3
+
+[[boundaries]]
+payload_offset = 213
+length = 7
+
+[[boundaries]]
+payload_offset = 220
+length = 7
+
+[[boundaries]]
+payload_offset = 227
+length = 3
+
+[[boundaries]]
+payload_offset = 230
+length = 6
+
+[[boundaries]]
+payload_offset = 236
+length = 2
+
+[[boundaries]]
+payload_offset = 238
+length = 1
+
+[[boundaries]]
+payload_offset = 239
+length = 7
+
+[[boundaries]]
+payload_offset = 246
+length = 7
+
+[[boundaries]]
+payload_offset = 253
+length = 7
+
+[[boundaries]]
+payload_offset = 260
+length = 3
+
+[[boundaries]]
+payload_offset = 263
+length = 3
+
+[[boundaries]]
+payload_offset = 266
+length = 3
+
+[[boundaries]]
+payload_offset = 269
+length = 7
+
+[[boundaries]]
+payload_offset = 276
+length = 3
+
+[[boundaries]]
+payload_offset = 279
+length = 6
+
+[[boundaries]]
+payload_offset = 285
+length = 2
+
+[[boundaries]]
+payload_offset = 287
+length = 1
+
+[[boundaries]]
+payload_offset = 288
+length = 7
+
+[[boundaries]]
+payload_offset = 295
+length = 7
+
+[[boundaries]]
+payload_offset = 302
+length = 3
+
+[[boundaries]]
+payload_offset = 305
+length = 6
+
+[[boundaries]]
+payload_offset = 311
+length = 2
+
+[[boundaries]]
+payload_offset = 313
+length = 7
+
+[[boundaries]]
+payload_offset = 320
+length = 3
+
+[[boundaries]]
+payload_offset = 323
+length = 6
+
+[[boundaries]]
+payload_offset = 329
+length = 2
+
+[[boundaries]]
+payload_offset = 331
+length = 7
+
+[[boundaries]]
+payload_offset = 338
+length = 3
+
+[[boundaries]]
+payload_offset = 341
+length = 6
+
+[[boundaries]]
+payload_offset = 347
+length = 2
+
+[[boundaries]]
+payload_offset = 349
+length = 1
+
+[[boundaries]]
+payload_offset = 350
+length = 7
+
+[[boundaries]]
+payload_offset = 357
+length = 7
+
+[[boundaries]]
+payload_offset = 364
+length = 7
+
+[[boundaries]]
+payload_offset = 371
+length = 3
+
+[[boundaries]]
+payload_offset = 374
+length = 1
+
+[[boundaries]]
+payload_offset = 375
+length = 3
+
+[[boundaries]]
+payload_offset = 378
+length = 3
+
+[[boundaries]]
+payload_offset = 381
+length = 3
+
+[[boundaries]]
+payload_offset = 384
+length = 3
+
+[[boundaries]]
+payload_offset = 387
+length = 3
+
+[[boundaries]]
+payload_offset = 390
+length = 3
+
+[[boundaries]]
+payload_offset = 393
+length = 5
+
+[[boundaries]]
+payload_offset = 398
+length = 1
+
+[[boundaries]]
+payload_offset = 399
+length = 1
+
+[[boundaries]]
+payload_offset = 400
+length = 1
+
+[[boundaries]]
+payload_offset = 401
+length = 1
+
+[[boundaries]]
+payload_offset = 402
+length = 3
+
+[[boundaries]]
+payload_offset = 405
+length = 6
+
+[[boundaries]]
+payload_offset = 411
+length = 3
+
+[[boundaries]]
+payload_offset = 414
+length = 6
+
+[[boundaries]]
+payload_offset = 420
+length = 2
+
+[[boundaries]]
+payload_offset = 422
+length = 1
+
+[[boundaries]]
+payload_offset = 423
+length = 1
+
+[[boundaries]]
+payload_offset = 424
+length = 6
+
+[[boundaries]]
+payload_offset = 430
+length = 2
+
+[[boundaries]]
+payload_offset = 432
+length = 1
+
+[[boundaries]]
+payload_offset = 433
+length = 1

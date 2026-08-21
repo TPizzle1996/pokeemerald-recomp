@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 3
 reloc_count = 5
+instruction_count = 19
 
 [[segments]]
 kind = "bytecode"
@@ -55,6 +56,8 @@ original_encoded_gba = 0x822200f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-house1"
 target_export = "MossdeepCity_House1_Text_HmmYourPokemon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -65,6 +68,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-house1"
 target_export = "MossdeepCity_House1_EventScript_NeutralNature"
 target_offset = 39
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 38
 runtime_resolution_required = true
 
 [[relocs]]
@@ -74,6 +79,8 @@ original_encoded_gba = 0x822201d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-house1"
 target_export = "MossdeepCity_House1_Text_ItLikesXPokeblocks"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -83,6 +90,8 @@ original_encoded_gba = 0x8222068
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-house1"
 target_export = "MossdeepCity_House1_Text_DoesntLikeOrDislikePokeblocks"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -92,4 +101,82 @@ original_encoded_gba = 0x8222099
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-house1"
 target_export = "MossdeepCity_House1_Text_HusbandCanTellPokeblockMonLikes"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 1
+
+[[boundaries]]
+payload_offset = 2
+length = 2
+
+[[boundaries]]
+payload_offset = 4
+length = 6
+
+[[boundaries]]
+payload_offset = 10
+length = 2
+
+[[boundaries]]
+payload_offset = 12
+length = 5
+
+[[boundaries]]
+payload_offset = 17
+length = 5
+
+[[boundaries]]
+payload_offset = 22
+length = 6
+
+[[boundaries]]
+payload_offset = 28
+length = 6
+
+[[boundaries]]
+payload_offset = 34
+length = 2
+
+[[boundaries]]
+payload_offset = 36
+length = 1
+
+[[boundaries]]
+payload_offset = 37
+length = 1
+
+[[boundaries]]
+payload_offset = 38
+length = 6
+
+[[boundaries]]
+payload_offset = 44
+length = 2
+
+[[boundaries]]
+payload_offset = 46
+length = 1
+
+[[boundaries]]
+payload_offset = 47
+length = 1
+
+[[boundaries]]
+payload_offset = 48
+length = 6
+
+[[boundaries]]
+payload_offset = 54
+length = 2
+
+[[boundaries]]
+payload_offset = 56
+length = 1

@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 4
 export_count = 14
 reloc_count = 48
+instruction_count = 124
 
 [[segments]]
 kind = "bytecode"
@@ -162,6 +163,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/rival-graphics"
 target_export = "Common_EventScript_SetupRivalGfxId"
 target_offset = 0
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 0
 runtime_resolution_required = true
 
 [[relocs]]
@@ -171,6 +174,8 @@ original_encoded_gba = 0x82725c1
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkup4"
 target_export = "Common_Movement_WalkUp4"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -180,6 +185,8 @@ original_encoded_gba = 0x8228a42
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/evergrandecity-championsroom-movement-playerapproachwallace"
 target_export = "EverGrandeCity_ChampionsRoom_Movement_PlayerApproachWallace"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -190,6 +197,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/evergrandecity-championsroom"
 target_export = "EverGrandeCity_ChampionsRoom_EventScript_Wallace"
 target_offset = 86
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 47
 runtime_resolution_required = true
 
 [[relocs]]
@@ -199,6 +208,8 @@ original_encoded_gba = 0x8228c4c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/evergrandecity-championsroom"
 target_export = "EverGrandeCity_ChampionsRoom_Text_IntroSpeech"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -208,6 +219,8 @@ original_encoded_gba = 0x8228eac
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/evergrandecity-championsroom"
 target_export = "EverGrandeCity_ChampionsRoom_Text_Defeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -218,6 +231,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/evergrandecity-championsroom"
 target_export = "EverGrandeCity_ChampionsRoom_EventScript_Defeated"
 target_offset = 114
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 75
 runtime_resolution_required = true
 
 [[relocs]]
@@ -227,6 +242,8 @@ original_encoded_gba = 0x8228f66
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/evergrandecity-championsroom"
 target_export = "EverGrandeCity_ChampionsRoom_Text_PostBattleSpeech"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -237,6 +254,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/evergrandecity-championsroom"
 target_export = "EverGrandeCity_ChampionsRoom_EventScript_PlayMayMusic"
 target_offset = 205
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 166
 runtime_resolution_required = true
 
 [[relocs]]
@@ -247,6 +266,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/evergrandecity-championsroom"
 target_export = "EverGrandeCity_ChampionsRoom_EventScript_PlayBrendanMusic"
 target_offset = 210
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 171
 runtime_resolution_required = true
 
 [[relocs]]
@@ -257,6 +278,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/evergrandecity-championsroom"
 target_export = "EverGrandeCity_ChampionsRoom_EventScript_RivalApproachPlayer"
 target_offset = 526
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 487
 runtime_resolution_required = true
 
 [[relocs]]
@@ -267,6 +290,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/evergrandecity-championsroom"
 target_export = "EverGrandeCity_ChampionsRoom_EventScript_MayAdvice"
 target_offset = 215
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 176
 runtime_resolution_required = true
 
 [[relocs]]
@@ -277,6 +302,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/evergrandecity-championsroom"
 target_export = "EverGrandeCity_ChampionsRoom_EventScript_BrendanAdvice"
 target_offset = 268
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 229
 runtime_resolution_required = true
 
 [[relocs]]
@@ -286,6 +313,8 @@ original_encoded_gba = 0x82290ca
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/evergrandecity-championsroom"
 target_export = "EverGrandeCity_ChampionsRoom_Text_MayAdvice"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -295,6 +324,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -304,6 +335,8 @@ original_encoded_gba = 0x827259a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-delay48"
 target_export = "Common_Movement_Delay48"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -314,6 +347,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/evergrandecity-championsroom"
 target_export = "EverGrandeCity_ChampionsRoom_EventScript_RivalLookBackAndForth"
 target_offset = 547
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 508
 runtime_resolution_required = true
 
 [[relocs]]
@@ -323,6 +358,8 @@ original_encoded_gba = 0x822910b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/evergrandecity-championsroom"
 target_export = "EverGrandeCity_ChampionsRoom_Text_MayItsAlreadyOver"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -333,6 +370,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/evergrandecity-championsroom"
 target_export = "EverGrandeCity_ChampionsRoom_EventScript_BirchArrivesExitForHoF"
 target_offset = 321
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 282
 runtime_resolution_required = true
 
 [[relocs]]
@@ -342,6 +381,8 @@ original_encoded_gba = 0x8229152
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/evergrandecity-championsroom"
 target_export = "EverGrandeCity_ChampionsRoom_Text_BrendanAdvice"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -351,6 +392,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -360,6 +403,8 @@ original_encoded_gba = 0x827259a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-delay48"
 target_export = "Common_Movement_Delay48"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -370,6 +415,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/evergrandecity-championsroom"
 target_export = "EverGrandeCity_ChampionsRoom_EventScript_RivalLookBackAndForth"
 target_offset = 547
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 508
 runtime_resolution_required = true
 
 [[relocs]]
@@ -379,6 +426,8 @@ original_encoded_gba = 0x82291a2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/evergrandecity-championsroom"
 target_export = "EverGrandeCity_ChampionsRoom_Text_BrendanYouveWon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -389,6 +438,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/evergrandecity-championsroom"
 target_export = "EverGrandeCity_ChampionsRoom_EventScript_BirchArrivesExitForHoF"
 target_offset = 321
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 282
 runtime_resolution_required = true
 
 [[relocs]]
@@ -398,6 +449,8 @@ original_encoded_gba = 0x8228c43
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/evergrandecity-championsroom-movement-bircharrives"
 target_export = "EverGrandeCity_ChampionsRoom_Movement_BirchArrives"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -407,6 +460,8 @@ original_encoded_gba = 0x82725a8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterright"
 target_export = "Common_Movement_WalkInPlaceFasterRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -416,6 +471,8 @@ original_encoded_gba = 0x82291e6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/evergrandecity-championsroom"
 target_export = "EverGrandeCity_ChampionsRoom_Text_BirchArriveRatePokedex"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -426,6 +483,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/prof-birch"
 target_export = "ProfBirch_EventScript_RatePokedex"
 target_offset = 215
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 215
 runtime_resolution_required = true
 
 [[relocs]]
@@ -435,6 +494,8 @@ original_encoded_gba = 0x822934d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/evergrandecity-championsroom"
 target_export = "EverGrandeCity_ChampionsRoom_Text_BirchCongratulations"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -444,6 +505,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -453,6 +516,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -462,6 +527,8 @@ original_encoded_gba = 0x8229399
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/evergrandecity-championsroom"
 target_export = "EverGrandeCity_ChampionsRoom_Text_WallaceComeWithMe"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -471,6 +538,8 @@ original_encoded_gba = 0x8228c3b
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/evergrandecity-championsroom-movement-wallaceexitstart"
 target_export = "EverGrandeCity_ChampionsRoom_Movement_WallaceExitStart"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -480,6 +549,8 @@ original_encoded_gba = 0x8228c1d
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/evergrandecity-championsroom-movement-playerexitstart"
 target_export = "EverGrandeCity_ChampionsRoom_Movement_PlayerExitStart"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -489,6 +560,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -498,6 +571,8 @@ original_encoded_gba = 0x8228c38
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/evergrandecity-championsroom-movement-rivalfollows"
 target_export = "EverGrandeCity_ChampionsRoom_Movement_RivalFollows"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -507,6 +582,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -516,6 +593,8 @@ original_encoded_gba = 0x82293eb
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/evergrandecity-championsroom"
 target_export = "EverGrandeCity_ChampionsRoom_Text_WallaceWaitOutside"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -526,6 +605,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/evergrandecity-championsroom"
 target_export = "EverGrandeCity_ChampionsRoom_EventScript_MayCongratulations"
 target_offset = 508
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 469
 runtime_resolution_required = true
 
 [[relocs]]
@@ -536,6 +617,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/evergrandecity-championsroom"
 target_export = "EverGrandeCity_ChampionsRoom_EventScript_BrendanCongratulations"
 target_offset = 517
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 478
 runtime_resolution_required = true
 
 [[relocs]]
@@ -545,6 +628,8 @@ original_encoded_gba = 0x8228c3f
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/evergrandecity-championsroom-movement-wallaceexit"
 target_export = "EverGrandeCity_ChampionsRoom_Movement_WallaceExit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -554,6 +639,8 @@ original_encoded_gba = 0x8228c20
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/evergrandecity-championsroom-movement-playerexit"
 target_export = "EverGrandeCity_ChampionsRoom_Movement_PlayerExit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -563,6 +650,8 @@ original_encoded_gba = 0x8229479
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/evergrandecity-championsroom"
 target_export = "EverGrandeCity_ChampionsRoom_Text_MayCongratulations"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -572,6 +661,8 @@ original_encoded_gba = 0x82294f5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/evergrandecity-championsroom"
 target_export = "EverGrandeCity_ChampionsRoom_Text_BrendanCongratulations"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -581,6 +672,8 @@ original_encoded_gba = 0x8228c26
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/evergrandecity-championsroom-movement-rivalapproachplayer"
 target_export = "EverGrandeCity_ChampionsRoom_Movement_RivalApproachPlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -590,6 +683,8 @@ original_encoded_gba = 0x82725a4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterleft"
 target_export = "Common_Movement_WalkInPlaceFasterLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -599,4 +694,502 @@ original_encoded_gba = 0x8228c2f
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/evergrandecity-championsroom-movement-rivallookbackandforth"
 target_export = "EverGrandeCity_ChampionsRoom_Movement_RivalLookBackAndForth"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 5
+
+[[boundaries]]
+payload_offset = 5
+length = 1
+
+[[boundaries]]
+payload_offset = 6
+length = 4
+
+[[boundaries]]
+payload_offset = 10
+length = 1
+
+[[boundaries]]
+payload_offset = 11
+length = 1
+
+[[boundaries]]
+payload_offset = 12
+length = 7
+
+[[boundaries]]
+payload_offset = 19
+length = 3
+
+[[boundaries]]
+payload_offset = 22
+length = 3
+
+[[boundaries]]
+payload_offset = 25
+length = 7
+
+[[boundaries]]
+payload_offset = 32
+length = 3
+
+[[boundaries]]
+payload_offset = 35
+length = 5
+
+[[boundaries]]
+payload_offset = 40
+length = 5
+
+[[boundaries]]
+payload_offset = 47
+length = 4
+
+[[boundaries]]
+payload_offset = 51
+length = 6
+
+[[boundaries]]
+payload_offset = 57
+length = 2
+
+[[boundaries]]
+payload_offset = 59
+length = 10
+
+[[boundaries]]
+payload_offset = 69
+length = 5
+
+[[boundaries]]
+payload_offset = 75
+length = 3
+
+[[boundaries]]
+payload_offset = 78
+length = 9
+
+[[boundaries]]
+payload_offset = 87
+length = 9
+
+[[boundaries]]
+payload_offset = 96
+length = 3
+
+[[boundaries]]
+payload_offset = 99
+length = 6
+
+[[boundaries]]
+payload_offset = 105
+length = 2
+
+[[boundaries]]
+payload_offset = 107
+length = 1
+
+[[boundaries]]
+payload_offset = 108
+length = 3
+
+[[boundaries]]
+payload_offset = 111
+length = 1
+
+[[boundaries]]
+payload_offset = 112
+length = 5
+
+[[boundaries]]
+payload_offset = 117
+length = 6
+
+[[boundaries]]
+payload_offset = 123
+length = 5
+
+[[boundaries]]
+payload_offset = 128
+length = 6
+
+[[boundaries]]
+payload_offset = 134
+length = 3
+
+[[boundaries]]
+payload_offset = 137
+length = 5
+
+[[boundaries]]
+payload_offset = 142
+length = 1
+
+[[boundaries]]
+payload_offset = 143
+length = 5
+
+[[boundaries]]
+payload_offset = 148
+length = 6
+
+[[boundaries]]
+payload_offset = 154
+length = 5
+
+[[boundaries]]
+payload_offset = 159
+length = 6
+
+[[boundaries]]
+payload_offset = 165
+length = 1
+
+[[boundaries]]
+payload_offset = 166
+length = 4
+
+[[boundaries]]
+payload_offset = 170
+length = 1
+
+[[boundaries]]
+payload_offset = 171
+length = 4
+
+[[boundaries]]
+payload_offset = 175
+length = 1
+
+[[boundaries]]
+payload_offset = 176
+length = 6
+
+[[boundaries]]
+payload_offset = 182
+length = 2
+
+[[boundaries]]
+payload_offset = 184
+length = 3
+
+[[boundaries]]
+payload_offset = 187
+length = 3
+
+[[boundaries]]
+payload_offset = 190
+length = 7
+
+[[boundaries]]
+payload_offset = 197
+length = 3
+
+[[boundaries]]
+payload_offset = 200
+length = 7
+
+[[boundaries]]
+payload_offset = 207
+length = 3
+
+[[boundaries]]
+payload_offset = 210
+length = 5
+
+[[boundaries]]
+payload_offset = 215
+length = 6
+
+[[boundaries]]
+payload_offset = 221
+length = 2
+
+[[boundaries]]
+payload_offset = 223
+length = 5
+
+[[boundaries]]
+payload_offset = 229
+length = 6
+
+[[boundaries]]
+payload_offset = 235
+length = 2
+
+[[boundaries]]
+payload_offset = 237
+length = 3
+
+[[boundaries]]
+payload_offset = 240
+length = 3
+
+[[boundaries]]
+payload_offset = 243
+length = 7
+
+[[boundaries]]
+payload_offset = 250
+length = 3
+
+[[boundaries]]
+payload_offset = 253
+length = 7
+
+[[boundaries]]
+payload_offset = 260
+length = 3
+
+[[boundaries]]
+payload_offset = 263
+length = 5
+
+[[boundaries]]
+payload_offset = 268
+length = 6
+
+[[boundaries]]
+payload_offset = 274
+length = 2
+
+[[boundaries]]
+payload_offset = 276
+length = 5
+
+[[boundaries]]
+payload_offset = 282
+length = 1
+
+[[boundaries]]
+payload_offset = 283
+length = 3
+
+[[boundaries]]
+payload_offset = 286
+length = 7
+
+[[boundaries]]
+payload_offset = 293
+length = 3
+
+[[boundaries]]
+payload_offset = 296
+length = 7
+
+[[boundaries]]
+payload_offset = 303
+length = 3
+
+[[boundaries]]
+payload_offset = 306
+length = 6
+
+[[boundaries]]
+payload_offset = 312
+length = 2
+
+[[boundaries]]
+payload_offset = 314
+length = 5
+
+[[boundaries]]
+payload_offset = 319
+length = 6
+
+[[boundaries]]
+payload_offset = 325
+length = 2
+
+[[boundaries]]
+payload_offset = 327
+length = 7
+
+[[boundaries]]
+payload_offset = 334
+length = 3
+
+[[boundaries]]
+payload_offset = 337
+length = 3
+
+[[boundaries]]
+payload_offset = 340
+length = 7
+
+[[boundaries]]
+payload_offset = 347
+length = 3
+
+[[boundaries]]
+payload_offset = 350
+length = 6
+
+[[boundaries]]
+payload_offset = 356
+length = 2
+
+[[boundaries]]
+payload_offset = 358
+length = 1
+
+[[boundaries]]
+payload_offset = 359
+length = 3
+
+[[boundaries]]
+payload_offset = 362
+length = 7
+
+[[boundaries]]
+payload_offset = 369
+length = 7
+
+[[boundaries]]
+payload_offset = 376
+length = 7
+
+[[boundaries]]
+payload_offset = 383
+length = 7
+
+[[boundaries]]
+payload_offset = 390
+length = 3
+
+[[boundaries]]
+payload_offset = 393
+length = 3
+
+[[boundaries]]
+payload_offset = 396
+length = 7
+
+[[boundaries]]
+payload_offset = 403
+length = 3
+
+[[boundaries]]
+payload_offset = 406
+length = 6
+
+[[boundaries]]
+payload_offset = 412
+length = 2
+
+[[boundaries]]
+payload_offset = 414
+length = 1
+
+[[boundaries]]
+payload_offset = 415
+length = 5
+
+[[boundaries]]
+payload_offset = 420
+length = 6
+
+[[boundaries]]
+payload_offset = 426
+length = 5
+
+[[boundaries]]
+payload_offset = 431
+length = 6
+
+[[boundaries]]
+payload_offset = 437
+length = 1
+
+[[boundaries]]
+payload_offset = 438
+length = 7
+
+[[boundaries]]
+payload_offset = 445
+length = 7
+
+[[boundaries]]
+payload_offset = 452
+length = 3
+
+[[boundaries]]
+payload_offset = 455
+length = 3
+
+[[boundaries]]
+payload_offset = 458
+length = 8
+
+[[boundaries]]
+payload_offset = 466
+length = 1
+
+[[boundaries]]
+payload_offset = 467
+length = 1
+
+[[boundaries]]
+payload_offset = 468
+length = 1
+
+[[boundaries]]
+payload_offset = 469
+length = 6
+
+[[boundaries]]
+payload_offset = 475
+length = 2
+
+[[boundaries]]
+payload_offset = 477
+length = 1
+
+[[boundaries]]
+payload_offset = 478
+length = 6
+
+[[boundaries]]
+payload_offset = 484
+length = 2
+
+[[boundaries]]
+payload_offset = 486
+length = 1
+
+[[boundaries]]
+payload_offset = 487
+length = 7
+
+[[boundaries]]
+payload_offset = 494
+length = 3
+
+[[boundaries]]
+payload_offset = 497
+length = 7
+
+[[boundaries]]
+payload_offset = 504
+length = 3
+
+[[boundaries]]
+payload_offset = 507
+length = 1
+
+[[boundaries]]
+payload_offset = 508
+length = 7
+
+[[boundaries]]
+payload_offset = 515
+length = 3
+
+[[boundaries]]
+payload_offset = 518
+length = 1

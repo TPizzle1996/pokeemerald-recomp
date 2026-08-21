@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 4
 export_count = 23
 reloc_count = 64
+instruction_count = 195
 
 [[segments]]
 kind = "bytecode"
@@ -234,6 +235,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rusturftunnel"
 target_export = "RusturfTunnel_EventScript_SetAquaGruntAndPeekoPos"
 target_offset = 41
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 12
 runtime_resolution_required = true
 
 [[relocs]]
@@ -243,6 +246,8 @@ original_encoded_gba = 0x822d7a3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rusturftunnel"
 target_export = "RusturfTunnel_Text_BoyfriendOnOtherSideOfRock"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -252,6 +257,8 @@ original_encoded_gba = 0x82725a2
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceoriginaldirection"
 target_export = "Common_Movement_FaceOriginalDirection"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -262,6 +269,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rusturftunnel"
 target_export = "RusturfTunnel_EventScript_AlreadySpokenTo"
 target_offset = 114
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 85
 runtime_resolution_required = true
 
 [[relocs]]
@@ -271,6 +280,8 @@ original_encoded_gba = 0x822d510
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rusturftunnel"
 target_export = "RusturfTunnel_Text_WhyCantTheyKeepDigging"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -280,6 +291,8 @@ original_encoded_gba = 0x82725a2
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceoriginaldirection"
 target_export = "Common_Movement_FaceOriginalDirection"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -289,6 +302,8 @@ original_encoded_gba = 0x822d5f3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rusturftunnel"
 target_export = "RusturfTunnel_Text_ToGetToVerdanturf"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -298,6 +313,8 @@ original_encoded_gba = 0x82725a2
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceoriginaldirection"
 target_export = "Common_Movement_FaceOriginalDirection"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -308,6 +325,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rusturftunnel"
 target_export = "RusturfTunnel_EventScript_FaceWandasBoyfriend1"
 target_offset = 384
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 355
 runtime_resolution_required = true
 
 [[relocs]]
@@ -318,6 +337,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rusturftunnel"
 target_export = "RusturfTunnel_EventScript_FaceWandasBoyfriend2"
 target_offset = 405
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 376
 runtime_resolution_required = true
 
 [[relocs]]
@@ -328,6 +349,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rusturftunnel"
 target_export = "RusturfTunnel_EventScript_FaceWandasBoyfriend3"
 target_offset = 416
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 387
 runtime_resolution_required = true
 
 [[relocs]]
@@ -338,6 +361,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rusturftunnel"
 target_export = "RusturfTunnel_EventScript_WandasBoyfriendNotice"
 target_offset = 472
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 443
 runtime_resolution_required = true
 
 [[relocs]]
@@ -347,6 +372,8 @@ original_encoded_gba = 0x822d65c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rusturftunnel"
 target_export = "RusturfTunnel_Text_YouShatteredBoulderTakeHM"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -357,6 +384,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rusturftunnel"
 target_export = "RusturfTunnel_EventScript_WandasBoyfriendApproachPlayer"
 target_offset = 417
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 388
 runtime_resolution_required = true
 
 [[relocs]]
@@ -367,6 +396,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rusturftunnel"
 target_export = "RusturfTunnel_EventScript_WandasBoyfriendApproachPlayer"
 target_offset = 417
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 388
 runtime_resolution_required = true
 
 [[relocs]]
@@ -376,6 +407,8 @@ original_encoded_gba = 0x822d6d2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rusturftunnel"
 target_export = "RusturfTunnel_Text_ExplainStrength"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -386,6 +419,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rusturftunnel"
 target_export = "RusturfTunnel_EventScript_BoyfriendApproachWanda1"
 target_offset = 310
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 281
 runtime_resolution_required = true
 
 [[relocs]]
@@ -396,6 +431,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rusturftunnel"
 target_export = "RusturfTunnel_EventScript_BoyfriendApproachWanda2"
 target_offset = 328
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 299
 runtime_resolution_required = true
 
 [[relocs]]
@@ -406,6 +443,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rusturftunnel"
 target_export = "RusturfTunnel_EventScript_BoyfriendApproachWanda3"
 target_offset = 356
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 327
 runtime_resolution_required = true
 
 [[relocs]]
@@ -415,6 +454,8 @@ original_encoded_gba = 0x822d745
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rusturftunnel"
 target_export = "RusturfTunnel_Text_WandaReunion"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -425,6 +466,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rusturftunnel"
 target_export = "RusturfTunnel_EventScript_WandaAndBoyfriendExit1"
 target_offset = 429
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 400
 runtime_resolution_required = true
 
 [[relocs]]
@@ -435,6 +478,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rusturftunnel"
 target_export = "RusturfTunnel_EventScript_WandaAndBoyfriendExit"
 target_offset = 447
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 418
 runtime_resolution_required = true
 
 [[relocs]]
@@ -445,6 +490,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/rusturftunnel"
 target_export = "RusturfTunnel_EventScript_WandaAndBoyfriendExit"
 target_offset = 447
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 418
 runtime_resolution_required = true
 
 [[relocs]]
@@ -455,6 +502,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/prof-birch"
 target_export = "RusturfTunnel_EventScript_SetRusturfTunnelOpen"
 target_offset = 361
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 353
 runtime_resolution_required = true
 
 [[relocs]]
@@ -464,6 +513,8 @@ original_encoded_gba = 0x822d042
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rusturftunnel-movement-playerwatchboyfriend1"
 target_export = "RusturfTunnel_Movement_PlayerWatchBoyfriend1"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -473,6 +524,8 @@ original_encoded_gba = 0x822d067
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rusturftunnel-movement-boyfriendapproachwanda1"
 target_export = "RusturfTunnel_Movement_BoyfriendApproachWanda1"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -482,6 +535,8 @@ original_encoded_gba = 0x822d045
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rusturftunnel-movement-playerwatchboyfriend"
 target_export = "RusturfTunnel_Movement_PlayerWatchBoyfriend"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -491,6 +546,8 @@ original_encoded_gba = 0x822d06c
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rusturftunnel-movement-boyfriendapproachwanda"
 target_export = "RusturfTunnel_Movement_BoyfriendApproachWanda"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -500,6 +557,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -509,6 +568,8 @@ original_encoded_gba = 0x822d045
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rusturftunnel-movement-playerwatchboyfriend"
 target_export = "RusturfTunnel_Movement_PlayerWatchBoyfriend"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -518,6 +579,8 @@ original_encoded_gba = 0x822d06c
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rusturftunnel-movement-boyfriendapproachwanda"
 target_export = "RusturfTunnel_Movement_BoyfriendApproachWanda"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -527,6 +590,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -536,6 +601,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -545,6 +612,8 @@ original_encoded_gba = 0x82725aa
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterdown"
 target_export = "Common_Movement_WalkInPlaceFasterDown"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -554,6 +623,8 @@ original_encoded_gba = 0x822d048
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rusturftunnel-movement-boyfriendfaceright"
 target_export = "RusturfTunnel_Movement_BoyfriendFaceRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -563,6 +634,8 @@ original_encoded_gba = 0x822d065
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rusturftunnel-movement-wandasboyfriendapproachplayer"
 target_export = "RusturfTunnel_Movement_WandasBoyfriendApproachPlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -572,6 +645,8 @@ original_encoded_gba = 0x822d017
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rusturftunnel-movement-wandaexit1"
 target_export = "RusturfTunnel_Movement_WandaExit1"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -581,6 +656,8 @@ original_encoded_gba = 0x822d04b
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rusturftunnel-movement-wandasboyfriendexit1"
 target_export = "RusturfTunnel_Movement_WandasBoyfriendExit1"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -590,6 +667,8 @@ original_encoded_gba = 0x822d02f
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rusturftunnel-movement-playerwatchwandaexit"
 target_export = "RusturfTunnel_Movement_PlayerWatchWandaExit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -599,6 +678,8 @@ original_encoded_gba = 0x822d023
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rusturftunnel-movement-wandaexit"
 target_export = "RusturfTunnel_Movement_WandaExit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -608,6 +689,8 @@ original_encoded_gba = 0x822d058
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rusturftunnel-movement-wandasboyfriendexit"
 target_export = "RusturfTunnel_Movement_WandasBoyfriendExit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -617,6 +700,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -626,6 +711,8 @@ original_encoded_gba = 0x827259a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-delay48"
 target_export = "Common_Movement_Delay48"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -635,6 +722,8 @@ original_encoded_gba = 0x822d1c8
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rusturftunnel"
 target_export = "RusturfTunnel_Text_ComeAndGetSome"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -644,6 +733,8 @@ original_encoded_gba = 0x822d0ab
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rusturftunnel-movement-gruntandpeekobackup"
 target_export = "RusturfTunnel_Movement_GruntAndPeekoBackUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -653,6 +744,8 @@ original_encoded_gba = 0x822d0ab
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rusturftunnel-movement-gruntandpeekobackup"
 target_export = "RusturfTunnel_Movement_GruntAndPeekoBackUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -662,6 +755,8 @@ original_encoded_gba = 0x822d1f7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rusturftunnel"
 target_export = "RusturfTunnel_Text_Peeko"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -671,6 +766,8 @@ original_encoded_gba = 0x822d20a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rusturftunnel"
 target_export = "RusturfTunnel_Text_GruntIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -680,6 +777,8 @@ original_encoded_gba = 0x822d2b0
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rusturftunnel"
 target_export = "RusturfTunnel_Text_GruntDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -689,6 +788,8 @@ original_encoded_gba = 0x822d2e1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rusturftunnel"
 target_export = "RusturfTunnel_Text_GruntTakePackage"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -698,6 +799,8 @@ original_encoded_gba = 0x822d178
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rusturftunnel-movement-pushplayerasideforgrunt"
 target_export = "RusturfTunnel_Movement_PushPlayerAsideForGrunt"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -707,6 +810,8 @@ original_encoded_gba = 0x822d181
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rusturftunnel-movement-gruntescape"
 target_export = "RusturfTunnel_Movement_GruntEscape"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -716,6 +821,8 @@ original_encoded_gba = 0x822d18b
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rusturftunnel-movement-brineyapproachpeeko1"
 target_export = "RusturfTunnel_Movement_BrineyApproachPeeko1"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -725,6 +832,8 @@ original_encoded_gba = 0x822d17e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rusturftunnel-movement-playermoveasideforbriney"
 target_export = "RusturfTunnel_Movement_PlayerMoveAsideForBriney"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -734,6 +843,8 @@ original_encoded_gba = 0x822d1a4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rusturftunnel-movement-brineyapproachpeeko2"
 target_export = "RusturfTunnel_Movement_BrineyApproachPeeko2"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -743,6 +854,8 @@ original_encoded_gba = 0x822d395
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rusturftunnel"
 target_export = "RusturfTunnel_Text_PeekoGladToSeeYouSafe"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -752,6 +865,8 @@ original_encoded_gba = 0x827259e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceplayer"
 target_export = "Common_Movement_FacePlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -761,6 +876,8 @@ original_encoded_gba = 0x822d3ba
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rusturftunnel"
 target_export = "RusturfTunnel_Text_ThankYouLetsGoHomePeeko"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -770,6 +887,8 @@ original_encoded_gba = 0x822d19f
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rusturftunnel-movement-playerwatchbrineyexit"
 target_export = "RusturfTunnel_Movement_PlayerWatchBrineyExit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -779,6 +898,8 @@ original_encoded_gba = 0x822d193
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rusturftunnel-movement-brineyexit"
 target_export = "RusturfTunnel_Movement_BrineyExit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -788,6 +909,8 @@ original_encoded_gba = 0x822d1a7
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/rusturftunnel-movement-peekoexit"
 target_export = "RusturfTunnel_Movement_PeekoExit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -797,6 +920,8 @@ original_encoded_gba = 0x822d84d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rusturftunnel"
 target_export = "RusturfTunnel_Text_MikeIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -806,6 +931,8 @@ original_encoded_gba = 0x822d8db
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rusturftunnel"
 target_export = "RusturfTunnel_Text_MikeDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -815,4 +942,786 @@ original_encoded_gba = 0x822d8f9
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/rusturftunnel"
 target_export = "RusturfTunnel_Text_MikePostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 5
+
+[[boundaries]]
+payload_offset = 5
+length = 6
+
+[[boundaries]]
+payload_offset = 11
+length = 1
+
+[[boundaries]]
+payload_offset = 12
+length = 7
+
+[[boundaries]]
+payload_offset = 19
+length = 7
+
+[[boundaries]]
+payload_offset = 26
+length = 1
+
+[[boundaries]]
+payload_offset = 27
+length = 1
+
+[[boundaries]]
+payload_offset = 28
+length = 1
+
+[[boundaries]]
+payload_offset = 29
+length = 6
+
+[[boundaries]]
+payload_offset = 35
+length = 2
+
+[[boundaries]]
+payload_offset = 37
+length = 1
+
+[[boundaries]]
+payload_offset = 38
+length = 7
+
+[[boundaries]]
+payload_offset = 45
+length = 3
+
+[[boundaries]]
+payload_offset = 48
+length = 1
+
+[[boundaries]]
+payload_offset = 49
+length = 1
+
+[[boundaries]]
+payload_offset = 50
+length = 1
+
+[[boundaries]]
+payload_offset = 51
+length = 1
+
+[[boundaries]]
+payload_offset = 52
+length = 3
+
+[[boundaries]]
+payload_offset = 55
+length = 6
+
+[[boundaries]]
+payload_offset = 61
+length = 3
+
+[[boundaries]]
+payload_offset = 64
+length = 6
+
+[[boundaries]]
+payload_offset = 70
+length = 2
+
+[[boundaries]]
+payload_offset = 72
+length = 1
+
+[[boundaries]]
+payload_offset = 73
+length = 7
+
+[[boundaries]]
+payload_offset = 80
+length = 3
+
+[[boundaries]]
+payload_offset = 83
+length = 1
+
+[[boundaries]]
+payload_offset = 84
+length = 1
+
+[[boundaries]]
+payload_offset = 85
+length = 6
+
+[[boundaries]]
+payload_offset = 91
+length = 2
+
+[[boundaries]]
+payload_offset = 93
+length = 1
+
+[[boundaries]]
+payload_offset = 94
+length = 7
+
+[[boundaries]]
+payload_offset = 101
+length = 3
+
+[[boundaries]]
+payload_offset = 104
+length = 1
+
+[[boundaries]]
+payload_offset = 105
+length = 1
+
+[[boundaries]]
+payload_offset = 106
+length = 1
+
+[[boundaries]]
+payload_offset = 107
+length = 5
+
+[[boundaries]]
+payload_offset = 112
+length = 6
+
+[[boundaries]]
+payload_offset = 118
+length = 5
+
+[[boundaries]]
+payload_offset = 123
+length = 6
+
+[[boundaries]]
+payload_offset = 129
+length = 5
+
+[[boundaries]]
+payload_offset = 134
+length = 6
+
+[[boundaries]]
+payload_offset = 140
+length = 5
+
+[[boundaries]]
+payload_offset = 145
+length = 6
+
+[[boundaries]]
+payload_offset = 151
+length = 2
+
+[[boundaries]]
+payload_offset = 153
+length = 5
+
+[[boundaries]]
+payload_offset = 158
+length = 6
+
+[[boundaries]]
+payload_offset = 164
+length = 5
+
+[[boundaries]]
+payload_offset = 169
+length = 6
+
+[[boundaries]]
+payload_offset = 175
+length = 5
+
+[[boundaries]]
+payload_offset = 180
+length = 5
+
+[[boundaries]]
+payload_offset = 185
+length = 2
+
+[[boundaries]]
+payload_offset = 187
+length = 3
+
+[[boundaries]]
+payload_offset = 190
+length = 6
+
+[[boundaries]]
+payload_offset = 196
+length = 2
+
+[[boundaries]]
+payload_offset = 198
+length = 1
+
+[[boundaries]]
+payload_offset = 199
+length = 5
+
+[[boundaries]]
+payload_offset = 204
+length = 6
+
+[[boundaries]]
+payload_offset = 210
+length = 5
+
+[[boundaries]]
+payload_offset = 215
+length = 6
+
+[[boundaries]]
+payload_offset = 221
+length = 5
+
+[[boundaries]]
+payload_offset = 226
+length = 6
+
+[[boundaries]]
+payload_offset = 232
+length = 6
+
+[[boundaries]]
+payload_offset = 238
+length = 2
+
+[[boundaries]]
+payload_offset = 240
+length = 1
+
+[[boundaries]]
+payload_offset = 241
+length = 5
+
+[[boundaries]]
+payload_offset = 246
+length = 6
+
+[[boundaries]]
+payload_offset = 252
+length = 5
+
+[[boundaries]]
+payload_offset = 257
+length = 6
+
+[[boundaries]]
+payload_offset = 263
+length = 5
+
+[[boundaries]]
+payload_offset = 268
+length = 6
+
+[[boundaries]]
+payload_offset = 274
+length = 5
+
+[[boundaries]]
+payload_offset = 279
+length = 1
+
+[[boundaries]]
+payload_offset = 280
+length = 1
+
+[[boundaries]]
+payload_offset = 281
+length = 7
+
+[[boundaries]]
+payload_offset = 288
+length = 7
+
+[[boundaries]]
+payload_offset = 295
+length = 3
+
+[[boundaries]]
+payload_offset = 298
+length = 1
+
+[[boundaries]]
+payload_offset = 299
+length = 7
+
+[[boundaries]]
+payload_offset = 306
+length = 7
+
+[[boundaries]]
+payload_offset = 313
+length = 3
+
+[[boundaries]]
+payload_offset = 316
+length = 7
+
+[[boundaries]]
+payload_offset = 323
+length = 3
+
+[[boundaries]]
+payload_offset = 326
+length = 1
+
+[[boundaries]]
+payload_offset = 327
+length = 7
+
+[[boundaries]]
+payload_offset = 334
+length = 7
+
+[[boundaries]]
+payload_offset = 341
+length = 3
+
+[[boundaries]]
+payload_offset = 344
+length = 7
+
+[[boundaries]]
+payload_offset = 351
+length = 3
+
+[[boundaries]]
+payload_offset = 354
+length = 1
+
+[[boundaries]]
+payload_offset = 355
+length = 7
+
+[[boundaries]]
+payload_offset = 362
+length = 3
+
+[[boundaries]]
+payload_offset = 365
+length = 7
+
+[[boundaries]]
+payload_offset = 372
+length = 3
+
+[[boundaries]]
+payload_offset = 375
+length = 1
+
+[[boundaries]]
+payload_offset = 376
+length = 7
+
+[[boundaries]]
+payload_offset = 383
+length = 3
+
+[[boundaries]]
+payload_offset = 386
+length = 1
+
+[[boundaries]]
+payload_offset = 387
+length = 1
+
+[[boundaries]]
+payload_offset = 388
+length = 1
+
+[[boundaries]]
+payload_offset = 389
+length = 7
+
+[[boundaries]]
+payload_offset = 396
+length = 3
+
+[[boundaries]]
+payload_offset = 399
+length = 1
+
+[[boundaries]]
+payload_offset = 400
+length = 7
+
+[[boundaries]]
+payload_offset = 407
+length = 7
+
+[[boundaries]]
+payload_offset = 414
+length = 3
+
+[[boundaries]]
+payload_offset = 417
+length = 1
+
+[[boundaries]]
+payload_offset = 418
+length = 7
+
+[[boundaries]]
+payload_offset = 425
+length = 7
+
+[[boundaries]]
+payload_offset = 432
+length = 7
+
+[[boundaries]]
+payload_offset = 439
+length = 3
+
+[[boundaries]]
+payload_offset = 442
+length = 1
+
+[[boundaries]]
+payload_offset = 443
+length = 3
+
+[[boundaries]]
+payload_offset = 446
+length = 7
+
+[[boundaries]]
+payload_offset = 453
+length = 3
+
+[[boundaries]]
+payload_offset = 456
+length = 7
+
+[[boundaries]]
+payload_offset = 463
+length = 3
+
+[[boundaries]]
+payload_offset = 466
+length = 1
+
+[[boundaries]]
+payload_offset = 467
+length = 5
+
+[[boundaries]]
+payload_offset = 472
+length = 1
+
+[[boundaries]]
+payload_offset = 473
+length = 5
+
+[[boundaries]]
+payload_offset = 478
+length = 1
+
+[[boundaries]]
+payload_offset = 479
+length = 5
+
+[[boundaries]]
+payload_offset = 484
+length = 1
+
+[[boundaries]]
+payload_offset = 485
+length = 1
+
+[[boundaries]]
+payload_offset = 486
+length = 6
+
+[[boundaries]]
+payload_offset = 492
+length = 2
+
+[[boundaries]]
+payload_offset = 494
+length = 1
+
+[[boundaries]]
+payload_offset = 495
+length = 7
+
+[[boundaries]]
+payload_offset = 502
+length = 7
+
+[[boundaries]]
+payload_offset = 509
+length = 3
+
+[[boundaries]]
+payload_offset = 512
+length = 3
+
+[[boundaries]]
+payload_offset = 515
+length = 3
+
+[[boundaries]]
+payload_offset = 518
+length = 5
+
+[[boundaries]]
+payload_offset = 523
+length = 1
+
+[[boundaries]]
+payload_offset = 524
+length = 1
+
+[[boundaries]]
+payload_offset = 525
+length = 1
+
+[[boundaries]]
+payload_offset = 526
+length = 1
+
+[[boundaries]]
+payload_offset = 527
+length = 1
+
+[[boundaries]]
+payload_offset = 528
+length = 5
+
+[[boundaries]]
+payload_offset = 533
+length = 6
+
+[[boundaries]]
+payload_offset = 539
+length = 2
+
+[[boundaries]]
+payload_offset = 541
+length = 1
+
+[[boundaries]]
+payload_offset = 542
+length = 1
+
+[[boundaries]]
+payload_offset = 543
+length = 1
+
+[[boundaries]]
+payload_offset = 544
+length = 1
+
+[[boundaries]]
+payload_offset = 545
+length = 1
+
+[[boundaries]]
+payload_offset = 546
+length = 4
+
+[[boundaries]]
+payload_offset = 550
+length = 6
+
+[[boundaries]]
+payload_offset = 556
+length = 2
+
+[[boundaries]]
+payload_offset = 558
+length = 10
+
+[[boundaries]]
+payload_offset = 568
+length = 6
+
+[[boundaries]]
+payload_offset = 574
+length = 2
+
+[[boundaries]]
+payload_offset = 576
+length = 5
+
+[[boundaries]]
+payload_offset = 581
+length = 5
+
+[[boundaries]]
+payload_offset = 586
+length = 2
+
+[[boundaries]]
+payload_offset = 588
+length = 1
+
+[[boundaries]]
+payload_offset = 589
+length = 7
+
+[[boundaries]]
+payload_offset = 596
+length = 7
+
+[[boundaries]]
+payload_offset = 603
+length = 3
+
+[[boundaries]]
+payload_offset = 606
+length = 3
+
+[[boundaries]]
+payload_offset = 609
+length = 3
+
+[[boundaries]]
+payload_offset = 612
+length = 3
+
+[[boundaries]]
+payload_offset = 615
+length = 7
+
+[[boundaries]]
+payload_offset = 622
+length = 3
+
+[[boundaries]]
+payload_offset = 625
+length = 7
+
+[[boundaries]]
+payload_offset = 632
+length = 7
+
+[[boundaries]]
+payload_offset = 639
+length = 3
+
+[[boundaries]]
+payload_offset = 642
+length = 6
+
+[[boundaries]]
+payload_offset = 648
+length = 2
+
+[[boundaries]]
+payload_offset = 650
+length = 7
+
+[[boundaries]]
+payload_offset = 657
+length = 3
+
+[[boundaries]]
+payload_offset = 660
+length = 5
+
+[[boundaries]]
+payload_offset = 665
+length = 1
+
+[[boundaries]]
+payload_offset = 666
+length = 1
+
+[[boundaries]]
+payload_offset = 667
+length = 5
+
+[[boundaries]]
+payload_offset = 672
+length = 1
+
+[[boundaries]]
+payload_offset = 673
+length = 1
+
+[[boundaries]]
+payload_offset = 674
+length = 1
+
+[[boundaries]]
+payload_offset = 675
+length = 7
+
+[[boundaries]]
+payload_offset = 682
+length = 7
+
+[[boundaries]]
+payload_offset = 689
+length = 7
+
+[[boundaries]]
+payload_offset = 696
+length = 3
+
+[[boundaries]]
+payload_offset = 699
+length = 3
+
+[[boundaries]]
+payload_offset = 702
+length = 3
+
+[[boundaries]]
+payload_offset = 705
+length = 3
+
+[[boundaries]]
+payload_offset = 708
+length = 3
+
+[[boundaries]]
+payload_offset = 711
+length = 5
+
+[[boundaries]]
+payload_offset = 716
+length = 5
+
+[[boundaries]]
+payload_offset = 721
+length = 3
+
+[[boundaries]]
+payload_offset = 724
+length = 1
+
+[[boundaries]]
+payload_offset = 725
+length = 1
+
+[[boundaries]]
+payload_offset = 726
+length = 14
+
+[[boundaries]]
+payload_offset = 740
+length = 6
+
+[[boundaries]]
+payload_offset = 746
+length = 2
+
+[[boundaries]]
+payload_offset = 748
+length = 1

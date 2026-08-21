@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 2
 export_count = 70
 reloc_count = 147
+instruction_count = 415
 
 [[segments]]
 kind = "bytecode"
@@ -598,6 +599,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_BlendMasterPresent"
 target_offset = 4365
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 701
 runtime_resolution_required = true
 
 [[relocs]]
@@ -607,6 +610,8 @@ original_encoded_gba = 0x8294053
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/berryblender-movement-blendleaderwalkinplace"
 target_export = "BerryBlender_Movement_BlendLeaderWalkInPlace"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -616,6 +621,8 @@ original_encoded_gba = 0x8292dee
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/berry-blender"
 target_export = "BerryBlender_Text_WantToMakePokeblocks"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -626,6 +633,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_TryUseBerryBlender1"
 target_offset = 3840
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 176
 runtime_resolution_required = true
 
 [[relocs]]
@@ -636,6 +645,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_DeclineBlender1"
 target_offset = 3714
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 50
 runtime_resolution_required = true
 
 [[relocs]]
@@ -645,6 +656,8 @@ original_encoded_gba = 0x8292e33
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/berry-blender"
 target_export = "BerryBlender_Text_MadeOldTimerSad"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -654,6 +667,8 @@ original_encoded_gba = 0x8292f77
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/berry-blender"
 target_export = "BerryBlender_Text_DontHaveAnyBerries"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -664,6 +679,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_Blender1NoSpareBerries"
 target_offset = 3748
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 84
 runtime_resolution_required = true
 
 [[relocs]]
@@ -674,6 +691,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_Blender1GiveSpareBerry"
 target_offset = 3758
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 94
 runtime_resolution_required = true
 
 [[relocs]]
@@ -683,6 +702,8 @@ original_encoded_gba = 0x829307d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/berry-blender"
 target_export = "BerryBlender_Text_DontHaveAnyBerriesToSpare"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -692,6 +713,8 @@ original_encoded_gba = 0x8292fd1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/berry-blender"
 target_export = "BerryBlender_Text_CanHaveOneOfMyBerries"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -702,6 +725,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_UseBerryBlender1"
 target_offset = 3787
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 123
 runtime_resolution_required = true
 
 [[relocs]]
@@ -711,6 +736,8 @@ original_encoded_gba = 0x8292e57
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/berry-blender"
 target_export = "BerryBlender_Text_KnowHowToMakePokeblocks"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -721,6 +748,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_StartBlender1"
 target_offset = 3812
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 148
 runtime_resolution_required = true
 
 [[relocs]]
@@ -731,6 +760,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_ExplainBlending1"
 target_offset = 3826
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 162
 runtime_resolution_required = true
 
 [[relocs]]
@@ -740,6 +771,8 @@ original_encoded_gba = 0x8292e78
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/berry-blender"
 target_export = "BerryBlender_Text_LetsBerryBlender"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -750,6 +783,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_DoBerryBlending"
 target_offset = 3902
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 238
 runtime_resolution_required = true
 
 [[relocs]]
@@ -759,6 +794,8 @@ original_encoded_gba = 0x8292ea6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/berry-blender"
 target_export = "BerryBlender_Text_ExplainBerryBlending"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -769,6 +806,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_StartBlender1"
 target_offset = 3812
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 148
 runtime_resolution_required = true
 
 [[relocs]]
@@ -779,6 +818,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_Blender1NoCase"
 target_offset = 3925
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 261
 runtime_resolution_required = true
 
 [[relocs]]
@@ -789,6 +830,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_Blender1CaseFull"
 target_offset = 3915
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 251
 runtime_resolution_required = true
 
 [[relocs]]
@@ -799,6 +842,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_Blender1NoBerries"
 target_offset = 3724
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 60
 runtime_resolution_required = true
 
 [[relocs]]
@@ -808,6 +853,8 @@ original_encoded_gba = 0x8292e28
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/berry-blender"
 target_export = "BerryBlender_Text_Excellent"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -818,6 +865,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_UseBerryBlender1"
 target_offset = 3787
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 123
 runtime_resolution_required = true
 
 [[relocs]]
@@ -827,6 +876,8 @@ original_encoded_gba = 0x8293101
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/berry-blender"
 target_export = "BerryBlender_Text_PokeblockCaseIsFull"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -836,6 +887,8 @@ original_encoded_gba = 0x8293157
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/berry-blender"
 target_export = "BerryBlender_Text_DontHavePokeblockCase"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -845,6 +898,8 @@ original_encoded_gba = 0x82725a2
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceoriginaldirection"
 target_export = "Common_Movement_FaceOriginalDirection"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -854,6 +909,8 @@ original_encoded_gba = 0x8294053
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/berryblender-movement-blendleaderwalkinplace"
 target_export = "BerryBlender_Movement_BlendLeaderWalkInPlace"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -863,6 +920,8 @@ original_encoded_gba = 0x8293201
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/berry-blender"
 target_export = "BerryBlender_Text_WantToBlendPokeblocksWithUs"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -873,6 +932,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_TryUseBerryBlender2"
 target_offset = 4056
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 392
 runtime_resolution_required = true
 
 [[relocs]]
@@ -883,6 +944,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_DeclineBlender2"
 target_offset = 3983
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 319
 runtime_resolution_required = true
 
 [[relocs]]
@@ -892,6 +955,8 @@ original_encoded_gba = 0x829323d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/berry-blender"
 target_export = "BerryBlender_Text_ThatsTooBad"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -901,6 +966,8 @@ original_encoded_gba = 0x8293394
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/berry-blender"
 target_export = "BerryBlender_Text_DontHaveAnyBerries2"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -910,6 +977,8 @@ original_encoded_gba = 0x829328c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/berry-blender"
 target_export = "BerryBlender_Text_KnowHowToMakePokeblocks2"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -920,6 +989,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_StartBlender2"
 target_offset = 4028
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 364
 runtime_resolution_required = true
 
 [[relocs]]
@@ -930,6 +1001,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_ExplainBlending2"
 target_offset = 4042
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 378
 runtime_resolution_required = true
 
 [[relocs]]
@@ -939,6 +1012,8 @@ original_encoded_gba = 0x82932c3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/berry-blender"
 target_export = "BerryBlender_Text_LetsBerryBlender2"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -949,6 +1024,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_DoBerryBlending"
 target_offset = 3902
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 238
 runtime_resolution_required = true
 
 [[relocs]]
@@ -958,6 +1035,8 @@ original_encoded_gba = 0x82932f1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/berry-blender"
 target_export = "BerryBlender_Text_ExplainBerryBlending2"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -968,6 +1047,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_StartBlender2"
 target_offset = 4028
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 364
 runtime_resolution_required = true
 
 [[relocs]]
@@ -978,6 +1059,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_Blender2NoBerries"
 target_offset = 3993
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 329
 runtime_resolution_required = true
 
 [[relocs]]
@@ -988,6 +1071,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_Blender2NoCase"
 target_offset = 4134
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 470
 runtime_resolution_required = true
 
 [[relocs]]
@@ -997,6 +1082,8 @@ original_encoded_gba = 0x8293237
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/berry-blender"
 target_export = "BerryBlender_Text_Okay"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1007,6 +1094,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_UseBerryBlender2"
 target_offset = 4003
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 339
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1017,6 +1106,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_Blender2CaseFull"
 target_offset = 4124
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 460
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1026,6 +1117,8 @@ original_encoded_gba = 0x829343e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/berry-blender"
 target_export = "BerryBlender_Text_PokeblockCaseIsFull2"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1035,6 +1128,8 @@ original_encoded_gba = 0x82934a2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/berry-blender"
 target_export = "BerryBlender_Text_DontHavePokeblockCase2"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1044,6 +1139,8 @@ original_encoded_gba = 0x82725a2
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceoriginaldirection"
 target_export = "Common_Movement_FaceOriginalDirection"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1053,6 +1150,8 @@ original_encoded_gba = 0x82725a2
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceoriginaldirection"
 target_export = "Common_Movement_FaceOriginalDirection"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1062,6 +1161,8 @@ original_encoded_gba = 0x8294053
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/berryblender-movement-blendleaderwalkinplace"
 target_export = "BerryBlender_Movement_BlendLeaderWalkInPlace"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1071,6 +1172,8 @@ original_encoded_gba = 0x8293842
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/berry-blender"
 target_export = "BerryBlender_Text_LookGoodAtBlendingJoinUs"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1081,6 +1184,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_TryUseBlender3"
 target_offset = 4277
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 613
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1091,6 +1196,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_DeclineBlender3"
 target_offset = 4204
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 540
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1100,6 +1207,8 @@ original_encoded_gba = 0x8293558
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/berry-blender"
 target_export = "BerryBlender_Text_LeftUsInShock"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1109,6 +1218,8 @@ original_encoded_gba = 0x829367d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/berry-blender"
 target_export = "BerryBlender_Text_DontHaveAnyBerries3"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1118,6 +1229,8 @@ original_encoded_gba = 0x829357e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/berry-blender"
 target_export = "BerryBlender_Text_KnowHowToMakePokeblocks3"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1128,6 +1241,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_StartBlender3"
 target_offset = 4249
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 585
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1138,6 +1253,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_ExplainBlending3"
 target_offset = 4263
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 599
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1147,6 +1264,8 @@ original_encoded_gba = 0x82935b1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/berry-blender"
 target_export = "BerryBlender_Text_LetsBerryBlender3"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1157,6 +1276,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_DoBerryBlending"
 target_offset = 3902
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 238
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1166,6 +1287,8 @@ original_encoded_gba = 0x82935e5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/berry-blender"
 target_export = "BerryBlender_Text_ExplainBerryBlending3"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1176,6 +1299,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_StartBlender3"
 target_offset = 4249
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 585
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1186,6 +1311,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_Blender3NoBerries"
 target_offset = 4214
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 550
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1196,6 +1323,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_Blender3NoCase"
 target_offset = 4355
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 691
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1205,6 +1334,8 @@ original_encoded_gba = 0x829354e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/berry-blender"
 target_export = "BerryBlender_Text_OhDear"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1215,6 +1346,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_UseBerryBlender3"
 target_offset = 4224
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 560
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1225,6 +1358,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_Blender3CaseFull"
 target_offset = 4345
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 681
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1234,6 +1369,8 @@ original_encoded_gba = 0x8293738
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/berry-blender"
 target_export = "BerryBlender_Text_PokeblockCaseIsFull3"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1243,6 +1380,8 @@ original_encoded_gba = 0x8293792
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/berry-blender"
 target_export = "BerryBlender_Text_DontHavePokeblockCase3"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1252,6 +1391,8 @@ original_encoded_gba = 0x82c42f4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/blend-master"
 target_export = "BerryBlender_Text_SeeMyMasteryInAction"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1262,6 +1403,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_TryBlendWithBlendMaster"
 target_offset = 4410
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 746
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1271,6 +1414,8 @@ original_encoded_gba = 0x82c4332
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/blend-master"
 target_export = "BerryBlender_Text_TooBusyNowIsee"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1280,6 +1425,8 @@ original_encoded_gba = 0x82c439d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/blend-master"
 target_export = "BerryBlender_Text_BlendMasterNoBerries"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1290,6 +1437,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_BlendMasterNoCase"
 target_offset = 4512
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 848
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1300,6 +1449,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_BlendMasterNoBerries"
 target_offset = 4400
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 736
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1310,6 +1461,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_BlendWithBlendMaster"
 target_offset = 4470
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 806
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1320,6 +1473,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_BlendMasterCaseFull"
 target_offset = 4522
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 858
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1329,6 +1484,8 @@ original_encoded_gba = 0x82c43fa
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/blend-master"
 target_export = "BerryBlender_Text_BlendMasterKnowHowToMakePokeblocks"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1339,6 +1496,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_BlendMasterExplainBlending"
 target_offset = 4503
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 839
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1348,6 +1507,8 @@ original_encoded_gba = 0x82c451b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/blend-master"
 target_export = "BerryBlender_Text_BlendMasterLetsBerryBlender"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1358,6 +1519,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_DoBerryBlending"
 target_offset = 3902
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 238
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1367,6 +1530,8 @@ original_encoded_gba = 0x82c444c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/blend-master"
 target_export = "BerryBlender_Text_BlendMasterExplainBerryBlending"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1376,6 +1541,8 @@ original_encoded_gba = 0x82c4573
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/blend-master"
 target_export = "BerryBlender_Text_BlendMasterNoPokeblockCase"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1385,6 +1552,8 @@ original_encoded_gba = 0x82c45e8
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/blend-master"
 target_export = "BerryBlender_Text_BlendMasterPokeblockCaseFull"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1394,6 +1563,8 @@ original_encoded_gba = 0x82937f9
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/berry-blender"
 target_export = "BerryBlender_Text_SetNewBlenderRecord"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1403,6 +1574,8 @@ original_encoded_gba = 0x8293842
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/berry-blender"
 target_export = "BerryBlender_Text_LookGoodAtBlendingJoinUs"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1412,6 +1585,8 @@ original_encoded_gba = 0x829388f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/berry-blender"
 target_export = "BerryBlender_Text_MakeDeliciousPokeblocks"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1422,6 +1597,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_ExpertMCheckGiveBerry"
 target_offset = 4570
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 906
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1431,6 +1608,8 @@ original_encoded_gba = 0x8293a6b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/berry-blender"
 target_export = "BerryBlender_Text_LoveMakingPokeblocks"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1441,6 +1620,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_ExpertMPlayerHasBerries"
 target_offset = 4608
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 944
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1451,6 +1632,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_ExpertMNoBerries"
 target_offset = 4618
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 954
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1460,6 +1643,8 @@ original_encoded_gba = 0x8293aa5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/berry-blender"
 target_export = "BerryBlender_Text_MakePokeblocksUsingBerryBlender"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1470,6 +1655,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_ExpertMNoSpareBerries"
 target_offset = 4666
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1002
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1480,6 +1667,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_ExpertMNoSpareBerries"
 target_offset = 4666
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1002
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1490,6 +1679,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_ExpertMNoSpareBerries"
 target_offset = 4666
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1002
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1500,6 +1691,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_ExpertMGiveBerry"
 target_offset = 4676
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1012
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1509,6 +1702,8 @@ original_encoded_gba = 0x8293bb4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/berry-blender"
 target_export = "BerryBlender_Text_DontHaveAnyBerriesNoneToSpare"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1518,6 +1713,8 @@ original_encoded_gba = 0x8293af0
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/berry-blender"
 target_export = "BerryBlender_Text_DontHaveAnyBerriesHaveOne"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1527,6 +1724,8 @@ original_encoded_gba = 0x8293b76
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/berry-blender"
 target_export = "BerryBlender_Text_UseItToMakePokeblocksTogether"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1537,6 +1736,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_LinkBlenderNoBerries"
 target_offset = 4803
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1137
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1547,6 +1748,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_LinkBlenderNoCase"
 target_offset = 4990
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1324
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1557,6 +1760,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_LinkBlenderSaveGame"
 target_offset = 4772
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1106
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1567,6 +1772,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_LinkBlenderCaseFull"
 target_offset = 4980
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1314
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1576,6 +1783,8 @@ original_encoded_gba = 0x82938cd
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/berry-blender"
 target_export = "BerryBlender_Text_SaveGameBeforeBerryBlenderLink"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1586,6 +1795,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_TryDoLinkBlender"
 target_offset = 4813
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1147
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1596,6 +1807,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_CancelLinkBlender"
 target_offset = 4978
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1312
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1605,6 +1818,8 @@ original_encoded_gba = 0x82939bd
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/berry-blender"
 target_export = "BerryBlender_Text_NoBerriesLink"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1615,6 +1830,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/std-msgbox"
 target_export = "Common_EventScript_SaveGame"
 target_offset = 58
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 58
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1625,6 +1842,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_CancelLinkBlender"
 target_offset = 4978
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1312
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1635,6 +1854,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_StartDecideLinkLeader"
 target_offset = 5119
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1453
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1644,6 +1865,8 @@ original_encoded_gba = 0x8293955
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/berry-blender"
 target_export = "BerryBlender_Text_SearchingForFriends"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1654,6 +1877,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_SpawnLinkPartners"
 target_offset = 5052
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1386
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1664,6 +1889,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_CloseLinkNotReady"
 target_offset = 5000
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1334
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1674,6 +1901,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_CloseLinkDifferentSelections"
 target_offset = 5013
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1347
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1684,6 +1913,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_CloseLink"
 target_offset = 5026
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1360
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1694,6 +1925,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_LinkError"
 target_offset = 5039
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1373
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1703,6 +1936,8 @@ original_encoded_gba = 0x8293986
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/berry-blender"
 target_export = "BerryBlender_Text_Player1Arrived"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1713,6 +1948,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_DoLinkBerryBlending"
 target_offset = 4953
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1287
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1722,6 +1959,8 @@ original_encoded_gba = 0x8293992
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/berry-blender"
 target_export = "BerryBlender_Text_Player1And2Arrived"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1732,6 +1971,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_DoLinkBerryBlending"
 target_offset = 4953
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1287
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1741,6 +1982,8 @@ original_encoded_gba = 0x82939a5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/berry-blender"
 target_export = "BerryBlender_Text_AllPlayersArrived"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1751,6 +1994,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_DoLinkBerryBlending"
 target_offset = 4953
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1287
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1760,6 +2005,8 @@ original_encoded_gba = 0x82939f3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/berry-blender"
 target_export = "BerryBlender_Text_PokeblockCaseIsFullLink"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1769,6 +2016,8 @@ original_encoded_gba = 0x8293a2d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/berry-blender"
 target_export = "BerryBlender_Text_DontHavePokeblockCaseLink"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1778,6 +2027,8 @@ original_encoded_gba = 0x82781c7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/cable-club"
 target_export = "Text_SomeoneIsNotReadyToLink"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1787,6 +2038,8 @@ original_encoded_gba = 0x8278255
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/cable-club"
 target_export = "Text_PlayersMadeDifferentSelections"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1796,6 +2049,8 @@ original_encoded_gba = 0x8272d9c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/event-scripts"
 target_export = "gText_PokeblockLinkCanceled"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1805,6 +2060,8 @@ original_encoded_gba = 0x827821c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/cable-club"
 target_export = "Text_LinkErrorPleaseReset"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1815,6 +2072,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_LinkPlayersArrived"
 target_offset = 5078
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1412
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1825,6 +2084,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_TwoPlayerLink"
 target_offset = 4911
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1245
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1835,6 +2096,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_ThreePlayerLink"
 target_offset = 4925
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1259
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1845,6 +2108,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_FourPlayerLink"
 target_offset = 4939
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1273
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1855,6 +2120,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_DecideLinkLeader"
 target_offset = 5130
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1464
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1864,6 +2131,8 @@ original_encoded_gba = 0x827c1ea
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/contest-hall"
 target_export = "LilycoveCity_ContestLobby_Text_PleaseDecideLinkLeader"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1874,6 +2143,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_TryJoinGroup"
 target_offset = 5231
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1565
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1884,6 +2155,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_TryLeadGroup"
 target_offset = 5191
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1525
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1894,6 +2167,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_CloseLink"
 target_offset = 5026
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1360
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1904,6 +2179,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_CloseLink"
 target_offset = 5026
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1360
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1914,6 +2191,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_TryBecomeLinkLeader"
 target_offset = 5271
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1605
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1924,6 +2203,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_LinkLeaderDecided"
 target_offset = 5281
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1615
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1934,6 +2215,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_DecideLinkLeader"
 target_offset = 5130
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1464
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1944,6 +2227,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_TryLeadGroup"
 target_offset = 5191
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1525
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1954,6 +2239,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_TryJoinLinkGroup"
 target_offset = 5276
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1610
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1964,6 +2251,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_LinkLeaderDecided"
 target_offset = 5281
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1615
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1974,6 +2263,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_DecideLinkLeader"
 target_offset = 5130
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1464
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1984,6 +2275,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_TryJoinGroup"
 target_offset = 5231
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1565
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1994,4 +2287,1666 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/berry-blender"
 target_export = "BerryBlender_EventScript_SpawnLinkPartners"
 target_offset = 5052
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1386
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 3
+
+[[boundaries]]
+payload_offset = 4
+length = 6
+
+[[boundaries]]
+payload_offset = 10
+length = 5
+
+[[boundaries]]
+payload_offset = 15
+length = 7
+
+[[boundaries]]
+payload_offset = 22
+length = 3
+
+[[boundaries]]
+payload_offset = 25
+length = 6
+
+[[boundaries]]
+payload_offset = 31
+length = 2
+
+[[boundaries]]
+payload_offset = 33
+length = 5
+
+[[boundaries]]
+payload_offset = 38
+length = 6
+
+[[boundaries]]
+payload_offset = 44
+length = 5
+
+[[boundaries]]
+payload_offset = 50
+length = 6
+
+[[boundaries]]
+payload_offset = 56
+length = 2
+
+[[boundaries]]
+payload_offset = 58
+length = 1
+
+[[boundaries]]
+payload_offset = 59
+length = 1
+
+[[boundaries]]
+payload_offset = 60
+length = 6
+
+[[boundaries]]
+payload_offset = 66
+length = 2
+
+[[boundaries]]
+payload_offset = 68
+length = 1
+
+[[boundaries]]
+payload_offset = 69
+length = 3
+
+[[boundaries]]
+payload_offset = 72
+length = 6
+
+[[boundaries]]
+payload_offset = 78
+length = 5
+
+[[boundaries]]
+payload_offset = 84
+length = 6
+
+[[boundaries]]
+payload_offset = 90
+length = 2
+
+[[boundaries]]
+payload_offset = 92
+length = 1
+
+[[boundaries]]
+payload_offset = 93
+length = 1
+
+[[boundaries]]
+payload_offset = 94
+length = 6
+
+[[boundaries]]
+payload_offset = 100
+length = 2
+
+[[boundaries]]
+payload_offset = 102
+length = 5
+
+[[boundaries]]
+payload_offset = 107
+length = 5
+
+[[boundaries]]
+payload_offset = 112
+length = 2
+
+[[boundaries]]
+payload_offset = 114
+length = 3
+
+[[boundaries]]
+payload_offset = 117
+length = 5
+
+[[boundaries]]
+payload_offset = 123
+length = 6
+
+[[boundaries]]
+payload_offset = 129
+length = 2
+
+[[boundaries]]
+payload_offset = 131
+length = 5
+
+[[boundaries]]
+payload_offset = 136
+length = 6
+
+[[boundaries]]
+payload_offset = 142
+length = 5
+
+[[boundaries]]
+payload_offset = 148
+length = 6
+
+[[boundaries]]
+payload_offset = 154
+length = 2
+
+[[boundaries]]
+payload_offset = 156
+length = 5
+
+[[boundaries]]
+payload_offset = 162
+length = 6
+
+[[boundaries]]
+payload_offset = 168
+length = 2
+
+[[boundaries]]
+payload_offset = 170
+length = 5
+
+[[boundaries]]
+payload_offset = 176
+length = 5
+
+[[boundaries]]
+payload_offset = 181
+length = 5
+
+[[boundaries]]
+payload_offset = 186
+length = 6
+
+[[boundaries]]
+payload_offset = 192
+length = 5
+
+[[boundaries]]
+payload_offset = 197
+length = 5
+
+[[boundaries]]
+payload_offset = 202
+length = 6
+
+[[boundaries]]
+payload_offset = 208
+length = 5
+
+[[boundaries]]
+payload_offset = 213
+length = 5
+
+[[boundaries]]
+payload_offset = 218
+length = 6
+
+[[boundaries]]
+payload_offset = 224
+length = 6
+
+[[boundaries]]
+payload_offset = 230
+length = 2
+
+[[boundaries]]
+payload_offset = 232
+length = 5
+
+[[boundaries]]
+payload_offset = 238
+length = 5
+
+[[boundaries]]
+payload_offset = 243
+length = 2
+
+[[boundaries]]
+payload_offset = 245
+length = 3
+
+[[boundaries]]
+payload_offset = 248
+length = 1
+
+[[boundaries]]
+payload_offset = 249
+length = 1
+
+[[boundaries]]
+payload_offset = 250
+length = 1
+
+[[boundaries]]
+payload_offset = 251
+length = 6
+
+[[boundaries]]
+payload_offset = 257
+length = 2
+
+[[boundaries]]
+payload_offset = 259
+length = 1
+
+[[boundaries]]
+payload_offset = 260
+length = 1
+
+[[boundaries]]
+payload_offset = 261
+length = 6
+
+[[boundaries]]
+payload_offset = 267
+length = 2
+
+[[boundaries]]
+payload_offset = 269
+length = 1
+
+[[boundaries]]
+payload_offset = 270
+length = 1
+
+[[boundaries]]
+payload_offset = 271
+length = 1
+
+[[boundaries]]
+payload_offset = 272
+length = 5
+
+[[boundaries]]
+payload_offset = 277
+length = 7
+
+[[boundaries]]
+payload_offset = 284
+length = 7
+
+[[boundaries]]
+payload_offset = 291
+length = 3
+
+[[boundaries]]
+payload_offset = 294
+length = 6
+
+[[boundaries]]
+payload_offset = 300
+length = 2
+
+[[boundaries]]
+payload_offset = 302
+length = 5
+
+[[boundaries]]
+payload_offset = 307
+length = 6
+
+[[boundaries]]
+payload_offset = 313
+length = 5
+
+[[boundaries]]
+payload_offset = 319
+length = 6
+
+[[boundaries]]
+payload_offset = 325
+length = 2
+
+[[boundaries]]
+payload_offset = 327
+length = 1
+
+[[boundaries]]
+payload_offset = 328
+length = 1
+
+[[boundaries]]
+payload_offset = 329
+length = 6
+
+[[boundaries]]
+payload_offset = 335
+length = 2
+
+[[boundaries]]
+payload_offset = 337
+length = 1
+
+[[boundaries]]
+payload_offset = 338
+length = 1
+
+[[boundaries]]
+payload_offset = 339
+length = 6
+
+[[boundaries]]
+payload_offset = 345
+length = 2
+
+[[boundaries]]
+payload_offset = 347
+length = 5
+
+[[boundaries]]
+payload_offset = 352
+length = 6
+
+[[boundaries]]
+payload_offset = 358
+length = 5
+
+[[boundaries]]
+payload_offset = 364
+length = 6
+
+[[boundaries]]
+payload_offset = 370
+length = 2
+
+[[boundaries]]
+payload_offset = 372
+length = 5
+
+[[boundaries]]
+payload_offset = 378
+length = 6
+
+[[boundaries]]
+payload_offset = 384
+length = 2
+
+[[boundaries]]
+payload_offset = 386
+length = 5
+
+[[boundaries]]
+payload_offset = 392
+length = 5
+
+[[boundaries]]
+payload_offset = 397
+length = 5
+
+[[boundaries]]
+payload_offset = 402
+length = 6
+
+[[boundaries]]
+payload_offset = 408
+length = 5
+
+[[boundaries]]
+payload_offset = 413
+length = 5
+
+[[boundaries]]
+payload_offset = 418
+length = 6
+
+[[boundaries]]
+payload_offset = 424
+length = 6
+
+[[boundaries]]
+payload_offset = 430
+length = 2
+
+[[boundaries]]
+payload_offset = 432
+length = 5
+
+[[boundaries]]
+payload_offset = 437
+length = 5
+
+[[boundaries]]
+payload_offset = 442
+length = 6
+
+[[boundaries]]
+payload_offset = 448
+length = 5
+
+[[boundaries]]
+payload_offset = 453
+length = 6
+
+[[boundaries]]
+payload_offset = 459
+length = 1
+
+[[boundaries]]
+payload_offset = 460
+length = 6
+
+[[boundaries]]
+payload_offset = 466
+length = 2
+
+[[boundaries]]
+payload_offset = 468
+length = 1
+
+[[boundaries]]
+payload_offset = 469
+length = 1
+
+[[boundaries]]
+payload_offset = 470
+length = 6
+
+[[boundaries]]
+payload_offset = 476
+length = 2
+
+[[boundaries]]
+payload_offset = 478
+length = 1
+
+[[boundaries]]
+payload_offset = 479
+length = 1
+
+[[boundaries]]
+payload_offset = 480
+length = 1
+
+[[boundaries]]
+payload_offset = 481
+length = 5
+
+[[boundaries]]
+payload_offset = 486
+length = 5
+
+[[boundaries]]
+payload_offset = 491
+length = 7
+
+[[boundaries]]
+payload_offset = 498
+length = 7
+
+[[boundaries]]
+payload_offset = 505
+length = 7
+
+[[boundaries]]
+payload_offset = 512
+length = 3
+
+[[boundaries]]
+payload_offset = 515
+length = 6
+
+[[boundaries]]
+payload_offset = 521
+length = 2
+
+[[boundaries]]
+payload_offset = 523
+length = 5
+
+[[boundaries]]
+payload_offset = 528
+length = 6
+
+[[boundaries]]
+payload_offset = 534
+length = 5
+
+[[boundaries]]
+payload_offset = 540
+length = 6
+
+[[boundaries]]
+payload_offset = 546
+length = 2
+
+[[boundaries]]
+payload_offset = 548
+length = 1
+
+[[boundaries]]
+payload_offset = 549
+length = 1
+
+[[boundaries]]
+payload_offset = 550
+length = 6
+
+[[boundaries]]
+payload_offset = 556
+length = 2
+
+[[boundaries]]
+payload_offset = 558
+length = 1
+
+[[boundaries]]
+payload_offset = 559
+length = 1
+
+[[boundaries]]
+payload_offset = 560
+length = 6
+
+[[boundaries]]
+payload_offset = 566
+length = 2
+
+[[boundaries]]
+payload_offset = 568
+length = 5
+
+[[boundaries]]
+payload_offset = 573
+length = 6
+
+[[boundaries]]
+payload_offset = 579
+length = 5
+
+[[boundaries]]
+payload_offset = 585
+length = 6
+
+[[boundaries]]
+payload_offset = 591
+length = 2
+
+[[boundaries]]
+payload_offset = 593
+length = 5
+
+[[boundaries]]
+payload_offset = 599
+length = 6
+
+[[boundaries]]
+payload_offset = 605
+length = 2
+
+[[boundaries]]
+payload_offset = 607
+length = 5
+
+[[boundaries]]
+payload_offset = 613
+length = 5
+
+[[boundaries]]
+payload_offset = 618
+length = 5
+
+[[boundaries]]
+payload_offset = 623
+length = 6
+
+[[boundaries]]
+payload_offset = 629
+length = 5
+
+[[boundaries]]
+payload_offset = 634
+length = 5
+
+[[boundaries]]
+payload_offset = 639
+length = 6
+
+[[boundaries]]
+payload_offset = 645
+length = 6
+
+[[boundaries]]
+payload_offset = 651
+length = 2
+
+[[boundaries]]
+payload_offset = 653
+length = 5
+
+[[boundaries]]
+payload_offset = 658
+length = 5
+
+[[boundaries]]
+payload_offset = 663
+length = 6
+
+[[boundaries]]
+payload_offset = 669
+length = 5
+
+[[boundaries]]
+payload_offset = 674
+length = 6
+
+[[boundaries]]
+payload_offset = 680
+length = 1
+
+[[boundaries]]
+payload_offset = 681
+length = 6
+
+[[boundaries]]
+payload_offset = 687
+length = 2
+
+[[boundaries]]
+payload_offset = 689
+length = 1
+
+[[boundaries]]
+payload_offset = 690
+length = 1
+
+[[boundaries]]
+payload_offset = 691
+length = 6
+
+[[boundaries]]
+payload_offset = 697
+length = 2
+
+[[boundaries]]
+payload_offset = 699
+length = 1
+
+[[boundaries]]
+payload_offset = 700
+length = 1
+
+[[boundaries]]
+payload_offset = 701
+length = 1
+
+[[boundaries]]
+payload_offset = 702
+length = 5
+
+[[boundaries]]
+payload_offset = 707
+length = 6
+
+[[boundaries]]
+payload_offset = 713
+length = 2
+
+[[boundaries]]
+payload_offset = 715
+length = 5
+
+[[boundaries]]
+payload_offset = 720
+length = 6
+
+[[boundaries]]
+payload_offset = 726
+length = 6
+
+[[boundaries]]
+payload_offset = 732
+length = 2
+
+[[boundaries]]
+payload_offset = 734
+length = 1
+
+[[boundaries]]
+payload_offset = 735
+length = 1
+
+[[boundaries]]
+payload_offset = 736
+length = 6
+
+[[boundaries]]
+payload_offset = 742
+length = 2
+
+[[boundaries]]
+payload_offset = 744
+length = 1
+
+[[boundaries]]
+payload_offset = 745
+length = 1
+
+[[boundaries]]
+payload_offset = 746
+length = 5
+
+[[boundaries]]
+payload_offset = 751
+length = 5
+
+[[boundaries]]
+payload_offset = 756
+length = 6
+
+[[boundaries]]
+payload_offset = 762
+length = 5
+
+[[boundaries]]
+payload_offset = 767
+length = 5
+
+[[boundaries]]
+payload_offset = 772
+length = 6
+
+[[boundaries]]
+payload_offset = 778
+length = 5
+
+[[boundaries]]
+payload_offset = 783
+length = 5
+
+[[boundaries]]
+payload_offset = 788
+length = 6
+
+[[boundaries]]
+payload_offset = 794
+length = 5
+
+[[boundaries]]
+payload_offset = 799
+length = 6
+
+[[boundaries]]
+payload_offset = 805
+length = 1
+
+[[boundaries]]
+payload_offset = 806
+length = 6
+
+[[boundaries]]
+payload_offset = 812
+length = 2
+
+[[boundaries]]
+payload_offset = 814
+length = 5
+
+[[boundaries]]
+payload_offset = 819
+length = 6
+
+[[boundaries]]
+payload_offset = 825
+length = 6
+
+[[boundaries]]
+payload_offset = 831
+length = 2
+
+[[boundaries]]
+payload_offset = 833
+length = 5
+
+[[boundaries]]
+payload_offset = 839
+length = 6
+
+[[boundaries]]
+payload_offset = 845
+length = 2
+
+[[boundaries]]
+payload_offset = 847
+length = 1
+
+[[boundaries]]
+payload_offset = 848
+length = 6
+
+[[boundaries]]
+payload_offset = 854
+length = 2
+
+[[boundaries]]
+payload_offset = 856
+length = 1
+
+[[boundaries]]
+payload_offset = 857
+length = 1
+
+[[boundaries]]
+payload_offset = 858
+length = 6
+
+[[boundaries]]
+payload_offset = 864
+length = 2
+
+[[boundaries]]
+payload_offset = 866
+length = 1
+
+[[boundaries]]
+payload_offset = 867
+length = 1
+
+[[boundaries]]
+payload_offset = 868
+length = 6
+
+[[boundaries]]
+payload_offset = 874
+length = 2
+
+[[boundaries]]
+payload_offset = 876
+length = 1
+
+[[boundaries]]
+payload_offset = 877
+length = 6
+
+[[boundaries]]
+payload_offset = 883
+length = 2
+
+[[boundaries]]
+payload_offset = 885
+length = 1
+
+[[boundaries]]
+payload_offset = 886
+length = 6
+
+[[boundaries]]
+payload_offset = 892
+length = 2
+
+[[boundaries]]
+payload_offset = 894
+length = 1
+
+[[boundaries]]
+payload_offset = 895
+length = 5
+
+[[boundaries]]
+payload_offset = 900
+length = 5
+
+[[boundaries]]
+payload_offset = 906
+length = 1
+
+[[boundaries]]
+payload_offset = 907
+length = 1
+
+[[boundaries]]
+payload_offset = 908
+length = 6
+
+[[boundaries]]
+payload_offset = 914
+length = 2
+
+[[boundaries]]
+payload_offset = 916
+length = 5
+
+[[boundaries]]
+payload_offset = 921
+length = 5
+
+[[boundaries]]
+payload_offset = 926
+length = 6
+
+[[boundaries]]
+payload_offset = 932
+length = 5
+
+[[boundaries]]
+payload_offset = 937
+length = 6
+
+[[boundaries]]
+payload_offset = 943
+length = 1
+
+[[boundaries]]
+payload_offset = 944
+length = 6
+
+[[boundaries]]
+payload_offset = 950
+length = 2
+
+[[boundaries]]
+payload_offset = 952
+length = 1
+
+[[boundaries]]
+payload_offset = 953
+length = 1
+
+[[boundaries]]
+payload_offset = 954
+length = 5
+
+[[boundaries]]
+payload_offset = 959
+length = 5
+
+[[boundaries]]
+payload_offset = 964
+length = 6
+
+[[boundaries]]
+payload_offset = 970
+length = 5
+
+[[boundaries]]
+payload_offset = 975
+length = 5
+
+[[boundaries]]
+payload_offset = 980
+length = 6
+
+[[boundaries]]
+payload_offset = 986
+length = 1
+
+[[boundaries]]
+payload_offset = 987
+length = 3
+
+[[boundaries]]
+payload_offset = 990
+length = 6
+
+[[boundaries]]
+payload_offset = 996
+length = 5
+
+[[boundaries]]
+payload_offset = 1002
+length = 6
+
+[[boundaries]]
+payload_offset = 1008
+length = 2
+
+[[boundaries]]
+payload_offset = 1010
+length = 1
+
+[[boundaries]]
+payload_offset = 1011
+length = 1
+
+[[boundaries]]
+payload_offset = 1012
+length = 6
+
+[[boundaries]]
+payload_offset = 1018
+length = 2
+
+[[boundaries]]
+payload_offset = 1020
+length = 5
+
+[[boundaries]]
+payload_offset = 1025
+length = 5
+
+[[boundaries]]
+payload_offset = 1030
+length = 2
+
+[[boundaries]]
+payload_offset = 1032
+length = 3
+
+[[boundaries]]
+payload_offset = 1035
+length = 6
+
+[[boundaries]]
+payload_offset = 1041
+length = 2
+
+[[boundaries]]
+payload_offset = 1043
+length = 1
+
+[[boundaries]]
+payload_offset = 1044
+length = 1
+
+[[boundaries]]
+payload_offset = 1045
+length = 1
+
+[[boundaries]]
+payload_offset = 1046
+length = 5
+
+[[boundaries]]
+payload_offset = 1051
+length = 5
+
+[[boundaries]]
+payload_offset = 1056
+length = 6
+
+[[boundaries]]
+payload_offset = 1062
+length = 5
+
+[[boundaries]]
+payload_offset = 1067
+length = 5
+
+[[boundaries]]
+payload_offset = 1072
+length = 6
+
+[[boundaries]]
+payload_offset = 1078
+length = 5
+
+[[boundaries]]
+payload_offset = 1083
+length = 5
+
+[[boundaries]]
+payload_offset = 1088
+length = 6
+
+[[boundaries]]
+payload_offset = 1094
+length = 5
+
+[[boundaries]]
+payload_offset = 1099
+length = 6
+
+[[boundaries]]
+payload_offset = 1105
+length = 1
+
+[[boundaries]]
+payload_offset = 1106
+length = 6
+
+[[boundaries]]
+payload_offset = 1112
+length = 2
+
+[[boundaries]]
+payload_offset = 1114
+length = 5
+
+[[boundaries]]
+payload_offset = 1119
+length = 6
+
+[[boundaries]]
+payload_offset = 1125
+length = 5
+
+[[boundaries]]
+payload_offset = 1130
+length = 6
+
+[[boundaries]]
+payload_offset = 1136
+length = 1
+
+[[boundaries]]
+payload_offset = 1137
+length = 6
+
+[[boundaries]]
+payload_offset = 1143
+length = 2
+
+[[boundaries]]
+payload_offset = 1145
+length = 1
+
+[[boundaries]]
+payload_offset = 1146
+length = 1
+
+[[boundaries]]
+payload_offset = 1147
+length = 5
+
+[[boundaries]]
+payload_offset = 1152
+length = 5
+
+[[boundaries]]
+payload_offset = 1157
+length = 6
+
+[[boundaries]]
+payload_offset = 1163
+length = 5
+
+[[boundaries]]
+payload_offset = 1168
+length = 5
+
+[[boundaries]]
+payload_offset = 1173
+length = 6
+
+[[boundaries]]
+payload_offset = 1179
+length = 5
+
+[[boundaries]]
+payload_offset = 1184
+length = 1
+
+[[boundaries]]
+payload_offset = 1185
+length = 3
+
+[[boundaries]]
+payload_offset = 1188
+length = 1
+
+[[boundaries]]
+payload_offset = 1189
+length = 5
+
+[[boundaries]]
+payload_offset = 1194
+length = 6
+
+[[boundaries]]
+payload_offset = 1200
+length = 5
+
+[[boundaries]]
+payload_offset = 1205
+length = 6
+
+[[boundaries]]
+payload_offset = 1211
+length = 5
+
+[[boundaries]]
+payload_offset = 1216
+length = 6
+
+[[boundaries]]
+payload_offset = 1222
+length = 5
+
+[[boundaries]]
+payload_offset = 1227
+length = 6
+
+[[boundaries]]
+payload_offset = 1233
+length = 5
+
+[[boundaries]]
+payload_offset = 1238
+length = 6
+
+[[boundaries]]
+payload_offset = 1244
+length = 1
+
+[[boundaries]]
+payload_offset = 1245
+length = 6
+
+[[boundaries]]
+payload_offset = 1251
+length = 2
+
+[[boundaries]]
+payload_offset = 1253
+length = 5
+
+[[boundaries]]
+payload_offset = 1259
+length = 6
+
+[[boundaries]]
+payload_offset = 1265
+length = 2
+
+[[boundaries]]
+payload_offset = 1267
+length = 5
+
+[[boundaries]]
+payload_offset = 1273
+length = 6
+
+[[boundaries]]
+payload_offset = 1279
+length = 2
+
+[[boundaries]]
+payload_offset = 1281
+length = 5
+
+[[boundaries]]
+payload_offset = 1287
+length = 5
+
+[[boundaries]]
+payload_offset = 1292
+length = 2
+
+[[boundaries]]
+payload_offset = 1294
+length = 3
+
+[[boundaries]]
+payload_offset = 1297
+length = 3
+
+[[boundaries]]
+payload_offset = 1300
+length = 3
+
+[[boundaries]]
+payload_offset = 1303
+length = 3
+
+[[boundaries]]
+payload_offset = 1306
+length = 3
+
+[[boundaries]]
+payload_offset = 1309
+length = 1
+
+[[boundaries]]
+payload_offset = 1310
+length = 1
+
+[[boundaries]]
+payload_offset = 1311
+length = 1
+
+[[boundaries]]
+payload_offset = 1312
+length = 1
+
+[[boundaries]]
+payload_offset = 1313
+length = 1
+
+[[boundaries]]
+payload_offset = 1314
+length = 6
+
+[[boundaries]]
+payload_offset = 1320
+length = 2
+
+[[boundaries]]
+payload_offset = 1322
+length = 1
+
+[[boundaries]]
+payload_offset = 1323
+length = 1
+
+[[boundaries]]
+payload_offset = 1324
+length = 6
+
+[[boundaries]]
+payload_offset = 1330
+length = 2
+
+[[boundaries]]
+payload_offset = 1332
+length = 1
+
+[[boundaries]]
+payload_offset = 1333
+length = 1
+
+[[boundaries]]
+payload_offset = 1334
+length = 3
+
+[[boundaries]]
+payload_offset = 1337
+length = 6
+
+[[boundaries]]
+payload_offset = 1343
+length = 2
+
+[[boundaries]]
+payload_offset = 1345
+length = 1
+
+[[boundaries]]
+payload_offset = 1346
+length = 1
+
+[[boundaries]]
+payload_offset = 1347
+length = 3
+
+[[boundaries]]
+payload_offset = 1350
+length = 6
+
+[[boundaries]]
+payload_offset = 1356
+length = 2
+
+[[boundaries]]
+payload_offset = 1358
+length = 1
+
+[[boundaries]]
+payload_offset = 1359
+length = 1
+
+[[boundaries]]
+payload_offset = 1360
+length = 3
+
+[[boundaries]]
+payload_offset = 1363
+length = 6
+
+[[boundaries]]
+payload_offset = 1369
+length = 2
+
+[[boundaries]]
+payload_offset = 1371
+length = 1
+
+[[boundaries]]
+payload_offset = 1372
+length = 1
+
+[[boundaries]]
+payload_offset = 1373
+length = 3
+
+[[boundaries]]
+payload_offset = 1376
+length = 6
+
+[[boundaries]]
+payload_offset = 1382
+length = 2
+
+[[boundaries]]
+payload_offset = 1384
+length = 1
+
+[[boundaries]]
+payload_offset = 1385
+length = 1
+
+[[boundaries]]
+payload_offset = 1386
+length = 2
+
+[[boundaries]]
+payload_offset = 1388
+length = 5
+
+[[boundaries]]
+payload_offset = 1393
+length = 5
+
+[[boundaries]]
+payload_offset = 1398
+length = 5
+
+[[boundaries]]
+payload_offset = 1403
+length = 3
+
+[[boundaries]]
+payload_offset = 1406
+length = 5
+
+[[boundaries]]
+payload_offset = 1412
+length = 2
+
+[[boundaries]]
+payload_offset = 1414
+length = 5
+
+[[boundaries]]
+payload_offset = 1419
+length = 5
+
+[[boundaries]]
+payload_offset = 1424
+length = 6
+
+[[boundaries]]
+payload_offset = 1430
+length = 5
+
+[[boundaries]]
+payload_offset = 1435
+length = 6
+
+[[boundaries]]
+payload_offset = 1441
+length = 5
+
+[[boundaries]]
+payload_offset = 1446
+length = 6
+
+[[boundaries]]
+payload_offset = 1452
+length = 1
+
+[[boundaries]]
+payload_offset = 1453
+length = 5
+
+[[boundaries]]
+payload_offset = 1458
+length = 5
+
+[[boundaries]]
+payload_offset = 1464
+length = 5
+
+[[boundaries]]
+payload_offset = 1469
+length = 1
+
+[[boundaries]]
+payload_offset = 1470
+length = 5
+
+[[boundaries]]
+payload_offset = 1475
+length = 5
+
+[[boundaries]]
+payload_offset = 1480
+length = 5
+
+[[boundaries]]
+payload_offset = 1485
+length = 6
+
+[[boundaries]]
+payload_offset = 1491
+length = 5
+
+[[boundaries]]
+payload_offset = 1496
+length = 6
+
+[[boundaries]]
+payload_offset = 1502
+length = 5
+
+[[boundaries]]
+payload_offset = 1507
+length = 6
+
+[[boundaries]]
+payload_offset = 1513
+length = 5
+
+[[boundaries]]
+payload_offset = 1518
+length = 6
+
+[[boundaries]]
+payload_offset = 1524
+length = 1
+
+[[boundaries]]
+payload_offset = 1525
+length = 5
+
+[[boundaries]]
+payload_offset = 1530
+length = 5
+
+[[boundaries]]
+payload_offset = 1535
+length = 6
+
+[[boundaries]]
+payload_offset = 1541
+length = 5
+
+[[boundaries]]
+payload_offset = 1546
+length = 6
+
+[[boundaries]]
+payload_offset = 1552
+length = 5
+
+[[boundaries]]
+payload_offset = 1557
+length = 6
+
+[[boundaries]]
+payload_offset = 1563
+length = 1
+
+[[boundaries]]
+payload_offset = 1564
+length = 1
+
+[[boundaries]]
+payload_offset = 1565
+length = 5
+
+[[boundaries]]
+payload_offset = 1570
+length = 5
+
+[[boundaries]]
+payload_offset = 1575
+length = 6
+
+[[boundaries]]
+payload_offset = 1581
+length = 5
+
+[[boundaries]]
+payload_offset = 1586
+length = 6
+
+[[boundaries]]
+payload_offset = 1592
+length = 5
+
+[[boundaries]]
+payload_offset = 1597
+length = 6
+
+[[boundaries]]
+payload_offset = 1603
+length = 1
+
+[[boundaries]]
+payload_offset = 1604
+length = 1
+
+[[boundaries]]
+payload_offset = 1605
+length = 3
+
+[[boundaries]]
+payload_offset = 1608
+length = 1
+
+[[boundaries]]
+payload_offset = 1609
+length = 1
+
+[[boundaries]]
+payload_offset = 1610
+length = 3
+
+[[boundaries]]
+payload_offset = 1613
+length = 1
+
+[[boundaries]]
+payload_offset = 1614
+length = 1
+
+[[boundaries]]
+payload_offset = 1615
+length = 5

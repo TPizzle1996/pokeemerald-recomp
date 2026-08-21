@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 2
 export_count = 43
 reloc_count = 87
+instruction_count = 264
 
 [[segments]]
 kind = "bytecode"
@@ -382,6 +383,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtchimney"
 target_export = "MtChimney_EventScript_ArchieGoStopTeamMagma"
 target_offset = 56
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 45
 runtime_resolution_required = true
 
 [[relocs]]
@@ -392,6 +395,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtchimney"
 target_export = "MtChimney_EventScript_ArchieBusyFighting"
 target_offset = 65
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 54
 runtime_resolution_required = true
 
 [[relocs]]
@@ -401,6 +406,8 @@ original_encoded_gba = 0x82725a2
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceoriginaldirection"
 target_export = "Common_Movement_FaceOriginalDirection"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -410,6 +417,8 @@ original_encoded_gba = 0x822fad2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_ArchieGoStopTeamMagma"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -419,6 +428,8 @@ original_encoded_gba = 0x822fbc7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_ArchieIHaveMyHandsFull"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -428,6 +439,8 @@ original_encoded_gba = 0x822f26a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_MeteoriteWillActivateVolcano"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -437,6 +450,8 @@ original_encoded_gba = 0x827259e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceplayer"
 target_export = "Common_Movement_FacePlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -446,6 +461,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -455,6 +472,8 @@ original_encoded_gba = 0x827259a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-delay48"
 target_export = "Common_Movement_Delay48"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -464,6 +483,8 @@ original_encoded_gba = 0x822f32e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_MaxieIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -473,6 +494,8 @@ original_encoded_gba = 0x822f5cf
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_MaxieDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -482,6 +505,8 @@ original_encoded_gba = 0x822f5f7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_MaxieYouHaventSeenLastOfMagma"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -492,6 +517,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtchimney"
 target_export = "MtChimney_EventScript_ArchieApproachPlayerEast"
 target_offset = 262
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 251
 runtime_resolution_required = true
 
 [[relocs]]
@@ -502,6 +529,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtchimney"
 target_export = "MtChimney_EventScript_ArchieApproachPlayerNorth"
 target_offset = 273
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 262
 runtime_resolution_required = true
 
 [[relocs]]
@@ -511,6 +540,8 @@ original_encoded_gba = 0x82725a4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterleft"
 target_export = "Common_Movement_WalkInPlaceFasterLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -520,6 +551,8 @@ original_encoded_gba = 0x822fc3d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_ArchieThankYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -530,6 +563,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtchimney"
 target_export = "MtChimney_EventScript_ArchieExitEast"
 target_offset = 284
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 273
 runtime_resolution_required = true
 
 [[relocs]]
@@ -540,6 +575,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtchimney"
 target_export = "MtChimney_EventScript_ArchieExitNorth"
 target_offset = 295
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 284
 runtime_resolution_required = true
 
 [[relocs]]
@@ -549,6 +586,8 @@ original_encoded_gba = 0x822ef83
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mtchimney-movement-archieapproachplayereast"
 target_export = "MtChimney_Movement_ArchieApproachPlayerEast"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -558,6 +597,8 @@ original_encoded_gba = 0x822ef94
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mtchimney-movement-archieapproachplayernorth"
 target_export = "MtChimney_Movement_ArchieApproachPlayerNorth"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -567,6 +608,8 @@ original_encoded_gba = 0x822ef8b
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mtchimney-movement-archieexiteast"
 target_export = "MtChimney_Movement_ArchieExitEast"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -576,6 +619,8 @@ original_encoded_gba = 0x822ef9c
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mtchimney-movement-archieexitnorth"
 target_export = "MtChimney_Movement_ArchieExitNorth"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -585,6 +630,8 @@ original_encoded_gba = 0x822fe04
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_LavaCookiesJust200"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -595,6 +642,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtchimney"
 target_export = "MtChimney_EventScript_DeclineLavaCookie"
 target_offset = 424
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 413
 runtime_resolution_required = true
 
 [[relocs]]
@@ -605,6 +654,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtchimney"
 target_export = "MtChimney_EventScript_NotEnoughMoney"
 target_offset = 437
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 426
 runtime_resolution_required = true
 
 [[relocs]]
@@ -614,6 +665,8 @@ original_encoded_gba = 0x822fe4d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_ThankYouDear"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -624,6 +677,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtchimney"
 target_export = "MtChimney_EventScript_RemoveMoney"
 target_offset = 413
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 402
 runtime_resolution_required = true
 
 [[relocs]]
@@ -634,6 +689,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtchimney"
 target_export = "MtChimney_EventScript_BagIsFull"
 target_offset = 400
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 389
 runtime_resolution_required = true
 
 [[relocs]]
@@ -643,6 +700,8 @@ original_encoded_gba = 0x8272ad0
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/obtain-item"
 target_export = "gText_TooBadBagIsFull"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -652,6 +711,8 @@ original_encoded_gba = 0x822fe9b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_OhFineThen"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -661,6 +722,8 @@ original_encoded_gba = 0x822fe5e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_YouveNotGotTheMoney"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -670,6 +733,8 @@ original_encoded_gba = 0x822fd1f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_MagmaOutnumbersUs"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -679,6 +744,8 @@ original_encoded_gba = 0x822fd5b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_LessHabitatForWaterPokemon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -688,6 +755,8 @@ original_encoded_gba = 0x822fda1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_MagmasNameSimilar"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -697,6 +766,8 @@ original_encoded_gba = 0x822f6aa
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_TabithaIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -706,6 +777,8 @@ original_encoded_gba = 0x822f72c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_TabithaDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -715,6 +788,8 @@ original_encoded_gba = 0x822f76d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_TabithaPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -724,6 +799,8 @@ original_encoded_gba = 0x822f7a2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_Grunt2Intro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -733,6 +810,8 @@ original_encoded_gba = 0x822f83a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_Grunt2Defeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -742,6 +821,8 @@ original_encoded_gba = 0x822f859
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_Grunt2PostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -751,6 +832,8 @@ original_encoded_gba = 0x822f978
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_TeamAquaAlwaysMessingWithPlans"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -760,6 +843,8 @@ original_encoded_gba = 0x822f9b2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_MeteoritesPackAmazingPower"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -769,6 +854,8 @@ original_encoded_gba = 0x822f9d1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_YouBetterNotMessWithUs"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -778,6 +865,8 @@ original_encoded_gba = 0x822fa2f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_AquasNameSimilar"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -787,6 +876,8 @@ original_encoded_gba = 0x822fa8b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_DouseThemInFire"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -796,6 +887,8 @@ original_encoded_gba = 0x822faa5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_KeepMakingMoreLand"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -805,6 +898,8 @@ original_encoded_gba = 0x822facb
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_Bufoh"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -814,6 +909,8 @@ original_encoded_gba = 0x822fdfc
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_Bushaa"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -824,6 +921,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtchimney"
 target_export = "MtChimney_EventScript_MachineOn"
 target_offset = 886
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 667
 runtime_resolution_required = true
 
 [[relocs]]
@@ -834,6 +933,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtchimney"
 target_export = "MtChimney_EventScript_MachineOff"
 target_offset = 876
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 657
 runtime_resolution_required = true
 
 [[relocs]]
@@ -843,6 +944,8 @@ original_encoded_gba = 0x822ff12
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_RemoveTheMeteorite"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -853,6 +956,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtchimney"
 target_export = "MtChimney_EventScript_LeaveMeteoriteAlone"
 target_offset = 866
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 647
 runtime_resolution_required = true
 
 [[relocs]]
@@ -862,6 +967,8 @@ original_encoded_gba = 0x822ff66
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_PlayerRemovedMeteorite"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -871,6 +978,8 @@ original_encoded_gba = 0x822ff9c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_PlayerLeftMeteorite"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -880,6 +989,8 @@ original_encoded_gba = 0x822ffc0
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_MachineMakesNoResponse"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -889,6 +1000,8 @@ original_encoded_gba = 0x822feaa
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_MetoriteFittedOnMachine"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -898,6 +1011,8 @@ original_encoded_gba = 0x822fffa
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_RouteSign"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -907,6 +1022,8 @@ original_encoded_gba = 0x823001d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_ShelbyIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -916,6 +1033,8 @@ original_encoded_gba = 0x8230076
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_ShelbyDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -926,6 +1045,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtchimney"
 target_export = "MtChimney_EventScript_DefeatedShelby"
 target_offset = 949
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 730
 runtime_resolution_required = true
 
 [[relocs]]
@@ -936,6 +1057,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtchimney"
 target_export = "MtChimney_EventScript_RematchShelby"
 target_offset = 980
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 761
 runtime_resolution_required = true
 
 [[relocs]]
@@ -945,6 +1068,8 @@ original_encoded_gba = 0x82300a2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_ShelbyPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -954,6 +1079,8 @@ original_encoded_gba = 0x82300e3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_ShelbyRegister"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -963,6 +1090,8 @@ original_encoded_gba = 0x8230153
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_ShelbyRematchIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -972,6 +1101,8 @@ original_encoded_gba = 0x82301bb
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_ShelbyRematchDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -981,6 +1112,8 @@ original_encoded_gba = 0x82301e7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_ShelbyPostRematch"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -990,6 +1123,8 @@ original_encoded_gba = 0x823022a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_MelissaIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -999,6 +1134,8 @@ original_encoded_gba = 0x823026d
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_MelissaDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1008,6 +1145,8 @@ original_encoded_gba = 0x8230292
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_MelissaPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1017,6 +1156,8 @@ original_encoded_gba = 0x82302bd
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_SheilaIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1026,6 +1167,8 @@ original_encoded_gba = 0x8230304
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_SheilaDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1035,6 +1178,8 @@ original_encoded_gba = 0x823033a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_SheilaPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1044,6 +1189,8 @@ original_encoded_gba = 0x82303df
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_ShirleyIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1053,6 +1200,8 @@ original_encoded_gba = 0x8230436
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_ShirleyDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1062,6 +1211,8 @@ original_encoded_gba = 0x8230463
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_ShirleyPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1071,6 +1222,8 @@ original_encoded_gba = 0x822f8b6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_Grunt1Intro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1080,6 +1233,8 @@ original_encoded_gba = 0x822f921
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_Grunt1Defeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1089,6 +1244,8 @@ original_encoded_gba = 0x822f93a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_Grunt1PostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1098,6 +1255,8 @@ original_encoded_gba = 0x82304b3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_SawyerIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1107,6 +1266,8 @@ original_encoded_gba = 0x82304f7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_SawyerDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1117,6 +1278,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtchimney"
 target_export = "MtChimney_EventScript_SawyerDefeated"
 target_offset = 1139
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 920
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1127,6 +1290,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mtchimney"
 target_export = "MtChimney_EventScript_SawyerRematch"
 target_offset = 1170
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 951
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1136,6 +1301,8 @@ original_encoded_gba = 0x8230519
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_SawyerPostBattle"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1145,6 +1312,8 @@ original_encoded_gba = 0x8230557
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_SawyerRegister"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1154,6 +1323,8 @@ original_encoded_gba = 0x823059c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_SawyerRematchIntro"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1163,6 +1334,8 @@ original_encoded_gba = 0x82305e3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_SawyerRematchDefeat"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1172,4 +1345,1062 @@ original_encoded_gba = 0x8230614
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mtchimney"
 target_export = "MtChimney_Text_SawyerPostRematch"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 5
+
+[[boundaries]]
+payload_offset = 5
+length = 1
+
+[[boundaries]]
+payload_offset = 6
+length = 2
+
+[[boundaries]]
+payload_offset = 8
+length = 1
+
+[[boundaries]]
+payload_offset = 9
+length = 1
+
+[[boundaries]]
+payload_offset = 10
+length = 1
+
+[[boundaries]]
+payload_offset = 11
+length = 3
+
+[[boundaries]]
+payload_offset = 14
+length = 6
+
+[[boundaries]]
+payload_offset = 20
+length = 3
+
+[[boundaries]]
+payload_offset = 23
+length = 6
+
+[[boundaries]]
+payload_offset = 29
+length = 1
+
+[[boundaries]]
+payload_offset = 30
+length = 7
+
+[[boundaries]]
+payload_offset = 37
+length = 3
+
+[[boundaries]]
+payload_offset = 40
+length = 3
+
+[[boundaries]]
+payload_offset = 43
+length = 1
+
+[[boundaries]]
+payload_offset = 44
+length = 1
+
+[[boundaries]]
+payload_offset = 45
+length = 6
+
+[[boundaries]]
+payload_offset = 51
+length = 2
+
+[[boundaries]]
+payload_offset = 53
+length = 1
+
+[[boundaries]]
+payload_offset = 54
+length = 6
+
+[[boundaries]]
+payload_offset = 60
+length = 2
+
+[[boundaries]]
+payload_offset = 62
+length = 1
+
+[[boundaries]]
+payload_offset = 63
+length = 1
+
+[[boundaries]]
+payload_offset = 64
+length = 4
+
+[[boundaries]]
+payload_offset = 68
+length = 6
+
+[[boundaries]]
+payload_offset = 74
+length = 2
+
+[[boundaries]]
+payload_offset = 76
+length = 7
+
+[[boundaries]]
+payload_offset = 83
+length = 3
+
+[[boundaries]]
+payload_offset = 86
+length = 3
+
+[[boundaries]]
+payload_offset = 89
+length = 7
+
+[[boundaries]]
+payload_offset = 96
+length = 3
+
+[[boundaries]]
+payload_offset = 99
+length = 7
+
+[[boundaries]]
+payload_offset = 106
+length = 3
+
+[[boundaries]]
+payload_offset = 109
+length = 6
+
+[[boundaries]]
+payload_offset = 115
+length = 2
+
+[[boundaries]]
+payload_offset = 117
+length = 10
+
+[[boundaries]]
+payload_offset = 127
+length = 6
+
+[[boundaries]]
+payload_offset = 133
+length = 2
+
+[[boundaries]]
+payload_offset = 135
+length = 1
+
+[[boundaries]]
+payload_offset = 136
+length = 3
+
+[[boundaries]]
+payload_offset = 139
+length = 2
+
+[[boundaries]]
+payload_offset = 141
+length = 3
+
+[[boundaries]]
+payload_offset = 144
+length = 3
+
+[[boundaries]]
+payload_offset = 147
+length = 3
+
+[[boundaries]]
+payload_offset = 150
+length = 3
+
+[[boundaries]]
+payload_offset = 153
+length = 3
+
+[[boundaries]]
+payload_offset = 156
+length = 2
+
+[[boundaries]]
+payload_offset = 158
+length = 7
+
+[[boundaries]]
+payload_offset = 165
+length = 3
+
+[[boundaries]]
+payload_offset = 168
+length = 5
+
+[[boundaries]]
+payload_offset = 173
+length = 6
+
+[[boundaries]]
+payload_offset = 179
+length = 5
+
+[[boundaries]]
+payload_offset = 184
+length = 6
+
+[[boundaries]]
+payload_offset = 190
+length = 7
+
+[[boundaries]]
+payload_offset = 197
+length = 3
+
+[[boundaries]]
+payload_offset = 200
+length = 6
+
+[[boundaries]]
+payload_offset = 206
+length = 2
+
+[[boundaries]]
+payload_offset = 208
+length = 1
+
+[[boundaries]]
+payload_offset = 209
+length = 5
+
+[[boundaries]]
+payload_offset = 214
+length = 6
+
+[[boundaries]]
+payload_offset = 220
+length = 5
+
+[[boundaries]]
+payload_offset = 225
+length = 6
+
+[[boundaries]]
+payload_offset = 231
+length = 3
+
+[[boundaries]]
+payload_offset = 234
+length = 3
+
+[[boundaries]]
+payload_offset = 237
+length = 3
+
+[[boundaries]]
+payload_offset = 240
+length = 3
+
+[[boundaries]]
+payload_offset = 243
+length = 3
+
+[[boundaries]]
+payload_offset = 246
+length = 3
+
+[[boundaries]]
+payload_offset = 249
+length = 1
+
+[[boundaries]]
+payload_offset = 250
+length = 1
+
+[[boundaries]]
+payload_offset = 251
+length = 7
+
+[[boundaries]]
+payload_offset = 258
+length = 3
+
+[[boundaries]]
+payload_offset = 261
+length = 1
+
+[[boundaries]]
+payload_offset = 262
+length = 7
+
+[[boundaries]]
+payload_offset = 269
+length = 3
+
+[[boundaries]]
+payload_offset = 272
+length = 1
+
+[[boundaries]]
+payload_offset = 273
+length = 7
+
+[[boundaries]]
+payload_offset = 280
+length = 3
+
+[[boundaries]]
+payload_offset = 283
+length = 1
+
+[[boundaries]]
+payload_offset = 284
+length = 7
+
+[[boundaries]]
+payload_offset = 291
+length = 3
+
+[[boundaries]]
+payload_offset = 294
+length = 1
+
+[[boundaries]]
+payload_offset = 295
+length = 1
+
+[[boundaries]]
+payload_offset = 296
+length = 1
+
+[[boundaries]]
+payload_offset = 297
+length = 4
+
+[[boundaries]]
+payload_offset = 301
+length = 6
+
+[[boundaries]]
+payload_offset = 307
+length = 2
+
+[[boundaries]]
+payload_offset = 309
+length = 5
+
+[[boundaries]]
+payload_offset = 314
+length = 6
+
+[[boundaries]]
+payload_offset = 320
+length = 6
+
+[[boundaries]]
+payload_offset = 326
+length = 5
+
+[[boundaries]]
+payload_offset = 331
+length = 6
+
+[[boundaries]]
+payload_offset = 337
+length = 6
+
+[[boundaries]]
+payload_offset = 343
+length = 2
+
+[[boundaries]]
+payload_offset = 345
+length = 5
+
+[[boundaries]]
+payload_offset = 350
+length = 5
+
+[[boundaries]]
+payload_offset = 355
+length = 6
+
+[[boundaries]]
+payload_offset = 361
+length = 5
+
+[[boundaries]]
+payload_offset = 366
+length = 5
+
+[[boundaries]]
+payload_offset = 371
+length = 2
+
+[[boundaries]]
+payload_offset = 373
+length = 5
+
+[[boundaries]]
+payload_offset = 378
+length = 6
+
+[[boundaries]]
+payload_offset = 384
+length = 1
+
+[[boundaries]]
+payload_offset = 385
+length = 1
+
+[[boundaries]]
+payload_offset = 386
+length = 1
+
+[[boundaries]]
+payload_offset = 387
+length = 1
+
+[[boundaries]]
+payload_offset = 388
+length = 1
+
+[[boundaries]]
+payload_offset = 389
+length = 6
+
+[[boundaries]]
+payload_offset = 395
+length = 2
+
+[[boundaries]]
+payload_offset = 397
+length = 1
+
+[[boundaries]]
+payload_offset = 398
+length = 1
+
+[[boundaries]]
+payload_offset = 399
+length = 1
+
+[[boundaries]]
+payload_offset = 400
+length = 1
+
+[[boundaries]]
+payload_offset = 401
+length = 1
+
+[[boundaries]]
+payload_offset = 402
+length = 6
+
+[[boundaries]]
+payload_offset = 408
+length = 4
+
+[[boundaries]]
+payload_offset = 412
+length = 1
+
+[[boundaries]]
+payload_offset = 413
+length = 6
+
+[[boundaries]]
+payload_offset = 419
+length = 2
+
+[[boundaries]]
+payload_offset = 421
+length = 1
+
+[[boundaries]]
+payload_offset = 422
+length = 1
+
+[[boundaries]]
+payload_offset = 423
+length = 1
+
+[[boundaries]]
+payload_offset = 424
+length = 1
+
+[[boundaries]]
+payload_offset = 425
+length = 1
+
+[[boundaries]]
+payload_offset = 426
+length = 6
+
+[[boundaries]]
+payload_offset = 432
+length = 2
+
+[[boundaries]]
+payload_offset = 434
+length = 1
+
+[[boundaries]]
+payload_offset = 435
+length = 1
+
+[[boundaries]]
+payload_offset = 436
+length = 1
+
+[[boundaries]]
+payload_offset = 437
+length = 1
+
+[[boundaries]]
+payload_offset = 438
+length = 1
+
+[[boundaries]]
+payload_offset = 439
+length = 6
+
+[[boundaries]]
+payload_offset = 445
+length = 2
+
+[[boundaries]]
+payload_offset = 447
+length = 1
+
+[[boundaries]]
+payload_offset = 448
+length = 6
+
+[[boundaries]]
+payload_offset = 454
+length = 2
+
+[[boundaries]]
+payload_offset = 456
+length = 1
+
+[[boundaries]]
+payload_offset = 457
+length = 6
+
+[[boundaries]]
+payload_offset = 463
+length = 2
+
+[[boundaries]]
+payload_offset = 465
+length = 1
+
+[[boundaries]]
+payload_offset = 466
+length = 14
+
+[[boundaries]]
+payload_offset = 480
+length = 6
+
+[[boundaries]]
+payload_offset = 486
+length = 2
+
+[[boundaries]]
+payload_offset = 488
+length = 1
+
+[[boundaries]]
+payload_offset = 489
+length = 14
+
+[[boundaries]]
+payload_offset = 503
+length = 6
+
+[[boundaries]]
+payload_offset = 509
+length = 2
+
+[[boundaries]]
+payload_offset = 511
+length = 1
+
+[[boundaries]]
+payload_offset = 512
+length = 6
+
+[[boundaries]]
+payload_offset = 518
+length = 2
+
+[[boundaries]]
+payload_offset = 520
+length = 1
+
+[[boundaries]]
+payload_offset = 521
+length = 6
+
+[[boundaries]]
+payload_offset = 527
+length = 2
+
+[[boundaries]]
+payload_offset = 529
+length = 1
+
+[[boundaries]]
+payload_offset = 530
+length = 6
+
+[[boundaries]]
+payload_offset = 536
+length = 2
+
+[[boundaries]]
+payload_offset = 538
+length = 1
+
+[[boundaries]]
+payload_offset = 539
+length = 6
+
+[[boundaries]]
+payload_offset = 545
+length = 2
+
+[[boundaries]]
+payload_offset = 547
+length = 1
+
+[[boundaries]]
+payload_offset = 548
+length = 6
+
+[[boundaries]]
+payload_offset = 554
+length = 2
+
+[[boundaries]]
+payload_offset = 556
+length = 1
+
+[[boundaries]]
+payload_offset = 557
+length = 6
+
+[[boundaries]]
+payload_offset = 563
+length = 2
+
+[[boundaries]]
+payload_offset = 565
+length = 1
+
+[[boundaries]]
+payload_offset = 566
+length = 6
+
+[[boundaries]]
+payload_offset = 572
+length = 2
+
+[[boundaries]]
+payload_offset = 574
+length = 1
+
+[[boundaries]]
+payload_offset = 575
+length = 6
+
+[[boundaries]]
+payload_offset = 581
+length = 2
+
+[[boundaries]]
+payload_offset = 583
+length = 1
+
+[[boundaries]]
+payload_offset = 584
+length = 1
+
+[[boundaries]]
+payload_offset = 585
+length = 3
+
+[[boundaries]]
+payload_offset = 588
+length = 6
+
+[[boundaries]]
+payload_offset = 594
+length = 3
+
+[[boundaries]]
+payload_offset = 597
+length = 6
+
+[[boundaries]]
+payload_offset = 603
+length = 6
+
+[[boundaries]]
+payload_offset = 609
+length = 2
+
+[[boundaries]]
+payload_offset = 611
+length = 5
+
+[[boundaries]]
+payload_offset = 616
+length = 6
+
+[[boundaries]]
+payload_offset = 622
+length = 6
+
+[[boundaries]]
+payload_offset = 628
+length = 2
+
+[[boundaries]]
+payload_offset = 630
+length = 5
+
+[[boundaries]]
+payload_offset = 635
+length = 5
+
+[[boundaries]]
+payload_offset = 640
+length = 2
+
+[[boundaries]]
+payload_offset = 642
+length = 3
+
+[[boundaries]]
+payload_offset = 645
+length = 1
+
+[[boundaries]]
+payload_offset = 646
+length = 1
+
+[[boundaries]]
+payload_offset = 647
+length = 6
+
+[[boundaries]]
+payload_offset = 653
+length = 2
+
+[[boundaries]]
+payload_offset = 655
+length = 1
+
+[[boundaries]]
+payload_offset = 656
+length = 1
+
+[[boundaries]]
+payload_offset = 657
+length = 6
+
+[[boundaries]]
+payload_offset = 663
+length = 2
+
+[[boundaries]]
+payload_offset = 665
+length = 1
+
+[[boundaries]]
+payload_offset = 666
+length = 1
+
+[[boundaries]]
+payload_offset = 667
+length = 6
+
+[[boundaries]]
+payload_offset = 673
+length = 2
+
+[[boundaries]]
+payload_offset = 675
+length = 1
+
+[[boundaries]]
+payload_offset = 676
+length = 1
+
+[[boundaries]]
+payload_offset = 677
+length = 6
+
+[[boundaries]]
+payload_offset = 683
+length = 2
+
+[[boundaries]]
+payload_offset = 685
+length = 1
+
+[[boundaries]]
+payload_offset = 686
+length = 18
+
+[[boundaries]]
+payload_offset = 704
+length = 5
+
+[[boundaries]]
+payload_offset = 709
+length = 5
+
+[[boundaries]]
+payload_offset = 714
+length = 6
+
+[[boundaries]]
+payload_offset = 720
+length = 6
+
+[[boundaries]]
+payload_offset = 726
+length = 2
+
+[[boundaries]]
+payload_offset = 728
+length = 1
+
+[[boundaries]]
+payload_offset = 729
+length = 1
+
+[[boundaries]]
+payload_offset = 730
+length = 3
+
+[[boundaries]]
+payload_offset = 733
+length = 3
+
+[[boundaries]]
+payload_offset = 736
+length = 6
+
+[[boundaries]]
+payload_offset = 742
+length = 2
+
+[[boundaries]]
+payload_offset = 744
+length = 5
+
+[[boundaries]]
+payload_offset = 749
+length = 3
+
+[[boundaries]]
+payload_offset = 752
+length = 5
+
+[[boundaries]]
+payload_offset = 757
+length = 2
+
+[[boundaries]]
+payload_offset = 759
+length = 1
+
+[[boundaries]]
+payload_offset = 760
+length = 1
+
+[[boundaries]]
+payload_offset = 761
+length = 14
+
+[[boundaries]]
+payload_offset = 775
+length = 6
+
+[[boundaries]]
+payload_offset = 781
+length = 2
+
+[[boundaries]]
+payload_offset = 783
+length = 1
+
+[[boundaries]]
+payload_offset = 784
+length = 14
+
+[[boundaries]]
+payload_offset = 798
+length = 6
+
+[[boundaries]]
+payload_offset = 804
+length = 2
+
+[[boundaries]]
+payload_offset = 806
+length = 1
+
+[[boundaries]]
+payload_offset = 807
+length = 14
+
+[[boundaries]]
+payload_offset = 821
+length = 6
+
+[[boundaries]]
+payload_offset = 827
+length = 2
+
+[[boundaries]]
+payload_offset = 829
+length = 1
+
+[[boundaries]]
+payload_offset = 830
+length = 14
+
+[[boundaries]]
+payload_offset = 844
+length = 6
+
+[[boundaries]]
+payload_offset = 850
+length = 2
+
+[[boundaries]]
+payload_offset = 852
+length = 1
+
+[[boundaries]]
+payload_offset = 853
+length = 14
+
+[[boundaries]]
+payload_offset = 867
+length = 6
+
+[[boundaries]]
+payload_offset = 873
+length = 2
+
+[[boundaries]]
+payload_offset = 875
+length = 1
+
+[[boundaries]]
+payload_offset = 876
+length = 18
+
+[[boundaries]]
+payload_offset = 894
+length = 5
+
+[[boundaries]]
+payload_offset = 899
+length = 5
+
+[[boundaries]]
+payload_offset = 904
+length = 6
+
+[[boundaries]]
+payload_offset = 910
+length = 6
+
+[[boundaries]]
+payload_offset = 916
+length = 2
+
+[[boundaries]]
+payload_offset = 918
+length = 1
+
+[[boundaries]]
+payload_offset = 919
+length = 1
+
+[[boundaries]]
+payload_offset = 920
+length = 3
+
+[[boundaries]]
+payload_offset = 923
+length = 3
+
+[[boundaries]]
+payload_offset = 926
+length = 6
+
+[[boundaries]]
+payload_offset = 932
+length = 2
+
+[[boundaries]]
+payload_offset = 934
+length = 5
+
+[[boundaries]]
+payload_offset = 939
+length = 3
+
+[[boundaries]]
+payload_offset = 942
+length = 5
+
+[[boundaries]]
+payload_offset = 947
+length = 2
+
+[[boundaries]]
+payload_offset = 949
+length = 1
+
+[[boundaries]]
+payload_offset = 950
+length = 1
+
+[[boundaries]]
+payload_offset = 951
+length = 14
+
+[[boundaries]]
+payload_offset = 965
+length = 6
+
+[[boundaries]]
+payload_offset = 971
+length = 2
+
+[[boundaries]]
+payload_offset = 973
+length = 1

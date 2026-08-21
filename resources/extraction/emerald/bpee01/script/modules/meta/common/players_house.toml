@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 6
 export_count = 49
 reloc_count = 139
+instruction_count = 425
 
 [[segments]]
 kind = "bytecode"
@@ -453,6 +454,8 @@ original_encoded_gba = 0x81f7a1c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/littleroottown-brendanshouse-1f"
 target_export = "PlayersHouse_1F_Text_IsntItNiceInHere"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -462,6 +465,8 @@ original_encoded_gba = 0x827259e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceplayer"
 target_export = "Common_Movement_FacePlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -472,6 +477,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/players-house"
 target_export = "PlayersHouse_1F_EventScript_MomFacePlayerMovingInMale"
 target_offset = 79
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 79
 runtime_resolution_required = true
 
 [[relocs]]
@@ -482,6 +489,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/players-house"
 target_export = "PlayersHouse_1F_EventScript_MomFacePlayerMovingInFemale"
 target_offset = 90
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 90
 runtime_resolution_required = true
 
 [[relocs]]
@@ -491,6 +500,8 @@ original_encoded_gba = 0x81f7a46
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/littleroottown-brendanshouse-1f"
 target_export = "PlayersHouse_1F_Text_MoversPokemonGoSetClock"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -500,6 +511,8 @@ original_encoded_gba = 0x8292763
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/playershouse-1f-movement-playerwalkin"
 target_export = "PlayersHouse_1F_Movement_PlayerWalkIn"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -509,6 +522,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -518,6 +533,8 @@ original_encoded_gba = 0x82725a8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterright"
 target_export = "Common_Movement_WalkInPlaceFasterRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -527,6 +544,8 @@ original_encoded_gba = 0x82725a4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterleft"
 target_export = "Common_Movement_WalkInPlaceFasterLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -536,6 +555,8 @@ original_encoded_gba = 0x81f7b24
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/littleroottown-brendanshouse-1f"
 target_export = "PlayersHouse_1F_Text_ArentYouInterestedInRoom"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -545,6 +566,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -554,6 +577,8 @@ original_encoded_gba = 0x8292af0
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/playershouse-1f-movement-moveplayerawayfromdoor"
 target_export = "PlayersHouse_1F_Movement_MovePlayerAwayFromDoor"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -564,6 +589,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/players-house"
 target_export = "PlayersHouse_2F_EventScript_WallClock"
 target_offset = 155
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 153
 runtime_resolution_required = true
 
 [[relocs]]
@@ -574,6 +601,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/players-house"
 target_export = "PlayersHouse_2F_EventScript_WallClock"
 target_offset = 155
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 153
 runtime_resolution_required = true
 
 [[relocs]]
@@ -584,6 +613,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/players-house"
 target_export = "PlayersHouse_2F_EventScript_CheckWallClock"
 target_offset = 321
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 319
 runtime_resolution_required = true
 
 [[relocs]]
@@ -593,6 +624,8 @@ original_encoded_gba = 0x81f8668
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/littleroottown-brendanshouse-2f"
 target_export = "PlayersHouse_2F_Text_ClockIsStopped"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -603,6 +636,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/players-house"
 target_export = "PlayersHouse_2F_EventScript_SetWallClock"
 target_offset = 331
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 329
 runtime_resolution_required = true
 
 [[relocs]]
@@ -613,6 +648,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/players-house"
 target_export = "PlayersHouse_2F_EventScript_MomComesUpstairsMale"
 target_offset = 225
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 223
 runtime_resolution_required = true
 
 [[relocs]]
@@ -623,6 +660,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/players-house"
 target_export = "PlayersHouse_2F_EventScript_MomComesUpstairsFemale"
 target_offset = 273
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 271
 runtime_resolution_required = true
 
 [[relocs]]
@@ -632,6 +671,8 @@ original_encoded_gba = 0x8292850
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/playershouse-2f-movement-momentersmale"
 target_export = "PlayersHouse_2F_Movement_MomEntersMale"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -641,6 +682,8 @@ original_encoded_gba = 0x82725a8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterright"
 target_export = "Common_Movement_WalkInPlaceFasterRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -650,6 +693,8 @@ original_encoded_gba = 0x81f869a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/littleroottown-brendanshouse-2f"
 target_export = "PlayersHouse_2F_Text_HowDoYouLikeYourRoom"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -659,6 +704,8 @@ original_encoded_gba = 0x8292857
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/playershouse-2f-movement-momexitsmale"
 target_export = "PlayersHouse_2F_Movement_MomExitsMale"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -668,6 +715,8 @@ original_encoded_gba = 0x829285b
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/playershouse-2f-movement-momentersfemale"
 target_export = "PlayersHouse_2F_Movement_MomEntersFemale"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -677,6 +726,8 @@ original_encoded_gba = 0x82725a4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterleft"
 target_export = "Common_Movement_WalkInPlaceFasterLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -686,6 +737,8 @@ original_encoded_gba = 0x81f869a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/littleroottown-brendanshouse-2f"
 target_export = "PlayersHouse_2F_Text_HowDoYouLikeYourRoom"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -695,6 +748,8 @@ original_encoded_gba = 0x8292862
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/playershouse-2f-movement-momexitsfemale"
 target_export = "PlayersHouse_2F_Movement_MomExitsFemale"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -704,6 +759,8 @@ original_encoded_gba = 0x82725a8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterright"
 target_export = "Common_Movement_WalkInPlaceFasterRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -714,6 +771,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/players-house"
 target_export = "PlayersHouse_1F_EventScript_MomNoticeGymBroadcast"
 target_offset = 589
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 565
 runtime_resolution_required = true
 
 [[relocs]]
@@ -723,6 +782,8 @@ original_encoded_gba = 0x8292ae0
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/playershouse-1f-movement-playerapproachtvforgymmale"
 target_export = "PlayersHouse_1F_Movement_PlayerApproachTVForGymMale"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -732,6 +793,8 @@ original_encoded_gba = 0x81f7bbc
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/littleroottown-brendanshouse-1f"
 target_export = "PlayersHouse_1F_Text_MaybeDadWillBeOn"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -741,6 +804,8 @@ original_encoded_gba = 0x82929b7
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/playershouse-1f-movement-mommakeroomtoseetvmale"
 target_export = "PlayersHouse_1F_Movement_MomMakeRoomToSeeTVMale"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -750,6 +815,8 @@ original_encoded_gba = 0x8292ae6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/playershouse-1f-movement-playermovetotvmale"
 target_export = "PlayersHouse_1F_Movement_PlayerMoveToTVMale"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -760,6 +827,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/players-house"
 target_export = "PlayersHouse_1F_EventScript_WatchGymBroadcast"
 target_offset = 622
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 598
 runtime_resolution_required = true
 
 [[relocs]]
@@ -769,6 +838,8 @@ original_encoded_gba = 0x82725a4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterleft"
 target_export = "Common_Movement_WalkInPlaceFasterLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -778,6 +849,8 @@ original_encoded_gba = 0x81f7bf1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/littleroottown-brendanshouse-1f"
 target_export = "PlayersHouse_1F_Text_ItsOverWeMissedHim"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -787,6 +860,8 @@ original_encoded_gba = 0x81f7c35
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/littleroottown-brendanshouse-1f"
 target_export = "PlayersHouse_1F_Text_GoIntroduceYourselfNextDoor"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -796,6 +871,8 @@ original_encoded_gba = 0x82929bd
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/playershouse-1f-movement-momreturntoseatmale"
 target_export = "PlayersHouse_1F_Movement_MomReturnToSeatMale"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -806,6 +883,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/players-house"
 target_export = "PlayersHouse_1F_EventScript_SetWatchedBroadcast"
 target_offset = 360
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 336
 runtime_resolution_required = true
 
 [[relocs]]
@@ -815,6 +894,8 @@ original_encoded_gba = 0x82725a4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterleft"
 target_export = "Common_Movement_WalkInPlaceFasterLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -825,6 +906,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/players-house"
 target_export = "PlayersHouse_1F_EventScript_MomNoticeGymBroadcast"
 target_offset = 589
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 565
 runtime_resolution_required = true
 
 [[relocs]]
@@ -834,6 +917,8 @@ original_encoded_gba = 0x8292ae8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/playershouse-1f-movement-playerapproachtvforgymfemale"
 target_export = "PlayersHouse_1F_Movement_PlayerApproachTVForGymFemale"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -843,6 +928,8 @@ original_encoded_gba = 0x81f7bbc
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/littleroottown-brendanshouse-1f"
 target_export = "PlayersHouse_1F_Text_MaybeDadWillBeOn"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -852,6 +939,8 @@ original_encoded_gba = 0x82929ba
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/playershouse-1f-movement-mommakeroomtoseetvfemale"
 target_export = "PlayersHouse_1F_Movement_MomMakeRoomToSeeTVFemale"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -861,6 +950,8 @@ original_encoded_gba = 0x8292aee
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/playershouse-1f-movement-playermovetotvfemale"
 target_export = "PlayersHouse_1F_Movement_PlayerMoveToTVFemale"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -871,6 +962,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/players-house"
 target_export = "PlayersHouse_1F_EventScript_WatchGymBroadcast"
 target_offset = 622
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 598
 runtime_resolution_required = true
 
 [[relocs]]
@@ -880,6 +973,8 @@ original_encoded_gba = 0x82725a8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterright"
 target_export = "Common_Movement_WalkInPlaceFasterRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -889,6 +984,8 @@ original_encoded_gba = 0x81f7bf1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/littleroottown-brendanshouse-1f"
 target_export = "PlayersHouse_1F_Text_ItsOverWeMissedHim"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -898,6 +995,8 @@ original_encoded_gba = 0x81f7c35
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/littleroottown-brendanshouse-1f"
 target_export = "PlayersHouse_1F_Text_GoIntroduceYourselfNextDoor"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -907,6 +1006,8 @@ original_encoded_gba = 0x82929c1
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/playershouse-1f-movement-momreturntoseatfemale"
 target_export = "PlayersHouse_1F_Movement_MomReturnToSeatFemale"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -917,6 +1018,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/players-house"
 target_export = "PlayersHouse_1F_EventScript_SetWatchedBroadcast"
 target_offset = 360
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 336
 runtime_resolution_required = true
 
 [[relocs]]
@@ -926,6 +1029,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -935,6 +1040,8 @@ original_encoded_gba = 0x827259a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-delay48"
 target_export = "Common_Movement_Delay48"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -944,6 +1051,8 @@ original_encoded_gba = 0x81f7b96
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/littleroottown-brendanshouse-1f"
 target_export = "PlayersHouse_1F_Text_OhComeQuickly"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -953,6 +1062,8 @@ original_encoded_gba = 0x82725a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterup"
 target_export = "Common_Movement_WalkInPlaceFasterUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -962,6 +1073,8 @@ original_encoded_gba = 0x81f7ec6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/littleroottown-brendanshouse-1f"
 target_export = "PlayersHouse_1F_Text_ReportFromPetalburgGym"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -972,6 +1085,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/players-house"
 target_export = "PlayersHouse_1F_EventScript_DontPushYourselfTooHard"
 target_offset = 785
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 701
 runtime_resolution_required = true
 
 [[relocs]]
@@ -982,6 +1097,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/players-house"
 target_export = "PlayersHouse_1F_EventScript_DontPushYourselfTooHard"
 target_offset = 785
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 701
 runtime_resolution_required = true
 
 [[relocs]]
@@ -992,6 +1109,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/players-house"
 target_export = "PlayersHouse_1F_EventScript_TryRegisterMom"
 target_offset = 795
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 711
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1002,6 +1121,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/players-house"
 target_export = "PlayersHouse_1F_EventScript_MomHealsParty"
 target_offset = 904
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 820
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1012,6 +1133,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/players-house"
 target_export = "PlayersHouse_1F_EventScript_SeeYouHoney"
 target_offset = 918
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 834
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1022,6 +1145,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/players-house"
 target_export = "PlayersHouse_1F_EventScript_DidYouMeetProfBirch"
 target_offset = 946
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 862
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1031,6 +1156,8 @@ original_encoded_gba = 0x81f7a1c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/littleroottown-brendanshouse-1f"
 target_export = "PlayersHouse_1F_Text_IsntItNiceInHere"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1040,6 +1167,8 @@ original_encoded_gba = 0x81f7dbe
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/littleroottown-brendanshouse-1f"
 target_export = "PlayersHouse_1F_Text_DontPushYourselfTooHard"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1050,6 +1179,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/players-house"
 target_export = "PlayersHouse_1F_EventScript_CheckGiveAmuletCoin"
 target_offset = 837
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 753
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1059,6 +1190,8 @@ original_encoded_gba = 0x81f7e0e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/littleroottown-brendanshouse-1f"
 target_export = "PlayersHouse_1F_Text_IsThatAPokenav"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1068,6 +1201,8 @@ original_encoded_gba = 0x81f7e89
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/littleroottown-brendanshouse-1f"
 target_export = "PlayersHouse_1F_Text_RegisteredMom"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1078,6 +1213,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/players-house"
 target_export = "PlayersHouse_1F_EventScript_TryGiveAmuletCoin"
 target_offset = 851
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 767
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1088,6 +1225,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/players-house"
 target_export = "PlayersHouse_1F_EventScript_MomHealsParty"
 target_offset = 904
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 820
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1098,6 +1237,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/players-house"
 target_export = "PlayersHouse_1F_EventScript_MomHealsParty"
 target_offset = 904
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 820
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1107,6 +1248,8 @@ original_encoded_gba = 0x81f7d73
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/littleroottown-brendanshouse-1f"
 target_export = "PlayersHouse_1F_Text_GotDadsBadgeHeresSomethingFromMom"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1117,6 +1260,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_ShowBagIsFull"
 target_offset = 273
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 273
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1126,6 +1271,8 @@ original_encoded_gba = 0x81f7dbe
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/littleroottown-brendanshouse-1f"
 target_export = "PlayersHouse_1F_Text_DontPushYourselfTooHard"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1135,6 +1282,8 @@ original_encoded_gba = 0x81f7d08
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/littleroottown-brendanshouse-1f"
 target_export = "PlayersHouse_1F_Text_YouShouldRestABit"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1145,6 +1294,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/players-house"
 target_export = "PlayersHouse_1F_EventScript_HealParty"
 target_offset = 928
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 844
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1154,6 +1305,8 @@ original_encoded_gba = 0x81f7cc3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/littleroottown-brendanshouse-1f"
 target_export = "PlayersHouse_1F_Text_SeeYouHoney"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1164,6 +1317,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_OutOfCenterPartyHeal"
 target_offset = 320
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 320
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1173,6 +1328,8 @@ original_encoded_gba = 0x81f7d5c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/littleroottown-brendanshouse-1f"
 target_export = "PlayersHouse_1F_Text_TakeCareHoney"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1182,6 +1339,8 @@ original_encoded_gba = 0x81f7cd8
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/littleroottown-brendanshouse-1f"
 target_export = "PlayersHouse_1F_Text_DidYouMeetProfBirch"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1191,6 +1350,8 @@ original_encoded_gba = 0x81f7ea8
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/littleroottown-brendanshouse-1f"
 target_export = "PlayersHouse_1F_Text_Vigoroth1"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1200,6 +1361,8 @@ original_encoded_gba = 0x81f7eb3
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/littleroottown-brendanshouse-1f"
 target_export = "PlayersHouse_1F_Text_Vigoroth2"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1210,6 +1373,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/players-house"
 target_export = "PlayersHouse_1F_EventScript_SetUpObjectEventVarsMale"
 target_offset = 1400
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1298
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1220,6 +1385,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/players-house"
 target_export = "PlayersHouse_1F_EventScript_SetUpObjectEventVarsFemale"
 target_offset = 1416
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1314
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1230,6 +1397,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/players-house"
 target_export = "PlayersHouse_1F_EventScript_PlayerEnterRoomMale"
 target_offset = 1546
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1444
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1240,6 +1409,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/players-house"
 target_export = "PlayersHouse_1F_EventScript_PlayerEnterRoomFemale"
 target_offset = 1557
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1455
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1249,6 +1420,8 @@ original_encoded_gba = 0x827259e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceplayer"
 target_export = "Common_Movement_FacePlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1258,6 +1431,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1267,6 +1442,8 @@ original_encoded_gba = 0x827259a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-delay48"
 target_export = "Common_Movement_Delay48"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1277,6 +1454,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/players-house"
 target_export = "PlayersHouse_1F_EventScript_DadApproachPlayerMale"
 target_offset = 1432
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1330
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1287,6 +1466,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/players-house"
 target_export = "PlayersHouse_1F_EventScript_DadApproachPlayerFemale"
 target_offset = 1443
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1341
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1296,6 +1477,8 @@ original_encoded_gba = 0x81f800e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/littleroottown-brendanshouse-1f"
 target_export = "PlayersHouse_1F_Text_TicketFromBrineyCameForYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1305,6 +1488,8 @@ original_encoded_gba = 0x81f80fe
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/littleroottown-brendanshouse-1f"
 target_export = "PlayersHouse_1F_Text_PortsInSlateportLilycove"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1315,6 +1500,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/players-house"
 target_export = "PlayersHouse_1F_EventScript_MomApproachDadMale"
 target_offset = 1454
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1352
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1325,6 +1512,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/players-house"
 target_export = "PlayersHouse_1F_EventScript_MomApproachDadFemale"
 target_offset = 1475
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1373
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1334,6 +1523,8 @@ original_encoded_gba = 0x81f815b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/littleroottown-brendanshouse-1f"
 target_export = "PlayersHouse_1F_Text_BetterGetBackToGym"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1344,6 +1535,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/players-house"
 target_export = "PlayersHouse_1F_EventScript_DadExitsMale"
 target_offset = 1496
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1394
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1354,6 +1547,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/players-house"
 target_export = "PlayersHouse_1F_EventScript_DadExitsFemale"
 target_offset = 1521
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1419
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1364,6 +1559,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/players-house"
 target_export = "PlayersHouse_1F_EventScript_MomApproachPlayerMale"
 target_offset = 1610
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1508
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1374,6 +1571,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/players-house"
 target_export = "PlayersHouse_1F_EventScript_MomApproachPlayerFemale"
 target_offset = 1631
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1529
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1383,6 +1582,8 @@ original_encoded_gba = 0x81f81b9
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/littleroottown-brendanshouse-1f"
 target_export = "PlayersHouse_1F_Text_DadShouldStayLonger"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1393,6 +1594,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/players-house"
 target_export = "PlayersHouse_1F_EventScript_MomNoticesLatiBroadcastMale"
 target_offset = 1652
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1550
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1403,6 +1606,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/players-house"
 target_export = "PlayersHouse_1F_EventScript_MomNoticesLatiBroadcastFemale"
 target_offset = 1663
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1561
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1412,6 +1617,8 @@ original_encoded_gba = 0x81f824b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/littleroottown-brendanshouse-1f"
 target_export = "PlayersHouse_1F_Text_IsThatABreakingStory"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1422,6 +1629,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/players-house"
 target_export = "PlayersHouse_1F_EventScript_PlayerApproachTVForLatiMale"
 target_offset = 1568
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1466
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1432,6 +1641,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/players-house"
 target_export = "PlayersHouse_1F_EventScript_PlayerApproachTVForLatiFemale"
 target_offset = 1589
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1487
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1441,6 +1652,8 @@ original_encoded_gba = 0x81f826f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/littleroottown-brendanshouse-1f"
 target_export = "PlayersHouse_1F_Text_LatiEmergencyNewsFlash"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1451,6 +1664,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/players-house"
 target_export = "PlayersHouse_1F_EventScript_MomApproachPlayerAfterTVMale"
 target_offset = 1674
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1572
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1461,6 +1676,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/players-house"
 target_export = "PlayersHouse_1F_EventScript_MomApproachPlayerAfterTVFemale"
 target_offset = 1695
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 1593
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1470,6 +1687,8 @@ original_encoded_gba = 0x81f8351
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/littleroottown-brendanshouse-1f"
 target_export = "PlayersHouse_1F_Text_WhatColorDidTheySay"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1479,6 +1698,8 @@ original_encoded_gba = 0x81f83a1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/littleroottown-brendanshouse-1f"
 target_export = "PlayersHouse_1F_Text_StillUnknownPokemon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1488,6 +1709,8 @@ original_encoded_gba = 0x8292db2
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/playershouse-1f-movement-dadapproachplayermale"
 target_export = "PlayersHouse_1F_Movement_DadApproachPlayerMale"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1497,6 +1720,8 @@ original_encoded_gba = 0x8292db5
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/playershouse-1f-movement-dadapproachplayerfemale"
 target_export = "PlayersHouse_1F_Movement_DadApproachPlayerFemale"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1506,6 +1731,8 @@ original_encoded_gba = 0x8292989
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/playershouse-1f-movement-momapproachdadmale"
 target_export = "PlayersHouse_1F_Movement_MomApproachDadMale"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1515,6 +1742,8 @@ original_encoded_gba = 0x8292db8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/playershouse-1f-movement-dadfacemommale"
 target_export = "PlayersHouse_1F_Movement_DadFaceMomMale"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1524,6 +1753,8 @@ original_encoded_gba = 0x8292991
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/playershouse-1f-movement-momapproachdadfemale"
 target_export = "PlayersHouse_1F_Movement_MomApproachDadFemale"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1533,6 +1764,8 @@ original_encoded_gba = 0x8292dba
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/playershouse-1f-movement-dadfacemomfemale"
 target_export = "PlayersHouse_1F_Movement_DadFaceMomFemale"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1542,6 +1775,8 @@ original_encoded_gba = 0x8292dcc
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/playershouse-1f-movement-momandplayerwatchdadexit"
 target_export = "PlayersHouse_1F_Movement_MomAndPlayerWatchDadExit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1551,6 +1786,8 @@ original_encoded_gba = 0x8292dcc
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/playershouse-1f-movement-momandplayerwatchdadexit"
 target_export = "PlayersHouse_1F_Movement_MomAndPlayerWatchDadExit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1560,6 +1797,8 @@ original_encoded_gba = 0x8292dbc
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/playershouse-1f-movement-dadexitsmale"
 target_export = "PlayersHouse_1F_Movement_DadExitsMale"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1569,6 +1808,8 @@ original_encoded_gba = 0x8292dcc
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/playershouse-1f-movement-momandplayerwatchdadexit"
 target_export = "PlayersHouse_1F_Movement_MomAndPlayerWatchDadExit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1578,6 +1819,8 @@ original_encoded_gba = 0x8292dcc
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/playershouse-1f-movement-momandplayerwatchdadexit"
 target_export = "PlayersHouse_1F_Movement_MomAndPlayerWatchDadExit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1587,6 +1830,8 @@ original_encoded_gba = 0x8292dc1
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/playershouse-1f-movement-dadexitsfemale"
 target_export = "PlayersHouse_1F_Movement_DadExitsFemale"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1596,6 +1841,8 @@ original_encoded_gba = 0x8292dc6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/playershouse-1f-movement-playerenterroommale"
 target_export = "PlayersHouse_1F_Movement_PlayerEnterRoomMale"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1605,6 +1852,8 @@ original_encoded_gba = 0x8292dd1
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/playershouse-1f-movement-playerenterroomfemale"
 target_export = "PlayersHouse_1F_Movement_PlayerEnterRoomFemale"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1614,6 +1863,8 @@ original_encoded_gba = 0x8292dd7
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/playershouse-1f-movement-playerapproachtvforlatimale"
 target_export = "PlayersHouse_1F_Movement_PlayerApproachTVForLatiMale"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1623,6 +1874,8 @@ original_encoded_gba = 0x82725a4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterleft"
 target_export = "Common_Movement_WalkInPlaceFasterLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1632,6 +1885,8 @@ original_encoded_gba = 0x8292dde
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/playershouse-1f-movement-playerapproachtvforlatifemale"
 target_export = "PlayersHouse_1F_Movement_PlayerApproachTVForLatiFemale"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1641,6 +1896,8 @@ original_encoded_gba = 0x82725a8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterright"
 target_export = "Common_Movement_WalkInPlaceFasterRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1650,6 +1907,8 @@ original_encoded_gba = 0x8292999
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/playershouse-1f-movement-momapproachplayermale"
 target_export = "PlayersHouse_1F_Movement_MomApproachPlayerMale"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1659,6 +1918,8 @@ original_encoded_gba = 0x82725a4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterleft"
 target_export = "Common_Movement_WalkInPlaceFasterLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1668,6 +1929,8 @@ original_encoded_gba = 0x829299b
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/playershouse-1f-movement-momapproachplayerfemale"
 target_export = "PlayersHouse_1F_Movement_MomApproachPlayerFemale"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1677,6 +1940,8 @@ original_encoded_gba = 0x82725a8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterright"
 target_export = "Common_Movement_WalkInPlaceFasterRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1686,6 +1951,8 @@ original_encoded_gba = 0x829299d
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/playershouse-1f-movement-momnoticeslatibroadcastmale"
 target_export = "PlayersHouse_1F_Movement_MomNoticesLatiBroadcastMale"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1695,6 +1962,8 @@ original_encoded_gba = 0x82929a6
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/playershouse-1f-movement-momnoticeslatibroadcastfemale"
 target_export = "PlayersHouse_1F_Movement_MomNoticesLatiBroadcastFemale"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1704,6 +1973,8 @@ original_encoded_gba = 0x82929af
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/playershouse-1f-movement-momapproachplayeraftertvmale"
 target_export = "PlayersHouse_1F_Movement_MomApproachPlayerAfterTVMale"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1713,6 +1984,8 @@ original_encoded_gba = 0x82725a8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterright"
 target_export = "Common_Movement_WalkInPlaceFasterRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1722,6 +1995,8 @@ original_encoded_gba = 0x82929b3
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/playershouse-1f-movement-momapproachplayeraftertvfemale"
 target_export = "PlayersHouse_1F_Movement_MomApproachPlayerAfterTVFemale"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1731,6 +2006,8 @@ original_encoded_gba = 0x82725a4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterleft"
 target_export = "Common_Movement_WalkInPlaceFasterLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -1740,4 +2017,1706 @@ original_encoded_gba = 0x81f7f66
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/littleroottown-brendanshouse-1f"
 target_export = "PlayersHouse_1F_Text_RunningShoesManual"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 5
+
+[[boundaries]]
+payload_offset = 5
+length = 1
+
+[[boundaries]]
+payload_offset = 6
+length = 6
+
+[[boundaries]]
+payload_offset = 12
+length = 2
+
+[[boundaries]]
+payload_offset = 14
+length = 7
+
+[[boundaries]]
+payload_offset = 21
+length = 3
+
+[[boundaries]]
+payload_offset = 24
+length = 5
+
+[[boundaries]]
+payload_offset = 29
+length = 6
+
+[[boundaries]]
+payload_offset = 35
+length = 5
+
+[[boundaries]]
+payload_offset = 40
+length = 6
+
+[[boundaries]]
+payload_offset = 46
+length = 6
+
+[[boundaries]]
+payload_offset = 52
+length = 2
+
+[[boundaries]]
+payload_offset = 54
+length = 1
+
+[[boundaries]]
+payload_offset = 55
+length = 5
+
+[[boundaries]]
+payload_offset = 60
+length = 7
+
+[[boundaries]]
+payload_offset = 67
+length = 7
+
+[[boundaries]]
+payload_offset = 74
+length = 3
+
+[[boundaries]]
+payload_offset = 77
+length = 1
+
+[[boundaries]]
+payload_offset = 78
+length = 1
+
+[[boundaries]]
+payload_offset = 79
+length = 7
+
+[[boundaries]]
+payload_offset = 86
+length = 3
+
+[[boundaries]]
+payload_offset = 89
+length = 1
+
+[[boundaries]]
+payload_offset = 90
+length = 7
+
+[[boundaries]]
+payload_offset = 97
+length = 3
+
+[[boundaries]]
+payload_offset = 100
+length = 1
+
+[[boundaries]]
+payload_offset = 101
+length = 6
+
+[[boundaries]]
+payload_offset = 107
+length = 2
+
+[[boundaries]]
+payload_offset = 109
+length = 1
+
+[[boundaries]]
+payload_offset = 110
+length = 7
+
+[[boundaries]]
+payload_offset = 117
+length = 7
+
+[[boundaries]]
+payload_offset = 124
+length = 3
+
+[[boundaries]]
+payload_offset = 127
+length = 1
+
+[[boundaries]]
+payload_offset = 128
+length = 1
+
+[[boundaries]]
+payload_offset = 129
+length = 1
+
+[[boundaries]]
+payload_offset = 130
+length = 5
+
+[[boundaries]]
+payload_offset = 135
+length = 5
+
+[[boundaries]]
+payload_offset = 141
+length = 1
+
+[[boundaries]]
+payload_offset = 142
+length = 5
+
+[[boundaries]]
+payload_offset = 147
+length = 5
+
+[[boundaries]]
+payload_offset = 153
+length = 3
+
+[[boundaries]]
+payload_offset = 156
+length = 6
+
+[[boundaries]]
+payload_offset = 162
+length = 6
+
+[[boundaries]]
+payload_offset = 168
+length = 2
+
+[[boundaries]]
+payload_offset = 170
+length = 5
+
+[[boundaries]]
+payload_offset = 175
+length = 3
+
+[[boundaries]]
+payload_offset = 178
+length = 5
+
+[[boundaries]]
+payload_offset = 183
+length = 3
+
+[[boundaries]]
+payload_offset = 186
+length = 3
+
+[[boundaries]]
+payload_offset = 189
+length = 3
+
+[[boundaries]]
+payload_offset = 192
+length = 1
+
+[[boundaries]]
+payload_offset = 193
+length = 5
+
+[[boundaries]]
+payload_offset = 198
+length = 6
+
+[[boundaries]]
+payload_offset = 204
+length = 5
+
+[[boundaries]]
+payload_offset = 209
+length = 6
+
+[[boundaries]]
+payload_offset = 215
+length = 3
+
+[[boundaries]]
+payload_offset = 218
+length = 3
+
+[[boundaries]]
+payload_offset = 221
+length = 1
+
+[[boundaries]]
+payload_offset = 222
+length = 1
+
+[[boundaries]]
+payload_offset = 223
+length = 5
+
+[[boundaries]]
+payload_offset = 228
+length = 3
+
+[[boundaries]]
+payload_offset = 231
+length = 7
+
+[[boundaries]]
+payload_offset = 238
+length = 3
+
+[[boundaries]]
+payload_offset = 241
+length = 7
+
+[[boundaries]]
+payload_offset = 248
+length = 3
+
+[[boundaries]]
+payload_offset = 251
+length = 6
+
+[[boundaries]]
+payload_offset = 257
+length = 2
+
+[[boundaries]]
+payload_offset = 259
+length = 1
+
+[[boundaries]]
+payload_offset = 260
+length = 7
+
+[[boundaries]]
+payload_offset = 267
+length = 3
+
+[[boundaries]]
+payload_offset = 270
+length = 1
+
+[[boundaries]]
+payload_offset = 271
+length = 5
+
+[[boundaries]]
+payload_offset = 276
+length = 3
+
+[[boundaries]]
+payload_offset = 279
+length = 7
+
+[[boundaries]]
+payload_offset = 286
+length = 3
+
+[[boundaries]]
+payload_offset = 289
+length = 7
+
+[[boundaries]]
+payload_offset = 296
+length = 3
+
+[[boundaries]]
+payload_offset = 299
+length = 6
+
+[[boundaries]]
+payload_offset = 305
+length = 2
+
+[[boundaries]]
+payload_offset = 307
+length = 1
+
+[[boundaries]]
+payload_offset = 308
+length = 7
+
+[[boundaries]]
+payload_offset = 315
+length = 3
+
+[[boundaries]]
+payload_offset = 318
+length = 1
+
+[[boundaries]]
+payload_offset = 319
+length = 2
+
+[[boundaries]]
+payload_offset = 321
+length = 2
+
+[[boundaries]]
+payload_offset = 323
+length = 3
+
+[[boundaries]]
+payload_offset = 326
+length = 1
+
+[[boundaries]]
+payload_offset = 327
+length = 1
+
+[[boundaries]]
+payload_offset = 328
+length = 1
+
+[[boundaries]]
+payload_offset = 329
+length = 2
+
+[[boundaries]]
+payload_offset = 331
+length = 3
+
+[[boundaries]]
+payload_offset = 334
+length = 1
+
+[[boundaries]]
+payload_offset = 335
+length = 1
+
+[[boundaries]]
+payload_offset = 336
+length = 5
+
+[[boundaries]]
+payload_offset = 341
+length = 1
+
+[[boundaries]]
+payload_offset = 342
+length = 1
+
+[[boundaries]]
+payload_offset = 343
+length = 7
+
+[[boundaries]]
+payload_offset = 350
+length = 3
+
+[[boundaries]]
+payload_offset = 353
+length = 5
+
+[[boundaries]]
+payload_offset = 358
+length = 7
+
+[[boundaries]]
+payload_offset = 365
+length = 3
+
+[[boundaries]]
+payload_offset = 368
+length = 4
+
+[[boundaries]]
+payload_offset = 372
+length = 6
+
+[[boundaries]]
+payload_offset = 378
+length = 2
+
+[[boundaries]]
+payload_offset = 380
+length = 1
+
+[[boundaries]]
+payload_offset = 381
+length = 7
+
+[[boundaries]]
+payload_offset = 388
+length = 3
+
+[[boundaries]]
+payload_offset = 391
+length = 7
+
+[[boundaries]]
+payload_offset = 398
+length = 3
+
+[[boundaries]]
+payload_offset = 401
+length = 5
+
+[[boundaries]]
+payload_offset = 406
+length = 7
+
+[[boundaries]]
+payload_offset = 413
+length = 3
+
+[[boundaries]]
+payload_offset = 416
+length = 6
+
+[[boundaries]]
+payload_offset = 422
+length = 2
+
+[[boundaries]]
+payload_offset = 424
+length = 6
+
+[[boundaries]]
+payload_offset = 430
+length = 2
+
+[[boundaries]]
+payload_offset = 432
+length = 1
+
+[[boundaries]]
+payload_offset = 433
+length = 5
+
+[[boundaries]]
+payload_offset = 438
+length = 7
+
+[[boundaries]]
+payload_offset = 445
+length = 3
+
+[[boundaries]]
+payload_offset = 448
+length = 5
+
+[[boundaries]]
+payload_offset = 454
+length = 7
+
+[[boundaries]]
+payload_offset = 461
+length = 3
+
+[[boundaries]]
+payload_offset = 464
+length = 5
+
+[[boundaries]]
+payload_offset = 469
+length = 7
+
+[[boundaries]]
+payload_offset = 476
+length = 3
+
+[[boundaries]]
+payload_offset = 479
+length = 4
+
+[[boundaries]]
+payload_offset = 483
+length = 6
+
+[[boundaries]]
+payload_offset = 489
+length = 2
+
+[[boundaries]]
+payload_offset = 491
+length = 1
+
+[[boundaries]]
+payload_offset = 492
+length = 7
+
+[[boundaries]]
+payload_offset = 499
+length = 3
+
+[[boundaries]]
+payload_offset = 502
+length = 7
+
+[[boundaries]]
+payload_offset = 509
+length = 3
+
+[[boundaries]]
+payload_offset = 512
+length = 5
+
+[[boundaries]]
+payload_offset = 517
+length = 7
+
+[[boundaries]]
+payload_offset = 524
+length = 3
+
+[[boundaries]]
+payload_offset = 527
+length = 6
+
+[[boundaries]]
+payload_offset = 533
+length = 2
+
+[[boundaries]]
+payload_offset = 535
+length = 6
+
+[[boundaries]]
+payload_offset = 541
+length = 2
+
+[[boundaries]]
+payload_offset = 543
+length = 1
+
+[[boundaries]]
+payload_offset = 544
+length = 5
+
+[[boundaries]]
+payload_offset = 549
+length = 7
+
+[[boundaries]]
+payload_offset = 556
+length = 3
+
+[[boundaries]]
+payload_offset = 559
+length = 5
+
+[[boundaries]]
+payload_offset = 565
+length = 3
+
+[[boundaries]]
+payload_offset = 568
+length = 7
+
+[[boundaries]]
+payload_offset = 575
+length = 3
+
+[[boundaries]]
+payload_offset = 578
+length = 7
+
+[[boundaries]]
+payload_offset = 585
+length = 3
+
+[[boundaries]]
+payload_offset = 588
+length = 6
+
+[[boundaries]]
+payload_offset = 594
+length = 2
+
+[[boundaries]]
+payload_offset = 596
+length = 1
+
+[[boundaries]]
+payload_offset = 597
+length = 1
+
+[[boundaries]]
+payload_offset = 598
+length = 7
+
+[[boundaries]]
+payload_offset = 605
+length = 3
+
+[[boundaries]]
+payload_offset = 608
+length = 6
+
+[[boundaries]]
+payload_offset = 614
+length = 2
+
+[[boundaries]]
+payload_offset = 616
+length = 1
+
+[[boundaries]]
+payload_offset = 617
+length = 3
+
+[[boundaries]]
+payload_offset = 620
+length = 3
+
+[[boundaries]]
+payload_offset = 623
+length = 3
+
+[[boundaries]]
+payload_offset = 626
+length = 1
+
+[[boundaries]]
+payload_offset = 627
+length = 1
+
+[[boundaries]]
+payload_offset = 628
+length = 1
+
+[[boundaries]]
+payload_offset = 629
+length = 5
+
+[[boundaries]]
+payload_offset = 634
+length = 6
+
+[[boundaries]]
+payload_offset = 640
+length = 5
+
+[[boundaries]]
+payload_offset = 645
+length = 6
+
+[[boundaries]]
+payload_offset = 651
+length = 3
+
+[[boundaries]]
+payload_offset = 654
+length = 6
+
+[[boundaries]]
+payload_offset = 660
+length = 3
+
+[[boundaries]]
+payload_offset = 663
+length = 6
+
+[[boundaries]]
+payload_offset = 669
+length = 5
+
+[[boundaries]]
+payload_offset = 674
+length = 6
+
+[[boundaries]]
+payload_offset = 680
+length = 5
+
+[[boundaries]]
+payload_offset = 685
+length = 6
+
+[[boundaries]]
+payload_offset = 691
+length = 6
+
+[[boundaries]]
+payload_offset = 697
+length = 2
+
+[[boundaries]]
+payload_offset = 699
+length = 1
+
+[[boundaries]]
+payload_offset = 700
+length = 1
+
+[[boundaries]]
+payload_offset = 701
+length = 6
+
+[[boundaries]]
+payload_offset = 707
+length = 2
+
+[[boundaries]]
+payload_offset = 709
+length = 1
+
+[[boundaries]]
+payload_offset = 710
+length = 1
+
+[[boundaries]]
+payload_offset = 711
+length = 3
+
+[[boundaries]]
+payload_offset = 714
+length = 6
+
+[[boundaries]]
+payload_offset = 720
+length = 6
+
+[[boundaries]]
+payload_offset = 726
+length = 2
+
+[[boundaries]]
+payload_offset = 728
+length = 1
+
+[[boundaries]]
+payload_offset = 729
+length = 3
+
+[[boundaries]]
+payload_offset = 732
+length = 3
+
+[[boundaries]]
+payload_offset = 735
+length = 6
+
+[[boundaries]]
+payload_offset = 741
+length = 2
+
+[[boundaries]]
+payload_offset = 743
+length = 1
+
+[[boundaries]]
+payload_offset = 744
+length = 1
+
+[[boundaries]]
+payload_offset = 745
+length = 3
+
+[[boundaries]]
+payload_offset = 748
+length = 3
+
+[[boundaries]]
+payload_offset = 751
+length = 1
+
+[[boundaries]]
+payload_offset = 752
+length = 1
+
+[[boundaries]]
+payload_offset = 753
+length = 3
+
+[[boundaries]]
+payload_offset = 756
+length = 6
+
+[[boundaries]]
+payload_offset = 762
+length = 5
+
+[[boundaries]]
+payload_offset = 767
+length = 3
+
+[[boundaries]]
+payload_offset = 770
+length = 6
+
+[[boundaries]]
+payload_offset = 776
+length = 6
+
+[[boundaries]]
+payload_offset = 782
+length = 2
+
+[[boundaries]]
+payload_offset = 784
+length = 5
+
+[[boundaries]]
+payload_offset = 789
+length = 5
+
+[[boundaries]]
+payload_offset = 794
+length = 2
+
+[[boundaries]]
+payload_offset = 796
+length = 5
+
+[[boundaries]]
+payload_offset = 801
+length = 6
+
+[[boundaries]]
+payload_offset = 807
+length = 6
+
+[[boundaries]]
+payload_offset = 813
+length = 2
+
+[[boundaries]]
+payload_offset = 815
+length = 3
+
+[[boundaries]]
+payload_offset = 818
+length = 1
+
+[[boundaries]]
+payload_offset = 819
+length = 1
+
+[[boundaries]]
+payload_offset = 820
+length = 6
+
+[[boundaries]]
+payload_offset = 826
+length = 2
+
+[[boundaries]]
+payload_offset = 828
+length = 5
+
+[[boundaries]]
+payload_offset = 834
+length = 6
+
+[[boundaries]]
+payload_offset = 840
+length = 2
+
+[[boundaries]]
+payload_offset = 842
+length = 1
+
+[[boundaries]]
+payload_offset = 843
+length = 1
+
+[[boundaries]]
+payload_offset = 844
+length = 1
+
+[[boundaries]]
+payload_offset = 845
+length = 5
+
+[[boundaries]]
+payload_offset = 850
+length = 2
+
+[[boundaries]]
+payload_offset = 852
+length = 6
+
+[[boundaries]]
+payload_offset = 858
+length = 2
+
+[[boundaries]]
+payload_offset = 860
+length = 1
+
+[[boundaries]]
+payload_offset = 861
+length = 1
+
+[[boundaries]]
+payload_offset = 862
+length = 6
+
+[[boundaries]]
+payload_offset = 868
+length = 2
+
+[[boundaries]]
+payload_offset = 870
+length = 1
+
+[[boundaries]]
+payload_offset = 871
+length = 1
+
+[[boundaries]]
+payload_offset = 872
+length = 1
+
+[[boundaries]]
+payload_offset = 873
+length = 1
+
+[[boundaries]]
+payload_offset = 874
+length = 1
+
+[[boundaries]]
+payload_offset = 875
+length = 5
+
+[[boundaries]]
+payload_offset = 880
+length = 6
+
+[[boundaries]]
+payload_offset = 886
+length = 2
+
+[[boundaries]]
+payload_offset = 888
+length = 1
+
+[[boundaries]]
+payload_offset = 889
+length = 1
+
+[[boundaries]]
+payload_offset = 890
+length = 1
+
+[[boundaries]]
+payload_offset = 891
+length = 1
+
+[[boundaries]]
+payload_offset = 892
+length = 1
+
+[[boundaries]]
+payload_offset = 893
+length = 1
+
+[[boundaries]]
+payload_offset = 894
+length = 5
+
+[[boundaries]]
+payload_offset = 899
+length = 6
+
+[[boundaries]]
+payload_offset = 905
+length = 2
+
+[[boundaries]]
+payload_offset = 907
+length = 1
+
+[[boundaries]]
+payload_offset = 908
+length = 1
+
+[[boundaries]]
+payload_offset = 909
+length = 1
+
+[[boundaries]]
+payload_offset = 910
+length = 1
+
+[[boundaries]]
+payload_offset = 911
+length = 1
+
+[[boundaries]]
+payload_offset = 912
+length = 5
+
+[[boundaries]]
+payload_offset = 917
+length = 6
+
+[[boundaries]]
+payload_offset = 923
+length = 5
+
+[[boundaries]]
+payload_offset = 928
+length = 6
+
+[[boundaries]]
+payload_offset = 934
+length = 5
+
+[[boundaries]]
+payload_offset = 939
+length = 6
+
+[[boundaries]]
+payload_offset = 945
+length = 5
+
+[[boundaries]]
+payload_offset = 950
+length = 6
+
+[[boundaries]]
+payload_offset = 956
+length = 7
+
+[[boundaries]]
+payload_offset = 963
+length = 3
+
+[[boundaries]]
+payload_offset = 966
+length = 3
+
+[[boundaries]]
+payload_offset = 969
+length = 7
+
+[[boundaries]]
+payload_offset = 976
+length = 3
+
+[[boundaries]]
+payload_offset = 979
+length = 7
+
+[[boundaries]]
+payload_offset = 986
+length = 3
+
+[[boundaries]]
+payload_offset = 989
+length = 3
+
+[[boundaries]]
+payload_offset = 992
+length = 5
+
+[[boundaries]]
+payload_offset = 997
+length = 6
+
+[[boundaries]]
+payload_offset = 1003
+length = 5
+
+[[boundaries]]
+payload_offset = 1008
+length = 6
+
+[[boundaries]]
+payload_offset = 1014
+length = 6
+
+[[boundaries]]
+payload_offset = 1020
+length = 2
+
+[[boundaries]]
+payload_offset = 1022
+length = 5
+
+[[boundaries]]
+payload_offset = 1027
+length = 5
+
+[[boundaries]]
+payload_offset = 1032
+length = 2
+
+[[boundaries]]
+payload_offset = 1034
+length = 6
+
+[[boundaries]]
+payload_offset = 1040
+length = 2
+
+[[boundaries]]
+payload_offset = 1042
+length = 1
+
+[[boundaries]]
+payload_offset = 1043
+length = 3
+
+[[boundaries]]
+payload_offset = 1046
+length = 5
+
+[[boundaries]]
+payload_offset = 1051
+length = 6
+
+[[boundaries]]
+payload_offset = 1057
+length = 5
+
+[[boundaries]]
+payload_offset = 1062
+length = 6
+
+[[boundaries]]
+payload_offset = 1068
+length = 6
+
+[[boundaries]]
+payload_offset = 1074
+length = 2
+
+[[boundaries]]
+payload_offset = 1076
+length = 1
+
+[[boundaries]]
+payload_offset = 1077
+length = 5
+
+[[boundaries]]
+payload_offset = 1082
+length = 6
+
+[[boundaries]]
+payload_offset = 1088
+length = 5
+
+[[boundaries]]
+payload_offset = 1093
+length = 6
+
+[[boundaries]]
+payload_offset = 1099
+length = 3
+
+[[boundaries]]
+payload_offset = 1102
+length = 3
+
+[[boundaries]]
+payload_offset = 1105
+length = 3
+
+[[boundaries]]
+payload_offset = 1108
+length = 3
+
+[[boundaries]]
+payload_offset = 1111
+length = 5
+
+[[boundaries]]
+payload_offset = 1116
+length = 6
+
+[[boundaries]]
+payload_offset = 1122
+length = 5
+
+[[boundaries]]
+payload_offset = 1127
+length = 6
+
+[[boundaries]]
+payload_offset = 1133
+length = 3
+
+[[boundaries]]
+payload_offset = 1136
+length = 6
+
+[[boundaries]]
+payload_offset = 1142
+length = 2
+
+[[boundaries]]
+payload_offset = 1144
+length = 1
+
+[[boundaries]]
+payload_offset = 1145
+length = 3
+
+[[boundaries]]
+payload_offset = 1148
+length = 3
+
+[[boundaries]]
+payload_offset = 1151
+length = 3
+
+[[boundaries]]
+payload_offset = 1154
+length = 5
+
+[[boundaries]]
+payload_offset = 1159
+length = 6
+
+[[boundaries]]
+payload_offset = 1165
+length = 5
+
+[[boundaries]]
+payload_offset = 1170
+length = 6
+
+[[boundaries]]
+payload_offset = 1176
+length = 6
+
+[[boundaries]]
+payload_offset = 1182
+length = 2
+
+[[boundaries]]
+payload_offset = 1184
+length = 1
+
+[[boundaries]]
+payload_offset = 1185
+length = 5
+
+[[boundaries]]
+payload_offset = 1190
+length = 6
+
+[[boundaries]]
+payload_offset = 1196
+length = 5
+
+[[boundaries]]
+payload_offset = 1201
+length = 6
+
+[[boundaries]]
+payload_offset = 1207
+length = 6
+
+[[boundaries]]
+payload_offset = 1213
+length = 2
+
+[[boundaries]]
+payload_offset = 1215
+length = 1
+
+[[boundaries]]
+payload_offset = 1216
+length = 3
+
+[[boundaries]]
+payload_offset = 1219
+length = 3
+
+[[boundaries]]
+payload_offset = 1222
+length = 3
+
+[[boundaries]]
+payload_offset = 1225
+length = 5
+
+[[boundaries]]
+payload_offset = 1230
+length = 6
+
+[[boundaries]]
+payload_offset = 1236
+length = 5
+
+[[boundaries]]
+payload_offset = 1241
+length = 6
+
+[[boundaries]]
+payload_offset = 1247
+length = 6
+
+[[boundaries]]
+payload_offset = 1253
+length = 2
+
+[[boundaries]]
+payload_offset = 1255
+length = 5
+
+[[boundaries]]
+payload_offset = 1260
+length = 5
+
+[[boundaries]]
+payload_offset = 1265
+length = 3
+
+[[boundaries]]
+payload_offset = 1268
+length = 5
+
+[[boundaries]]
+payload_offset = 1273
+length = 6
+
+[[boundaries]]
+payload_offset = 1279
+length = 2
+
+[[boundaries]]
+payload_offset = 1281
+length = 1
+
+[[boundaries]]
+payload_offset = 1282
+length = 5
+
+[[boundaries]]
+payload_offset = 1287
+length = 5
+
+[[boundaries]]
+payload_offset = 1292
+length = 1
+
+[[boundaries]]
+payload_offset = 1293
+length = 1
+
+[[boundaries]]
+payload_offset = 1294
+length = 3
+
+[[boundaries]]
+payload_offset = 1297
+length = 1
+
+[[boundaries]]
+payload_offset = 1298
+length = 5
+
+[[boundaries]]
+payload_offset = 1303
+length = 5
+
+[[boundaries]]
+payload_offset = 1308
+length = 5
+
+[[boundaries]]
+payload_offset = 1313
+length = 1
+
+[[boundaries]]
+payload_offset = 1314
+length = 5
+
+[[boundaries]]
+payload_offset = 1319
+length = 5
+
+[[boundaries]]
+payload_offset = 1324
+length = 5
+
+[[boundaries]]
+payload_offset = 1329
+length = 1
+
+[[boundaries]]
+payload_offset = 1330
+length = 7
+
+[[boundaries]]
+payload_offset = 1337
+length = 3
+
+[[boundaries]]
+payload_offset = 1340
+length = 1
+
+[[boundaries]]
+payload_offset = 1341
+length = 7
+
+[[boundaries]]
+payload_offset = 1348
+length = 3
+
+[[boundaries]]
+payload_offset = 1351
+length = 1
+
+[[boundaries]]
+payload_offset = 1352
+length = 7
+
+[[boundaries]]
+payload_offset = 1359
+length = 3
+
+[[boundaries]]
+payload_offset = 1362
+length = 7
+
+[[boundaries]]
+payload_offset = 1369
+length = 3
+
+[[boundaries]]
+payload_offset = 1372
+length = 1
+
+[[boundaries]]
+payload_offset = 1373
+length = 7
+
+[[boundaries]]
+payload_offset = 1380
+length = 3
+
+[[boundaries]]
+payload_offset = 1383
+length = 7
+
+[[boundaries]]
+payload_offset = 1390
+length = 3
+
+[[boundaries]]
+payload_offset = 1393
+length = 1
+
+[[boundaries]]
+payload_offset = 1394
+length = 7
+
+[[boundaries]]
+payload_offset = 1401
+length = 7
+
+[[boundaries]]
+payload_offset = 1408
+length = 7
+
+[[boundaries]]
+payload_offset = 1415
+length = 3
+
+[[boundaries]]
+payload_offset = 1418
+length = 1
+
+[[boundaries]]
+payload_offset = 1419
+length = 7
+
+[[boundaries]]
+payload_offset = 1426
+length = 7
+
+[[boundaries]]
+payload_offset = 1433
+length = 7
+
+[[boundaries]]
+payload_offset = 1440
+length = 3
+
+[[boundaries]]
+payload_offset = 1443
+length = 1
+
+[[boundaries]]
+payload_offset = 1444
+length = 7
+
+[[boundaries]]
+payload_offset = 1451
+length = 3
+
+[[boundaries]]
+payload_offset = 1454
+length = 1
+
+[[boundaries]]
+payload_offset = 1455
+length = 7
+
+[[boundaries]]
+payload_offset = 1462
+length = 3
+
+[[boundaries]]
+payload_offset = 1465
+length = 1
+
+[[boundaries]]
+payload_offset = 1466
+length = 7
+
+[[boundaries]]
+payload_offset = 1473
+length = 3
+
+[[boundaries]]
+payload_offset = 1476
+length = 7
+
+[[boundaries]]
+payload_offset = 1483
+length = 3
+
+[[boundaries]]
+payload_offset = 1486
+length = 1
+
+[[boundaries]]
+payload_offset = 1487
+length = 7
+
+[[boundaries]]
+payload_offset = 1494
+length = 3
+
+[[boundaries]]
+payload_offset = 1497
+length = 7
+
+[[boundaries]]
+payload_offset = 1504
+length = 3
+
+[[boundaries]]
+payload_offset = 1507
+length = 1
+
+[[boundaries]]
+payload_offset = 1508
+length = 7
+
+[[boundaries]]
+payload_offset = 1515
+length = 3
+
+[[boundaries]]
+payload_offset = 1518
+length = 7
+
+[[boundaries]]
+payload_offset = 1525
+length = 3
+
+[[boundaries]]
+payload_offset = 1528
+length = 1
+
+[[boundaries]]
+payload_offset = 1529
+length = 7
+
+[[boundaries]]
+payload_offset = 1536
+length = 3
+
+[[boundaries]]
+payload_offset = 1539
+length = 7
+
+[[boundaries]]
+payload_offset = 1546
+length = 3
+
+[[boundaries]]
+payload_offset = 1549
+length = 1
+
+[[boundaries]]
+payload_offset = 1550
+length = 7
+
+[[boundaries]]
+payload_offset = 1557
+length = 3
+
+[[boundaries]]
+payload_offset = 1560
+length = 1
+
+[[boundaries]]
+payload_offset = 1561
+length = 7
+
+[[boundaries]]
+payload_offset = 1568
+length = 3
+
+[[boundaries]]
+payload_offset = 1571
+length = 1
+
+[[boundaries]]
+payload_offset = 1572
+length = 7
+
+[[boundaries]]
+payload_offset = 1579
+length = 3
+
+[[boundaries]]
+payload_offset = 1582
+length = 7
+
+[[boundaries]]
+payload_offset = 1589
+length = 3
+
+[[boundaries]]
+payload_offset = 1592
+length = 1
+
+[[boundaries]]
+payload_offset = 1593
+length = 7
+
+[[boundaries]]
+payload_offset = 1600
+length = 3
+
+[[boundaries]]
+payload_offset = 1603
+length = 7
+
+[[boundaries]]
+payload_offset = 1610
+length = 3
+
+[[boundaries]]
+payload_offset = 1613
+length = 1
+
+[[boundaries]]
+payload_offset = 1614
+length = 6
+
+[[boundaries]]
+payload_offset = 1620
+length = 2
+
+[[boundaries]]
+payload_offset = 1622
+length = 1

@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 5
 reloc_count = 7
+instruction_count = 23
 
 [[segments]]
 kind = "bytecode"
@@ -71,6 +72,8 @@ original_encoded_gba = 0x8204017
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/pacifidlogtown-house4"
 target_export = "PacifidlogTown_House4_Text_SkyPokemon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -80,6 +83,8 @@ original_encoded_gba = 0x8203f93
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/pacifidlogtown-house4"
 target_export = "PacifidlogTown_House4_Text_PeopleSawHighFlyingPokemon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -89,6 +94,8 @@ original_encoded_gba = 0x8204035
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/pacifidlogtown-house4"
 target_export = "PacifidlogTown_House4_Text_WhereDidYouComeFrom"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -99,6 +106,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/pacifidlogtown-house4"
 target_export = "PacifidlogTown_House4_EventScript_Yes"
 target_offset = 52
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 51
 runtime_resolution_required = true
 
 [[relocs]]
@@ -109,6 +118,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/pacifidlogtown-house4"
 target_export = "PacifidlogTown_House4_EventScript_No"
 target_offset = 62
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 61
 runtime_resolution_required = true
 
 [[relocs]]
@@ -118,6 +129,8 @@ original_encoded_gba = 0x820404e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/pacifidlogtown-house4"
 target_export = "PacifidlogTown_House4_Text_YesTown"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -127,4 +140,98 @@ original_encoded_gba = 0x8204084
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/pacifidlogtown-house4"
 target_export = "PacifidlogTown_House4_Text_YouHaveToComeFromSomewhere"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 6
+
+[[boundaries]]
+payload_offset = 6
+length = 2
+
+[[boundaries]]
+payload_offset = 8
+length = 1
+
+[[boundaries]]
+payload_offset = 9
+length = 6
+
+[[boundaries]]
+payload_offset = 15
+length = 2
+
+[[boundaries]]
+payload_offset = 17
+length = 1
+
+[[boundaries]]
+payload_offset = 18
+length = 1
+
+[[boundaries]]
+payload_offset = 19
+length = 1
+
+[[boundaries]]
+payload_offset = 20
+length = 6
+
+[[boundaries]]
+payload_offset = 26
+length = 2
+
+[[boundaries]]
+payload_offset = 28
+length = 5
+
+[[boundaries]]
+payload_offset = 33
+length = 6
+
+[[boundaries]]
+payload_offset = 39
+length = 5
+
+[[boundaries]]
+payload_offset = 44
+length = 6
+
+[[boundaries]]
+payload_offset = 50
+length = 1
+
+[[boundaries]]
+payload_offset = 51
+length = 6
+
+[[boundaries]]
+payload_offset = 57
+length = 2
+
+[[boundaries]]
+payload_offset = 59
+length = 1
+
+[[boundaries]]
+payload_offset = 60
+length = 1
+
+[[boundaries]]
+payload_offset = 61
+length = 6
+
+[[boundaries]]
+payload_offset = 67
+length = 2
+
+[[boundaries]]
+payload_offset = 69
+length = 1
+
+[[boundaries]]
+payload_offset = 70
+length = 1

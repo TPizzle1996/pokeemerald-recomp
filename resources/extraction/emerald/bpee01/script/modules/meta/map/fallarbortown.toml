@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 9
 reloc_count = 9
+instruction_count = 40
 
 [[segments]]
 kind = "bytecode"
@@ -104,6 +105,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/fallarbortown"
 target_export = "FallarborTown_EventScript_ExpertMNormal"
 target_offset = 39
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 33
 runtime_resolution_required = true
 
 [[relocs]]
@@ -113,6 +116,8 @@ original_encoded_gba = 0x81eb26b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fallarbortown"
 target_export = "FallarborTown_Text_ShadyCharactersCozmosHome"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -122,6 +127,8 @@ original_encoded_gba = 0x81eb2de
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fallarbortown"
 target_export = "FallarborTown_Text_RegionKnownForMeteors"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -131,6 +138,8 @@ original_encoded_gba = 0x81eb35f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fallarbortown"
 target_export = "FallarborTown_Text_MyPreciousAzurill"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -140,6 +149,8 @@ original_encoded_gba = 0x81eb3ca
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fallarbortown"
 target_export = "FallarborTown_Text_HaveYouChallengedFlannery"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -149,6 +160,8 @@ original_encoded_gba = 0x81eb3b5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fallarbortown"
 target_export = "FallarborTown_Text_Azurill"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -158,6 +171,8 @@ original_encoded_gba = 0x81eb4c2
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fallarbortown"
 target_export = "FallarborTown_Text_BattleTentSign"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -167,6 +182,8 @@ original_encoded_gba = 0x81eb4fe
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fallarbortown"
 target_export = "FallarborTown_Text_TownSign"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -176,4 +193,166 @@ original_encoded_gba = 0x81eb534
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/fallarbortown"
 target_export = "FallarborTown_Text_MoveTutorSign"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 5
+
+[[boundaries]]
+payload_offset = 8
+length = 3
+
+[[boundaries]]
+payload_offset = 11
+length = 1
+
+[[boundaries]]
+payload_offset = 12
+length = 1
+
+[[boundaries]]
+payload_offset = 13
+length = 1
+
+[[boundaries]]
+payload_offset = 14
+length = 3
+
+[[boundaries]]
+payload_offset = 17
+length = 6
+
+[[boundaries]]
+payload_offset = 23
+length = 6
+
+[[boundaries]]
+payload_offset = 29
+length = 2
+
+[[boundaries]]
+payload_offset = 31
+length = 1
+
+[[boundaries]]
+payload_offset = 32
+length = 1
+
+[[boundaries]]
+payload_offset = 33
+length = 6
+
+[[boundaries]]
+payload_offset = 39
+length = 2
+
+[[boundaries]]
+payload_offset = 41
+length = 1
+
+[[boundaries]]
+payload_offset = 42
+length = 1
+
+[[boundaries]]
+payload_offset = 43
+length = 6
+
+[[boundaries]]
+payload_offset = 49
+length = 2
+
+[[boundaries]]
+payload_offset = 51
+length = 1
+
+[[boundaries]]
+payload_offset = 52
+length = 6
+
+[[boundaries]]
+payload_offset = 58
+length = 2
+
+[[boundaries]]
+payload_offset = 60
+length = 1
+
+[[boundaries]]
+payload_offset = 61
+length = 1
+
+[[boundaries]]
+payload_offset = 62
+length = 1
+
+[[boundaries]]
+payload_offset = 63
+length = 1
+
+[[boundaries]]
+payload_offset = 64
+length = 5
+
+[[boundaries]]
+payload_offset = 69
+length = 6
+
+[[boundaries]]
+payload_offset = 75
+length = 2
+
+[[boundaries]]
+payload_offset = 77
+length = 1
+
+[[boundaries]]
+payload_offset = 78
+length = 1
+
+[[boundaries]]
+payload_offset = 79
+length = 1
+
+[[boundaries]]
+payload_offset = 80
+length = 6
+
+[[boundaries]]
+payload_offset = 86
+length = 2
+
+[[boundaries]]
+payload_offset = 88
+length = 1
+
+[[boundaries]]
+payload_offset = 89
+length = 6
+
+[[boundaries]]
+payload_offset = 95
+length = 2
+
+[[boundaries]]
+payload_offset = 97
+length = 1
+
+[[boundaries]]
+payload_offset = 98
+length = 6
+
+[[boundaries]]
+payload_offset = 104
+length = 2
+
+[[boundaries]]
+payload_offset = 106
+length = 1

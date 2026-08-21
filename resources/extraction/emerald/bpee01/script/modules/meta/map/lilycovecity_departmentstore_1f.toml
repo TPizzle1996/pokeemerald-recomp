@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 20
 reloc_count = 38
+instruction_count = 130
 
 [[segments]]
 kind = "bytecode"
@@ -191,6 +192,8 @@ original_encoded_gba = 0x821f866
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-departmentstore-1f"
 target_export = "LilycoveCity_DepartmentStore_1F_Text_WelcomeToDeptStore"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -201,6 +204,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstore-1f"
 target_export = "LilycoveCity_DepartmentStore_1F_EventScript_GivePrizeFromEarlier"
 target_offset = 357
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 356
 runtime_resolution_required = true
 
 [[relocs]]
@@ -211,6 +216,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstore-1f"
 target_export = "LilycoveCity_DepartmentStore_1F_EventScript_ComeBackTomorrow"
 target_offset = 251
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 250
 runtime_resolution_required = true
 
 [[relocs]]
@@ -220,6 +227,8 @@ original_encoded_gba = 0x82a6390
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/lottery-corner"
 target_export = "LilycoveCity_DepartmentStore_1F_Text_LotteryCornerDrawTicket"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -230,6 +239,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstore-1f"
 target_export = "LilycoveCity_DepartmentStore_1F_EventScript_PleaseVisitAgain"
 target_offset = 261
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 260
 runtime_resolution_required = true
 
 [[relocs]]
@@ -239,6 +250,8 @@ original_encoded_gba = 0x82a64c8
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/lottery-corner"
 target_export = "LilycoveCity_DepartmentStore_1F_Text_PleasePickTicket"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -248,6 +261,8 @@ original_encoded_gba = 0x82a650b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/lottery-corner"
 target_export = "LilycoveCity_DepartmentStore_1F_Text_TicketNumberIsXPleaseWait"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -257,6 +272,8 @@ original_encoded_gba = 0x82725a8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterright"
 target_export = "Common_Movement_WalkInPlaceFasterRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -266,6 +283,8 @@ original_encoded_gba = 0x827259e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceplayer"
 target_export = "Common_Movement_FacePlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -276,6 +295,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstore-1f"
 target_export = "LilycoveCity_DepartmentStore_1F_EventScript_NoMatch"
 target_offset = 271
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 270
 runtime_resolution_required = true
 
 [[relocs]]
@@ -286,6 +307,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstore-1f"
 target_export = "LilycoveCity_DepartmentStore_1F_EventScript_TicketMatchPartyMon"
 target_offset = 233
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 232
 runtime_resolution_required = true
 
 [[relocs]]
@@ -296,6 +319,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstore-1f"
 target_export = "LilycoveCity_DepartmentStore_1F_EventScript_TicketMatchPCMon"
 target_offset = 242
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 241
 runtime_resolution_required = true
 
 [[relocs]]
@@ -306,6 +331,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstore-1f"
 target_export = "LilycoveCity_DepartmentStore_1F_EventScript_TwoDigitMatch"
 target_offset = 295
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 294
 runtime_resolution_required = true
 
 [[relocs]]
@@ -316,6 +343,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstore-1f"
 target_export = "LilycoveCity_DepartmentStore_1F_EventScript_ThreeDigitMatch"
 target_offset = 304
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 303
 runtime_resolution_required = true
 
 [[relocs]]
@@ -326,6 +355,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstore-1f"
 target_export = "LilycoveCity_DepartmentStore_1F_EventScript_FourDigitMatch"
 target_offset = 313
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 312
 runtime_resolution_required = true
 
 [[relocs]]
@@ -336,6 +367,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstore-1f"
 target_export = "LilycoveCity_DepartmentStore_1F_EventScript_FullMatch"
 target_offset = 322
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 321
 runtime_resolution_required = true
 
 [[relocs]]
@@ -346,6 +379,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstore-1f"
 target_export = "LilycoveCity_DepartmentStore_1F_EventScript_RecordPrizeNoRoom"
 target_offset = 331
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 330
 runtime_resolution_required = true
 
 [[relocs]]
@@ -356,6 +391,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstore-1f"
 target_export = "LilycoveCity_DepartmentStore_1F_EventScript_PleaseVisitAgain2"
 target_offset = 285
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 284
 runtime_resolution_required = true
 
 [[relocs]]
@@ -365,6 +402,8 @@ original_encoded_gba = 0x82a6592
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/lottery-corner"
 target_export = "LilycoveCity_DepartmentStore_1F_Text_TicketMatchesPartyMon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -374,6 +413,8 @@ original_encoded_gba = 0x82a65e6
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/lottery-corner"
 target_export = "LilycoveCity_DepartmentStore_1F_Text_TicketMatchesPCMon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -383,6 +424,8 @@ original_encoded_gba = 0x82a6496
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/lottery-corner"
 target_export = "LilycoveCity_DepartmentStore_1F_Text_ComeBackTomorrow"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -392,6 +435,8 @@ original_encoded_gba = 0x82a64b1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/lottery-corner"
 target_export = "LilycoveCity_DepartmentStore_1F_Text_PleaseVisitAgain"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -401,6 +446,8 @@ original_encoded_gba = 0x82a663c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/lottery-corner"
 target_export = "LilycoveCity_DepartmentStore_1F_Text_NoNumbersMatched"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -411,6 +458,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstore-1f"
 target_export = "LilycoveCity_DepartmentStore_1F_EventScript_PleaseVisitAgain2"
 target_offset = 285
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 284
 runtime_resolution_required = true
 
 [[relocs]]
@@ -420,6 +469,8 @@ original_encoded_gba = 0x82a6831
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/lottery-corner"
 target_export = "LilycoveCity_DepartmentStore_1F_Text_PleaseVisitAgain2"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -429,6 +480,8 @@ original_encoded_gba = 0x82a6664
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/lottery-corner"
 target_export = "LilycoveCity_DepartmentStore_1F_Text_TwoDigitsMatched"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -438,6 +491,8 @@ original_encoded_gba = 0x82a66a7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/lottery-corner"
 target_export = "LilycoveCity_DepartmentStore_1F_Text_ThreeDigitsMatched"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -447,6 +502,8 @@ original_encoded_gba = 0x82a66ed
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/lottery-corner"
 target_export = "LilycoveCity_DepartmentStore_1F_Text_FourDigitsMatched"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -456,6 +513,8 @@ original_encoded_gba = 0x82a6731
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/lottery-corner"
 target_export = "LilycoveCity_DepartmentStore_1F_Text_AllFiveDigitsMatched"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -466,6 +525,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstore-1f"
 target_export = "LilycoveCity_DepartmentStore_1F_EventScript_NoRoomForPrize"
 target_offset = 347
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 346
 runtime_resolution_required = true
 
 [[relocs]]
@@ -475,6 +536,8 @@ original_encoded_gba = 0x82a678c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/lottery-corner"
 target_export = "LilycoveCity_DepartmentStore_1F_Text_NoRoomForThis"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -484,6 +547,8 @@ original_encoded_gba = 0x82a67e1
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/lottery-corner"
 target_export = "LilycoveCity_DepartmentStore_1F_Text_PrizeWeveBeenHolding"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -494,6 +559,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/lilycovecity-departmentstore-1f"
 target_export = "LilycoveCity_DepartmentStore_1F_EventScript_NoRoomForPrize"
 target_offset = 347
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 346
 runtime_resolution_required = true
 
 [[relocs]]
@@ -503,6 +570,8 @@ original_encoded_gba = 0x821f88c
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-departmentstore-1f"
 target_export = "LilycoveCity_DepartmentStore_1F_Text_IBuyAllSortsOfThings"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -512,6 +581,8 @@ original_encoded_gba = 0x821f8f5
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-departmentstore-1f"
 target_export = "LilycoveCity_DepartmentStore_1F_Text_MomBuyingMeFurniture"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -521,6 +592,8 @@ original_encoded_gba = 0x821f92b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-departmentstore-1f"
 target_export = "LilycoveCity_DepartmentStore_1F_Text_BuyingSomethingForAzumarill"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -530,6 +603,8 @@ original_encoded_gba = 0x821f974
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-departmentstore-1f"
 target_export = "LilycoveCity_DepartmentStore_1F_Text_Azumarill"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -539,4 +614,526 @@ original_encoded_gba = 0x821f98a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/lilycovecity-departmentstore-1f"
 target_export = "LilycoveCity_DepartmentStore_1F_Text_FloorNamesSign"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 6
+
+[[boundaries]]
+payload_offset = 6
+length = 2
+
+[[boundaries]]
+payload_offset = 8
+length = 1
+
+[[boundaries]]
+payload_offset = 9
+length = 1
+
+[[boundaries]]
+payload_offset = 10
+length = 1
+
+[[boundaries]]
+payload_offset = 11
+length = 1
+
+[[boundaries]]
+payload_offset = 12
+length = 5
+
+[[boundaries]]
+payload_offset = 17
+length = 6
+
+[[boundaries]]
+payload_offset = 23
+length = 3
+
+[[boundaries]]
+payload_offset = 26
+length = 6
+
+[[boundaries]]
+payload_offset = 32
+length = 6
+
+[[boundaries]]
+payload_offset = 38
+length = 2
+
+[[boundaries]]
+payload_offset = 40
+length = 5
+
+[[boundaries]]
+payload_offset = 45
+length = 6
+
+[[boundaries]]
+payload_offset = 51
+length = 3
+
+[[boundaries]]
+payload_offset = 54
+length = 5
+
+[[boundaries]]
+payload_offset = 59
+length = 1
+
+[[boundaries]]
+payload_offset = 60
+length = 3
+
+[[boundaries]]
+payload_offset = 63
+length = 5
+
+[[boundaries]]
+payload_offset = 68
+length = 3
+
+[[boundaries]]
+payload_offset = 71
+length = 6
+
+[[boundaries]]
+payload_offset = 77
+length = 2
+
+[[boundaries]]
+payload_offset = 79
+length = 7
+
+[[boundaries]]
+payload_offset = 86
+length = 3
+
+[[boundaries]]
+payload_offset = 89
+length = 3
+
+[[boundaries]]
+payload_offset = 92
+length = 3
+
+[[boundaries]]
+payload_offset = 95
+length = 3
+
+[[boundaries]]
+payload_offset = 98
+length = 3
+
+[[boundaries]]
+payload_offset = 101
+length = 3
+
+[[boundaries]]
+payload_offset = 104
+length = 3
+
+[[boundaries]]
+payload_offset = 107
+length = 7
+
+[[boundaries]]
+payload_offset = 114
+length = 3
+
+[[boundaries]]
+payload_offset = 117
+length = 5
+
+[[boundaries]]
+payload_offset = 122
+length = 6
+
+[[boundaries]]
+payload_offset = 128
+length = 2
+
+[[boundaries]]
+payload_offset = 130
+length = 5
+
+[[boundaries]]
+payload_offset = 135
+length = 6
+
+[[boundaries]]
+payload_offset = 141
+length = 5
+
+[[boundaries]]
+payload_offset = 146
+length = 6
+
+[[boundaries]]
+payload_offset = 152
+length = 4
+
+[[boundaries]]
+payload_offset = 156
+length = 5
+
+[[boundaries]]
+payload_offset = 161
+length = 6
+
+[[boundaries]]
+payload_offset = 167
+length = 5
+
+[[boundaries]]
+payload_offset = 172
+length = 6
+
+[[boundaries]]
+payload_offset = 178
+length = 5
+
+[[boundaries]]
+payload_offset = 183
+length = 6
+
+[[boundaries]]
+payload_offset = 189
+length = 5
+
+[[boundaries]]
+payload_offset = 194
+length = 6
+
+[[boundaries]]
+payload_offset = 200
+length = 5
+
+[[boundaries]]
+payload_offset = 205
+length = 5
+
+[[boundaries]]
+payload_offset = 210
+length = 2
+
+[[boundaries]]
+payload_offset = 212
+length = 5
+
+[[boundaries]]
+payload_offset = 217
+length = 6
+
+[[boundaries]]
+payload_offset = 223
+length = 3
+
+[[boundaries]]
+payload_offset = 226
+length = 5
+
+[[boundaries]]
+payload_offset = 232
+length = 6
+
+[[boundaries]]
+payload_offset = 238
+length = 2
+
+[[boundaries]]
+payload_offset = 240
+length = 1
+
+[[boundaries]]
+payload_offset = 241
+length = 6
+
+[[boundaries]]
+payload_offset = 247
+length = 2
+
+[[boundaries]]
+payload_offset = 249
+length = 1
+
+[[boundaries]]
+payload_offset = 250
+length = 6
+
+[[boundaries]]
+payload_offset = 256
+length = 2
+
+[[boundaries]]
+payload_offset = 258
+length = 1
+
+[[boundaries]]
+payload_offset = 259
+length = 1
+
+[[boundaries]]
+payload_offset = 260
+length = 6
+
+[[boundaries]]
+payload_offset = 266
+length = 2
+
+[[boundaries]]
+payload_offset = 268
+length = 1
+
+[[boundaries]]
+payload_offset = 269
+length = 1
+
+[[boundaries]]
+payload_offset = 270
+length = 6
+
+[[boundaries]]
+payload_offset = 276
+length = 2
+
+[[boundaries]]
+payload_offset = 278
+length = 5
+
+[[boundaries]]
+payload_offset = 284
+length = 6
+
+[[boundaries]]
+payload_offset = 290
+length = 2
+
+[[boundaries]]
+payload_offset = 292
+length = 1
+
+[[boundaries]]
+payload_offset = 293
+length = 1
+
+[[boundaries]]
+payload_offset = 294
+length = 6
+
+[[boundaries]]
+payload_offset = 300
+length = 2
+
+[[boundaries]]
+payload_offset = 302
+length = 1
+
+[[boundaries]]
+payload_offset = 303
+length = 6
+
+[[boundaries]]
+payload_offset = 309
+length = 2
+
+[[boundaries]]
+payload_offset = 311
+length = 1
+
+[[boundaries]]
+payload_offset = 312
+length = 6
+
+[[boundaries]]
+payload_offset = 318
+length = 2
+
+[[boundaries]]
+payload_offset = 320
+length = 1
+
+[[boundaries]]
+payload_offset = 321
+length = 6
+
+[[boundaries]]
+payload_offset = 327
+length = 2
+
+[[boundaries]]
+payload_offset = 329
+length = 1
+
+[[boundaries]]
+payload_offset = 330
+length = 5
+
+[[boundaries]]
+payload_offset = 335
+length = 5
+
+[[boundaries]]
+payload_offset = 340
+length = 5
+
+[[boundaries]]
+payload_offset = 346
+length = 6
+
+[[boundaries]]
+payload_offset = 352
+length = 2
+
+[[boundaries]]
+payload_offset = 354
+length = 1
+
+[[boundaries]]
+payload_offset = 355
+length = 1
+
+[[boundaries]]
+payload_offset = 356
+length = 6
+
+[[boundaries]]
+payload_offset = 362
+length = 2
+
+[[boundaries]]
+payload_offset = 364
+length = 5
+
+[[boundaries]]
+payload_offset = 369
+length = 5
+
+[[boundaries]]
+payload_offset = 374
+length = 2
+
+[[boundaries]]
+payload_offset = 376
+length = 5
+
+[[boundaries]]
+payload_offset = 381
+length = 6
+
+[[boundaries]]
+payload_offset = 387
+length = 5
+
+[[boundaries]]
+payload_offset = 392
+length = 5
+
+[[boundaries]]
+payload_offset = 397
+length = 3
+
+[[boundaries]]
+payload_offset = 400
+length = 5
+
+[[boundaries]]
+payload_offset = 405
+length = 5
+
+[[boundaries]]
+payload_offset = 410
+length = 1
+
+[[boundaries]]
+payload_offset = 411
+length = 1
+
+[[boundaries]]
+payload_offset = 412
+length = 6
+
+[[boundaries]]
+payload_offset = 418
+length = 2
+
+[[boundaries]]
+payload_offset = 420
+length = 1
+
+[[boundaries]]
+payload_offset = 421
+length = 6
+
+[[boundaries]]
+payload_offset = 427
+length = 2
+
+[[boundaries]]
+payload_offset = 429
+length = 1
+
+[[boundaries]]
+payload_offset = 430
+length = 6
+
+[[boundaries]]
+payload_offset = 436
+length = 2
+
+[[boundaries]]
+payload_offset = 438
+length = 1
+
+[[boundaries]]
+payload_offset = 439
+length = 1
+
+[[boundaries]]
+payload_offset = 440
+length = 1
+
+[[boundaries]]
+payload_offset = 441
+length = 1
+
+[[boundaries]]
+payload_offset = 442
+length = 5
+
+[[boundaries]]
+payload_offset = 447
+length = 6
+
+[[boundaries]]
+payload_offset = 453
+length = 2
+
+[[boundaries]]
+payload_offset = 455
+length = 1
+
+[[boundaries]]
+payload_offset = 456
+length = 1
+
+[[boundaries]]
+payload_offset = 457
+length = 1
+
+[[boundaries]]
+payload_offset = 458
+length = 6
+
+[[boundaries]]
+payload_offset = 464
+length = 2
+
+[[boundaries]]
+payload_offset = 466
+length = 1

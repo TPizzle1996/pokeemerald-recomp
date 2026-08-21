@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 3
 export_count = 17
 reloc_count = 33
+instruction_count = 101
 
 [[segments]]
 kind = "bytecode"
@@ -180,6 +181,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-stevenshouse"
 target_export = "MossdeepCity_StevensHouse_EventScript_HideStevensNote"
 target_offset = 26
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 10
 runtime_resolution_required = true
 
 [[relocs]]
@@ -190,6 +193,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-stevenshouse"
 target_export = "MossdeepCity_StevensHouse_EventScript_SetStevenPos"
 target_offset = 48
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 32
 runtime_resolution_required = true
 
 [[relocs]]
@@ -199,6 +204,8 @@ original_encoded_gba = 0x82725a4
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterleft"
 target_export = "Common_Movement_WalkInPlaceFasterLeft"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -208,6 +215,8 @@ original_encoded_gba = 0x8272598
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-exclamationmark"
 target_export = "Common_Movement_ExclamationMark"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -217,6 +226,8 @@ original_encoded_gba = 0x827259a
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-delay48"
 target_export = "Common_Movement_Delay48"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -226,6 +237,8 @@ original_encoded_gba = 0x8222833
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mossdeepcity-stevenshouse-movement-stevenapproachplayer"
 target_export = "MossdeepCity_StevensHouse_Movement_StevenApproachPlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -235,6 +248,8 @@ original_encoded_gba = 0x8222936
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-stevenshouse"
 target_export = "MossdeepCity_StevensHouse_Text_YouveEarnedHMDive"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -244,6 +259,8 @@ original_encoded_gba = 0x8222a0e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-stevenshouse"
 target_export = "MossdeepCity_StevensHouse_Text_ExplainDive"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -253,6 +270,8 @@ original_encoded_gba = 0x822283b
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/mossdeepcity-stevenshouse-movement-stevenreturn"
 target_export = "MossdeepCity_StevensHouse_Movement_StevenReturn"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -262,6 +281,8 @@ original_encoded_gba = 0x8222b9e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-stevenshouse"
 target_export = "MossdeepCity_StevensHouse_Text_TakeBallContainingBeldum"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -272,6 +293,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-stevenshouse"
 target_export = "MossdeepCity_StevensHouse_EventScript_LeaveBeldum"
 target_offset = 215
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 175
 runtime_resolution_required = true
 
 [[relocs]]
@@ -282,6 +305,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-stevenshouse"
 target_export = "MossdeepCity_StevensHouse_EventScript_GiveBeldum"
 target_offset = 225
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 185
 runtime_resolution_required = true
 
 [[relocs]]
@@ -291,6 +316,8 @@ original_encoded_gba = 0x8222c2a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-stevenshouse"
 target_export = "MossdeepCity_StevensHouse_Text_LeftPokeBallWhereItWas"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -301,6 +328,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-stevenshouse"
 target_export = "MossdeepCity_StevensHouse_EventScript_SendBeldumParty"
 target_offset = 273
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 233
 runtime_resolution_required = true
 
 [[relocs]]
@@ -311,6 +340,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-stevenshouse"
 target_export = "MossdeepCity_StevensHouse_EventScript_SendBeldumPC"
 target_offset = 313
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 273
 runtime_resolution_required = true
 
 [[relocs]]
@@ -321,6 +352,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pc-transfer"
 target_export = "Common_EventScript_NoMoreRoomForPokemon"
 target_offset = 134
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 134
 runtime_resolution_required = true
 
 [[relocs]]
@@ -331,6 +364,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-stevenshouse"
 target_export = "MossdeepCity_StevensHouse_EventScript_ReceivedBeldumFanfare"
 target_offset = 359
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 319
 runtime_resolution_required = true
 
 [[relocs]]
@@ -340,6 +375,8 @@ original_encoded_gba = 0x8273374
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/pc-transfer"
 target_export = "gText_NicknameThisPokemon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -350,6 +387,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-stevenshouse"
 target_export = "MossdeepCity_StevensHouse_EventScript_ReceivedBeldum"
 target_offset = 381
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 341
 runtime_resolution_required = true
 
 [[relocs]]
@@ -360,6 +399,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pc-transfer"
 target_export = "Common_EventScript_GetGiftMonPartySlot"
 target_offset = 0
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 0
 runtime_resolution_required = true
 
 [[relocs]]
@@ -370,6 +411,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/kecleon"
 target_export = "Common_EventScript_NameReceivedPartyMon"
 target_offset = 258
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 236
 runtime_resolution_required = true
 
 [[relocs]]
@@ -380,6 +423,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-stevenshouse"
 target_export = "MossdeepCity_StevensHouse_EventScript_ReceivedBeldum"
 target_offset = 381
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 341
 runtime_resolution_required = true
 
 [[relocs]]
@@ -390,6 +435,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-stevenshouse"
 target_export = "MossdeepCity_StevensHouse_EventScript_ReceivedBeldumFanfare"
 target_offset = 359
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 319
 runtime_resolution_required = true
 
 [[relocs]]
@@ -399,6 +446,8 @@ original_encoded_gba = 0x8273374
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/pc-transfer"
 target_export = "gText_NicknameThisPokemon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -409,6 +458,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-stevenshouse"
 target_export = "MossdeepCity_StevensHouse_EventScript_BeldumTransferredToPC"
 target_offset = 348
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 308
 runtime_resolution_required = true
 
 [[relocs]]
@@ -419,6 +470,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pc-transfer"
 target_export = "Common_EventScript_NameReceivedBoxMon"
 target_offset = 12
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 12
 runtime_resolution_required = true
 
 [[relocs]]
@@ -429,6 +482,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-stevenshouse"
 target_export = "MossdeepCity_StevensHouse_EventScript_BeldumTransferredToPC"
 target_offset = 348
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 308
 runtime_resolution_required = true
 
 [[relocs]]
@@ -439,6 +494,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pc-transfer"
 target_export = "Common_EventScript_TransferredToPC"
 target_offset = 21
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 21
 runtime_resolution_required = true
 
 [[relocs]]
@@ -449,6 +506,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/mossdeepcity-stevenshouse"
 target_export = "MossdeepCity_StevensHouse_EventScript_ReceivedBeldum"
 target_offset = 381
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 341
 runtime_resolution_required = true
 
 [[relocs]]
@@ -458,6 +517,8 @@ original_encoded_gba = 0x8222bed
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-stevenshouse"
 target_export = "MossdeepCity_StevensHouse_Text_ObtainedBeldum"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -467,6 +528,8 @@ original_encoded_gba = 0x8222d97
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-stevenshouse"
 target_export = "MossdeepCity_StevensHouse_Text_CollectionOfRareRocks"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -476,6 +539,8 @@ original_encoded_gba = 0x8222b11
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-stevenshouse"
 target_export = "MossdeepCity_StevensHouse_Text_UnderwateCavernBetweenMossdeepSootopolis"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -485,4 +550,410 @@ original_encoded_gba = 0x8222c4e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/mossdeepcity-stevenshouse"
 target_export = "MossdeepCity_StevensHouse_Text_LetterFromSteven"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 6
+
+[[boundaries]]
+payload_offset = 9
+length = 1
+
+[[boundaries]]
+payload_offset = 10
+length = 9
+
+[[boundaries]]
+payload_offset = 19
+length = 1
+
+[[boundaries]]
+payload_offset = 20
+length = 5
+
+[[boundaries]]
+payload_offset = 25
+length = 6
+
+[[boundaries]]
+payload_offset = 31
+length = 1
+
+[[boundaries]]
+payload_offset = 32
+length = 7
+
+[[boundaries]]
+payload_offset = 39
+length = 4
+
+[[boundaries]]
+payload_offset = 43
+length = 1
+
+[[boundaries]]
+payload_offset = 44
+length = 1
+
+[[boundaries]]
+payload_offset = 45
+length = 7
+
+[[boundaries]]
+payload_offset = 52
+length = 3
+
+[[boundaries]]
+payload_offset = 55
+length = 3
+
+[[boundaries]]
+payload_offset = 58
+length = 7
+
+[[boundaries]]
+payload_offset = 65
+length = 3
+
+[[boundaries]]
+payload_offset = 68
+length = 7
+
+[[boundaries]]
+payload_offset = 75
+length = 3
+
+[[boundaries]]
+payload_offset = 78
+length = 7
+
+[[boundaries]]
+payload_offset = 85
+length = 3
+
+[[boundaries]]
+payload_offset = 88
+length = 6
+
+[[boundaries]]
+payload_offset = 94
+length = 2
+
+[[boundaries]]
+payload_offset = 96
+length = 5
+
+[[boundaries]]
+payload_offset = 101
+length = 5
+
+[[boundaries]]
+payload_offset = 106
+length = 2
+
+[[boundaries]]
+payload_offset = 108
+length = 3
+
+[[boundaries]]
+payload_offset = 111
+length = 3
+
+[[boundaries]]
+payload_offset = 114
+length = 6
+
+[[boundaries]]
+payload_offset = 120
+length = 2
+
+[[boundaries]]
+payload_offset = 122
+length = 1
+
+[[boundaries]]
+payload_offset = 123
+length = 3
+
+[[boundaries]]
+payload_offset = 126
+length = 7
+
+[[boundaries]]
+payload_offset = 133
+length = 3
+
+[[boundaries]]
+payload_offset = 136
+length = 3
+
+[[boundaries]]
+payload_offset = 139
+length = 3
+
+[[boundaries]]
+payload_offset = 142
+length = 5
+
+[[boundaries]]
+payload_offset = 147
+length = 1
+
+[[boundaries]]
+payload_offset = 148
+length = 1
+
+[[boundaries]]
+payload_offset = 149
+length = 1
+
+[[boundaries]]
+payload_offset = 150
+length = 6
+
+[[boundaries]]
+payload_offset = 156
+length = 2
+
+[[boundaries]]
+payload_offset = 158
+length = 5
+
+[[boundaries]]
+payload_offset = 163
+length = 6
+
+[[boundaries]]
+payload_offset = 169
+length = 5
+
+[[boundaries]]
+payload_offset = 175
+length = 6
+
+[[boundaries]]
+payload_offset = 181
+length = 2
+
+[[boundaries]]
+payload_offset = 183
+length = 1
+
+[[boundaries]]
+payload_offset = 184
+length = 1
+
+[[boundaries]]
+payload_offset = 185
+length = 5
+
+[[boundaries]]
+payload_offset = 190
+length = 15
+
+[[boundaries]]
+payload_offset = 205
+length = 5
+
+[[boundaries]]
+payload_offset = 210
+length = 6
+
+[[boundaries]]
+payload_offset = 216
+length = 5
+
+[[boundaries]]
+payload_offset = 221
+length = 6
+
+[[boundaries]]
+payload_offset = 227
+length = 5
+
+[[boundaries]]
+payload_offset = 233
+length = 5
+
+[[boundaries]]
+payload_offset = 238
+length = 6
+
+[[boundaries]]
+payload_offset = 244
+length = 2
+
+[[boundaries]]
+payload_offset = 246
+length = 5
+
+[[boundaries]]
+payload_offset = 251
+length = 6
+
+[[boundaries]]
+payload_offset = 257
+length = 5
+
+[[boundaries]]
+payload_offset = 262
+length = 5
+
+[[boundaries]]
+payload_offset = 267
+length = 5
+
+[[boundaries]]
+payload_offset = 273
+length = 5
+
+[[boundaries]]
+payload_offset = 278
+length = 6
+
+[[boundaries]]
+payload_offset = 284
+length = 2
+
+[[boundaries]]
+payload_offset = 286
+length = 5
+
+[[boundaries]]
+payload_offset = 291
+length = 6
+
+[[boundaries]]
+payload_offset = 297
+length = 5
+
+[[boundaries]]
+payload_offset = 302
+length = 5
+
+[[boundaries]]
+payload_offset = 308
+length = 5
+
+[[boundaries]]
+payload_offset = 313
+length = 5
+
+[[boundaries]]
+payload_offset = 319
+length = 4
+
+[[boundaries]]
+payload_offset = 323
+length = 3
+
+[[boundaries]]
+payload_offset = 326
+length = 3
+
+[[boundaries]]
+payload_offset = 329
+length = 5
+
+[[boundaries]]
+payload_offset = 334
+length = 1
+
+[[boundaries]]
+payload_offset = 335
+length = 1
+
+[[boundaries]]
+payload_offset = 336
+length = 4
+
+[[boundaries]]
+payload_offset = 340
+length = 1
+
+[[boundaries]]
+payload_offset = 341
+length = 3
+
+[[boundaries]]
+payload_offset = 344
+length = 3
+
+[[boundaries]]
+payload_offset = 347
+length = 1
+
+[[boundaries]]
+payload_offset = 348
+length = 1
+
+[[boundaries]]
+payload_offset = 349
+length = 6
+
+[[boundaries]]
+payload_offset = 355
+length = 2
+
+[[boundaries]]
+payload_offset = 357
+length = 1
+
+[[boundaries]]
+payload_offset = 358
+length = 6
+
+[[boundaries]]
+payload_offset = 364
+length = 2
+
+[[boundaries]]
+payload_offset = 366
+length = 1
+
+[[boundaries]]
+payload_offset = 367
+length = 1
+
+[[boundaries]]
+payload_offset = 368
+length = 6
+
+[[boundaries]]
+payload_offset = 374
+length = 2
+
+[[boundaries]]
+payload_offset = 376
+length = 1
+
+[[boundaries]]
+payload_offset = 377
+length = 1
+
+[[boundaries]]
+payload_offset = 378
+length = 5
+
+[[boundaries]]
+payload_offset = 383
+length = 5
+
+[[boundaries]]
+payload_offset = 388
+length = 2
+
+[[boundaries]]
+payload_offset = 390
+length = 3
+
+[[boundaries]]
+payload_offset = 393
+length = 1

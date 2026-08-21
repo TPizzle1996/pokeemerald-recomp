@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 4
 reloc_count = 4
+instruction_count = 15
 
 [[segments]]
 kind = "bytecode"
@@ -64,6 +65,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/hall-of-fame"
 target_export = "Common_EventScript_UpdateBrineyLocation"
 target_offset = 285
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 285
 runtime_resolution_required = true
 
 [[relocs]]
@@ -74,6 +77,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/pkmn-center-nurse"
 target_export = "Common_EventScript_PkmnCenterNurse"
 target_offset = 0
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 0
 runtime_resolution_required = true
 
 [[relocs]]
@@ -83,6 +88,8 @@ original_encoded_gba = 0x820275a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/verdanturftown-pokemoncenter-1f"
 target_export = "VerdanturfTown_PokemonCenter_1F_Text_FaithInYourPokemon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -92,4 +99,66 @@ original_encoded_gba = 0x820280b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/verdanturftown-pokemoncenter-1f"
 target_export = "VerdanturfTown_PokemonCenter_1F_Text_VisitForBattleTent"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 5
+
+[[boundaries]]
+payload_offset = 8
+length = 1
+
+[[boundaries]]
+payload_offset = 9
+length = 5
+
+[[boundaries]]
+payload_offset = 14
+length = 5
+
+[[boundaries]]
+payload_offset = 19
+length = 1
+
+[[boundaries]]
+payload_offset = 20
+length = 1
+
+[[boundaries]]
+payload_offset = 21
+length = 1
+
+[[boundaries]]
+payload_offset = 22
+length = 1
+
+[[boundaries]]
+payload_offset = 23
+length = 6
+
+[[boundaries]]
+payload_offset = 29
+length = 2
+
+[[boundaries]]
+payload_offset = 31
+length = 1
+
+[[boundaries]]
+payload_offset = 32
+length = 6
+
+[[boundaries]]
+payload_offset = 38
+length = 2
+
+[[boundaries]]
+payload_offset = 40
+length = 1

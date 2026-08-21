@@ -678,11 +678,11 @@ int main(int argc, char **argv)
     printf("opened production pack : %zu entries\n", Gen3ResourcePack_GetEntryCount(pack));
     CHECK("production pack has 20501 entries (196 trainer + 1608 Pokémon "
           "battle + 288 object-event + 1544 tileset + 882 layout + 771 audio + 530 song graphs + 1057 leaf + 5187 text + 3310 D1 + 377 items + 1775 E1 + 210 E2 + 786 E3a-1)",
-          Gen3ResourcePack_GetEntryCount(pack) == 20501u);
+          Gen3ResourcePack_GetEntryCount(pack) == 20988u);
     printf("loaded catalog          : %zu resources\n", Gen3ResourceCatalog_Count(catalog));
     CHECK("catalog has 20501 resources (196 trainer + 1608 Pokémon battle + "
           "288 object-event + 1544 tileset + 882 layout + 771 audio + 530 song graphs + 1057 leaf + 5187 text + 3310 D1 + 377 items + 1775 E1 + 210 E2 + 786 E3a-1)",
-          Gen3ResourceCatalog_Count(catalog) == 20501u);
+          Gen3ResourceCatalog_Count(catalog) == 20988u);
 
     /* 3. Build the production ROM_BASE candidate + snapshot from the real pack. */
     Gen3ResourceDiagnostics_Init(&gdiag);
@@ -716,7 +716,7 @@ int main(int argc, char **argv)
     CHECK("provider precedence 300", info.precedence == EMERALD_ROM_BASE_PRECEDENCE);
     CHECK("provider version v1", strcmp(info.providerVersion, "v1") == 0);
     CHECK("provider entryCount 20501 (196 trainer + 1608 Pokémon + 288 object-event + 1544 tileset + 882 layout + 771 audio + 530 song graphs + 1057 leaf + 5187 text + 3310 D1 + 377 items + 1775 E1 + 210 E2 + 786 E3a-1)",
-          info.entryCount == 20501u);
+          info.entryCount == 20988u);
 
     CHECK("snapshot builds",
           Gen3ResourceCandidate_Build(candidate, &snapshot, &gdiag) && snapshot != NULL);

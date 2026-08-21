@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 7
 reloc_count = 16
+instruction_count = 46
 
 [[segments]]
 kind = "bytecode"
@@ -87,6 +88,8 @@ original_encoded_gba = 0x822a539
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route111-winstratefamilyshouse"
 target_export = "Route111_WinstrateFamilysHouse_Text_MySonIsStrongerThanYou"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -97,6 +100,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route111-winstratefamilyshouse"
 target_export = "Route111_WinstrateFamilysHouse_EventScript_FaceOriginalDirection"
 target_offset = 160
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 159
 runtime_resolution_required = true
 
 [[relocs]]
@@ -107,6 +112,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route111-winstratefamilyshouse"
 target_export = "Route111_WinstrateFamilysHouse_EventScript_ReceivedMachoBrace"
 target_offset = 78
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 77
 runtime_resolution_required = true
 
 [[relocs]]
@@ -116,6 +123,8 @@ original_encoded_gba = 0x822a5f4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route111-winstratefamilyshouse"
 target_export = "Route111_WinstrateFamilysHouse_Text_LikeYouToHaveMachoBrace"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -126,6 +135,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/set-gym-trainers"
 target_export = "Common_EventScript_ShowBagIsFull"
 target_offset = 273
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 273
 runtime_resolution_required = true
 
 [[relocs]]
@@ -136,6 +147,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route111-winstratefamilyshouse"
 target_export = "Route111_WinstrateFamilysHouse_EventScript_FaceOriginalDirection"
 target_offset = 160
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 159
 runtime_resolution_required = true
 
 [[relocs]]
@@ -145,6 +158,8 @@ original_encoded_gba = 0x822a6b4
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route111-winstratefamilyshouse"
 target_export = "Route111_WinstrateFamilysHouse_Text_PassionateAboutBattles"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -155,6 +170,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route111-winstratefamilyshouse"
 target_export = "Route111_WinstrateFamilysHouse_EventScript_FaceOriginalDirection"
 target_offset = 160
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 159
 runtime_resolution_required = true
 
 [[relocs]]
@@ -164,6 +181,8 @@ original_encoded_gba = 0x822a6f7
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route111-winstratefamilyshouse"
 target_export = "Route111_WinstrateFamilysHouse_Text_StrongerFamilyMembers"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -174,6 +193,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route111-winstratefamilyshouse"
 target_export = "Route111_WinstrateFamilysHouse_EventScript_FaceOriginalDirection"
 target_offset = 160
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 159
 runtime_resolution_required = true
 
 [[relocs]]
@@ -184,6 +205,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route111-winstratefamilyshouse"
 target_export = "Route111_WinstrateFamilysHouse_EventScript_AlreadySpokenTo"
 target_offset = 146
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 145
 runtime_resolution_required = true
 
 [[relocs]]
@@ -193,6 +216,8 @@ original_encoded_gba = 0x822a780
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route111-winstratefamilyshouse"
 target_export = "Route111_WinstrateFamilysHouse_Text_GrandsonStrong"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -203,6 +228,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route111-winstratefamilyshouse"
 target_export = "Route111_WinstrateFamilysHouse_EventScript_FaceOriginalDirection"
 target_offset = 160
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 159
 runtime_resolution_required = true
 
 [[relocs]]
@@ -212,6 +239,8 @@ original_encoded_gba = 0x822a89b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/route111-winstratefamilyshouse"
 target_export = "Route111_WinstrateFamilysHouse_Text_GrandsonStrongShort"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -222,6 +251,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/route111-winstratefamilyshouse"
 target_export = "Route111_WinstrateFamilysHouse_EventScript_FaceOriginalDirection"
 target_offset = 160
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 159
 runtime_resolution_required = true
 
 [[relocs]]
@@ -231,4 +262,190 @@ original_encoded_gba = 0x82725a2
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceoriginaldirection"
 target_export = "Common_Movement_FaceOriginalDirection"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 1
+
+[[boundaries]]
+payload_offset = 2
+length = 5
+
+[[boundaries]]
+payload_offset = 7
+length = 6
+
+[[boundaries]]
+payload_offset = 13
+length = 2
+
+[[boundaries]]
+payload_offset = 15
+length = 5
+
+[[boundaries]]
+payload_offset = 21
+length = 1
+
+[[boundaries]]
+payload_offset = 22
+length = 1
+
+[[boundaries]]
+payload_offset = 23
+length = 5
+
+[[boundaries]]
+payload_offset = 28
+length = 3
+
+[[boundaries]]
+payload_offset = 31
+length = 6
+
+[[boundaries]]
+payload_offset = 37
+length = 6
+
+[[boundaries]]
+payload_offset = 43
+length = 2
+
+[[boundaries]]
+payload_offset = 45
+length = 5
+
+[[boundaries]]
+payload_offset = 50
+length = 5
+
+[[boundaries]]
+payload_offset = 55
+length = 2
+
+[[boundaries]]
+payload_offset = 57
+length = 5
+
+[[boundaries]]
+payload_offset = 62
+length = 6
+
+[[boundaries]]
+payload_offset = 68
+length = 3
+
+[[boundaries]]
+payload_offset = 71
+length = 5
+
+[[boundaries]]
+payload_offset = 77
+length = 6
+
+[[boundaries]]
+payload_offset = 83
+length = 2
+
+[[boundaries]]
+payload_offset = 85
+length = 5
+
+[[boundaries]]
+payload_offset = 91
+length = 1
+
+[[boundaries]]
+payload_offset = 92
+length = 1
+
+[[boundaries]]
+payload_offset = 93
+length = 5
+
+[[boundaries]]
+payload_offset = 98
+length = 6
+
+[[boundaries]]
+payload_offset = 104
+length = 2
+
+[[boundaries]]
+payload_offset = 106
+length = 5
+
+[[boundaries]]
+payload_offset = 112
+length = 1
+
+[[boundaries]]
+payload_offset = 113
+length = 1
+
+[[boundaries]]
+payload_offset = 114
+length = 5
+
+[[boundaries]]
+payload_offset = 119
+length = 3
+
+[[boundaries]]
+payload_offset = 122
+length = 6
+
+[[boundaries]]
+payload_offset = 128
+length = 6
+
+[[boundaries]]
+payload_offset = 134
+length = 2
+
+[[boundaries]]
+payload_offset = 136
+length = 3
+
+[[boundaries]]
+payload_offset = 139
+length = 5
+
+[[boundaries]]
+payload_offset = 145
+length = 6
+
+[[boundaries]]
+payload_offset = 151
+length = 2
+
+[[boundaries]]
+payload_offset = 153
+length = 5
+
+[[boundaries]]
+payload_offset = 159
+length = 1
+
+[[boundaries]]
+payload_offset = 160
+length = 7
+
+[[boundaries]]
+payload_offset = 167
+length = 3
+
+[[boundaries]]
+payload_offset = 170
+length = 1
+
+[[boundaries]]
+payload_offset = 171
+length = 1

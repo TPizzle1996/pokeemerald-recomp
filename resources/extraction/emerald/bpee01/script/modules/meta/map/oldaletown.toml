@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 2
 export_count = 26
 reloc_count = 58
+instruction_count = 161
 
 [[segments]]
 kind = "bytecode"
@@ -246,6 +247,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/rival-graphics"
 target_export = "Common_EventScript_SetupRivalGfxId"
 target_offset = 0
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 0
 runtime_resolution_required = true
 
 [[relocs]]
@@ -256,6 +259,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/oldaletown"
 target_export = "OldaleTown_EventScript_BlockWestEntrance"
 target_offset = 48
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 42
 runtime_resolution_required = true
 
 [[relocs]]
@@ -266,6 +271,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/oldaletown"
 target_export = "OldaleTown_EventScript_MoveMartEmployee"
 target_offset = 60
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 54
 runtime_resolution_required = true
 
 [[relocs]]
@@ -276,6 +283,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/oldaletown"
 target_export = "OldaleTown_EventScript_SetOldaleState"
 target_offset = 42
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 36
 runtime_resolution_required = true
 
 [[relocs]]
@@ -285,6 +294,8 @@ original_encoded_gba = 0x81e94da
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/oldaletown"
 target_export = "OldaleTown_Text_CitySign"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -294,6 +305,8 @@ original_encoded_gba = 0x81e918e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/oldaletown"
 target_export = "OldaleTown_Text_SavingMyProgress"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -304,6 +317,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/oldaletown"
 target_export = "OldaleTown_EventScript_ExplainPotion"
 target_offset = 279
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 273
 runtime_resolution_required = true
 
 [[relocs]]
@@ -314,6 +329,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/oldaletown"
 target_export = "OldaleTown_EventScript_ExplainPotion"
 target_offset = 279
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 273
 runtime_resolution_required = true
 
 [[relocs]]
@@ -323,6 +340,8 @@ original_encoded_gba = 0x81e91c0
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/oldaletown"
 target_export = "OldaleTown_Text_IWorkAtPokemonMart"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -333,6 +352,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/oldaletown"
 target_export = "OldaleTown_EventScript_GoToMartSouth"
 target_offset = 165
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 159
 runtime_resolution_required = true
 
 [[relocs]]
@@ -343,6 +364,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/oldaletown"
 target_export = "OldaleTown_EventScript_GoToMartNorth"
 target_offset = 188
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 182
 runtime_resolution_required = true
 
 [[relocs]]
@@ -353,6 +376,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/oldaletown"
 target_export = "OldaleTown_EventScript_GoToMartEast"
 target_offset = 211
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 205
 runtime_resolution_required = true
 
 [[relocs]]
@@ -362,6 +387,8 @@ original_encoded_gba = 0x81e8fd7
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/oldaletown-movement-employeesouth"
 target_export = "OldaleTown_Movement_EmployeeSouth"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -371,6 +398,8 @@ original_encoded_gba = 0x81e9001
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/oldaletown-movement-playersouth"
 target_export = "OldaleTown_Movement_PlayerSouth"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -381,6 +410,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/oldaletown"
 target_export = "OldaleTown_EventScript_ExplainPokemonMart"
 target_offset = 234
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 228
 runtime_resolution_required = true
 
 [[relocs]]
@@ -390,6 +421,8 @@ original_encoded_gba = 0x81e8fe2
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/oldaletown-movement-employeenorth"
 target_export = "OldaleTown_Movement_EmployeeNorth"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -399,6 +432,8 @@ original_encoded_gba = 0x81e900b
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/oldaletown-movement-playernorth"
 target_export = "OldaleTown_Movement_PlayerNorth"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -409,6 +444,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/oldaletown"
 target_export = "OldaleTown_EventScript_ExplainPokemonMart"
 target_offset = 234
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 228
 runtime_resolution_required = true
 
 [[relocs]]
@@ -418,6 +455,8 @@ original_encoded_gba = 0x81e8ff9
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/oldaletown-movement-playereast"
 target_export = "OldaleTown_Movement_PlayerEast"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -427,6 +466,8 @@ original_encoded_gba = 0x81e8fce
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/oldaletown-movement-employeeeast"
 target_export = "OldaleTown_Movement_EmployeeEast"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -437,6 +478,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/oldaletown"
 target_export = "OldaleTown_EventScript_ExplainPokemonMart"
 target_offset = 234
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 228
 runtime_resolution_required = true
 
 [[relocs]]
@@ -446,6 +489,8 @@ original_encoded_gba = 0x81e91fd
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/oldaletown"
 target_export = "OldaleTown_Text_ThisIsAPokemonMart"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -456,6 +501,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/oldaletown"
 target_export = "OldaleTown_EventScript_BagIsFull"
 target_offset = 289
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 283
 runtime_resolution_required = true
 
 [[relocs]]
@@ -465,6 +512,8 @@ original_encoded_gba = 0x81e92af
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/oldaletown"
 target_export = "OldaleTown_Text_PotionExplanation"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -474,6 +523,8 @@ original_encoded_gba = 0x81e92af
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/oldaletown"
 target_export = "OldaleTown_Text_PotionExplanation"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -483,6 +534,8 @@ original_encoded_gba = 0x8272ad0
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/data/obtain-item"
 target_export = "gText_TooBadBagIsFull"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -493,6 +546,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/oldaletown"
 target_export = "OldaleTown_EventScript_NotBlockingPath"
 target_offset = 452
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 365
 runtime_resolution_required = true
 
 [[relocs]]
@@ -502,6 +557,8 @@ original_encoded_gba = 0x81e939a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/oldaletown"
 target_export = "OldaleTown_Text_DiscoveredFootprints"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -511,6 +568,8 @@ original_encoded_gba = 0x82725a2
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceoriginaldirection"
 target_export = "Common_Movement_FaceOriginalDirection"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -520,6 +579,8 @@ original_encoded_gba = 0x81e9182
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/oldaletown-movement-playerstepback"
 target_export = "OldaleTown_Movement_PlayerStepBack"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -529,6 +590,8 @@ original_encoded_gba = 0x81e9185
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/oldaletown-movement-backup"
 target_export = "OldaleTown_Movement_BackUp"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -538,6 +601,8 @@ original_encoded_gba = 0x81e9313
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/oldaletown"
 target_export = "OldaleTown_Text_WaitDontComeInHere"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -547,6 +612,8 @@ original_encoded_gba = 0x81e918b
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/oldaletown-movement-returntooriginalposition"
 target_export = "OldaleTown_Movement_ReturnToOriginalPosition"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -556,6 +623,8 @@ original_encoded_gba = 0x81e93f8
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/oldaletown"
 target_export = "OldaleTown_Text_FinishedSketchingFootprints"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -565,6 +634,8 @@ original_encoded_gba = 0x827259e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-faceplayer"
 target_export = "Common_Movement_FacePlayer"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -575,6 +646,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/oldaletown"
 target_export = "OldaleTown_EventScript_ShowRivalMessage"
 target_offset = 580
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 493
 runtime_resolution_required = true
 
 [[relocs]]
@@ -584,6 +657,8 @@ original_encoded_gba = 0x81e9170
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/oldaletown-movement-rivalapproachplayer1"
 target_export = "OldaleTown_Movement_RivalApproachPlayer1"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -593,6 +668,8 @@ original_encoded_gba = 0x82725a8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterright"
 target_export = "Common_Movement_WalkInPlaceFasterRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -603,6 +680,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/oldaletown"
 target_export = "OldaleTown_EventScript_ShowRivalMessage"
 target_offset = 580
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 493
 runtime_resolution_required = true
 
 [[relocs]]
@@ -612,6 +691,8 @@ original_encoded_gba = 0x81e9173
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/oldaletown-movement-rivalapproachplayer2"
 target_export = "OldaleTown_Movement_RivalApproachPlayer2"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -621,6 +702,8 @@ original_encoded_gba = 0x82725a8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterright"
 target_export = "Common_Movement_WalkInPlaceFasterRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -631,6 +714,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/oldaletown"
 target_export = "OldaleTown_EventScript_ShowRivalMessage"
 target_offset = 580
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 493
 runtime_resolution_required = true
 
 [[relocs]]
@@ -640,6 +725,8 @@ original_encoded_gba = 0x81e9175
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/oldaletown-movement-rivalapproachplayer3"
 target_export = "OldaleTown_Movement_RivalApproachPlayer3"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -649,6 +736,8 @@ original_encoded_gba = 0x82725a8
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/common-movement-walkinplacefasterright"
 target_export = "Common_Movement_WalkInPlaceFasterRight"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -659,6 +748,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/oldaletown"
 target_export = "OldaleTown_EventScript_ShowRivalMessage"
 target_offset = 580
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 493
 runtime_resolution_required = true
 
 [[relocs]]
@@ -669,6 +760,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/oldaletown"
 target_export = "OldaleTown_EventScript_ShowMayMessage"
 target_offset = 604
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 517
 runtime_resolution_required = true
 
 [[relocs]]
@@ -679,6 +772,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/oldaletown"
 target_export = "OldaleTown_EventScript_ShowBrendanMessage"
 target_offset = 618
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 531
 runtime_resolution_required = true
 
 [[relocs]]
@@ -688,6 +783,8 @@ original_encoded_gba = 0x81e9462
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/oldaletown"
 target_export = "OldaleTown_Text_MayLetsGoBack"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -698,6 +795,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/oldaletown"
 target_export = "OldaleTown_EventScript_RivalFinish"
 target_offset = 632
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 545
 runtime_resolution_required = true
 
 [[relocs]]
@@ -707,6 +806,8 @@ original_encoded_gba = 0x81e948a
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/oldaletown"
 target_export = "OldaleTown_Text_BrendanLetsGoBack"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -717,6 +818,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/oldaletown"
 target_export = "OldaleTown_EventScript_RivalFinish"
 target_offset = 632
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 545
 runtime_resolution_required = true
 
 [[relocs]]
@@ -727,6 +830,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/oldaletown"
 target_export = "OldaleTown_EventScript_DoExitMovement1"
 target_offset = 678
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 591
 runtime_resolution_required = true
 
 [[relocs]]
@@ -737,6 +842,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/oldaletown"
 target_export = "OldaleTown_EventScript_DoExitMovement2"
 target_offset = 700
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 613
 runtime_resolution_required = true
 
 [[relocs]]
@@ -746,6 +853,8 @@ original_encoded_gba = 0x81e9177
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/oldaletown-movement-rivalexit"
 target_export = "OldaleTown_Movement_RivalExit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -756,6 +865,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/oldaletown"
 target_export = "OldaleTown_EventScript_DoExitMovement2"
 target_offset = 700
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 613
 runtime_resolution_required = true
 
 [[relocs]]
@@ -765,6 +876,8 @@ original_encoded_gba = 0x81e9177
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/oldaletown-movement-rivalexit"
 target_export = "OldaleTown_Movement_RivalExit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -774,6 +887,8 @@ original_encoded_gba = 0x81e917e
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/oldaletown-movement-watchrivalexit"
 target_export = "OldaleTown_Movement_WatchRivalExit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -783,4 +898,650 @@ original_encoded_gba = 0x81e9177
 target_class = "MOVEMENT_TARGET"
 target_resource_key = "emerald:movement/oldaletown-movement-rivalexit"
 target_export = "OldaleTown_Movement_RivalExit"
+target_kind = "MOVEMENT_RESOURCE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 5
+
+[[boundaries]]
+payload_offset = 5
+length = 3
+
+[[boundaries]]
+payload_offset = 8
+length = 3
+
+[[boundaries]]
+payload_offset = 11
+length = 6
+
+[[boundaries]]
+payload_offset = 17
+length = 3
+
+[[boundaries]]
+payload_offset = 20
+length = 6
+
+[[boundaries]]
+payload_offset = 26
+length = 3
+
+[[boundaries]]
+payload_offset = 29
+length = 6
+
+[[boundaries]]
+payload_offset = 35
+length = 1
+
+[[boundaries]]
+payload_offset = 36
+length = 5
+
+[[boundaries]]
+payload_offset = 41
+length = 1
+
+[[boundaries]]
+payload_offset = 42
+length = 7
+
+[[boundaries]]
+payload_offset = 49
+length = 4
+
+[[boundaries]]
+payload_offset = 53
+length = 1
+
+[[boundaries]]
+payload_offset = 54
+length = 7
+
+[[boundaries]]
+payload_offset = 61
+length = 4
+
+[[boundaries]]
+payload_offset = 65
+length = 1
+
+[[boundaries]]
+payload_offset = 66
+length = 6
+
+[[boundaries]]
+payload_offset = 72
+length = 2
+
+[[boundaries]]
+payload_offset = 74
+length = 1
+
+[[boundaries]]
+payload_offset = 75
+length = 6
+
+[[boundaries]]
+payload_offset = 81
+length = 2
+
+[[boundaries]]
+payload_offset = 83
+length = 1
+
+[[boundaries]]
+payload_offset = 84
+length = 1
+
+[[boundaries]]
+payload_offset = 85
+length = 1
+
+[[boundaries]]
+payload_offset = 86
+length = 3
+
+[[boundaries]]
+payload_offset = 89
+length = 6
+
+[[boundaries]]
+payload_offset = 95
+length = 3
+
+[[boundaries]]
+payload_offset = 98
+length = 6
+
+[[boundaries]]
+payload_offset = 104
+length = 3
+
+[[boundaries]]
+payload_offset = 107
+length = 4
+
+[[boundaries]]
+payload_offset = 111
+length = 6
+
+[[boundaries]]
+payload_offset = 117
+length = 2
+
+[[boundaries]]
+payload_offset = 119
+length = 1
+
+[[boundaries]]
+payload_offset = 120
+length = 5
+
+[[boundaries]]
+payload_offset = 125
+length = 5
+
+[[boundaries]]
+payload_offset = 130
+length = 6
+
+[[boundaries]]
+payload_offset = 136
+length = 5
+
+[[boundaries]]
+payload_offset = 141
+length = 6
+
+[[boundaries]]
+payload_offset = 147
+length = 5
+
+[[boundaries]]
+payload_offset = 152
+length = 6
+
+[[boundaries]]
+payload_offset = 158
+length = 1
+
+[[boundaries]]
+payload_offset = 159
+length = 7
+
+[[boundaries]]
+payload_offset = 166
+length = 7
+
+[[boundaries]]
+payload_offset = 173
+length = 3
+
+[[boundaries]]
+payload_offset = 176
+length = 5
+
+[[boundaries]]
+payload_offset = 182
+length = 7
+
+[[boundaries]]
+payload_offset = 189
+length = 7
+
+[[boundaries]]
+payload_offset = 196
+length = 3
+
+[[boundaries]]
+payload_offset = 199
+length = 5
+
+[[boundaries]]
+payload_offset = 205
+length = 7
+
+[[boundaries]]
+payload_offset = 212
+length = 7
+
+[[boundaries]]
+payload_offset = 219
+length = 3
+
+[[boundaries]]
+payload_offset = 222
+length = 5
+
+[[boundaries]]
+payload_offset = 228
+length = 6
+
+[[boundaries]]
+payload_offset = 234
+length = 2
+
+[[boundaries]]
+payload_offset = 236
+length = 5
+
+[[boundaries]]
+payload_offset = 241
+length = 5
+
+[[boundaries]]
+payload_offset = 246
+length = 2
+
+[[boundaries]]
+payload_offset = 248
+length = 5
+
+[[boundaries]]
+payload_offset = 253
+length = 6
+
+[[boundaries]]
+payload_offset = 259
+length = 6
+
+[[boundaries]]
+payload_offset = 265
+length = 2
+
+[[boundaries]]
+payload_offset = 267
+length = 3
+
+[[boundaries]]
+payload_offset = 270
+length = 1
+
+[[boundaries]]
+payload_offset = 271
+length = 1
+
+[[boundaries]]
+payload_offset = 272
+length = 1
+
+[[boundaries]]
+payload_offset = 273
+length = 6
+
+[[boundaries]]
+payload_offset = 279
+length = 2
+
+[[boundaries]]
+payload_offset = 281
+length = 1
+
+[[boundaries]]
+payload_offset = 282
+length = 1
+
+[[boundaries]]
+payload_offset = 283
+length = 6
+
+[[boundaries]]
+payload_offset = 289
+length = 2
+
+[[boundaries]]
+payload_offset = 291
+length = 1
+
+[[boundaries]]
+payload_offset = 292
+length = 1
+
+[[boundaries]]
+payload_offset = 293
+length = 1
+
+[[boundaries]]
+payload_offset = 294
+length = 1
+
+[[boundaries]]
+payload_offset = 295
+length = 1
+
+[[boundaries]]
+payload_offset = 296
+length = 3
+
+[[boundaries]]
+payload_offset = 299
+length = 6
+
+[[boundaries]]
+payload_offset = 305
+length = 6
+
+[[boundaries]]
+payload_offset = 311
+length = 2
+
+[[boundaries]]
+payload_offset = 313
+length = 1
+
+[[boundaries]]
+payload_offset = 314
+length = 7
+
+[[boundaries]]
+payload_offset = 321
+length = 3
+
+[[boundaries]]
+payload_offset = 324
+length = 1
+
+[[boundaries]]
+payload_offset = 325
+length = 1
+
+[[boundaries]]
+payload_offset = 326
+length = 1
+
+[[boundaries]]
+payload_offset = 327
+length = 7
+
+[[boundaries]]
+payload_offset = 334
+length = 7
+
+[[boundaries]]
+payload_offset = 341
+length = 3
+
+[[boundaries]]
+payload_offset = 344
+length = 6
+
+[[boundaries]]
+payload_offset = 350
+length = 2
+
+[[boundaries]]
+payload_offset = 352
+length = 1
+
+[[boundaries]]
+payload_offset = 353
+length = 7
+
+[[boundaries]]
+payload_offset = 360
+length = 3
+
+[[boundaries]]
+payload_offset = 363
+length = 1
+
+[[boundaries]]
+payload_offset = 364
+length = 1
+
+[[boundaries]]
+payload_offset = 365
+length = 6
+
+[[boundaries]]
+payload_offset = 371
+length = 2
+
+[[boundaries]]
+payload_offset = 373
+length = 1
+
+[[boundaries]]
+payload_offset = 374
+length = 1
+
+[[boundaries]]
+payload_offset = 375
+length = 1
+
+[[boundaries]]
+payload_offset = 376
+length = 7
+
+[[boundaries]]
+payload_offset = 383
+length = 3
+
+[[boundaries]]
+payload_offset = 386
+length = 5
+
+[[boundaries]]
+payload_offset = 391
+length = 5
+
+[[boundaries]]
+payload_offset = 397
+length = 1
+
+[[boundaries]]
+payload_offset = 398
+length = 7
+
+[[boundaries]]
+payload_offset = 405
+length = 3
+
+[[boundaries]]
+payload_offset = 408
+length = 7
+
+[[boundaries]]
+payload_offset = 415
+length = 3
+
+[[boundaries]]
+payload_offset = 418
+length = 5
+
+[[boundaries]]
+payload_offset = 423
+length = 5
+
+[[boundaries]]
+payload_offset = 429
+length = 1
+
+[[boundaries]]
+payload_offset = 430
+length = 7
+
+[[boundaries]]
+payload_offset = 437
+length = 3
+
+[[boundaries]]
+payload_offset = 440
+length = 7
+
+[[boundaries]]
+payload_offset = 447
+length = 3
+
+[[boundaries]]
+payload_offset = 450
+length = 5
+
+[[boundaries]]
+payload_offset = 455
+length = 5
+
+[[boundaries]]
+payload_offset = 461
+length = 1
+
+[[boundaries]]
+payload_offset = 462
+length = 7
+
+[[boundaries]]
+payload_offset = 469
+length = 3
+
+[[boundaries]]
+payload_offset = 472
+length = 7
+
+[[boundaries]]
+payload_offset = 479
+length = 3
+
+[[boundaries]]
+payload_offset = 482
+length = 5
+
+[[boundaries]]
+payload_offset = 487
+length = 5
+
+[[boundaries]]
+payload_offset = 493
+length = 1
+
+[[boundaries]]
+payload_offset = 494
+length = 5
+
+[[boundaries]]
+payload_offset = 499
+length = 6
+
+[[boundaries]]
+payload_offset = 505
+length = 5
+
+[[boundaries]]
+payload_offset = 510
+length = 6
+
+[[boundaries]]
+payload_offset = 516
+length = 1
+
+[[boundaries]]
+payload_offset = 517
+length = 6
+
+[[boundaries]]
+payload_offset = 523
+length = 2
+
+[[boundaries]]
+payload_offset = 525
+length = 5
+
+[[boundaries]]
+payload_offset = 531
+length = 6
+
+[[boundaries]]
+payload_offset = 537
+length = 2
+
+[[boundaries]]
+payload_offset = 539
+length = 5
+
+[[boundaries]]
+payload_offset = 545
+length = 1
+
+[[boundaries]]
+payload_offset = 546
+length = 5
+
+[[boundaries]]
+payload_offset = 551
+length = 6
+
+[[boundaries]]
+payload_offset = 557
+length = 5
+
+[[boundaries]]
+payload_offset = 562
+length = 6
+
+[[boundaries]]
+payload_offset = 568
+length = 7
+
+[[boundaries]]
+payload_offset = 575
+length = 3
+
+[[boundaries]]
+payload_offset = 578
+length = 3
+
+[[boundaries]]
+payload_offset = 581
+length = 5
+
+[[boundaries]]
+payload_offset = 586
+length = 3
+
+[[boundaries]]
+payload_offset = 589
+length = 1
+
+[[boundaries]]
+payload_offset = 590
+length = 1
+
+[[boundaries]]
+payload_offset = 591
+length = 5
+
+[[boundaries]]
+payload_offset = 596
+length = 6
+
+[[boundaries]]
+payload_offset = 602
+length = 7
+
+[[boundaries]]
+payload_offset = 609
+length = 3
+
+[[boundaries]]
+payload_offset = 612
+length = 1
+
+[[boundaries]]
+payload_offset = 613
+length = 7
+
+[[boundaries]]
+payload_offset = 620
+length = 7
+
+[[boundaries]]
+payload_offset = 627
+length = 3
+
+[[boundaries]]
+payload_offset = 630
+length = 1

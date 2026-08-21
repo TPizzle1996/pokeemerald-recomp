@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 3
 reloc_count = 4
+instruction_count = 16
 
 [[segments]]
 kind = "bytecode"
@@ -56,6 +57,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/pacifidlogtown-house5"
 target_export = "PacifidlogTown_House5_EventScript_MirageIslandPresent"
 target_offset = 29
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 28
 runtime_resolution_required = true
 
 [[relocs]]
@@ -65,6 +68,8 @@ original_encoded_gba = 0x8204140
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/pacifidlogtown-house5"
 target_export = "PacifidlogTown_House5_Text_CantSeeMirageIslandToday"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -74,6 +79,8 @@ original_encoded_gba = 0x8204161
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/pacifidlogtown-house5"
 target_export = "PacifidlogTown_House5_Text_CanSeeMirageIslandToday"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -83,4 +90,70 @@ original_encoded_gba = 0x820418b
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/pacifidlogtown-house5"
 target_export = "PacifidlogTown_House5_Text_MirageIslandAppearDependingOnWeather"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 1
+
+[[boundaries]]
+payload_offset = 2
+length = 5
+
+[[boundaries]]
+payload_offset = 7
+length = 5
+
+[[boundaries]]
+payload_offset = 12
+length = 6
+
+[[boundaries]]
+payload_offset = 18
+length = 6
+
+[[boundaries]]
+payload_offset = 24
+length = 2
+
+[[boundaries]]
+payload_offset = 26
+length = 1
+
+[[boundaries]]
+payload_offset = 27
+length = 1
+
+[[boundaries]]
+payload_offset = 28
+length = 6
+
+[[boundaries]]
+payload_offset = 34
+length = 2
+
+[[boundaries]]
+payload_offset = 36
+length = 1
+
+[[boundaries]]
+payload_offset = 37
+length = 1
+
+[[boundaries]]
+payload_offset = 38
+length = 6
+
+[[boundaries]]
+payload_offset = 44
+length = 2
+
+[[boundaries]]
+payload_offset = 46
+length = 1

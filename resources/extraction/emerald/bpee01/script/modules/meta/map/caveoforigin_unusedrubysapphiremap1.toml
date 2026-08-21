@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 1
 reloc_count = 1
+instruction_count = 3
 
 [[segments]]
 kind = "bytecode"
@@ -40,4 +41,18 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/cave-of-origin"
 target_export = "CaveOfOrigin_EventScript_DisableTriggers"
 target_offset = 77
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 77
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 6
+
+[[boundaries]]
+payload_offset = 9
+length = 1

@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 15
 reloc_count = 19
+instruction_count = 91
 
 [[segments]]
 kind = "bytecode"
@@ -152,6 +153,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/islandcave"
 target_export = "IslandCave_EventScript_TryRemoveRegice"
 target_offset = 26
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 10
 runtime_resolution_required = true
 
 [[relocs]]
@@ -162,6 +165,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-poison"
 target_export = "Common_EventScript_NopReturn"
 target_offset = 146
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 146
 runtime_resolution_required = true
 
 [[relocs]]
@@ -172,6 +177,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/islandcave"
 target_export = "IslandCave_EventScript_HideRegiEntrance"
 target_offset = 56
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 40
 runtime_resolution_required = true
 
 [[relocs]]
@@ -182,6 +189,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/islandcave"
 target_export = "IslandCave_EventScript_ClearSteps"
 target_offset = 283
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 267
 runtime_resolution_required = true
 
 [[relocs]]
@@ -192,6 +201,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/islandcave"
 target_export = "IslandCave_EventScript_ShowRegice"
 target_offset = 129
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 113
 runtime_resolution_required = true
 
 [[relocs]]
@@ -202,6 +213,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/islandcave"
 target_export = "IslandCave_EventScript_ClearSteps"
 target_offset = 283
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 267
 runtime_resolution_required = true
 
 [[relocs]]
@@ -212,6 +225,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/islandcave"
 target_export = "IslandCave_EventScript_BigHoleInWall"
 target_offset = 233
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 217
 runtime_resolution_required = true
 
 [[relocs]]
@@ -221,6 +236,8 @@ original_encoded_gba = 0x82a6cd4
 target_class = "MART_TABLE_TARGET"
 target_resource_key = "emerald:text/braille/islandcave-braille-runlaparoundwall"
 target_export = "IslandCave_Braille_RunLapAroundWall"
+target_kind = "BRAILLE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -231,6 +248,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/islandcave"
 target_export = "IslandCave_EventScript_CloseBrailleMsg"
 target_offset = 279
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 263
 runtime_resolution_required = true
 
 [[relocs]]
@@ -240,6 +259,8 @@ original_encoded_gba = 0x827304e
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/scripts/event-scripts"
 target_export = "gText_BigHoleInTheWall"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -250,6 +271,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/islandcave"
 target_export = "IslandCave_EventScript_ClearSteps"
 target_offset = 283
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 267
 runtime_resolution_required = true
 
 [[relocs]]
@@ -259,6 +282,8 @@ original_encoded_gba = 0x82a6cd4
 target_class = "MART_TABLE_TARGET"
 target_resource_key = "emerald:text/braille/islandcave-braille-runlaparoundwall"
 target_export = "IslandCave_Braille_RunLapAroundWall"
+target_kind = "BRAILLE"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -269,6 +294,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/islandcave"
 target_export = "IslandCave_EventScript_CloseBrailleMsg"
 target_offset = 279
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 263
 runtime_resolution_required = true
 
 [[relocs]]
@@ -279,6 +306,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/islandcave"
 target_export = "IslandCave_EventScript_CloseBrailleMsg"
 target_offset = 279
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 263
 runtime_resolution_required = true
 
 [[relocs]]
@@ -289,6 +318,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/islandcave"
 target_export = "IslandCave_EventScript_DefeatedRegice"
 target_offset = 373
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 357
 runtime_resolution_required = true
 
 [[relocs]]
@@ -299,6 +330,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/islandcave"
 target_export = "IslandCave_EventScript_RanFromRegice"
 target_offset = 382
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 366
 runtime_resolution_required = true
 
 [[relocs]]
@@ -309,6 +342,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/islandcave"
 target_export = "IslandCave_EventScript_RanFromRegice"
 target_offset = 382
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 366
 runtime_resolution_required = true
 
 [[relocs]]
@@ -319,6 +354,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-poison"
 target_export = "Common_EventScript_RemoveStaticPokemon"
 target_offset = 177
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 177
 runtime_resolution_required = true
 
 [[relocs]]
@@ -329,4 +366,370 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/common/field-poison"
 target_export = "Common_EventScript_LegendaryFlewAway"
 target_offset = 186
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 186
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 3
+
+[[boundaries]]
+payload_offset = 3
+length = 6
+
+[[boundaries]]
+payload_offset = 9
+length = 1
+
+[[boundaries]]
+payload_offset = 10
+length = 5
+
+[[boundaries]]
+payload_offset = 15
+length = 5
+
+[[boundaries]]
+payload_offset = 20
+length = 6
+
+[[boundaries]]
+payload_offset = 26
+length = 3
+
+[[boundaries]]
+payload_offset = 29
+length = 1
+
+[[boundaries]]
+payload_offset = 30
+length = 3
+
+[[boundaries]]
+payload_offset = 33
+length = 6
+
+[[boundaries]]
+payload_offset = 39
+length = 1
+
+[[boundaries]]
+payload_offset = 40
+length = 9
+
+[[boundaries]]
+payload_offset = 49
+length = 9
+
+[[boundaries]]
+payload_offset = 58
+length = 9
+
+[[boundaries]]
+payload_offset = 67
+length = 9
+
+[[boundaries]]
+payload_offset = 76
+length = 9
+
+[[boundaries]]
+payload_offset = 85
+length = 9
+
+[[boundaries]]
+payload_offset = 94
+length = 1
+
+[[boundaries]]
+payload_offset = 95
+length = 3
+
+[[boundaries]]
+payload_offset = 98
+length = 5
+
+[[boundaries]]
+payload_offset = 103
+length = 3
+
+[[boundaries]]
+payload_offset = 106
+length = 6
+
+[[boundaries]]
+payload_offset = 112
+length = 1
+
+[[boundaries]]
+payload_offset = 113
+length = 3
+
+[[boundaries]]
+payload_offset = 116
+length = 1
+
+[[boundaries]]
+payload_offset = 117
+length = 9
+
+[[boundaries]]
+payload_offset = 126
+length = 9
+
+[[boundaries]]
+payload_offset = 135
+length = 9
+
+[[boundaries]]
+payload_offset = 144
+length = 9
+
+[[boundaries]]
+payload_offset = 153
+length = 9
+
+[[boundaries]]
+payload_offset = 162
+length = 9
+
+[[boundaries]]
+payload_offset = 171
+length = 3
+
+[[boundaries]]
+payload_offset = 174
+length = 3
+
+[[boundaries]]
+payload_offset = 177
+length = 3
+
+[[boundaries]]
+payload_offset = 180
+length = 1
+
+[[boundaries]]
+payload_offset = 181
+length = 1
+
+[[boundaries]]
+payload_offset = 182
+length = 3
+
+[[boundaries]]
+payload_offset = 185
+length = 6
+
+[[boundaries]]
+payload_offset = 191
+length = 3
+
+[[boundaries]]
+payload_offset = 194
+length = 6
+
+[[boundaries]]
+payload_offset = 200
+length = 5
+
+[[boundaries]]
+payload_offset = 205
+length = 3
+
+[[boundaries]]
+payload_offset = 208
+length = 3
+
+[[boundaries]]
+payload_offset = 211
+length = 5
+
+[[boundaries]]
+payload_offset = 217
+length = 6
+
+[[boundaries]]
+payload_offset = 223
+length = 2
+
+[[boundaries]]
+payload_offset = 225
+length = 1
+
+[[boundaries]]
+payload_offset = 226
+length = 1
+
+[[boundaries]]
+payload_offset = 227
+length = 1
+
+[[boundaries]]
+payload_offset = 228
+length = 3
+
+[[boundaries]]
+payload_offset = 231
+length = 6
+
+[[boundaries]]
+payload_offset = 237
+length = 5
+
+[[boundaries]]
+payload_offset = 242
+length = 3
+
+[[boundaries]]
+payload_offset = 245
+length = 6
+
+[[boundaries]]
+payload_offset = 251
+length = 3
+
+[[boundaries]]
+payload_offset = 254
+length = 3
+
+[[boundaries]]
+payload_offset = 257
+length = 5
+
+[[boundaries]]
+payload_offset = 263
+length = 1
+
+[[boundaries]]
+payload_offset = 264
+length = 1
+
+[[boundaries]]
+payload_offset = 265
+length = 1
+
+[[boundaries]]
+payload_offset = 266
+length = 1
+
+[[boundaries]]
+payload_offset = 267
+length = 5
+
+[[boundaries]]
+payload_offset = 272
+length = 5
+
+[[boundaries]]
+payload_offset = 277
+length = 5
+
+[[boundaries]]
+payload_offset = 282
+length = 3
+
+[[boundaries]]
+payload_offset = 285
+length = 1
+
+[[boundaries]]
+payload_offset = 286
+length = 1
+
+[[boundaries]]
+payload_offset = 287
+length = 1
+
+[[boundaries]]
+payload_offset = 288
+length = 1
+
+[[boundaries]]
+payload_offset = 289
+length = 5
+
+[[boundaries]]
+payload_offset = 294
+length = 3
+
+[[boundaries]]
+payload_offset = 297
+length = 1
+
+[[boundaries]]
+payload_offset = 298
+length = 6
+
+[[boundaries]]
+payload_offset = 304
+length = 3
+
+[[boundaries]]
+payload_offset = 307
+length = 3
+
+[[boundaries]]
+payload_offset = 310
+length = 1
+
+[[boundaries]]
+payload_offset = 311
+length = 3
+
+[[boundaries]]
+payload_offset = 314
+length = 5
+
+[[boundaries]]
+payload_offset = 319
+length = 5
+
+[[boundaries]]
+payload_offset = 324
+length = 6
+
+[[boundaries]]
+payload_offset = 330
+length = 5
+
+[[boundaries]]
+payload_offset = 335
+length = 6
+
+[[boundaries]]
+payload_offset = 341
+length = 5
+
+[[boundaries]]
+payload_offset = 346
+length = 6
+
+[[boundaries]]
+payload_offset = 352
+length = 3
+
+[[boundaries]]
+payload_offset = 355
+length = 1
+
+[[boundaries]]
+payload_offset = 356
+length = 1
+
+[[boundaries]]
+payload_offset = 357
+length = 3
+
+[[boundaries]]
+payload_offset = 360
+length = 5
+
+[[boundaries]]
+payload_offset = 366
+length = 5
+
+[[boundaries]]
+payload_offset = 371
+length = 5

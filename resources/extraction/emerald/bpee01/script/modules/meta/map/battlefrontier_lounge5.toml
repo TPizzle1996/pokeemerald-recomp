@@ -17,6 +17,7 @@ static_data_bytes = 0
 segment_count = 1
 export_count = 6
 reloc_count = 9
+instruction_count = 37
 
 [[segments]]
 kind = "bytecode"
@@ -79,6 +80,8 @@ original_encoded_gba = 0x8264632
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-lounge5"
 target_export = "BattleFrontier_Lounge5_Text_NatureGirlGreeting"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -89,6 +92,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-lounge5"
 target_export = "BattleFrontier_Lounge5_EventScript_NatureGirlNoneShown"
 target_offset = 72
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 71
 runtime_resolution_required = true
 
 [[relocs]]
@@ -99,6 +104,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-lounge5"
 target_export = "BattleFrontier_Lounge5_EventScript_NatureGirlNoneShown"
 target_offset = 72
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 71
 runtime_resolution_required = true
 
 [[relocs]]
@@ -109,6 +116,8 @@ target_class = "SCRIPT_TARGET"
 target_resource_key = "emerald:script/map/battlefrontier-lounge5"
 target_export = "BattleFrontier_Lounge5_EventScript_NatureGirlEgg"
 target_offset = 62
+target_kind = "SCRIPT_PAYLOAD"
+target_payload_offset = 61
 runtime_resolution_required = true
 
 [[relocs]]
@@ -118,6 +127,8 @@ original_encoded_gba = 0x8264eee
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-lounge5"
 target_export = "BattleFrontier_Lounge5_Text_NatureGirlEgg"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -127,6 +138,8 @@ original_encoded_gba = 0x826467f
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-lounge5"
 target_export = "BattleFrontier_Lounge5_Text_NatureGirlNoneShown"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -136,6 +149,8 @@ original_encoded_gba = 0x8264f22
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-lounge5"
 target_export = "BattleFrontier_Lounge5_Text_LadyClaimsSheUnderstandsPokemon"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -145,6 +160,8 @@ original_encoded_gba = 0x8264f64
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-lounge5"
 target_export = "BattleFrontier_Lounge5_Text_GirlSayingSomethingProfound"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
 
 [[relocs]]
@@ -154,4 +171,154 @@ original_encoded_gba = 0x8264fab
 target_class = "TEXT_TARGET"
 target_resource_key = "emerald:text/map/battlefrontier-lounge5"
 target_export = "BattleFrontier_Lounge5_Text_GirlPlaysAtRedHouseALot"
+target_kind = "TEXT_BUNDLE_MEMBER"
+target_payload_offset = 4294967295
 runtime_resolution_required = true
+
+[[boundaries]]
+payload_offset = 0
+length = 1
+
+[[boundaries]]
+payload_offset = 1
+length = 1
+
+[[boundaries]]
+payload_offset = 2
+length = 6
+
+[[boundaries]]
+payload_offset = 8
+length = 2
+
+[[boundaries]]
+payload_offset = 10
+length = 5
+
+[[boundaries]]
+payload_offset = 15
+length = 6
+
+[[boundaries]]
+payload_offset = 21
+length = 3
+
+[[boundaries]]
+payload_offset = 24
+length = 1
+
+[[boundaries]]
+payload_offset = 25
+length = 1
+
+[[boundaries]]
+payload_offset = 26
+length = 1
+
+[[boundaries]]
+payload_offset = 27
+length = 5
+
+[[boundaries]]
+payload_offset = 32
+length = 6
+
+[[boundaries]]
+payload_offset = 38
+length = 5
+
+[[boundaries]]
+payload_offset = 43
+length = 5
+
+[[boundaries]]
+payload_offset = 48
+length = 6
+
+[[boundaries]]
+payload_offset = 54
+length = 3
+
+[[boundaries]]
+payload_offset = 57
+length = 1
+
+[[boundaries]]
+payload_offset = 58
+length = 1
+
+[[boundaries]]
+payload_offset = 59
+length = 1
+
+[[boundaries]]
+payload_offset = 60
+length = 1
+
+[[boundaries]]
+payload_offset = 61
+length = 6
+
+[[boundaries]]
+payload_offset = 67
+length = 2
+
+[[boundaries]]
+payload_offset = 69
+length = 1
+
+[[boundaries]]
+payload_offset = 70
+length = 1
+
+[[boundaries]]
+payload_offset = 71
+length = 6
+
+[[boundaries]]
+payload_offset = 77
+length = 2
+
+[[boundaries]]
+payload_offset = 79
+length = 1
+
+[[boundaries]]
+payload_offset = 80
+length = 1
+
+[[boundaries]]
+payload_offset = 81
+length = 6
+
+[[boundaries]]
+payload_offset = 87
+length = 2
+
+[[boundaries]]
+payload_offset = 89
+length = 1
+
+[[boundaries]]
+payload_offset = 90
+length = 6
+
+[[boundaries]]
+payload_offset = 96
+length = 2
+
+[[boundaries]]
+payload_offset = 98
+length = 1
+
+[[boundaries]]
+payload_offset = 99
+length = 6
+
+[[boundaries]]
+payload_offset = 105
+length = 2
+
+[[boundaries]]
+payload_offset = 107
+length = 1
