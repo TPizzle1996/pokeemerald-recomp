@@ -1,4 +1,9 @@
 #include "global.h"
+#if defined(LINUX64) && LINUX64
+#include "emerald/resources/emerald_script_compat.h"
+#include "emerald/resources/emerald_script_state.h"
+#endif
+
 #include "script.h"
 #include "event_data.h"
 #include "mystery_gift.h"
@@ -287,8 +292,23 @@ void RunScriptImmediately(const u8 *ptr)
     while (RunScriptCommand(&sImmediateScriptContext) == TRUE);
 }
 
+/* R13-G5 (plan sec 6): the two map-dispatch pointer reads. The header's
+ * mapScripts GBA provenance resolves to the staged routing table; each
+ * dispatch entry resolves through the typed source index. The legacy
+ * bridge remains only for the pre-publication window. */
+static const u8 *ResolveMapDispatchEntry(const u8 *entryPtr)
+{
+    uintptr_t ptr;
+    if (EmeraldScriptCompat_ResolveLiveOperand((uintptr_t)entryPtr, &ptr))
+        return (const u8 *)ptr;
+    return (const u8 *)T2_READ_PTR(entryPtr);
+}
+
 u8 *MapHeaderGetScriptTable(u8 tag)
 {
+    /* R13-G5: the header's mapScripts is the staged routing table
+     * (published by the map seam's rebind); each dispatch entry
+     * resolves through the typed source index. */
     const u8 *mapScripts = gMapHeader.mapScripts;
 
     if (!mapScripts)
@@ -301,7 +321,7 @@ u8 *MapHeaderGetScriptTable(u8 tag)
         if (*mapScripts == tag)
         {
             mapScripts++;
-            return T2_READ_PTR(mapScripts);
+            return (u8 *)ResolveMapDispatchEntry(mapScripts);
         }
         mapScripts += 5;
     }
@@ -418,6 +438,24 @@ const u8 *GetRamScript(u8 localId, const u8 *script)
 {
     struct RamScriptData *scriptData = &gSaveBlock1Ptr->ramScript.data;
     gRamScriptRetAddr = NULL;
+#if defined(LINUX64) && LINUX64
+    {
+        /* R13-G5 (plan sec 16): register the mutable RAM-script storage
+         * so dynamic IPs and the stable virtual anchor validate against
+         * the recreated save-block buffer. */
+        struct EmeraldScriptDynamicBuffer buffer;
+        memset(&buffer, 0, sizeof(buffer));
+        buffer.kind = EMERALD_SCRIPT_DYNAMIC_SAVE_RAM_SCRIPT;
+        buffer.ownerStorageId = 0u;
+        buffer.generation = 1u;
+        buffer.base = (uint8_t *)scriptData->script;
+        buffer.size = sizeof(scriptData->script);
+        buffer.instructionStarts = NULL;
+        snprintf(buffer.ownerId, sizeof(buffer.ownerId), "%s",
+                 "ram-script");
+        (void)EmeraldScriptState_RegisterDynamicBuffer(&buffer);
+    }
+#endif
     if (scriptData->magic != RAM_SCRIPT_MAGIC)
         return script;
     if (scriptData->mapGroup != gSaveBlock1Ptr->location.mapGroup)

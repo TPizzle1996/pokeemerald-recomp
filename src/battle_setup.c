@@ -1,4 +1,10 @@
 #include "global.h"
+#if defined(LINUX64) && LINUX64
+#include "emerald/resources/emerald_script_compat.h"
+extern void *const gNullScriptPtr;
+#include "emerald/resources/emerald_text_compat.h"
+#endif
+
 #include "battle.h"
 #include "battle_setup.h"
 #include "battle_transition.h"
@@ -63,6 +69,12 @@ enum {
     TRAINER_PARAM_CLEAR_VAL_16BIT,
     TRAINER_PARAM_CLEAR_VAL_32BIT,
     TRAINER_PARAM_LOAD_SCRIPT_RET_ADDR,
+    /* R13-G5 (plan sec 12): the typed trainerbattle fields - text
+     * resolves through the R13-C catalog, field continuations through
+     * the G script bindings. Never a raw 4-byte store into a host
+     * pointer object. */
+    TRAINER_PARAM_LOAD_TEXT,
+    TRAINER_PARAM_LOAD_SCRIPT,
 };
 
 struct TrainerBattleParameter
@@ -178,8 +190,8 @@ static const struct TrainerBattleParameter sOrdinaryBattleParams[] =
     {&sTrainerBattleMode,           TRAINER_PARAM_LOAD_VAL_8BIT},
     {&gTrainerBattleOpponent_A,     TRAINER_PARAM_LOAD_VAL_16BIT},
     {&sTrainerObjectEventLocalId,   TRAINER_PARAM_LOAD_VAL_16BIT},
-    {&sTrainerAIntroSpeech,         TRAINER_PARAM_LOAD_VAL_32BIT},
-    {&sTrainerADefeatSpeech,        TRAINER_PARAM_LOAD_VAL_32BIT},
+    {&sTrainerAIntroSpeech,         TRAINER_PARAM_LOAD_TEXT},
+    {&sTrainerADefeatSpeech,        TRAINER_PARAM_LOAD_TEXT},
     {&sTrainerVictorySpeech,        TRAINER_PARAM_CLEAR_VAL_32BIT},
     {&sTrainerCannotBattleSpeech,   TRAINER_PARAM_CLEAR_VAL_32BIT},
     {&sTrainerABattleScriptRetAddr, TRAINER_PARAM_CLEAR_VAL_32BIT},
@@ -191,11 +203,11 @@ static const struct TrainerBattleParameter sContinueScriptBattleParams[] =
     {&sTrainerBattleMode,           TRAINER_PARAM_LOAD_VAL_8BIT},
     {&gTrainerBattleOpponent_A,     TRAINER_PARAM_LOAD_VAL_16BIT},
     {&sTrainerObjectEventLocalId,   TRAINER_PARAM_LOAD_VAL_16BIT},
-    {&sTrainerAIntroSpeech,         TRAINER_PARAM_LOAD_VAL_32BIT},
-    {&sTrainerADefeatSpeech,        TRAINER_PARAM_LOAD_VAL_32BIT},
+    {&sTrainerAIntroSpeech,         TRAINER_PARAM_LOAD_TEXT},
+    {&sTrainerADefeatSpeech,        TRAINER_PARAM_LOAD_TEXT},
     {&sTrainerVictorySpeech,        TRAINER_PARAM_CLEAR_VAL_32BIT},
     {&sTrainerCannotBattleSpeech,   TRAINER_PARAM_CLEAR_VAL_32BIT},
-    {&sTrainerABattleScriptRetAddr, TRAINER_PARAM_LOAD_VAL_32BIT},
+    {&sTrainerABattleScriptRetAddr, TRAINER_PARAM_LOAD_SCRIPT},
     {&sTrainerBattleEndScript,      TRAINER_PARAM_LOAD_SCRIPT_RET_ADDR},
 };
 
@@ -204,8 +216,8 @@ static const struct TrainerBattleParameter sDoubleBattleParams[] =
     {&sTrainerBattleMode,           TRAINER_PARAM_LOAD_VAL_8BIT},
     {&gTrainerBattleOpponent_A,     TRAINER_PARAM_LOAD_VAL_16BIT},
     {&sTrainerObjectEventLocalId,   TRAINER_PARAM_LOAD_VAL_16BIT},
-    {&sTrainerAIntroSpeech,         TRAINER_PARAM_LOAD_VAL_32BIT},
-    {&sTrainerADefeatSpeech,        TRAINER_PARAM_LOAD_VAL_32BIT},
+    {&sTrainerAIntroSpeech,         TRAINER_PARAM_LOAD_TEXT},
+    {&sTrainerADefeatSpeech,        TRAINER_PARAM_LOAD_TEXT},
     {&sTrainerVictorySpeech,        TRAINER_PARAM_CLEAR_VAL_32BIT},
     {&sTrainerCannotBattleSpeech,   TRAINER_PARAM_LOAD_VAL_32BIT},
     {&sTrainerABattleScriptRetAddr, TRAINER_PARAM_CLEAR_VAL_32BIT},
@@ -230,11 +242,11 @@ static const struct TrainerBattleParameter sContinueScriptDoubleBattleParams[] =
     {&sTrainerBattleMode,           TRAINER_PARAM_LOAD_VAL_8BIT},
     {&gTrainerBattleOpponent_A,     TRAINER_PARAM_LOAD_VAL_16BIT},
     {&sTrainerObjectEventLocalId,   TRAINER_PARAM_LOAD_VAL_16BIT},
-    {&sTrainerAIntroSpeech,         TRAINER_PARAM_LOAD_VAL_32BIT},
-    {&sTrainerADefeatSpeech,        TRAINER_PARAM_LOAD_VAL_32BIT},
+    {&sTrainerAIntroSpeech,         TRAINER_PARAM_LOAD_TEXT},
+    {&sTrainerADefeatSpeech,        TRAINER_PARAM_LOAD_TEXT},
     {&sTrainerVictorySpeech,        TRAINER_PARAM_CLEAR_VAL_32BIT},
     {&sTrainerCannotBattleSpeech,   TRAINER_PARAM_LOAD_VAL_32BIT},
-    {&sTrainerABattleScriptRetAddr, TRAINER_PARAM_LOAD_VAL_32BIT},
+    {&sTrainerABattleScriptRetAddr, TRAINER_PARAM_LOAD_SCRIPT},
     {&sTrainerBattleEndScript,      TRAINER_PARAM_LOAD_SCRIPT_RET_ADDR},
 };
 
@@ -1098,8 +1110,53 @@ static void TrainerBattleLoadArgs(const struct TrainerBattleParameter *specs, co
             SetU32(specs->varPtr, 0);
             break;
         case TRAINER_PARAM_LOAD_SCRIPT_RET_ADDR:
+            /* The implicit post-command return: data already points at
+             * the live instruction (the executing G arena after
+             * cutover) - no transformation. */
             SetPtr(specs->varPtr, data);
             return;
+        case TRAINER_PARAM_LOAD_TEXT:
+        {
+            /* Typed C text: the encoded 4-byte GBA value resolves to
+             * the published R13-C arena bytes. */
+            const uint8_t *text = NULL;
+            size_t textSize = 0u;
+            u32 encoded = TrainerBattleLoadArg32(data);
+            struct EmeraldScriptCompatResolvedTarget target;
+
+            if (EmeraldScriptCompat_ResolveEncodedTarget(
+                    encoded, EMERALD_SCRIPT_NATIVE_CLASS_TEXT, &target)
+                    == EMERALD_SCRIPT_OK
+             && target.liveAddress != 0u)
+            {
+                SetPtr(specs->varPtr, (const void *)target.liveAddress);
+            }
+            else
+            {
+                SetPtr(specs->varPtr, gNullScriptPtr);
+            }
+            (void)text;
+            (void)textSize;
+            data += 4;
+            break;
+        }
+        case TRAINER_PARAM_LOAD_SCRIPT:
+        {
+            /* Typed field continuation: the encoded 4-byte GBA value
+             * resolves to the live module entrypoint. */
+            u32 encoded = TrainerBattleLoadArg32(data);
+            struct EmeraldScriptCompatResolvedTarget target;
+
+            if (EmeraldScriptCompat_ResolveEncodedTarget(
+                    encoded, EMERALD_SCRIPT_NATIVE_CLASS_SCRIPT, &target)
+                    == EMERALD_SCRIPT_OK
+             && target.liveAddress != 0u)
+                SetPtr(specs->varPtr, (const void *)target.liveAddress);
+            else
+                SetPtr(specs->varPtr, gNullScriptPtr);
+            data += 4;
+            break;
+        }
         }
         specs++;
     }

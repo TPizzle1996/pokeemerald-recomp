@@ -58,6 +58,7 @@
 #include "emerald/resources/emerald_pokedex_compat.h"
 #include "emerald/resources/emerald_gameplay_compat.h"
 #include "emerald/resources/emerald_map_compat.h"
+#include "emerald/resources/emerald_script_compat.h"
 #include "emerald/resources/emerald_leaf_compat.h"
 #include "emerald/resources/emerald_resource_session.h"
 #include "emerald/resources/emerald_text_compat.h"
@@ -538,6 +539,67 @@ EmeraldResourceCompat_RegisterRuntimeSnapshot(const char *packPath)
                                             }
                                             else
                                             {
+                                                /* R13-G5: the FIRST LIVE field-script
+                                                 * cutover (plan sec 3). After every
+                                                 * dependency family published: stage +
+                                                 * validate the complete G generation,
+                                                 * register the 523 live module ranges,
+                                                 * publish the live gStdScripts table,
+                                                 * and rebind the R13-F script
+                                                 * pointers - all before any script
+                                                 * entrypoint can execute. A failure at
+                                                 * any step refuses the session with the
+                                                 * same full rollback as every earlier
+                                                 * seam; compiled field scripts are
+                                                 * NEVER executed after this point. */
+                                                struct EmeraldScriptCompatDiagnostics scriptDiag;
+                                                enum EmeraldScriptCompatStatus scriptStatus =
+                                                    EmeraldScriptCompat_TryInitialize(
+                                                        snapshot, pack, &scriptDiag);
+                                                if (scriptStatus == EMERALD_SCRIPT_OK)
+                                                    scriptStatus =
+                                                        EmeraldScriptCompat_RegisterRanges();
+                                                if (scriptStatus == EMERALD_SCRIPT_OK
+                                                 && EmeraldScriptCompat_GetRangeCount() != 6377u)
+                                                    scriptStatus =
+                                                        EMERALD_SCRIPT_ERR_UNEXPECTED_COUNT;
+                                                if (scriptStatus == EMERALD_SCRIPT_OK)
+                                                    scriptStatus =
+                                                        EmeraldScriptCompat_PublishStdScripts();
+                                                if (scriptStatus == EMERALD_SCRIPT_OK
+                                                 && !EmeraldMapCompat_RebindScripts())
+                                                    scriptStatus =
+                                                        EMERALD_SCRIPT_ERR_TARGET_UNRESOLVED;
+                                                if (scriptStatus != EMERALD_SCRIPT_OK)
+                                                {
+                                                    fprintf(stderr,
+                                                            "emerald runtime: session refused: "
+                                                            "field-script generation not "
+                                                            "published (status %d%s%s)\n",
+                                                            (int)scriptStatus,
+                                                            scriptDiag.canonicalName[0] != '\0'
+                                                                ? " @ " : "",
+                                                            scriptDiag.canonicalName);
+                                                    EmeraldScriptCompat_ClearMigratedEntries();
+                                                    EmeraldResourceCompat_ClearMigratedEntries();
+                                                    EmeraldAudioCompat_ClearMigratedEntries();
+                                                    EmeraldTextCompat_ClearMigratedEntries();
+                                                    EmeraldLeafCompat_ClearMigratedEntries();
+                                                    EmeraldGameplayCompat_ClearMigratedEntries();
+                                                    EmeraldTrainerCompat_ClearMigratedEntries();
+                                                    EmeraldEncounterCompat_ClearMigratedEntries();
+                                                    EmeraldFrontierCompat_ClearMigratedEntries();
+                                                    EmeraldPokedexCompat_ClearMigratedEntries();
+                                                    EmeraldMapCompat_ClearMigratedEntries();
+                                                    EmeraldResourceCompat_ClearSnapshot();
+                                                    EmeraldResourceCompat_SetSessionContentFingerprint(NULL);
+                                                    Gen3ResourceSnapshot_Destroy(snapshot);
+                                                    snapshot = NULL;
+                                                    sSnapshotRegistered = false;
+                                                    status = EMERALD_COMPAT_ERR_PUBLISH_FAILED;
+                                                }
+                                                else
+                                                {
                                             /* R10-F: the session content fingerprint
                                              * pins the exact logical provider content
                                              * this session was built from (the
@@ -560,6 +622,7 @@ EmeraldResourceCompat_RegisterRuntimeSnapshot(const char *packPath)
                                             else
                                                 EmeraldResourceCompat_SetSessionContentFingerprint(
                                                     NULL);
+                                                }
                                             }
                                         }
                                     }

@@ -112,9 +112,13 @@ SCHEMA_GIFT = 46
 # checkout; B documents them in its leaf seam header). Qualified names
 # and module-relative offsets:
 RECOMP_LOCAL_MOVEMENT = [
-    ("Route103_EventScript_RivalExitFacingNorth2", 0x10F45, 7),
-    ("Ferry_EventScript_DepartIslandBoardSouth", 0x673BB, 2),
-    ("Ferry_EventScript_DepartIslandBoardWest", 0x673BD, 3),
+    # (qualified name, recomp-compiled name, region-relative offset, size)
+    ("Route103_EventScript_RivalExitFacingNorth2",
+     "Route103_Movement_RivalExitFacingNorth2", 0x10F45, 7),
+    ("Ferry_EventScript_DepartIslandBoardSouth",
+     "Ferry_Movement_DepartIslandBoardSouth", 0x673BB, 2),
+    ("Ferry_EventScript_DepartIslandBoardWest",
+     "Ferry_Movement_DepartIslandBoardWest", 0x673BD, 3),
 ]
 
 # R13-G2 §7: gStdScripts shadow binding records.  The 11 slots occupy the
@@ -606,8 +610,8 @@ def emit_all(outdir, args, rom, modules, text_class_bytes, move_class_bytes,
                 for op in operands
                 if op["target_class"] == "RAM_DATA_TARGET"]
     emit_script_native_tables(Path(args.root), args, rom, base, modules,
-                              routing_relocs, std_raw, f_raw, mart_raw,
-                              ram_rows, dyn)
+                              routing_relocs, routing, std_raw, f_raw,
+                              mart_raw, ram_rows, dyn)
 
     print(f"\n=== R13-G2 RESULTS ===")
     print(f"Modules: {len(modules)} (pinned: {MODULES_PIN})  [{n_map} map, {n_common} common, {n_gift} gift]")
@@ -1123,7 +1127,7 @@ def render_movement_edges(modules, routing_relocs, base):
             f"target_export = \"{r['target_export']}\"",
             "",
         ]
-    for name, rel, size in RECOMP_LOCAL_MOVEMENT:
+    for name, compiled, rel, size in RECOMP_LOCAL_MOVEMENT:
         gba = base + rel
         hits = [(m, r) for m in modules for r in m.relocs
                 if r["original_encoded_gba"] == gba
@@ -1351,7 +1355,8 @@ def render_mart_tables(modules):
 
 
 
-def render_script_native_h(n_mod, n_seg, n_exp, n_rel, n_rrt, n_bnd, n_dyn):
+def render_script_native_h(n_mod, n_seg, n_exp, n_rel, n_rrt, n_bnd, n_dyn,
+                            n_rseg):
     pins = [
         ("EMERALD_SCRIPT_MODULE_COUNT", n_mod, 523),
         ("EMERALD_SCRIPT_SEGMENT_COUNT", n_seg, 812),
@@ -1365,6 +1370,7 @@ def render_script_native_h(n_mod, n_seg, n_exp, n_rel, n_rrt, n_bnd, n_dyn):
         ("EMERALD_SCRIPT_RAM_TARGET_COUNT", 18, 18),
         ("EMERALD_SCRIPT_RAM_ALLOWLIST_COUNT", 1, 1),
         ("EMERALD_SCRIPT_BRIDGE_COUNT", 3, 3),
+        ("EMERALD_SCRIPT_ROUTING_SEGMENT_COUNT", n_rseg, n_rseg),
         ("EMERALD_SCRIPT_ARENA_PAYLOAD_BYTES", 207330, 207330),
         ("EMERALD_SCRIPT_ARENA_ALIGNMENT", 16, 16),
     ]
@@ -1474,6 +1480,8 @@ def render_script_native_h(n_mod, n_seg, n_exp, n_rel, n_rrt, n_bnd, n_dyn):
         "    uint32_t relocCount;",
         "    uint32_t boundaryFirst;",
         "    uint32_t boundaryCount;",
+        "    uint32_t routingFirst;",
+        "    uint32_t routingCount;",
         "    uint8_t kind;",
         "    uint8_t embedded;",
         "};",
@@ -1484,6 +1492,19 @@ def render_script_native_h(n_mod, n_seg, n_exp, n_rel, n_rrt, n_bnd, n_dyn):
         "    uint32_t byteCount;",
         "    uint32_t payloadOffset;",
         "    uint8_t kind;",
+        "};",
+        "",
+        "/* R13-G5 (plan sec 4): a module's routing-class tables (map",
+        " * dispatch + conditional tables) staged as a span suffix after",
+        " * the payload. spanOffset is payload-relative; the live address",
+        " * of table byte X is arena + module.arenaOffset + spanOffset +",
+        " * (X - originalGbaStart). */",
+        "struct EmeraldScriptNativeRoutingSegment",
+        "{",
+        "    uint32_t moduleIndex;",
+        "    uint32_t originalGbaStart;",
+        "    uint32_t byteCount;",
+        "    uint32_t spanOffset;",
         "};",
         "",
         "struct EmeraldScriptNativeExport",
@@ -1625,6 +1646,10 @@ def render_script_native_h(n_mod, n_seg, n_exp, n_rel, n_rrt, n_bnd, n_dyn):
         "    uint32_t bridgeCount;",
         "    const struct EmeraldScriptNativeBoundary *boundaries;",
         "    uint32_t boundaryCount;",
+        "    const struct EmeraldScriptNativeRoutingSegment *routingSegments;",
+        "    uint32_t routingSegmentCount;",
+        "    const uint8_t *routingBytes;",
+        "    uint32_t routingByteCount;",
         "    const char *const *pool;",
         "    uint32_t poolCount;",
         "};",
@@ -1643,7 +1668,7 @@ def _cstr(s):
 
 def render_script_native_c(mod_rows, seg_rows, exp_rows, reloc_rows, rrt_rows,
                            dyn_rows, bridge_rows, std_rows, f_rows, mart_rows,
-                           ram_rows, bound_rows, pool, arena_bytes):
+                           ram_rows, bound_rows, rseg_rows, pool, arena_bytes):
     cls_map = {"SCRIPT_TARGET": 0, "TEXT_TARGET": 1, "MOVEMENT_TARGET": 2,
                "MART_TABLE_TARGET": 3, "RAM_DATA_TARGET": 4}
     kind_map = {
@@ -1669,9 +1694,9 @@ def render_script_native_c(mod_rows, seg_rows, exp_rows, reloc_rows, rrt_rows,
         " * bytes so EmeraldScriptCompat can prove byte identity against the",
         " * compiled symbols; the live pointers themselves come from the",
         " * symbols below (never written into any arena). */",
-        "extern const uint8_t Route103_EventScript_RivalExitFacingNorth2[7];",
-        "extern const uint8_t Ferry_EventScript_DepartIslandBoardSouth[2];",
-        "extern const uint8_t Ferry_EventScript_DepartIslandBoardWest[3];",
+        "extern const uint8_t Route103_Movement_RivalExitFacingNorth2[7];",
+        "extern const uint8_t Ferry_Movement_DepartIslandBoardSouth[2];",
+        "extern const uint8_t Ferry_Movement_DepartIslandBoardWest[3];",
         "const uint8_t *const kEmeraldScriptNativeBridgeSymbols["
         + str(len(bridge_rows)) + "] = {",
     ]
@@ -1706,12 +1731,13 @@ def render_script_native_c(mod_rows, seg_rows, exp_rows, reloc_rows, rrt_rows,
     emit_array("kScriptModules", "struct EmeraldScriptNativeModule",
                mod_rows,
                lambda r: "{%s, %s, {%s}, %uu, 0x%xu, %uu, %uu, %uu, %uu, "
-                         "%uu, %uu, %uu, %uu, %uu, %uu, %uu, %uu}" % (
+                         "%uu, %uu, %uu, %uu, %uu, %uu, %uu, %uu, %uu, %uu}" % (
                    _cstr(r["id"]), _cstr(r["sym"]),
                    ", ".join("0x%02x" % b for b in r["digest"]),
                    r["schema"], r["rstart"], r["size"], r["arena"],
                    r["sfirst"], r["sn"], r["efirst"], r["en"],
                    r["rfirst"], r["rn"], r["bfirst"], r["bn"],
+                   r["rsegfirst"], r["rsegn"],
                    r["kind"], r["embedded"]))
     emit_array("kScriptSegments", "struct EmeraldScriptNativeSegment",
                seg_rows,
@@ -1739,6 +1765,19 @@ def render_script_native_c(mod_rows, seg_rows, exp_rows, reloc_rows, rrt_rows,
                lambda r: "{0x%xu, %uu, %uu, %uu, %uu, %uu, %uu, %uu}" % (
                    r["gba"], cls_map[r["cls"]], kind_map[r["kind"]],
                    r["key"], r["label"], r["to"], r["tpo"], r["bk"]))
+    # R13-G5: the routing-class bytes come straight from the qualified
+    # ROM (the generator's provenance) - they are not pack resources.
+    out.append("/* R13-G5: the 5,749 B routing class (map dispatch + "
+               "conditional tables), exact qualified-ROM bytes. The seam "
+               "copies each module's routing suffix from this blob. */")
+    routing_blob = b"".join(r["rom"] for r in rseg_rows)
+    out.append(f"const uint8_t kScriptRoutingBytes[{len(routing_blob)}] = {{")
+    for i in range(0, len(routing_blob), 16):
+        chunk = routing_blob[i:i + 16]
+        out.append("    " + ", ".join("0x%02x" % b for b in chunk) + ",")
+    out.append("};")
+    out.append("")
+
     emit_array("kScriptBridges", "struct EmeraldScriptNativeBridge",
                bridge_rows,
                lambda r: "{%s, %s, 0x%xu, %uu, {%s}}" % (
@@ -1768,6 +1807,10 @@ def render_script_native_c(mod_rows, seg_rows, exp_rows, reloc_rows, rrt_rows,
     emit_array("kScriptBoundaries", "struct EmeraldScriptNativeBoundary",
                bound_rows,
                lambda r: "{%uu, %uu, 0u}" % (r["off"], r["n"]))
+    emit_array("kScriptRoutingSegments",
+               "struct EmeraldScriptNativeRoutingSegment", rseg_rows,
+               lambda r: "{%uu, 0x%xu, %uu, %uu}" % (r["mi"], r["gba"],
+                                                     r["n"], r["off"]))
 
     out += [
         "const struct EmeraldScriptCompatNativeTable kEmeraldScriptCompatTable = {",
@@ -1784,6 +1827,8 @@ def render_script_native_c(mod_rows, seg_rows, exp_rows, reloc_rows, rrt_rows,
         "    kScriptRamAllowlist, EMERALD_SCRIPT_RAM_ALLOWLIST_COUNT,",
         "    kScriptBridges, EMERALD_SCRIPT_BRIDGE_COUNT,",
         "    kScriptBoundaries, (uint32_t)" + str(len(bound_rows)) + "u,",
+        "    kScriptRoutingSegments, (uint32_t)" + str(len(rseg_rows)) + "u,",
+        "    kScriptRoutingBytes, (uint32_t)" + str(len(routing_blob)) + "u,",
         "    kScriptPool, (uint32_t)" + str(len(pool)) + "u,",
         "};",
         "",
@@ -1792,23 +1837,52 @@ def render_script_native_c(mod_rows, seg_rows, exp_rows, reloc_rows, rrt_rows,
 
 
 def emit_script_native_tables(root, args, rom, base, modules, routing_relocs,
-                              std_raw, f_raw, mart_raw,
+                              routing, std_raw, f_raw, mart_raw,
                               ram_rows, dyn):
     """R13-G3 (plan sec 1/10/18): emit the shadow seam's generated C
     inventory - include/emerald/resources/script_native.generated.h +
     src/emerald/resources/script_native_table.generated.c. Every row is
     a projection of the already-generated G2 metadata plus the boundary
     walk and the dynamic encoded-GBA target index derived in main();
-    the G1 graph itself is not reinterpreted here."""
+    the G1 graph itself is not reinterpreted here.
+
+    R13-G5 (plan sec 4): the module spans additionally stage each
+    module's routing-class tables (map dispatch + conditional tables,
+    5,749 B total - the region-gap bytes G2 typed as routing segments)
+    as a routing suffix after the payload. That materializes the
+    MapHeader.mapScripts provenance and every dispatch-entry operand as
+    live arena bytes without touching any payload offset."""
     mods = sorted(modules, key=lambda m: m.id)
     mod_idx = {m.id: i for i, m in enumerate(mods)}
     # Deterministic arena layout: modules in bytewise id order (the
-    # manifest order), 16-aligned spans, payload bytes contiguous.
+    # manifest order), 16-aligned spans; each span = payload + the
+    # module's routing suffix.
+    routing_runs = {}
+    routing_total = 0
+    for m in mods:
+        runs = []
+        cur = None
+        for a in range(m.region_start, m.region_end):
+            if a in routing:
+                if cur is None:
+                    cur = a
+            elif cur is not None:
+                runs.append((cur, a))
+                cur = None
+        if cur is not None:
+            runs.append((cur, m.region_end))
+        routing_runs[m.id] = runs
+        routing_total += sum(b - a for a, b in runs)
+    if routing_total != ROUTING_BYTES_PIN:
+        fail(f"staged routing bytes {routing_total} != {ROUTING_BYTES_PIN}")
+    span_sizes = {
+        m.id: m.payload_bytes + sum(b - a for a, b in routing_runs[m.id])
+        for m in mods}
     arena_offsets = {}
     cursor = 0
     for m in mods:
         arena_offsets[m.id] = cursor
-        cursor += (m.payload_bytes + 15) & ~15
+        cursor += (span_sizes[m.id] + 15) & ~15
     arena_bytes = cursor
 
     # String pool (index 0 = "").
@@ -1840,8 +1914,9 @@ def emit_script_native_tables(root, args, rom, base, modules, routing_relocs,
             for s in m.segments if s.get("kind") == "static-data"]
 
     mod_rows, seg_rows, exp_rows, reloc_rows, bound_rows = [], [], [], [], []
+    rseg_rows = []
     exp_index_of = {}  # module id -> {payload_offset: global export row}
-    seg_first = exp_first = rel_first = bound_first = 0
+    seg_first = exp_first = rel_first = bound_first = rseg_first = 0
     for mi, m in enumerate(mods):
         mod_rows.append(dict(
             id=m.id, sym=m.primary_symbol,
@@ -1853,7 +1928,15 @@ def emit_script_native_tables(root, args, rom, base, modules, routing_relocs,
             sfirst=seg_first, sn=len(m.segments),
             efirst=exp_first, en=len(m.exports),
             rfirst=rel_first, rn=len(m.relocs),
-            bfirst=bound_first, bn=len(m.boundaries)))
+            bfirst=bound_first, bn=len(m.boundaries),
+            rsegfirst=rseg_first, rsegn=len(routing_runs[m.id])))
+        for gba0, gba1 in routing_runs[m.id]:
+            rseg_rows.append(dict(
+                mi=mi, gba=gba0, n=gba1 - gba0,
+                off=m.payload_bytes + sum(b - a for a, b in routing_runs[m.id]
+                                          if b <= gba0),
+                rom=rom[(gba0 - GEN3_GBA_ROM_BASE):(gba1 - GEN3_GBA_ROM_BASE)]))
+            rseg_first += 1
         exp_index_of[m.id] = {}
         for s in m.segments:
             seg_rows.append(dict(
@@ -1927,11 +2010,11 @@ def emit_script_native_tables(root, args, rom, base, modules, routing_relocs,
     # The 3 recomp-local movement bridges: gba/size/bytes come straight
     # from the qualified ROM (the generator's provenance, plan sec 5).
     bridge_rows = []
-    for name, rel, size in RECOMP_LOCAL_MOVEMENT:
+    for name, compiled, rel, size in RECOMP_LOCAL_MOVEMENT:
         gba = base + rel
         data = rom[(gba - GEN3_GBA_ROM_BASE):(gba - GEN3_GBA_ROM_BASE) + size]
         bridge_rows.append(dict(
-            key=f"emerald:movement/bridge/{slugify(name)}", sym=name,
+            key=f"emerald:movement/bridge/{slugify(name)}", sym=compiled,
             gba=gba, n=size, bytes=list(data)))
 
     # gStdScripts + F inbound rows: payload offsets are derived from the
@@ -1953,7 +2036,10 @@ def emit_script_native_tables(root, args, rom, base, modules, routing_relocs,
             bk={"offset-zero": 0, "interior": 1, "routing": 2}[rec["boundary_kind"]],
             slot=rec["slot"]))
     f_rows = []
-    for rec in sorted(f_raw, key=lambda r: (r["kind"], r["gba_target"])):
+    fkind_order = {"map-scripts": 0, "object-event": 1, "coord-event": 2,
+                   "bg-event": 3}
+    for rec in sorted(f_raw, key=lambda r: (fkind_order[r["kind"]],
+                                            r["gba_target"])):
         mi = mod_idx[rec["module_key"]]
         is_routing = rec["boundary_kind"] == "routing"
         po = 0xFFFFFFFF
@@ -1996,13 +2082,30 @@ def emit_script_native_tables(root, args, rom, base, modules, routing_relocs,
     if len(bridge_rows) != 3 or len(std_rows) != 11:
         fail(f"bridge/std rows {len(bridge_rows)}/{len(std_rows)} != 3/11")
 
+    # Routing segments sort globally by GBA start (the seam
+    # binary-searches them; the bytes blob follows the same order).
+    # Each module's runs stay contiguous (its region is a contiguous
+    # GBA interval), so the per-module windows are re-derived over the
+    # sorted rows.
+    rseg_rows.sort(key=lambda r: r["gba"])
+    rseg_first_by_module = {}
+    rseg_count_by_module = {}
+    for idx, r in enumerate(rseg_rows):
+        if r["mi"] not in rseg_first_by_module:
+            rseg_first_by_module[r["mi"]] = idx
+            rseg_count_by_module[r["mi"]] = 1
+        else:
+            rseg_count_by_module[r["mi"]] += 1
+    for mi, row in enumerate(mod_rows):
+        row["rsegfirst"] = rseg_first_by_module.get(mi, 0)
+        row["rsegn"] = rseg_count_by_module.get(mi, 0)
     header = render_script_native_h(
         len(mod_rows), len(seg_rows), len(exp_rows), len(reloc_rows),
-        len(rrt_rows), len(bound_rows), len(dyn_rows))
+        len(rrt_rows), len(bound_rows), len(dyn_rows), len(rseg_rows))
     body = render_script_native_c(
         mod_rows, seg_rows, exp_rows, reloc_rows, rrt_rows, dyn_rows,
         bridge_rows, std_rows, f_rows, mart_rows, ram_row_list,
-        bound_rows, pool, arena_bytes)
+        bound_rows, rseg_rows, pool, arena_bytes)
     hpath = root / "include/emerald/resources/script_native.generated.h"
     cpath = root / "src/emerald/resources/script_native_table.generated.c"
     write_if(hpath, header, args.check)
@@ -2115,7 +2218,7 @@ def main():
 
     move_starts = fe.generated_target_starts(root, elf, "movement")
     extra_movement = []
-    for name, rel, size in RECOMP_LOCAL_MOVEMENT:
+    for name, compiled, rel, size in RECOMP_LOCAL_MOVEMENT:
         a = val_by_name.get(name)
         if a is None:
             fail(f"recomp-local movement {name} missing from qualified ELF")
@@ -2423,7 +2526,7 @@ def main():
 
     print("Attributing and resolving 16,704 relocations...")
     by_start = sorted(all_modules, key=lambda m: m.region_start)
-    movement_bridges = {base + rel for _, rel, _ in RECOMP_LOCAL_MOVEMENT}
+    movement_bridges = {base + rel for _, _, rel, _ in RECOMP_LOCAL_MOVEMENT}
     routing_relocs = []
     gift_text_edges = []
     movement_bridge_hits = []

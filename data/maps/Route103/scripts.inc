@@ -153,6 +153,7 @@ Route103_Movement_RivalExitFacingNorth1:
 	walk_down
 	step_end
 
+	.globl Route103_Movement_RivalExitFacingNorth2
 Route103_Movement_RivalExitFacingNorth2:
 	jump_2_down
 	delay_16

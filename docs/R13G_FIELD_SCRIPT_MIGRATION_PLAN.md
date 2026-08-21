@@ -944,6 +944,38 @@ boot ordering, and narrow F rebind. Gate: full static and stepwise differential
 oracles, real map/event integration, sanitizers, native world/render, and no
 compiled fallback path. This is the first live wave.
 
+**G5 COMPLETE (2026-08-21) — confirmed facts** (report:
+`docs/R13G5_FIELD_SCRIPT_LIVE_CUTOVER_REPORT.md`):
+
+- The production binary boots through the atomic live cutover: the seam
+  stages the full generation (523 modules + the materialized 5,749 B
+  routing class as span suffixes, 217,360 B arena), registers exactly
+  **523 live module ranges (total 6,377 / 8,192, pinned in the loader)**,
+  publishes the live `gStdScripts` table, and rebinds every R13-F script
+  surface before any entrypoint executes. `--verify-game-data` green.
+- ScriptReadPointer resolves static G operands through the typed source
+  index (all 16,704 sources live) with hard refusal and no compiled
+  fallback for static G operands; the vaddress family runs on the stable
+  anchor (sAddressOffset retired to dead zeroed storage); map dispatch
+  reads staged routing bytes; the trainer loader resolves text/continuations
+  by type (no 4-byte encoded store into host pointer objects); the
+  ObjectEventTemplate accessors resolve/reverse-map through the live
+  generation.
+- Identity-based range unregistration (the G2 text-seam lesson) covers
+  clear/restage/replacement; the live arena registers as one dynamic
+  buffer for the stable anchor; re-registration replaces the generation.
+- State-v5 live: the G4 adapter's strong path (nested interior
+  fresh-process proof, RAM return, trainer continuations, vaddress 8/8,
+  Context2 refusal, 32/32 faults) is green against the live session.
+- Regression: runtime loader 65,745 checks over the live cutover;
+  focused suite 7,143; fault matrix 21/21; all state/world/render/
+  real-tables/isolation/ranges suites green; generator + extractor
+  `--check` and the three-way oracle byte-identical; ASan/UBSan clean.
+- Release 25,007,320 B (no debug sections) / DINFO 38,375,496 B
+  (debug_info); pack 20,988 entries byte-identical.
+- Compiled field scripts remain linked but unreachable (G6 owns the
+  physical removal and the ROM_BASE_ONLY flip).
+
 ### G6 — compiled field-script removal and isolation
 
 Remove only G-owned compiled payloads/local tables, enforce robust symbol,

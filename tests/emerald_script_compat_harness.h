@@ -158,6 +158,108 @@ done:
     return ok;
 }
 
+/* The table-fault driver cannot run the R6 loader (the mutated table
+ * would refuse the loader's own script publication before the seam's
+ * refusal can be observed); this variant publishes only the siblings
+ * the seam requires. */
+static bool SetupScriptCompatSessionWithoutScript(const char *path)
+{
+    struct Gen3ResourceCatalog *catalog = NULL;
+    struct Gen3ResourceCandidate *candidate = NULL;
+    struct Gen3ResourceDiagnosticList diagnostics;
+    struct Gen3ResourcePackDiagnosticList packDiag;
+    enum EmeraldResourceSessionError sessionError;
+    struct EmeraldResourceSessionInfo info;
+    struct EmeraldTextCompatDiagnostics textDiag;
+    struct EmeraldLeafCompatDiagnostics leafDiag;
+    bool ok = false;
+
+    Gen3ResourceDiagnostics_Init(&diagnostics);
+    Gen3ResourcePackDiagnostics_Init(&packDiag);
+    if (Gen3ResourcePack_OpenFile(path, &gScriptHarnessPack, &packDiag)
+            != GEN3_PACK_OK
+     || gScriptHarnessPack == NULL)
+        goto done;
+    Gen3ResourcePackDiagnostics_Destroy(&packDiag);
+    if (!BuildCatalogFromPackHarness(gScriptHarnessPack, &catalog)
+     || catalog == NULL)
+        goto done;
+    sessionError = EmeraldResourceSession_BuildRomBaseCandidate(
+        gScriptHarnessPack, catalog, &candidate, &info, &diagnostics);
+    if (sessionError != EMERALD_SESSION_OK || candidate == NULL)
+        goto done;
+    if (!Gen3ResourceCandidate_Build(candidate, &gScriptHarnessSnapshot,
+                                     &diagnostics)
+     || gScriptHarnessSnapshot == NULL)
+        goto done;
+    /* The full pre-G5 family set in the loader's order (the state
+     * harness expects the 5,854-range baseline WITHOUT the script
+     * seam's 523 live ranges). */
+    memset(&textDiag, 0, sizeof(textDiag));
+    if (EmeraldTextCompat_TryInitialize(gScriptHarnessSnapshot,
+                                        gScriptHarnessPack, &textDiag)
+            != EMERALD_TEXT_OK)
+        goto done;
+    memset(&leafDiag, 0, sizeof(leafDiag));
+    if (EmeraldLeafCompat_TryInitialize(gScriptHarnessSnapshot,
+                                        gScriptHarnessPack, &leafDiag)
+            != EMERALD_LEAF_OK)
+        goto done;
+    {
+        struct EmeraldGameplayCompatDiagnostics gameplayDiag;
+        struct EmeraldTrainerCompatDiagnostics trainerDiag;
+        struct EmeraldAudioCompatDiagnostics audioDiag;
+        struct EmeraldEncounterCompatDiagnostics encounterDiag;
+        struct EmeraldFrontierCompatDiagnostics frontierDiag;
+        struct EmeraldPokedexCompatDiagnostics pokedexDiag;
+        struct EmeraldMapCompatDiagnostics mapDiag;
+
+        memset(&gameplayDiag, 0, sizeof(gameplayDiag));
+        if (EmeraldGameplayCompat_TryInitialize(
+                gScriptHarnessSnapshot, gScriptHarnessPack, &gameplayDiag)
+                != EMERALD_GAMEPLAY_OK)
+            goto done;
+        memset(&trainerDiag, 0, sizeof(trainerDiag));
+        if (EmeraldTrainerCompat_TryInitialize(
+                gScriptHarnessSnapshot, gScriptHarnessPack, &trainerDiag)
+                != EMERALD_TRAINER_OK)
+            goto done;
+        memset(&audioDiag, 0, sizeof(audioDiag));
+        if (EmeraldAudioCompat_TryInitialize(
+                gScriptHarnessSnapshot, gScriptHarnessPack, &audioDiag)
+                != EMERALD_AUDIO_OK)
+            goto done;
+        memset(&encounterDiag, 0, sizeof(encounterDiag));
+        if (EmeraldEncounterCompat_TryInitialize(
+                gScriptHarnessSnapshot, gScriptHarnessPack, &encounterDiag)
+                != EMERALD_ENCOUNTER_OK)
+            goto done;
+        memset(&frontierDiag, 0, sizeof(frontierDiag));
+        if (EmeraldFrontierCompat_TryInitialize(
+                gScriptHarnessSnapshot, gScriptHarnessPack, &frontierDiag)
+                != EMERALD_FRONTIER_OK)
+            goto done;
+        memset(&pokedexDiag, 0, sizeof(pokedexDiag));
+        if (EmeraldPokedexCompat_TryInitialize(
+                gScriptHarnessSnapshot, gScriptHarnessPack, &pokedexDiag)
+                != EMERALD_POKEDEX_OK)
+            goto done;
+        memset(&mapDiag, 0, sizeof(mapDiag));
+        if (EmeraldMapCompat_TryInitialize(
+                gScriptHarnessSnapshot, gScriptHarnessPack, &mapDiag)
+                != EMERALD_MAP_OK)
+            goto done;
+    }
+    EmeraldResourceCompat_TryInitialize();
+    ok = true;
+
+done:
+    Gen3ResourceDiagnostics_Destroy(&diagnostics);
+    Gen3ResourceCatalog_Destroy(catalog);
+    Gen3ResourceCandidate_Destroy(candidate);
+    return ok;
+}
+
 static void TeardownScriptCompatSession(void)
 {
     /* Full shutdown so the sanitize variant's leak detector sees a

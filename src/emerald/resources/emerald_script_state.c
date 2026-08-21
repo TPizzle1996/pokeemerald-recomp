@@ -331,7 +331,13 @@ bool EmeraldScriptState_RegisterDynamicBuffer(
             return false;
         if (buffer->kind == sDynamicBuffers[i].kind
          && buffer->ownerStorageId == sDynamicBuffers[i].ownerStorageId)
-            return false;
+        {
+            /* R13-G5: a re-registration of the same (kind, owner) is a
+             * generation replacement - the new buffer supersedes the
+             * old (the generation stamp validates every anchor). */
+            sDynamicBuffers[i] = *buffer;
+            return true;
+        }
     }
     sDynamicBuffers[sDynamicBufferCount++] = *buffer;
     return true;
@@ -560,6 +566,21 @@ enum EmeraldScriptStateStatus EmeraldScriptState_ValidateDynamicField(
     return FindDynamic(pointer,
                        surface.surfaceClass != SURFACE_MYSTERY_BASE,
                        NULL, NULL);
+}
+
+enum EmeraldScriptStateStatus EmeraldScriptState_BuildVirtualAnchorFromBase(
+    uintptr_t liveBase, uint32_t encodedVirtualBase,
+    struct EmeraldScriptVirtualAnchor *outAnchor)
+{
+    const struct EmeraldScriptDynamicBuffer *buffer = NULL;
+    size_t offset = 0u;
+    enum EmeraldScriptStateStatus status;
+
+    status = FindDynamic(liveBase, false, &buffer, &offset);
+    if (status != EMERALD_SCRIPT_STATE_OK || buffer == NULL)
+        return status;
+    return EmeraldScriptState_BuildVirtualAnchor(buffer, encodedVirtualBase,
+                                                    (uint32_t)offset, outAnchor);
 }
 
 enum EmeraldScriptStateStatus EmeraldScriptState_BuildVirtualAnchor(

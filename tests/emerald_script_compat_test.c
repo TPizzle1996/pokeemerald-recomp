@@ -258,7 +258,7 @@ static void TestStagingAndIndexes(void)
           EmeraldScriptCompat_GetGenerationId() == sBaseGenerationId + 1u);
     CHECK("arena published",
           EmeraldScriptCompat_GetArena(&arena, &arenaSize));
-    CHECK("arena size = deterministic 210880 B", arenaSize == 210880u);
+    CHECK("arena size = deterministic 217360 B (payload + routing)", arenaSize == 217360u);
 
     CHECK("index counts reported",
           EmeraldScriptCompat_GetIndexCounts(&counts));
@@ -355,16 +355,16 @@ static void TestAllRelocations(void)
                 interior++;
         }
     }
-    CHECK("dispositions: 8236 staged arena",
-          dispositions[EMERALD_SCRIPT_DISPOSITION_STAGED_ARENA] == 8236u);
+    CHECK("dispositions: 8441 staged arena (payload + routing)",
+          dispositions[EMERALD_SCRIPT_DISPOSITION_STAGED_ARENA] == 8441u);
     CHECK("dispositions: 8216 sibling seam",
           dispositions[EMERALD_SCRIPT_DISPOSITION_SIBLING_SEAM] == 8216u);
     CHECK("dispositions: 3 compiled bridge",
           dispositions[EMERALD_SCRIPT_DISPOSITION_COMPILED_BRIDGE] == 3u);
     CHECK("dispositions: 18 host RAM",
           dispositions[EMERALD_SCRIPT_DISPOSITION_HOST_RAM] == 18u);
-    CHECK("dispositions: 231 deferred",
-          dispositions[EMERALD_SCRIPT_DISPOSITION_DEFERRED] == 231u);
+    CHECK("dispositions: 26 deferred (braille pending only)",
+          dispositions[EMERALD_SCRIPT_DISPOSITION_DEFERRED] == 26u);
     CHECK("classes: 8208 script", classes[0] == 8208u);
     CHECK("classes: 6207 text", classes[1] == 6207u);
     CHECK("classes: 2009 movement", classes[2] == 2009u);
@@ -541,8 +541,8 @@ static void TestStagedSurfaces(void)
     CHECK("F kinds: 518/2163/289/531",
           byKind[0] == 518u && byKind[1] == 2163u
           && byKind[2] == 289u && byKind[3] == 531u);
-    CHECK("F staged 2983 + deferred 518 (routing)",
-          stagedF == 2983u && deferredF == 518u);
+    CHECK("F staged 3501 + deferred 0 (routing materialized)",
+          stagedF == 3501u && deferredF == 0u);
     CHECK("F row 3501 refused",
           !EmeraldScriptCompat_GetStagedFBinding(3501u, &fb));
 }
@@ -942,20 +942,27 @@ static void TestStateV5AndRuntimeInvariants(void)
 
     CHECK("range index present", index != NULL);
     before = EmeraldResourceRangeIndex_GetRangeCount(index);
+    CHECK("live range pin 6377/8192 after the loader's cutover",
+          before == 6377u && before < 8192u);
 
-    /* Clear + restage while the range index is untouched. */
+    /* Range lifecycle (plan sec 22): the clear unregisters exactly the
+     * 523 module ranges (identity-based), the restage re-registers
+     * them, and the count returns to exactly 6,377. */
     EmeraldScriptCompat_ClearMigratedEntries();
     CHECK("clear drops the generation",
           !EmeraldScriptCompat_GetArena(&arena, &arenaSize)
           && EmeraldScriptCompat_GetGenerationId() == 0u);
+    CHECK("clear unregisters exactly the 523 module ranges",
+          EmeraldResourceRangeIndex_GetRangeCount(index)
+              == before - 523u);
     memset(&diag, 0, sizeof(diag));
     status = EmeraldScriptCompat_TryInitialize(
         gScriptHarnessSnapshot, gScriptHarnessPack, &diag);
     CHECK("restage after clear succeeds", status == EMERALD_SCRIPT_OK);
+    CHECK("restage registers the 523 module ranges",
+          EmeraldScriptCompat_RegisterRanges() == EMERALD_SCRIPT_OK);
     after = EmeraldResourceRangeIndex_GetRangeCount(index);
-    CHECK("range count unchanged by shadow staging", after == before);
-    CHECK("absolute range pin 5854/8192 (the loader's full family set)",
-          after == 5854u && after < 8192u);
+    CHECK("range count restored to exactly 6377", after == 6377u);
     /* clear bumps the counter, the restage bumps it again: base+4. */
     CHECK("generation id advanced past the clear",
           EmeraldScriptCompat_GetGenerationId()
@@ -964,19 +971,23 @@ static void TestStateV5AndRuntimeInvariants(void)
     CHECK("arena republished",
           EmeraldScriptCompat_GetArena(&arena, &arenaSize));
     {
+        /* The 523 registered module ranges must cover the arena
+         * exactly (one range per non-empty span; the 56 routing-only
+         * modules now carry routing-suffix spans, so every module has
+         * a registered range). */
         uint32_t intersections = 0u;
         for (i = 0u; i < after; i++)
         {
             const struct EmeraldResourceRange *range = &index->ranges[i];
             uintptr_t rangeEnd = range->base + range->length;
             uintptr_t arenaEnd = (uintptr_t)(arena + arenaSize);
-            bool before = arenaEnd <= range->base;
+            bool beforeRange = arenaEnd <= range->base;
             bool afterRange = (uintptr_t)arena >= rangeEnd;
-            if (!before && !afterRange)
+            if (!beforeRange && !afterRange)
                 intersections++;
         }
-        CHECK("no registered range intersects the shadow arena",
-              intersections == 0u);
+        CHECK("exactly 523 registered ranges cover the live arena",
+              intersections == 523u);
     }
 }
 
@@ -1018,14 +1029,18 @@ int main(int argc, char **argv)
     {
         const uint8_t *arena = NULL;
         size_t arenaSize = 0u;
+        uint64_t generationBefore = EmeraldScriptCompat_GetGenerationId();
         EmeraldLeafCompat_ClearMigratedEntries();
         memset(&diag, 0, sizeof(diag));
         status = EmeraldScriptCompat_TryInitialize(
             gScriptHarnessSnapshot, gScriptHarnessPack, &diag);
         CHECK("staging refuses while a sibling is unpublished",
               status == EMERALD_SCRIPT_ERR_UNAVAILABLE);
-        CHECK("no shadow generation from the refused stage",
-              !EmeraldScriptCompat_GetArena(&arena, &arenaSize));
+        /* The R6 loader already published the live generation; a refused
+         * restage must leave it untouched. */
+        CHECK("refused stage preserves the live generation",
+              EmeraldScriptCompat_GetGenerationId() == generationBefore
+              && EmeraldScriptCompat_GetArena(&arena, &arenaSize));
         /* Re-publish the leaf sibling directly (the R6 loader's
          * registration is one-shot per process session, so a full
          * teardown/re-setup is not a legal harness flow). */

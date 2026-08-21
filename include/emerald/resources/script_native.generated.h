@@ -29,6 +29,7 @@
 #define EMERALD_SCRIPT_RAM_TARGET_COUNT 18u
 #define EMERALD_SCRIPT_RAM_ALLOWLIST_COUNT 1u
 #define EMERALD_SCRIPT_BRIDGE_COUNT 3u
+#define EMERALD_SCRIPT_ROUTING_SEGMENT_COUNT 581u
 #define EMERALD_SCRIPT_ARENA_PAYLOAD_BYTES 207330u
 #define EMERALD_SCRIPT_ARENA_ALIGNMENT 16u
 
@@ -111,6 +112,8 @@ struct EmeraldScriptNativeModule
     uint32_t relocCount;
     uint32_t boundaryFirst;
     uint32_t boundaryCount;
+    uint32_t routingFirst;
+    uint32_t routingCount;
     uint8_t kind;
     uint8_t embedded;
 };
@@ -121,6 +124,19 @@ struct EmeraldScriptNativeSegment
     uint32_t byteCount;
     uint32_t payloadOffset;
     uint8_t kind;
+};
+
+/* R13-G5 (plan sec 4): a module's routing-class tables (map
+ * dispatch + conditional tables) staged as a span suffix after
+ * the payload. spanOffset is payload-relative; the live address
+ * of table byte X is arena + module.arenaOffset + spanOffset +
+ * (X - originalGbaStart). */
+struct EmeraldScriptNativeRoutingSegment
+{
+    uint32_t moduleIndex;
+    uint32_t originalGbaStart;
+    uint32_t byteCount;
+    uint32_t spanOffset;
 };
 
 struct EmeraldScriptNativeExport
@@ -262,6 +278,10 @@ struct EmeraldScriptCompatNativeTable
     uint32_t bridgeCount;
     const struct EmeraldScriptNativeBoundary *boundaries;
     uint32_t boundaryCount;
+    const struct EmeraldScriptNativeRoutingSegment *routingSegments;
+    uint32_t routingSegmentCount;
+    const uint8_t *routingBytes;
+    uint32_t routingByteCount;
     const char *const *pool;
     uint32_t poolCount;
 };

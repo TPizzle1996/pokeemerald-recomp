@@ -49,12 +49,23 @@
 #include "tv.h"
 #include "window.h"
 #include "constants/event_objects.h"
+#include "emerald/resources/emerald_script_compat.h"
+#include "emerald/resources/emerald_script_state.h"
 
 typedef u16 (*SpecialFunc)(void);
 typedef void (*NativeFunc)(void);
 
 EWRAM_DATA const u8 *gRamScriptRetAddr = NULL;
-static EWRAM_DATA intptr_t sAddressOffset = 0; // Native/logical delta for saved scripts (e.g. Mystery Event)
+
+/* R13-G5 (plan sec 7/8): the creator-process host-delta sAddressOffset is
+ * retired. The live virtual-address family resolves through the stable
+ * anchor (encodedVirtualBase + buffer identity + liveBaseOffset) held
+ * here; the State-v5 adapter persists and re-validates it. The legacy
+ * delta stays as dead zeroed storage purely for the G4 adapter's
+ * ABI/refusal contract - no live reader or writer exists (proven by the
+ * isolation sweep). */
+static EWRAM_DATA intptr_t sAddressOffset = 0;
+static EWRAM_DATA struct EmeraldScriptVirtualAnchor sVAddressAnchor;
 
 /* R13-G4 read-only State-v5 inventory.  Live vaddress behavior and the
  * creator-process delta remain untouched until G5; the adapter persists only
@@ -80,9 +91,33 @@ extern const u8 *gStdScripts[];
 extern const u8 *gStdScripts_End[];
 
 static void CloseBrailleWindow(void);
+extern void *const gNullScriptPtr;
 
+/* R13-G5 (plan sec 5): the live static-script pointer path. An operand
+ * whose bytes live in the current G arena resolves through the typed
+ * source-relocation index - exact row, raw-value proof at stage time,
+ * typed target - with a hard refusal on any mismatch (no compiled
+ * fallback for static G operands). Operands outside the arena (battle/
+ * AI/animation H bytecode, dynamic RAM buffers, engine tables) keep the
+ * legacy HostResolveGbaAddr bridge. */
 static void *ScriptReadPointer(struct ScriptContext *ctx)
 {
+    const u8 *operand = (const u8 *)ctx->scriptPtr;
+    uintptr_t ptr;
+
+    if (EmeraldScriptCompat_IsArenaAddress((uintptr_t)operand))
+    {
+        if (!EmeraldScriptCompat_ResolveLiveOperand((uintptr_t)operand, &ptr))
+        {
+            fprintf(stderr,
+                    "scrcmd: static script operand resolution refused "
+                    "at %p\n", (void *)operand);
+            StopScript(ctx);
+            return gNullScriptPtr;
+        }
+        ctx->scriptPtr += 4;
+        return (void *)ptr;
+    }
     return HostResolveGbaAddr(ScriptReadWord(ctx));
 }
 
@@ -218,36 +253,72 @@ bool8 ScrCmd_call_if(struct ScriptContext *ctx)
     return FALSE;
 }
 
+/* R13-G5 (plan sec 7): the stable virtual-address anchor. A failed
+ * resolution is a hard stop - no creator-process delta fallback. */
+static bool8 ResolveVTarget(struct ScriptContext *ctx, u32 encodedTarget, u8 **outPtr)
+{
+    uintptr_t target;
+
+    if (EmeraldScriptState_ResolveVirtualTarget(&sVAddressAnchor,
+                                                encodedTarget, 1u, &target)
+            != EMERALD_SCRIPT_STATE_OK)
+    {
+        fprintf(stderr, "scrcmd: virtual-address resolution refused "
+                        "(encoded target 0x%08x)\n", encodedTarget);
+        StopScript(ctx);
+        *outPtr = (u8 *)gNullScriptPtr;
+        return TRUE; /* stop the script */
+    }
+    *outPtr = (u8 *)target;
+    return FALSE;
+}
+
 bool8 ScrCmd_setvaddress(struct ScriptContext *ctx)
 {
-    uintptr_t addr1 = (uintptr_t)ctx->scriptPtr - 1;
-    u32 addr2 = ScriptReadWord(ctx);
+    u32 encodedBase = ScriptReadWord(ctx);
+    uintptr_t liveBase = (uintptr_t)ctx->scriptPtr;
 
-    sAddressOffset = (intptr_t)addr2 - (intptr_t)addr1;
+    if (EmeraldScriptState_BuildVirtualAnchorFromBase(
+            liveBase, encodedBase, &sVAddressAnchor)
+            != EMERALD_SCRIPT_STATE_OK)
+    {
+        fprintf(stderr, "scrcmd: setvaddress anchor refused "
+                        "(encoded base 0x%08x)\n", encodedBase);
+        StopScript(ctx);
+    }
     return FALSE;
 }
 
 bool8 ScrCmd_vgoto(struct ScriptContext *ctx)
 {
     u32 addr = ScriptReadWord(ctx);
+    u8 *ptr;
 
-    ScriptJump(ctx, (u8 *)(uintptr_t)((intptr_t)addr - sAddressOffset));
+    if (ResolveVTarget(ctx, addr, &ptr))
+        return TRUE;
+    ScriptJump(ctx, ptr);
     return FALSE;
 }
 
 bool8 ScrCmd_vcall(struct ScriptContext *ctx)
 {
     u32 addr = ScriptReadWord(ctx);
+    u8 *ptr;
 
-    ScriptCall(ctx, (u8 *)(uintptr_t)((intptr_t)addr - sAddressOffset));
+    if (ResolveVTarget(ctx, addr, &ptr))
+        return TRUE;
+    ScriptCall(ctx, ptr);
     return FALSE;
 }
 
 bool8 ScrCmd_vgoto_if(struct ScriptContext *ctx)
 {
     u8 condition = ScriptReadByte(ctx);
-    const u8 *ptr = (const u8 *)(uintptr_t)((intptr_t)ScriptReadWord(ctx) - sAddressOffset);
+    u32 addr = ScriptReadWord(ctx);
+    u8 *ptr;
 
+    if (ResolveVTarget(ctx, addr, &ptr))
+        return TRUE;
     if (sScriptConditionTable[condition][ctx->comparisonResult] == 1)
         ScriptJump(ctx, ptr);
     return FALSE;
@@ -256,8 +327,11 @@ bool8 ScrCmd_vgoto_if(struct ScriptContext *ctx)
 bool8 ScrCmd_vcall_if(struct ScriptContext *ctx)
 {
     u8 condition = ScriptReadByte(ctx);
-    const u8 *ptr = (const u8 *)(uintptr_t)((intptr_t)ScriptReadWord(ctx) - sAddressOffset);
+    u32 addr = ScriptReadWord(ctx);
+    u8 *ptr;
 
+    if (ResolveVTarget(ctx, addr, &ptr))
+        return TRUE;
     if (sScriptConditionTable[condition][ctx->comparisonResult] == 1)
         ScriptCall(ctx, ptr);
     return FALSE;
@@ -1576,8 +1650,11 @@ bool8 ScrCmd_closebraillemessage(struct ScriptContext *ctx)
 bool8 ScrCmd_vmessage(struct ScriptContext *ctx)
 {
     u32 msg = ScriptReadWord(ctx);
+    u8 *ptr;
 
-    ShowFieldMessage((u8 *)(uintptr_t)((intptr_t)msg - sAddressOffset));
+    if (ResolveVTarget(ctx, msg, &ptr))
+        return TRUE;
+    ShowFieldMessage(ptr);
     return FALSE;
 }
 
@@ -1687,8 +1764,11 @@ bool8 ScrCmd_bufferstring(struct ScriptContext *ctx)
 
 bool8 ScrCmd_vbuffermessage(struct ScriptContext *ctx)
 {
-    const u8 *ptr = (const u8 *)(uintptr_t)((intptr_t)ScriptReadWord(ctx) - sAddressOffset);
+    u32 addr = ScriptReadWord(ctx);
+    u8 *ptr;
 
+    if (ResolveVTarget(ctx, addr, &ptr))
+        return TRUE;
     StringExpandPlaceholders(gStringVar4, ptr);
     return FALSE;
 }
@@ -1697,10 +1777,11 @@ bool8 ScrCmd_vbufferstring(struct ScriptContext *ctx)
 {
     u8 stringVarIndex = ScriptReadByte(ctx);
     u32 addr = ScriptReadWord(ctx);
+    u8 *ptr;
 
-    const u8 *src = (const u8 *)(uintptr_t)((intptr_t)addr - sAddressOffset);
-    u8 *dest = sScriptStringVars[stringVarIndex];
-    StringCopy(dest, src);
+    if (ResolveVTarget(ctx, addr, &ptr))
+        return TRUE;
+    StringCopy(sScriptStringVars[stringVarIndex], ptr);
     return FALSE;
 }
 

@@ -98,6 +98,7 @@ gcc "${FLAGS[@]}" \
     "$here/emerald_text_harness_stubs.c" \
     "$emerald_dir/emerald_runtime_loader.c" \
     "$emerald_dir/emerald_script_compat.c" \
+    "$emerald_dir/emerald_script_state.c" \
     "$emerald_dir/script_native_table.generated.c" \
     "$here/emerald_script_harness_stubs.c" \
     "$here/emerald_script_compat_test.c" \
@@ -114,8 +115,11 @@ echo "== running =="
 # any reference to the live-execution surfaces is a G3 refusal.
 echo "== isolation sweep (seam sources) =="
 # Comments are excluded: the header documents that these surfaces stay
-# untouched, which is exactly the contract.
-for banned in ScriptReadPointer sAddressOffset gStdScripts MapHeader ObjectEventTemplate CoordEvent BgEvent HostResolveGbaAddr; do
+# untouched, which is exactly the contract. The gStdScripts reference
+# must be exactly the publication stores (PublishStdScripts).
+# R13-G5: gStdScripts is now the seam's own publication target (plan
+# sec 9) - the sweep still gates every other live-execution surface.
+for banned in ScriptReadPointer sAddressOffset MapHeader ObjectEventTemplate CoordEvent BgEvent HostResolveGbaAddr; do
     if grep -n "$banned" "$emerald_dir/emerald_script_compat.c" \
        include/emerald/resources/emerald_script_compat.h \
        | grep -vE '^[^:]+:[0-9]+:[[:space:]]*(\*|/\*|//)' > /dev/null; then

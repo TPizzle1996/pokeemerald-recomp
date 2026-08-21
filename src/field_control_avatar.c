@@ -1,4 +1,8 @@
 #include "global.h"
+#if defined(LINUX64) && LINUX64
+#include "emerald/resources/emerald_script_compat.h"
+#endif
+
 #include "battle_setup.h"
 #include "bike.h"
 #include "coord_event_weather.h"
@@ -352,7 +356,18 @@ static const u8 *GetInteractedBackgroundEventScript(struct MapPosition *position
     case 6:
     case BG_EVENT_HIDDEN_ITEM:
         {
-            GbaAddr scriptAddr = HostPointerToGbaAddr(bgEvent->bgUnion.script);
+            GbaAddr scriptAddr;
+#if defined(LINUX64) && LINUX64
+            {
+                u32 gba = 0u;
+                if (!EmeraldScriptCompat_ReverseResolveToGba(
+                        (uintptr_t)bgEvent->bgUnion.script, &gba))
+                    gba = HostPointerToGbaAddr(bgEvent->bgUnion.script);
+                scriptAddr = gba;
+            }
+#else
+            scriptAddr = HostPointerToGbaAddr(bgEvent->bgUnion.script);
+#endif
             gSpecialVar_0x8004 = (scriptAddr >> 16) + FLAG_HIDDEN_ITEMS_START;
             gSpecialVar_0x8005 = scriptAddr;
         }

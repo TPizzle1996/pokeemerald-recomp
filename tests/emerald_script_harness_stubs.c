@@ -20,8 +20,13 @@
 
 uint8_t gStringVar4[1000];
 
-const uint8_t Route103_EventScript_RivalExitFacingNorth2[7];
-const uint8_t Ferry_EventScript_DepartIslandBoardSouth[2];
-const uint8_t Ferry_EventScript_DepartIslandBoardWest[3];
+/* R13-G5: the live gStdScripts publication table (the game defines the
+ * compiled .s table; the harness provides writable slots). */
+const uint8_t *gStdScripts[11] = {0};
+const uint8_t *gStdScripts_End[1];
+
+const uint8_t Route103_Movement_RivalExitFacingNorth2[7];
+const uint8_t Ferry_Movement_DepartIslandBoardSouth[2];
+const uint8_t Ferry_Movement_DepartIslandBoardWest[3];
 
 struct ApproachingTrainer gApproachingTrainers[2];

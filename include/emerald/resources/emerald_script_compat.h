@@ -102,6 +102,7 @@ enum EmeraldScriptCompatStatus
     EMERALD_SCRIPT_ERR_TARGET_UNRESOLVED, /* a typed target could not resolve */
     EMERALD_SCRIPT_ERR_BOUNDARY_INVALID,  /* boundary query refused */
     EMERALD_SCRIPT_ERR_STAGING_FAILED,    /* phase-2 allocation/index failure */
+    EMERALD_SCRIPT_ERR_RANGE_REGISTRATION, /* 523-span live registration refused */
     EMERALD_SCRIPT_ERR_UNAVAILABLE,       /* no shadow generation / sibling seam unpublished */
 };
 
@@ -332,6 +333,39 @@ bool EmeraldScriptCompat_GetStagedRoutingTarget(
 bool EmeraldScriptCompat_GetIndexCounts(struct EmeraldScriptCompatIndexCounts *outCounts);
 bool EmeraldScriptCompat_GetParityCounts(uint32_t *outChecked,
                                          uint32_t *outMismatches);
+/* ---- R13-G5: live publication + engine-facing resolver APIs ----
+ * The production cutover surfaces (plan sec 2/4/5/7/9/10). RegisterRanges
+ * publishes exactly the 523 module spans (payload + routing suffix) into
+ * the session range index with identity-based removal; PublishStdScripts
+ * fills the live native gStdScripts table with arena pointers;
+ * ResolveLiveOperand is the ScriptReadPointer path (hard refusal on any
+ * mismatch - no compiled fallback for static G operands);
+ * ResolveRoutingTable resolves a MapHeader.mapScripts GBA provenance to
+ * the staged dispatch table. */
+
+enum EmeraldScriptCompatStatus EmeraldScriptCompat_RegisterRanges(void);
+void EmeraldScriptCompat_UnregisterRanges(void);
+void EmeraldScriptCompat_UnregisterModuleRange(uint32_t moduleIndex);
+bool EmeraldScriptCompat_AreRangesRegistered(void);
+bool EmeraldScriptCompat_IsPublished(void);
+const uint8_t *EmeraldScriptCompat_ResolveObjectScript(uint32_t gbaAddress);
+bool EmeraldScriptCompat_ReverseResolveToGba(uintptr_t address,
+                                             uint32_t *outGbaAddress);
+bool EmeraldScriptCompat_IsArenaAddress(uintptr_t address);
+size_t EmeraldScriptCompat_GetRangeCount(void);
+bool EmeraldScriptCompat_ResolveLiveOperand(uintptr_t operandAddress,
+                                            uintptr_t *outPointer);
+bool EmeraldScriptCompat_ResolveFEntrypoint(uint32_t kind, uint32_t gbaTarget,
+                                            uintptr_t *outAddress);
+bool EmeraldScriptCompat_ResolveRoutingTable(uint32_t gbaTarget,
+                                             uintptr_t *outBase,
+                                             size_t *outSize);
+enum EmeraldScriptCompatStatus EmeraldScriptCompat_PublishStdScripts(void);
+bool EmeraldScriptCompat_ResolveVAddress(uint32_t encodedVirtualBase,
+                                         uintptr_t liveBase,
+                                         uint32_t encodedTarget,
+                                         uintptr_t *outAddress);
+
 const char *EmeraldScriptCompatStatus_Describe(enum EmeraldScriptCompatStatus status);
 
 #ifdef EMERALD_SCRIPT_COMPAT_TEST_HOOKS

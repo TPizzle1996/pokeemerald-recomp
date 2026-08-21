@@ -46,6 +46,7 @@ int main(int argc, char **argv)
     const char *tempDir;
     const char *prodPack;
     int expected;
+    uint64_t sGenerationBeforeFault = 0u;
     struct EmeraldScriptCompatDiagnostics diag;
     enum EmeraldScriptCompatStatus status;
 
@@ -67,7 +68,7 @@ int main(int argc, char **argv)
     gScriptHarnessTempDir = tempDir;
     gScriptHarnessPackPath = prodPack;
 
-    if (!SetupScriptCompatSession(prodPack))
+    if (!SetupScriptCompatSessionWithoutScript(prodPack))
     {
         fprintf(stderr, "fault driver: setup failed\n");
         TeardownScriptCompatSession();
@@ -83,6 +84,7 @@ int main(int argc, char **argv)
         EmeraldScriptCompat_TestSetAllocFail(3u);
     }
 #endif
+    sGenerationBeforeFault = EmeraldScriptCompat_GetGenerationId();
     memset(&diag, 0, sizeof(diag));
     status = EmeraldScriptCompat_TryInitialize(
         gScriptHarnessSnapshot, gScriptHarnessPack, &diag);
@@ -97,8 +99,9 @@ int main(int argc, char **argv)
         TeardownScriptCompatSession();
         return 1;
     }
-    /* A refused stage must publish nothing. */
-    if (EmeraldScriptCompat_GetGenerationId() != 0u)
+    /* A refused stage must publish nothing: the live generation
+     * (published by the R6 loader) stays untouched. */
+    if (EmeraldScriptCompat_GetGenerationId() != sGenerationBeforeFault)
     {
         fprintf(stderr, "fault driver: refused stage left a generation\n");
         EmeraldScriptCompat_ClearMigratedEntries();

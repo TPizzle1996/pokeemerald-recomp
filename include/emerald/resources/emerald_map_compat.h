@@ -105,6 +105,10 @@ void EmeraldMapCompat_Shutdown(void);
 
 /* Query helpers (tests + ranges walker). PublishedCount is the number of
  * published resources (518 + 441 + 507 + 64 = 1530 when OK). */
+/* R13-G5 (plan sec 10): atomically rebind the published header/
+ * coord/bg script pointers to the live G generation (all-or-nothing). */
+bool EmeraldMapCompat_RebindScripts(void);
+
 size_t EmeraldMapCompat_GetPublishedCount(void);
 size_t EmeraldMapCompat_GetEventArenaBytes(void);
 size_t EmeraldMapCompat_GetConnArenaBytes(void);

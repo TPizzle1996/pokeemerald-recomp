@@ -27,6 +27,7 @@
 #include "emerald/resources/map_data_native.h"
 #include "emerald/resources/emerald_resource_session.h"
 #include "emerald/resources/emerald_resource_ranges.h"
+#include "emerald/resources/emerald_script_compat.h"
 #include "platform/host_memory.h"
 
 /* Weak forward decl (strong definition in emerald_trainer_native_compat.c);
@@ -61,6 +62,20 @@ static int32_t ReadLe32(const uint8_t *d)
 static HOST_DATA struct MapHeader sPublishedHeaders[EMERALD_MAP_HEADER_COUNT];
 static uint8_t *sEventArena;
 static size_t sEventArenaBytes;
+
+/* R13-G5 (plan sec 10/11): per-map event-bundle layout bookkeeping so
+ * the script rebind can walk the published arena rows exactly as the
+ * publish phase laid them out. */
+struct EmeraldMapEventBundle
+{
+    uint32_t arenaOffset;
+    uint16_t objectCount;
+    uint16_t coordCount;
+    uint16_t bgCount;
+};
+static struct EmeraldMapEventBundle sEventBundles[EMERALD_MAP_EVENT_COUNT];
+/* R13-G5: per-header mapScripts GBA provenance (retained for the rebind). */
+static uint32_t sHeaderScriptGba[EMERALD_MAP_HEADER_COUNT];
 static uint8_t *sConnArena;
 static size_t sConnArenaBytes;
 
@@ -612,6 +627,10 @@ EmeraldMapCompat_TryInitialize(
     {
         const struct EmeraldMapEventRecord *r = &kMapEvents[i];
         const uint8_t *w = evWire[i];
+        sEventBundles[i].arenaOffset = (uint32_t)(evCur - sEventArena);
+        sEventBundles[i].objectCount = (uint16_t)r->objectCount;
+        sEventBundles[i].coordCount = (uint16_t)r->coordCount;
+        sEventBundles[i].bgCount = (uint16_t)r->bgCount;
         size_t objB = (size_t)r->objectCount * MAP_OBJ_WIRE;
         size_t warpB = (size_t)r->warpCount * MAP_WARP_WIRE;
         size_t coordB = (size_t)r->coordCount * MAP_COORD_WIRE;
@@ -748,8 +767,9 @@ EmeraldMapCompat_TryInitialize(
         memset(d, 0, sizeof(*d));
         d->mapLayout = layoutByHeader[i];
         d->events = eventsByHeader[i];
+        sHeaderScriptGba[i] = (uint32_t)ReadLe32(w + 8u);
         d->mapScripts = (const u8 *)HostResolveGbaAddr(
-            (uint32_t)ReadLe32(w + 8u));
+            sHeaderScriptGba[i]);
         d->connections = connsByHeader[i];
         d->music = ReadLe16(w + 16u);
         d->mapLayoutId = ReadLe16(w + 18u);
@@ -825,6 +845,90 @@ size_t EmeraldMapCompat_GetEventArenaBytes(void)
 size_t EmeraldMapCompat_GetConnArenaBytes(void)
 {
     return sConnArenaBytes;
+}
+
+/* R13-G5 (plan sec 10/11): the live R13-F script rebind. Walks the
+ * published event arena exactly as the publish phase laid it out and
+ * replaces every coord/bg script pointer (originally resolved through
+ * HostResolveGbaAddr) and every header mapScripts pointer with the
+ * live G generation pointer resolved from the validated GBA
+ * provenance. Object rows keep their GbaAddr field (the accessors
+ * resolve). Every row must resolve - a missing target refuses the
+ * whole transaction (all-or-nothing). */
+bool EmeraldMapCompat_RebindScripts(void)
+{
+    size_t i;
+
+    if (sEventArena == NULL || sPublishedCount == 0u)
+        return false;
+    if (!EmeraldScriptCompat_IsPublished())
+        return false;
+    for (i = 0u; i < EMERALD_MAP_HEADER_COUNT; i++)
+    {
+        uintptr_t tableBase;
+        size_t tableSize;
+        if (!EmeraldScriptCompat_ResolveRoutingTable(
+                sHeaderScriptGba[i], &tableBase, &tableSize))
+        {
+            return false;
+        }
+        sPublishedHeaders[i].mapScripts = (const u8 *)tableBase;
+    }
+    for (i = 0u; i < EMERALD_MAP_EVENT_COUNT; i++)
+    {
+        const struct EmeraldMapEventBundle *bundle = &sEventBundles[i];
+        uint8_t *base = sEventArena + bundle->arenaOffset;
+        uint8_t *pObjects = base;
+        uint8_t *pWarps = pObjects + (size_t)bundle->objectCount * 24u;
+        uint8_t *pCoords = pWarps + (size_t)kMapEvents[i].warpCount * 8u;
+        uint8_t *pBgs = pCoords + (size_t)bundle->coordCount * 24u;
+        size_t o;
+
+        for (o = 0u; o < (size_t)bundle->coordCount; o++)
+        {
+            struct CoordEvent *dst = (struct CoordEvent *)(pCoords + o * 24u);
+            uint32_t gba = kMapEventCoordScriptAddrs[
+                kMapEventCoordScriptStart[i] + o];
+
+            /* Weather-only coord rows carry no script (the engine's
+             * TryRunCoordEventScript handles the null case); they stay
+             * null through the rebind. */
+            if (gba == 0u)
+                continue;
+            struct EmeraldScriptCompatResolvedTarget target;
+
+            {
+                uintptr_t address;
+                if (!EmeraldScriptCompat_ResolveFEntrypoint(
+                        EMERALD_SCRIPT_NATIVE_F_COORD_EVENT, gba, &address))
+                {
+                    return false;
+                }
+                dst->script = (const u8 *)address;
+            }
+        }
+        for (o = 0u; o < (size_t)bundle->bgCount; o++)
+        {
+            struct BgEvent *dst = (struct BgEvent *)(pBgs + o * 16u);
+            uint32_t gba;
+
+            if (dst->kind > 4u)
+                continue;
+            gba = kMapEventBgScriptAddrs[kMapEventBgScriptStart[i] + o];
+            if (gba == 0u)
+                continue;
+            {
+                uintptr_t address;
+                if (!EmeraldScriptCompat_ResolveFEntrypoint(
+                        EMERALD_SCRIPT_NATIVE_F_BG_EVENT, gba, &address))
+                {
+                    return false;
+                }
+                dst->bgUnion.script = (const u8 *)address;
+            }
+        }
+    }
+    return true;
 }
 
 const char *EmeraldMapCompatStatus_Describe(

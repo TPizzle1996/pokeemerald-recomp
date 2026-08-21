@@ -2961,6 +2961,9 @@ static bool32 G4Stage(const char *packPath, bool32 restage)
     struct EmeraldScriptCompatDiagnostics diagnostics;
     enum EmeraldScriptCompatStatus status;
 
+    /* R13-G5: the live state runs on the production-linked path - the
+     * R6 loader publishes every family INCLUDING the 523 live script
+     * ranges, exactly like the game. */
     if (!SetupScriptCompatSession(packPath))
         return FALSE;
     memset(&diagnostics, 0, sizeof(diagnostics));
@@ -3319,6 +3322,9 @@ static bool32 G4SaveVariant(const char *statePath, const char *suffix,
     HarnessStatePath_Override(path);
     CHECK(NativeState_Save(HARNESS_STATE_SLOT) == NATIVE_STATE_OK);
     CHECK(ParseStateSidecar(path, records, ARRAY_COUNT(records), &recordCount));
+    if (recordCount != expectedRecords)
+        printf("G4SaveVariant %s: expected %u records, got %u\n",
+               suffix, expectedRecords, recordCount);
     CHECK(recordCount == expectedRecords);
     return sFailures == 0;
 }
@@ -3424,12 +3430,11 @@ static int DoG4Create(const char *packPath, const char *statePath)
     if (!G4Stage(packPath, FALSE) || !G4PlantNestedState())
         return 1;
     CHECK(EmeraldScriptCompat_GetArena(&arena, &arenaSize));
-    CHECK(EmeraldScriptCompat_ValidateProjectedRanges(
-              5854u, EMERALD_RESOURCE_RANGE_INDEX_MAX_RANGES, &projected)
-          == EMERALD_SCRIPT_OK);
-    CHECK(projected == 6377u);
+    CHECK(EmeraldScriptCompat_IsPublished());
+    CHECK(EmeraldScriptCompat_AreRangesRegistered());
     CHECK(EmeraldResourceRangeIndex_GetRangeCount(
-              EmeraldResourceCompat_GetRangeIndex()) == 5854u);
+              EmeraldResourceCompat_GetRangeIndex()) == 6377u);
+    (void)projected;
     CHECK(NativeState_Save(HARNESS_STATE_SLOT) == NATIVE_STATE_OK);
     CHECK(ParseStateSidecar(statePath, records, ARRAY_COUNT(records),
                             &recordCount));

@@ -53,6 +53,10 @@ enum EmeraldScriptStateDynamicKind
     EMERALD_SCRIPT_DYNAMIC_SAVE_RAM_SCRIPT = 1,
     EMERALD_SCRIPT_DYNAMIC_MYSTERY_EVENT_BUFFER = 2,
     EMERALD_SCRIPT_DYNAMIC_CAPTURED_BUFFER = 3,
+    /* R13-G5: the live static G arena registers as one buffer so the
+     * stable virtual anchor resolves static-script vaddress targets
+     * through the same machinery as the dynamic buffers. */
+    EMERALD_SCRIPT_DYNAMIC_STATIC_G_ARENA = 4,
 };
 
 struct EmeraldScriptStateLayout
@@ -144,6 +148,13 @@ bool EmeraldScriptState_IsStaticRecord(uint32_t resourceType,
                                        uint32_t representationRole);
 enum EmeraldScriptStateStatus EmeraldScriptState_ValidateDynamicField(
     uintptr_t fieldAddress, uintptr_t pointer);
+
+/* R13-G5 (plan sec 7): build the live anchor for the buffer containing
+ * `liveBase` (the byte after the setvaddress operand) - a registered
+ * dynamic buffer or the static G arena registered at publication. */
+enum EmeraldScriptStateStatus EmeraldScriptState_BuildVirtualAnchorFromBase(
+    uintptr_t liveBase, uint32_t encodedVirtualBase,
+    struct EmeraldScriptVirtualAnchor *outAnchor);
 
 enum EmeraldScriptStateStatus EmeraldScriptState_BuildVirtualAnchor(
     const struct EmeraldScriptDynamicBuffer *buffer,

@@ -100,6 +100,10 @@ gcc -std=gnu99 -O2 -ffunction-sections -fdata-sections -Wl,--gc-sections \
     "$emerald_dir/map_data_native.c" \
     "$emerald_dir/map_native.generated.c" \
     "$emerald_dir/emerald_map_compat.c" \
+    "$emerald_dir/emerald_script_compat.c" \
+    "$emerald_dir/emerald_script_state.c" \
+    "$emerald_dir/script_native_table.generated.c" \
+    "$here/emerald_script_harness_stubs.c" \
     "$here/emerald_map_harness_host.c" \
     "$here/emerald_real_tables_test.c" \
     -o "$tmp/emerald_real_tables_test"

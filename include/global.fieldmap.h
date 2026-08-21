@@ -1,6 +1,11 @@
 #ifndef GUARD_GLOBAL_FIELDMAP_H
 #define GUARD_GLOBAL_FIELDMAP_H
 
+#if defined(LINUX64) && LINUX64
+/* R13-G5: the script accessors resolve through the live G generation. */
+#include "emerald/resources/emerald_script_compat.h"
+#endif
+
 // Masks/shifts for blocks in the map grid
 // Map grid blocks consist of a 10 bit metatile id, a 2 bit collision value, and a 4 bit elevation value
 // This is the data stored in each data/layouts/*/map.bin file
@@ -105,9 +110,17 @@ struct ObjectEventTemplate
     /*0x16*/ //u8 padding3[2];
 };
 
+/* R13-G5 (plan sec 10): the accessors resolve through the live G
+ * generation - a stored GBA provenance becomes the module entrypoint,
+ * and a live arena pointer reverse-maps back to its export GBA (never
+ * a generation-local handle). The pre-publication window falls back to
+ * the legacy bridge; publication failure refuses boot. */
 static inline const u8 *ObjectEventTemplate_GetScript(const struct ObjectEventTemplate *template)
 {
 #if defined(LINUX64) && LINUX64
+    const u8 *script = EmeraldScriptCompat_ResolveObjectScript(template->script);
+    if (script != NULL)
+        return script;
     return (const u8 *)HostResolveGbaAddr(template->script);
 #else
     return template->script;
@@ -117,7 +130,13 @@ static inline const u8 *ObjectEventTemplate_GetScript(const struct ObjectEventTe
 static inline void ObjectEventTemplate_SetScript(struct ObjectEventTemplate *template, const u8 *script)
 {
 #if defined(LINUX64) && LINUX64
-    template->script = HostPointerToGbaAddr(script);
+    {
+        u32 gba;
+        if (EmeraldScriptCompat_ReverseResolveToGba((uintptr_t)script, &gba))
+            template->script = gba;
+        else
+            template->script = HostPointerToGbaAddr(script);
+    }
 #else
     template->script = script;
 #endif

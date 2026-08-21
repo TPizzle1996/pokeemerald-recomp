@@ -1,4 +1,9 @@
 #include "global.h"
+#include "mystery_gift_link.h"
+#if defined(LINUX64) && LINUX64
+#include "emerald/resources/emerald_script_state.h"
+#endif
+
 #include "berry.h"
 #include "battle_tower.h"
 #include "easy_chat.h"
@@ -77,6 +82,26 @@ static void InitMysteryEventScript(struct ScriptContext *ctx, u8 *script)
     InitScriptContext(ctx, gMysteryEventScriptCmdTable, gMysteryEventScriptCmdTableEnd);
     SetupBytecodeScript(ctx, script);
     sMysteryEventScriptNativeBase = script;
+#if defined(LINUX64) && LINUX64
+    {
+        /* R13-G5 (plan sec 7/16): register the received buffer so the
+         * stable virtual anchor resolves and the State-v5 capture
+         * validates against it. instructionStarts stays NULL until the
+         * 17-op MEVENT grammar gets a live boundary builder (capture
+         * of an ACTIVE mystery-event context remains fail-closed). */
+        struct EmeraldScriptDynamicBuffer buffer;
+        memset(&buffer, 0, sizeof(buffer));
+        buffer.kind = EMERALD_SCRIPT_DYNAMIC_MYSTERY_EVENT_BUFFER;
+        buffer.ownerStorageId = 0u;
+        buffer.generation = 1u;
+        buffer.base = script;
+        buffer.size = MG_LINK_BUFFER_SIZE;
+        buffer.instructionStarts = NULL;
+        snprintf(buffer.ownerId, sizeof(buffer.ownerId), "%s",
+                 "mystery-event");
+        (void)EmeraldScriptState_RegisterDynamicBuffer(&buffer);
+    }
+#endif
     ctx->mScriptBase = HostPointerToGbaAddr(script);
     ctx->mOffset = 0;
     ctx->mStatus = MEVENT_STATUS_LOAD_OK;

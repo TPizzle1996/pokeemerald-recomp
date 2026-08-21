@@ -21,6 +21,7 @@
 
 #include "emerald/resources/emerald_script_compat.h"
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -28,7 +29,9 @@
 #include "emerald/resources/emerald_leaf_compat.h"
 #include "emerald/resources/emerald_resource_ranges.h"
 #include "emerald/resources/emerald_resource_session.h"
+#include "emerald/resources/emerald_script_state.h"
 #include "emerald/resources/emerald_text_compat.h"
+#include "emerald/resources/emerald_trainer_native_compat.h"
 #include "emerald/resources/script_native.generated.h"
 #include "emerald/resources/text_bundle_index.generated.h"
 
@@ -43,13 +46,15 @@ struct EmeraldScriptCompatModuleSpan
 {
     uintptr_t base;
     uint32_t payloadSize;
+    uint32_t routingBytes;
     uint32_t moduleIndex;
 };
 
 struct EmeraldScriptCompatSourceRow
 {
     uintptr_t operandAddress;
-    uint32_t relocIndex;
+    uint32_t relocIndex;     /* EMERALD_SCRIPT_NATIVE_OFFSET_NONE for routing rows */
+    uint32_t routingRowIndex; /* index into kScriptRoutingRelocs when routing */
 };
 
 struct EmeraldScriptCompatGeneration
@@ -380,10 +385,46 @@ static uintptr_t ModuleSpanBase(uint32_t moduleIndex)
 /* Fill `out` from a relocation-style target identity (class/kind/key/
  * label/offsets). Live addresses resolve against the current
  * generation and the sibling seams. Returns OK or a refusal status. */
+/* R13-G5: the staged routing segment containing GBA address `gba`
+ * (map dispatch / conditional table bytes), with the owning module
+ * written back. O(log n) over the 581 sorted segments. */
+static const struct EmeraldScriptNativeRoutingSegment *FindRoutingSegmentForGba(
+    uint32_t gba, const struct EmeraldScriptNativeModule **outModule)
+{
+    const struct EmeraldScriptCompatNativeTable *t = &kEmeraldScriptCompatTable;
+    size_t low = 0u;
+    size_t high = t->routingSegmentCount;
+
+    while (low < high)
+    {
+        size_t mid = low + (high - low) / 2u;
+        const struct EmeraldScriptNativeRoutingSegment *seg =
+            &t->routingSegments[mid];
+        if (seg->originalGbaStart + seg->byteCount <= gba)
+            low = mid + 1u;
+        else
+            high = mid;
+    }
+    if (low < t->routingSegmentCount)
+    {
+        const struct EmeraldScriptNativeRoutingSegment *seg =
+            &t->routingSegments[low];
+        if (seg->originalGbaStart <= gba
+         && gba < seg->originalGbaStart + seg->byteCount)
+        {
+            if (outModule != NULL && seg->moduleIndex < t->moduleCount)
+                *outModule = &t->modules[seg->moduleIndex];
+            return seg;
+        }
+    }
+    return NULL;
+}
+
 static enum EmeraldScriptCompatStatus ResolveTargetIdentity(
     uint32_t targetClass, uint32_t targetKind,
     const char *resourceKey, const char *label,
     uint32_t regionOffset, uint32_t payloadOffset, uint32_t boundaryKind,
+    uint32_t encodedGba,
     struct EmeraldScriptCompatResolvedTarget *out)
 {
     const struct EmeraldScriptNativeModule *module = NULL;
@@ -433,10 +474,22 @@ static enum EmeraldScriptCompatStatus ResolveTargetIdentity(
         return EMERALD_SCRIPT_OK;
     }
     case EMERALD_SCRIPT_NATIVE_KIND_SCRIPT_ROUTING:
-        /* Dispatch-table byte: ROM-resident through G3. */
-        out->disposition = EMERALD_SCRIPT_DISPOSITION_DEFERRED;
+    {
+        /* R13-G5: a routing-class table start (conditional dispatch)
+         * - staged in the owning module's routing suffix. */
+        const struct EmeraldScriptNativeRoutingSegment *seg =
+            FindRoutingSegmentForGba(encodedGba, &module);
+        if (seg == NULL)
+            return EMERALD_SCRIPT_ERR_TARGET_UNRESOLVED;
+        out->disposition = EMERALD_SCRIPT_DISPOSITION_STAGED_ARENA;
         out->boundaryKind = EMERALD_SCRIPT_NATIVE_BOUNDARY_ROUTING;
+        if (sGeneration != NULL)
+            out->liveAddress = ModuleSpanBase(
+                (uint32_t)(module - kEmeraldScriptCompatTable.modules))
+                + module->payloadSize + seg->spanOffset
+                + (encodedGba - seg->originalGbaStart);
         return EMERALD_SCRIPT_OK;
+    }
     case EMERALD_SCRIPT_NATIVE_KIND_SCRIPT_BRIDGE:
     case EMERALD_SCRIPT_NATIVE_KIND_MOVEMENT_BRIDGE:
     {
@@ -556,10 +609,22 @@ static enum EmeraldScriptCompatStatus ResolveTargetIdentity(
         return EMERALD_SCRIPT_OK;
     }
     case EMERALD_SCRIPT_NATIVE_KIND_DISPATCH:
-        /* Typed routing segment: ROM-resident through G3. */
-        out->disposition = EMERALD_SCRIPT_DISPOSITION_DEFERRED;
+    {
+        /* R13-G5: a map dispatch / conditional table start - staged in
+         * the owning module's routing suffix. */
+        const struct EmeraldScriptNativeRoutingSegment *seg =
+            FindRoutingSegmentForGba(encodedGba, &module);
+        if (seg == NULL)
+            return EMERALD_SCRIPT_ERR_TARGET_UNRESOLVED;
+        out->disposition = EMERALD_SCRIPT_DISPOSITION_STAGED_ARENA;
         out->boundaryKind = EMERALD_SCRIPT_NATIVE_BOUNDARY_ROUTING;
+        if (sGeneration != NULL)
+            out->liveAddress = ModuleSpanBase(
+                (uint32_t)(module - kEmeraldScriptCompatTable.modules))
+                + module->payloadSize + seg->spanOffset
+                + (encodedGba - seg->originalGbaStart);
         return EMERALD_SCRIPT_OK;
+    }
     case EMERALD_SCRIPT_NATIVE_KIND_BRAILLE:
         /* C text handoff pending (plan sec 7.3): deferred through G3. */
         out->disposition = EMERALD_SCRIPT_DISPOSITION_DEFERRED;
@@ -590,7 +655,7 @@ static enum EmeraldScriptCompatStatus ResolveRelocRowTarget(
         row->targetClass, row->targetKind,
         PoolString(row->targetKey), PoolString(row->targetLabel),
         row->targetOffset, row->targetPayloadOffset,
-        EMERALD_SCRIPT_NATIVE_BOUNDARY_NONE, out);
+        EMERALD_SCRIPT_NATIVE_BOUNDARY_NONE, row->originalEncodedGba, out);
 }
 
 static enum EmeraldScriptCompatStatus ResolveRoutingRowTarget(
@@ -601,7 +666,7 @@ static enum EmeraldScriptCompatStatus ResolveRoutingRowTarget(
         row->targetClass, row->targetKind,
         PoolString(row->targetKey), PoolString(row->targetLabel),
         row->targetOffset, row->targetPayloadOffset,
-        EMERALD_SCRIPT_NATIVE_BOUNDARY_NONE, out);
+        EMERALD_SCRIPT_NATIVE_BOUNDARY_NONE, row->targetGba, out);
 }
 
 /* ------------------------------------------------------------------ */
@@ -662,6 +727,16 @@ static enum EmeraldScriptCompatStatus ValidateTableStructure(
                               m->arenaOffset);
             return EMERALD_SCRIPT_ERR_TABLE_MISMATCH;
         }
+        {
+            uint32_t routingBytes = 0u;
+            uint32_t j;
+            for (j = m->routingFirst; j < m->routingFirst + m->routingCount; j++)
+                routingBytes += t->routingSegments[j].byteCount;
+            arenaCursor += (m->payloadSize + routingBytes
+                            + EMERALD_SCRIPT_ARENA_ALIGNMENT - 1u)
+                         & ~(EMERALD_SCRIPT_ARENA_ALIGNMENT - 1u);
+            payloadTotal += m->payloadSize;
+        }
         if (m->schema != 45u && m->schema != 46u)
         {
             NoteFailureSimple(diag, "validate", m->id, 45u, m->schema);
@@ -672,9 +747,7 @@ static enum EmeraldScriptCompatStatus ValidateTableStructure(
             NoteFailureSimple(diag, "validate", m->id, 0u, 0u);
             return EMERALD_SCRIPT_ERR_TABLE_MISMATCH;
         }
-        arenaCursor += (m->payloadSize + EMERALD_SCRIPT_ARENA_ALIGNMENT - 1u)
-                     & ~(EMERALD_SCRIPT_ARENA_ALIGNMENT - 1u);
-        payloadTotal += m->payloadSize;
+        /* (cursor + payload total advanced in the block above) */
 
         /* Segments: packed, contiguous, in payload bounds. */
         {
@@ -760,6 +833,62 @@ static enum EmeraldScriptCompatStatus ValidateTableStructure(
         NoteFailureSimple(diag, "validate", "script-table",
                           EMERALD_SCRIPT_ARENA_PAYLOAD_BYTES, payloadTotal);
         return EMERALD_SCRIPT_ERR_UNEXPECTED_COUNT;
+    }
+
+    /* R13-G5: routing segments sorted globally by GBA start,
+     * non-overlapping, per-module span offsets = payloadSize + prefix,
+     * the blob covering exactly the 5,749 routing bytes. */
+    {
+        uint32_t routingBytes = 0u;
+        for (i = 0u; i < t->routingSegmentCount; i++)
+        {
+            const struct EmeraldScriptNativeRoutingSegment *s =
+                &t->routingSegments[i];
+            if (i > 0u)
+            {
+                const struct EmeraldScriptNativeRoutingSegment *prev =
+                    &t->routingSegments[i - 1u];
+                if (s->originalGbaStart
+                        < prev->originalGbaStart + prev->byteCount)
+                {
+                    NoteFailureSimple(diag, "validate", "routing-segments",
+                                      s->originalGbaStart, 0u);
+                    return EMERALD_SCRIPT_ERR_SEGMENT_INVALID;
+                }
+            }
+            if (s->moduleIndex >= t->moduleCount || s->byteCount == 0u)
+            {
+                NoteFailureSimple(diag, "validate", "routing-segments", i, 0u);
+                return EMERALD_SCRIPT_ERR_SEGMENT_INVALID;
+            }
+            routingBytes += s->byteCount;
+        }
+        if (routingBytes != 5749u || t->routingByteCount != 5749u
+         || t->routingBytes == NULL)
+        {
+            NoteFailureSimple(diag, "validate", "routing-bytes", routingBytes,
+                              t->routingByteCount);
+            return EMERALD_SCRIPT_ERR_UNEXPECTED_COUNT;
+        }
+    }
+    /* Per-module routing segment windows + span offsets. */
+    for (module = 0u; module < t->moduleCount; module++)
+    {
+        const struct EmeraldScriptNativeModule *m = &t->modules[module];
+        uint32_t expectedOff = m->payloadSize;
+        uint32_t j;
+        for (j = m->routingFirst; j < m->routingFirst + m->routingCount; j++)
+        {
+            const struct EmeraldScriptNativeRoutingSegment *s =
+                &t->routingSegments[j];
+            if (s->moduleIndex != module || s->spanOffset != expectedOff)
+            {
+                NoteFailureSimple(diag, "validate", m->id,
+                                  expectedOff, s->spanOffset);
+                return EMERALD_SCRIPT_ERR_SEGMENT_INVALID;
+            }
+            expectedOff += s->byteCount;
+        }
     }
 
     /* Dynamic index: strictly ascending (gba, class). */
@@ -1205,15 +1334,22 @@ static enum EmeraldScriptCompatStatus StageGeneration(
     size_t e;
 
     /* Arena size = the aligned end of the last span (the generator's
-     * deterministic cursor). */
+     * deterministic cursor); each span = payload + routing suffix. */
     for (module = 0u; module < t->moduleCount; module++)
     {
-        size_t end = (size_t)t->modules[module].arenaOffset
-                   + t->modules[module].payloadSize;
-        end = (end + EMERALD_SCRIPT_ARENA_ALIGNMENT - 1u)
-            & ~(size_t)(EMERALD_SCRIPT_ARENA_ALIGNMENT - 1u);
-        if (end > arenaSize)
-            arenaSize = end;
+        const struct EmeraldScriptNativeModule *m = &t->modules[module];
+        uint32_t routingBytes = 0u;
+        uint32_t j;
+        for (j = m->routingFirst; j < m->routingFirst + m->routingCount; j++)
+            routingBytes += t->routingSegments[j].byteCount;
+        {
+            size_t end = (size_t)m->arenaOffset + m->payloadSize
+                       + routingBytes;
+            end = (end + EMERALD_SCRIPT_ARENA_ALIGNMENT - 1u)
+                & ~(size_t)(EMERALD_SCRIPT_ARENA_ALIGNMENT - 1u);
+            if (end > arenaSize)
+                arenaSize = end;
+        }
     }
 
     gen = calloc(1u, sizeof(*gen));
@@ -1221,7 +1357,8 @@ static enum EmeraldScriptCompatStatus StageGeneration(
         return EMERALD_SCRIPT_ERR_OUT_OF_MEMORY;
     gen->arena = SC_MALLOC(arenaSize);
     gen->spans = SC_MALLOC(sizeof(gen->spans[0]) * t->moduleCount);
-    gen->sources = SC_MALLOC(sizeof(gen->sources[0]) * t->relocCount);
+    gen->sources = SC_MALLOC(sizeof(gen->sources[0])
+                             * (t->relocCount + t->routingRelocCount));
     gen->fBindings = SC_MALLOC(sizeof(gen->fBindings[0]) * t->fBindingCount);
     if (gen->arena == NULL || gen->spans == NULL || gen->sources == NULL
      || gen->fBindings == NULL)
@@ -1254,6 +1391,27 @@ static enum EmeraldScriptCompatStatus StageGeneration(
         }
     }
 
+    /* R13-G5: copy each module's routing suffix from the generated
+     * qualified-ROM blob (map dispatch + conditional tables). */
+    for (module = 0u; module < t->moduleCount; module++)
+    {
+        const struct EmeraldScriptNativeModule *m = &t->modules[module];
+        uint32_t j;
+        for (j = m->routingFirst; j < m->routingFirst + m->routingCount; j++)
+        {
+            const struct EmeraldScriptNativeRoutingSegment *seg =
+                &t->routingSegments[j];
+            uint32_t blobOffset = 0u;
+            uint32_t k;
+            for (k = 0u; k < t->routingSegmentCount
+                 && t->routingSegments[k].originalGbaStart
+                        < seg->originalGbaStart; k++)
+                blobOffset += t->routingSegments[k].byteCount;
+            memcpy(gen->arena + m->arenaOffset + seg->spanOffset,
+                   t->routingBytes + blobOffset, seg->byteCount);
+        }
+    }
+
     /* Spans (sorted by base) + raw-value proof + source index. */
     for (module = 0u; module < t->moduleCount; module++)
     {
@@ -1263,6 +1421,9 @@ static enum EmeraldScriptCompatStatus StageGeneration(
         gen->spans[module].base = (uintptr_t)(gen->arena + m->arenaOffset);
         gen->spans[module].payloadSize = m->payloadSize;
         gen->spans[module].moduleIndex = module;
+        gen->spans[module].routingBytes = 0u;
+        for (j = m->routingFirst; j < m->routingFirst + m->routingCount; j++)
+            gen->spans[module].routingBytes += t->routingSegments[j].byteCount;
         for (j = m->relocFirst; j < m->relocFirst + m->relocCount; j++)
         {
             const struct EmeraldScriptNativeReloc *r = &t->relocs[j];
@@ -1281,6 +1442,37 @@ static enum EmeraldScriptCompatStatus StageGeneration(
             gen->sources[sourceCount].relocIndex = j;
             sourceCount++;
         }
+    }
+    /* R13-G5: the 830 routing sources become live operand rows (their
+     * encoded u32 dispatch entries live in the staged routing tables). */
+    for (i = 0u; i < t->routingRelocCount; i++)
+    {
+        const struct EmeraldScriptNativeRoutingReloc *r = &t->routingRelocs[i];
+        const struct EmeraldScriptNativeModule *m = NULL;
+        const struct EmeraldScriptNativeRoutingSegment *seg =
+            FindRoutingSegmentForGba(r->sourceGbaOffset, &m);
+        uintptr_t operand;
+        if (seg == NULL || m == NULL)
+        {
+            NoteFailureSimple(diag, "stage", "routing-source",
+                              r->sourceGbaOffset, 0u);
+            FreeGeneration(gen);
+            return EMERALD_SCRIPT_ERR_RELOC_INVALID;
+        }
+        operand = (uintptr_t)(gen->arena + m->arenaOffset + seg->spanOffset
+                              + (r->sourceGbaOffset - seg->originalGbaStart));
+        if (ReadU32LE((const uint8_t *)operand) != r->targetGba)
+        {
+            NoteFailureSimple(diag, "stage", "routing-source",
+                              r->targetGba, ReadU32LE((const uint8_t *)operand));
+            FreeGeneration(gen);
+            return EMERALD_SCRIPT_ERR_RELOC_INVALID;
+        }
+        gen->sources[sourceCount].operandAddress = operand;
+        gen->sources[sourceCount].relocIndex =
+            EMERALD_SCRIPT_NATIVE_OFFSET_NONE;
+        gen->sources[sourceCount].routingRowIndex = i;
+        sourceCount++;
     }
     gen->sourceCount = sourceCount;
     qsort(gen->spans, t->moduleCount, sizeof(gen->spans[0]), SpanCompare);
@@ -1351,8 +1543,22 @@ static enum EmeraldScriptCompatStatus StageGeneration(
                  e != NULL ? PoolString(e->name) : NULL);
         if (f->boundaryKind == EMERALD_SCRIPT_NATIVE_BOUNDARY_ROUTING)
         {
-            out->disposition = EMERALD_SCRIPT_DISPOSITION_DEFERRED;
-            out->stagedAddress = 0u;
+            /* R13-G5: the map dispatch table is staged in the module's
+             * routing suffix - the F provenance now resolves live. */
+            const struct EmeraldScriptNativeRoutingSegment *seg =
+                FindRoutingSegmentForGba(f->gbaTarget, NULL);
+            if (seg == NULL)
+            {
+                NoteFailureSimple(diag, "stage", "f-routing",
+                                  f->gbaTarget, 0u);
+                FreeGeneration(gen);
+                return EMERALD_SCRIPT_ERR_TARGET_UNRESOLVED;
+            }
+            out->disposition = EMERALD_SCRIPT_DISPOSITION_STAGED_ARENA;
+            out->stagedAddress = (uintptr_t)(gen->arena + m->arenaOffset
+                                           + seg->spanOffset
+                                           + (f->gbaTarget
+                                              - seg->originalGbaStart));
         }
         else
         {
@@ -1413,6 +1619,7 @@ EmeraldScriptCompat_TryInitialize(
 
 void EmeraldScriptCompat_ClearMigratedEntries(void)
 {
+    EmeraldScriptCompat_UnregisterRanges();
     sGenerationCounter++;
     FreeGeneration(sGeneration);
     sGeneration = NULL;
@@ -1485,12 +1692,22 @@ EmeraldScriptCompat_ResolveOperand(uintptr_t operandAddress,
         return EMERALD_SCRIPT_ERR_UNAVAILABLE;
     key.operandAddress = operandAddress;
     key.relocIndex = 0u;
+    key.routingRowIndex = 0u;
     hit = bsearch(&key, sGeneration->sources, sGeneration->sourceCount,
                   sizeof(sGeneration->sources[0]), SourceRowCompare);
     if (hit == NULL)
         return EMERALD_SCRIPT_ERR_RELOC_INVALID;
-    row = &kEmeraldScriptCompatTable.relocs[hit->relocIndex];
-    status = ResolveRelocRowTarget(row, outTarget);
+    if (hit->relocIndex == EMERALD_SCRIPT_NATIVE_OFFSET_NONE)
+    {
+        const struct EmeraldScriptNativeRoutingReloc *rrow =
+            &kEmeraldScriptCompatTable.routingRelocs[hit->routingRowIndex];
+        status = ResolveRoutingRowTarget(rrow, outTarget);
+    }
+    else
+    {
+        row = &kEmeraldScriptCompatTable.relocs[hit->relocIndex];
+        status = ResolveRelocRowTarget(row, outTarget);
+    }
     return status;
 }
 
@@ -1534,7 +1751,7 @@ EmeraldScriptCompat_ResolveBinding(uint32_t targetClass,
                 ? EMERALD_SCRIPT_NATIVE_KIND_SCRIPT_PAYLOAD
                 : EMERALD_SCRIPT_NATIVE_KIND_MART_TABLE,
             resourceKey, label, targetOffset, e->payloadOffset,
-            e->boundaryKind, outTarget);
+            e->boundaryKind, e->originalGbaAddress, outTarget);
     }
     /* Non-script classes resolve through the dynamic identity path:
      * the class selects the kind set; a label-level binding uses the
@@ -1566,7 +1783,7 @@ EmeraldScriptCompat_ResolveBinding(uint32_t targetClass,
             d->targetClass, d->targetKind,
             PoolString(d->targetKey), PoolString(d->targetLabel),
             d->targetOffset, d->targetPayloadOffset, d->boundaryKind,
-            outTarget);
+            d->gbaAddress, outTarget);
     }
 }
 
@@ -1587,7 +1804,8 @@ EmeraldScriptCompat_ResolveEncodedTarget(
     return ResolveTargetIdentity(
         d->targetClass, d->targetKind,
         PoolString(d->targetKey), PoolString(d->targetLabel),
-        d->targetOffset, d->targetPayloadOffset, d->boundaryKind, outTarget);
+        d->targetOffset, d->targetPayloadOffset, d->boundaryKind,
+        encodedGba, outTarget);
 }
 
 enum EmeraldScriptCompatStatus
@@ -1624,13 +1842,24 @@ EmeraldScriptCompat_ReverseResolve(uintptr_t address,
         const struct EmeraldScriptCompatModuleSpan *span =
             &sGeneration->spans[hit];
         uintptr_t offset;
+        size_t spanSize = (size_t)span->payloadSize + span->routingBytes;
         if (address < span->base
-         || span->payloadSize == 0u
-         || address - span->base >= span->payloadSize)
+         || spanSize == 0u
+         || address - span->base >= spanSize)
             return EMERALD_SCRIPT_ERR_BOUNDARY_INVALID; /* hull/hole/end */
         offset = address - span->base;
         m = &kEmeraldScriptCompatTable.modules[span->moduleIndex];
         CopyName(outModuleKey, keyCap, m->id);
+        if ((uint32_t)offset >= span->payloadSize)
+        {
+            /* R13-G5: the routing suffix (map dispatch / conditional
+             * table bytes) - payload offsets stay the state identity;
+             * the reported offset remains payload-relative for the
+             * non-routing region only. */
+            *outOffset = EMERALD_SCRIPT_NATIVE_OFFSET_NONE;
+            *outSegmentKind = 2u; /* routing suffix */
+            return EMERALD_SCRIPT_OK;
+        }
         *outOffset = (uint32_t)offset;
         seg = FindSegment(span->moduleIndex, (uint32_t)offset);
         *outSegmentKind = seg != NULL ? seg->kind : 0xFFu;
@@ -1926,6 +2155,388 @@ bool EmeraldScriptCompat_GetParityCounts(uint32_t *outChecked,
     *outChecked = sParityChecked;
     *outMismatches = sParityMismatches;
     return sParityChecked != 0u;
+}
+
+/* ------------------------------------------------------------------ */
+/* R13-G5: live publication + engine-facing resolver APIs               */
+
+extern const uint8_t *gStdScripts[];
+
+static bool sRangesRegistered;
+
+void EmeraldScriptCompat_UnregisterRanges(void);
+void EmeraldScriptCompat_UnregisterModuleRange(uint32_t moduleIndex);
+
+static Gen3ResourceKey RangeKeyForModule(uint32_t moduleIndex)
+{
+    Gen3ResourceKey key;
+    Gen3ResourceId_DeriveKey(kEmeraldScriptCompatTable.modules[moduleIndex].id,
+                             &key);
+    return key;
+}
+
+enum EmeraldScriptCompatStatus EmeraldScriptCompat_RegisterRanges(void)
+{
+    struct EmeraldResourceRangeIndex *index =
+        EmeraldResourceCompat_GetRangeIndex();
+    const struct EmeraldScriptCompatNativeTable *t = &kEmeraldScriptCompatTable;
+    uint32_t module;
+    uint32_t registered = 0u;
+
+    if (sGeneration == NULL)
+        return EMERALD_SCRIPT_ERR_UNAVAILABLE;
+    if (index == NULL)
+        return EMERALD_SCRIPT_ERR_STAGING_FAILED;
+    if (sRangesRegistered)
+        EmeraldScriptCompat_UnregisterRanges();
+    if (t->moduleCount
+            > EMERALD_RESOURCE_RANGE_INDEX_MAX_RANGES
+                  - index->rangeCount)
+        return EMERALD_SCRIPT_ERR_STAGING_FAILED;
+    /* Sorted ascending spans register non-overlapping; any conflict is
+     * a hard refusal with the whole registration rolled back. */
+    for (module = 0u; module < t->moduleCount; module++)
+    {
+        const struct EmeraldScriptNativeModule *m = &t->modules[module];
+        struct EmeraldScriptCompatModuleSpan *span = NULL;
+        uint32_t i;
+        for (i = 0u; i < t->moduleCount; i++)
+        {
+            if (sGeneration->spans[i].moduleIndex == module)
+            {
+                span = &sGeneration->spans[i];
+                break;
+            }
+        }
+        if (span == NULL)
+            goto fail;
+        if (!EmeraldResourceRangeIndex_RegisterSpan(
+                index, span->base,
+                (size_t)span->payloadSize + span->routingBytes,
+                m->id, GEN3_RESOURCE_TYPE_STRUCTURED_DATA, m->schema,
+                EMERALD_RESOURCE_ROLE_CANONICAL))
+            goto fail;
+        registered++;
+    }
+    sRangesRegistered = true;
+    /* R13-G5 (plan sec 7): the live arena registers as one dynamic
+     * buffer so the stable virtual anchor resolves static-script
+     * vaddress targets uniformly (the adapter re-validates owner +
+     * generation at every resolution). */
+    {
+        struct EmeraldScriptDynamicBuffer arenaBuffer;
+        memset(&arenaBuffer, 0, sizeof(arenaBuffer));
+        arenaBuffer.kind = EMERALD_SCRIPT_DYNAMIC_STATIC_G_ARENA;
+        arenaBuffer.ownerStorageId = 0u;
+        arenaBuffer.generation = sGeneration->generationId;
+        arenaBuffer.base = sGeneration->arena;
+        arenaBuffer.size = sGeneration->arenaSize;
+        arenaBuffer.instructionStarts = NULL;
+        snprintf(arenaBuffer.ownerId, sizeof(arenaBuffer.ownerId),
+                 "%s", "script-arena");
+        if (!EmeraldScriptState_RegisterDynamicBuffer(&arenaBuffer))
+            goto fail;
+    }
+    return EMERALD_SCRIPT_OK;
+
+fail:
+    /* Roll back the partial registration by exact resource key. */
+    while (registered > 0u)
+    {
+        registered--;
+        EmeraldScriptCompat_UnregisterModuleRange(registered);
+    }
+    return EMERALD_SCRIPT_ERR_RANGE_REGISTRATION;
+}
+
+/* Identity-based single-range removal: find the exact key and remove
+ * it wherever it sits (position-independent - the G2 text-seam lesson). */
+void EmeraldScriptCompat_UnregisterModuleRange(uint32_t moduleIndex)
+{
+    struct EmeraldResourceRangeIndex *index =
+        EmeraldResourceCompat_GetRangeIndex();
+    Gen3ResourceKey key;
+    size_t i;
+
+    if (index == NULL)
+        return;
+    key = RangeKeyForModule(moduleIndex);
+    for (i = 0u; i < index->rangeCount; i++)
+    {
+        if (Gen3ResourceId_KeyEqual(&index->ranges[i].key, &key)
+         && index->ranges[i].type == GEN3_RESOURCE_TYPE_STRUCTURED_DATA)
+        {
+            memmove(&index->ranges[i], &index->ranges[i + 1u],
+                    (index->rangeCount - i - 1u) * sizeof(index->ranges[0]));
+            index->rangeCount--;
+            return;
+        }
+    }
+}
+
+void EmeraldScriptCompat_UnregisterRanges(void)
+{
+    uint32_t module;
+
+    if (!sRangesRegistered)
+        return;
+    /* Remove in descending module order so the memmove stays cheap. */
+    for (module = kEmeraldScriptCompatTable.moduleCount; module > 0u; module--)
+        EmeraldScriptCompat_UnregisterModuleRange(module - 1u);
+    sRangesRegistered = false;
+}
+
+bool EmeraldScriptCompat_AreRangesRegistered(void)
+{
+    return sRangesRegistered;
+}
+
+/* The production ScriptReadPointer path (plan sec 5): the exact source
+ * operand address -> its relocation row -> the typed live target. Hard
+ * refusal on any mismatch; no HostResolveGbaAddr fallback for static G
+ * operands. */
+bool EmeraldScriptCompat_ResolveLiveOperand(uintptr_t operandAddress,
+                                            uintptr_t *outPointer)
+{
+    struct EmeraldScriptCompatResolvedTarget target;
+
+    if (outPointer == NULL)
+        return false;
+    if (EmeraldScriptCompat_ResolveOperand(operandAddress, &target)
+            != EMERALD_SCRIPT_OK)
+        return false;
+    if (target.disposition != EMERALD_SCRIPT_DISPOSITION_STAGED_ARENA
+     || target.liveAddress == 0u)
+        return false;
+    *outPointer = target.liveAddress;
+    return true;
+}
+
+/* The map-dispatch provenance read (plan sec 10): a MapHeader's stored
+ * GBA mapScripts address -> the staged routing table's live base. */
+bool EmeraldScriptCompat_ResolveRoutingTable(uint32_t gbaTarget,
+                                             uintptr_t *outBase,
+                                             size_t *outSize)
+{
+    const struct EmeraldScriptNativeModule *module = NULL;
+    const struct EmeraldScriptNativeRoutingSegment *seg;
+
+    if (outBase == NULL || outSize == NULL || sGeneration == NULL)
+        return false;
+    seg = FindRoutingSegmentForGba(gbaTarget, &module);
+    if (seg == NULL)
+        return false;
+    *outBase = ModuleSpanBase(
+        (uint32_t)(module - kEmeraldScriptCompatTable.modules))
+        + module->payloadSize + seg->spanOffset
+        + (gbaTarget - seg->originalGbaStart);
+    *outSize = seg->byteCount
+        - (gbaTarget - seg->originalGbaStart);
+    return true;
+}
+
+/* Publish the staged 11-entry gStdScripts candidate table into the
+ * live native publication table (plan sec 9). Pure stores; every slot
+ * must be a pointer into the current generation. */
+enum EmeraldScriptCompatStatus EmeraldScriptCompat_PublishStdScripts(void)
+{
+    uint32_t i;
+
+    if (sGeneration == NULL)
+        return EMERALD_SCRIPT_ERR_UNAVAILABLE;
+    for (i = 0u; i < EMERALD_SCRIPT_STD_SCRIPT_COUNT; i++)
+    {
+        const struct EmeraldScriptCompatStagedStdScript *s =
+            &sGeneration->std[i];
+        if (s->stagedAddress < (uintptr_t)sGeneration->arena
+         || s->stagedAddress >= (uintptr_t)sGeneration->arena
+                                 + sGeneration->arenaSize)
+            return EMERALD_SCRIPT_ERR_TARGET_UNRESOLVED;
+        gStdScripts[i] = (const uint8_t *)s->stagedAddress;
+    }
+    return EMERALD_SCRIPT_OK;
+}
+
+/* The production vaddress family path (plan sec 7): the stable anchor
+ * lives in the state adapter (already production-linked from G4); the
+ * seam exposes the static-G side - a static module anchor resolves
+ * buffer-relative targets through the staged span. */
+bool EmeraldScriptCompat_ResolveVAddress(uint32_t encodedVirtualBase,
+                                         uintptr_t liveBase,
+                                         uint32_t encodedTarget,
+                                         uintptr_t *outAddress)
+{
+    const struct EmeraldScriptCompatModuleSpan *span = NULL;
+    uintptr_t base;
+    size_t size;
+    uint32_t i;
+    int64_t delta;
+    uint64_t target;
+
+    if (outAddress == NULL || sGeneration == NULL)
+        return false;
+    /* The live base must lie inside one staged span (the static
+     * anchor case; dynamic buffers resolve through the state
+     * adapter's registered buffers). */
+    for (i = 0u; i < kEmeraldScriptCompatTable.moduleCount; i++)
+    {
+        size_t spanSize = (size_t)sGeneration->spans[i].payloadSize
+                        + sGeneration->spans[i].routingBytes;
+        if (liveBase >= sGeneration->spans[i].base
+         && liveBase - sGeneration->spans[i].base < spanSize)
+        {
+            span = &sGeneration->spans[i];
+            break;
+        }
+    }
+    if (span == NULL)
+        return false;
+    base = span->base;
+    size = (size_t)span->payloadSize + span->routingBytes;
+    delta = (int64_t)encodedTarget - (int64_t)encodedVirtualBase;
+    if (delta < 0)
+        return false;
+    target = (uint64_t)(liveBase - base) + (uint64_t)delta;
+    if (target >= size)
+        return false;
+    *outAddress = base + (uintptr_t)target;
+    return true;
+}
+
+bool EmeraldScriptCompat_IsPublished(void)
+{
+    return sGeneration != NULL && sRangesRegistered;
+}
+
+/* R13-G5 (plan sec 11): the F-inbound entrypoint lookup - the staged
+ * rebind plan's rows (sorted by kind + GBA provenance). F-entered
+ * scripts are exactly the 3,501 bindings; some are never targeted by
+ * any relocation, so the dynamic index is not their surface. */
+bool EmeraldScriptCompat_ResolveFEntrypoint(uint32_t kind, uint32_t gbaTarget,
+                                            uintptr_t *outAddress)
+{
+    size_t low;
+    size_t high;
+    size_t i;
+
+    if (outAddress == NULL || sGeneration == NULL)
+        return false;
+    low = 0u;
+    high = EMERALD_SCRIPT_F_BINDING_COUNT;
+    while (low < high)
+    {
+        size_t mid = low + (high - low) / 2u;
+        const struct EmeraldScriptCompatStagedFBinding *row =
+            &sGeneration->fBindings[mid];
+        if (row->kind < kind
+         || (row->kind == kind && row->gbaTarget < gbaTarget))
+            low = mid + 1u;
+        else
+            high = mid;
+    }
+    for (i = low; i < EMERALD_SCRIPT_F_BINDING_COUNT; i++)
+    {
+        const struct EmeraldScriptCompatStagedFBinding *row =
+            &sGeneration->fBindings[i];
+        if (row->kind != kind || row->gbaTarget != gbaTarget)
+            break;
+        if (row->disposition == EMERALD_SCRIPT_DISPOSITION_STAGED_ARENA
+         && row->stagedAddress != 0u)
+        {
+            *outAddress = row->stagedAddress;
+            return true;
+        }
+    }
+    return false;
+}
+
+size_t EmeraldScriptCompat_GetRangeCount(void)
+{
+    struct EmeraldResourceRangeIndex *index =
+        EmeraldResourceCompat_GetRangeIndex();
+    return index != NULL ? index->rangeCount : 0u;
+}
+
+/* R13-G5 (plan sec 10): the ObjectEventTemplate getter path - a stored
+ * GBA provenance resolves to the live module entrypoint. Falls back to
+ * the legacy bridge only while no generation is published (the boot
+ * path refuses publication failure before any script can run). */
+const uint8_t *EmeraldScriptCompat_ResolveObjectScript(uint32_t gbaAddress)
+{
+    struct EmeraldScriptCompatResolvedTarget target;
+    uintptr_t address;
+
+    if (sGeneration == NULL)
+        return NULL;
+    if (EmeraldScriptCompat_ResolveFEntrypoint(
+            EMERALD_SCRIPT_NATIVE_F_OBJECT_EVENT, gbaAddress, &address))
+        return (const uint8_t *)address;
+    if (EmeraldScriptCompat_ResolveEncodedTarget(
+            gbaAddress, EMERALD_SCRIPT_NATIVE_CLASS_SCRIPT, &target)
+            == EMERALD_SCRIPT_OK
+     && target.liveAddress != 0u)
+        return (const uint8_t *)target.liveAddress;
+    return NULL;
+}
+
+/* The setter path: a live arena pointer reverse-maps to its original
+ * GBA export address (never a generation-local handle). */
+bool EmeraldScriptCompat_ReverseResolveToGba(uintptr_t address,
+                                             uint32_t *outGbaAddress)
+{
+    char moduleKey[EMERALD_SCRIPT_KEY_CAP];
+    uint32_t payloadOffset = 0u;
+    uint32_t segmentKind = 0u;
+    const struct EmeraldScriptNativeModule *m;
+    const struct EmeraldScriptNativeExport *e;
+
+    if (outGbaAddress == NULL)
+        return false;
+    if (EmeraldScriptCompat_ReverseResolve(address, moduleKey,
+                                           sizeof(moduleKey),
+                                           &payloadOffset, &segmentKind)
+            != EMERALD_SCRIPT_OK)
+        return false;
+    if (payloadOffset == EMERALD_SCRIPT_NATIVE_OFFSET_NONE)
+        return false;
+    m = FindModule(moduleKey);
+    if (m == NULL)
+        return false;
+    e = FindExport((uint32_t)(m - kEmeraldScriptCompatTable.modules),
+                   payloadOffset);
+    if (e == NULL)
+        return false;
+    *outGbaAddress = e->originalGbaAddress;
+    return true;
+}
+
+/* The production fast path (plan sec 5): O(log 523) membership over the
+ * staged span set - no string copying. */
+bool EmeraldScriptCompat_IsArenaAddress(uintptr_t address)
+{
+    size_t low;
+    size_t high;
+
+    if (sGeneration == NULL)
+        return false;
+    low = 0u;
+    high = kEmeraldScriptCompatTable.moduleCount;
+    while (low < high)
+    {
+        size_t mid = low + (high - low) / 2u;
+        if (sGeneration->spans[mid].base <= address)
+            low = mid + 1u;
+        else
+            high = mid;
+    }
+    if (low == 0u)
+        return false;
+    {
+        const struct EmeraldScriptCompatModuleSpan *span =
+            &sGeneration->spans[low - 1u];
+        size_t spanSize = (size_t)span->payloadSize + span->routingBytes;
+        return address - span->base < spanSize;
+    }
 }
 
 const char *EmeraldScriptCompatStatus_Describe(

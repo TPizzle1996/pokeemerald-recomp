@@ -39,10 +39,12 @@ Ferry_EventScript_DepartIslandWest::
 	waitmovement 0
 	return
 
+	.globl Ferry_Movement_DepartIslandBoardSouth
 Ferry_Movement_DepartIslandBoardSouth:
 	walk_down
 	step_end
 
+	.globl Ferry_Movement_DepartIslandBoardWest
 Ferry_Movement_DepartIslandBoardWest:
 	walk_left
 	walk_in_place_faster_down

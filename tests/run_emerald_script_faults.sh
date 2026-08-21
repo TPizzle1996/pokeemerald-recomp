@@ -102,6 +102,7 @@ for fault in seg-overlap seg-gap seg-kind export-outside export-dup \
     if ! gcc "${FLAGS[@]}" \
         "${CORES[@]}" "${SEAMS[@]}" \
         "$emerald_dir/emerald_script_compat.c" \
+        "$emerald_dir/emerald_script_state.c" \
         "$tmp/${fault}_table.c" \
         "$here/emerald_script_harness_stubs.c" \
         "$here/emerald_script_fault_test.c" \
