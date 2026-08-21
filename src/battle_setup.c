@@ -109,6 +109,20 @@ EWRAM_DATA static u8 *sTrainerBBattleScriptRetAddr = NULL;
 EWRAM_DATA static bool8 sShouldCheckTrainerBScript = FALSE;
 EWRAM_DATA static u8 sNoOfPossibleTrainerRetScripts = 0;
 
+/* R13-G4 read-only field-script continuation inventory.  Trainer text
+ * pointers remain C-owned and are intentionally absent. */
+void BattleSetup_GetScriptStatePointers(
+    const u8 ***battleEnd, const u8 ***trainerAReturn,
+    const u8 ***trainerBReturn)
+{
+    if (battleEnd != NULL)
+        *battleEnd = (const u8 **)&sTrainerBattleEndScript;
+    if (trainerAReturn != NULL)
+        *trainerAReturn = (const u8 **)&sTrainerABattleScriptRetAddr;
+    if (trainerBReturn != NULL)
+        *trainerBReturn = (const u8 **)&sTrainerBBattleScriptRetAddr;
+}
+
 // The first transition is used if the enemy Pokémon are lower level than our Pokémon.
 // Otherwise, the second transition is used.
 static const u8 sBattleTransitionTable_Wild[][2] =

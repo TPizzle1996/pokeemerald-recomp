@@ -597,9 +597,10 @@ The linker script places top-level `src/*.o` BSS in the captured `game_bss`
 slice. Therefore the global/immediate contexts, status/field-lock scalars, and
 `sMysteryEventScriptNativeBase` are already serialized; `sAddressOffset` is
 also in captured EWRAM. G does **not** add a slice or move the contexts merely
-for persistence. G4 instead teaches the existing walker/reverse index about G
-module ranges, validates Context2 inactivity, and replaces the captured but
-creator-base-dependent vaddress delta with the stable anchor. A Mystery Event
+for persistence. As refined by G3/G4, G4 uses a family adapter against staged
+G3 generations and does **not** publish the 523 module ranges; G5 publishes
+them atomically with the live cutover. G4 validates Context2 inactivity and
+provides the stable-anchor persistence model out of band. A Mystery Event
 native base must resolve inside its captured dynamic buffer or be reconstructed
 from that buffer identity. This is existing-format relocation work, not a file
 format revision.
@@ -902,12 +903,39 @@ no publication/consumer changes.
 
 ### G4 — State-v5 execution readiness
 
-Relocate the already captured Context1 state, stable dynamic vaddress anchor,
-trainer continuations, reverse containment, and fresh-process restore using
-the existing format. Gate: all mandatory saves plus adversarial
-interior/stale-pointer tests pass at a different arena base; post-G count
-exactly 6,377 (or gated 6,378 if C proves a new family range). No live cutover
-before this gate.
+**G4 COMPLETE (2026-08-21) — confirmed facts** (report:
+`docs/R13G4_SCRIPT_STATE_READINESS_REPORT.md`):
+
+- The existing State-v5 64-byte resource sidecar represents staged static G
+  pointers exactly as key + type/schema/role + payload offset; boundary role
+  is enforced from the exact destination surface. No file-format change.
+- All 27 possible static execution slots are pinned across existing
+  `GAME_BSS`, `EWRAM`, and `COMMON` slices. Context1 captures only active
+  frames; active/transient Context2 always refuses. Mystery Event and saved
+  RAM script pointers use registered captured-buffer identities and offsets.
+- A real process-A/process-B harness passes five capture and five restore
+  transactions at forced-different 210,880-byte arena bases/generations. The
+  nested hard gate uses a nonzero IP plus two nonzero return offsets, executes
+  the exact next `RETURN` sequence, and lands at the same canonical offset.
+  Separate snapshots pass RAM return, dialogue/C text/native callback,
+  movement wait/B ownership, object/coord/map-dispatch/BG, and trainer cases.
+- The pointer-free vaddress anchor covers all eight `0xB8..0xBF` operations.
+  Live `sAddressOffset` and opcode handlers are unchanged. The earlier G3
+  mystery-gift opacity diagnosis was a supplementary-walk section-bound bug,
+  not missing grammar; the sparse owned-byte walk now emits 52,042 boundaries
+  and leaves 1,423 opaque data bytes.
+- The focused refusal/identity matrix passes 32/32, including explicit refusal
+  of a legacy nonzero `sAddressOffset` creator-process delta. Existing generic
+  State-v5 cross-restart and corruption transactions remain green.
+- Live ranges remain exactly **5,854 / 8,192**, with **zero** G ranges. The
+  dry run proves all 523 future spans and **6,377 / 8,192** projected capacity;
+  no new C range and no cap increase. Static G + trainer C sidecars peak at
+  33 / 4,096; dynamic script pointers use captured-storage identities.
+- Production links only the weak family adapter; the G3 seam/table remain
+  harness-only until G5. `ScriptReadPointer`, live opcodes, `gStdScripts`, F
+  bindings, compiled scripts, and resource ownership are unchanged.
+
+G4 stops here. G5 remains the first live publication/cutover wave.
 
 ### G5 — atomic VM and R13-F live cutover
 

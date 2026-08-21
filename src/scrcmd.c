@@ -55,6 +55,18 @@ typedef void (*NativeFunc)(void);
 
 EWRAM_DATA const u8 *gRamScriptRetAddr = NULL;
 static EWRAM_DATA intptr_t sAddressOffset = 0; // Native/logical delta for saved scripts (e.g. Mystery Event)
+
+/* R13-G4 read-only State-v5 inventory.  Live vaddress behavior and the
+ * creator-process delta remain untouched until G5; the adapter persists only
+ * its separate stable virtual-anchor representation. */
+void ScrCmd_GetStatePointers(const u8 ***ramScriptRetAddr,
+                             intptr_t **addressOffset)
+{
+    if (ramScriptRetAddr != NULL)
+        *ramScriptRetAddr = &gRamScriptRetAddr;
+    if (addressOffset != NULL)
+        *addressOffset = &sAddressOffset;
+}
 static EWRAM_DATA u16 sPauseCounter = 0;
 static EWRAM_DATA u16 sMovingNpcId = 0;
 static EWRAM_DATA u16 sMovingNpcMapGroup = 0;

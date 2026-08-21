@@ -2554,7 +2554,15 @@ def main():
             seeds.add(e["original_gba_address"])
     seeds.update(struct.unpack_from("<I", rom, a - GEN3_GBA_ROM_BASE)[0]
                  for a, _, _ in std)
-    section_end = base + elf.sections[4]["sh_size"]
+    # G4 state-readiness boundary closure: the eight ordinary-field
+    # mystery-gift modules live in data/mystery_gift.o rather than the main
+    # script_data section.  The opcode grammar already includes the complete
+    # vaddress family (B8-BF); the G3 supplementary walk accidentally gated
+    # every seed on the main section's address interval, leaving all 692 gift
+    # bytes opaque.  Walk the exact sparse G-owned byte set instead.  This is
+    # also stricter than a broad ROM interval: an instruction may not cross a
+    # C-text or B-movement hole.
+    bytecode_addresses = {gba for m in all_modules for gba in m.gbytes}
     terminal_set = {0x02, 0x03, 0x05, 0x08, 0x0C, 0x0D, 0x24, 0xB9}
 
     def rom_u8(a):
@@ -2568,7 +2576,7 @@ def main():
     seen = set(queue)
     while queue:
         p = queue.pop(0)
-        if not (base <= p < section_end) or p in text_starts \
+        if p not in bytecode_addresses or p in text_starts \
            or p in move_starts or p in bfs_starts or p in sup_starts:
             continue
         for _ in range(100000):
@@ -2585,7 +2593,8 @@ def main():
                     break
                 size, types, operand = tt["encoded_size"], \
                     list(tt.get("operand_types", [])), 2
-            if size <= 0 or p + size > section_end:
+            if size <= 0 or any(p + i not in bytecode_addresses
+                                for i in range(size)):
                 break
             # Never decode across a BFS-decoded start: the census walk
             # owns those bytes and the boundary model must not overlap
@@ -2598,7 +2607,7 @@ def main():
             for typ in types:
                 if typ.startswith("ADDR32"):
                     val = rom_u32(p + operand)
-                    if typ == "ADDR32_SCRIPT" and base <= val < section_end \
+                    if typ == "ADDR32_SCRIPT" and val in bytecode_addresses \
                        and val not in seen:
                         queue.append(val)
                         seen.add(val)

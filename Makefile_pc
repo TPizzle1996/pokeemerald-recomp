@@ -249,11 +249,11 @@ C_SRCS := $(foreach src,$(C_SRCS_IN),$(if $(findstring .inc.c,$(src)),,$(src)))
 # (see src/data/graphics/trainers_front_payload.c). The GBA Makefile
 # auto-collects them via its own wildcard.
 ifeq ($(NATIVE_LINUX),1)
-# R13-G3: the shadow staging seam and its generated inventory are NOT
-# linked into the game in G3 (shadow-only; the live VM keeps the
-# compiled field scripts and no consumer resolves through the seam yet).
-# G5 links them at the atomic publication wave. Keeping them out of the
-# link keeps the game binary byte-identical to the G2 milestone.
+# R13-G4: the family State-v5 adapter is linked, but its G3 query hooks are
+# weak and the shadow seam/inventory remain harness-only until G5.  This keeps
+# the VM, compiled field scripts, gStdScripts, F bindings, and production
+# range index exactly pre-cutover while the dedicated harness links the real
+# seam and proves the same adapter against staged generations.
 C_SRCS := $(filter-out $(C_SUBDIR)/data/graphics/trainers_front_payload.c \
                        $(C_SUBDIR)/data/graphics/trainers_back_payload.c \
                        $(C_SUBDIR)/data/graphics/pokemon_battle_payload.c \

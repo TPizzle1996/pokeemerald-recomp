@@ -289,6 +289,31 @@ enum EmeraldScriptCompatStatus
 EmeraldScriptCompat_ValidateBoundary(const char *moduleKey, uint32_t offset,
                                      uint32_t boundaryKind);
 
+/* R13-G4 State-v5 identity bridge.  Shadow generations are deliberately not
+ * registered in the production range index before G5, so the state adapter
+ * uses these narrow queries to translate the existing sidecar's stable
+ * resource key + payload offset without teaching the generic walker script
+ * grammar.  The serialized type is STRUCTURED_DATA, schema is the module's
+ * existing 45/46 schema, and role is CANONICAL; boundaryRole is derived from
+ * the exact pointer surface (IP, return, or entrypoint), not stored in a new
+ * file field. */
+bool EmeraldScriptCompat_GetStateIdentity(
+    const char *moduleKey, Gen3ResourceKey *outKey, uint32_t *outSchema,
+    uint32_t *outPayloadSize);
+enum EmeraldScriptCompatStatus EmeraldScriptCompat_ResolveStateIdentity(
+    const Gen3ResourceKey *key, uint32_t resourceType, uint32_t schema,
+    uint32_t representationRole, uint32_t payloadOffset,
+    uint32_t boundaryRole, uintptr_t *outAddress,
+    char *outModuleKey, size_t keyCap);
+
+/* G4 dry-run only: validates the complete prospective G5 module-range set
+ * and capacity arithmetic without registering a range or publishing the
+ * shadow generation.  Zero-payload routing identities are empty half-open
+ * ranges in G4; G5 owns materializing/publishing their routing bytes. */
+enum EmeraldScriptCompatStatus EmeraldScriptCompat_ValidateProjectedRanges(
+    size_t currentRangeCount, size_t rangeCapacity,
+    size_t *outProjectedRangeCount);
+
 /* Staged shadow surfaces (plan sec 12/13). */
 size_t EmeraldScriptCompat_GetStagedStdScriptCount(void);
 bool EmeraldScriptCompat_GetStagedStdScript(uint32_t slot,
@@ -296,6 +321,11 @@ bool EmeraldScriptCompat_GetStagedStdScript(uint32_t slot,
 size_t EmeraldScriptCompat_GetStagedFBindingCount(void);
 bool EmeraldScriptCompat_GetStagedFBinding(
     size_t index, struct EmeraldScriptCompatStagedFBinding *outRow);
+/* G4 staged-only provenance hook for an F map-script routing-table target.
+ * It resolves the immutable routing row's typed destination without
+ * rebinding the live F table or publishing a G range. */
+bool EmeraldScriptCompat_GetStagedRoutingTarget(
+    size_t index, struct EmeraldScriptCompatResolvedTarget *outTarget);
 
 /* Counts + parity + status text. GetParityCounts reports the dynamic
  * oracle run in phase 1: checked == 16,704, mismatches == 0. */

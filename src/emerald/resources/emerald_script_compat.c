@@ -26,6 +26,7 @@
 
 #include "gen3/resources/sha256.h"
 #include "emerald/resources/emerald_leaf_compat.h"
+#include "emerald/resources/emerald_resource_ranges.h"
 #include "emerald/resources/emerald_resource_session.h"
 #include "emerald/resources/emerald_text_compat.h"
 #include "emerald/resources/script_native.generated.h"
@@ -1666,11 +1667,8 @@ EmeraldScriptCompat_ValidateBoundary(const char *moduleKey, uint32_t offset,
         return b != NULL ? EMERALD_SCRIPT_OK
                          : EMERALD_SCRIPT_ERR_BOUNDARY_INVALID;
     case EMERALD_SCRIPT_BOUNDARY_ENTRYPOINT:
-        if (e != NULL)
-            return EMERALD_SCRIPT_OK;
-        if (b != NULL)
-            return EMERALD_SCRIPT_OK;
-        return EMERALD_SCRIPT_ERR_BOUNDARY_INVALID;
+        return e != NULL ? EMERALD_SCRIPT_OK
+                         : EMERALD_SCRIPT_ERR_BOUNDARY_INVALID;
     case EMERALD_SCRIPT_BOUNDARY_SCRIPT_INTERIOR:
         if (e != NULL
          && e->kind == EMERALD_SCRIPT_NATIVE_EXPORT_SCRIPT
@@ -1689,6 +1687,117 @@ EmeraldScriptCompat_ValidateBoundary(const char *moduleKey, uint32_t offset,
     default:
         return EMERALD_SCRIPT_ERR_INVALID_ARGUMENT;
     }
+}
+
+bool EmeraldScriptCompat_GetStateIdentity(
+    const char *moduleKey, Gen3ResourceKey *outKey, uint32_t *outSchema,
+    uint32_t *outPayloadSize)
+{
+    const struct EmeraldScriptNativeModule *m;
+
+    if (moduleKey == NULL || outKey == NULL || outSchema == NULL
+     || outPayloadSize == NULL)
+        return false;
+    m = FindModule(moduleKey);
+    if (m == NULL)
+        return false;
+    Gen3ResourceId_DeriveKey(m->id, outKey);
+    *outSchema = m->schema;
+    *outPayloadSize = m->payloadSize;
+    return true;
+}
+
+enum EmeraldScriptCompatStatus EmeraldScriptCompat_ResolveStateIdentity(
+    const Gen3ResourceKey *key, uint32_t resourceType, uint32_t schema,
+    uint32_t representationRole, uint32_t payloadOffset,
+    uint32_t boundaryRole, uintptr_t *outAddress,
+    char *outModuleKey, size_t keyCap)
+{
+    const struct EmeraldScriptNativeModule *m = NULL;
+    uint32_t i;
+
+    if (key == NULL || outAddress == NULL || outModuleKey == NULL
+     || keyCap == 0u)
+        return EMERALD_SCRIPT_ERR_INVALID_ARGUMENT;
+    if (sGeneration == NULL)
+        return EMERALD_SCRIPT_ERR_UNAVAILABLE;
+    if (resourceType != GEN3_RESOURCE_TYPE_STRUCTURED_DATA
+     || representationRole != EMERALD_RESOURCE_ROLE_CANONICAL)
+        return EMERALD_SCRIPT_ERR_UNEXPECTED_SCHEMA;
+    for (i = 0u; i < kEmeraldScriptCompatTable.moduleCount; i++)
+    {
+        Gen3ResourceKey candidate;
+        Gen3ResourceId_DeriveKey(kEmeraldScriptCompatTable.modules[i].id,
+                                 &candidate);
+        if (Gen3ResourceId_KeyEqual(&candidate, key))
+        {
+            m = &kEmeraldScriptCompatTable.modules[i];
+            break;
+        }
+    }
+    if (m == NULL)
+        return EMERALD_SCRIPT_ERR_TARGET_UNRESOLVED;
+    if (m->schema != schema)
+        return EMERALD_SCRIPT_ERR_UNEXPECTED_SCHEMA;
+    if (payloadOffset >= m->payloadSize)
+        return EMERALD_SCRIPT_ERR_BOUNDARY_INVALID;
+    if (EmeraldScriptCompat_ValidateBoundary(m->id, payloadOffset,
+                                             boundaryRole)
+            != EMERALD_SCRIPT_OK)
+        return EMERALD_SCRIPT_ERR_BOUNDARY_INVALID;
+    CopyName(outModuleKey, keyCap, m->id);
+    *outAddress = (uintptr_t)(sGeneration->arena + m->arenaOffset
+                              + payloadOffset);
+    return EMERALD_SCRIPT_OK;
+}
+
+enum EmeraldScriptCompatStatus EmeraldScriptCompat_ValidateProjectedRanges(
+    size_t currentRangeCount, size_t rangeCapacity,
+    size_t *outProjectedRangeCount)
+{
+    size_t projected;
+    uint32_t i;
+    uintptr_t previousEnd = 0u;
+
+    if (outProjectedRangeCount == NULL)
+        return EMERALD_SCRIPT_ERR_INVALID_ARGUMENT;
+    if (sGeneration == NULL)
+        return EMERALD_SCRIPT_ERR_UNAVAILABLE;
+    if (currentRangeCount > rangeCapacity
+     || kEmeraldScriptCompatTable.moduleCount > rangeCapacity - currentRangeCount)
+        return EMERALD_SCRIPT_ERR_UNEXPECTED_COUNT;
+    projected = currentRangeCount + kEmeraldScriptCompatTable.moduleCount;
+    for (i = 0u; i < kEmeraldScriptCompatTable.moduleCount; i++)
+    {
+        const struct EmeraldScriptNativeModule *m =
+            &kEmeraldScriptCompatTable.modules[i];
+        uintptr_t start;
+        uintptr_t end;
+        Gen3ResourceKey key;
+
+        if (m->schema != 45u && m->schema != 46u)
+            return EMERALD_SCRIPT_ERR_UNEXPECTED_SCHEMA;
+        Gen3ResourceId_DeriveKey(m->id, &key);
+        if (m->id == NULL || m->id[0] == '\0')
+            return EMERALD_SCRIPT_ERR_TABLE_MISMATCH;
+        if (m->arenaOffset > sGeneration->arenaSize
+         || m->payloadSize > sGeneration->arenaSize - m->arenaOffset)
+            return EMERALD_SCRIPT_ERR_TABLE_MISMATCH;
+        start = (uintptr_t)sGeneration->arena + m->arenaOffset;
+        end = start + m->payloadSize;
+        /* Empty routing identities are valid half-open ranges for the G4
+         * dry run and overlap no bytes.  G5 must materialize their routing
+         * spans before the real range-index registration. */
+        if (m->payloadSize != 0u)
+        {
+            if (previousEnd != 0u && start < previousEnd)
+                return EMERALD_SCRIPT_ERR_TABLE_MISMATCH;
+            previousEnd = end;
+        }
+        (void)key;
+    }
+    *outProjectedRangeCount = projected;
+    return EMERALD_SCRIPT_OK;
 }
 
 size_t EmeraldScriptCompat_GetStagedStdScriptCount(void)
@@ -1719,6 +1828,17 @@ bool EmeraldScriptCompat_GetStagedFBinding(
         return false;
     *outRow = sGeneration->fBindings[index];
     return true;
+}
+
+bool EmeraldScriptCompat_GetStagedRoutingTarget(
+    size_t index, struct EmeraldScriptCompatResolvedTarget *outTarget)
+{
+    if (sGeneration == NULL || outTarget == NULL
+     || index >= kEmeraldScriptCompatTable.routingRelocCount)
+        return false;
+    return ResolveRoutingRowTarget(
+        &kEmeraldScriptCompatTable.routingRelocs[index], outTarget)
+        == EMERALD_SCRIPT_OK;
 }
 
 bool EmeraldScriptCompat_GetIndexCounts(

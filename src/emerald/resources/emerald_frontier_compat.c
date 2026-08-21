@@ -1176,23 +1176,30 @@ static bool RegisterWildSlotRange(void)
 static void UnregisterMonSetRange(void)
 {
     struct EmeraldResourceRangeIndex *index = EmeraldResourceCompat_GetRangeIndex();
-    size_t r;
+    Gen3ResourceKey monSetKey;
+    Gen3ResourceKey wildSlotKey;
+    size_t j;
     if (index == NULL)
         return;
-    for (r = 0u; r < sRegisteredRangeCount; r++)
+
+    /* A refused direct republish can replace the two tracked bases after the
+     * mon-set phase but before AUX publication.  Remove the exact family
+     * identities, including any older generation whose base is no longer in
+     * sRegisteredRanges; address-only removal can otherwise orphan a range. */
+    Gen3ResourceId_DeriveKey("emerald:data/arena/frontier-mon-set", &monSetKey);
+    Gen3ResourceId_DeriveKey("emerald:data/arena/facility-wild-slots", &wildSlotKey);
+    j = 0u;
+    while (j < index->rangeCount)
     {
-        uintptr_t base = sRegisteredRanges[r].base;
-        size_t j;
-        for (j = 0u; j < index->rangeCount; j++)
+        if (memcmp(&index->ranges[j].key, &monSetKey, sizeof(monSetKey)) == 0
+         || memcmp(&index->ranges[j].key, &wildSlotKey, sizeof(wildSlotKey)) == 0)
         {
-            if (index->ranges[j].base == base)
-            {
-                memmove(&index->ranges[j], &index->ranges[j + 1u],
-                        (index->rangeCount - j - 1u) * sizeof(index->ranges[0]));
-                index->rangeCount--;
-                break;
-            }
+            memmove(&index->ranges[j], &index->ranges[j + 1u],
+                    (index->rangeCount - j - 1u) * sizeof(index->ranges[0]));
+            index->rangeCount--;
         }
+        else
+            j++;
     }
     sRegisteredRangeCount = 0u;
 }

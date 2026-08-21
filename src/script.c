@@ -31,6 +31,20 @@ extern ScrCmdFunc gScriptCmdTable[];
 extern ScrCmdFunc gScriptCmdTableEnd[];
 extern void *const gNullScriptPtr;
 
+/* R13-G4 read-only State-v5 surface inventory.  This exposes addresses of
+ * the existing contexts without changing their layout or execution. */
+void Script_GetStateContexts(struct ScriptContext **context1,
+                             const u8 **context1Status,
+                             struct ScriptContext **context2)
+{
+    if (context1 != NULL)
+        *context1 = &sGlobalScriptContext;
+    if (context1Status != NULL)
+        *context1Status = &sGlobalScriptContextStatus;
+    if (context2 != NULL)
+        *context2 = &sImmediateScriptContext;
+}
+
 void InitScriptContext(struct ScriptContext *ctx, void *cmdTable, void *cmdTableEnd)
 {
     s32 i;

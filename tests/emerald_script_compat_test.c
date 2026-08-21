@@ -267,7 +267,7 @@ static void TestStagingAndIndexes(void)
     CHECK("counts: 7683 exports", counts.exports == 7683u);
     CHECK("counts: 15874 module relocs", counts.relocs == 15874u);
     CHECK("counts: 830 routing relocs", counts.routingRelocs == 830u);
-    CHECK("counts: 51814 boundaries", counts.boundaries == 51814u);
+    CHECK("counts: 52042 boundaries", counts.boundaries == 52042u);
     CHECK("counts: 12016 dynamic targets", counts.dynamicTargets == 12016u);
     CHECK("counts: 11 std scripts", counts.stdScripts == 11u);
     CHECK("counts: 3501 F bindings", counts.fBindings == 3501u);
@@ -275,7 +275,7 @@ static void TestStagingAndIndexes(void)
     CHECK("counts: 18 RAM targets / 1 allowlist row",
           counts.ramTargets == 18u && counts.ramAllowlist == 1u);
     CHECK("counts: 3 bridges", counts.bridges == 3u);
-    CHECK("counts: 2115 opaque bytes", counts.opaqueBytes == 2115u);
+    CHECK("counts: 1423 opaque bytes", counts.opaqueBytes == 1423u);
 
     CHECK("parity reported",
           EmeraldScriptCompat_GetParityCounts(&checked, &mismatches));

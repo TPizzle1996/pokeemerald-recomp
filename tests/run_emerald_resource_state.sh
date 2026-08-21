@@ -32,8 +32,13 @@ trap 'rm -rf "$tmp"' EXIT
 
 mode="${1:-}"
 sanitize_flags=""
-if [ "$mode" = "sanitize" ]; then
+if [ "$mode" = "sanitize" ] || [ "$mode" = "g4-sanitize" ]; then
     sanitize_flags="-fsanitize=address,undefined -fno-omit-frame-pointer -g"
+    # The R6 runtime snapshot/provider is intentionally process-lifetime
+    # state in these focused harnesses; match the established G3 sanitizer
+    # policy and gate memory/UB errors without treating that ownership model
+    # as a G4 leak regression.
+    export ASAN_OPTIONS="${ASAN_OPTIONS:+$ASAN_OPTIONS:}detect_leaks=0:halt_on_error=1"
 fi
 
 echo "== generating map script/event stub symbols =="
@@ -122,6 +127,10 @@ gcc -std=gnu99 -O2 -ffunction-sections -fdata-sections -Wl,--gc-sections \
     "$emerald_dir/map_data_native.c" \
     "$emerald_dir/map_native.generated.c" \
     "$emerald_dir/emerald_map_compat.c" \
+    "$emerald_dir/emerald_script_compat.c" \
+    "$emerald_dir/emerald_script_state.c" \
+    "$emerald_dir/script_native_table.generated.c" \
+    "$here/emerald_script_harness_stubs.c" \
     "$root/src/platform/native_state.c" \
     "$root/src/platform/host_memory.c" \
     "$root/src/platform/native_world_neighborhood.c" \
@@ -137,6 +146,47 @@ gcc -std=gnu99 -O2 -ffunction-sections -fdata-sections -Wl,--gc-sections \
 
 cd "$tmp"
 state="harness-state-slot-7.st"
+
+if [ "$mode" = "g4-state" ] || [ "$mode" = "g4-cross" ] \
+   || [ "$mode" = "g4-sanitize" ]; then
+    g4state="harness-g4-slot-7.st"
+    echo "== R13-G4: capture in process A (five transactional cases) =="
+    "$tmp/emerald_resource_state_test" g4-create "$pack" "$g4state" > g4-create.log
+    cat g4-create.log
+    grep -q "G4-CREATE" g4-create.log
+
+    echo "== R13-G4: restore in fresh process B =="
+    "$tmp/emerald_resource_state_test" g4-load "$pack" "$g4state" > g4-load.log
+    cat g4-load.log
+    grep -q "nested-return=ok dynamic-vaddress=8/8" g4-load.log
+
+    python3 - "$tmp" <<'EOF'
+import re, sys
+tmp = sys.argv[1]
+create = open(f"{tmp}/g4-create.log").read()
+load = open(f"{tmp}/g4-load.log").read()
+c = re.search(r"G4-CREATE arena=(0x[0-9a-f]+).*generation=(\d+)", create)
+l = re.search(r"G4-LOAD arena=(0x[0-9a-f]+).*generation=(\d+)", load)
+assert c and l, "missing G4 arena/generation proof line"
+assert c.group(1) != l.group(1), "creator and restorer script arena bases match"
+assert c.group(2) != l.group(2), "creator and restorer generation IDs match"
+print(f"G4 fresh-process relocation: creator {c.groups()} -> restorer {l.groups()}")
+EOF
+    echo "R13-G4 state: 5 capture cases, 5 restore cases, 2 arena generations"
+    if [ "$mode" != "g4-sanitize" ]; then
+        exit 0
+    fi
+fi
+
+if [ "$mode" = "g4-faults" ] || [ "$mode" = "g4-sanitize" ]; then
+    echo "== R13-G4: refusal matrix =="
+    "$tmp/emerald_resource_state_test" g4-faults "$pack" \
+        "harness-g4-fault-slot-7.st" > g4-faults.log
+    cat g4-faults.log
+    grep -q "G4-FAULTS passed=32" g4-faults.log
+    echo "R13-G4 faults: 32/32 capture/restore/identity checks"
+    exit 0
+fi
 
 echo "== TEST 1/2/3: create (process A) =="
 "$tmp/emerald_resource_state_test" create "$pack" "$state" > create.log

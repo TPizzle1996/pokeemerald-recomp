@@ -37,6 +37,7 @@
 #include "platform/native_state.h"
 #include "emerald/resources/emerald_trainer_native_compat.h"
 #include "emerald/resources/emerald_audio_compat.h"
+#include "emerald/resources/emerald_script_state.h"
 #include "platform/native_world_neighborhood.h"
 #include "siirtc.h"
 
@@ -238,6 +239,18 @@ static u32 SectionSize(const unsigned char *start, const unsigned char *stop)
 static struct NativeStateResourceRecord
     sCaptureResourceRecords[NATIVE_STATE_MAX_RESOURCE_RECORDS];
 static u32 sCaptureResourceRecordCount;
+
+/* G4's family adapter is linked by production, but older focused walker
+ * harnesses intentionally omit it.  Weak references preserve those generic
+ * v5 regression builds; a state containing schema-45/46 script records still
+ * refuses when the adapter is absent. */
+#pragma weak EmeraldScriptState_PrepareCapture
+#pragma weak EmeraldScriptState_CaptureField
+#pragma weak EmeraldScriptState_ResolveField
+#pragma weak EmeraldScriptState_IsStaticRecord
+#pragma weak EmeraldScriptState_ValidateDynamicField
+#pragma weak EmeraldScriptState_GetLastSurface
+#pragma weak EmeraldScriptStateStatus_Describe
 
 /* The active session's reverse resource-range index, or NULL when no
  * resource session exists (non-Linux targets, no published session, or a
@@ -1906,6 +1919,62 @@ enum NativeStateResourceWindowResult
     NORMALIZE_RESOURCE_ERROR,
 };
 
+static enum NativeStateResourceWindowResult CaptureScriptStateWindow(
+    const struct NativeStateSlice *slice, u8 *dest, u32 offset, u32 size,
+    const u8 *source)
+{
+    struct EmeraldScriptStateResourceIdentity identity;
+    enum EmeraldScriptStateStatus status;
+    struct NativeStateResourceRecord *record;
+    uintptr_t candidate;
+
+    if (EmeraldScriptState_CaptureField == NULL
+     || offset + sizeof(uintptr_t) > size)
+        return NORMALIZE_RESOURCE_NONE;
+    memcpy(&candidate, source + offset, sizeof(candidate));
+    memset(&identity, 0, sizeof(identity));
+    status = EmeraldScriptState_CaptureField(
+        (uintptr_t)source + offset, candidate, &identity);
+    if (status == EMERALD_SCRIPT_STATE_NOT_SCRIPT
+     || status == EMERALD_SCRIPT_STATE_DYNAMIC)
+        return NORMALIZE_RESOURCE_NONE;
+    if (status == EMERALD_SCRIPT_STATE_SCRUB)
+    {
+        memset(dest + offset, 0, sizeof(candidate));
+        return NORMALIZE_RESOURCE_CAPTURED; /* consumed, no sidecar row */
+    }
+    if (status != EMERALD_SCRIPT_STATE_OK)
+    {
+        char reason[320];
+        snprintf(reason, sizeof(reason), "field-script state surface %s refused: %s",
+                 EmeraldScriptState_GetLastSurface != NULL
+                    ? EmeraldScriptState_GetLastSurface() : "unknown",
+                 EmeraldScriptStateStatus_Describe != NULL
+                    ? EmeraldScriptStateStatus_Describe(status) : "adapter error");
+        SetRuntimePointerError(slice, offset, candidate, reason,
+                               "save-script-state", source, size);
+        return NORMALIZE_RESOURCE_ERROR;
+    }
+    if (sCaptureResourceRecordCount >= NATIVE_STATE_MAX_RESOURCE_RECORDS)
+    {
+        SetRuntimePointerError(slice, offset, candidate,
+                               "resource reference sidecar record limit exceeded",
+                               "save-script-state", source, size);
+        return NORMALIZE_RESOURCE_ERROR;
+    }
+    record = &sCaptureResourceRecords[sCaptureResourceRecordCount++];
+    memset(record, 0, sizeof(*record));
+    record->sectionTag = slice->tag;
+    record->fieldOffset = offset;
+    memcpy(record->resourceKey, identity.key.bytes, GEN3_RESOURCE_KEY_SIZE);
+    record->resourceType = identity.resourceType;
+    record->resourceSchema = identity.schema;
+    record->representationRole = identity.representationRole;
+    record->rangeOffset = identity.payloadOffset;
+    memset(dest + offset, 0, sizeof(candidate));
+    return NORMALIZE_RESOURCE_CAPTURED;
+}
+
 static enum NativeStateResourceWindowResult CaptureResourceWindow(
     const struct NativeStateSlice *slice, u8 *dest, u32 offset, u32 size,
     const u8 *source, const struct EmeraldResourceRangeIndex *rangeIndex)
@@ -2029,6 +2098,22 @@ static bool32 NormalizeRuntimeBytes(const struct NativeStateSlice *slice, u8 *de
         }
         functionPointer = RuntimeLocationIsFunction(slice, offset);
         knownDataPointer = RuntimeLocationIsKnownDataPointer(slice, offset);
+        /* R13-G4: exact script execution surfaces are offered to the family
+         * adapter before the production range index.  Shadow G ranges remain
+         * unregistered, but their ordinary v5 key+offset records are emitted
+         * with the same transactional record accumulator. */
+        switch (CaptureScriptStateWindow(slice, dest, offset, size,
+                                         (const u8 *)source))
+        {
+        case NORMALIZE_RESOURCE_CAPTURED:
+            offset += sizeof(u32);
+            continue;
+        case NORMALIZE_RESOURCE_ERROR:
+            return FALSE;
+        case NORMALIZE_RESOURCE_NONE:
+        default:
+            break;
+        }
         /* R10 §D: resource-range detection runs BEFORE every normal pointer
          * classification. A captured pointer becomes a sidecar record with
          * the in-band bytes zeroed (and the walk advances past the whole
@@ -2209,6 +2294,27 @@ static bool32 RestoreRuntimeBytes(const struct NativeStateSlice *slice,
             return FALSE;
         }
         native = (uintptr_t)pointer;
+        if (EmeraldScriptState_ValidateDynamicField != NULL)
+        {
+            enum EmeraldScriptStateStatus scriptStatus =
+                EmeraldScriptState_ValidateDynamicField(
+                    (uintptr_t)slice->source + offset, native);
+            if (scriptStatus != EMERALD_SCRIPT_STATE_OK
+             && scriptStatus != EMERALD_SCRIPT_STATE_NOT_SCRIPT)
+            {
+                char reason[320];
+                snprintf(reason, sizeof(reason),
+                         "field-script dynamic restore refused at %s: %s",
+                         EmeraldScriptState_GetLastSurface != NULL
+                            ? EmeraldScriptState_GetLastSurface() : "unknown",
+                         EmeraldScriptStateStatus_Describe != NULL
+                            ? EmeraldScriptStateStatus_Describe(scriptStatus)
+                            : "adapter error");
+                SetRuntimePointerError(slice, offset, native, reason,
+                                       "load-script-state", source, size);
+                return FALSE;
+            }
+        }
         memcpy((u8 *)dest + offset, &native, sizeof(native));
         offset += sizeof(u32);
     }
@@ -2568,6 +2674,25 @@ static enum NativeStateResult SaveStateToPath(const char *path)
     struct NativeStateHeader *header;
     const struct EmeraldResourceRangeIndex *rangeIndex = ActiveRangeIndex();
 
+    if (EmeraldScriptState_PrepareCapture != NULL)
+    {
+        enum EmeraldScriptStateStatus scriptState =
+            EmeraldScriptState_PrepareCapture();
+        if (scriptState != EMERALD_SCRIPT_STATE_OK
+         && scriptState != EMERALD_SCRIPT_STATE_ERR_UNAVAILABLE)
+        {
+            char message[320];
+            snprintf(message, sizeof(message),
+                     "field-script state capture refused at %s: %s",
+                     EmeraldScriptState_GetLastSurface != NULL
+                        ? EmeraldScriptState_GetLastSurface() : "unknown",
+                     EmeraldScriptStateStatus_Describe != NULL
+                        ? EmeraldScriptStateStatus_Describe(scriptState)
+                        : "adapter error");
+            SetError(message);
+            return NATIVE_STATE_UNSUPPORTED;
+        }
+    }
     framebuffer = malloc(DISPLAY_WIDTH * DISPLAY_HEIGHT * sizeof(u32));
     if (framebuffer == NULL)
     {
@@ -2778,7 +2903,9 @@ static bool32 ValidateResourceRecords(const u8 *records, u32 recordCount,
  * index. Any failure rejects the whole state before live memory is touched. */
 static bool32 ResolveResourceRecords(const u8 *records, u32 recordCount,
                                      const struct EmeraldResourceRangeIndex *rangeIndex,
-                                     uintptr_t *outPointers)
+                                     const struct NativeStateSlice *slices,
+                                     const u8 *const *serializedSlices,
+                                     u32 sliceCount, uintptr_t *outPointers)
 {
     u32 i;
 
@@ -2794,8 +2921,51 @@ static bool32 ResolveResourceRecords(const u8 *records, u32 recordCount,
         uint32_t rangeOffset = ReadLe32(bytes + 52u);
         char keyHex[GEN3_RESOURCE_KEY_HEX_SIZE];
         char message[512];
+        u32 sliceIndex;
+        uintptr_t fieldAddress = 0u;
 
         memcpy(key.bytes, bytes + 8u, GEN3_RESOURCE_KEY_SIZE);
+        for (sliceIndex = 0u; sliceIndex < sliceCount; sliceIndex++)
+        {
+            if (slices[sliceIndex].tag == sectionTag)
+            {
+                fieldAddress = (uintptr_t)slices[sliceIndex].source
+                             + fieldOffset;
+                break;
+            }
+        }
+        if (EmeraldScriptState_ResolveField != NULL && fieldAddress != 0u)
+        {
+            enum EmeraldScriptStateStatus scriptStatus =
+                EmeraldScriptState_ResolveField(
+                    fieldAddress, &key, resourceType, resourceSchema,
+                    representationRole, rangeOffset,
+                    serializedSlices[sliceIndex],
+                    (uintptr_t)slices[sliceIndex].source,
+                    slices[sliceIndex].size, &outPointers[i]);
+            if (scriptStatus == EMERALD_SCRIPT_STATE_OK)
+                continue;
+            if (scriptStatus != EMERALD_SCRIPT_STATE_NOT_SCRIPT)
+            {
+                snprintf(message, sizeof(message),
+                         "state field-script reference %u refused at %s: %s",
+                         i,
+                         EmeraldScriptState_GetLastSurface != NULL
+                            ? EmeraldScriptState_GetLastSurface() : "unknown",
+                         EmeraldScriptStateStatus_Describe != NULL
+                            ? EmeraldScriptStateStatus_Describe(scriptStatus)
+                            : "adapter error");
+                SetError(message);
+                return FALSE;
+            }
+        }
+        if (EmeraldScriptState_IsStaticRecord != NULL
+         && EmeraldScriptState_IsStaticRecord(resourceType, resourceSchema,
+                                              representationRole))
+        {
+            SetError("state field-script reference is not attached to an approved script pointer surface");
+            return FALSE;
+        }
         if (!EmeraldResourceRangeIndex_ResolveByKey(
                 rangeIndex, &key, resourceType, resourceSchema,
                 representationRole, (size_t)rangeOffset, &outPointers[i]))
@@ -2817,6 +2987,7 @@ static bool32 ResolveResourceRecords(const u8 *records, u32 recordCount,
 static enum NativeStateResult LoadStateFromPath(const char *path)
 {
     struct NativeStateSlice slices[13];
+    const u8 *serializedSlices[13] = {0};
     struct SiiRtcInfo rtc;
     u8 *framebuffer;
     u8 *file;
@@ -2901,6 +3072,7 @@ static enum NativeStateResult LoadStateFromPath(const char *path)
             SetError("state section is missing, incompatible, or corrupt");
             return NATIVE_STATE_CORRUPT;
         }
+        serializedSlices[i] = file + offset;
         if (!ValidateRestoreSlice(&slices[i], file + offset))
         {
             free(file);
@@ -2987,6 +3159,7 @@ static enum NativeStateResult LoadStateFromPath(const char *path)
                 return NATIVE_STATE_UNAVAILABLE;
             }
             if (!ResolveResourceRecords(records, recordCount, rangeIndex,
+                                        slices, serializedSlices, count,
                                         resolved))
             {
                 free(resolved);

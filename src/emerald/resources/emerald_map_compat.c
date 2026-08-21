@@ -63,6 +63,16 @@ static uint8_t *sEventArena;
 static size_t sEventArenaBytes;
 static uint8_t *sConnArena;
 static size_t sConnArenaBytes;
+
+/* Native MapConnections contains a host pointer and therefore each packed
+ * arena block must begin at pointer alignment.  The wire rows remain exact
+ * 12-byte records; only zero padding between native blocks is added. */
+static size_t NativeConnectionBlockSize(uint32_t count)
+{
+    size_t size = 16u + (size_t)count * MAP_CONN_WIRE;
+    size_t alignment = sizeof(uintptr_t);
+    return (size + alignment - 1u) & ~(alignment - 1u);
+}
 static struct { uintptr_t base; size_t length; } sRegisteredRanges[
     MAP_MAX_REG_RANGES];
 static size_t sRegisteredRangeCount;
@@ -520,7 +530,7 @@ EmeraldMapCompat_TryInitialize(
             goto done;
         }
         conWire[i] = wire;
-        conBytes += (size_t)16u + (size_t)r->count * MAP_CONN_WIRE;
+        conBytes += NativeConnectionBlockSize(r->count);
         /* the block's own count must match the metadata. */
         if ((int32_t)ReadLe32(wire + (size_t)r->count * MAP_CONN_WIRE)
                 != r->count)
@@ -679,7 +689,7 @@ EmeraldMapCompat_TryInitialize(
             memcpy(rows, w, (size_t)r->count * MAP_CONN_WIRE);
         pm->count = r->count;
         pm->connections = (const struct MapConnection *)rows;
-        conCur += 16u + (size_t)r->count * MAP_CONN_WIRE;
+        conCur += NativeConnectionBlockSize(r->count);
     }
     sConnArenaBytes = (size_t)(conCur - sConnArena);
 
@@ -726,7 +736,7 @@ EmeraldMapCompat_TryInitialize(
                 if (kMapConnectionsKeyByHeader[h][0] != '\0'
                  && strcmp(kMapConnectionsKeyByHeader[h], r->name) == 0)
                     connsByHeader[h] = pm;
-            cc += 16u + (size_t)r->count * MAP_CONN_WIRE;
+            cc += NativeConnectionBlockSize(r->count);
         }
     }
 

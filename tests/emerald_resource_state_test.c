@@ -43,6 +43,10 @@
 #include "gen3/resources/resource_types.h"
 #include "emerald/resources/emerald_resource_ranges.h"
 #include "emerald/resources/emerald_text_compat.h"
+#include "emerald/resources/emerald_script_compat.h"
+#include "emerald/resources/emerald_script_state.h"
+#include "emerald/resources/script_native.generated.h"
+#include "script.h"
 /* R12: REAL MP2K struct layouts for the audio-shaped game_bss fixture
  * (struct SoundInfo/SoundChannel/MusicPlayerInfo). Header-only; no m4a.c is
  * linked, so no audio externs are referenced. */
@@ -111,6 +115,8 @@ extern uint64_t HarnessDeviceQueuedBytes(void);
 /* R11-D declaration mode: the record DEFINITIONS live in
  * emerald_layout_compat.c (compiled alongside). */
 #include "emerald/resources/layout_native.generated.h"
+#include "wild_encounter.h"
+#include "emerald_script_compat_harness.h"
 
 #define HARNESS_STATE_SLOT 7u
 #define HARNESS_ROW_COUNT 10u
@@ -251,6 +257,31 @@ struct HarnessGameData
      * pointers target the executable image; events/connections target the
      * session arenas and must travel through the State-v5 resource sidecar. */
     struct MapHeader activeMapHeader;
+    /* R13-G4 staged-only execution-state clone.  The member layouts are the
+     * real native ScriptContext/pointer shapes; production contexts are not
+     * redirected and the VM never executes this shadow fixture. */
+    struct
+    {
+        struct ScriptContext context1;
+        struct ScriptContext context2;
+        struct ScriptContext mysteryEvent;
+        const u8 *ramScriptRetAddr;
+        const u8 *approaching[2];
+        const u8 *trainerEnd;
+        const u8 *trainerReturnA;
+        const u8 *trainerReturnB;
+        const u8 *trainerText[6];
+        u8 *mysteryNativeBase;
+        intptr_t addressOffset;
+        u64 generationStamp;
+        struct EmeraldScriptVirtualAnchor virtualAnchor;
+        u8 dynamicScript[512];
+        u32 expectedModule[12];
+        u32 expectedOffset[12];
+        u32 trainerIds[4];
+        u32 movementEncodedTarget;
+        u32 caseKind;
+    } scriptState;
     u32 tailMagic;                      /* 0x48475232 */
     u32 filler[24];
 };
@@ -2908,6 +2939,963 @@ static int DoDesktopRealSdl(const char *packPath, const char *statePath)
 }
 #endif /* HARNESS_REAL_SDL_PROBE */
 
+/* ------------------------------------------------------------------ */
+/* R13-G4 staged field-script State-v5 closure.                        */
+
+struct G4Point
+{
+    u32 module;
+    u32 offset;
+    const u8 *pointer;
+};
+
+static u8 sG4DynamicBoundaries[512];
+
+static bool8 G4WaitCallback(void)
+{
+    return FALSE;
+}
+
+static bool32 G4Stage(const char *packPath, bool32 restage)
+{
+    struct EmeraldScriptCompatDiagnostics diagnostics;
+    enum EmeraldScriptCompatStatus status;
+
+    if (!SetupScriptCompatSession(packPath))
+        return FALSE;
+    memset(&diagnostics, 0, sizeof(diagnostics));
+    status = EmeraldScriptCompat_TryInitialize(
+        gScriptHarnessSnapshot, gScriptHarnessPack, &diagnostics);
+    if (status != EMERALD_SCRIPT_OK)
+    {
+        fprintf(stderr, "G4 script stage refused: %s @ %s\n",
+                EmeraldScriptCompatStatus_Describe(status),
+                diagnostics.canonicalName);
+        return FALSE;
+    }
+    if (restage)
+    {
+        const u8 *firstBase;
+        const u8 *secondBase;
+        size_t firstSize;
+        size_t secondSize;
+        CHECK(EmeraldScriptCompat_GetArena(&firstBase, &firstSize));
+        memset(&diagnostics, 0, sizeof(diagnostics));
+        status = EmeraldScriptCompat_TryInitialize(
+            gScriptHarnessSnapshot, gScriptHarnessPack, &diagnostics);
+        CHECK(status == EMERALD_SCRIPT_OK);
+        CHECK(EmeraldScriptCompat_GetArena(&secondBase, &secondSize));
+        CHECK(firstBase != secondBase);
+        CHECK(firstSize == secondSize);
+    }
+    return TRUE;
+}
+
+static bool32 G4PointForOpcode(u8 opcode, u32 ordinal, struct G4Point *out)
+{
+    u32 m;
+    u32 seen = 0u;
+    for (m = 0u; m < kEmeraldScriptCompatTable.moduleCount; m++)
+    {
+        const struct EmeraldScriptNativeModule *module =
+            &kEmeraldScriptCompatTable.modules[m];
+        const u8 *base;
+        size_t size;
+        u32 i;
+        if (module->payloadSize == 0u
+         || !EmeraldScriptCompat_GetModuleSpan(module->id, &base, &size))
+            continue;
+        for (i = module->boundaryFirst;
+             i < module->boundaryFirst + module->boundaryCount; i++)
+        {
+            u32 offset = kEmeraldScriptCompatTable.boundaries[i].payloadOffset;
+            if (offset == 0u || offset >= size || base[offset] != opcode)
+                continue;
+            if (seen++ == ordinal)
+            {
+                out->module = m;
+                out->offset = offset;
+                out->pointer = base + offset;
+                return TRUE;
+            }
+        }
+    }
+    return FALSE;
+}
+
+static bool32 G4AnyInteriorPoint(u32 ordinal, struct G4Point *out)
+{
+    u32 m;
+    u32 seen = 0u;
+    for (m = 0u; m < kEmeraldScriptCompatTable.moduleCount; m++)
+    {
+        const struct EmeraldScriptNativeModule *module =
+            &kEmeraldScriptCompatTable.modules[m];
+        const u8 *base;
+        size_t size;
+        u32 i;
+        if (module->payloadSize == 0u
+         || !EmeraldScriptCompat_GetModuleSpan(module->id, &base, &size))
+            continue;
+        for (i = module->boundaryFirst;
+             i < module->boundaryFirst + module->boundaryCount; i++)
+        {
+            u32 offset = kEmeraldScriptCompatTable.boundaries[i].payloadOffset;
+            if (offset == 0u || offset >= size)
+                continue;
+            if (seen++ == ordinal)
+            {
+                out->module = m;
+                out->offset = offset;
+                out->pointer = base + offset;
+                return TRUE;
+            }
+        }
+    }
+    return FALSE;
+}
+
+static bool32 G4NonEntrypoint(u32 ordinal, struct G4Point *out)
+{
+    u32 m;
+    u32 seen = 0u;
+    for (m = 0u; m < kEmeraldScriptCompatTable.moduleCount; m++)
+    {
+        const struct EmeraldScriptNativeModule *module =
+            &kEmeraldScriptCompatTable.modules[m];
+        const u8 *base;
+        size_t size;
+        u32 i;
+        if (!EmeraldScriptCompat_GetModuleSpan(module->id, &base, &size))
+            continue;
+        for (i = module->boundaryFirst;
+             i < module->boundaryFirst + module->boundaryCount; i++)
+        {
+            u32 offset = kEmeraldScriptCompatTable.boundaries[i].payloadOffset;
+            if (offset == 0u || offset >= size
+             || EmeraldScriptCompat_ValidateBoundary(
+                    module->id, offset, EMERALD_SCRIPT_BOUNDARY_ENTRYPOINT)
+                    == EMERALD_SCRIPT_OK)
+                continue;
+            if (seen++ == ordinal)
+            {
+                out->module = m;
+                out->offset = offset;
+                out->pointer = base + offset;
+                return TRUE;
+            }
+        }
+    }
+    return FALSE;
+}
+
+static bool32 G4SegmentPoint(u32 segmentKind, struct G4Point *out)
+{
+    u32 m;
+    for (m = 0u; m < kEmeraldScriptCompatTable.moduleCount; m++)
+    {
+        const struct EmeraldScriptNativeModule *module =
+            &kEmeraldScriptCompatTable.modules[m];
+        const u8 *base;
+        size_t size;
+        u32 i;
+        if (!EmeraldScriptCompat_GetModuleSpan(module->id, &base, &size))
+            continue;
+        for (i = module->segmentFirst;
+             i < module->segmentFirst + module->segmentCount; i++)
+        {
+            const struct EmeraldScriptNativeSegment *segment =
+                &kEmeraldScriptCompatTable.segments[i];
+            if (segment->kind != segmentKind
+             || segment->payloadOffset >= size)
+                continue;
+            out->module = m;
+            out->offset = segment->payloadOffset;
+            out->pointer = base + segment->payloadOffset;
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+static bool32 G4Entrypoint(u32 kind, u32 ordinal, struct G4Point *out)
+{
+    size_t i;
+    u32 seen = 0u;
+    for (i = 0u; i < EmeraldScriptCompat_GetStagedFBindingCount(); i++)
+    {
+        struct EmeraldScriptCompatStagedFBinding row;
+        const u8 *base;
+        size_t size;
+        u32 m;
+        if (!EmeraldScriptCompat_GetStagedFBinding(i, &row)
+         || row.kind != kind)
+            continue;
+        if (EmeraldScriptCompat_ValidateBoundary(
+                row.moduleKey, row.payloadOffset,
+                EMERALD_SCRIPT_BOUNDARY_ENTRYPOINT) != EMERALD_SCRIPT_OK)
+            continue;
+        if (seen++ != ordinal)
+            continue;
+        for (m = 0u; m < kEmeraldScriptCompatTable.moduleCount; m++)
+            if (strcmp(kEmeraldScriptCompatTable.modules[m].id,
+                       row.moduleKey) == 0)
+                break;
+        if (m == kEmeraldScriptCompatTable.moduleCount)
+            return FALSE;
+        if (!EmeraldScriptCompat_GetModuleSpan(row.moduleKey, &base, &size)
+         || row.payloadOffset >= size)
+            return FALSE;
+        out->module = m;
+        out->offset = row.payloadOffset;
+        out->pointer = base + row.payloadOffset;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+static bool32 G4MapDispatchEntrypoint(u32 ordinal, struct G4Point *out)
+{
+    u32 i;
+    u32 seen = 0u;
+
+    for (i = 0u; i < kEmeraldScriptCompatTable.routingRelocCount; i++)
+    {
+        struct EmeraldScriptCompatResolvedTarget target;
+        char key[96];
+        u32 offset;
+        u32 segment;
+        u32 m;
+        if (!EmeraldScriptCompat_GetStagedRoutingTarget(i, &target)
+         || target.disposition != EMERALD_SCRIPT_DISPOSITION_STAGED_ARENA
+         || target.liveAddress == 0u
+         || EmeraldScriptCompat_ReverseResolve(
+                target.liveAddress, key, sizeof(key), &offset, &segment)
+                != EMERALD_SCRIPT_OK
+         || segment != EMERALD_SCRIPT_NATIVE_SEGMENT_BYTECODE
+         || EmeraldScriptCompat_ValidateBoundary(
+                key, offset, EMERALD_SCRIPT_BOUNDARY_ENTRYPOINT)
+                != EMERALD_SCRIPT_OK)
+            continue;
+        if (seen++ != ordinal)
+            continue;
+        for (m = 0u; m < kEmeraldScriptCompatTable.moduleCount; m++)
+            if (strcmp(kEmeraldScriptCompatTable.modules[m].id, key) == 0)
+                break;
+        if (m == kEmeraldScriptCompatTable.moduleCount)
+            return FALSE;
+        out->module = m;
+        out->offset = offset;
+        out->pointer = (const u8 *)target.liveAddress;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+static void G4BindLayout(void)
+{
+    struct HarnessGameData *data = GameData();
+    struct EmeraldScriptStateLayout layout;
+    struct EmeraldScriptDynamicBuffer dynamic;
+
+    memset(&layout, 0, sizeof(layout));
+    layout.context1 = &data->scriptState.context1;
+    layout.context2 = &data->scriptState.context2;
+    layout.generationStamp = &data->scriptState.generationStamp;
+    layout.ramScriptRetAddr = &data->scriptState.ramScriptRetAddr;
+    layout.approachingTrainerScript[0] = &data->scriptState.approaching[0];
+    layout.approachingTrainerScript[1] = &data->scriptState.approaching[1];
+    layout.trainerBattleEndScript = &data->scriptState.trainerEnd;
+    layout.trainerAReturnScript = &data->scriptState.trainerReturnA;
+    layout.trainerBReturnScript = &data->scriptState.trainerReturnB;
+    layout.addressOffset = &data->scriptState.addressOffset;
+    layout.mysteryEventContext = &data->scriptState.mysteryEvent;
+    layout.mysteryEventNativeBase = &data->scriptState.mysteryNativeBase;
+    EmeraldScriptState_SetLayout(&layout);
+
+    memset(sG4DynamicBoundaries, 0, sizeof(sG4DynamicBoundaries));
+    sG4DynamicBoundaries[0] = 1u;
+    sG4DynamicBoundaries[5] = 1u;
+    sG4DynamicBoundaries[10] = 1u;
+    sG4DynamicBoundaries[15] = 1u;
+    sG4DynamicBoundaries[256] = 1u;
+    sG4DynamicBoundaries[261] = 1u;
+    sG4DynamicBoundaries[266] = 1u;
+    sG4DynamicBoundaries[271] = 1u;
+    memset(&dynamic, 0, sizeof(dynamic));
+    dynamic.kind = EMERALD_SCRIPT_DYNAMIC_MYSTERY_EVENT_BUFFER;
+    dynamic.ownerStorageId = 0x4d455654u;
+    dynamic.generation = 7u;
+    dynamic.base = data->scriptState.dynamicScript;
+    dynamic.size = sizeof(data->scriptState.dynamicScript) / 2u;
+    dynamic.instructionStarts = sG4DynamicBoundaries;
+    snprintf(dynamic.ownerId, sizeof(dynamic.ownerId), "GAME_DATA:mystery-event");
+    EmeraldScriptState_ClearDynamicBuffers();
+    CHECK(EmeraldScriptState_RegisterDynamicBuffer(&dynamic));
+
+    dynamic.kind = EMERALD_SCRIPT_DYNAMIC_SAVE_RAM_SCRIPT;
+    dynamic.ownerStorageId = 0x53415645u;
+    dynamic.generation = 11u;
+    dynamic.base = data->scriptState.dynamicScript + 256u;
+    dynamic.size = sizeof(data->scriptState.dynamicScript) / 2u;
+    dynamic.instructionStarts = sG4DynamicBoundaries + 256u;
+    snprintf(dynamic.ownerId, sizeof(dynamic.ownerId), "GAME_DATA:save-ram-script");
+    CHECK(EmeraldScriptState_RegisterDynamicBuffer(&dynamic));
+}
+
+static void G4StoreExpected(u32 slot, const struct G4Point *point)
+{
+    GameData()->scriptState.expectedModule[slot] = point->module;
+    GameData()->scriptState.expectedOffset[slot] = point->offset;
+}
+
+static bool32 G4CheckPoint(const u8 *pointer, u32 slot, u32 boundary)
+{
+    char key[96];
+    u32 offset;
+    u32 segment;
+    enum EmeraldScriptCompatStatus status = EmeraldScriptCompat_ReverseResolve(
+        (uintptr_t)pointer, key, sizeof(key), &offset, &segment);
+    CHECK(status == EMERALD_SCRIPT_OK);
+    if (status != EMERALD_SCRIPT_OK)
+        return FALSE;
+    CHECK(strcmp(key, kEmeraldScriptCompatTable.modules[
+                         GameData()->scriptState.expectedModule[slot]].id) == 0);
+    CHECK(offset == GameData()->scriptState.expectedOffset[slot]);
+    CHECK(segment == EMERALD_SCRIPT_NATIVE_SEGMENT_BYTECODE);
+    CHECK(EmeraldScriptCompat_ValidateBoundary(key, offset, boundary)
+          == EMERALD_SCRIPT_OK);
+    return TRUE;
+}
+
+static bool32 G4PointAfterOpcode(u8 opcode, u32 instructionSize,
+                                struct G4Point *out)
+{
+    u32 m;
+
+    for (m = 0u; m < kEmeraldScriptCompatTable.moduleCount; m++)
+    {
+        const struct EmeraldScriptNativeModule *module =
+            &kEmeraldScriptCompatTable.modules[m];
+        const u8 *base;
+        size_t size;
+        u32 i;
+        if (!EmeraldScriptCompat_GetModuleSpan(module->id, &base, &size))
+            continue;
+        for (i = instructionSize; i < size; i++)
+        {
+            if (base[i - instructionSize] != opcode
+             || EmeraldScriptCompat_ValidateBoundary(
+                    module->id, i - instructionSize,
+                    EMERALD_SCRIPT_BOUNDARY_INSTRUCTION_START)
+                    != EMERALD_SCRIPT_OK
+             || EmeraldScriptCompat_ValidateBoundary(
+                    module->id, i, EMERALD_SCRIPT_BOUNDARY_INSTRUCTION_START)
+                    != EMERALD_SCRIPT_OK)
+                continue;
+            out->module = m;
+            out->offset = i;
+            out->pointer = base + i;
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+static void G4VariantPath(char *out, size_t outSize, const char *statePath,
+                          const char *suffix)
+{
+    snprintf(out, outSize, "%s.%s", statePath, suffix);
+}
+
+static bool32 G4SaveVariant(const char *statePath, const char *suffix,
+                            u32 expectedRecords)
+{
+    char path[512];
+    struct ParsedRecord records[64];
+    u32 recordCount = 0u;
+
+    G4VariantPath(path, sizeof(path), statePath, suffix);
+    HarnessStatePath_Override(path);
+    CHECK(NativeState_Save(HARNESS_STATE_SLOT) == NATIVE_STATE_OK);
+    CHECK(ParseStateSidecar(path, records, ARRAY_COUNT(records), &recordCount));
+    CHECK(recordCount == expectedRecords);
+    return sFailures == 0;
+}
+
+static void G4PlantDynamic(void)
+{
+    struct HarnessGameData *data = GameData();
+    struct EmeraldScriptDynamicBuffer dynamic;
+    u32 i;
+
+    memset(data->scriptState.dynamicScript, 0,
+           sizeof(data->scriptState.dynamicScript));
+    /* Full vaddress family fixture.  Encoded targets are deliberately not
+     * host addresses; all eight resolve through one stable anchor. */
+    for (i = 0u; i < 8u; i++)
+        data->scriptState.dynamicScript[i * 8u] = (u8)(0xB8u + i);
+    memset(&dynamic, 0, sizeof(dynamic));
+    dynamic.kind = EMERALD_SCRIPT_DYNAMIC_MYSTERY_EVENT_BUFFER;
+    dynamic.ownerStorageId = 0x4d455654u;
+    dynamic.generation = 7u;
+    dynamic.base = data->scriptState.dynamicScript;
+    dynamic.size = sizeof(data->scriptState.dynamicScript) / 2u;
+    dynamic.instructionStarts = sG4DynamicBoundaries;
+    snprintf(dynamic.ownerId, sizeof(dynamic.ownerId), "GAME_DATA:mystery-event");
+    CHECK(EmeraldScriptState_BuildVirtualAnchor(
+        &dynamic, 0x09000000u, 0u, &data->scriptState.virtualAnchor)
+          == EMERALD_SCRIPT_STATE_OK);
+    data->scriptState.mysteryEvent.mode = 1u;
+    data->scriptState.mysteryEvent.stackDepth = 2u;
+    data->scriptState.mysteryEvent.scriptPtr = data->scriptState.dynamicScript + 5u;
+    data->scriptState.mysteryEvent.stack[0] = data->scriptState.dynamicScript + 10u;
+    data->scriptState.mysteryEvent.stack[1] = data->scriptState.dynamicScript + 15u;
+    data->scriptState.mysteryNativeBase = data->scriptState.dynamicScript;
+}
+
+static bool32 G4PlantNestedState(void)
+{
+    struct HarnessGameData *data = GameData();
+    struct G4Point current;
+    struct G4Point return1;
+    struct G4Point final;
+    struct G4Point trainer;
+    struct G4Point entryA;
+    struct G4Point entryB;
+    const u8 *text;
+    size_t textSize;
+    u32 i;
+
+    memset(data, 0, sizeof(*data));
+    G4BindLayout();
+    CHECK(G4PointForOpcode(0x03u, 0u, &current));
+    CHECK(G4PointForOpcode(0x03u, 1u, &return1));
+    CHECK(G4AnyInteriorPoint(50u, &final));
+    CHECK(G4PointForOpcode(0x5Cu, 0u, &trainer));
+    CHECK(G4Entrypoint(EMERALD_SCRIPT_NATIVE_F_OBJECT_EVENT, 0u, &entryA));
+    CHECK(G4Entrypoint(EMERALD_SCRIPT_NATIVE_F_COORD_EVENT, 0u, &entryB));
+    if (sFailures != 0)
+        return FALSE;
+    data->scriptState.context1.mode = 1u;
+    data->scriptState.context1.stackDepth = 2u;
+    data->scriptState.context1.scriptPtr = current.pointer;
+    data->scriptState.context1.stack[0] = final.pointer;
+    data->scriptState.context1.stack[1] = return1.pointer;
+    data->scriptState.context1.stack[19] = (const u8 *)(uintptr_t)0x11111111u;
+    data->scriptState.ramScriptRetAddr = final.pointer;
+    data->scriptState.approaching[0] = trainer.pointer;
+    data->scriptState.approaching[1] = trainer.pointer;
+    data->scriptState.trainerEnd = final.pointer;
+    data->scriptState.trainerReturnA = entryA.pointer;
+    data->scriptState.trainerReturnB = entryB.pointer;
+    data->scriptState.generationStamp = EmeraldScriptCompat_GetGenerationId();
+    data->scriptState.trainerIds[0] = 0x1234u;
+    data->scriptState.trainerIds[1] = 0x5678u;
+    CHECK(EmeraldTextCompat_GetResourceBytes(
+            "emerald:text/system/gtext-123dot", &text, &textSize));
+    if (text != NULL)
+    {
+        CHECK(textSize == 9u);
+        for (i = 0u; i < 6u; i++)
+            data->scriptState.trainerText[i] = text + (i % 3u) * 3u;
+    }
+    G4StoreExpected(0u, &current);
+    G4StoreExpected(1u, &return1);
+    G4StoreExpected(2u, &final);
+    G4StoreExpected(3u, &trainer);
+    G4StoreExpected(4u, &entryA);
+    G4StoreExpected(5u, &entryB);
+    G4PlantDynamic();
+    data->magic = 0x47344e31u;
+    data->tailMagic = 0x47344e32u;
+    return TRUE;
+}
+
+static int DoG4Create(const char *packPath, const char *statePath)
+{
+    struct ParsedRecord records[64];
+    u32 recordCount = 0u;
+    const u8 *arena;
+    size_t arenaSize;
+    size_t projected = 0u;
+
+    HarnessStatePath_Override(statePath);
+    if (!G4Stage(packPath, FALSE) || !G4PlantNestedState())
+        return 1;
+    CHECK(EmeraldScriptCompat_GetArena(&arena, &arenaSize));
+    CHECK(EmeraldScriptCompat_ValidateProjectedRanges(
+              5854u, EMERALD_RESOURCE_RANGE_INDEX_MAX_RANGES, &projected)
+          == EMERALD_SCRIPT_OK);
+    CHECK(projected == 6377u);
+    CHECK(EmeraldResourceRangeIndex_GetRangeCount(
+              EmeraldResourceCompat_GetRangeIndex()) == 5854u);
+    CHECK(NativeState_Save(HARNESS_STATE_SLOT) == NATIVE_STATE_OK);
+    CHECK(ParseStateSidecar(statePath, records, ARRAY_COUNT(records),
+                            &recordCount));
+    /* 9 static G records + six C trainer-text records. Dynamic Mystery
+     * pointers use existing in-band persistent identities. */
+    CHECK(recordCount == 15u);
+
+    /* SAVE_RAM_SCRIPT: mutable Context1 IP remains relative to captured
+     * SaveBlock storage; the return target is the one static G sidecar. */
+    {
+        struct HarnessGameData *data = GameData();
+        struct G4Point ret;
+        memset(data, 0, sizeof(*data));
+        G4BindLayout();
+        CHECK(G4AnyInteriorPoint(50u, &ret));
+        data->scriptState.context1.mode = 1u;
+        data->scriptState.context1.scriptPtr =
+            data->scriptState.dynamicScript + 261u;
+        data->scriptState.dynamicScript[261] = 0x03u;
+        data->scriptState.ramScriptRetAddr = ret.pointer;
+        data->scriptState.generationStamp = EmeraldScriptCompat_GetGenerationId();
+        G4StoreExpected(0u, &ret);
+        CHECK(G4SaveVariant(statePath, "ram", 1u));
+    }
+
+    /* Mid-dialogue: IP is already after MESSAGE, the deferred callback is
+     * engine-image relative, and the outstanding text pointer is C-owned. */
+    {
+        struct HarnessGameData *data = GameData();
+        struct G4Point next;
+        const u8 *text = NULL;
+        size_t textSize = 0u;
+        memset(data, 0, sizeof(*data));
+        G4BindLayout();
+        CHECK(G4PointAfterOpcode(0x67u, 5u, &next));
+        CHECK(EmeraldTextCompat_GetResourceBytes(
+            "emerald:text/system/gtext-123dot", &text, &textSize));
+        data->scriptState.context1.mode = 1u;
+        data->scriptState.context1.scriptPtr = next.pointer;
+        data->scriptState.context1.nativePtr = G4WaitCallback;
+        data->scriptState.trainerText[0] = text + 3u;
+        data->scriptState.generationStamp = EmeraldScriptCompat_GetGenerationId();
+        G4StoreExpected(0u, &next);
+        CHECK(G4SaveVariant(statePath, "dialogue", 2u));
+    }
+
+    /* Movement wait: movement ownership remains an opaque B-owned scalar;
+     * only the advanced G IP is sidecar-relocated. */
+    {
+        struct HarnessGameData *data = GameData();
+        struct G4Point next;
+        memset(data, 0, sizeof(*data));
+        G4BindLayout();
+        CHECK(G4PointAfterOpcode(0x51u, 3u, &next));
+        data->scriptState.context1.mode = 1u;
+        data->scriptState.context1.scriptPtr = next.pointer;
+        data->scriptState.context1.nativePtr = G4WaitCallback;
+        data->scriptState.movementEncodedTarget = 0x42574e44u;
+        data->scriptState.generationStamp = EmeraldScriptCompat_GetGenerationId();
+        G4StoreExpected(0u, &next);
+        CHECK(G4SaveVariant(statePath, "movement", 1u));
+    }
+
+    /* The nested fixture covers object and corrected coord F entrypoints.
+     * This variant closes map-script and BG/sign provenance using the same
+     * exact ENTRYPOINT role on the two trainer-continuation-shaped slots. */
+    {
+        struct HarnessGameData *data = GameData();
+        struct G4Point map = {0};
+        struct G4Point bg = {0};
+        memset(data, 0, sizeof(*data));
+        G4BindLayout();
+        CHECK(G4MapDispatchEntrypoint(0u, &map));
+        CHECK(G4Entrypoint(EMERALD_SCRIPT_NATIVE_F_BG_EVENT, 0u, &bg));
+        data->scriptState.trainerReturnA = map.pointer;
+        data->scriptState.trainerReturnB = bg.pointer;
+        data->scriptState.generationStamp = EmeraldScriptCompat_GetGenerationId();
+        G4StoreExpected(0u, &map);
+        G4StoreExpected(1u, &bg);
+        CHECK(G4SaveVariant(statePath, "entrypoints", 2u));
+    }
+    printf("G4-CREATE arena=%p size=%zu generation=%llu records=%u projected=%zu\n",
+           (const void *)arena, arenaSize,
+           (unsigned long long)EmeraldScriptCompat_GetGenerationId(),
+           recordCount, projected);
+    TeardownScriptCompatSession();
+    return sFailures != 0;
+}
+
+static int DoG4Load(const char *packPath, const char *statePath)
+{
+    struct HarnessGameData *data = GameData();
+    const u8 *arena;
+    size_t arenaSize;
+    uintptr_t target;
+    u32 i;
+
+    HarnessStatePath_Override(statePath);
+    if (!G4Stage(packPath, TRUE))
+        return 1;
+    memset(data, 0, sizeof(*data));
+    G4BindLayout();
+    CHECK(NativeState_Load(HARNESS_STATE_SLOT) == NATIVE_STATE_OK);
+    CHECK(EmeraldScriptCompat_GetArena(&arena, &arenaSize));
+    CHECK(G4CheckPoint(data->scriptState.context1.scriptPtr, 0u,
+                       EMERALD_SCRIPT_BOUNDARY_INSTRUCTION_START));
+    CHECK(G4CheckPoint(data->scriptState.context1.stack[1], 1u,
+                       EMERALD_SCRIPT_BOUNDARY_NEXT_INSTRUCTION));
+    CHECK(G4CheckPoint(data->scriptState.context1.stack[0], 2u,
+                       EMERALD_SCRIPT_BOUNDARY_NEXT_INSTRUCTION));
+    CHECK(data->scriptState.context1.stack[19] == NULL);
+    CHECK(data->scriptState.trainerIds[0] == 0x1234u
+       && data->scriptState.trainerIds[1] == 0x5678u);
+    CHECK(G4CheckPoint(data->scriptState.ramScriptRetAddr, 2u,
+                       EMERALD_SCRIPT_BOUNDARY_NEXT_INSTRUCTION));
+    CHECK(G4CheckPoint(data->scriptState.approaching[0], 3u,
+                       EMERALD_SCRIPT_BOUNDARY_INSTRUCTION_START));
+    CHECK(G4CheckPoint(data->scriptState.trainerReturnA, 4u,
+                       EMERALD_SCRIPT_BOUNDARY_ENTRYPOINT));
+    CHECK(G4CheckPoint(data->scriptState.trainerReturnB, 5u,
+                       EMERALD_SCRIPT_BOUNDARY_ENTRYPOINT));
+    CHECK(data->scriptState.mysteryEvent.scriptPtr
+          == data->scriptState.dynamicScript + 5u);
+    CHECK(data->scriptState.mysteryEvent.stack[0]
+          == data->scriptState.dynamicScript + 10u);
+    CHECK(data->scriptState.mysteryEvent.stack[1]
+          == data->scriptState.dynamicScript + 15u);
+    CHECK(data->scriptState.mysteryNativeBase
+          == data->scriptState.dynamicScript);
+    for (i = 0u; i < 8u; i++)
+    {
+        CHECK(EmeraldScriptState_ResolveVirtualTarget(
+                  &data->scriptState.virtualAnchor,
+                  0x09000000u + i * 8u, 1u, &target)
+              == EMERALD_SCRIPT_STATE_OK);
+        CHECK(target == (uintptr_t)data->scriptState.dynamicScript + i * 8u);
+        CHECK(*(const u8 *)target == (u8)(0xB8u + i));
+    }
+    /* Differential next-opcode/return oracle: the canonical IP and first
+     * return both point at opcode RETURN.  Pop both frames in the native
+     * stack order and land at the exact final canonical offset. */
+    CHECK(*data->scriptState.context1.scriptPtr == 0x03u);
+    data->scriptState.context1.stackDepth--;
+    data->scriptState.context1.scriptPtr =
+        data->scriptState.context1.stack[data->scriptState.context1.stackDepth];
+    CHECK(*data->scriptState.context1.scriptPtr == 0x03u);
+    data->scriptState.context1.stackDepth--;
+    data->scriptState.context1.scriptPtr =
+        data->scriptState.context1.stack[data->scriptState.context1.stackDepth];
+    CHECK(G4CheckPoint(data->scriptState.context1.scriptPtr, 2u,
+                       EMERALD_SCRIPT_BOUNDARY_INSTRUCTION_START));
+
+    /* Each following load is another complete transaction in this fresh
+     * process, against generation B and its forced-different arena base. */
+    {
+        char path[512];
+        G4VariantPath(path, sizeof(path), statePath, "ram");
+        HarnessStatePath_Override(path);
+        memset(data, 0, sizeof(*data));
+        G4BindLayout();
+        CHECK(NativeState_Load(HARNESS_STATE_SLOT) == NATIVE_STATE_OK);
+        CHECK(data->scriptState.context1.scriptPtr
+              == data->scriptState.dynamicScript + 261u);
+        CHECK(*data->scriptState.context1.scriptPtr == 0x03u);
+        CHECK(G4CheckPoint(data->scriptState.ramScriptRetAddr, 0u,
+                           EMERALD_SCRIPT_BOUNDARY_NEXT_INSTRUCTION));
+        data->scriptState.context1.scriptPtr =
+            data->scriptState.ramScriptRetAddr;
+        CHECK(G4CheckPoint(data->scriptState.context1.scriptPtr, 0u,
+                           EMERALD_SCRIPT_BOUNDARY_INSTRUCTION_START));
+    }
+    {
+        char path[512];
+        G4VariantPath(path, sizeof(path), statePath, "dialogue");
+        HarnessStatePath_Override(path);
+        memset(data, 0, sizeof(*data));
+        G4BindLayout();
+        CHECK(NativeState_Load(HARNESS_STATE_SLOT) == NATIVE_STATE_OK);
+        CHECK(G4CheckPoint(data->scriptState.context1.scriptPtr, 0u,
+                           EMERALD_SCRIPT_BOUNDARY_INSTRUCTION_START));
+        CHECK(data->scriptState.context1.nativePtr == G4WaitCallback);
+        CHECK(data->scriptState.trainerText[0] != NULL);
+        CHECK(data->scriptState.trainerText[0][0] == 0xA3u);
+    }
+    {
+        char path[512];
+        G4VariantPath(path, sizeof(path), statePath, "movement");
+        HarnessStatePath_Override(path);
+        memset(data, 0, sizeof(*data));
+        G4BindLayout();
+        CHECK(NativeState_Load(HARNESS_STATE_SLOT) == NATIVE_STATE_OK);
+        CHECK(G4CheckPoint(data->scriptState.context1.scriptPtr, 0u,
+                           EMERALD_SCRIPT_BOUNDARY_INSTRUCTION_START));
+        CHECK(data->scriptState.context1.nativePtr == G4WaitCallback);
+        CHECK(data->scriptState.movementEncodedTarget == 0x42574e44u);
+    }
+    {
+        char path[512];
+        G4VariantPath(path, sizeof(path), statePath, "entrypoints");
+        HarnessStatePath_Override(path);
+        memset(data, 0, sizeof(*data));
+        G4BindLayout();
+        CHECK(NativeState_Load(HARNESS_STATE_SLOT) == NATIVE_STATE_OK);
+        CHECK(G4CheckPoint(data->scriptState.trainerReturnA, 0u,
+                           EMERALD_SCRIPT_BOUNDARY_ENTRYPOINT));
+        CHECK(G4CheckPoint(data->scriptState.trainerReturnB, 1u,
+                           EMERALD_SCRIPT_BOUNDARY_ENTRYPOINT));
+    }
+    printf("G4-LOAD arena=%p size=%zu generation=%llu nested-return=ok dynamic-vaddress=8/8\n",
+           (const void *)arena, arenaSize,
+           (unsigned long long)EmeraldScriptCompat_GetGenerationId());
+    TeardownScriptCompatSession();
+    return sFailures != 0;
+}
+
+static int DoG4Faults(const char *packPath, const char *statePath)
+{
+    struct HarnessGameData *data = GameData();
+    struct G4Point valid = {0};
+    struct G4Point nonEntry = {0};
+    struct G4Point dataPoint = {0};
+    struct EmeraldScriptStateResourceIdentity identity;
+    enum NativeStateResult result;
+    const u8 *arena;
+    size_t arenaSize;
+    const u8 *hole = NULL;
+    u32 passed = 0u;
+    u32 i;
+
+    HarnessStatePath_Override(statePath);
+    if (!G4Stage(packPath, FALSE))
+        return 1;
+    memset(data, 0, sizeof(*data));
+    G4BindLayout();
+    CHECK(G4AnyInteriorPoint(20u, &valid));
+    CHECK(G4NonEntrypoint(20u, &nonEntry));
+    CHECK(G4SegmentPoint(EMERALD_SCRIPT_NATIVE_SEGMENT_STATIC_DATA,
+                         &dataPoint));
+    CHECK(EmeraldScriptCompat_GetArena(&arena, &arenaSize));
+    for (i = 0u; i < arenaSize; i++)
+    {
+        char key[96];
+        u32 offset;
+        u32 segment;
+        if (EmeraldScriptCompat_ReverseResolve(
+                (uintptr_t)(arena + i), key, sizeof(key), &offset, &segment)
+                != EMERALD_SCRIPT_OK)
+        {
+            hole = arena + i;
+            break;
+        }
+    }
+    CHECK(hole != NULL);
+    data->scriptState.context1.mode = 1u;
+    data->scriptState.context1.scriptPtr = valid.pointer;
+    data->scriptState.generationStamp = EmeraldScriptCompat_GetGenerationId();
+
+#define G4_REFUSE(setup, needle) do { \
+        setup; \
+        result = NativeState_Save(HARNESS_STATE_SLOT); \
+        CHECK(result != NATIVE_STATE_OK); \
+        CHECK(strstr(NativeState_GetLastError(), (needle)) != NULL); \
+        passed++; \
+    } while (0)
+    data->scriptState.context1.stackDepth = 21u;
+    G4_REFUSE((void)0, "stackDepth");
+    data->scriptState.context1.stackDepth = 0u;
+    data->scriptState.context1.scriptPtr = NULL;
+    G4_REFUSE((void)0, "null IP");
+    data->scriptState.context1.scriptPtr = valid.pointer;
+    data->scriptState.context2.mode = 1u;
+    G4_REFUSE((void)0, "Context2");
+    data->scriptState.context2.mode = 0u;
+    data->scriptState.context2.scriptPtr = valid.pointer;
+    G4_REFUSE((void)0, "Context2");
+    data->scriptState.context2.scriptPtr = NULL;
+    data->scriptState.context2.stackDepth = 1u;
+    G4_REFUSE((void)0, "Context2");
+    data->scriptState.context2.stackDepth = 0u;
+    data->scriptState.context2.stack[19] = valid.pointer;
+    G4_REFUSE((void)0, "Context2");
+    data->scriptState.context2.stack[19] = NULL;
+    data->scriptState.addressOffset = 1;
+    G4_REFUSE((void)0, "host delta");
+    data->scriptState.addressOffset = 0;
+    data->scriptState.generationStamp++;
+    G4_REFUSE((void)0, "stale");
+    data->scriptState.generationStamp = EmeraldScriptCompat_GetGenerationId();
+    data->scriptState.context1.scriptPtr = valid.pointer + 1u;
+    G4_REFUSE((void)0, "boundary");
+
+    data->scriptState.context1.scriptPtr = valid.pointer;
+    data->scriptState.context1.stackDepth = 1u;
+    data->scriptState.context1.stack[0] = valid.pointer + 1u;
+    G4_REFUSE((void)0, "Context1.stack");
+    data->scriptState.context1.stackDepth = 0u;
+    data->scriptState.context1.stack[0] = NULL;
+    data->scriptState.context1.scriptPtr = arena + arenaSize;
+    G4_REFUSE((void)0, "outside");
+    data->scriptState.context1.scriptPtr = hole;
+    G4_REFUSE((void)0, "outside");
+    data->scriptState.context1.scriptPtr = dataPoint.pointer;
+    G4_REFUSE((void)0, "data/text/movement");
+    data->scriptState.context1.scriptPtr = valid.pointer;
+    data->scriptState.trainerEnd = dataPoint.pointer;
+    G4_REFUSE((void)0, "sTrainerBattleEndScript");
+    data->scriptState.trainerEnd = NULL;
+
+    /* Inactive Context1 scratch is scrubbed, never treated as an active
+     * return stack and never emitted as a sidecar. */
+    data->scriptState.context1.mode = 0u;
+    data->scriptState.context1.scriptPtr = (const u8 *)(uintptr_t)0x11111111u;
+    data->scriptState.context1.stack[19] =
+        (const u8 *)(uintptr_t)0x22222222u;
+    CHECK(NativeState_Save(HARNESS_STATE_SLOT) == NATIVE_STATE_OK);
+    passed++;
+
+    /* Unregistered mutable storage and an exact one-past buffer pointer. */
+    data->scriptState.context1.mode = 1u;
+    data->scriptState.context1.scriptPtr =
+        data->scriptState.dynamicScript + 261u;
+    data->scriptState.context1.stack[19] = NULL;
+    EmeraldScriptState_ClearDynamicBuffers();
+    G4_REFUSE((void)0, "outside");
+    data->scriptState.context1.scriptPtr =
+        data->scriptState.dynamicScript + sizeof(data->scriptState.dynamicScript);
+    G4_REFUSE((void)0, "outside");
+    G4BindLayout();
+#undef G4_REFUSE
+
+    /* Direct restore staging matrix.  These calls exercise the same family
+     * resolver used by NativeState_Load before any slice is committed. */
+    data->scriptState.context1.mode = 0u;
+    data->scriptState.trainerEnd = valid.pointer;
+    CHECK(EmeraldScriptState_CaptureField(
+              (uintptr_t)(void *)&data->scriptState.trainerEnd,
+              (uintptr_t)valid.pointer, &identity)
+          == EMERALD_SCRIPT_STATE_OK);
+    {
+        uintptr_t resolved = 0u;
+        Gen3ResourceKey badKey = identity.key;
+        u32 payloadSize = 0u;
+        u32 schema = 0u;
+        CHECK(EmeraldScriptState_ResolveField(
+                  (uintptr_t)(void *)&data->scriptState.trainerEnd,
+                  &identity.key, identity.resourceType, identity.schema,
+                  identity.representationRole, identity.payloadOffset,
+                  NULL, 0u, 0u, &resolved) == EMERALD_SCRIPT_STATE_OK);
+        CHECK(resolved == (uintptr_t)valid.pointer); passed++;
+        badKey.bytes[0] ^= 0x80u;
+        CHECK(EmeraldScriptState_ResolveField(
+                  (uintptr_t)(void *)&data->scriptState.trainerEnd,
+                  &badKey, identity.resourceType, identity.schema,
+                  identity.representationRole, identity.payloadOffset,
+                  NULL, 0u, 0u, &resolved)
+              == EMERALD_SCRIPT_STATE_ERR_MISSING_KEY); passed++;
+        CHECK(EmeraldScriptState_ResolveField(
+                  (uintptr_t)(void *)&data->scriptState.trainerEnd,
+                  &identity.key, identity.resourceType, 999u,
+                  identity.representationRole, identity.payloadOffset,
+                  NULL, 0u, 0u, &resolved)
+              == EMERALD_SCRIPT_STATE_ERR_SCHEMA); passed++;
+        CHECK(EmeraldScriptState_ResolveField(
+                  (uintptr_t)(void *)&data->scriptState.trainerEnd,
+                  &identity.key, identity.resourceType, identity.schema,
+                  EMERALD_RESOURCE_ROLE_LEGACY_LZ, identity.payloadOffset,
+                  NULL, 0u, 0u, &resolved)
+              == EMERALD_SCRIPT_STATE_ERR_SCHEMA); passed++;
+        CHECK(EmeraldScriptCompat_GetStateIdentity(
+                  identity.moduleKey, &badKey, &schema, &payloadSize));
+        CHECK(EmeraldScriptState_ResolveField(
+                  (uintptr_t)(void *)&data->scriptState.trainerEnd,
+                  &identity.key, identity.resourceType, identity.schema,
+                  identity.representationRole, payloadSize,
+                  NULL, 0u, 0u, &resolved)
+              == EMERALD_SCRIPT_STATE_ERR_WRONG_BOUNDARY); passed++;
+
+        data->scriptState.trainerEnd = nonEntry.pointer;
+        CHECK(EmeraldScriptState_CaptureField(
+                  (uintptr_t)(void *)&data->scriptState.trainerEnd,
+                  (uintptr_t)nonEntry.pointer, &identity)
+              == EMERALD_SCRIPT_STATE_OK);
+        CHECK(EmeraldScriptState_ResolveField(
+                  (uintptr_t)(void *)&data->scriptState.trainerReturnA,
+                  &identity.key, identity.resourceType, identity.schema,
+                  identity.representationRole, identity.payloadOffset,
+                  NULL, 0u, 0u, &resolved)
+              == EMERALD_SCRIPT_STATE_ERR_WRONG_BOUNDARY); passed++;
+    }
+
+    /* vaddress refusal matrix (no live handler changes). */
+    G4PlantDynamic();
+    {
+        uintptr_t target;
+        struct EmeraldScriptVirtualAnchor bad = data->scriptState.virtualAnchor;
+        CHECK(EmeraldScriptState_ResolveVirtualTarget(
+                  &bad, bad.encodedVirtualBase - 1u, 1u, &target)
+              == EMERALD_SCRIPT_STATE_ERR_DYNAMIC_BOUNDS); passed++;
+        CHECK(EmeraldScriptState_ResolveVirtualTarget(
+                  &bad, bad.encodedVirtualBase + 600u, 1u, &target)
+              == EMERALD_SCRIPT_STATE_ERR_DYNAMIC_BOUNDS); passed++;
+        bad.bufferGeneration++;
+        CHECK(EmeraldScriptState_ResolveVirtualTarget(
+                  &bad, bad.encodedVirtualBase, 1u, &target)
+              == EMERALD_SCRIPT_STATE_ERR_DYNAMIC_GENERATION); passed++;
+        bad = data->scriptState.virtualAnchor;
+        bad.ownerStorageId++;
+        CHECK(EmeraldScriptState_ResolveVirtualTarget(
+                  &bad, bad.encodedVirtualBase, 1u, &target)
+              == EMERALD_SCRIPT_STATE_ERR_DYNAMIC_UNKNOWN); passed++;
+        bad = data->scriptState.virtualAnchor;
+        bad.liveBaseOffset = 0xfffffff0u;
+        CHECK(EmeraldScriptState_ResolveVirtualTarget(
+                  &bad, bad.encodedVirtualBase, 32u, &target)
+              == EMERALD_SCRIPT_STATE_ERR_DYNAMIC_BOUNDS); passed++;
+        bad = data->scriptState.virtualAnchor;
+        bad.reserved = 1u;
+        CHECK(EmeraldScriptState_ResolveVirtualTarget(
+                  &bad, bad.encodedVirtualBase, 1u, &target)
+              == EMERALD_SCRIPT_STATE_ERR_DYNAMIC_UNKNOWN); passed++;
+    }
+    {
+        struct EmeraldScriptDynamicBuffer overlap;
+        memset(&overlap, 0, sizeof(overlap));
+        overlap.kind = EMERALD_SCRIPT_DYNAMIC_CAPTURED_BUFFER;
+        overlap.ownerStorageId = 0x414d4249u;
+        overlap.generation = 1u;
+        overlap.base = data->scriptState.dynamicScript + 1u;
+        overlap.size = 8u;
+        snprintf(overlap.ownerId, sizeof(overlap.ownerId), "ambiguous-overlap");
+        CHECK(!EmeraldScriptState_RegisterDynamicBuffer(&overlap)); passed++;
+    }
+    {
+        const u8 *oldPointer = valid.pointer;
+        struct EmeraldScriptCompatDiagnostics diagnostics;
+        memset(&diagnostics, 0, sizeof(diagnostics));
+        CHECK(EmeraldScriptCompat_TryInitialize(
+                  gScriptHarnessSnapshot, gScriptHarnessPack, &diagnostics)
+              == EMERALD_SCRIPT_OK);
+        memset(data, 0, sizeof(*data));
+        G4BindLayout();
+        data->scriptState.context1.mode = 1u;
+        data->scriptState.context1.scriptPtr = oldPointer;
+        data->scriptState.generationStamp =
+            EmeraldScriptCompat_GetGenerationId();
+        result = NativeState_Save(HARNESS_STATE_SLOT);
+        CHECK(result != NATIVE_STATE_OK);
+        CHECK(strstr(NativeState_GetLastError(), "outside") != NULL);
+        passed++;
+    }
+    {
+        uintptr_t resolved = 0u;
+        EmeraldScriptCompat_Shutdown();
+        CHECK(EmeraldScriptState_ResolveField(
+                  (uintptr_t)(void *)&data->scriptState.trainerEnd,
+                  &identity.key, identity.resourceType, identity.schema,
+                  identity.representationRole, identity.payloadOffset,
+                  NULL, 0u, 0u, &resolved)
+              == EMERALD_SCRIPT_STATE_ERR_UNAVAILABLE); passed++;
+    }
+    CHECK(passed == 32u);
+    printf("G4-FAULTS passed=%u\n", passed);
+    TeardownScriptCompatSession();
+    return sFailures != 0;
+}
+
 /* Rejection modes: every one must leave the canary (magic fields) untouched
  * and return a non-OK result. */
 static int DoLoadFail(const char *packPath, const char *statePath,
@@ -2984,12 +3972,16 @@ int main(int argc, char **argv)
                 "       %s desktop-audio <pack> <state>\n"
                 "       %s desktop-audio-paused <pack> <state>\n"
                 "       %s desktop-quick <pack> <state>\n"
+                "       %s g4-create <pack> <state>\n"
+                "       %s g4-load <pack> <state>\n"
+                "       %s g4-faults <pack> <state>\n"
 #if defined(HARNESS_REAL_SDL_PROBE)
                 "       %s desktop-real-sdl <pack> <state>\n"
 #endif
                 ,
                 argv[0], argv[0], argv[0], argv[0], argv[0], argv[0],
-                argv[0], argv[0], argv[0], argv[0], argv[0]
+                argv[0], argv[0], argv[0], argv[0], argv[0], argv[0],
+                argv[0], argv[0]
 #if defined(HARNESS_REAL_SDL_PROBE)
                 , argv[0]
 #endif
@@ -2997,6 +3989,12 @@ int main(int argc, char **argv)
         return 2;
     }
     HarnessStatePath_Override(argv[3]);
+    if (strcmp(argv[1], "g4-create") == 0)
+        return DoG4Create(argv[2], argv[3]);
+    if (strcmp(argv[1], "g4-load") == 0)
+        return DoG4Load(argv[2], argv[3]);
+    if (strcmp(argv[1], "g4-faults") == 0)
+        return DoG4Faults(argv[2], argv[3]);
     if (strcmp(argv[1], "audio-regression") == 0)
         return DoAudioRegression(argv[2], argv[3]);
     if (strcmp(argv[1], "audio-load") == 0)

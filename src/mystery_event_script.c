@@ -30,6 +30,17 @@ extern ScrCmdFunc gMysteryEventScriptCmdTableEnd[];
 EWRAM_DATA static struct ScriptContext sMysteryEventScriptContext = {0};
 static u8 *sMysteryEventScriptNativeBase;
 
+/* R13-G4 read-only dynamic-buffer State-v5 inventory.  This separate
+ * 17-command VM remains mutable-buffer-owned and is not a G resource. */
+void MysteryEvent_GetScriptStatePointers(struct ScriptContext **context,
+                                         u8 ***nativeBase)
+{
+    if (context != NULL)
+        *context = &sMysteryEventScriptContext;
+    if (nativeBase != NULL)
+        *nativeBase = &sMysteryEventScriptNativeBase;
+}
+
 static u8 *ResolveMysteryEventPointer(struct ScriptContext *ctx, GbaAddr address)
 {
     return sMysteryEventScriptNativeBase + (address - ctx->mOffset);
