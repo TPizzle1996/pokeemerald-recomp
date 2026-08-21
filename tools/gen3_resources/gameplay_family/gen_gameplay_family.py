@@ -1477,7 +1477,7 @@ def derive_map(elf, rom, root, add):
         if ccount:
             for i in range(ccount):
                 coord_scripts.append(struct.unpack_from(
-                    "<I", rom, cptr - GEN3_GBA_ROM_BASE + i * 16 + 8)[0])
+                    "<I", rom, cptr - GEN3_GBA_ROM_BASE + i * 16 + 12)[0])
         bg_scripts = []   # BgEvent overlay: sign kind scripts @ offset 8
         if bcount:
             for i in range(bcount):

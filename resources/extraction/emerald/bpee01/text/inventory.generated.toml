@@ -9,7 +9,7 @@ rom_profile = "bpee01"
 
 # Pinned counts (R13C-AC-1, authoritative):
 # 12777 labels / 903157 B; script_data 7933 / 749265 B;
-# C-side per-label resources 4824 / 151210 B; asm-source 7953 / 751947 B
+# C-side per-label resources 4824 / 151210 B; mystery-gift per-label 20 / 2682 B (R13-G2 §7.3); asm-source 7953 / 751947 B
 # across 363 bundles (304 maps + 35 data/text + 24 scripts).
 
 [[families]]
@@ -84,13 +84,18 @@ canonical_bytes = 1714
 
 [[families]]
 name = "misc-scripts"
-symbol_count = 512
-canonical_bytes = 37484
+symbol_count = 492
+canonical_bytes = 34802
 
 [[families]]
 name = "move"
 symbol_count = 355
 canonical_bytes = 17251
+
+[[families]]
+name = "mystery-gift"
+symbol_count = 20
+canonical_bytes = 2682
 
 [[families]]
 name = "nature"

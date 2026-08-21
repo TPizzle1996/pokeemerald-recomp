@@ -1,0 +1,6270 @@
+# Qualified relocation universe census.  No broad section exemption is used.
+census_version = 1
+qualified_total = 17497
+g_included_canonical = 16704
+g_included_std_routing = 11
+excluded_total = 782
+unexplained_remainder = 0
+duplicate_accounting = 0
+
+[[excluded]]
+source_gba = "0x081DB67C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_nop'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB680"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_nop1'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB684"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_end'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB688"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_return'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB68C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_call'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB690"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_goto'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB694"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_goto_if'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB698"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_call_if'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB69C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_gotostd'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB6A0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_callstd'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB6A4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_gotostd_if'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB6A8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_callstd_if'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB6AC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_returnram'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB6B0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_endram'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB6B4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_setmysteryeventstatus'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB6B8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_loadword'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB6BC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_loadbyte'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB6C0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_setptr'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB6C4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_loadbytefromptr'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB6C8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_setptrbyte'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB6CC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_copylocal'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB6D0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_copybyte'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB6D4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_setvar'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB6D8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_addvar'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB6DC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_subvar'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB6E0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_copyvar'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB6E4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_setorcopyvar'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB6E8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_compare_local_to_local'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB6EC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_compare_local_to_value'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB6F0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_compare_local_to_ptr'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB6F4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_compare_ptr_to_local'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB6F8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_compare_ptr_to_value'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB6FC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_compare_ptr_to_ptr'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB700"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_compare_var_to_value'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB704"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_compare_var_to_var'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB708"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_callnative'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB70C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_gotonative'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB710"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_special'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB714"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_specialvar'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB718"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_waitstate'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB71C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_delay'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB720"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_setflag'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB724"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_clearflag'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB728"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_checkflag'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB72C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_initclock'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB730"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_dotimebasedevents'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB734"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_gettime'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB738"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_playse'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB73C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_waitse'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB740"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_playfanfare'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB744"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_waitfanfare'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB748"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_playbgm'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB74C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_savebgm'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB750"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_fadedefaultbgm'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB754"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_fadenewbgm'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB758"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_fadeoutbgm'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB75C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_fadeinbgm'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB760"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_warp'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB764"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_warpsilent'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB768"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_warpdoor'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB76C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_warphole'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB770"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_warpteleport'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB774"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_setwarp'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB778"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_setdynamicwarp'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB77C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_setdivewarp'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB780"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_setholewarp'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB784"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_getplayerxy'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB788"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_getpartysize'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB78C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_additem'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB790"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_removeitem'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB794"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_checkitemspace'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB798"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_checkitem'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB79C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_checkitemtype'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB7A0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_addpcitem'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB7A4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_checkpcitem'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB7A8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_adddecoration'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB7AC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_removedecoration'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB7B0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_checkdecor'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB7B4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_checkdecorspace'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB7B8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_applymovement'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB7BC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_applymovement_at'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB7C0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_waitmovement'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB7C4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_waitmovement_at'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB7C8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_removeobject'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB7CC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_removeobject_at'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB7D0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_addobject'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB7D4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_addobject_at'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB7D8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_setobjectxy'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB7DC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_showobject_at'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB7E0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_hideobject_at'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB7E4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_faceplayer'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB7E8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_turnobject'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB7EC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_trainerbattle'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB7F0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_dotrainerbattle'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB7F4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_gotopostbattlescript'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB7F8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_gotobeatenscript'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB7FC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_checktrainerflag'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB800"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_settrainerflag'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB804"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_cleartrainerflag'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB808"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_setobjectxyperm'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB80C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_copyobjectxytoperm'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB810"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_setobjectmovementtype'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB814"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_waitmessage'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB818"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_message'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB81C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_closemessage'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB820"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_lockall'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB824"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_lock'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB828"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_releaseall'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB82C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_release'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB830"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_waitbuttonpress'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB834"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_yesnobox'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB838"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_multichoice'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB83C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_multichoicedefault'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB840"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_multichoicegrid'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB844"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_drawbox'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB848"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_erasebox'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB84C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_drawboxtext'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB850"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_showmonpic'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB854"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_hidemonpic'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB858"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_showcontestpainting'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB85C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_braillemessage'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB860"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_givemon'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB864"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_giveegg'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB868"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_setmonmove'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB86C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_checkpartymove'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB870"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_bufferspeciesname'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB874"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_bufferleadmonspeciesname'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB878"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_bufferpartymonnick'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB87C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_bufferitemname'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB880"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_bufferdecorationname'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB884"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_buffermovename'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB888"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_buffernumberstring'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB88C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_bufferstdstring'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB890"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_bufferstring'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB894"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_pokemart'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB898"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_pokemartdecoration'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB89C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_pokemartdecoration2'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB8A0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_playslotmachine'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB8A4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_setberrytree'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB8A8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_choosecontestmon'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB8AC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_startcontest'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB8B0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_showcontestresults'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB8B4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_contestlinktransfer'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB8B8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_random'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB8BC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_addmoney'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB8C0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_removemoney'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB8C4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_checkmoney'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB8C8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_showmoneybox'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB8CC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_hidemoneybox'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB8D0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_updatemoneybox'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB8D4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_getpokenewsactive'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB8D8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_fadescreen'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB8DC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_fadescreenspeed'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB8E0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_setflashlevel'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB8E4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_animateflash'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB8E8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_messageautoscroll'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB8EC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_dofieldeffect'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB8F0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_setfieldeffectargument'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB8F4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_waitfieldeffect'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB8F8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_setrespawn'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB8FC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_checkplayergender'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB900"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_playmoncry'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB904"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_setmetatile'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB908"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_resetweather'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB90C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_setweather'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB910"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_doweather'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB914"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_setstepcallback'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB918"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_setmaplayoutindex'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB91C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_setobjectsubpriority'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB920"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_resetobjectsubpriority'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB924"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_createvobject'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB928"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_turnvobject'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB92C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_opendoor'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB930"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_closedoor'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB934"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_waitdooranim'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB938"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_setdooropen'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB93C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_setdoorclosed'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB940"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_addelevmenuitem'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB944"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_showelevmenu'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB948"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_checkcoins'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB94C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_addcoins'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB950"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_removecoins'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB954"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_setwildbattle'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB958"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_dowildbattle'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB95C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_setvaddress'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB960"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_vgoto'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB964"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_vcall'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB968"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_vgoto_if'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB96C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_vcall_if'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB970"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_vmessage'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB974"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_vbuffermessage'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB978"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_vbufferstring'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB97C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_showcoinsbox'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB980"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_hidecoinsbox'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB984"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_updatecoinsbox'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB988"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_incrementgamestat'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB98C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_setescapewarp'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB990"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_waitmoncry'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB994"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_bufferboxname'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB998"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_nop1'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB99C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_nop1'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB9A0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_nop1'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB9A4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_nop1'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB9A8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_nop1'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB9AC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_nop1'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB9B0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_setmoneventlegal'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB9B4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_checkmoneventlegal'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB9B8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_trywondercardscript'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB9BC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_nop1'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB9C0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_warpspinenter'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB9C4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_setmonmetlocation'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB9C8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_moverotatingtileobjects'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB9CC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_turnrotatingtileobjects'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB9D0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_initrotatingtilepuzzle'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB9D4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_freerotatingtilepuzzle'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB9D8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_warpmossdeepgym'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB9DC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_selectapproachingtrainer'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB9E0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_lockfortrainer'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB9E4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_closebraillemessage'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB9E8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_messageinstant'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB9EC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_fadescreenswapbuffers'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB9F0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_buffertrainerclassname'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB9F4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_buffertrainername'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB9F8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_pokenavcall'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DB9FC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_warpwhitefade'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBA00"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_buffercontestname'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBA04"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_bufferitemnameplural'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBA08"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrCmd_nop'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBA0C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'gSpecialVar_0x8000'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBA10"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'gSpecialVar_0x8001'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBA14"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'gSpecialVar_0x8002'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBA18"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'gSpecialVar_0x8003'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBA1C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'gSpecialVar_0x8004'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBA20"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'gSpecialVar_0x8005'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBA24"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'gSpecialVar_0x8006'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBA28"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'gSpecialVar_0x8007'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBA2C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'gSpecialVar_0x8008'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBA30"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'gSpecialVar_0x8009'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBA34"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'gSpecialVar_0x800A'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBA38"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'gSpecialVar_0x800B'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBA3C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'gSpecialVar_Facing'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBA40"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'gSpecialVar_Result'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBA44"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'gSpecialVar_ItemId'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBA48"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'gSpecialVar_LastTalked'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBA4C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'gSpecialVar_ContestRank'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBA50"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'gSpecialVar_ContestCategory'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBA54"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'gSpecialVar_MonBoxId'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBA58"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'gSpecialVar_MonBoxPos'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBA5C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'gSpecialVar_Unused_0x8014'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBA60"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'gTrainerBattleOpponent_A'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBA64"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'HealPlayerParty'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBA68"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'SetCableClubWarp'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBA6C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'DoCableClubWarp'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBA70"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ReturnFromLinkRoom'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBA74"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CleanupLinkRoomState'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBA78"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ExitLinkRoom'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBA7C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'SetPlayerSecretBase'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBA80"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CheckPlayerHasSecretBase'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBA84"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'EnterSecretBase'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBA88"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ClearAndLeaveSecretBase'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBA8C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'MoveOutOfSecretBase'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBA90"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'IsCurSecretBaseOwnedByAnotherPlayer'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBA94"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetCurSecretBaseRegistrationValidity'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBA98"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ToggleCurSecretBaseRegistry'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBA9C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ShowSecretBaseDecorationMenu'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBAA0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ShowSecretBaseRegistryMenu'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBAA4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'PrepSecretBaseBattleFlags'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBAA8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetSecretBaseOwnerAndState'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBAAC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'InitSecretBaseDecorationSprites'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBAB0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'SetDecoration'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBAB4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetObjectEventLocalIdByFlag'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBAB8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetSecretBaseTypeInFrontOfPlayer'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBABC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'SetSecretBaseOwnerGfxId'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBAC0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'PutAwayDecorationIteration'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBAC4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'EnterNewlyCreatedSecretBase'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBAC8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'SetBattledOwnerFromResult'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBACC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'DoSecretBasePCTurnOffEffect'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBAD0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'RecordMixingPlayerSpotTriggered'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBAD4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'TryBattleLinkup'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBAD8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'TryTradeLinkup'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBADC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'TryRecordMixLinkup'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBAE0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ValidateMixingGameLanguage'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBAE4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CloseLink'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBAE8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ColosseumPlayerSpotTriggered'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBAEC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'PlayerEnteredTradeSeat'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBAF0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'Script_StartWiredTrade'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBAF4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CableClubSaveGame'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBAF8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'TryBerryBlenderLinkup'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBAFC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetLinkPartnerNames'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBB00"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'SpawnLinkPartnerObjectEvent'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBB04"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'SavePlayerParty'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBB08"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'LoadPlayerParty'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBB0C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ChooseHalfPartyForBattle'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBB10"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'Script_ShowLinkTrainerCard'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBB14"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ObjectEventInteractionGetBerryTreeData'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBB18"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ObjectEventInteractionGetBerryName'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBB1C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ObjectEventInteractionGetBerryCountString'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBB20"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'Bag_ChooseBerry'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBB24"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ObjectEventInteractionPlantBerryTree'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBB28"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ObjectEventInteractionPickBerryTree'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBB2C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ObjectEventInteractionRemoveBerryTree'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBB30"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ObjectEventInteractionWaterBerryTree'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBB34"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'PlayerHasBerries'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBB38"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'IsEnigmaBerryValid'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBB3C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetTrainerBattleMode'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBB40"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ShowTrainerIntroSpeech'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBB44"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ShowTrainerCantBattleSpeech'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBB48"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetTrainerFlag'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBB4C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'DoTrainerApproach'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBB50"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'PlayTrainerEncounterMusic'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBB54"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ShouldTryRematchBattle'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBB58"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'IsTrainerReadyForRematch'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBB5C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'BattleSetup_StartRematchBattle'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBB60"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ShowPokemonStorageSystemPC'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBB64"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'HasEnoughMonsForDoubleBattle'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBB68"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'TurnOffTVScreen'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBB6C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'DoTVShow'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBB70"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'DoPokeNews'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBB74"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetRandomActiveShowIdx'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBB78"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetSelectedTVShow'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBB7C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'InterviewBefore'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBB80"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'InterviewAfter'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBB84"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'IsLeadMonNicknamedOrNotEnglish'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBB88"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'SetContestCategoryStringVarForInterview'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBB8C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetNextActiveShowIfMassOutbreak'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBB90"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'IsTVShowAlreadyInQueue'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBB94"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CheckForPlayersHouseNews'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBB98"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetMomOrDadStringForTVMessage'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBB9C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ResetTVShowState'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBBA0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetContestWinnerId'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBBA4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetContestPlayerId'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBBA8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetNpcContestantLocalId'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBBAC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'BufferContestWinnerTrainerName'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBBB0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'BufferContestWinnerMonName'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBBB4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'BufferContestTrainerAndMonNames'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBBB8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetContestMonConditionRanking'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBBBC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'SetContestTrainerGfxIds'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBBC0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'TryEnterContestMon'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBBC4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetContestantNamesAtRank'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBBC8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'SetLinkContestPlayerGfx'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBBCC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetContestMonCondition'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBBD0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'HasMonWonThisContestBefore'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBBD4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GiveMonContestRibbon'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBBD8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'IsContestDebugActive'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBBDC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GiveMonArtistRibbon'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBBE0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'TryContestGModeLinkup'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBBE4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'SaveGame'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBBE8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'DoWateringBerryTreeAnim'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBBEC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ShowEasyChatScreen'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBBF0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ShowEasyChatProfile'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBBF4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'Script_GetCurrentMauvilleMan'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBBF8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'HasBardSongBeenChanged'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBBFC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'SaveBardSongLyrics'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBC00"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetHipsterSpokenFlag'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBC04"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'SetHipsterSpokenFlag'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBC08"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'HipsterTryTeachWord'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBC0C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'PlayBardSong'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBC10"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'SetMauvilleOldManObjEventGfx'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBC14"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GenerateGiddyLine'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBC18"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GiddyShouldTellAnotherTale'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBC1C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'StorytellerGetFreeStorySlot'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBC20"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'Script_StorytellerDisplayStory'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBC24"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'StorytellerStoryListMenu'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBC28"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'StorytellerUpdateStat'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBC2C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'Script_StorytellerInitializeRandomStat'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBC30"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'HasStorytellerAlreadyRecorded'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBC34"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'TraderMenuGetDecoration'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBC38"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetTraderTradedFlag'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBC3C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'DoesPlayerHaveNoDecorations'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBC40"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'IsDecorationCategoryFull'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBC44"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'TraderShowDecorationMenu'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBC48"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'TraderDoDecorationTrade'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBC4C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetSeedotSizeRecordInfo'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBC50"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CompareSeedotSize'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBC54"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetLotadSizeRecordInfo'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBC58"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CompareLotadSize'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBC5C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'TryPutNameRaterShowOnTheAir'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBC60"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'BufferMonNickname'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBC64"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'IsMonOTIDNotPlayers'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBC68"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'BufferTrendyPhraseString'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBC6C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'IsTrendyPhraseBoring'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBC70"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'BufferDeepLinkPhrase'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBC74"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetDewfordHallPaintingNameIndex'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBC78"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'SwapRegisteredBike'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBC7C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CalculatePlayerPartyCount'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBC80"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CountPartyNonEggMons'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBC84"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CountPartyAliveNonEggMons_IgnoreVar0x8004Slot'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBC88"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ShouldReadyContestArtist'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBC8C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'SaveMuseumContestPainting'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBC90"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'DoesContestCategoryHaveMuseumPainting'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBC94"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CountPlayerMuseumPaintings'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBC98"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ShowContestPainting'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBC9C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'MauvilleGymSetDefaultBarriers'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBCA0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'MauvilleGymPressSwitch'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBCA4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ShowFieldMessageStringVar4'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBCA8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'DrawWholeMapView'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBCAC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'StorePlayerCoordsInVars'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBCB0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'MauvilleGymDeactivatePuzzle'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBCB4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'PetalburgGymSlideOpenRoomDoors'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBCB8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'PetalburgGymUnlockRoomDoors'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBCBC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetPlayerTrainerIdOnesDigit'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBCC0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetPlayerBigGuyGirlString'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBCC4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetRivalSonDaughterString'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBCC8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'SetHiddenItemFlag'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBCCC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CableCarWarp'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBCD0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CableCar'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBCD4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'Overworld_PlaySpecialMapMusic'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBCD8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'StartWallClock'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBCDC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'Special_ViewWallClock'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBCE0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ChooseStarter'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBCE4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'StartWallyTutorialBattle'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBCE8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ChangePokemonNickname'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBCEC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ChoosePartyMon'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBCF0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetFirstFreePokeblockSlot'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBCF4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'DoBerryBlending'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBCF8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'PlayRoulette'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBCFC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'IsFanClubMemberFanOfPlayer'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBD00"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetNumFansOfPlayerInTrainerFanClub'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBD04"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'BufferFanClubTrainerName'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBD08"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'TryLoseFansFromPlayTimeAfterLinkBattle'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBD0C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'TryLoseFansFromPlayTime'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBD10"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'SetPlayerGotFirstFans'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBD14"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'UpdateTrainerFanClubGameClear'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBD18"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'Script_TryGainNewFanFromCounter'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBD1C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'RockSmashWildEncounter'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBD20"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GabbyAndTyGetBattleNum'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBD24"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GabbyAndTyAfterInterview'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBD28"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GabbyAndTyBeforeInterview'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBD2C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'DoTVShowInSearchOfTrainers'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBD30"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'IsGabbyAndTyShowOnTheAir'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBD34"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GabbyAndTyGetLastQuote'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBD38"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GabbyAndTyGetLastBattleTrivia'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBD3C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetGabbyAndTyLocalIds'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBD40"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetBattleOutcome'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBD44"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetDaycareMonNicknames'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBD48"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetDaycareState'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBD4C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'RejectEggFromDayCare'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBD50"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GiveEggFromDaycare'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBD54"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'SetDaycareCompatibilityString'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBD58"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetSelectedMonNicknameAndSpecies'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBD5C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'StoreSelectedPokemonInDaycare'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBD60"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ChooseSendDaycareMon'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBD64"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ShowDaycareLevelMenu'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBD68"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetNumLevelsGainedFromDaycare'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBD6C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetDaycareCost'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBD70"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'TakePokemonFromDaycare'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBD74"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScriptHatchMon'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBD78"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'EggHatch'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBD7C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CheckDaycareMonReceivedMail'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBD80"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ShowLinkBattleRecords'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBD84"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'IsEnoughForCostInVar0x8005'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBD88"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'SubtractMoneyFromVar0x8005'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBD8C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'TryFieldPoisonWhiteOut'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBD90"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'SetCB2WhiteOut'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBD94"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'RotatingGate_InitPuzzle'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBD98"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'RotatingGate_InitPuzzleAndGraphics'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBD9C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'SetSSTidalFlag'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBDA0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ResetSSTidalFlag'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBDA4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'EnterSafariMode'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBDA8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ExitSafariMode'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBDAC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetPokeblockFeederInFront'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBDB0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'OpenPokeblockCaseOnFeeder'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBDB4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'IsMirageIslandPresent'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBDB8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'UpdateShoalTideFlag'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBDBC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'InitBirchState'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBDC0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScriptGetPokedexInfo'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBDC4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ShowPokedexRatingMessage'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBDC8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'DoPCTurnOnEffect'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBDCC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'DoPCTurnOffEffect'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBDD0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'SetDeptStoreFloor'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBDD4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'DoLotteryCornerComputerEffect'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBDD8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'EndLotteryCornerComputerEffect'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBDDC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ChooseMonForMoveRelearner'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBDE0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'MoveDeleterChooseMoveToForget'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBDE4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'MoveDeleterForgetMove'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBDE8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'BufferMoveDeleterNicknameAndMove'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBDEC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetNumMovesSelectedMonHas'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBDF0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'TeachMoveRelearnerMove'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBDF4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetRecordedCyclingRoadResults'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBDF8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'Special_BeginCyclingRoadChallenge'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBDFC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetPlayerAvatarBike'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBE00"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'FinishCyclingRoadChallenge'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBE04"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'UpdateCyclingRoadState'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBE08"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetLeadMonFriendshipScore'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBE0C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CallFrontierUtilFunc'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBE10"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CallBattleTowerFunc'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBE14"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CallBattleDomeFunction'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBE18"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CallBattlePalaceFunction'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBE1C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CopyEReaderTrainerGreeting'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBE20"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'DoSpecialTrainerBattle'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBE24"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CallBattleArenaFunction'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBE28"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CallBattleFactoryFunction'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBE2C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CallBattlePikeFunction'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBE30"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CallBattlePyramidFunction'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBE34"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'StopMapMusic'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBE38"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CallVerdanturfTentFunction'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBE3C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CallFallarborTentFunction'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBE40"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CallSlateportTentFunction'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBE44"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ChoosePartyForBattleFrontier'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBE48"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ValidateEReaderTrainer'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBE4C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetBestBattleTowerStreak'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBE50"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ReducePlayerPartyToSelectedMons'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBE54"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'BedroomPC'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBE58"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'PlayerPC'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBE5C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'FieldShowRegionMap'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBE60"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetInGameTradeSpeciesInfo'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBE64"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CreateInGameTradePokemon'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBE68"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'DoInGameTradeScene'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBE6C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetTradeSpecies'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBE70"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetWeekCount'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBE74"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'RetrieveLotteryNumber'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBE78"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'PickLotteryCornerTicket'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBE7C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ShowBerryBlenderRecordWindow'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBE80"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ResetTrickHouseNuggetFlag'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBE84"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'SetTrickHouseNuggetFlag'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBE88"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScriptMenu_CreatePCMultichoice'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBE8C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'AccessHallOfFamePC'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBE90"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'Special_ShowDiploma'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBE94"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CheckLeadMonCool'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBE98"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CheckLeadMonBeauty'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBE9C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CheckLeadMonCute'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBEA0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CheckLeadMonSmart'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBEA4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CheckLeadMonTough'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBEA8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'LookThroughPorthole'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBEAC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'DoSoftReset'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBEB0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GameClear'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBEB4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'MoveElevator'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBEB8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ShowGlassWorkshopMenu'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBEBC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'SpawnCameraObject'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBEC0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'RemoveCameraObject'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBEC4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetPokeblockNameByMonNature'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBEC8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetSecretBaseNearbyMapName'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBECC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CheckRelicanthWailord'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBED0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ShouldDoBrailleRegirockEffectOld'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBED4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'DoOrbEffect'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBED8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'FadeOutOrbEffect'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBEDC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'WaitWeather'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBEE0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'BufferEReaderTrainerName'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBEE4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetSlotMachineId'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBEE8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetPlayerFacingDirection'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBEEC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'FoundAbandonedShipRoom1Key'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBEF0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'FoundAbandonedShipRoom2Key'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBEF4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'FoundAbandonedShipRoom4Key'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBEF8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'FoundAbandonedShipRoom6Key'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBEFC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'LeadMonHasEffortRibbon'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBF00"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GiveLeadMonEffortRibbon'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBF04"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'Special_AreLeadMonEVsMaxedOut'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBF08"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'Script_FacePlayer'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBF0C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'Script_ClearHeldMovement'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBF10"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'InitRoamer'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBF14"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'TryUpdateRusturfTunnelState'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBF18"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'IsGrassTypeInParty'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBF1C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'DoContestHallWarp'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBF20"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'PutZigzagoonInPlayerParty'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBF24"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'IsStarterInParty'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBF28"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CopyCurSecretBaseOwnerName_StrVar1'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBF2C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScriptCheckFreePokemonStorageSpace'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBF30"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'DoSealedChamberShakingEffect_Long'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBF34"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ShowDeptStoreElevatorFloorSelect'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBF38"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'InteractWithShieldOrTVDecoration'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBF3C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'IsPokerusInParty'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBF40"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'SetSootopolisGymCrackedIceMetatiles'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBF44"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ShakeCamera'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBF48"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'StartGroudonKyogreBattle'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBF4C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'BattleSetup_StartLegendaryBattle'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBF50"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'StartRegiBattle'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBF54"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'SetTrainerFacingDirection'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBF58"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'DoSealedChamberShakingEffect_Short'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBF5C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'FoundBlackGlasses'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBF60"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'StartDroughtWeatherBlend'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBF64"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'DoDiveWarp'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBF68"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'DoFallWarp'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBF6C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ShowContestEntryMonPic'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBF70"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'HideContestEntryMonPic'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBF74"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'SetEReaderTrainerGfxId'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBF78"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'BattleSetup_StartLatiBattle'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBF7C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'SetRoute119Weather'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBF80"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'SetRoute123Weather'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBF84"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetContestMultiplayerId'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBF88"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScriptGetPartyMonSpecies'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBF8C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'IsSelectedMonEgg'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBF90"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'TryInitBattleTowerAwardManObjectEvent'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBF94"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'MoveOutOfSecretBaseFromOutside'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBF98"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'LoadPlayerBag'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBF9C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'Script_FadeOutMapMusic'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBFA0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'SetPacifidlogTMReceivedDay'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBFA4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetDaysUntilPacifidlogTMAvailable'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBFA8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'HasAllHoennMons'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBFAC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'MonOTNameNotPlayer'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBFB0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'BufferLottoTicketNumber'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBFB4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'TryHideBattleTowerReporter'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBFB8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'DoesPartyHaveEnigmaBerry'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBFBC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GenerateContestRand'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBFC0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'SetChampionSaveWarp'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBFC4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'TryPutTreasureInvestigatorsOnAir'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBFC8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'TryPutLotteryWinnerReportOnAir'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBFCC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'TryPutTrainerFanClubOnAir'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBFD0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ShouldHideFanClubInterviewer'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBFD4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ShowGlassWorkshopMenu'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBFD8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'PutFanClubSpecialOnTheAir'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBFDC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'IncrementDailyPlantedBerries'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBFE0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'IncrementDailyPickedBerries'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBFE4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'InitSecretBaseVars'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBFE8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CheckInteractedWithFriendsSandOrnament'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBFEC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'DeclinedSecretBaseBattle'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBFF0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'DrewSecretBaseBattle'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBFF4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'WonSecretBaseBattle'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBFF8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'LostSecretBaseBattle'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DBFFC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CheckInteractedWithFriendsDollDecor'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC000"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CheckInteractedWithFriendsCushionDecor'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC004"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CheckInteractedWithFriendsFurnitureBottom'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC008"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CheckInteractedWithFriendsFurnitureMiddle'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC00C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CheckInteractedWithFriendsFurnitureTop'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC010"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CheckInteractedWithFriendsPosterDecor'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC014"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'SetLilycoveLadyGfx'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC018"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'Script_GetLilycoveLadyId'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC01C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetFavorLadyState'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC020"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'BufferFavorLadyRequest'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC024"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'HasAnotherPlayerGivenFavorLadyItem'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC028"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'BufferFavorLadyItemName'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC02C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'BufferFavorLadyPlayerName'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC030"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'DidFavorLadyLikeItem'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC034"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'Script_FavorLadyOpenBagMenu'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC038"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'Script_DoesFavorLadyLikeItem'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC03C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'IsFavorLadyThresholdMet'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC040"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'FavorLadyGetPrize'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC044"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'SetFavorLadyState_Complete'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC048"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetQuizLadyState'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC04C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetQuizAuthor'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC050"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'IsQuizLadyWaitingForChallenger'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC054"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'QuizLadyShowQuizQuestion'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC058"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'QuizLadyGetPlayerAnswer'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC05C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'IsQuizAnswerCorrect'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC060"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'BufferQuizPrizeItem'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC064"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'SetQuizLadyState_Complete'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC068"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'BufferQuizAuthorNameAndCheckIfLady'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC06C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'SetQuizLadyState_GivePrize'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC070"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ClearQuizLadyPlayerAnswer'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC074"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'Script_QuizLadyOpenBagMenu'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC078"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ClearQuizLadyQuestionAndAnswer'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC07C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'QuizLadySetCustomQuestion'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC080"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'QuizLadyTakePrizeForCustomQuiz'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC084"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetMysteryGiftCardStat'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC088"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'QuizLadyRecordCustomQuizData'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC08C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'QuizLadySetWaitingForChallenger'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC090"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'BufferQuizCorrectAnswer'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC094"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'BufferQuizPrizeName'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC098"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'QuizLadyPickNewQuestion'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC09C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ShouldContestLadyShowGoOnAir'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC0A0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'HasPlayerGivenContestLadyPokeblock'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC0A4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'Script_BufferContestLadyCategoryAndMonName'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC0A8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'OpenPokeblockCaseForContestLady'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC0AC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'SetContestLadyGivenPokeblock'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC0B0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetContestLadyMonSpecies'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC0B4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetContestLadyCategory'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC0B8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'PutLilycoveContestLadyShowOnTheAir'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC0BC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CloseBattlePikeCurtain'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC0C0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CallApprenticeFunction'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC0C4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ShouldTryGetTrainerScript'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC0C8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ShowMapNamePopup'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC0CC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ShowMapNamePopup'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC0D0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'DoMirageTowerCeilingCrumble'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC0D4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'SetMirageTowerVisibility'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC0D8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'StartPlayerDescendMirageTower'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC0DC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'BufferTMHMMoveName'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC0E0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'IsWirelessAdapterConnected'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC0E4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'TryBecomeLinkLeader'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC0E8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'TryJoinLinkGroup'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC0EC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'RunUnionRoom'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC0F0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ShowWirelessCommunicationScreen'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC0F4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'InitUnionRoom'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC0F8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'BufferUnionRoomPlayerName'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC0FC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'RetrieveWonderNewsVal'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC100"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ChooseMonForWirelessMinigame'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC104"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'Script_ResetUnionRoomTrade'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC108"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'IsBadEggInParty'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC10C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ValidateSavedWonderCard'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC110"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'HasAtLeastOneBerry'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC114"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'IsPokemonJumpSpeciesInParty'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC118"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ShowPokemonJumpRecords'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC11C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'IsDodrioInParty'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC120"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ShowDodrioBerryPickingRecords'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC124"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'OffsetCameraForBattle'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC128"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetDeptStoreDefaultFloorChoice'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC12C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'BufferVarsForIVRater'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC130"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'LinkContestWaitForConnection'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC134"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetWirelessCommType'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC138"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'LinkContestTryShowWirelessIndicator'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC13C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'LinkContestTryHideWirelessIndicator'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC140"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'IsWirelessContest'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC144"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ShowRankingHallRecordsWindow'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC148"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrollRankingHallRecordsWindow'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC14C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ShowFrontierManiacMessage'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC150"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'IsContestWithRSPlayer'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC154"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ClearLinkContestFlags'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC158"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'TryContestEModeLinkup'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC15C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ShowScrollableMultichoice'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC160"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrollableMultichoice_TryReturnToList'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC164"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'BufferBattleTowerElevatorFloors'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC168"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'TryStoreHeldItemsInPyramidBag'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC16C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ChooseItemsToTossFromPyramidBag'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC170"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'DoBattlePyramidMonsHaveHeldItem'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC174"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'BattlePyramidChooseMonHeldItems'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC178"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'SetBattleTowerLinkPlayerGfx'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC17C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ShowNatureGirlMessage'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC180"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ShowBattlePointsWindow'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC184"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'UpdateBattlePointsWindow'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC188"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CloseBattlePointsWindow'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC18C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GiveFrontierBattlePoints'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC190"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'TakeFrontierBattlePoints'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC194"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetFrontierBattlePoints'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC198"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ShowFrontierExchangeCornerItemIconWindow'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC19C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CloseFrontierExchangeCornerItemIconWindow'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC1A0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'DisplayBerryPowderVendorMenu'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC1A4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'RemoveBerryPowderVendorMenu'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC1A8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'HasEnoughBerryPowder'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC1AC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'TakeBerryPowder'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC1B0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'PrintPlayerBerryPowderAmount'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC1B4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ShowFrontierGamblerLookingMessage'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC1B8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ShowFrontierGamblerGoMessage'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC1BC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'Script_DoRayquazaScene'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC1C0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'OpenPokenavForTutorial'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC1C4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScriptMenu_CreateStartMenuForPokenavTutorial'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC1C8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CountPlayerTrainerStars'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC1CC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'BufferBattleFrontierTutorMoveName'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC1D0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CloseBattleFrontierTutorWindow'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC1D4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrollableMultichoice_RedrawPersistentMenu'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC1D8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ChooseMonForMoveTutor'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC1DC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetBattleFrontierTutorMoveIndex'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC1E0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScrollableMultichoice_ClosePersistentMenu'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC1E4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'DoDeoxysRockInteraction'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC1E8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'SetDeoxysRockPalette'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC1EC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CreateEventLegalEnemyMon'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC1F0"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'StartMirageTowerDisintegration'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC1F4"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'StartMirageTowerShake'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC1F8"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'StartMirageTowerFossilFallAndSink'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC1FC"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ChangeBoxPokemonNickname'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC200"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetPCBoxToSendMon'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC204"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ShouldShowBoxWasFullMessage'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC208"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'SetMatchCallRegisteredFlag'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC20C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'DoDomeConfetti'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC210"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CreateAbnormalWeatherEvent'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC214"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetAbnormalWeatherMapNameAndType'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC218"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetMartEmployeeObjectEventId'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC21C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'SaveForBattleTowerLink'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC220"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'Unused_SetWeatherSunny'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC224"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'SetUnlockedPokedexFlags'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC228"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'IsTrainerRegistered'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC22C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ShouldDoBrailleRegicePuzzle'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC230"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'EnableNationalPokedex'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC234"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ScriptMenu_CreateLilycoveSSTidalMultichoice'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC238"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetLilycoveSSTidalSelection'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC23C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'TurnOnTVScreen'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC240"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'SetMewAboveGrass'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC244"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ShouldDistributeEonTicket'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC248"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'LinkRetireStatusWithBattleTowerPartner'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC24C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'BattleTowerReconnectLink'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC250"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CallTrainerHillFunction'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC254"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'Script_DoRayquazaScene'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC258"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'LoopWingFlapSE'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC25C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'DestroyMewEmergingGrassSprite'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC260"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ShowBerryCrushRankings'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC264"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'TryBufferWaldaPhrase'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC268"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'DoWaldaNamingScreen'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC26C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'TryGetWallpaperWithWaldaPhrase'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC270"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'PlayerNotAtTrainerHillEntrance'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC274"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'GetBattlePyramidHint'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC278"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'LoadLinkContestPlayerPalettes'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC27C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ShowTrainerHillRecords'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC280"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'PlayerFaceTrainerAfterBattle'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC284"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'ResetHealLocationFromDewford'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC288"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'IsLastMonThatKnowsSurf'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC28C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CountPartyAliveNonEggMons'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC290"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'TryPrepareSecondApproachingTrainer'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC294"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'RemoveRecordsWindow'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC298"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'CloseDeptStoreElevatorWindow'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x081DC29C"
+source_object = "event_scripts.o:script_data"
+relocation_type = "R_ARM_ABS32"
+target_symbol = 'TrySetBattleTowerLinkType'
+reason = "command/special engine-routing prefix"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x08674CBD"
+source_object = "mystery_gift.o:.rodata"
+relocation_type = "R_ARM_ABS16"
+target_scalar = 392
+target_symbol = 'SPECIAL_GetMysteryGiftCardStat'
+reason = "SPECIAL_ID scalar, not an address operand"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x08674CC7"
+source_object = "mystery_gift.o:.rodata"
+relocation_type = "R_ARM_ABS16"
+target_scalar = 392
+target_symbol = 'SPECIAL_GetMysteryGiftCardStat'
+reason = "SPECIAL_ID scalar, not an address operand"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x08674D4F"
+source_object = "mystery_gift.o:.rodata"
+relocation_type = "R_ARM_ABS16"
+target_scalar = 134
+target_symbol = 'SPECIAL_CalculatePlayerPartyCount'
+reason = "SPECIAL_ID scalar, not an address operand"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x08674EC7"
+source_object = "mystery_gift.o:.rodata"
+relocation_type = "R_ARM_ABS16"
+target_scalar = 249
+target_symbol = 'SPECIAL_ValidateEReaderTrainer'
+reason = "SPECIAL_ID scalar, not an address operand"
+owner = "ENGINE"
+
+[[excluded]]
+source_gba = "0x08675152"
+source_object = "mystery_gift.o:.rodata"
+relocation_type = "R_ARM_ABS16"
+target_scalar = 392
+target_symbol = 'SPECIAL_GetMysteryGiftCardStat'
+reason = "SPECIAL_ID scalar, not an address operand"
+owner = "ENGINE"
+

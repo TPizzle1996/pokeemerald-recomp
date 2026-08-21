@@ -1354,46 +1354,38 @@ done:
 /* ---- State-v5 arena-range registration (R13-C §13-15). ---- */
 
 static bool sTextRangesInIndex;   /* our 16 spans are registered now */
-static size_t sTextRangeMark;     /* sorted-insertion position of our block */
 
-/* The unregister is safe only when the block at [mark, mark+16) is
- * exactly ours (another seam's ranges could sort before our block and
- * shift it). Base + length identity is sufficient: the ranges sort by
- * base and the arena allocation is exclusive to us. */
-static bool TextArenaRangesMatch(const struct EmeraldResourceRangeIndex *index)
-{
-    size_t i;
-
-    if (sArena == NULL)
-        return false;
-    if (sTextRangeMark + TEXT_ARENA_COUNT > index->rangeCount)
-        return false;
-    for (i = 0u; i < TEXT_ARENA_COUNT; i++)
-    {
-        const struct EmeraldResourceRange *range =
-            &index->ranges[sTextRangeMark + i];
-        uintptr_t base =
-            (uintptr_t)(sArena->bytes + sArena->subArenas[i].payloadOffset);
-        if (range->base != base || range->length != sArena->subArenas[i].payloadSize)
-            return false;
-    }
-    return true;
-}
-
+/* Identity-based unregister: each span is removed wherever it sits in
+ * the sorted index. A block-mark scheme is unsafe here - another
+ * seam's ranges can sort before our block (the D1 font ranges landed
+ * below the text arena in the runtime loader harness) and shift it, and
+ * the old fail-closed match then orphaned our spans: the arena freed,
+ * the ranges stayed, and the next session's allocation collided with
+ * its own freed arena. Bases are unique (InsertRange rejects overlap
+ * and the arena allocation is exclusive to us), so removing by base
+ * can only remove our own spans. */
 static void UnregisterArenaRanges(void)
 {
     struct EmeraldResourceRangeIndex *index =
         EmeraldResourceCompat_GetRangeIndex();
+    size_t i;
 
     if (index == NULL || !sTextRangesInIndex)
         return;
-    if (TextArenaRangesMatch(index))
+    for (i = 0u; i < TEXT_ARENA_COUNT; i++)
     {
-        memmove(&index->ranges[sTextRangeMark],
-                &index->ranges[sTextRangeMark + TEXT_ARENA_COUNT],
-                (index->rangeCount - sTextRangeMark - TEXT_ARENA_COUNT)
-                    * sizeof(index->ranges[0]));
-        index->rangeCount -= TEXT_ARENA_COUNT;
+        uintptr_t base =
+            (uintptr_t)(sArena->bytes + sArena->subArenas[i].payloadOffset);
+        size_t j;
+        for (j = 0u; j < index->rangeCount; j++)
+        {
+            if (index->ranges[j].base != base)
+                continue;
+            memmove(&index->ranges[j], &index->ranges[j + 1u],
+                    (index->rangeCount - j - 1u) * sizeof(index->ranges[0]));
+            index->rangeCount--;
+            break;
+        }
     }
     sTextRangesInIndex = false;
 }
@@ -1421,7 +1413,6 @@ static bool RegisterArenaRanges(void)
               < (uintptr_t)(sArena->bytes
                             + sArena->subArenas[0].payloadOffset))
         mark++;
-    sTextRangeMark = mark;
     for (i = 0u; i < TEXT_ARENA_COUNT; i++)
     {
         char name[96];

@@ -66,9 +66,12 @@
 #if TEXT_NATIVE_RESOURCE_COUNT != (TEXT_NATIVE_LABEL_COUNT + TEXT_NATIVE_BUNDLE_COUNT)
 #error "text native inventory counts disagree"
 #endif
-#if TEXT_NATIVE_LABEL_COUNT != 4824u
+#if TEXT_NATIVE_LABEL_COUNT != 4844u
 #error "text native label count disagrees with the R13-C pins"
 #endif
+/* 4,844 = 4,824 C-side + 20 R13-G2 §7.3 mystery-gift handoff labels
+ * (emerald:text/mystery-gift/*, 2,682 B; passive inventory records,
+ * no range registration). */
 #if TEXT_NATIVE_BUNDLE_COUNT != 363u
 #error "text native bundle count disagrees with the R13-C pins"
 #endif
@@ -88,12 +91,16 @@
 #error "text skeleton fill count disagrees with the R13-C pins"
 #endif
 
-/* Total label count across the 16 arenas (12,777 = 4,824 C-side +
- * 7,953 bundle-local; the 13 out-of-contract symbols stay compiled
- * and are not resources). 903,157 B = 903,151 + 6 (R13-C #112:
+/* Total label count across the 16 arenas: 12,797 records = 4,844
+ * per-label rows (4,824 C-side + 20 R13-G2 §7.3 mystery-gift handoff)
+ * + 7,953 bundle-local entries; the gift labels additionally publish
+ * per-label while staying bundle members, so the seam's inventory
+ * model counts them in both representations (the 13 out-of-contract
+ * symbols stay compiled and are not resources). 905,839 B =
+ * 903,157 + 2,682 (the +20 gift per-label rows; R13-C #112:
  * gText_123Dot is a single 9-byte record instead of a 3-byte run). */
-#define EMERALD_TEXT_LABEL_COUNT 12777u
-#define EMERALD_TEXT_TOTAL_BYTES 903157u
+#define EMERALD_TEXT_LABEL_COUNT 12797u
+#define EMERALD_TEXT_TOTAL_BYTES 905839u
 
 /* The longest canonical label name (the dash-form key) and resource id
  * fit these buffers; a truncating copy made a leaf-seam comparison

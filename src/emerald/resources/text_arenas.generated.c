@@ -20,5 +20,5 @@ const struct TextArenaSummary kTextArenaSummaries[TEXT_ARENA_COUNT] =
     {"frontier-brain", 28u, 882u},
     {"easy-chat", 1008u, 7101u},
     {"berry", 41u, 4305u},
-    {"misc", 6191u, 548591u},
+    {"misc", 6211u, 551273u},
 };

@@ -85,6 +85,10 @@ PINNED_ASM_LABELS = 7953             # asm-source incl. 20 gift in .rodata
 PINNED_ASM_BYTES = 751947            # 749,265 + 2,682
 PINNED_GIFT_LABELS = 20
 PINNED_GIFT_BYTES = 2682
+PINNED_GIFT_RESOURCES = 20   # per-label C resources published for the
+                             # mystery-gift family (R13-G2 §7.3 handoff:
+                             # ids emerald:text/mystery-gift/<canonical>
+                             # resolve every G2 gift-script text edge)
 PINNED_C_SCOPE_LABELS = 4821         # plan-scope, excl. renames/gift/c-misc
 PINNED_C_SCOPE_BYTES = 151129        # 151,117 + 6 (gEasyChatWord_WeRe) + 6 (#112)
 PINNED_RENAME_LABELS = 24            # 3 (AC-1) + 21 (AC-3)
@@ -114,7 +118,17 @@ PINNED_KEY_COLLISION_GROUPS = {"geasychatword-were": ["gEasyChatWord_WeRe",
 FAMILY_PINS = {
     "map-dialogue": (4361, 428130), "trainer": (1142, 67095),
     "match-call": (629, 60934), "pokedex": (387, 58017), "tv": (401, 55507),
-    "apprentice": (288, 49891), "misc-scripts": (512, 37484),
+    "apprentice": (288, 49891), "misc-scripts": (492, 34802),
+    # R13-G2 §7.3 handoff: the 8 gift_*.inc text files reclassified from
+    # misc-scripts into their own family (20 labels / 2,682 B, all
+    # asm-source .rodata) so the per-label C resources publish under
+    # emerald:text/mystery-gift/<canonical> - the ids the gift-script
+    # modules target. Census total is unchanged (the 20 labels moved,
+    # not added); but the seam's arena summaries count the inventory
+    # representation (per-label rows + bundle members), so the misc
+    # arena grows by the 20 per-label rows: 6,191 -> 6,211 labels,
+    # 548,591 -> 551,273 B (PINNED_ARENA_SUMMARIES below).
+    "mystery-gift": (20, 2682),
     "shared": (1655, 29915), "system": (613, 28790), "move": (355, 17251),
     "item": (310, 15101), "battle": (522, 11989), "frontier": (180, 11597),
     "cable-club": (91, 7713), "easy-chat": (1008, 7101), "berry": (41, 4305),
@@ -203,6 +217,9 @@ KEY_SEGMENT = {
     "nature": "nature", "item": "item", "pokedex": "pokedex",
     "easy-chat": "easychat", "match-call": "matchcall", "ribbon": "ribbon",
     "shared": "system", "system": "system",
+    # R13-G2 §7.3: gift labels publish as per-label resources under the
+    # mystery-gift segment (the keys the gift-script modules target).
+    "mystery-gift": "mystery-gift",
 }
 
 # Live cutover families (plan §11 tranches 1-2): ROM_BASE_ONLY after the
@@ -680,6 +697,11 @@ def asm_family(path, label):
     p = path.replace("\\", "/")
     if p.startswith("data/maps/"):
         return "map-dialogue"
+    if p.startswith("data/scripts/gift_"):
+        # R13-G2 §7.3: the 8 gift_*.inc text files (20 labels, 2,682 B)
+        # form the mystery-gift family; their per-label resources are
+        # the C identities the gift-script modules target.
+        return "mystery-gift"
     if p.startswith("data/scripts/"):
         return "misc-scripts"
     if p == "data/event_scripts.s":
@@ -724,7 +746,9 @@ def canonical(symbol):
 
 
 def assign_label_keys(c_records):
-    """{label: resource id} for every C-side label. Keys are
+    """{label: resource id} for every C-side label plus the R13-G2
+    mystery-gift labels (which publish per-label under
+    emerald:text/mystery-gift/<canonical>). Keys are
     emerald:text/<segment>/<canonical>; the single documented collision
     group (geasychatword-were: WeRe/Were) is disambiguated by sorted
     symbol order: the first symbol gets the base key, the rest get
@@ -887,8 +911,9 @@ def check_pins(records):
         fail(f"C-side resources {len(c_side)} / {sum(r[6] for r in c_side)} "
              f"B != pinned {PINNED_C_RESOURCES} / {PINNED_C_RESOURCE_BYTES}")
 
-    # Gift labels: asm-source labels resolving in .rodata.
-    gift = [r for r in records if r[3] == "asm" and r[4] == ".rodata"]
+    # Gift labels: the mystery-gift family (asm-source labels resolving
+    # in .rodata; R13-G2 §7.3 reclassification from misc-scripts).
+    gift = [r for r in records if r[1] == "mystery-gift"]
     if len(gift) != PINNED_GIFT_LABELS or sum(r[6] for r in gift) != PINNED_GIFT_BYTES:
         fail(f"gift labels {len(gift)} / {sum(r[6] for r in gift)} B != "
              f"pinned {PINNED_GIFT_LABELS} / {PINNED_GIFT_BYTES}")
@@ -2535,7 +2560,12 @@ def emit_artifacts(records, fam_dir, args, rom_bytes, keymap):
     bundle_blobs) as {id: rel path}."""
     label_arts = {}
     for r in records:
-        if r[3] != "c":
+        if r[3] != "c" and r[1] != "mystery-gift":
+            # C-source labels publish per-label; asm-source labels
+            # publish as bundle members, EXCEPT the mystery-gift labels
+            # (R13-G2 §7.3 handoff) which additionally publish per-label
+            # under emerald:text/mystery-gift/<canonical> so the gift
+            # script modules can target them.
             continue
         label, fam, path, kind, section, off, size = r
         # Artifact filename = the resource key's last segment (== canonical
@@ -2617,8 +2647,9 @@ def emit_family(records, dual, label_arts, bundle_blobs, fam_dir, args, keymap):
         f"# {PINNED_TOTAL_LABELS} labels / {PINNED_TOTAL_BYTES} B; "
         f"script_data {PINNED_SCRIPT_LABELS} / {PINNED_SCRIPT_BYTES} B;",
         f"# C-side per-label resources {PINNED_C_RESOURCES} / "
-        f"{PINNED_C_RESOURCE_BYTES} B; asm-source {PINNED_ASM_LABELS} / "
-        f"{PINNED_ASM_BYTES} B",
+        f"{PINNED_C_RESOURCE_BYTES} B; mystery-gift per-label "
+        f"{PINNED_GIFT_RESOURCES} / {PINNED_GIFT_BYTES} B (R13-G2 §7.3); "
+        f"asm-source {PINNED_ASM_LABELS} / {PINNED_ASM_BYTES} B",
         f"# across {PINNED_BUNDLES} bundles ({PINNED_BUNDLE_MAPS} maps + "
         f"{PINNED_BUNDLE_DATA_TEXT} data/text + "
         f"{PINNED_BUNDLE_SCRIPTS} scripts).",
@@ -2678,7 +2709,7 @@ def emit_family(records, dual, label_arts, bundle_blobs, fam_dir, args, keymap):
     ]
     by_id = {}
     for r in records:
-        if r[3] != "c":
+        if r[3] != "c" and r[1] != "mystery-gift":
             continue
         rid = keymap[r[0]]
         by_id[rid] = (r[0], r[6])
@@ -2771,13 +2802,19 @@ def emit_family(records, dual, label_arts, bundle_blobs, fam_dir, args, keymap):
         "#    (script operands embed native addresses; R13-G re-emits them as",
         "#    GBA logical addresses). The 97 dual-referenced labels stay",
         "#    compiled through R13-G, documented in consumers.generated.toml.",
+        "#  - R13-G2 §7.3 handoff: the 20 mystery-gift labels publish as",
+        "#    per-label resources (emerald:text/mystery-gift/<canonical>)",
+        "#    COMPILED_PENDING_MIGRATION - additive identity for the gift",
+        "#    script modules; the compiled bytes stay until G re-emits the",
+        "#    gift scripts' text operands.",
         "",
         "ownership_version = 1",
         'game = "emerald"',
         'rom_profile = "bpee01-rev0"',
         "",
     ]
-    sym_fam = {r[0]: r[1] for r in records if r[3] == "c"}
+    sym_fam = {r[0]: r[1] for r in records
+               if r[3] == "c" or r[1] == "mystery-gift"}
     # R13-D2: the item-description family (emerald:text/item/s<item>desc)
     # flips to ROM_BASE_ONLY at that stage - native gItems[].description
     # re-points into the item text arena. R13-E3b does the SAME TARGETED flip
@@ -2946,9 +2983,9 @@ def emit_seam_header(records, label_arts, bundle_blobs, root, args, keymap):
     # emerald:text/data/abnormal-weather).
     ids = sorted(set(label_arts) | set(bundle_blobs))
     count = len(ids)
-    if count != PINNED_C_RESOURCES + PINNED_BUNDLES:
+    if count != PINNED_C_RESOURCES + PINNED_GIFT_RESOURCES + PINNED_BUNDLES:
         fail(f"seam inventory {count} != "
-             f"{PINNED_C_RESOURCES + PINNED_BUNDLES}")
+             f"{PINNED_C_RESOURCES + PINNED_GIFT_RESOURCES + PINNED_BUNDLES}")
 
     lines = [
         "/* Generated by tools/gen3_resources/text_family/gen_text_family.py.",
@@ -2956,8 +2993,9 @@ def emit_seam_header(records, label_arts, bundle_blobs, root, args, keymap):
         " *",
         " * R13-C seam inventory for the emerald:text family. The table",
         " * enumerates every canonical text resource the production pack",
-        " * publishes (4,824 per-label + 363 bundles) with its canonical id",
-        " * and payload size. The seam (EmeraldTextCompat) validates the",
+        " * publishes (4,844 per-label: 4,824 C-side + 20 mystery-gift, the",
+        " * R13-G2 §7.3 handoff; + 363 bundles) with its canonical id and",
+        " * payload size. The seam (EmeraldTextCompat) validates the",
         " * session's pack against this exact inventory (name/size/schema",
         " * set equality) before allocating family arenas - drift is a",
         " * publish failure, never a partial publication.",
@@ -2969,7 +3007,8 @@ def emit_seam_header(records, label_arts, bundle_blobs, root, args, keymap):
         "#include <stdint.h>",
         "",
         f"#define TEXT_NATIVE_RESOURCE_COUNT {count}u",
-        f"#define TEXT_NATIVE_LABEL_COUNT {PINNED_C_RESOURCES}u",
+        f"#define TEXT_NATIVE_LABEL_COUNT "
+        f"{PINNED_C_RESOURCES + PINNED_GIFT_RESOURCES}u",
         f"#define TEXT_NATIVE_BUNDLE_COUNT {PINNED_BUNDLES}u",
         "",
         "struct TextNativeResource",
@@ -2994,7 +3033,7 @@ def emit_seam_header(records, label_arts, bundle_blobs, root, args, keymap):
 
     by_id = {}
     for r in records:
-        if r[3] == "c":
+        if r[3] == "c" or r[1] == "mystery-gift":
             by_id[keymap[r[0]]] = (r[6], ARENA_KEYS.index(arena_of(r)))
     c_lines = [
         "/* Generated by tools/gen3_resources/text_family/gen_text_family.py.",
@@ -3469,16 +3508,34 @@ def emit_bundle_index(records, bundle_blobs, root, args):
                     "text_bundle_index.generated.c", c_lines, args)
 
 
-def emit_arenas(records, root, args):
-    """Per-family arena summaries (R13-C §8/§14): 16 arenas, keyed in
-    ARENA_KEYS order, each with its pinned label count + canonical byte
-    total. The seam re-derives these from the resolution table at
-    publish and fails on any mismatch."""
+def arena_inventory_counts(records):
+    """Per-arena [labelCount, byteTotal] in the SEAM's inventory model
+    (emerald_text_compat.c re-derives these from the resolution table):
+    every non-bundle inventory row (C-side per-label resources) plus
+    every bundle-index entry. Mystery-gift labels (R13-G2 §7.3) appear
+    in BOTH: they stay bundle members (their 8 gift_*.inc blobs tile
+    them) and additionally publish per-label under
+    emerald:text/mystery-gift/<canonical>, so they are counted once per
+    representation. That is what the seam demands of
+    kTextArenaSummaries at publish."""
     per = {}
     for r in records:
         per.setdefault(arena_of(r), [0, 0])
         per[arena_of(r)][0] += 1
         per[arena_of(r)][1] += r[6]
+        if r[1] == "mystery-gift":
+            # The per-label row in ADDITION to the bundle membership.
+            per[arena_of(r)][0] += 1
+            per[arena_of(r)][1] += r[6]
+    return per
+
+
+def emit_arenas(records, root, args):
+    """Per-family arena summaries (R13-C §8/§14): 16 arenas, keyed in
+    ARENA_KEYS order, each with its pinned label count + canonical byte
+    total. The seam re-derives these from the resolution table at
+    publish and fails on any mismatch."""
+    per = arena_inventory_counts(records)
     for key in ARENA_KEYS:
         if key not in per:
             fail(f"arena '{key}' has no labels")
@@ -3541,11 +3598,7 @@ def emit_skeleton_report(tables, deferred, records, fam_dir, args):
     """Surface report: every discovered table (file/kind/rows/fills), the
     mixed live/deferred tables that stay compiled, and every arena
     summary, for the R13-C report + review."""
-    per = {}
-    for r in records:
-        per.setdefault(arena_of(r), [0, 0])
-        per[arena_of(r)][0] += 1
-        per[arena_of(r)][1] += r[6]
+    per = arena_inventory_counts(records)
     lines = [
         "# Generated by tools/gen3_resources/text_family/gen_text_family.py.",
         "# R13-C §9/§10 skeleton-table surface report (do not edit).",
@@ -3895,7 +3948,10 @@ PINNED_ARENA_SUMMARIES = {
     "frontier-brain": (28, 882),
     "easy-chat": (1008, 7101),
     "berry": (41, 4305),
-    "misc": (6191, 548591),
+    # R13-G2 §7.3 handoff: +20 mystery-gift per-label rows (2,682 B)
+    # counted on top of their bundle membership (arena_inventory_counts)
+    # - the only arena summary that changed since R13-C.
+    "misc": (6211, 551273),
 }
 
 PINNED_BUNDLE_INDEX_ENTRIES = 7953
@@ -3944,10 +4000,12 @@ def main():
     check_pins(records)
 
     c_records = [r for r in records if r[3] == "c"]
-    keymap = assign_label_keys(c_records)
-    if len(keymap) != PINNED_C_RESOURCES or \
-            set(keymap) != {r[0] for r in c_records}:
-        fail(f"keymap {len(keymap)} != {PINNED_C_RESOURCES} "
+    gift_records = [r for r in records if r[1] == "mystery-gift"]
+    keymap = assign_label_keys(c_records + gift_records)
+    if len(keymap) != PINNED_C_RESOURCES + PINNED_GIFT_RESOURCES or \
+            set(keymap) != {r[0] for r in c_records + gift_records}:
+        fail(f"keymap {len(keymap)} != "
+             f"{PINNED_C_RESOURCES + PINNED_GIFT_RESOURCES} "
              f"(set mismatch)")
 
     asm_labels = sorted(r[0] for r in records if r[3] == "asm")
@@ -3973,6 +4031,7 @@ def main():
 
     print(f"text labels: {len(records)} "
           f"({PINNED_C_RESOURCES} C-side per-label + "
+          f"{PINNED_GIFT_RESOURCES} mystery-gift per-label + "
           f"{PINNED_BUNDLES} bundles covering {PINNED_ASM_LABELS} asm "
           f"labels)")
     print(f"canonical bytes: {sum(r[6] for r in records)} B; bundles "

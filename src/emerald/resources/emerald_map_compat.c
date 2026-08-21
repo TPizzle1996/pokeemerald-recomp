@@ -457,7 +457,7 @@ EmeraldMapCompat_TryInitialize(
         /* coord script provenance. */
         for (o = 0u; o < (size_t)r->coordCount; o++)
         {
-            uint32_t a = ReadLe32(wire + objB + warpB + o * MAP_COORD_WIRE + 8u);
+            uint32_t a = ReadLe32(wire + objB + warpB + o * MAP_COORD_WIRE + 12u);
             uint32_t ex = kMapEventCoordScriptAddrs[
                 kMapEventCoordScriptStart[i] + o];
             if (a != ex)
@@ -632,10 +632,10 @@ EmeraldMapCompat_TryInitialize(
             dst->x = (s16)ReadLe16(src + 0u);
             dst->y = (s16)ReadLe16(src + 2u);
             dst->elevation = src[4u];
-            dst->trigger = ReadLe16(src + 5u);
-            dst->index = ReadLe16(src + 7u);
+            dst->trigger = ReadLe16(src + 6u);
+            dst->index = ReadLe16(src + 8u);
             dst->script = (const u8 *)HostResolveGbaAddr(
-                (uint32_t)ReadLe32(src + 8u));
+                (uint32_t)ReadLe32(src + 12u));
         }
         /* bg rows: 12 -> 16 native; script for sign/player-facing kinds. */
         for (o = 0u; o < (size_t)r->bgCount; o++)

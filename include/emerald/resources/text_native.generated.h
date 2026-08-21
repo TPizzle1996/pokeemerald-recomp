@@ -3,8 +3,9 @@
  *
  * R13-C seam inventory for the emerald:text family. The table
  * enumerates every canonical text resource the production pack
- * publishes (4,824 per-label + 363 bundles) with its canonical id
- * and payload size. The seam (EmeraldTextCompat) validates the
+ * publishes (4,844 per-label: 4,824 C-side + 20 mystery-gift, the
+ * R13-G2 §7.3 handoff; + 363 bundles) with its canonical id and
+ * payload size. The seam (EmeraldTextCompat) validates the
  * session's pack against this exact inventory (name/size/schema
  * set equality) before allocating family arenas - drift is a
  * publish failure, never a partial publication.
@@ -15,8 +16,8 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-#define TEXT_NATIVE_RESOURCE_COUNT 5187u
-#define TEXT_NATIVE_LABEL_COUNT 4824u
+#define TEXT_NATIVE_RESOURCE_COUNT 5207u
+#define TEXT_NATIVE_LABEL_COUNT 4844u
 #define TEXT_NATIVE_BUNDLE_COUNT 363u
 
 struct TextNativeResource
