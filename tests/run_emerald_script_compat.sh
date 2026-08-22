@@ -25,7 +25,7 @@ trap 'rm -rf "$tmp"' EXIT
 echo "== compiling emerald script compat test (real native flags) =="
 cd "$root"
 FLAGS=(-std=gnu99 -O2 -ffunction-sections -fdata-sections -Wl,--gc-sections \
-    -Wall -Wextra \
+    -no-pie -Wall -Wextra \
     -iquote include -iquote "$core_dir" \
     -DPORTABLE -DNONMATCHING -DUBFIX -DMODERN=1 \
     -DPLATFORM_SDL2 -DNATIVE_LINUX -DLINUX64=1 \

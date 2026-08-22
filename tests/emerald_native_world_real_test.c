@@ -62,6 +62,7 @@
 #include "emerald/resources/emerald_resource_compat.h"
 #include "emerald/resources/emerald_resource_ranges.h"
 #include "emerald/resources/emerald_resource_session.h"
+#include "emerald/resources/emerald_map_compat.h"
 #include "emerald/resources/emerald_trainer_native_compat.h"
 #include "emerald/resources/emerald_audio_compat.h"
 
@@ -1142,6 +1143,33 @@ int main(int argc, char **argv)
         CHECK(resolvedPointer == (uintptr_t)(arenaBase + songOff));
     }
 
+    /* 3c. R13-F map seam (R13-G6): the compiled headers.inc rows are gated
+     * out of the native maps.o; gMapHeaders is the HOST_DATA array the
+     * seam fills from the pack and the gMapGroup_* tables route into it
+     * via groups_native.inc. Published after the audio seam to mirror the
+     * loader chain order (audio first, map second); runs before the
+     * neighborhood walks connections/layouts (mapLayout rows come from
+     * the layout seam published in step 3). GetPublishedCount is the full
+     * publish sum (headers + layouts + event bundles + connections), and
+     * the map family registers exactly 3 state-v5 spans (headers array +
+     * event arena + connection arena): the shared range index grows
+     * 5819 -> 5822 (the loader's 6,377 total is this plus the later
+     * script-family 523 + the remaining families' 32). */
+    {
+        struct EmeraldMapCompatDiagnostics mapDiag;
+        enum EmeraldMapCompatStatus mapStatus =
+            EmeraldMapCompat_TryInitialize(snapshot, pack, &mapDiag);
+        struct EmeraldResourceRangeIndex *index =
+            EmeraldResourceCompat_GetRangeIndex();
+        CHECK(mapStatus == EMERALD_MAP_OK);
+        CHECK(mapDiag.canonicalName[0] == '\0');
+        CHECK(EmeraldMapCompat_GetPublishedCount() ==
+              (EMERALD_MAP_HEADER_COUNT + EMERALD_MAP_LAYOUT_COUNT +
+               EMERALD_MAP_EVENT_COUNT + EMERALD_MAP_CONNECTION_COUNT));
+        CHECK(index != NULL);
+        CHECK(EmeraldResourceRangeIndex_GetRangeCount(index) == 5822u);
+    }
+
     /* 4. The neighborhood module: Init AFTER publication (LayoutPublished). */
     NativeWorldNeighborhood_Init();
 
@@ -1158,6 +1186,7 @@ int main(int argc, char **argv)
     /* Teardown mirroring the production harness's success path: the compat
      * seams' published pointers die with the snapshot, so everything is
      * destroyed only after the last test. */
+    EmeraldMapCompat_ClearMigratedEntries();
     Gen3ResourceSnapshot_Destroy(snapshot);
     Gen3ResourceCandidate_Destroy(candidate);
     Gen3ResourceCatalog_Destroy(catalog);

@@ -36,8 +36,7 @@ extern void Script_GetStateContexts(struct ScriptContext **context1,
                                     const uint8_t **context1Status,
                                     struct ScriptContext **context2)
     __attribute__((weak));
-extern void ScrCmd_GetStatePointers(const uint8_t ***ramScriptRetAddr,
-                                    intptr_t **addressOffset)
+extern void ScrCmd_GetStatePointers(const uint8_t ***ramScriptRetAddr)
     __attribute__((weak));
 extern void BattleSetup_GetScriptStatePointers(
     const uint8_t ***battleEnd, const uint8_t ***trainerAReturn,
@@ -252,7 +251,6 @@ bool EmeraldScriptState_BindLiveLayout(void)
 {
     struct EmeraldScriptStateLayout layout;
     const uint8_t **ram = NULL;
-    intptr_t *addressOffset = NULL;
     const uint8_t **battleEnd = NULL;
     const uint8_t **trainerA = NULL;
     const uint8_t **trainerB = NULL;
@@ -265,7 +263,7 @@ bool EmeraldScriptState_BindLiveLayout(void)
         return false;
     Script_GetStateContexts(&layout.context1, &layout.context1Status,
                             &layout.context2);
-    ScrCmd_GetStatePointers(&ram, &addressOffset);
+    ScrCmd_GetStatePointers(&ram);
     BattleSetup_GetScriptStatePointers(&battleEnd, &trainerA, &trainerB);
     MysteryEvent_GetScriptStatePointers(&layout.mysteryEventContext,
                                         &mysteryBase);
@@ -277,7 +275,6 @@ bool EmeraldScriptState_BindLiveLayout(void)
     layout.trainerBattleEndScript = battleEnd;
     layout.trainerAReturnScript = trainerA;
     layout.trainerBReturnScript = trainerB;
-    layout.addressOffset = addressOffset;
     layout.mysteryEventNativeBase = mysteryBase;
     EmeraldScriptState_SetLayout(&layout);
     return true;
@@ -343,6 +340,45 @@ bool EmeraldScriptState_RegisterDynamicBuffer(
     return true;
 }
 
+/* R13-G6 (plan sec 9): the 17-op MEVENT grammar (gMysteryEventScriptCmdTable,
+ * data/mystery_event_script_cmd_table.s). Each entry is the full instruction
+ * size in bytes (opcode + operands), derived from the operand reads of the
+ * corresponding MEScrCmd_* implementation in src/mystery_event_script.c:
+ *  0x00 nop            1   0x09 givenationaldex   1
+ *  0x01 checkcompat    17  0x0a addrareword       2
+ *  0x02 end            1   0x0b setrecordmixinggift 5
+ *  0x03 setmsg         6   0x0c givepokemon       5
+ *  0x04 setstatus      2   0x0d addtrainer        5
+ *  0x05 runscript      5   0x0e enableresetrtc    1
+ *  0x06 initramscript  12  0x0f checksum          13
+ *  0x07 setenigmaberry 5   0x10 crc               13
+ *  0x08 giveribbon     3
+ */
+static const uint8_t sMysteryEventCmdSize[17] = {
+    1, 17, 1, 6, 2, 5, 12, 5, 3, 1, 2, 5, 5, 5, 1, 13, 13,
+};
+
+void EmeraldScriptState_BuildMysteryEventBoundaryBitmap(
+    const uint8_t *script, size_t size, uint8_t *bitmap)
+{
+    size_t pos;
+
+    if (script == NULL || bitmap == NULL)
+        return;
+    memset(bitmap, 0, size);
+    pos = 0u;
+    while (pos < size)
+    {
+        uint8_t op = script[pos];
+        if (op >= ARRAY_COUNT(sMysteryEventCmdSize))
+            break;            /* unknown opcode: opaque tail, fail-closed */
+        bitmap[pos] = 1u;     /* exact instruction start */
+        if (op == 0x02u)      /* end: terminal */
+            break;
+        pos += sMysteryEventCmdSize[op];
+    }
+}
+
 enum EmeraldScriptStateStatus EmeraldScriptState_PrepareCapture(void)
 {
     size_t i;
@@ -375,15 +411,10 @@ enum EmeraldScriptStateStatus EmeraldScriptState_PrepareCapture(void)
             return EMERALD_SCRIPT_STATE_ERR_CONTEXT2_ACTIVE;
         }
     }
-    /* Never serialize the legacy creator-process host delta. Successful G4
-     * staged vaddress fixtures persist EmeraldScriptVirtualAnchor instead.
-     * Converting a live nonzero delta requires G5's atomic handler/buffer
-     * registration switch, so refuse before any state bytes are emitted. */
-    if (sLayout.addressOffset != NULL && *sLayout.addressOffset != 0)
-    {
-        NoteSurface("sAddressOffset");
-        return EMERALD_SCRIPT_STATE_ERR_VADDRESS_HOST_DELTA;
-    }
+    /* R13-G6 (plan sec 9): the legacy creator-process host delta is
+     * removed from the engine entirely (dead storage deleted); staged
+     * vaddress fixtures persist EmeraldScriptVirtualAnchor instead, so
+     * no delta refusal is possible or needed. */
     if (sLayout.mysteryEventContext != NULL
      && sLayout.mysteryEventContext->stackDepth > EMERALD_SCRIPT_STATE_STACK_CAP)
     {
@@ -669,7 +700,6 @@ const char *EmeraldScriptStateStatus_Describe(enum EmeraldScriptStateStatus stat
     case EMERALD_SCRIPT_STATE_ERR_DYNAMIC_UNKNOWN: return "dynamic script buffer identity is unknown or ambiguous";
     case EMERALD_SCRIPT_STATE_ERR_DYNAMIC_BOUNDS: return "dynamic script offset is out of bounds";
     case EMERALD_SCRIPT_STATE_ERR_DYNAMIC_GENERATION: return "dynamic script buffer generation is stale";
-    case EMERALD_SCRIPT_STATE_ERR_VADDRESS_HOST_DELTA: return "legacy creator-process vaddress host delta has no stable anchor";
     case EMERALD_SCRIPT_STATE_ERR_MISSING_KEY: return "script resource key is missing from the staged generation";
     case EMERALD_SCRIPT_STATE_ERR_SCHEMA: return "script resource type/schema/role does not match";
     default: return "unknown script state error";

@@ -1,4 +1,7 @@
 #include "global.h"
+#if defined(LINUX64) && LINUX64
+#include "emerald/resources/emerald_script_compat.h"
+#endif
 #if defined(NATIVE_LINUX)
 /* R11-C: gTilesetPalettes_SecretBase is ROM_BASE on native; declared here,
  * defined by the compat seam. */
@@ -591,7 +594,7 @@ bool8 SetUpFieldMove_SecretPower(void)
 static void FieldCallback_SecretBaseCave(void)
 {
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
-    ScriptContext_SetupScript(SecretBase_EventScript_CaveUseSecretPower);
+    ScriptContext_SetupScript(G_SCRIPT(SecretBase_EventScript_CaveUseSecretPower));
 }
 
 bool8 FldEff_UseSecretPowerCave(void)
@@ -652,7 +655,7 @@ static void SpriteCB_CaveEntranceEnd(struct Sprite *sprite)
 static void FieldCallback_SecretBaseTree(void)
 {
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
-    ScriptContext_SetupScript(SecretBase_EventScript_TreeUseSecretPower);
+    ScriptContext_SetupScript(G_SCRIPT(SecretBase_EventScript_TreeUseSecretPower));
 }
 
 bool8 FldEff_UseSecretPowerTree(void)
@@ -727,7 +730,7 @@ static void SpriteCB_TreeEntranceEnd(struct Sprite *sprite)
 static void FieldCallback_SecretBaseShrub(void)
 {
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
-    ScriptContext_SetupScript(SecretBase_EventScript_ShrubUseSecretPower);
+    ScriptContext_SetupScript(G_SCRIPT(SecretBase_EventScript_ShrubUseSecretPower));
 }
 
 bool8 FldEff_UseSecretPowerShrub(void)

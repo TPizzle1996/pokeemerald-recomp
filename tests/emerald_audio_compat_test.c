@@ -1,7 +1,7 @@
 /* R12-B focused test: audio leaf ownership migration (tests A-G).
  *
  * Drives the R12-B seam (emerald_audio_compat.c) against the REAL production
- * pack (games/emerald/base/emerald-bpee01-v1.rpack, 20501 entries incl. the
+ * pack (games/emerald/base/emerald-bpee01-v1.rpack, 20988 entries incl. the
  * 771 audio resources: 569 leaves + 202 structural + 530 song graphs, and
  * since R13-B the 1057 movement/multiboot leaf resources) plus synthetic
  * packs for the failure matrix:
@@ -11,7 +11,7 @@
  *                      MP2K song graphs (mus 210 / se 269 / ph 51), all
  *                      type AUDIO_SAMPLE / schema 1 (MUSIC_SEQUENCE for the
  *                      songs), names classified by the R12-A taxonomy (pack
- *                      total 20501 since R13-E2);
+ *                      total 20988 since the R13-G script family);
  *   B. exact         - every leaf's ROM-relative arena offset fits the
  *                      verbatim zone [0x0867709C, 0x089A3DB4], no two leaves
  *                      overlap, and the published arena bytes are
@@ -941,9 +941,13 @@ static void TestAudioCounts(const struct Gen3ResourcePack *pack)
 {
     /* R13-D1: the production pack entry count grew to 15,373 (12,063 after
      * R13-C + 3,310 D1 gameplay/font resources; the diverged evolution
-     * family is excluded). The audio-family pins below are unchanged. */
-    CHECK("pack total 20501 entries (+786 R13-E3a-1 frontier/tent)",
-          Gen3ResourcePack_GetEntryCount(pack) == 20501u);
+     * family is excluded). R13-G2 §7.3 added 20 gift-text entries and the
+     * R13-G script family added 467 payload modules (523 catalog
+     * identities; the 56 routing-only modules are absent from the pack),
+     * landing the total at 20,988. The audio-family pins below are
+     * unchanged. */
+    CHECK("pack total 20988 entries (+487 R13-G2 gift text + script family)",
+          Gen3ResourcePack_GetEntryCount(pack) == 20988u);
     CHECK("leaf total 569", sLeafCount == EMERALD_AUDIO_LEAF_COUNT);
     CHECK("root count 105", sRootCount == EMERALD_AUDIO_ROOT_COUNT);
     CHECK("phoneme count 51", sPhonemeCount == EMERALD_AUDIO_PHONEME_COUNT);

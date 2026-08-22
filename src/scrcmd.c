@@ -57,26 +57,20 @@ typedef void (*NativeFunc)(void);
 
 EWRAM_DATA const u8 *gRamScriptRetAddr = NULL;
 
-/* R13-G5 (plan sec 7/8): the creator-process host-delta sAddressOffset is
- * retired. The live virtual-address family resolves through the stable
- * anchor (encodedVirtualBase + buffer identity + liveBaseOffset) held
- * here; the State-v5 adapter persists and re-validates it. The legacy
- * delta stays as dead zeroed storage purely for the G4 adapter's
- * ABI/refusal contract - no live reader or writer exists (proven by the
- * isolation sweep). */
-static EWRAM_DATA intptr_t sAddressOffset = 0;
+/* R13-G6 (plan sec 9): the creator-process host-delta sAddressOffset is
+ * retired and its dead storage removed. The live virtual-address family
+ * resolves through the stable anchor (encodedVirtualBase + buffer
+ * identity + liveBaseOffset) held here; the State-v5 adapter persists and
+ * re-validates it. No live reader or writer of the delta remains (proven
+ * by the isolation sweep), so the G4-era ABI slot is gone entirely. */
 static EWRAM_DATA struct EmeraldScriptVirtualAnchor sVAddressAnchor;
 
-/* R13-G4 read-only State-v5 inventory.  Live vaddress behavior and the
- * creator-process delta remain untouched until G5; the adapter persists only
- * its separate stable virtual-anchor representation. */
-void ScrCmd_GetStatePointers(const u8 ***ramScriptRetAddr,
-                             intptr_t **addressOffset)
+/* R13-G5 read-only State-v5 inventory.  The adapter persists only its
+ * separate stable virtual-anchor representation. */
+void ScrCmd_GetStatePointers(const u8 ***ramScriptRetAddr)
 {
     if (ramScriptRetAddr != NULL)
         *ramScriptRetAddr = &gRamScriptRetAddr;
-    if (addressOffset != NULL)
-        *addressOffset = &sAddressOffset;
 }
 static EWRAM_DATA u16 sPauseCounter = 0;
 static EWRAM_DATA u16 sMovingNpcId = 0;

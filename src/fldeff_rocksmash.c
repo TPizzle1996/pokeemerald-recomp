@@ -1,4 +1,7 @@
 #include "global.h"
+#if defined(LINUX64) && LINUX64
+#include "emerald/resources/emerald_script_compat.h"
+#endif
 #include "braille_puzzles.h"
 #include "event_data.h"
 #include "event_object_movement.h"
@@ -146,7 +149,7 @@ bool8 SetUpFieldMove_RockSmash(void)
 static void FieldCallback_RockSmash(void)
 {
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
-    ScriptContext_SetupScript(EventScript_UseRockSmash);
+    ScriptContext_SetupScript(G_SCRIPT(EventScript_UseRockSmash));
 }
 
 bool8 FldEff_UseRockSmash(void)

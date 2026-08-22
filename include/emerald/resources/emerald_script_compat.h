@@ -13,13 +13,15 @@
  *
  * NOTHING in this seam mutates live execution state: the running VM
  * keeps executing compiled field scripts, gStdScripts stays compiled,
- * the R13-F map/event pointers are untouched, ScriptReadPointer and
- * sAddressOffset are untouched, and NO range is registered with the
- * State-v5 range index (the shadow arena is intentionally invisible to
- * the range walker; a session that captures pointers into it would be
- * corrupt by definition - G4/G5 wire the arena in through the normal
- * publication path before any save can see it). Live publication of
- * gStdScripts, the F rebind and range registration is G5's job.
+ * the R13-F map/event pointers are untouched, ScriptReadPointer is
+ * untouched (the G6 §9 cleanup removed the legacy sAddressOffset delta
+ * entirely; the stable virtual anchor is the only model), and NO range
+ * is registered with the State-v5 range index (the shadow arena is
+ * intentionally invisible to the range walker; a session that captures
+ * pointers into it would be corrupt by definition - G4/G5 wire the
+ * arena in through the normal publication path before any save can see
+ * it). Live publication of gStdScripts, the F rebind and range
+ * registration is G5's job.
  *
  * REFUSE-CLASS and transactional (plan sec 11): phase 1 validates the
  * generated inventory against the session's pack (exactly 467 embedded
@@ -126,10 +128,11 @@ struct EmeraldScriptCompatDiagnostics
 
 /* Where a resolved target's live pointer comes from. STAGED_ARENA
  * pointers are generation-scoped and never persist; SIBLING_SEAM
- * pointers belong to the published text/leaf arenas; COMPILED_BRIDGE
- * and HOST_RAM point at named compiled symbols; DEFERRED targets have
- * no live pointer in G3 (routing dispatch tables stay ROM-resident
- * and the braille labels await their C handoff). */
+ * pointers belong to the published text/leaf arenas or the compiled
+ * braille text (R13-G6 sec 7.3, via the generated
+ * kBrailleGbaAddrs/kBrailleTextAddresses pair); COMPILED_BRIDGE and
+ * HOST_RAM point at named compiled symbols; DEFERRED targets have no
+ * live pointer in G3 (routing dispatch tables stay ROM-resident). */
 enum EmeraldScriptTargetDisposition
 {
     EMERALD_SCRIPT_DISPOSITION_STAGED_ARENA = 0,
@@ -365,6 +368,24 @@ bool EmeraldScriptCompat_ResolveVAddress(uint32_t encodedVirtualBase,
                                          uintptr_t liveBase,
                                          uint32_t encodedTarget,
                                          uintptr_t *outAddress);
+
+/* R13-G6 (plan sec 5.3): engine C-site entrypoint resolution. A
+ * G-owned script export resolved by canonical symbol name through the
+ * sorted export-name index (O(log n) bsearch). Returns 0 when the
+ * name is unknown or no generation is staged - the callers treat 0
+ * as a terminal error (no compiled fallback exists on native). */
+uintptr_t EmeraldScriptCompat_GetScriptSymbol(const char *name);
+
+/* The dual-build C-site reference macro: native resolves by name
+ * through the seam (the compiled symbol is physically absent from the
+ * native link); GBA keeps the direct symbol reference. `name` must be
+ * a symbol - the macro stringifies it. */
+#if defined(NATIVE_LINUX)
+#define G_SCRIPT(name) \
+    ((const uint8_t *)EmeraldScriptCompat_GetScriptSymbol(#name))
+#else
+#define G_SCRIPT(name) ((const uint8_t *)(name))
+#endif
 
 const char *EmeraldScriptCompatStatus_Describe(enum EmeraldScriptCompatStatus status);
 

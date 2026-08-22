@@ -1,4 +1,7 @@
 #include "global.h"
+#if defined(LINUX64) && LINUX64
+#include "emerald/resources/emerald_script_compat.h"
+#endif
 #include "new_game.h"
 #include "random.h"
 #include "pokemon.h"
@@ -204,7 +207,7 @@ void NewGameInitData(void)
     ResetFanClub();
     ResetLotteryCorner();
     WarpToTruck();
-    RunScriptImmediately(EventScript_ResetAllMapFlags);
+    RunScriptImmediately(G_SCRIPT(EventScript_ResetAllMapFlags));
     ResetMiniGamesRecords();
     InitUnionRoomChatRegisteredTexts();
     InitLilycoveLady();

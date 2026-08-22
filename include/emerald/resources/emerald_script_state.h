@@ -43,7 +43,9 @@ enum EmeraldScriptStateStatus
     EMERALD_SCRIPT_STATE_ERR_DYNAMIC_UNKNOWN,
     EMERALD_SCRIPT_STATE_ERR_DYNAMIC_BOUNDS,
     EMERALD_SCRIPT_STATE_ERR_DYNAMIC_GENERATION,
-    EMERALD_SCRIPT_STATE_ERR_VADDRESS_HOST_DELTA,
+    /* R13-G6 (plan sec 9): EMERALD_SCRIPT_STATE_ERR_VADDRESS_HOST_DELTA
+     * removed - the legacy creator-process host delta and its refusal
+     * are gone (dead storage deleted; anchors are the only model). */
     EMERALD_SCRIPT_STATE_ERR_MISSING_KEY,
     EMERALD_SCRIPT_STATE_ERR_SCHEMA,
 };
@@ -70,7 +72,6 @@ struct EmeraldScriptStateLayout
     const uint8_t **trainerBattleEndScript;
     const uint8_t **trainerAReturnScript;
     const uint8_t **trainerBReturnScript;
-    const intptr_t *addressOffset;
     struct ScriptContext *mysteryEventContext;
     uint8_t **mysteryEventNativeBase;
 };
@@ -120,6 +121,15 @@ void EmeraldScriptState_ClearLayout(void);
 void EmeraldScriptState_ClearDynamicBuffers(void);
 bool EmeraldScriptState_RegisterDynamicBuffer(
     const struct EmeraldScriptDynamicBuffer *buffer);
+
+/* R13-G6 (plan sec 9): build the 17-op MEVENT grammar's instruction
+ * boundary bitmap - one byte per buffer byte, nonzero at an exact
+ * instruction start. The walk decodes sequentially from offset 0 and
+ * breaks on an unknown opcode or after `end` (0x02), leaving trailing
+ * bytes (main-dialect sub-scripts, embedded data) opaque/unmarked.
+ * `bitmap` must hold `size` bytes and is fully zeroed first. */
+void EmeraldScriptState_BuildMysteryEventBoundaryBitmap(
+    const uint8_t *script, size_t size, uint8_t *bitmap);
 
 /* Whole-capture preflight.  It enforces the Context1 depth/IP rules and the
  * hard Context2 stopped/null rule before the generic walker can emit any

@@ -1,4 +1,7 @@
 #include "global.h"
+#if defined(LINUX64) && LINUX64
+#include "emerald/resources/emerald_script_compat.h"
+#endif
 #include "item_use.h"
 #include "battle.h"
 #include "battle_pyramid.h"
@@ -700,7 +703,7 @@ static void ItemUseOnFieldCB_Berry(u8 taskId)
 {
     RemoveBagItem(gSpecialVar_ItemId, 1);
     LockPlayerFieldControls();
-    ScriptContext_SetupScript(BerryTree_EventScript_ItemUsePlantBerry);
+    ScriptContext_SetupScript(G_SCRIPT(BerryTree_EventScript_ItemUsePlantBerry));
     DestroyTask(taskId);
 }
 
@@ -725,7 +728,7 @@ void ItemUseOutOfBattle_WailmerPail(u8 taskId)
 static void ItemUseOnFieldCB_WailmerPailBerry(u8 taskId)
 {
     LockPlayerFieldControls();
-    ScriptContext_SetupScript(BerryTree_EventScript_ItemUseWailmerPail);
+    ScriptContext_SetupScript(G_SCRIPT(BerryTree_EventScript_ItemUseWailmerPail));
     DestroyTask(taskId);
 }
 
@@ -746,7 +749,7 @@ static bool8 TryToWaterSudowoodo(void)
 static void ItemUseOnFieldCB_WailmerPailSudowoodo(u8 taskId)
 {
     LockPlayerFieldControls();
-    ScriptContext_SetupScript(BattleFrontier_OutsideEast_EventScript_WaterSudowoodo);
+    ScriptContext_SetupScript(G_SCRIPT(BattleFrontier_OutsideEast_EventScript_WaterSudowoodo));
     DestroyTask(taskId);
 }
 

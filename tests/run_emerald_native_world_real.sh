@@ -85,7 +85,11 @@ python3 - "$tmp" <<'EOF'
 import sys
 tmp = sys.argv[1]
 names = [line.strip() for line in open(tmp + "/stub_names.txt") if line.strip()]
-assert names, "no <Map>_MapScripts/_MapEvents symbols found in maps.o"
+# R13-G6: maps.o no longer references any *_MapScripts/_MapEvents
+# (headers.inc is gated out of maps.s on linux64; the G-owned payload is
+# pack-loaded only). An empty set is the EXPECTED post-G6 state — the
+# stubs exist only to satisfy legacy undefined refs, so emit whatever
+# (possibly nothing) the object actually needs.
 with open(tmp + "/map_script_stubs.s", "w") as f:
     f.write("# R11-E/F Harness B: inert <Map>_MapScripts / <Map>_MapEvents\n")
     f.write("# pointer targets for maps.o's relocations (from nm -u maps.o;\n")
@@ -129,6 +133,9 @@ gcc -std=gnu99 -O2 -ffunction-sections -fdata-sections -Wl,--gc-sections \
     "$emerald_dir/emerald_audio_compat.c" \
     "$here/emerald_tileset_compat_stubs.c" \
     "$emerald_dir/emerald_resource_session.c" \
+    "$emerald_dir/map_data_native.c" \
+    "$emerald_dir/map_native.generated.c" \
+    "$emerald_dir/emerald_map_compat.c" \
     src/platform/host_memory.c \
     src/platform/native_world_neighborhood.c \
     "$data_dir/maps.o" \

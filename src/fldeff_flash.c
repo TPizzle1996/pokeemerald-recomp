@@ -1,4 +1,7 @@
 #include "global.h"
+#if defined(LINUX64) && LINUX64
+#include "emerald/resources/emerald_script_compat.h"
+#endif
 #include "braille_puzzles.h"
 #include "event_data.h"
 #include "event_scripts.h"
@@ -103,7 +106,7 @@ static void FldEff_UseFlash(void)
 {
     PlaySE(SE_M_REFLECT);
     FlagSet(FLAG_SYS_USE_FLASH);
-    ScriptContext_SetupScript(EventScript_UseFlash);
+    ScriptContext_SetupScript(G_SCRIPT(EventScript_UseFlash));
 }
 
 static void CB2_ChangeMapMain(void)

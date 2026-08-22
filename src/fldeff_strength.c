@@ -1,4 +1,7 @@
 #include "global.h"
+#if defined(LINUX64) && LINUX64
+#include "emerald/resources/emerald_script_compat.h"
+#endif
 #include "event_data.h"
 #include "event_scripts.h"
 #include "field_effect.h"
@@ -30,7 +33,7 @@ bool8 SetUpFieldMove_Strength(void)
 static void FieldCallback_Strength(void)
 {
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
-    ScriptContext_SetupScript(EventScript_UseStrength);
+    ScriptContext_SetupScript(G_SCRIPT(EventScript_UseStrength));
 }
 
 bool8 FldEff_UseStrength(void)

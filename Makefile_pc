@@ -292,6 +292,19 @@ ifeq ($(NATIVE_LINUX)-$(LINUX64),1-1)
 SONG_OBJS :=
 MID_OBJS :=
 
+# R13-G6: the linux64 link drops every G-owned compiled field-script
+# payload object. map_events.o (the 2,260 compiled MapEvents_* arrays -
+# the R13-F seam builds the event bundles in-arena) and mystery_gift.o
+# (the 8 static gift modules - pack-loaded arena modules, G-owned) have
+# zero native consumers; the GBA build and the 32-bit/windows native
+# builds keep them. event_scripts.o stays (engine prefix + C-owned text)
+# with the G payload gated out inside the assembly (G_SCRIPT_INC +
+# region guards); maps.o stays (F-owned layouts/groups) with
+# headers.inc/connections.inc gated out inside the assembly.
+DATA_ASM_OBJS := $(filter-out $(DATA_ASM_BUILDDIR)/map_events.o \
+                              $(DATA_ASM_BUILDDIR)/mystery_gift.o, \
+                              $(DATA_ASM_OBJS))
+
 # R12-G: sweep stale audio payload objects out of the linux64 object tree.
 # make only deletes targets it would rebuild; with SONG_OBJS/MID_OBJS empty,
 # song objects from a pre-R12-G (payload-linked) build would linger in
@@ -303,7 +316,14 @@ MID_OBJS :=
 sweep-stale-audio-objects:
 	rm -rf $(OBJ_DIR)/$(SONG_SUBDIR) $(OBJ_DIR)/$(MID_SUBDIR)
 
-rom: sweep-stale-audio-objects
+# R13-G6: sweep stale G payload objects out of the linux64 object tree
+# (same reasoning as the audio sweep: the isolation runner treats the
+# object tree as the link graph).
+.PHONY: sweep-stale-g-script-objects
+sweep-stale-g-script-objects:
+	rm -f $(DATA_ASM_BUILDDIR)/map_events.o $(DATA_ASM_BUILDDIR)/mystery_gift.o
+
+rom: sweep-stale-audio-objects sweep-stale-g-script-objects
 endif
 
 OBJS     := $(C_OBJS) $(GFLIB_OBJS) $(ASM_OBJS) $(DATA_ASM_OBJS) $(SONG_OBJS) $(MID_OBJS)

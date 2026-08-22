@@ -45,12 +45,16 @@ echo "== generating map script/event stub symbols =="
 # Same stub object as Harness B: inert <Map>_MapScripts/<Map>_MapEvents
 # pointer targets for maps.o's relocations, sourced from maps.o itself
 # (nm -u) so the build-generated secret-base maps are covered.
+# R13-G6 (plan sec 3/6): maps.s no longer references the G-owned script
+# symbols (physically removed), so the list is legitimately empty - the
+# remaining undefined symbols (_Layout, gMapHeaders, ITEM_*) are
+# provided by the linked map-family seams. The empty stub object still
+# assembles so the link is unchanged.
 nm -u "$root/build/linux64/data/maps.o" | awk '/_(MapScripts|MapEvents)$/ {print $2}' | sort -u > "$tmp/stub_names.txt"
 python3 - "$tmp" <<'EOF'
 import sys
 tmp = sys.argv[1]
 names = [line.strip() for line in open(tmp + "/stub_names.txt") if line.strip()]
-assert names, "no <Map>_MapScripts/_MapEvents symbols found in maps.o"
 with open(tmp + "/map_script_stubs.s", "w") as f:
     f.write("# R11-E/F Harness C: inert script/event pointer targets\n")
     f.write("# (from nm -u maps.o; never dereferenced by the module).\n")
@@ -64,6 +68,7 @@ gcc -c "$tmp/map_script_stubs.s" -o "$tmp/map_script_stubs.o"
 echo "== compiling cross-restart state test (real walker + seams + data.c + loader) =="
 cd "$root"
 gcc -std=gnu99 -O2 -ffunction-sections -fdata-sections -Wl,--gc-sections \
+    -no-pie \
     -Wall -Wextra $sanitize_flags -no-pie \
     -iquote include -iquote "$core_dir" -iquote "$emerald_dir" \
     -I "$here/shim_include" \
@@ -183,8 +188,18 @@ if [ "$mode" = "g4-faults" ] || [ "$mode" = "g4-sanitize" ]; then
     "$tmp/emerald_resource_state_test" g4-faults "$pack" \
         "harness-g4-fault-slot-7.st" > g4-faults.log
     cat g4-faults.log
-    grep -q "G4-FAULTS passed=32" g4-faults.log
-    echo "R13-G4 faults: 32/32 capture/restore/identity checks"
+    grep -q "G4-FAULTS passed=31" g4-faults.log
+    echo "R13-G4 faults: 31/31 capture/restore/identity checks"
+    exit 0
+fi
+
+if [ "$mode" = "g6-mevent" ] || [ "$mode" = "g4-sanitize" ]; then
+    echo "== R13-G6 (plan sec 9): MEVENT boundary builder =="
+    "$tmp/emerald_resource_state_test" g6-mevent "$pack" \
+        "harness-g6-mevent-slot-7.st" > g6-mevent.log
+    cat g6-mevent.log
+    grep -q "G6-MEVENT passed" g6-mevent.log
+    echo "R13-G6 MEVENT: active mystery-event capture validates boundaries"
     exit 0
 fi
 

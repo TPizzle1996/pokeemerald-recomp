@@ -1,4 +1,7 @@
 #include "global.h"
+#if defined(LINUX64) && LINUX64
+#include "emerald/resources/emerald_script_compat.h"
+#endif
 #include "event_object_lock.h"
 #include "event_object_movement.h"
 #include "event_scripts.h"
@@ -295,7 +298,7 @@ bool8 FldEff_UseCutOnGrass(void)
 static void FieldCallback_CutTree(void)
 {
     gFieldEffectArguments[0] = GetCursorSelectionMonId();
-    ScriptContext_SetupScript(EventScript_UseCut);
+    ScriptContext_SetupScript(G_SCRIPT(EventScript_UseCut));
 }
 
 bool8 FldEff_UseCutOnTree(void)
@@ -588,7 +591,7 @@ static void CutGrassSpriteCallbackEnd(struct Sprite *sprite)
     UnlockPlayerFieldControls();
 
     if (IsMewPlayingHideAndSeek() == TRUE)
-        ScriptContext_SetupScript(FarawayIsland_Interior_EventScript_HideMewWhenGrassCut);
+        ScriptContext_SetupScript(G_SCRIPT(FarawayIsland_Interior_EventScript_HideMewWhenGrassCut));
 }
 
 void FixLongGrassMetatilesWindowTop(s16 x, s16 y)

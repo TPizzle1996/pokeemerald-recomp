@@ -1,4 +1,7 @@
 #include "global.h"
+#if defined(LINUX64) && LINUX64
+#include "emerald/resources/emerald_script_compat.h"
+#endif
 #include "battle_pike.h"
 #include "battle_pyramid.h"
 #include "battle_pyramid_bag.h"
@@ -985,7 +988,7 @@ static bool8 BattlePyramidRetireCallback(void)
         ClearDialogWindowAndFrameToTransparent(0, TRUE);
         ScriptUnfreezeObjectEvents();
         UnlockPlayerFieldControls();
-        ScriptContext_SetupScript(BattlePyramid_Retire);
+        ScriptContext_SetupScript(G_SCRIPT(BattlePyramid_Retire));
         return TRUE;
     }
 

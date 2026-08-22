@@ -1,4 +1,7 @@
 #include "global.h"
+#if defined(LINUX64) && LINUX64
+#include "emerald/resources/emerald_script_compat.h"
+#endif
 #include "event_data.h"
 #include "event_scripts.h"
 #include "field_effect.h"
@@ -95,7 +98,7 @@ static void FailSweetScentEncounter(u8 taskId)
     {
         CpuFastCopy(gPaletteDecompressionBuffer, gPlttBufferUnfaded, PLTT_SIZE);
         SetWeatherPalStateIdle();
-        ScriptContext_SetupScript(EventScript_FailSweetScent);
+        ScriptContext_SetupScript(G_SCRIPT(EventScript_FailSweetScent));
         DestroyTask(taskId);
     }
 }

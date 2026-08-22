@@ -1,4 +1,7 @@
 #include "global.h"
+#if defined(LINUX64) && LINUX64
+#include "emerald/resources/emerald_script_compat.h"
+#endif
 #include "berry.h"
 #include "event_data.h"
 #include "event_object_movement.h"
@@ -1022,7 +1025,7 @@ bool32 ObjectEventInteractionWaterBerryTree(void)
 
 bool8 IsPlayerFacingEmptyBerryTreePatch(void)
 {
-    if (GetObjectEventScriptPointerPlayerFacing() == BerryTreeScript
+    if (GetObjectEventScriptPointerPlayerFacing() == G_SCRIPT(BerryTreeScript)
      && GetStageByBerryTreeId(GetObjectEventBerryTreeId(gSelectedObjectEvent)) == BERRY_STAGE_NO_BERRY)
         return TRUE;
     else
@@ -1031,7 +1034,7 @@ bool8 IsPlayerFacingEmptyBerryTreePatch(void)
 
 bool8 TryToWaterBerryTree(void)
 {
-    if (GetObjectEventScriptPointerPlayerFacing() != BerryTreeScript)
+    if (GetObjectEventScriptPointerPlayerFacing() != G_SCRIPT(BerryTreeScript))
         return FALSE;
     else
         return ObjectEventInteractionWaterBerryTree();

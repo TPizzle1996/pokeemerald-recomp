@@ -17,10 +17,10 @@
 #   4. tamper refusal: payload-byte flip -> PAYLOAD_HASH_MISMATCH,
 #      TOC-byte flip -> TOC_HASH_MISMATCH, truncated image -> refused.
 #
-# The ownership-state check (523 x COMPILED_PENDING_MIGRATION, additive)
-# runs in python after the C harness: the ownership file's
-# [resources.targets] dotted headers are outside toml.c's supported TOML
-# subset.
+# The ownership-state check (523 x ROM_BASE_ONLY since the R13-G6 sec 4
+# flip; additive during G1-G5) runs in python after the C harness: the
+# ownership file's [resources.targets] dotted headers are outside toml.c's
+# supported TOML subset.
 #
 set -euo pipefail
 
@@ -59,13 +59,15 @@ echo "== running =="
     "$root" \
     "$tmp"
 
-echo "== ownership state check (523 x COMPILED_PENDING_MIGRATION) =="
+echo "== ownership state check (523 x ROM_BASE_ONLY) =="
 python3 - "$mods/ownership.generated.toml" <<'EOF'
 import sys, tomllib
 doc = tomllib.load(open(sys.argv[1], "rb"))
 recs = doc["resources"]
 assert len(recs) == 523, f"ownership resources {len(recs)} != 523"
-bad = [r["id"] for r in recs if r.get("ownership_state") != "COMPILED_PENDING_MIGRATION"]
-assert not bad, f"non-additive ownership states: {bad}"
-print(f"ok: 523/523 ownership records COMPILED_PENDING_MIGRATION (additive-only)")
+bad = [r["id"] for r in recs
+       if r.get("ownership_state") != "ROM_BASE_ONLY"
+       or r.get("targets", {}).get("native") != "ROM_BASE_ONLY"]
+assert not bad, f"non-ROM_BASE_ONLY ownership states: {bad}"
+print(f"ok: 523/523 ownership records ROM_BASE_ONLY (no compiled fallback)")
 EOF

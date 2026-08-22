@@ -1,4 +1,7 @@
 #include "global.h"
+#if defined(LINUX64) && LINUX64
+#include "emerald/resources/emerald_script_compat.h"
+#endif
 #include "item_menu.h"
 #include "battle.h"
 #include "battle_controllers.h"
@@ -2140,7 +2143,7 @@ bool8 UseRegisteredKeyItemOnField(void)
             gSaveBlock1Ptr->registeredItem = ITEM_NONE;
         }
     }
-    ScriptContext_SetupScript(EventScript_SelectWithoutRegisteredItem);
+    ScriptContext_SetupScript(G_SCRIPT(EventScript_SelectWithoutRegisteredItem));
     return TRUE;
 }
 

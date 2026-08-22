@@ -1,4 +1,7 @@
 #include "global.h"
+#if defined(LINUX64) && LINUX64
+#include "emerald/resources/emerald_script_compat.h"
+#endif
 #include "malloc.h"
 #include "battle.h"
 #include "battle_setup.h"
@@ -688,7 +691,7 @@ void WarpIntoSecretBase(const struct MapPosition *position, const struct MapEven
 {
     SetCurSecretBaseIdFromPosition(position, events);
     TrySetCurSecretBaseIndex();
-    ScriptContext_SetupScript(SecretBase_EventScript_Enter);
+    ScriptContext_SetupScript(G_SCRIPT(SecretBase_EventScript_Enter));
 }
 
 bool8 TrySetCurSecretBase(void)
@@ -1137,9 +1140,9 @@ void ReturnToMainRegistryMenu(u8 taskId)
 static void GoToSecretBasePCRegisterMenu(u8 taskId)
 {
     if (VarGet(VAR_CURRENT_SECRET_BASE) == 0)
-        ScriptContext_SetupScript(SecretBase_EventScript_PCCancel);
+        ScriptContext_SetupScript(G_SCRIPT(SecretBase_EventScript_PCCancel));
     else
-        ScriptContext_SetupScript(SecretBase_EventScript_ShowRegisterMenu);
+        ScriptContext_SetupScript(G_SCRIPT(SecretBase_EventScript_ShowRegisterMenu));
 
     DestroyTask(taskId);
 }

@@ -1,4 +1,7 @@
 #include "global.h"
+#if defined(LINUX64) && LINUX64
+#include "emerald/resources/emerald_script_compat.h"
+#endif
 #include "malloc.h"
 #include "battle_pyramid.h"
 #include "berry.h"
@@ -2527,10 +2530,10 @@ void OverrideSecretBaseDecorationSpriteScript(u8 localId, u8 mapNum, u8 mapGroup
         switch (decorationCategory)
         {
         case DECORCAT_DOLL:
-            OverrideObjectEventTemplateScript(&gObjectEvents[objectEventId], SecretBase_EventScript_DollInteract);
+            OverrideObjectEventTemplateScript(&gObjectEvents[objectEventId], G_SCRIPT(SecretBase_EventScript_DollInteract));
             break;
         case DECORCAT_CUSHION:
-            OverrideObjectEventTemplateScript(&gObjectEvents[objectEventId], SecretBase_EventScript_CushionInteract);
+            OverrideObjectEventTemplateScript(&gObjectEvents[objectEventId], G_SCRIPT(SecretBase_EventScript_CushionInteract));
             break;
         }
     }

@@ -84,19 +84,22 @@ static void InitMysteryEventScript(struct ScriptContext *ctx, u8 *script)
     sMysteryEventScriptNativeBase = script;
 #if defined(LINUX64) && LINUX64
     {
-        /* R13-G5 (plan sec 7/16): register the received buffer so the
-         * stable virtual anchor resolves and the State-v5 capture
-         * validates against it. instructionStarts stays NULL until the
-         * 17-op MEVENT grammar gets a live boundary builder (capture
-         * of an ACTIVE mystery-event context remains fail-closed). */
+        /* R13-G6 (plan sec 9): the received E-Reader card runs through
+         * the 17-op MEVENT VM. The boundary bitmap (one byte per buffer
+         * byte, nonzero at an exact instruction start) is rebuilt for
+         * every received script, so the State-v5 capture validates an
+         * ACTIVE mystery-event context instead of staying fail-closed. */
+        static uint8_t sMysteryEventBoundaries[MG_LINK_BUFFER_SIZE];
         struct EmeraldScriptDynamicBuffer buffer;
+        EmeraldScriptState_BuildMysteryEventBoundaryBitmap(
+            script, MG_LINK_BUFFER_SIZE, sMysteryEventBoundaries);
         memset(&buffer, 0, sizeof(buffer));
         buffer.kind = EMERALD_SCRIPT_DYNAMIC_MYSTERY_EVENT_BUFFER;
         buffer.ownerStorageId = 0u;
         buffer.generation = 1u;
         buffer.base = script;
         buffer.size = MG_LINK_BUFFER_SIZE;
-        buffer.instructionStarts = NULL;
+        buffer.instructionStarts = sMysteryEventBoundaries;
         snprintf(buffer.ownerId, sizeof(buffer.ownerId), "%s",
                  "mystery-event");
         (void)EmeraldScriptState_RegisterDynamicBuffer(&buffer);

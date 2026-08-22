@@ -1,4 +1,7 @@
 #include "global.h"
+#if defined(LINUX64) && LINUX64
+#include "emerald/resources/emerald_script_compat.h"
+#endif
 #include "battle_pyramid.h"
 #include "battle_pyramid_bag.h"
 #include "event_data.h"
@@ -1503,7 +1506,7 @@ u8 GetTrainerEncounterMusicIdInBattlePyramid(u16 trainerId)
 
 static void UNUSED BattlePyramidRetireChallenge(void)
 {
-    ScriptContext_SetupScript(BattlePyramid_Retire);
+    ScriptContext_SetupScript(G_SCRIPT(BattlePyramid_Retire));
 }
 
 static u16 GetUniqueTrainerId(u8 objectEventId)
@@ -1653,9 +1656,9 @@ void LoadBattlePyramidFloorObjectEventScripts(void)
     for (i = 0; i < OBJECT_EVENT_TEMPLATES_COUNT; i++)
     {
         if (events[i].graphicsId != OBJ_EVENT_GFX_ITEM_BALL)
-            ObjectEventTemplate_SetScript(&events[i], BattlePyramid_TrainerBattle);
+            ObjectEventTemplate_SetScript(&events[i], G_SCRIPT(BattlePyramid_TrainerBattle));
         else
-            ObjectEventTemplate_SetScript(&events[i], BattlePyramid_FindItemBall);
+            ObjectEventTemplate_SetScript(&events[i], G_SCRIPT(BattlePyramid_FindItemBall));
     }
 }
 

@@ -1,4 +1,7 @@
 #include "global.h"
+#if defined(LINUX64) && LINUX64
+#include "emerald/resources/emerald_script_compat.h"
+#endif
 #include "battle_tower.h"
 #include "apprentice.h"
 #include "event_data.h"
@@ -2128,9 +2131,9 @@ void DoSpecialTrainerBattle(void)
         gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOUBLE | BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER;
         FillPartnerParty(TRAINER_STEVEN_PARTNER);
         gApproachingTrainerId = 0;
-        BattleSetup_ConfigureTrainerBattle(MossdeepCity_SpaceCenter_2F_EventScript_MaxieTrainer + 1);
+        BattleSetup_ConfigureTrainerBattle(G_SCRIPT(MossdeepCity_SpaceCenter_2F_EventScript_MaxieTrainer) + 1);
         gApproachingTrainerId = 1;
-        BattleSetup_ConfigureTrainerBattle(MossdeepCity_SpaceCenter_2F_EventScript_TabithaTrainer + 1);
+        BattleSetup_ConfigureTrainerBattle(G_SCRIPT(MossdeepCity_SpaceCenter_2F_EventScript_TabithaTrainer) + 1);
         gPartnerTrainerId = TRAINER_STEVEN_PARTNER;
         CreateTask(Task_StartBattleAfterTransition, 1);
         PlayMapChosenOrBattleBGM(0);

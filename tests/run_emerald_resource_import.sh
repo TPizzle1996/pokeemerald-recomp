@@ -33,6 +33,9 @@ echo "== guardrail 18: dependency-creep assertion =="
 # R13-F's emerald_map_compat.c and map_data_native.c are native publication
 # TUs: the former uses the host GBA-address bridge and the latter defines the
 # real MapHeader HOST_DATA fill target.  Neither is an importer dependency.
+# R13-G4's emerald_script_state.c is the State-v5 field-script state model
+# (native replacement for sAddressOffset; script/trainer_see.h surface) -
+# same platform-coupled category, never an importer dependency.
 bad=$(grep -rEn '^[[:space:]]*#[[:space:]]*include[[:space:]]+[<"][[:space:]]*(global\.h|gba|SDL|platform|graphics|sound|rom|main\.h)' \
       --exclude='emerald_trainer_native_compat.c' \
       --exclude='emerald_pokemon_native_compat.c' \
@@ -42,6 +45,7 @@ bad=$(grep -rEn '^[[:space:]]*#[[:space:]]*include[[:space:]]+[<"][[:space:]]*(g
       --exclude='emerald_map_compat.c' \
       --exclude='map_data_native.c' \
       --exclude='text_native_exports.c' \
+      --exclude='emerald_script_state.c' \
       "$core_dir" "$inc_dir" "$emerald_dir" "$here/emerald_resource_import_test.c" || true)
 if [ -n "$bad" ]; then
     echo "FAIL: gen3 core / importer includes frontend dependencies:" >&2

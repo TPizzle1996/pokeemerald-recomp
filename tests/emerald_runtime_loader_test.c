@@ -54,6 +54,10 @@
 #include "emerald/resources/pokedex_data_native.h"    /* R13-E3b HOST_DATA targets */
 #include "emerald/resources/emerald_map_compat.h"     /* R13-F map seam */
 #include "emerald/resources/map_data_native.h"        /* R13-F gMapHeaders HOST_DATA */
+#include "emerald/resources/emerald_script_compat.h"  /* R13-G6 sec 15:
+                                                         generation/arena queries for
+                                                         the missing-script refusal
+                                                         rollback proofs */
 #include "../src/emerald/resources/emerald_runtime_loader.c"
 
 /* ------------------------------------------------------------------ */
@@ -515,6 +519,111 @@ done:
     return ok;
 }
 
+/* R13-G6 sec 15: clone of the production pack with the FIRST script-family
+ * entry dropped.  After physical removal the compiled field-script payload
+ * is gone from the native link, so a session whose pack cannot serve the
+ * complete G generation must REFUSE at boot - a silent fallback to compiled
+ * bytes is physically impossible.  The loader's script stage counts the
+ * family (523 modules) and refuses the variant as UNEXPECTED_COUNT. */
+static bool BuildScriptMissingPack(const char *srcPath, const char *dstPath)
+{
+    struct Gen3ResourcePack *pack = NULL;
+    struct Gen3ResourcePackDiagnosticList packDiag;
+    struct Gen3ResourcePackProfile profile;
+    struct Gen3ResourcePackBuild *build = NULL;
+    struct Gen3ResourcePackProfileInput pin;
+    struct Gen3ResourcePackEntryInput entry;
+    struct Gen3ResourcePackBytes bytes = { NULL, 0 };
+    struct Gen3ResourcePackDiagnosticList diag;
+    uint8_t provenanceSha[32];
+    size_t count;
+    size_t i;
+    FILE *f = NULL;
+    bool ok = false;
+
+    Gen3ResourcePackDiagnostics_Init(&packDiag);
+    if (Gen3ResourcePack_OpenFile(srcPath, &pack, &packDiag) != GEN3_PACK_OK
+     || pack == NULL)
+        goto done;
+    Gen3ResourcePackDiagnostics_Destroy(&packDiag);
+
+    Gen3ResourcePackDiagnostics_Init(&diag);
+    build = Gen3ResourcePackBuild_Create();
+    if (build == NULL)
+        goto done;
+
+    if (!Gen3ResourcePack_GetProfile(pack, &profile))
+        goto done;
+    memset(&pin, 0, sizeof(pin));
+    pin.basePackVersion = profile.basePackVersion;
+    pin.catalogVersion = profile.catalogVersion;
+    pin.extractionManifestVersion = profile.extractionManifestVersion;
+    pin.canonicalRepresentationVersion = profile.canonicalRepresentationVersion;
+    pin.sourceRomSize = profile.sourceRomSize;
+    pin.sourceRomSha1 = profile.sourceRomSha1;
+    pin.sourceRomSha256 = profile.sourceRomSha256;
+    memcpy(pin.gameCode, profile.gameCode, 4u);
+    memcpy(pin.makerCode, profile.makerCode, 2u);
+    pin.softwareRevision = profile.softwareRevision;
+    memcpy(pin.gameId, profile.gameId, GEN3_PACK_GAME_ID_SIZE);
+    pin.catalogSha256 = profile.catalogSha256;
+    pin.extractionManifestSha256 = profile.extractionManifestSha256;
+    if (Gen3ResourcePackBuild_SetProfile(build, &pin, &diag) != GEN3_PACK_OK)
+        goto done;
+
+    memset(provenanceSha, 0x5A, sizeof(provenanceSha));
+
+    count = Gen3ResourcePack_GetEntryCount(pack);
+    for (i = 0; i < count; i++)
+    {
+        const struct Gen3ResourcePackEntry *e =
+            Gen3ResourcePack_GetEntry(pack, i);
+        bool isScript =
+            strncmp(e->canonicalName, "emerald:script/", 15u) == 0
+            && e->canonicalName[15] != '\0';
+
+        if (isScript)
+            continue;   /* drop every script entry: the family cannot stage */
+        memset(&entry, 0, sizeof(entry));
+        entry.schema = e->schema;
+        entry.flags = e->flags;
+        entry.representation = e->representation;
+        entry.sourceEncoding = e->sourceEncoding;
+        entry.canonicalName = e->canonicalName;
+        entry.key = &e->key;
+        entry.type = e->type;
+        entry.canonicalPayload = e->payload;
+        entry.canonicalPayloadSize = e->payloadSize;
+        entry.canonicalPayloadSha256 = e->payloadSha256;
+        entry.sourceRomOffset = e->sourceRomOffset;
+        entry.sourceEncodedSize = e->sourceEncodedSize;
+        entry.sourceEncodedSha256 = provenanceSha;
+        if (Gen3ResourcePackBuild_AddEntry(build, &entry, &diag) != GEN3_PACK_OK)
+            goto done;
+    }
+
+    if (Gen3ResourcePackWriter_Write(build, &bytes, &diag) != GEN3_PACK_OK)
+        goto done;
+    f = fopen(dstPath, "wb");
+    if (f == NULL)
+        goto done;
+    if (fwrite(bytes.data, 1, bytes.size, f) != bytes.size)
+        goto done;
+    fclose(f);
+    f = NULL;
+    ok = true;
+
+done:
+    if (f != NULL)
+        fclose(f);
+    Gen3ResourcePackBytes_Destroy(&bytes);
+    Gen3ResourcePackBuild_Destroy(build);
+    Gen3ResourcePackDiagnostics_Destroy(&diag);
+    if (pack != NULL)
+        Gen3ResourcePack_Destroy(pack);
+    return ok;
+}
+
 /* The text seam against a freshly built session (the same pack ->
  * catalog -> candidate -> snapshot chain the loader runs, driven
  * directly so the loader's at-most-once registration is not consumed by
@@ -604,6 +713,62 @@ static void TestLoaderRefusesTextVariant(const char *tempDir,
     /* Not registered: a second attempt re-opens and refuses identically. */
     status = EmeraldResourceCompat_RegisterRuntimeSnapshot(path);
     CHECK("text refusal is repeatable",
+          status == EMERALD_COMPAT_ERR_PUBLISH_FAILED);
+}
+
+/* R13-G6 sec 15 negative proof: a boot whose pack is missing the G script
+ * family REFUSES.  The compiled field-script payload was physically removed
+ * in G6 (isolation sweeps prove it absent), so no fallback exists: the
+ * loader's script stage fails closed, the whole session rolls back, and
+ * nothing may execute scripted behavior from compiled bytes. */
+static void TestLoaderRefusesScriptMissingPack(const char *tempDir,
+                                               const char *prodPack)
+{
+    /* The live publication table (11 slots, defined writable by
+     * emerald_script_harness_stubs.c; the game defines the compiled
+     * zeroed slots). */
+    extern const uint8_t *gStdScripts[11];
+    enum EmeraldResourceCompatStatus status;
+    const uint8_t *arena = NULL;
+    size_t arenaSize = 0u;
+    char path[512];
+
+    snprintf(path, sizeof(path), "%s/script_missing.rpack", tempDir);
+    CHECK("script-missing pack builds", BuildScriptMissingPack(prodPack, path));
+
+    /* Clean slate (nothing registered in this process yet). */
+    EmeraldResourceCompat_ClearMigratedEntries();
+    EmeraldResourceCompat_ClearSnapshot();
+
+    status = EmeraldResourceCompat_RegisterRuntimeSnapshot(path);
+    CHECK("missing-script boot refused (PUBLISH_FAILED)",
+          status == EMERALD_COMPAT_ERR_PUBLISH_FAILED);
+
+    /* Rolled back: no session, no script generation/arena, the published
+     * gStdScripts slots zeroed, and every earlier family's pointers back
+     * at their sentinels. */
+    CHECK("refused: session not registered",
+          !EmeraldResourceCompat_IsSessionRegistered());
+    CHECK("refused: no script generation",
+          EmeraldScriptCompat_GetGenerationId() == 0u);
+    CHECK("refused: no script arena",
+          !EmeraldScriptCompat_GetArena(&arena, &arenaSize));
+    {
+        size_t i;
+        bool zeroed = true;
+        for (i = 0u; i < ARRAY_COUNT(gStdScripts); i++)
+            if (gStdScripts[i] != NULL)
+                zeroed = false;
+        CHECK("refused: gStdScripts slots zeroed", zeroed);
+    }
+    CHECK("refused: trainer front sheet sentinel",
+          gTrainerFrontPicTable[0].data == NULL);
+    CHECK("refused: mon front sentinel",
+          gMonFrontPicTable[0].data == NULL);
+
+    /* Not registered: a second attempt re-opens and refuses identically. */
+    status = EmeraldResourceCompat_RegisterRuntimeSnapshot(path);
+    CHECK("missing-script refusal is repeatable",
           status == EMERALD_COMPAT_ERR_PUBLISH_FAILED);
 }
 
@@ -2828,6 +2993,7 @@ int main(int argc, char **argv)
                                  "text_malformed");
     TestLoaderRefusesTextVariant(tempDir, prodPack, false, true,
                                  "text_missing");
+    TestLoaderRefusesScriptMissingPack(tempDir, prodPack);
     TestLoaderProductionPack(prodPack);
     TestMapPublication();
     TestTextPublication(prodPack);

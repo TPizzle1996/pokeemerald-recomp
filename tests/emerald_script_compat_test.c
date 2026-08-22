@@ -16,7 +16,9 @@
  *   5. typed target classes: text into the published C catalog (incl.
  *      bundle members + the 20 gift labels), movement into the B
  *      surface + 3 named compiled bridges, marts (sentinel), RAM into
- *      gStringVar4, dispatch/braille deferred;
+ *      gStringVar4, braille live via the generated address table
+ *      (R13-G6 sec 7.3: 26 edges -> 22 distinct compiled blocks),
+ *      dispatch deferred;
  *   6. gStdScripts shadow staging (11 slots, arena pointers only);
  *   7. F inbound staging (3,501 rows: 2,983 staged + 518 deferred
  *      routing);
@@ -297,6 +299,9 @@ static void TestAllRelocations(void)
     uint32_t classes[5] = {0u, 0u, 0u, 0u, 0u};
     uint32_t roots = 0u;
     uint32_t interior = 0u;
+    uint32_t brailleLive = 0u;
+    uint32_t brailleDistinct[22] = {0u};
+    uint32_t brailleDistinctCount = 0u;
     uint32_t module;
     uint32_t i;
 
@@ -330,6 +335,23 @@ static void TestAllRelocations(void)
                 else
                     interior++;
             }
+            if (target.targetKind == EMERALD_SCRIPT_NATIVE_KIND_BRAILLE)
+            {
+                uint32_t k;
+
+                if (target.disposition == EMERALD_SCRIPT_DISPOSITION_SIBLING_SEAM
+                 && target.liveAddress != 0u)
+                    brailleLive++;
+                for (k = 0u; k < brailleDistinctCount; k++)
+                {
+                    if (brailleDistinct[k] == (uint32_t)target.liveAddress)
+                        break;
+                }
+                if (k == brailleDistinctCount
+                 && brailleDistinctCount < 22u)
+                    brailleDistinct[brailleDistinctCount++] =
+                        (uint32_t)target.liveAddress;
+            }
         }
     }
     for (i = 0u; i < t->routingRelocCount; i++)
@@ -357,19 +379,23 @@ static void TestAllRelocations(void)
     }
     CHECK("dispositions: 8441 staged arena (payload + routing)",
           dispositions[EMERALD_SCRIPT_DISPOSITION_STAGED_ARENA] == 8441u);
-    CHECK("dispositions: 8216 sibling seam",
-          dispositions[EMERALD_SCRIPT_DISPOSITION_SIBLING_SEAM] == 8216u);
+    CHECK("dispositions: 8242 sibling seam (8216 + 26 braille)",
+          dispositions[EMERALD_SCRIPT_DISPOSITION_SIBLING_SEAM] == 8242u);
     CHECK("dispositions: 3 compiled bridge",
           dispositions[EMERALD_SCRIPT_DISPOSITION_COMPILED_BRIDGE] == 3u);
     CHECK("dispositions: 18 host RAM",
           dispositions[EMERALD_SCRIPT_DISPOSITION_HOST_RAM] == 18u);
-    CHECK("dispositions: 26 deferred (braille pending only)",
-          dispositions[EMERALD_SCRIPT_DISPOSITION_DEFERRED] == 26u);
+    CHECK("dispositions: 0 deferred (dispatch stays ROM-resident)",
+          dispositions[EMERALD_SCRIPT_DISPOSITION_DEFERRED] == 0u);
     CHECK("classes: 8208 script", classes[0] == 8208u);
     CHECK("classes: 6207 text", classes[1] == 6207u);
     CHECK("classes: 2009 movement", classes[2] == 2009u);
     CHECK("classes: 262 static-data", classes[3] == 262u);
     CHECK("classes: 18 RAM", classes[4] == 18u);
+    CHECK("braille: 26 edges resolve SIBLING_SEAM with a live address",
+          brailleLive == 26u);
+    CHECK("braille: 22 distinct compiled blocks",
+          brailleDistinctCount == 22u);
     CHECK("root/interior pin: 95 / 8113", roots == 95u && interior == 8113u);
 }
 

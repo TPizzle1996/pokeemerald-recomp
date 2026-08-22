@@ -1180,11 +1180,11 @@ const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
     {
     case TRAINER_BATTLE_SINGLE_NO_INTRO_TEXT:
         TrainerBattleLoadArgs(sOrdinaryNoIntroBattleParams, data);
-        return EventScript_DoNoIntroTrainerBattle;
+        return G_SCRIPT(EventScript_DoNoIntroTrainerBattle);
     case TRAINER_BATTLE_DOUBLE:
         TrainerBattleLoadArgs(sDoubleBattleParams, data);
         SetMapVarsToTrainer();
-        return EventScript_TryDoDoubleTrainerBattle;
+        return G_SCRIPT(EventScript_TryDoDoubleTrainerBattle);
     case TRAINER_BATTLE_CONTINUE_SCRIPT:
         if (gApproachingTrainerId == 0)
         {
@@ -1195,26 +1195,26 @@ const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
         {
             TrainerBattleLoadArgs(sTrainerBContinueScriptBattleParams, data);
         }
-        return EventScript_TryDoNormalTrainerBattle;
+        return G_SCRIPT(EventScript_TryDoNormalTrainerBattle);
     case TRAINER_BATTLE_CONTINUE_SCRIPT_NO_MUSIC:
         TrainerBattleLoadArgs(sContinueScriptBattleParams, data);
         SetMapVarsToTrainer();
-        return EventScript_TryDoNormalTrainerBattle;
+        return G_SCRIPT(EventScript_TryDoNormalTrainerBattle);
     case TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE:
     case TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE_NO_MUSIC:
         TrainerBattleLoadArgs(sContinueScriptDoubleBattleParams, data);
         SetMapVarsToTrainer();
-        return EventScript_TryDoDoubleTrainerBattle;
+        return G_SCRIPT(EventScript_TryDoDoubleTrainerBattle);
     case TRAINER_BATTLE_REMATCH_DOUBLE:
         TrainerBattleLoadArgs(sDoubleBattleParams, data);
         SetMapVarsToTrainer();
         gTrainerBattleOpponent_A = GetRematchTrainerId(gTrainerBattleOpponent_A);
-        return EventScript_TryDoDoubleRematchBattle;
+        return G_SCRIPT(EventScript_TryDoDoubleRematchBattle);
     case TRAINER_BATTLE_REMATCH:
         TrainerBattleLoadArgs(sOrdinaryBattleParams, data);
         SetMapVarsToTrainer();
         gTrainerBattleOpponent_A = GetRematchTrainerId(gTrainerBattleOpponent_A);
-        return EventScript_TryDoRematchBattle;
+        return G_SCRIPT(EventScript_TryDoRematchBattle);
     case TRAINER_BATTLE_PYRAMID:
         if (gApproachingTrainerId == 0)
         {
@@ -1227,7 +1227,7 @@ const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
             TrainerBattleLoadArgs(sTrainerBOrdinaryBattleParams, data);
             gTrainerBattleOpponent_B = LocalIdToPyramidTrainerId(gSpecialVar_LastTalked);
         }
-        return EventScript_TryDoNormalTrainerBattle;
+        return G_SCRIPT(EventScript_TryDoNormalTrainerBattle);
     case TRAINER_BATTLE_SET_TRAINER_A:
         TrainerBattleLoadArgs(sOrdinaryBattleParams, data);
         return NULL;
@@ -1246,7 +1246,7 @@ const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
             TrainerBattleLoadArgs(sTrainerBOrdinaryBattleParams, data);
             gTrainerBattleOpponent_B = LocalIdToHillTrainerId(gSpecialVar_LastTalked);
         }
-        return EventScript_TryDoNormalTrainerBattle;
+        return G_SCRIPT(EventScript_TryDoNormalTrainerBattle);
     default:
         if (gApproachingTrainerId == 0)
         {
@@ -1257,7 +1257,7 @@ const u8 *BattleSetup_ConfigureTrainerBattle(const u8 *data)
         {
             TrainerBattleLoadArgs(sTrainerBOrdinaryBattleParams, data);
         }
-        return EventScript_TryDoNormalTrainerBattle;
+        return G_SCRIPT(EventScript_TryDoNormalTrainerBattle);
     }
 }
 
@@ -1266,7 +1266,7 @@ void ConfigureAndSetUpOneTrainerBattle(u8 trainerObjEventId, const u8 *trainerSc
     gSelectedObjectEvent = trainerObjEventId;
     gSpecialVar_LastTalked = gObjectEvents[trainerObjEventId].localId;
     BattleSetup_ConfigureTrainerBattle(trainerScript + 1);
-    ScriptContext_SetupScript(EventScript_StartTrainerApproach);
+    ScriptContext_SetupScript(G_SCRIPT(EventScript_StartTrainerApproach));
     LockPlayerFieldControls();
 }
 
@@ -1279,7 +1279,7 @@ void ConfigureTwoTrainersBattle(u8 trainerObjEventId, const u8 *trainerScript)
 
 void SetUpTwoTrainersBattle(void)
 {
-    ScriptContext_SetupScript(EventScript_StartTrainerApproach);
+    ScriptContext_SetupScript(G_SCRIPT(EventScript_StartTrainerApproach));
     LockPlayerFieldControls();
 }
 
@@ -1477,7 +1477,7 @@ const u8 *BattleSetup_GetScriptAddrAfterBattle(void)
     if (sTrainerBattleEndScript != NULL)
         return sTrainerBattleEndScript;
     else
-        return EventScript_TestSignpostMsg;
+        return G_SCRIPT(EventScript_TestSignpostMsg);
 }
 
 const u8 *BattleSetup_GetTrainerPostBattleScript(void)
@@ -1500,7 +1500,7 @@ const u8 *BattleSetup_GetTrainerPostBattleScript(void)
         }
     }
 
-    return EventScript_TryGetTrainerScript;
+    return G_SCRIPT(EventScript_TryGetTrainerScript);
 }
 
 void ShowTrainerCantBattleSpeech(void)

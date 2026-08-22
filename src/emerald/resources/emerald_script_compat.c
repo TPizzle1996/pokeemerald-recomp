@@ -35,8 +35,9 @@
 #include "emerald/resources/script_native.generated.h"
 #include "emerald/resources/text_bundle_index.generated.h"
 
-extern const uint8_t *const kEmeraldScriptNativeBridgeSymbols[
-    EMERALD_SCRIPT_BRIDGE_COUNT];
+/* R13-G6: the movement bridges are no longer compiled-symbol externs;
+ * the seam resolves them to the bytes embedded in each bridge row
+ * (B-owned, plan sec 7.4 - the movement-isolation exception). */
 extern uint8_t gStringVar4[1000];
 
 /* ------------------------------------------------------------------ */
@@ -382,6 +383,53 @@ static uintptr_t ModuleSpanBase(uint32_t moduleIndex)
     return 0u;
 }
 
+/* R13-G6 (plan sec 5.3): engine C-site entrypoint resolution. A
+ * G-owned script export resolved by canonical symbol name through the
+ * sorted export-name index (O(log n) bsearch). The resolved address
+ * is the module span base + the export's payload offset - the same
+ * formula the relocation index uses - so the result is generation-
+ * exact with no cache and no stale-pointer window on republish.
+ * Returns 0 on any failure (unknown name, no live generation); the
+ * callers treat 0 as a terminal error, so a G resource that vanished
+ * from the pack refuses instead of falling back to a compiled
+ * symbol. */
+uintptr_t EmeraldScriptCompat_GetScriptSymbol(const char *name)
+{
+    const struct EmeraldScriptCompatNativeTable *t = &kEmeraldScriptCompatTable;
+    const struct EmeraldScriptNativeExportName *rows;
+    const struct EmeraldScriptNativeExport *exports;
+    const struct EmeraldScriptNativeExportName *hit;
+    const struct EmeraldScriptNativeExport *exp;
+    size_t low;
+    size_t high;
+    size_t mid;
+
+    if (name == NULL)
+        return 0u;
+    if (sGeneration == NULL)
+        return 0u;
+    rows = t->exportNames;
+    exports = t->exports;
+    low = 0u;
+    high = t->exportNameCount;
+    while (low < high)
+    {
+        mid = low + (high - low) / 2u;
+        if (strcmp(rows[mid].name, name) < 0)
+            low = mid + 1u;
+        else
+            high = mid;
+    }
+    if (low >= t->exportNameCount
+     || strcmp(rows[low].name, name) != 0)
+        return 0u;
+    hit = &rows[low];
+    if (hit->exportIndex >= t->exportCount)
+        return 0u;
+    exp = &exports[hit->exportIndex];
+    return ModuleSpanBase(exp->moduleIndex) + exp->payloadOffset;
+}
+
 /* Fill `out` from a relocation-style target identity (class/kind/key/
  * label/offsets). Live addresses resolve against the current
  * generation and the sibling seams. Returns OK or a refusal status. */
@@ -500,9 +548,10 @@ static enum EmeraldScriptCompatStatus ResolveTargetIdentity(
             return EMERALD_SCRIPT_ERR_TARGET_UNRESOLVED;
         out->disposition = EMERALD_SCRIPT_DISPOSITION_COMPILED_BRIDGE;
         out->boundaryKind = EMERALD_SCRIPT_NATIVE_BOUNDARY_INTERIOR;
-        out->liveAddress = (uintptr_t)
-            kEmeraldScriptNativeBridgeSymbols[
-                (uint32_t)(bridge - kEmeraldScriptCompatTable.bridges)];
+        /* R13-G6: the bridge rows embed the qualified-ROM movement
+         * bytes (12 B total); no compiled bridge symbol exists on
+         * native. B-owned until the R13-B movement cutover. */
+        out->liveAddress = (uintptr_t)bridge->bytes;
         out->liveSize = bridge->byteCount;
         return EMERALD_SCRIPT_OK;
     }
@@ -626,10 +675,34 @@ static enum EmeraldScriptCompatStatus ResolveTargetIdentity(
         return EMERALD_SCRIPT_OK;
     }
     case EMERALD_SCRIPT_NATIVE_KIND_BRAILLE:
-        /* C text handoff pending (plan sec 7.3): deferred through G3. */
-        out->disposition = EMERALD_SCRIPT_DISPOSITION_DEFERRED;
+    {
+        /* R13-G6 (plan sec 7.3): the compiled braille text blocks stay
+         * C-owned through R13-G (no C catalog record exists for them
+         * yet - the identity handoff is R13-H's). The generated
+         * kBrailleGbaAddrs (sorted ascending) pairs each encoded GBA
+         * target with its live label address in the same assembly unit
+         * as braille.inc, so the 26 BRAILLE edges resolve live instead
+         * of deferring. */
+        size_t low = 0u;
+        size_t high = EMERALD_SCRIPT_BRAILLE_COUNT;
+
+        while (low < high)
+        {
+            size_t mid = low + (high - low) / 2u;
+            if (kBrailleGbaAddrs[mid] < encodedGba)
+                low = mid + 1u;
+            else
+                high = mid;
+        }
+        if (low >= EMERALD_SCRIPT_BRAILLE_COUNT
+         || kBrailleGbaAddrs[low] != encodedGba)
+            return EMERALD_SCRIPT_ERR_TARGET_UNRESOLVED;
+        out->disposition = EMERALD_SCRIPT_DISPOSITION_SIBLING_SEAM;
         out->boundaryKind = EMERALD_SCRIPT_NATIVE_BOUNDARY_NONE;
+        out->liveAddress = (uintptr_t)kBrailleTextAddresses[low];
+        out->liveSize = 0u; /* extent is the next braille block; never needed */
         return EMERALD_SCRIPT_OK;
+    }
     case EMERALD_SCRIPT_NATIVE_KIND_RAM_HOST:
         /* Allowlist shape is gated in ValidateTableStructure; here the
          * single approved writable target resolves to its host symbol

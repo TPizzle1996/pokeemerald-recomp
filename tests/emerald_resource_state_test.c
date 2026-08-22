@@ -272,7 +272,6 @@ struct HarnessGameData
         const u8 *trainerReturnB;
         const u8 *trainerText[6];
         u8 *mysteryNativeBase;
-        intptr_t addressOffset;
         u64 generationStamp;
         struct EmeraldScriptVirtualAnchor virtualAnchor;
         u8 dynamicScript[512];
@@ -3211,9 +3210,10 @@ static void G4BindLayout(void)
     layout.trainerBattleEndScript = &data->scriptState.trainerEnd;
     layout.trainerAReturnScript = &data->scriptState.trainerReturnA;
     layout.trainerBReturnScript = &data->scriptState.trainerReturnB;
-    layout.addressOffset = &data->scriptState.addressOffset;
     layout.mysteryEventContext = &data->scriptState.mysteryEvent;
     layout.mysteryEventNativeBase = &data->scriptState.mysteryNativeBase;
+    /* R13-G6 (plan sec 9): sAddressOffset is deleted (the stable virtual
+     * anchor is the only model); no addressOffset binding is set. */
     EmeraldScriptState_SetLayout(&layout);
 
     memset(sG4DynamicBoundaries, 0, sizeof(sG4DynamicBoundaries));
@@ -3717,9 +3717,8 @@ static int DoG4Faults(const char *packPath, const char *statePath)
     data->scriptState.context2.stack[19] = valid.pointer;
     G4_REFUSE((void)0, "Context2");
     data->scriptState.context2.stack[19] = NULL;
-    data->scriptState.addressOffset = 1;
-    G4_REFUSE((void)0, "host delta");
-    data->scriptState.addressOffset = 0;
+    /* R13-G6 (plan sec 9): the legacy sAddressOffset host-delta refusal
+     * is deleted with the dead storage; anchors are the only model. */
     data->scriptState.generationStamp++;
     G4_REFUSE((void)0, "stale");
     data->scriptState.generationStamp = EmeraldScriptCompat_GetGenerationId();
@@ -3895,8 +3894,124 @@ static int DoG4Faults(const char *packPath, const char *statePath)
                   NULL, 0u, 0u, &resolved)
               == EMERALD_SCRIPT_STATE_ERR_UNAVAILABLE); passed++;
     }
-    CHECK(passed == 32u);
+    /* R13-G6 (plan sec 9): the legacy sAddressOffset host-delta refusal
+     * was deleted with the dead storage, so the matrix is 31 cases. */
+    CHECK(passed == 31u);
     printf("G4-FAULTS passed=%u\n", passed);
+    TeardownScriptCompatSession();
+    return sFailures != 0;
+}
+
+/* R13-G6 (plan sec 9): the 17-op MEVENT boundary builder. The received
+ * E-Reader card used to register with a NULL instruction bitmap, so
+ * capture of an ACTIVE mystery-event context was fail-closed. The
+ * builder now produces the bitmap (one byte per buffer byte, nonzero at
+ * an exact instruction start) and the capture path validates against it.
+ *
+ * Synthetic wrapper mirrors a real card: checkcompat (17 B), setstatus
+ * (2 B), setmsg (6 B), end (1 B), then a trailing main-dialect
+ * sub-script region that must stay opaque (unmarked). */
+static int DoG6Mevent(const char *packPath, const char *statePath)
+{
+    static u8 bitmap[512];
+    struct HarnessGameData *data = GameData();
+    struct EmeraldScriptDynamicBuffer dynamic;
+    struct EmeraldScriptStateResourceIdentity identity;
+    enum NativeStateResult result;
+    u8 *script;
+    u32 marks = 0u;
+    u32 i;
+
+    HarnessStatePath_Override(statePath);
+    if (!G4Stage(packPath, FALSE))
+        return 1;
+    memset(data, 0, sizeof(*data));
+    G4BindLayout();
+    script = data->scriptState.dynamicScript;
+    memset(script, 0, sizeof(data->scriptState.dynamicScript));
+    script[0] = 0x01u;                 /* checkcompat: 17-byte instruction */
+    script[17] = 0x04u;                /* setstatus: 2 bytes */
+    script[19] = 0x03u;                /* setmsg: 6 bytes */
+    script[25] = 0x02u;                /* end: terminal */
+    for (i = 26u; i < 40u; i++)
+        script[i] = (u8)(0xB8u + i);   /* trailing sub-script/data: opaque */
+
+    EmeraldScriptState_BuildMysteryEventBoundaryBitmap(script, 512u, bitmap);
+    CHECK(bitmap[0] == 1u && bitmap[17] == 1u && bitmap[19] == 1u
+       && bitmap[25] == 1u);
+    CHECK(bitmap[18] == 0u && bitmap[20] == 0u);
+    for (i = 26u; i < 512u; i++)
+    {
+        if (bitmap[i] != 0u)
+            marks++;
+    }
+    CHECK(marks == 0u);                /* trailing region stays opaque */
+
+    script[0] = 0x11u;                 /* unknown opcode: nothing marked */
+    EmeraldScriptState_BuildMysteryEventBoundaryBitmap(script, 512u, bitmap);
+    CHECK(bitmap[0] == 0u);
+    script[0] = 0x02u;                 /* bare end: exactly one mark */
+    EmeraldScriptState_BuildMysteryEventBoundaryBitmap(script, 512u, bitmap);
+    CHECK(bitmap[0] == 1u && bitmap[1] == 0u);
+
+    memset(&dynamic, 0, sizeof(dynamic));
+    dynamic.kind = EMERALD_SCRIPT_DYNAMIC_MYSTERY_EVENT_BUFFER;
+    dynamic.ownerStorageId = 0x4d455654u;
+    dynamic.generation = 7u;
+    dynamic.base = script;
+    dynamic.size = 512u;
+    dynamic.instructionStarts = bitmap;
+    snprintf(dynamic.ownerId, sizeof(dynamic.ownerId), "GAME_DATA:mystery-event");
+    EmeraldScriptState_ClearDynamicBuffers();
+    CHECK(EmeraldScriptState_RegisterDynamicBuffer(&dynamic));
+
+    /* Restore the wrapper (0x11 broke the bitmap above) and plant an
+     * ACTIVE mystery-event context on marked positions. */
+    script[0] = 0x01u;
+    EmeraldScriptState_BuildMysteryEventBoundaryBitmap(script, 512u, bitmap);
+    data->scriptState.mysteryEvent.mode = 1u;
+    data->scriptState.mysteryEvent.stackDepth = 2u;
+    data->scriptState.mysteryEvent.scriptPtr = script + 17u;
+    data->scriptState.mysteryEvent.stack[0] = script + 19u;
+    data->scriptState.mysteryEvent.stack[1] = script + 25u;
+    data->scriptState.mysteryNativeBase = script;
+    data->scriptState.generationStamp = EmeraldScriptCompat_GetGenerationId();
+
+    CHECK(EmeraldScriptState_CaptureField(
+              (uintptr_t)(void *)&data->scriptState.mysteryEvent.scriptPtr,
+              (uintptr_t)(script + 17u), &identity)
+          == EMERALD_SCRIPT_STATE_DYNAMIC);
+    CHECK(EmeraldScriptState_CaptureField(
+              (uintptr_t)(void *)&data->scriptState.mysteryEvent.stack[0],
+              (uintptr_t)(script + 19u), &identity)
+          == EMERALD_SCRIPT_STATE_DYNAMIC);
+    CHECK(EmeraldScriptState_CaptureField(
+              (uintptr_t)(void *)&data->scriptState.mysteryEvent.stack[1],
+              (uintptr_t)(script + 25u), &identity)
+          == EMERALD_SCRIPT_STATE_DYNAMIC);
+    CHECK(EmeraldScriptState_CaptureField(
+              (uintptr_t)(void *)&data->scriptState.mysteryNativeBase,
+              (uintptr_t)script, &identity)
+          == EMERALD_SCRIPT_STATE_DYNAMIC);
+    /* Mid-instruction, opaque-tail and one-past pointers still refuse. */
+    CHECK(EmeraldScriptState_CaptureField(
+              (uintptr_t)(void *)&data->scriptState.mysteryEvent.scriptPtr,
+              (uintptr_t)(script + 18u), &identity)
+          == EMERALD_SCRIPT_STATE_ERR_WRONG_BOUNDARY);
+    CHECK(EmeraldScriptState_CaptureField(
+              (uintptr_t)(void *)&data->scriptState.mysteryEvent.scriptPtr,
+              (uintptr_t)(script + 26u), &identity)
+          == EMERALD_SCRIPT_STATE_ERR_WRONG_BOUNDARY);
+    CHECK(EmeraldScriptState_CaptureField(
+              (uintptr_t)(void *)&data->scriptState.mysteryEvent.scriptPtr,
+              (uintptr_t)(script + 512u), &identity)
+          == EMERALD_SCRIPT_STATE_ERR_DYNAMIC_UNKNOWN);
+
+    /* End to end: a full save with the active MEVENT context captures
+     * (previously refused as WRONG_BOUNDARY with a NULL bitmap). */
+    result = NativeState_Save(HARNESS_STATE_SLOT);
+    CHECK(result == NATIVE_STATE_OK);
+    printf("G6-MEVENT passed\n");
     TeardownScriptCompatSession();
     return sFailures != 0;
 }
@@ -3980,13 +4095,14 @@ int main(int argc, char **argv)
                 "       %s g4-create <pack> <state>\n"
                 "       %s g4-load <pack> <state>\n"
                 "       %s g4-faults <pack> <state>\n"
+                "       %s g6-mevent <pack> <state>\n"
 #if defined(HARNESS_REAL_SDL_PROBE)
                 "       %s desktop-real-sdl <pack> <state>\n"
 #endif
                 ,
                 argv[0], argv[0], argv[0], argv[0], argv[0], argv[0],
                 argv[0], argv[0], argv[0], argv[0], argv[0], argv[0],
-                argv[0], argv[0]
+                argv[0], argv[0], argv[0]
 #if defined(HARNESS_REAL_SDL_PROBE)
                 , argv[0]
 #endif
@@ -4000,6 +4116,8 @@ int main(int argc, char **argv)
         return DoG4Load(argv[2], argv[3]);
     if (strcmp(argv[1], "g4-faults") == 0)
         return DoG4Faults(argv[2], argv[3]);
+    if (strcmp(argv[1], "g6-mevent") == 0)
+        return DoG6Mevent(argv[2], argv[3]);
     if (strcmp(argv[1], "audio-regression") == 0)
         return DoAudioRegression(argv[2], argv[3]);
     if (strcmp(argv[1], "audio-load") == 0)

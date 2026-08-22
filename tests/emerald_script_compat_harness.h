@@ -32,6 +32,9 @@
 #include "emerald/resources/emerald_text_compat.h"
 #include "emerald/resources/emerald_trainer_compat.h"
 
+/* Defined by emerald_script_harness_stubs.c (test-only). */
+void EmeraldScriptHarness_InitBrailleStub(void);
+
 static struct Gen3ResourceSnapshot *gScriptHarnessSnapshot;
 static struct Gen3ResourcePack *gScriptHarnessPack;
 static const char *gScriptHarnessTempDir;
@@ -78,6 +81,11 @@ static bool BuildCatalogFromPackHarness(struct Gen3ResourcePack *pack,
 static bool SetupScriptCompatSession(const char *path)
 {
     struct Gen3ResourceCatalog *catalog = NULL;
+    /* R13-G6 (plan sec 7.3): the braille stub's live addresses are
+     * uint32_t by design (the production tables are 32-bit .int
+     * relocations under -no-pie); the fill runs before any
+     * TryInitialize so phase-1 braille resolution sees real targets. */
+    EmeraldScriptHarness_InitBrailleStub();
     struct Gen3ResourceCandidate *candidate = NULL;
     struct Gen3ResourceDiagnosticList diagnostics;
     struct Gen3ResourcePackDiagnosticList packDiag;

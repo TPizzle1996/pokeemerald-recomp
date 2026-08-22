@@ -37,7 +37,12 @@ python3 - "$tmp" <<'EOF'
 import sys
 tmp = sys.argv[1]
 names = [line.strip() for line in open(tmp + "/stub_names.txt") if line.strip()]
-assert names, "no <Map>_MapScripts/_MapEvents symbols found in maps.o"
+# R13-G6: maps.o no longer references any *_MapScripts/_MapEvents
+# (headers.inc is gated out of maps.s on linux64; the G-owned payload is
+# pack-loaded only). An empty set is the EXPECTED post-G6 state — the
+# stubs exist only to satisfy legacy undefined refs, so emit whatever
+# (possibly nothing) the object actually needs.
+print(f"map script/event stub symbols: {len(names)} (0 expected post-R13-G6)")
 with open(tmp + "/map_script_stubs.s", "w") as f:
     f.write("# R11-E/F Harness C: inert script/event pointer targets\n")
     f.write("# (from nm -u maps.o; never dereferenced by the module).\n")
@@ -56,6 +61,7 @@ gcc -std=gnu99 -O2 -ffunction-sections -fdata-sections -Wl,--gc-sections \
     $sdl_cflags \
     -DPORTABLE -DNONMATCHING -DUBFIX -DMODERN=1 \
     -DPLATFORM_SDL2 -DNATIVE_LINUX -DLINUX64=1 \
+    -DDESKTOP_EXTERNAL_GAME_CONTENT \
     -DHARNESS_REAL_SDL_PROBE=1 \
     "$core_dir/sha256.c" \
     "$core_dir/sha1.c" \
@@ -91,6 +97,33 @@ gcc -std=gnu99 -O2 -ffunction-sections -fdata-sections -Wl,--gc-sections \
     "$emerald_dir/text_skeletons_table.generated.c" \
     "$emerald_dir/text_skeleton_arrays.generated.c" \
     "$here/emerald_text_harness_stubs.c" \
+    "$emerald_dir/gameplay_data_native.c" \
+    "$emerald_dir/gameplay_native_table.generated.c" \
+    "$emerald_dir/gameplay_levelup.generated.c" \
+    "$emerald_dir/gameplay_callbacks.generated.c" \
+    "$emerald_dir/gameplay_item_callbacks_native.c" \
+    "$emerald_dir/emerald_gameplay_compat.c" \
+    "$here/emerald_gameplay_harness_stubs.c" \
+    "$emerald_dir/trainer_data_native.c" \
+    "$emerald_dir/trainer_native.generated.c" \
+    "$emerald_dir/emerald_trainer_compat.c" \
+    "$emerald_dir/encounter_data_native.c" \
+    "$emerald_dir/encounter_native.generated.c" \
+    "$emerald_dir/emerald_encounter_compat.c" \
+    "$emerald_dir/frontier_data_native.c" \
+    "$emerald_dir/frontier_native.generated.c" \
+    "$emerald_dir/frontier_aux_native.generated.c" \
+    "$emerald_dir/emerald_frontier_compat.c" \
+    "$emerald_dir/pokedex_data_native.c" \
+    "$emerald_dir/pokedex_native.generated.c" \
+    "$emerald_dir/emerald_pokedex_compat.c" \
+    "$emerald_dir/map_data_native.c" \
+    "$emerald_dir/map_native.generated.c" \
+    "$emerald_dir/emerald_map_compat.c" \
+    "$emerald_dir/emerald_script_compat.c" \
+    "$emerald_dir/emerald_script_state.c" \
+    "$emerald_dir/script_native_table.generated.c" \
+    "$here/emerald_script_harness_stubs.c" \
     "$root/src/platform/native_state.c" \
     "$root/src/platform/host_memory.c" \
     "$root/src/platform/native_world_neighborhood.c" \

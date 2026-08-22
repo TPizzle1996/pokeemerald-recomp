@@ -984,6 +984,68 @@ fresh-process State-v5 batteries. Gate: every G resource `ROM_BASE_ONLY`, all
 documented B/H/dynamic/engine exclusions still present and named, no R13-H
 migration begun.
 
+**G6 COMPLETE (2026-08-21) — confirmed facts** (report:
+`docs/R13G6_FIELD_SCRIPT_ISOLATION_REPORT.md`):
+
+- Physical removal: `map_events.o` (2,260 compiled `MapEvents_*` entries)
+  and `mystery_gift.o` (8 static gift modules) are excluded from the
+  linux64 link; `event_scripts.s` gates out every G payload include and
+  zeroes all 11 `gStdScripts` slots; `maps.s` gates out
+  `headers.inc`/`connections.inc` (the R13-F seam owns map metadata);
+  `data/scripts/*.inc` + `shared_secret_base` are out. `sAddressOffset`
+  dead storage removed with its G4_REFUSE case (fault matrix 32 → 31).
+  The R13-B movement tables defined inside the excluded files are
+  re-carved by `gen_leaf_family.py` into `data/movement_tables_native.inc`
+  (1,047 tables, 7,404 B — qualified-ROM slices as byte directives;
+  LINUX64-gated include): the COMPILED_PENDING_MIGRATION ownership
+  contract holds through R13-G, and the 8 `sMovement_*` objects never
+  left the link (non-gated source). Per-map `Text_*` labels in the
+  excluded files are a named exclusion (TEXT_BUNDLE_MEMBER, pack-served
+  via the text seam — no compiled fallback).
+- Ownership flip: all **523** resources `COMPILED_PENDING_MIGRATION` →
+  `ROM_BASE_ONLY` on native (GBA target stays `COMPILED`); 0 pending
+  remain. The 207,330 B canonical payload exists only as pack-loaded
+  arena modules; `G_SCRIPT` has **no compiled fallback** — boot fails
+  closed (`EMERALD_COMPAT_ERR_PUBLISH_FAILED` + full rollback) when the
+  pack lacks the script modules (`TestLoaderRefusesScriptMissingPack`,
+  +9 checks).
+- Live seams unchanged from G5: script ranges still exactly
+  **523 (6,377 / 8,192)**, `gStdScripts` published by the loader, MEVENT
+  boundary bitmap rebuilt per card (17-op size table), braille handoff
+  live (22 rows; sweep 7 green on both binaries).
+- Removal proofs: isolation sweeps 1-9 ALL GREEN (523/523 ROM_BASE_ONLY,
+  0 legacy symbols, 0 of 7,683 exports, gStdScripts all zero, braille
+  format headers at all 22 live addresses, 379 payloads byte-absent);
+  153 relocations with zero script references; census unexplained
+  symbols = **0**.
+- Regression: full battery green — compat 7,145; loader 65,754 (incl.
+  missing-pack refusal); state all legs (g4-state, g4-faults 31/31,
+  g6-mevent, default, state-faults, cross-restart); real tables 16,311;
+  script faults 21/21; module loader 1,938; G1/G2 `--check` + three-way
+  oracle (523 modules, 15,874 relocs); ASan/UBSan clean; trainer ×3;
+  layout/tileset/object-event/import (guardrail 18) /desktop probe;
+  audio leaf runner 3/3 (E1 pack determinism, E2 manifest provenance,
+  seam 10,375 checks on the real `host_memory.c` range-index resolution);
+  R13-B leaf runner FULLY PASSED — E0 leaf-generator determinism (incl.
+  the movement native include), E1 pack determinism, E1b provenance
+  refusal, E2 manifest provenance, A–G leaf seam, F native isolation
+  battery (6,876-record ownership union; all 1,047 movement symbols
+  present in the fresh link, multiboot 2/2);
+  native-world real 5,570 + render 3,631 (map seam publish checks).
+- Sizes: release 23,307,480 B (−1,699,840 B, **−6.80%**) / DINFO
+  36,021,856 B (−2,353,640 B, **−6.13%**, 7 debug sections, distinct
+  Build ID); the movement-tables restore adds +83,416 B over the
+  pre-fix G6 state (7,404 B re-carved table payload + symbol-table
+  overhead for the 1,047 local labels); pack 20,988 entries, SHA-256
+  `9847001a21fe432eef17d47be2416072b971425039cda446dbf392b07d0ec42a`
+  (final rebuild from the R13-G-final manifests — supersedes the
+  `eadf79a6…` build that predated the G5/G6 generator re-runs; entry
+  count/size/consumers unchanged, `gen3-pack-build --check` reproduces it
+  byte-for-byte).
+- Gate: every G resource `ROM_BASE_ONLY` (523/523), documented
+  B/H/dynamic/engine exclusions still present and named, **no R13-H
+  migration begun** — G6 stops here.
+
 Each wave has a usable permanent artifact; none introduces patched bytecode,
 a temporary native bytecode dialect, or a live state gap.
 

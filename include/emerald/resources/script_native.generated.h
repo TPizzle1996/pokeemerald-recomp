@@ -20,6 +20,7 @@
 #define EMERALD_SCRIPT_MODULE_COUNT 523u
 #define EMERALD_SCRIPT_SEGMENT_COUNT 812u
 #define EMERALD_SCRIPT_EXPORT_COUNT 7683u
+#define EMERALD_SCRIPT_EXPORT_NAME_COUNT 7683u
 #define EMERALD_SCRIPT_RELOC_COUNT 15874u
 #define EMERALD_SCRIPT_ROUTING_RELOC_COUNT 830u
 #define EMERALD_SCRIPT_TOTAL_RELOC_COUNT 16704u
@@ -32,6 +33,7 @@
 #define EMERALD_SCRIPT_ROUTING_SEGMENT_COUNT 581u
 #define EMERALD_SCRIPT_ARENA_PAYLOAD_BYTES 207330u
 #define EMERALD_SCRIPT_ARENA_ALIGNMENT 16u
+#define EMERALD_SCRIPT_BRAILLE_COUNT 22u
 
 enum EmeraldScriptNativeTargetClass
 {
@@ -149,6 +151,15 @@ struct EmeraldScriptNativeExport
     uint32_t name;
 };
 
+/* R13-G6: sorted-by-name export index (the engine C-site resolver).
+ * name is the export's canonical symbol string; exportIndex indexes
+ * kScriptExports. Sorted by name for the seam's bsearch. */
+struct EmeraldScriptNativeExportName
+{
+    const char *name;
+    uint32_t exportIndex;
+};
+
 struct EmeraldScriptNativeReloc
 {
     uint32_t moduleIndex;
@@ -258,6 +269,8 @@ struct EmeraldScriptCompatNativeTable
     uint32_t segmentCount;
     const struct EmeraldScriptNativeExport *exports;
     uint32_t exportCount;
+    const struct EmeraldScriptNativeExportName *exportNames;
+    uint32_t exportNameCount;
     const struct EmeraldScriptNativeReloc *relocs;
     uint32_t relocCount;
     const struct EmeraldScriptNativeRoutingReloc *routingRelocs;
@@ -287,5 +300,20 @@ struct EmeraldScriptCompatNativeTable
 };
 
 extern const struct EmeraldScriptCompatNativeTable kEmeraldScriptCompatTable;
+
+/* R13-G6 (plan sec 7.3): the compiled braille text blocks stay
+ * C-owned through R13-G (they have no C catalog record; the
+ * identity handoff is R13-H's). kBrailleGbaAddrs (sorted GBA
+ * provenance) pairs index-for-index with kBrailleTextAddresses,
+ * defined in data/text/braille_addresses_native.inc (the same
+ * assembly unit as braille.inc, so the LOCAL text labels are in
+ * scope). The seam bsearches by encoded GBA target and resolves
+ * the 26 BRAILLE reloc rows SIBLING_SEAM instead of deferring
+ * them. */
+/* Not const: the test harness legitimately fills this table at
+ * startup (a pointer-to-uint32_t narrowing cast is not a C
+ * constant expression); the production build never writes it. */
+extern uint32_t kBrailleTextAddresses[22];
+extern const uint32_t kBrailleGbaAddrs[22];
 
 #endif /* EMERALD_RESOURCES_SCRIPT_NATIVE_GENERATED_H */

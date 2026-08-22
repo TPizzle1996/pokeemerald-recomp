@@ -1,4 +1,7 @@
 #include "global.h"
+#if defined(LINUX64) && LINUX64
+#include "emerald/resources/emerald_script_compat.h"
+#endif
 #include "wild_encounter.h"
 #include "pokemon.h"
 #include "metatile_behavior.h"
@@ -867,7 +870,7 @@ bool8 UpdateRepelCounter(void)
         VarSet(VAR_REPEL_STEP_COUNT, steps);
         if (steps == 0)
         {
-            ScriptContext_SetupScript(EventScript_RepelWoreOff);
+            ScriptContext_SetupScript(G_SCRIPT(EventScript_RepelWoreOff));
             return TRUE;
         }
     }

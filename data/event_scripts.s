@@ -71,6 +71,7 @@
 	.endif
 	.endm
 
+
 gSpecialVars::
 	host_pointer_entry gSpecialVar_0x8000
 	host_pointer_entry gSpecialVar_0x8001
@@ -98,6 +99,23 @@ gSpecialVars::
 	.include "data/specials.inc"
 
 gStdScripts::
+	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
+	/* R13-G6: the compiled Std_* payload is physically removed on
+	 * LINUX64; these 11 slots are zeroed and the seam's
+	 * PublishStdScripts (G5 boot ordering) is the only writer -
+	 * publication commits before any script entrypoint can execute. */
+	.quad 0 /* STD_OBTAIN_ITEM */
+	.quad 0 /* STD_FIND_ITEM */
+	.quad 0 /* MSGBOX_NPC */
+	.quad 0 /* MSGBOX_SIGN */
+	.quad 0 /* MSGBOX_DEFAULT */
+	.quad 0 /* MSGBOX_YESNO */
+	.quad 0 /* MSGBOX_AUTOCLOSE */
+	.quad 0 /* STD_OBTAIN_DECORATION */
+	.quad 0 /* STD_REGISTER_MATCH_CALL */
+	.quad 0 /* MSGBOX_GETPOINTS */
+	.quad 0 /* MSGBOX_POKENAV */
+	.else
 	host_pointer_entry Std_ObtainItem              /* STD_OBTAIN_ITEM*/
 	host_pointer_entry Std_FindItem                /* STD_FIND_ITEM*/
 	host_pointer_entry Std_MsgboxNPC               /* MSGBOX_NPC*/
@@ -109,8 +127,18 @@ gStdScripts::
 	host_pointer_entry Std_RegisteredInMatchCall   /* STD_REGISTER_MATCH_CALL*/
 	host_pointer_entry Std_MsgboxGetPoints         /* MSGBOX_GETPOINTS*/
 	host_pointer_entry Std_MsgboxPokenav           /* MSGBOX_POKENAV*/
+	.endif
 gStdScripts_End::
 
+	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
+	/* R13-G6: all G-owned map scripts + shared_secret_base excluded on LINUX64 (pack-loaded arena modules). GBA keeps them.
+	 * The R13-B movement tables defined inside those files stay compiled:
+	 * the leaf generator re-carves them into movement_tables_native.inc
+	 * (ownership contract: COMPILED_PENDING_MIGRATION => symbol in the
+	 * link through R13-G; the live VM serves movement operands from the
+	 * pack via the leaf seam, so these are contract-preserving shadows). */
+	.include "data/movement_tables_native.inc"
+	.else
 	.include "data/maps/PetalburgCity/scripts.inc"
 	.include "data/maps/SlateportCity/scripts.inc"
 	.include "data/maps/MauvilleCity/scripts.inc"
@@ -580,12 +608,18 @@ gStdScripts_End::
 	.include "data/maps/Route119_WeatherInstitute_2F/scripts.inc"
 	.include "data/maps/Route119_House/scripts.inc"
 	.include "data/maps/Route124_DivingTreasureHuntersHouse/scripts.inc"
+	.endif
 
+	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
+	.else
 	.include "data/scripts/std_msgbox.inc"
 	.include "data/scripts/trainer_battle.inc"
 	.include "data/scripts/new_game.inc"
 	.include "data/scripts/hall_of_fame.inc"
 
+	/* R13-G6: the hand-written common entrypoints below are G-owned
+	 * compiled payload (they live in the pack-loaded arena modules);
+	 * the LINUX64 link excludes the whole region. */
 EventScript_WhiteOut::
 	call EverGrandeCity_HallOfFame_EventScript_ResetEliteFour
 	goto EventScript_ResetMrBriney
@@ -661,7 +695,11 @@ EventScript_SetBrineyLocation_Route109::
 	.include "data/scripts/obtain_item.inc"
 	.include "data/scripts/record_mix.inc"
 	.include "data/scripts/pc.inc"
+	.endif
 
+	/* (region A above; region B below) */
+	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
+	.else
 /* scripts/notices.inc? signs.inc? See comment about text/notices.inc*/
 Common_EventScript_ShowPokemartSign::
 	msgbox gText_PokemartSign, MSGBOX_SIGN
@@ -835,6 +873,8 @@ Common_EventScript_PlayerHandedOverTheItem::
 	.include "data/scripts/elite_four.inc"
 	.include "data/scripts/movement.inc"
 	.include "data/scripts/check_furniture.inc"
+	.endif
+
 	.include "data/text/record_mix.inc"
 	.include "data/text/pc.inc"
 	.include "data/text/pkmn_center_nurse.inc"
@@ -964,6 +1004,9 @@ gText_LegendaryFlewAway::
 	.include "data/text/questionnaire.inc"
 	.include "data/text/abnormal_weather.inc"
 
+	/* R13-G6: region C (G-owned common entrypoints). */
+	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
+	.else
 EventScript_SelectWithoutRegisteredItem::
 	msgbox gText_SelectWithoutRegisteredItem, MSGBOX_SIGN
 	end
@@ -1017,51 +1060,138 @@ Common_EventScript_LegendaryFlewAway::
 	.include "data/scripts/berry_tree.inc"
 	.include "data/scripts/secret_base.inc"
 	.include "data/scripts/cable_club.inc"
+	.endif
+
 	.include "data/text/cable_club.inc"
+	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
+	.else
 	.include "data/scripts/contest_hall.inc"
+	.endif
 	.include "data/text/contest_strings.inc"
 	.include "data/text/contest_link.inc"
 	.include "data/text/contest_painting.inc"
 	.include "data/text/trick_house_mechadolls.inc"
+	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
+	.else
 	.include "data/scripts/tv.inc"
+	.endif
 	.include "data/text/tv.inc"
+	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
+	.else
 	.include "data/scripts/interview.inc"
+	.endif
+	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
+	.else
 	.include "data/scripts/gabby_and_ty.inc"
+	.endif
 	.include "data/text/pokemon_news.inc"
+	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
+	.else
 	.include "data/scripts/mauville_man.inc"
+	.endif
+	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
+	.else
 	.include "data/scripts/field_move_scripts.inc"
+	.endif
+	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
+	.else
 	.include "data/scripts/item_ball_scripts.inc"
+	.endif
+	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
+	.else
 	.include "data/scripts/profile_man.inc"
+	.endif
+	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
+	.else
 	.include "data/scripts/day_care.inc"
+	.endif
+	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
+	.else
 	.include "data/scripts/flash.inc"
+	.endif
+	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
+	.else
 	.include "data/scripts/players_house.inc"
+	.endif
+	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
+	.else
 	.include "data/scripts/berry_blender.inc"
+	.endif
 	.include "data/text/mauville_man.inc"
 	.include "data/text/trainers.inc"
+	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
+	.else
 	.include "data/scripts/repel.inc"
+	.endif
+	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
+	.else
 	.include "data/scripts/safari_zone.inc"
+	.endif
+	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
+	.else
 	.include "data/scripts/roulette.inc"
+	.endif
 	.include "data/text/pokedex_rating.inc"
 	.include "data/text/lottery_corner.inc"
 	.include "data/text/event_ticket_1.inc"
 	.include "data/text/braille.inc"
+	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
+	.include "data/text/braille_addresses_native.inc"
+	.endif
 	.include "data/text/berries.inc"
 	.include "data/text/shoal_cave.inc"
 	.include "data/text/check_furniture.inc"
+	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
+	.else
 	.include "data/scripts/cave_hole.inc"
+	.endif
+	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
+	.else
 	.include "data/scripts/lilycove_lady.inc"
+	.endif
 	.include "data/text/match_call.inc"
+	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
+	.else
 	.include "data/scripts/apprentice.inc"
+	.endif
 	.include "data/text/apprentice.inc"
 	.include "data/text/battle_dome.inc"
+	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
+	.else
 	.include "data/scripts/battle_pike.inc"
+	.endif
 	.include "data/text/blend_master.inc"
 	.include "data/text/battle_tent.inc"
 	.include "data/text/event_ticket_2.inc"
 	.include "data/text/move_tutors.inc"
+	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
+	.else
 	.include "data/scripts/move_tutors.inc"
+	.endif
+	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
+	.else
 	.include "data/scripts/trainer_hill.inc"
+	.endif
+	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
+	.else
 	.include "data/scripts/test_signpost.inc"
+	.endif
 	.include "data/text/frontier_brain.inc"
 	.include "data/text/save.inc"
 	.include "data/text/birch_speech.inc"
+	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
+	/* R13-G6: C-owned text blocks carved verbatim out of G-excluded
+	 * script files (their whole files are skipped on LINUX64), so the
+	 * deferred-to-r13g labels stay compiled natively through R13-G.
+	 * The GBA build still gets them from the script .inc files. */
+	.include "data/text/secret_base_trainers.inc"
+	.include "data/text/BattleFrontier_BattleTowerMultiPartnerRoom_text.inc"
+	.include "data/text/BattleFrontier_BattlePyramidFloor_text.inc"
+	.include "data/text/mauville_man_g6.inc"
+	.include "data/text/BattleFrontier_Lounge2_text.inc"
+	.include "data/text/BattleFrontier_Lounge3_text.inc"
+	.include "data/text/BattleFrontier_Lounge5_text.inc"
+	.include "data/text/roulette_g6.inc"
+	.include "data/text/BattleFrontier_BattleTowerMultiBattleRoom_text.inc"
+	.include "data/text/BattleFrontier_BattleTowerBattleRoom_text.inc"
+	.endif

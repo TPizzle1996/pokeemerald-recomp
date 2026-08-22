@@ -1,4 +1,7 @@
 #include "global.h"
+#if defined(LINUX64) && LINUX64
+#include "emerald/resources/emerald_script_compat.h"
+#endif
 #include "overworld.h"
 #include "battle_pyramid.h"
 #include "battle_setup.h"
@@ -363,7 +366,7 @@ static void (*const sMovementStatusHandler[])(struct LinkPlayerObjectEvent *, st
 // code
 void DoWhiteOut(void)
 {
-    RunScriptImmediately(EventScript_WhiteOut);
+    RunScriptImmediately(G_SCRIPT(EventScript_WhiteOut));
     SetMoney(&gSaveBlock1Ptr->money, GetMoney(&gSaveBlock1Ptr->money) / 2);
     HealPlayerParty();
     Overworld_ResetStateAfterWhiteOut();
@@ -389,7 +392,7 @@ void Overworld_ResetStateAfterTeleport(void)
     FlagClear(FLAG_SYS_SAFARI_MODE);
     FlagClear(FLAG_SYS_USE_STRENGTH);
     FlagClear(FLAG_SYS_USE_FLASH);
-    RunScriptImmediately(EventScript_ResetMrBriney);
+    RunScriptImmediately(G_SCRIPT(EventScript_ResetMrBriney));
 }
 
 void Overworld_ResetStateAfterDigEscRope(void)
@@ -2973,7 +2976,7 @@ static u16 KeyInterCB_WaitForPlayersToExit(u32 keyOrPlayerId)
         CheckRfuKeepAliveTimer();
     if (AreAllPlayersInLinkState(PLAYER_LINK_STATE_EXITING_ROOM) == TRUE)
     {
-        ScriptContext_SetupScript(EventScript_DoLinkRoomExit);
+        ScriptContext_SetupScript(G_SCRIPT(EventScript_DoLinkRoomExit));
         SetKeyInterceptCallback(KeyInterCB_SendNothing);
     }
     return LINK_KEY_CODE_EMPTY;
@@ -3105,13 +3108,13 @@ static const u8 *TryInteractWithPlayer(struct CableClubPlayer *player)
     if (linkPlayerId != MAX_LINK_PLAYERS)
     {
         if (!player->isLocalPlayer)
-            return CableClub_EventScript_TooBusyToNotice;
+            return G_SCRIPT(CableClub_EventScript_TooBusyToNotice);
         else if (sPlayerLinkStates[linkPlayerId] != PLAYER_LINK_STATE_IDLE)
-            return CableClub_EventScript_TooBusyToNotice;
+            return G_SCRIPT(CableClub_EventScript_TooBusyToNotice);
         else if (!GetLinkTrainerCardColor(linkPlayerId))
-            return CableClub_EventScript_ReadTrainerCard;
+            return G_SCRIPT(CableClub_EventScript_ReadTrainerCard);
         else
-            return CableClub_EventScript_ReadTrainerCardColored;
+            return G_SCRIPT(CableClub_EventScript_ReadTrainerCardColored);
     }
 
     return GetInteractedLinkPlayerScript(&otherPlayerPos, player->metatileBehavior, player->facing);
@@ -3121,29 +3124,29 @@ static const u8 *TryInteractWithPlayer(struct CableClubPlayer *player)
 // these event scripts runs.
 static u16 GetDirectionForEventScript(const u8 *script)
 {
-    if (script == EventScript_BattleColosseum_4P_PlayerSpot0)
+    if (script == G_SCRIPT(EventScript_BattleColosseum_4P_PlayerSpot0))
         return FACING_FORCED_RIGHT;
-    else if (script == EventScript_BattleColosseum_4P_PlayerSpot1)
+    else if (script == G_SCRIPT(EventScript_BattleColosseum_4P_PlayerSpot1))
         return FACING_FORCED_LEFT;
-    else if (script == EventScript_BattleColosseum_4P_PlayerSpot2)
+    else if (script == G_SCRIPT(EventScript_BattleColosseum_4P_PlayerSpot2))
         return FACING_FORCED_RIGHT;
-    else if (script == EventScript_BattleColosseum_4P_PlayerSpot3)
+    else if (script == G_SCRIPT(EventScript_BattleColosseum_4P_PlayerSpot3))
         return FACING_FORCED_LEFT;
-    else if (script == EventScript_RecordCenter_Spot0)
+    else if (script == G_SCRIPT(EventScript_RecordCenter_Spot0))
         return FACING_FORCED_RIGHT;
-    else if (script == EventScript_RecordCenter_Spot1)
+    else if (script == G_SCRIPT(EventScript_RecordCenter_Spot1))
         return FACING_FORCED_LEFT;
-    else if (script == EventScript_RecordCenter_Spot2)
+    else if (script == G_SCRIPT(EventScript_RecordCenter_Spot2))
         return FACING_FORCED_RIGHT;
-    else if (script == EventScript_RecordCenter_Spot3)
+    else if (script == G_SCRIPT(EventScript_RecordCenter_Spot3))
         return FACING_FORCED_LEFT;
-    else if (script == EventScript_BattleColosseum_2P_PlayerSpot0)
+    else if (script == G_SCRIPT(EventScript_BattleColosseum_2P_PlayerSpot0))
         return FACING_FORCED_RIGHT;
-    else if (script == EventScript_BattleColosseum_2P_PlayerSpot1)
+    else if (script == G_SCRIPT(EventScript_BattleColosseum_2P_PlayerSpot1))
         return FACING_FORCED_LEFT;
-    else if (script == EventScript_TradeCenter_Chair0)
+    else if (script == G_SCRIPT(EventScript_TradeCenter_Chair0))
         return FACING_FORCED_RIGHT;
-    else if (script == EventScript_TradeCenter_Chair1)
+    else if (script == G_SCRIPT(EventScript_TradeCenter_Chair1))
         return FACING_FORCED_LEFT;
     else
         return FACING_NONE;
@@ -3171,7 +3174,7 @@ static void RunInteractLocalPlayerScript(const u8 *script)
 static void RunConfirmLeaveCableClubScript(void)
 {
     PlaySE(SE_WIN_OPEN);
-    ScriptContext_SetupScript(EventScript_ConfirmLeaveCableClubRoom);
+    ScriptContext_SetupScript(G_SCRIPT(EventScript_ConfirmLeaveCableClubRoom));
     LockPlayerFieldControls();
 }
 
@@ -3184,7 +3187,7 @@ static void InitMenuBasedScript(const u8 *script)
 
 static void RunTerminateLinkScript(void)
 {
-    ScriptContext_SetupScript(EventScript_TerminateLink);
+    ScriptContext_SetupScript(G_SCRIPT(EventScript_TerminateLink));
     LockPlayerFieldControls();
 }
 

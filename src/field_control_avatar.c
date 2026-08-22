@@ -233,13 +233,13 @@ static bool8 TryStartInteractionScript(struct MapPosition *position, u16 metatil
         return FALSE;
 
     // Don't play interaction sound for certain scripts.
-    if (script != LittlerootTown_BrendansHouse_2F_EventScript_PC
-     && script != LittlerootTown_MaysHouse_2F_EventScript_PC
-     && script != SecretBase_EventScript_PC
-     && script != SecretBase_EventScript_RecordMixingPC
-     && script != SecretBase_EventScript_DollInteract
-     && script != SecretBase_EventScript_CushionInteract
-     && script != EventScript_PC)
+    if (script != G_SCRIPT(LittlerootTown_BrendansHouse_2F_EventScript_PC)
+     && script != G_SCRIPT(LittlerootTown_MaysHouse_2F_EventScript_PC)
+     && script != G_SCRIPT(SecretBase_EventScript_PC)
+     && script != G_SCRIPT(SecretBase_EventScript_RecordMixingPC)
+     && script != G_SCRIPT(SecretBase_EventScript_DollInteract)
+     && script != G_SCRIPT(SecretBase_EventScript_CushionInteract)
+     && script != G_SCRIPT(EventScript_PC))
         PlaySE(SE_SELECT);
 
     ScriptContext_SetupScript(script);
@@ -329,7 +329,7 @@ static const u8 *GetInteractedBackgroundEventScript(struct MapPosition *position
     if (bgEvent == NULL)
         return NULL;
     if (bgEvent->bgUnion.script == NULL)
-        return EventScript_TestSignpostMsg;
+        return G_SCRIPT(EventScript_TestSignpostMsg);
 
     switch (bgEvent->kind)
     {
@@ -373,13 +373,13 @@ static const u8 *GetInteractedBackgroundEventScript(struct MapPosition *position
         }
         if (FlagGet(gSpecialVar_0x8004) == TRUE)
             return NULL;
-        return EventScript_HiddenItemScript;
+        return G_SCRIPT(EventScript_HiddenItemScript);
     case BG_EVENT_SECRET_BASE:
         if (direction == DIR_NORTH)
         {
             gSpecialVar_0x8004 = bgEvent->bgUnion.secretBaseId;
             if (TrySetCurSecretBase())
-                return SecretBase_EventScript_CheckEntrance;
+                return G_SCRIPT(SecretBase_EventScript_CheckEntrance);
         }
         return NULL;
     }
@@ -392,57 +392,57 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
     s8 elevation;
 
     if (MetatileBehavior_IsPlayerFacingTVScreen(metatileBehavior, direction) == TRUE)
-        return EventScript_TV;
+        return G_SCRIPT(EventScript_TV);
     if (MetatileBehavior_IsPC(metatileBehavior) == TRUE)
-        return EventScript_PC;
+        return G_SCRIPT(EventScript_PC);
     if (MetatileBehavior_IsClosedSootopolisDoor(metatileBehavior) == TRUE)
-        return EventScript_ClosedSootopolisDoor;
+        return G_SCRIPT(EventScript_ClosedSootopolisDoor);
     if (MetatileBehavior_IsSkyPillarClosedDoor(metatileBehavior) == TRUE)
-        return SkyPillar_Outside_EventScript_ClosedDoor;
+        return G_SCRIPT(SkyPillar_Outside_EventScript_ClosedDoor);
     if (MetatileBehavior_IsCableBoxResults1(metatileBehavior) == TRUE)
-        return EventScript_CableBoxResults;
+        return G_SCRIPT(EventScript_CableBoxResults);
     if (MetatileBehavior_IsPokeblockFeeder(metatileBehavior) == TRUE)
-        return EventScript_PokeBlockFeeder;
+        return G_SCRIPT(EventScript_PokeBlockFeeder);
     if (MetatileBehavior_IsTrickHousePuzzleDoor(metatileBehavior) == TRUE)
-        return Route110_TrickHousePuzzle_EventScript_Door;
+        return G_SCRIPT(Route110_TrickHousePuzzle_EventScript_Door);
     if (MetatileBehavior_IsRegionMap(metatileBehavior) == TRUE)
-        return EventScript_RegionMap;
+        return G_SCRIPT(EventScript_RegionMap);
     if (MetatileBehavior_IsRunningShoesManual(metatileBehavior) == TRUE)
-        return EventScript_RunningShoesManual;
+        return G_SCRIPT(EventScript_RunningShoesManual);
     if (MetatileBehavior_IsPictureBookShelf(metatileBehavior) == TRUE)
-        return EventScript_PictureBookShelf;
+        return G_SCRIPT(EventScript_PictureBookShelf);
     if (MetatileBehavior_IsBookShelf(metatileBehavior) == TRUE)
-        return EventScript_BookShelf;
+        return G_SCRIPT(EventScript_BookShelf);
     if (MetatileBehavior_IsPokeCenterBookShelf(metatileBehavior) == TRUE)
-        return EventScript_PokemonCenterBookShelf;
+        return G_SCRIPT(EventScript_PokemonCenterBookShelf);
     if (MetatileBehavior_IsVase(metatileBehavior) == TRUE)
-        return EventScript_Vase;
+        return G_SCRIPT(EventScript_Vase);
     if (MetatileBehavior_IsTrashCan(metatileBehavior) == TRUE)
-        return EventScript_EmptyTrashCan;
+        return G_SCRIPT(EventScript_EmptyTrashCan);
     if (MetatileBehavior_IsShopShelf(metatileBehavior) == TRUE)
-        return EventScript_ShopShelf;
+        return G_SCRIPT(EventScript_ShopShelf);
     if (MetatileBehavior_IsBlueprint(metatileBehavior) == TRUE)
-        return EventScript_Blueprint;
+        return G_SCRIPT(EventScript_Blueprint);
     if (MetatileBehavior_IsPlayerFacingWirelessBoxResults(metatileBehavior, direction) == TRUE)
-        return EventScript_WirelessBoxResults;
+        return G_SCRIPT(EventScript_WirelessBoxResults);
     if (MetatileBehavior_IsCableBoxResults2(metatileBehavior, direction) == TRUE)
-        return EventScript_CableBoxResults;
+        return G_SCRIPT(EventScript_CableBoxResults);
     if (MetatileBehavior_IsQuestionnaire(metatileBehavior) == TRUE)
-        return EventScript_Questionnaire;
+        return G_SCRIPT(EventScript_Questionnaire);
     if (MetatileBehavior_IsTrainerHillTimer(metatileBehavior) == TRUE)
-        return EventScript_TrainerHillTimer;
+        return G_SCRIPT(EventScript_TrainerHillTimer);
 
     elevation = position->elevation;
     if (elevation == MapGridGetElevationAt(position->x, position->y))
     {
         if (MetatileBehavior_IsSecretBasePC(metatileBehavior) == TRUE)
-            return SecretBase_EventScript_PC;
+            return G_SCRIPT(SecretBase_EventScript_PC);
         if (MetatileBehavior_IsRecordMixingSecretBasePC(metatileBehavior) == TRUE)
-            return SecretBase_EventScript_RecordMixingPC;
+            return G_SCRIPT(SecretBase_EventScript_RecordMixingPC);
         if (MetatileBehavior_IsSecretBaseSandOrnament(metatileBehavior) == TRUE)
-            return SecretBase_EventScript_SandOrnament;
+            return G_SCRIPT(SecretBase_EventScript_SandOrnament);
         if (MetatileBehavior_IsSecretBaseShieldOrToyTV(metatileBehavior) == TRUE)
-            return SecretBase_EventScript_ShieldOrToyTV;
+            return G_SCRIPT(SecretBase_EventScript_ShieldOrToyTV);
         if (MetatileBehavior_IsSecretBaseDecorationBase(metatileBehavior) == TRUE)
         {
             CheckInteractedWithFriendsFurnitureBottom();
@@ -471,14 +471,14 @@ static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 me
 static const u8 *GetInteractedWaterScript(struct MapPosition *unused1, u8 metatileBehavior, u8 direction)
 {
     if (FlagGet(FLAG_BADGE05_GET) == TRUE && PartyHasMonWithSurf() == TRUE && IsPlayerFacingSurfableFishableWater() == TRUE)
-        return EventScript_UseSurf;
+        return G_SCRIPT(EventScript_UseSurf);
 
     if (MetatileBehavior_IsWaterfall(metatileBehavior) == TRUE)
     {
         if (FlagGet(FLAG_BADGE08_GET) == TRUE && IsPlayerSurfingNorth() == TRUE)
-            return EventScript_UseWaterfall;
+            return G_SCRIPT(EventScript_UseWaterfall);
         else
-            return EventScript_CannotUseWaterfall;
+            return G_SCRIPT(EventScript_CannotUseWaterfall);
     }
     return NULL;
 }
@@ -487,7 +487,7 @@ static bool32 TrySetupDiveDownScript(void)
 {
     if (FlagGet(FLAG_BADGE07_GET) && TrySetDiveWarp() == 2)
     {
-        ScriptContext_SetupScript(EventScript_UseDive);
+        ScriptContext_SetupScript(G_SCRIPT(EventScript_UseDive));
         return TRUE;
     }
     return FALSE;
@@ -497,7 +497,7 @@ static bool32 TrySetupDiveEmergeScript(void)
 {
     if (FlagGet(FLAG_BADGE07_GET) && gMapHeader.mapType == MAP_TYPE_UNDERWATER && TrySetDiveWarp() == 1)
     {
-        ScriptContext_SetupScript(EventScript_UseDiveUnderwater);
+        ScriptContext_SetupScript(G_SCRIPT(EventScript_UseDiveUnderwater));
         return TRUE;
     }
     return FALSE;
@@ -534,12 +534,12 @@ static bool8 TryStartMiscWalkingScripts(u16 metatileBehavior)
 
     if (MetatileBehavior_IsCrackedFloorHole(metatileBehavior))
     {
-        ScriptContext_SetupScript(EventScript_FallDownHole);
+        ScriptContext_SetupScript(G_SCRIPT(EventScript_FallDownHole));
         return TRUE;
     }
     else if (MetatileBehavior_IsBattlePyramidWarp(metatileBehavior))
     {
-        ScriptContext_SetupScript(BattlePyramid_WarpToNextFloor);
+        ScriptContext_SetupScript(G_SCRIPT(BattlePyramid_WarpToNextFloor));
         return TRUE;
     }
     else if (MetatileBehavior_IsSecretBaseGlitterMat(metatileBehavior) == TRUE)
@@ -571,48 +571,48 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
     {
         if (UpdatePoisonStepCounter() == TRUE)
         {
-            ScriptContext_SetupScript(EventScript_FieldPoison);
+            ScriptContext_SetupScript(G_SCRIPT(EventScript_FieldPoison));
             return TRUE;
         }
         if (ShouldEggHatch())
         {
             IncrementGameStat(GAME_STAT_HATCHED_EGGS);
-            ScriptContext_SetupScript(EventScript_EggHatch);
+            ScriptContext_SetupScript(G_SCRIPT(EventScript_EggHatch));
             return TRUE;
         }
         if (AbnormalWeatherHasExpired() == TRUE)
         {
-            ScriptContext_SetupScript(AbnormalWeather_EventScript_EndEventAndCleanup_1);
+            ScriptContext_SetupScript(G_SCRIPT(AbnormalWeather_EventScript_EndEventAndCleanup_1));
             return TRUE;
         }
         if (ShouldDoBrailleRegicePuzzle() == TRUE)
         {
-            ScriptContext_SetupScript(IslandCave_EventScript_OpenRegiEntrance);
+            ScriptContext_SetupScript(G_SCRIPT(IslandCave_EventScript_OpenRegiEntrance));
             return TRUE;
         }
         if (ShouldDoWallyCall() == TRUE)
         {
-            ScriptContext_SetupScript(MauvilleCity_EventScript_RegisterWallyCall);
+            ScriptContext_SetupScript(G_SCRIPT(MauvilleCity_EventScript_RegisterWallyCall));
             return TRUE;
         }
         if (ShouldDoScottFortreeCall() == TRUE)
         {
-            ScriptContext_SetupScript(Route119_EventScript_ScottWonAtFortreeGymCall);
+            ScriptContext_SetupScript(G_SCRIPT(Route119_EventScript_ScottWonAtFortreeGymCall));
             return TRUE;
         }
         if (ShouldDoScottBattleFrontierCall() == TRUE)
         {
-            ScriptContext_SetupScript(LittlerootTown_ProfessorBirchsLab_EventScript_ScottAboardSSTidalCall);
+            ScriptContext_SetupScript(G_SCRIPT(LittlerootTown_ProfessorBirchsLab_EventScript_ScottAboardSSTidalCall));
             return TRUE;
         }
         if (ShouldDoRoxanneCall() == TRUE)
         {
-            ScriptContext_SetupScript(RustboroCity_Gym_EventScript_RegisterRoxanne);
+            ScriptContext_SetupScript(G_SCRIPT(RustboroCity_Gym_EventScript_RegisterRoxanne));
             return TRUE;
         }
         if (ShouldDoRivalRayquazaCall() == TRUE)
         {
-            ScriptContext_SetupScript(MossdeepCity_SpaceCenter_2F_EventScript_RivalRayquazaCall);
+            ScriptContext_SetupScript(G_SCRIPT(MossdeepCity_SpaceCenter_2F_EventScript_RivalRayquazaCall));
             return TRUE;
         }
     }
@@ -621,7 +621,7 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
         return TRUE;
     if (CountSSTidalStep(1) == TRUE)
     {
-        ScriptContext_SetupScript(SSTidalCorridor_EventScript_ReachedStepCount);
+        ScriptContext_SetupScript(G_SCRIPT(SSTidalCorridor_EventScript_ReachedStepCount));
         return TRUE;
     }
     if (TryStartMatchCall())
@@ -757,7 +757,7 @@ static bool8 TryStartWarpEventScript(struct MapPosition *position, u16 metatileB
         }
         if (MetatileBehavior_IsMtPyreHole(metatileBehavior) == TRUE)
         {
-            ScriptContext_SetupScript(EventScript_FallDownHoleMtPyre);
+            ScriptContext_SetupScript(G_SCRIPT(EventScript_FallDownHoleMtPyre));
             return TRUE;
         }
         if (MetatileBehavior_IsMossdeepGymWarp(metatileBehavior) == TRUE)
