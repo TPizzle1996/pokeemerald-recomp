@@ -4,7 +4,7 @@
  * production pack and the committed script-module artifacts, exactly as the
  * runtime loader consumes them:
  *
- *   1. the pack opens, reports the 20,988-entry surface and the qualified
+ *   1. the pack opens, reports the 23,069-entry surface and the qualified
  *      BPEE01 Rev 0 ROM identity (SHA-1 f3ae0881...);
  *   2. all 467 payload-bearing script modules are found by canonical name,
  *      byte-exact against the committed .bin artifacts, and their payload
@@ -204,9 +204,9 @@ int main(int argc, char **argv)
         }
         {
             char line[128];
-            snprintf(line, sizeof(line), "pack entry count == 20,988 (got %zu)",
+            snprintf(line, sizeof(line), "pack entry count == 23,069 (got %zu)",
                      Gen3ResourcePack_GetEntryCount(pack));
-            Check(Gen3ResourcePack_GetEntryCount(pack) == 20988u, line);
+            Check(Gen3ResourcePack_GetEntryCount(pack) == 23069u, line);
         }
     }
 

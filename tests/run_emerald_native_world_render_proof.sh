@@ -41,12 +41,26 @@ data_dir="$root/build/linux64/data"
 tmp="$(mktemp -d)"
 export ROOT="$root"
 # R13-G2 script catalog declares 523 identities; 56 routing-only ids have
-# no pack entry. The session's construction catalog must match the pack's
-# provider surface, so this harness passes the 467 embedded ids only.
+# no pack entry. R13-H2 battle catalog declares 2,089 identities; the 8
+# zero-width alias ids have no pack entry. The session's construction
+# catalogs must match the pack's provider surface, so this harness passes
+# the 467 script + 2,081 battle embedded ids only.
 python3 - <<PYFILT > "$tmp/script_embedded_catalog.toml"
 import re, os
 cat = open(os.environ["ROOT"] + "/resources/extraction/emerald/bpee01/script/modules/catalog.generated.toml").read()
 man = open(os.environ["ROOT"] + "/resources/extraction/emerald/bpee01/script/modules/manifest.production.toml").read()
+ids = set(re.findall(r'^id = "([^"]+)"$', man, re.M))
+header, rest = cat.split("[[resources]]", 1)
+print(header, end="")
+for block in rest.split("[[resources]]"):
+    i = re.search(r'id = "([^"]+)"', block)
+    if i and i.group(1) in ids:
+        print("[[resources]]" + block, end="")
+PYFILT
+python3 - <<PYFILT > "$tmp/battle_embedded_catalog.toml"
+import re, os
+cat = open(os.environ["ROOT"] + "/resources/extraction/emerald/bpee01/battle/modules/catalog.generated.toml").read()
+man = open(os.environ["ROOT"] + "/resources/extraction/emerald/bpee01/battle/modules/manifest.production.toml").read()
 ids = set(re.findall(r'^id = "([^"]+)"$', man, re.M))
 header, rest = cat.split("[[resources]]", 1)
 print(header, end="")
@@ -145,4 +159,5 @@ echo "== running =="
     --catalog "$root/resources/extraction/emerald/bpee01/text/catalog.generated.toml" \
     --catalog "$root/resources/extraction/emerald/bpee01/gameplay/catalog.generated.toml" \
     --catalog "$root/resources/extraction/emerald/bpee01/multiboot/catalog.generated.toml" \
-    --catalog "$tmp/script_embedded_catalog.toml"
+    --catalog "$tmp/script_embedded_catalog.toml" \
+    --catalog "$tmp/battle_embedded_catalog.toml"

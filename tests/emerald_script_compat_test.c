@@ -5,7 +5,7 @@
  * emerald-bpee01-v1.rpack) with the text + leaf sibling seams
  * published first (the loader's ordering). Covers:
  *
- *   1. preconditions (pack 20,988 entries; sibling seams published);
+ *   1. preconditions (pack 23,069 entries; sibling seams published);
  *   2. refused staging before the siblings publish (UNAVAILABLE);
  *   3. full shadow staging: index counts, parity 16,704/0, arena
  *      geometry, per-module byte identity against the pack;
@@ -1043,7 +1043,7 @@ int main(int argc, char **argv)
     }
     {
         size_t count = Gen3ResourcePack_GetEntryCount(gScriptHarnessPack);
-        CHECK("pack entry count 20988", count == 20988u);
+        CHECK("pack entry count 23069", count == 23069u);
     }
     CHECK("text sibling published",
           EmeraldTextCompat_GetPublishedCount() == EMERALD_TEXT_LABEL_COUNT);

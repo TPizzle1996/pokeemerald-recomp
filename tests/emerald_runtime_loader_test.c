@@ -828,9 +828,9 @@ static void TestTextPublication(const char *packPath)
 
     packCount = Gen3ResourcePack_GetEntryCount(pack);
     printf("production pack entry count: %zu\n", packCount);
-    CHECK("production pack entry count pinned at 20501+20+467 "
-          "(R13-E3a-2 + R13-G2 §7.3 gift text + script family)",
-          packCount == 20988u);
+    CHECK("production pack entry count pinned at 20501+20+467+2081 "
+          "(R13-E3a-2 + R13-G2 §7.3 gift text + script family + R13-H2 battle family)",
+          packCount == 23069u);
 
     /* Every text entry: C-side labels resolve by resource id; bundle ids
      * are captured for the blob-slice pass below. */

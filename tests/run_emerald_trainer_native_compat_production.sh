@@ -50,6 +50,21 @@ for block in rest.split("[[resources]]"):
         print("[[resources]]" + block, end="")
 PYFILT
 
+# R13-H2 battle catalog declares 2,089 identities; the 8 zero-width alias
+# ids have no pack entry. Same filtering: pass the 2,081 embedded ids only.
+python3 - <<PYFILT > "$tmp/battle_embedded_catalog.toml"
+import re, os
+cat = open(os.environ["ROOT"] + "/resources/extraction/emerald/bpee01/battle/modules/catalog.generated.toml").read()
+man = open(os.environ["ROOT"] + "/resources/extraction/emerald/bpee01/battle/modules/manifest.production.toml").read()
+ids = set(re.findall(r'^id = "([^"]+)"$', man, re.M))
+header, rest = cat.split("[[resources]]", 1)
+print(header, end="")
+for block in rest.split("[[resources]]"):
+    i = re.search(r'id = "([^"]+)"', block)
+    if i and i.group(1) in ids:
+        print("[[resources]]" + block, end="")
+PYFILT
+
 trap 'rm -rf "$tmp"' EXIT
 
 echo "== compiling production compat proof (real native flags + R4 session) =="
@@ -99,4 +114,5 @@ echo "== running =="
     --catalog "$root/resources/extraction/emerald/bpee01/text/catalog.generated.toml" \
     --catalog "$root/resources/extraction/emerald/bpee01/gameplay/catalog.generated.toml" \
     --catalog "$tmp/script_embedded_catalog.toml" \
+    --catalog "$tmp/battle_embedded_catalog.toml" \
     --descriptor "$root/resources/extraction/emerald/bpee01/trainer_front_family.toml"

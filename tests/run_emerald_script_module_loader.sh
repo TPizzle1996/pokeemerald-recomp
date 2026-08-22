@@ -7,7 +7,7 @@
 # resource_core/pack/toml/sha256 TUs the R6 runtime loader links, driven
 # over the REAL production pack + the committed script-module artifacts:
 #
-#   1. pack identity (20,988 entries, BPEE01 Rev 0 ROM SHA-1);
+#   1. pack identity (23,069 entries, BPEE01 Rev 0 ROM SHA-1);
 #   2. all 467 payload-bearing script modules: found by canonical name,
 #      byte-exact vs the committed .bin, payload SHA-256 == both manifest
 #      digests;
