@@ -74,26 +74,40 @@ u8 gBattleBufferA[MAX_BATTLERS_COUNT][0x200];
 u8 gBattleBufferB[MAX_BATTLERS_COUNT][0x200];
 u8 *gLinkBattleSendBuffer;
 u8 *gLinkBattleRecvBuffer;
-const u8 *gAIScriptPtr;
+/* R13-H3: the battle-family execution surfaces match the production
+ * EWRAM_DATA declarations exactly (battle_main.c:184-188,
+ * battle_ai_script_commands.c:154, battle_anim.c:92-94), so the
+ * walker's EWRAM slice serializes them with production layout parity.
+ * The anim statics are file-local in production; the harness owns
+ * same-shaped copies here. */
+EWRAM_DATA const u8 *gAIScriptPtr = NULL;
+EWRAM_DATA void (*gAnimScriptCallback)(void) = NULL;
+EWRAM_DATA const u8 *gBattlescriptCurrInstr = NULL;
+EWRAM_DATA const u8 *gSelectionBattleScripts[MAX_BATTLERS_COUNT] = {NULL};
+EWRAM_DATA const u8 *gPalaceSelectionBattleScripts[MAX_BATTLERS_COUNT] = {NULL};
+EWRAM_DATA const u8 *sBattleAnimScriptPtr = NULL;
+EWRAM_DATA const u8 *sBattleAnimScriptRetAddr = NULL;
 struct DisableStruct *gAnimDisableStructPtr;
-void (*gAnimScriptCallback)(void);
 u8 *gBattleAnimBgTileBuffer;
 u8 *gBattleAnimBgTilemapBuffer;
 struct BattleMsgData *gBattleMsgDataPtr;
-const u8 *gBattlescriptCurrInstr;
 struct BattleSpriteData *gBattleSpritesDataPtr;
 void (*gBattleMainFunc)(void);
 void (*gPreBattleCallback1)(void);
 void (*gBattlerControllerFuncs[MAX_BATTLERS_COUNT])(void);
 struct BattleHealthboxInfo *gBattleControllerOpponentHealthboxData;
 struct BattleHealthboxInfo *gBattleControllerOpponentFlankHealthboxData;
-const u8 *gSelectionBattleScripts[MAX_BATTLERS_COUNT];
-const u8 *gPalaceSelectionBattleScripts[MAX_BATTLERS_COUNT];
 
-/* TextPrinter state hooks (text.c); the harness has no printers.
- * R13-C §13-15: the State-v5 currentChar routing added the printer
- * registry + event-dump API; the signatures must match include/text.h. */
-const struct TextPrinter *TextPrinter_GetStatePrinters(void) { return NULL; }
+/* TextPrinter state hooks (text.c). The harness has no live printers,
+ * but the State-v5 EWRAM failure forensics iterate the printer table
+ * (native_state.c SetRuntimePointerError), so the registry must return
+ * real all-inactive storage instead of NULL (R13-H3: the first EWRAM
+ * capture failure ever hit this path and dereferenced the old NULL). */
+static struct TextPrinter sHarnessPrinters[WINDOWS_MAX];
+const struct TextPrinter *TextPrinter_GetStatePrinters(void)
+{
+    return sHarnessPrinters;
+}
 void TextPrinter_DumpStateEvents(void) { }
 
 /* Native-overworld sprite snapshot sink (uncommitted native_sprite_snapshot

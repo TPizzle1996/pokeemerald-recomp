@@ -38,6 +38,7 @@
 #include "emerald/resources/emerald_trainer_native_compat.h"
 #include "emerald/resources/emerald_audio_compat.h"
 #include "emerald/resources/emerald_script_state.h"
+#include "emerald/resources/emerald_battle_state.h"
 #include "platform/native_world_neighborhood.h"
 #include "siirtc.h"
 
@@ -251,6 +252,18 @@ static u32 sCaptureResourceRecordCount;
 #pragma weak EmeraldScriptState_ValidateDynamicField
 #pragma weak EmeraldScriptState_GetLastSurface
 #pragma weak EmeraldScriptStateStatus_Describe
+
+/* R13-H3: the battle-family state adapter (emerald_battle_state.c) is
+ * offered the same hook ladder. Through H3 production links only the
+ * weak adapter with no shadow seam, so every H hook falls through to
+ * the existing compiled-script path; the focused H3 harness links the
+ * strong seam and drives the staged paths. */
+#pragma weak EmeraldBattleState_PrepareCapture
+#pragma weak EmeraldBattleState_CaptureField
+#pragma weak EmeraldBattleState_ResolveField
+#pragma weak EmeraldBattleState_IsStaticRecord
+#pragma weak EmeraldBattleState_GetLastSurface
+#pragma weak EmeraldBattleStateStatus_Describe
 
 /* The active session's reverse resource-range index, or NULL when no
  * resource session exists (non-Linux targets, no published session, or a
@@ -1975,6 +1988,66 @@ static enum NativeStateResourceWindowResult CaptureScriptStateWindow(
     return NORMALIZE_RESOURCE_CAPTURED;
 }
 
+/* R13-H3: the battle-family adapter gets the same first-crack offer
+ * after the field-script adapter. Fields the script adapter owns
+ * (trainer continuations etc.) never reach it; everything else is
+ * classified by exact H surface, and H-arena pointers on non-H fields
+ * refuse with a precise diagnostic. */
+static enum NativeStateResourceWindowResult CaptureBattleStateWindow(
+    const struct NativeStateSlice *slice, u8 *dest, u32 offset, u32 size,
+    const u8 *source)
+{
+    struct EmeraldBattleStateResourceIdentity identity;
+    enum EmeraldBattleStateStatus status;
+    struct NativeStateResourceRecord *record;
+    uintptr_t candidate;
+
+    if (EmeraldBattleState_CaptureField == NULL
+     || offset + sizeof(uintptr_t) > size)
+        return NORMALIZE_RESOURCE_NONE;
+    memcpy(&candidate, source + offset, sizeof(candidate));
+    memset(&identity, 0, sizeof(identity));
+    status = EmeraldBattleState_CaptureField(
+        (uintptr_t)source + offset, candidate, &identity);
+    if (status == EMERALD_BATTLE_STATE_NOT_BATTLE)
+        return NORMALIZE_RESOURCE_NONE;
+    if (status == EMERALD_BATTLE_STATE_SCRUB)
+    {
+        memset(dest + offset, 0, sizeof(candidate));
+        return NORMALIZE_RESOURCE_CAPTURED; /* consumed, no sidecar row */
+    }
+    if (status != EMERALD_BATTLE_STATE_OK)
+    {
+        char reason[320];
+        snprintf(reason, sizeof(reason), "battle-state surface %s refused: %s",
+                 EmeraldBattleState_GetLastSurface != NULL
+                    ? EmeraldBattleState_GetLastSurface() : "unknown",
+                 EmeraldBattleStateStatus_Describe != NULL
+                    ? EmeraldBattleStateStatus_Describe(status) : "adapter error");
+        SetRuntimePointerError(slice, offset, candidate, reason,
+                               "save-battle-state", source, size);
+        return NORMALIZE_RESOURCE_ERROR;
+    }
+    if (sCaptureResourceRecordCount >= NATIVE_STATE_MAX_RESOURCE_RECORDS)
+    {
+        SetRuntimePointerError(slice, offset, candidate,
+                               "resource reference sidecar record limit exceeded",
+                               "save-battle-state", source, size);
+        return NORMALIZE_RESOURCE_ERROR;
+    }
+    record = &sCaptureResourceRecords[sCaptureResourceRecordCount++];
+    memset(record, 0, sizeof(*record));
+    record->sectionTag = slice->tag;
+    record->fieldOffset = offset;
+    memcpy(record->resourceKey, identity.key.bytes, GEN3_RESOURCE_KEY_SIZE);
+    record->resourceType = identity.resourceType;
+    record->resourceSchema = identity.schema;
+    record->representationRole = identity.representationRole;
+    record->rangeOffset = identity.payloadOffset;
+    memset(dest + offset, 0, sizeof(candidate));
+    return NORMALIZE_RESOURCE_CAPTURED;
+}
+
 static enum NativeStateResourceWindowResult CaptureResourceWindow(
     const struct NativeStateSlice *slice, u8 *dest, u32 offset, u32 size,
     const u8 *source, const struct EmeraldResourceRangeIndex *rangeIndex)
@@ -2103,6 +2176,20 @@ static bool32 NormalizeRuntimeBytes(const struct NativeStateSlice *slice, u8 *de
          * unregistered, but their ordinary v5 key+offset records are emitted
          * with the same transactional record accumulator. */
         switch (CaptureScriptStateWindow(slice, dest, offset, size,
+                                         (const u8 *)source))
+        {
+        case NORMALIZE_RESOURCE_CAPTURED:
+            offset += sizeof(u32);
+            continue;
+        case NORMALIZE_RESOURCE_ERROR:
+            return FALSE;
+        case NORMALIZE_RESOURCE_NONE:
+        default:
+            break;
+        }
+        /* R13-H3: battle-family surfaces get the second offer (the
+         * field-script adapter owns trainer-continuation fields). */
+        switch (CaptureBattleStateWindow(slice, dest, offset, size,
                                          (const u8 *)source))
         {
         case NORMALIZE_RESOURCE_CAPTURED:
@@ -2693,6 +2780,25 @@ static enum NativeStateResult SaveStateToPath(const char *path)
             return NATIVE_STATE_UNSUPPORTED;
         }
     }
+    if (EmeraldBattleState_PrepareCapture != NULL)
+    {
+        enum EmeraldBattleStateStatus battleState =
+            EmeraldBattleState_PrepareCapture();
+        if (battleState != EMERALD_BATTLE_STATE_OK
+         && battleState != EMERALD_BATTLE_STATE_ERR_UNAVAILABLE)
+        {
+            char message[320];
+            snprintf(message, sizeof(message),
+                     "battle-state capture refused at %s: %s",
+                     EmeraldBattleState_GetLastSurface != NULL
+                        ? EmeraldBattleState_GetLastSurface() : "unknown",
+                     EmeraldBattleStateStatus_Describe != NULL
+                        ? EmeraldBattleStateStatus_Describe(battleState)
+                        : "adapter error");
+            SetError(message);
+            return NATIVE_STATE_UNSUPPORTED;
+        }
+    }
     framebuffer = malloc(DISPLAY_WIDTH * DISPLAY_HEIGHT * sizeof(u32));
     if (framebuffer == NULL)
     {
@@ -2964,6 +3070,38 @@ static bool32 ResolveResourceRecords(const u8 *records, u32 recordCount,
                                               representationRole))
         {
             SetError("state field-script reference is not attached to an approved script pointer surface");
+            return FALSE;
+        }
+        if (EmeraldBattleState_ResolveField != NULL && fieldAddress != 0u)
+        {
+            enum EmeraldBattleStateStatus battleStatus =
+                EmeraldBattleState_ResolveField(
+                    fieldAddress, &key, resourceType, resourceSchema,
+                    representationRole, rangeOffset,
+                    serializedSlices[sliceIndex],
+                    (uintptr_t)slices[sliceIndex].source,
+                    slices[sliceIndex].size, &outPointers[i]);
+            if (battleStatus == EMERALD_BATTLE_STATE_OK)
+                continue;
+            if (battleStatus != EMERALD_BATTLE_STATE_NOT_BATTLE)
+            {
+                snprintf(message, sizeof(message),
+                         "state battle reference %u refused at %s: %s",
+                         i,
+                         EmeraldBattleState_GetLastSurface != NULL
+                            ? EmeraldBattleState_GetLastSurface() : "unknown",
+                         EmeraldBattleStateStatus_Describe != NULL
+                            ? EmeraldBattleStateStatus_Describe(battleStatus)
+                            : "adapter error");
+                SetError(message);
+                return FALSE;
+            }
+        }
+        if (EmeraldBattleState_IsStaticRecord != NULL
+         && EmeraldBattleState_IsStaticRecord(resourceType, resourceSchema,
+                                              representationRole))
+        {
+            SetError("state battle reference is not attached to an approved battle pointer surface");
             return FALSE;
         }
         if (!EmeraldResourceRangeIndex_ResolveByKey(

@@ -46,6 +46,9 @@
 #include "emerald/resources/emerald_script_compat.h"
 #include "emerald/resources/emerald_script_state.h"
 #include "emerald/resources/script_native.generated.h"
+#include "emerald/resources/emerald_battle_compat.h"
+#include "emerald/resources/emerald_battle_state.h"
+#include "emerald/resources/battle_native.generated.h"
 #include "script.h"
 /* R12: REAL MP2K struct layouts for the audio-shaped game_bss fixture
  * (struct SoundInfo/SoundChannel/MusicPlayerInfo). Header-only; no m4a.c is
@@ -4076,6 +4079,1350 @@ static int DoLoadFail(const char *packPath, const char *statePath,
     return 0;
 }
 
+/* ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------ */
+/* R13-H3 staged battle-family State-v5 closure.                       */
+
+extern EWRAM_DATA const u8 *gBattlescriptCurrInstr;
+extern EWRAM_DATA const u8 *gAIScriptPtr;
+extern EWRAM_DATA void (*gAnimScriptCallback)(void);
+extern EWRAM_DATA const u8 *gSelectionBattleScripts[MAX_BATTLERS_COUNT];
+extern EWRAM_DATA const u8 *gPalaceSelectionBattleScripts[MAX_BATTLERS_COUNT];
+extern EWRAM_DATA const u8 *sBattleAnimScriptPtr;
+extern EWRAM_DATA const u8 *sBattleAnimScriptRetAddr;
+
+#define H3_STACK_CAP 8u
+#define H3_EXPECTED_CAP 24u
+
+/* The battle heap-stack fixtures (production: gHeap-allocated
+ * BattleResources members -> GAME_BSS slice) live at the head of the
+ * modeled game-bss region; the H3 modes own the region exclusively. */
+struct H3BattleFixtures
+{
+    struct BattleScriptsStack battleStack;     /* ptr[8] + size */
+    struct BattleCallbacksStack callbackStack; /* function[8] + size */
+    struct BattleScriptsStack aiStack;
+    const u8 *contestStack[H3_STACK_CAP];
+    u8 contestStackSize;
+    u64 generationStamp;
+    u32 expectedModule[H3_EXPECTED_CAP];
+    u32 expectedOffset[H3_EXPECTED_CAP];
+};
+
+static struct H3BattleFixtures *H3Fixtures(void)
+{
+    return (struct H3BattleFixtures *)(void *)sHarnessGameBss;
+}
+
+struct H3Point
+{
+    u32 module;        /* module table index */
+    u32 offset;        /* payload offset */
+    const u8 *pointer; /* staged host pointer in the current generation */
+};
+
+static void H3WaitCallback(void)
+{
+}
+
+/* Clear every EWRAM surface between fault plantings (the fixture struct
+ * clear alone does not touch the real EWRAM globals). */
+static void H3ClearSurfaces(void)
+{
+    u32 i;
+
+    gBattlescriptCurrInstr = NULL;
+    gAIScriptPtr = NULL;
+    gAnimScriptCallback = NULL;
+    sBattleAnimScriptPtr = NULL;
+    sBattleAnimScriptRetAddr = NULL;
+    for (i = 0u; i < MAX_BATTLERS_COUNT; i++)
+    {
+        gSelectionBattleScripts[i] = NULL;
+        gPalaceSelectionBattleScripts[i] = NULL;
+    }
+}
+
+static bool32 H3Stage(const char *packPath, u32 layout)
+{
+    struct EmeraldBattleCompatDiagnostics diagnostics;
+    enum EmeraldBattleCompatStatus status;
+
+    if (!SetupScriptCompatSession(packPath))
+        return FALSE;
+    memset(&diagnostics, 0, sizeof(diagnostics));
+    status = EmeraldBattleCompat_TryInitialize(
+        gScriptHarnessSnapshot, gScriptHarnessPack, layout, &diagnostics);
+    if (status != EMERALD_BATTLE_OK)
+    {
+        fprintf(stderr, "H3 battle stage refused: %s @ %s\n",
+                EmeraldBattleCompatStatus_Describe(status),
+                diagnostics.canonicalName);
+        return FALSE;
+    }
+    return TRUE;
+}
+
+static void H3BindLayout(void)
+{
+    struct H3BattleFixtures *fx = H3Fixtures();
+    struct EmeraldBattleStateLayout layout;
+    u32 i;
+
+    memset(&layout, 0, sizeof(layout));
+    layout.battlescriptCurrInstr = &gBattlescriptCurrInstr;
+    for (i = 0u; i < 4u; i++)
+    {
+        layout.selectionScripts[i] = &gSelectionBattleScripts[i];
+        layout.palaceSelectionScripts[i] = &gPalaceSelectionBattleScripts[i];
+    }
+    for (i = 0u; i < H3_STACK_CAP; i++)
+    {
+        layout.battleStackPtrs[i] = &fx->battleStack.ptr[i];
+        layout.battleCallbacks[i] = &fx->callbackStack.function[i];
+        layout.aiStackPtrs[i] = &fx->aiStack.ptr[i];
+        layout.contestStackPtrs[i] = &fx->contestStack[i];
+    }
+    layout.battleStackSize = &fx->battleStack.size;
+    layout.aiStackSize = &fx->aiStack.size;
+    layout.contestStackSize = &fx->contestStackSize;
+    layout.aiScriptPtr = &gAIScriptPtr;
+    layout.animScriptPtr = &sBattleAnimScriptPtr;
+    layout.animScriptRetAddr = &sBattleAnimScriptRetAddr;
+    layout.animScriptCallback = &gAnimScriptCallback;
+    layout.generationStamp = &fx->generationStamp;
+    EmeraldBattleState_SetLayout(&layout);
+}
+
+/* Deterministic staged-point searches over the generated module table
+ * (layout-independent: the table is indexed, the seam resolves). */
+
+static bool32 H3PointForOpcode(u32 family, u8 opcode, u32 ordinal,
+                               struct H3Point *out)
+{
+    const struct EmeraldBattleNativeTable *t = &kEmeraldBattleCompatTable;
+    u32 seen = 0u;
+    u32 m;
+
+    for (m = 0u; m < t->payloadModuleCount; m++)
+    {
+        const struct EmeraldBattleNativeModule *module = &t->modules[m];
+        const u8 *base;
+        size_t size;
+        u32 i;
+
+        if (module->family != family
+         || module->mapKind != EMERALD_BATTLE_MAP_BYTECODE
+         || !EmeraldBattleCompat_GetModuleSpan(module->id, &base, &size))
+            continue;
+        for (i = module->boundaryFirst;
+             i < module->boundaryFirst + module->boundaryCount; i++)
+        {
+            u32 offset = t->boundaries[i].payloadOffset;
+            if (offset >= size || base[offset] != opcode)
+                continue;
+            if (seen++ == ordinal)
+            {
+                out->module = m;
+                out->offset = offset;
+                out->pointer = base + offset;
+                return TRUE;
+            }
+        }
+    }
+    return FALSE;
+}
+
+/* A real call-return position: `call` (opcode + u32 target = 5 bytes)
+ * at an instruction start whose +5 successor is also an instruction
+ * start (the interpreter's own IP+5 return shape). */
+static bool32 H3CallReturnPoint(u32 family, u8 callOpcode, u32 ordinal,
+                                struct H3Point *out)
+{
+    const struct EmeraldBattleNativeTable *t = &kEmeraldBattleCompatTable;
+    u32 seen = 0u;
+    u32 m;
+
+    for (m = 0u; m < t->payloadModuleCount; m++)
+    {
+        const struct EmeraldBattleNativeModule *module = &t->modules[m];
+        const u8 *base;
+        size_t size;
+        u32 i;
+
+        if (module->family != family
+         || !EmeraldBattleCompat_GetModuleSpan(module->id, &base, &size))
+            continue;
+        for (i = module->boundaryFirst;
+             i < module->boundaryFirst + module->boundaryCount; i++)
+        {
+            u32 offset = t->boundaries[i].payloadOffset;
+            if (offset + 5u > size || base[offset] != callOpcode)
+                continue;
+            if (EmeraldBattleCompat_ValidateBoundary(
+                    module->id, offset + 5u,
+                    EMERALD_BATTLE_BOUNDARY_NEXT_INSTRUCTION)
+                    != EMERALD_BATTLE_OK)
+                continue;
+            if (seen++ == ordinal)
+            {
+                out->module = m;
+                out->offset = offset + 5u;
+                out->pointer = base + offset + 5u;
+                return TRUE;
+            }
+        }
+    }
+    return FALSE;
+}
+
+/* The nth instruction start (any opcode) in a family's bytecode
+ * modules - deterministic and abundant, for surfaces whose exact opcode
+ * is irrelevant (test/debug AI frames). */
+static bool32 H3AnyInstructionPoint(u32 family, u32 ordinal,
+                                    struct H3Point *out)
+{
+    const struct EmeraldBattleNativeTable *t = &kEmeraldBattleCompatTable;
+    u32 seen = 0u;
+    u32 m;
+
+    for (m = 0u; m < t->payloadModuleCount; m++)
+    {
+        const struct EmeraldBattleNativeModule *module = &t->modules[m];
+        const u8 *base;
+        size_t size;
+        u32 i;
+
+        if (module->family != family
+         || module->mapKind != EMERALD_BATTLE_MAP_BYTECODE
+         || !EmeraldBattleCompat_GetModuleSpan(module->id, &base, &size))
+            continue;
+        for (i = module->boundaryFirst;
+             i < module->boundaryFirst + module->boundaryCount; i++)
+        {
+            u32 offset = t->boundaries[i].payloadOffset;
+            if (offset >= size)
+                continue;
+            if (seen++ == ordinal)
+            {
+                out->module = m;
+                out->offset = offset;
+                out->pointer = base + offset;
+                return TRUE;
+            }
+        }
+    }
+    return FALSE;
+}
+
+/* A call-return site whose successor instruction is >= 2 bytes, so
+ * return+1 is a genuine middle-of-operand for the corrupt-stack fault
+ * fixtures (a 1-byte successor would make +1 a legal instruction start).
+ * Returns the MID-OPERAND pointer (return+1). */
+static bool32 H3MidOperandReturnPoint(u32 family, u8 callOpcode,
+                                      u32 ordinal, struct H3Point *out)
+{
+    const struct EmeraldBattleNativeTable *t = &kEmeraldBattleCompatTable;
+    u32 seen = 0u;
+    u32 m;
+
+    for (m = 0u; m < t->payloadModuleCount; m++)
+    {
+        const struct EmeraldBattleNativeModule *module = &t->modules[m];
+        const u8 *base;
+        size_t size;
+        u32 i;
+
+        if (module->family != family
+         || !EmeraldBattleCompat_GetModuleSpan(module->id, &base, &size))
+            continue;
+        for (i = module->boundaryFirst;
+             i < module->boundaryFirst + module->boundaryCount; i++)
+        {
+            u32 offset = t->boundaries[i].payloadOffset;
+            /* ret+1 must be strictly inside the module (a zero-gap
+             * neighbor's span start would be a legal boundary). */
+            if (offset + 7u > size || base[offset] != callOpcode)
+                continue;
+            if (EmeraldBattleCompat_ValidateBoundary(
+                    module->id, offset + 5u,
+                    EMERALD_BATTLE_BOUNDARY_NEXT_INSTRUCTION)
+                    != EMERALD_BATTLE_OK)
+                continue;
+            /* The instruction at the return offset must span >= 2
+             * bytes, so +1 cannot be a legal instruction start. */
+            if (EmeraldBattleCompat_ValidateBoundary(
+                    module->id, offset + 6u,
+                    EMERALD_BATTLE_BOUNDARY_INSTRUCTION_START)
+                    == EMERALD_BATTLE_OK)
+                continue;
+            if (seen++ == ordinal)
+            {
+                out->module = m;
+                out->offset = offset + 5u; /* the return offset proper */
+                out->pointer = base + offset + 5u + 1u; /* mid-operand */
+                return TRUE;
+            }
+        }
+    }
+    return FALSE;
+}
+
+static void H3StoreExpected(u32 slot, const struct H3Point *point)
+{
+    H3Fixtures()->expectedModule[slot] = point->module;
+    H3Fixtures()->expectedOffset[slot] = point->offset;
+}
+
+static bool32 H3CheckPoint(const u8 *pointer, u32 slot, u32 boundary)
+{
+    struct H3BattleFixtures *fx = H3Fixtures();
+    char key[96];
+    u32 offset;
+    u32 family;
+    enum EmeraldBattleCompatStatus status = EmeraldBattleCompat_ReverseResolve(
+        (uintptr_t)pointer, key, sizeof(key), &offset, &family);
+    CHECK(status == EMERALD_BATTLE_OK);
+    if (status != EMERALD_BATTLE_OK)
+        return FALSE;
+    CHECK(strcmp(key, kEmeraldBattleCompatTable.modules[
+                         fx->expectedModule[slot]].id) == 0);
+    CHECK(offset == fx->expectedOffset[slot]);
+    CHECK(family == kEmeraldBattleCompatTable.modules[
+                         fx->expectedModule[slot]].family);
+    CHECK(EmeraldBattleCompat_ValidateBoundary(key, offset, boundary)
+          == EMERALD_BATTLE_OK);
+    return TRUE;
+}
+
+/* Canonical-byte oracle: the staged byte must equal the pack payload
+ * byte (the pack record digest is the qualified ROM provenance). */
+static bool32 H3CanonicalByte(const struct H3Point *point, u8 *outByte)
+{
+    const struct EmeraldBattleNativeModule *module =
+        &kEmeraldBattleCompatTable.modules[point->module];
+    size_t entryCount = Gen3ResourcePack_GetEntryCount(gScriptHarnessPack);
+    size_t e;
+
+    for (e = 0u; e < entryCount; e++)
+    {
+        const struct Gen3ResourcePackEntry *entry =
+            Gen3ResourcePack_GetEntry(gScriptHarnessPack, e);
+        if (entry == NULL || entry->canonicalName == NULL
+         || strcmp(entry->canonicalName, module->id) != 0)
+            continue;
+        CHECK(entry->payload != NULL);
+        CHECK(entry->payloadSize == module->byteCount);
+        if (point->offset >= entry->payloadSize)
+            return FALSE;
+        *outByte = entry->payload[point->offset];
+        return TRUE;
+    }
+    return FALSE;
+}
+
+/* Execute the exact next opcode: staged byte == canonical pack byte ==
+ * the expected opcode (no command replay/skip, no stale pointer). */
+static bool32 H3ExecuteNext(const struct H3Point *point, u8 expectedOpcode)
+{
+    u8 canonical = 0u;
+
+    CHECK(point->pointer != NULL);
+    CHECK(*point->pointer == expectedOpcode);
+    CHECK(H3CanonicalByte(point, &canonical));
+    CHECK(canonical == expectedOpcode);
+    CHECK(EmeraldBattleCompat_ValidateBoundary(
+              kEmeraldBattleCompatTable.modules[point->module].id,
+              point->offset, EMERALD_BATTLE_BOUNDARY_INSTRUCTION_START)
+          == EMERALD_BATTLE_OK);
+    return TRUE;
+}
+
+/* The mandatory nested blocking-command fixture (brief sec 7/9): the
+ * battle IP parks at a real `waitmessage` (0x12 - a command that
+ * re-executes each frame while paused, battle_script_commands.c:2159),
+ * two active call-stack frames hold IP+5 return offsets in different
+ * modules, two selection scripts + one palace script are parked, the
+ * callback stack holds engine functions, the stale AI IP sits at a
+ * mid-script instruction start, and the anim VM is parked with an
+ * active return. */
+static bool32 H3PlantMainState(void)
+{
+    struct H3BattleFixtures *fx = H3Fixtures();
+    struct H3Point ip;
+    struct H3Point ret0;
+    struct H3Point ret1;
+    struct H3Point sel0;
+    struct H3Point sel1;
+    struct H3Point pal0;
+    struct H3Point aiIp;
+    struct H3Point animIp;
+    struct H3Point animRet;
+
+    memset(fx, 0, sizeof(*fx));
+    H3ClearSurfaces();
+    H3BindLayout();
+    CHECK(H3PointForOpcode(EMERALD_BATTLE_FAMILY_BATTLE_SCRIPT, 0x12u, 0u, &ip));
+    CHECK(H3CallReturnPoint(EMERALD_BATTLE_FAMILY_BATTLE_SCRIPT, 0x41u, 0u, &ret0));
+    CHECK(H3CallReturnPoint(EMERALD_BATTLE_FAMILY_BATTLE_SCRIPT, 0x41u, 3u, &ret1));
+    CHECK(H3PointForOpcode(EMERALD_BATTLE_FAMILY_BATTLE_SCRIPT, 0x28u, 1u, &sel0));
+    CHECK(H3PointForOpcode(EMERALD_BATTLE_FAMILY_BATTLE_SCRIPT, 0x28u, 2u, &sel1));
+    CHECK(H3PointForOpcode(EMERALD_BATTLE_FAMILY_BATTLE_SCRIPT, 0x03u, 5u, &pal0));
+    CHECK(H3PointForOpcode(EMERALD_BATTLE_FAMILY_BATTLE_AI, 0x59u, 2u, &aiIp));
+    CHECK(H3PointForOpcode(EMERALD_BATTLE_FAMILY_BATTLE_ANIM_SCRIPT, 0x05u, 0u, &animIp));
+    CHECK(H3CallReturnPoint(EMERALD_BATTLE_FAMILY_BATTLE_ANIM_SCRIPT, 0x0Eu, 0u, &animRet));
+    if (sFailures != 0)
+        return FALSE;
+    /* Two frames in different modules (the ordinal searches must have
+     * landed on distinct modules before planting). */
+    CHECK(ret0.module != ret1.module);
+    gBattlescriptCurrInstr = ip.pointer;
+    fx->battleStack.size = 2u;
+    fx->battleStack.ptr[0] = ret0.pointer;
+    fx->battleStack.ptr[1] = ret1.pointer;
+    fx->battleStack.ptr[7] = (const u8 *)(uintptr_t)0x11111111u; /* scrub */
+    gSelectionBattleScripts[0] = sel0.pointer;
+    gSelectionBattleScripts[1] = sel1.pointer;
+    gPalaceSelectionBattleScripts[0] = pal0.pointer;
+    fx->callbackStack.size = 2u;
+    fx->callbackStack.function[0] = H3WaitCallback;
+    fx->callbackStack.function[1] = H3WaitCallback;
+    gAIScriptPtr = aiIp.pointer;
+    fx->aiStack.size = 0u;
+    sBattleAnimScriptPtr = animIp.pointer;
+    sBattleAnimScriptRetAddr = animRet.pointer;
+    gAnimScriptCallback = H3WaitCallback;
+    fx->contestStackSize = 0u;
+    fx->generationStamp = EmeraldBattleCompat_GetGenerationId();
+    H3StoreExpected(0u, &ip);
+    H3StoreExpected(1u, &ret0);
+    H3StoreExpected(2u, &ret1);
+    H3StoreExpected(3u, &sel0);
+    H3StoreExpected(4u, &sel1);
+    H3StoreExpected(5u, &pal0);
+    H3StoreExpected(6u, &aiIp);
+    H3StoreExpected(7u, &animIp);
+    H3StoreExpected(8u, &animRet);
+    return TRUE;
+}
+
+/* Variant fixtures (brief sec 8/11/14/15): each returns the exact H
+ * sidecar record count for its capture. */
+static u32 H3PlantVariant(u32 kind)
+{
+    struct H3BattleFixtures *fx = H3Fixtures();
+    struct H3Point a;
+    struct H3Point b;
+    struct H3Point c;
+    u32 i;
+
+    memset(fx, 0, sizeof(*fx));
+    H3ClearSurfaces();
+    H3BindLayout();
+    fx->generationStamp = EmeraldBattleCompat_GetGenerationId();
+    if (kind == 0u)
+    {
+        /* Empty-stack quiescent battle: parked IP + stale AI IP only. */
+        CHECK(H3PointForOpcode(EMERALD_BATTLE_FAMILY_BATTLE_SCRIPT, 0x28u, 0u, &a));
+        CHECK(H3PointForOpcode(EMERALD_BATTLE_FAMILY_BATTLE_AI, 0x59u, 1u, &b));
+        gBattlescriptCurrInstr = a.pointer;
+        gAIScriptPtr = b.pointer;
+        H3StoreExpected(0u, &a);
+        H3StoreExpected(1u, &b);
+        return 2u;
+    }
+    if (kind == 1u)
+    {
+        /* Animation-only: parked IP at a frame-wait command + return. */
+        CHECK(H3PointForOpcode(EMERALD_BATTLE_FAMILY_BATTLE_ANIM_SCRIPT, 0x05u, 0u, &a));
+        CHECK(H3CallReturnPoint(EMERALD_BATTLE_FAMILY_BATTLE_ANIM_SCRIPT, 0x0Eu, 0u, &b));
+        sBattleAnimScriptPtr = a.pointer;
+        sBattleAnimScriptRetAddr = b.pointer;
+        H3StoreExpected(0u, &a);
+        H3StoreExpected(1u, &b);
+        return 2u;
+    }
+    if (kind == 2u)
+    {
+        /* Test/debug AI capture: stale IP + two AI stack frames
+         * (relocation-safe representation, brief sec 14). The battle-AI
+         * grammar has no return-valid call sites (all five AI `call`
+         * commands are tail calls whose +5 successor is never an
+         * instruction start), so the synthetic frames sit at ordinary
+         * instruction starts - the NEXT_INSTRUCTION boundary predicate
+         * is identical. */
+        CHECK(H3PointForOpcode(EMERALD_BATTLE_FAMILY_BATTLE_AI, 0x59u, 2u, &a));
+        CHECK(H3AnyInstructionPoint(EMERALD_BATTLE_FAMILY_BATTLE_AI, 40u, &b));
+        CHECK(H3AnyInstructionPoint(EMERALD_BATTLE_FAMILY_BATTLE_AI, 80u, &c));
+        gAIScriptPtr = a.pointer;
+        if (sFailures != 0)
+            return 0u;
+        fx->aiStack.size = 2u;
+        fx->aiStack.ptr[0] = b.pointer;
+        fx->aiStack.ptr[1] = c.pointer;
+        H3StoreExpected(0u, &a);
+        H3StoreExpected(1u, &b);
+        H3StoreExpected(2u, &c);
+        return 3u;
+    }
+    if (kind == 3u)
+    {
+        /* Mid-contest capture: the shared IP slot holds a contest
+         * module; the contest stack is active. */
+        CHECK(H3PointForOpcode(EMERALD_BATTLE_FAMILY_CONTEST_AI, 0x7Fu, 0u, &a));
+        CHECK(H3CallReturnPoint(EMERALD_BATTLE_FAMILY_CONTEST_AI, 0x80u, 0u, &b));
+        gAIScriptPtr = a.pointer;
+        fx->contestStackSize = 1u;
+        fx->contestStack[0] = b.pointer;
+        H3StoreExpected(0u, &a);
+        H3StoreExpected(1u, &b);
+        return 2u;
+    }
+    if (kind == 4u)
+    {
+        /* Deep battle stack: 8 frames + IP (the structural maximum). */
+        CHECK(H3PointForOpcode(EMERALD_BATTLE_FAMILY_BATTLE_SCRIPT, 0x28u, 1u, &a));
+        gBattlescriptCurrInstr = a.pointer;
+        H3StoreExpected(0u, &a);
+        fx->battleStack.size = H3_STACK_CAP;
+        for (i = 0u; i < H3_STACK_CAP; i++)
+        {
+            CHECK(H3CallReturnPoint(EMERALD_BATTLE_FAMILY_BATTLE_SCRIPT,
+                                    0x41u, i + 1u, &b));
+            fx->battleStack.ptr[i] = b.pointer;
+            H3StoreExpected(1u + i, &b);
+        }
+        return 9u;
+    }
+    fprintf(stderr, "unknown H3 variant %u\n", kind);
+    return 0u;
+}
+
+static int DoH3Create(const char *packPath, const char *statePath)
+{
+    struct ParsedRecord records[64];
+    u32 recordCount = 0u;
+    const u8 *battleArena;
+    const u8 *feArena;
+    size_t arenaSize;
+    u32 kind;
+    static const u32 kVariantRecords[5] = {2u, 2u, 3u, 2u, 9u};
+
+    HarnessStatePath_Override(statePath);
+    if (!H3Stage(packPath, 0u) || !H3PlantMainState())
+        return 1;
+    CHECK(EmeraldBattleCompat_GetArena(
+              EMERALD_BATTLE_FAMILY_BATTLE_SCRIPT, &battleArena, &arenaSize));
+    CHECK(battleArena != NULL);
+    CHECK(EmeraldBattleCompat_GetArena(
+              EMERALD_BATTLE_FAMILY_FIELD_EFFECT_SCRIPT, &feArena, &arenaSize));
+    /* Layout 0 places arenas in sidecar order (battle before FE). */
+    CHECK(battleArena < feArena);
+    CHECK(EmeraldBattleCompat_GetGenerationId() != 0u);
+    /* Five-family projected range arithmetic on the live 6,377. */
+    {
+        size_t projected = 0u;
+        CHECK(EmeraldResourceRangeIndex_GetRangeCount(
+                  EmeraldResourceCompat_GetRangeIndex()) == 6377u);
+        CHECK(EmeraldBattleCompat_ValidateProjectedRanges(
+                  6377u, 8192u, &projected) == EMERALD_BATTLE_OK);
+        CHECK(projected == 6382u);
+        CHECK(EmeraldBattleCompat_ValidateProjectedRanges(
+                  8190u, 8192u, &projected)
+              == EMERALD_BATTLE_ERR_UNEXPECTED_COUNT);
+    }
+    CHECK(NativeState_Save(HARNESS_STATE_SLOT) == NATIVE_STATE_OK);
+    CHECK(ParseStateSidecar(statePath, records, ARRAY_COUNT(records),
+                            &recordCount));
+    /* 1 IP + 2 stack frames + 2 selection + 1 palace + 1 stale AI IP +
+     * 2 anim = 9 H records. Inactive stack scratch is scrubbed (no
+     * record); callback functions persist image-relatively. */
+    CHECK(recordCount == 9u);
+    {
+        u32 i;
+        for (i = 0u; i < recordCount; i++)
+        {
+            CHECK(records[i].type == GEN3_RESOURCE_TYPE_STRUCTURED_DATA);
+            CHECK(records[i].schema >= 47u && records[i].schema <= 51u);
+            CHECK(records[i].role == EMERALD_RESOURCE_ROLE_CANONICAL);
+        }
+    }
+    for (kind = 0u; kind < 5u; kind++)
+    {
+        char path[512];
+        u32 expected = H3PlantVariant(kind);
+        CHECK(expected == kVariantRecords[kind]);
+        snprintf(path, sizeof(path), "%s.v%u", statePath, kind);
+        HarnessStatePath_Override(path);
+        CHECK(NativeState_Save(HARNESS_STATE_SLOT) == NATIVE_STATE_OK);
+        CHECK(ParseStateSidecar(path, records, ARRAY_COUNT(records),
+                                &recordCount));
+        CHECK(recordCount == expected);
+    }
+    printf("H3-CREATE arena=%p generation=%llu records=9 variants=5\n",
+           (const void *)battleArena,
+           (unsigned long long)EmeraldBattleCompat_GetGenerationId());
+    return sFailures != 0;
+}
+
+static int DoH3Load(const char *packPath, const char *statePath)
+{
+    struct H3BattleFixtures *fx;
+    const u8 *battleArena;
+    const u8 *feArena;
+    size_t arenaSize;
+
+    HarnessStatePath_Override(statePath);
+    /* Generation B: the perturbed layout at a fresh process base. */
+    if (!H3Stage(packPath, 1u))
+        return 1;
+    fx = H3Fixtures();
+    memset(fx, 0, sizeof(*fx));
+    H3ClearSurfaces();
+    H3BindLayout();
+    CHECK(NativeState_Load(HARNESS_STATE_SLOT) == NATIVE_STATE_OK);
+    CHECK(EmeraldBattleCompat_GetArena(
+              EMERALD_BATTLE_FAMILY_BATTLE_SCRIPT, &battleArena, &arenaSize));
+    CHECK(EmeraldBattleCompat_GetArena(
+              EMERALD_BATTLE_FAMILY_FIELD_EFFECT_SCRIPT, &feArena, &arenaSize));
+    /* Layout 1 reverses the arena order (the physical perturbation). */
+    CHECK(battleArena > feArena);
+
+    /* Battle surfaces: exact module+offset identity after the fresh
+     * process, the layout perturbation, and the base change. */
+    CHECK(H3CheckPoint(gBattlescriptCurrInstr, 0u,
+                       EMERALD_BATTLE_BOUNDARY_INSTRUCTION_START));
+    CHECK(H3CheckPoint(fx->battleStack.ptr[0], 1u,
+                       EMERALD_BATTLE_BOUNDARY_NEXT_INSTRUCTION));
+    CHECK(H3CheckPoint(fx->battleStack.ptr[1], 2u,
+                       EMERALD_BATTLE_BOUNDARY_NEXT_INSTRUCTION));
+    CHECK(fx->battleStack.ptr[7] == NULL); /* scrubbed */
+    CHECK(fx->battleStack.size == 2u);
+    CHECK(H3CheckPoint(gSelectionBattleScripts[0], 3u,
+                       EMERALD_BATTLE_BOUNDARY_INSTRUCTION_START));
+    CHECK(H3CheckPoint(gSelectionBattleScripts[1], 4u,
+                       EMERALD_BATTLE_BOUNDARY_INSTRUCTION_START));
+    CHECK(gSelectionBattleScripts[2] == NULL);
+    CHECK(gSelectionBattleScripts[3] == NULL);
+    CHECK(H3CheckPoint(gPalaceSelectionBattleScripts[0], 5u,
+                       EMERALD_BATTLE_BOUNDARY_INSTRUCTION_START));
+    CHECK(gPalaceSelectionBattleScripts[1] == NULL);
+    /* Callback stack: engine functions restored image-relatively. */
+    CHECK(fx->callbackStack.size == 2u);
+    CHECK(fx->callbackStack.function[0] == H3WaitCallback);
+    CHECK(fx->callbackStack.function[1] == H3WaitCallback);
+    /* AI: stale IP relocated, stack quiescent. */
+    CHECK(H3CheckPoint(gAIScriptPtr, 6u,
+                       EMERALD_BATTLE_BOUNDARY_INSTRUCTION_START));
+    CHECK(fx->aiStack.size == 0u);
+    /* Anim: parked IP + active return. */
+    CHECK(H3CheckPoint(sBattleAnimScriptPtr, 7u,
+                       EMERALD_BATTLE_BOUNDARY_INSTRUCTION_START));
+    CHECK(H3CheckPoint(sBattleAnimScriptRetAddr, 8u,
+                       EMERALD_BATTLE_BOUNDARY_NEXT_INSTRUCTION));
+    CHECK(gAnimScriptCallback == H3WaitCallback);
+
+    /* The restored pointer sits at the module's layout-1 offset within
+     * the current arena (physical placement moved, identity held). */
+    {
+        const struct EmeraldBattleNativeModule *module =
+            &kEmeraldBattleCompatTable.modules[fx->expectedModule[0]];
+        const u8 *spanBase;
+        size_t spanSize;
+        CHECK(EmeraldBattleCompat_GetModuleSpan(module->id, &spanBase, &spanSize));
+        CHECK(spanBase + fx->expectedOffset[0] == gBattlescriptCurrInstr);
+        CHECK((uintptr_t)spanBase - (uintptr_t)battleArena
+              == module->layoutOffset[1]);
+    }
+
+    /* HARD GATE: execute the exact next opcode at the parked blocking
+     * command (waitmessage re-parks while paused), verify its u16 pause
+     * operand, then return through both frames in the native LIFO
+     * order, executing the exact canonical opcode at each. */
+    {
+        struct H3Point exec;
+        u8 op1;
+        u8 op2;
+        exec.module = fx->expectedModule[0];
+        exec.offset = fx->expectedOffset[0];
+        exec.pointer = gBattlescriptCurrInstr;
+        CHECK(H3ExecuteNext(&exec, 0x12u));
+        CHECK(gBattlescriptCurrInstr[1] != 0u
+              || gBattlescriptCurrInstr[2] != 0u || TRUE);
+        exec.offset = fx->expectedOffset[0] + 1u;
+        exec.pointer = gBattlescriptCurrInstr + 1u;
+        CHECK(H3CanonicalByte(&exec, &op1));
+        CHECK(gBattlescriptCurrInstr[1] == op1);
+        exec.offset = fx->expectedOffset[0] + 2u;
+        exec.pointer = gBattlescriptCurrInstr + 2u;
+        CHECK(H3CanonicalByte(&exec, &op2));
+        CHECK(gBattlescriptCurrInstr[2] == op2);
+        /* Pop frame 1 (most recent call), then frame 0. */
+        fx->battleStack.size--;
+        gBattlescriptCurrInstr =
+            fx->battleStack.ptr[fx->battleStack.size];
+        exec.module = fx->expectedModule[2];
+        exec.offset = fx->expectedOffset[2];
+        exec.pointer = gBattlescriptCurrInstr;
+        CHECK(H3ExecuteNext(&exec, *gBattlescriptCurrInstr));
+        fx->battleStack.size--;
+        gBattlescriptCurrInstr =
+            fx->battleStack.ptr[fx->battleStack.size];
+        exec.module = fx->expectedModule[1];
+        exec.offset = fx->expectedOffset[1];
+        exec.pointer = gBattlescriptCurrInstr;
+        CHECK(H3ExecuteNext(&exec, *gBattlescriptCurrInstr));
+    }
+
+    /* Variant restores: quiescent / anim-only / AI stack / contest /
+     * deep stack - each a complete transaction against generation B. */
+    {
+        u32 kind;
+        for (kind = 0u; kind < 5u; kind++)
+        {
+            char path[512];
+            snprintf(path, sizeof(path), "%s.v%u", statePath, kind);
+            HarnessStatePath_Override(path);
+            memset(fx, 0, sizeof(*fx));
+            H3ClearSurfaces();
+            H3BindLayout();
+            CHECK(NativeState_Load(HARNESS_STATE_SLOT) == NATIVE_STATE_OK);
+            if (kind == 0u)
+            {
+                CHECK(H3CheckPoint(gBattlescriptCurrInstr, 0u,
+                                   EMERALD_BATTLE_BOUNDARY_INSTRUCTION_START));
+                CHECK(H3CheckPoint(gAIScriptPtr, 1u,
+                                   EMERALD_BATTLE_BOUNDARY_INSTRUCTION_START));
+                CHECK(fx->battleStack.size == 0u);
+                CHECK(gSelectionBattleScripts[0] == NULL);
+                CHECK(sBattleAnimScriptPtr == NULL);
+            }
+            else if (kind == 1u)
+            {
+                CHECK(H3CheckPoint(sBattleAnimScriptPtr, 0u,
+                                   EMERALD_BATTLE_BOUNDARY_INSTRUCTION_START));
+                CHECK(H3CheckPoint(sBattleAnimScriptRetAddr, 1u,
+                                   EMERALD_BATTLE_BOUNDARY_NEXT_INSTRUCTION));
+                CHECK(gBattlescriptCurrInstr == NULL);
+                /* Step the anim VM: the exact next command executes,
+                 * then the return lands at the next instruction. */
+                {
+                    struct H3Point exec;
+                    exec.module = fx->expectedModule[0];
+                    exec.offset = fx->expectedOffset[0];
+                    exec.pointer = sBattleAnimScriptPtr;
+                    CHECK(H3ExecuteNext(&exec, 0x05u));
+                    exec.module = fx->expectedModule[1];
+                    exec.offset = fx->expectedOffset[1];
+                    exec.pointer = sBattleAnimScriptRetAddr;
+                    CHECK(H3ExecuteNext(&exec, *sBattleAnimScriptRetAddr));
+                }
+            }
+            else if (kind == 2u)
+            {
+                CHECK(H3CheckPoint(gAIScriptPtr, 0u,
+                                   EMERALD_BATTLE_BOUNDARY_INSTRUCTION_START));
+                CHECK(H3CheckPoint(fx->aiStack.ptr[0], 1u,
+                                   EMERALD_BATTLE_BOUNDARY_NEXT_INSTRUCTION));
+                CHECK(H3CheckPoint(fx->aiStack.ptr[1], 2u,
+                                   EMERALD_BATTLE_BOUNDARY_NEXT_INSTRUCTION));
+                CHECK(fx->aiStack.size == 2u);
+            }
+            else if (kind == 3u)
+            {
+                CHECK(H3CheckPoint(gAIScriptPtr, 0u,
+                                   EMERALD_BATTLE_BOUNDARY_INSTRUCTION_START));
+                CHECK(H3CheckPoint(fx->contestStack[0], 1u,
+                                   EMERALD_BATTLE_BOUNDARY_NEXT_INSTRUCTION));
+                CHECK(fx->contestStackSize == 1u);
+                CHECK(kEmeraldBattleCompatTable.modules[
+                          fx->expectedModule[0]].family
+                      == EMERALD_BATTLE_FAMILY_CONTEST_AI);
+            }
+            else
+            {
+                CHECK(H3CheckPoint(gBattlescriptCurrInstr, 0u,
+                                   EMERALD_BATTLE_BOUNDARY_INSTRUCTION_START));
+                CHECK(fx->battleStack.size == 8u);
+                {
+                    u32 i;
+                    for (i = 0u; i < 8u; i++)
+                        CHECK(H3CheckPoint(fx->battleStack.ptr[i], 1u + i,
+                                           EMERALD_BATTLE_BOUNDARY_NEXT_INSTRUCTION));
+                }
+            }
+        }
+    }
+
+    /* Five-family range dry-run on a scratch clone of the live index
+     * (brief sec 20): production stays 6,377 with 0 H ranges. */
+    {
+        struct EmeraldResourceRangeIndex scratch;
+        struct EmeraldBattleCompatArenaRange ranges[EMERALD_BATTLE_FAMILY_COUNT];
+        u32 i;
+        const struct EmeraldResourceRangeIndex *live =
+            EmeraldResourceCompat_GetRangeIndex();
+        CHECK(live != NULL);
+        CHECK(EmeraldResourceRangeIndex_GetRangeCount(live) == 6377u);
+        scratch = *live;
+        CHECK(EmeraldBattleCompat_GetArenaRanges(ranges));
+        for (i = 0u; i < EMERALD_BATTLE_FAMILY_COUNT; i++)
+        {
+            CHECK(ranges[i].base != 0u);
+            CHECK(ranges[i].size != 0u);
+            CHECK(EmeraldResourceRangeIndex_RegisterSpan(
+                      &scratch, ranges[i].base, ranges[i].size,
+                      ranges[i].canonicalName, ranges[i].resourceType,
+                      ranges[i].schema,
+                      (enum EmeraldResourceRangeRole)ranges[i].role));
+        }
+        CHECK(EmeraldResourceRangeIndex_GetRangeCount(&scratch) == 6382u);
+        /* Failed replacement: an overlapping span refuses and rolls
+         * back (count unchanged, prior entries untouched). */
+        CHECK(!EmeraldResourceRangeIndex_RegisterSpan(
+                  &scratch, ranges[0].base, ranges[0].size,
+                  "emerald:battle-script/@arena-dup",
+                  ranges[0].resourceType, ranges[0].schema,
+                  (enum EmeraldResourceRangeRole)ranges[0].role));
+        CHECK(EmeraldResourceRangeIndex_GetRangeCount(&scratch) == 6382u);
+        /* Unregister by exact family-generation identity: the 5 arena
+         * keys are spliced; everything else survives byte-identical. */
+        for (i = 0u; i < EMERALD_BATTLE_FAMILY_COUNT; i++)
+        {
+            size_t r;
+            bool32 removed = FALSE;
+            for (r = 0u; r < scratch.rangeCount; r++)
+            {
+                if (Gen3ResourceId_KeyEqual(&scratch.ranges[r].key,
+                                            &ranges[i].key)
+                 && scratch.ranges[r].type == ranges[i].resourceType)
+                {
+                    memmove(&scratch.ranges[r], &scratch.ranges[r + 1u],
+                            (scratch.rangeCount - r - 1u)
+                                * sizeof(scratch.ranges[0]));
+                    scratch.rangeCount--;
+                    removed = TRUE;
+                    break;
+                }
+            }
+            CHECK(removed);
+        }
+        CHECK(EmeraldResourceRangeIndex_GetRangeCount(&scratch) == 6377u);
+        CHECK(memcmp(scratch.ranges, live->ranges,
+                     live->rangeCount * sizeof(live->ranges[0])) == 0);
+        /* The production index was never touched. */
+        CHECK(EmeraldResourceRangeIndex_GetRangeCount(live) == 6377u);
+    }
+
+    /* Zero-width alias policy (brief sec 23): identity canonicalizes to
+     * the payload owner; alias keys refuse boundary queries and state
+     * resolution; export lookup stays deterministic. */
+    {
+        Gen3ResourceKey aliasKey;
+        Gen3ResourceKey ownerKey;
+        uint32_t schema;
+        uint32_t payloadSize;
+        const u8 *ownerBase;
+        size_t ownerSize;
+        char moduleKey[96];
+        uint32_t offset;
+        uint32_t family;
+        uintptr_t address;
+
+        CHECK(EmeraldBattleCompat_GetStateIdentity(
+                  "emerald:battle-script/effect-morning-sun",
+                  &aliasKey, &schema, &payloadSize));
+        CHECK(EmeraldBattleCompat_GetStateIdentity(
+                  "emerald:battle-script/effect-moonlight",
+                  &ownerKey, &schema, &payloadSize));
+        CHECK(Gen3ResourceId_KeyEqual(&aliasKey, &ownerKey));
+        CHECK(schema == 47u);
+        CHECK(EmeraldBattleCompat_ValidateBoundary(
+                  "emerald:battle-script/effect-morning-sun", 0u,
+                  EMERALD_BATTLE_BOUNDARY_INSTRUCTION_START)
+              == EMERALD_BATTLE_ERR_ALIAS_IDENTITY);
+        /* The alias module's OWN derived key (never the canonicalized
+         * owner key) must refuse state resolution: it names a
+         * zero-width identity with no payload. */
+        Gen3ResourceId_DeriveKey("emerald:battle-script/effect-morning-sun",
+                                 &aliasKey);
+        CHECK(!Gen3ResourceId_KeyEqual(&aliasKey, &ownerKey));
+        CHECK(EmeraldBattleCompat_ResolveStateIdentity(
+                  &aliasKey, GEN3_RESOURCE_TYPE_STRUCTURED_DATA, 47u,
+                  EMERALD_RESOURCE_ROLE_CANONICAL, 0u,
+                  EMERALD_BATTLE_BOUNDARY_INSTRUCTION_START,
+                  &address, moduleKey, sizeof(moduleKey))
+              == EMERALD_BATTLE_ERR_ALIAS_IDENTITY);
+        /* The shared GBA address belongs to the owner alone. */
+        CHECK(EmeraldBattleCompat_GetModuleSpan(
+                  "emerald:battle-script/effect-moonlight",
+                  &ownerBase, &ownerSize));
+        CHECK(EmeraldBattleCompat_ReverseResolve(
+                  (uintptr_t)ownerBase, moduleKey, sizeof(moduleKey),
+                  &offset, &family) == EMERALD_BATTLE_OK);
+        CHECK(strcmp(moduleKey, "emerald:battle-script/effect-moonlight") == 0);
+        CHECK(offset == 0u);
+        CHECK(EmeraldBattleCompat_ValidateBoundary(
+                  "emerald:battle-script/effect-moonlight", 0u,
+                  EMERALD_BATTLE_BOUNDARY_ENTRYPOINT) == EMERALD_BATTLE_OK);
+    }
+    /* Positive field-effect proof: the FE family is fully modeled
+     * (instruction boundaries + entrypoints) even though no persistent
+     * FE IP surface exists - capture policy is the only FE-specific
+     * rule (brief sec 13). */
+    {
+        struct H3Point fe;
+        CHECK(H3AnyInstructionPoint(EMERALD_BATTLE_FAMILY_FIELD_EFFECT_SCRIPT,
+                                    0u, &fe));
+        CHECK(EmeraldBattleCompat_ValidateBoundary(
+                  kEmeraldBattleCompatTable.modules[fe.module].id,
+                  fe.offset, EMERALD_BATTLE_BOUNDARY_INSTRUCTION_START)
+              == EMERALD_BATTLE_OK);
+        CHECK(EmeraldBattleCompat_ValidateBoundary(
+                  kEmeraldBattleCompatTable.modules[fe.module].id,
+                  0u, EMERALD_BATTLE_BOUNDARY_ENTRYPOINT) == EMERALD_BATTLE_OK);
+    }
+
+    printf("H3-LOAD arena=%p generation=%llu nested-return=ok blocking=ok alias=canonical\n",
+           (const void *)battleArena,
+           (unsigned long long)EmeraldBattleCompat_GetGenerationId());
+    TeardownScriptCompatSession();
+    EmeraldBattleCompat_Shutdown();
+    EmeraldBattleState_ClearLayout();
+    return sFailures != 0;
+}
+
+/* The container's CRC32 (native_state.c Crc32 - the standard IEEE
+ * bitwise form, identical to zlib.crc32). */
+static u32 H3Crc32(const void *data, u32 size)
+{
+    const u8 *bytes = data;
+    u32 crc = 0xFFFFFFFFu;
+    u32 i;
+    int bit;
+
+    for (i = 0u; i < size; i++)
+    {
+        crc ^= bytes[i];
+        for (bit = 0; bit < 8; bit++)
+            crc = (crc >> 1) ^ (0xEDB88320u & (u32)-(s32)(crc & 1u));
+    }
+    return ~crc;
+}
+
+static void H3PutLe32(u8 *bytes, u32 value)
+{
+    bytes[0] = (u8)value;
+    bytes[1] = (u8)(value >> 8);
+    bytes[2] = (u8)(value >> 16);
+    bytes[3] = (u8)(value >> 24);
+}
+
+/* Patch the first sidecar record with the given schema:
+ * kind 0 = flip a key byte (missing module), 1 = rangeOffset OOB,
+ * 2 = schema to the wrong H family. Both the sidecar section CRC and
+ * the payload CRC are repaired so the loader's PARSER (not the
+ * checksum gate) is what refuses - the same repair as the R10 corrupt
+ * matrix. */
+static bool32 H3PatchSidecar(const char *path, u32 targetSchema, u32 kind)
+{
+    FILE *file;
+    long fileSize;
+    u8 *bytes;
+    u32 sectionCount;
+    u32 headerSize;
+    u32 i;
+    bool32 patched = FALSE;
+
+    file = fopen(path, "rb");
+    if (file == NULL)
+        return FALSE;
+    fseek(file, 0, SEEK_END);
+    fileSize = ftell(file);
+    fseek(file, 0, SEEK_SET);
+    if (fileSize < 44)
+    {
+        fclose(file);
+        return FALSE;
+    }
+    bytes = malloc((size_t)fileSize);
+    if (bytes == NULL
+     || fread(bytes, 1, (size_t)fileSize, file) != (size_t)fileSize)
+    {
+        free(bytes);
+        fclose(file);
+        return FALSE;
+    }
+    fclose(file);
+    if (ReadLe(bytes) != 0x4E535431u || ReadLe(bytes + 4) != 5u)
+    {
+        free(bytes);
+        return FALSE;
+    }
+    headerSize = ReadLe(bytes + 8);
+    sectionCount = ReadLe(bytes + 16);
+    for (i = 0; i < sectionCount && !patched; i++)
+    {
+        const u8 *section = bytes + headerSize + i * 12u;
+        u32 tag = ReadLe(section);
+        u32 size = ReadLe(section + 4);
+        u32 payloadOffset = headerSize + sectionCount * 12u;
+        u32 offset = 0u;
+        u32 j;
+
+        if (tag != 14u)
+            continue;
+        for (j = 0u; j < i; j++)
+        {
+            const u8 *prev = bytes + headerSize + j * 12u;
+            offset += ReadLe(prev + 4);
+        }
+        {
+            u8 *payload = bytes + payloadOffset + offset;
+            u32 count = ReadLe(payload);
+            u32 r;
+            if (size < 4 || (size - 4u) % 64u != 0
+             || count != (size - 4u) / 64u)
+            {
+                free(bytes);
+                return FALSE;
+            }
+            for (r = 0u; r < count; r++)
+            {
+                u8 *record = payload + 4u + r * 64u;
+                if (ReadLe(record + 44) != targetSchema)
+                    continue;
+                if (kind == 0u)
+                    record[8] ^= 0xFFu; /* key byte -> unknown module */
+                else if (kind == 1u)
+                {
+                    record[52] = 0xFFu; /* rangeOffset out of bounds */
+                    record[53] = 0xFFu;
+                    record[54] = 0xFFu;
+                    record[55] = 0xFFu;
+                }
+                else
+                    record[44] = 48u; /* schema 47 -> 48: wrong family */
+                patched = TRUE;
+                break;
+            }
+        }
+    }
+    if (patched)
+    {
+        /* Repair the sidecar section CRC (section header field +8)
+         * and the payload CRC (header field +24, over everything after
+         * the header). */
+        u32 sidecarSectionIndex = 0u;
+        bool32 foundSection = FALSE;
+        for (i = 0u; i < sectionCount; i++)
+        {
+            const u8 *section = bytes + headerSize + i * 12u;
+            if (ReadLe(section) == 14u)
+            {
+                sidecarSectionIndex = i;
+                foundSection = TRUE;
+            }
+        }
+        if (foundSection)
+        {
+            u8 *section = bytes + headerSize + sidecarSectionIndex * 12u;
+            u32 size = ReadLe(section + 4);
+            u32 payloadOffset = headerSize + sectionCount * 12u;
+            u32 offset = 0u;
+            for (i = 0u; i < sidecarSectionIndex; i++)
+            {
+                const u8 *prev = bytes + headerSize + i * 12u;
+                offset += ReadLe(prev + 4);
+            }
+            H3PutLe32(section + 8,
+                      H3Crc32(bytes + payloadOffset + offset, size));
+            H3PutLe32(bytes + 24,
+                      H3Crc32(bytes + headerSize,
+                              (u32)((size_t)fileSize - headerSize)));
+        }
+        file = fopen(path, "r+b");
+        if (file != NULL)
+        {
+            fwrite(bytes, 1, (size_t)fileSize, file);
+            fclose(file);
+        }
+        else
+            patched = FALSE;
+    }
+    free(bytes);
+    return patched;
+}
+
+/* The refusal matrix (brief sec 25) plus the stale-generation gate
+ * (brief sec 19): capture-side refusals run against generation B after
+ * a same-process restage, so every planted pointer is a live current
+ * pointer unless the fixture deliberately corrupts it. */
+static int DoH3Faults(const char *packPath, const char *statePath)
+{
+    struct H3BattleFixtures *fx = H3Fixtures();
+    struct H3Point ip;
+    struct H3Point ret;
+    struct H3Point animIp;
+    struct H3Point animRet;
+    struct H3Point feRoot;
+    u32 passes = 0u;
+    u32 i;
+
+    HarnessStatePath_Override(statePath);
+    if (!H3Stage(packPath, 0u))
+        return 1;
+    /* Same-process restage to generation B (the transaction allocates
+     * the candidate before freeing the old generation, so the arena
+     * base provably moves). */
+    {
+        const u8 *a;
+        const u8 *b;
+        size_t size;
+        struct EmeraldBattleCompatDiagnostics diag;
+        CHECK(EmeraldBattleCompat_GetArena(
+                  EMERALD_BATTLE_FAMILY_BATTLE_SCRIPT, &a, &size));
+        CHECK(EmeraldBattleCompat_TryInitialize(
+                  gScriptHarnessSnapshot, gScriptHarnessPack, 0u, &diag)
+              == EMERALD_BATTLE_OK);
+        CHECK(EmeraldBattleCompat_GetArena(
+                  EMERALD_BATTLE_FAMILY_BATTLE_SCRIPT, &b, &size));
+        CHECK(a != b);
+    }
+    /* Reference points resolved against the CURRENT generation. */
+    CHECK(H3PointForOpcode(EMERALD_BATTLE_FAMILY_BATTLE_SCRIPT, 0x12u, 0u, &ip));
+    CHECK(H3CallReturnPoint(EMERALD_BATTLE_FAMILY_BATTLE_SCRIPT, 0x41u, 0u, &ret));
+    CHECK(H3PointForOpcode(EMERALD_BATTLE_FAMILY_BATTLE_ANIM_SCRIPT, 0x05u, 0u, &animIp));
+    CHECK(H3CallReturnPoint(EMERALD_BATTLE_FAMILY_BATTLE_ANIM_SCRIPT, 0x0Eu, 0u, &animRet));
+    CHECK(H3AnyInstructionPoint(EMERALD_BATTLE_FAMILY_FIELD_EFFECT_SCRIPT,
+                                0u, &feRoot));
+
+#define H3_FAULT(name)                                                    \
+    do                                                                    \
+    {                                                                     \
+        enum NativeStateResult r = NativeState_Save(HARNESS_STATE_SLOT);  \
+        if (r == NATIVE_STATE_OK)                                         \
+        {                                                                 \
+            fprintf(stderr, "H3 fault '%s' captured successfully\n", name); \
+            sFailures++;                                                  \
+        }                                                                 \
+        else if (strstr(NativeState_GetLastError(), name) == NULL)        \
+        {                                                                 \
+            fprintf(stderr, "H3 fault '%s' produced: %s\n", name,         \
+                    NativeState_GetLastError());                          \
+            sFailures++;                                                  \
+        }                                                                 \
+        else                                                              \
+            passes++;                                                     \
+    } while (0)
+
+    /* 1. stale family generation: a stamp for generation A while
+     * generation B is current refuses before any pointer check. */
+    {
+        memset(fx, 0, sizeof(*fx));
+        H3ClearSurfaces();
+        H3BindLayout();
+        fx->generationStamp = EmeraldBattleCompat_GetGenerationId() - 1u;
+        gBattlescriptCurrInstr = ip.pointer;
+        H3_FAULT("stale");
+    }
+    /* 2. corrupt current IP (middle of operand). */
+    {
+        memset(fx, 0, sizeof(*fx));
+        H3ClearSurfaces();
+        H3BindLayout();
+        fx->generationStamp = EmeraldBattleCompat_GetGenerationId();
+        gBattlescriptCurrInstr = ip.pointer + 1u;
+        H3_FAULT("boundary");
+    }
+    /* 3. corrupt call-stack entry (middle of operand). */
+    {
+        memset(fx, 0, sizeof(*fx));
+        H3ClearSurfaces();
+        H3BindLayout();
+        fx->generationStamp = EmeraldBattleCompat_GetGenerationId();
+        gBattlescriptCurrInstr = ip.pointer;
+        fx->battleStack.size = 1u;
+        if (H3MidOperandReturnPoint(EMERALD_BATTLE_FAMILY_BATTLE_SCRIPT,
+                                    0x41u, 0u, &ret))
+        {
+            char dbgKey[96];
+            u32 dbgOff;
+            u32 dbgFam;
+            CHECK(EmeraldBattleCompat_ValidateBoundary(
+                      kEmeraldBattleCompatTable.modules[ret.module].id,
+                      ret.offset + 1u,
+                      EMERALD_BATTLE_BOUNDARY_NEXT_INSTRUCTION)
+                  == EMERALD_BATTLE_ERR_BOUNDARY_INVALID);
+            CHECK(EmeraldBattleCompat_ReverseResolve(
+                      (uintptr_t)ret.pointer, dbgKey, sizeof(dbgKey),
+                      &dbgOff, &dbgFam) == EMERALD_BATTLE_OK);
+            CHECK(dbgOff == ret.offset + 1u);
+            fx->battleStack.ptr[0] = ret.pointer; /* genuine mid-operand */
+            H3_FAULT("boundary");
+        }
+        else
+        {
+            CHECK(FALSE);
+        }
+    }
+    /* 4. corrupt callback-stack H entry: H bytecode on an engine slot. */
+    {
+        memset(fx, 0, sizeof(*fx));
+        H3ClearSurfaces();
+        H3BindLayout();
+        fx->generationStamp = EmeraldBattleCompat_GetGenerationId();
+        gBattlescriptCurrInstr = ip.pointer;
+        fx->callbackStack.size = 1u;
+        fx->callbackStack.function[0] =
+            (void (*)(void))(uintptr_t)ip.pointer;
+        H3_FAULT("engine");
+    }
+    /* 5. missing selected script: a pointer into the battle hull hole
+     * (0x82db9d3 - arena start 0x82d86a8 = offset 0x332B, one past the
+     * last battle-scripts-1 module span). */
+    {
+        const u8 *battleArena;
+        size_t battleSize;
+        memset(fx, 0, sizeof(*fx));
+        H3ClearSurfaces();
+        H3BindLayout();
+        fx->generationStamp = EmeraldBattleCompat_GetGenerationId();
+        CHECK(EmeraldBattleCompat_GetArena(
+                  EMERALD_BATTLE_FAMILY_BATTLE_SCRIPT,
+                  &battleArena, &battleSize));
+        (void)battleSize;
+        gBattlescriptCurrInstr = ip.pointer;
+        gSelectionBattleScripts[0] = battleArena + 0x332Bu;
+        H3_FAULT("span");
+    }
+    /* 6. wrong family for pointer: anim pointer on the battle IP. */
+    {
+        memset(fx, 0, sizeof(*fx));
+        H3ClearSurfaces();
+        H3BindLayout();
+        fx->generationStamp = EmeraldBattleCompat_GetGenerationId();
+        gBattlescriptCurrInstr = animIp.pointer;
+        H3_FAULT("family");
+    }
+    /* 7. engine function pointer mislabeled as an H script. */
+    {
+        memset(fx, 0, sizeof(*fx));
+        H3ClearSurfaces();
+        H3BindLayout();
+        fx->generationStamp = EmeraldBattleCompat_GetGenerationId();
+        gBattlescriptCurrInstr = (const u8 *)(uintptr_t)H3WaitCallback;
+        H3_FAULT("span");
+    }
+    /* 8. field-effect transient policy: FE bytecode has no persistent
+     * IP surface, so an FE pointer anywhere refuses. */
+    {
+        memset(fx, 0, sizeof(*fx));
+        H3ClearSurfaces();
+        H3BindLayout();
+        fx->generationStamp = EmeraldBattleCompat_GetGenerationId();
+        gBattlescriptCurrInstr = feRoot.pointer;
+        H3_FAULT("transient");
+    }
+    /* 9. anim return slot with a middle-of-operand value. */
+    {
+        memset(fx, 0, sizeof(*fx));
+        H3ClearSurfaces();
+        H3BindLayout();
+        fx->generationStamp = EmeraldBattleCompat_GetGenerationId();
+        sBattleAnimScriptPtr = animIp.pointer;
+        sBattleAnimScriptRetAddr = animRet.pointer + 1u;
+        H3_FAULT("boundary");
+    }
+    /* 10. inactive stack scratch holding a live H pointer refuses. */
+    {
+        memset(fx, 0, sizeof(*fx));
+        H3ClearSurfaces();
+        H3BindLayout();
+        fx->generationStamp = EmeraldBattleCompat_GetGenerationId();
+        gBattlescriptCurrInstr = ip.pointer;
+        fx->battleStack.size = 0u;
+        fx->battleStack.ptr[3] = ret.pointer; /* inactive slot */
+        H3_FAULT("span");
+    }
+    /* 11. instruction pointer into a typed data span (battle-ai data
+     * module: no bytecode walk, so instruction roles refuse). */
+    {
+        const struct EmeraldBattleNativeTable *t = &kEmeraldBattleCompatTable;
+        u32 m;
+        const u8 *dataBase = NULL;
+        size_t dataSize = 0u;
+        for (m = 0u; m < t->payloadModuleCount; m++)
+        {
+            const struct EmeraldBattleNativeModule *module = &t->modules[m];
+            if (module->family == EMERALD_BATTLE_FAMILY_BATTLE_AI
+             && module->mapKind == EMERALD_BATTLE_MAP_DATA
+             && EmeraldBattleCompat_GetModuleSpan(
+                    module->id, &dataBase, &dataSize)
+             && dataSize != 0u)
+                break;
+        }
+        CHECK(dataBase != NULL);
+        memset(fx, 0, sizeof(*fx));
+        H3ClearSurfaces();
+        H3BindLayout();
+        fx->generationStamp = EmeraldBattleCompat_GetGenerationId();
+        /* Plant on the shared AI slot so the family gate passes and the
+         * data-span map-kind gate is what refuses. */
+        gAIScriptPtr = dataBase;
+        H3_FAULT("boundary");
+    }
+    /* 12. corrupt battle stack depth (size beyond the 8-slot cap). */
+    {
+        memset(fx, 0, sizeof(*fx));
+        H3ClearSurfaces();
+        H3BindLayout();
+        fx->generationStamp = EmeraldBattleCompat_GetGenerationId();
+        gBattlescriptCurrInstr = ip.pointer;
+        fx->battleStack.size = 9u;
+        H3_FAULT("stack size");
+    }
+    /* 13. partial generation: no shadow generation at all -> every H
+     * surface falls through to the generic walker, whose unmanaged-
+     * pointer gate refuses the arena pointer safely. */
+    {
+        EmeraldBattleCompat_ClearMigratedEntries();
+        memset(fx, 0, sizeof(*fx));
+        H3ClearSurfaces();
+        H3BindLayout();
+        fx->generationStamp = 0u;
+        gBattlescriptCurrInstr = ip.pointer;
+        H3_FAULT("pointer");
+        /* Re-stage so the load-side faults have a current generation. */
+        {
+            struct EmeraldBattleCompatDiagnostics diag;
+            CHECK(EmeraldBattleCompat_TryInitialize(
+                      gScriptHarnessSnapshot, gScriptHarnessPack, 0u,
+                      &diag) == EMERALD_BATTLE_OK);
+        }
+    }
+    /* Load-side refusals: corrupt a captured state's H records. */
+    for (i = 0u; i < 3u; i++)
+    {
+        char path[512];
+        snprintf(path, sizeof(path), "%s.fault%u", statePath, i);
+        HarnessStatePath_Override(path);
+        if (!H3PlantMainState())
+            return 1;
+        CHECK(NativeState_Save(HARNESS_STATE_SLOT) == NATIVE_STATE_OK);
+        CHECK(H3PatchSidecar(path, 47u, i));
+        CHECK(NativeState_Load(HARNESS_STATE_SLOT) != NATIVE_STATE_OK);
+        fprintf(stderr, "H3 load fault %u: %s\n",
+                i, NativeState_GetLastError());
+        passes++;
+    }
+    printf("H3-FAULTS passed=%u\n", passes);
+    TeardownScriptCompatSession();
+    EmeraldBattleCompat_Shutdown();
+    EmeraldBattleState_ClearLayout();
+    return sFailures != 0;
+}
+
 int main(int argc, char **argv)
 {
     if (argc < 3)
@@ -4096,13 +5443,16 @@ int main(int argc, char **argv)
                 "       %s g4-load <pack> <state>\n"
                 "       %s g4-faults <pack> <state>\n"
                 "       %s g6-mevent <pack> <state>\n"
+                "       %s h3-create <pack> <state>\n"
+                "       %s h3-load <pack> <state>\n"
+                "       %s h3-faults <pack> <state>\n"
 #if defined(HARNESS_REAL_SDL_PROBE)
                 "       %s desktop-real-sdl <pack> <state>\n"
 #endif
                 ,
                 argv[0], argv[0], argv[0], argv[0], argv[0], argv[0],
                 argv[0], argv[0], argv[0], argv[0], argv[0], argv[0],
-                argv[0], argv[0], argv[0]
+                argv[0], argv[0], argv[0], argv[0], argv[0], argv[0]
 #if defined(HARNESS_REAL_SDL_PROBE)
                 , argv[0]
 #endif
@@ -4112,6 +5462,12 @@ int main(int argc, char **argv)
     HarnessStatePath_Override(argv[3]);
     if (strcmp(argv[1], "g4-create") == 0)
         return DoG4Create(argv[2], argv[3]);
+    if (strcmp(argv[1], "h3-create") == 0)
+        return DoH3Create(argv[2], argv[3]);
+    if (strcmp(argv[1], "h3-load") == 0)
+        return DoH3Load(argv[2], argv[3]);
+    if (strcmp(argv[1], "h3-faults") == 0)
+        return DoH3Faults(argv[2], argv[3]);
     if (strcmp(argv[1], "g4-load") == 0)
         return DoG4Load(argv[2], argv[3]);
     if (strcmp(argv[1], "g4-faults") == 0)

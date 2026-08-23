@@ -637,6 +637,16 @@ each is a safe standalone gate:
   two stack returns are interior offsets must restore in a fresh process at
   a forced-different arena base and execute the exact next canonical opcode.
   Live ranges stay at 6,377 (zero H ranges until cutover).
+  **COMPLETE (2026-08-22):** the STOP gate is green — a mid-battle save
+  parked at `waitmessage` (0x12) with two IP+5 stack returns in different
+  modules captures through the ordinary State-v5 sidecar and restores in a
+  fresh process at a forced-different arena base with a perturbed physical
+  layout, executing the exact next canonical opcode and return sequence.
+  Five-family range dry run 6,377 → 6,382 proven (scratch index, rollback,
+  identity splice); zero-width aliases canonicalize to the payload owner;
+  fault matrix 16/16; G State-v5 regressions green; no format change; no
+  interpreter TU modified. Report:
+  `docs/R13H3_BATTLE_STATE_READINESS_REPORT.md`.
 - **H4 — anim + field-effect live cutover.** Smallest state surface, zero
   dependencies on other H families, engine targets stay compiled. Gate:
   stepwise differential oracle (48 + 8 opcode slots), full battle/contest
@@ -862,3 +872,60 @@ checked / 0 bad.
 **§17/§19 confirmed:** H1–H7 subdivision stands as written; infra reuse B
 (generator) + C (runtime) stands; H3's nested interior-IP STOP gate remains
 the gate to H4.
+
+## 27. Confirmed by R13-H3 (2026-08-22)
+
+R13-H3 (State-v5 execution readiness / shadow relocation only — no live
+cutover, no commit) proved the §23 STOP gate. Full proof in
+`docs/R13H3_BATTLE_STATE_READINESS_REPORT.md`; the shadow seam
+(`emerald_battle_compat.c` + generated `battle_native_table.*`) is
+harness-linked only through H3; production links the weak
+`emerald_battle_state.c` adapter whose no-generation fallthrough keeps
+the compiled-script path byte-for-byte unchanged.
+
+**State surface truth (§14 correction).** 36 H-typed slots + 9
+engine-typed slots (census pinned against the exact production
+structures). The maximum simultaneously active H sidecar count is
+**20** (1 IP + 8 battle stack + 4 selection + 4 palace + 2 anim + 1
+stale AI) — the plan's ≈27 estimate was conservative; no correction
+upward was needed (cap 4,096, headroom ≈200×). The battle-AI grammar
+has no return-valid call sites (all five `call` commands are tail
+calls — the +5 successor is never an instruction start), so the AI
+test/debug frames use ordinary instruction starts (the identical
+NEXT_INSTRUCTION predicate).
+
+**Capture policies (brief sec 13-15).** Field effect: no persistent
+instruction pointer exists (function-local cursor,
+field_effect.c:705) — an FE-arena pointer in any serialized field is a
+precise policy refusal. Battle AI: synchronous run-to-completion —
+relocate the quiescent stale `gAIScriptPtr`, never execute it; the AI
+stack is size-0 at every VBlank. Contest AI: the shared IP slot accepts
+either AI family; contest stack relocation is proven for mid-contest
+captures.
+
+**Identity model (brief sec 21-23).** Two physical layouts prove
+module identity is never an aggregate offset: layout 0 (GBA-preserving,
+h2_stage geometry) and layout 1 (tight-packed modules, reversed arena
+order). The zero-width alias rule: state identity always canonicalizes
+to the payload owner (the module whose export is `offset-zero`);
+alias keys refuse boundary queries and state resolution; no zero-length
+ranges, deterministic export lookup. The five-family range dry run
+registers/unregisters by exact family identity on a scratch index clone
+(6,377 → 6,382 → 6,377 with unrelated ranges byte-identical).
+
+**Boundary roles (brief sec 17-18).** INSTRUCTION_START and
+NEXT_INSTRUCTION both require an exact bytecode-map instruction start;
+ENTRYPOINT requires a generated export. Runtime return addresses are
+interior instruction boundaries by construction (IP+5 pushes), fully
+supported — H1's interior RELOCATION count of 0 constrains relocation
+targets, not runtime returns. Middle-of-operand, holes, gaps, past-end,
+data/routing spans, aliases, and wrong-family keys all refuse precisely.
+
+**Production isolation.** `git diff` over every H interpreter TU is
+empty; the pack stays 23,069 entries (SHA-256
+`b711d35877332c43ce671caacda7640905205579a367e8d60bc683c5d0aac5bb`);
+live ranges stay 6,377 with 0 H ranges; forced release build
+23,320,512 B (+13,032 B: the weak adapter + walker hooks) and the
+DINFO build (see report) both verify-game-data
+`f3ae088181bf583e55daf962a92bb46f4f1d07b7`; release carries zero debug
+sections; `nm` finds no `EmeraldBattleCompat` symbol in either binary.

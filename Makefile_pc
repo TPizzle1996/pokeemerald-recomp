@@ -252,10 +252,16 @@ ifeq ($(NATIVE_LINUX),1)
 # R13-G5: the script compat seam and its generated inventory are
 # production-linked (the live field-script cutover); the GBA payload
 # objects remain filtered out as before.
+# R13-H3: the battle shadow seam and its generated inventory are
+# harness-linked only (State-v5 readiness dry run; no live cutover) -
+# production links only the weak emerald_battle_state.c adapter, which
+# falls through to the compiled-script path with no seam present.
 C_SRCS := $(filter-out $(C_SUBDIR)/data/graphics/trainers_front_payload.c \
                        $(C_SUBDIR)/data/graphics/trainers_back_payload.c \
                        $(C_SUBDIR)/data/graphics/pokemon_battle_payload.c \
-                       $(C_SUBDIR)/anim_mon_front_pics.c,$(C_SRCS))
+                       $(C_SUBDIR)/anim_mon_front_pics.c \
+                       $(C_SUBDIR)/emerald/resources/emerald_battle_compat.c \
+                       $(C_SUBDIR)/emerald/resources/battle_native_table.generated.c,$(C_SRCS))
 endif
 C_OBJS := $(patsubst $(C_SUBDIR)/%.c,$(C_BUILDDIR)/%.o,$(C_SRCS))
 

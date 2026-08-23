@@ -32,7 +32,7 @@ trap 'rm -rf "$tmp"' EXIT
 
 mode="${1:-}"
 sanitize_flags=""
-if [ "$mode" = "sanitize" ] || [ "$mode" = "g4-sanitize" ]; then
+if [ "$mode" = "sanitize" ] || [ "$mode" = "g4-sanitize" ]    || [ "$mode" = "h3-sanitize" ]; then
     sanitize_flags="-fsanitize=address,undefined -fno-omit-frame-pointer -g"
     # The R6 runtime snapshot/provider is intentionally process-lifetime
     # state in these focused harnesses; match the established G3 sanitizer
@@ -136,6 +136,9 @@ gcc -std=gnu99 -O2 -ffunction-sections -fdata-sections -Wl,--gc-sections \
     "$emerald_dir/emerald_script_state.c" \
     "$emerald_dir/script_native_table.generated.c" \
     "$here/emerald_script_harness_stubs.c" \
+    "$emerald_dir/emerald_battle_compat.c" \
+    "$emerald_dir/emerald_battle_state.c" \
+    "$emerald_dir/battle_native_table.generated.c" \
     "$root/src/platform/native_state.c" \
     "$root/src/platform/host_memory.c" \
     "$root/src/platform/native_world_neighborhood.c" \
@@ -190,6 +193,62 @@ if [ "$mode" = "g4-faults" ] || [ "$mode" = "g4-sanitize" ]; then
     cat g4-faults.log
     grep -q "G4-FAULTS passed=31" g4-faults.log
     echo "R13-G4 faults: 31/31 capture/restore/identity checks"
+    exit 0
+fi
+
+if [ "$mode" = "h3-state" ] || [ "$mode" = "h3-cross" ]; then
+    h3state="harness-h3-slot-7.st"
+    echo "== R13-H3: capture in process A (nested blocking-command battle state) =="
+    "$tmp/emerald_resource_state_test" h3-create "$pack" "$h3state" > h3-create.log
+    cat h3-create.log
+    grep -q "H3-CREATE" h3-create.log
+
+    echo "== R13-H3: restore in fresh process B (perturbed layout, new base) =="
+    "$tmp/emerald_resource_state_test" h3-load "$pack" "$h3state" > h3-load.log
+    cat h3-load.log
+    grep -q "nested-return=ok blocking=ok alias=canonical" h3-load.log
+
+    python3 - "$tmp" <<'EOF'
+import re, sys
+tmp = sys.argv[1]
+create = open(f"{tmp}/h3-create.log").read()
+load = open(f"{tmp}/h3-load.log").read()
+c = re.search(r"H3-CREATE arena=(0x[0-9a-f]+).*generation=(\d+)", create)
+l = re.search(r"H3-LOAD arena=(0x[0-9a-f]+).*generation=(\d+)", load)
+assert c and l, "missing H3 arena/generation proof line"
+assert c.group(1) != l.group(1), "creator and restorer battle arena bases match"
+# Generation ids are per-process monotonic counters (not comparable
+# across processes); the same-process restage + stale-generation
+# refusals are proven by the h3-faults driver.
+assert int(c.group(2)) >= 1 and int(l.group(2)) >= 1
+print(f"H3 fresh-process relocation: creator {c.groups()} -> restorer {l.groups()}")
+EOF
+    echo "R13-H3 state: nested blocking-command capture + fresh-process restore"
+    if [ "$mode" != "h3-cross" ]; then
+        exit 0
+    fi
+    exit 0
+fi
+
+if [ "$mode" = "h3-sanitize" ]; then
+    echo "== R13-H3: sanitizer variants (ASan/UBSan instrumented binary) =="
+    "$tmp/emerald_resource_state_test" h3-create "$pack"         "harness-h3-san-slot-7.st" > h3-san-create.log
+    grep -q "H3-CREATE" h3-san-create.log
+    "$tmp/emerald_resource_state_test" h3-load "$pack"         "harness-h3-san-slot-7.st" > h3-san-load.log
+    grep -q "nested-return=ok" h3-san-load.log
+    "$tmp/emerald_resource_state_test" h3-faults "$pack"         "harness-h3-san-fault-slot-7.st" > h3-san-faults.log
+    grep -q "H3-FAULTS passed=16" h3-san-faults.log
+    echo "R13-H3 sanitize: create/load/faults clean under ASan/UBSan"
+    exit 0
+fi
+
+if [ "$mode" = "h3-faults" ]; then
+    echo "== R13-H3: refusal matrix =="
+    "$tmp/emerald_resource_state_test" h3-faults "$pack" \
+        "harness-h3-fault-slot-7.st" > h3-faults.log
+    cat h3-faults.log
+    grep -q "H3-FAULTS passed=16" h3-faults.log
+    echo "R13-H3 faults: 16/16 capture/restore/identity checks"
     exit 0
 fi
 

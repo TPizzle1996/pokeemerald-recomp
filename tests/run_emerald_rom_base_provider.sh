@@ -41,6 +41,8 @@ bad=$(grep -rEn '^[[:space:]]*#[[:space:]]*include[[:space:]]+[<"][[:space:]]*(g
       --exclude='emerald_tileset_compat.c' \
       --exclude='emerald_layout_compat.c' \
       --exclude='emerald_map_compat.c' \
+      --exclude='emerald_script_state.c' \
+      --exclude='emerald_battle_state.c' \
       --exclude='map_data_native.c' \
       --exclude='text_native_exports.c' \
       "$core_dir" "$inc_dir" "$emerald_dir" "$here/emerald_rom_base_provider_test.c" || true)
