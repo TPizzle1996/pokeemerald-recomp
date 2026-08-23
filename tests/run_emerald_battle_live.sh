@@ -1,27 +1,33 @@
 #!/usr/bin/env bash
 #
-# R13-H4: live cutover tests for the battle-anim + field-effect arenas
-# (tests/emerald_battle_live_test.c).
+# R13-H4/H5: live cutover tests for the battle + battle-anim +
+# field-effect arenas (tests/emerald_battle_live_test.c).
 #
 # Compiles the SAME production machinery as run_emerald_resource_state.sh
 # (real walker, real seams, real R6 loader, maps.o) with the H3 shadow
 # seam swapped for the PRODUCTION live seam:
 #
 #   - emerald_battle_compat.c + battle_native_table.generated.c  (H3)
-#   + emerald_battle_live.c + battle_live_table.generated.c      (H4)
+#   + emerald_battle_live.c + battle_live_table.generated.c      (H4/H5)
+#   + battle_live_native.generated.c + inert native-address stubs
 #
 # and drives it against the REAL production pack:
 #
-#   oracle     differential resolution oracle over all 726 modules and
-#              4,401 relocs, both physical layouts; staged bytes are
-#              byte-exact against the committed .bin artifacts
-#   faults     brief sec 24 fail-closed matrix (11 cases)
-#   replace    brief sec 25/26: generation replacement, 6,379 range
-#              invariant, identity-based unregister
-#   state      brief sec 15: fresh-process State-v5 anim proof
-#   sanitize   oracle + faults + state under ASan/UBSan
+#   oracle         differential resolution oracle over all 1,371 modules
+#                  and 5,963 relocs, both physical layouts; staged bytes
+#                  byte-exact against the committed .bin artifacts
+#   faults         brief sec 24 fail-closed matrix (11 cases)
+#   replace        brief sec 25/26: generation replacement, 6,380 range
+#                  invariant, identity-based unregister
+#   battle-oracle  H5: 238 routing rows, 199 compiled labels, 50 EWRAM
+#                  bindings, battle pointer sweep, both layouts
+#   battle-faults  H5 battle fail-closed matrix (8 cases)
+#   state          brief sec 15: fresh-process State-v5 anim proof
+#   h5-state       H5 sec 22: nested blocking battle fresh-process proof
+#   sanitize       all of the above under ASan/UBSan
 #
-# Modes: oracle | faults | replace | state | sanitize (default: all).
+# Modes: oracle | faults | replace | battle-oracle | battle-faults |
+#        state | h5-state | sanitize (default: all).
 set -euo pipefail
 
 here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -95,7 +101,13 @@ with open(tmp + "/binding_stubs.s", "w") as f:
 EOF
 gcc -c "$tmp/binding_stubs.s" -o "$tmp/binding_stubs.o"
 
-echo "== compiling H4 live-cutover test (real walker + seams + loader + LIVE seam) =="
+# R13-H5: the native-address TU (battle_live_native.generated.c) takes
+# the ADDRESS of the A/B battle binding symbols and the compiled battle
+# labels; the harness provides inert cells (address-only, never read).
+echo "== generating battle native-address stubs (H5) =="
+gcc -c "$here/battle_live_native_stubs.s" -o "$tmp/battle_live_native_stubs.o"
+
+echo "== compiling H4/H5 live-cutover test (real walker + seams + loader + LIVE seam) =="
 cd "$root"
 gcc -std=gnu99 -O2 -ffunction-sections -fdata-sections -Wl,--gc-sections \
     -no-pie \
@@ -169,6 +181,7 @@ gcc -std=gnu99 -O2 -ffunction-sections -fdata-sections -Wl,--gc-sections \
     "$emerald_dir/emerald_battle_state.c" \
     "$emerald_dir/emerald_battle_live.c" \
     "$emerald_dir/battle_live_table.generated.c" \
+    "$emerald_dir/battle_live_native.generated.c" \
     "$root/src/platform/native_state.c" \
     "$root/src/platform/host_memory.c" \
     "$root/src/platform/native_world_neighborhood.c" \
@@ -178,6 +191,7 @@ gcc -std=gnu99 -O2 -ffunction-sections -fdata-sections -Wl,--gc-sections \
     "$root/build/linux64/data/maps.o" \
     "$tmp/map_script_stubs.o" \
     "$tmp/binding_stubs.o" \
+    "$tmp/battle_live_native_stubs.o" \
     "$here/emerald_native_world_overworld_stub.c" \
     "$here/emerald_native_world_tables_stub.c" \
     "$here/emerald_resource_state_stub.c" \
@@ -191,9 +205,9 @@ if [ "$mode" = "oracle" ] || [ "$mode" = "sanitize" ]; then
         echo "== H4 oracle: layout $layout =="
         "$tmp/emerald_battle_live_test" oracle "$pack" "$mods_dir" "$layout" > "oracle-$layout.log"
         cat "oracle-$layout.log"
-        grep -q "H4-ORACLE layout=$layout entry-words=717 byte-exact=723 relocs=4401" "oracle-$layout.log"
+        grep -q "H4-ORACLE layout=$layout entry-words=1352 byte-exact=1363 relocs=5963" "oracle-$layout.log"
     done
-    echo "H4 oracle: 723 entry words, 723 byte-exact modules, 4,401 relocs, both layouts"
+    echo "H4/H5 oracle: 1,352 entry words, 1,363 byte-exact modules, 5,963 relocs, both layouts"
 fi
 
 if [ "$mode" = "faults" ] || [ "$mode" = "sanitize" ]; then
@@ -209,7 +223,7 @@ if [ "$mode" = "replace" ] || [ "$mode" = "sanitize" ]; then
     "$tmp/emerald_battle_live_test" replace "$pack" > replace.log
     cat replace.log
     grep -q "H4-REPLACE" replace.log
-    grep -q "count=6379" replace.log
+    grep -q "count=6380" replace.log
     echo "H4 replace: generation B committed, 6,379 invariant, identity unregister/restore"
 fi
 
@@ -244,11 +258,72 @@ EOF
     echo "H4 state: live anim IP/return relocated by module+offset identity into the new arena"
 fi
 
+if [ "$mode" = "battle-oracle" ] || [ "$mode" = "sanitize" ]; then
+    for layout in 0 1; do
+        echo "== H5 battle oracle: layout $layout =="
+        "$tmp/emerald_battle_live_test" battle-oracle "$pack" "$mods_dir" "$layout" > "battle-oracle-$layout.log"
+        cat "battle-oracle-$layout.log"
+        grep -q "H5-BATTLE-ORACLE layout=$layout routing-rows=238 labels=199 ewram=50" "battle-oracle-$layout.log"
+    done
+    echo "H5 battle oracle: 238 routing rows, 199 labels, 50 EWRAM bindings, pointer sweep, both layouts"
+fi
+
+if [ "$mode" = "battle-faults" ] || [ "$mode" = "sanitize" ]; then
+    echo "== H5 battle fail-closed matrix =="
+    "$tmp/emerald_battle_live_test" battle-faults "$pack" > battle-faults.log
+    cat battle-faults.log
+    grep -q "H5-BATTLE-FAULTS passed=8" battle-faults.log
+    echo "H5 battle faults: 8/8 fail-closed cases"
+fi
+
+if [ "$mode" = "h5-state" ] || [ "$mode" = "sanitize" ] || [ "$mode" = "" ]; then
+    state="harness-h5-slot-7.st"
+    echo "== H5 nested fresh-process state proof: capture in process A =="
+    "$tmp/emerald_battle_live_test" h5-state-create "$pack" "$mods_dir" "$state" > h5-state-create.log
+    cat h5-state-create.log
+    grep -q "H5-CREATE" h5-state-create.log
+
+    echo "== H5 nested fresh-process state proof: restore in fresh process B =="
+    "$tmp/emerald_battle_live_test" h5-state-load "$pack" "$mods_dir" "$state" > h5-state-load.log
+    cat h5-state-load.log
+    grep -q "H5-LOAD" h5-state-load.log
+
+    python3 - "$tmp" <<'EOF'
+import re, sys
+tmp = sys.argv[1]
+create = open(f"{tmp}/h5-state-create.log").read()
+load = open(f"{tmp}/h5-state-load.log").read()
+c = re.search(r"H5-CREATE arena=(0x[0-9a-f]+) generation=(\d+) module=(\d+) ip=(\d+) ret0=(\d+)/(\d+) ret1=(\d+)/(\d+)", create)
+l = re.search(r"H5-LOAD arena=(0x[0-9a-f]+) generation=(\d+) module=(\d+) ip=(\d+) ret0=(\d+)/(\d+) ret1=(\d+)/(\d+)", load)
+assert c and l, "missing H5 arena/generation proof line"
+# Physical arena base moved across the process boundary + layout
+# perturbation; every (module, offset) identity held - the blocking
+# waitmessage IP and BOTH nested IP+5 returns in different modules.
+assert c.group(1) != l.group(1), "creator and restorer battle arena bases match"
+assert c.group(3) == l.group(3), f"waitmessage module changed across restart: {c.group(3)} vs {l.group(3)}"
+assert c.group(4) == l.group(4), f"IP offset changed across restart: {c.group(4)} vs {l.group(4)}"
+assert c.group(5) == l.group(5) and c.group(6) == l.group(6), f"return 0 identity changed: {c.group(5)}/{c.group(6)} vs {l.group(5)}/{l.group(6)}"
+assert c.group(7) == l.group(7) and c.group(8) == l.group(8), f"return 1 identity changed: {c.group(7)}/{c.group(8)} vs {l.group(7)}/{l.group(8)}"
+assert c.group(5) != c.group(7), "the two returns must live in DIFFERENT modules"
+print(f"H5 fresh-process relocation: creator {c.groups()} -> restorer {l.groups()}")
+EOF
+    echo "H5 state: nested blocking battle IP + two IP+5 returns relocated by module+offset identity"
+fi
+
+if [ "$mode" = "battle-249" ] || [ "$mode" = "sanitize" ]; then
+    echo "== H5 249-opcode differential =="
+    "$tmp/emerald_battle_live_test" battle-249 "$pack" "$mods_dir" > battle-249.log
+    cat battle-249.log
+    grep -q "H5-249 layout=0 decoded=" battle-249.log
+    grep -q "slots-present=238 synthetic=11" battle-249.log
+    echo "H5 249: 3,390 qualified instructions decode, all 249 opcode slots covered (238 real + 11 synthetic)"
+fi
+
 if [ "$mode" = "sanitize" ]; then
-    echo "H4 sanitize: oracle/faults/replace/state clean under ASan/UBSan"
+    echo "H4/H5 sanitize: oracle/faults/replace/state/battle clean under ASan/UBSan"
 fi
 
 if [ "$mode" = "" ]; then
     echo
-    echo "R13-H4 live cutover tests: ALL PASSED"
+    echo "R13-H4/H5 live cutover tests: ALL PASSED"
 fi

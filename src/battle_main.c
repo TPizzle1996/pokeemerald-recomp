@@ -9,6 +9,7 @@
 #include "battle_message.h"
 #include "battle_pyramid.h"
 #include "battle_scripts.h"
+#include "emerald/resources/emerald_battle_live.h" /* H5 typed battle resolution */
 #include "battle_setup.h"
 #include "battle_tower.h"
 #include "battle_util.h"
@@ -182,6 +183,52 @@ EWRAM_DATA u8 gAbsentBattlerFlags = 0;
 EWRAM_DATA u8 gCritMultiplier = 0;
 EWRAM_DATA u8 gMultiHitCounter = 0;
 EWRAM_DATA const u8 *gBattlescriptCurrInstr = NULL;
+
+/* R13-H5: the battle interpreter's hooks for the production live seam.
+ * RegisterStateLayout hands the State-v5 adapter the CURRENT battle
+ * surface slot addresses (the per-battle heap stacks are rebound at
+ * battle start - BattleAllocResources calls it again after the
+ * allocations); IsBattleActive is the generation-replacement
+ * quiescence probe (brief sec 25/26). */
+#include "emerald/resources/emerald_battle_state.h"
+
+extern const u8 *gAIScriptPtr; /* battle_ai_script_commands.c */
+
+void BattleScriptCompat_RegisterStateLayout(void)
+{
+    struct EmeraldBattleStateLayout layout;
+    uint32_t i;
+
+    memset(&layout, 0, sizeof(layout));
+    layout.battlescriptCurrInstr = &gBattlescriptCurrInstr;
+    for (i = 0u; i < 4u; i++)
+    {
+        layout.selectionScripts[i] = &gSelectionBattleScripts[i];
+        layout.palaceSelectionScripts[i] = &gPalaceSelectionBattleScripts[i];
+    }
+    layout.aiScriptPtr = &gAIScriptPtr;
+    if (gBattleResources != NULL)
+    {
+        for (i = 0u; i < EMERALD_BATTLE_STATE_STACK_CAP; i++)
+        {
+            layout.battleStackPtrs[i] =
+                &gBattleResources->battleScriptsStack->ptr[i];
+            layout.battleCallbacks[i] =
+                (void (**)(void))&gBattleResources->battleCallbackStack
+                    ->function[i];
+            layout.aiStackPtrs[i] = &gBattleResources->AI_ScriptsStack->ptr[i];
+        }
+        layout.battleStackSize = &gBattleResources->battleScriptsStack->size;
+        layout.aiStackSize = &gBattleResources->AI_ScriptsStack->size;
+    }
+    EmeraldBattleState_SetLayout(&layout);
+}
+
+bool BattleScriptCompat_IsBattleActive(void)
+{
+    return gBattleTypeFlags != 0;
+}
+
 EWRAM_DATA u32 gUnusedBattleMainVar = 0;
 EWRAM_DATA u8 gChosenActionByBattler[MAX_BATTLERS_COUNT] = {0};
 EWRAM_DATA const u8 *gSelectionBattleScripts[MAX_BATTLERS_COUNT] = {NULL};
@@ -3928,7 +3975,7 @@ static void TryDoEventsBeforeFirstTurn(void)
     if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
     {
         StopCryAndClearCrySongs();
-        BattleScriptExecute(BattleScript_ArenaTurnBeginning);
+        BattleScriptExecute(EmeraldBattleLive_BattleScriptPtr(BattleScript_ArenaTurnBeginning));
     }
 }
 
@@ -4016,9 +4063,9 @@ void BattleTurnPassed(void)
     gRandomTurnNumber = Random();
 
     if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
-        BattleScriptExecute(BattleScript_PalacePrintFlavorText);
+        BattleScriptExecute(EmeraldBattleLive_BattleScriptPtr(BattleScript_PalacePrintFlavorText));
     else if (gBattleTypeFlags & BATTLE_TYPE_ARENA && gBattleStruct->arenaTurnCounter == 0)
-        BattleScriptExecute(BattleScript_ArenaTurnBeginning);
+        BattleScriptExecute(EmeraldBattleLive_BattleScriptPtr(BattleScript_ArenaTurnBeginning));
 }
 
 u8 IsRunningFromBattleImpossible(void)
@@ -4228,7 +4275,7 @@ static void HandleTurnActionSelectionState(void)
                                             | BATTLE_TYPE_RECORDED_LINK))
                     {
                         RecordedBattle_ClearBattlerAction(gActiveBattler, 1);
-                        gSelectionBattleScripts[gActiveBattler] = BattleScript_ActionSelectionItemsCantBeUsed;
+                        gSelectionBattleScripts[gActiveBattler] = EmeraldBattleLive_BattleScriptPtr(BattleScript_ActionSelectionItemsCantBeUsed);
                         gBattleCommunication[gActiveBattler] = STATE_SELECTION_SCRIPT;
                         *(gBattleStruct->selectionScriptFinished + gActiveBattler) = FALSE;
                         *(gBattleStruct->stateIdAfterSelScript + gActiveBattler) = STATE_BEFORE_ACTION_CHOSEN;
@@ -4271,7 +4318,7 @@ static void HandleTurnActionSelectionState(void)
                 case B_ACTION_SAFARI_BALL:
                     if (IsPlayerPartyAndPokemonStorageFull())
                     {
-                        gSelectionBattleScripts[gActiveBattler] = BattleScript_PrintFullBox;
+                        gSelectionBattleScripts[gActiveBattler] = EmeraldBattleLive_BattleScriptPtr(BattleScript_PrintFullBox);
                         gBattleCommunication[gActiveBattler] = STATE_SELECTION_SCRIPT;
                         *(gBattleStruct->selectionScriptFinished + gActiveBattler) = FALSE;
                         *(gBattleStruct->stateIdAfterSelScript + gActiveBattler) = STATE_BEFORE_ACTION_CHOSEN;
@@ -4326,7 +4373,7 @@ static void HandleTurnActionSelectionState(void)
                     && gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_TRAINER_HILL)
                     && gBattleBufferB[gActiveBattler][1] == B_ACTION_RUN)
                 {
-                    gSelectionBattleScripts[gActiveBattler] = BattleScript_AskIfWantsToForfeitMatch;
+                    gSelectionBattleScripts[gActiveBattler] = EmeraldBattleLive_BattleScriptPtr(BattleScript_AskIfWantsToForfeitMatch);
                     gBattleCommunication[gActiveBattler] = STATE_SELECTION_SCRIPT_MAY_RUN;
                     *(gBattleStruct->selectionScriptFinished + gActiveBattler) = FALSE;
                     *(gBattleStruct->stateIdAfterSelScript + gActiveBattler) = STATE_BEFORE_ACTION_CHOSEN;
@@ -4336,13 +4383,13 @@ static void HandleTurnActionSelectionState(void)
                          && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
                          && gBattleBufferB[gActiveBattler][1] == B_ACTION_RUN)
                 {
-                    BattleScriptExecute(BattleScript_PrintCantRunFromTrainer);
+                    BattleScriptExecute(EmeraldBattleLive_BattleScriptPtr(BattleScript_PrintCantRunFromTrainer));
                     gBattleCommunication[gActiveBattler] = STATE_BEFORE_ACTION_CHOSEN;
                 }
                 else if (IsRunningFromBattleImpossible() != BATTLE_RUN_SUCCESS
                          && gBattleBufferB[gActiveBattler][1] == B_ACTION_RUN)
                 {
-                    gSelectionBattleScripts[gActiveBattler] = BattleScript_PrintCantEscapeFromBattle;
+                    gSelectionBattleScripts[gActiveBattler] = EmeraldBattleLive_BattleScriptPtr(BattleScript_PrintCantEscapeFromBattle);
                     gBattleCommunication[gActiveBattler] = STATE_SELECTION_SCRIPT;
                     *(gBattleStruct->selectionScriptFinished + gActiveBattler) = FALSE;
                     *(gBattleStruct->stateIdAfterSelScript + gActiveBattler) = STATE_BEFORE_ACTION_CHOSEN;
@@ -4919,7 +4966,7 @@ static void CheckFocusPunch_ClearVarsBeforeTurnStarts(void)
                 && !(gDisableStructs[gBattlerAttacker].truantCounter)
                 && !(gProtectStructs[gActiveBattler].noValidMoves))
             {
-                BattleScriptExecute(BattleScript_FocusPunchSetUp);
+                BattleScriptExecute(EmeraldBattleLive_BattleScriptPtr(BattleScript_FocusPunchSetUp));
                 return;
             }
         }
@@ -4969,14 +5016,14 @@ static void HandleEndTurn_BattleWon(void)
         gSpecialVar_Result = gBattleOutcome;
         gBattleTextBuff1[0] = gBattleOutcome;
         gBattlerAttacker = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
-        gBattlescriptCurrInstr = BattleScript_LinkBattleWonOrLost;
+        gBattlescriptCurrInstr = EmeraldBattleLive_BattleScriptPtr(BattleScript_LinkBattleWonOrLost);
         gBattleOutcome &= ~B_OUTCOME_LINK_BATTLE_RAN;
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER
             && gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_TRAINER_HILL | BATTLE_TYPE_EREADER_TRAINER))
     {
         BattleStopLowHpSound();
-        gBattlescriptCurrInstr = BattleScript_FrontierTrainerBattleWon;
+        gBattlescriptCurrInstr = EmeraldBattleLive_BattleScriptPtr(BattleScript_FrontierTrainerBattleWon);
 
         if (gTrainerBattleOpponent_A == TRAINER_FRONTIER_BRAIN)
             PlayBGM(MUS_VICTORY_GYM_LEADER);
@@ -4986,7 +5033,7 @@ static void HandleEndTurn_BattleWon(void)
     else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && !(gBattleTypeFlags & BATTLE_TYPE_LINK))
     {
         BattleStopLowHpSound();
-        gBattlescriptCurrInstr = BattleScript_LocalTrainerBattleWon;
+        gBattlescriptCurrInstr = EmeraldBattleLive_BattleScriptPtr(BattleScript_LocalTrainerBattleWon);
 
         switch (gTrainers[gTrainerBattleOpponent_A].trainerClass)
         {
@@ -5012,7 +5059,7 @@ static void HandleEndTurn_BattleWon(void)
     }
     else
     {
-        gBattlescriptCurrInstr = BattleScript_PayDayMoneyAndPickUpItems;
+        gBattlescriptCurrInstr = EmeraldBattleLive_BattleScriptPtr(BattleScript_PayDayMoneyAndPickUpItems);
     }
 
     gBattleMainFunc = HandleEndTurn_FinishBattle;
@@ -5028,13 +5075,13 @@ static void HandleEndTurn_BattleLost(void)
         {
             if (gBattleOutcome & B_OUTCOME_LINK_BATTLE_RAN)
             {
-                gBattlescriptCurrInstr = BattleScript_PrintPlayerForfeitedLinkBattle;
+                gBattlescriptCurrInstr = EmeraldBattleLive_BattleScriptPtr(BattleScript_PrintPlayerForfeitedLinkBattle);
                 gBattleOutcome &= ~B_OUTCOME_LINK_BATTLE_RAN;
                 gSaveBlock2Ptr->frontier.disableRecordBattle = TRUE;
             }
             else
             {
-                gBattlescriptCurrInstr = BattleScript_FrontierLinkBattleLost;
+                gBattlescriptCurrInstr = EmeraldBattleLive_BattleScriptPtr(BattleScript_FrontierLinkBattleLost);
                 gBattleOutcome &= ~B_OUTCOME_LINK_BATTLE_RAN;
             }
         }
@@ -5042,13 +5089,13 @@ static void HandleEndTurn_BattleLost(void)
         {
             gBattleTextBuff1[0] = gBattleOutcome;
             gBattlerAttacker = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
-            gBattlescriptCurrInstr = BattleScript_LinkBattleWonOrLost;
+            gBattlescriptCurrInstr = EmeraldBattleLive_BattleScriptPtr(BattleScript_LinkBattleWonOrLost);
             gBattleOutcome &= ~B_OUTCOME_LINK_BATTLE_RAN;
         }
     }
     else
     {
-        gBattlescriptCurrInstr = BattleScript_LocalBattleLost;
+        gBattlescriptCurrInstr = EmeraldBattleLive_BattleScriptPtr(BattleScript_LocalBattleLost);
     }
 
     gBattleMainFunc = HandleEndTurn_FinishBattle;
@@ -5060,13 +5107,13 @@ static void HandleEndTurn_RanFromBattle(void)
 
     if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER && gBattleTypeFlags & BATTLE_TYPE_TRAINER)
     {
-        gBattlescriptCurrInstr = BattleScript_PrintPlayerForfeited;
+        gBattlescriptCurrInstr = EmeraldBattleLive_BattleScriptPtr(BattleScript_PrintPlayerForfeited);
         gBattleOutcome = B_OUTCOME_FORFEITED;
         gSaveBlock2Ptr->frontier.disableRecordBattle = TRUE;
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
     {
-        gBattlescriptCurrInstr = BattleScript_PrintPlayerForfeited;
+        gBattlescriptCurrInstr = EmeraldBattleLive_BattleScriptPtr(BattleScript_PrintPlayerForfeited);
         gBattleOutcome = B_OUTCOME_FORFEITED;
     }
     else
@@ -5074,13 +5121,13 @@ static void HandleEndTurn_RanFromBattle(void)
         switch (gProtectStructs[gBattlerAttacker].fleeType)
         {
         default:
-            gBattlescriptCurrInstr = BattleScript_GotAwaySafely;
+            gBattlescriptCurrInstr = EmeraldBattleLive_BattleScriptPtr(BattleScript_GotAwaySafely);
             break;
         case FLEE_ITEM:
-            gBattlescriptCurrInstr = BattleScript_SmokeBallEscape;
+            gBattlescriptCurrInstr = EmeraldBattleLive_BattleScriptPtr(BattleScript_SmokeBallEscape);
             break;
         case FLEE_ABILITY:
-            gBattlescriptCurrInstr = BattleScript_RanAwayUsingMonAbility;
+            gBattlescriptCurrInstr = EmeraldBattleLive_BattleScriptPtr(BattleScript_RanAwayUsingMonAbility);
             break;
         }
     }
@@ -5093,7 +5140,7 @@ static void HandleEndTurn_MonFled(void)
     gCurrentActionFuncId = 0;
 
     PREPARE_MON_NICK_BUFFER(gBattleTextBuff1, gBattlerAttacker, gBattlerPartyIndexes[gBattlerAttacker]);
-    gBattlescriptCurrInstr = BattleScript_WildMonFled;
+    gBattlescriptCurrInstr = EmeraldBattleLive_BattleScriptPtr(BattleScript_WildMonFled);
 
     gBattleMainFunc = HandleEndTurn_FinishBattle;
 }

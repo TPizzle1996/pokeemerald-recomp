@@ -131,13 +131,29 @@ int strcmp(const char *, const char*);
 #define T1_READ_8(ptr)  ((ptr)[0])
 #define T1_READ_16(ptr) ((ptr)[0] | ((ptr)[1] << 8))
 #define T1_READ_32(ptr) ((ptr)[0] | ((ptr)[1] << 8) | ((ptr)[2] << 16) | ((ptr)[3] << 24))
+// R13-H5: on linux64 the pointer reads funnel through the battle live
+// seam's central typed reader - words read from a live battle arena
+// span resolve through the relocation source index (word-checked,
+// class-dispatched; legal NULL literals return NULL; refusal is a hard
+// fail-closed stop). Everywhere else (compiled AI/contest families,
+// host-pointer identity, GBA) the legacy HostResolveGbaAddr path
+// applies unchanged.
+#if defined(LINUX64) && LINUX64
+void *EmeraldBattleLive_ReadPointerOperand(const uint8_t *operandAddress);
+#define T1_READ_PTR(ptr) ((u8 *)EmeraldBattleLive_ReadPointerOperand((const u8 *)(ptr)))
+#else
 #define T1_READ_PTR(ptr) ((u8 *)HostResolveGbaAddr(T1_READ_32(ptr)))
+#endif
 
 // T2_READ_8 is a duplicate to remain consistent with each group.
 #define T2_READ_8(ptr)  ((ptr)[0])
 #define T2_READ_16(ptr) ((ptr)[0] + ((ptr)[1] << 8))
 #define T2_READ_32(ptr) ((ptr)[0] + ((ptr)[1] << 8) + ((ptr)[2] << 16) + ((ptr)[3] << 24))
+#if defined(LINUX64) && LINUX64
+#define T2_READ_PTR(ptr) ((void *)EmeraldBattleLive_ReadPointerOperand((const u8 *)(ptr)))
+#else
 #define T2_READ_PTR(ptr) ((void *)HostResolveGbaAddr(T2_READ_32(ptr)))
+#endif
 
 #define PACK(data, shift, mask)   ( ((data) << (shift)) & (mask) )
 #define UNPACK(data, shift, mask) ( ((data) & (mask)) >> (shift) )

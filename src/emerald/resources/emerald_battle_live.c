@@ -1,26 +1,45 @@
-/* R13-H4 production live seam: battle-anim + field-effect arenas.
+/* R13-H4/H5 production live seam: battle + battle-anim + field-effect
+ * arenas.
  *
- * This seam is the FIRST live H-family cutover (brief sec 17). It stages
- * the anim (63,811 B) and field-effect (817 B) arena payloads from the
- * pack into one host buffer, registers exactly two live ranges (6,377 ->
- * 6,379), publishes live execution, and then resolves every animation /
- * field-effect script pointer the interpreters read through a typed,
- * metadata-driven path - NEVER through HostResolveGbaAddr identity
- * arithmetic and NEVER back to compiled payloads (brief sec 8/9/23).
+ * H4 made the FIRST live H-family cutover (anim + field-effect, 2
+ * ranges). H5 adds the battle-script family: the seam stages the
+ * battle (14,413 B hull), anim (63,811 B) and field-effect (817 B)
+ * arena payloads from the pack into one host buffer, registers exactly
+ * three live ranges (6,377 -> 6,380), publishes live execution, and
+ * then resolves every battle / animation / field-effect script pointer
+ * the interpreters read through a typed, metadata-driven path - NEVER
+ * through HostResolveGbaAddr identity arithmetic and NEVER back to
+ * compiled payloads (brief sec 8/9/23).
  *
- * Transaction order (brief sec 4): validate anim surface -> validate FE
- * surface -> stage the generation -> register the 2 ranges -> publish.
- * No partial cutover: every failure before publish leaves the compiled
- * runtime untouched; every failure after ranges registered rolls the
- * ranges back by exact identity. The loader drives this and refuses the
- * session on any failure (see emerald_runtime_loader.c).
+ * Transaction order (brief sec 4): validate pack surfaces -> stage the
+ * generation -> register the 3 ranges -> publish. No partial cutover:
+ * every failure before publish leaves the compiled runtime untouched;
+ * every failure after ranges registered rolls the ranges back by exact
+ * identity. The loader drives this and refuses the session on any
+ * failure (see emerald_runtime_loader.c).
  *
  * The weak state-adapter bridge (emerald_battle_state.c) resolves
  * through the six EmeraldBattleCompat_* functions this seam provides -
  * the same symbols the harness-only H3 shadow seam provides, and the
- * two never link into the same binary. The adapter gates anim/FE
- * surfaces live; battle/AI/contest surfaces report NOT_BATTLE
+ * two never link into the same binary. The adapter gates battle/anim/
+ * FE surfaces live; AI/contest surfaces report NOT_BATTLE
  * (family-live policy).
+ *
+ * H5 battle resolution specifics:
+ *  - the central pointer-operand reader (ReadPointerOperand) backs
+ *    T1_READ_PTR/T2_READ_PTR on linux64: battle-arena operand words
+ *    resolve through the relocation source index with the word check
+ *    (brief sec 6/7); legal NULL literals (no reloc row, word 0)
+ *    return NULL; anything else is a hard fail-closed refusal;
+ *  - EWRAM operands resolve as semantic base + validated addend via
+ *    the native-address TU (battle_live_native.generated.c); no
+ *    GBA->host arithmetic anywhere (brief sec 15/16);
+ *  - the 5 battle routing tables are arena-owned: rows are read from
+ *    the canonical arena bytes and each row word resolves as a
+ *    SCRIPT_TARGET root (brief sec 12);
+ *  - direct C label references (BattleScript_Get) resolve through the
+ *    compiled-label map (native symbol -> canonical GBA word -> arena
+ *    root export; brief sec 11/14).
  *
  * Refuse-only bindings: four engine bindings whose native symbols do
  * not exist in this fork (upstream battle_anim_mist.c /
@@ -42,6 +61,9 @@
 #include "emerald/resources/emerald_trainer_native_compat.h" /* GetRangeIndex */
 #include "emerald/resources/battle_live.generated.h"
 
+/* host_memory.c (GbaAddr == uint32_t; the seam stays global.h-free). */
+void *HostResolveGbaAddr(uint32_t addr);
+
 /* Weak coupling to the production animation interpreter (battle_anim.c):
  * the seam's Publish calls RegisterStateLayout to hand the State-v5
  * adapter its live surface layout, and StageGeneration probes
@@ -52,6 +74,13 @@ extern void BattleAnimCompat_RegisterStateLayout(void);
 #pragma weak BattleAnimCompat_RegisterStateLayout
 extern bool BattleAnimCompat_IsAnimActive(void);
 #pragma weak BattleAnimCompat_IsAnimActive
+/* H5: the battle interpreter's State-v5 surface layout + the battle
+ * quiescence probe (an in-progress battle refuses generation
+ * replacement). Weak like the anim hooks. */
+extern void BattleScriptCompat_RegisterStateLayout(void);
+#pragma weak BattleScriptCompat_RegisterStateLayout
+extern bool BattleScriptCompat_IsBattleActive(void);
+#pragma weak BattleScriptCompat_IsBattleActive
 
 struct EmeraldBattleLiveGeneration
 {
@@ -150,14 +179,31 @@ static const struct EmeraldBattleLiveAlias *FindAlias(const char *id)
     return NULL;
 }
 
-/* The two live families: pack records for anim + FE only. Battle/AI/
- * contest records are the H3 shadow's domain and never reach this seam. */
+/* The three live families: pack records for battle + anim + FE only.
+ * AI/contest records are the H3 shadow's domain and never reach this
+ * seam. */
 static bool IsLiveFamilyEntry(const char *canonicalName)
 {
-    return strncmp(canonicalName, "emerald:battle-anim-script/",
+    return strncmp(canonicalName, "emerald:battle-script/",
+                   strlen("emerald:battle-script/")) == 0
+        || strncmp(canonicalName, "emerald:battle-anim-script/",
                    strlen("emerald:battle-anim-script/")) == 0
         || strncmp(canonicalName, "emerald:field-effect-script/",
                    strlen("emerald:field-effect-script/")) == 0;
+}
+
+/* Family gate: a family is live when a live arena row carries it. */
+static bool IsLiveFamily(uint32_t family)
+{
+    const struct EmeraldBattleLiveTable *t = &kEmeraldBattleLiveTable;
+    uint32_t arena;
+
+    for (arena = 0u; arena < t->arenaCount; arena++)
+    {
+        if (t->arenas[arena].family == family)
+            return true;
+    }
+    return false;
 }
 
 static void ArenaCanonicalName(uint32_t arena, char *out, size_t cap)
@@ -167,6 +213,8 @@ static void ArenaCanonicalName(uint32_t arena, char *out, size_t cap)
 
     if (arena >= t->arenaCount)
         name = "";
+    else if (t->arenas[arena].family == EMERALD_BATTLE_FAMILY_BATTLE_SCRIPT)
+        name = "battle-script";
     else if (t->arenas[arena].family == EMERALD_BATTLE_FAMILY_BATTLE_ANIM_SCRIPT)
         name = "battle-anim-script";
     else
@@ -361,12 +409,16 @@ static enum EmeraldBattleLiveStatus StageGeneration(
 
     if (layout >= EMERALD_BATTLE_LIVE_LAYOUT_COUNT)
         return EMERALD_BATTLE_LIVE_ERR_INVALID_ARGUMENT;
-    /* Brief sec 25: a running animation VM whose instruction pointer
-     * lives in the current buffer must never be orphaned by a
-     * replacement. The weak probe is defined by the production anim
-     * interpreter; NULL (harness builds without battle_anim.c) skips. */
+    /* Brief sec 25/26 quiescence: a running animation VM or an
+     * in-progress battle whose instruction pointers live in the current
+     * buffer must never be orphaned by a replacement. The weak probes
+     * are defined by the production interpreters; NULL (harness builds
+     * without battle_anim.c / battle_main.c) skips. */
     if (sPublished && BattleAnimCompat_IsAnimActive != NULL
      && BattleAnimCompat_IsAnimActive())
+        return EMERALD_BATTLE_LIVE_ERR_BUSY;
+    if (sPublished && BattleScriptCompat_IsBattleActive != NULL
+     && BattleScriptCompat_IsBattleActive())
         return EMERALD_BATTLE_LIVE_ERR_BUSY;
     for (arena = 0u; arena < t->arenaCount; arena++)
         bufferSize += t->arenas[arena].layoutSize[layout];
@@ -607,8 +659,7 @@ enum EmeraldBattleLiveStatus EmeraldBattleLive_ResolveScriptTarget(
 
     if (outPointer == NULL)
         return EMERALD_BATTLE_LIVE_ERR_INVALID_ARGUMENT;
-    if (family != EMERALD_BATTLE_FAMILY_BATTLE_ANIM_SCRIPT
-     && family != EMERALD_BATTLE_FAMILY_FIELD_EFFECT_SCRIPT)
+    if (!IsLiveFamily(family))
         return EMERALD_BATTLE_LIVE_ERR_INVALID_ARGUMENT;
     if (!sPublished)
         return EMERALD_BATTLE_LIVE_ERR_NOT_PUBLISHED;
@@ -651,8 +702,7 @@ enum EmeraldBattleLiveStatus EmeraldBattleLive_ResolveLaunchTarget(
 
     if (outPointer == NULL)
         return EMERALD_BATTLE_LIVE_ERR_INVALID_ARGUMENT;
-    if (family != EMERALD_BATTLE_FAMILY_BATTLE_ANIM_SCRIPT
-     && family != EMERALD_BATTLE_FAMILY_FIELD_EFFECT_SCRIPT)
+    if (!IsLiveFamily(family))
         return EMERALD_BATTLE_LIVE_ERR_INVALID_ARGUMENT;
     if (!sPublished)
         return EMERALD_BATTLE_LIVE_ERR_NOT_PUBLISHED;
@@ -712,11 +762,203 @@ enum EmeraldBattleLiveStatus EmeraldBattleLive_ResolveOperand(
     {
         const struct EmeraldBattleLiveBinding *binding =
             &t->bindings[reloc->target];
-        if (binding->address == 0u)
+        uintptr_t address = binding->address;
+
+        /* A (EWRAM) and battle B (string-ID table) rows resolve through
+         * the native-address TU; the platform-neutral table carries 0. */
+        if (address == 0u)
+            address = EmeraldBattleLiveNative_BindingAddress(reloc->target);
+        if (address == 0u)
             return EMERALD_BATTLE_LIVE_ERR_REFUSED;
-        *outPointer = binding->address;
+        /* Brief sec 15/16: EWRAM resolves as semantic base + validated
+         * addend - never GBA->host arithmetic. The stored word already
+         * pinned (base + addend) in the generated table; the addend
+         * must stay inside the symbol's ELF size bound. */
+        if (binding->letter == 'A')
+        {
+            if (binding->addend >= binding->allowedOffset)
+                return EMERALD_BATTLE_LIVE_ERR_REFUSED;
+            *outPointer = address + binding->addend;
+        }
+        else
+        {
+            *outPointer = address;
+        }
         return EMERALD_BATTLE_LIVE_OK;
     }
+}
+
+/* ------------------------------------------------------------------ */
+/* H5 battle routing + direct entry + compiled-label translation.      */
+
+enum EmeraldBattleLiveStatus EmeraldBattleLive_ResolveRoutingTarget(
+    uint32_t tableWord, uint32_t rowIndex, uintptr_t *outPointer)
+{
+    const struct EmeraldBattleLiveTable *t = &kEmeraldBattleLiveTable;
+    uint32_t moduleIndex;
+    uint32_t moduleOffset;
+    const struct EmeraldBattleLiveModule *module;
+    uint32_t rowCount;
+    uint32_t word;
+
+    if (outPointer == NULL)
+        return EMERALD_BATTLE_LIVE_ERR_INVALID_ARGUMENT;
+    if (!sPublished)
+        return EMERALD_BATTLE_LIVE_ERR_NOT_PUBLISHED;
+    if (sGeneration == NULL)
+        return EMERALD_BATTLE_LIVE_ERR_UNAVAILABLE;
+    if (!GbaContain(tableWord, &moduleIndex, &moduleOffset))
+        return EMERALD_BATTLE_LIVE_ERR_TARGET_UNRESOLVED;
+    module = &t->modules[moduleIndex];
+    /* The table word must denote the routing module's own start. */
+    if (moduleOffset != 0u
+     || module->family != EMERALD_BATTLE_FAMILY_BATTLE_SCRIPT
+     || module->mapKind != EMERALD_BATTLE_MAP_ROUTING)
+        return EMERALD_BATTLE_LIVE_ERR_BOUNDARY_INVALID;
+    rowCount = module->byteCount / 4u;
+    if (rowIndex >= rowCount)
+        return EMERALD_BATTLE_LIVE_ERR_BOUNDARY_INVALID;
+    /* The canonical row is read from the ARENA - the compiled routing
+     * table is dead at runtime (brief sec 12/24). */
+    word = ReadWord(SpanBase(moduleIndex) + (size_t)rowIndex * 4u);
+    return EmeraldBattleLive_ResolveScriptTarget(
+        EMERALD_BATTLE_FAMILY_BATTLE_SCRIPT, word, outPointer);
+}
+
+enum EmeraldBattleLiveStatus EmeraldBattleLive_GetBattleScript(
+    uint32_t word, uintptr_t *outPointer)
+{
+    const struct EmeraldBattleLiveTable *t = &kEmeraldBattleLiveTable;
+    uint32_t moduleIndex;
+    uint32_t moduleOffset;
+
+    if (outPointer == NULL)
+        return EMERALD_BATTLE_LIVE_ERR_INVALID_ARGUMENT;
+    if (!sPublished)
+        return EMERALD_BATTLE_LIVE_ERR_NOT_PUBLISHED;
+    if (sGeneration == NULL)
+        return EMERALD_BATTLE_LIVE_ERR_UNAVAILABLE;
+    if (!GbaContain(word, &moduleIndex, &moduleOffset))
+        return EMERALD_BATTLE_LIVE_ERR_TARGET_UNRESOLVED;
+    if (t->modules[moduleIndex].family != EMERALD_BATTLE_FAMILY_BATTLE_SCRIPT)
+        return EMERALD_BATTLE_LIVE_ERR_WRONG_FAMILY;
+    /* A direct entry is an export identity at the exact offset (root or
+     * alias export; interior instructions never enter here). */
+    if (ValidateBoundaryInternal(moduleIndex, moduleOffset,
+                                 EMERALD_BATTLE_BOUNDARY_ENTRYPOINT)
+            != EMERALD_BATTLE_LIVE_OK)
+        return EMERALD_BATTLE_LIVE_ERR_BOUNDARY_INVALID;
+    *outPointer = (uintptr_t)SpanBase(moduleIndex) + moduleOffset;
+    return EMERALD_BATTLE_LIVE_OK;
+}
+
+enum EmeraldBattleLiveStatus EmeraldBattleLive_ResolveCompiledLabel(
+    const void *nativeSymbolAddress, uintptr_t *outPointer)
+{
+    const struct EmeraldBattleLiveTable *t = &kEmeraldBattleLiveTable;
+    uint32_t i;
+
+    if (outPointer == NULL || nativeSymbolAddress == NULL)
+        return EMERALD_BATTLE_LIVE_ERR_INVALID_ARGUMENT;
+    if (!sPublished)
+        return EMERALD_BATTLE_LIVE_ERR_NOT_PUBLISHED;
+    /* Linear scan over the label map (645 rows); entry sites are not
+     * hot loops and the map keeps the platform-neutral table free of
+     * link-time addresses. */
+    for (i = 0u; i < t->labelCount; i++)
+    {
+        if (EmeraldBattleLiveNative_LabelAddress(i)
+                == (uintptr_t)nativeSymbolAddress)
+            return EmeraldBattleLive_GetBattleScript(t->labels[i].word,
+                                                     outPointer);
+    }
+    return EMERALD_BATTLE_LIVE_ERR_TARGET_UNRESOLVED;
+}
+
+/* ------------------------------------------------------------------ */
+/* Fail-closed C-site accessors (BattleScript_Get / routing reads).    */
+
+const uint8_t *EmeraldBattleLive_BattleScriptPtr(
+    const void *nativeSymbolAddress)
+{
+    uintptr_t pointer = 0u;
+
+    if (EmeraldBattleLive_ResolveCompiledLabel(nativeSymbolAddress,
+                                               &pointer)
+            != EMERALD_BATTLE_LIVE_OK)
+    {
+        fprintf(stderr,
+                "emerald battle live: compiled battle label @ %p is not a "
+                "mapped live root - refusing (no compiled fallback)\n",
+                nativeSymbolAddress);
+        abort();
+    }
+    return (const uint8_t *)pointer;
+}
+
+const uint8_t *EmeraldBattleLive_RoutingScriptPtr(uint32_t tableWord,
+                                                  uint32_t rowIndex)
+{
+    uintptr_t pointer = 0u;
+
+    if (EmeraldBattleLive_ResolveRoutingTarget(tableWord, rowIndex, &pointer)
+            != EMERALD_BATTLE_LIVE_OK)
+    {
+        fprintf(stderr,
+                "emerald battle live: routing row (table 0x%08x[%u]) "
+                "refused - no compiled fallback\n", tableWord, rowIndex);
+        abort();
+    }
+    return (const uint8_t *)pointer;
+}
+
+/* ------------------------------------------------------------------ */
+/* Central pointer-operand reader (T1_READ_PTR/T2_READ_PTR body).      */
+
+void *EmeraldBattleLive_ReadPointerOperand(const uint8_t *operandAddress)
+{
+    const struct EmeraldBattleLiveTable *t = &kEmeraldBattleLiveTable;
+    uint32_t word;
+    uint32_t moduleIndex;
+    uint32_t moduleOffset;
+    uintptr_t pointer;
+
+    word = ReadWord(operandAddress);
+    /* Operand words read OUTSIDE any live battle arena span keep the
+     * legacy path: compiled families' words are native host addresses
+     * (identity), host-pointer words pass through unchanged. */
+    if (!sPublished || sGeneration == NULL
+     || !ReverseContain((uintptr_t)operandAddress, &moduleIndex,
+                        &moduleOffset))
+        return HostResolveGbaAddr(word);
+    if (t->modules[moduleIndex].family
+            != EMERALD_BATTLE_FAMILY_BATTLE_SCRIPT)
+        return HostResolveGbaAddr(word);
+    /* Inside a live battle arena span: typed resolution only. Legal
+     * NULL literals (a pointer operand slot with a stored 0 and no
+     * relocation row - the H1 NULL-literal census) return NULL; a
+     * nonzero word with no relocation row is a hard refusal. */
+    if (FindReloc(moduleIndex, moduleOffset) == NULL)
+    {
+        if (word == 0u)
+            return NULL;
+        fprintf(stderr,
+                "emerald battle live: pointer operand @ %p (module %u"
+                "+%u) has no relocation row (word 0x%08x) - refusing\n",
+                (const void *)operandAddress, moduleIndex, moduleOffset,
+                word);
+        abort();
+    }
+    if (EmeraldBattleLive_ResolveOperand((uintptr_t)operandAddress,
+                                         &pointer) != EMERALD_BATTLE_LIVE_OK)
+    {
+        fprintf(stderr,
+                "emerald battle live: pointer operand @ %p (word 0x%08x) "
+                "refused - no compiled fallback\n",
+                (const void *)operandAddress, word);
+        abort();
+    }
+    return (void *)pointer;
 }
 
 /* ------------------------------------------------------------------ */
@@ -841,12 +1083,14 @@ enum EmeraldBattleLiveStatus EmeraldBattleLive_Publish(void)
     if (!sRangesRegistered)
         return EMERALD_BATTLE_LIVE_ERR_RANGE_REGISTRATION;
     sPublished = true;
-    /* Hand the State-v5 adapter its live surface layout (the anim IP /
-     * return / callback field addresses; arena bases are looked up live
-     * through GetArena on every capture, so a later generation
-     * replacement needs no rebind). */
+    /* Hand the State-v5 adapter its live surface layouts (anim IP /
+     * return / callback field addresses + the battle VM surfaces; arena
+     * bases are looked up live through GetArena on every capture, so a
+     * later generation replacement needs no rebind). */
     if (BattleAnimCompat_RegisterStateLayout != NULL)
         BattleAnimCompat_RegisterStateLayout();
+    if (BattleScriptCompat_RegisterStateLayout != NULL)
+        BattleScriptCompat_RegisterStateLayout();
     return EMERALD_BATTLE_LIVE_OK;
 }
 
@@ -894,8 +1138,8 @@ bool EmeraldBattleCompat_GetArena(uint32_t family, const uint8_t **outBase,
 
     if (sGeneration == NULL || outBase == NULL || outSize == NULL)
         return false;
-    /* Arena rows are family-attributed; only the two live families can
-     * be requested (battle/AI/contest report false). */
+    /* Arena rows are family-attributed; only the live families can be
+     * requested (AI/contest report false). */
     for (arena = 0u; arena < t->arenaCount; arena++)
     {
         if (t->arenas[arena].family == family)

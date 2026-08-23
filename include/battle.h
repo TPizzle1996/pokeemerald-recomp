@@ -662,6 +662,10 @@ extern u8 gAbsentBattlerFlags;
 extern u8 gCritMultiplier;
 extern u8 gMultiHitCounter;
 extern const u8 *gBattlescriptCurrInstr;
+// R13-H5 battle interpreter hooks for the production live seam (defined
+// in battle_main.c; weak-probed by emerald_battle_live.c).
+void BattleScriptCompat_RegisterStateLayout(void);
+bool BattleScriptCompat_IsBattleActive(void);
 extern u32 gUnusedBattleMainVar;
 extern u8 gChosenActionByBattler[MAX_BATTLERS_COUNT];
 extern const u8 *gSelectionBattleScripts[MAX_BATTLERS_COUNT];

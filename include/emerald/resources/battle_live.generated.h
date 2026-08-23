@@ -14,18 +14,41 @@
 #include <stdint.h>
 #include "emerald/resources/battle_native.generated.h"
 
-#define EMERALD_BATTLE_LIVE_ARENA_COUNT 2u
-#define EMERALD_BATTLE_LIVE_MODULE_COUNT 726u
-#define EMERALD_BATTLE_LIVE_PAYLOAD_MODULE_COUNT 723u
-#define EMERALD_BATTLE_LIVE_ALIAS_COUNT 3u
-#define EMERALD_BATTLE_LIVE_BOUNDARY_COUNT 9818u
-#define EMERALD_BATTLE_LIVE_EXPORT_ROW_COUNT 734u
-#define EMERALD_BATTLE_LIVE_RELOC_COUNT 4401u
-#define EMERALD_BATTLE_LIVE_BINDING_COUNT 620u
+#define EMERALD_BATTLE_LIVE_ARENA_COUNT 3u
+#define EMERALD_BATTLE_LIVE_MODULE_COUNT 1371u
+#define EMERALD_BATTLE_LIVE_PAYLOAD_MODULE_COUNT 1363u
+#define EMERALD_BATTLE_LIVE_ALIAS_COUNT 8u
+#define EMERALD_BATTLE_LIVE_BOUNDARY_COUNT 13446u
+#define EMERALD_BATTLE_LIVE_EXPORT_ROW_COUNT 1391u
+#define EMERALD_BATTLE_LIVE_RELOC_COUNT 5963u
+#define EMERALD_BATTLE_LIVE_BINDING_COUNT 718u
 #define EMERALD_BATTLE_LIVE_REFUSE_ONLY_BINDING_COUNT 4u
-#define EMERALD_BATTLE_LIVE_SCRIPT_TARGET_WORD_COUNT 715u
-#define EMERALD_BATTLE_LIVE_CANONICAL_BYTES 64628u
+#define EMERALD_BATTLE_LIVE_SCRIPT_TARGET_WORD_COUNT 1172u
+#define EMERALD_BATTLE_LIVE_CANONICAL_BYTES 78220u
 #define EMERALD_BATTLE_LIVE_LAYOUT_COUNT 2u
+#define EMERALD_BATTLE_LIVE_ROUTING_COUNT 5u
+#define EMERALD_BATTLE_LIVE_LABEL_COUNT 199u
+#define EMERALD_BATTLE_LIVE_GRAMMAR_ENTRY_COUNT 300u
+
+struct EmeraldBattleLiveGrammarEntry
+{
+    uint8_t opcode;
+    uint8_t size;
+    uint8_t operandCount;
+    uint8_t widths[4];
+};
+
+/* Battle routing tables (H1 sec 6): the canonical GBA address of
+ * each pointer-bearing routing module. The live seam reads the
+ * arena-owned rows; the compiled tables are dead at runtime. */
+enum EmeraldBattleLiveRouting
+{
+    EMERALD_BATTLE_ROUTING_MOVEEFFECTS = 0u, /* emerald:battle-script/g-battle-scripts-for-move-effects @ 0x82d86a8 */
+    EMERALD_BATTLE_ROUTING_BALLTHROW = 1u, /* emerald:battle-script/g-battlescripts-for-ball-throw @ 0x82dbd08 */
+    EMERALD_BATTLE_ROUTING_USINGITEM = 2u, /* emerald:battle-script/g-battlescripts-for-using-item @ 0x82dbd3c */
+    EMERALD_BATTLE_ROUTING_RUNNINGBYITEM = 3u, /* emerald:battle-script/g-battlescripts-for-running-by-item @ 0x82dbd54 */
+    EMERALD_BATTLE_ROUTING_SAFARIACTIONS = 4u, /* emerald:battle-script/g-battlescripts-for-safari-actions @ 0x82dbd58 */
+};
 
 enum EmeraldBattleLiveRelocClass
 {
@@ -34,6 +57,7 @@ enum EmeraldBattleLiveRelocClass
     EMERALD_BATTLE_LIVE_RELOC_ENGINE_CALLBACK = 2u,
     EMERALD_BATTLE_LIVE_RELOC_ENGINE_GFX_TARGET = 3u,
     EMERALD_BATTLE_LIVE_RELOC_ENGINE_TABLE_TARGET = 4u,
+    EMERALD_BATTLE_LIVE_RELOC_ENGINE_EWRAM_TARGET = 5u,
 };
 
 struct EmeraldBattleLiveArena
@@ -82,9 +106,20 @@ struct EmeraldBattleLiveAlias
 struct EmeraldBattleLiveBinding
 {
     const char *name;
-    uint8_t letter; /* 'B' | 'C' | 'D' | 'E' | 'F' */
-    uint32_t word; /* encoded GBA value (canonical word) */
+    uint8_t letter; /* 'A'..'F' */
+    uint32_t word; /* stored word (base + addend for 'A') */
     uintptr_t address; /* native host address; 0 = refuse-only */
+    uint32_t baseWord; /* 'A': encoded base value; else = word */
+    uint32_t addend; /* 'A': validated field offset */
+    uint32_t allowedOffset; /* 'A': ELF size bound */
+};
+
+struct EmeraldBattleLiveLabel
+{
+    const char *name;
+    uint32_t word; /* canonical GBA address of the root */
+    uint32_t module; /* payload module index */
+    uint32_t offset; /* payload offset of the export */
 };
 
 struct EmeraldBattleLiveReloc
@@ -112,6 +147,7 @@ struct EmeraldBattleLiveTable
     uint32_t refuseOnlyBindingCount;
     uint32_t scriptTargetWordCount;
     uint32_t canonicalBytes;
+    uint32_t labelCount;
     const struct EmeraldBattleLiveArena *arenas;
     const struct EmeraldBattleLiveModule *modules;
     const struct EmeraldBattleNativeBoundary *boundaries;
@@ -120,8 +156,16 @@ struct EmeraldBattleLiveTable
     const struct EmeraldBattleLiveReloc *relocs;
     const struct EmeraldBattleLiveBinding *bindings;
     const uint32_t *scriptTargetWords;
+    const struct EmeraldBattleLiveLabel *labels;
+    const struct EmeraldBattleLiveGrammarEntry *grammar;
 };
 
 extern const struct EmeraldBattleLiveTable kEmeraldBattleLiveTable;
+
+/* Native-address accessors (battle_live_native.generated.c;
+ * production-linked). Return 0 for out-of-range / non-native
+ * rows. */
+uintptr_t EmeraldBattleLiveNative_BindingAddress(uint32_t index);
+uintptr_t EmeraldBattleLiveNative_LabelAddress(uint32_t index);
 
 #endif /* EMERALD_RESOURCES_BATTLE_LIVE_GENERATED_H */

@@ -10,6 +10,7 @@
 #include "constants/abilities.h"
 #include "random.h"
 #include "battle_scripts.h"
+#include "emerald/resources/emerald_battle_live.h" /* H5 typed battle resolution */
 #include "constants/battle_string_ids.h"
 
 void AllocateBattleResources(void)
@@ -30,6 +31,11 @@ void AllocateBattleResources(void)
     gBattleResources->ai = AllocZeroed(sizeof(*gBattleResources->ai));
     gBattleResources->battleHistory = AllocZeroed(sizeof(*gBattleResources->battleHistory));
     gBattleResources->AI_ScriptsStack = AllocZeroed(sizeof(*gBattleResources->AI_ScriptsStack));
+
+    // R13-H5: rebind the State-v5 battle surface layout now that the
+    // per-battle stack allocations exist (the heap slot addresses are
+    // stable for the battle's lifetime).
+    BattleScriptCompat_RegisterStateLayout();
 
     gLinkBattleSendBuffer = AllocZeroed(BATTLE_BUFFER_LINK_SIZE);
     gLinkBattleRecvBuffer = AllocZeroed(BATTLE_BUFFER_LINK_SIZE);
@@ -138,7 +144,7 @@ u32 BattlePalace_TryEscapeStatus(u8 battler)
                     gBattleMons[battler].status2 &= ~(STATUS2_NIGHTMARE);
                     BattleScriptPushCursor();
                     gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WOKE_UP_UPROAR;
-                    gBattlescriptCurrInstr = BattleScript_MoveUsedWokeUp;
+                    gBattlescriptCurrInstr = EmeraldBattleLive_BattleScriptPtr(BattleScript_MoveUsedWokeUp);
                     effect = 2;
                 }
                 else
@@ -159,7 +165,7 @@ u32 BattlePalace_TryEscapeStatus(u8 battler)
                     if (gBattleMons[battler].status1 & STATUS1_SLEEP)
                     {
                         // Still asleep
-                        gBattlescriptCurrInstr = BattleScript_MoveUsedIsAsleep;
+                        gBattlescriptCurrInstr = EmeraldBattleLive_BattleScriptPtr(BattleScript_MoveUsedIsAsleep);
                         effect = 2;
                     }
                     else
@@ -168,7 +174,7 @@ u32 BattlePalace_TryEscapeStatus(u8 battler)
                         gBattleMons[battler].status2 &= ~(STATUS2_NIGHTMARE);
                         BattleScriptPushCursor();
                         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WOKE_UP;
-                        gBattlescriptCurrInstr = BattleScript_MoveUsedWokeUp;
+                        gBattlescriptCurrInstr = EmeraldBattleLive_BattleScriptPtr(BattleScript_MoveUsedWokeUp);
                         effect = 2;
                     }
                 }
@@ -181,14 +187,14 @@ u32 BattlePalace_TryEscapeStatus(u8 battler)
                 if (Random() % 5 != 0)
                 {
                     // Still frozen
-                    gBattlescriptCurrInstr = BattleScript_MoveUsedIsFrozen;
+                    gBattlescriptCurrInstr = EmeraldBattleLive_BattleScriptPtr(BattleScript_MoveUsedIsFrozen);
                 }
                 else
                 {
                     // Unfreeze
                     gBattleMons[battler].status1 &= ~(STATUS1_FREEZE);
                     BattleScriptPushCursor();
-                    gBattlescriptCurrInstr = BattleScript_MoveUsedUnfroze;
+                    gBattlescriptCurrInstr = EmeraldBattleLive_BattleScriptPtr(BattleScript_MoveUsedUnfroze);
                     gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_DEFROSTED;
                 }
                 effect = 2;

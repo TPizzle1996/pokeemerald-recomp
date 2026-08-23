@@ -676,6 +676,32 @@ each is a safe standalone gate:
   handoff edges. Gate: stepwise oracle over the 249-opcode table (real +
   synthetic fixtures), trainer/safari/tower/palace/link flows, the G6
   battery, no compiled battle-script fallback.
+  **COMPLETE (2026-08-23):** the battle VM executes from the H arena.
+  Live ranges **6,380 / 8,192** (6,377 + 3 H ranges: battle/anim/FE;
+  STOP condition not hit). Battle: 645 modules (640 payload + 5
+  zero-width aliases), 13,592 canonical B, 1,562 relocs (993
+  SCRIPT_TARGET + 488 EWRAM + 81 TABLE) all resolving typed; 238
+  routing rows (5 tables: 214+13+6+1+4) read from the ARENA (compiled
+  tables dead at runtime); 488 EWRAM operands resolve as semantic base
+  + validated addend (50 rows, 23 symbols; zero GBA->host arithmetic);
+  275 direct C label sites + 22 routing sites + 7 `sMoveEffectBS_Ptrs`
+  reads converted through the compiled-label map (199 labels, the
+  native-address TU `battle_live_native.generated.c`); the central
+  pointer-operand reader backs T1_READ_PTR/T2_READ_PTR (typed for
+  battle arena operands, legacy for AI/contest/G); `sTrainerBattleEndScript`
+  stays G-class; STRINGID text and ID-routed animation untouched;
+  battle AI/contest AI unchanged/compiled; State-v5 battle surfaces
+  live (layout bound at Publish + rebind at BattleAllocResources);
+  mandatory nested blocking fresh-process proof green (waitmessage IP +
+  two IP+5 returns in different modules across gen A->B at a
+  forced-different arena base); 249-opcode differential green (3,390
+  qualified instructions decode; 238 real + 11 synthetic slots);
+  battle fault matrix 8/8; generation replacement 6,380 invariant with
+  the battle quiescence gate (`gBattleTypeFlags != 0`); pack invariant
+  23,069; ownership stays COMPILED_PENDING_MIGRATION; release
+  23,913,784 B (+226,488), DINFO 36,644,768 B (+210,336), both verify
+  f3ae0881…d07b7. Report:
+  `docs/R13H5_BATTLE_SCRIPT_LIVE_CUTOVER_REPORT.md`.
 - **H6 — AI + contest AI live cutover.** Gate: AI stepwise oracle
   (opcode, score[], aiState, control flow, chosen move), contest flows.
 - **H7 — compiled H removal and isolation.** Remove all five families from

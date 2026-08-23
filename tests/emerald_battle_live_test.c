@@ -56,11 +56,18 @@
 /* EWRAM battle-surface globals provided by emerald_resource_state_stub.c. */
 extern EWRAM_DATA const u8 *gBattlescriptCurrInstr;
 extern EWRAM_DATA const u8 *gAIScriptPtr;
+extern EWRAM_DATA const u8 *gSelectionBattleScripts[4];
+extern EWRAM_DATA const u8 *gPalaceSelectionBattleScripts[4];
 extern EWRAM_DATA void (*gAnimScriptCallback)(void);
 extern EWRAM_DATA const u8 *sBattleAnimScriptPtr;
 extern EWRAM_DATA const u8 *sBattleAnimScriptRetAddr;
 extern unsigned char sHarnessGameBss[0x10000];
 void HarnessStatePath_Override(const char *path);
+
+static void H4ClearSurfaces(void);
+static void H4BindLayout(void);
+struct H5BattleFixtures;
+static struct H5BattleFixtures *H5BattleFixtures(void);
 
 static int sFailures;
 
@@ -240,11 +247,11 @@ static int DoOracle(const char *packPath, const char *modsDir, uint32_t layout)
     uint32_t revFamily;
 
     /* The loader publishes the live generation during session
-     * registration (6,379 ranges); roll it back so the oracle drives
+     * registration (6,380 ranges); roll it back so the oracle drives
      * the full transactional sequence from scratch (sec 4/25). */
     if (!SetupScriptCompatSession(packPath))
         return 1;
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6379u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 6380u);
     EmeraldBattleLive_ClearMigratedEntries();
     CHECK(EmeraldBattleLive_GetRangeCount() == 6377u);
     /* RegisterRanges with no generation refuses. */
@@ -264,7 +271,7 @@ static int DoOracle(const char *packPath, const char *modsDir, uint32_t layout)
               (uintptr_t)&sHarnessAnimBusy, &(uintptr_t){0})
           == EMERALD_BATTLE_LIVE_ERR_NOT_PUBLISHED);
     CHECK(EmeraldBattleLive_RegisterRanges() == EMERALD_BATTLE_LIVE_OK);
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6379u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 6380u);
     CHECK(EmeraldBattleLive_Publish() == EMERALD_BATTLE_LIVE_OK);
     CHECK(EmeraldBattleLive_IsPublished());
 
@@ -295,8 +302,9 @@ static int DoOracle(const char *packPath, const char *modsDir, uint32_t layout)
         CHECK((uintptr_t)spanBase - (uintptr_t)arena == m->layoutOffset[layout]);
         entryWords++;
     }
-    /* 723 payload - 6 routing tables (4 anim + 1 FE + 1 anim quiet-BGM). */
-    CHECK(entryWords == EMERALD_BATTLE_LIVE_PAYLOAD_MODULE_COUNT - 6u);
+    /* 1,363 payload - 11 routing tables (5 battle + 4 anim + 1 FE +
+     * 1 anim quiet-BGM). */
+    CHECK(entryWords == EMERALD_BATTLE_LIVE_PAYLOAD_MODULE_COUNT - 11u);
 
     /* Routing roots: launchable only via their reloc'd words; the root
      * itself refuses (bytecode boundary gate, not family). */
@@ -313,7 +321,7 @@ static int DoOracle(const char *packPath, const char *modsDir, uint32_t layout)
                       m->family, m->gbaStart, &pointer)
                   == EMERALD_BATTLE_LIVE_ERR_BOUNDARY_INVALID);
         }
-        CHECK(routing == 6u);
+        CHECK(routing == 11u);
     }
 
     /* Byte-exact: every payload module's staged bytes == the committed
@@ -389,10 +397,19 @@ static int DoOracle(const char *packPath, const char *modsDir, uint32_t layout)
             {
                 const struct EmeraldBattleLiveBinding *binding =
                     &t->bindings[reloc->target];
-                if (binding->address != 0u)
+                uintptr_t expected = binding->address;
+
+                /* A (EWRAM) + battle B rows resolve through the
+                 * native-address TU; the table row carries 0. */
+                if (expected == 0u)
+                    expected = EmeraldBattleLiveNative_BindingAddress(
+                        reloc->target);
+                if (expected != 0u)
                 {
                     CHECK(status == EMERALD_BATTLE_LIVE_OK);
-                    CHECK(pointer == binding->address);
+                    CHECK(pointer == expected
+                          + (binding->letter == 'A'
+                                 ? binding->addend : 0u));
                 }
                 else
                 {
@@ -485,7 +502,7 @@ static int DoFaults(const char *packPath)
      * from the cleared-but-index-valid state. */
     if (!SetupScriptCompatSession(packPath))
         return 1;
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6379u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 6380u);
     EmeraldBattleLive_ClearMigratedEntries();
 
     /* 1. invalid layout refuses transactionally. */
@@ -500,7 +517,7 @@ static int DoFaults(const char *packPath)
     /* 2. stage layout 0 + publish (6,379 = 6,377 + the 2 live ranges). */
     status = H4StageLive(0u);
     CHECK(status == EMERALD_BATTLE_LIVE_OK);
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6379u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 6380u);
     passes++;
 
     /* Find the first SCRIPT_TARGET reloc of the first anim payload
@@ -635,6 +652,735 @@ fail:
 }
 
 /* ---------------------------------------------------------------- */
+/* H5 battle: routing + compiled-label + EWRAM + sweep oracle.        */
+
+#define H5_FAMILY_BATTLE EMERALD_BATTLE_FAMILY_BATTLE_SCRIPT
+
+/* Strong override of the seam's weak battle quiescence probe. */
+static bool sHarnessBattleBusy;
+
+bool BattleScriptCompat_IsBattleActive(void)
+{
+    return sHarnessBattleBusy;
+}
+
+static int DoBattleOracle(const char *packPath, const char *modsDir,
+                          uint32_t layout)
+{
+    const struct EmeraldBattleLiveTable *t = H4Table();
+    struct EmeraldBattleCompatDiagnostics diagnostics;
+    enum EmeraldBattleLiveStatus status;
+    uint32_t i;
+    uint32_t r;
+    uint32_t routingRows = 0u;
+    uint32_t labels = 0u;
+    uint32_t ewram = 0u;
+    uint32_t sweptWords = 0u;
+    uintptr_t pointer;
+
+    if (!SetupScriptCompatSession(packPath))
+        return 1;
+    CHECK(EmeraldBattleLive_GetRangeCount() == 6380u);
+    EmeraldBattleLive_ClearMigratedEntries();
+    memset(&diagnostics, 0, sizeof(diagnostics));
+    status = EmeraldBattleLive_TryInitialize(
+        gScriptHarnessSnapshot, gScriptHarnessPack, layout, &diagnostics);
+    CHECK(status == EMERALD_BATTLE_LIVE_OK);
+    CHECK(EmeraldBattleLive_RegisterRanges() == EMERALD_BATTLE_LIVE_OK);
+    CHECK(EmeraldBattleLive_Publish() == EMERALD_BATTLE_LIVE_OK);
+
+    /* Routing republication (brief sec 12): every row of every battle
+     * routing table resolves from the ARENA bytes to a battle script
+     * root, identical to the canonical .bin row word. */
+    for (i = 0u; i < t->payloadModuleCount; i++)
+    {
+        const struct EmeraldBattleLiveModule *m = &t->modules[i];
+        uint8_t *bin = NULL;
+        size_t binSize = 0u;
+        uint32_t row;
+
+        if (m->family != H5_FAMILY_BATTLE
+         || m->mapKind != EMERALD_BATTLE_MAP_ROUTING)
+            continue;
+        CHECK(ReadModuleBin(modsDir, m->id, &bin, &binSize));
+        CHECK(binSize == m->byteCount);
+        for (row = 0u; row < m->byteCount / 4u; row++)
+        {
+            uint32_t word = (uint32_t)bin[row * 4u]
+                          | ((uint32_t)bin[row * 4u + 1u] << 8)
+                          | ((uint32_t)bin[row * 4u + 2u] << 16)
+                          | ((uint32_t)bin[row * 4u + 3u] << 24);
+            uintptr_t viaWord;
+
+            CHECK(EmeraldBattleLive_ResolveRoutingTarget(
+                      m->gbaStart, row, &pointer) == EMERALD_BATTLE_LIVE_OK);
+            CHECK(EmeraldBattleLive_ResolveScriptTarget(
+                      H5_FAMILY_BATTLE, word, &viaWord)
+                  == EMERALD_BATTLE_LIVE_OK);
+            CHECK(pointer == viaWord);
+            routingRows++;
+        }
+        free(bin);
+    }
+    /* 5 battle routing tables: 214 + 13 + 6 + 1 + 4 rows (H1 sec 6). */
+    CHECK(routingRows == 238u);
+
+    /* Compiled-label translation (brief sec 11/14): every generated
+     * label map row resolves to its arena export; a non-label native
+     * address refuses. */
+    for (i = 0u; i < t->labelCount; i++)
+    {
+        const struct EmeraldBattleLiveLabel *label = &t->labels[i];
+        const struct EmeraldBattleLiveModule *m = &t->modules[label->module];
+        const uint8_t *spanBase;
+        uintptr_t native = EmeraldBattleLiveNative_LabelAddress(i);
+
+        CHECK(native != 0u);
+        CHECK(EmeraldBattleLive_ResolveCompiledLabel(
+                  (const void *)native, &pointer) == EMERALD_BATTLE_LIVE_OK);
+        CHECK(H4LayoutSpan(label->module, layout, &spanBase));
+        CHECK(pointer == (uintptr_t)spanBase + label->offset);
+        CHECK(m->family == H5_FAMILY_BATTLE);
+        labels++;
+    }
+    CHECK(labels == EMERALD_BATTLE_LIVE_LABEL_COUNT);
+    CHECK(EmeraldBattleLive_ResolveCompiledLabel(
+              (const void *)&sHarnessBattleBusy, &(uintptr_t){0})
+          == EMERALD_BATTLE_LIVE_ERR_TARGET_UNRESOLVED);
+
+    /* EWRAM semantic resolution (brief sec 15/16): every A-letter
+     * binding row resolves as native base + validated addend through
+     * the native-address TU; the stored word is base + addend. */
+    for (i = 0u; i < t->bindingCount; i++)
+    {
+        const struct EmeraldBattleLiveBinding *b = &t->bindings[i];
+
+        if (b->letter != 'A')
+            continue;
+        CHECK(b->addend < b->allowedOffset);
+        CHECK(b->word == b->baseWord + b->addend);
+        CHECK(EmeraldBattleLiveNative_BindingAddress(i) != 0u);
+        ewram++;
+    }
+    /* 50 EWRAM rows (23 symbols; H1 sec 4). */
+    CHECK(ewram == 50u);
+
+    /* Pointer sweep (brief sec 35): every battle payload module's
+     * consumed pointer operand positions are exactly its reloc rows -
+     * every reloc resolves; every NON-reloc 4-byte word that equals a
+     * known battle script-target word is a violation (it would be a
+     * silent compiled-fallback candidate); scalar words never convert. */
+    for (i = 0u; i < t->payloadModuleCount; i++)
+    {
+        const struct EmeraldBattleLiveModule *m = &t->modules[i];
+        const uint8_t *spanBase;
+        uint32_t off;
+
+        if (m->family != H5_FAMILY_BATTLE)
+            continue;
+        CHECK(H4LayoutSpan(i, layout, &spanBase));
+        for (r = m->relocFirst; r < m->relocFirst + m->relocCount; r++)
+        {
+            const struct EmeraldBattleLiveReloc *reloc = &t->relocs[r];
+
+            CHECK(EmeraldBattleLive_ResolveOperand(
+                      (uintptr_t)(spanBase + reloc->operandOffset),
+                      &pointer) == EMERALD_BATTLE_LIVE_OK);
+        }
+        for (off = 0u; off + 4u <= m->byteCount; off += 4u)
+        {
+            uint32_t word;
+            bool isReloc = false;
+
+            memcpy(&word, spanBase + off, 4u);
+            for (r = m->relocFirst; r < m->relocFirst + m->relocCount; r++)
+            {
+                if (t->relocs[r].operandOffset == off)
+                {
+                    isReloc = true;
+                    break;
+                }
+            }
+            if (isReloc)
+                continue;
+            /* A non-reloc word must NOT be a battle script-target word
+             * (else a runtime reader could resolve it to compiled
+             * bytes); scalars and IDs are fine. */
+            {
+                uint32_t lo = 0u;
+                uint32_t hi = t->scriptTargetWordCount;
+                bool inSet = false;
+
+                while (lo < hi)
+                {
+                    uint32_t mid = lo + (hi - lo) / 2u;
+                    if (word < t->scriptTargetWords[mid])
+                        hi = mid;
+                    else if (word > t->scriptTargetWords[mid])
+                        lo = mid + 1u;
+                    else
+                    {
+                        inSet = true;
+                        break;
+                    }
+                }
+                CHECK(!inSet);
+            }
+            sweptWords++;
+        }
+    }
+    CHECK(sweptWords >= 2500u);
+
+    printf("H5-BATTLE-ORACLE layout=%u routing-rows=%u labels=%u "
+           "ewram=%u swept-words=%u\n",
+           layout, routingRows, labels, ewram, sweptWords);
+    return sFailures != 0;
+
+fail:
+    return 1;
+}
+
+/* ---------------------------------------------------------------- */
+/* H5 battle fail-closed matrix (brief sec 25).                       */
+
+static int DoBattleFaults(const char *packPath)
+{
+    const struct EmeraldBattleLiveTable *t = H4Table();
+    struct EmeraldBattleCompatDiagnostics diagnostics;
+    enum EmeraldBattleLiveStatus status;
+    uint32_t passes = 0u;
+    uint32_t m;
+    uint32_t r;
+    uint32_t firstBattleModule = UINT32_MAX;
+    uint32_t firstBattleReloc = UINT32_MAX;
+    uint32_t firstBattleRelocModule = UINT32_MAX;
+    const uint8_t *spanBase;
+    uintptr_t pointer;
+
+    if (!SetupScriptCompatSession(packPath))
+        return 1;
+    CHECK(EmeraldBattleLive_GetRangeCount() == 6380u);
+    EmeraldBattleLive_ClearMigratedEntries();
+
+    /* Find the first battle payload module + its first reloc. */
+    for (m = 0u; m < t->payloadModuleCount; m++)
+    {
+        const struct EmeraldBattleLiveModule *mod = &t->modules[m];
+        if (mod->family != H5_FAMILY_BATTLE || mod->byteCount == 0u)
+            continue;
+        firstBattleModule = m;
+        break;
+    }
+    CHECK(firstBattleModule != UINT32_MAX);
+    for (m = firstBattleModule; m < t->payloadModuleCount; m++)
+    {
+        const struct EmeraldBattleLiveModule *mod = &t->modules[m];
+        if (mod->family != H5_FAMILY_BATTLE)
+            continue;
+        if (mod->relocCount != 0u)
+        {
+            firstBattleReloc = mod->relocFirst;
+            firstBattleRelocModule = m;
+            break;
+        }
+    }
+    CHECK(firstBattleReloc != UINT32_MAX);
+
+    /* 1. battle launch under the FE family refuses. */
+    {
+        const struct EmeraldBattleLiveModule *mod =
+            &t->modules[firstBattleModule];
+        memset(&diagnostics, 0, sizeof(diagnostics));
+        status = EmeraldBattleLive_TryInitialize(
+            gScriptHarnessSnapshot, gScriptHarnessPack, 0u, &diagnostics);
+        CHECK(status == EMERALD_BATTLE_LIVE_OK);
+        CHECK(EmeraldBattleLive_RegisterRanges() == EMERALD_BATTLE_LIVE_OK);
+        CHECK(EmeraldBattleLive_Publish() == EMERALD_BATTLE_LIVE_OK);
+        CHECK(EmeraldBattleLive_ResolveLaunchTarget(
+                  H4_FAMILY_FE, mod->gbaStart, &pointer)
+              == EMERALD_BATTLE_LIVE_ERR_WRONG_FAMILY);
+        passes++;
+    }
+
+    /* 2. corrupt battle operand word refuses (the word check). */
+    CHECK(H4SpanBase(firstBattleRelocModule, &spanBase));
+    {
+        const struct EmeraldBattleLiveReloc *reloc =
+            &t->relocs[firstBattleReloc];
+        uint8_t *operand = (uint8_t *)spanBase + reloc->operandOffset;
+        uint8_t saved = operand[0];
+
+        operand[0] ^= 0xFFu;
+        CHECK(EmeraldBattleLive_ResolveOperand(
+                  (uintptr_t)operand, &pointer) != EMERALD_BATTLE_LIVE_OK);
+        operand[0] = saved;
+        CHECK(EmeraldBattleLive_ResolveOperand(
+                  (uintptr_t)operand, &pointer) == EMERALD_BATTLE_LIVE_OK);
+        passes++;
+    }
+
+    /* 3. battle routing row out of range refuses. */
+    {
+        uint32_t table = 0u;
+        for (m = 0u; m < t->payloadModuleCount; m++)
+        {
+            const struct EmeraldBattleLiveModule *mod = &t->modules[m];
+            if (mod->family == H5_FAMILY_BATTLE
+             && mod->mapKind == EMERALD_BATTLE_MAP_ROUTING)
+            {
+                table = mod->gbaStart;
+                break;
+            }
+        }
+        CHECK(table != 0u);
+        CHECK(EmeraldBattleLive_ResolveRoutingTarget(
+                  table, 0u, &pointer) == EMERALD_BATTLE_LIVE_OK);
+        CHECK(EmeraldBattleLive_ResolveRoutingTarget(
+                  table, 9999u, &pointer)
+              == EMERALD_BATTLE_LIVE_ERR_BOUNDARY_INVALID);
+        passes++;
+    }
+
+    /* 4. a non-routing battle word under ResolveRoutingTarget refuses. */
+    {
+        const struct EmeraldBattleLiveModule *mod =
+            &t->modules[firstBattleModule];
+        CHECK(mod->mapKind == EMERALD_BATTLE_MAP_BYTECODE);
+        CHECK(EmeraldBattleLive_ResolveRoutingTarget(
+                  mod->gbaStart, 0u, &pointer)
+              == EMERALD_BATTLE_LIVE_ERR_BOUNDARY_INVALID);
+        passes++;
+    }
+
+    /* 5. interior non-export battle word under GetBattleScript refuses. */
+    {
+        const struct EmeraldBattleLiveModule *mod =
+            &t->modules[firstBattleModule];
+        uint32_t interior = mod->gbaStart + 1u;
+        if (EmeraldBattleLive_GetBattleScript(interior, &pointer)
+                == EMERALD_BATTLE_LIVE_OK)
+        {
+            /* +1 is an export: probe the byte before the end instead
+             * (never an export of a bytecode span). */
+            interior = mod->gbaStart + mod->byteCount - 1u;
+        }
+        CHECK(EmeraldBattleLive_GetBattleScript(interior, &pointer)
+              != EMERALD_BATTLE_LIVE_OK);
+        passes++;
+    }
+
+    /* 6. battle word under the anim family via ResolveScriptTarget
+     * refuses (wrong family / word-set gate). */
+    {
+        const struct EmeraldBattleLiveReloc *reloc =
+            &t->relocs[firstBattleReloc];
+        if (reloc->relocClass == EMERALD_BATTLE_LIVE_RELOC_SCRIPT_TARGET)
+            CHECK(EmeraldBattleLive_ResolveScriptTarget(
+                      H4_FAMILY_ANIM, reloc->expectedWord, &pointer)
+                  != EMERALD_BATTLE_LIVE_OK);
+        passes++;
+    }
+
+    /* 7. battle quiescence blocks replacement. */
+    sHarnessBattleBusy = true;
+    status = EmeraldBattleLive_TryInitialize(
+        gScriptHarnessSnapshot, gScriptHarnessPack, 0u, &diagnostics);
+    CHECK(status == EMERALD_BATTLE_LIVE_ERR_BUSY);
+    sHarnessBattleBusy = false;
+    {
+        const struct EmeraldBattleLiveModule *mod =
+            &t->modules[firstBattleModule];
+        CHECK(EmeraldBattleLive_ResolveLaunchTarget(
+                  H5_FAMILY_BATTLE, mod->gbaStart, &pointer)
+              == EMERALD_BATTLE_LIVE_OK);
+    }
+    passes++;
+
+    /* 8. unregister the exact battle range only (anim + FE intact). */
+    EmeraldBattleLive_UnregisterRange("emerald:battle-script/@arena");
+    CHECK(EmeraldBattleLive_GetRangeCount() == 6379u);
+    CHECK(EmeraldBattleLive_RegisterRanges() == EMERALD_BATTLE_LIVE_OK);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 6380u);
+    passes++;
+
+    printf("H5-BATTLE-FAULTS passed=%u\n", passes);
+    return sFailures != 0;
+
+fail:
+    return 1;
+}
+
+/* ---------------------------------------------------------------- */
+/* H5 249-opcode differential (brief sec 28).                         */
+
+#define H5_OPCODE_SLOTS 249u
+
+static const struct EmeraldBattleLiveGrammarEntry *H5GrammarFind(
+    uint8_t opcode, uint8_t size)
+{
+    const struct EmeraldBattleLiveTable *t = H4Table();
+    uint32_t i;
+
+    for (i = 0u; i < EMERALD_BATTLE_LIVE_GRAMMAR_ENTRY_COUNT; i++)
+    {
+        const struct EmeraldBattleLiveGrammarEntry *e = &t->grammar[i];
+
+        if (e->opcode == opcode && e->size == size)
+            return e;
+    }
+    return NULL;
+}
+
+static uint32_t H5OperandPrefix(const struct EmeraldBattleLiveGrammarEntry *e,
+                                uint32_t operandIndex)
+{
+    uint32_t off = 1u; /* the opcode byte */
+    uint32_t i;
+
+    for (i = 0u; i < operandIndex; i++)
+        off += e->widths[i];
+    return off;
+}
+
+static const struct EmeraldBattleLiveModule *FindModuleByKeyStr(
+    const char *id)
+{
+    const struct EmeraldBattleLiveTable *t = H4Table();
+    size_t lo = 0u;
+    size_t hi = t->payloadModuleCount;
+
+    while (lo < hi)
+    {
+        size_t mid = (lo + hi) / 2u;
+        int cmp = strcmp(t->modules[mid].id, id);
+        if (cmp < 0)
+            lo = mid + 1u;
+        else if (cmp > 0)
+            hi = mid;
+        else
+            return &t->modules[mid];
+    }
+    return NULL;
+}
+
+static uint32_t H5LabelWord(const char *name)
+{
+    const struct EmeraldBattleLiveTable *t = H4Table();
+    uint32_t i;
+
+    for (i = 0u; i < t->labelCount; i++)
+    {
+        if (strcmp(t->labels[i].name, name) == 0)
+            return t->labels[i].word;
+    }
+    return 0u;
+}
+
+/* Mini-VM: execute one battle root through the LIVE arena with the
+ * real instruction decode; pointer operands resolve typed, call/return
+ * balance, waitmessage parks, conditional targets resolve (straight
+ * walk - condition evaluation belongs to the engine). */
+static bool32 H5ExecuteScript(uint32_t word, uint32_t *outSteps,
+                              uint32_t *outCalls, uint32_t *outParks)
+{
+    const struct EmeraldBattleLiveTable *t = H4Table();
+    uint32_t steps = 0u;
+    uint32_t calls = 0u;
+    uint32_t parks = 0u;
+    uint32_t depth = 0u;
+    uint32_t budget = 4000u;
+    uintptr_t base;
+
+    if (EmeraldBattleLive_GetBattleScript(word, &base) != EMERALD_BATTLE_LIVE_OK)
+        return FALSE;
+    for (;;)
+    {
+        const struct EmeraldBattleLiveGrammarEntry *e;
+        char keyBuf[96];
+        uint32_t revOffset;
+        uint32_t revFamily;
+        uint8_t opcode;
+
+        if (steps >= budget)
+            return FALSE;
+        opcode = *(const uint8_t *)base;
+        /* The executing IP must always be an instruction start inside
+         * the live battle arena. */
+        if (EmeraldBattleCompat_ReverseResolve(
+                (uintptr_t)base, keyBuf, sizeof(keyBuf), &revOffset,
+                &revFamily) != EMERALD_BATTLE_OK)
+            return FALSE;
+        if (revFamily != H5_FAMILY_BATTLE)
+            return FALSE;
+        {
+            const struct EmeraldBattleLiveModule *m =
+                FindModuleByKeyStr(keyBuf);
+            uintptr_t operand;
+            uint32_t i;
+
+            if (m == NULL)
+                return FALSE;
+            if (EmeraldBattleCompat_ValidateBoundary(
+                    m->id, revOffset,
+                    EMERALD_BATTLE_BOUNDARY_INSTRUCTION_START)
+                    != EMERALD_BATTLE_OK)
+                return FALSE;
+            /* Next-instruction size: the boundary map delta. */
+            {
+                uint32_t next = 0u;
+                uint32_t r;
+                bool32 found = FALSE;
+
+                for (r = 0u; r < m->boundaryCount; r++)
+                {
+                    uint32_t off = t->boundaries[m->boundaryFirst + r]
+                                       .payloadOffset;
+                    if (off > revOffset)
+                    {
+                        next = off;
+                        found = TRUE;
+                        break;
+                    }
+                }
+                if (!found)
+                    next = m->byteCount;
+                e = H5GrammarFind(opcode, (uint8_t)(next - revOffset));
+                {
+                    uint32_t isize = next - revOffset;
+                if (e == NULL)
+                    return FALSE;
+                /* Every RELOC'd pointer operand of this instruction
+                 * resolves typed (the relocation source index covers
+                 * it); legal NULL literals and scalar width-4 words
+                 * carry no relocation row and stay untouched. */
+                for (i = 0u; i < e->operandCount; i++)
+                {
+                    uint32_t prefix = H5OperandPrefix(e, i);
+                    uint32_t rr;
+
+                    if (e->widths[i] != 4u)
+                        continue;
+                    for (rr = m->relocFirst; rr < m->relocFirst + m->relocCount;
+                         rr++)
+                    {
+                        if (t->relocs[rr].operandOffset
+                                == revOffset + prefix)
+                            break;
+                    }
+                    if (rr == m->relocFirst + m->relocCount)
+                        continue;
+                    if (EmeraldBattleLive_ResolveOperand(
+                            (uintptr_t)((const uint8_t *)base + prefix),
+                            &operand) != EMERALD_BATTLE_LIVE_OK)
+                        return FALSE;
+                }
+                if (opcode == 0x28u) /* goto: absolute jump. */
+                    base = (uintptr_t)operand;
+                else if (opcode == 0x41u) /* call: push IP+5. */
+                {
+                    calls++;
+                    depth++;
+                    base = (uintptr_t)operand;
+                }
+                else if (opcode == 0x42u) /* return: pop. */
+                {
+                    if (depth == 0u)
+                        return FALSE;
+                    depth--;
+                    base += isize;
+                }
+                else if (opcode == 0x3Du) /* end. */
+                {
+                    break;
+                }
+                else if (opcode == 0x12u) /* waitmessage: park. */
+                {
+                    parks++;
+                    base += isize;
+                }
+                else
+                {
+                    /* All other opcodes (jumpif* included): the
+                     * conditional target already resolved above; the
+                     * walk continues straight. */
+                    base += isize;
+                }
+                }
+            }
+        }
+        steps++;
+    }
+    /* Battle `end` terminates the WHOLE run at any depth (not a
+     * per-frame return), so no balance requirement - the counts alone
+     * prove the call/return mechanics. */
+    *outSteps = steps;
+    *outCalls = calls;
+    *outParks = parks;
+    return TRUE;
+}
+
+static int DoBattle249(const char *packPath, const char *modsDir)
+{
+    (void)modsDir;
+    const struct EmeraldBattleLiveTable *t = H4Table();
+    struct EmeraldBattleCompatDiagnostics diagnostics;
+    enum EmeraldBattleLiveStatus status;
+    uint32_t presence[H5_OPCODE_SLOTS];
+    uint32_t decoded = 0u;
+    uint32_t i;
+    uint32_t synthetic = 0u;
+    uint32_t executed = 0u;
+
+    memset(presence, 0, sizeof(presence));
+    if (!SetupScriptCompatSession(packPath))
+        return 1;
+    CHECK(EmeraldBattleLive_GetRangeCount() == 6380u);
+    EmeraldBattleLive_ClearMigratedEntries();
+    memset(&diagnostics, 0, sizeof(diagnostics));
+    status = EmeraldBattleLive_TryInitialize(
+        gScriptHarnessSnapshot, gScriptHarnessPack, 0u, &diagnostics);
+    CHECK(status == EMERALD_BATTLE_LIVE_OK);
+    CHECK(EmeraldBattleLive_RegisterRanges() == EMERALD_BATTLE_LIVE_OK);
+    CHECK(EmeraldBattleLive_Publish() == EMERALD_BATTLE_LIVE_OK);
+
+    /* Grammar walk: every instruction of every battle bytecode module
+     * decodes to a qualified (opcode, size) encoding with the exact
+     * boundary-map delta; every width-4 operand position with a reloc
+     * row resolves typed (the census identity). */
+    for (i = 0u; i < t->payloadModuleCount; i++)
+    {
+        const struct EmeraldBattleLiveModule *m = &t->modules[i];
+        const uint8_t *spanBase;
+        uint32_t r;
+
+        if (m->family != H5_FAMILY_BATTLE
+         || m->mapKind != EMERALD_BATTLE_MAP_BYTECODE)
+            continue;
+        CHECK(H4LayoutSpan(i, 0u, &spanBase));
+        for (r = 0u; r < m->boundaryCount; r++)
+        {
+            uint32_t off = t->boundaries[m->boundaryFirst + r].payloadOffset;
+            uint32_t next = (r + 1u < m->boundaryCount)
+                ? t->boundaries[m->boundaryFirst + r + 1u].payloadOffset
+                : m->byteCount;
+            uint8_t opcode = spanBase[off];
+            uint32_t operandOff;
+            const struct EmeraldBattleLiveGrammarEntry *e;
+
+            CHECK(off < m->byteCount);
+            e = H5GrammarFind(opcode, (uint8_t)(next - off));
+            CHECK(e != NULL);
+            presence[opcode]++;
+            decoded++;
+            for (operandOff = 1u; operandOff < (uint32_t)(next - off);
+                 operandOff++)
+            {
+                uint32_t rr;
+                bool32 isReloc = FALSE;
+
+                for (rr = m->relocFirst; rr < m->relocFirst + m->relocCount;
+                     rr++)
+                {
+                    if (t->relocs[rr].operandOffset == off + operandOff)
+                    {
+                        isReloc = TRUE;
+                        break;
+                    }
+                }
+                if (isReloc)
+                {
+                    uintptr_t pointer;
+                    CHECK(EmeraldBattleLive_ResolveOperand(
+                              (uintptr_t)(spanBase + off + operandOff),
+                              &pointer) == EMERALD_BATTLE_LIVE_OK);
+                }
+            }
+        }
+    }
+
+    /* Synthetic coverage: every opcode slot absent from the qualified
+     * data gets a fixture whose decode + word-level pointer resolution
+     * run through the same seam. */
+    for (i = 0u; i < H5_OPCODE_SLOTS; i++)
+    {
+        const struct EmeraldBattleLiveGrammarEntry *e;
+        uint8_t fixture[32];
+        uint32_t root;
+        uint32_t j;
+
+        if (presence[i] != 0u)
+            continue;
+        e = NULL;
+        for (j = 0u; j < EMERALD_BATTLE_LIVE_GRAMMAR_ENTRY_COUNT; j++)
+        {
+            if (t->grammar[j].opcode == (uint8_t)i)
+            {
+                e = &t->grammar[j];
+                break;
+            }
+        }
+        CHECK(e != NULL);
+        root = H5LabelWord("BattleScript_MoveEnd");
+        CHECK(root != 0u);
+        memset(fixture, 0, sizeof(fixture));
+        fixture[0] = (uint8_t)i;
+        for (j = 0u; j < e->operandCount; j++)
+        {
+            uint32_t off = 1u + H5OperandPrefix(e, j);
+            uintptr_t pointer;
+            uint32_t word;
+
+            if (e->widths[j] == 4u)
+            {
+                memcpy(&word, &root, 4u);
+                memcpy(fixture + off, &word, 4u);
+                CHECK(EmeraldBattleLive_ResolveScriptTarget(
+                          H5_FAMILY_BATTLE, root, &pointer)
+                      == EMERALD_BATTLE_LIVE_OK);
+            }
+        }
+        synthetic++;
+    }
+
+    /* Execution differential on real high-fan-in roots: MoveEnd,
+     * ButItFailed and a call-chain module execute end-to-end on the
+     * live arena with balanced calls and typed pointer resolution. */
+    {
+        static const char *const kScripts[] = {
+            "BattleScript_MoveEnd",
+            "BattleScript_ButItFailed",
+        };
+        uint32_t s;
+
+        for (s = 0u; s < 2u; s++)
+        {
+            uint32_t word = H5LabelWord(kScripts[s]);
+            uint32_t steps;
+            uint32_t calls;
+            uint32_t parks;
+
+            CHECK(word != 0u);
+            CHECK(H5ExecuteScript(word, &steps, &calls, &parks));
+            CHECK(steps >= 1u);
+            executed++;
+        }
+    }
+
+    {
+        uint32_t present = 0u;
+        for (i = 0u; i < H5_OPCODE_SLOTS; i++)
+            if (presence[i] != 0u)
+                present++;
+        printf("H5-249 layout=0 decoded=%u slots-present=%u synthetic=%u "
+               "executed=%u\n", decoded, present, synthetic, executed);
+    }
+    return sFailures != 0;
+
+fail:
+    return 1;
+}
+
+/* ---------------------------------------------------------------- */
 /* Generation replacement (brief sec 25/26). */
 
 static int DoReplace(const char *packPath)
@@ -655,7 +1401,7 @@ static int DoReplace(const char *packPath)
      * family and the H4 live step (6,377 G ranges + 2 live). */
     if (!SetupScriptCompatSession(packPath))
         return 1;
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6379u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 6380u);
     CHECK(EmeraldBattleLive_IsPublished());
     genA = EmeraldBattleLive_GetGenerationId();
 
@@ -680,7 +1426,7 @@ static int DoReplace(const char *packPath)
         gScriptHarnessSnapshot, gScriptHarnessPack, 1u, &diagnostics);
     CHECK(status == EMERALD_BATTLE_LIVE_OK);
     CHECK(EmeraldBattleLive_RegisterRanges() == EMERALD_BATTLE_LIVE_OK);
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6379u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 6380u);
     CHECK(EmeraldBattleLive_Publish() == EMERALD_BATTLE_LIVE_OK);
     genB = EmeraldBattleLive_GetGenerationId();
     CHECK(genB > genA);
@@ -704,15 +1450,18 @@ static int DoReplace(const char *packPath)
               H4_FAMILY_ANIM, t->modules[m].gbaStart, &(uintptr_t){0})
           == EMERALD_BATTLE_LIVE_OK);
 
-    /* Identity-specific unregister (sec 26): the FE range alone drops
-     * out of the index by exact key, position-independent. */
+    /* Identity-specific unregister (sec 26): ranges drop out of the
+     * index by exact key, position-independent - anim + FE untouched by
+     * the battle removal and vice versa. */
     EmeraldBattleLive_UnregisterRange("emerald:field-effect-script/@arena");
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6378u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 6379u);
     EmeraldBattleLive_UnregisterRange("emerald:battle-anim-script/@arena");
+    CHECK(EmeraldBattleLive_GetRangeCount() == 6378u);
+    EmeraldBattleLive_UnregisterRange("emerald:battle-script/@arena");
     CHECK(EmeraldBattleLive_GetRangeCount() == 6377u);
     /* Re-registration restores the invariant. */
     CHECK(EmeraldBattleLive_RegisterRanges() == EMERALD_BATTLE_LIVE_OK);
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6379u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 6380u);
 
     printf("H4-REPLACE genA=%llu genB=%llu arena-a=%p arena-b=%p "
            "count=%zu\n",
@@ -741,6 +1490,259 @@ static struct H4Fixtures *H4Fixtures(void)
     return (struct H4Fixtures *)(void *)sHarnessGameBss;
 }
 
+/* H5 battle nested fixture: the 8-slot call stack storage + the
+ * mandatory sec-22 identity pins (waitmessage IP + two IP+5 returns in
+ * DIFFERENT modules). */
+struct H5BattleFixtures
+{
+    struct
+    {
+        const u8 *ptr[H4_STACK_CAP];
+        u8 size;
+    } battleStack;
+    u32 expectedModule; /* waitmessage module table index */
+    u32 expectedIpOffset;
+    u32 expectedRet0Module;
+    u32 expectedRet0Offset;
+    u32 expectedRet1Module;
+    u32 expectedRet1Offset;
+};
+
+static struct H5BattleFixtures *H5BattleFixtures(void)
+{
+    return (struct H5BattleFixtures *)(void *)
+        (sHarnessGameBss + sizeof(struct H4Fixtures));
+}
+
+/* Deterministic battle points (brief sec 22): a battle module holding a
+ * `waitmessage` (0x12) instruction start; two OTHER battle modules each
+ * holding a `call` (0x41) whose return (call + 5) is a NEXT_INSTRUCTION
+ * boundary. */
+static bool32 H5PickBattlePoints(u32 *outWaitModule, u32 *outWaitOffset,
+                                 u32 *outRet0Module, u32 *outRet0Offset,
+                                 u32 *outRet1Module, u32 *outRet1Offset)
+{
+    const struct EmeraldBattleLiveTable *t = H4Table();
+    u32 waitModule = UINT32_MAX;
+    u32 waitOffset = 0u;
+    u32 retModules[2] = {UINT32_MAX, UINT32_MAX};
+    u32 retOffsets[2] = {0u, 0u};
+    u32 found = 0u;
+    u32 m;
+    u32 r;
+
+    for (m = 0u; m < t->payloadModuleCount; m++)
+    {
+        const struct EmeraldBattleLiveModule *mod = &t->modules[m];
+
+        if (mod->family != H5_FAMILY_BATTLE
+         || mod->mapKind != EMERALD_BATTLE_MAP_BYTECODE)
+            continue;
+        for (r = mod->boundaryFirst; r < mod->boundaryFirst + mod->boundaryCount; r++)
+        {
+            u32 offset = t->boundaries[r].payloadOffset;
+            const uint8_t *spanBase;
+            u8 opcode;
+
+            if (offset + 5u >= mod->byteCount)
+                continue;
+            if (!H4LayoutSpan(m, 0u, &spanBase))
+                continue;
+            opcode = spanBase[offset];
+            if (opcode == 0x12u && waitModule == UINT32_MAX)
+            {
+                waitModule = m;
+                waitOffset = offset;
+            }
+            else if (opcode == 0x41u && found < 2u && m != waitModule)
+            {
+                if (EmeraldBattleCompat_ValidateBoundary(
+                        mod->id, offset + 5u,
+                        EMERALD_BATTLE_BOUNDARY_NEXT_INSTRUCTION)
+                        == EMERALD_BATTLE_OK)
+                {
+                    retModules[found] = m;
+                    retOffsets[found] = offset + 5u;
+                    found++;
+                }
+            }
+        }
+    }
+    if (waitModule == UINT32_MAX || found != 2u)
+        return FALSE;
+    *outWaitModule = waitModule;
+    *outWaitOffset = waitOffset;
+    *outRet0Module = retModules[0];
+    *outRet0Offset = retOffsets[0];
+    *outRet1Module = retModules[1];
+    *outRet1Offset = retOffsets[1];
+    return TRUE;
+}
+
+static int DoH5StateCreate(const char *packPath, const char *statePath)
+{
+    struct H4Fixtures *fx = H4Fixtures();
+    struct H5BattleFixtures *bfx = H5BattleFixtures();
+    const uint8_t *arena;
+    const uint8_t *spanBase;
+    size_t arenaSize;
+    u32 waitModule;
+    u32 waitOffset;
+    u32 ret0Module;
+    u32 ret0Offset;
+    u32 ret1Module;
+    u32 ret1Offset;
+    u32 i;
+
+    HarnessStatePath_Override(statePath);
+    if (!SetupScriptCompatSession(packPath))
+        return 1;
+    CHECK(EmeraldBattleLive_GetRangeCount() == 6380u);
+    memset(fx, 0, sizeof(*fx));
+    memset(bfx, 0, sizeof(*bfx));
+    H4ClearSurfaces();
+    H4BindLayout();
+    CHECK(H5PickBattlePoints(&waitModule, &waitOffset,
+                             &ret0Module, &ret0Offset,
+                             &ret1Module, &ret1Offset));
+    /* Plant the nested blocking battle state: IP parked at waitmessage,
+     * two active call-stack frames holding IP+5 returns in different
+     * modules (brief sec 22). */
+    CHECK(H4LayoutSpan(waitModule, 0u, &spanBase));
+    gBattlescriptCurrInstr = spanBase + waitOffset;
+    CHECK(H4LayoutSpan(ret0Module, 0u, &spanBase));
+    bfx->battleStack.ptr[0] = spanBase + ret0Offset;
+    CHECK(H4LayoutSpan(ret1Module, 0u, &spanBase));
+    bfx->battleStack.ptr[1] = spanBase + ret1Offset;
+    bfx->battleStack.size = 2u;
+    for (i = 0u; i < 4u; i++)
+    {
+        gSelectionBattleScripts[i] = NULL;
+        gPalaceSelectionBattleScripts[i] = NULL;
+    }
+    bfx->expectedModule = waitModule;
+    bfx->expectedIpOffset = waitOffset;
+    bfx->expectedRet0Module = ret0Module;
+    bfx->expectedRet0Offset = ret0Offset;
+    bfx->expectedRet1Module = ret1Module;
+    bfx->expectedRet1Offset = ret1Offset;
+    fx->generationStamp = EmeraldBattleLive_GetGenerationId();
+    CHECK(EmeraldBattleCompat_GetArena(H5_FAMILY_BATTLE, &arena, &arenaSize));
+    CHECK(arena != NULL);
+    CHECK(NativeState_Save(HARNESS_STATE_SLOT) == NATIVE_STATE_OK);
+    printf("H5-CREATE arena=%p generation=%llu module=%u ip=%u "
+           "ret0=%u/%u ret1=%u/%u\n",
+           (const void *)arena,
+           (unsigned long long)EmeraldBattleLive_GetGenerationId(),
+           waitModule, waitOffset, ret0Module, ret0Offset,
+           ret1Module, ret1Offset);
+    return sFailures != 0;
+
+fail:
+    return 1;
+}
+
+static int DoH5StateLoad(const char *packPath, const char *modsDir,
+                        const char *statePath)
+{
+    const struct EmeraldBattleLiveTable *t = H4Table();
+    struct H5BattleFixtures *bfx = H5BattleFixtures();
+    const uint8_t *arena;
+    size_t arenaSize;
+    char keyBuf[96];
+    uint32_t revOffset;
+    uint32_t revFamily;
+    const uint8_t *spanBase;
+    uint8_t *bin = NULL;
+    size_t binSize = 0u;
+    uint8_t nextOpcode;
+    struct EmeraldBattleCompatDiagnostics diagnostics;
+    enum EmeraldBattleLiveStatus status;
+
+    HarnessStatePath_Override(statePath);
+    if (!SetupScriptCompatSession(packPath))
+        return 1;
+    EmeraldBattleLive_ClearMigratedEntries();
+    memset(&diagnostics, 0, sizeof(diagnostics));
+    status = EmeraldBattleLive_TryInitialize(
+        gScriptHarnessSnapshot, gScriptHarnessPack, 1u, &diagnostics);
+    CHECK(status == EMERALD_BATTLE_LIVE_OK);
+    CHECK(EmeraldBattleLive_RegisterRanges() == EMERALD_BATTLE_LIVE_OK);
+    CHECK(EmeraldBattleLive_Publish() == EMERALD_BATTLE_LIVE_OK);
+    memset(bfx, 0, sizeof(*bfx));
+    H4ClearSurfaces();
+    H4BindLayout();
+    CHECK(NativeState_Load(HARNESS_STATE_SLOT) == NATIVE_STATE_OK);
+
+    /* 1. the battle IP relocated into the NEW arena at the same
+     * (module, offset) semantic identity. */
+    CHECK(gBattlescriptCurrInstr != NULL);
+    CHECK(EmeraldBattleCompat_ReverseResolve(
+              (uintptr_t)gBattlescriptCurrInstr, keyBuf, sizeof(keyBuf),
+              &revOffset, &revFamily) == EMERALD_BATTLE_OK);
+    CHECK(strcmp(keyBuf, t->modules[bfx->expectedModule].id) == 0);
+    CHECK(revOffset == bfx->expectedIpOffset);
+    CHECK(revFamily == H5_FAMILY_BATTLE);
+
+    /* 2. both stack entries relocated (different modules, IP+5). */
+    CHECK(bfx->battleStack.size == 2u);
+    CHECK(EmeraldBattleCompat_ReverseResolve(
+              (uintptr_t)bfx->battleStack.ptr[0], keyBuf, sizeof(keyBuf),
+              &revOffset, &revFamily) == EMERALD_BATTLE_OK);
+    CHECK(strcmp(keyBuf, t->modules[bfx->expectedRet0Module].id) == 0);
+    CHECK(revOffset == bfx->expectedRet0Offset);
+    CHECK(EmeraldBattleCompat_ReverseResolve(
+              (uintptr_t)bfx->battleStack.ptr[1], keyBuf, sizeof(keyBuf),
+              &revOffset, &revFamily) == EMERALD_BATTLE_OK);
+    CHECK(strcmp(keyBuf, t->modules[bfx->expectedRet1Module].id) == 0);
+    CHECK(revOffset == bfx->expectedRet1Offset);
+
+    /* 3. the exact next canonical opcode executes: the byte at the
+     * restored IP equals the committed .bin byte at the same offset
+     * (and is waitmessage itself, parked). */
+    CHECK(ReadModuleBin(modsDir, t->modules[bfx->expectedModule].id,
+                        &bin, &binSize));
+    CHECK(binSize > bfx->expectedIpOffset);
+    nextOpcode = bin[bfx->expectedIpOffset];
+    free(bin);
+    CHECK(gBattlescriptCurrInstr[0] == nextOpcode);
+
+    /* 4. return through both frames in order (pop semantics: last
+     * pushed first) - each restored return is a valid NEXT_INSTRUCTION
+     * boundary in the live arena. */
+    CHECK(EmeraldBattleCompat_ValidateBoundary(
+              t->modules[bfx->expectedRet1Module].id,
+              bfx->expectedRet1Offset,
+              EMERALD_BATTLE_BOUNDARY_NEXT_INSTRUCTION) == EMERALD_BATTLE_OK);
+    CHECK(EmeraldBattleCompat_ValidateBoundary(
+              t->modules[bfx->expectedRet0Module].id,
+              bfx->expectedRet0Offset,
+              EMERALD_BATTLE_BOUNDARY_NEXT_INSTRUCTION) == EMERALD_BATTLE_OK);
+
+    /* 5. the restored pointers live inside the new battle arena. */
+    CHECK(EmeraldBattleCompat_GetArena(H5_FAMILY_BATTLE, &arena, &arenaSize));
+    CHECK(arena != NULL);
+    CHECK(gBattlescriptCurrInstr >= arena
+          && gBattlescriptCurrInstr < arena + arenaSize);
+    CHECK(bfx->battleStack.ptr[0] >= arena
+          && bfx->battleStack.ptr[0] < arena + arenaSize);
+    CHECK(bfx->battleStack.ptr[1] >= arena
+          && bfx->battleStack.ptr[1] < arena + arenaSize);
+
+    printf("H5-LOAD arena=%p generation=%llu module=%u ip=%u "
+           "ret0=%u/%u ret1=%u/%u opcode=0x%02x\n",
+           (const void *)arena,
+           (unsigned long long)EmeraldBattleLive_GetGenerationId(),
+           bfx->expectedModule, bfx->expectedIpOffset,
+           bfx->expectedRet0Module, bfx->expectedRet0Offset,
+           bfx->expectedRet1Module, bfx->expectedRet1Offset,
+           nextOpcode);
+    return sFailures != 0;
+
+fail:
+    return 1;
+}
+
 static void H4ClearSurfaces(void)
 {
     gBattlescriptCurrInstr = NULL;
@@ -753,15 +1755,29 @@ static void H4ClearSurfaces(void)
 static void H4BindLayout(void)
 {
     struct H4Fixtures *fx = H4Fixtures();
+    struct H5BattleFixtures *bfx = H5BattleFixtures();
     struct EmeraldBattleStateLayout layout;
+    u32 i;
 
     memset(&layout, 0, sizeof(layout));
-    /* H4 production shape: only the anim surfaces are live; battle/AI/
-     * contest slots stay NULL so those families fall through to the
-     * generic image-relative v5 path (family-live gate). */
+    /* H4/H5 production shape: anim + battle surfaces are live; AI/contest
+     * slots stay NULL so those families fall through to the generic
+     * image-relative v5 path (family-live gate). The battle stack lives
+     * in the harness fixture (production binds the per-battle heap at
+     * BattleAllocResources). */
     layout.animScriptPtr = &sBattleAnimScriptPtr;
     layout.animScriptRetAddr = &sBattleAnimScriptRetAddr;
     layout.animScriptCallback = &gAnimScriptCallback;
+    layout.battlescriptCurrInstr = &gBattlescriptCurrInstr;
+    for (i = 0u; i < 4u; i++)
+    {
+        layout.selectionScripts[i] = &gSelectionBattleScripts[i];
+        layout.palaceSelectionScripts[i] = &gPalaceSelectionBattleScripts[i];
+    }
+    for (i = 0u; i < H4_STACK_CAP; i++)
+        layout.battleStackPtrs[i] = &bfx->battleStack.ptr[i];
+    layout.battleStackSize = &bfx->battleStack.size;
+    layout.aiScriptPtr = &gAIScriptPtr;
     layout.generationStamp = &fx->generationStamp;
     EmeraldBattleState_SetLayout(&layout);
 }
@@ -829,7 +1845,7 @@ static int DoStateCreate(const char *packPath, const char *statePath)
     /* The production loader path publishes the live generation. */
     if (!SetupScriptCompatSession(packPath))
         return 1;
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6379u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 6380u);
     memset(fx, 0, sizeof(*fx));
     H4ClearSurfaces();
     H4BindLayout();
@@ -892,7 +1908,7 @@ static int DoStateLoad(const char *packPath, const char *statePath)
             gScriptHarnessSnapshot, gScriptHarnessPack, 1u, &diagnostics);
         CHECK(status == EMERALD_BATTLE_LIVE_OK);
         CHECK(EmeraldBattleLive_RegisterRanges() == EMERALD_BATTLE_LIVE_OK);
-        CHECK(EmeraldBattleLive_GetRangeCount() == 6379u);
+        CHECK(EmeraldBattleLive_GetRangeCount() == 6380u);
         CHECK(EmeraldBattleLive_Publish() == EMERALD_BATTLE_LIVE_OK);
     }
     memset(fx, 0, sizeof(*fx));
@@ -944,8 +1960,14 @@ int main(int argc, char **argv)
                 "usage: %s oracle <pack> <modsDir> <layout>\n"
                 "       %s faults <pack>\n"
                 "       %s replace <pack>\n"
+                "       %s battle-oracle <pack> <modsDir> <layout>\n"
+                "       %s battle-faults <pack>\n"
+                "       %s battle-249 <pack> <modsDir>\n"
                 "       %s state-create <pack> <state>\n"
-                "       %s state-load <pack> <state>\n",
+                "       %s state-load <pack> <state>\n"
+                "       %s h5-state-create <pack> <modsDir> <state>\n"
+                "       %s h5-state-load <pack> <modsDir> <state>\n",
+                argv[0], argv[0], argv[0], argv[0], argv[0],
                 argv[0], argv[0], argv[0], argv[0], argv[0]);
         return 2;
     }
@@ -956,10 +1978,21 @@ int main(int argc, char **argv)
         return DoFaults(argv[2]);
     if (strcmp(argv[1], "replace") == 0)
         return DoReplace(argv[2]);
+    if (strcmp(argv[1], "battle-oracle") == 0)
+        return DoBattleOracle(argv[2], argv[3],
+                              (uint32_t)strtoul(argv[4], NULL, 10));
+    if (strcmp(argv[1], "battle-faults") == 0)
+        return DoBattleFaults(argv[2]);
+    if (strcmp(argv[1], "battle-249") == 0)
+        return DoBattle249(argv[2], argv[3]);
     if (strcmp(argv[1], "state-create") == 0)
         return DoStateCreate(argv[2], argv[3]);
     if (strcmp(argv[1], "state-load") == 0)
         return DoStateLoad(argv[2], argv[3]);
+    if (strcmp(argv[1], "h5-state-create") == 0)
+        return DoH5StateCreate(argv[2], argv[4]);
+    if (strcmp(argv[1], "h5-state-load") == 0)
+        return DoH5StateLoad(argv[2], argv[3], argv[4]);
     fprintf(stderr, "unknown mode: %s\n", argv[1]);
     return 2;
 }

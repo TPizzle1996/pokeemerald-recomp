@@ -1,38 +1,53 @@
 #!/usr/bin/env python3
-"""R13-H4: production live table (battle-anim + field-effect arenas).
+"""R13-H4/H5: production live table (battle + battle-anim + field-effect).
 
 Consumes the R13-H2/H3 generated sidecars
 (resources/extraction/emerald/bpee01/battle/modules/) and emits the C
-compilation table for the H4 production live seam:
+compilation table for the production live seam:
 
   include/emerald/resources/battle_live.generated.h
   src/emerald/resources/battle_live_table.generated.c
 
-This table carries every fact the live seam needs for the FIRST H-family
-live cutover (anim + field-effect only; battle/AI/contest stay compiled
-through H4):
+H4 carried the FIRST H-family live cutover (anim + field-effect only);
+H5 adds the battle-script family. The table now carries every fact the
+live seam needs for the three live families (AI/contest stay compiled
+through H6):
 
-  - the 722 live payload modules (654 anim + 68 FE: id, derived key,
-    schema 48/51, family, arena, GBA span, canonical digest, both
-    physical-layout arena offsets, boundary/export/reloc indexes) and
-    the 4 zero-width alias identities (all anim) with canonical owners;
-  - the 2 live arenas (battle_anim 63,811 B, field_effect 817 B) with
-    both layouts (0 = GBA-preserving, 1 = tight-packed reversed -- the
+  - the 1,363 live payload modules (640 battle + 655 anim + 68 FE: id,
+    derived key, schema 47/48/51, family, arena, GBA span, canonical
+    digest, both physical-layout arena offsets, boundary/export/reloc
+    indexes) and the 8 zero-width alias identities (5 battle + 3 anim)
+    with canonical owners;
+  - the 3 live arenas (battle 14,413 B hull with the nested FE gap,
+    battle_anim 63,811 B, field_effect 817 B) with both layouts
+    (0 = GBA-preserving, 1 = tight-packed reversed -- the
     semantic-identity perturbation proof);
-  - all 4,401 reloc rows (anim 4,231 + FE 170), each with its expected
-    runtime word (the 4 canonical .bin bytes at the operand offset --
-    the H2 oracle re-proof: ROM word == final_gba == expected word),
-    class dispatch (SCRIPT_TARGET -> target module + offset; ENGINE_* ->
-    semantic binding row), and per-module first/count indexes;
-  - the 620 unique semantic binding rows (C 327 + D 213 + E 11 + F 67 +
-    B 2) with native symbol addresses; the 4 bindings whose native
-    symbols do not exist in this fork (upstream battle_anim_mist.c /
-    battle_anim_terrain.c are absent) are emitted refuse-only (address
-    0, no extern) and the resolver hard-refuses them;
-  - the sorted unique SCRIPT_TARGET word index (715) for the metadata
-    gate on entry resolution (brief sec 8: raw operand matches H2
-    metadata, expected class SCRIPT_TARGET, valid target boundary,
-    family = animation, no compiled fallback).
+  - all 5,963 reloc rows (battle 1,562: 993 SCRIPT_TARGET + 488 EWRAM +
+    81 TABLE; anim 4,231; FE 170), each with its expected runtime word
+    (the 4 canonical .bin bytes at the operand offset -- the H2 oracle
+    re-proof: ROM word == final_gba == expected word), class dispatch
+    (SCRIPT_TARGET -> target module + offset; ENGINE_EWRAM_TARGET ->
+    semantic base + validated addend; other ENGINE_* -> semantic
+    binding row), and per-module first/count indexes;
+  - the 718 unique semantic binding rows (A EWRAM 50 + B table 50 +
+    C sprite-template 327 + D anim-callback 213 + E gfx 11 + F FE-
+    callnative 67) with native symbol addresses, addends and validated
+    offsets; the 4 bindings whose native symbols do not exist in this
+    fork (upstream battle_anim_mist.c / battle_anim_terrain.c are
+    absent) are emitted refuse-only (address 0, no extern) and the
+    resolver hard-refuses them;
+  - the sorted unique SCRIPT_TARGET word index for the metadata gate on
+    entry resolution (brief sec 8: raw operand matches H2 metadata,
+    expected class SCRIPT_TARGET, valid target boundary, correct
+    family, no compiled fallback);
+  - the 5 battle routing tables (move-effects / ball-throw / using-item
+    / running-by-item / safari-actions) as launchable-row indexes
+    (arena-owned canonical rows; the compiled tables are dead at
+    runtime after H5);
+  - the compiled-label map: every battle root export + alias label with
+    its compiled native symbol and its canonical GBA word, so the VM's
+    direct C label references (BattleScript_Get) resolve semantically
+    into the live arena.
 
 Regeneration must be a no-op diff; run with --check.
 """
@@ -40,6 +55,7 @@ Regeneration must be a no-op diff; run with --check.
 import argparse
 import hashlib
 import pathlib
+import re
 import struct
 import sys
 import tomllib
@@ -54,23 +70,30 @@ HEADER_OUT = ROOT / "include" / "emerald" / "resources" \
     / "battle_live.generated.h"
 TABLE_OUT = ROOT / "src" / "emerald" / "resources" \
     / "battle_live_table.generated.c"
+NATIVE_OUT = ROOT / "src" / "emerald" / "resources" \
+    / "battle_live_native.generated.c"
 
-# ---- R13-H4 qualified pins (docs/R13H_BATTLE_SCRIPT_MIGRATION_PLAN.md) ----
-LIVE_FAMILIES = ["battle-anim-script", "field-effect-script"]
+# ---- R13-H4/H5 qualified pins (docs/R13H_BATTLE_SCRIPT_MIGRATION_PLAN.md) ----
+LIVE_FAMILIES = ["battle-script", "battle-anim-script", "field-effect-script"]
 # Arena order within the combined live buffer (mirrors h3 ARENA_ORDER_0/1
-# restricted to the two live arenas).
-LIVE_ARENAS_ORDER_0 = ["battle_anim", "field_effect"]
+# restricted to the live arenas).
+LIVE_ARENAS_ORDER_0 = ["battle", "battle_anim", "field_effect"]
 LIVE_ARENAS_ORDER_1 = list(reversed(LIVE_ARENAS_ORDER_0))
 FAMILY_PINS = {
+    "battle-script": dict(modules=645, payload=640, bytes=13592,
+                          relocs=1562, schema=47, aliases=5),
     "battle-anim-script": dict(modules=658, payload=655, bytes=63811,
                                relocs=4231, schema=48, aliases=3),
     "field-effect-script": dict(modules=68, payload=68, bytes=817,
                                 relocs=170, schema=51, aliases=0),
 }
-RELOCS_PIN = 4401
-BINDINGS_PIN = 620
+RELOCS_PIN = 5963
+BINDINGS_PIN = 718
 REFUSE_ONLY_PIN = 4
-SCRIPT_TARGET_WORD_COUNT_PIN = 715
+# H4: 715 (anim 648 + FE 67). H5 adds the distinct battle SCRIPT_TARGET
+# words (993 occurrences -> distinct roots; computed on first run, then
+# pinned).
+SCRIPT_TARGET_WORD_COUNT_PIN = 715 + 457
 # Native binding symbols that do NOT exist in this fork (upstream
 # src/battle_anim_mist.c + src/battle_anim_terrain.c are absent). The
 # qualified ROM references them from 13 move/effect modules; the live
@@ -82,19 +105,37 @@ REFUSE_ONLY_NAMES = {
     "AnimTask_ShakeBattleTerrain",
 }
 # B-letter bindings referenced by anim relocs: the 2 gIceCrystal* sprite
-# templates used by move_ice_punch's crystal table (8 occurrences).
+# templates used by move_ice_punch's crystal table (8 occurrences). The
+# other 48 B rows are battle engine-table bindings (H5).
 B_LETTER_NAMES_PIN = {"gIceCrystalSpiralInwardLarge",
                       "gIceCrystalSpiralInwardSmall"}
+B_LETTER_BATTLE_COUNT_PIN = 48
 
-CLASS_LETTER = {"ENGINE_SPRITE_TEMPLATE_TARGET": "C",
+CLASS_LETTER = {"ENGINE_EWRAM_TARGET": "A",
+                "ENGINE_SPRITE_TEMPLATE_TARGET": "C",
                 "ENGINE_GFX_TARGET": "E",
                 "ENGINE_TABLE_TARGET": "B"}
 CLASS_ENUM = {"SCRIPT_TARGET": 0,
               "ENGINE_SPRITE_TEMPLATE_TARGET": 1,
               "ENGINE_CALLBACK": 2,
               "ENGINE_GFX_TARGET": 3,
-              "ENGINE_TABLE_TARGET": 4}
-BINDING_LETTERS = "BCDEF"
+              "ENGINE_TABLE_TARGET": 4,
+              "ENGINE_EWRAM_TARGET": 5}
+BINDING_LETTERS = "ABCDEF"
+
+# Battle routing tables (H1 sec 6): module key -> C constant suffix. The
+# live seam reads these rows from the arena; the compiled tables are
+# dead at runtime after H5.
+ROUTING_TABLES = {
+    "emerald:battle-script/g-battle-scripts-for-move-effects":
+        "MoveEffects",
+    "emerald:battle-script/g-battlescripts-for-ball-throw": "BallThrow",
+    "emerald:battle-script/g-battlescripts-for-using-item": "UsingItem",
+    "emerald:battle-script/g-battlescripts-for-running-by-item":
+        "RunningByItem",
+    "emerald:battle-script/g-battlescripts-for-safari-actions":
+        "SafariActions",
+}
 
 
 def fail(msg):
@@ -193,11 +234,14 @@ def main():
     exports_toml = tomllib.loads(
         (MODULES_DIR / "exports.generated.toml").read_text())
     exports = {k: [] for k in list(payload_by_id) + list(aliases_by_id)}
+    exports_name_by_key = {}
     for e in exports_toml["exports"]:
         key = e["module_key"]
         if key in exports:
             exports[key].append((e["payload_offset"],
                                  h3.EXPORT_KIND_ENUM[e["boundary_kind"]]))
+            exports_name_by_key.setdefault(key, {})[
+                e["payload_offset"]] = e["name"]
     for key, rows in exports.items():
         rows.sort()
 
@@ -226,6 +270,18 @@ def main():
     for alias in aliases:
         alias["owner_module_idx"] = payload_idx[alias["owner_id"]]
     arena_layout, module_off1 = compute_live_layouts(arenas_by_name, payload)
+
+    # Battle routing tables (H1 sec 6): the canonical GBA word of each
+    # routing module (the C runtime calls the seam with this word + the
+    # row index; the seam reads the canonical row from the arena).
+    routing_words = {}
+    for key in ROUTING_TABLES:
+        p = payload_by_id.get(key)
+        if p is None:
+            fail(f"routing module {key} is not a battle payload module")
+        if p["family"] != "battle-script":
+            fail(f"routing module {key} has family {p['family']}")
+        routing_words[key] = p["gba_start"]
     for p in payload:
         a = arenas_by_name[p["arena"]]
         p["layout_off"] = [p["gba_start"] - a["gba_start"],
@@ -236,18 +292,45 @@ def main():
 
     # Arena tiling: the live arena GBA spans must be exactly the union of
     # their module spans (no gaps, no overlap) - the reverse-containment
-    # correctness precondition for entry-word resolution.
+    # correctness precondition for entry-word resolution. The battle
+    # hull nests the field-effect arena and declares two alignment
+    # holes; every gap outside a module span must be fully covered by a
+    # declared hole or a foreign arena hull clipped to this arena.
     for a in LIVE_ARENAS_ORDER_0:
         spans = sorted((p["gba_start"], p["gba_start"] + p["byte_count"])
                        for p in payload if p["arena"] == a)
-        cursor = arenas_by_name[a]["gba_start"]
+        start0 = arenas_by_name[a]["gba_start"]
+        end0 = arenas_by_name[a]["gba_end"]
+        allowed = list(arenas_by_name[a]["holes"])
+        for other in LIVE_ARENAS_ORDER_0:
+            if other == a:
+                continue
+            oh = arenas_by_name[other]
+            lo = max(oh["gba_start"], start0)
+            hi = min(oh["gba_end"], end0)
+            if lo < hi:
+                allowed.append((lo, hi - lo))
+        cursor = start0
         for start, end in spans:
-            if start != cursor:
-                fail(f"arena {a}: gap at {cursor:#x} (next module {start:#x})")
+            if start < cursor:
+                fail(f"arena {a}: overlap at {start:#x} (cursor {cursor:#x})")
+            while cursor < start:
+                hit = [h for h in allowed if h[0] == cursor]
+                if len(hit) != 1:
+                    fail(f"arena {a}: gap at {cursor:#x} (next module "
+                         f"{start:#x})")
+                cursor += hit[0][1]
+            if cursor != start:
+                fail(f"arena {a}: gap {cursor:#x}..{start:#x} not exactly "
+                     "a hole / foreign hull")
             cursor = end
-        if cursor != arenas_by_name[a]["gba_end"]:
-            fail(f"arena {a}: tiling ends {cursor:#x}, hull ends "
-                 f"{arenas_by_name[a]['gba_end']:#x}")
+        while cursor < end0:
+            hit = [h for h in allowed if h[0] == cursor]
+            if len(hit) != 1:
+                fail(f"arena {a}: trailing gap at {cursor:#x}")
+            cursor += hit[0][1]
+        if cursor != end0:
+            fail(f"arena {a}: tiling ends {cursor:#x}, hull ends {end0:#x}")
 
     # Boundary/export flat arrays (anim + FE only).
     boundaries, exports_flat = [], []
@@ -269,12 +352,15 @@ def main():
         (MODULES_DIR / "bindings.generated.toml").read_text())
     bindings_by_key = {}
     for b in bindings_toml["semantic_tables"]:
-        key = (b["table"], b["encoded_gba_value"])
-        # Letter A (EWRAM) bindings legitimately share base addresses
-        # (multiple fields per base); the letters H4 uses are unique.
-        if key in bindings_by_key and b["table"] != "A":
+        # The RUNTIME lookup key is (letter, stored word). A (EWRAM)
+        # rows encode base + addend as the stored word; every other
+        # letter stores the base value itself.
+        word = b["encoded_gba_value"] + b["addend"]
+        key = (b["table"], word)
+        if key in bindings_by_key:
             fail(f"duplicate semantic binding ({key[0]}, {key[1]:#x})")
         bindings_by_key[key] = b
+        b["_word"] = word
 
     relocs = []
     word_index = set()
@@ -322,11 +408,15 @@ def main():
             if b is None:
                 fail(f"{key}@{r['operand_offset']}: no binding row for "
                      f"({letter}, {word:#x})")
-            bkey = (letter, b["gba_base_symbol"], b["encoded_gba_value"])
+            bkey = (letter, b["gba_base_symbol"], b["_word"])
             if bkey not in binding_usage:
-                binding_usage[bkey] = dict(letter=letter, name=b["gba_base_symbol"],
-                                           word=b["encoded_gba_value"],
-                                           native=b["native_binding_symbol"])
+                binding_usage[bkey] = dict(
+                    letter=letter, name=b["gba_base_symbol"],
+                    word=b["_word"],
+                    native=b["native_binding_symbol"],
+                    base_word=b["encoded_gba_value"],
+                    addend=b["addend"],
+                    allowed=b["allowed_offset"])
             row["letter"] = letter
         relocs.append(row)
     if len(relocs) != RELOCS_PIN:
@@ -350,22 +440,30 @@ def main():
     extra_refuse = REFUSE_ONLY_NAMES - {b["name"] for b in refuse}
     if extra_refuse:
         fail(f"refuse-only names not referenced: {sorted(extra_refuse)}")
-    names = [b["name"] for b in bindings]
-    if len(set(names)) != len(names):
-        fail("binding names are not unique (extern emission would collide)")
+    # A (EWRAM) rows legitimately repeat the base symbol name (one row
+    # per addend); every name that gets an inline extern (C/D/E/F and
+    # the 2 anim B rows) must stay unique.
+    inline = [b["name"] for b in bindings
+              if not (b["letter"] == "A"
+                      or (b["letter"] == "B"
+                          and b["name"] not in B_LETTER_NAMES_PIN))]
+    if len(set(inline)) != len(inline):
+        fail("inline-extern binding names are not unique")
     for b in bindings:
         b["refuse_only"] = b["name"] in REFUSE_ONLY_NAMES
-    binding_idx = {b["name"]: i for i, b in enumerate(bindings)}
+    binding_idx = {(b["letter"], b["word"]): i
+                   for i, b in enumerate(bindings)}
     b_letter = [b for b in bindings if b["letter"] == "B"]
-    if {b["name"] for b in b_letter} != B_LETTER_NAMES_PIN:
-        fail(f"B-letter bindings {[b['name'] for b in b_letter]} != pin")
+    b_names = {b["name"] for b in b_letter}
+    if not B_LETTER_NAMES_PIN <= b_names:
+        fail(f"B-letter bindings missing anim pin {B_LETTER_NAMES_PIN - b_names}")
+    b_battle = [b for b in b_letter if b["name"] not in B_LETTER_NAMES_PIN]
+    if len(b_battle) != B_LETTER_BATTLE_COUNT_PIN:
+        fail(f"battle B-letter bindings {len(b_battle)} != pin "
+             f"{B_LETTER_BATTLE_COUNT_PIN}")
     for r in relocs:
         if r["reloc_class"] != 0:
-            letter = r["letter"]
-            name = next(b["name"] for b in bindings
-                        if b["letter"] == letter
-                        and b["word"] == r["expected_word"])
-            r["binding"] = binding_idx[name]
+            r["binding"] = binding_idx[(r["letter"], r["expected_word"])]
     referenced = {r["binding"] for r in relocs if r["reloc_class"] != 0}
     if referenced != set(range(BINDINGS_PIN)):
         fail("binding rows referenced by relocs != full binding table")
@@ -393,6 +491,74 @@ def main():
              f"{SCRIPT_TARGET_WORD_COUNT_PIN}")
 
     total_bytes = sum(p["byte_count"] for p in payload)
+
+    # Compiled-label map: every battle root export + alias label with its
+    # canonical GBA word. The production VM's direct C label references
+    # (BattleScript_Get) resolve through this map; the compiled label
+    # symbol's native address is the lookup key (filled at link time in
+    # the native-address TU).
+    labels = []
+    for key, rows in exports.items():
+        if family_of(key) != "battle-script" or key not in payload_by_id:
+            continue
+        for off, _kind in rows:
+            labels.append(dict(name=exports_name_by_key[key][off],
+                               word=payload_by_id[key]["gba_start"] + off,
+                               module=payload_idx[key], offset=off))
+    seen_names = set()
+    labels = [r for r in labels if not (r["name"] in seen_names
+                                        or seen_names.add(r["name"]))]
+    for alias in aliases:
+        if alias["family"] != "battle-script":
+            continue
+        owner = payload_by_id[alias["owner_id"]]
+        name = exports_name_by_key[alias["id"]][0]
+        if name in seen_names:
+            continue
+        seen_names.add(name)
+        labels.append(dict(name=name,
+                           word=alias["gba_start"],
+                           module=alias["owner_module_idx"],
+                           offset=alias["gba_start"] - owner["gba_start"]))
+    labels.sort(key=lambda r: r["name"])
+
+    # The native-address TU must only reference labels that are GLOBAL in
+    # the native link (the preproc marks a .s label .global only when
+    # another TU references it). The runtime needs translation exactly
+    # for the labels the C sources reference, so the map is exactly
+    # (C-referenced BattleScript_* tokens) ∩ (battle exports); every
+    # C token must land in the map (complete coverage proof).
+    c_refs = set()
+    for path in sorted((ROOT / "src").glob("*.c")):
+        for m in re.finditer(r"BattleScript_[A-Za-z0-9_]+", path.read_text()):
+            c_refs.add(m.group(0))
+    labels_by_name = {r["name"]: r for r in labels}
+    unmapped = sorted(c_refs - set(labels_by_name))
+    if unmapped:
+        fail(f"C-referenced labels missing from the battle export set: "
+             f"{unmapped[:6]}...")
+    labels = [labels_by_name[n] for n in sorted(c_refs)]
+
+    # Battle VM grammar (H1 sec 2): 249 opcode slots / 300 qualified
+    # encodings (opcode, size, operand widths) - the differential
+    # walker's decode table.
+    grammar_toml = tomllib.loads(
+        (MODULES_DIR / "../h1_grammar_battle.generated.toml").read_text())
+    grammar = []
+    for o in grammar_toml["opcodes"]:
+        widths = [0, 0, 0, 0]
+        for i, op in enumerate(o["operands"][:4]):
+            widths[i] = op["width"]
+        grammar.append(dict(opcode=o["opcode"], size=o["size"],
+                            operand_count=len(o["operands"]),
+                            widths=widths))
+    grammar.sort(key=lambda r: (r["opcode"], r["size"]))
+    # Same (opcode, size) encodings differ only in operand MEANING
+    # (e.g. playanimation vs playanimation_var); the walker accepts any
+    # matching entry, so duplicates are legal here.
+    if len(grammar) != 300 or len({r["opcode"] for r in grammar}) != 249:
+        fail(f"grammar: {len(grammar)} encodings / "
+             f"{len({r['opcode'] for r in grammar})} opcodes != pins")
 
     # ---- header ----
     h = []
@@ -431,6 +597,30 @@ def main():
              % len(script_target_words))
     h.append("#define EMERALD_BATTLE_LIVE_CANONICAL_BYTES %du" % total_bytes)
     h.append("#define EMERALD_BATTLE_LIVE_LAYOUT_COUNT 2u")
+    h.append("#define EMERALD_BATTLE_LIVE_ROUTING_COUNT %du"
+             % len(ROUTING_TABLES))
+    h.append("#define EMERALD_BATTLE_LIVE_LABEL_COUNT %du" % len(labels))
+    h.append("#define EMERALD_BATTLE_LIVE_GRAMMAR_ENTRY_COUNT %du"
+             % len(grammar))
+    h.append("")
+    h.append("struct EmeraldBattleLiveGrammarEntry")
+    h.append("{")
+    h.append("    uint8_t opcode;")
+    h.append("    uint8_t size;")
+    h.append("    uint8_t operandCount;")
+    h.append("    uint8_t widths[4];")
+    h.append("};")
+    h.append("")
+    h.append("/* Battle routing tables (H1 sec 6): the canonical GBA address of")
+    h.append(" * each pointer-bearing routing module. The live seam reads the")
+    h.append(" * arena-owned rows; the compiled tables are dead at runtime. */")
+    h.append("enum EmeraldBattleLiveRouting")
+    h.append("{")
+    for i, (key, suffix) in enumerate(ROUTING_TABLES.items()):
+        word = routing_words[key]
+        h.append("    EMERALD_BATTLE_ROUTING_%s = %du, /* %s @ 0x%x */"
+                 % (suffix.upper(), i, key, word))
+    h.append("};")
     h.append("")
     h.append("enum EmeraldBattleLiveRelocClass")
     h.append("{")
@@ -485,9 +675,20 @@ def main():
     h.append("struct EmeraldBattleLiveBinding")
     h.append("{")
     h.append("    const char *name;")
-    h.append("    uint8_t letter; /* 'B' | 'C' | 'D' | 'E' | 'F' */")
-    h.append("    uint32_t word; /* encoded GBA value (canonical word) */")
+    h.append("    uint8_t letter; /* 'A'..'F' */")
+    h.append("    uint32_t word; /* stored word (base + addend for 'A') */")
     h.append("    uintptr_t address; /* native host address; 0 = refuse-only */")
+    h.append("    uint32_t baseWord; /* 'A': encoded base value; else = word */")
+    h.append("    uint32_t addend; /* 'A': validated field offset */")
+    h.append("    uint32_t allowedOffset; /* 'A': ELF size bound */")
+    h.append("};")
+    h.append("")
+    h.append("struct EmeraldBattleLiveLabel")
+    h.append("{")
+    h.append("    const char *name;")
+    h.append("    uint32_t word; /* canonical GBA address of the root */")
+    h.append("    uint32_t module; /* payload module index */")
+    h.append("    uint32_t offset; /* payload offset of the export */")
     h.append("};")
     h.append("")
     h.append("struct EmeraldBattleLiveReloc")
@@ -515,6 +716,7 @@ def main():
     h.append("    uint32_t refuseOnlyBindingCount;")
     h.append("    uint32_t scriptTargetWordCount;")
     h.append("    uint32_t canonicalBytes;")
+    h.append("    uint32_t labelCount;")
     h.append("    const struct EmeraldBattleLiveArena *arenas;")
     h.append("    const struct EmeraldBattleLiveModule *modules;")
     h.append("    const struct EmeraldBattleNativeBoundary *boundaries;")
@@ -523,10 +725,20 @@ def main():
     h.append("    const struct EmeraldBattleLiveReloc *relocs;")
     h.append("    const struct EmeraldBattleLiveBinding *bindings;")
     h.append("    const uint32_t *scriptTargetWords;")
+    h.append("    const struct EmeraldBattleLiveLabel *labels;")
+    h.append("    const struct EmeraldBattleLiveGrammarEntry *grammar;")
     h.append("};")
     h.append("")
     h.append("extern const struct EmeraldBattleLiveTable "
              "kEmeraldBattleLiveTable;")
+    h.append("")
+    h.append("/* Native-address accessors (battle_live_native.generated.c;")
+    h.append(" * production-linked). Return 0 for out-of-range / non-native")
+    h.append(" * rows. */")
+    h.append("uintptr_t EmeraldBattleLiveNative_BindingAddress("
+             "uint32_t index);")
+    h.append("uintptr_t EmeraldBattleLiveNative_LabelAddress("
+             "uint32_t index);")
     h.append("")
     h.append("#endif /* EMERALD_RESOURCES_BATTLE_LIVE_GENERATED_H */")
     header = "\n".join(h) + "\n"
@@ -559,6 +771,11 @@ def main():
         if b["refuse_only"]:
             continue
         name = b["name"]
+        # A (EWRAM) and battle B rows resolve through the native-address
+        # TU; only the inline-address letters need externs here.
+        if b["letter"] == "A" or (b["letter"] == "B"
+                                  and b["name"] not in B_LETTER_NAMES_PIN):
+            continue
         if b["letter"] in ("B", "C"):
             c.append("extern const struct SpriteTemplate %s;" % name)
         elif b["letter"] == "E":
@@ -568,21 +785,37 @@ def main():
     c.append("")
     c.append("static const struct EmeraldBattleLiveBinding sBindings[] = {")
     for b in bindings:
+        # A (EWRAM) and battle B (string-ID table) rows resolve through
+        # the native-address TU (battle_live_native.generated.c); the
+        # table stays platform-neutral. Everything else carries its
+        # link-time address inline.
         if b["refuse_only"]:
             c.append("    /* refuse-only: %s */" % b["name"])
-            c.append("    {\"%s\", '%s', 0x%08xu, 0u},"
-                     % (b["name"], b["letter"], b["word"]))
+            c.append("    {\"%s\", '%s', 0x%08xu, 0u, 0x%08xu, %du, %du},"
+                     % (b["name"], b["letter"], b["word"],
+                        b["word"], b["addend"], b["allowed"]))
+        elif b["letter"] == "A" or (b["letter"] == "B"
+                                    and b["name"] not in B_LETTER_NAMES_PIN):
+            c.append("    /* native-address TU: %s */" % b["name"])
+            c.append("    {\"%s\", '%s', 0x%08xu, 0u, 0x%08xu, %du, %du},"
+                     % (b["name"], b["letter"], b["word"],
+                        b["base_word"], b["addend"], b["allowed"]))
         else:
-            c.append("    {\"%s\", '%s', 0x%08xu, (uintptr_t)&%s},"
-                     % (b["name"], b["letter"], b["word"], b["name"]))
+            c.append("    {\"%s\", '%s', 0x%08xu, (uintptr_t)&%s, 0x%08xu,"
+                     " %du, %du},"
+                     % (b["name"], b["letter"], b["word"], b["name"],
+                        b["word"], b["addend"], b["allowed"]))
     c.append("};")
     c.append("")
     c.append("static const struct EmeraldBattleLiveArena sArenas[] = {")
     for a in LIVE_ARENAS_ORDER_0:
-        fam = "EMERALD_BATTLE_FAMILY_BATTLE_ANIM_SCRIPT" if a == "battle_anim" \
-            else "EMERALD_BATTLE_FAMILY_FIELD_EFFECT_SCRIPT"
-        schema = FAMILY_PINS["battle-anim-script" if a == "battle_anim"
-                            else "field-effect-script"]["schema"]
+        fam = {"battle": "EMERALD_BATTLE_FAMILY_BATTLE_SCRIPT",
+               "battle_anim": "EMERALD_BATTLE_FAMILY_BATTLE_ANIM_SCRIPT",
+               "field_effect": "EMERALD_BATTLE_FAMILY_FIELD_EFFECT_SCRIPT"}[a]
+        schema = FAMILY_PINS[{"battle": "battle-script",
+                              "battle_anim": "battle-anim-script",
+                              "field_effect": "field-effect-script"}[a]][
+                                  "schema"]
         la = arena_layout[a]
         mods = [p for p in payload if p["arena"] == a]
         first = payload_idx[mods[0]["id"]]
@@ -647,19 +880,93 @@ def main():
         c.append("    0x%08xu," % w)
     c.append("};")
     c.append("")
+    c.append("static const struct EmeraldBattleLiveGrammarEntry sGrammar[] = {")
+    for r in grammar:
+        c.append("    {%du, %du, %du, {%du, %du, %du, %du}},"
+                 % (r["opcode"], r["size"], r["operand_count"],
+                    r["widths"][0], r["widths"][1], r["widths"][2],
+                    r["widths"][3]))
+    c.append("};")
+    c.append("")
+    c.append("static const struct EmeraldBattleLiveLabel sLabels[] = {")
+    for r in labels:
+        c.append('    {"%s", 0x%08xu, %du, %du},'
+                 % (r["name"], r["word"], r["module"], r["offset"]))
+    c.append("};")
+    c.append("")
     c.append("const struct EmeraldBattleLiveTable kEmeraldBattleLiveTable = {")
     c.append("    %du, %du, %du, %du, %du, %du, %du, %du, %du, %du, %du,"
+             " %du,"
              % (len(modules), len(payload), len(aliases),
                 len(LIVE_ARENAS_ORDER_0), len(boundaries), len(exports_flat),
                 len(relocs), len(bindings), len(refuse),
-                len(script_target_words), total_bytes))
+                len(script_target_words), total_bytes, len(labels)))
     c.append("    sArenas, sModules, sBoundaries, sExports, sAliases,")
-    c.append("    sRelocs, sBindings, sScriptTargetWords,")
+    c.append("    sRelocs, sBindings, sScriptTargetWords, sLabels, sGrammar,")
     c.append("};")
     table = "\n".join(c) + "\n"
 
+    # ---- native-address TU (production-linked; the table above stays
+    # platform-neutral) ----
+    n = []
+    n.append("/* Generated by tools/gen3_resources/battle_family/"
+             "h4_generate.py.")
+    n.append(" * Do not edit by hand; re-run the generator (regeneration must")
+    n.append(" * be a no-op diff).")
+    n.append(" */")
+    n.append("")
+    n.append("/* Native-typed address table for the R13-H5 battle bindings")
+    n.append(" * (A EWRAM + battle B string-ID tables) and the compiled-label")
+    n.append(" * map. Every symbol below is ADDRESSED (never dereferenced) in")
+    n.append(" * this TU, so the uniform scalar declarations bind the linker")
+    n.append(" * symbol regardless of the defining TU's real type; the real")
+    n.append(" * type stays where it is defined. Missing symbols fail the")
+    n.append(" * link (build-time coverage proof). */")
+    n.append("")
+    n.append("#include <stdint.h>")
+    n.append("#include \"emerald/resources/battle_live.generated.h\"")
+    n.append("")
+    native_names = sorted(
+        {b["name"] for b in bindings
+         if b["letter"] == "A"
+         or (b["letter"] == "B" and b["name"] not in B_LETTER_NAMES_PIN)}
+        | {r["name"] for r in labels})
+    for name in native_names:
+        n.append("extern uint8_t %s;" % name)
+    n.append("")
+    n.append("static const uintptr_t sNativeBindingAddresses[] = {")
+    for b in bindings:
+        if b["letter"] == "A" or (b["letter"] == "B"
+                                  and b["name"] not in B_LETTER_NAMES_PIN):
+            n.append("    (uintptr_t)&%s, /* %s */" % (b["name"], b["name"]))
+        else:
+            n.append("    0u,")
+    n.append("};")
+    n.append("")
+    n.append("static const uintptr_t sLabelAddresses[] = {")
+    for r in labels:
+        n.append("    (uintptr_t)&%s, /* %s */" % (r["name"], r["name"]))
+    n.append("};")
+    n.append("")
+    n.append("uintptr_t EmeraldBattleLiveNative_BindingAddress("
+             "uint32_t index)")
+    n.append("{")
+    n.append("    if (index >= EMERALD_BATTLE_LIVE_BINDING_COUNT)")
+    n.append("        return 0u;")
+    n.append("    return sNativeBindingAddresses[index];")
+    n.append("}")
+    n.append("")
+    n.append("uintptr_t EmeraldBattleLiveNative_LabelAddress(uint32_t index)")
+    n.append("{")
+    n.append("    if (index >= EMERALD_BATTLE_LIVE_LABEL_COUNT)")
+    n.append("        return 0u;")
+    n.append("    return sLabelAddresses[index];")
+    n.append("}")
+    native = "\n".join(n) + "\n"
+
     h3.write_if(HEADER_OUT, header, args.check)
     h3.write_if(TABLE_OUT, table, args.check)
+    h3.write_if(NATIVE_OUT, native, args.check)
     print(f"H4 table: {len(modules)} modules ({len(payload)} payload, "
           f"{len(aliases)} aliases), {len(boundaries)} boundaries, "
           f"{len(exports_flat)} export rows, {len(relocs)} relocs, "
