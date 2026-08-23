@@ -1,5 +1,6 @@
 #include "global.h"
 #include "decompress.h"
+#include "emerald/resources/emerald_battle_live.h"
 #include "event_object_movement.h"
 #include "field_camera.h"
 #include "field_control_avatar.h"
@@ -696,11 +697,23 @@ static void (*const sEscapeRopeWarpOutEffectFuncs[])(struct Task *) =
 u32 FieldEffectStart(u8 id)
 {
     u8 *script;
-    u32 val;
+    u32 val = 0;
+    uintptr_t scriptAddress;
 
     FieldEffectActiveListAdd(id);
 
-    script = HostResolveGbaAddr(gFieldEffectScriptPointers[id]);
+    /* R13-H4 (brief sec 21): the routing word is a field-effect module
+     * root export; the live seam resolves it to the host arena - no
+     * identity arithmetic, no compiled fallback. On refusal the effect
+     * did not run: roll back the active-list entry and report 0. */
+    if (EmeraldBattleLive_ResolveLaunchTarget(EMERALD_BATTLE_FAMILY_FIELD_EFFECT_SCRIPT,
+                                              gFieldEffectScriptPointers[id],
+                                              &scriptAddress) != EMERALD_BATTLE_LIVE_OK)
+    {
+        FieldEffectActiveListRemove(id);
+        return 0;
+    }
+    script = (u8 *)scriptAddress;
 
     while (gFieldEffectScriptFuncs[*script](&script, &val))
         ;
@@ -711,29 +724,25 @@ u32 FieldEffectStart(u8 id)
 bool8 FieldEffectCmd_loadtiles(u8 **script, u32 *val)
 {
     (*script)++;
-    FieldEffectScript_LoadTiles(script);
-    return TRUE;
+    return FieldEffectScript_LoadTiles(script);
 }
 
 bool8 FieldEffectCmd_loadfadedpal(u8 **script, u32 *val)
 {
     (*script)++;
-    FieldEffectScript_LoadFadedPalette(script);
-    return TRUE;
+    return FieldEffectScript_LoadFadedPalette(script);
 }
 
 bool8 FieldEffectCmd_loadpal(u8 **script, u32 *val)
 {
     (*script)++;
-    FieldEffectScript_LoadPalette(script);
-    return TRUE;
+    return FieldEffectScript_LoadPalette(script);
 }
 
 bool8 FieldEffectCmd_callnative(u8 **script, u32 *val)
 {
     (*script)++;
-    FieldEffectScript_CallNative(script, val);
-    return TRUE;
+    return FieldEffectScript_CallNative(script, val);
 }
 
 bool8 FieldEffectCmd_end(u8 **script, u32 *val)
@@ -744,26 +753,27 @@ bool8 FieldEffectCmd_end(u8 **script, u32 *val)
 bool8 FieldEffectCmd_loadgfx_callnative(u8 **script, u32 *val)
 {
     (*script)++;
-    FieldEffectScript_LoadTiles(script);
-    FieldEffectScript_LoadFadedPalette(script);
-    FieldEffectScript_CallNative(script, val);
-    return TRUE;
+    if (!FieldEffectScript_LoadTiles(script))
+        return FALSE;
+    if (!FieldEffectScript_LoadFadedPalette(script))
+        return FALSE;
+    return FieldEffectScript_CallNative(script, val);
 }
 
 bool8 FieldEffectCmd_loadtiles_callnative(u8 **script, u32 *val)
 {
     (*script)++;
-    FieldEffectScript_LoadTiles(script);
-    FieldEffectScript_CallNative(script, val);
-    return TRUE;
+    if (!FieldEffectScript_LoadTiles(script))
+        return FALSE;
+    return FieldEffectScript_CallNative(script, val);
 }
 
 bool8 FieldEffectCmd_loadfadedpal_callnative(u8 **script, u32 *val)
 {
     (*script)++;
-    FieldEffectScript_LoadFadedPalette(script);
-    FieldEffectScript_CallNative(script, val);
-    return TRUE;
+    if (!FieldEffectScript_LoadFadedPalette(script))
+        return FALSE;
+    return FieldEffectScript_CallNative(script, val);
 }
 
 u32 FieldEffectScript_ReadWord(u8 **script)
@@ -774,35 +784,60 @@ u32 FieldEffectScript_ReadWord(u8 **script)
          + ((*script)[3] << 24);
 }
 
-void FieldEffectScript_LoadTiles(u8 **script)
+bool8 FieldEffectScript_LoadTiles(u8 **script)
 {
-    struct SpriteSheet *sheet = HostResolveGbaAddr(FieldEffectScript_ReadWord(script));
-    if (GetSpriteTileStartByTag(sheet->tag) == 0xFFFF)
-        LoadSpriteSheet(sheet);
+    uintptr_t pointer;
+
+    /* R13-H4 (brief sec 18-22): gfx operands are semantic bindings
+     * resolved by the live seam (gfx family E / engine family F); the
+     * operand word at *script is unaligned - the seam's reloc lookup and
+     * word check are unaligned-safe. On refusal the effect aborts: FALSE
+     * ends the command loop and the battle/field flow continues. */
+    if (EmeraldBattleLive_ResolveOperand((uintptr_t)*script, &pointer) != EMERALD_BATTLE_LIVE_OK)
+        return FALSE;
+    if (GetSpriteTileStartByTag(((const struct SpriteSheet *)pointer)->tag) == 0xFFFF)
+        LoadSpriteSheet((const struct SpriteSheet *)pointer);
     (*script) += 4;
+    return TRUE;
 }
 
-void FieldEffectScript_LoadFadedPalette(u8 **script)
+bool8 FieldEffectScript_LoadFadedPalette(u8 **script)
 {
-    struct SpritePalette *palette = HostResolveGbaAddr(FieldEffectScript_ReadWord(script));
-    LoadSpritePalette(palette);
-    UpdateSpritePaletteWithWeather(IndexOfSpritePaletteTag(palette->tag));
+    uintptr_t pointer;
+
+    if (EmeraldBattleLive_ResolveOperand((uintptr_t)*script, &pointer) != EMERALD_BATTLE_LIVE_OK)
+        return FALSE;
+    LoadSpritePalette((const struct SpritePalette *)pointer);
+    UpdateSpritePaletteWithWeather(IndexOfSpritePaletteTag(((const struct SpritePalette *)pointer)->tag));
     (*script) += 4;
+    return TRUE;
 }
 
-void FieldEffectScript_LoadPalette(u8 **script)
+bool8 FieldEffectScript_LoadPalette(u8 **script)
 {
-    struct SpritePalette *palette = HostResolveGbaAddr(FieldEffectScript_ReadWord(script));
-    LoadSpritePalette(palette);
+    uintptr_t pointer;
+
+    if (EmeraldBattleLive_ResolveOperand((uintptr_t)*script, &pointer) != EMERALD_BATTLE_LIVE_OK)
+        return FALSE;
+    LoadSpritePalette((const struct SpritePalette *)pointer);
     (*script) += 4;
+    return TRUE;
 }
 
-void FieldEffectScript_CallNative(u8 **script, u32 *val)
+bool8 FieldEffectScript_CallNative(u8 **script, u32 *val)
 {
+    uintptr_t pointer;
     u32 (*func)(void);
-    HostResolveFunction(FieldEffectScript_ReadWord(script), &func, sizeof(func));
+
+    if (EmeraldBattleLive_ResolveOperand((uintptr_t)*script, &pointer) != EMERALD_BATTLE_LIVE_OK)
+    {
+        *val = 0;
+        return FALSE;
+    }
+    func = (u32 (*)(void))pointer;
     *val = func();
     (*script) += 4;
+    return TRUE;
 }
 
 void FieldEffectFreeGraphicsResources(struct Sprite *sprite)

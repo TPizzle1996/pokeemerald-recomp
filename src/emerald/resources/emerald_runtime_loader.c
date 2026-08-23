@@ -59,11 +59,33 @@
 #include "emerald/resources/emerald_gameplay_compat.h"
 #include "emerald/resources/emerald_map_compat.h"
 #include "emerald/resources/emerald_script_compat.h"
+#include "emerald/resources/emerald_battle_live.h"
 #include "emerald/resources/emerald_leaf_compat.h"
 #include "emerald/resources/emerald_resource_session.h"
 #include "emerald/resources/emerald_text_compat.h"
 #include "emerald/resources/emerald_trainer_compat.h"
 #include "emerald/resources/emerald_trainer_native_compat.h"
+
+/* R13-H4: the live battle-anim/FE seam is weak-probed exactly like the
+ * state-adapter bridges - production always links emerald_battle_live.c,
+ * so the cutover below is unconditional there; the harness-only H3 shadow
+ * link (emerald_battle_compat.c, which shares the six bridge symbols and
+ * therefore can never co-link) skips this step. The interpreters hard-
+ * reference the seam, so a production build can never accidentally omit
+ * it: omitting it is a link failure, not a silent fallback. */
+extern enum EmeraldBattleLiveStatus EmeraldBattleLive_TryInitialize(
+    const struct Gen3ResourceSnapshot *snapshot,
+    const struct Gen3ResourcePack *pack, uint32_t layout,
+    struct EmeraldBattleCompatDiagnostics *diagnostics);
+#pragma weak EmeraldBattleLive_TryInitialize
+extern enum EmeraldBattleLiveStatus EmeraldBattleLive_RegisterRanges(void);
+#pragma weak EmeraldBattleLive_RegisterRanges
+extern size_t EmeraldBattleLive_GetRangeCount(void);
+#pragma weak EmeraldBattleLive_GetRangeCount
+extern enum EmeraldBattleLiveStatus EmeraldBattleLive_Publish(void);
+#pragma weak EmeraldBattleLive_Publish
+extern void EmeraldBattleLive_ClearMigratedEntries(void);
+#pragma weak EmeraldBattleLive_ClearMigratedEntries
 
 static bool sSnapshotRegistered;
 
@@ -556,6 +578,8 @@ EmeraldResourceCompat_RegisterRuntimeSnapshot(const char *packPath)
                                                 enum EmeraldScriptCompatStatus scriptStatus =
                                                     EmeraldScriptCompat_TryInitialize(
                                                         snapshot, pack, &scriptDiag);
+                                                enum EmeraldBattleLiveStatus liveStatus =
+                                                    EMERALD_BATTLE_LIVE_OK;
                                                 if (scriptStatus == EMERALD_SCRIPT_OK)
                                                     scriptStatus =
                                                         EmeraldScriptCompat_RegisterRanges();
@@ -600,6 +624,71 @@ EmeraldResourceCompat_RegisterRuntimeSnapshot(const char *packPath)
                                                 }
                                                 else
                                                 {
+                                            /* R13-H4: the FIRST LIVE battle-family
+                                             * cutover (brief sec 17). After the G
+                                             * script family published: validate the
+                                             * anim + field-effect pack surfaces,
+                                             * stage the combined generation, register
+                                             * the 2 live arena ranges (6,377 ->
+                                             * 6,379), publish live execution, and
+                                             * hand the State-v5 adapter its surface
+                                             * layout - all before any animation or
+                                             * field-effect instruction can execute
+                                             * through the live seam. A failure at
+                                             * any step refuses the session with the
+                                             * same full rollback as every earlier
+                                             * seam; compiled anim/FE payloads are
+                                             * NEVER executed after this point. The
+                                             * weak probe above is NULL only in the
+                                             * harness-only H3 shadow link (the two
+                                             * battle seams can never co-link). */
+                                            if (EmeraldBattleLive_TryInitialize != NULL)
+                                            {
+                                                struct EmeraldBattleCompatDiagnostics liveDiag;
+                                                liveStatus = EmeraldBattleLive_TryInitialize(
+                                                    snapshot, pack, 0u, &liveDiag);
+                                                if (liveStatus == EMERALD_BATTLE_LIVE_OK)
+                                                    liveStatus =
+                                                        EmeraldBattleLive_RegisterRanges();
+                                                if (liveStatus == EMERALD_BATTLE_LIVE_OK
+                                                 && EmeraldBattleLive_GetRangeCount() != 6379u)
+                                                    liveStatus =
+                                                        EMERALD_BATTLE_LIVE_ERR_UNEXPECTED_COUNT;
+                                                if (liveStatus == EMERALD_BATTLE_LIVE_OK)
+                                                    liveStatus =
+                                                        EmeraldBattleLive_Publish();
+                                                if (liveStatus != EMERALD_BATTLE_LIVE_OK)
+                                                {
+                                                    fprintf(stderr,
+                                                            "emerald runtime: session refused: "
+                                                            "battle live generation not "
+                                                            "published (status %d%s%s)\n",
+                                                            (int)liveStatus,
+                                                            liveDiag.canonicalName[0] != '\0'
+                                                                ? " @ " : "",
+                                                            liveDiag.canonicalName);
+                                                    EmeraldBattleLive_ClearMigratedEntries();
+                                                    EmeraldScriptCompat_ClearMigratedEntries();
+                                                    EmeraldResourceCompat_ClearMigratedEntries();
+                                                    EmeraldAudioCompat_ClearMigratedEntries();
+                                                    EmeraldTextCompat_ClearMigratedEntries();
+                                                    EmeraldLeafCompat_ClearMigratedEntries();
+                                                    EmeraldGameplayCompat_ClearMigratedEntries();
+                                                    EmeraldTrainerCompat_ClearMigratedEntries();
+                                                    EmeraldEncounterCompat_ClearMigratedEntries();
+                                                    EmeraldFrontierCompat_ClearMigratedEntries();
+                                                    EmeraldPokedexCompat_ClearMigratedEntries();
+                                                    EmeraldMapCompat_ClearMigratedEntries();
+                                                    EmeraldResourceCompat_ClearSnapshot();
+                                                    EmeraldResourceCompat_SetSessionContentFingerprint(NULL);
+                                                    Gen3ResourceSnapshot_Destroy(snapshot);
+                                                    snapshot = NULL;
+                                                    sSnapshotRegistered = false;
+                                                    status = EMERALD_COMPAT_ERR_PUBLISH_FAILED;
+                                                }
+                                            }
+                                            if (status == EMERALD_COMPAT_OK)
+                                            {
                                             /* R10-F: the session content fingerprint
                                              * pins the exact logical provider content
                                              * this session was built from (the
@@ -622,6 +711,7 @@ EmeraldResourceCompat_RegisterRuntimeSnapshot(const char *packPath)
                                             else
                                                 EmeraldResourceCompat_SetSessionContentFingerprint(
                                                     NULL);
+                                            }
                                                 }
                                             }
                                         }

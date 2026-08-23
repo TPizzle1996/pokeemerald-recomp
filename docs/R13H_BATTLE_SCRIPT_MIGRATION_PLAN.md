@@ -651,6 +651,26 @@ each is a safe standalone gate:
   dependencies on other H families, engine targets stay compiled. Gate:
   stepwise differential oracle (48 + 8 opcode slots), full battle/contest
   world animation flows, sanitizers.
+  **COMPLETE (2026-08-23):** both families execute from the H arena through
+  the production live seam (`emerald_battle_live.c` +
+  `battle_live_table.generated.c`), published transactionally by the R6
+  loader (validate anim → validate FE → stage → register ranges → publish →
+  enable execution → commit; fail-closed full rollback). Live ranges
+  **6,379 / 8,192** (6,377 + exactly 2 H ranges; STOP condition not hit).
+  726 modules (723 payload + 3 zero-width aliases): anim 650 BYTECODE + 5
+  ROUTING + 3 aliases = 658, FE 67 BYTECODE + 1 ROUTING = 68; 717
+  launchable roots; 4,401 relocs (anim 4,231: 1,152 SCRIPT_TARGET / 2,108
+  SPRITE_TEMPLATE / 963 CALLBACK / 8 TABLE; FE 170: 67 SCRIPT_TARGET /
+  67 CALLBACK refuse-if-unknown / 36 GFX semantic); 620 bindings, 4
+  refuse-only; 9,818 boundaries; 64,628 canonical bytes; 2 layouts.
+  Oracle byte-exact on both layouts for all 723 modules; fault matrix
+  11/11; replacement proof (6,379 invariant, identity-specific
+  unregister); fresh-process anim State-v5 proof green (mandatory §15);
+  anim interpreter cut over at LaunchBattleAnimation + 9 command sites,
+  FE at FieldEffectStart + 4 operand helpers (void→bool8); pack invariant
+  23,069; ownership stays COMPILED_PENDING_MIGRATION (658/658, 68/68); no
+  compiled payload removed. Report:
+  `docs/R13H4_ANIMATION_FIELD_EFFECT_LIVE_CUTOVER_REPORT.md`.
 - **H5 — battle VM live cutover.** IP/stack/heap state, engine-EWRAM
   bindings, `sMoveEffectBS_Ptrs` + routing-table republication, trainer
   handoff edges. Gate: stepwise oracle over the 249-opcode table (real +

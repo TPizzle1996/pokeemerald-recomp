@@ -124,6 +124,9 @@ gcc -std=gnu99 -O2 -ffunction-sections -fdata-sections -Wl,--gc-sections \
     "$emerald_dir/emerald_script_state.c" \
     "$emerald_dir/script_native_table.generated.c" \
     "$here/emerald_script_harness_stubs.c" \
+    "$emerald_dir/emerald_battle_compat.c" \
+    "$emerald_dir/emerald_battle_state.c" \
+    "$emerald_dir/battle_native_table.generated.c" \
     "$root/src/platform/native_state.c" \
     "$root/src/platform/host_memory.c" \
     "$root/src/platform/native_world_neighborhood.c" \

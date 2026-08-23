@@ -16,6 +16,8 @@
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
+#include "emerald/resources/emerald_battle_live.h"
+#include "emerald/resources/emerald_battle_state.h"
 #include "constants/battle_anim.h"
 
 /*
@@ -92,6 +94,53 @@ static void LoadMoveBg(u16 bgId);
 EWRAM_DATA static const u8 *sBattleAnimScriptPtr = NULL;
 EWRAM_DATA static const u8 *sBattleAnimScriptRetAddr = NULL;
 EWRAM_DATA void (*gAnimScriptCallback)(void) = NULL;
+
+/* R13-H4: the live seam's weak probes, defined here (the seam declares
+ * them weak and binds to them when battle_anim.c is present).
+ * RegisterStateLayout hands the State-v5 adapter the live anim surface
+ * layout (slot addresses; arena bases are looked up live through
+ * GetArena on every capture, so a generation replacement needs no
+ * rebind). IsAnimActive refuses a generation replacement while an
+ * animation script is executing (its instruction pointer lives in the
+ * current generation buffer). */
+void BattleAnimCompat_RegisterStateLayout(void)
+{
+    struct EmeraldBattleStateLayout layout;
+
+    memset(&layout, 0, sizeof(layout));
+    layout.animScriptPtr = &sBattleAnimScriptPtr;
+    layout.animScriptRetAddr = &sBattleAnimScriptRetAddr;
+    layout.animScriptCallback = &gAnimScriptCallback;
+    EmeraldBattleState_SetLayout(&layout);
+}
+
+bool BattleAnimCompat_IsAnimActive(void)
+{
+    return gAnimScriptActive != FALSE;
+}
+
+/* Fail-closed script termination: the same signal the engine uses for
+ * a finished animation (Cmd_end's gAnimScriptActive = FALSE). The
+ * controllers observe it and proceed; the battle continues. */
+static void AbortBattleAnimation(void)
+{
+    gAnimScriptActive = FALSE;
+}
+
+/* Resolve the u32 operand at `operandAddress` (a typed relocation site
+ * in the live arena) through the seam. On ANY failure the animation
+ * aborts cleanly - the seam never falls back to compiled payloads
+ * (brief sec 23/24). */
+static bool ResolveAnimOperand(uintptr_t operandAddress,
+                               uintptr_t *outPointer)
+{
+    if (EmeraldBattleLive_ResolveOperand(operandAddress, outPointer)
+            == EMERALD_BATTLE_LIVE_OK)
+        return true;
+    AbortBattleAnimation();
+    return false;
+}
+
 EWRAM_DATA static s8 sAnimFramesToWait = 0;
 EWRAM_DATA bool8 gAnimScriptActive = FALSE;
 EWRAM_DATA u8 gAnimVisualTaskCount = 0;
@@ -237,7 +286,21 @@ void LaunchBattleAnimation(const GbaAddr animsTable[], u16 tableId, bool8 isMove
 
     sMonAnimTaskIdArray[0] = TASK_NONE;
     sMonAnimTaskIdArray[1] = TASK_NONE;
-    sBattleAnimScriptPtr = HostResolveGbaAddr(animsTable[tableId]);
+    {
+        uintptr_t scriptAddress;
+        if (EmeraldBattleLive_ResolveLaunchTarget(
+                EMERALD_BATTLE_FAMILY_BATTLE_ANIM_SCRIPT,
+                animsTable[tableId], &scriptAddress)
+                != EMERALD_BATTLE_LIVE_OK)
+        {
+            /* Fail-closed: a launch word the live seam cannot resolve
+             * (refuse-only effects; see emerald_battle_live.h) never
+             * starts a script. The move plays without animation and the
+             * battle continues. */
+            return;
+        }
+        sBattleAnimScriptPtr = (const u8 *)scriptAddress;
+    }
     gAnimScriptActive = TRUE;
     sAnimFramesToWait = 0;
     gAnimScriptCallback = RunAnimScriptCommand;
@@ -366,7 +429,13 @@ static void Cmd_createsprite(void)
     s16 subpriority;
 
     sBattleAnimScriptPtr++;
-    template = T2_READ_PTR(sBattleAnimScriptPtr);
+    {
+        uintptr_t templateAddress;
+        if (!ResolveAnimOperand((uintptr_t)sBattleAnimScriptPtr,
+                                &templateAddress))
+            return;
+        template = (const struct SpriteTemplate *)templateAddress;
+    }
     sBattleAnimScriptPtr += 4;
 
     argVar = sBattleAnimScriptPtr[0];
@@ -420,8 +489,13 @@ static void Cmd_createvisualtask(void)
     s32 i;
 
     sBattleAnimScriptPtr++;
-
-    HostResolveFunction(T2_READ_32(sBattleAnimScriptPtr), &taskFunc, sizeof(taskFunc));
+    {
+        uintptr_t funcAddress;
+        if (!ResolveAnimOperand((uintptr_t)sBattleAnimScriptPtr,
+                                &funcAddress))
+            return;
+        taskFunc = (TaskFunc)funcAddress;
+    }
     sBattleAnimScriptPtr += 4;
 
     taskPriority = sBattleAnimScriptPtr[0];
@@ -1042,9 +1116,13 @@ static void Cmd_blendoff(void)
 
 static void Cmd_call(void)
 {
+    uintptr_t targetAddress;
+
     sBattleAnimScriptPtr++;
     sBattleAnimScriptRetAddr = sBattleAnimScriptPtr + 4;
-    sBattleAnimScriptPtr = T2_READ_PTR(sBattleAnimScriptPtr);
+    if (!ResolveAnimOperand((uintptr_t)sBattleAnimScriptPtr, &targetAddress))
+        return;
+    sBattleAnimScriptPtr = (const u8 *)targetAddress;
 }
 
 static void Cmd_return(void)
@@ -1072,29 +1150,43 @@ static void Cmd_setarg(void)
 
 static void Cmd_choosetwoturnanim(void)
 {
+    uintptr_t targetAddress;
+
     sBattleAnimScriptPtr++;
     if (gAnimMoveTurn & 1)
         sBattleAnimScriptPtr += 4;
-    sBattleAnimScriptPtr = T2_READ_PTR(sBattleAnimScriptPtr);
+    if (!ResolveAnimOperand((uintptr_t)sBattleAnimScriptPtr, &targetAddress))
+        return;
+    sBattleAnimScriptPtr = (const u8 *)targetAddress;
 }
 
 static void Cmd_jumpifmoveturn(void)
 {
+    uintptr_t targetAddress;
     u8 toCheck;
     sBattleAnimScriptPtr++;
     toCheck = sBattleAnimScriptPtr[0];
     sBattleAnimScriptPtr++;
 
     if (toCheck == gAnimMoveTurn)
-        sBattleAnimScriptPtr = T2_READ_PTR(sBattleAnimScriptPtr);
+    {
+        if (!ResolveAnimOperand((uintptr_t)sBattleAnimScriptPtr,
+                                &targetAddress))
+            return;
+        sBattleAnimScriptPtr = (const u8 *)targetAddress;
+    }
     else
         sBattleAnimScriptPtr += 4;
 }
 
 static void Cmd_goto(void)
 {
+    uintptr_t targetAddress;
+
     sBattleAnimScriptPtr++;
-    sBattleAnimScriptPtr = T2_READ_PTR(sBattleAnimScriptPtr);
+    if (!ResolveAnimOperand((uintptr_t)sBattleAnimScriptPtr, &targetAddress))
+        return;
+    sBattleAnimScriptPtr = (const u8 *)targetAddress;
 }
 
 // Uses of this function that rely on a TRUE return are expecting inBattle to not be ticked as defined in contest behavior.
@@ -1618,7 +1710,13 @@ static void Cmd_createsoundtask(void)
     s32 i;
 
     sBattleAnimScriptPtr++;
-    HostResolveFunction(T2_READ_32(sBattleAnimScriptPtr), &func, sizeof(func));
+    {
+        uintptr_t funcAddress;
+        if (!ResolveAnimOperand((uintptr_t)sBattleAnimScriptPtr,
+                                &funcAddress))
+            return;
+        func = (TaskFunc)funcAddress;
+    }
     sBattleAnimScriptPtr += 4;
     numArgs = sBattleAnimScriptPtr[0];
     sBattleAnimScriptPtr++;
@@ -1662,6 +1760,7 @@ static void Cmd_waitsound(void)
 
 static void Cmd_jumpargeq(void)
 {
+    uintptr_t targetAddress;
     u8 argId;
     s16 valueToCheck;
 
@@ -1670,16 +1769,30 @@ static void Cmd_jumpargeq(void)
     valueToCheck = T1_READ_16(sBattleAnimScriptPtr + 1);
 
     if (valueToCheck == gBattleAnimArgs[argId])
-        sBattleAnimScriptPtr = T2_READ_PTR(sBattleAnimScriptPtr + 3);
+    {
+        /* The operand word sits at a +3 offset (unaligned); the seam's
+         * reloc lookup and word check are unaligned-safe. */
+        if (!ResolveAnimOperand((uintptr_t)sBattleAnimScriptPtr + 3,
+                                &targetAddress))
+            return;
+        sBattleAnimScriptPtr = (const u8 *)targetAddress;
+    }
     else
         sBattleAnimScriptPtr += 7;
 }
 
 static void Cmd_jumpifcontest(void)
 {
+    uintptr_t targetAddress;
+
     sBattleAnimScriptPtr++;
     if (IsContest())
-        sBattleAnimScriptPtr = T2_READ_PTR(sBattleAnimScriptPtr);
+    {
+        if (!ResolveAnimOperand((uintptr_t)sBattleAnimScriptPtr,
+                                &targetAddress))
+            return;
+        sBattleAnimScriptPtr = (const u8 *)targetAddress;
+    }
     else
         sBattleAnimScriptPtr += 4;
 }

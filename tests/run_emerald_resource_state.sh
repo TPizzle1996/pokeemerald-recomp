@@ -66,6 +66,9 @@ EOF
 gcc -c "$tmp/map_script_stubs.s" -o "$tmp/map_script_stubs.o"
 
 echo "== compiling cross-restart state test (real walker + seams + data.c + loader) =="
+# NOTE: emerald_native_world_tables_stub.c is intentionally NOT linked here.
+# The state test textually includes src/data.c, which already defines every
+# native pic table; linking the stub as well would duplicate them.
 cd "$root"
 gcc -std=gnu99 -O2 -ffunction-sections -fdata-sections -Wl,--gc-sections \
     -no-pie \

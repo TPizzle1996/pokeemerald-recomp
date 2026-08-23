@@ -1,11 +1,15 @@
-/* R13-H3 State-v5 battle-family execution adapter (shadow/test-only).
+/* R13-H3/H4 State-v5 battle-family execution adapter.
  *
  * Staged H pointers use the existing v5 resource sidecar; this adapter
  * owns only family-specific surface and boundary policy. The generic
  * container still owns record layout, ordering, CRCs, capacity, and
- * transactional commit. With no shadow generation present (production
- * through H3) every field returns NOT_BATTLE and the existing
- * image-relative compiled-script path is unchanged. */
+ * transactional commit. Through H3 no live seam was linked and every
+ * field returned NOT_BATTLE (the image-relative compiled-script path).
+ * R13-H4 links the production live seam: emerald_battle_live.c provides
+ * the same six EmeraldBattleCompat_* bridge symbols, and the family-live
+ * gate below activates the identity path for the published anim arena
+ * while every still-compiled family (battle scripts, AI, contest)
+ * continues unchanged through the image-relative path. */
 
 #include "emerald/resources/emerald_battle_state.h"
 
@@ -275,6 +279,39 @@ static bool InArenaHull(uintptr_t pointer, uint32_t *outFamily)
     return false;
 }
 
+/* R13-H4 family-live policy: the identity path may only own surfaces
+ * whose family is PUBLISHED into the live seam's arenas (anim + FE
+ * today). Every other battle-family surface (battle scripts, AI,
+ * contest) is still compiled; the generic image-relative v5 path owns
+ * it, so this adapter must step aside with NOT_BATTLE - never classify
+ * a compiled pointer as an unknown H pointer. Engine slots (family
+ * UINT32_MAX) are governed by their own class checks and are always
+ * eligible. The FAMILY_COUNT sentinel (the shared gAIScriptPtr slot) is
+ * live when EITHER AI arena is published. */
+static bool FamilyIsLive(uint32_t family)
+{
+    const uint8_t *base = NULL;
+    size_t size = 0u;
+
+    if (family == UINT32_MAX)
+        return true;
+    if (EmeraldBattleCompat_GetArena == NULL)
+        return false;
+    if (family == EMERALD_BATTLE_FAMILY_COUNT)
+    {
+        if (EmeraldBattleCompat_GetArena(EMERALD_BATTLE_FAMILY_BATTLE_AI,
+                                         &base, &size) && base != NULL)
+            return true;
+        base = NULL;
+        size = 0u;
+        return EmeraldBattleCompat_GetArena(EMERALD_BATTLE_FAMILY_CONTEST_AI,
+                                            &base, &size) && base != NULL;
+    }
+    if (family >= EMERALD_BATTLE_FAMILY_COUNT)
+        return false;
+    return EmeraldBattleCompat_GetArena(family, &base, &size) && base != NULL;
+}
+
 enum EmeraldBattleStateStatus EmeraldBattleState_CaptureField(
     uintptr_t fieldAddress, uintptr_t pointer,
     struct EmeraldBattleStateResourceIdentity *outIdentity)
@@ -317,6 +354,15 @@ enum EmeraldBattleStateStatus EmeraldBattleState_CaptureField(
             NoteSurface("non-battle field holding H bytecode");
             return EMERALD_BATTLE_STATE_ERR_WRONG_CLASS;
         }
+        return EMERALD_BATTLE_STATE_NOT_BATTLE;
+    }
+    if (!FamilyIsLive(surface.family))
+    {
+        /* Compiled family (not yet live): the generic image-relative v5
+         * path owns this surface. An H arena pointer here is a
+         * misclassification - refuse precisely. */
+        if (pointer != 0u && InArenaHull(pointer, NULL))
+            return EMERALD_BATTLE_STATE_ERR_WRONG_CLASS;
         return EMERALD_BATTLE_STATE_NOT_BATTLE;
     }
     NoteSurface(surface.name);
@@ -429,6 +475,8 @@ enum EmeraldBattleStateStatus EmeraldBattleState_ResolveField(
     if (surface.surfaceClass == SURFACE_NONE)
         return EMERALD_BATTLE_STATE_NOT_BATTLE;
     NoteSurface(surface.name);
+    if (!FamilyIsLive(surface.family))
+        return EMERALD_BATTLE_STATE_NOT_BATTLE;
     if (surface.surfaceClass == SURFACE_BATTLE_CALLBACK
      || surface.surfaceClass == SURFACE_ANIM_CALLBACK)
         return EMERALD_BATTLE_STATE_ERR_WRONG_CLASS;
