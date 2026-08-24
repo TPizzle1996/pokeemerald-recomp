@@ -307,8 +307,25 @@ MID_OBJS :=
 # with the G payload gated out inside the assembly (G_SCRIPT_INC +
 # region guards); maps.o stays (F-owned layouts/groups) with
 # headers.inc/connections.inc gated out inside the assembly.
+#
+# R13-H7: the linux64 link also drops every H-owned compiled battle
+# payload object: battle_scripts_1.o / battle_scripts_2.o (battle
+# bytecode + 5 move-effect routing tables), battle_ai_scripts.o,
+# contest_ai_scripts.o, battle_anim_scripts.o (anim bytecode + the 4
+# anim routing tables + gMovesWithQuietBGM) and field_effect_scripts.o
+# (field-effect bytecode + gFieldEffectScriptPointers). All 10 routing
+# tables are arena-owned; every C read site resolves through the live
+# seam (ResolveRoutingTarget / ResolveModuleData / label-word macros in
+# battle_scripts.h - R13-H7). The GBA build and the 32-bit/windows
+# native builds keep the full H payload set.
 DATA_ASM_OBJS := $(filter-out $(DATA_ASM_BUILDDIR)/map_events.o \
-                              $(DATA_ASM_BUILDDIR)/mystery_gift.o, \
+                              $(DATA_ASM_BUILDDIR)/mystery_gift.o \
+                              $(DATA_ASM_BUILDDIR)/battle_scripts_1.o \
+                              $(DATA_ASM_BUILDDIR)/battle_scripts_2.o \
+                              $(DATA_ASM_BUILDDIR)/battle_ai_scripts.o \
+                              $(DATA_ASM_BUILDDIR)/contest_ai_scripts.o \
+                              $(DATA_ASM_BUILDDIR)/battle_anim_scripts.o \
+                              $(DATA_ASM_BUILDDIR)/field_effect_scripts.o, \
                               $(DATA_ASM_OBJS))
 
 # R12-G: sweep stale audio payload objects out of the linux64 object tree.
@@ -329,7 +346,19 @@ sweep-stale-audio-objects:
 sweep-stale-g-script-objects:
 	rm -f $(DATA_ASM_BUILDDIR)/map_events.o $(DATA_ASM_BUILDDIR)/mystery_gift.o
 
-rom: sweep-stale-audio-objects sweep-stale-g-script-objects
+# R13-H7: sweep stale H payload objects out of the linux64 object tree
+# (same reasoning - post-carve builds must not link pre-carve payload
+# objects into the binary).
+.PHONY: sweep-stale-h-script-objects
+sweep-stale-h-script-objects:
+	rm -f $(DATA_ASM_BUILDDIR)/battle_scripts_1.o \
+	      $(DATA_ASM_BUILDDIR)/battle_scripts_2.o \
+	      $(DATA_ASM_BUILDDIR)/battle_ai_scripts.o \
+	      $(DATA_ASM_BUILDDIR)/contest_ai_scripts.o \
+	      $(DATA_ASM_BUILDDIR)/battle_anim_scripts.o \
+	      $(DATA_ASM_BUILDDIR)/field_effect_scripts.o
+
+rom: sweep-stale-audio-objects sweep-stale-g-script-objects sweep-stale-h-script-objects
 endif
 
 OBJS     := $(C_OBJS) $(GFLIB_OBJS) $(ASM_OBJS) $(DATA_ASM_OBJS) $(SONG_OBJS) $(MID_OBJS)

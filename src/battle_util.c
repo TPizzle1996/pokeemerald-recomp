@@ -44,11 +44,6 @@ match the ROM; this is also why sSoundMovesTable's declaration is in the middle 
 functions instead of at the top of the file with the other declarations.
 */
 
-extern const GbaAddr gBattleScriptsForMoveEffects[];
-extern const GbaAddr gBattlescriptsForBallThrow[];
-extern const GbaAddr gBattlescriptsForRunningByItem[];
-extern const GbaAddr gBattlescriptsForUsingItem[];
-extern const GbaAddr gBattlescriptsForSafariActions[];
 
 static const u8 sPkblToEscapeFactor[][3] = {
     {

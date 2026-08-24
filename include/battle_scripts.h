@@ -223,4 +223,12 @@ extern const u8 BattleScript_ActionWatchesCarefully[];
 extern const u8 BattleScript_ActionGetNear[];
 extern const u8 BattleScript_ActionThrowPokeblock[];
 
+/* R13-H7: on linux64 the compiled battle-script symbols are REMOVED
+ * from the native link (brief sec 3/§4). Every C use of BattleScript_X
+ * becomes a canonical-word macro (the externs above are shadowed; the
+ * generated map covers exactly the C-referenced battle exports). */
+#if defined(NATIVE_LINUX) && defined(LINUX64) && (LINUX64 == 1)
+#include "emerald/resources/battle_labels_linux64.generated.h"
+#endif
+
 #endif // GUARD_BATTLE_SCRIPTS_H

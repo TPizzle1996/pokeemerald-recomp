@@ -3,6 +3,7 @@
 #include "battle_controllers.h"
 #include "battle_ai_script_commands.h"
 #include "battle_anim.h"
+#include "emerald/resources/emerald_battle_live.h"
 #include "constants/battle_anim.h"
 #include "battle_interface.h"
 #include "main.h"
@@ -27,8 +28,6 @@
 #include "constants/battle_palace.h"
 
 extern const u8 gBattlePalaceNatureToMoveTarget[];
-extern const GbaAddr gBattleAnims_General[];
-extern const GbaAddr gBattleAnims_Special[];
 extern const struct CompressedSpriteSheet gSpriteSheet_EnemyShadow;
 extern const struct SpriteTemplate gSpriteTemplate_EnemyShadow;
 
@@ -482,7 +481,7 @@ bool8 TryHandleLaunchBattleTableAnimation(u8 activeBattler, u8 atkBattler, u8 de
     gBattleAnimAttacker = atkBattler;
     gBattleAnimTarget = defBattler;
     gBattleSpritesDataPtr->animationData->animArg = argument;
-    LaunchBattleAnimation(gBattleAnims_General, tableId, FALSE);
+    LaunchBattleAnimation(EMERALD_BATTLE_ROUTING_ANIMSGENERAL, tableId, FALSE);
     taskId = CreateTask(Task_ClearBitWhenBattleTableAnimDone, 10);
     gTasks[taskId].tBattlerId = activeBattler;
     gBattleSpritesDataPtr->healthBoxesData[gTasks[taskId].tBattlerId].animFromTableActive = 1;
@@ -526,7 +525,7 @@ void InitAndLaunchSpecialAnimation(u8 activeBattler, u8 atkBattler, u8 defBattle
 
     gBattleAnimAttacker = atkBattler;
     gBattleAnimTarget = defBattler;
-    LaunchBattleAnimation(gBattleAnims_Special, tableId, FALSE);
+    LaunchBattleAnimation(EMERALD_BATTLE_ROUTING_ANIMSSPECIAL, tableId, FALSE);
     taskId = CreateTask(Task_ClearBitWhenSpecialAnimDone, 10);
     gTasks[taskId].tBattlerId = activeBattler;
     gBattleSpritesDataPtr->healthBoxesData[gTasks[taskId].tBattlerId].specialAnimActive = 1;

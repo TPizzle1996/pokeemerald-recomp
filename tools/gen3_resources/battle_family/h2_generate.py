@@ -13,9 +13,13 @@ the R13-H1 graph artifacts (resources/extraction/emerald/bpee01/battle/):
     data/<family>/<module>.bin payloads.
 
 Every payload byte is an exact qualified-ROM slice -- no widening, no
-patching, no rewriting to native pointers (R13-H2 §4). Ownership is
-COMPILED_PENDING_MIGRATION (§3/§27): compiled battle/animation/AI/field-
-effect content remains the live runtime source through H2 (§28). Schemas
+patching, no rewriting to native pointers (R13-H2 §4). Ownership was
+COMPILED_PENDING_MIGRATION through H6 (§3/§27): compiled battle/
+animation/AI/field-effect content was the live runtime source until the
+live cutovers. R13-H7 (§4) flips the native target to ROM_BASE_ONLY -
+the compiled payloads are physically removed from the linux64 link
+(canonical bytes live in the pack-loaded H arenas); the GBA target
+keeps the qualified ROM bytes as the canonical representation. Schemas
 47-51 are free (G occupies 1-46) and are assigned per family.
 
 Regeneration must be a no-op diff; run with --check to verify.
@@ -527,11 +531,13 @@ def render_ownership(modules):
         "# records the canonical id, key (artifact sha256 - raw encoding,",
         "# so encoded == decoded), legacy compiled symbol, source artifact,",
         "# per-target ownership state and source hashes.",
-        "# R13-H2 ownership: every battle/animation/AI/field-effect module is",
-        "# COMPILED_PENDING_MIGRATION - the compiled ROM payloads stay the",
-        "# live runtime source through H2 (§28); nothing is staged live, no",
-        "# State-v5 range is registered (§19/§29). The gba target keeps the",
-        "# qualified ROM bytes as the canonical representation.",
+        "# R13-H7 ownership: every battle/animation/AI/field-effect module",
+        "# is ROM_BASE_ONLY on native - the compiled payloads are removed",
+        "# from the linux64 link (R13-H7 §4); canonical bytes live in the",
+        "# pack-loaded H arenas (2,089 modules / 90,047 B / 23,069 pack",
+        "# entries). Nothing is staged live, no State-v5 range is registered",
+        "# (§19/§29). The gba target keeps the qualified ROM bytes as the",
+        "# canonical representation.",
         "",
         "ownership_version = 1",
         "game = \"emerald\"",
@@ -551,10 +557,10 @@ def render_ownership(modules):
             "source_encoding = \"raw\"",
             f"source_encoded_sha256 = \"{m.digest}\"",
             f"canonical_decoded_sha256 = \"{m.digest}\"",
-            "ownership_state = \"COMPILED_PENDING_MIGRATION\"",
+            "ownership_state = \"ROM_BASE_ONLY\"",
             "",
             "[resources.targets]",
-            "native = \"COMPILED_PENDING_MIGRATION\"",
+            "native = \"ROM_BASE_ONLY\"",
             "gba = \"COMPILED\"",
             "",
         ]

@@ -27,9 +27,6 @@
 
 #define ANIM_SPRITE_INDEX_COUNT 8
 
-extern const u16 gMovesWithQuietBGM[];
-extern const GbaAddr gBattleAnims_Moves[];
-
 static void Cmd_loadspritegfx(void);
 static void Cmd_unloadspritegfx(void);
 static void Cmd_createsprite(void);
@@ -251,10 +248,10 @@ void DoMoveAnim(u16 move)
 {
     gBattleAnimAttacker = gBattlerAttacker;
     gBattleAnimTarget = gBattlerTarget;
-    LaunchBattleAnimation(gBattleAnims_Moves, move, TRUE);
+    LaunchBattleAnimation(EMERALD_BATTLE_ROUTING_ANIMSMOVES, move, TRUE);
 }
 
-void LaunchBattleAnimation(const GbaAddr animsTable[], u16 tableId, bool8 isMoveAnim)
+void LaunchBattleAnimation(uint32_t tableRouting, u16 tableId, bool8 isMoveAnim)
 {
     s32 i;
 
@@ -288,9 +285,11 @@ void LaunchBattleAnimation(const GbaAddr animsTable[], u16 tableId, bool8 isMove
     sMonAnimTaskIdArray[1] = TASK_NONE;
     {
         uintptr_t scriptAddress;
-        if (EmeraldBattleLive_ResolveLaunchTarget(
-                EMERALD_BATTLE_FAMILY_BATTLE_ANIM_SCRIPT,
-                animsTable[tableId], &scriptAddress)
+        /* R13-H7: the compiled anim tables are removed from the native
+         * link - the routing enum word IS the table (canonical GBA
+         * word); the seam reads the row from the arena. */
+        if (EmeraldBattleLive_ResolveRoutingTarget(
+                tableRouting, tableId, &scriptAddress)
                 != EMERALD_BATTLE_LIVE_OK)
         {
             /* Fail-closed: a launch word the live seam cannot resolve
@@ -310,9 +309,23 @@ void LaunchBattleAnimation(const GbaAddr animsTable[], u16 tableId, bool8 isMove
 
     if (isMoveAnim)
     {
-        for (i = 0; gMovesWithQuietBGM[i] != 0xFFFF; i++)
+        /* R13-H7: the compiled gMovesWithQuietBGM symbol is removed
+         * from the native link; read the u16 rows from the arena span
+         * (fail-closed: an unresolved span behaves as an empty list). */
+        uintptr_t span;
+        uint32_t byteCount;
+
+        if (EmeraldBattleLive_ResolveModuleData(EMERALD_BATTLE_QUIET_BGM_WORD,
+                                                &span, &byteCount)
+                != EMERALD_BATTLE_LIVE_OK)
+            byteCount = 0u;
+        for (i = 0; (uint32_t)i * 2u < byteCount; i++)
         {
-            if (tableId == gMovesWithQuietBGM[i])
+            u16 quietMove;
+
+            memcpy(&quietMove, (const void *)(span + (uint32_t)i * 2u),
+                   sizeof(quietMove));
+            if (tableId == quietMove)
             {
                 m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 128);
                 break;

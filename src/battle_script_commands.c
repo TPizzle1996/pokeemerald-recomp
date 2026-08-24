@@ -53,8 +53,6 @@
 #include "constants/songs.h"
 #include "constants/trainers.h"
 
-extern const GbaAddr gBattleScriptsForMoveEffects[];
-
 #define DEFENDER_IS_PROTECTED ((gProtectStructs[gBattlerTarget].protected) && (gBattleMoves[gCurrentMove].flags & FLAG_PROTECT_AFFECTED))
 
 #define LEVEL_UP_BANNER_START 416

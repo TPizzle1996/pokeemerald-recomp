@@ -890,17 +890,55 @@ enum EmeraldBattleLiveStatus EmeraldBattleLive_ResolveCompiledLabel(
         return EMERALD_BATTLE_LIVE_ERR_INVALID_ARGUMENT;
     if (!sPublished)
         return EMERALD_BATTLE_LIVE_ERR_NOT_PUBLISHED;
-    /* Linear scan over the label map (645 rows); entry sites are not
+    /* Linear scan over the label map (199 rows); entry sites are not
      * hot loops and the map keeps the platform-neutral table free of
-     * link-time addresses. */
+     * link-time addresses. R13-H7: on linux64 the compiled label
+     * symbols are REMOVED from the link - every C reference is a
+     * canonical-word macro, so the scan compares words (the argument
+     * is the macro-expanded word constant); off-linux64 the argument
+     * is the compiled symbol's host address. */
     for (i = 0u; i < t->labelCount; i++)
     {
+#if defined(NATIVE_LINUX) && defined(LINUX64) && (LINUX64 == 1)
+        if (t->labels[i].word == (uint32_t)(uintptr_t)nativeSymbolAddress)
+#else
         if (EmeraldBattleLiveNative_LabelAddress(i)
                 == (uintptr_t)nativeSymbolAddress)
+#endif
             return EmeraldBattleLive_GetBattleScript(t->labels[i].word,
                                                      outPointer);
     }
     return EMERALD_BATTLE_LIVE_ERR_TARGET_UNRESOLVED;
+}
+
+/* R13-H7 (brief sec 2/§12): resolve a NON-pointer data module (e.g.
+ * gMovesWithQuietBGM) by its canonical root word - the compiled
+ * symbols are removed from the native link, so the read site fetches
+ * the span from the arena. The root word must denote the module's own
+ * start and the module must not be bytecode (a script module root is a
+ * launch target, not raw data). */
+enum EmeraldBattleLiveStatus EmeraldBattleLive_ResolveModuleData(
+    uint32_t rootWord, uintptr_t *outSpan, uint32_t *outByteCount)
+{
+    const struct EmeraldBattleLiveTable *t = &kEmeraldBattleLiveTable;
+    uint32_t moduleIndex;
+    uint32_t moduleOffset;
+
+    if (outSpan == NULL || outByteCount == NULL)
+        return EMERALD_BATTLE_LIVE_ERR_INVALID_ARGUMENT;
+    if (!sPublished)
+        return EMERALD_BATTLE_LIVE_ERR_NOT_PUBLISHED;
+    if (sGeneration == NULL)
+        return EMERALD_BATTLE_LIVE_ERR_UNAVAILABLE;
+    if (!GbaContain(rootWord, &moduleIndex, &moduleOffset))
+        return EMERALD_BATTLE_LIVE_ERR_TARGET_UNRESOLVED;
+    if (moduleOffset != 0u)
+        return EMERALD_BATTLE_LIVE_ERR_BOUNDARY_INVALID;
+    if (t->modules[moduleIndex].mapKind == EMERALD_BATTLE_MAP_BYTECODE)
+        return EMERALD_BATTLE_LIVE_ERR_BOUNDARY_INVALID;
+    *outSpan = (uintptr_t)SpanBase(moduleIndex);
+    *outByteCount = t->modules[moduleIndex].byteCount;
+    return EMERALD_BATTLE_LIVE_OK;
 }
 
 /* ------------------------------------------------------------------ */

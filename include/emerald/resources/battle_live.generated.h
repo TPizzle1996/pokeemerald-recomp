@@ -27,7 +27,7 @@
 #define EMERALD_BATTLE_LIVE_SCRIPT_TARGET_WORD_COUNT 1880u
 #define EMERALD_BATTLE_LIVE_CANONICAL_BYTES 90047u
 #define EMERALD_BATTLE_LIVE_LAYOUT_COUNT 2u
-#define EMERALD_BATTLE_LIVE_ROUTING_COUNT 7u
+#define EMERALD_BATTLE_LIVE_ROUTING_COUNT 12u
 #define EMERALD_BATTLE_LIVE_LABEL_COUNT 199u
 #define EMERALD_BATTLE_LIVE_GRAMMAR_ENTRY_COUNT 554u
 
@@ -57,7 +57,18 @@ enum EmeraldBattleLiveRouting
     EMERALD_BATTLE_ROUTING_SAFARIACTIONS = 0x082dbd58u, /* emerald:battle-script/g-battlescripts-for-safari-actions */
     EMERALD_BATTLE_ROUTING_BATTLEAI = 0x082dbef8u, /* emerald:battle-ai/g-battle-ai_scripts-table */
     EMERALD_BATTLE_ROUTING_CONTESTAI = 0x082de350u, /* emerald:contest-ai/g-contest-ai_scripts-table */
+    EMERALD_BATTLE_ROUTING_ANIMSMOVES = 0x082c8d6cu, /* emerald:battle-anim-script/g-battle-anims_moves */
+    EMERALD_BATTLE_ROUTING_ANIMSSTATUS = 0x082c92fcu, /* emerald:battle-anim-script/g-battle-anims_status-conditions */
+    EMERALD_BATTLE_ROUTING_ANIMSGENERAL = 0x082c9320u, /* emerald:battle-anim-script/g-battle-anims_general */
+    EMERALD_BATTLE_ROUTING_ANIMSSPECIAL = 0x082c937cu, /* emerald:battle-anim-script/g-battle-anims_special */
+    EMERALD_BATTLE_ROUTING_FIELDEFFECTS = 0x082db9d4u, /* emerald:field-effect-script/g-field-effect-script-pointers */
 };
+
+/* gMovesWithQuietBGM (u16 rows, 8 B, mapKind ROUTING): a
+ * data table, not pointer rows - the live seam reads it
+ * via EmeraldBattleLive_ResolveModuleData with this root
+ * word (R13-H7 sec 2/§12). */
+#define EMERALD_BATTLE_QUIET_BGM_WORD 0x082c8d64u
 
 enum EmeraldBattleLiveRelocClass
 {

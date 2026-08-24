@@ -53,7 +53,7 @@ extern u8 gAnimCustomPanning;
 
 void ClearBattleAnimationVars(void);
 void DoMoveAnim(u16 move);
-void LaunchBattleAnimation(const GbaAddr animsTable[], u16 tableId, bool8 isMoveAnim);
+void LaunchBattleAnimation(uint32_t tableRouting, u16 tableId, bool8 isMoveAnim);
 void DestroyAnimSprite(struct Sprite *sprite);
 void DestroyAnimVisualTask(u8 taskId);
 void DestroyAnimSoundTask(u8 taskId);

@@ -244,7 +244,6 @@ static u8 sActiveList[32];
 extern struct CompressedSpritePalette gMonPaletteTable[]; // GF made a mistake and did not extern it as const.
 extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
 extern const struct CompressedSpriteSheet gTrainerFrontPicTable[];
-extern const GbaAddr gFieldEffectScriptPointers[];
 extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[];
 
 static const u32 sNewGameBirch_Gfx[] = INCBIN_U32("graphics/birch_speech/birch.4bpp");
@@ -702,12 +701,14 @@ u32 FieldEffectStart(u8 id)
 
     FieldEffectActiveListAdd(id);
 
-    /* R13-H4 (brief sec 21): the routing word is a field-effect module
-     * root export; the live seam resolves it to the host arena - no
-     * identity arithmetic, no compiled fallback. On refusal the effect
-     * did not run: roll back the active-list entry and report 0. */
-    if (EmeraldBattleLive_ResolveLaunchTarget(EMERALD_BATTLE_FAMILY_FIELD_EFFECT_SCRIPT,
-                                              gFieldEffectScriptPointers[id],
+    /* R13-H4 (brief sec 21) + R13-H7: the routing enum word IS the
+     * field-effect table (canonical GBA word - the compiled symbol is
+     * removed from the native link); the live seam reads the row from
+     * the arena - no identity arithmetic, no compiled fallback. On
+     * refusal the effect did not run: roll back the active-list entry
+     * and report 0. */
+    if (EmeraldBattleLive_ResolveRoutingTarget(EMERALD_BATTLE_ROUTING_FIELDEFFECTS,
+                                              id,
                                               &scriptAddress) != EMERALD_BATTLE_LIVE_OK)
     {
         FieldEffectActiveListRemove(id);

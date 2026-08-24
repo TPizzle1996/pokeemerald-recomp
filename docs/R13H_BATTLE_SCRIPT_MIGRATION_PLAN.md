@@ -717,12 +717,18 @@ each is a safe standalone gate:
   ranges; pointer sweep 2,051 words zero cross-family; pack invariant
   23,069; ownership stays COMPILED_PENDING_MIGRATION. Report:
   `docs/R13H6_AI_LIVE_CUTOVER_REPORT.md`.
-- **H7 — compiled H removal and isolation.** Remove all five families from
-  the linux64 link (assembly gates per data file), flip ownership to
-  `ROM_BASE_ONLY` (GBA stays COMPILED), run the full isolation sweeps
-  (§21), full regression battery, and the fresh-process State-v5 suites.
-  Gate: every H resource ROM_BASE_ONLY, 0 pending, documented
-  engine/ID-table exclusions present and named, **no R13-I begun**.
+- **H7 — compiled H removal and isolation.** COMPLETE: all five families
+  removed from the linux64 link (Makefile_pc carve of the 6 H script
+  objects + stale-object sweep under the linux64 gate); ownership flipped
+  2,089/2,089 `ROM_BASE_ONLY`, 0 COMPILED_PENDING_MIGRATION, GBA stays
+  COMPILED; isolation sweep 33,521 ok / 0 failed (7908/7908 + 1057/1057)
+  with 4 sha-keyed named exemptions (2 seam §12 retentions in
+  battle_live_table.generated.c rodata, 2 R7B x86-coincidences); fault
+  matrix 22/22; live ranges 6,382/5 unchanged; pack invariant 23,069 /
+  15,278,272 B / `b711d358…`; release −267,768 B vs H6; verify-game-data
+  f3ae0881…d07b7 exit 0. Report:
+  `docs/R13H7_BATTLE_SCRIPT_ISOLATION_REPORT.md`. Gate held: **no R13-I
+  begun**.
 
 Each wave produces a permanent artifact; none introduces patched bytecode,
 a temporary native dialect, or a live state gap.

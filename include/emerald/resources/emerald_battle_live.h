@@ -25,15 +25,19 @@
  *    else keep the legacy path;
  *  - EWRAM operands resolve as semantic base + validated addend
  *    (native address from the battle_live_native.generated.c TU);
- *  - the 7 routing tables (5 battle + gBattleAI_ScriptsTable 32 rows +
- *    gContestAI_ScriptsTable 32 rows) are arena-owned: rows are read
- *    from the canonical arena bytes and each row word resolves as a
+ *  - the 12 routing tables (7 battle/AI + the battle-anim tables
+ *    gBattleAnims_Moves/StatusConditions/General/Special +
+ *    gFieldEffectScriptPointers) are arena-owned: rows are read from
+ *    the canonical arena bytes and each row word resolves as a
  *    SCRIPT_TARGET root of the table's own family (the compiled tables
  *    are dead at runtime; the AI entry tables are the only entry
  *    surfaces for the AI VMs, brief sec 11);
  *  - direct C label references (BattleScript_Get) resolve through the
  *    compiled-label map (native symbol -> canonical GBA word -> arena
- *    root export);
+ *    root export; on linux64 the symbols are REMOVED and the map key
+ *    is the canonical word itself, R13-H7);
+ *  - gMovesWithQuietBGM (u16 rows) resolves through
+ *    EmeraldBattleLive_ResolveModuleData by root word (R13-H7);
  *  - data-target relocs (38 battle-AI if_in_* byte/hword list tables)
  *    resolve at offset 0 by map kind - no instruction boundaries
  *    (brief sec 6).
@@ -128,10 +132,20 @@ enum EmeraldBattleLiveStatus EmeraldBattleLive_ResolveLaunchTarget(
  * canonical row bytes are read from the ARENA (the compiled tables are
  * dead at runtime) and the row word resolves as a SCRIPT_TARGET root of
  * the table's own family (battle move-effects/ball-throw/using-item/
- * running-by-item/safari-actions + battle-AI + contest-AI entry
- * tables). */
+ * running-by-item/safari-actions + battle-AI + contest-AI entry tables;
+ * R13-H7 adds the battle-anim tables gBattleAnims_Moves/Status/
+ * General/Special and gFieldEffectScriptPointers - the anim/FE launch
+ * sites convert from compiled table symbols to these enum words). */
 enum EmeraldBattleLiveStatus EmeraldBattleLive_ResolveRoutingTarget(
     uint32_t tableWord, uint32_t rowIndex, uintptr_t *outPointer);
+
+/* R13-H7: resolve a NON-pointer data module (gMovesWithQuietBGM) by
+ * its canonical root word - the compiled symbols are removed from the
+ * native link, so the read site fetches the arena span instead. The
+ * root word must denote the module's own start and the module must not
+ * be bytecode. */
+enum EmeraldBattleLiveStatus EmeraldBattleLive_ResolveModuleData(
+    uint32_t rootWord, uintptr_t *outSpan, uint32_t *outByteCount);
 
 /* H5 battle direct entry: `word` is a canonical battle root GBA address
  * (from the compiled-label map - a generator-validated constant, never

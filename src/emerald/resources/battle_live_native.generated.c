@@ -9,210 +9,19 @@
  * this TU, so the uniform scalar declarations bind the linker
  * symbol regardless of the defining TU's real type; the real
  * type stays where it is defined. Missing symbols fail the
- * link (build-time coverage proof). */
+ * link (build-time coverage proof).
+ *
+ * R13-H7: on linux64 the compiled battle labels are REMOVED
+ * from the link (brief sec 3/§4); the label externs and the
+ * host-address table below exist only off-linux64, and
+ * LabelAddress returns the canonical GBA word instead (the
+ * label map stays queryable; ResolveCompiledLabel compares
+ * words on linux64). The engine binding symbols stay on all
+ * targets (brief sec 12/§26). */
 
 #include <stdint.h>
 #include "emerald/resources/battle_live.generated.h"
 
-extern uint8_t BattleScript_AbilityCuredStatus;
-extern uint8_t BattleScript_AbilityNoSpecificStatLoss;
-extern uint8_t BattleScript_AbilityNoStatLoss;
-extern uint8_t BattleScript_ActionSelectionItemsCantBeUsed;
-extern uint8_t BattleScript_ActionSwitch;
-extern uint8_t BattleScript_AllStatsUp;
-extern uint8_t BattleScript_AlreadyAtFullHp;
-extern uint8_t BattleScript_ApplySecondaryEffect;
-extern uint8_t BattleScript_ArenaDoJudgment;
-extern uint8_t BattleScript_ArenaTurnBeginning;
-extern uint8_t BattleScript_AskIfWantsToForfeitMatch;
-extern uint8_t BattleScript_AtkDefDown;
-extern uint8_t BattleScript_BRNPrevention;
-extern uint8_t BattleScript_BerryConfuseHealEnd2;
-extern uint8_t BattleScript_BerryCureBrnEnd2;
-extern uint8_t BattleScript_BerryCureBrnRet;
-extern uint8_t BattleScript_BerryCureChosenStatusEnd2;
-extern uint8_t BattleScript_BerryCureChosenStatusRet;
-extern uint8_t BattleScript_BerryCureConfusionEnd2;
-extern uint8_t BattleScript_BerryCureConfusionRet;
-extern uint8_t BattleScript_BerryCureFrzEnd2;
-extern uint8_t BattleScript_BerryCureFrzRet;
-extern uint8_t BattleScript_BerryCureParRet;
-extern uint8_t BattleScript_BerryCurePrlzEnd2;
-extern uint8_t BattleScript_BerryCurePsnEnd2;
-extern uint8_t BattleScript_BerryCurePsnRet;
-extern uint8_t BattleScript_BerryCureSlpEnd2;
-extern uint8_t BattleScript_BerryCureSlpRet;
-extern uint8_t BattleScript_BerryFocusEnergyEnd2;
-extern uint8_t BattleScript_BerryPPHealEnd2;
-extern uint8_t BattleScript_BerryStatRaiseEnd2;
-extern uint8_t BattleScript_BideAttack;
-extern uint8_t BattleScript_BideNoEnergyToAttack;
-extern uint8_t BattleScript_BideStoringEnergy;
-extern uint8_t BattleScript_BurnTurnDmg;
-extern uint8_t BattleScript_ButItFailed;
-extern uint8_t BattleScript_CastformChange;
-extern uint8_t BattleScript_ColorChangeActivates;
-extern uint8_t BattleScript_CurseTurnDmg;
-extern uint8_t BattleScript_CuteCharmActivates;
-extern uint8_t BattleScript_DamagingWeatherContinues;
-extern uint8_t BattleScript_DampStopsExplosion;
-extern uint8_t BattleScript_DefrostedViaFireMove;
-extern uint8_t BattleScript_DestinyBondTakesLife;
-extern uint8_t BattleScript_DisabledNoMore;
-extern uint8_t BattleScript_DrizzleActivates;
-extern uint8_t BattleScript_DroughtActivates;
-extern uint8_t BattleScript_EncoredNoMore;
-extern uint8_t BattleScript_EnduredMsg;
-extern uint8_t BattleScript_FaintAttacker;
-extern uint8_t BattleScript_FaintTarget;
-extern uint8_t BattleScript_FlashFireBoost;
-extern uint8_t BattleScript_FlashFireBoost_PPLoss;
-extern uint8_t BattleScript_FlinchPrevention;
-extern uint8_t BattleScript_FlushMessageBox;
-extern uint8_t BattleScript_FocusBandActivates;
-extern uint8_t BattleScript_FocusPunchSetUp;
-extern uint8_t BattleScript_FrontierLinkBattleLost;
-extern uint8_t BattleScript_FrontierTrainerBattleWon;
-extern uint8_t BattleScript_GiveExp;
-extern uint8_t BattleScript_GotAwaySafely;
-extern uint8_t BattleScript_GrudgeTakesPp;
-extern uint8_t BattleScript_HandleFaintedMon;
-extern uint8_t BattleScript_HitFromCritCalc;
-extern uint8_t BattleScript_IgnoresAndFallsAsleep;
-extern uint8_t BattleScript_IgnoresAndHitsItself;
-extern uint8_t BattleScript_IgnoresAndUsesRandomMove;
-extern uint8_t BattleScript_IgnoresWhileAsleep;
-extern uint8_t BattleScript_IngrainTurnHeal;
-extern uint8_t BattleScript_IntimidateActivates;
-extern uint8_t BattleScript_IntimidateActivatesEnd3;
-extern uint8_t BattleScript_ItemHealHP_End2;
-extern uint8_t BattleScript_ItemHealHP_RemoveItem;
-extern uint8_t BattleScript_ItemHealHP_Ret;
-extern uint8_t BattleScript_ItemSteal;
-extern uint8_t BattleScript_KnockedOff;
-extern uint8_t BattleScript_LeechSeedFree;
-extern uint8_t BattleScript_LeechSeedTurnDrain;
-extern uint8_t BattleScript_LevelUp;
-extern uint8_t BattleScript_LinkBattleWonOrLost;
-extern uint8_t BattleScript_LocalBattleLost;
-extern uint8_t BattleScript_LocalTrainerBattleWon;
-extern uint8_t BattleScript_MagicCoatBounce;
-extern uint8_t BattleScript_MistProtected;
-extern uint8_t BattleScript_MonMadeMoveUseless;
-extern uint8_t BattleScript_MonMadeMoveUseless_PPLoss;
-extern uint8_t BattleScript_MonTookFutureAttack;
-extern uint8_t BattleScript_MonWokeUpInUproar;
-extern uint8_t BattleScript_MoveEffectBurn;
-extern uint8_t BattleScript_MoveEffectConfusion;
-extern uint8_t BattleScript_MoveEffectFreeze;
-extern uint8_t BattleScript_MoveEffectParalysis;
-extern uint8_t BattleScript_MoveEffectPayDay;
-extern uint8_t BattleScript_MoveEffectPoison;
-extern uint8_t BattleScript_MoveEffectRecoil;
-extern uint8_t BattleScript_MoveEffectSleep;
-extern uint8_t BattleScript_MoveEffectToxic;
-extern uint8_t BattleScript_MoveEffectUproar;
-extern uint8_t BattleScript_MoveEffectWrap;
-extern uint8_t BattleScript_MoveEnd;
-extern uint8_t BattleScript_MoveHPDrain;
-extern uint8_t BattleScript_MoveHPDrain_PPLoss;
-extern uint8_t BattleScript_MoveMissedPause;
-extern uint8_t BattleScript_MoveUsedFlinched;
-extern uint8_t BattleScript_MoveUsedIsAsleep;
-extern uint8_t BattleScript_MoveUsedIsConfused;
-extern uint8_t BattleScript_MoveUsedIsConfusedNoMore;
-extern uint8_t BattleScript_MoveUsedIsDisabled;
-extern uint8_t BattleScript_MoveUsedIsFrozen;
-extern uint8_t BattleScript_MoveUsedIsImprisoned;
-extern uint8_t BattleScript_MoveUsedIsInLove;
-extern uint8_t BattleScript_MoveUsedIsInLoveCantAttack;
-extern uint8_t BattleScript_MoveUsedIsParalyzed;
-extern uint8_t BattleScript_MoveUsedIsTaunted;
-extern uint8_t BattleScript_MoveUsedLoafingAround;
-extern uint8_t BattleScript_MoveUsedMustRecharge;
-extern uint8_t BattleScript_MoveUsedUnfroze;
-extern uint8_t BattleScript_MoveUsedWokeUp;
-extern uint8_t BattleScript_NightmareTurnDmg;
-extern uint8_t BattleScript_NoItemSteal;
-extern uint8_t BattleScript_NoMovesLeft;
-extern uint8_t BattleScript_NoPPForMove;
-extern uint8_t BattleScript_ObliviousPreventsAttraction;
-extern uint8_t BattleScript_OneHitKOMsg;
-extern uint8_t BattleScript_OverworldWeatherStarts;
-extern uint8_t BattleScript_PRLZPrevention;
-extern uint8_t BattleScript_PSNPrevention;
-extern uint8_t BattleScript_PalacePrintFlavorText;
-extern uint8_t BattleScript_Pausex20;
-extern uint8_t BattleScript_PayDayMoneyAndPickUpItems;
-extern uint8_t BattleScript_PerishSongCountGoesDown;
-extern uint8_t BattleScript_PerishSongTakesLife;
-extern uint8_t BattleScript_PlayerUsesItem;
-extern uint8_t BattleScript_PoisonTurnDmg;
-extern uint8_t BattleScript_PresentHealTarget;
-extern uint8_t BattleScript_PrintCantEscapeFromBattle;
-extern uint8_t BattleScript_PrintCantRunFromTrainer;
-extern uint8_t BattleScript_PrintFailedToRunString;
-extern uint8_t BattleScript_PrintFullBox;
-extern uint8_t BattleScript_PrintPayDayMoneyString;
-extern uint8_t BattleScript_PrintPlayerForfeited;
-extern uint8_t BattleScript_PrintPlayerForfeitedLinkBattle;
-extern uint8_t BattleScript_PrintUproarOverTurns;
-extern uint8_t BattleScript_RageIsBuilding;
-extern uint8_t BattleScript_RainContinuesOrEnds;
-extern uint8_t BattleScript_RainDishActivates;
-extern uint8_t BattleScript_RanAwayUsingMonAbility;
-extern uint8_t BattleScript_RapidSpinAway;
-extern uint8_t BattleScript_RoughSkinActivates;
-extern uint8_t BattleScript_RunByUsingItem;
-extern uint8_t BattleScript_SAtkDown2;
-extern uint8_t BattleScript_SafeguardEnds;
-extern uint8_t BattleScript_SandStormHailEnds;
-extern uint8_t BattleScript_SandstreamActivates;
-extern uint8_t BattleScript_SelectingDisabledMove;
-extern uint8_t BattleScript_SelectingDisabledMoveInPalace;
-extern uint8_t BattleScript_SelectingImprisonedMove;
-extern uint8_t BattleScript_SelectingImprisonedMoveInPalace;
-extern uint8_t BattleScript_SelectingMoveWithNoPP;
-extern uint8_t BattleScript_SelectingNotAllowedMoveChoiceItem;
-extern uint8_t BattleScript_SelectingNotAllowedMoveTaunt;
-extern uint8_t BattleScript_SelectingNotAllowedMoveTauntInPalace;
-extern uint8_t BattleScript_SelectingTormentedMove;
-extern uint8_t BattleScript_SelectingTormentedMoveInPalace;
-extern uint8_t BattleScript_ShakeBallThrow;
-extern uint8_t BattleScript_ShedSkinActivates;
-extern uint8_t BattleScript_SideStatusWoreOff;
-extern uint8_t BattleScript_SmokeBallEscape;
-extern uint8_t BattleScript_SnatchedMove;
-extern uint8_t BattleScript_SoundproofProtected;
-extern uint8_t BattleScript_SpeedBoostActivates;
-extern uint8_t BattleScript_SpikesFree;
-extern uint8_t BattleScript_SpikesOnAttacker;
-extern uint8_t BattleScript_SpikesOnFaintedBattler;
-extern uint8_t BattleScript_SpikesOnTarget;
-extern uint8_t BattleScript_StatDown;
-extern uint8_t BattleScript_StatUp;
-extern uint8_t BattleScript_StickyHoldActivates;
-extern uint8_t BattleScript_SturdyPreventsOHKO;
-extern uint8_t BattleScript_SubstituteFade;
-extern uint8_t BattleScript_SuccessBallThrow;
-extern uint8_t BattleScript_SuccessForceOut;
-extern uint8_t BattleScript_SunlightContinues;
-extern uint8_t BattleScript_SunlightFaded;
-extern uint8_t BattleScript_SynchronizeActivates;
-extern uint8_t BattleScript_TargetPRLZHeal;
-extern uint8_t BattleScript_ThrashConfuses;
-extern uint8_t BattleScript_TookAttack;
-extern uint8_t BattleScript_TraceActivates;
-extern uint8_t BattleScript_TrainerBallBlock;
-extern uint8_t BattleScript_WallyBallThrow;
-extern uint8_t BattleScript_WhiteHerbEnd2;
-extern uint8_t BattleScript_WhiteHerbRet;
-extern uint8_t BattleScript_WildMonFled;
-extern uint8_t BattleScript_WishComesTrue;
-extern uint8_t BattleScript_WrapEnds;
-extern uint8_t BattleScript_WrapFree;
-extern uint8_t BattleScript_WrapTurnDmg;
-extern uint8_t BattleScript_YawnMakesAsleep;
 extern uint8_t gAbsorbDrainStringIds;
 extern uint8_t gBRNPreventionStringIds;
 extern uint8_t gBallEscapeStringIds;
@@ -1006,6 +815,208 @@ static const uintptr_t sNativeBindingAddresses[] = {
     0u,
 };
 
+#if !(defined(NATIVE_LINUX) && defined(LINUX64) && (LINUX64 == 1))
+/* Compiled-label host-address table (off-linux64 only). */
+extern uint8_t BattleScript_AbilityCuredStatus;
+extern uint8_t BattleScript_AbilityNoSpecificStatLoss;
+extern uint8_t BattleScript_AbilityNoStatLoss;
+extern uint8_t BattleScript_ActionSelectionItemsCantBeUsed;
+extern uint8_t BattleScript_ActionSwitch;
+extern uint8_t BattleScript_AllStatsUp;
+extern uint8_t BattleScript_AlreadyAtFullHp;
+extern uint8_t BattleScript_ApplySecondaryEffect;
+extern uint8_t BattleScript_ArenaDoJudgment;
+extern uint8_t BattleScript_ArenaTurnBeginning;
+extern uint8_t BattleScript_AskIfWantsToForfeitMatch;
+extern uint8_t BattleScript_AtkDefDown;
+extern uint8_t BattleScript_BRNPrevention;
+extern uint8_t BattleScript_BerryConfuseHealEnd2;
+extern uint8_t BattleScript_BerryCureBrnEnd2;
+extern uint8_t BattleScript_BerryCureBrnRet;
+extern uint8_t BattleScript_BerryCureChosenStatusEnd2;
+extern uint8_t BattleScript_BerryCureChosenStatusRet;
+extern uint8_t BattleScript_BerryCureConfusionEnd2;
+extern uint8_t BattleScript_BerryCureConfusionRet;
+extern uint8_t BattleScript_BerryCureFrzEnd2;
+extern uint8_t BattleScript_BerryCureFrzRet;
+extern uint8_t BattleScript_BerryCureParRet;
+extern uint8_t BattleScript_BerryCurePrlzEnd2;
+extern uint8_t BattleScript_BerryCurePsnEnd2;
+extern uint8_t BattleScript_BerryCurePsnRet;
+extern uint8_t BattleScript_BerryCureSlpEnd2;
+extern uint8_t BattleScript_BerryCureSlpRet;
+extern uint8_t BattleScript_BerryFocusEnergyEnd2;
+extern uint8_t BattleScript_BerryPPHealEnd2;
+extern uint8_t BattleScript_BerryStatRaiseEnd2;
+extern uint8_t BattleScript_BideAttack;
+extern uint8_t BattleScript_BideNoEnergyToAttack;
+extern uint8_t BattleScript_BideStoringEnergy;
+extern uint8_t BattleScript_BurnTurnDmg;
+extern uint8_t BattleScript_ButItFailed;
+extern uint8_t BattleScript_CastformChange;
+extern uint8_t BattleScript_ColorChangeActivates;
+extern uint8_t BattleScript_CurseTurnDmg;
+extern uint8_t BattleScript_CuteCharmActivates;
+extern uint8_t BattleScript_DamagingWeatherContinues;
+extern uint8_t BattleScript_DampStopsExplosion;
+extern uint8_t BattleScript_DefrostedViaFireMove;
+extern uint8_t BattleScript_DestinyBondTakesLife;
+extern uint8_t BattleScript_DisabledNoMore;
+extern uint8_t BattleScript_DrizzleActivates;
+extern uint8_t BattleScript_DroughtActivates;
+extern uint8_t BattleScript_EncoredNoMore;
+extern uint8_t BattleScript_EnduredMsg;
+extern uint8_t BattleScript_FaintAttacker;
+extern uint8_t BattleScript_FaintTarget;
+extern uint8_t BattleScript_FlashFireBoost;
+extern uint8_t BattleScript_FlashFireBoost_PPLoss;
+extern uint8_t BattleScript_FlinchPrevention;
+extern uint8_t BattleScript_FlushMessageBox;
+extern uint8_t BattleScript_FocusBandActivates;
+extern uint8_t BattleScript_FocusPunchSetUp;
+extern uint8_t BattleScript_FrontierLinkBattleLost;
+extern uint8_t BattleScript_FrontierTrainerBattleWon;
+extern uint8_t BattleScript_GiveExp;
+extern uint8_t BattleScript_GotAwaySafely;
+extern uint8_t BattleScript_GrudgeTakesPp;
+extern uint8_t BattleScript_HandleFaintedMon;
+extern uint8_t BattleScript_HitFromCritCalc;
+extern uint8_t BattleScript_IgnoresAndFallsAsleep;
+extern uint8_t BattleScript_IgnoresAndHitsItself;
+extern uint8_t BattleScript_IgnoresAndUsesRandomMove;
+extern uint8_t BattleScript_IgnoresWhileAsleep;
+extern uint8_t BattleScript_IngrainTurnHeal;
+extern uint8_t BattleScript_IntimidateActivates;
+extern uint8_t BattleScript_IntimidateActivatesEnd3;
+extern uint8_t BattleScript_ItemHealHP_End2;
+extern uint8_t BattleScript_ItemHealHP_RemoveItem;
+extern uint8_t BattleScript_ItemHealHP_Ret;
+extern uint8_t BattleScript_ItemSteal;
+extern uint8_t BattleScript_KnockedOff;
+extern uint8_t BattleScript_LeechSeedFree;
+extern uint8_t BattleScript_LeechSeedTurnDrain;
+extern uint8_t BattleScript_LevelUp;
+extern uint8_t BattleScript_LinkBattleWonOrLost;
+extern uint8_t BattleScript_LocalBattleLost;
+extern uint8_t BattleScript_LocalTrainerBattleWon;
+extern uint8_t BattleScript_MagicCoatBounce;
+extern uint8_t BattleScript_MistProtected;
+extern uint8_t BattleScript_MonMadeMoveUseless;
+extern uint8_t BattleScript_MonMadeMoveUseless_PPLoss;
+extern uint8_t BattleScript_MonTookFutureAttack;
+extern uint8_t BattleScript_MonWokeUpInUproar;
+extern uint8_t BattleScript_MoveEffectBurn;
+extern uint8_t BattleScript_MoveEffectConfusion;
+extern uint8_t BattleScript_MoveEffectFreeze;
+extern uint8_t BattleScript_MoveEffectParalysis;
+extern uint8_t BattleScript_MoveEffectPayDay;
+extern uint8_t BattleScript_MoveEffectPoison;
+extern uint8_t BattleScript_MoveEffectRecoil;
+extern uint8_t BattleScript_MoveEffectSleep;
+extern uint8_t BattleScript_MoveEffectToxic;
+extern uint8_t BattleScript_MoveEffectUproar;
+extern uint8_t BattleScript_MoveEffectWrap;
+extern uint8_t BattleScript_MoveEnd;
+extern uint8_t BattleScript_MoveHPDrain;
+extern uint8_t BattleScript_MoveHPDrain_PPLoss;
+extern uint8_t BattleScript_MoveMissedPause;
+extern uint8_t BattleScript_MoveUsedFlinched;
+extern uint8_t BattleScript_MoveUsedIsAsleep;
+extern uint8_t BattleScript_MoveUsedIsConfused;
+extern uint8_t BattleScript_MoveUsedIsConfusedNoMore;
+extern uint8_t BattleScript_MoveUsedIsDisabled;
+extern uint8_t BattleScript_MoveUsedIsFrozen;
+extern uint8_t BattleScript_MoveUsedIsImprisoned;
+extern uint8_t BattleScript_MoveUsedIsInLove;
+extern uint8_t BattleScript_MoveUsedIsInLoveCantAttack;
+extern uint8_t BattleScript_MoveUsedIsParalyzed;
+extern uint8_t BattleScript_MoveUsedIsTaunted;
+extern uint8_t BattleScript_MoveUsedLoafingAround;
+extern uint8_t BattleScript_MoveUsedMustRecharge;
+extern uint8_t BattleScript_MoveUsedUnfroze;
+extern uint8_t BattleScript_MoveUsedWokeUp;
+extern uint8_t BattleScript_NightmareTurnDmg;
+extern uint8_t BattleScript_NoItemSteal;
+extern uint8_t BattleScript_NoMovesLeft;
+extern uint8_t BattleScript_NoPPForMove;
+extern uint8_t BattleScript_ObliviousPreventsAttraction;
+extern uint8_t BattleScript_OneHitKOMsg;
+extern uint8_t BattleScript_OverworldWeatherStarts;
+extern uint8_t BattleScript_PRLZPrevention;
+extern uint8_t BattleScript_PSNPrevention;
+extern uint8_t BattleScript_PalacePrintFlavorText;
+extern uint8_t BattleScript_Pausex20;
+extern uint8_t BattleScript_PayDayMoneyAndPickUpItems;
+extern uint8_t BattleScript_PerishSongCountGoesDown;
+extern uint8_t BattleScript_PerishSongTakesLife;
+extern uint8_t BattleScript_PlayerUsesItem;
+extern uint8_t BattleScript_PoisonTurnDmg;
+extern uint8_t BattleScript_PresentHealTarget;
+extern uint8_t BattleScript_PrintCantEscapeFromBattle;
+extern uint8_t BattleScript_PrintCantRunFromTrainer;
+extern uint8_t BattleScript_PrintFailedToRunString;
+extern uint8_t BattleScript_PrintFullBox;
+extern uint8_t BattleScript_PrintPayDayMoneyString;
+extern uint8_t BattleScript_PrintPlayerForfeited;
+extern uint8_t BattleScript_PrintPlayerForfeitedLinkBattle;
+extern uint8_t BattleScript_PrintUproarOverTurns;
+extern uint8_t BattleScript_RageIsBuilding;
+extern uint8_t BattleScript_RainContinuesOrEnds;
+extern uint8_t BattleScript_RainDishActivates;
+extern uint8_t BattleScript_RanAwayUsingMonAbility;
+extern uint8_t BattleScript_RapidSpinAway;
+extern uint8_t BattleScript_RoughSkinActivates;
+extern uint8_t BattleScript_RunByUsingItem;
+extern uint8_t BattleScript_SAtkDown2;
+extern uint8_t BattleScript_SafeguardEnds;
+extern uint8_t BattleScript_SandStormHailEnds;
+extern uint8_t BattleScript_SandstreamActivates;
+extern uint8_t BattleScript_SelectingDisabledMove;
+extern uint8_t BattleScript_SelectingDisabledMoveInPalace;
+extern uint8_t BattleScript_SelectingImprisonedMove;
+extern uint8_t BattleScript_SelectingImprisonedMoveInPalace;
+extern uint8_t BattleScript_SelectingMoveWithNoPP;
+extern uint8_t BattleScript_SelectingNotAllowedMoveChoiceItem;
+extern uint8_t BattleScript_SelectingNotAllowedMoveTaunt;
+extern uint8_t BattleScript_SelectingNotAllowedMoveTauntInPalace;
+extern uint8_t BattleScript_SelectingTormentedMove;
+extern uint8_t BattleScript_SelectingTormentedMoveInPalace;
+extern uint8_t BattleScript_ShakeBallThrow;
+extern uint8_t BattleScript_ShedSkinActivates;
+extern uint8_t BattleScript_SideStatusWoreOff;
+extern uint8_t BattleScript_SmokeBallEscape;
+extern uint8_t BattleScript_SnatchedMove;
+extern uint8_t BattleScript_SoundproofProtected;
+extern uint8_t BattleScript_SpeedBoostActivates;
+extern uint8_t BattleScript_SpikesFree;
+extern uint8_t BattleScript_SpikesOnAttacker;
+extern uint8_t BattleScript_SpikesOnFaintedBattler;
+extern uint8_t BattleScript_SpikesOnTarget;
+extern uint8_t BattleScript_StatDown;
+extern uint8_t BattleScript_StatUp;
+extern uint8_t BattleScript_StickyHoldActivates;
+extern uint8_t BattleScript_SturdyPreventsOHKO;
+extern uint8_t BattleScript_SubstituteFade;
+extern uint8_t BattleScript_SuccessBallThrow;
+extern uint8_t BattleScript_SuccessForceOut;
+extern uint8_t BattleScript_SunlightContinues;
+extern uint8_t BattleScript_SunlightFaded;
+extern uint8_t BattleScript_SynchronizeActivates;
+extern uint8_t BattleScript_TargetPRLZHeal;
+extern uint8_t BattleScript_ThrashConfuses;
+extern uint8_t BattleScript_TookAttack;
+extern uint8_t BattleScript_TraceActivates;
+extern uint8_t BattleScript_TrainerBallBlock;
+extern uint8_t BattleScript_WallyBallThrow;
+extern uint8_t BattleScript_WhiteHerbEnd2;
+extern uint8_t BattleScript_WhiteHerbRet;
+extern uint8_t BattleScript_WildMonFled;
+extern uint8_t BattleScript_WishComesTrue;
+extern uint8_t BattleScript_WrapEnds;
+extern uint8_t BattleScript_WrapFree;
+extern uint8_t BattleScript_WrapTurnDmg;
+extern uint8_t BattleScript_YawnMakesAsleep;
+
 static const uintptr_t sLabelAddresses[] = {
     (uintptr_t)&BattleScript_AbilityCuredStatus, /* BattleScript_AbilityCuredStatus */
     (uintptr_t)&BattleScript_AbilityNoSpecificStatLoss, /* BattleScript_AbilityNoSpecificStatLoss */
@@ -1207,6 +1218,7 @@ static const uintptr_t sLabelAddresses[] = {
     (uintptr_t)&BattleScript_WrapTurnDmg, /* BattleScript_WrapTurnDmg */
     (uintptr_t)&BattleScript_YawnMakesAsleep, /* BattleScript_YawnMakesAsleep */
 };
+#endif
 
 uintptr_t EmeraldBattleLiveNative_BindingAddress(uint32_t index)
 {
@@ -1217,7 +1229,17 @@ uintptr_t EmeraldBattleLiveNative_BindingAddress(uint32_t index)
 
 uintptr_t EmeraldBattleLiveNative_LabelAddress(uint32_t index)
 {
+#if defined(NATIVE_LINUX) && defined(LINUX64) && (LINUX64 == 1)
+    /* R13-H7: the compiled symbols are removed - the accessor
+     * yields the canonical GBA word so the label map stays
+     * queryable (and ResolveCompiledLabel's linux64 branch
+     * compares words). */
+    if (index >= EMERALD_BATTLE_LIVE_LABEL_COUNT)
+        return 0u;
+    return (uintptr_t)kEmeraldBattleLiveTable.labels[index].word;
+#else
     if (index >= EMERALD_BATTLE_LIVE_LABEL_COUNT)
         return 0u;
     return sLabelAddresses[index];
+#endif
 }

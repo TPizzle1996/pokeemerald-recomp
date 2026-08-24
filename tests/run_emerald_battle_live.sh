@@ -356,6 +356,14 @@ if [ "$mode" = "ai-faults" ] || [ "$mode" = "sanitize" ]; then
     echo "H6 AI faults: 10/10 fail-closed cases"
 fi
 
+if [ "$mode" = "h7-faults" ] || [ "$mode" = "sanitize" ]; then
+    echo "== H7 fail-closed matrix =="
+    "$tmp/emerald_battle_live_test" h7-faults "$pack" > h7-faults.log
+    cat h7-faults.log
+    grep -q "H7-FAULTS passed=22" h7-faults.log
+    echo "H7 faults: 22/22 fail-closed cases"
+fi
+
 if [ "$mode" = "ai-249" ] || [ "$mode" = "sanitize" ]; then
     echo "== H6 235-opcode differential =="
     "$tmp/emerald_battle_live_test" ai-249 "$pack" "$mods_dir" > ai-249.log

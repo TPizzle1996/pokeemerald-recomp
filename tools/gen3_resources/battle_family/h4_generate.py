@@ -83,6 +83,17 @@ TABLE_OUT = ROOT / "src" / "emerald" / "resources" \
     / "battle_live_table.generated.c"
 NATIVE_OUT = ROOT / "src" / "emerald" / "resources" \
     / "battle_live_native.generated.c"
+LABELS_OUT = ROOT / "include" / "emerald" / "resources" \
+    / "battle_labels_linux64.generated.h"
+
+# R13-H7: the linux64 build removes the compiled battle labels from the
+# native link (brief sec 3/§4); C references become canonical-word macros
+# (battle_scripts.h trailing include). Same expression as Makefile_pc's
+# CPPFLAGS -D NATIVE_LINUX -D LINUX64=$(LINUX64).
+LINUX64_GATE = ("#if defined(NATIVE_LINUX) && defined(LINUX64)"
+                " && (LINUX64 == 1)")
+LINUX64_GATE_NOT = ("#if !(defined(NATIVE_LINUX) && defined(LINUX64)"
+                    " && (LINUX64 == 1))")
 
 # ---- R13-H4/H5/H6 qualified pins (docs/R13H_BATTLE_SCRIPT_MIGRATION_PLAN.md) ----
 LIVE_FAMILIES = ["battle-script", "battle-anim-script", "battle-ai",
@@ -153,11 +164,14 @@ CLASS_ENUM = {"SCRIPT_TARGET": 0,
               "ENGINE_EWRAM_TARGET": 5}
 BINDING_LETTERS = "ABCDEF"
 
-# Battle/AI routing tables (H1 sec 6, R13-H6 sec 2/11): module key ->
-# C constant suffix. The live seam reads these rows from the arena; the
-# compiled tables are dead at runtime after H5/H6. The AI tables are the
-# entry points: gBattleAI_ScriptsTable[aiLogicId] (32 rows) and
-# gContestAI_ScriptsTable[currentAIFlag] (32 rows).
+# Battle/AI routing tables (H1 sec 6, R13-H6 sec 2/11, R13-H7 sec 2):
+# module key -> C constant suffix. The live seam reads these rows from
+# the arena; the compiled tables are dead at runtime after H5/H6. The AI
+# tables are the entry points: gBattleAI_ScriptsTable[aiLogicId] (32
+# rows) and gContestAI_ScriptsTable[currentAIFlag] (32 rows). H7 adds
+# the four battle-anim tables (gBattleAnims_Moves/StatusConditions/
+# General/Special) and gFieldEffectScriptPointers - their read sites
+# convert from compiled table symbols to the routing enum.
 ROUTING_TABLES = {
     "emerald:battle-script/g-battle-scripts-for-move-effects":
         "MoveEffects",
@@ -169,6 +183,13 @@ ROUTING_TABLES = {
         "SafariActions",
     "emerald:battle-ai/g-battle-ai_scripts-table": "BattleAI",
     "emerald:contest-ai/g-contest-ai_scripts-table": "ContestAI",
+    "emerald:battle-anim-script/g-battle-anims_moves": "AnimsMoves",
+    "emerald:battle-anim-script/g-battle-anims_status-conditions":
+        "AnimsStatus",
+    "emerald:battle-anim-script/g-battle-anims_general": "AnimsGeneral",
+    "emerald:battle-anim-script/g-battle-anims_special": "AnimsSpecial",
+    "emerald:field-effect-script/g-field-effect-script-pointers":
+        "FieldEffects",
 }
 
 
@@ -319,6 +340,15 @@ def main():
             fail(f"routing module {key} has family {p['family']}, "
                  f"expected {family_of(key)}")
         routing_words[key] = p["gba_start"]
+    # gMovesWithQuietBGM (u16 data rows): same root-word treatment, but
+    # the C site reads raw bytes via ResolveModuleData, not pointer rows.
+    quiet_bgm_key = "emerald:battle-anim-script/g-moves-with-quiet-bgm"
+    quiet_bgm = payload_by_id.get(quiet_bgm_key)
+    if quiet_bgm is None:
+        fail(f"quiet-BGM module {quiet_bgm_key} is not a live payload module")
+    if quiet_bgm["family"] != "battle-anim-script":
+        fail(f"quiet-BGM module has family {quiet_bgm['family']}, "
+             "expected battle-anim-script")
     for p in payload:
         a = arenas_by_name[p["arena"]]
         p["layout_off"] = [p["gba_start"] - a["gba_start"],
@@ -683,6 +713,13 @@ def main():
                  % (suffix.upper(), word, key))
     h.append("};")
     h.append("")
+    h.append("/* gMovesWithQuietBGM (u16 rows, 8 B, mapKind ROUTING): a")
+    h.append(" * data table, not pointer rows - the live seam reads it")
+    h.append(" * via EmeraldBattleLive_ResolveModuleData with this root")
+    h.append(" * word (R13-H7 sec 2/§12). */")
+    h.append("#define EMERALD_BATTLE_QUIET_BGM_WORD 0x%08xu"
+             % quiet_bgm["gba_start"])
+    h.append("")
     h.append("enum EmeraldBattleLiveRelocClass")
     h.append("{")
     for name in CLASS_ENUM:
@@ -993,17 +1030,24 @@ def main():
     n.append(" * this TU, so the uniform scalar declarations bind the linker")
     n.append(" * symbol regardless of the defining TU's real type; the real")
     n.append(" * type stays where it is defined. Missing symbols fail the")
-    n.append(" * link (build-time coverage proof). */")
+    n.append(" * link (build-time coverage proof).")
+    n.append(" *")
+    n.append(" * R13-H7: on linux64 the compiled battle labels are REMOVED")
+    n.append(" * from the link (brief sec 3/§4); the label externs and the")
+    n.append(" * host-address table below exist only off-linux64, and")
+    n.append(" * LabelAddress returns the canonical GBA word instead (the")
+    n.append(" * label map stays queryable; ResolveCompiledLabel compares")
+    n.append(" * words on linux64). The engine binding symbols stay on all")
+    n.append(" * targets (brief sec 12/§26). */")
     n.append("")
     n.append("#include <stdint.h>")
     n.append("#include \"emerald/resources/battle_live.generated.h\"")
     n.append("")
-    native_names = sorted(
+    binding_names = sorted(
         {b["name"] for b in bindings
          if b["letter"] == "A"
-         or (b["letter"] == "B" and b["name"] not in B_LETTER_NAMES_PIN)}
-        | {r["name"] for r in labels})
-    for name in native_names:
+         or (b["letter"] == "B" and b["name"] not in B_LETTER_NAMES_PIN)})
+    for name in binding_names:
         n.append("extern uint8_t %s;" % name)
     n.append("")
     n.append("static const uintptr_t sNativeBindingAddresses[] = {")
@@ -1015,10 +1059,16 @@ def main():
             n.append("    0u,")
     n.append("};")
     n.append("")
+    n.append(LINUX64_GATE_NOT)
+    n.append("/* Compiled-label host-address table (off-linux64 only). */")
+    for r in labels:
+        n.append("extern uint8_t %s;" % r["name"])
+    n.append("")
     n.append("static const uintptr_t sLabelAddresses[] = {")
     for r in labels:
         n.append("    (uintptr_t)&%s, /* %s */" % (r["name"], r["name"]))
     n.append("};")
+    n.append("#endif")
     n.append("")
     n.append("uintptr_t EmeraldBattleLiveNative_BindingAddress("
              "uint32_t index)")
@@ -1030,15 +1080,50 @@ def main():
     n.append("")
     n.append("uintptr_t EmeraldBattleLiveNative_LabelAddress(uint32_t index)")
     n.append("{")
+    n.append(LINUX64_GATE)
+    n.append("    /* R13-H7: the compiled symbols are removed - the accessor")
+    n.append("     * yields the canonical GBA word so the label map stays")
+    n.append("     * queryable (and ResolveCompiledLabel's linux64 branch")
+    n.append("     * compares words). */")
+    n.append("    if (index >= EMERALD_BATTLE_LIVE_LABEL_COUNT)")
+    n.append("        return 0u;")
+    n.append("    return (uintptr_t)kEmeraldBattleLiveTable.labels[index].word;")
+    n.append("#else")
     n.append("    if (index >= EMERALD_BATTLE_LIVE_LABEL_COUNT)")
     n.append("        return 0u;")
     n.append("    return sLabelAddresses[index];")
+    n.append("#endif")
     n.append("}")
     native = "\n".join(n) + "\n"
+
+    # ---- linux64 label-word macros (battle_scripts.h trailing include;
+    # C references become canonical words, the compiled symbols are gone) ----
+    hl = []
+    hl.append("/* Generated by tools/gen3_resources/battle_family/"
+              "h4_generate.py.")
+    hl.append(" * Do not edit by hand; re-run the generator (regeneration")
+    hl.append(" * must be a no-op diff).")
+    hl.append(" *")
+    hl.append(" * R13-H7: linux64 macro map - every compiled BattleScript_*")
+    hl.append(" * label becomes its canonical GBA word. Included at the END")
+    hl.append(" * of include/battle_scripts.h under the linux64 gate, AFTER")
+    hl.append(" * the extern declarations, so all C uses of BattleScript_X")
+    hl.append(" * expand to word constants; the compiled symbols are removed")
+    hl.append(" * from the native link (brief sec 3/§4).")
+    hl.append(" */")
+    hl.append("#ifndef EMERALD_RESOURCES_BATTLE_LABELS_LINUX64_GENERATED_H")
+    hl.append("#define EMERALD_RESOURCES_BATTLE_LABELS_LINUX64_GENERATED_H")
+    hl.append("")
+    for r in labels:
+        hl.append("#define %s ((const u8 *)0x%08xu)" % (r["name"], r["word"]))
+    hl.append("")
+    hl.append("#endif")
+    labels_header = "\n".join(hl) + "\n"
 
     h3.write_if(HEADER_OUT, header, args.check)
     h3.write_if(TABLE_OUT, table, args.check)
     h3.write_if(NATIVE_OUT, native, args.check)
+    h3.write_if(LABELS_OUT, labels_header, args.check)
     print(f"H4 table: {len(modules)} modules ({len(payload)} payload, "
           f"{len(aliases)} aliases), {len(boundaries)} boundaries, "
           f"{len(exports_flat)} export rows, {len(relocs)} relocs, "

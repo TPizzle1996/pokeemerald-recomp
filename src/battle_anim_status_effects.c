@@ -1,6 +1,7 @@
 #include "global.h"
 #include "battle.h"
 #include "battle_anim.h"
+#include "emerald/resources/emerald_battle_live.h"
 #include "decompress.h"
 #include "gpu_regs.h"
 #include "palette.h"
@@ -13,7 +14,6 @@
 
 extern const struct CompressedSpriteSheet gBattleAnimPicTable[];
 extern const struct CompressedSpritePalette gBattleAnimPaletteTable[];
-extern const GbaAddr gBattleAnims_StatusConditions[];
 extern const struct OamData gOamData_AffineOff_ObjNormal_8x8;
 extern const struct OamData gOamData_AffineOff_ObjBlend_64x64;
 
@@ -546,7 +546,7 @@ void LaunchStatusAnimation(u8 battler, u8 statusAnimId)
 
     gBattleAnimAttacker = battler;
     gBattleAnimTarget = battler;
-    LaunchBattleAnimation(gBattleAnims_StatusConditions, statusAnimId, FALSE);
+    LaunchBattleAnimation(EMERALD_BATTLE_ROUTING_ANIMSSTATUS, statusAnimId, FALSE);
     taskId = CreateTask(Task_DoStatusAnimation, 10);
     gTasks[taskId].data[0] = battler;
 }

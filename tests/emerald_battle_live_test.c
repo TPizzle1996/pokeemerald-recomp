@@ -2157,6 +2157,257 @@ static bool32 H6ExecuteAiScript(uint32_t family, uintptr_t start,
     return TRUE;
 }
 
+/* R13-H7 fail-closed matrix (brief sec 24): the new seam surface -
+ * routing-table resolution for the battle-anim + field-effect tables,
+ * the module-data accessor (gMovesWithQuietBGM), the linux64
+ * compiled-label word path - fails closed exactly like the H5/H6
+ * resolvers, and the removed-compiled-symbol state refuses injection. */
+
+static int DoH7Faults(const char *packPath)
+{
+    const struct EmeraldBattleLiveTable *t = H4Table();
+    struct EmeraldBattleCompatDiagnostics diagnostics;
+    enum EmeraldBattleLiveStatus status;
+    uint32_t passes = 0u;
+    uint32_t i;
+    uint32_t m;
+    uint32_t firstBytecodeModule = UINT32_MAX;
+    uint32_t firstDataModule = UINT32_MAX;
+    uintptr_t pointer;
+    uintptr_t span;
+    uint32_t byteCount;
+
+    /* Pre-publish: the H7 accessors refuse like every other resolver
+     * (routing publication absent = not published; brief sec 23). */
+    CHECK(EmeraldBattleLive_ResolveRoutingTarget(
+              EMERALD_BATTLE_ROUTING_ANIMSMOVES, 0u, &pointer)
+          == EMERALD_BATTLE_LIVE_ERR_NOT_PUBLISHED);
+    CHECK(EmeraldBattleLive_ResolveModuleData(
+              EMERALD_BATTLE_QUIET_BGM_WORD, &span, &byteCount)
+          == EMERALD_BATTLE_LIVE_ERR_NOT_PUBLISHED);
+    passes++;
+
+    if (!SetupScriptCompatSession(packPath))
+        return 1;
+    CHECK(EmeraldBattleLive_GetRangeCount() == 6382u);
+    EmeraldBattleLive_ClearMigratedEntries();
+    /* Stage the H arenas exactly like the oracles: the loader publishes
+     * the session image, then the seam drives its own transactional
+     * sequence (fresh generation + range registration + publication).
+     * Without this the H7 accessors refuse NOT_PUBLISHED. */
+    memset(&diagnostics, 0, sizeof(diagnostics));
+    status = EmeraldBattleLive_TryInitialize(
+        gScriptHarnessSnapshot, gScriptHarnessPack, 0u, &diagnostics);
+    CHECK(status == EMERALD_BATTLE_LIVE_OK);
+    CHECK(EmeraldBattleLive_RegisterRanges() == EMERALD_BATTLE_LIVE_OK);
+    CHECK(EmeraldBattleLive_Publish() == EMERALD_BATTLE_LIVE_OK);
+
+    for (m = 0u; m < t->moduleCount; m++)
+    {
+        const struct EmeraldBattleLiveModule *mod = &t->modules[m];
+        if (mod->mapKind == EMERALD_BATTLE_MAP_BYTECODE
+         && firstBytecodeModule == UINT32_MAX)
+            firstBytecodeModule = m;
+        if (mod->mapKind == EMERALD_BATTLE_MAP_DATA
+         && firstDataModule == UINT32_MAX)
+            firstDataModule = m;
+    }
+    CHECK(firstBytecodeModule != UINT32_MAX);
+    CHECK(firstDataModule != UINT32_MAX);
+
+    /* 1. compiled-symbol injection detector (brief sec 24): a host
+     * pointer is never a canonical GBA word - the linux64 word scan
+     * refuses it (the compiled symbols are removed; no host address
+     * can masquerade as a label). */
+    CHECK(EmeraldBattleLive_ResolveCompiledLabel(
+              (const void *)&sHarnessBattleBusy, &pointer)
+          == EMERALD_BATTLE_LIVE_ERR_TARGET_UNRESOLVED);
+    passes++;
+
+    /* 2. partial ownership/publication mismatch: a valid module root
+     * that is NOT a routing table refuses as a routing table (bytecode
+     * root injected where a table word is expected). */
+    CHECK(EmeraldBattleLive_ResolveRoutingTarget(
+              t->modules[firstBytecodeModule].gbaStart, 0u, &pointer)
+          == EMERALD_BATTLE_LIVE_ERR_BOUNDARY_INVALID);
+    passes++;
+
+    /* 3. the module-data accessor is data-only: a bytecode root
+     * refuses (routing word injected where data is expected). */
+    CHECK(EmeraldBattleLive_ResolveModuleData(
+              t->modules[firstBytecodeModule].gbaStart, &span, &byteCount)
+          == EMERALD_BATTLE_LIVE_ERR_BOUNDARY_INVALID);
+    passes++;
+
+    /* 4. the module-data accessor requires the module root: an
+     * interior word of the quiet-BGM module refuses. */
+    CHECK(EmeraldBattleLive_ResolveModuleData(
+              EMERALD_BATTLE_QUIET_BGM_WORD + 4u, &span, &byteCount)
+          == EMERALD_BATTLE_LIVE_ERR_BOUNDARY_INVALID);
+    passes++;
+
+    /* 5. resource missing after removal: a table word that contains to
+     * no live module refuses outright. */
+    CHECK(EmeraldBattleLive_ResolveRoutingTarget(
+              0x08000000u, 0u, &pointer)
+          == EMERALD_BATTLE_LIVE_ERR_TARGET_UNRESOLVED);
+    CHECK(EmeraldBattleLive_ResolveModuleData(
+              0x08000000u, &span, &byteCount)
+          == EMERALD_BATTLE_LIVE_ERR_TARGET_UNRESOLVED);
+    passes++;
+
+    /* 6. all 12 routing tables are live after the H7 additions: row 0
+     * of every table resolves to a script of the table's own family
+     * (moved/status/general/special anim + field-effect tables are
+     * now routed through the arena, not the removed compiled arrays). */
+    {
+        const struct EmeraldBattleLiveRoutingRow
+        {
+            uint32_t word;
+            uint32_t family;
+        } rows[] = {
+            { EMERALD_BATTLE_ROUTING_MOVEEFFECTS,
+              EMERALD_BATTLE_FAMILY_BATTLE_SCRIPT },
+            { EMERALD_BATTLE_ROUTING_BALLTHROW,
+              EMERALD_BATTLE_FAMILY_BATTLE_SCRIPT },
+            { EMERALD_BATTLE_ROUTING_USINGITEM,
+              EMERALD_BATTLE_FAMILY_BATTLE_SCRIPT },
+            { EMERALD_BATTLE_ROUTING_RUNNINGBYITEM,
+              EMERALD_BATTLE_FAMILY_BATTLE_SCRIPT },
+            { EMERALD_BATTLE_ROUTING_SAFARIACTIONS,
+              EMERALD_BATTLE_FAMILY_BATTLE_SCRIPT },
+            { EMERALD_BATTLE_ROUTING_BATTLEAI,
+              EMERALD_BATTLE_FAMILY_BATTLE_AI },
+            { EMERALD_BATTLE_ROUTING_CONTESTAI,
+              EMERALD_BATTLE_FAMILY_CONTEST_AI },
+            { EMERALD_BATTLE_ROUTING_ANIMSMOVES,
+              EMERALD_BATTLE_FAMILY_BATTLE_ANIM_SCRIPT },
+            { EMERALD_BATTLE_ROUTING_ANIMSSTATUS,
+              EMERALD_BATTLE_FAMILY_BATTLE_ANIM_SCRIPT },
+            { EMERALD_BATTLE_ROUTING_ANIMSGENERAL,
+              EMERALD_BATTLE_FAMILY_BATTLE_ANIM_SCRIPT },
+            { EMERALD_BATTLE_ROUTING_ANIMSSPECIAL,
+              EMERALD_BATTLE_FAMILY_BATTLE_ANIM_SCRIPT },
+            { EMERALD_BATTLE_ROUTING_FIELDEFFECTS,
+              EMERALD_BATTLE_FAMILY_FIELD_EFFECT_SCRIPT },
+        };
+        uint32_t r;
+
+        for (r = 0u; r < sizeof(rows) / sizeof(rows[0]); r++)
+        {
+            uintptr_t rowPointer = 0u;
+            uint32_t containing = UINT32_MAX;
+            uint32_t mm;
+
+            CHECK(EmeraldBattleLive_ResolveRoutingTarget(
+                      rows[r].word, 0u, &rowPointer)
+                  == EMERALD_BATTLE_LIVE_OK);
+            CHECK(rowPointer != 0u);
+            /* The resolved row must land in a live span of the table's
+             * own family (cross-family rows refuse by design). */
+            for (mm = 0u; mm < t->moduleCount; mm++)
+            {
+                const uint8_t *spanBase;
+
+                if (!H4LayoutSpan(mm, 0u, &spanBase))
+                    continue;
+                if (rowPointer >= (uintptr_t)spanBase
+                 && rowPointer < (uintptr_t)spanBase
+                               + t->modules[mm].byteCount)
+                {
+                    containing = mm;
+                    break;
+                }
+            }
+            CHECK(containing != UINT32_MAX);
+            CHECK(t->modules[containing].family == rows[r].family);
+            passes++;
+        }
+
+        /* Row bounds: the anim-moves table is 356 rows; row 356 must
+         * refuse, the last row must resolve. */
+        {
+            const struct EmeraldBattleLiveModule *mod = NULL;
+            uint32_t mm;
+            uint32_t rowCount;
+
+            for (mm = 0u; mm < t->moduleCount; mm++)
+            {
+                if (t->modules[mm].gbaStart
+                        == EMERALD_BATTLE_ROUTING_ANIMSMOVES)
+                {
+                    mod = &t->modules[mm];
+                    break;
+                }
+            }
+            CHECK(mod != NULL);
+            CHECK(mod->mapKind == EMERALD_BATTLE_MAP_ROUTING);
+            rowCount = mod->byteCount / 4u;
+            CHECK(rowCount == 356u);
+            CHECK(EmeraldBattleLive_ResolveRoutingTarget(
+                      EMERALD_BATTLE_ROUTING_ANIMSMOVES, rowCount - 1u,
+                      &pointer) == EMERALD_BATTLE_LIVE_OK);
+            CHECK(EmeraldBattleLive_ResolveRoutingTarget(
+                      EMERALD_BATTLE_ROUTING_ANIMSMOVES, rowCount,
+                      &pointer) == EMERALD_BATTLE_LIVE_ERR_BOUNDARY_INVALID);
+            passes++;
+        }
+    }
+
+    /* 7. the quiet-BGM module reads through the arena: 8 B, three
+     * move ids + the 0xFFFF sentinel. */
+    {
+        uint16_t rows[4];
+
+        CHECK(EmeraldBattleLive_ResolveModuleData(
+                  EMERALD_BATTLE_QUIET_BGM_WORD, &span, &byteCount)
+              == EMERALD_BATTLE_LIVE_OK);
+        CHECK(byteCount == 8u);
+        memcpy(rows, (const void *)span, byteCount);
+        CHECK(rows[0] != 0xFFFF);
+        CHECK(rows[3] == 0xFFFF); /* sentinel */
+        passes++;
+    }
+
+    /* 8. the linux64 compiled-label word path: the accessor yields the
+     * canonical word (the compiled symbols are removed) and every
+     * label word resolves to its arena export. */
+    for (i = 0u; i < t->labelCount; i++)
+    {
+        CHECK(EmeraldBattleLiveNative_LabelAddress(i)
+              == (uintptr_t)t->labels[i].word);
+        CHECK(EmeraldBattleLive_ResolveCompiledLabel(
+                  (const void *)(uintptr_t)t->labels[i].word, &pointer)
+              == EMERALD_BATTLE_LIVE_OK);
+    }
+    passes++;
+
+    /* 9. stale generation: a replacement generation must keep every
+     * routing table + data module resolvable - the enum words are
+     * canonical GBA words, generation-independent (the arena bytes
+     * are re-staged under the new generation). */
+    sHarnessBattleBusy = false;
+    status = EmeraldBattleLive_TryInitialize(
+        gScriptHarnessSnapshot, gScriptHarnessPack, 0u, &diagnostics);
+    CHECK(status == EMERALD_BATTLE_LIVE_OK);
+    CHECK(EmeraldBattleLive_ResolveRoutingTarget(
+              EMERALD_BATTLE_ROUTING_ANIMSMOVES, 0u, &pointer)
+          == EMERALD_BATTLE_LIVE_OK);
+    CHECK(EmeraldBattleLive_ResolveRoutingTarget(
+              EMERALD_BATTLE_ROUTING_FIELDEFFECTS, 0u, &pointer)
+          == EMERALD_BATTLE_LIVE_OK);
+    CHECK(EmeraldBattleLive_ResolveModuleData(
+              EMERALD_BATTLE_QUIET_BGM_WORD, &span, &byteCount)
+          == EMERALD_BATTLE_LIVE_OK);
+    passes++;
+
+    printf("H7-FAULTS passed=%u\n", passes);
+    return sFailures != 0;
+
+fail:
+    return 1;
+}
+
 static int DoAi249(const char *packPath, const char *modsDir)
 {
     (void)modsDir;
@@ -3221,10 +3472,12 @@ int main(int argc, char **argv)
                 "       %s ai-faults <pack>\n"
                 "       %s ai-249 <pack> <modsDir>\n"
                 "       %s h6-state-create <pack> <modsDir> <state> <battle-ai|contest-ai>\n"
-                "       %s h6-state-load <pack> <modsDir> <state> <battle-ai|contest-ai>\n",
+                "       %s h6-state-load <pack> <modsDir> <state> <battle-ai|contest-ai>\n"
+                "       %s h7-faults <pack>\n",
                 argv[0], argv[0], argv[0], argv[0], argv[0],
                 argv[0], argv[0], argv[0], argv[0], argv[0],
-                argv[0], argv[0], argv[0], argv[0], argv[0]);
+                argv[0], argv[0], argv[0], argv[0], argv[0],
+                argv[0]);
         return 2;
     }
     if (strcmp(argv[1], "oracle") == 0)
@@ -3260,6 +3513,8 @@ int main(int argc, char **argv)
         return DoH6StateCreate(argv[2], argv[4], argv[5]);
     if (strcmp(argv[1], "h6-state-load") == 0)
         return DoH6StateLoad(argv[2], argv[3], argv[4], argv[5]);
+    if (strcmp(argv[1], "h7-faults") == 0)
+        return DoH7Faults(argv[2]);
     fprintf(stderr, "unknown mode: %s\n", argv[1]);
     return 2;
 }

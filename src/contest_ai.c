@@ -10,7 +10,6 @@
 #define AI_ACTION_DONE (1 << 0)
 
 extern const u8 *gAIScriptPtr;
-extern const GbaAddr gContestAI_ScriptsTable[];
 
 static void ContestAICmd_score(void);
 static void ContestAICmd_get_appeal_num(void);

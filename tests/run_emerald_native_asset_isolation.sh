@@ -128,6 +128,7 @@ layout_ownership="$root/resources/extraction/emerald/bpee01/layout/ownership.gen
 audio_ownership="$root/resources/extraction/emerald/bpee01/audio/ownership.generated.toml"
 movement_ownership="$root/resources/extraction/emerald/bpee01/movement/ownership.generated.toml"
 multiboot_ownership="$root/resources/extraction/emerald/bpee01/multiboot/ownership.generated.toml"
+battle_ownership="$root/resources/extraction/emerald/bpee01/battle/modules/ownership.generated.toml"
 scaninc="$root/tools/scaninc/scaninc"
 default_binary="$root/pokeemerald-linux64"
 
@@ -167,6 +168,7 @@ bad()  { fail=$((fail + 1)); printf 'FAIL - %s\n' "$*"; }
 [[ -f "$audio_ownership" ]] || { echo "FATAL: ownership file missing: $audio_ownership" >&2; exit 2; }
 [[ -f "$movement_ownership" ]] || { echo "FATAL: ownership file missing: $movement_ownership" >&2; exit 2; }
 [[ -f "$multiboot_ownership" ]] || { echo "FATAL: ownership file missing: $multiboot_ownership" >&2; exit 2; }
+[[ -f "$battle_ownership" ]] || { echo "FATAL: ownership file missing: $battle_ownership" >&2; exit 2; }
 
 # ---------------------------------------------------------------------------
 # Build / freshness
@@ -214,7 +216,7 @@ ok "native binary is fresh: $binary"
 echo "== ownership-driven payload byte + symbol scans =="
 tmpdir="$(mktemp -d)"
 trap 'rm -rf "$tmpdir"' EXIT
-python3 - "$binary" "$ownership" "$back_ownership" "$pokemon_ownership" "$object_event_ownership" "$tileset_ownership" "$layout_ownership" "$audio_ownership" "$movement_ownership" "$multiboot_ownership" "$tmpdir" "$maps_obj" <<'PY' || exit 1
+python3 - "$binary" "$ownership" "$back_ownership" "$pokemon_ownership" "$object_event_ownership" "$tileset_ownership" "$layout_ownership" "$audio_ownership" "$movement_ownership" "$multiboot_ownership" "$battle_ownership" "$tmpdir" "$maps_obj" <<'PY' || exit 1
 import glob, hashlib, re, subprocess, sys
 
 # Line-buffer stdout: under 2>&1 the runner's log is the record of record,
@@ -224,7 +226,7 @@ import glob, hashlib, re, subprocess, sys
 # diagnostic on its own line in write order.
 sys.stdout.reconfigure(line_buffering=True)
 
-binary_path, ownership_path, back_ownership_path, pokemon_ownership_path, object_event_ownership_path, tileset_ownership_path, layout_ownership_path, audio_ownership_path, movement_ownership_path, multiboot_ownership_path, tmpdir, maps_obj_path = sys.argv[1:13]
+binary_path, ownership_path, back_ownership_path, pokemon_ownership_path, object_event_ownership_path, tileset_ownership_path, layout_ownership_path, audio_ownership_path, movement_ownership_path, multiboot_ownership_path, battle_ownership_path, tmpdir, maps_obj_path = sys.argv[1:14]
 
 def sha256_file(path):
     h = hashlib.sha256()
@@ -305,12 +307,12 @@ all_nm = subprocess.run(['nm', '--defined-only', binary_path],
                         capture_output=True, text=True)
 all_defined = set(l.split()[-1] for l in all_nm.stdout.splitlines() if l.strip())
 
-# All nine ownership files (trainer front R7B, trainer back R8, Pokémon
+# All ten ownership files (trainer front R7B, trainer back R8, Pokémon
 # battle R9, object-event R11-B, tileset R11-C, layout R11-D, audio R12-G,
-# movement R13-B, multiboot R13-B) declare the same [[resources]] record
-# grammar; concatenate so every downstream check is driven by the
-# 6876-record union, never a hardcoded species, trainer, layout, audio or
-# movement name.
+# movement R13-B, multiboot R13-B, battle modules R13-H7) declare the
+# same [[resources]] record grammar; concatenate so every downstream
+# check is driven by the union, never a hardcoded species, trainer,
+# layout, audio, movement or battle-module name.
 # R11-C: the tileset ownership file appends [[gba_parity]] blocks (18)
 # after its last [[resources]] record. Strip them per file before the
 # block split: the regex split below would otherwise fold the first
@@ -322,7 +324,8 @@ parts = []
 for path in (ownership_path, back_ownership_path, pokemon_ownership_path,
              object_event_ownership_path, tileset_ownership_path,
              layout_ownership_path, audio_ownership_path,
-             movement_ownership_path, multiboot_ownership_path):
+             movement_ownership_path, multiboot_ownership_path,
+             battle_ownership_path):
     content = open(path).read()
     parts.append(content.split('\n[[gba_parity]]')[0])
 text = '\n'.join(parts)
@@ -406,6 +409,44 @@ layout_byte_exemptions = {
 # reasons for the observed coincidence class.
 audio_byte_exemptions = {}
 
+# R13-H7 §13/§28 byte-scan exemptions for the battle family. Every hit was
+# classified at scan time by locating the exact payload bytes in the binary
+# (readelf VA map + nm bracketing); the compiled-TU absence is proven by the
+# 2,088-symbol nm sweep + the 6-object Makefile carve + the 267,768 B size
+# delta, which are the hard isolation proof for every battle record.
+#   - 4ee7b7f3... (g-battlescripts-for-safari-actions): the 4 routing words
+#     0x082dbebd/0x082dbec4/0x082dbecd/0x082dbee3 sit contiguously inside
+#     sScriptTargetWords (battle_live_table.generated.c rodata, VA
+#     0xc62300..0xc64060) - the live seam's platform-neutral script-target
+#     index retains canonical GBA words by design (§12 semantic binding).
+#   - e53f434e... (g-battlescripts-for-running-by-item): the routing target
+#     word 0x082dbeb3 lives in the seam table rodata (VA 0xc60ac0, the
+#     sLabels..sScriptTargetWords span) - same retention class.
+#   - c6d44cf4... (hit-from-crit-calc) and e5a843e6... (selecting-imprisoned-
+#     move): degenerate 4-byte payloads (0x07060504 / 0x4400ba11) coinciding
+#     with x86 instruction runs in .text (VA 0x409fdf near
+#     ShuffleApprenticeSpecies, VA 0x4e4ec9 near Cmd_typecalc) - the R7B
+#     coincidence precedent; the words are not GBA addresses.
+battle_byte_exemptions = {
+    "4ee7b7f3944c43c5dfcee1962559a30125c28bfdedd092d281ac8258e32825a4":
+        "seam retention: 4 routing words are sScriptTargetWords entries "
+        "(battle_live_table.generated.c, VA 0xc62300..0xc64060) - the live "
+        "seam's target index retains canonical GBA words by design (§12); "
+        "compiled TU absent (nm 2,088-symbol sweep + 6-object carve)",
+    "e53f434ec20171d018a169efda99f12ae4b8eefce85fc4f417dd60e63d430859":
+        "seam retention: routing target word 0x082dbeb3 in seam table rodata "
+        "(VA 0xc60ac0, sLabels..sScriptTargetWords span) - §12 semantic "
+        "binding; compiled TU absent (nm sweep + 6-object carve)",
+    "c6d44cf418f610e3fe9e1d9294ff43def81c6cdcad6cbb1820cff48d3aa4355d":
+        "degenerate 4-byte payload (0x07060504) coincides with an x86 "
+        "instruction run in .text (VA 0x409fdf, near ShuffleApprenticeSpecies); "
+        "R7B coincidence precedent, word is not a GBA address",
+    "e5a843e63da908e44e5e585944a34a8fca1047ba11d09a94fd397c3bc9ef541e":
+        "degenerate 4-byte payload (0x4400ba11) coincides with an x86 "
+        "instruction run in .text (VA 0x4e4ec9, near Cmd_typecalc); R7B "
+        "coincidence precedent, word is not a GBA address",
+}
+
 # R9 §9 byte-scan exemption: the sha256 of every still-compiled still-front
 # asset (graphics/pokemon/<species>/front.4bpp.lz - the party-menu fronts,
 # still compiled on native). A ROM_BASE_ONLY encoded payload that is
@@ -465,13 +506,21 @@ for rec in records:
               f'expected COMPILED', file=sys.stderr)
         bad += 1
 
-    try:
-        with open(artifact, 'rb') as f:
-            encoded = f.read()
-    except OSError:
-        print(f'FAIL - {rid}: cannot read source artifact {artifact}', file=sys.stderr)
-        bad += 1
-        continue
+    if enc_len == 0:
+        # R13-H7 zero-width aliases (8 battle-script records): the alias
+        # names a canonical word the compiled ROM never materialized (e.g.
+        # effect-protect is a no-op slot), so no artifact file exists and
+        # there are no payload bytes to read or scan; the symbol-absence
+        # check below is the isolation proof.
+        encoded = b''
+    else:
+        try:
+            with open(artifact, 'rb') as f:
+                encoded = f.read()
+        except OSError:
+            print(f'FAIL - {rid}: cannot read source artifact {artifact}', file=sys.stderr)
+            bad += 1
+            continue
     second = rec.get('source_artifact_2')
     if second:
         # R11-C multi-file records (Sootopolis StormyWater frames: the
@@ -551,52 +600,72 @@ for rec in records:
                 bad += 1
         else:
             print(f'ok   - {rid}: ROM_BASE_ONLY symbol {symbol} absent from binary')
-        if binary.find(encoded) != -1:
-            exempt_reason = tileset_byte_exemptions.get(enc_sha) \
-                or layout_byte_exemptions.get(enc_sha) \
-                or audio_byte_exemptions.get(enc_sha)
-            if exempt_reason:
-                # R11-C §7 / R11-D §10: sha-keyed, classified at scan time
-                # (see the dicts above - art-sharing with a compiled
-                # consumer verified via grep -rln, or a coincidence/vacuous
-                # pattern); the symbol/TU/dep-graph checks are the hard
-                # isolation proof.
-                print(f'NOTE - {rid}: {enc_len}-byte encoded payload found in '
-                      f'{binary_path} but sha-keyed exempt: '
-                      f'{exempt_reason}; reported, not failed', file=sys.stderr)
-            elif enc_sha in still_front_shas or enc_sha in object_event_byte_exemptions:
-                # Art-sharing with the still-compiled menu-front family
-                # (castform): the same bytes legitimately sit in the binary
-                # as the still-front asset; the symbol/TU/dep-graph checks
-                # are the hard isolation proof for this record.
-                print(f'NOTE - {rid}: {enc_len}-byte encoded payload found in '
-                      f'{binary_path} but byte-identical to a compiled '
-                      f'still-front asset (R9 §9 art-sharing); reported, '
-                      f'not failed', file=sys.stderr)
+        if enc_len >= 4:
+            if binary.find(encoded) != -1:
+                exempt_reason = tileset_byte_exemptions.get(enc_sha) \
+                    or layout_byte_exemptions.get(enc_sha) \
+                    or audio_byte_exemptions.get(enc_sha) \
+                    or battle_byte_exemptions.get(enc_sha)
+                if exempt_reason:
+                    # R11-C §7 / R11-D §10 / R13-H7 §28: sha-keyed, classified
+                    # at scan time (see the dicts above - art-sharing with a
+                    # compiled consumer verified via grep -rln, a seam/§12
+                    # retention, or a coincidence/vacuous pattern); the
+                    # symbol/TU/dep-graph checks are the hard isolation proof.
+                    print(f'NOTE - {rid}: {enc_len}-byte encoded payload found in '
+                          f'{binary_path} but sha-keyed exempt: '
+                          f'{exempt_reason}; reported, not failed', file=sys.stderr)
+                elif enc_sha in still_front_shas or enc_sha in object_event_byte_exemptions:
+                    # Art-sharing with the still-compiled menu-front family
+                    # (castform): the same bytes legitimately sit in the binary
+                    # as the still-front asset; the symbol/TU/dep-graph checks
+                    # are the hard isolation proof for this record.
+                    print(f'NOTE - {rid}: {enc_len}-byte encoded payload found in '
+                          f'{binary_path} but byte-identical to a compiled '
+                          f'still-front asset (R9 §9 art-sharing); reported, '
+                          f'not failed', file=sys.stderr)
+                else:
+                    print(f'FAIL - {rid}: {enc_len}-byte encoded payload found in {binary_path} '
+                          f'({symbol} leaked into the native executable)', file=sys.stderr)
+                    bad += 1
             else:
-                print(f'FAIL - {rid}: {enc_len}-byte encoded payload found in {binary_path} '
-                      f'({symbol} leaked into the native executable)', file=sys.stderr)
-                bad += 1
+                print(f'ok   - {rid}: encoded {enc_len}-byte payload absent from binary')
+        elif enc_len == 0:
+            # R13-H7 zero-width aliases: no payload bytes exist by construction
+            # (the compiled ROM never materialized the alias slot); the
+            # symbol-absence check below is the isolation proof.
+            print(f'ok   - {rid}: zero-width alias (no payload bytes to scan)')
         else:
-            print(f'ok   - {rid}: encoded {enc_len}-byte payload absent from binary')
-        if binary.find(decoded) != -1:
-            if dec_len >= 1024:
-                print(f'FAIL - {rid}: {dec_len}-byte decoded payload found in {binary_path}',
-                      file=sys.stderr)
-                bad += 1
+            # R13-H7 scan floor: a 1-3 byte payload is degenerate (any such
+            # sequence occurs in a 24MB binary by chance); the G6 precedent
+            # covers short payloads with the symbol sweep, which is the hard
+            # proof here.
+            print(f'ok   - {rid}: encoded {enc_len}-byte payload below the '
+                  f'4-byte scan floor (G6 precedent: symbol sweep is the proof)')
+        if len(decoded) >= 4:
+            if binary.find(decoded) != -1:
+                if dec_len >= 1024:
+                    print(f'FAIL - {rid}: {dec_len}-byte decoded payload found in {binary_path}',
+                          file=sys.stderr)
+                    bad += 1
+                else:
+                    # Small decoded payloads (the 32-byte palettes) are REPORTED, not
+                    # failed: a 32-byte run can legitimately coincide with unrelated
+                    # bytes elsewhere in the binary (R7B hit this: rs-may's decoded
+                    # palette matched an x86 instruction run in .text). The real
+                    # isolation proof for palettes is the symbol/encoded/TU/dep-graph
+                    # checks, which remain hard failures.
+                    print(f'NOTE - {rid}: {dec_len}-byte decoded payload collides at '
+                          f'0x{binary.find(decoded):x} (reported, not failed: '
+                          f'small-payload collision risk)',
+                          file=sys.stderr)
             else:
-                # Small decoded payloads (the 32-byte palettes) are REPORTED, not
-                # failed: a 32-byte run can legitimately coincide with unrelated
-                # bytes elsewhere in the binary (R7B hit this: rs-may's decoded
-                # palette matched an x86 instruction run in .text). The real
-                # isolation proof for palettes is the symbol/encoded/TU/dep-graph
-                # checks, which remain hard failures.
-                print(f'NOTE - {rid}: {dec_len}-byte decoded payload collides at '
-                      f'0x{binary.find(decoded):x} (reported, not failed: '
-                      f'small-payload collision risk)',
-                      file=sys.stderr)
+                print(f'ok   - {rid}: decoded {dec_len}-byte payload absent from binary')
+        elif enc_len == 0:
+            print(f'ok   - {rid}: zero-width alias (no decoded bytes to scan)')
         else:
-            print(f'ok   - {rid}: decoded {dec_len}-byte payload absent from binary')
+            print(f'ok   - {rid}: decoded {dec_len}-byte payload below the '
+                  f'4-byte scan floor (G6 precedent: symbol sweep is the proof)')
         # R11-D §10 object scan: native maps.o (assembled data/maps.s with
         # the `.if LINUX64` skip in layouts.inc) must not contain any
         # blockdata/border byte sequences. The 2/4-byte unused-map
@@ -1024,4 +1093,4 @@ fi
 echo
 echo "native asset-isolation: $pass ok, $fail failed"
 [[ "$fail" == 0 ]] || exit 1
-echo "PASS: native target matches ownership (5819/5819 ROM_BASE_ONLY isolated - 196 trainer + 1608 pokemon battle + 288 object-event + 1544 tileset + 882 layout + 1301 audio; 1057/1057 COMPILED_PENDING_MIGRATION present - 1055 movement + 2 multiboot)"
+echo "PASS: native target matches ownership (7908/7908 ROM_BASE_ONLY isolated - 196 trainer + 1608 pokemon battle + 288 object-event + 1544 tileset + 882 layout + 1301 audio + 2089 battle modules; 1057/1057 COMPILED_PENDING_MIGRATION present - 1055 movement + 2 multiboot)"
