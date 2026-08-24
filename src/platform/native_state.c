@@ -2598,6 +2598,18 @@ static bool32 CaptureSlice(const struct NativeStateSlice *slice, u8 *dest,
     if (slice->runtimePointers)
         return TRUE;
     memcpy(dest, slice->source, slice->size);
+    /* R13-I: the FLASH slice (the in-game .sav bytes) is the one raw-copy
+     * section that shares game data with a walked slice (SaveBlock1 lives
+     * in both EWRAM and the flash image). The walker's save-final audit
+     * never sees FLASH, so run the runtime-handle gate here too: a
+     * process-local E/F handle byte can then never persist into a state
+     * file through the raw path. (Producers are currently unreachable -
+     * every object-event script is compat-resolvable - but the gate makes
+     * the invariant structural instead of disciplinary.) */
+    if (slice->tag == STATE_SECTION_FLASH
+     && !ValidateNoRuntimeHandles(slice, dest, slice->size, TRUE,
+                                  "save-flash-final"))
+        return FALSE;
     return TRUE;
 }
 
@@ -2698,6 +2710,13 @@ static bool32 ValidateRestoreSlice(const struct NativeStateSlice *slice, const u
         free(scratch);
         return valid;
     }
+    /* R13-I: the load-side mirror of the FLASH capture gate - a state file
+     * whose raw flash bytes contain a registered process-local handle is
+     * refused before any restore (symmetric with the EWRAM load-verify). */
+    if (slice->tag == STATE_SECTION_FLASH
+     && !ValidateNoRuntimeHandles(slice, source, slice->size, TRUE,
+                                  "load-flash-verify"))
+        return FALSE;
     return TRUE;
 }
 

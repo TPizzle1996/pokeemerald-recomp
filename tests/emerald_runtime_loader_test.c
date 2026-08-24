@@ -2968,6 +2968,106 @@ static void TestFrontierAuxRefusals(const char *tempDir, const char *prodPack)
     }
 }
 
+/* R13-I §14: exact per-family live range census. Walks the production
+ * range index and tallies by (type, schema, role), printing one
+ * machine-readable line per bucket plus the known schema family name.
+ * Buckets without a named constant print as plain numbers; the report
+ * maps those to their seams by type + count. Also pins hull count and
+ * the sorted non-overlapping invariant. */
+static void TestRangeCensus(void)
+{
+    static const struct { u32 type; u32 schema; const char *family; } kSchemaNames[] = {
+        { GEN3_RESOURCE_TYPE_STRUCTURED_DATA, 16u, "trainer-metadata" },
+        { GEN3_RESOURCE_TYPE_STRUCTURED_DATA, 17u, "trainer-party" },
+        { GEN3_RESOURCE_TYPE_STRUCTURED_DATA, 18u, "trainer-class" },
+        { GEN3_RESOURCE_TYPE_STRUCTURED_DATA, 19u, "encounter-headers" },
+        { GEN3_RESOURCE_TYPE_STRUCTURED_DATA, 20u, "encounter-slot" },
+        { GEN3_RESOURCE_TYPE_STRUCTURED_DATA, 21u, "frontier-trainer" },
+        { GEN3_RESOURCE_TYPE_STRUCTURED_DATA, 22u, "frontier-mon-set" },
+        { GEN3_RESOURCE_TYPE_STRUCTURED_DATA, 23u, "frontier-mon" },
+        { GEN3_RESOURCE_TYPE_STRUCTURED_DATA, 24u, "frontier-held-items" },
+        { GEN3_RESOURCE_TYPE_STRUCTURED_DATA, 25u, "frontier-banned" },
+        { GEN3_RESOURCE_TYPE_STRUCTURED_DATA, 26u, "frontier-factory" },
+        { GEN3_RESOURCE_TYPE_STRUCTURED_DATA, 27u, "frontier-palace" },
+        { GEN3_RESOURCE_TYPE_STRUCTURED_DATA, 28u, "frontier-arena" },
+        { GEN3_RESOURCE_TYPE_STRUCTURED_DATA, 29u, "frontier-pike-npc" },
+        { GEN3_RESOURCE_TYPE_STRUCTURED_DATA, 30u, "frontier-pike-speech" },
+        { GEN3_RESOURCE_TYPE_STRUCTURED_DATA, 31u, "frontier-pyramid-floor" },
+        { GEN3_RESOURCE_TYPE_STRUCTURED_DATA, 32u, "frontier-pyramid-item" },
+        { GEN3_RESOURCE_TYPE_STRUCTURED_DATA, 33u, "frontier-pyramid-slots" },
+        { GEN3_RESOURCE_TYPE_STRUCTURED_DATA, 34u, "frontier-brain" },
+        { GEN3_RESOURCE_TYPE_STRUCTURED_DATA, 35u, "frontier-apprentice" },
+        { GEN3_RESOURCE_TYPE_STRUCTURED_DATA, 36u, "frontier-wild-headers" },
+        { GEN3_RESOURCE_TYPE_STRUCTURED_DATA, 37u, "frontier-wild" },
+        { GEN3_RESOURCE_TYPE_STRUCTURED_DATA, 38u, "pokedex-row" },
+        { GEN3_RESOURCE_TYPE_STRUCTURED_DATA, 39u, "pokedex-order" },
+        { GEN3_RESOURCE_TYPE_STRUCTURED_DATA, 40u, "pokedex-s2n" },
+        { GEN3_RESOURCE_TYPE_STRUCTURED_DATA, 41u, "map-header" },
+        { GEN3_RESOURCE_TYPE_STRUCTURED_DATA, 42u, "map-layout" },
+        { GEN3_RESOURCE_TYPE_STRUCTURED_DATA, 43u, "map-events" },
+        { GEN3_RESOURCE_TYPE_STRUCTURED_DATA, 44u, "map-connections" },
+        { GEN3_RESOURCE_TYPE_STRUCTURED_DATA, 45u, "script-field" },
+        { GEN3_RESOURCE_TYPE_STRUCTURED_DATA, 46u, "script-routing" },
+        { GEN3_RESOURCE_TYPE_STRUCTURED_DATA, 47u, "battle-script" },
+        { GEN3_RESOURCE_TYPE_STRUCTURED_DATA, 48u, "battle-anim-script" },
+        { GEN3_RESOURCE_TYPE_STRUCTURED_DATA, 49u, "battle-ai" },
+        { GEN3_RESOURCE_TYPE_STRUCTURED_DATA, 50u, "contest-ai" },
+        { GEN3_RESOURCE_TYPE_STRUCTURED_DATA, 51u, "field-effect-script" },
+    };
+    const struct EmeraldResourceRangeIndex *index =
+        EmeraldResourceCompat_GetRangeIndex();
+    size_t i;
+    size_t total = 0u;
+    int buckets[128][4] = {0}; /* [slot][type,schema,role,count] */
+    int bucketCount = 0;
+
+    CHECK("R13I range census: index present", index != NULL);
+    if (index == NULL)
+        return;
+    for (i = 0u; i < index->rangeCount; i++)
+    {
+        const struct EmeraldResourceRange *range = &index->ranges[i];
+        int slot;
+
+        for (slot = 0; slot < bucketCount; slot++)
+            if (buckets[slot][0] == (int)range->type
+             && buckets[slot][1] == (int)range->schema
+             && buckets[slot][2] == (int)range->role)
+                break;
+        if (slot == bucketCount)
+        {
+            buckets[slot][0] = (int)range->type;
+            buckets[slot][1] = (int)range->schema;
+            buckets[slot][2] = (int)range->role;
+            bucketCount++;
+        }
+        buckets[slot][3]++;
+        /* Sorted, non-overlapping, nonzero-length invariant. */
+        CHECK("R13I range census: nonzero length", range->length != 0u);
+        if (i != 0u)
+        {
+            const struct EmeraldResourceRange *prev = &index->ranges[i - 1u];
+            CHECK("R13I range census: sorted non-overlapping",
+                  range->base >= prev->base + prev->length);
+        }
+        total++;
+    }
+    printf("R13I-CENSUS total=%zu hulls=%zu\n", total, index->hullCount);
+    for (i = 0; i < (size_t)bucketCount; i++)
+    {
+        const char *name = "";
+        size_t k;
+
+        for (k = 0u; k < ARRAY_COUNT(kSchemaNames); k++)
+            if (kSchemaNames[k].type == (u32)buckets[i][0]
+             && kSchemaNames[k].schema == (u32)buckets[i][1])
+                name = kSchemaNames[k].family;
+        printf("R13I-CENSUS type=%d schema=%d role=%d count=%d family=%s\n",
+               buckets[i][0], buckets[i][1], buckets[i][2], buckets[i][3],
+               name);
+    }
+}
+
 int main(int argc, char **argv)
 {
     const char *tempDir;
@@ -3028,6 +3128,10 @@ int main(int argc, char **argv)
      * while the frontier session republished by TestFrontierRelocation is
      * live, so the whole 843-fill-target frontier publication can be checked. */
     TestFrontierAux(prodPack);
+    /* R13-I §14: exact per-family live range census - every seam is live
+     * here (the text/frontier teardown tests run after this point), so the
+     * tally below is the full production range surface State-v5 consumes. */
+    TestRangeCensus();
     TestTextTransactionalRefusal(tempDir, prodPack);
     /* R13-E1 failure-matrix: trainer seams against freshly built variant
      * sessions (independent of the (now rolled-back) production session). */

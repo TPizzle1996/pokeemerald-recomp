@@ -17,6 +17,15 @@ pack behind the additive leaf seam, and the design-time "remains" figures
 above are reduced accordingly (see
 `docs/R13B_LEAF_PAYLOAD_MIGRATION_REPORT.md`).
 
+**Status (2026-08-24):** R13-B through **R13-I COMPLETE** — every R13
+content family is migrated and isolated, and the global State-v5 closure
+(R13-I) is green: all persisted pointer surfaces classified, raw
+host-pointer persistence eliminated (frontier-table spans + FLASH
+handle gates), live range count 6,390/8,192, pack 23,069, mixed-family
+and deterministic-serialization proofs green, full battery green. See
+`docs/R13I_STATE_V5_CLOSURE_REPORT.md` and
+`docs/R13I_STATE_V5_POINTER_CENSUS.md`. R13-J not begun.
+
 ## 1. Scope decision: what belongs in R13
 
 R13 takes **all remaining original-game payload** — text, script bytecode,

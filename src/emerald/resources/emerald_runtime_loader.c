@@ -584,7 +584,7 @@ EmeraldResourceCompat_RegisterRuntimeSnapshot(const char *packPath)
                                                     scriptStatus =
                                                         EmeraldScriptCompat_RegisterRanges();
                                                 if (scriptStatus == EMERALD_SCRIPT_OK
-                                                 && EmeraldScriptCompat_GetRangeCount() != 6377u)
+                                                 && EmeraldScriptCompat_GetRangeCount() != 6385u)
                                                     scriptStatus =
                                                         EMERALD_SCRIPT_ERR_UNEXPECTED_COUNT;
                                                 if (scriptStatus == EMERALD_SCRIPT_OK)
@@ -631,7 +631,7 @@ EmeraldResourceCompat_RegisterRuntimeSnapshot(const char *packPath)
                                              * contest-AI + field-effect pack
                                              * surfaces, stage the combined
                                              * generation, register the 5 live
-                                             * arena ranges (6,377 -> 6,382),
+                                             * arena ranges (6,385 -> 6,390),
                                              * publish live execution, and hand
                                              * the State-v5 adapter its surface
                                              * layouts - all before any battle /
@@ -656,7 +656,7 @@ EmeraldResourceCompat_RegisterRuntimeSnapshot(const char *packPath)
                                                     liveStatus =
                                                         EmeraldBattleLive_RegisterRanges();
                                                 if (liveStatus == EMERALD_BATTLE_LIVE_OK
-                                                 && EmeraldBattleLive_GetRangeCount() != 6382u)
+                                                 && EmeraldBattleLive_GetRangeCount() != 6390u)
                                                     liveStatus =
                                                         EMERALD_BATTLE_LIVE_ERR_UNEXPECTED_COUNT;
                                                 if (liveStatus == EMERALD_BATTLE_LIVE_OK)

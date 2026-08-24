@@ -89,6 +89,14 @@ def main():
         put32(buf, 4, 6)
     elif kind == "oversized-count":
         put32(buf, sidecar_payload, 5000)
+    elif kind == "bad-sidecar-size":
+        # Size field not 4 + 64*k: the parser's structural check refuses
+        # before any record is read.
+        put32(buf, sidecar_header + 4, sidecar_size - 4)
+    elif kind == "raw-crc":
+        # Flip one payload byte WITHOUT repairing: the container CRC check
+        # must refuse (the payload/section checksum path).
+        buf[payload_base] ^= 0xFF
     else:
         if sidecar_size < 4 + RECORD_SIZE:
             print("sidecar too small to corrupt")
@@ -108,6 +116,8 @@ def main():
             put32(buf, record + 48, 99)
         elif kind == "bad-schema":
             put32(buf, record + 44, 0xFFFFFFFF)
+        elif kind == "bad-type":
+            put32(buf, record + 40, 99)
         elif kind == "oob-resource-offset":
             put32(buf, record + 52, 0xFFFFFFF0)
         elif kind == "duplicate-fields":
@@ -120,9 +130,12 @@ def main():
 
     # Repair the sidecar section CRC and the payload CRC so the container's
     # structural checks pass and the semantic validation must do the work.
-    put32(buf, sidecar_header + 8,
-          zlib.crc32(buf[sidecar_payload:sidecar_payload + sidecar_size]))
-    put32(buf, 24, zlib.crc32(buf[header_size:]))
+    # raw-crc deliberately SKIPS the repair: the un-repaired checksum is the
+    # mutation under test.
+    if kind != "raw-crc":
+        put32(buf, sidecar_header + 8,
+              zlib.crc32(buf[sidecar_payload:sidecar_payload + sidecar_size]))
+        put32(buf, 24, zlib.crc32(buf[header_size:]))
     with open(path, "wb") as f:
         f.write(buf)
     print(f"corrupted {kind}")

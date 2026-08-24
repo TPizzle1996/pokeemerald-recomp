@@ -968,8 +968,8 @@ static void TestStateV5AndRuntimeInvariants(void)
 
     CHECK("range index present", index != NULL);
     before = EmeraldResourceRangeIndex_GetRangeCount(index);
-    CHECK("live range pin 6377/8192 after the loader's cutover",
-          before == 6377u && before < 8192u);
+    CHECK("live range pin 6385/8192 after the loader's cutover",
+          before == 6385u && before < 8192u);
 
     /* Range lifecycle (plan sec 22): the clear unregisters exactly the
      * 523 module ranges (identity-based), the restage re-registers
@@ -988,7 +988,7 @@ static void TestStateV5AndRuntimeInvariants(void)
     CHECK("restage registers the 523 module ranges",
           EmeraldScriptCompat_RegisterRanges() == EMERALD_SCRIPT_OK);
     after = EmeraldResourceRangeIndex_GetRangeCount(index);
-    CHECK("range count restored to exactly 6377", after == 6377u);
+    CHECK("range count restored to exactly 6385", after == 6385u);
     /* clear bumps the counter, the restage bumps it again: base+4. */
     CHECK("generation id advanced past the clear",
           EmeraldScriptCompat_GetGenerationId()

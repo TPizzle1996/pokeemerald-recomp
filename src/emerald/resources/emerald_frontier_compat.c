@@ -52,7 +52,7 @@ static void UnregisterMonSetRange(void);
 static bool RegisterWildSlotRange(void);
 static void UnregisterWildSlotRange(void);
 
-#define EMERALD_FRONTIER_MAX_REG_RANGES 2u
+#define EMERALD_FRONTIER_MAX_REG_RANGES 10u
 #define EMERALD_FRONTIER_GBA_ROM_BASE   ((uint32_t)0x08000000u)
 
 static uint16_t ReadLe16(const uint8_t *data)
@@ -1117,23 +1117,107 @@ static enum EmeraldFrontierCompatStatus PublishFrontierAux(
 
 /* ---- State-v5 arena-range registration (mon-set + E3a-2 wild arenas). ---- */
 
+/* R13-I: remove every frontier-family span from the index by exact key
+ * identity (position-independent), including an older refused generation
+ * whose base is no longer tracked in sRegisteredRanges. Covers the two
+ * arena spans AND the eight fixed-base HOST_DATA fill-target spans. */
+static void RemoveFrontierRanges(struct EmeraldResourceRangeIndex *index)
+{
+    static const char *const kFrontierKeys[10] =
+    {
+        "emerald:data/arena/frontier-mon-set",
+        "emerald:data/arena/facility-wild-slots",
+        "emerald:data/frontier/tower-trainers",
+        "emerald:data/frontier/tower-mons",
+        "emerald:data/frontier/slateport-tent-trainers",
+        "emerald:data/frontier/slateport-tent-mons",
+        "emerald:data/frontier/verdanturf-tent-trainers",
+        "emerald:data/frontier/verdanturf-tent-mons",
+        "emerald:data/frontier/fallarbor-tent-trainers",
+        "emerald:data/frontier/fallarbor-tent-mons",
+    };
+    Gen3ResourceKey keys[(sizeof(kFrontierKeys) / sizeof(kFrontierKeys[0]))];
+    size_t k;
+    size_t j;
+
+    for (k = 0u; k < (sizeof(kFrontierKeys) / sizeof(kFrontierKeys[0])); k++)
+        Gen3ResourceId_DeriveKey(kFrontierKeys[k], &keys[k]);
+    j = 0u;
+    while (j < index->rangeCount)
+    {
+        bool match = false;
+
+        for (k = 0u; k < (sizeof(keys) / sizeof(keys[0])); k++)
+        {
+            if (memcmp(&index->ranges[j].key, &keys[k], sizeof(keys[k])) == 0)
+            {
+                match = true;
+                break;
+            }
+        }
+        if (match)
+        {
+            memmove(&index->ranges[j], &index->ranges[j + 1u],
+                    (index->rangeCount - j - 1u) * sizeof(index->ranges[0]));
+            index->rangeCount--;
+        }
+        else
+            j++;
+    }
+}
+
 static bool RegisterMonSetRange(void)
 {
     struct EmeraldResourceRangeIndex *index = EmeraldResourceCompat_GetRangeIndex();
+    /* R13-I: the published HOST_DATA trainer/mon/tent fill targets get the
+     * same COMPAT_OBJECT span treatment as the map headers (the
+     * emerald_map_compat.c precedent): the EWRAM globals gFacilityTrainers /
+     * gFacilityTrainerMons hold raw pointers into these arrays inside
+     * frontier facilities, and a State-v5 capture must reconcile them as
+     * key+offset resource records instead of silently persisting raw
+     * host_data addresses. The arrays never move (fixed link addresses),
+     * so their spans have no generation lifecycle beyond publish/clear.
+     * Registration is idempotent: any prior frontier spans (including an
+     * older refused generation) are removed by key first, so repeated
+     * publish cycles can never duplicate or overlap the fixed-base spans. */
+    static const struct
+    {
+        const void *base;
+        size_t length;
+        const char *canonicalName;
+        uint32_t schema;
+    } kHostTableSpans[8] =
+    {
+        { gBattleFrontierTrainers,         sizeof(gBattleFrontierTrainers),
+          "emerald:data/frontier/tower-trainers",      EMERALD_FRONTIER_SCHEMA_TRAINER },
+        { gBattleFrontierMons,             sizeof(gBattleFrontierMons),
+          "emerald:data/frontier/tower-mons",          EMERALD_FRONTIER_SCHEMA_MON },
+        { gSlateportBattleTentTrainers,    sizeof(gSlateportBattleTentTrainers),
+          "emerald:data/frontier/slateport-tent-trainers", EMERALD_FRONTIER_SCHEMA_TRAINER },
+        { gSlateportBattleTentMons,        sizeof(gSlateportBattleTentMons),
+          "emerald:data/frontier/slateport-tent-mons",  EMERALD_FRONTIER_SCHEMA_MON },
+        { gVerdanturfBattleTentTrainers,   sizeof(gVerdanturfBattleTentTrainers),
+          "emerald:data/frontier/verdanturf-tent-trainers", EMERALD_FRONTIER_SCHEMA_TRAINER },
+        { gVerdanturfBattleTentMons,       sizeof(gVerdanturfBattleTentMons),
+          "emerald:data/frontier/verdanturf-tent-mons",  EMERALD_FRONTIER_SCHEMA_MON },
+        { gFallarborBattleTentTrainers,    sizeof(gFallarborBattleTentTrainers),
+          "emerald:data/frontier/fallarbor-tent-trainers", EMERALD_FRONTIER_SCHEMA_TRAINER },
+        { gFallarborBattleTentMons,        sizeof(gFallarborBattleTentMons),
+          "emerald:data/frontier/fallarbor-tent-mons",    EMERALD_FRONTIER_SCHEMA_MON },
+    };
     bool allRanges = true;
     size_t r;
     (void)r;
     sRegisteredRangeCount = 0u;
     if (index == NULL || sMonSetArena == NULL)
         return true;
+    RemoveFrontierRanges(index);
 
     /* ONE COMPAT_OBJECT range over the packed mon-set arena. Every published
      * trainer row's monSet pointer (frontier + tents) resolves into this arena;
      * a State-v5 walk that follows a serialized monSet pointer must reconcile
      * the addresses, so the span is registered just like the levelup /
-     * trainer-party arenas. The HOST_DATA trainer/mon/tent tables live at
-     * fixed host_data addresses (the same binary), so no ranges over them. No
-     * per-resource ranges. */
+     * trainer-party arenas. No per-resource ranges. */
     if (!EmeraldResourceRangeIndex_RegisterSpan(
             index, (uintptr_t)sMonSetArena, sMonSetArenaTotal,
             "emerald:data/arena/frontier-mon-set",
@@ -1146,6 +1230,25 @@ static bool RegisterMonSetRange(void)
         sRegisteredRanges[sRegisteredRangeCount].base = (uintptr_t)sMonSetArena;
         sRegisteredRanges[sRegisteredRangeCount].length = sMonSetArenaTotal;
         sRegisteredRangeCount++;
+    }
+    /* R13-I: the eight HOST_DATA fill-target spans (see above). */
+    for (r = 0u; r < (sizeof(kHostTableSpans) / sizeof(kHostTableSpans[0])); r++)
+    {
+        if (!EmeraldResourceRangeIndex_RegisterSpan(
+                index, (uintptr_t)kHostTableSpans[r].base,
+                kHostTableSpans[r].length, kHostTableSpans[r].canonicalName,
+                GEN3_RESOURCE_TYPE_STRUCTURED_DATA,
+                kHostTableSpans[r].schema,
+                EMERALD_RESOURCE_ROLE_COMPAT_OBJECT))
+            allRanges = false;
+        else
+        {
+            sRegisteredRanges[sRegisteredRangeCount].base =
+                (uintptr_t)kHostTableSpans[r].base;
+            sRegisteredRanges[sRegisteredRangeCount].length =
+                kHostTableSpans[r].length;
+            sRegisteredRangeCount++;
+        }
     }
     return allRanges;
 }
@@ -1176,31 +1279,9 @@ static bool RegisterWildSlotRange(void)
 static void UnregisterMonSetRange(void)
 {
     struct EmeraldResourceRangeIndex *index = EmeraldResourceCompat_GetRangeIndex();
-    Gen3ResourceKey monSetKey;
-    Gen3ResourceKey wildSlotKey;
-    size_t j;
     if (index == NULL)
         return;
-
-    /* A refused direct republish can replace the two tracked bases after the
-     * mon-set phase but before AUX publication.  Remove the exact family
-     * identities, including any older generation whose base is no longer in
-     * sRegisteredRanges; address-only removal can otherwise orphan a range. */
-    Gen3ResourceId_DeriveKey("emerald:data/arena/frontier-mon-set", &monSetKey);
-    Gen3ResourceId_DeriveKey("emerald:data/arena/facility-wild-slots", &wildSlotKey);
-    j = 0u;
-    while (j < index->rangeCount)
-    {
-        if (memcmp(&index->ranges[j].key, &monSetKey, sizeof(monSetKey)) == 0
-         || memcmp(&index->ranges[j].key, &wildSlotKey, sizeof(wildSlotKey)) == 0)
-        {
-            memmove(&index->ranges[j], &index->ranges[j + 1u],
-                    (index->rangeCount - j - 1u) * sizeof(index->ranges[0]));
-            index->rangeCount--;
-        }
-        else
-            j++;
-    }
+    RemoveFrontierRanges(index);
     sRegisteredRangeCount = 0u;
 }
 

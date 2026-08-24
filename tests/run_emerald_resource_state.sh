@@ -233,6 +233,45 @@ EOF
     exit 0
 fi
 
+if [ "$mode" = "mixed-state" ] || [ "$mode" = "mixed-cross" ]; then
+    mixedstate="harness-mixed-slot-7.st"
+    echo "== R13-I: mixed-family capture in process A (G nested + H battle/anim/AI + engine) =="
+    "$tmp/emerald_resource_state_test" mixed-create "$pack" "$mixedstate" > mixed-create.log 2>&1
+    cat mixed-create.log
+    grep -q "MIXED-CREATE" mixed-create.log
+    grep -q "records=24 (g=9 h=9 text=6)" mixed-create.log
+
+    echo "== R13-I: mixed-family restore in fresh process B (both generations re-staged) =="
+    "$tmp/emerald_resource_state_test" mixed-load "$pack" "$mixedstate" > mixed-load.log 2>&1
+    cat mixed-load.log
+    grep -q "g-ok h-ok engine-ok mixed-return=ok" mixed-load.log
+
+    python3 - "$tmp" <<'EOF'
+import re, sys
+tmp = sys.argv[1]
+create = open(f"{tmp}/mixed-create.log").read()
+load = open(f"{tmp}/mixed-load.log").read()
+c = re.search(r"MIXED-CREATE arena=(0x[0-9a-f]+) battle-arena=(0x[0-9a-f]+)", create)
+l = re.search(r"MIXED-LOAD arena=(0x[0-9a-f]+) battle-arena=(0x[0-9a-f]+)", load)
+assert c and l, "missing mixed arena proof line"
+assert c.group(1) != l.group(1), "creator and restorer script arena bases match"
+assert c.group(2) != l.group(2), "creator and restorer battle arena bases match"
+print(f"MIXED fresh-process relocation: creator {c.groups()} -> restorer {l.groups()}")
+EOF
+    echo "R13-I mixed: G+H+engine pointers resolve per-family across the process boundary"
+    exit 0
+fi
+
+if [ "$mode" = "determinism" ]; then
+    detstate="harness-det-slot-7.st"
+    echo "== R13-I: deterministic semantic serialization across arena bases =="
+    "$tmp/emerald_resource_state_test" determinism "$pack" "$detstate" > determinism.log 2>&1
+    cat determinism.log
+    grep -q "DETERMINISM payload=" determinism.log
+    grep -q "bytes identical across arena bases" determinism.log
+    exit 0
+fi
+
 if [ "$mode" = "h3-sanitize" ]; then
     echo "== R13-H3: sanitizer variants (ASan/UBSan instrumented binary) =="
     "$tmp/emerald_resource_state_test" h3-create "$pack"         "harness-h3-san-slot-7.st" > h3-san-create.log
@@ -426,8 +465,8 @@ grep -q "LOADFAIL corrupt ok" fail7b.log
 echo "TEST 7b ok (unknown resource key)"
 
 echo "== TEST 8: corrupt sidecar matrix =="
-for kind in bad-tag oob-offset bad-key bad-role bad-schema oob-resource-offset oversized-count duplicate-fields bad-reserved truncated-sidecar; do
-    "$tmp/emerald_resource_state_test" create "$pack" "$state" > /dev/null
+for kind in bad-tag oob-offset bad-key bad-role bad-schema bad-type oob-resource-offset oversized-count duplicate-fields bad-reserved truncated-sidecar bad-sidecar-size raw-crc; do
+    "$tmp/emerald_resource_state_test" create "$pack" "$state" > "create-$kind.log" 2>&1
     python3 "$here/emerald_resource_state_corrupt.py" "$tmp/$state" "$kind"
     "$tmp/emerald_resource_state_test" load-fail "$pack" "$state" corrupt > "fail8-$kind.log" || true
     if ! grep -q "LOADFAIL corrupt ok" "fail8-$kind.log"; then

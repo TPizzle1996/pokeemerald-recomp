@@ -3436,7 +3436,7 @@ static int DoG4Create(const char *packPath, const char *statePath)
     CHECK(EmeraldScriptCompat_IsPublished());
     CHECK(EmeraldScriptCompat_AreRangesRegistered());
     CHECK(EmeraldResourceRangeIndex_GetRangeCount(
-              EmeraldResourceCompat_GetRangeIndex()) == 6377u);
+              EmeraldResourceCompat_GetRangeIndex()) == 6385u);
     (void)projected;
     CHECK(NativeState_Save(HARNESS_STATE_SLOT) == NATIVE_STATE_OK);
     CHECK(ParseStateSidecar(statePath, records, ARRAY_COUNT(records),
@@ -4623,10 +4623,10 @@ static int DoH3Create(const char *packPath, const char *statePath)
     {
         size_t projected = 0u;
         CHECK(EmeraldResourceRangeIndex_GetRangeCount(
-                  EmeraldResourceCompat_GetRangeIndex()) == 6377u);
+                  EmeraldResourceCompat_GetRangeIndex()) == 6385u);
         CHECK(EmeraldBattleCompat_ValidateProjectedRanges(
-                  6377u, 8192u, &projected) == EMERALD_BATTLE_OK);
-        CHECK(projected == 6382u);
+                  6385u, 8192u, &projected) == EMERALD_BATTLE_OK);
+        CHECK(projected == 6390u);
         CHECK(EmeraldBattleCompat_ValidateProjectedRanges(
                   8190u, 8192u, &projected)
               == EMERALD_BATTLE_ERR_UNEXPECTED_COUNT);
@@ -4863,7 +4863,7 @@ static int DoH3Load(const char *packPath, const char *statePath)
         const struct EmeraldResourceRangeIndex *live =
             EmeraldResourceCompat_GetRangeIndex();
         CHECK(live != NULL);
-        CHECK(EmeraldResourceRangeIndex_GetRangeCount(live) == 6377u);
+        CHECK(EmeraldResourceRangeIndex_GetRangeCount(live) == 6385u);
         scratch = *live;
         CHECK(EmeraldBattleCompat_GetArenaRanges(ranges));
         for (i = 0u; i < EMERALD_BATTLE_FAMILY_COUNT; i++)
@@ -4876,7 +4876,7 @@ static int DoH3Load(const char *packPath, const char *statePath)
                       ranges[i].schema,
                       (enum EmeraldResourceRangeRole)ranges[i].role));
         }
-        CHECK(EmeraldResourceRangeIndex_GetRangeCount(&scratch) == 6382u);
+        CHECK(EmeraldResourceRangeIndex_GetRangeCount(&scratch) == 6390u);
         /* Failed replacement: an overlapping span refuses and rolls
          * back (count unchanged, prior entries untouched). */
         CHECK(!EmeraldResourceRangeIndex_RegisterSpan(
@@ -4884,7 +4884,7 @@ static int DoH3Load(const char *packPath, const char *statePath)
                   "emerald:battle-script/@arena-dup",
                   ranges[0].resourceType, ranges[0].schema,
                   (enum EmeraldResourceRangeRole)ranges[0].role));
-        CHECK(EmeraldResourceRangeIndex_GetRangeCount(&scratch) == 6382u);
+        CHECK(EmeraldResourceRangeIndex_GetRangeCount(&scratch) == 6390u);
         /* Unregister by exact family-generation identity: the 5 arena
          * keys are spliced; everything else survives byte-identical. */
         for (i = 0u; i < EMERALD_BATTLE_FAMILY_COUNT; i++)
@@ -4907,11 +4907,11 @@ static int DoH3Load(const char *packPath, const char *statePath)
             }
             CHECK(removed);
         }
-        CHECK(EmeraldResourceRangeIndex_GetRangeCount(&scratch) == 6377u);
+        CHECK(EmeraldResourceRangeIndex_GetRangeCount(&scratch) == 6385u);
         CHECK(memcmp(scratch.ranges, live->ranges,
                      live->rangeCount * sizeof(live->ranges[0])) == 0);
         /* The production index was never touched. */
-        CHECK(EmeraldResourceRangeIndex_GetRangeCount(live) == 6377u);
+        CHECK(EmeraldResourceRangeIndex_GetRangeCount(live) == 6385u);
     }
 
     /* Zero-width alias policy (brief sec 23): identity canonicalizes to
@@ -4989,6 +4989,406 @@ static int DoH3Load(const char *packPath, const char *statePath)
     TeardownScriptCompatSession();
     EmeraldBattleCompat_Shutdown();
     EmeraldBattleState_ClearLayout();
+    return sFailures != 0;
+}
+
+/* ------------------------------------------------------------------ */
+/* R13-I mixed-family State-v5 proof (brief sec 20/21).                */
+/* One state file carries an active field-script Context1 (nested, two  */
+/* frames), the H battle VM (IP + two call-stack returns + selection +  */
+/* palace), the anim VM (IP + return), a stale AI IP, and engine        */
+/* callbacks - captured through both family adapters in ONE save, and   */
+/* restored in a fresh process with both generations re-staged at       */
+/* different bases and a perturbed H layout. Proves per-family          */
+/* resolution, no cross-family capture/resolve, and no restore-order    */
+/* dependency (records interleave in (section, offset) order).          */
+
+static int DoMixedCreate(const char *packPath, const char *statePath)
+{
+    struct ParsedRecord records[64];
+    u32 recordCount = 0u;
+    u32 i;
+    u32 gRecords = 0u;
+    u32 hRecords = 0u;
+    u32 textRecords = 0u;
+    const u8 *arena;
+    size_t arenaSize;
+    const u8 *battleArena;
+    size_t battleSize;
+
+    HarnessStatePath_Override(statePath);
+    /* Both seams staged in one process: the live G generation (full
+     * loader session, 523 G ranges) + the shadow H generation layout 0.
+     * STAGE BEFORE PLANTING: the second session call (H3Stage's own
+     * SetupScriptCompatSession) re-publishes the text arena, so the
+     * planted trainer-text pointers must be taken from the final arena. */
+    if (!G4Stage(packPath, FALSE))
+        return 1;
+    if (!H3Stage(packPath, 0u))
+        return 1;
+    if (!G4PlantNestedState() || !H3PlantMainState())
+        return 1;
+    G4BindLayout();
+    H3BindLayout();
+    CHECK(EmeraldScriptCompat_GetArena(&arena, &arenaSize));
+    CHECK(EmeraldBattleCompat_GetArena(
+              EMERALD_BATTLE_FAMILY_BATTLE_SCRIPT, &battleArena, &battleSize));
+    CHECK(arena != NULL && battleArena != NULL);
+
+    CHECK(NativeState_Save(HARNESS_STATE_SLOT) == NATIVE_STATE_OK);
+    {
+        bool32 parsed = ParseStateSidecar(statePath, records,
+                                          ARRAY_COUNT(records), &recordCount);
+        fprintf(stderr, "MIXED-DEBUG parse=%u recordCount=%u\n", parsed ? 1u : 0u,
+               recordCount);
+        CHECK(parsed);
+    }
+    /* 9 static G records (nested Context1 + ram return + approaching x2
+     * + trainer returns) + 9 H records (battle IP + stack + selection +
+     * palace + AI + anim) + 6 C trainer-text records (type TEXT). */
+    CHECK(recordCount == 24u);
+    for (i = 0u; i < recordCount && i < ARRAY_COUNT(records); i++)
+    {
+        fprintf(stderr, "MIXED-DEBUG record %u: section=%u field=+0x%x type=%u schema=%u role=%u\n",
+               i, records[i].sectionTag, records[i].fieldOffset,
+               records[i].type, records[i].schema, records[i].role);
+        if (records[i].type == GEN3_RESOURCE_TYPE_STRUCTURED_DATA
+         && records[i].schema >= 45u && records[i].schema <= 46u)
+            gRecords++;
+        else if (records[i].type == GEN3_RESOURCE_TYPE_STRUCTURED_DATA
+              && records[i].schema >= 47u && records[i].schema <= 51u)
+            hRecords++;
+        else if (records[i].type == GEN3_RESOURCE_TYPE_TEXT)
+            textRecords++;
+        else
+            CHECK(FALSE); /* no other family may appear in this state */
+    }
+    CHECK(gRecords == 9u);
+    CHECK(hRecords == 9u);
+    CHECK(textRecords == 6u);
+    fprintf(stderr, "MIXED-CREATE arena=%p battle-arena=%p records=24 (g=9 h=9 text=6)\n",
+           (const void *)arena, (const void *)battleArena);
+    TeardownScriptCompatSession();
+    EmeraldBattleCompat_Shutdown();
+    EmeraldBattleState_ClearLayout();
+    EmeraldScriptState_ClearLayout();
+    return sFailures != 0;
+}
+
+static int DoMixedLoad(const char *packPath, const char *statePath)
+{
+    struct HarnessGameData *data = GameData();
+    struct H3BattleFixtures *fx;
+    const u8 *arena;
+    size_t arenaSize;
+    const u8 *battleArena;
+    const u8 *feArena;
+    size_t battleSize;
+    uintptr_t target;
+    u32 i;
+
+    HarnessStatePath_Override(statePath);
+    /* Fresh generation bases: G restaged (candidate-first allocation),
+     * H layout 1 (perturbed, reversed arena order). */
+    if (!G4Stage(packPath, TRUE))
+        return 1;
+    if (!H3Stage(packPath, 1u))
+        return 1;
+    fx = H3Fixtures();
+    memset(data, 0, sizeof(*data));
+    memset(fx, 0, sizeof(*fx));
+    H3ClearSurfaces();
+    G4BindLayout();
+    H3BindLayout();
+    CHECK(NativeState_Load(HARNESS_STATE_SLOT) == NATIVE_STATE_OK);
+    CHECK(EmeraldScriptCompat_GetArena(&arena, &arenaSize));
+    CHECK(EmeraldBattleCompat_GetArena(
+              EMERALD_BATTLE_FAMILY_BATTLE_SCRIPT, &battleArena, &battleSize));
+    CHECK(EmeraldBattleCompat_GetArena(
+              EMERALD_BATTLE_FAMILY_FIELD_EFFECT_SCRIPT, &feArena, &battleSize));
+    CHECK(battleArena > feArena); /* layout-1 perturbation */
+
+    /* ---- G closure in the mixed state (G4 core checks). ---- */
+    CHECK(G4CheckPoint(data->scriptState.context1.scriptPtr, 0u,
+                       EMERALD_SCRIPT_BOUNDARY_INSTRUCTION_START));
+    CHECK(G4CheckPoint(data->scriptState.context1.stack[1], 1u,
+                       EMERALD_SCRIPT_BOUNDARY_NEXT_INSTRUCTION));
+    CHECK(G4CheckPoint(data->scriptState.context1.stack[0], 2u,
+                       EMERALD_SCRIPT_BOUNDARY_NEXT_INSTRUCTION));
+    CHECK(data->scriptState.context1.stack[19] == NULL);
+    CHECK(data->scriptState.trainerIds[0] == 0x1234u
+       && data->scriptState.trainerIds[1] == 0x5678u);
+    CHECK(G4CheckPoint(data->scriptState.ramScriptRetAddr, 2u,
+                       EMERALD_SCRIPT_BOUNDARY_NEXT_INSTRUCTION));
+    CHECK(G4CheckPoint(data->scriptState.approaching[0], 3u,
+                       EMERALD_SCRIPT_BOUNDARY_INSTRUCTION_START));
+    CHECK(G4CheckPoint(data->scriptState.trainerReturnA, 4u,
+                       EMERALD_SCRIPT_BOUNDARY_ENTRYPOINT));
+    CHECK(G4CheckPoint(data->scriptState.trainerReturnB, 5u,
+                       EMERALD_SCRIPT_BOUNDARY_ENTRYPOINT));
+    for (i = 0u; i < 8u; i++)
+    {
+        CHECK(EmeraldScriptState_ResolveVirtualTarget(
+                  &data->scriptState.virtualAnchor,
+                  0x09000000u + i * 8u, 1u, &target)
+              == EMERALD_SCRIPT_STATE_OK);
+        CHECK(target == (uintptr_t)data->scriptState.dynamicScript + i * 8u);
+    }
+    /* C trainer-text pointers restored by key into the current text arena
+     * (the third family in this state - no cross-family resolution). */
+    {
+        const u8 *text = NULL;
+        size_t textSize = 0u;
+        CHECK(EmeraldTextCompat_GetResourceBytes(
+            "emerald:text/system/gtext-123dot", &text, &textSize));
+        CHECK(textSize == 9u);
+        CHECK(data->scriptState.trainerText[0] == text);
+        CHECK(data->scriptState.trainerText[1] == text + 3u);
+        CHECK(data->scriptState.trainerText[2] == text + 6u);
+        CHECK(data->scriptState.trainerText[0][0] == k123DotBytes[0]);
+    }
+    /* G differential: pop both Context1 frames in native order. */
+    CHECK(*data->scriptState.context1.scriptPtr == 0x03u);
+    data->scriptState.context1.stackDepth--;
+    data->scriptState.context1.scriptPtr =
+        data->scriptState.context1.stack[data->scriptState.context1.stackDepth];
+    CHECK(*data->scriptState.context1.scriptPtr == 0x03u);
+    data->scriptState.context1.stackDepth--;
+    data->scriptState.context1.scriptPtr =
+        data->scriptState.context1.stack[data->scriptState.context1.stackDepth];
+    CHECK(G4CheckPoint(data->scriptState.context1.scriptPtr, 2u,
+                       EMERALD_SCRIPT_BOUNDARY_INSTRUCTION_START));
+
+    /* ---- H closure in the mixed state (H3 core checks). ---- */
+    CHECK(H3CheckPoint(gBattlescriptCurrInstr, 0u,
+                       EMERALD_BATTLE_BOUNDARY_INSTRUCTION_START));
+    CHECK(H3CheckPoint(fx->battleStack.ptr[0], 1u,
+                       EMERALD_BATTLE_BOUNDARY_NEXT_INSTRUCTION));
+    CHECK(H3CheckPoint(fx->battleStack.ptr[1], 2u,
+                       EMERALD_BATTLE_BOUNDARY_NEXT_INSTRUCTION));
+    CHECK(fx->battleStack.ptr[7] == NULL);
+    CHECK(fx->battleStack.size == 2u);
+    CHECK(H3CheckPoint(gSelectionBattleScripts[0], 3u,
+                       EMERALD_BATTLE_BOUNDARY_INSTRUCTION_START));
+    CHECK(H3CheckPoint(gSelectionBattleScripts[1], 4u,
+                       EMERALD_BATTLE_BOUNDARY_INSTRUCTION_START));
+    CHECK(H3CheckPoint(gPalaceSelectionBattleScripts[0], 5u,
+                       EMERALD_BATTLE_BOUNDARY_INSTRUCTION_START));
+    /* Engine callbacks restored image-relatively (never H identities). */
+    CHECK(fx->callbackStack.size == 2u);
+    CHECK(fx->callbackStack.function[0] == H3WaitCallback);
+    CHECK(fx->callbackStack.function[1] == H3WaitCallback);
+    CHECK(gAnimScriptCallback == H3WaitCallback);
+    CHECK(H3CheckPoint(gAIScriptPtr, 6u,
+                       EMERALD_BATTLE_BOUNDARY_INSTRUCTION_START));
+    CHECK(fx->aiStack.size == 0u);
+    CHECK(H3CheckPoint(sBattleAnimScriptPtr, 7u,
+                       EMERALD_BATTLE_BOUNDARY_INSTRUCTION_START));
+    CHECK(H3CheckPoint(sBattleAnimScriptRetAddr, 8u,
+                       EMERALD_BATTLE_BOUNDARY_NEXT_INSTRUCTION));
+    /* H hard gate: execute the parked blocking command and return through
+     * both frames (module+offset identity, current generation). */
+    {
+        struct H3Point exec;
+        exec.module = fx->expectedModule[0];
+        exec.offset = fx->expectedOffset[0];
+        exec.pointer = gBattlescriptCurrInstr;
+        CHECK(H3ExecuteNext(&exec, 0x12u));
+        fx->battleStack.size--;
+        gBattlescriptCurrInstr =
+            fx->battleStack.ptr[fx->battleStack.size];
+        exec.module = fx->expectedModule[2];
+        exec.offset = fx->expectedOffset[2];
+        exec.pointer = gBattlescriptCurrInstr;
+        CHECK(H3ExecuteNext(&exec, *gBattlescriptCurrInstr));
+        fx->battleStack.size--;
+        gBattlescriptCurrInstr =
+            fx->battleStack.ptr[fx->battleStack.size];
+        exec.module = fx->expectedModule[1];
+        exec.offset = fx->expectedOffset[1];
+        exec.pointer = gBattlescriptCurrInstr;
+        CHECK(H3ExecuteNext(&exec, *gBattlescriptCurrInstr));
+    }
+    fprintf(stderr, "MIXED-LOAD arena=%p battle-arena=%p g-ok h-ok engine-ok mixed-return=ok\n",
+           (const void *)arena, (const void *)battleArena);
+    TeardownScriptCompatSession();
+    EmeraldBattleCompat_Shutdown();
+    EmeraldBattleState_ClearLayout();
+    EmeraldScriptState_ClearLayout();
+    return sFailures != 0;
+}
+
+/* ------------------------------------------------------------------ */
+/* R13-I deterministic serialization (brief sec 32).                   */
+/* The SAME semantic state is saved twice with deliberately different  */
+/* arena bases (the restage relocates the arena by candidate-first      */
+/* allocation). The serialized payload bytes must be byte-identical     */
+/* except the header frame counter: resource fields are zeroed in-band  */
+/* and identities live in the sidecar, so no host address can enter     */
+/* the file.                                                            */
+
+static int DoDeterminism(const char *packPath, const char *statePath)
+{
+    /* Mirror of the v5 header layout (PACKED like the writer's private
+     * struct; the test parses the file bytewise). */
+    struct TestStateHeader
+    {
+        u32 magic;
+        u32 formatVersion;
+        u32 headerSize;
+        u32 totalSize;
+        u32 sectionCount;
+        u32 payloadSize;
+        u32 payloadCrc;
+        u32 reserved;
+        u64 frame;
+        u8 buildId[64];
+        u8 contentFingerprint[64];
+    } __attribute__((packed));
+    struct TestStateHeader *headerA;
+    struct TestStateHeader *headerB;
+    struct StateFileBytes bytesA;
+    struct StateFileBytes bytesB;
+    size_t payloadOffset;
+    int failed = 0;
+
+    memset(&bytesA, 0, sizeof(bytesA));
+    memset(&bytesB, 0, sizeof(bytesB));
+    HarnessStatePath_Override(statePath);
+    if (!G4Stage(packPath, FALSE) || !G4PlantNestedState())
+        return 1;
+    G4BindLayout();
+    CHECK(NativeState_Save(HARNESS_STATE_SLOT) == NATIVE_STATE_OK);
+    if (!ReadStateFile(statePath, &bytesA))
+        return 1;
+    /* Restage: the generation replacement moves the arena base. */
+    if (!G4Stage(packPath, TRUE))
+        return 1;
+    {
+        struct HarnessGameData *data = GameData();
+        memset(data, 0, sizeof(*data));
+    }
+    G4BindLayout();
+    CHECK(G4PlantNestedState());
+    HarnessStatePath_Override(statePath);
+    CHECK(NativeState_Save(HARNESS_STATE_SLOT) == NATIVE_STATE_OK);
+    if (!ReadStateFile(statePath, &bytesB))
+        return 1;
+
+    CHECK(bytesA.size == bytesB.size);
+    headerA = (struct TestStateHeader *)(void *)bytesA.bytes;
+    headerB = (struct TestStateHeader *)(void *)bytesB.bytes;
+    /* The script-generation stamp in the GAME_DATA slice is
+     * session-lifecycle bookkeeping (which arena generation the capture
+     * was made against), like the header frame counter - the second
+     * allowed-differ field. The raw stamps must DIFFER (the restage
+     * moved the generation), and everything else must be identical. */
+    {
+        size_t stampOffset = offsetof(struct HarnessGameData,
+                                      scriptState.generationStamp);
+        size_t gameDataOffA = 0u;
+        size_t gameDataOffB = 0u;
+        u32 s0;
+        for (s0 = 0u; s0 < headerA->sectionCount; s0++)
+        {
+            u32 tag = ReadLe(bytesA.bytes + sizeof(*headerA) + s0 * 12u);
+            u32 size = ReadLe(bytesA.bytes + sizeof(*headerA) + s0 * 12u + 4u);
+            if (tag == 8u) /* GAME_DATA */
+            {
+                gameDataOffA = (size_t)headerA->headerSize
+                             + (size_t)headerA->sectionCount * 12u;
+                for (s0 = 0u; s0 < headerA->sectionCount; s0++)
+                {
+                    if (ReadLe(bytesA.bytes + sizeof(*headerA) + s0 * 12u) == 8u)
+                        break;
+                    gameDataOffA += ReadLe(bytesA.bytes + sizeof(*headerA)
+                                           + s0 * 12u + 4u);
+                }
+                gameDataOffB = (size_t)headerB->headerSize
+                             + (size_t)headerB->sectionCount * 12u;
+                for (s0 = 0u; s0 < headerB->sectionCount; s0++)
+                {
+                    if (ReadLe(bytesB.bytes + sizeof(*headerB) + s0 * 12u) == 8u)
+                        break;
+                    gameDataOffB += ReadLe(bytesB.bytes + sizeof(*headerB)
+                                           + s0 * 12u + 4u);
+                }
+                CHECK(size == 0x1000u); /* the harness game-data slice */
+                CHECK(memcmp(bytesA.bytes + gameDataOffA + stampOffset,
+                             bytesB.bytes + gameDataOffB + stampOffset,
+                             sizeof(u64)) != 0); /* generations differ */
+                /* Mask the stamp so the per-section compare below sees the
+                 * semantic content only. */
+                memset(bytesA.bytes + gameDataOffA + stampOffset, 0, sizeof(u64));
+                memset(bytesB.bytes + gameDataOffB + stampOffset, 0, sizeof(u64));
+                break;
+            }
+        }
+        CHECK(gameDataOffA != 0u && gameDataOffB != 0u);
+    }
+    /* Compare SECTION BY SECTION: every section payload plus its CRC must
+     * be byte-identical, except the RTC section (real-time clock bytes -
+     * the one field class explicitly allowed to differ by brief sec 32).
+     * The frame counter in the header is the other allowed difference. */
+    payloadOffset = (size_t)headerA->headerSize
+                  + (size_t)headerA->sectionCount * 12u;
+    CHECK(headerA->sectionCount == headerB->sectionCount);
+    {
+        u32 s;
+        size_t offA = payloadOffset;
+        size_t offB = payloadOffset;
+        u32 compared = 0u;
+        for (s = 0u; s < headerA->sectionCount; s++)
+        {
+            u32 tag = ReadLe(bytesA.bytes + sizeof(*headerA) + s * 12u);
+            u32 size = ReadLe(bytesA.bytes + sizeof(*headerA) + s * 12u + 4u);
+            u32 crcA = ReadLe(bytesA.bytes + sizeof(*headerA) + s * 12u + 8u);
+            u32 crcB = ReadLe(bytesB.bytes + sizeof(*headerA) + s * 12u + 8u);
+            if (tag == 13u) /* STATE_SECTION_RTC */
+            {
+                offA += size;
+                offB += size;
+                continue; /* allowed to differ (real time) */
+            }
+            if (tag != 8u) /* GAME_DATA carries the masked generation stamp */
+                CHECK(crcA == crcB);
+            if (memcmp(bytesA.bytes + offA, bytesB.bytes + offB, size) != 0)
+            {
+                size_t i;
+                for (i = 0u; i < size; i++)
+                {
+                    if (bytesA.bytes[offA + i] != bytesB.bytes[offB + i])
+                    {
+                        fprintf(stderr, "DETERMINISM section %u divergence at +0x%zx "
+                               "(0x%02x vs 0x%02x)\n",
+                               tag, i, bytesA.bytes[offA + i],
+                               bytesB.bytes[offB + i]);
+                        break;
+                    }
+                }
+                failed = 1;
+            }
+            compared++;
+            offA += size;
+            offB += size;
+        }
+        CHECK(compared >= 12u); /* everything except RTC compared */
+    }
+    CHECK(!failed);
+    /* Headers: fingerprint/buildId equal; only frame may differ. */
+    CHECK(memcmp(headerA->buildId, headerB->buildId,
+                 sizeof(headerA->buildId)) == 0);
+    CHECK(memcmp(headerA->contentFingerprint, headerB->contentFingerprint,
+                 sizeof(headerA->contentFingerprint)) == 0);
+    fprintf(stderr, "DETERMINISM payload=%zu bytes identical across arena bases "
+           "except RTC (frame %llu vs %llu)\n",
+           (size_t)headerA->payloadSize,
+           (unsigned long long)headerA->frame,
+           (unsigned long long)headerB->frame);
+    free(bytesA.bytes);
+    free(bytesB.bytes);
+    TeardownScriptCompatSession();
+    EmeraldScriptState_ClearLayout();
     return sFailures != 0;
 }
 
@@ -5462,6 +5862,12 @@ int main(int argc, char **argv)
     HarnessStatePath_Override(argv[3]);
     if (strcmp(argv[1], "g4-create") == 0)
         return DoG4Create(argv[2], argv[3]);
+    if (strcmp(argv[1], "mixed-create") == 0)
+        return DoMixedCreate(argv[2], argv[3]);
+    if (strcmp(argv[1], "mixed-load") == 0)
+        return DoMixedLoad(argv[2], argv[3]);
+    if (strcmp(argv[1], "determinism") == 0)
+        return DoDeterminism(argv[2], argv[3]);
     if (strcmp(argv[1], "h3-create") == 0)
         return DoH3Create(argv[2], argv[3]);
     if (strcmp(argv[1], "h3-load") == 0)
