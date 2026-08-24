@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""R13-H4/H5: production live table (battle + battle-anim + field-effect).
+"""R13-H4/H5/H6: production live table (battle + battle-anim + AI +
+contest-AI + field-effect).
 
 Consumes the R13-H2/H3 generated sidecars
 (resources/extraction/emerald/bpee01/battle/modules/) and emits the C
@@ -9,26 +10,32 @@ compilation table for the production live seam:
   src/emerald/resources/battle_live_table.generated.c
 
 H4 carried the FIRST H-family live cutover (anim + field-effect only);
-H5 adds the battle-script family. The table now carries every fact the
-live seam needs for the three live families (AI/contest stay compiled
-through H6):
+H5 adds the battle-script family; H6 adds the battle-AI and contest-AI
+families (brief R13-H6 sec 2: module index, reloc source index, target
+index, instruction boundaries, reverse containment, generation
+identity, entry/routing publication). The table carries every fact the
+live seam needs for the five live families:
 
-  - the 1,363 live payload modules (640 battle + 655 anim + 68 FE: id,
-    derived key, schema 47/48/51, family, arena, GBA span, canonical
-    digest, both physical-layout arena offsets, boundary/export/reloc
-    indexes) and the 8 zero-width alias identities (5 battle + 3 anim)
-    with canonical owners;
-  - the 3 live arenas (battle 14,413 B hull with the nested FE gap,
-    battle_anim 63,811 B, field_effect 817 B) with both layouts
-    (0 = GBA-preserving, 1 = tight-packed reversed -- the
-    semantic-identity perturbation proof);
-  - all 5,963 reloc rows (battle 1,562: 993 SCRIPT_TARGET + 488 EWRAM +
-    81 TABLE; anim 4,231; FE 170), each with its expected runtime word
-    (the 4 canonical .bin bytes at the operand offset -- the H2 oracle
-    re-proof: ROM word == final_gba == expected word), class dispatch
-    (SCRIPT_TARGET -> target module + offset; ENGINE_EWRAM_TARGET ->
-    semantic base + validated addend; other ENGINE_* -> semantic
-    binding row), and per-module first/count indexes;
+  - the 2,149 live payload modules (640 battle + 655 anim + 553 battle-
+    AI + 165 contest-AI + 68 FE: id, derived key, schema 47/48/49/50/
+    51, family, arena, GBA span, canonical digest, both physical-layout
+    arena offsets, boundary/export/reloc indexes) and the 8 zero-width
+    alias identities (5 battle + 3 anim) with canonical owners;
+  - the 5 live arenas (battle 14,413 B hull with the nested FE gap,
+    battle_anim 63,811 B, battle_ai 9,303 B, contest_ai 2,524 B,
+    field_effect 817 B) with both layouts (0 = GBA-preserving,
+    1 = tight-packed reversed -- the semantic-identity perturbation
+    proof);
+  - all 7,549 reloc rows (battle 1,562: 993 SCRIPT_TARGET + 488 EWRAM +
+    81 TABLE; anim 4,231; battle-AI 1,222 SCRIPT_TARGET incl. 38 data-
+    target rows (if_in_* byte/hword list tables, target_offset 0, no
+    instruction boundaries); contest-AI 364 SCRIPT_TARGET; FE 170),
+    each with its expected runtime word (the 4 canonical .bin bytes at
+    the operand offset -- the H2 oracle re-proof: ROM word ==
+    final_gba == expected word), class dispatch (SCRIPT_TARGET ->
+    target module + offset; ENGINE_EWRAM_TARGET -> semantic base +
+    validated addend; other ENGINE_* -> semantic binding row), and
+    per-module first/count indexes;
   - the 718 unique semantic binding rows (A EWRAM 50 + B table 50 +
     C sprite-template 327 + D anim-callback 213 + E gfx 11 + F FE-
     callnative 67) with native symbol addresses, addends and validated
@@ -40,14 +47,18 @@ through H6):
     entry resolution (brief sec 8: raw operand matches H2 metadata,
     expected class SCRIPT_TARGET, valid target boundary, correct
     family, no compiled fallback);
-  - the 5 battle routing tables (move-effects / ball-throw / using-item
-    / running-by-item / safari-actions) as launchable-row indexes
-    (arena-owned canonical rows; the compiled tables are dead at
-    runtime after H5);
+  - the 7 routing tables (battle: move-effects / ball-throw /
+    using-item / running-by-item / safari-actions; battle-AI:
+    gBattleAI_ScriptsTable 32 rows; contest-AI: gContestAI_ScriptsTable
+    32 rows) as launchable-row indexes (arena-owned canonical rows; the
+    compiled tables are dead at runtime after H5/H6);
   - the compiled-label map: every battle root export + alias label with
     its compiled native symbol and its canonical GBA word, so the VM's
     direct C label references (BattleScript_Get) resolve semantically
-    into the live arena.
+    into the live arena;
+  - the VM grammar tables (battle 300 encodings / 249 opcodes, battle-
+    AI 114 / 99, contest-AI 140 / 136) with family tags for the
+    differential walker (control-flow resolution at consumption).
 
 Regeneration must be a no-op diff; run with --check.
 """
@@ -73,27 +84,46 @@ TABLE_OUT = ROOT / "src" / "emerald" / "resources" \
 NATIVE_OUT = ROOT / "src" / "emerald" / "resources" \
     / "battle_live_native.generated.c"
 
-# ---- R13-H4/H5 qualified pins (docs/R13H_BATTLE_SCRIPT_MIGRATION_PLAN.md) ----
-LIVE_FAMILIES = ["battle-script", "battle-anim-script", "field-effect-script"]
+# ---- R13-H4/H5/H6 qualified pins (docs/R13H_BATTLE_SCRIPT_MIGRATION_PLAN.md) ----
+LIVE_FAMILIES = ["battle-script", "battle-anim-script", "battle-ai",
+                 "contest-ai", "field-effect-script"]
 # Arena order within the combined live buffer (mirrors h3 ARENA_ORDER_0/1
 # restricted to the live arenas).
-LIVE_ARENAS_ORDER_0 = ["battle", "battle_anim", "field_effect"]
+LIVE_ARENAS_ORDER_0 = ["battle", "battle_anim", "battle_ai", "contest_ai",
+                       "field_effect"]
 LIVE_ARENAS_ORDER_1 = list(reversed(LIVE_ARENAS_ORDER_0))
 FAMILY_PINS = {
     "battle-script": dict(modules=645, payload=640, bytes=13592,
                           relocs=1562, schema=47, aliases=5),
     "battle-anim-script": dict(modules=658, payload=655, bytes=63811,
                                relocs=4231, schema=48, aliases=3),
+    "battle-ai": dict(modules=553, payload=553, bytes=9303,
+                      relocs=1222, schema=49, aliases=0),
+    "contest-ai": dict(modules=165, payload=165, bytes=2524,
+                       relocs=364, schema=50, aliases=0),
     "field-effect-script": dict(modules=68, payload=68, bytes=817,
                                 relocs=170, schema=51, aliases=0),
 }
-RELOCS_PIN = 5963
+RELOCS_PIN = 7549
 BINDINGS_PIN = 718
 REFUSE_ONLY_PIN = 4
 # H4: 715 (anim 648 + FE 67). H5 adds the distinct battle SCRIPT_TARGET
-# words (993 occurrences -> distinct roots; computed on first run, then
-# pinned).
-SCRIPT_TARGET_WORD_COUNT_PIN = 715 + 457
+# words (993 occurrences -> 457 distinct roots); H6 adds the distinct AI
+# words (1,586 occurrences -> 708 distinct roots; no overlap with the
+# battle range). Computed on first run, then pinned.
+SCRIPT_TARGET_WORD_COUNT_PIN = 715 + 457 + 708
+# VM grammar pins: (encodings, distinct opcodes) per family (battle 249
+# opcode slots; battle-AI 99; contest-AI 136).
+GRAMMAR_PINS = {
+    "battle-script": (300, 249),
+    "battle-ai": (114, 99),
+    "contest-ai": (140, 136),
+}
+GRAMMAR_FILES = {
+    "battle-script": "h1_grammar_battle.generated.toml",
+    "battle-ai": "h1_grammar_battle_ai.generated.toml",
+    "contest-ai": "h1_grammar_contest_ai.generated.toml",
+}
 # Native binding symbols that do NOT exist in this fork (upstream
 # src/battle_anim_mist.c + src/battle_anim_terrain.c are absent). The
 # qualified ROM references them from 13 move/effect modules; the live
@@ -123,9 +153,11 @@ CLASS_ENUM = {"SCRIPT_TARGET": 0,
               "ENGINE_EWRAM_TARGET": 5}
 BINDING_LETTERS = "ABCDEF"
 
-# Battle routing tables (H1 sec 6): module key -> C constant suffix. The
-# live seam reads these rows from the arena; the compiled tables are
-# dead at runtime after H5.
+# Battle/AI routing tables (H1 sec 6, R13-H6 sec 2/11): module key ->
+# C constant suffix. The live seam reads these rows from the arena; the
+# compiled tables are dead at runtime after H5/H6. The AI tables are the
+# entry points: gBattleAI_ScriptsTable[aiLogicId] (32 rows) and
+# gContestAI_ScriptsTable[currentAIFlag] (32 rows).
 ROUTING_TABLES = {
     "emerald:battle-script/g-battle-scripts-for-move-effects":
         "MoveEffects",
@@ -135,6 +167,8 @@ ROUTING_TABLES = {
         "RunningByItem",
     "emerald:battle-script/g-battlescripts-for-safari-actions":
         "SafariActions",
+    "emerald:battle-ai/g-battle-ai_scripts-table": "BattleAI",
+    "emerald:contest-ai/g-contest-ai_scripts-table": "ContestAI",
 }
 
 
@@ -271,16 +305,19 @@ def main():
         alias["owner_module_idx"] = payload_idx[alias["owner_id"]]
     arena_layout, module_off1 = compute_live_layouts(arenas_by_name, payload)
 
-    # Battle routing tables (H1 sec 6): the canonical GBA word of each
-    # routing module (the C runtime calls the seam with this word + the
-    # row index; the seam reads the canonical row from the arena).
+    # Battle/AI routing tables (H1 sec 6, R13-H6 sec 11): the canonical
+    # GBA word of each routing module (the C runtime calls the seam with
+    # this word + the row index; the seam reads the canonical row from
+    # the arena). The module key embeds the family, so the routing
+    # module must carry exactly that family.
     routing_words = {}
     for key in ROUTING_TABLES:
         p = payload_by_id.get(key)
         if p is None:
-            fail(f"routing module {key} is not a battle payload module")
-        if p["family"] != "battle-script":
-            fail(f"routing module {key} has family {p['family']}")
+            fail(f"routing module {key} is not a live payload module")
+        if p["family"] != family_of(key):
+            fail(f"routing module {key} has family {p['family']}, "
+                 f"expected {family_of(key)}")
         routing_words[key] = p["gba_start"]
     for p in payload:
         a = arenas_by_name[p["arena"]]
@@ -393,7 +430,16 @@ def main():
             if not (0 <= r["target_offset"] < tmod["byte_count"]):
                 fail(f"{key}: target offset {r['target_offset']} out of "
                      f"{tkey} range")
-            if r["target_offset"] not in [e[0] for e in exports[tkey]]:
+            # Data targets (battle-AI if_in_* byte/hword list tables, 38
+            # rows) have NO instruction boundaries and NO exports: the
+            # seam accepts them at offset 0 by map kind (R13-H6 sec 6).
+            # Bytecode targets must be root exports (interior targets
+            # stay impossible).
+            if tmod["map_kind"] == h3.MAP_KIND_ENUM["data"]:
+                if r["target_offset"] != 0:
+                    fail(f"{key}: data target {tkey} offset "
+                         f"{r['target_offset']} != 0")
+            elif r["target_offset"] not in [e[0] for e in exports[tkey]]:
                 fail(f"{key}: target offset {r['target_offset']} is not a "
                      f"root export of {tkey} (interior target)")
             row["target"] = payload_idx[tkey]
@@ -539,26 +585,34 @@ def main():
              f"{unmapped[:6]}...")
     labels = [labels_by_name[n] for n in sorted(c_refs)]
 
-    # Battle VM grammar (H1 sec 2): 249 opcode slots / 300 qualified
-    # encodings (opcode, size, operand widths) - the differential
-    # walker's decode table.
-    grammar_toml = tomllib.loads(
-        (MODULES_DIR / "../h1_grammar_battle.generated.toml").read_text())
+    # VM grammar (H1 sec 2, R13-H6 sec 5/13): battle 249 opcode slots /
+    # 300 qualified encodings, battle-AI 99 / 114, contest-AI 136 / 140
+    # (opcode, size, operand widths) - the differential walker's decode
+    # table. Rows carry the FAMILY tag so the H6 walker selects the
+    # right VM grammar at consumption (battle-AI and battle share some
+    # opcode values; control-flow resolution must never cross).
     grammar = []
-    for o in grammar_toml["opcodes"]:
-        widths = [0, 0, 0, 0]
-        for i, op in enumerate(o["operands"][:4]):
-            widths[i] = op["width"]
-        grammar.append(dict(opcode=o["opcode"], size=o["size"],
-                            operand_count=len(o["operands"]),
-                            widths=widths))
-    grammar.sort(key=lambda r: (r["opcode"], r["size"]))
+    for fam in ("battle-script", "battle-ai", "contest-ai"):
+        grammar_toml = tomllib.loads(
+            (MODULES_DIR / ".." / GRAMMAR_FILES[fam]).read_text())
+        for o in grammar_toml["opcodes"]:
+            widths = [0] * 5  # battle-AI if_ability/if_type: 5 operands
+            for i, op in enumerate(o["operands"][:5]):
+                widths[i] = op["width"]
+            grammar.append(dict(opcode=o["opcode"], size=o["size"],
+                                operand_count=len(o["operands"]),
+                                widths=widths,
+                                family_idx=fam_idx[fam]))
+    grammar.sort(key=lambda r: (r["family_idx"], r["opcode"], r["size"]))
     # Same (opcode, size) encodings differ only in operand MEANING
     # (e.g. playanimation vs playanimation_var); the walker accepts any
     # matching entry, so duplicates are legal here.
-    if len(grammar) != 300 or len({r["opcode"] for r in grammar}) != 249:
-        fail(f"grammar: {len(grammar)} encodings / "
-             f"{len({r['opcode'] for r in grammar})} opcodes != pins")
+    for fam, (enc, opc) in GRAMMAR_PINS.items():
+        rows = [r for r in grammar if r["family_idx"] == fam_idx[fam]]
+        if len(rows) != enc or len({r["opcode"] for r in rows}) != opc:
+            fail(f"grammar {fam}: {len(rows)} encodings / "
+                 f"{len({r['opcode'] for r in rows})} opcodes != pins "
+                 f"({enc}, {opc})")
 
     # ---- header ----
     h = []
@@ -567,10 +621,11 @@ def main():
     h.append(" * Do not edit by hand; re-run the generator (regeneration must")
     h.append(" * be a no-op diff).")
     h.append(" *")
-    h.append(" * R13-H4 production live table: battle-anim + field-effect")
-    h.append(" * arenas, relocs and semantic bindings. Family/arena enum")
-    h.append(" * values come from battle_native.generated.h so the state")
-    h.append(" * adapter's surface identities line up unchanged.")
+    h.append(" * R13-H4/H5/H6 production live table: battle + battle-anim")
+    h.append(" * + battle-AI + contest-AI + field-effect arenas, relocs and")
+    h.append(" * semantic bindings. Family/arena enum values come from")
+    h.append(" * battle_native.generated.h so the state adapter's surface")
+    h.append(" * identities line up unchanged.")
     h.append(" */")
     h.append("")
     h.append("#ifndef EMERALD_RESOURCES_BATTLE_LIVE_GENERATED_H")
@@ -608,18 +663,24 @@ def main():
     h.append("    uint8_t opcode;")
     h.append("    uint8_t size;")
     h.append("    uint8_t operandCount;")
-    h.append("    uint8_t widths[4];")
+    h.append("    uint8_t family; /* EmeraldBattleNativeFamily; the walker")
+    h.append("                       selects the VM grammar per family */")
+    h.append("    uint8_t widths[5];")
     h.append("};")
     h.append("")
-    h.append("/* Battle routing tables (H1 sec 6): the canonical GBA address of")
-    h.append(" * each pointer-bearing routing module. The live seam reads the")
-    h.append(" * arena-owned rows; the compiled tables are dead at runtime. */")
+    h.append("/* Battle/AI routing tables (H1 sec 6, R13-H6 sec 11): the")
+    h.append(" * canonical GBA address of each pointer-bearing routing module.")
+    h.append(" * The live seam reads the arena-owned rows (incl. the 32-row")
+    h.append(" * gBattleAI_ScriptsTable and gContestAI_ScriptsTable entry")
+    h.append(" * tables); the compiled tables are dead at runtime. The enum")
+    h.append(" * VALUES are the canonical GBA words - the C sites pass them")
+    h.append(" * straight to ResolveRoutingTarget as the table word. */")
     h.append("enum EmeraldBattleLiveRouting")
     h.append("{")
-    for i, (key, suffix) in enumerate(ROUTING_TABLES.items()):
+    for key, suffix in ROUTING_TABLES.items():
         word = routing_words[key]
-        h.append("    EMERALD_BATTLE_ROUTING_%s = %du, /* %s @ 0x%x */"
-                 % (suffix.upper(), i, key, word))
+        h.append("    EMERALD_BATTLE_ROUTING_%s = 0x%08xu, /* %s */"
+                 % (suffix.upper(), word, key))
     h.append("};")
     h.append("")
     h.append("enum EmeraldBattleLiveRelocClass")
@@ -808,14 +869,23 @@ def main():
     c.append("};")
     c.append("")
     c.append("static const struct EmeraldBattleLiveArena sArenas[] = {")
+    arena_family = {
+        "battle": "EMERALD_BATTLE_FAMILY_BATTLE_SCRIPT",
+        "battle_anim": "EMERALD_BATTLE_FAMILY_BATTLE_ANIM_SCRIPT",
+        "battle_ai": "EMERALD_BATTLE_FAMILY_BATTLE_AI",
+        "contest_ai": "EMERALD_BATTLE_FAMILY_CONTEST_AI",
+        "field_effect": "EMERALD_BATTLE_FAMILY_FIELD_EFFECT_SCRIPT",
+    }
+    arena_family_name = {
+        "battle": "battle-script",
+        "battle_anim": "battle-anim-script",
+        "battle_ai": "battle-ai",
+        "contest_ai": "contest-ai",
+        "field_effect": "field-effect-script",
+    }
     for a in LIVE_ARENAS_ORDER_0:
-        fam = {"battle": "EMERALD_BATTLE_FAMILY_BATTLE_SCRIPT",
-               "battle_anim": "EMERALD_BATTLE_FAMILY_BATTLE_ANIM_SCRIPT",
-               "field_effect": "EMERALD_BATTLE_FAMILY_FIELD_EFFECT_SCRIPT"}[a]
-        schema = FAMILY_PINS[{"battle": "battle-script",
-                              "battle_anim": "battle-anim-script",
-                              "field_effect": "field-effect-script"}[a]][
-                                  "schema"]
+        fam = arena_family[a]
+        schema = FAMILY_PINS[arena_family_name[a]]["schema"]
         la = arena_layout[a]
         mods = [p for p in payload if p["arena"] == a]
         first = payload_idx[mods[0]["id"]]
@@ -882,10 +952,12 @@ def main():
     c.append("")
     c.append("static const struct EmeraldBattleLiveGrammarEntry sGrammar[] = {")
     for r in grammar:
-        c.append("    {%du, %du, %du, {%du, %du, %du, %du}},"
+        c.append("    {%du, %du, %du, %du,"
+                 " {%du, %du, %du, %du, %du}},"
                  % (r["opcode"], r["size"], r["operand_count"],
+                    r["family_idx"],
                     r["widths"][0], r["widths"][1], r["widths"][2],
-                    r["widths"][3]))
+                    r["widths"][3], r["widths"][4]))
     c.append("};")
     c.append("")
     c.append("static const struct EmeraldBattleLiveLabel sLabels[] = {")

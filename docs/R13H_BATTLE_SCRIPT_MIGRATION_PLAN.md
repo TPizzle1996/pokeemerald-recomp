@@ -702,8 +702,21 @@ each is a safe standalone gate:
   23,913,784 B (+226,488), DINFO 36,644,768 B (+210,336), both verify
   f3ae0881…d07b7. Report:
   `docs/R13H5_BATTLE_SCRIPT_LIVE_CUTOVER_REPORT.md`.
-- **H6 — AI + contest AI live cutover.** Gate: AI stepwise oracle
-  (opcode, score[], aiState, control flow, chosen move), contest flows.
+- **H6 — AI + contest AI live cutover.** COMPLETE: battle-AI and
+  contest-AI live on the H arenas (5 ranges, 6,382 total, 553 battle-ai
+  modules / 9,303 B / 1,222 relocs + 165 contest-ai / 2,524 B / 364
+  relocs); AI entry tables arena-owned (32+32 routing rows, enum words
+  == arena starts); 2,351 AI instructions decode to the family-tagged
+  grammar (67+36 real slots, 132 synthetic, 249-opcode differential);
+  38 data-target relocs (25 `if_in_*` tables) stay offset-0; the
+  shared `gAIScriptPtr` State-v5 surface carries either family
+  (FAMILY_COUNT sentinel) with per-family stack surfaces; fresh-process
+  proofs green for both families (battle-ai module 0 ip 0 ret 1/8,
+  contest-ai module 1848 ip 0 ret 1849/6, byte-exact next opcode);
+  fault matrix 10/10; generation replacement holds 6,382 with both AI
+  ranges; pointer sweep 2,051 words zero cross-family; pack invariant
+  23,069; ownership stays COMPILED_PENDING_MIGRATION. Report:
+  `docs/R13H6_AI_LIVE_CUTOVER_REPORT.md`.
 - **H7 — compiled H removal and isolation.** Remove all five families from
   the linux64 link (assembly gates per data file), flip ownership to
   `ROM_BASE_ONLY` (GBA stays COMPILED), run the full isolation sweeps

@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 #
-# R13-H4/H5: live cutover tests for the battle + battle-anim +
-# field-effect arenas (tests/emerald_battle_live_test.c).
+# R13-H4/H5/H6: live cutover tests for the battle + battle-anim +
+# battle-AI + contest-AI + field-effect arenas
+# (tests/emerald_battle_live_test.c).
 #
 # Compiles the SAME production machinery as run_emerald_resource_state.sh
 # (real walker, real seams, real R6 loader, maps.o) with the H3 shadow
@@ -13,21 +14,30 @@
 #
 # and drives it against the REAL production pack:
 #
-#   oracle         differential resolution oracle over all 1,371 modules
-#                  and 5,963 relocs, both physical layouts; staged bytes
+#   oracle         differential resolution oracle over all 2,081 modules
+#                  and 7,549 relocs, both physical layouts; staged bytes
 #                  byte-exact against the committed .bin artifacts
 #   faults         brief sec 24 fail-closed matrix (11 cases)
-#   replace        brief sec 25/26: generation replacement, 6,380 range
+#   replace        brief sec 25/26: generation replacement, 6,382 range
 #                  invariant, identity-based unregister
 #   battle-oracle  H5: 238 routing rows, 199 compiled labels, 50 EWRAM
 #                  bindings, battle pointer sweep, both layouts
 #   battle-faults  H5 battle fail-closed matrix (8 cases)
 #   state          brief sec 15: fresh-process State-v5 anim proof
 #   h5-state       H5 sec 22: nested blocking battle fresh-process proof
+#   ai-oracle      H6: 2,351 AI instructions, 1,586 AI relocs (38 data
+#                  targets), 64 AI routing rows, typed resolution + AI
+#                  pointer sweep, both layouts
+#   ai-faults      H6 AI fail-closed matrix (10 cases)
+#   ai-249         H6: 235-opcode differential, 103 real + 132 synthetic
+#                  slots, mini-VM execution of both AI entry roots
+#   h6-state       H6 sec 22: AI fresh-process proof per family
+#                  (battle-ai + contest-ai)
 #   sanitize       all of the above under ASan/UBSan
 #
 # Modes: oracle | faults | replace | battle-oracle | battle-faults |
-#        state | h5-state | sanitize (default: all).
+#        state | h5-state | ai-oracle | ai-faults | ai-249 | h6-state |
+#        sanitize (default: all).
 set -euo pipefail
 
 here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -205,9 +215,9 @@ if [ "$mode" = "oracle" ] || [ "$mode" = "sanitize" ]; then
         echo "== H4 oracle: layout $layout =="
         "$tmp/emerald_battle_live_test" oracle "$pack" "$mods_dir" "$layout" > "oracle-$layout.log"
         cat "oracle-$layout.log"
-        grep -q "H4-ORACLE layout=$layout entry-words=1352 byte-exact=1363 relocs=5963" "oracle-$layout.log"
+        grep -q "H4-ORACLE layout=$layout entry-words=2043 byte-exact=2081 relocs=7549" "oracle-$layout.log"
     done
-    echo "H4/H5 oracle: 1,352 entry words, 1,363 byte-exact modules, 5,963 relocs, both layouts"
+    echo "H4/H5 oracle: 2,043 entry words, 2,081 byte-exact modules, 7,549 relocs, both layouts"
 fi
 
 if [ "$mode" = "faults" ] || [ "$mode" = "sanitize" ]; then
@@ -223,8 +233,8 @@ if [ "$mode" = "replace" ] || [ "$mode" = "sanitize" ]; then
     "$tmp/emerald_battle_live_test" replace "$pack" > replace.log
     cat replace.log
     grep -q "H4-REPLACE" replace.log
-    grep -q "count=6380" replace.log
-    echo "H4 replace: generation B committed, 6,379 invariant, identity unregister/restore"
+    grep -q "count=6382" replace.log
+    echo "H4 replace: generation B committed, 6,377 invariant, identity unregister/restore"
 fi
 
 if [ "$mode" = "state" ] || [ "$mode" = "sanitize" ] || [ "$mode" = "" ]; then
@@ -319,11 +329,82 @@ if [ "$mode" = "battle-249" ] || [ "$mode" = "sanitize" ]; then
     echo "H5 249: 3,390 qualified instructions decode, all 249 opcode slots covered (238 real + 11 synthetic)"
 fi
 
+if [ "$mode" = "ai-oracle" ] || [ "$mode" = "sanitize" ]; then
+    for layout in 0 1; do
+        echo "== H6 AI oracle: layout $layout =="
+        "$tmp/emerald_battle_live_test" ai-oracle "$pack" "$mods_dir" "$layout" > "ai-oracle-$layout.log"
+        cat "ai-oracle-$layout.log"
+        grep -q "H6-AI-ORACLE layout=$layout instructions=2351 battle-ai=1738 contest-ai=613 ai-relocs=1586 data-targets=38 routing-rows=64" "ai-oracle-$layout.log"
+        python3 - "$tmp" "$layout" <<'EOF'
+import re, sys
+tmp, layout = sys.argv[1], sys.argv[2]
+log = open(f"{tmp}/ai-oracle-{layout}.log").read()
+m = re.search(r"swept-words=(\d+)", log)
+assert m, "missing AI pointer sweep line"
+assert int(m.group(1)) >= 1800, f"AI sweep too small: {m.group(1)}"
+print(f"H6 AI pointer sweep: {m.group(1)} non-reloc 4-byte words verified non-target")
+EOF
+    done
+    echo "H6 AI oracle: 2,351 instructions, 1,586 relocs, 38 data targets, 64 routing rows, sweep, both layouts"
+fi
+
+if [ "$mode" = "ai-faults" ] || [ "$mode" = "sanitize" ]; then
+    echo "== H6 AI fail-closed matrix =="
+    "$tmp/emerald_battle_live_test" ai-faults "$pack" > ai-faults.log
+    cat ai-faults.log
+    grep -q "H6-AI-FAULTS passed=10" ai-faults.log
+    echo "H6 AI faults: 10/10 fail-closed cases"
+fi
+
+if [ "$mode" = "ai-249" ] || [ "$mode" = "sanitize" ]; then
+    echo "== H6 235-opcode differential =="
+    "$tmp/emerald_battle_live_test" ai-249 "$pack" "$mods_dir" > ai-249.log
+    cat ai-249.log
+    grep -q "H6-AI-249 layout=0 decoded=2351 slots-present=103 battle-ai=67 contest-ai=36 synthetic=132 executed=2" ai-249.log
+    echo "H6 249: 2,351 AI instructions decode, all 235 opcode slots covered (103 real + 132 synthetic), both AI entry roots execute"
+fi
+
+if [ "$mode" = "h6-state" ] || [ "$mode" = "sanitize" ] || [ "$mode" = "" ]; then
+    for family in battle-ai contest-ai; do
+        state="harness-h6-$family-slot-7.st"
+        echo "== H6 $family fresh-process state proof: capture in process A =="
+        "$tmp/emerald_battle_live_test" h6-state-create "$pack" "$mods_dir" "$state" "$family" > "h6-state-create-$family.log"
+        cat "h6-state-create-$family.log"
+        grep -q "H6-CREATE" "h6-state-create-$family.log"
+
+        echo "== H6 $family fresh-process state proof: restore in fresh process B =="
+        "$tmp/emerald_battle_live_test" h6-state-load "$pack" "$mods_dir" "$state" "$family" > "h6-state-load-$family.log"
+        cat "h6-state-load-$family.log"
+        grep -q "H6-LOAD" "h6-state-load-$family.log"
+
+        python3 - "$tmp" "$family" <<'EOF'
+import re, sys
+tmp, family = sys.argv[1], sys.argv[2]
+create = open(f"{tmp}/h6-state-create-{family}.log").read()
+load = open(f"{tmp}/h6-state-load-{family}.log").read()
+c = re.search(r"H6-CREATE family=(\d+) arena=(0x[0-9a-f]+) generation=(\d+) module=(\d+) ip=(\d+) ret=(\d+)/(\d+)", create)
+l = re.search(r"H6-LOAD family=(\d+) arena=(0x[0-9a-f]+) generation=(\d+) module=(\d+) ip=(\d+) ret=(\d+)/(\d+)", load)
+assert c and l, "missing H6 arena/generation proof line"
+# Physical arena base moved across the process boundary + layout
+# perturbation; the (module, offset) identity held for the shared AI IP
+# and the single call-stack return.
+assert c.group(1) == l.group(1), f"family changed across restart: {c.group(1)} vs {l.group(1)}"
+assert c.group(2) != l.group(2), "creator and restorer AI arena bases match"
+assert c.group(4) == l.group(4), f"IP module changed across restart: {c.group(4)} vs {l.group(4)}"
+assert c.group(5) == l.group(5), f"IP offset changed across restart: {c.group(5)} vs {l.group(5)}"
+assert c.group(6) == l.group(6) and c.group(7) == l.group(7), f"return identity changed: {c.group(6)}/{c.group(7)} vs {l.group(6)}/{l.group(7)}"
+assert c.group(4) != c.group(6), "the AI IP and its return must live in DIFFERENT modules"
+print(f"H6 {family} fresh-process relocation: creator {c.groups()} -> restorer {l.groups()}")
+EOF
+    done
+    echo "H6 state: shared AI IP + single call return relocated by module+offset identity into the new arena, both families"
+fi
+
 if [ "$mode" = "sanitize" ]; then
-    echo "H4/H5 sanitize: oracle/faults/replace/state/battle clean under ASan/UBSan"
+    echo "H4/H5/H6 sanitize: oracle/faults/replace/state/battle/ai clean under ASan/UBSan"
 fi
 
 if [ "$mode" = "" ]; then
     echo
-    echo "R13-H4/H5 live cutover tests: ALL PASSED"
+    echo "R13-H4/H5/H6 live cutover tests: ALL PASSED"
 fi

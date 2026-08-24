@@ -1,6 +1,7 @@
 #include "global.h"
 #include "battle.h"
 #include "contest.h"
+#include "emerald/resources/emerald_battle_live.h" /* R13-H6 typed AI entry resolution */
 #include "random.h"
 #include "contest_ai.h"
 #include "contest_effect.h"
@@ -348,7 +349,10 @@ static void ContestAI_DoAIProcessing(void)
             case CONTESTAI_DO_NOT_PROCESS:
                 break;
             case CONTESTAI_SETTING_UP:
-                gAIScriptPtr = HostResolveGbaAddr(gContestAI_ScriptsTable[eContestAI.currentAIFlag]);
+                // R13-H6: entry via the live routing surface (the 32-row
+                // gContestAI_ScriptsTable read from the arena); the compiled
+                // table is dead at runtime - no compiled fallback.
+                gAIScriptPtr = EmeraldBattleLive_RoutingScriptPtr(EMERALD_BATTLE_ROUTING_CONTESTAI, eContestAI.currentAIFlag);
 
                 if (gContestMons[eContestAI.contestantId].moves[eContestAI.nextMoveIndex] == MOVE_NONE)
                     eContestAI.nextMove = MOVE_NONE; // don't process a move that doesn't exist.

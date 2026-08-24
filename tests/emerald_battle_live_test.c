@@ -1,12 +1,12 @@
-/* R13-H4 live battle-anim + field-effect cutover tests
- * (tests/run_emerald_battle_live.sh).
+/* R13-H4/H5/H6 live battle + battle-anim + battle-AI + contest-AI +
+ * field-effect cutover tests (tests/run_emerald_battle_live.sh).
  *
  * Drives the PRODUCTION live seam (emerald_battle_live.c +
  * battle_live_table.generated.c) instead of the H3 shadow seam, over
  * the real production pack:
  *
  *   oracle <pack> <modsDir> <layout>  differential resolution oracle:
- *       726 entry words x 2 layouts, 4,401 relocs x 2 layouts,
+ *       2,043 entry words x 2 layouts, 7,549 relocs x 2 layouts,
  *       byte-exact arena vs the committed .bin artifacts, boundary and
  *       family re-verification through the six-bridge adapter API;
  *   faults <pack>                    the brief sec 24 fail-closed
@@ -16,15 +16,28 @@
  *       invalid layout, teardown refusal);
  *   replace <pack>                   brief sec 25/26: publish generation
  *       A, replace with generation B (perturbed layout), ranges hold at
- *       the 6,379 invariant, identity-based unregister + re-register;
+ *       the 6,382 invariant, identity-based unregister + re-register
+ *       across all five live arenas;
  *   state-create <pack> <state>      fresh-process proof (sec 15) side
  *       A: live anim IP/return planted, real walker saves v5 state;
  *   state-load  <pack> <state>       side B: fresh process, perturbed
  *       layout, restore -> anim pointers relocate into the new arena by
- *       module+offset identity.
+ *       module+offset identity;
+ *   battle-oracle / battle-faults / battle-249 / h5-state
+ *                                    H5 battle suite (routing rows,
+ *                                    compiled labels, EWRAM, sweep,
+ *                                    fail-closed matrix, 249-opcode
+ *                                    differential, nested state);
+ *   ai-oracle / ai-faults / ai-249   H6 battle-AI + contest-AI suite:
+ *       2,351 instructions, 1,586 typed relocs (38 data targets),
+ *       64 entry rows, pointer sweep, fail-closed matrix, 235-opcode
+ *       differential, mini-VM execution differential;
+ *   h6-state-create/-load            H6 quiescent AI fresh-process
+ *       proof (battle-ai and contest-ai).
  *
- * The weak BattleAnimCompat_IsAnimActive probe is defined strongly here
- * so the quiescence gate (sec 25) is exercised deterministically.
+ * The weak BattleAnimCompat_IsAnimActive and
+ * BattleScriptCompat_IsBattleActive probes are defined strongly here so
+ * the quiescence gates (sec 25) are exercised deterministically.
  */
 
 #include <stdbool.h>
@@ -68,6 +81,8 @@ static void H4ClearSurfaces(void);
 static void H4BindLayout(void);
 struct H5BattleFixtures;
 static struct H5BattleFixtures *H5BattleFixtures(void);
+struct H6AiFixtures;
+static struct H6AiFixtures *H6AiFixtures(void);
 
 static int sFailures;
 
@@ -247,11 +262,11 @@ static int DoOracle(const char *packPath, const char *modsDir, uint32_t layout)
     uint32_t revFamily;
 
     /* The loader publishes the live generation during session
-     * registration (6,380 ranges); roll it back so the oracle drives
+     * registration (6,382 ranges); roll it back so the oracle drives
      * the full transactional sequence from scratch (sec 4/25). */
     if (!SetupScriptCompatSession(packPath))
         return 1;
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6380u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 6382u);
     EmeraldBattleLive_ClearMigratedEntries();
     CHECK(EmeraldBattleLive_GetRangeCount() == 6377u);
     /* RegisterRanges with no generation refuses. */
@@ -271,7 +286,7 @@ static int DoOracle(const char *packPath, const char *modsDir, uint32_t layout)
               (uintptr_t)&sHarnessAnimBusy, &(uintptr_t){0})
           == EMERALD_BATTLE_LIVE_ERR_NOT_PUBLISHED);
     CHECK(EmeraldBattleLive_RegisterRanges() == EMERALD_BATTLE_LIVE_OK);
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6380u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 6382u);
     CHECK(EmeraldBattleLive_Publish() == EMERALD_BATTLE_LIVE_OK);
     CHECK(EmeraldBattleLive_IsPublished());
 
@@ -302,26 +317,33 @@ static int DoOracle(const char *packPath, const char *modsDir, uint32_t layout)
         CHECK((uintptr_t)spanBase - (uintptr_t)arena == m->layoutOffset[layout]);
         entryWords++;
     }
-    /* 1,363 payload - 11 routing tables (5 battle + 4 anim + 1 FE +
-     * 1 anim quiet-BGM). */
-    CHECK(entryWords == EMERALD_BATTLE_LIVE_PAYLOAD_MODULE_COUNT - 11u);
+    /* 2,081 payload - 13 routing tables (5 battle + 4 anim + 1 FE +
+     * 1 anim quiet-BGM + 2 AI entry) - 25 AI data tables. */
+    CHECK(entryWords == EMERALD_BATTLE_LIVE_PAYLOAD_MODULE_COUNT - 38u);
 
     /* Routing roots: launchable only via their reloc'd words; the root
-     * itself refuses (bytecode boundary gate, not family). */
+     * itself refuses (bytecode boundary gate, not family). The H6 AI
+     * if_in_* data tables (25) are payload spans with no instruction
+     * boundaries - never launch roots either. */
     {
         uint32_t routing = 0u;
+        uint32_t dataTables = 0u;
         uintptr_t pointer;
         for (i = 0u; i < t->payloadModuleCount; i++)
         {
             const struct EmeraldBattleLiveModule *m = &t->modules[i];
             if (m->mapKind == EMERALD_BATTLE_MAP_BYTECODE)
                 continue;
-            routing++;
+            if (m->mapKind == EMERALD_BATTLE_MAP_DATA)
+                dataTables++;
+            else
+                routing++;
             CHECK(EmeraldBattleLive_ResolveLaunchTarget(
                       m->family, m->gbaStart, &pointer)
                   == EMERALD_BATTLE_LIVE_ERR_BOUNDARY_INVALID);
         }
-        CHECK(routing == 11u);
+        CHECK(routing == 13u);
+        CHECK(dataTables == 25u);
     }
 
     /* Byte-exact: every payload module's staged bytes == the committed
@@ -380,11 +402,16 @@ static int DoOracle(const char *packPath, const char *modsDir, uint32_t layout)
                 /* Boundary + reverse-containment re-verification via
                  * the bridges: the resolved pointer sits in exactly one
                  * payload span, at the row's offset, under the row's
-                 * family identity. */
-                CHECK(EmeraldBattleCompat_ValidateBoundary(
-                          target->id, reloc->targetOffset,
-                          EMERALD_BATTLE_BOUNDARY_INSTRUCTION_START)
-                      == EMERALD_BATTLE_OK);
+                 * family identity. H6 data tables (battle-AI if_in_*
+                 * byte/hword lists) carry no instruction boundaries -
+                 * the row pins offset 0 (brief sec 6). */
+                if (target->mapKind == EMERALD_BATTLE_MAP_DATA)
+                    CHECK(reloc->targetOffset == 0u);
+                else
+                    CHECK(EmeraldBattleCompat_ValidateBoundary(
+                              target->id, reloc->targetOffset,
+                              EMERALD_BATTLE_BOUNDARY_INSTRUCTION_START)
+                          == EMERALD_BATTLE_OK);
                 CHECK(EmeraldBattleCompat_ReverseResolve(
                           pointer, keyBuf, sizeof(keyBuf), &revOffset,
                           &revFamily) == EMERALD_BATTLE_OK);
@@ -502,7 +529,7 @@ static int DoFaults(const char *packPath)
      * from the cleared-but-index-valid state. */
     if (!SetupScriptCompatSession(packPath))
         return 1;
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6380u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 6382u);
     EmeraldBattleLive_ClearMigratedEntries();
 
     /* 1. invalid layout refuses transactionally. */
@@ -514,10 +541,10 @@ static int DoFaults(const char *packPath)
     CHECK(EmeraldBattleLive_GetGenerationId() == 0u);
     passes++;
 
-    /* 2. stage layout 0 + publish (6,379 = 6,377 + the 2 live ranges). */
+    /* 2. stage layout 0 + publish (6,382 = 6,377 + the 5 live ranges). */
     status = H4StageLive(0u);
     CHECK(status == EMERALD_BATTLE_LIVE_OK);
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6380u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 6382u);
     passes++;
 
     /* Find the first SCRIPT_TARGET reloc of the first anim payload
@@ -680,7 +707,7 @@ static int DoBattleOracle(const char *packPath, const char *modsDir,
 
     if (!SetupScriptCompatSession(packPath))
         return 1;
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6380u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 6382u);
     EmeraldBattleLive_ClearMigratedEntries();
     memset(&diagnostics, 0, sizeof(diagnostics));
     status = EmeraldBattleLive_TryInitialize(
@@ -859,7 +886,7 @@ static int DoBattleFaults(const char *packPath)
 
     if (!SetupScriptCompatSession(packPath))
         return 1;
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6380u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 6382u);
     EmeraldBattleLive_ClearMigratedEntries();
 
     /* Find the first battle payload module + its first reloc. */
@@ -996,11 +1023,11 @@ static int DoBattleFaults(const char *packPath)
     }
     passes++;
 
-    /* 8. unregister the exact battle range only (anim + FE intact). */
+    /* 8. unregister the exact battle range only (anim + FE + AI intact). */
     EmeraldBattleLive_UnregisterRange("emerald:battle-script/@arena");
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6379u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 6381u);
     CHECK(EmeraldBattleLive_RegisterRanges() == EMERALD_BATTLE_LIVE_OK);
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6380u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 6382u);
     passes++;
 
     printf("H5-BATTLE-FAULTS passed=%u\n", passes);
@@ -1015,8 +1042,11 @@ fail:
 
 #define H5_OPCODE_SLOTS 249u
 
-static const struct EmeraldBattleLiveGrammarEntry *H5GrammarFind(
-    uint8_t opcode, uint8_t size)
+/* Family-tagged grammar lookup (H6): the table now carries the battle,
+ * battle-AI and contest-AI grammars - an (opcode, size) pair is only
+ * qualified under the executing family's VM grammar. */
+static const struct EmeraldBattleLiveGrammarEntry *H6GrammarFind(
+    uint32_t family, uint8_t opcode, uint8_t size)
 {
     const struct EmeraldBattleLiveTable *t = H4Table();
     uint32_t i;
@@ -1025,7 +1055,7 @@ static const struct EmeraldBattleLiveGrammarEntry *H5GrammarFind(
     {
         const struct EmeraldBattleLiveGrammarEntry *e = &t->grammar[i];
 
-        if (e->opcode == opcode && e->size == size)
+        if (e->family == family && e->opcode == opcode && e->size == size)
             return e;
     }
     return NULL;
@@ -1144,7 +1174,8 @@ static bool32 H5ExecuteScript(uint32_t word, uint32_t *outSteps,
                 }
                 if (!found)
                     next = m->byteCount;
-                e = H5GrammarFind(opcode, (uint8_t)(next - revOffset));
+                e = H6GrammarFind(H5_FAMILY_BATTLE, opcode,
+                                  (uint8_t)(next - revOffset));
                 {
                     uint32_t isize = next - revOffset;
                 if (e == NULL)
@@ -1234,7 +1265,7 @@ static int DoBattle249(const char *packPath, const char *modsDir)
     memset(presence, 0, sizeof(presence));
     if (!SetupScriptCompatSession(packPath))
         return 1;
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6380u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 6382u);
     EmeraldBattleLive_ClearMigratedEntries();
     memset(&diagnostics, 0, sizeof(diagnostics));
     status = EmeraldBattleLive_TryInitialize(
@@ -1268,7 +1299,8 @@ static int DoBattle249(const char *packPath, const char *modsDir)
             const struct EmeraldBattleLiveGrammarEntry *e;
 
             CHECK(off < m->byteCount);
-            e = H5GrammarFind(opcode, (uint8_t)(next - off));
+            e = H6GrammarFind(H5_FAMILY_BATTLE, opcode,
+                              (uint8_t)(next - off));
             CHECK(e != NULL);
             presence[opcode]++;
             decoded++;
@@ -1313,7 +1345,8 @@ static int DoBattle249(const char *packPath, const char *modsDir)
         e = NULL;
         for (j = 0u; j < EMERALD_BATTLE_LIVE_GRAMMAR_ENTRY_COUNT; j++)
         {
-            if (t->grammar[j].opcode == (uint8_t)i)
+            if (t->grammar[j].opcode == (uint8_t)i
+             && t->grammar[j].family == H5_FAMILY_BATTLE)
             {
                 e = &t->grammar[j];
                 break;
@@ -1381,6 +1414,935 @@ fail:
 }
 
 /* ---------------------------------------------------------------- */
+/* R13-H6: battle-AI + contest-AI differential oracle (sec 5/6/9/11/13/
+ * 15/16/17/18/19).                                                          */
+
+#define H6_FAMILY_BATTLE_AI EMERALD_BATTLE_FAMILY_BATTLE_AI
+#define H6_FAMILY_CONTEST_AI EMERALD_BATTLE_FAMILY_CONTEST_AI
+/* Opcode slot spans (grammar opcode ranges): battle-ai 0..98 (99
+ * slots), contest-ai 0..135 (136 slots). */
+#define H6_BATTLE_AI_SLOTS 99u
+#define H6_CONTEST_AI_SLOTS 136u
+#define H6_AI_SLOTS (H6_BATTLE_AI_SLOTS + H6_CONTEST_AI_SLOTS)
+
+static uint32_t H6AiSlot(uint32_t family, uint8_t opcode)
+{
+    return (family == H6_FAMILY_BATTLE_AI)
+        ? opcode
+        : H6_BATTLE_AI_SLOTS + opcode;
+}
+
+static uint32_t H6AiFamilyOfSlot(uint32_t slot, uint8_t *outOpcode)
+{
+    if (slot < H6_BATTLE_AI_SLOTS)
+    {
+        *outOpcode = (uint8_t)slot;
+        return H6_FAMILY_BATTLE_AI;
+    }
+    *outOpcode = (uint8_t)(slot - H6_BATTLE_AI_SLOTS);
+    return H6_FAMILY_CONTEST_AI;
+}
+
+/* The first SCRIPT_TARGET word of the index that resolves under
+ * `family` - a deterministic fixture target word (synthetic opcode
+ * fixtures fill width-4 operands with real same-family targets). */
+static uint32_t H6FirstFamilyWord(uint32_t family)
+{
+    const struct EmeraldBattleLiveTable *t = H4Table();
+    uint32_t i;
+
+    for (i = 0u; i < t->scriptTargetWordCount; i++)
+    {
+        uintptr_t pointer;
+
+        if (EmeraldBattleLive_ResolveScriptTarget(
+                family, t->scriptTargetWords[i], &pointer)
+                == EMERALD_BATTLE_LIVE_OK)
+            return t->scriptTargetWords[i];
+    }
+    return 0u;
+}
+
+static int DoAiOracle(const char *packPath, const char *modsDir,
+                      uint32_t layout)
+{
+    const struct EmeraldBattleLiveTable *t = H4Table();
+    struct EmeraldBattleCompatDiagnostics diagnostics;
+    enum EmeraldBattleLiveStatus status;
+    uint32_t i;
+    uint32_t r;
+    uint32_t instructions = 0u;
+    uint32_t battleAiInstructions = 0u;
+    uint32_t contestAiInstructions = 0u;
+    uint32_t aiRelocs = 0u;
+    uint32_t dataTargets = 0u;
+    uint32_t routingRows = 0u;
+    uint32_t sweptWords = 0u;
+    char keyBuf[96];
+    uint32_t revOffset;
+    uint32_t revFamily;
+    uintptr_t pointer;
+
+    if (!SetupScriptCompatSession(packPath))
+        return 1;
+    CHECK(EmeraldBattleLive_GetRangeCount() == 6382u);
+    EmeraldBattleLive_ClearMigratedEntries();
+    memset(&diagnostics, 0, sizeof(diagnostics));
+    status = EmeraldBattleLive_TryInitialize(
+        gScriptHarnessSnapshot, gScriptHarnessPack, layout, &diagnostics);
+    CHECK(status == EMERALD_BATTLE_LIVE_OK);
+    CHECK(EmeraldBattleLive_RegisterRanges() == EMERALD_BATTLE_LIVE_OK);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 6382u);
+    CHECK(EmeraldBattleLive_Publish() == EMERALD_BATTLE_LIVE_OK);
+    CHECK(EmeraldBattleLive_IsPublished());
+
+    /* Entry/routing publication (brief sec 11): the routing enum values
+     * ARE the canonical arena starts of the two AI entry tables - the
+     * production callers pass them directly. */
+    {
+        const struct EmeraldBattleLiveArena *arenas = t->arenas;
+        uint32_t a;
+
+        for (a = 0u; a < t->arenaCount; a++)
+        {
+            if (arenas[a].family == H6_FAMILY_BATTLE_AI)
+                CHECK(arenas[a].gbaStart == EMERALD_BATTLE_ROUTING_BATTLEAI);
+            else if (arenas[a].family == H6_FAMILY_CONTEST_AI)
+                CHECK(arenas[a].gbaStart == EMERALD_BATTLE_ROUTING_CONTESTAI);
+        }
+    }
+
+    /* Grammar walk (brief sec 5/13): every instruction of every AI
+     * bytecode module decodes to a qualified (opcode, size) encoding of
+     * the family-tagged grammar with the exact boundary-map delta;
+     * every width-4 operand position with a reloc row resolves typed
+     * (control-flow resolution at consumption, sec 7). */
+    for (i = 0u; i < t->payloadModuleCount; i++)
+    {
+        const struct EmeraldBattleLiveModule *m = &t->modules[i];
+        const uint8_t *spanBase;
+
+        if (m->family != H6_FAMILY_BATTLE_AI
+         && m->family != H6_FAMILY_CONTEST_AI)
+            continue;
+        if (m->mapKind != EMERALD_BATTLE_MAP_BYTECODE)
+            continue;
+        CHECK(H4LayoutSpan(i, layout, &spanBase));
+        for (r = 0u; r < m->boundaryCount; r++)
+        {
+            uint32_t off = t->boundaries[m->boundaryFirst + r].payloadOffset;
+            uint32_t next = (r + 1u < m->boundaryCount)
+                ? t->boundaries[m->boundaryFirst + r + 1u].payloadOffset
+                : m->byteCount;
+            uint8_t opcode = spanBase[off];
+            const struct EmeraldBattleLiveGrammarEntry *e;
+            uint32_t operandOff;
+
+            CHECK(off < m->byteCount);
+            e = H6GrammarFind(m->family, opcode, (uint8_t)(next - off));
+            CHECK(e != NULL);
+            instructions++;
+            if (m->family == H6_FAMILY_BATTLE_AI)
+                battleAiInstructions++;
+            else
+                contestAiInstructions++;
+            for (operandOff = 1u; operandOff < (uint32_t)(next - off);
+                 operandOff++)
+            {
+                uint32_t rr;
+                bool32 isReloc = FALSE;
+
+                for (rr = m->relocFirst; rr < m->relocFirst + m->relocCount;
+                     rr++)
+                {
+                    if (t->relocs[rr].operandOffset == off + operandOff)
+                    {
+                        isReloc = TRUE;
+                        break;
+                    }
+                }
+                if (isReloc)
+                {
+                    CHECK(EmeraldBattleLive_ResolveOperand(
+                              (uintptr_t)(spanBase + off + operandOff),
+                              &pointer) == EMERALD_BATTLE_LIVE_OK);
+                }
+            }
+        }
+    }
+    /* 1,738 + 613 = 2,351 (the boundary-pin census). */
+    CHECK(instructions == 2351u);
+    CHECK(battleAiInstructions == 1738u);
+    CHECK(contestAiInstructions == 613u);
+
+    /* Typed relocation resolution (brief sec 6/13): all 1,586 AI relocs
+     * resolve (raw operand -> relocation row -> semantic module/export
+     * -> current arena pointer); the 38 data-target rows pin offset 0
+     * by map kind (no instruction boundaries); bytecode targets
+     * re-validate boundary + identity. Zero cross-family bytecode
+     * edges (brief sec 16). */
+    for (i = 0u; i < t->payloadModuleCount; i++)
+    {
+        const struct EmeraldBattleLiveModule *m = &t->modules[i];
+        const uint8_t *spanBase;
+
+        if (m->family != H6_FAMILY_BATTLE_AI
+         && m->family != H6_FAMILY_CONTEST_AI)
+            continue;
+        CHECK(H4LayoutSpan(i, layout, &spanBase));
+        for (r = m->relocFirst; r < m->relocFirst + m->relocCount; r++)
+        {
+            const struct EmeraldBattleLiveReloc *reloc = &t->relocs[r];
+            uintptr_t operand = (uintptr_t)(spanBase + reloc->operandOffset);
+            const struct EmeraldBattleLiveModule *target;
+            const uint8_t *targetBase;
+            uintptr_t expected;
+            uintptr_t viaWord;
+
+            CHECK(reloc->relocClass
+                  == EMERALD_BATTLE_LIVE_RELOC_SCRIPT_TARGET);
+            target = &t->modules[reloc->target];
+            /* The target lives in the SOURCE family - the cross-family
+             * bytecode edge count must stay zero. */
+            CHECK(target->family == m->family);
+            status = EmeraldBattleLive_ResolveOperand(operand, &pointer);
+            CHECK(status == EMERALD_BATTLE_LIVE_OK);
+            CHECK(H4LayoutSpan(reloc->target, layout, &targetBase));
+            if (target->mapKind == EMERALD_BATTLE_MAP_DATA)
+            {
+                /* Data tables carry no boundaries; the row pins 0. */
+                CHECK(reloc->targetOffset == 0u);
+                expected = (uintptr_t)targetBase;
+                dataTargets++;
+            }
+            else
+            {
+                expected = (uintptr_t)targetBase + reloc->targetOffset;
+                CHECK(EmeraldBattleCompat_ValidateBoundary(
+                          target->id, reloc->targetOffset,
+                          EMERALD_BATTLE_BOUNDARY_INSTRUCTION_START)
+                      == EMERALD_BATTLE_OK);
+            }
+            CHECK(pointer == expected);
+            /* Raw-word API (sec 8): the operand word itself resolves to
+             * the same arena pointer. */
+            CHECK(EmeraldBattleLive_ResolveScriptTarget(
+                      m->family, reloc->expectedWord, &viaWord)
+                  == EMERALD_BATTLE_LIVE_OK);
+            CHECK(viaWord == expected);
+            /* Reverse containment: the resolved pointer sits in the
+             * target module at the row's offset under the row's family. */
+            CHECK(EmeraldBattleCompat_ReverseResolve(
+                      pointer, keyBuf, sizeof(keyBuf), &revOffset,
+                      &revFamily) == EMERALD_BATTLE_OK);
+            CHECK(strcmp(keyBuf, target->id) == 0);
+            CHECK(revOffset == reloc->targetOffset);
+            CHECK(revFamily == m->family);
+            aiRelocs++;
+        }
+    }
+    CHECK(aiRelocs == 1586u);
+    CHECK(dataTargets == 38u);
+
+    /* Entry republication (brief sec 11/15): all 64 AI routing rows
+     * resolve from the ARENA bytes (the compiled entry tables are dead)
+     * to a script root of the table's own family - a cross-family row
+     * word is refused by the family gate. */
+    for (i = 0u; i < t->payloadModuleCount; i++)
+    {
+        const struct EmeraldBattleLiveModule *m = &t->modules[i];
+        uint8_t *bin = NULL;
+        size_t binSize = 0u;
+        uint32_t row;
+
+        if (m->family != H6_FAMILY_BATTLE_AI
+         && m->family != H6_FAMILY_CONTEST_AI)
+            continue;
+        if (m->mapKind != EMERALD_BATTLE_MAP_ROUTING)
+            continue;
+        CHECK(ReadModuleBin(modsDir, m->id, &bin, &binSize));
+        CHECK(binSize == m->byteCount);
+        for (row = 0u; row < m->byteCount / 4u; row++)
+        {
+            uint32_t word = (uint32_t)bin[row * 4u]
+                          | ((uint32_t)bin[row * 4u + 1u] << 8)
+                          | ((uint32_t)bin[row * 4u + 2u] << 16)
+                          | ((uint32_t)bin[row * 4u + 3u] << 24);
+            uintptr_t viaWord;
+
+            CHECK(EmeraldBattleLive_ResolveRoutingTarget(
+                      m->gbaStart, row, &pointer) == EMERALD_BATTLE_LIVE_OK);
+            CHECK(EmeraldBattleLive_ResolveScriptTarget(
+                      m->family, word, &viaWord)
+                  == EMERALD_BATTLE_LIVE_OK);
+            CHECK(pointer == viaWord);
+            CHECK(EmeraldBattleCompat_ReverseResolve(
+                      pointer, keyBuf, sizeof(keyBuf), &revOffset,
+                      &revFamily) == EMERALD_BATTLE_OK);
+            CHECK(revFamily == m->family);
+            routingRows++;
+        }
+        free(bin);
+    }
+    /* 32 + 32 rows (brief sec 11). */
+    CHECK(routingRows == 64u);
+
+    /* Pointer sweep (brief sec 16/17): every AI bytecode module's
+     * consumed pointer positions are exactly its reloc rows - a
+     * NON-reloc 4-byte word that equals a known script-target word of
+     * ANY family is a violation (a silent compiled-fallback or
+     * cross-family raw pointer candidate); scalar words never convert
+     * (sec 17). */
+    for (i = 0u; i < t->payloadModuleCount; i++)
+    {
+        const struct EmeraldBattleLiveModule *m = &t->modules[i];
+        const uint8_t *spanBase;
+        uint32_t off;
+
+        if (m->family != H6_FAMILY_BATTLE_AI
+         && m->family != H6_FAMILY_CONTEST_AI)
+            continue;
+        if (m->mapKind != EMERALD_BATTLE_MAP_BYTECODE)
+            continue;
+        CHECK(H4LayoutSpan(i, layout, &spanBase));
+        for (off = 0u; off + 4u <= m->byteCount; off += 4u)
+        {
+            uint32_t word;
+            bool isReloc = false;
+            uint32_t rr;
+
+            memcpy(&word, spanBase + off, 4u);
+            for (rr = m->relocFirst; rr < m->relocFirst + m->relocCount; rr++)
+            {
+                if (t->relocs[rr].operandOffset == off)
+                {
+                    isReloc = true;
+                    break;
+                }
+            }
+            if (isReloc)
+                continue;
+            {
+                uint32_t lo = 0u;
+                uint32_t hi = t->scriptTargetWordCount;
+                bool inSet = false;
+
+                while (lo < hi)
+                {
+                    uint32_t mid = lo + (hi - lo) / 2u;
+
+                    if (word < t->scriptTargetWords[mid])
+                        hi = mid;
+                    else if (word > t->scriptTargetWords[mid])
+                        lo = mid + 1u;
+                    else
+                    {
+                        inSet = true;
+                        break;
+                    }
+                }
+                CHECK(!inSet);
+            }
+            sweptWords++;
+        }
+    }
+    CHECK(sweptWords >= 1800u);
+
+    printf("H6-AI-ORACLE layout=%u instructions=%u battle-ai=%u "
+           "contest-ai=%u ai-relocs=%u data-targets=%u routing-rows=%u "
+           "swept-words=%u\n",
+           layout, instructions, battleAiInstructions, contestAiInstructions,
+           aiRelocs, dataTargets, routingRows, sweptWords);
+    return sFailures != 0;
+
+fail:
+    return 1;
+}
+
+/* ---------------------------------------------------------------- */
+/* H6 battle-AI + contest-AI fail-closed matrix (brief sec 26).       */
+
+static int DoAiFaults(const char *packPath)
+{
+    const struct EmeraldBattleLiveTable *t = H4Table();
+    struct EmeraldBattleCompatDiagnostics diagnostics;
+    enum EmeraldBattleLiveStatus status;
+    uint32_t passes = 0u;
+    uint32_t m;
+    uint32_t firstAiModule = UINT32_MAX;
+    uint32_t firstContestModule = UINT32_MAX;
+    uint32_t firstAiReloc = UINT32_MAX;
+    uint32_t firstAiRelocModule = UINT32_MAX;
+    uint32_t firstContestReloc = UINT32_MAX;
+    uint32_t firstDataReloc = UINT32_MAX;
+    uint32_t firstDataRelocModule = UINT32_MAX;
+    uint32_t battleAiTable = 0u;
+    uint32_t contestAiTable = 0u;
+    const uint8_t *spanBase;
+    uintptr_t pointer;
+
+    if (!SetupScriptCompatSession(packPath))
+        return 1;
+    CHECK(EmeraldBattleLive_GetRangeCount() == 6382u);
+    EmeraldBattleLive_ClearMigratedEntries();
+
+    /* Locate the fixtures: first battle-ai/contest-ai bytecode module,
+     * first script-target reloc of each family, the first DATA-target
+     * reloc (battle-ai if_in_* tables), and the two entry tables. */
+    for (m = 0u; m < t->payloadModuleCount; m++)
+    {
+        const struct EmeraldBattleLiveModule *mod = &t->modules[m];
+
+        if (mod->family == H6_FAMILY_BATTLE_AI
+         && mod->mapKind == EMERALD_BATTLE_MAP_BYTECODE
+         && firstAiModule == UINT32_MAX)
+            firstAiModule = m;
+        if (mod->family == H6_FAMILY_CONTEST_AI
+         && mod->mapKind == EMERALD_BATTLE_MAP_BYTECODE
+         && firstContestModule == UINT32_MAX)
+            firstContestModule = m;
+        if (mod->family == H6_FAMILY_BATTLE_AI
+         && mod->mapKind == EMERALD_BATTLE_MAP_ROUTING && battleAiTable == 0u)
+            battleAiTable = mod->gbaStart;
+        if (mod->family == H6_FAMILY_CONTEST_AI
+         && mod->mapKind == EMERALD_BATTLE_MAP_ROUTING && contestAiTable == 0u)
+            contestAiTable = mod->gbaStart;
+    }
+    CHECK(firstAiModule != UINT32_MAX);
+    CHECK(firstContestModule != UINT32_MAX);
+    CHECK(battleAiTable != 0u);
+    CHECK(contestAiTable != 0u);
+    for (m = 0u; m < t->payloadModuleCount; m++)
+    {
+        const struct EmeraldBattleLiveModule *mod = &t->modules[m];
+        uint32_t rr;
+
+        if (mod->family != H6_FAMILY_BATTLE_AI)
+            continue;
+        for (rr = mod->relocFirst; rr < mod->relocFirst + mod->relocCount; rr++)
+        {
+            if (t->relocs[rr].relocClass
+                    != EMERALD_BATTLE_LIVE_RELOC_SCRIPT_TARGET)
+                continue;
+            if (firstAiReloc == UINT32_MAX)
+            {
+                firstAiReloc = rr;
+                firstAiRelocModule = m;
+            }
+            if (t->modules[t->relocs[rr].target].mapKind
+                    == EMERALD_BATTLE_MAP_DATA
+             && firstDataReloc == UINT32_MAX)
+            {
+                firstDataReloc = rr;
+                firstDataRelocModule = m;
+            }
+        }
+    }
+    for (m = 0u; m < t->payloadModuleCount; m++)
+    {
+        const struct EmeraldBattleLiveModule *mod = &t->modules[m];
+        uint32_t rr;
+
+        if (mod->family != H6_FAMILY_CONTEST_AI)
+            continue;
+        for (rr = mod->relocFirst; rr < mod->relocFirst + mod->relocCount; rr++)
+        {
+            if (t->relocs[rr].relocClass
+                    == EMERALD_BATTLE_LIVE_RELOC_SCRIPT_TARGET)
+            {
+                firstContestReloc = rr;
+                break;
+            }
+        }
+        if (firstContestReloc != UINT32_MAX)
+            break;
+    }
+    CHECK(firstAiReloc != UINT32_MAX);
+    CHECK(firstContestReloc != UINT32_MAX);
+    CHECK(firstDataReloc != UINT32_MAX);
+
+    /* 1. stage layout 0 + publish (6,382 = 6,377 + the 5 live ranges). */
+    status = H4StageLive(0u);
+    CHECK(status == EMERALD_BATTLE_LIVE_OK);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 6382u);
+    passes++;
+
+    /* 2. wrong-family launch: a battle-ai root under the contest-ai
+     * family refuses (and vice versa) - the family gate, not the word
+     * gate. */
+    {
+        const struct EmeraldBattleLiveModule *mod = &t->modules[firstAiModule];
+        CHECK(EmeraldBattleLive_ResolveLaunchTarget(
+                  H6_FAMILY_CONTEST_AI, mod->gbaStart, &pointer)
+              == EMERALD_BATTLE_LIVE_ERR_WRONG_FAMILY);
+        mod = &t->modules[firstContestModule];
+        CHECK(EmeraldBattleLive_ResolveLaunchTarget(
+                  H6_FAMILY_BATTLE_AI, mod->gbaStart, &pointer)
+              == EMERALD_BATTLE_LIVE_ERR_WRONG_FAMILY);
+        passes++;
+    }
+
+    /* 3. corrupt battle-ai script-target operand word refuses (raw
+     * operand mismatch); restore resolves again. */
+    CHECK(H4SpanBase(firstAiRelocModule, &spanBase));
+    {
+        const struct EmeraldBattleLiveReloc *reloc = &t->relocs[firstAiReloc];
+        uint8_t *operand = (uint8_t *)spanBase + reloc->operandOffset;
+        uint8_t saved = operand[0];
+
+        operand[0] ^= 0xFFu;
+        CHECK(EmeraldBattleLive_ResolveOperand(
+                  (uintptr_t)operand, &pointer) != EMERALD_BATTLE_LIVE_OK);
+        operand[0] = saved;
+        CHECK(EmeraldBattleLive_ResolveOperand(
+                  (uintptr_t)operand, &pointer) == EMERALD_BATTLE_LIVE_OK);
+        passes++;
+    }
+
+    /* 4. corrupt DATA-target operand word refuses (raw operand
+     * mismatch on an if_in_* table pointer); restore resolves. */
+    CHECK(H4SpanBase(firstDataRelocModule, &spanBase));
+    {
+        const struct EmeraldBattleLiveReloc *reloc = &t->relocs[firstDataReloc];
+        uint8_t *operand = (uint8_t *)spanBase + reloc->operandOffset;
+        uint8_t saved = operand[0];
+
+        CHECK(t->modules[reloc->target].mapKind == EMERALD_BATTLE_MAP_DATA);
+        operand[0] ^= 0xFFu;
+        CHECK(EmeraldBattleLive_ResolveOperand(
+                  (uintptr_t)operand, &pointer) != EMERALD_BATTLE_LIVE_OK);
+        operand[0] = saved;
+        CHECK(EmeraldBattleLive_ResolveOperand(
+                  (uintptr_t)operand, &pointer) == EMERALD_BATTLE_LIVE_OK);
+        passes++;
+    }
+
+    /* 5. routing row out of range refuses (32 rows: row 31 resolves,
+     * row 32 does not) - both AI tables. */
+    CHECK(EmeraldBattleLive_ResolveRoutingTarget(
+              battleAiTable, 31u, &pointer) == EMERALD_BATTLE_LIVE_OK);
+    CHECK(EmeraldBattleLive_ResolveRoutingTarget(
+              battleAiTable, 32u, &pointer)
+          == EMERALD_BATTLE_LIVE_ERR_BOUNDARY_INVALID);
+    CHECK(EmeraldBattleLive_ResolveRoutingTarget(
+              contestAiTable, 31u, &pointer) == EMERALD_BATTLE_LIVE_OK);
+    CHECK(EmeraldBattleLive_ResolveRoutingTarget(
+              contestAiTable, 32u, &pointer)
+          == EMERALD_BATTLE_LIVE_ERR_BOUNDARY_INVALID);
+    passes++;
+
+    /* 6. a non-routing word under ResolveRoutingTarget refuses (a
+     * bytecode module start is not a routing table). */
+    {
+        const struct EmeraldBattleLiveModule *mod = &t->modules[firstAiModule];
+        CHECK(EmeraldBattleLive_ResolveRoutingTarget(
+                  mod->gbaStart, 0u, &pointer)
+              == EMERALD_BATTLE_LIVE_ERR_BOUNDARY_INVALID);
+        passes++;
+    }
+
+    /* 7. cross-family raw word gate: a battle-ai script-target word
+     * under the contest-ai family refuses (and vice versa) - zero
+     * cross-family bytecode edges (brief sec 16). */
+    {
+        const struct EmeraldBattleLiveReloc *reloc = &t->relocs[firstAiReloc];
+        const struct EmeraldBattleLiveReloc *cReloc =
+            &t->relocs[firstContestReloc];
+
+        CHECK(EmeraldBattleLive_ResolveScriptTarget(
+                  H6_FAMILY_CONTEST_AI, reloc->expectedWord, &pointer)
+              == EMERALD_BATTLE_LIVE_ERR_WRONG_FAMILY);
+        CHECK(EmeraldBattleLive_ResolveScriptTarget(
+                  H6_FAMILY_BATTLE_AI, cReloc->expectedWord, &pointer)
+              == EMERALD_BATTLE_LIVE_ERR_WRONG_FAMILY);
+        passes++;
+    }
+
+    /* 8. cross-family routing row: a battle-ai row word rewritten to a
+     * contest-ai script target is refused by the family gate (the row
+     * resolves under the TABLE's own family); restore resolves. */
+    {
+        uint32_t tableModule = UINT32_MAX;
+        const uint8_t *tableBase;
+        const uint32_t contestWord =
+            t->relocs[firstContestReloc].expectedWord;
+        uint8_t saved[4];
+
+        for (m = 0u; m < t->payloadModuleCount; m++)
+        {
+            const struct EmeraldBattleLiveModule *mod = &t->modules[m];
+            if (mod->family == H6_FAMILY_BATTLE_AI
+             && mod->mapKind == EMERALD_BATTLE_MAP_ROUTING)
+            {
+                tableModule = m;
+                break;
+            }
+        }
+        CHECK(tableModule != UINT32_MAX);
+        CHECK(H4LayoutSpan(tableModule, 0u, &tableBase));
+        memcpy(saved, tableBase, 4u);
+        memcpy((uint8_t *)tableBase, &contestWord, 4u);
+        CHECK(EmeraldBattleLive_ResolveRoutingTarget(
+                  battleAiTable, 0u, &pointer)
+              != EMERALD_BATTLE_LIVE_OK);
+        memcpy((uint8_t *)tableBase, saved, 4u);
+        CHECK(EmeraldBattleLive_ResolveRoutingTarget(
+                  battleAiTable, 0u, &pointer)
+              == EMERALD_BATTLE_LIVE_OK);
+        passes++;
+    }
+
+    /* 9. battle quiescence (the battle-AI VM is a battle-family VM)
+     * blocks replacement; the generation survives untouched. */
+    sHarnessBattleBusy = true;
+    status = EmeraldBattleLive_TryInitialize(
+        gScriptHarnessSnapshot, gScriptHarnessPack, 0u, &diagnostics);
+    CHECK(status == EMERALD_BATTLE_LIVE_ERR_BUSY);
+    sHarnessBattleBusy = false;
+    {
+        const struct EmeraldBattleLiveModule *mod = &t->modules[firstAiModule];
+        CHECK(EmeraldBattleLive_ResolveLaunchTarget(
+                  H6_FAMILY_BATTLE_AI, mod->gbaStart, &pointer)
+              == EMERALD_BATTLE_LIVE_OK);
+    }
+    passes++;
+
+    /* 10. identity unregister (brief sec 26): the AI ranges drop out by
+     * exact key; re-registration restores the 6,382 invariant. */
+    EmeraldBattleLive_UnregisterRange("emerald:battle-ai/@arena");
+    CHECK(EmeraldBattleLive_GetRangeCount() == 6381u);
+    EmeraldBattleLive_UnregisterRange("emerald:contest-ai/@arena");
+    CHECK(EmeraldBattleLive_GetRangeCount() == 6380u);
+    CHECK(EmeraldBattleLive_RegisterRanges() == EMERALD_BATTLE_LIVE_OK);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 6382u);
+    passes++;
+
+    printf("H6-AI-FAULTS passed=%u\n", passes);
+    return sFailures != 0;
+
+fail:
+    return 1;
+}
+
+/* ---------------------------------------------------------------- */
+/* H6 235-opcode differential (brief sec 18/19).                     */
+
+/* Mini-VM: execute one AI root through the LIVE arena with the real
+ * instruction decode; control-flow resolves typed at consumption
+ * (brief sec 7): call pushes IP+5 (the AI stack convention), goto
+ * jumps, end pops the stack - resuming the saved frame when non-empty
+ * and terminating the run when empty (the production Cmd_end
+ * semantics). Branch conditions evaluate C-side - the walk continues
+ * straight; the opcode/next-IP/branch-target differential is the
+ * decode + typed-resolution proof. */
+static bool32 H6ExecuteAiScript(uint32_t family, uintptr_t start,
+                                uint32_t *outSteps, uint32_t *outCalls,
+                                uint32_t *outGotos)
+{
+    const struct EmeraldBattleLiveTable *t = H4Table();
+    uint32_t steps = 0u;
+    uint32_t calls = 0u;
+    uint32_t gotos = 0u;
+    uint32_t depth = 0u;
+    uintptr_t retStack[8];
+    uint32_t budget = 4000u;
+    uintptr_t base = start;
+    uint8_t endOpcode = (family == H6_FAMILY_BATTLE_AI) ? 0x5Au : 0x81u;
+    uint8_t callOpcode = (family == H6_FAMILY_BATTLE_AI) ? 0x58u : 0x80u;
+    uint8_t gotoOpcode = (family == H6_FAMILY_BATTLE_AI) ? 0x59u : 0x7Fu;
+
+    for (;;)
+    {
+        const struct EmeraldBattleLiveGrammarEntry *e;
+        char keyBuf[96];
+        uint32_t revOffset;
+        uint32_t revFamily;
+        uint8_t opcode;
+        uint32_t isize;
+
+        if (steps >= budget)
+            return FALSE;
+        /* The current AI IP must always be an instruction start inside
+         * the live arena, under the executing family (brief sec 9/16). */
+        if (EmeraldBattleCompat_ReverseResolve(
+                (uintptr_t)base, keyBuf, sizeof(keyBuf), &revOffset,
+                &revFamily) != EMERALD_BATTLE_OK)
+            return FALSE;
+        if (revFamily != family)
+            return FALSE;
+        {
+            const struct EmeraldBattleLiveModule *m = FindModuleByKeyStr(keyBuf);
+            uintptr_t operand = 0u;
+            uint32_t i;
+            uint32_t rr;
+
+            if (m == NULL)
+                return FALSE;
+            if (EmeraldBattleCompat_ValidateBoundary(
+                    m->id, revOffset,
+                    EMERALD_BATTLE_BOUNDARY_INSTRUCTION_START)
+                    != EMERALD_BATTLE_OK)
+                return FALSE;
+            opcode = *(const uint8_t *)base;
+            isize = 0u;
+            for (rr = 0u; rr < m->boundaryCount; rr++)
+            {
+                uint32_t off = t->boundaries[m->boundaryFirst + rr]
+                                   .payloadOffset;
+                if (off > revOffset)
+                {
+                    isize = off - revOffset;
+                    break;
+                }
+            }
+            if (isize == 0u)
+                isize = m->byteCount - revOffset;
+            e = H6GrammarFind(family, opcode, (uint8_t)isize);
+            if (e == NULL)
+                return FALSE;
+            /* Every RELOC'd pointer operand of this instruction
+             * resolves typed at consumption (the relocation source
+             * index covers it; legal NULL literals and scalar width-4
+             * words carry no relocation row and stay untouched). */
+            for (i = 0u; i < e->operandCount; i++)
+            {
+                uint32_t prefix = H5OperandPrefix(e, i);
+
+                if (e->widths[i] != 4u)
+                    continue;
+                for (rr = m->relocFirst; rr < m->relocFirst + m->relocCount;
+                     rr++)
+                {
+                    if (t->relocs[rr].operandOffset == revOffset + prefix)
+                        break;
+                }
+                if (rr == m->relocFirst + m->relocCount)
+                    continue;
+                if (EmeraldBattleLive_ResolveOperand(
+                        (uintptr_t)((const uint8_t *)base + prefix),
+                        &operand) != EMERALD_BATTLE_LIVE_OK)
+                    return FALSE;
+            }
+            if (opcode == gotoOpcode)
+            {
+                gotos++;
+                base = operand;
+            }
+            else if (opcode == callOpcode)
+            {
+                if (depth >= 8u)
+                    return FALSE;
+                /* The AI call convention pushes IP + 5 (opcode byte +
+                 * pointer operand). */
+                retStack[depth++] = base + 5u;
+                calls++;
+                base = operand;
+            }
+            else if (opcode == endOpcode)
+            {
+                /* end pops the stack: resume the saved frame while
+                 * non-empty, terminate the run when empty. */
+                if (depth == 0u)
+                    break;
+                base = retStack[--depth];
+            }
+            else
+                base += isize;
+        }
+        steps++;
+    }
+    *outSteps = steps;
+    *outCalls = calls;
+    *outGotos = gotos;
+    return TRUE;
+}
+
+static int DoAi249(const char *packPath, const char *modsDir)
+{
+    (void)modsDir;
+    const struct EmeraldBattleLiveTable *t = H4Table();
+    struct EmeraldBattleCompatDiagnostics diagnostics;
+    enum EmeraldBattleLiveStatus status;
+    uint32_t presence[H6_AI_SLOTS];
+    uint32_t decoded = 0u;
+    uint32_t synthetic = 0u;
+    uint32_t executed = 0u;
+    uint32_t i;
+
+    memset(presence, 0, sizeof(presence));
+    if (!SetupScriptCompatSession(packPath))
+        return 1;
+    CHECK(EmeraldBattleLive_GetRangeCount() == 6382u);
+    EmeraldBattleLive_ClearMigratedEntries();
+    memset(&diagnostics, 0, sizeof(diagnostics));
+    status = EmeraldBattleLive_TryInitialize(
+        gScriptHarnessSnapshot, gScriptHarnessPack, 0u, &diagnostics);
+    CHECK(status == EMERALD_BATTLE_LIVE_OK);
+    CHECK(EmeraldBattleLive_RegisterRanges() == EMERALD_BATTLE_LIVE_OK);
+    CHECK(EmeraldBattleLive_Publish() == EMERALD_BATTLE_LIVE_OK);
+
+    /* Grammar walk: every AI instruction decodes to a qualified
+     * (opcode, size) of the family-tagged grammar; width-4 operand
+     * positions with reloc rows resolve typed (the census identity). */
+    for (i = 0u; i < t->payloadModuleCount; i++)
+    {
+        const struct EmeraldBattleLiveModule *m = &t->modules[i];
+        const uint8_t *spanBase;
+        uint32_t r;
+
+        if (m->family != H6_FAMILY_BATTLE_AI
+         && m->family != H6_FAMILY_CONTEST_AI)
+            continue;
+        if (m->mapKind != EMERALD_BATTLE_MAP_BYTECODE)
+            continue;
+        CHECK(H4LayoutSpan(i, 0u, &spanBase));
+        for (r = 0u; r < m->boundaryCount; r++)
+        {
+            uint32_t off = t->boundaries[m->boundaryFirst + r].payloadOffset;
+            uint32_t next = (r + 1u < m->boundaryCount)
+                ? t->boundaries[m->boundaryFirst + r + 1u].payloadOffset
+                : m->byteCount;
+            uint8_t opcode = spanBase[off];
+            const struct EmeraldBattleLiveGrammarEntry *e;
+            uint32_t operandOff;
+
+            e = H6GrammarFind(m->family, opcode, (uint8_t)(next - off));
+            CHECK(e != NULL);
+            presence[H6AiSlot(m->family, opcode)]++;
+            decoded++;
+            for (operandOff = 1u; operandOff < (uint32_t)(next - off);
+                 operandOff++)
+            {
+                uint32_t rr;
+                bool32 isReloc = FALSE;
+
+                for (rr = m->relocFirst; rr < m->relocFirst + m->relocCount;
+                     rr++)
+                {
+                    if (t->relocs[rr].operandOffset == off + operandOff)
+                    {
+                        isReloc = TRUE;
+                        break;
+                    }
+                }
+                if (isReloc)
+                {
+                    uintptr_t pointer;
+                    CHECK(EmeraldBattleLive_ResolveOperand(
+                              (uintptr_t)(spanBase + off + operandOff),
+                              &pointer) == EMERALD_BATTLE_LIVE_OK);
+                }
+            }
+        }
+    }
+    CHECK(decoded == 2351u);
+
+    /* Synthetic coverage (brief sec 18/19): every opcode slot absent
+     * from the qualified data (battle-ai 32, contest-ai 100) gets a
+     * fixture whose width-4 operands carry a REAL script-target word of
+     * the same family - decode + word-level resolution through the same
+     * seam. */
+    for (i = 0u; i < H6_AI_SLOTS; i++)
+    {
+        uint8_t opcode;
+        uint32_t family = H6AiFamilyOfSlot(i, &opcode);
+        const struct EmeraldBattleLiveGrammarEntry *e;
+        uint8_t fixture[32];
+        uint32_t root;
+        uint32_t j;
+
+        if (presence[i] != 0u)
+            continue;
+        e = NULL;
+        for (j = 0u; j < EMERALD_BATTLE_LIVE_GRAMMAR_ENTRY_COUNT; j++)
+        {
+            if (t->grammar[j].family == family
+             && t->grammar[j].opcode == opcode)
+            {
+                e = &t->grammar[j];
+                break;
+            }
+        }
+        CHECK(e != NULL);
+        root = H6FirstFamilyWord(family);
+        CHECK(root != 0u);
+        memset(fixture, 0, sizeof(fixture));
+        fixture[0] = opcode;
+        for (j = 0u; j < e->operandCount; j++)
+        {
+            uint32_t off = 1u + H5OperandPrefix(e, j);
+            uintptr_t pointer;
+            uint32_t word;
+
+            if (e->widths[j] == 4u)
+            {
+                memcpy(&word, &root, 4u);
+                memcpy(fixture + off, &word, 4u);
+                CHECK(EmeraldBattleLive_ResolveScriptTarget(
+                          family, root, &pointer) == EMERALD_BATTLE_LIVE_OK);
+            }
+        }
+        synthetic++;
+    }
+    /* 32 battle-ai + 100 contest-ai absent slots. */
+    CHECK(synthetic == 132u);
+
+    /* Execution differential on real entry roots (brief sec 18/19): the
+     * row-0 target of each arena-owned AI entry table executes
+     * end-to-end through the live arena with typed control-flow
+     * resolution and the production end/pop semantics. */
+    {
+        static const uint32_t kTables[2] = {
+            EMERALD_BATTLE_ROUTING_BATTLEAI,
+            EMERALD_BATTLE_ROUTING_CONTESTAI,
+        };
+        static const uint32_t kFamilies[2] = {
+            H6_FAMILY_BATTLE_AI, H6_FAMILY_CONTEST_AI,
+        };
+        uint32_t s;
+
+        for (s = 0u; s < 2u; s++)
+        {
+            uintptr_t word;
+            uint32_t steps;
+            uint32_t calls;
+            uint32_t gotos;
+
+            CHECK(EmeraldBattleLive_ResolveRoutingTarget(
+                      kTables[s], 0u, &word) == EMERALD_BATTLE_LIVE_OK);
+            CHECK(H6ExecuteAiScript(kFamilies[s], word, &steps, &calls,
+                                    &gotos));
+            CHECK(steps >= 1u);
+            executed++;
+        }
+    }
+
+    {
+        uint32_t present = 0u;
+        uint32_t battlePresent = 0u;
+        uint32_t contestPresent = 0u;
+
+        for (i = 0u; i < H6_AI_SLOTS; i++)
+            if (presence[i] != 0u)
+            {
+                present++;
+                if (i < H6_BATTLE_AI_SLOTS)
+                    battlePresent++;
+                else
+                    contestPresent++;
+            }
+        printf("H6-AI-249 layout=0 decoded=%u slots-present=%u "
+               "battle-ai=%u contest-ai=%u synthetic=%u executed=%u\n",
+               decoded, present, battlePresent, contestPresent, synthetic,
+               executed);
+    }
+    return sFailures != 0;
+
+fail:
+    return 1;
+}
+
+/* ---------------------------------------------------------------- */
 /* Generation replacement (brief sec 25/26). */
 
 static int DoReplace(const char *packPath)
@@ -1398,10 +2360,10 @@ static int DoReplace(const char *packPath)
     uint64_t genB;
 
     /* Full production-shaped session: the R6 loader publishes every
-     * family and the H4 live step (6,377 G ranges + 2 live). */
+     * family and the live step (6,377 G ranges + 5 live). */
     if (!SetupScriptCompatSession(packPath))
         return 1;
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6380u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 6382u);
     CHECK(EmeraldBattleLive_IsPublished());
     genA = EmeraldBattleLive_GetGenerationId();
 
@@ -1426,7 +2388,7 @@ static int DoReplace(const char *packPath)
         gScriptHarnessSnapshot, gScriptHarnessPack, 1u, &diagnostics);
     CHECK(status == EMERALD_BATTLE_LIVE_OK);
     CHECK(EmeraldBattleLive_RegisterRanges() == EMERALD_BATTLE_LIVE_OK);
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6380u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 6382u);
     CHECK(EmeraldBattleLive_Publish() == EMERALD_BATTLE_LIVE_OK);
     genB = EmeraldBattleLive_GetGenerationId();
     CHECK(genB > genA);
@@ -1439,6 +2401,46 @@ static int DoReplace(const char *packPath)
     CHECK(arena1 != NULL);
     CHECK(p1 != p0); /* physical placement moved */
     CHECK((uintptr_t)p1 - (uintptr_t)arena1 == t->modules[m].layoutOffset[1]);
+
+    /* R13-H6: the AI arenas participate in the same replacement - the
+     * battle-ai root and the arena-owned 32-row entry table republish
+     * into the layout-1 arena (brief sec 11/25). */
+    {
+        uint32_t aiModule = 0u;
+        uint32_t am;
+        char keyBuf[96];
+        uint32_t revOffset;
+        uint32_t revFamily;
+
+        /* A local index: the outer `m` must stay on the anim probe
+         * module for the fail-closed checks below. */
+        for (am = 0u; am < t->payloadModuleCount; am++)
+            if (t->modules[am].family == EMERALD_BATTLE_FAMILY_BATTLE_AI
+             && t->modules[am].mapKind == EMERALD_BATTLE_MAP_BYTECODE)
+            {
+                aiModule = am;
+                break;
+            }
+        CHECK(aiModule < t->payloadModuleCount);
+        CHECK(EmeraldBattleLive_ResolveLaunchTarget(
+                  EMERALD_BATTLE_FAMILY_BATTLE_AI,
+                  t->modules[aiModule].gbaStart, &p1)
+              == EMERALD_BATTLE_LIVE_OK);
+        CHECK(EmeraldBattleCompat_GetArena(EMERALD_BATTLE_FAMILY_BATTLE_AI,
+                                           &arena1, &arenaSize));
+        CHECK(arena1 != NULL);
+        CHECK((uintptr_t)p1 - (uintptr_t)arena1
+              == t->modules[aiModule].layoutOffset[1]);
+        /* The entry surface republicates: routing row 0 -> a battle-AI
+         * bytecode root, family-verified. */
+        CHECK(EmeraldBattleLive_ResolveRoutingTarget(
+                  EMERALD_BATTLE_ROUTING_BATTLEAI, 0u, &p1)
+              == EMERALD_BATTLE_LIVE_OK);
+        CHECK(EmeraldBattleCompat_ReverseResolve(
+                  p1, keyBuf, sizeof(keyBuf), &revOffset, &revFamily)
+              == EMERALD_BATTLE_OK);
+        CHECK(revFamily == EMERALD_BATTLE_FAMILY_BATTLE_AI);
+    }
 
     /* Fail-closed restage: an invalid layout leaves the current
      * generation resolving. */
@@ -1454,14 +2456,20 @@ static int DoReplace(const char *packPath)
      * index by exact key, position-independent - anim + FE untouched by
      * the battle removal and vice versa. */
     EmeraldBattleLive_UnregisterRange("emerald:field-effect-script/@arena");
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6379u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 6381u);
     EmeraldBattleLive_UnregisterRange("emerald:battle-anim-script/@arena");
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6378u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 6380u);
     EmeraldBattleLive_UnregisterRange("emerald:battle-script/@arena");
+    CHECK(EmeraldBattleLive_GetRangeCount() == 6379u);
+    /* R13-H6: the AI ranges unregister by the same identity rule
+     * (battle-ai then contest-ai; the G count returns). */
+    EmeraldBattleLive_UnregisterRange("emerald:battle-ai/@arena");
+    CHECK(EmeraldBattleLive_GetRangeCount() == 6378u);
+    EmeraldBattleLive_UnregisterRange("emerald:contest-ai/@arena");
     CHECK(EmeraldBattleLive_GetRangeCount() == 6377u);
     /* Re-registration restores the invariant. */
     CHECK(EmeraldBattleLive_RegisterRanges() == EMERALD_BATTLE_LIVE_OK);
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6380u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 6382u);
 
     printf("H4-REPLACE genA=%llu genB=%llu arena-a=%p arena-b=%p "
            "count=%zu\n",
@@ -1512,6 +2520,37 @@ static struct H5BattleFixtures *H5BattleFixtures(void)
 {
     return (struct H5BattleFixtures *)(void *)
         (sHarnessGameBss + sizeof(struct H4Fixtures));
+}
+
+/* H6 AI state fixture: BOTH AI stack surfaces (battle-ai lives on
+ * aiStack, contest-ai on contestStack - the shared gAIScriptPtr surface
+ * carries either family) + the mandatory sec-22 identity pins (the AI IP
+ * at a module root and one active call frame holding an IP+5 return in a
+ * DIFFERENT bytecode module). */
+struct H6AiFixtures
+{
+    struct
+    {
+        const u8 *ptr[H4_STACK_CAP];
+        u8 size;
+    } aiStack;
+    struct
+    {
+        const u8 *ptr[H4_STACK_CAP];
+        u8 size;
+    } contestStack;
+    u32 expectedFamily;
+    u32 expectedIpModule; /* module table index of the parked IP */
+    u32 expectedIpOffset;
+    u32 expectedRetModule; /* module table index of the call return */
+    u32 expectedRetOffset;
+};
+
+static struct H6AiFixtures *H6AiFixtures(void)
+{
+    return (struct H6AiFixtures *)(void *)
+        (sHarnessGameBss + sizeof(struct H4Fixtures)
+         + sizeof(struct H5BattleFixtures));
 }
 
 /* Deterministic battle points (brief sec 22): a battle module holding a
@@ -1597,7 +2636,7 @@ static int DoH5StateCreate(const char *packPath, const char *statePath)
     HarnessStatePath_Override(statePath);
     if (!SetupScriptCompatSession(packPath))
         return 1;
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6380u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 6382u);
     memset(fx, 0, sizeof(*fx));
     memset(bfx, 0, sizeof(*bfx));
     H4ClearSurfaces();
@@ -1743,6 +2782,207 @@ fail:
     return 1;
 }
 
+/* Deterministic AI points (brief sec 22): the AI IP parks at the first
+ * bytecode module's root (offset 0, the module export); the single
+ * active stack frame holds an instruction-start return in a DIFFERENT
+ * bytecode module - the second boundary of that module. (The AI stack
+ * carries call returns, but battle-ai canonical data has NO call 0x58
+ * instructions - the seam validates the IP and both instruction roles
+ * against the same boundary map, so any instruction start round-trips;
+ * the identity proof, not the call provenance, is what is under test.) */
+static bool32 H6PickAiPoints(u32 family, u32 *outIpModule,
+                             u32 *outRetModule, u32 *outRetOffset)
+{
+    const struct EmeraldBattleLiveTable *t = H4Table();
+    u32 ipModule = UINT32_MAX;
+    u32 retModule = UINT32_MAX;
+    u32 m;
+
+    for (m = 0u; m < t->payloadModuleCount; m++)
+    {
+        const struct EmeraldBattleLiveModule *mod = &t->modules[m];
+
+        if (mod->family != family
+         || mod->mapKind != EMERALD_BATTLE_MAP_BYTECODE)
+            continue;
+        if (ipModule == UINT32_MAX)
+        {
+            ipModule = m;
+            continue;
+        }
+        if (mod->boundaryCount >= 2u)
+        {
+            retModule = m;
+            break;
+        }
+    }
+    if (ipModule == UINT32_MAX || retModule == UINT32_MAX)
+        return FALSE;
+    *outIpModule = ipModule;
+    *outRetModule = retModule;
+    *outRetOffset = t->boundaries[
+        t->modules[retModule].boundaryFirst + 1u].payloadOffset;
+    return TRUE;
+}
+
+static int DoH6StateCreate(const char *packPath, const char *statePath,
+                           const char *familyName)
+{
+    struct H6AiFixtures *afx = H6AiFixtures();
+    const uint8_t *arena;
+    const uint8_t *spanBase;
+    size_t arenaSize;
+    u32 family = (strcmp(familyName, "contest-ai") == 0)
+        ? H6_FAMILY_CONTEST_AI : H6_FAMILY_BATTLE_AI;
+    u32 ipModule;
+    u32 retModule;
+    u32 retOffset;
+
+    HarnessStatePath_Override(statePath);
+    if (!SetupScriptCompatSession(packPath))
+        return 1;
+    CHECK(EmeraldBattleLive_GetRangeCount() == 6382u);
+    memset(afx, 0, sizeof(*afx));
+    H4ClearSurfaces();
+    H4BindLayout();
+    CHECK(H6PickAiPoints(family, &ipModule, &retModule, &retOffset));
+    /* Plant the active AI state: the shared gAIScriptPtr parked at the
+     * module root, one call frame holding the IP+5 return (battle-ai on
+     * the aiStack surface, contest-ai on the contest stack - the other
+     * surface stays empty and scrubs). */
+    CHECK(H4LayoutSpan(ipModule, 0u, &spanBase));
+    gAIScriptPtr = spanBase;
+    CHECK(H4LayoutSpan(retModule, 0u, &spanBase));
+    if (family == H6_FAMILY_BATTLE_AI)
+    {
+        afx->aiStack.ptr[0] = spanBase + retOffset;
+        afx->aiStack.size = 1u;
+    }
+    else
+    {
+        afx->contestStack.ptr[0] = spanBase + retOffset;
+        afx->contestStack.size = 1u;
+    }
+    afx->expectedFamily = family;
+    afx->expectedIpModule = ipModule;
+    afx->expectedIpOffset = 0u;
+    afx->expectedRetModule = retModule;
+    afx->expectedRetOffset = retOffset;
+    H4Fixtures()->generationStamp = EmeraldBattleLive_GetGenerationId();
+    CHECK(EmeraldBattleCompat_GetArena(family, &arena, &arenaSize));
+    CHECK(arena != NULL);
+    CHECK(NativeState_Save(HARNESS_STATE_SLOT) == NATIVE_STATE_OK);
+    printf("H6-CREATE family=%u arena=%p generation=%llu module=%u ip=%u "
+           "ret=%u/%u\n",
+           family, (const void *)arena,
+           (unsigned long long)EmeraldBattleLive_GetGenerationId(),
+           ipModule, 0u, retModule, retOffset);
+    return sFailures != 0;
+
+fail:
+    return 1;
+}
+
+static int DoH6StateLoad(const char *packPath, const char *modsDir,
+                         const char *statePath, const char *familyName)
+{
+    const struct EmeraldBattleLiveTable *t = H4Table();
+    struct H6AiFixtures *afx = H6AiFixtures();
+    const uint8_t *arena;
+    size_t arenaSize;
+    char keyBuf[96];
+    uint32_t revOffset;
+    uint32_t revFamily;
+    uint8_t *bin = NULL;
+    size_t binSize = 0u;
+    uint8_t nextOpcode;
+    struct EmeraldBattleCompatDiagnostics diagnostics;
+    enum EmeraldBattleLiveStatus status;
+    u32 family = (strcmp(familyName, "contest-ai") == 0)
+        ? H6_FAMILY_CONTEST_AI : H6_FAMILY_BATTLE_AI;
+
+    HarnessStatePath_Override(statePath);
+    if (!SetupScriptCompatSession(packPath))
+        return 1;
+    EmeraldBattleLive_ClearMigratedEntries();
+    memset(&diagnostics, 0, sizeof(diagnostics));
+    status = EmeraldBattleLive_TryInitialize(
+        gScriptHarnessSnapshot, gScriptHarnessPack, 1u, &diagnostics);
+    CHECK(status == EMERALD_BATTLE_LIVE_OK);
+    CHECK(EmeraldBattleLive_RegisterRanges() == EMERALD_BATTLE_LIVE_OK);
+    CHECK(EmeraldBattleLive_Publish() == EMERALD_BATTLE_LIVE_OK);
+    memset(afx, 0, sizeof(*afx));
+    H4ClearSurfaces();
+    H4BindLayout();
+    CHECK(NativeState_Load(HARNESS_STATE_SLOT) == NATIVE_STATE_OK);
+
+    /* 1. the shared AI IP relocated into the NEW arena at the same
+     * (module, offset) semantic identity, under the captured family. */
+    CHECK(gAIScriptPtr != NULL);
+    CHECK(EmeraldBattleCompat_ReverseResolve(
+              (uintptr_t)gAIScriptPtr, keyBuf, sizeof(keyBuf),
+              &revOffset, &revFamily) == EMERALD_BATTLE_OK);
+    CHECK(strcmp(keyBuf, t->modules[afx->expectedIpModule].id) == 0);
+    CHECK(revOffset == afx->expectedIpOffset);
+    CHECK(revFamily == family);
+
+    /* 2. the single stack frame relocated (IP+5 of the call, in a
+     * different module) onto the family's own stack surface. */
+    {
+        const u8 **stackPtr = (family == H6_FAMILY_BATTLE_AI)
+            ? afx->aiStack.ptr : afx->contestStack.ptr;
+        u8 *stackSize = (family == H6_FAMILY_BATTLE_AI)
+            ? &afx->aiStack.size : &afx->contestStack.size;
+
+        CHECK(*stackSize == 1u);
+        CHECK(EmeraldBattleCompat_ReverseResolve(
+                  (uintptr_t)stackPtr[0], keyBuf, sizeof(keyBuf),
+                  &revOffset, &revFamily) == EMERALD_BATTLE_OK);
+        CHECK(strcmp(keyBuf, t->modules[afx->expectedRetModule].id) == 0);
+        CHECK(revOffset == afx->expectedRetOffset);
+        CHECK(revFamily == family);
+    }
+
+    /* 3. the exact next canonical opcode executes: the byte at the
+     * restored IP equals the committed .bin byte at the same offset
+     * (and is the module root itself, parked). */
+    CHECK(ReadModuleBin(modsDir, t->modules[afx->expectedIpModule].id,
+                        &bin, &binSize));
+    CHECK(binSize > afx->expectedIpOffset);
+    nextOpcode = bin[afx->expectedIpOffset];
+    free(bin);
+    CHECK(gAIScriptPtr[0] == nextOpcode);
+
+    /* 4. the restored return is a valid NEXT_INSTRUCTION boundary in the
+     * live arena. */
+    CHECK(EmeraldBattleCompat_ValidateBoundary(
+              t->modules[afx->expectedRetModule].id,
+              afx->expectedRetOffset,
+              EMERALD_BATTLE_BOUNDARY_NEXT_INSTRUCTION) == EMERALD_BATTLE_OK);
+
+    /* 5. the restored pointers live inside the new AI arena. */
+    CHECK(EmeraldBattleCompat_GetArena(family, &arena, &arenaSize));
+    CHECK(arena != NULL);
+    CHECK(gAIScriptPtr >= arena && gAIScriptPtr < arena + arenaSize);
+    {
+        const u8 **stackPtr = (family == H6_FAMILY_BATTLE_AI)
+            ? afx->aiStack.ptr : afx->contestStack.ptr;
+
+        CHECK(stackPtr[0] >= arena && stackPtr[0] < arena + arenaSize);
+    }
+
+    printf("H6-LOAD family=%u arena=%p generation=%llu module=%u ip=%u "
+           "ret=%u/%u opcode=0x%02x\n",
+           family, (const void *)arena,
+           (unsigned long long)EmeraldBattleLive_GetGenerationId(),
+           afx->expectedIpModule, afx->expectedIpOffset,
+           afx->expectedRetModule, afx->expectedRetOffset, nextOpcode);
+    return sFailures != 0;
+
+fail:
+    return 1;
+}
+
 static void H4ClearSurfaces(void)
 {
     gBattlescriptCurrInstr = NULL;
@@ -1756,15 +2996,18 @@ static void H4BindLayout(void)
 {
     struct H4Fixtures *fx = H4Fixtures();
     struct H5BattleFixtures *bfx = H5BattleFixtures();
+    struct H6AiFixtures *afx = H6AiFixtures();
     struct EmeraldBattleStateLayout layout;
     u32 i;
 
     memset(&layout, 0, sizeof(layout));
-    /* H4/H5 production shape: anim + battle surfaces are live; AI/contest
-     * slots stay NULL so those families fall through to the generic
-     * image-relative v5 path (family-live gate). The battle stack lives
-     * in the harness fixture (production binds the per-battle heap at
-     * BattleAllocResources). */
+    /* H4/H5/H6 production shape: anim + battle + both AI surfaces are
+     * bound. The battle stack lives in the harness fixture (production
+     * binds the per-battle heap at BattleAllocResources); the two AI
+     * stacks live in the H6 fixture - the h4/h5/h6-state-* modes zero
+     * their fixture before capture, so an unplanted AI stack has size 0
+     * and the adapter scrubs the surface (fresh-process bss is zeroed in
+     * every other mode). */
     layout.animScriptPtr = &sBattleAnimScriptPtr;
     layout.animScriptRetAddr = &sBattleAnimScriptRetAddr;
     layout.animScriptCallback = &gAnimScriptCallback;
@@ -1778,6 +3021,13 @@ static void H4BindLayout(void)
         layout.battleStackPtrs[i] = &bfx->battleStack.ptr[i];
     layout.battleStackSize = &bfx->battleStack.size;
     layout.aiScriptPtr = &gAIScriptPtr;
+    for (i = 0u; i < H4_STACK_CAP; i++)
+    {
+        layout.aiStackPtrs[i] = &afx->aiStack.ptr[i];
+        layout.contestStackPtrs[i] = &afx->contestStack.ptr[i];
+    }
+    layout.aiStackSize = &afx->aiStack.size;
+    layout.contestStackSize = &afx->contestStack.size;
     layout.generationStamp = &fx->generationStamp;
     EmeraldBattleState_SetLayout(&layout);
 }
@@ -1845,7 +3095,7 @@ static int DoStateCreate(const char *packPath, const char *statePath)
     /* The production loader path publishes the live generation. */
     if (!SetupScriptCompatSession(packPath))
         return 1;
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6380u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 6382u);
     memset(fx, 0, sizeof(*fx));
     H4ClearSurfaces();
     H4BindLayout();
@@ -1908,7 +3158,7 @@ static int DoStateLoad(const char *packPath, const char *statePath)
             gScriptHarnessSnapshot, gScriptHarnessPack, 1u, &diagnostics);
         CHECK(status == EMERALD_BATTLE_LIVE_OK);
         CHECK(EmeraldBattleLive_RegisterRanges() == EMERALD_BATTLE_LIVE_OK);
-        CHECK(EmeraldBattleLive_GetRangeCount() == 6380u);
+        CHECK(EmeraldBattleLive_GetRangeCount() == 6382u);
         CHECK(EmeraldBattleLive_Publish() == EMERALD_BATTLE_LIVE_OK);
     }
     memset(fx, 0, sizeof(*fx));
@@ -1966,7 +3216,13 @@ int main(int argc, char **argv)
                 "       %s state-create <pack> <state>\n"
                 "       %s state-load <pack> <state>\n"
                 "       %s h5-state-create <pack> <modsDir> <state>\n"
-                "       %s h5-state-load <pack> <modsDir> <state>\n",
+                "       %s h5-state-load <pack> <modsDir> <state>\n"
+                "       %s ai-oracle <pack> <modsDir> <layout>\n"
+                "       %s ai-faults <pack>\n"
+                "       %s ai-249 <pack> <modsDir>\n"
+                "       %s h6-state-create <pack> <modsDir> <state> <battle-ai|contest-ai>\n"
+                "       %s h6-state-load <pack> <modsDir> <state> <battle-ai|contest-ai>\n",
+                argv[0], argv[0], argv[0], argv[0], argv[0],
                 argv[0], argv[0], argv[0], argv[0], argv[0],
                 argv[0], argv[0], argv[0], argv[0], argv[0]);
         return 2;
@@ -1993,6 +3249,17 @@ int main(int argc, char **argv)
         return DoH5StateCreate(argv[2], argv[4]);
     if (strcmp(argv[1], "h5-state-load") == 0)
         return DoH5StateLoad(argv[2], argv[3], argv[4]);
+    if (strcmp(argv[1], "ai-oracle") == 0)
+        return DoAiOracle(argv[2], argv[3],
+                          (uint32_t)strtoul(argv[4], NULL, 10));
+    if (strcmp(argv[1], "ai-faults") == 0)
+        return DoAiFaults(argv[2]);
+    if (strcmp(argv[1], "ai-249") == 0)
+        return DoAi249(argv[2], argv[3]);
+    if (strcmp(argv[1], "h6-state-create") == 0)
+        return DoH6StateCreate(argv[2], argv[4], argv[5]);
+    if (strcmp(argv[1], "h6-state-load") == 0)
+        return DoH6StateLoad(argv[2], argv[3], argv[4], argv[5]);
     fprintf(stderr, "unknown mode: %s\n", argv[1]);
     return 2;
 }

@@ -3,6 +3,7 @@
 #include "battle_anim.h"
 #include "battle_ai_script_commands.h"
 #include "battle_factory.h"
+#include "emerald/resources/emerald_battle_live.h" /* R13-H6 typed AI entry resolution */
 #include "battle_setup.h"
 #include "data.h"
 #include "item.h"
@@ -578,7 +579,10 @@ static void BattleAI_DoAIProcessing(void)
             case AIState_DoNotProcess: // Needed to match.
                 break;
             case AIState_SettingUp:
-                gAIScriptPtr = HostResolveGbaAddr(gBattleAI_ScriptsTable[AI_THINKING_STRUCT->aiLogicId]); // set AI ptr to logic ID.
+                // R13-H6: entry via the live routing surface (the 32-row
+                // gBattleAI_ScriptsTable read from the arena); the compiled
+                // table is dead at runtime - no compiled fallback.
+                gAIScriptPtr = EmeraldBattleLive_RoutingScriptPtr(EMERALD_BATTLE_ROUTING_BATTLEAI, AI_THINKING_STRUCT->aiLogicId); // set AI ptr to logic ID.
                 if (gBattleMons[sBattler_AI].pp[AI_THINKING_STRUCT->movesetIndex] == 0)
                 {
                     AI_THINKING_STRUCT->moveConsidered = 0;

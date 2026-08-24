@@ -624,27 +624,29 @@ EmeraldResourceCompat_RegisterRuntimeSnapshot(const char *packPath)
                                                 }
                                                 else
                                                 {
-                                            /* R13-H4/H5: the LIVE battle-family
+                                            /* R13-H4/H5/H6: the LIVE battle-family
                                              * cutover (brief sec 17). After the G
                                              * script family published: validate the
-                                             * battle + anim + field-effect pack
+                                             * battle + anim + battle-AI +
+                                             * contest-AI + field-effect pack
                                              * surfaces, stage the combined
-                                             * generation, register the 3 live
-                                             * arena ranges (6,377 -> 6,380),
+                                             * generation, register the 5 live
+                                             * arena ranges (6,377 -> 6,382),
                                              * publish live execution, and hand
                                              * the State-v5 adapter its surface
                                              * layouts - all before any battle /
-                                             * animation / field-effect
-                                             * instruction can execute through the
-                                             * live seam. A failure at any step
-                                             * refuses the session with the same
-                                             * full rollback as every earlier
-                                             * seam; compiled battle/anim/FE
-                                             * payloads are NEVER executed after
-                                             * this point. The weak probe above
-                                             * is NULL only in the harness-only H3
-                                             * shadow link (the two battle seams
-                                             * can never co-link). */
+                                             * animation / AI / contest /
+                                             * field-effect instruction can
+                                             * execute through the live seam. A
+                                             * failure at any step refuses the
+                                             * session with the same full rollback
+                                             * as every earlier seam; compiled
+                                             * battle/anim/AI/contest/FE payloads
+                                             * are NEVER executed after this
+                                             * point. The weak probe above is NULL
+                                             * only in the harness-only H3 shadow
+                                             * link (the two battle seams can
+                                             * never co-link). */
                                             if (EmeraldBattleLive_TryInitialize != NULL)
                                             {
                                                 struct EmeraldBattleCompatDiagnostics liveDiag;
@@ -654,7 +656,7 @@ EmeraldResourceCompat_RegisterRuntimeSnapshot(const char *packPath)
                                                     liveStatus =
                                                         EmeraldBattleLive_RegisterRanges();
                                                 if (liveStatus == EMERALD_BATTLE_LIVE_OK
-                                                 && EmeraldBattleLive_GetRangeCount() != 6380u)
+                                                 && EmeraldBattleLive_GetRangeCount() != 6382u)
                                                     liveStatus =
                                                         EMERALD_BATTLE_LIVE_ERR_UNEXPECTED_COUNT;
                                                 if (liveStatus == EMERALD_BATTLE_LIVE_OK)

@@ -179,15 +179,18 @@ static const struct EmeraldBattleLiveAlias *FindAlias(const char *id)
     return NULL;
 }
 
-/* The three live families: pack records for battle + anim + FE only.
- * AI/contest records are the H3 shadow's domain and never reach this
- * seam. */
+/* The five live families: pack records for battle + anim + battle-AI +
+ * contest-AI + FE (R13-H6 cut over the AI families). */
 static bool IsLiveFamilyEntry(const char *canonicalName)
 {
     return strncmp(canonicalName, "emerald:battle-script/",
                    strlen("emerald:battle-script/")) == 0
         || strncmp(canonicalName, "emerald:battle-anim-script/",
                    strlen("emerald:battle-anim-script/")) == 0
+        || strncmp(canonicalName, "emerald:battle-ai/",
+                   strlen("emerald:battle-ai/")) == 0
+        || strncmp(canonicalName, "emerald:contest-ai/",
+                   strlen("emerald:contest-ai/")) == 0
         || strncmp(canonicalName, "emerald:field-effect-script/",
                    strlen("emerald:field-effect-script/")) == 0;
 }
@@ -217,6 +220,10 @@ static void ArenaCanonicalName(uint32_t arena, char *out, size_t cap)
         name = "battle-script";
     else if (t->arenas[arena].family == EMERALD_BATTLE_FAMILY_BATTLE_ANIM_SCRIPT)
         name = "battle-anim-script";
+    else if (t->arenas[arena].family == EMERALD_BATTLE_FAMILY_BATTLE_AI)
+        name = "battle-ai";
+    else if (t->arenas[arena].family == EMERALD_BATTLE_FAMILY_CONTEST_AI)
+        name = "contest-ai";
     else
         name = "field-effect-script";
     snprintf(out, cap, "emerald:%s/@arena", name);
@@ -685,7 +692,16 @@ known:
         return EMERALD_BATTLE_LIVE_ERR_TARGET_UNRESOLVED;
     if (t->modules[moduleIndex].family != family)
         return EMERALD_BATTLE_LIVE_ERR_WRONG_FAMILY;
-    if (ValidateBoundaryInternal(moduleIndex, moduleOffset,
+    /* Data targets (battle-AI if_in_* byte/hword list tables, 38 rows)
+     * have NO instruction boundaries - the operand must denote the
+     * module root (offset 0). Bytecode targets validate the boundary
+     * (R13-H6 sec 6). */
+    if (t->modules[moduleIndex].mapKind == EMERALD_BATTLE_MAP_DATA)
+    {
+        if (moduleOffset != 0u)
+            return EMERALD_BATTLE_LIVE_ERR_BOUNDARY_INVALID;
+    }
+    else if (ValidateBoundaryInternal(moduleIndex, moduleOffset,
                                  EMERALD_BATTLE_BOUNDARY_INSTRUCTION_START)
             != EMERALD_BATTLE_LIVE_OK)
         return EMERALD_BATTLE_LIVE_ERR_BOUNDARY_INVALID;
@@ -752,7 +768,14 @@ enum EmeraldBattleLiveStatus EmeraldBattleLive_ResolveOperand(
         return EMERALD_BATTLE_LIVE_ERR_REFUSED;
     if (reloc->relocClass == EMERALD_BATTLE_LIVE_RELOC_SCRIPT_TARGET)
     {
-        if (ValidateBoundaryInternal(reloc->target, reloc->targetOffset,
+        /* Data targets (battle-AI if_in_* list tables) carry no
+         * instruction boundaries; the row pins targetOffset 0. */
+        if (t->modules[reloc->target].mapKind == EMERALD_BATTLE_MAP_DATA)
+        {
+            if (reloc->targetOffset != 0u)
+                return EMERALD_BATTLE_LIVE_ERR_BOUNDARY_INVALID;
+        }
+        else if (ValidateBoundaryInternal(reloc->target, reloc->targetOffset,
                                      EMERALD_BATTLE_BOUNDARY_INSTRUCTION_START)
                 != EMERALD_BATTLE_LIVE_OK)
             return EMERALD_BATTLE_LIVE_ERR_BOUNDARY_INVALID;
@@ -789,7 +812,7 @@ enum EmeraldBattleLiveStatus EmeraldBattleLive_ResolveOperand(
 }
 
 /* ------------------------------------------------------------------ */
-/* H5 battle routing + direct entry + compiled-label translation.      */
+/* H5/H6 routing + direct entry + compiled-label translation.          */
 
 enum EmeraldBattleLiveStatus EmeraldBattleLive_ResolveRoutingTarget(
     uint32_t tableWord, uint32_t rowIndex, uintptr_t *outPointer)
@@ -810,19 +833,24 @@ enum EmeraldBattleLiveStatus EmeraldBattleLive_ResolveRoutingTarget(
     if (!GbaContain(tableWord, &moduleIndex, &moduleOffset))
         return EMERALD_BATTLE_LIVE_ERR_TARGET_UNRESOLVED;
     module = &t->modules[moduleIndex];
-    /* The table word must denote the routing module's own start. */
+    /* The table word must denote the routing module's own start. Any
+     * routing module family is accepted here (battle move-effects /
+     * ball-throw / using-item / running-by-item / safari-actions +
+     * battle-AI + contest-AI entry tables); the ROW word then resolves
+     * as a SCRIPT_TARGET root of the table's OWN family - a cross-
+     * family row word is refused by ResolveScriptTarget's family gate
+     * (R13-H6 sec 15/16). */
     if (moduleOffset != 0u
-     || module->family != EMERALD_BATTLE_FAMILY_BATTLE_SCRIPT
      || module->mapKind != EMERALD_BATTLE_MAP_ROUTING)
         return EMERALD_BATTLE_LIVE_ERR_BOUNDARY_INVALID;
     rowCount = module->byteCount / 4u;
     if (rowIndex >= rowCount)
         return EMERALD_BATTLE_LIVE_ERR_BOUNDARY_INVALID;
     /* The canonical row is read from the ARENA - the compiled routing
-     * table is dead at runtime (brief sec 12/24). */
+     * tables are dead at runtime (brief sec 12/24). */
     word = ReadWord(SpanBase(moduleIndex) + (size_t)rowIndex * 4u);
-    return EmeraldBattleLive_ResolveScriptTarget(
-        EMERALD_BATTLE_FAMILY_BATTLE_SCRIPT, word, outPointer);
+    return EmeraldBattleLive_ResolveScriptTarget(module->family, word,
+                                                 outPointer);
 }
 
 enum EmeraldBattleLiveStatus EmeraldBattleLive_GetBattleScript(
@@ -924,17 +952,20 @@ void *EmeraldBattleLive_ReadPointerOperand(const uint8_t *operandAddress)
     uintptr_t pointer;
 
     word = ReadWord(operandAddress);
-    /* Operand words read OUTSIDE any live battle arena span keep the
-     * legacy path: compiled families' words are native host addresses
-     * (identity), host-pointer words pass through unchanged. */
+    /* Operand words read OUTSIDE any live arena span keep the legacy
+     * path: host-pointer words pass through unchanged. */
     if (!sPublished || sGeneration == NULL
      || !ReverseContain((uintptr_t)operandAddress, &moduleIndex,
                         &moduleOffset))
         return HostResolveGbaAddr(word);
-    if (t->modules[moduleIndex].family
-            != EMERALD_BATTLE_FAMILY_BATTLE_SCRIPT)
+    /* R13-H6: every family in the live table (battle, anim, battle-AI,
+     * contest-AI, FE) resolves typed - the AI interpreters' control-
+     * flow operands (branch/jump/call/tail-call) all funnel through
+     * this central reader (brief sec 7). A module outside the live
+     * family set keeps the legacy path. */
+    if (!IsLiveFamily(t->modules[moduleIndex].family))
         return HostResolveGbaAddr(word);
-    /* Inside a live battle arena span: typed resolution only. Legal
+    /* Inside a live arena span: typed resolution only. Legal
      * NULL literals (a pointer operand slot with a stored 0 and no
      * relocation row - the H1 NULL-literal census) return NULL; a
      * nonzero word with no relocation row is a hard refusal. */

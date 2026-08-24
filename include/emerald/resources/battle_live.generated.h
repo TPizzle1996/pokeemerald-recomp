@@ -2,10 +2,11 @@
  * Do not edit by hand; re-run the generator (regeneration must
  * be a no-op diff).
  *
- * R13-H4 production live table: battle-anim + field-effect
- * arenas, relocs and semantic bindings. Family/arena enum
- * values come from battle_native.generated.h so the state
- * adapter's surface identities line up unchanged.
+ * R13-H4/H5/H6 production live table: battle + battle-anim
+ * + battle-AI + contest-AI + field-effect arenas, relocs and
+ * semantic bindings. Family/arena enum values come from
+ * battle_native.generated.h so the state adapter's surface
+ * identities line up unchanged.
  */
 
 #ifndef EMERALD_RESOURCES_BATTLE_LIVE_GENERATED_H
@@ -14,40 +15,48 @@
 #include <stdint.h>
 #include "emerald/resources/battle_native.generated.h"
 
-#define EMERALD_BATTLE_LIVE_ARENA_COUNT 3u
-#define EMERALD_BATTLE_LIVE_MODULE_COUNT 1371u
-#define EMERALD_BATTLE_LIVE_PAYLOAD_MODULE_COUNT 1363u
+#define EMERALD_BATTLE_LIVE_ARENA_COUNT 5u
+#define EMERALD_BATTLE_LIVE_MODULE_COUNT 2089u
+#define EMERALD_BATTLE_LIVE_PAYLOAD_MODULE_COUNT 2081u
 #define EMERALD_BATTLE_LIVE_ALIAS_COUNT 8u
-#define EMERALD_BATTLE_LIVE_BOUNDARY_COUNT 13446u
-#define EMERALD_BATTLE_LIVE_EXPORT_ROW_COUNT 1391u
-#define EMERALD_BATTLE_LIVE_RELOC_COUNT 5963u
+#define EMERALD_BATTLE_LIVE_BOUNDARY_COUNT 15861u
+#define EMERALD_BATTLE_LIVE_EXPORT_ROW_COUNT 2109u
+#define EMERALD_BATTLE_LIVE_RELOC_COUNT 7549u
 #define EMERALD_BATTLE_LIVE_BINDING_COUNT 718u
 #define EMERALD_BATTLE_LIVE_REFUSE_ONLY_BINDING_COUNT 4u
-#define EMERALD_BATTLE_LIVE_SCRIPT_TARGET_WORD_COUNT 1172u
-#define EMERALD_BATTLE_LIVE_CANONICAL_BYTES 78220u
+#define EMERALD_BATTLE_LIVE_SCRIPT_TARGET_WORD_COUNT 1880u
+#define EMERALD_BATTLE_LIVE_CANONICAL_BYTES 90047u
 #define EMERALD_BATTLE_LIVE_LAYOUT_COUNT 2u
-#define EMERALD_BATTLE_LIVE_ROUTING_COUNT 5u
+#define EMERALD_BATTLE_LIVE_ROUTING_COUNT 7u
 #define EMERALD_BATTLE_LIVE_LABEL_COUNT 199u
-#define EMERALD_BATTLE_LIVE_GRAMMAR_ENTRY_COUNT 300u
+#define EMERALD_BATTLE_LIVE_GRAMMAR_ENTRY_COUNT 554u
 
 struct EmeraldBattleLiveGrammarEntry
 {
     uint8_t opcode;
     uint8_t size;
     uint8_t operandCount;
-    uint8_t widths[4];
+    uint8_t family; /* EmeraldBattleNativeFamily; the walker
+                       selects the VM grammar per family */
+    uint8_t widths[5];
 };
 
-/* Battle routing tables (H1 sec 6): the canonical GBA address of
- * each pointer-bearing routing module. The live seam reads the
- * arena-owned rows; the compiled tables are dead at runtime. */
+/* Battle/AI routing tables (H1 sec 6, R13-H6 sec 11): the
+ * canonical GBA address of each pointer-bearing routing module.
+ * The live seam reads the arena-owned rows (incl. the 32-row
+ * gBattleAI_ScriptsTable and gContestAI_ScriptsTable entry
+ * tables); the compiled tables are dead at runtime. The enum
+ * VALUES are the canonical GBA words - the C sites pass them
+ * straight to ResolveRoutingTarget as the table word. */
 enum EmeraldBattleLiveRouting
 {
-    EMERALD_BATTLE_ROUTING_MOVEEFFECTS = 0u, /* emerald:battle-script/g-battle-scripts-for-move-effects @ 0x82d86a8 */
-    EMERALD_BATTLE_ROUTING_BALLTHROW = 1u, /* emerald:battle-script/g-battlescripts-for-ball-throw @ 0x82dbd08 */
-    EMERALD_BATTLE_ROUTING_USINGITEM = 2u, /* emerald:battle-script/g-battlescripts-for-using-item @ 0x82dbd3c */
-    EMERALD_BATTLE_ROUTING_RUNNINGBYITEM = 3u, /* emerald:battle-script/g-battlescripts-for-running-by-item @ 0x82dbd54 */
-    EMERALD_BATTLE_ROUTING_SAFARIACTIONS = 4u, /* emerald:battle-script/g-battlescripts-for-safari-actions @ 0x82dbd58 */
+    EMERALD_BATTLE_ROUTING_MOVEEFFECTS = 0x082d86a8u, /* emerald:battle-script/g-battle-scripts-for-move-effects */
+    EMERALD_BATTLE_ROUTING_BALLTHROW = 0x082dbd08u, /* emerald:battle-script/g-battlescripts-for-ball-throw */
+    EMERALD_BATTLE_ROUTING_USINGITEM = 0x082dbd3cu, /* emerald:battle-script/g-battlescripts-for-using-item */
+    EMERALD_BATTLE_ROUTING_RUNNINGBYITEM = 0x082dbd54u, /* emerald:battle-script/g-battlescripts-for-running-by-item */
+    EMERALD_BATTLE_ROUTING_SAFARIACTIONS = 0x082dbd58u, /* emerald:battle-script/g-battlescripts-for-safari-actions */
+    EMERALD_BATTLE_ROUTING_BATTLEAI = 0x082dbef8u, /* emerald:battle-ai/g-battle-ai_scripts-table */
+    EMERALD_BATTLE_ROUTING_CONTESTAI = 0x082de350u, /* emerald:contest-ai/g-contest-ai_scripts-table */
 };
 
 enum EmeraldBattleLiveRelocClass
