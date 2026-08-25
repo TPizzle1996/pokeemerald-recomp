@@ -17,14 +17,22 @@ pack behind the additive leaf seam, and the design-time "remains" figures
 above are reduced accordingly (see
 `docs/R13B_LEAF_PAYLOAD_MIGRATION_REPORT.md`).
 
-**Status (2026-08-24):** R13-B through **R13-I COMPLETE** — every R13
-content family is migrated and isolated, and the global State-v5 closure
-(R13-I) is green: all persisted pointer surfaces classified, raw
-host-pointer persistence eliminated (frontier-table spans + FLASH
-handle gates), live range count 6,390/8,192, pack 23,069, mixed-family
-and deterministic-serialization proofs green, full battery green. See
-`docs/R13I_STATE_V5_CLOSURE_REPORT.md` and
-`docs/R13I_STATE_V5_POINTER_CENSUS.md`. R13-J not begun.
+**Status (2026-08-25):** R13-B through **R13-J COMPLETE** — every R13
+content family is migrated and isolated, and the final closure (R13-J)
+is green: global ownership census unexplained 0, COMPILED_PENDING
+sweep 0 unexplained (1,388 explained: movement STAY bridge 15,
+multiboot 2, easy-chat engine carve-out 1,371), §3A FLIP removed the
+last uncompensated compiled payloads (1,040 movement tables, 11 text
+blocks, 2 labels — all pack-served, arbiter-proven), State-v5
+unchanged (5u), ranges 6,390/8,192, pack 23,069
+(`b711d35877332c43ce671caacda7640905205579a367e8d60bc683c5d0aac5bb`),
+release 23,464,296 B / DINFO 36,105,696 B both ROM-verify
+(f3ae0881…d07b7), isolation 7,908/7,908, full battery green including
+the state-master harness three-mode flake closure (mapScripts window
+planted NULL). See `docs/R13I_STATE_V5_CLOSURE_REPORT.md`,
+`docs/R13I_STATE_V5_POINTER_CENSUS.md` and
+`docs/R13J_FINAL_OWNERSHIP_ISOLATION_REPORT.md`. R14 not begun (handoff
+list in §11).
 
 ## 1. Scope decision: what belongs in R13
 

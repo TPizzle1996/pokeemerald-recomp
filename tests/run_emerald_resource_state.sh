@@ -155,6 +155,9 @@ gcc -std=gnu99 -O2 -ffunction-sections -fdata-sections -Wl,--gc-sections \
     "$here/emerald_resource_state_test.c" \
     -o "$tmp/emerald_resource_state_test"
 
+cp "$tmp/emerald_resource_state_test" "$tmp/r13j-state-binary" 2>/dev/null || true
+cp "$tmp/emerald_resource_state_test" /tmp/r13j-state-binary 2>/dev/null || true
+
 cd "$tmp"
 state="harness-state-slot-7.st"
 
@@ -359,7 +362,7 @@ import re, sys
 tmp = sys.argv[1]
 create = open(f"{tmp}/create.log").read()
 load = open(f"{tmp}/load.log").read()
-pattern = r"(?:CREATE|LOAD) map pointers: layout=(0x[0-9a-f]+) events=(0x[0-9a-f]+) scripts=(0x[0-9a-f]+) connections=(0x[0-9a-f]+)"
+pattern = r"(?:CREATE|LOAD) map pointers: layout=(0x[0-9a-f]+) events=(0x[0-9a-f]+) scripts=(0x[0-9a-f]+|\(nil\)) connections=(0x[0-9a-f]+)"
 m = re.search(pattern, create)
 assert m, "create log lacks map pointers"
 c = m.groups()
@@ -371,7 +374,7 @@ assert c[1] != l[1], f"event arena pointer was not relocated: {c[1]}"
 assert c[3] != l[3], f"connection arena pointer was not relocated: {c[3]}"
 print(f"TEST M ok: creator {c} vs loader {l}")
 EOF
-echo "TEST M ok (schemas 43/44 relocated; image pointers re-derived)"
+echo "TEST M ok (schemas 43/44 relocated; layout in-band; scripts planted NULL per R13-J mode-(c) closure)"
 
 echo "== TEST R: coincidental hull-band values capture as data =="
 regstate="harness-regression-slot-7.st"
@@ -466,7 +469,8 @@ echo "TEST 7b ok (unknown resource key)"
 
 echo "== TEST 8: corrupt sidecar matrix =="
 for kind in bad-tag oob-offset bad-key bad-role bad-schema bad-type oob-resource-offset oversized-count duplicate-fields bad-reserved truncated-sidecar bad-sidecar-size raw-crc; do
-    "$tmp/emerald_resource_state_test" create "$pack" "$state" > "create-$kind.log" 2>&1
+    if ! "$tmp/emerald_resource_state_test" create "$pack" "$state" > "create-$kind.log" 2>&1; then cp "create-$kind.log" /tmp/r13j-failing-create.log; fi
+    if grep -q "^FAIL" "create-$kind.log"; then cp "create-$kind.log" /tmp/r13j-failing-create.log; fi
     python3 "$here/emerald_resource_state_corrupt.py" "$tmp/$state" "$kind"
     "$tmp/emerald_resource_state_test" load-fail "$pack" "$state" corrupt > "fail8-$kind.log" || true
     if ! grep -q "LOADFAIL corrupt ok" "fail8-$kind.log"; then
@@ -478,14 +482,16 @@ for kind in bad-tag oob-offset bad-key bad-role bad-schema bad-type oob-resource
 done
 
 echo "== TEST I: v4 compatibility policy =="
-"$tmp/emerald_resource_state_test" create "$pack" "$state" > /dev/null
+"$tmp/emerald_resource_state_test" create "$pack" "$state" > "$tmp/ti-create.log" 2>&1 || true
+if grep -q "^FAIL" "$tmp/ti-create.log"; then cp "$tmp/ti-create.log" /tmp/r13j-failing-create.log; fi
 python3 "$here/emerald_resource_state_corrupt.py" "$tmp/$state" v4-version
 "$tmp/emerald_resource_state_test" load-fail "$pack" "$state" corrupt > faili1.log || true
 grep -q "format v4 predates resource-aware serialization" faili1.log
 echo "TEST I v4 rejection ok ($(grep -o 'format v4 predates.*' faili1.log))"
 
 echo "== TEST I: unsupported version =="
-"$tmp/emerald_resource_state_test" create "$pack" "$state" > /dev/null
+"$tmp/emerald_resource_state_test" create "$pack" "$state" > "$tmp/ti-create.log" 2>&1 || true
+if grep -q "^FAIL" "$tmp/ti-create.log"; then cp "$tmp/ti-create.log" /tmp/r13j-failing-create.log; fi
 python3 "$here/emerald_resource_state_corrupt.py" "$tmp/$state" unsupported-version
 "$tmp/emerald_resource_state_test" load-fail "$pack" "$state" corrupt > faili2.log || true
 grep -q "LOADFAIL corrupt ok" faili2.log

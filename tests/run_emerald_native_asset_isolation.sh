@@ -53,18 +53,22 @@
 # (R11-D §10, classified at scan time); the symbol/TU/dep-graph checks
 # remain the hard isolation proof.
 #
-# R13-B introduces the first COMPILED_PENDING_MIGRATION families since R8:
+# R13-B introduced the first COMPILED_PENDING_MIGRATION families since R8:
 # the leaf families (resources/extraction/emerald/bpee01/movement/
 # ownership.generated.toml, 1055 records — the 1047 script_data labels +
 # 8 sMovement_* objects, 7428 B — and resources/extraction/emerald/bpee01/
 # multiboot/ownership.generated.toml, 2 records — ereader + colosseum
 # programs, 176352 B) are extracted into the production pack (R13-B §10:
-# isolation ownership state with reasons) but stay COMPILED: the movement
-# labels are LOCAL symbols (pret movement.inc emits no .global; the native
-# binary shows them with `d`/`r` binding), so the COMPILED state check
-# below must match against the FULL nm table (local symbols included), not
-# nm -g — that is the whole reason this family is the first to exercise the
-# local-symbol path of the state check.
+# isolation ownership state with reasons) but stay COMPILED. R13-J §3A
+# FLIPped the 1,040 zero-reference movement tables (compiled duplicates
+# removed; pack serves the operands) — 15 movement records remain
+# COMPILED: the 7 STAY tables retained in movement_tables_native.inc
+# (link-required by resolved refs) + the 8 sMovement_* objects. The
+# movement labels are LOCAL symbols (pret movement.inc emits no .global;
+# the native binary shows them with `d`/`r` binding), so the COMPILED
+# state check below must match against the FULL nm table (local symbols
+# included), not nm -g — that is the whole reason this family is the
+# first to exercise the local-symbol path of the state check.
 #
 # Byte-scan exemption (R9 §9): an encoded payload whose bytes are
 # byte-identical to a still-compiled still-front asset (graphics/pokemon/*/
@@ -75,8 +79,10 @@
 # byte-identical to a menu asset. This mirrors the small-decoded-payload
 # NOTE policy.
 #
-#   native = COMPILED_PENDING_MIGRATION  (1057 records after R13-B: the leaf
-#       movement + multiboot families; zero between R8 and R12-G)
+#   native = COMPILED_PENDING_MIGRATION  (17 records after the R13-J §3A
+#       movement FLIP: movement 15 - the 7 STAY tables + 8 sMovement_*
+#       objects - plus the 2 multiboot programs; the other 1,040 movement
+#       tables are now ROM_BASE_ONLY pack-served; zero between R8 and R12-G)
 #       -> the state check stays in the runner, driven by the ownership files:
 #          any record still declaring this state MUST have its legacy symbol
 #          defined in the binary. A future family stage flips states as it
@@ -447,6 +453,71 @@ battle_byte_exemptions = {
         "coincidence precedent, word is not a GBA address",
 }
 
+# R13-J §3A movement-FLIP byte-scan exemptions: the 1,040 FLIPped movement
+# tables were removed from the LINUX64 link (zero resolved refs in the
+# baseline binary - arbiter link proof), but the tiny payloads below are
+# byte-identical windows of still-compiled STAY tables (the 7-link-required
+# tables in data/movement_tables_native.inc). Every hit was verified inside
+# the named STAY table via nm VMA (file offset + 0x400000 segment delta):
+# the 4/5-byte scripts 0x09 0x09 0x54 0xFE and the 0A-runs are shared
+# across frontier/route movement scripts, so the FLIP record's bytes
+# legitimately live in the binary as its STAY sibling. The symbol sweep
+# (absent nm -n on the symbol-bearing binary) is the hard isolation proof
+# for these records.
+movement_byte_exemptions = {
+    "efc56ff0a8363b00c3a1f14d91162965a0faee2ad004ccf36c1ffb30b4e6e2a3":
+        "art-share: 4-byte script 090954FE byte-identical to the "
+        "still-compiled STAY table "
+        "BattleFrontier_BattleDomeLobby_Movement_PlayerEnterDoor "
+        "(VA 0x1881c22, movement_tables_native.inc) - 7 FLIP records "
+        "share the same 'enter door' script; R9 §9 art-sharing",
+    "d466405ce90303f78a2b2d8fda45a20ee6b146f818a8489929d4fb85fd9795d1":
+        "art-share: 5-byte script 0A0A0A0AFE a window of the "
+        "still-compiled STAY table Route116_Movement_GlassesManExit "
+        "(VA 0x1881c43, 0A-run) - SumbarineDepartLeft/RefereeExit "
+        "share the 'walk away' script; R9 §9 art-sharing",
+    "f95e75b69f711a52d6a413a8f3fef98caf55faf54cdb02849a6a9b15c64e9012":
+        "art-share: 4-byte script 0A0A0AFE a window of the "
+        "still-compiled STAY table Route116_Movement_GlassesManExit "
+        "(VA 0x1881c44) - AttendantMoveToReceiveCall; R9 §9 art-sharing",
+    "4eebbccf61814972292bb39fef0ea57fdc9e3d203e5ee9fae286678c42a501d3":
+        "art-share: 0A-run script a window of the still-compiled STAY "
+        "table Route116_Movement_GlassesManExit (VA 0x1881c41) - "
+        "LavaridgeTown_RivalApproachPlayer2; R9 §9 art-sharing",
+    "e745e5300449749719147777383ed2034eda934848296cbaca313cdaa05eb517":
+        "art-share: 0A-run script a window of Route116_Movement_GlassesManExit "
+        "(VA 0x1881c42) - MomApproachPlayerFemale4/WalkLeft5; R9 §9",
+    "f818fbb2fc9b8c76d4d3e0fec724242e58da81a1a2d94289b2c3233eefbbfc8e":
+        "art-share: 0B-run script 0B0B0BFE the still-compiled STAY table "
+        "LittlerootTown_MaysHouse_2F_Movement_MayApproachPlayerSouth "
+        "(VA 0x1881c3a) - MomApproachPlayerMale5/WalkRight3/"
+        "ScientistApproachPlayer; R9 §9",
+    "51be958e73a39af67c1ae67fa88f031cb1993eb7023e22c31bfd5f05b11abc29":
+        "art-share: 0A-run script a window of Route116_Movement_GlassesManExit "
+        "(VA 0x1881c3e) - MauvilleCity/MossdeepCity_ScottExitNorth + "
+        "RusturfTunnel_PeekoExit; R9 §9",
+    "357ceb2377ce9f28c1f6df31118a6247d271c9c48424af81d7a1eb2e3e4ecff6":
+        "art-share: 0A-run script a window of Route116_Movement_GlassesManExit "
+        "(VA 0x1881c3f) - WallysUncleExitNorth2/DevonEmployeeExit/"
+        "SlateportCity_ScottExit; R9 §9",
+    "105b6bc5fb4ff15745a2f8371e64d03ad149c804454acbacfe5b1a3d9022d992":
+        "art-share: 0A-run script a window of Route116_Movement_GlassesManExit "
+        "(VA 0x1881c40) - SSTidalCorridor_ScottApproachPlayer; R9 §9",
+    "b9b90419f0057ea2f77001b7f504af351b30af84fbd47acc2a8190de614ee198":
+        "coincidence: 4-byte script 080808FE inside kScriptBridges "
+        "(VA 0xde8bd8, G-family routing-bridge seam retention - compiled "
+        "by design) - ArtistBeginToExit/LinkArtistBeginExit/BirchEntrance; "
+        "R7B coincidence precedent",
+    "186e11b29fff1a4e0b8505b3b21dea59f3db641bf3e12ad32d92379c5ab2f24e":
+        "coincidence: 5-byte script 08080808FE inside kScriptBridges "
+        "(VA 0xde8bd7) - PlayerApproachLegendariesDown; R7B coincidence "
+        "precedent",
+    "91353496f0cf6f6326c3d7e856903dc972eec0b5d7c38637258340dadb8c7644":
+        "coincidence: 4-byte script 000801FE inside gMonStillFrontPic_UnownT "
+        "(VA 0xaf6c26, compressed still-front sprite bytes - unrelated "
+        "data) - CoveLilyMotel_OwnerReturn; R7B coincidence precedent",
+}
+
 # R9 §9 byte-scan exemption: the sha256 of every still-compiled still-front
 # asset (graphics/pokemon/<species>/front.4bpp.lz - the party-menu fronts,
 # still compiled on native). A ROM_BASE_ONLY encoded payload that is
@@ -605,7 +676,8 @@ for rec in records:
                 exempt_reason = tileset_byte_exemptions.get(enc_sha) \
                     or layout_byte_exemptions.get(enc_sha) \
                     or audio_byte_exemptions.get(enc_sha) \
-                    or battle_byte_exemptions.get(enc_sha)
+                    or battle_byte_exemptions.get(enc_sha) \
+                    or movement_byte_exemptions.get(enc_sha)
                 if exempt_reason:
                     # R11-C §7 / R11-D §10 / R13-H7 §28: sha-keyed, classified
                     # at scan time (see the dicts above - art-sharing with a
@@ -751,14 +823,17 @@ mapfile -t migrated_symbols < "$tmpdir/migrated_symbols.txt"
 mapfile -t compiled_symbols < "$tmpdir/compiled_symbols.txt"
 mapfile -t migrated_artifacts < "$tmpdir/migrated_artifacts.txt"
 [[ ${#migrated_symbols[@]} -gt 0 ]] || { echo "FATAL: no ROM_BASE_ONLY records" >&2; exit 2; }
-# R13-B end state: 5819 ROM_BASE_ONLY (audio/visual families through
-# R12-G) + 1057 COMPILED_PENDING_MIGRATION (the leaf families). The
-# COMPILED count is a hard check now — every leaf record's symbol was
-# verified present in the binary by the python scan above.
-if [[ ${#compiled_symbols[@]} -eq 1057 ]]; then
-    ok "end state: exactly 1057 COMPILED_PENDING_MIGRATION records (movement + multiboot leaf families; 5819 ROM_BASE_ONLY elsewhere)"
+# R13-J §3A end state: 21735 ROM_BASE_ONLY across the scanned union
+# (audio/visual/script families through R13-H7 + the 1,040 FLIPped
+# movement tables) + 17 COMPILED_PENDING_MIGRATION (movement 15 - the
+# 7 STAY tables retained in movement_tables_native.inc + the 8
+# sMovement_* objects in non-gated source - plus the 2 multiboot
+# programs). The COMPILED count is a hard check now — every record's
+# symbol was verified present in the binary by the python scan above.
+if [[ ${#compiled_symbols[@]} -eq 17 ]]; then
+    ok "end state: exactly 17 COMPILED_PENDING_MIGRATION records (movement 15 STAY + multiboot 2; 21735 ROM_BASE_ONLY elsewhere)"
 else
-    bad "end state: ${#compiled_symbols[@]} COMPILED_PENDING_MIGRATION records, expected 1057"
+    bad "end state: ${#compiled_symbols[@]} COMPILED_PENDING_MIGRATION records, expected 17"
 fi
 
 payload_tu="$root/src/data/graphics/trainers_front_payload.c"
@@ -1093,4 +1168,4 @@ fi
 echo
 echo "native asset-isolation: $pass ok, $fail failed"
 [[ "$fail" == 0 ]] || exit 1
-echo "PASS: native target matches ownership (7908/7908 ROM_BASE_ONLY isolated - 196 trainer + 1608 pokemon battle + 288 object-event + 1544 tileset + 882 layout + 1301 audio + 2089 battle modules; 1057/1057 COMPILED_PENDING_MIGRATION present - 1055 movement + 2 multiboot)"
+echo "PASS: native target matches ownership (8948/8948 ROM_BASE_ONLY isolated - 196 trainer + 1608 pokemon battle + 288 object-event + 1544 tileset + 882 layout + 1301 audio + 2089 battle modules + 1040 movement (R13-J §3A FLIP); 17/17 COMPILED_PENDING_MIGRATION present - 15 movement STAY + 2 multiboot)"

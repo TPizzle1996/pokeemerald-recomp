@@ -875,11 +875,20 @@ Common_EventScript_PlayerHandedOverTheItem::
 	.include "data/scripts/check_furniture.inc"
 	.endif
 
+	/* R13-J §3A: pure-FLIP text blocks (zero host refs in the R13-I
+	 * baseline binary) - pack-served at runtime, GBA-only from here on. */
+	/* R13-J §3A correction (arbiter build): pc carries a C-consumer
+	 * label (gText_WhichPCShouldBeAccessed, birch_pc.c) - mixed, LINUX64
+	 * links the STAY twin. The rest stay pure-FLIP (GBA-only). */
+	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
+	.include "data/text/pc_native.inc"
+	.else
 	.include "data/text/record_mix.inc"
 	.include "data/text/pc.inc"
 	.include "data/text/pkmn_center_nurse.inc"
 	.include "data/text/mart_clerk.inc"
 	.include "data/text/obtain_item.inc"
+	.endif
 
 /* The below and surf.inc could be split into some text/notices.inc*/
 gText_PokemartSign::
@@ -952,7 +961,10 @@ gText_PokerusExplanation::
 	.string "While infected, POKéMON are said to\n"
 	.string "grow exceptionally well.$"
 
+	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
+	.else
 	.include "data/text/surf.inc"
+	.endif
 
 gText_DoorOpenedFarAway::
 	.string "It sounded as if a door opened\n"
@@ -1000,9 +1012,12 @@ gText_Sudowoodo_Attacked::
 gText_LegendaryFlewAway::
 	.string "The {STR_VAR_1} flew away!$"
 
+	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
+	.else
 	.include "data/text/pc_transfer.inc"
 	.include "data/text/questionnaire.inc"
 	.include "data/text/abnormal_weather.inc"
+	.endif
 
 	/* R13-G6: region C (G-owned common entrypoints). */
 	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
@@ -1062,20 +1077,34 @@ Common_EventScript_LegendaryFlewAway::
 	.include "data/scripts/cable_club.inc"
 	.endif
 
-	.include "data/text/cable_club.inc"
+	/* R13-J §3A: mixed file - LINUX64 links the STAY twin (8 STAY labels),
+	 * GBA links the full block (91 labels). */
 	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
+	.include "data/text/cable_club_native.inc"
 	.else
+	.include "data/text/cable_club.inc"
 	.include "data/scripts/contest_hall.inc"
 	.endif
+	/* R13-J §3A correction (arbiter build): contest_strings / contest_link
+	 * / contest_painting carry C-consumer labels (contest.c,
+	 * contest_painting.c) - mixed, LINUX64 links the STAY twins.
+	 * trick_house_mechadolls stays pure-FLIP (GBA-only). */
+	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
+	.include "data/text/contest_strings_native.inc"
+	.include "data/text/contest_link_native.inc"
+	.include "data/text/contest_painting_native.inc"
+	.else
 	.include "data/text/contest_strings.inc"
 	.include "data/text/contest_link.inc"
 	.include "data/text/contest_painting.inc"
 	.include "data/text/trick_house_mechadolls.inc"
+	.endif
 	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
+	.include "data/text/tv_native.inc"
 	.else
+	.include "data/text/tv.inc"
 	.include "data/scripts/tv.inc"
 	.endif
-	.include "data/text/tv.inc"
 	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
 	.else
 	.include "data/scripts/interview.inc"
@@ -1117,10 +1146,13 @@ Common_EventScript_LegendaryFlewAway::
 	.else
 	.include "data/scripts/berry_blender.inc"
 	.endif
+	/* R13-J §3A correction: mauville_man is pure-STAY (all 18 labels
+	 * C-consumed: mauville_old_man.c) - full include both sides.
+	 * trainers stays pure-FLIP (GBA-only). */
 	.include "data/text/mauville_man.inc"
-	.include "data/text/trainers.inc"
 	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
 	.else
+	.include "data/text/trainers.inc"
 	.include "data/scripts/repel.inc"
 	.endif
 	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
@@ -1131,27 +1163,35 @@ Common_EventScript_LegendaryFlewAway::
 	.else
 	.include "data/scripts/roulette.inc"
 	.endif
+	/* R13-J §3A: pokedex_rating is mixed (twin); lottery_corner and
+	 * event_ticket_1 are pure-FLIP. braille.inc stays BOTH-side: the 22
+	 * braille blocks are EXPLICIT_DEFERRED (§3A/§29), stay compiled for
+	 * the C braille runtime seam through the R14 block migration. */
+	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
+	.include "data/text/pokedex_rating_native.inc"
+	.else
 	.include "data/text/pokedex_rating.inc"
 	.include "data/text/lottery_corner.inc"
 	.include "data/text/event_ticket_1.inc"
+	.endif
 	.include "data/text/braille.inc"
 	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
 	.include "data/text/braille_addresses_native.inc"
 	.endif
+	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
+	.else
 	.include "data/text/berries.inc"
 	.include "data/text/shoal_cave.inc"
 	.include "data/text/check_furniture.inc"
-	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
-	.else
 	.include "data/scripts/cave_hole.inc"
 	.endif
 	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
 	.else
 	.include "data/scripts/lilycove_lady.inc"
 	.endif
-	.include "data/text/match_call.inc"
 	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
 	.else
+	.include "data/text/match_call.inc"
 	.include "data/scripts/apprentice.inc"
 	.endif
 	.include "data/text/apprentice.inc"
@@ -1160,12 +1200,12 @@ Common_EventScript_LegendaryFlewAway::
 	.else
 	.include "data/scripts/battle_pike.inc"
 	.endif
+	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
+	.else
 	.include "data/text/blend_master.inc"
 	.include "data/text/battle_tent.inc"
 	.include "data/text/event_ticket_2.inc"
 	.include "data/text/move_tutors.inc"
-	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
-	.else
 	.include "data/scripts/move_tutors.inc"
 	.endif
 	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
@@ -1177,21 +1217,38 @@ Common_EventScript_LegendaryFlewAway::
 	.include "data/scripts/test_signpost.inc"
 	.endif
 	.include "data/text/frontier_brain.inc"
+	/* R13-J §3A correction (arbiter build): save + birch_speech carry
+	 * C-consumer labels (start_menu.c, berry_crush.c, birch_pc.c,
+	 * main_menu.c) - mixed, LINUX64 links the STAY twins. */
+	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
+	.include "data/text/save_native.inc"
+	.include "data/text/birch_speech_native.inc"
+	.else
 	.include "data/text/save.inc"
 	.include "data/text/birch_speech.inc"
+	.endif
 	.if (NATIVE_LINUX == 1) && (LINUX64 == 1)
 	/* R13-G6: C-owned text blocks carved verbatim out of G-excluded
-	 * script files (their whole files are skipped on LINUX64), so the
-	 * deferred-to-r13g labels stay compiled natively through R13-G.
-	 * The GBA build still gets them from the script .inc files. */
-	.include "data/text/secret_base_trainers.inc"
+	 * script files (their whole files are skipped on LINUX64). The GBA
+	 * build still gets them from the script .inc files.
+	 * R13-J §3A: the STAY labels keep compiling natively (via the STAY
+	 * twins); the pure-FLIP carves have zero host refs and are dropped
+	 * from the LINUX64 link - pack-served at runtime.
+	 * R13-J §3A correction (arbiter build): BattleTowerMultiBattleRoom,
+	 * BattleTowerBattleRoom, BattlePyramidFloor and roulette_g6 carry
+	 * C-consumer labels (battle_main.c, roulette.c, start_menu.c) that
+	 * the 8-byte scan could not see (RIP-relative code refs) and stay
+	 * compiled. BattleTowerBattleRoom is mixed (LINUX64 links its STAY
+	 * twin); BattleTowerMultiBattleRoom, BattlePyramidFloor and
+	 * roulette_g6 are pure-STAY, so LINUX64 links the full files. */
+	.include "data/text/secret_base_trainers_native.inc"
 	.include "data/text/BattleFrontier_BattleTowerMultiPartnerRoom_text.inc"
 	.include "data/text/BattleFrontier_BattlePyramidFloor_text.inc"
+	.include "data/text/BattleFrontier_BattleTowerMultiBattleRoom_text.inc"
+	.include "data/text/BattleFrontier_BattleTowerBattleRoom_text_native.inc"
 	.include "data/text/mauville_man_g6.inc"
+	.include "data/text/roulette_g6.inc"
 	.include "data/text/BattleFrontier_Lounge2_text.inc"
 	.include "data/text/BattleFrontier_Lounge3_text.inc"
 	.include "data/text/BattleFrontier_Lounge5_text.inc"
-	.include "data/text/roulette_g6.inc"
-	.include "data/text/BattleFrontier_BattleTowerMultiBattleRoom_text.inc"
-	.include "data/text/BattleFrontier_BattleTowerBattleRoom_text.inc"
 	.endif

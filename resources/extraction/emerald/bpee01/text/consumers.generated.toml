@@ -108,7 +108,7 @@ reason = "battle-script text reads"
 
 [[consumer_sites]]
 kind = "c-direct-ref"
-site = "src/battle_main.c:2606"
+site = "src/battle_main.c:2653"
 consumer = "BattleFrontier_BattleTowerBattleRoom_Text_RecordCouldntBeSaved"
 decision = "deferred-to-r13g"
 reason = "script operand + direct C code reference; slot conversion would corrupt the script read"
@@ -213,70 +213,70 @@ reason = "script operand + direct C code reference; slot conversion would corrup
 
 [[consumer_sites]]
 kind = "c-direct-ref"
-site = "src/secret_base.c:1167"
+site = "src/secret_base.c:1170"
 consumer = "SecretBase_Text_Trainer0Defeated"
 decision = "deferred-to-r13g"
 reason = "script operand + direct C code reference; slot conversion would corrupt the script read"
 
 [[consumer_sites]]
 kind = "c-direct-ref"
-site = "src/secret_base.c:1169"
+site = "src/secret_base.c:1172"
 consumer = "SecretBase_Text_Trainer1Defeated"
 decision = "deferred-to-r13g"
 reason = "script operand + direct C code reference; slot conversion would corrupt the script read"
 
 [[consumer_sites]]
 kind = "c-direct-ref"
-site = "src/secret_base.c:1171"
+site = "src/secret_base.c:1174"
 consumer = "SecretBase_Text_Trainer2Defeated"
 decision = "deferred-to-r13g"
 reason = "script operand + direct C code reference; slot conversion would corrupt the script read"
 
 [[consumer_sites]]
 kind = "c-direct-ref"
-site = "src/secret_base.c:1173"
+site = "src/secret_base.c:1176"
 consumer = "SecretBase_Text_Trainer3Defeated"
 decision = "deferred-to-r13g"
 reason = "script operand + direct C code reference; slot conversion would corrupt the script read"
 
 [[consumer_sites]]
 kind = "c-direct-ref"
-site = "src/secret_base.c:1175"
+site = "src/secret_base.c:1178"
 consumer = "SecretBase_Text_Trainer4Defeated"
 decision = "deferred-to-r13g"
 reason = "script operand + direct C code reference; slot conversion would corrupt the script read"
 
 [[consumer_sites]]
 kind = "c-direct-ref"
-site = "src/secret_base.c:1177"
+site = "src/secret_base.c:1180"
 consumer = "SecretBase_Text_Trainer5Defeated"
 decision = "deferred-to-r13g"
 reason = "script operand + direct C code reference; slot conversion would corrupt the script read"
 
 [[consumer_sites]]
 kind = "c-direct-ref"
-site = "src/secret_base.c:1179"
+site = "src/secret_base.c:1182"
 consumer = "SecretBase_Text_Trainer6Defeated"
 decision = "deferred-to-r13g"
 reason = "script operand + direct C code reference; slot conversion would corrupt the script read"
 
 [[consumer_sites]]
 kind = "c-direct-ref"
-site = "src/secret_base.c:1181"
+site = "src/secret_base.c:1184"
 consumer = "SecretBase_Text_Trainer7Defeated"
 decision = "deferred-to-r13g"
 reason = "script operand + direct C code reference; slot conversion would corrupt the script read"
 
 [[consumer_sites]]
 kind = "c-direct-ref"
-site = "src/secret_base.c:1183"
+site = "src/secret_base.c:1186"
 consumer = "SecretBase_Text_Trainer8Defeated"
 decision = "deferred-to-r13g"
 reason = "script operand + direct C code reference; slot conversion would corrupt the script read"
 
 [[consumer_sites]]
 kind = "c-direct-ref"
-site = "src/secret_base.c:1185"
+site = "src/secret_base.c:1188"
 consumer = "SecretBase_Text_Trainer9Defeated"
 decision = "deferred-to-r13g"
 reason = "script operand + direct C code reference; slot conversion would corrupt the script read"
@@ -465,7 +465,7 @@ reason = "script operand + direct C code reference; slot conversion would corrup
 
 [[consumer_sites]]
 kind = "c-direct-ref"
-site = "src/start_menu.c:1161"
+site = "src/start_menu.c:1164"
 consumer = "gText_AlreadySavedFile"
 decision = "deferred-to-r13g"
 reason = "script operand + direct C code reference; slot conversion would corrupt the script read"
@@ -514,14 +514,14 @@ reason = "script operand + direct C code reference; slot conversion would corrup
 
 [[consumer_sites]]
 kind = "c-direct-ref"
-site = "src/start_menu.c:1104"
+site = "src/start_menu.c:1107"
 consumer = "gText_BattlePyramidConfirmRest"
 decision = "deferred-to-r13g"
 reason = "script operand + direct C code reference; slot conversion would corrupt the script read"
 
 [[consumer_sites]]
 kind = "c-direct-ref"
-site = "src/start_menu.c:1293"
+site = "src/start_menu.c:1296"
 consumer = "gText_BattlePyramidConfirmRetire"
 decision = "deferred-to-r13g"
 reason = "script operand + direct C code reference; slot conversion would corrupt the script read"
@@ -591,7 +591,7 @@ reason = "script operand + direct C code reference; slot conversion would corrup
 
 [[consumer_sites]]
 kind = "c-direct-ref"
-site = "src/start_menu.c:1108"
+site = "src/start_menu.c:1111"
 consumer = "gText_ConfirmSave"
 decision = "deferred-to-r13g"
 reason = "script operand + direct C code reference; slot conversion would corrupt the script read"
@@ -647,7 +647,7 @@ reason = "script operand + direct C code reference; slot conversion would corrup
 
 [[consumer_sites]]
 kind = "c-direct-ref"
-site = "src/start_menu.c:1157"
+site = "src/start_menu.c:1160"
 consumer = "gText_DifferentSaveFile"
 decision = "deferred-to-r13g"
 reason = "script operand + direct C code reference; slot conversion would corrupt the script read"
@@ -661,7 +661,7 @@ reason = "script operand + direct C code reference; slot conversion would corrup
 
 [[consumer_sites]]
 kind = "c-direct-ref"
-site = "src/battle_main.c:2359"
+site = "src/battle_main.c:2406"
 consumer = "gText_LinkStandby3"
 decision = "deferred-to-r13g"
 reason = "script operand + direct C code reference; slot conversion would corrupt the script read"
@@ -731,7 +731,7 @@ reason = "script operand + direct C code reference; slot conversion would corrup
 
 [[consumer_sites]]
 kind = "c-direct-ref"
-site = "src/start_menu.c:1227"
+site = "src/start_menu.c:1230"
 consumer = "gText_PlayerSavedGame"
 decision = "deferred-to-r13g"
 reason = "script operand + direct C code reference; slot conversion would corrupt the script read"
@@ -752,14 +752,14 @@ reason = "script operand + direct C code reference; slot conversion would corrup
 
 [[consumer_sites]]
 kind = "c-direct-ref"
-site = "src/start_menu.c:1229"
+site = "src/start_menu.c:1232"
 consumer = "gText_SaveError"
 decision = "deferred-to-r13g"
 reason = "script operand + direct C code reference; slot conversion would corrupt the script read"
 
 [[consumer_sites]]
 kind = "c-direct-ref"
-site = "src/start_menu.c:1204"
+site = "src/start_menu.c:1207"
 consumer = "gText_SavingDontTurnOff"
 decision = "deferred-to-r13g"
 reason = "script operand + direct C code reference; slot conversion would corrupt the script read"

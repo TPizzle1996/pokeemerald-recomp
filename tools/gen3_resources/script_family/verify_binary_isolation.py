@@ -58,11 +58,18 @@ ENGINE_PREFIX = [
     "gStdScripts_End",
 ]
 F_OWNED = ["gMapLayouts", "gMapGroups", "gMapHeaders"]
-# Sample C-owned text labels (R13-C family; must stay compiled through R13-G).
+# Sample C-owned text labels (R13-C family). R13-J §3A: the two Obtained
+# labels were FLIPped (arbiter LINUX64 link proved zero host refs) - their
+# compiled duplicates are removed and the strings are pack-served, so they
+# are expected ABSENT (FLIP_TEXT_SAMPLE). gBirchDexRatingText_AreYouCurious
+# is C-consumed (birch_pc.c; one of the 70 arbiter-proven labels) and stays
+# compiled through the pokedex_rating STAY twin.
 C_TEXT_SAMPLE = [
+    "gBirchDexRatingText_AreYouCurious",
+]
+FLIP_TEXT_SAMPLE = [
     "gText_ObtainedTheItem",
     "gText_ObtainedTheDecor",
-    "gBirchDexRatingText_AreYouCurious",
 ]
 BRIDGE_BYTES = ["kScriptBridges"]
 
@@ -200,6 +207,11 @@ def main() -> int:
     # 6. Named exclusions present
     for s in ENGINE_PREFIX + F_OWNED + C_TEXT_SAMPLE + BRIDGE_BYTES:
         report(f"exclusion-{s}", f"{'present' if s in defined else 'MISSING'}", s in defined)
+    # 6b. R13-J §3A FLIP text labels absent (compiled duplicates removed;
+    # the strings are pack-served). The arbiter LINUX64 link is the
+    # completeness proof: a live consumer would have failed the link.
+    for s in FLIP_TEXT_SAMPLE:
+        report(f"flip-text-{s}", f"{'ABSENT' if s not in defined else 'still defined!'}", s not in defined)
 
     # 7. R13-G6 braille handoff (plan sec 7.3): the generated
     # kBrailleGbaAddrs (ascending GBA provenance) pairs index-for-index

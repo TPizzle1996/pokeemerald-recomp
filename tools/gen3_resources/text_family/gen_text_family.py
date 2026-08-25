@@ -104,9 +104,16 @@ PINNED_DUP_GROUPS = 478              # 476 + "None$"×4 + 1 (AC-3, measured)
 PINNED_DUP_SYMBOLS = 1168
 PINNED_REDUNDANT_BYTES = 23891
 PINNED_BUNDLE_MAPS = 304
-PINNED_BUNDLE_DATA_TEXT = 35
+PINNED_BUNDLE_DATA_TEXT = 35  # R13-J §3A freeze preservation: the 9 carve
+                              # files remap to their HEAD-era bundle ids
+                              # (CARVE_BUNDLE_REMAP), so data/text stays at
+                              # the R13-I value 35 (the §3D bump to 44
+                              # codified the carve divergence and is reverted)
 PINNED_BUNDLE_SCRIPTS = 24   # 23 data/scripts + data/event_scripts.s (AC-2)
-PINNED_BUNDLES = 363         # corrected 362 -> 363 (docs/R13C_AUDIT_CORRECTIONS.md §8)
+PINNED_BUNDLES = 363         # 304 maps + 35 data/text + 24 scripts
+                             # (R13-I value; §3D's 363 -> 372 reverted -
+                             # the emitted bundles must agree with the
+                             # frozen pack, see CARVE_BUNDLE_REMAP)
 PINNED_DUAL_REF = 97
 PINNED_SCAN_BOUND = 4096             # canonical scan bound (never hit: max 824)
 PINNED_KEY_COLLISION_GROUPS = {"geasychatword-were": ["gEasyChatWord_WeRe",
@@ -115,10 +122,16 @@ PINNED_KEY_COLLISION_GROUPS = {"geasychatword-were": ["gEasyChatWord_WeRe",
 # Per-family (labels, bytes) - AC-1 §2 + AC-3 §9c corrections (map-dialogue,
 # misc-scripts, tv, easy-chat +21; system -2 double-count). All other rows
 # EXACT.
+# R13-J §3D (G6 carve reconciliation): R13-G6 split the Frontier map text
+# out of data/maps/*/scripts.inc into 7 data/text/BattleFrontier_*_text.inc
+# (545 labels) and carved mauville-man/roulette text out of event_scripts.s
+# into data/text/mauville_man_g6.inc + roulette_g6.inc (120 labels). The
+# generator was last run at R13-G2, so map-dialogue / misc-scripts / system
+# were stale by exactly those sets; refreshed here to the current tree.
 FAMILY_PINS = {
-    "map-dialogue": (4361, 428130), "trainer": (1142, 67095),
+    "map-dialogue": (3816, 387814), "trainer": (1142, 67095),
     "match-call": (629, 60934), "pokedex": (387, 58017), "tv": (401, 55507),
-    "apprentice": (288, 49891), "misc-scripts": (492, 34802),
+    "apprentice": (288, 49891), "misc-scripts": (372, 28266),
     # R13-G2 §7.3 handoff: the 8 gift_*.inc text files reclassified from
     # misc-scripts into their own family (20 labels / 2,682 B, all
     # asm-source .rodata) so the per-label C resources publish under
@@ -129,7 +142,7 @@ FAMILY_PINS = {
     # arena grows by the 20 per-label rows: 6,191 -> 6,211 labels,
     # 548,591 -> 551,273 B (PINNED_ARENA_SUMMARIES below).
     "mystery-gift": (20, 2682),
-    "shared": (1655, 29915), "system": (613, 28790), "move": (355, 17251),
+    "shared": (1655, 29915), "system": (1278, 75642), "move": (355, 17251),
     "item": (310, 15101), "battle": (522, 11989), "frontier": (180, 11597),
     "cable-club": (91, 7713), "easy-chat": (1008, 7101), "berry": (41, 4305),
     "pokemon-news": (12, 3950), "misc": (27, 1714), "ability": (78, 1859),
@@ -232,6 +245,223 @@ KEY_SEGMENT = {
 LIVE_FAMILIES = frozenset(
     {"battle", "move", "ability", "nature", "shared", "system",
      "match-call", "ribbon"})
+
+# R13-J §3A: FLIP classification pins. Each name is a compiled text
+# label with ZERO resolved pointer references in the R13-I baseline
+# binary's PROGBITS sections (pointer scan over 23,842,840 B; metadata
+# sections excluded as coincidental-match noise). Nothing in the native
+# link consumes the compiled definition, so R13-J removes it from the
+# LINUX64 assembly (per-file/include gating; GBA build untouched) and
+# flips ownership to ROM_BASE_ONLY. The pack serves the string at
+# runtime via kTextNativeResources exactly as before - runtime
+# semantics are unchanged. Labels NOT in this set stay compiled
+# (COMPILED_PENDING_MIGRATION, documented STAY owner). Provenance and
+# methodology: docs/R13J_FINAL_OWNERSHIP_ISOLATION_REPORT.md §3A.
+from text_flip_pins import FLIP_PINS
+
+# R13-J §3A/§29: braille blocks are compiled text-class bytes (22 local
+# labels, 552 B) referenced at runtime through the kBrailleTextAddresses
+# / kBrailleGbaAddrs seam (script-family generator pins
+# BRAILLE_TEXT_LABELS_PIN=22 / BRAILLE_TEXT_BYTES_PIN=552). They are NOT
+# pack-served (no inventory rows) and stay compiled: EXPLICIT_DEFERRED
+# with owner = C braille runtime (ScrCmd_braillemessage), stage = R14
+# braille block migration. Records are emitted so the R13-J §2 census
+# accounts for every compiled symbol.
+BRAILLE_PINNED_LABELS = 22
+BRAILLE_PINNED_BYTES = 552
+# The 22 local braille labels defined in data/text/braille.inc (local
+# `:` labels, so scan_asm_text never sees them - they carry no
+# .string/.ascii body). Kept in sync with the script-family generator's
+# BRAILLE_TEXT_LABELS_PIN by the ownership emission pin above.
+# R13-J §3A correction (arbiter build): the 8-byte pointer scan sees
+# only DATA references (absolute pointer words in PROGBITS). Code
+# references compile to RIP-relative 32-bit displacements and leave NO
+# absolute word, so labels consumed by compiled C (lea/mov %rip) were
+# misclassified FLIP. The forced LINUX64 link failed with exactly these
+# 70 undefined references (linker completeness: a STAY label whose
+# definition is missing always fails the link). They are removed from
+# FLIP_PINS and stay compiled as EXPLICIT_DEFERRED (owner = compiled C
+# consumers, stage = R14 C text-consumer migration), mirroring the
+# braille records. 66 of the 70 have site rows in consumers.generated.toml
+# (decision "deferred-to-r13g"); the remaining 4 are link-proven.
+C_CONSUMER_DEFERRED = frozenset({
+    "BattleFrontier_BattleTowerBattleRoom_Text_RecordCouldntBeSaved",
+    "GiddyText_DontYouAgree",
+    "GiddyText_Is",
+    "Roulette_Text_BoardWillBeCleared",
+    "Roulette_Text_CoinCaseIsFull",
+    "Roulette_Text_ControlsInstruction",
+    "Roulette_Text_ItsAHit",
+    "Roulette_Text_Jackpot",
+    "Roulette_Text_KeepPlaying",
+    "Roulette_Text_NoCoinsLeft",
+    "Roulette_Text_NotEnoughCoins",
+    "Roulette_Text_NothingDoing",
+    "Roulette_Text_PlayMinimumWagerIsX",
+    "Roulette_Text_SpecialRateTable",
+    "Roulette_Text_YouveWonXCoins",
+    "SecretBase_Text_Trainer9Defeated",
+    "gBirchDexRatingText_AreYouCurious",
+    "gBirchDexRatingText_OnANationwideBasis",
+    "gBirchDexRatingText_SoYouveSeenAndCaught",
+    "gContestHallPaintingCaption",
+    "gTVMassOutbreakText00",
+    "gTVPokemonAnglerText00",
+    "gTVPokemonAnglerText01",
+    "gTVPokemonLotteryWinnerFlashReportText00",
+    "gText_AllOutOfAppealTime",
+    "gText_AlreadySavedFile",
+    "gText_AppealComboWentOverExcellently",
+    "gText_AppealComboWentOverVeryWell",
+    "gText_AppealComboWentOverWell",
+    "gText_AppealNumButItCantParticipate",
+    "gText_AppealNumWhichMoveWillBePlayed",
+    "gText_AwaitingLinkup",
+    "gText_BattlePyramidConfirmRest",
+    "gText_BattlePyramidConfirmRetire",
+    "gText_Birch_AndYouAre",
+    "gText_Birch_AreYouReady",
+    "gText_Birch_BoyOrGirl",
+    "gText_Birch_MainSpeech",
+    "gText_Birch_SoItsPlayer",
+    "gText_Birch_Welcome",
+    "gText_Birch_WhatsYourName",
+    "gText_Birch_YourePlayer",
+    "gText_ConfirmLinkWhenPlayersReady",
+    "gText_ConfirmSave",
+    "gText_ConfirmStartLinkWithXPlayers",
+    "gText_Contest_Anxiety",
+    "gText_Contest_Fear",
+    "gText_Contest_Hesitancy",
+    "gText_Contest_Laziness",
+    "gText_Contest_Shyness",
+    "gText_CrowdContinuesToWatchMon",
+    "gText_DifferentSaveFile",
+    "gText_JudgeLookedAtMonExpectantly",
+    "gText_LinkStandby3",
+    "gText_LinkStandby4",
+    "gText_MonAppealedWithMove",
+    "gText_MonCantAppealNextTurn",
+    "gText_MonsMoveIsIgnored",
+    "gText_MonsXDidntGoOverWell",
+    "gText_MonsXGotTheCrowdGoing",
+    "gText_MonsXWentOverGreat",
+    "gText_MonWasTooNervousToMove",
+    "gText_MonWasWatchingOthers",
+    "gText_PlayerSavedGame",
+    "gText_PleaseWaitForLink",
+    "gText_RepeatedAppeal",
+    "gText_SaveError",
+    "gText_SavingDontTurnOffPower",
+    "gText_WhichPCShouldBeAccessed",
+    "gText_YourPartnerHasRetired",
+})
+
+BRAILLE_SOURCE_LABELS = (
+    "Underwater_SealedChamber_Braille_GoUpHere",
+    "SealedChamber_OuterRoom_Braille_ABC",
+    "SealedChamber_OuterRoom_Braille_GHI",
+    "SealedChamber_OuterRoom_Braille_MNO",
+    "SealedChamber_OuterRoom_Braille_TUV",
+    "SealedChamber_OuterRoom_Braille_DEF",
+    "SealedChamber_OuterRoom_Braille_JKL",
+    "SealedChamber_OuterRoom_Braille_PQRS",
+    "SealedChamber_OuterRoom_Braille_Period",
+    "SealedChamber_OuterRoom_Braille_WXYZ",
+    "SealedChamber_OuterRoom_Braille_Comma",
+    "SealedChamber_OuterRoom_Braille_DigHere",
+    "SealedChamber_InnerRoom_Braille_FirstWailordLastRelicanth",
+    "SealedChamber_InnerRoom_Braille_InThisCaveWeHaveLived",
+    "SealedChamber_InnerRoom_Braille_WeOweAllToThePokemon",
+    "SealedChamber_InnerRoom_Braille_ButWeSealedThePokemonAway",
+    "SealedChamber_InnerRoom_Braille_WeFearedIt",
+    "SealedChamber_InnerRoom_Braille_ThoseWithCourageHope",
+    "SealedChamber_InnerRoom_Braille_OpenDoorEternalPokemonWaits",
+    "DesertRuins_Braille_UseRockSmash",
+    "IslandCave_Braille_RunLapAroundWall",
+    "AncientTomb_Braille_ShineInTheMiddle",
+)
+
+# R13-J §3B: documented recomp-only table deferrals. sFrontierManiacMessages
+# is a function-local 2-D pointer table (src/field_specials.c:2065) whose
+# reference-ELF symbol is GAS-local-suffixed (sFrontierManiacMessages.336),
+# so exact-name discovery finds no qualified ELF slice and the source_only
+# path rejects 2-D shapes. Its 24 rows are system-family labels
+# (BattleFrontier_Lounge2_Text_*, data/text/BattleFrontier_Lounge2_text.inc)
+# - pack-owned (ROM_BASE_ONLY) and STAY-compiled: the compiled table's
+# pointer words are their only compiled references in the R13-I baseline
+# binary (that is why §3A classifies them STAY). The table therefore stays
+# compiled and the fail-closed 2-D check is waived for it: documented
+# deferral, owner = C frontier-maniac runtime (ShowFrontierManiacMessage),
+# stage = R14 2-D text-table migration. Root cause: R13-G6 carved the
+# Frontier map text out of data/maps/*/scripts.inc (map-dialogue, not
+# LIVE) into data/text/*.inc (system, LIVE), which newly pulled this table
+# into the live migration path; the generator was last run at R13-G2, so
+# the gap was dormant until R13-J.
+SOURCE_ONLY_2D_DEFERRALS = frozenset({"sFrontierManiacMessages"})
+
+# R13-J §3B: documented skeleton-array deferrals - tables the G6 carve
+# pulled into the live migration path that stay compiled. Root cause for
+# every name: R13-G6 carved Frontier/mauville/roulette text out of
+# data/maps/*/scripts.inc, data/scripts/mauville_man.inc and
+# data/event_scripts.s (families map-dialogue / misc-scripts / misc, not
+# LIVE) into data/text/*.inc (family system, LIVE), which made each
+# referencing table cuttable at R13-J for the first time. Their labels
+# are STAY per §3A (resolved pointer refs in the R13-I baseline binary:
+# msgbox script operands + the tables themselves), stay compiled, and are
+# pack-owned via constructed-blob bundles (COMPILED_PENDING_MIGRATION).
+# No NATIVE_LINUX cutover guards exist in the sources for these tables
+# (they were never part of the R13-C cutover), so emitting host arrays
+# would duplicate their symbols at link; each stays compiled instead.
+# Owners = the C runtimes named per table, stage = R14.
+SKELETON_DEFERRALS = frozenset({
+    # mauville-old-man storyteller runtime (ShowStorytellerMessage /
+    # Script_StorytellerDisplayStory): struct Story is file-local
+    # (src/mauville_old_man.c:969, no STRUCT_HEADER entry), so the host
+    # array cannot be typed. 108 row labels (MauvilleCity_PokemonCenter_
+    # 1F_Text_*) from data/text/mauville_man_g6.inc; served by the
+    # scripts/mauville-man bundle (R13-J §3A CARVE_BUNDLE_REMAP keeps
+    # the frozen-pack id).
+    "sStorytellerStories",
+    # Battle Frontier service tables (frontier_util.c / battle_frontier
+    # hint services), rows from the 7 data/text/BattleFrontier_*_text.inc
+    # carves (545 labels; bundles map/battlefrontier-*-... per
+    # CARVE_BUNDLE_REMAP, the frozen-pack ids).
+    "sExitDirectionHintTexts1", "sExitDirectionHintTexts2",
+    "sExitDirectionHintTexts3", "sExitDirectionHintTexts4",
+    "sExitDirectionHintTexts5", "sExitDirectionHintTexts6",
+    "sRemainingItemsHintTexts1", "sRemainingItemsHintTexts2",
+    "sRemainingItemsHintTexts3", "sRemainingItemsHintTexts4",
+    "sRemainingItemsHintTexts5", "sRemainingItemsHintTexts6",
+    "sRemainingTrainersHintTexts1", "sRemainingTrainersHintTexts2",
+    "sRemainingTrainersHintTexts3", "sRemainingTrainersHintTexts4",
+    "sRemainingTrainersHintTexts5", "sRemainingTrainersHintTexts6",
+    # Frontier Gambler / nature-girl services (frontier_util.c,
+    # recomp-only source tables whose labels are the same carve sets).
+    "sFrontierGamblerGoMessages", "sFrontierGamblerLookingMessages",
+    "sNatureGirlMessages",
+})
+
+# Shared reason for every Frontier-service deferral (all names but
+# sStorytellerStories): the table was pulled live solely by the G6
+# carve's family reclassification; its labels are STAY-compiled and
+# pack-owned (COMPILED_PENDING_MIGRATION bundles); no NATIVE_LINUX
+# cutover guards exist in the source, so it stays compiled.
+SKELETON_DEFERRAL_DEFAULT_REASON = (
+    "R13-J §3B documented deferral: Frontier-service table pulled "
+    "live by the R13-G6 carve (data/text/BattleFrontier_*_text.inc "
+    "labels, family system); labels STAY-compiled + pack-owned "
+    "bundle members (COMPILED_PENDING_MIGRATION); no cutover guards "
+    "in source; stays compiled; stage R14")
+
+SKELETON_DEFERRAL_REASONS = {
+    "sStorytellerStories":
+        "R13-J §3B documented deferral: file-local struct 'Story' "
+        "(src/mauville_old_man.c:969) cannot type the host array; "
+        "rows are system-family labels (pack-owned bundle "
+        "scripts/mauville-man, STAY-compiled); stays compiled; "
+        "stage R14",
+}
 
 # R13-C §9/§10: comprehensive text-pointer table discovery + host-array
 # generation. Every `const u8 *const NAME[...]` / `const struct T NAME[...]`
@@ -776,6 +1006,11 @@ def enumerate_sources(root):
             p = os_path(dirpath, f)
             rel = os.path.relpath(p, start=str(root)).replace("\\", "/")
             d = rel.rsplit("/", 1)[0] if "/" in rel else ""
+            if f.endswith("_native.inc"):
+                # R13-J §3A STAY twins (data/text/*_native.inc) are
+                # LINUX64-only copies of the STAY labels; they are not
+                # extraction sources (the originals are).
+                continue
             if f.endswith(".inc") and (
                     d.endswith(("/text", "/scripts")) or "/maps/" in rel):
                 for lab in scan_asm_text(p):
@@ -1827,8 +2062,40 @@ def analyze_text_tables(tables, records, keymap, elf, root):
             continue
         segs = split_top_level(t.body)
         fills = []
+        if t.name in SKELETON_DEFERRALS:
+            # R13-J §3B: documented deferral (see the constant): the
+            # table stays compiled; its rows' labels stay STAY; the
+            # pack serves them; owner/stage are named in the reason.
+            fams = sorted({known_records[w][1]
+                           for seg in segs
+                           for w in segment_label_tokens(
+                               seg, known_labels)})
+            deferred_out.append(
+                (t.rel, t.name, fams,
+                 SKELETON_DEFERRAL_REASONS.get(
+                     t.name, SKELETON_DEFERRAL_DEFAULT_REASON)))
+            t._dropped = True
+            continue
         if t.source_only:
             if t.star or len(t.shape) > 1:
+                if t.name in SOURCE_ONLY_2D_DEFERRALS:
+                    # R13-J §3B: documented deferral (see the constant):
+                    # the table stays compiled; its rows' labels stay
+                    # STAY; the pack serves them; owner = C
+                    # frontier-maniac runtime, stage = R14.
+                    fams = sorted({known_records[w][1]
+                                   for seg in segs
+                                   for w in segment_label_tokens(
+                                       seg, known_labels)})
+                    deferred_out.append(
+                        (t.rel, t.name, fams,
+                         "R13-J §3B documented deferral: GAS-local-"
+                         "suffixed 2-D pointer table "
+                         "(sFrontierManiacMessages.336); rows are "
+                         "system-family labels (pack-owned, STAY); "
+                         "stays compiled; stage R14"))
+                    t._dropped = True
+                    continue
                 fail(f"recomp-only table '{t.name}': only pure 1-D "
                      f"pointer tables and struct rows are supported")
             texts = _tu_texts(root, t.rel)
@@ -2527,6 +2794,48 @@ def bundle_key(kind, path):
     return f"emerald:text/data/{canonical(Path(p).stem)}"
 
 
+# R13-J §3A freeze preservation. R13-G6 carved Frontier/mauville/roulette
+# text out of data/maps/*/scripts.inc, data/scripts/mauville_man.inc and
+# data/event_scripts.s into these data/text files; a fresh generator run
+# derives bundle ids from the CURRENT paths, renaming the bundles to
+# emerald:text/data/*. But the frozen R13-I pack (23,069 resources /
+# 15,278,272 B / SHA-256 b711d358...aac5bb) and the R13-I runtime tables
+# were built from the pre-carve ids, and the R13-J mandate pins that pack
+# ("R13-J should not change runtime semantics"). The carved label FILES
+# stay where R13-G6 put them, but their bundle ids remap to the HEAD-era
+# ids the pack serves; the emitted bundles then carry exactly the R13-I
+# label sets (verified per bundle: 129/26/14/344/35/41/28/148/13 =
+# residual map/scripts labels + carved labels). Several source paths share
+# a key here (deliberate merges); the remaining 354 paths map 1:1, and the
+# emit_artifacts collision guard still fails on any unintended merge.
+CARVE_BUNDLE_REMAP = {
+    "data/text/BattleFrontier_BattlePyramidFloor_text.inc":
+        "emerald:text/map/battlefrontier-battlepyramidfloor",
+    "data/text/BattleFrontier_BattleTowerBattleRoom_text.inc":
+        "emerald:text/map/battlefrontier-battletowerbattleroom",
+    "data/text/BattleFrontier_BattleTowerMultiBattleRoom_text.inc":
+        "emerald:text/map/battlefrontier-battletowermultibattleroom",
+    "data/text/BattleFrontier_BattleTowerMultiPartnerRoom_text.inc":
+        "emerald:text/map/battlefrontier-battletowermultipartnerroom",
+    "data/text/BattleFrontier_Lounge2_text.inc":
+        "emerald:text/map/battlefrontier-lounge2",
+    "data/text/BattleFrontier_Lounge3_text.inc":
+        "emerald:text/map/battlefrontier-lounge3",
+    "data/text/BattleFrontier_Lounge5_text.inc":
+        "emerald:text/map/battlefrontier-lounge5",
+    "data/text/mauville_man_g6.inc":
+        "emerald:text/scripts/mauville-man",
+    "data/text/roulette_g6.inc":
+        "emerald:text/scripts/roulette",
+}
+
+
+def bundle_id(path):
+    """Bundle resource id for an asm label file: bundle_key(), with the
+    R13-J §3A carve remap (CARVE_BUNDLE_REMAP) applied."""
+    return CARVE_BUNDLE_REMAP.get(path, bundle_key("asm", path))
+
+
 def bundle_blob(labels):
     """Self-describing blob: u32 count, u32 dataOffset, u32 offsets[count],
     then the canonical bytes of each label in canonical-name order."""
@@ -2591,13 +2900,22 @@ def emit_artifacts(records, fam_dir, args, rom_bytes, keymap):
             bundle_files.setdefault(r[2], []).append(r)
     keys = {}
     for path, recs in sorted(bundle_files.items()):
-        key = bundle_key("asm", path)
+        key = bundle_id(path)
         if key in keys:
-            fail(f"bundle key collision: '{key}' from {keys[key]} and {path}")
-        keys[key] = path
+            # Only the R13-J §3A carve merges share a key (multiple source
+            # paths, one HEAD-era bundle id); anything else is a bug.
+            if key not in CARVE_BUNDLE_REMAP.values():
+                fail(f"bundle key collision: '{key}' from {keys[key]} "
+                     f"and {path}")
+            keys[key].append(path)
+        else:
+            keys[key] = [path]
     bundle_blob_bytes = {}
-    for key, path in sorted(keys.items()):
-        recs = sorted(bundle_files[path], key=lambda r: canonical(r[0]))
+    for key, paths in sorted(keys.items()):
+        recs = []
+        for path in paths:
+            recs += bundle_files[path]
+        recs.sort(key=lambda r: canonical(r[0]))
         labels = [(r[0], None, bytes(rom_bytes[r[5]:r[5] + r[6]]))
                   for r in recs]
         blob = bundle_blob(labels)
@@ -2625,7 +2943,8 @@ def emit_artifacts(records, fam_dir, args, rom_bytes, keymap):
     return label_arts, bundle_blob_bytes
 
 
-def emit_family(records, dual, label_arts, bundle_blobs, fam_dir, args, keymap):
+def emit_family(records, dual, label_arts, bundle_blobs, fam_dir, args,
+                keymap, elf):
     fam = fam_dir
     # inventory
     from collections import Counter
@@ -2748,7 +3067,7 @@ def emit_family(records, dual, label_arts, bundle_blobs, fam_dir, args, keymap):
     bundle_files = {}
     for r in records:
         if r[3] == "asm":
-            bundle_files.setdefault(bundle_key("asm", r[2]), []).append(r)
+            bundle_files.setdefault(bundle_id(r[2]), []).append(r)
     bundle_lines = [
         "# Generated by tools/gen3_resources/text_family/gen_text_family.py.",
         "# Do not edit by hand; re-run the generator (regeneration must be",
@@ -2827,8 +3146,30 @@ def emit_family(records, dual, label_arts, bundle_blobs, fam_dir, args, keymap):
     for rid in sorted(label_arts):
         symbol, size = by_id[rid]
         label_family = sym_fam[symbol]
+        # R13-J §3A: FLIP labels (zero binary refs -> compiled duplicate
+        # removed from the LINUX64 link) and the mystery-gift labels
+        # (never compiled on LINUX64; GBA-only script payload, pack
+        # serves them) are ROM_BASE_ONLY. Everything else keeps its
+        # prior state: LIVE families / item / pokedex ROM_BASE_ONLY,
+        # the rest COMPILED_PENDING_MIGRATION (STAY: the compiled
+        # definition is link-required and stays in the binary).
+        # R13-J §3A: FLIP labels (zero binary refs -> compiled duplicate
+        # removed from the LINUX64 link) and the mystery-gift labels
+        # (never compiled on LINUX64; GBA-only script payload, pack
+        # serves them) are ROM_BASE_ONLY. Everything else keeps its
+        # prior state: LIVE families / item / pokedex ROM_BASE_ONLY,
+        # the rest COMPILED_PENDING_MIGRATION (STAY: the compiled
+        # definition is link-required and stays in the binary).
+        # R13-J §3A correction: the 70 C_CONSUMER_DEFERRED labels are
+        # bundle-covered (no per-label records - the census accounts
+        # for them inside their bundle records, COMPILED_PENDING_
+        # MIGRATION); un-pinning them is what keeps their compiled
+        # definitions in the LINUX64 link (twin membership). See the
+        # C_CONSUMER_DEFERRED definition block.
         state = "ROM_BASE_ONLY" if (label_family in LIVE_FAMILIES
-                                    or label_family in ("item", "pokedex")) \
+                                    or label_family in ("item", "pokedex")
+                                    or label_family == "mystery-gift"
+                                    or symbol in FLIP_PINS) \
             else "COMPILED_PENDING_MIGRATION"
         data = root / label_arts[rid]
         h = sha256(data.read_bytes())
@@ -2884,6 +3225,73 @@ def emit_family(records, dual, label_arts, bundle_blobs, fam_dir, args, keymap):
                     'reason = "script operand + direct C code reference; '
                     'stays compiled through R13-G"')
             own_lines.append("")
+
+    # R13-J §3A/§29: braille text-class records. The braille blocks
+    # (22 local labels, 552 B total) are compiled on LINUX64 and
+    # runtime-referenced through the kBrailleTextAddresses /
+    # kBrailleGbaAddrs seam (script-family generator pins
+    # BRAILLE_TEXT_LABELS_PIN / BRAILLE_TEXT_BYTES_PIN). They are not
+    # pack-served, so they are EXPLICIT_DEFERRED with a named owner;
+    # per-label sizes come from the qualified ELF symbol spans.
+    braille_lines = []
+    braille_bytes = 0
+    braille_count = 0
+    braille_syms = []
+    for bl in sorted(BRAILLE_SOURCE_LABELS):
+        sym = elf.find(bl)
+        if sym is None:
+            fail(f"braille label '{bl}' not found in the qualified ELF")
+        braille_syms.append(sym)
+    # The braille symbols carry no ELF size (local labels); the span is
+    # [label address, next symbol address) - the same rule the script
+    # family generator uses for its BRAILLE_TEXT_BYTES_PIN=552.
+    img_syms = sorted((s for s in elf.symbols
+                       if s[1] >= GEN3_GBA_ROM_BASE), key=lambda s: s[1])
+    img_addrs = [s[1] for s in img_syms]
+
+    def span(addr):
+        for a in img_addrs:
+            if a > addr:
+                return a - addr
+        return 0
+
+    for name, value, size, _, _ in sorted(braille_syms, key=lambda s: s[1]):
+        size = span(value) if size == 0 else size
+        if value < GEN3_GBA_ROM_BASE:
+            fail(f"braille label '{name}': address outside the GBA image")
+        braille_bytes += size
+        braille_count += 1
+        braille_lines.append("[[resources]]")
+        braille_lines.append(f'id = "emerald:text/data/braille/{name}"')
+        braille_lines.append(
+            f'key = "{derive_key("emerald:text/data/braille/" + name)}"')
+        braille_lines.append(f'legacy_symbol = "{name}"')
+        braille_lines.append('type = "text"')
+        braille_lines.append('bundle = true')
+        braille_lines.append('source_artifact = "data/text/braille.inc"')
+        braille_lines.append(f"encoded_length = {size}")
+        braille_lines.append(f"decoded_length = {size}")
+        braille_lines.append('source_encoding = "raw"')
+        braille_lines.append(
+            'ownership_state = "EXPLICIT_DEFERRED"')
+        braille_lines.append(
+            'deferral_owner = "C braille runtime '
+            '(ScrCmd_braillemessage + '
+            'kBrailleTextAddresses/kBrailleGbaAddrs seam)"')
+        braille_lines.append(
+            'deferral_stage = "R14 braille block migration"')
+        braille_lines.append("")
+        braille_lines.append("[resources.targets]")
+        braille_lines.append('native = "EXPLICIT_DEFERRED"')
+        braille_lines.append('gba = "COMPILED"')
+        braille_lines.append("")
+    if braille_count != BRAILLE_PINNED_LABELS:
+        fail(f"braille records {braille_count} != pinned "
+             f"{BRAILLE_PINNED_LABELS}")
+    if braille_bytes != BRAILLE_PINNED_BYTES:
+        fail(f"braille bytes {braille_bytes} != pinned "
+             f"{BRAILLE_PINNED_BYTES}")
+    own_lines += braille_lines
     write_if(fam / "ownership.generated.toml", own_lines, args)
 
     # consumers
@@ -3439,7 +3847,7 @@ def emit_bundle_index(records, bundle_blobs, root, args):
     for b, rid in enumerate(bundles):
         ids.append(rid)
         recs = sorted((r for r in records if r[3] == "asm"
-                       and bundle_key("asm", r[2]) == rid),
+                       and bundle_id(r[2]) == rid),
                       key=lambda r: canonical(r[0]))
         data_off = 8 + 4 * len(recs)
         off = data_off
@@ -3939,7 +4347,13 @@ PINNED_ARENA_SUMMARIES = {
     "nature": (25, 162),
     "item": (310, 15101),
     "pokedex": (387, 58017),
-    "system-shared": (2268, 58705),
+    # R13-J §3D (G6 carve reconciliation): the 7 BattleFrontier_*_text.inc
+    # carves (545 labels) + mauville_man_g6.inc/roulette_g6.inc (120
+    # labels) moved 665 labels from map-dialogue/misc into the system
+    # family, so system-shared grew 2,268 -> 2,933 (58,705 -> 105,557 B)
+    # and misc shrank 6,211 -> 5,546 (551,273 -> 504,421 B) - the only
+    # two arena summaries that changed since R13-G2 (last generator run).
+    "system-shared": (2933, 105557),
     "tv": (401, 55507),
     "matchcall": (629, 60934),
     "apprentice": (288, 49891),
@@ -3951,7 +4365,9 @@ PINNED_ARENA_SUMMARIES = {
     # R13-G2 §7.3 handoff: +20 mystery-gift per-label rows (2,682 B)
     # counted on top of their bundle membership (arena_inventory_counts)
     # - the only arena summary that changed since R13-C.
-    "misc": (6211, 551273),
+    # R13-J §3D: see the system-shared comment above (665 labels moved
+    # out of misc into system).
+    "misc": (5546, 504421),
 }
 
 PINNED_BUNDLE_INDEX_ENTRIES = 7953
@@ -3966,6 +4382,95 @@ PINNED_BUNDLE_INDEX_ENTRIES = 7953
 # carries the slice fills.
 PINNED_SLOT_BINDINGS = 3118
 
+
+def label_blocks(path):
+    """Split an asm text file into {label: [verbatim lines]} blocks at
+    LABEL_RE matches (the label line plus everything up to the next
+    label line)."""
+    blocks = {}
+    cur = None
+    for ln in open(path, errors="ignore").read().splitlines():
+        m = LABEL_RE.match(ln)
+        if m:
+            cur = m.group(1)
+            blocks[cur] = [ln]
+        elif cur is not None:
+            blocks[cur].append(ln)
+    return blocks
+
+
+def emit_native_twins(root, args):
+    """R13-J §3A: emit data/text/<name>_native.inc STAY twins.
+
+    Each data/text file with a mix of STAY and FLIP labels gets a twin
+    containing ONLY the STAY labels (verbatim blocks), included from
+    event_scripts.s under the LINUX64 gate instead of the original
+    (GBA-inert: the .else arm keeps the original include). The FLIP
+    labels' compiled definitions are thereby removed from the LINUX64
+    link; the pack serves their strings at runtime. Pure-STAY files
+    keep the original include; pure-FLIP files are gated GBA-only by
+    hand in event_scripts.s (no twin). The GBA build never includes a
+    twin, so it is byte-identical by construction. The LINUX64 link
+    itself is the final verification: a misclassified STAY label would
+    leave an undefined reference.
+    """
+    import glob
+    # R13-J §3A correction invariant: the 70 arbiter-proven C-consumer
+    # labels must never be FLIP pins (their compiled definitions are
+    # link-required; flipping them removes the definition and the
+    # forced LINUX64 link fails with an undefined reference).
+    bad = C_CONSUMER_DEFERRED & FLIP_PINS
+    if bad:
+        fail(f"R13-J §3A correction violated: {len(bad)} C-consumer "
+             f"labels back in FLIP_PINS: {sorted(bad)}")
+    text_dir = root / "data" / "text"
+    header = [
+        "/* Generated by tools/gen3_resources/text_family/"
+        "gen_text_family.py.",
+        " * Do not edit by hand; re-run the generator and --check it.",
+        " *",
+        " * R13-J §3A STAY twin: LINUX64-only copy of the STAY labels",
+        " * (link-required compiled definitions) from this file. The",
+        " * FLIP labels are not defined here - the pack serves their",
+        " * strings at runtime. Included from data/event_scripts.s",
+        " * under the LINUX64 gate; the GBA build never includes it.",
+        " */",
+        "",
+    ]
+    twins = 0
+    for path in sorted(glob.glob(str(text_dir / "*.inc"))):
+        if path.endswith("_native.inc"):
+            continue
+        blocks = label_blocks(path)
+        labels = list(blocks)
+        stay = [l for l in labels if l not in FLIP_PINS]
+        flip = [l for l in labels if l in FLIP_PINS]
+        if not stay or not flip:
+            # Pure-STAY (keep original include) / pure-FLIP (include is
+            # hand-gated GBA-only in event_scripts.s): no twin. A twin
+            # left over from a previous pins state (un-pinning made the
+            # file pure-STAY) would silently omit the re-stayed labels
+            # and break the LINUX64 link, so stale twins are deleted.
+            stale = text_dir / (path.rsplit("/", 1)[-1][:-4] + "_native.inc")
+            if stale.exists():
+                stale.unlink()
+            continue
+        out = list(header)
+        out.append(f"/* {len(stay)} STAY / {len(flip)} FLIP labels "
+                   f"(file total {len(labels)}) */")
+        out.append("")
+        for l in stay:
+            blk = blocks[l]
+            if not blk[0].rstrip().endswith("::"):
+                fail(f"STAY label '{l}' in {path} is not global ('::') "
+                     f"- a compiled C reference cannot resolve a local "
+                     f"label")
+            out.extend(blk)
+            out.append("")
+        write_if(text_dir / (path.rsplit("/", 1)[-1][:-4] + "_native.inc"),
+                 out, args)
+        twins += 1
+    print(f"R13-J §3A STAY twins: {twins} mixed files emitted")
 
 
 def main():
@@ -4016,7 +4521,7 @@ def main():
     label_arts, bundle_blobs = emit_artifacts(records, fam_dir, args, rom,
                                               keymap)
     emit_family(records, dual, label_arts, bundle_blobs, fam_dir, args,
-                keymap)
+                keymap, elf)
     emit_seam_header(records, label_arts, bundle_blobs, root, args, keymap)
     emit_slots(records, root, args)
 
@@ -4028,6 +4533,7 @@ def main():
     emit_skeleton_arrays(tables, root, args)
     emit_skeletons(tables, root, args)
     emit_skeleton_report(tables, deferred, records, fam_dir, args)
+    emit_native_twins(root, args)
 
     print(f"text labels: {len(records)} "
           f"({PINNED_C_RESOURCES} C-side per-label + "

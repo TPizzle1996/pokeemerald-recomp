@@ -11,7 +11,7 @@ const struct TextArenaSummary kTextArenaSummaries[TEXT_ARENA_COUNT] =
     {"nature", 25u, 162u},
     {"item", 310u, 15101u},
     {"pokedex", 387u, 58017u},
-    {"system-shared", 2268u, 58705u},
+    {"system-shared", 2933u, 105557u},
     {"tv", 401u, 55507u},
     {"matchcall", 629u, 60934u},
     {"apprentice", 288u, 49891u},
@@ -20,5 +20,5 @@ const struct TextArenaSummary kTextArenaSummaries[TEXT_ARENA_COUNT] =
     {"frontier-brain", 28u, 882u},
     {"easy-chat", 1008u, 7101u},
     {"berry", 41u, 4305u},
-    {"misc", 6211u, 551273u},
+    {"misc", 5546u, 504421u},
 };

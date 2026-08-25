@@ -72,6 +72,24 @@ MOVEMENT_PINNED_LABEL_BYTES = 7404
 MOVEMENT_PINNED_OBJECT_BYTES = 24
 MOVEMENT_PINNED_TOTAL = 1055
 MOVEMENT_PINNED_BYTES = 7428
+# R13-J §3A: the LINUX64 native include retains only the movement
+# tables with resolved binary references (STAY - referenced by compiled
+# C tables/code). The other 1,040 tables are FLIP (zero refs in the
+# R13-I baseline binary's PROGBITS sections): their compiled duplicates
+# are removed from the LINUX64 link and the leaf seam serves the
+# operands from the pack at runtime (semantics unchanged). The 8
+# sMovement_* objects never left the link (non-gated source).
+MOVEMENT_STAY_TABLES = frozenset({
+    "Apprentice_Movement_Leave",
+    "BattleFrontier_BattleDomeLobby_Movement_PlayerEnterDoor",
+    "BattleFrontier_OutsideEast_Movement_SudowoodoShake",
+    "LilycoveCity_Harbor_Movement_BrineyBoardFerry",
+    "LittlerootTown_MaysHouse_2F_Movement_MayApproachPlayerSouth",
+    "Route116_Movement_GlassesManExit",
+    "Route128_Movement_StevenApproachPlayer",
+})
+MOVEMENT_NATIVE_INCLUDE_ROWS = 7
+MOVEMENT_NATIVE_INCLUDE_BYTES = 56
 
 # ------------------------------------------------------------ multiboot pins
 MULTIBOOT_PINNED_TOTAL = 2
@@ -589,10 +607,21 @@ def emit_family(rows, family, outdir, args, artifact_dir):
         own_lines.append('source_encoding = "raw"')
         own_lines.append(f'source_encoded_sha256 = "{h}"')
         own_lines.append(f'canonical_decoded_sha256 = "{h}"')
-        own_lines.append('ownership_state = "COMPILED_PENDING_MIGRATION"')
+        # R13-J §3A: movement-table FLIP closure. The 1,040 tables with
+        # zero resolved refs in the baseline binary are removed from the
+        # LINUX64 link (movement_tables_native.inc retains only the 7
+        # STAY tables; the 8 sMovement_* objects stay compiled from their
+        # non-gated source) and are served by the pack at runtime, so
+        # their ownership is ROM_BASE_ONLY. The 15 still-compiled records
+        # (7 STAY tables + 8 objects) keep COMPILED_PENDING_MIGRATION.
+        native_state = "COMPILED_PENDING_MIGRATION"
+        if family == "movement" and not rec_symbol.startswith("sMovement_") \
+                and rec_symbol not in MOVEMENT_STAY_TABLES:
+            native_state = "ROM_BASE_ONLY"
+        own_lines.append(f'ownership_state = "{native_state}"')
         own_lines.append("")
         own_lines.append("[resources.targets]")
-        own_lines.append('native = "COMPILED_PENDING_MIGRATION"')
+        own_lines.append(f'native = "{native_state}"')
         own_lines.append('gba = "COMPILED"')
         own_lines.append("")
     write_if(fam / "ownership.generated.toml", own_lines, args)
@@ -777,19 +806,21 @@ def emit_seam_header(rows, root, args):
 
 
 def emit_movement_native_include(rows, root, args):
-    """R13-G6: re-carve the compiled movement tables for the LINUX64 link.
+    """R13-J §3A: retain only the STAY movement tables for the link.
 
     The per-map and common script .inc files that define the R13-B
     movement family are excluded wholesale on LINUX64 (their G
     field-script payload is pack-loaded arena modules), so this
-    generated include restores the compiled tables: the R13-B ownership
-    contract (COMPILED_PENDING_MIGRATION => symbol in the link) holds
-    until the movement cutover. The tables are byte-directive copies of
-    the qualified-ROM slices - byte-for-byte the same bytes the GBA
-    build assembles from the source movement macros. The live runtime
-    never references them (MOVEMENT_TARGET operands resolve through the
-    leaf seam to the pack payloads), so these are contract-preserving
-    shadows. Included only under the LINUX64 gate in event_scripts.s;
+    generated include restores the compiled tables that the link still
+    requires. R13-J §3A classified every table by resolved references
+    in the R13-I baseline binary: 7 tables are STAY (referenced by
+    compiled C tables/code - their definitions must stay in the link);
+    the other 1,040 are FLIP with zero refs, so their compiled
+    duplicates are removed (the leaf seam serves the operands from the
+    pack at runtime - semantics unchanged). The tables are
+    byte-directive copies of the qualified-ROM slices - byte-for-byte
+    the same bytes the GBA build assembles from the source movement
+    macros. Included only under the LINUX64 gate in event_scripts.s;
     the GBA build gets the tables from the original .inc files.
     """
     lines = [
@@ -797,7 +828,7 @@ def emit_movement_native_include(rows, root, args):
         " * Do not edit by hand; re-run the generator and --check it",
         " * (tests/gen3_resources/run_r13b_leaf.sh).",
         " *",
-        " * R13-G6: compiled movement-table retention for the LINUX64",
+        " * R13-J §3A: STAY movement-table retention for the LINUX64",
         " * link (see the generator docstring for the rationale).",
         " */",
         "",
@@ -809,15 +840,25 @@ def emit_movement_native_include(rows, root, args):
             # non-gated source - they never left the LINUX64 link, so
             # re-carving them would duplicate the definitions.
             continue
+        if row[2] not in MOVEMENT_STAY_TABLES:
+            # R13-J §3A FLIP: zero resolved refs in the baseline
+            # binary - the compiled duplicate is removed from the
+            # LINUX64 link (pack serves the operands at runtime).
+            continue
         retained.append(row)
-    if len(retained) != MOVEMENT_PINNED_TOTAL - MOVEMENT_PINNED_OBJECTS:
+    if len(retained) != MOVEMENT_NATIVE_INCLUDE_ROWS:
         fail(f"movement native include rows {len(retained)} != "
-             f"{MOVEMENT_PINNED_TOTAL - MOVEMENT_PINNED_OBJECTS} "
-             f"(skipping the {MOVEMENT_PINNED_OBJECTS} sMovement_ objects)")
+             f"{MOVEMENT_NATIVE_INCLUDE_ROWS} STAY tables")
+    if sum(r[3] for r in retained) != MOVEMENT_NATIVE_INCLUDE_BYTES:
+        fail(f"movement native include bytes {sum(r[3] for r in retained)} "
+             f"!= pinned {MOVEMENT_NATIVE_INCLUDE_BYTES}")
     lines.append(
-        f"/* {len(retained)} movement tables, {sum(r[3] for r in retained)} B"
-        f" (the {MOVEMENT_PINNED_OBJECTS} sMovement_* objects stay "
-        f"compiled from their non-gated source) */")
+        f"/* {len(retained)} STAY movement tables, "
+        f"{sum(r[3] for r in retained)} B "
+        f"(the {MOVEMENT_PINNED_OBJECTS} sMovement_* objects stay "
+        f"compiled from their non-gated source; the other "
+        f"{MOVEMENT_PINNED_LABELS - len(retained)} tables are "
+        f"R13-J §3A FLIP and are pack-served at runtime) */")
     lines.append("")
     for key, symbol, rec_symbol, size, rom_off in retained:
         data = rom[rom_off:rom_off + size]

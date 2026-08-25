@@ -29,10 +29,12 @@
 #        truncated movement / multiboot, overlapping claimed ROM slice,
 #        pack duplicate-key guard).
 #   F    native isolation battery: tests/run_emerald_native_asset_isolation.sh
-#        --build against the ownership union (5819 ROM_BASE_ONLY
-#        + 1057 COMPILED_PENDING_MIGRATION; the leaf movement symbols are
-#        LOCAL, so the COMPILED presence check runs against the full nm
-#        table).
+#        --build against the ownership union (21735 ROM_BASE_ONLY
+#        + 1388 COMPILED_PENDING_MIGRATION after the R13-J §3A movement
+#        FLIP: 1040 tables are ROM_BASE_ONLY pack-served, the 15 remaining
+#        pending are the 7 STAY tables + 8 sMovement_* objects; the leaf
+#        movement symbols are LOCAL, so the COMPILED presence check runs
+#        against the full nm table).
 #
 # Build-isolated like the other Gen3 runners: gen3 core + session + seam
 # only, no SDL, never launches the game.
@@ -196,7 +198,7 @@ else
     grep '^FAIL' "$tmp/leaf_test.log" | head -10 >&2
 fi
 
-echo "== F: native isolation battery (6876-record ownership union) =="
+echo "== F: native isolation battery (23145-record ownership union) =="
 if "$root/tests/run_emerald_native_asset_isolation.sh" --build \
     > "$tmp/isolation.log" 2>&1; then
     pass "$(tail -1 "$tmp/isolation.log")"

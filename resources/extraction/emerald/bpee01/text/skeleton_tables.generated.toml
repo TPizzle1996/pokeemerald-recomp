@@ -2298,8 +2298,8 @@ byte_total = 58017
 
 [[arenas]]
 key = "system-shared"
-label_count = 2268
-byte_total = 58705
+label_count = 2933
+byte_total = 105557
 
 [[arenas]]
 key = "tv"
@@ -2343,9 +2343,543 @@ byte_total = 4305
 
 [[arenas]]
 key = "misc"
-label_count = 6211
-byte_total = 551273
+label_count = 5546
+byte_total = 504421
 
+
+[[deferred_tables]]
+file = "src/field_specials.c"
+name = "sFrontierManiacMessages"
+families = "system"
+reason = "R13-J §3B documented deferral: GAS-local-suffixed 2-D pointer table (sFrontierManiacMessages.336); rows are system-family labels (pack-owned, STAY); stays compiled; stage R14"
+
+[[deferred_tables]]
+file = "src/field_specials.c"
+name = "sNatureGirlMessages"
+families = "system"
+reason = "R13-J §3B documented deferral: Frontier-service table pulled live by the R13-G6 carve (data/text/BattleFrontier_*_text.inc labels, family system); labels STAY-compiled + pack-owned bundle members (COMPILED_PENDING_MIGRATION); no cutover guards in source; stays compiled; stage R14"
+
+[[deferred_tables]]
+file = "src/field_specials.c"
+name = "sFrontierGamblerLookingMessages"
+families = "system"
+reason = "R13-J §3B documented deferral: Frontier-service table pulled live by the R13-G6 carve (data/text/BattleFrontier_*_text.inc labels, family system); labels STAY-compiled + pack-owned bundle members (COMPILED_PENDING_MIGRATION); no cutover guards in source; stays compiled; stage R14"
+
+[[deferred_tables]]
+file = "src/field_specials.c"
+name = "sFrontierGamblerGoMessages"
+families = "system"
+reason = "R13-J §3B documented deferral: Frontier-service table pulled live by the R13-G6 carve (data/text/BattleFrontier_*_text.inc labels, family system); labels STAY-compiled + pack-owned bundle members (COMPILED_PENDING_MIGRATION); no cutover guards in source; stays compiled; stage R14"
+
+[[deferred_tables]]
+file = "src/battle_pyramid.c"
+name = "sExitDirectionHintTexts1"
+families = "system"
+reason = "R13-J §3B documented deferral: Frontier-service table pulled live by the R13-G6 carve (data/text/BattleFrontier_*_text.inc labels, family system); labels STAY-compiled + pack-owned bundle members (COMPILED_PENDING_MIGRATION); no cutover guards in source; stays compiled; stage R14"
+
+[[deferred_tables]]
+file = "src/battle_pyramid.c"
+name = "sRemainingItemsHintTexts1"
+families = "system"
+reason = "R13-J §3B documented deferral: Frontier-service table pulled live by the R13-G6 carve (data/text/BattleFrontier_*_text.inc labels, family system); labels STAY-compiled + pack-owned bundle members (COMPILED_PENDING_MIGRATION); no cutover guards in source; stays compiled; stage R14"
+
+[[deferred_tables]]
+file = "src/battle_pyramid.c"
+name = "sRemainingTrainersHintTexts1"
+families = "system"
+reason = "R13-J §3B documented deferral: Frontier-service table pulled live by the R13-G6 carve (data/text/BattleFrontier_*_text.inc labels, family system); labels STAY-compiled + pack-owned bundle members (COMPILED_PENDING_MIGRATION); no cutover guards in source; stays compiled; stage R14"
+
+[[deferred_tables]]
+file = "src/battle_pyramid.c"
+name = "sExitDirectionHintTexts2"
+families = "system"
+reason = "R13-J §3B documented deferral: Frontier-service table pulled live by the R13-G6 carve (data/text/BattleFrontier_*_text.inc labels, family system); labels STAY-compiled + pack-owned bundle members (COMPILED_PENDING_MIGRATION); no cutover guards in source; stays compiled; stage R14"
+
+[[deferred_tables]]
+file = "src/battle_pyramid.c"
+name = "sRemainingItemsHintTexts2"
+families = "system"
+reason = "R13-J §3B documented deferral: Frontier-service table pulled live by the R13-G6 carve (data/text/BattleFrontier_*_text.inc labels, family system); labels STAY-compiled + pack-owned bundle members (COMPILED_PENDING_MIGRATION); no cutover guards in source; stays compiled; stage R14"
+
+[[deferred_tables]]
+file = "src/battle_pyramid.c"
+name = "sRemainingTrainersHintTexts2"
+families = "system"
+reason = "R13-J §3B documented deferral: Frontier-service table pulled live by the R13-G6 carve (data/text/BattleFrontier_*_text.inc labels, family system); labels STAY-compiled + pack-owned bundle members (COMPILED_PENDING_MIGRATION); no cutover guards in source; stays compiled; stage R14"
+
+[[deferred_tables]]
+file = "src/battle_pyramid.c"
+name = "sExitDirectionHintTexts3"
+families = "system"
+reason = "R13-J §3B documented deferral: Frontier-service table pulled live by the R13-G6 carve (data/text/BattleFrontier_*_text.inc labels, family system); labels STAY-compiled + pack-owned bundle members (COMPILED_PENDING_MIGRATION); no cutover guards in source; stays compiled; stage R14"
+
+[[deferred_tables]]
+file = "src/battle_pyramid.c"
+name = "sRemainingItemsHintTexts3"
+families = "system"
+reason = "R13-J §3B documented deferral: Frontier-service table pulled live by the R13-G6 carve (data/text/BattleFrontier_*_text.inc labels, family system); labels STAY-compiled + pack-owned bundle members (COMPILED_PENDING_MIGRATION); no cutover guards in source; stays compiled; stage R14"
+
+[[deferred_tables]]
+file = "src/battle_pyramid.c"
+name = "sRemainingTrainersHintTexts3"
+families = "system"
+reason = "R13-J §3B documented deferral: Frontier-service table pulled live by the R13-G6 carve (data/text/BattleFrontier_*_text.inc labels, family system); labels STAY-compiled + pack-owned bundle members (COMPILED_PENDING_MIGRATION); no cutover guards in source; stays compiled; stage R14"
+
+[[deferred_tables]]
+file = "src/battle_pyramid.c"
+name = "sExitDirectionHintTexts4"
+families = "system"
+reason = "R13-J §3B documented deferral: Frontier-service table pulled live by the R13-G6 carve (data/text/BattleFrontier_*_text.inc labels, family system); labels STAY-compiled + pack-owned bundle members (COMPILED_PENDING_MIGRATION); no cutover guards in source; stays compiled; stage R14"
+
+[[deferred_tables]]
+file = "src/battle_pyramid.c"
+name = "sRemainingItemsHintTexts4"
+families = "system"
+reason = "R13-J §3B documented deferral: Frontier-service table pulled live by the R13-G6 carve (data/text/BattleFrontier_*_text.inc labels, family system); labels STAY-compiled + pack-owned bundle members (COMPILED_PENDING_MIGRATION); no cutover guards in source; stays compiled; stage R14"
+
+[[deferred_tables]]
+file = "src/battle_pyramid.c"
+name = "sRemainingTrainersHintTexts4"
+families = "system"
+reason = "R13-J §3B documented deferral: Frontier-service table pulled live by the R13-G6 carve (data/text/BattleFrontier_*_text.inc labels, family system); labels STAY-compiled + pack-owned bundle members (COMPILED_PENDING_MIGRATION); no cutover guards in source; stays compiled; stage R14"
+
+[[deferred_tables]]
+file = "src/battle_pyramid.c"
+name = "sExitDirectionHintTexts5"
+families = "system"
+reason = "R13-J §3B documented deferral: Frontier-service table pulled live by the R13-G6 carve (data/text/BattleFrontier_*_text.inc labels, family system); labels STAY-compiled + pack-owned bundle members (COMPILED_PENDING_MIGRATION); no cutover guards in source; stays compiled; stage R14"
+
+[[deferred_tables]]
+file = "src/battle_pyramid.c"
+name = "sRemainingItemsHintTexts5"
+families = "system"
+reason = "R13-J §3B documented deferral: Frontier-service table pulled live by the R13-G6 carve (data/text/BattleFrontier_*_text.inc labels, family system); labels STAY-compiled + pack-owned bundle members (COMPILED_PENDING_MIGRATION); no cutover guards in source; stays compiled; stage R14"
+
+[[deferred_tables]]
+file = "src/battle_pyramid.c"
+name = "sRemainingTrainersHintTexts5"
+families = "system"
+reason = "R13-J §3B documented deferral: Frontier-service table pulled live by the R13-G6 carve (data/text/BattleFrontier_*_text.inc labels, family system); labels STAY-compiled + pack-owned bundle members (COMPILED_PENDING_MIGRATION); no cutover guards in source; stays compiled; stage R14"
+
+[[deferred_tables]]
+file = "src/battle_pyramid.c"
+name = "sExitDirectionHintTexts6"
+families = "system"
+reason = "R13-J §3B documented deferral: Frontier-service table pulled live by the R13-G6 carve (data/text/BattleFrontier_*_text.inc labels, family system); labels STAY-compiled + pack-owned bundle members (COMPILED_PENDING_MIGRATION); no cutover guards in source; stays compiled; stage R14"
+
+[[deferred_tables]]
+file = "src/battle_pyramid.c"
+name = "sRemainingItemsHintTexts6"
+families = "system"
+reason = "R13-J §3B documented deferral: Frontier-service table pulled live by the R13-G6 carve (data/text/BattleFrontier_*_text.inc labels, family system); labels STAY-compiled + pack-owned bundle members (COMPILED_PENDING_MIGRATION); no cutover guards in source; stays compiled; stage R14"
+
+[[deferred_tables]]
+file = "src/battle_pyramid.c"
+name = "sRemainingTrainersHintTexts6"
+families = "system"
+reason = "R13-J §3B documented deferral: Frontier-service table pulled live by the R13-G6 carve (data/text/BattleFrontier_*_text.inc labels, family system); labels STAY-compiled + pack-owned bundle members (COMPILED_PENDING_MIGRATION); no cutover guards in source; stays compiled; stage R14"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerApprenticeTexts1"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice1Accept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice1Intro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice1Mon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice1Mon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice1Reject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice1Intro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerApprenticeTexts2"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice2Accept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice2Intro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice2Mon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice2Mon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice2Reject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice2Intro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerApprenticeTexts3"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice3Accept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice3Intro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice3Mon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice3Mon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice3Reject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice3Intro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerApprenticeTexts4"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice4Accept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice4Intro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice4Mon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice4Mon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice4Reject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice4Intro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerApprenticeTexts5"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice5Accept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice5Intro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice5Mon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice5Mon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice5Reject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice5Intro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerApprenticeTexts6"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice6Accept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice6Intro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice6Mon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice6Mon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice6Reject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice6Intro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerApprenticeTexts7"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice7Accept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice7Intro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice7Mon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice7Mon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice7Reject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice7Intro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerApprenticeTexts8"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice8Accept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice8Intro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice8Mon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice8Mon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice8Reject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice8Intro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerApprenticeTexts9"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice9Accept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice9Intro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice9Mon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice9Mon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice9Reject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice9Intro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerApprenticeTexts10"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice10Accept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice10Intro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice10Mon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice10Mon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice10Reject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice10Intro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerApprenticeTexts11"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice11Accept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice11Intro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice11Mon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice11Mon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice11Reject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice11Intro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerApprenticeTexts12"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice12Accept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice12Intro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice12Mon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice12Mon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice12Reject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice12Intro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerApprenticeTexts13"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice13Accept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice13Intro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice13Mon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice13Mon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice13Reject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice13Intro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerApprenticeTexts14"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice14Accept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice14Intro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice14Mon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice14Mon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice14Reject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice14Intro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerApprenticeTexts15"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice15Accept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice15Intro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice15Mon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice15Mon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice15Reject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice15Intro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerApprenticeTexts16"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice16Accept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice16Intro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice16Mon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice16Mon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice16Reject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_Apprentice16Intro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsLass"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_LassAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_LassIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_LassMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_LassMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_LassReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_LassIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsYoungster"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_YoungsterAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_YoungsterIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_YoungsterMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_YoungsterMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_YoungsterReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_YoungsterIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsHiker"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_HikerAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_HikerIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_HikerMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_HikerMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_HikerReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_HikerIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsBeauty"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_BeautyAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_BeautyIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_BeautyMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_BeautyMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_BeautyReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_BeautyIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsFisherman"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_FishermanAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_FishermanIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_FishermanMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_FishermanMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_FishermanReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_FishermanIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsLady"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_LadyAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_LadyIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_LadyMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_LadyMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_LadyReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_LadyIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsCyclingTriathleteF"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_CyclingTriathleteFAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_CyclingTriathleteFIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_CyclingTriathleteFMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_CyclingTriathleteFMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_CyclingTriathleteFReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_CyclingTriathleteFIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsBugCatcher"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_BugCatcherAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_BugCatcherIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_BugCatcherMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_BugCatcherMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_BugCatcherReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_BugCatcherIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsSchoolKidM"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_SchoolKidMAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_SchoolKidMIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_SchoolKidMMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_SchoolKidMMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_SchoolKidMReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_SchoolKidMIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsRichBoy"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_RichBoyAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_RichBoyIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_RichBoyMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_RichBoyMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_RichBoyReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_RichBoyIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsBlackBelt"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_BlackBeltAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_BlackBeltIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_BlackBeltMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_BlackBeltMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_BlackBeltReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_BlackBeltIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsTuberF"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_TuberFAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_TuberFIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_TuberFMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_TuberFMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_TuberFReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_TuberFIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsHexManiac"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_HexManiacAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_HexManiacIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_HexManiacMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_HexManiacMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_HexManiacReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_HexManiacIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsPkmnBreederM"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_PkmnBreederMAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_PkmnBreederMIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_PkmnBreederMMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_PkmnBreederMMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_PkmnBreederMReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_PkmnBreederMIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsRunningTriathleteF"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_RunningTriathleteFAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_RunningTriathleteFIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_RunningTriathleteFMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_RunningTriathleteFMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_RunningTriathleteFReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_RunningTriathleteFIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsRunningTriathleteM"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_RunningTriathleteMAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_RunningTriathleteMIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_RunningTriathleteMMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_RunningTriathleteMMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_RunningTriathleteMReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_RunningTriathleteMIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsBattleGirl"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_BattleGirlAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_BattleGirlIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_BattleGirlMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_BattleGirlMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_BattleGirlReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_BattleGirlIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsCyclingTriathleteM"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_CyclingTriathleteMAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_CyclingTriathleteMIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_CyclingTriathleteMMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_CyclingTriathleteMMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_CyclingTriathleteMReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_CyclingTriathleteMIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsTuberM"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_TuberMAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_TuberMIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_TuberMMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_TuberMMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_TuberMReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_TuberMIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsGuitarist"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_GuitaristAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_GuitaristIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_GuitaristMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_GuitaristMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_GuitaristReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_GuitaristIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsGentleman"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_GentlemanAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_GentlemanIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_GentlemanMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_GentlemanMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_GentlemanReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_GentlemanIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsPokefanM"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_PokefanMAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_PokefanMIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_PokefanMMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_PokefanMMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_PokefanMReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_PokefanMIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsExpertM"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_ExpertMAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_ExpertMIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_ExpertMMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_ExpertMMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_ExpertMReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_ExpertMIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsExpertF"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_ExpertFAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_ExpertFIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_ExpertFMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_ExpertFMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_ExpertFReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_ExpertFIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsDragonTamer"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_DragonTamerAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_DragonTamerIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_DragonTamerMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_DragonTamerMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_DragonTamerReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_DragonTamerIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsBirdKeeper"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_BirdKeeperAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_BirdKeeperIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_BirdKeeperMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_BirdKeeperMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_BirdKeeperReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_BirdKeeperIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsNinjaBoy"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_NinjaBoyAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_NinjaBoyIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_NinjaBoyMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_NinjaBoyMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_NinjaBoyReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_NinjaBoyIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsParasolLady"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_ParasolLadyAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_ParasolLadyIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_ParasolLadyMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_ParasolLadyMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_ParasolLadyReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_ParasolLadyIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsBugManiac"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_BugManiacAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_BugManiacIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_BugManiacMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_BugManiacMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_BugManiacReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_BugManiacIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsSailor"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_SailorAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_SailorIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_SailorMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_SailorMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_SailorReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_SailorIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsCollector"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_CollectorAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_CollectorIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_CollectorMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_CollectorMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_CollectorReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_CollectorIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsPkmnRangerM"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_PkmnRangerMAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_PkmnRangerMIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_PkmnRangerMMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_PkmnRangerMMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_PkmnRangerMReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_PkmnRangerMIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsPkmnRangerF"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_PkmnRangerFAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_PkmnRangerFIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_PkmnRangerFMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_PkmnRangerFMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_PkmnRangerFReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_PkmnRangerFIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsAromaLady"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_AromaLadyAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_AromaLadyIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_AromaLadyMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_AromaLadyMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_AromaLadyReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_AromaLadyIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsRuinManiac"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_RuinManiacAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_RuinManiacIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_RuinManiacMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_RuinManiacMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_RuinManiacReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_RuinManiacIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsCoolTrainerM"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_CoolTrainerMAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_CoolTrainerMIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_CoolTrainerMMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_CoolTrainerMMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_CoolTrainerMReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_CoolTrainerMIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsCoolTrainerF"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_CoolTrainerFAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_CoolTrainerFIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_CoolTrainerFMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_CoolTrainerFMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_CoolTrainerFReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_CoolTrainerFIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsPokemaniac"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_PokemaniacAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_PokemaniacIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_PokemaniacMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_PokemaniacMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_PokemaniacReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_PokemaniacIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsKindler"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_KindlerAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_KindlerIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_KindlerMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_KindlerMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_KindlerReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_KindlerIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsCamper"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_CamperAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_CamperIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_CamperMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_CamperMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_CamperReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_CamperIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsPicnicker"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_PicnickerAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_PicnickerIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_PicnickerMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_PicnickerMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_PicnickerReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_PicnickerIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsPsychicM"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_PsychicMAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_PsychicMIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_PsychicMMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_PsychicMMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_PsychicMReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_PsychicMIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsPsychicF"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_PsychicFAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_PsychicFIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_PsychicFMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_PsychicFMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_PsychicFReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_PsychicFIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsSchoolKidF"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_SchoolKidFAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_SchoolKidFIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_SchoolKidFMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_SchoolKidFMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_SchoolKidFReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_SchoolKidFIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsPkmnBreederF"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_PkmnBreederFAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_PkmnBreederFIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_PkmnBreederFMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_PkmnBreederFMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_PkmnBreederFReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_PkmnBreederFIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsPokefanF"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_PokefanFAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_PokefanFIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_PokefanFMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_PokefanFMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_PokefanFReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_PokefanFIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsSwimmerF"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_SwimmerFAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_SwimmerFIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_SwimmerFMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_SwimmerFMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_SwimmerFReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_SwimmerFIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsSwimmingTriathleteM"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_SwimmingTriathleteMAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_SwimmingTriathleteMIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_SwimmingTriathleteMMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_SwimmingTriathleteMMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_SwimmingTriathleteMReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_SwimmingTriathleteMIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsSwimmingTriathleteF"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_SwimmingTriathleteFAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_SwimmingTriathleteFIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_SwimmingTriathleteFMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_SwimmingTriathleteFMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_SwimmingTriathleteFReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_SwimmingTriathleteFIntro']"
+
+[[deferred_tables]]
+file = "src/battle_tower.c"
+name = "sPartnerTextsSwimmerM"
+families = "system"
+reason = "recomp-only rewrite: row 0 source [] (expanded ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_SwimmerMAccept', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_SwimmerMIntro', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_SwimmerMMon1', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_SwimmerMMon2Ask', 'BattleFrontier_BattleTowerMultiPartnerRoom_Text_SwimmerMReject']) != ELF ['BattleFrontier_BattleTowerMultiPartnerRoom_Text_SwimmerMIntro']"
+
+[[deferred_tables]]
+file = "src/mauville_old_man.c"
+name = "sStorytellerStories"
+families = "system"
+reason = "R13-J §3B documented deferral: file-local struct 'Story' (src/mauville_old_man.c:969) cannot type the host array; rows are system-family labels (pack-owned bundle scripts/mauville-man, STAY-compiled); stays compiled; stage R14"
 
 [[deferred_tables]]
 file = "src/battle_dome.c"

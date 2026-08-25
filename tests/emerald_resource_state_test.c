@@ -563,6 +563,22 @@ static bool32 PlantMapHeaderClass(void)
         return FALSE;
     }
     GameData()->activeMapHeader = *published;
+    /* R13-J mode-(c) closure: this session never publishes the script
+     * family (RebindScripts requires the script compat live), so the
+     * published header's mapScripts is the unresolved GBA ROM constant
+     * (0x081dc2cc for the first connected map).  The pack image is
+     * malloc'd (ASLR-random base); when the base lands in the 0x08xxxxxx
+     * band that constant falls inside a pack range hull - in an exposed
+     * range the walker captures it (the base-aware 14th record, mode b),
+     * and in a hull's unexposed build-time-only prefix the save refuses
+     * outright (mode c: "resource-owned pointer lacks a registered
+     * resource identity", R13-J hunter iteration 19).  The runtime is
+     * right in both cases - an unresolved ROM address in a serialized
+     * pointer window is exactly what that refusal guards against.  The
+     * harness must not plant it: the session-accurate value is NULL (no
+     * live script pointer), which serializes in-band and round-trips
+     * deterministically at every pack base. */
+    GameData()->activeMapHeader.mapScripts = NULL;
     printf("CREATE map pointers: layout=%p events=%p scripts=%p connections=%p\n",
            (const void *)published->mapLayout, (const void *)published->events,
            (const void *)published->mapScripts,
@@ -578,7 +594,7 @@ static bool32 VerifyMapHeaderRelocated(void)
     if (published == NULL
      || restored->mapLayout != published->mapLayout
      || restored->events != published->events
-     || restored->mapScripts != published->mapScripts
+     || restored->mapScripts != NULL /* planted NULL, R13-J mode-(c) */
      || restored->connections != published->connections
      || restored->music != published->music
      || restored->mapLayoutId != published->mapLayoutId
@@ -1085,7 +1101,11 @@ static int DoCreate(const char *packPath, const char *statePath)
                records[i].rangeOffset);
         CHECK(records[i].reserved == 0);
         /* Battle rows register as legacy-LZ compat; text and the R13-F map
-         * event/connection arenas register as compat objects. */
+         * event/connection arenas register as compat objects.  No record
+         * can be anything else: the mapScripts window (+0xc8) is planted
+         * NULL (this session never rebinds scripts, R13-J mode-(c)
+         * closure), so the pack-base-dependent capture/refusal classes
+         * are gone from the harness entirely. */
         CHECK(records[i].role == EMERALD_RESOURCE_ROLE_LEGACY_LZ
               || records[i].role == EMERALD_RESOURCE_ROLE_COMPAT_OBJECT);
         CHECK(records[i].sectionTag == 8u); /* GAME_DATA */
@@ -1096,9 +1116,12 @@ static int DoCreate(const char *packPath, const char *statePath)
      * the neighborhood module added NO record (its storage is host
      * .bss/.data, never a serialized slice), and the opaque compiled
      * text pointer added none either (it is outside every resource
-     * range, so it serializes verbatim in-band). */
+     * range, so it serializes verbatim in-band).  The mapScripts window
+     * adds none: it is planted NULL (R13-J mode-(c) closure - this
+     * session never rebinds scripts, so the published header's GBA ROM
+     * constant must not enter a serialized pointer window).  13 records
+     * is deterministic at every pack base. */
     CHECK(recordCount == HARNESS_ROW_COUNT + 3u);
-    printf("CREATE expected %u records\n", HARNESS_ROW_COUNT + 3u);
     {
         /* The interior-pointer record carries the system-shared arena
          * identity with the zone-relative offset of gText_123Dot[1]
