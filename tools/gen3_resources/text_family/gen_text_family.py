@@ -3352,6 +3352,14 @@ def emit_family(records, dual, label_arts, bundle_blobs, fam_dir, args,
          "sEasyChatGroupWords blob indexing", "deferred-table",
          "compiled word blobs (R13-B-remaining leaf family) repoint with "
          "the easy-chat migration"),
+        ("c-direct-ref", "src/mystery_event_msg.c:3-13 + "
+         "src/text_input_strings.c:4-17",
+         "gText_MysteryEvent* (13) + gText_NamingScreenKeyboard_* / "
+         "gText_EasyChatKeyboard_* (14)", "stay-compiled",
+         "C-owned Mystery-Event UI and naming/keyboard strings with direct "
+         "C refs; canonical ROM text compiled under the R13-C C-owned "
+         "policy; bundle-declaration gap (~857 B) closed in R14; R15 "
+         "text-closure candidate"),
         ("bytecode-operand", "src/scrcmd.c:72",
          "msgbox/showmessage/trainerbattle operands", "deferred-r13g",
          "script operands embed native addresses; R13-G re-emits them as "

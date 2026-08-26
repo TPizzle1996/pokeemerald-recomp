@@ -34,6 +34,24 @@ planted NULL). See `docs/R13I_STATE_V5_CLOSURE_REPORT.md`,
 `docs/R13J_FINAL_OWNERSHIP_ISOLATION_REPORT.md`. R14 not begun (handoff
 list in §11).
 
+**Status (2026-08-25): R14 AUDIT COMPLETE — STOP with finding.** The
+R14 whole-project audit (`docs/R14_FINAL_EMERALD_OWNERSHIP_AUDIT.md`)
+proved every *migrated* family cleanly isolated on the whole binary
+(37,681/0 isolation, canonical-byte hunter A=0, 0 stale/0 unexplained
+among declared families, clean rebuild byte-identical, State-v5/6,390
+ranges green, zero build deltas) and discovered the remaining
+un-owned canonical surface: **~1.36 MB of gfx/text compiled with no
+pack ownership** (mon icons 430,080 B, still-fronts 363,816 B,
+battle-anim gfx 118,988 B, item icons 57,896 B, wallpapers 35,700 B,
+UI/misc 322,000 B, footprints 12,384 B, credits/union-room/decoration
+text 20,863 B) plus easy-chat (1,008 words, engine carve-out) and the
+2 multiboot programs (incl. one full Nintendo-published GBA ROM
+image). Per brief §34 (substantial new content families) R14 STOPs
+with the exact inventory as the **R15 "gfx-leaf + UI/text closure +
+easy-chat/multiboot cutover"** scope. R14's one narrow fix: the 27
+C-owned text labels (~857 B) now carry a `stay-compiled` consumer
+declaration. No commit; FireRed/Tallgrass not begun.
+
 ## 1. Scope decision: what belongs in R13
 
 R13 takes **all remaining original-game payload** — text, script bytecode,

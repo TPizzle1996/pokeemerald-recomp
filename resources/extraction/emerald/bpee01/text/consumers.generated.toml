@@ -93,6 +93,13 @@ decision = "deferred-table"
 reason = "compiled word blobs (R13-B-remaining leaf family) repoint with the easy-chat migration"
 
 [[consumer_sites]]
+kind = "c-direct-ref"
+site = "src/mystery_event_msg.c:3-13 + src/text_input_strings.c:4-17"
+consumer = "gText_MysteryEvent* (13) + gText_NamingScreenKeyboard_* / gText_EasyChatKeyboard_* (14)"
+decision = "stay-compiled"
+reason = "C-owned Mystery-Event UI and naming/keyboard strings with direct C refs; canonical ROM text compiled under the R13-C C-owned policy; bundle-declaration gap (~857 B) closed in R14; R15 text-closure candidate"
+
+[[consumer_sites]]
 kind = "bytecode-operand"
 site = "src/scrcmd.c:72"
 consumer = "msgbox/showmessage/trainerbattle operands"
