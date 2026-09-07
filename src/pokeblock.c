@@ -302,6 +302,10 @@ static const union AffineAnimCmd *const sAffineAnims_PokeblockCaseShake[] =
     sAffineAnim_PokeblockCaseShake
 };
 
+#if defined(NATIVE_LINUX)
+struct CompressedSpriteSheet gPokeblockCase_SpriteSheet = {NULL, 0x800, TAG_POKEBLOCK_CASE};
+struct CompressedSpritePalette gPokeblockCase_SpritePal = {NULL, TAG_POKEBLOCK_CASE};
+#else
 const struct CompressedSpriteSheet gPokeblockCase_SpriteSheet =
 {
     gMenuPokeblockDevice_Gfx, 0x800, TAG_POKEBLOCK_CASE
@@ -311,6 +315,7 @@ const struct CompressedSpritePalette gPokeblockCase_SpritePal =
 {
     gMenuPokeblockDevice_Pal, TAG_POKEBLOCK_CASE
 };
+#endif
 
 static const struct SpriteTemplate sSpriteTemplate_PokeblockCase =
 {

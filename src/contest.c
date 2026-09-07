@@ -384,12 +384,16 @@ static const u8 sNextTurnSpriteYPositions[CONTESTANT_COUNT] =
     36, 76, 116, 156
 };
 
+#if defined(NATIVE_LINUX)
+struct SpriteSheet sSpriteSheet_SliderHeart = {.data = NULL, .size = 0x20, .tag = TAG_SLIDER_HEART};
+#else
 static const struct SpriteSheet sSpriteSheet_SliderHeart =
 {
     .data = gContestSliderHeart_Gfx,
     .size = 0x20,
     .tag = TAG_SLIDER_HEART
 };
+#endif
 
 static const struct OamData sOam_SliderHeart =
 {
@@ -446,6 +450,15 @@ static const struct SpriteTemplate sSpriteTemplate_SliderHeart =
     .callback = SpriteCallbackDummy
 };
 
+#if defined(NATIVE_LINUX)
+struct CompressedSpriteSheet sSpriteSheet_NextTurn[CONTESTANT_COUNT] =
+{
+    {.data = NULL, .size = 0x100, .tag = TAG_NEXT_TURN_1_GFX},
+    {.data = NULL, .size = 0x100, .tag = TAG_NEXT_TURN_2_GFX},
+    {.data = NULL, .size = 0x100, .tag = TAG_NEXT_TURN_3_GFX},
+    {.data = NULL, .size = 0x100, .tag = TAG_NEXT_TURN_4_GFX}
+};
+#else
 static const struct CompressedSpriteSheet sSpriteSheet_NextTurn[CONTESTANT_COUNT] =
 {
     {
@@ -469,12 +482,17 @@ static const struct CompressedSpriteSheet sSpriteSheet_NextTurn[CONTESTANT_COUNT
         .tag = TAG_NEXT_TURN_4_GFX
     }
 };
+#endif
 
+#if defined(NATIVE_LINUX)
+struct SpritePalette sSpritePalette_NextTurn = {.data = NULL, .tag = TAG_NEXT_TURN_PAL};
+#else
 static const struct SpritePalette sSpritePalette_NextTurn =
 {
     .data = gContestPal,
     .tag = TAG_NEXT_TURN_PAL
 };
+#endif
 
 static const struct OamData sOam_NextTurn =
 {
@@ -565,12 +583,16 @@ static const struct SubspriteTable sSubspriteTable_NextTurn[] =
 };
 
 // Unused
+#if defined(NATIVE_LINUX)
+struct CompressedSpriteSheet sSpriteSheet_Faces = {.data = NULL, .size = 0x180, .tag = TAG_FACES_GFX};
+#else
 static const struct CompressedSpriteSheet sSpriteSheet_Faces =
 {
     .data = gContestFaces_Gfx,
     .size = 0x180,
     .tag = TAG_FACES_GFX
 };
+#endif
 
 static const struct OamData sOam_Faces =
 {
@@ -598,18 +620,26 @@ static const struct SpriteTemplate sSpriteTemplate_Faces =
     .callback = SpriteCallbackDummy
 };
 
+#if defined(NATIVE_LINUX)
+struct CompressedSpriteSheet sSpriteSheet_ApplauseMeter = {.data = NULL, .size = 0x400, .tag = TAG_APPLAUSE_METER};
+#else
 static const struct CompressedSpriteSheet sSpriteSheet_ApplauseMeter =
 {
     .data = gContestApplauseGfx,
     .size = 0x400,
     .tag = TAG_APPLAUSE_METER
 };
+#endif
 
+#if defined(NATIVE_LINUX)
+struct SpritePalette sSpritePalette_ApplauseMeter = {.data = NULL, .tag = TAG_APPLAUSE_METER};
+#else
 static const struct SpritePalette sSpritePalette_ApplauseMeter =
 {
     .data = gContestPal,
     .tag = TAG_APPLAUSE_METER
 };
+#endif
 
 static const struct OamData sOam_ApplauseMeter =
 {
@@ -661,25 +691,37 @@ static const struct SpriteTemplate sSpriteTemplate_Judge =
     .callback = SpriteCallbackDummy
 };
 
+#if defined(NATIVE_LINUX)
+struct CompressedSpriteSheet sSpriteSheet_Judge = {.data = NULL, .size = 0x800, .tag = TAG_JUDGE};
+#else
 static const struct CompressedSpriteSheet sSpriteSheet_Judge =
 {
     .data = gContestJudgeGfx,
     .size = 0x800,
     .tag = TAG_JUDGE
 };
+#endif
 
+#if defined(NATIVE_LINUX)
+struct CompressedSpriteSheet sSpriteSheet_JudgeSymbols = {.data = NULL, .size = 0x380, .tag = TAG_JUDGE_SYMBOLS_GFX};
+#else
 static const struct CompressedSpriteSheet sSpriteSheet_JudgeSymbols =
 {
     .data = gContestJudgeSymbolsGfx,
     .size = 0x380,
     .tag = TAG_JUDGE_SYMBOLS_GFX
 };
+#endif
 
+#if defined(NATIVE_LINUX)
+struct CompressedSpritePalette sSpritePalette_JudgeSymbols = {.data = NULL, .tag = TAG_CONTEST_SYMBOLS_PAL};
+#else
 static const struct CompressedSpritePalette sSpritePalette_JudgeSymbols =
 {
     .data = gContestJudgeSymbolsPal,
     .tag = TAG_CONTEST_SYMBOLS_PAL
 };
+#endif
 
 static const struct SpriteTemplate sSpriteTemplate_JudgeSpeechBubble =
 {
@@ -842,6 +884,15 @@ static const struct WindowTemplate sContestWindowTemplates[] =
 
 #include "data/contest_opponents.h"
 
+#if defined(NATIVE_LINUX)
+struct CompressedSpriteSheet sSpriteSheets_ContestantsTurnBlinkEffect[CONTESTANT_COUNT] =
+{
+    {.data = NULL, .size = 0x1000, .tag = TAG_BLINK_EFFECT_CONTESTANT0},
+    {.data = NULL, .size = 0x1000, .tag = TAG_BLINK_EFFECT_CONTESTANT1},
+    {.data = NULL, .size = 0x1000, .tag = TAG_BLINK_EFFECT_CONTESTANT2},
+    {.data = NULL, .size = 0x1000, .tag = TAG_BLINK_EFFECT_CONTESTANT3}
+};
+#else
 static const struct CompressedSpriteSheet sSpriteSheets_ContestantsTurnBlinkEffect[CONTESTANT_COUNT] =
 {
     {
@@ -865,6 +916,7 @@ static const struct CompressedSpriteSheet sSpriteSheets_ContestantsTurnBlinkEffe
         .tag = TAG_BLINK_EFFECT_CONTESTANT3
     }
 };
+#endif
 
 static const struct SpritePalette sSpritePalettes_ContestantsTurnBlinkEffect[CONTESTANT_COUNT] =
 {

@@ -294,8 +294,13 @@ extern const struct OamData gOamData_AffineOff_ObjNormal_64x32;
 extern const struct OamData gOamData_AffineOff_ObjBlend_64x32;
 extern const struct OamData gOamData_AffineOff_ObjBlend_16x32;
 
+#if defined(NATIVE_LINUX)
+extern struct CompressedSpriteSheet gBattleAnimPicTable[289];
+extern struct CompressedSpritePalette gBattleAnimPaletteTable[289];
+#else
 extern const struct CompressedSpriteSheet gBattleAnimPicTable[];
 extern const struct CompressedSpritePalette gBattleAnimPaletteTable[];
+#endif
 
 extern const struct SpriteTemplate gWaterHitSplatSpriteTemplate;
 

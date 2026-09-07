@@ -1,46 +1,133 @@
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Thanks[] = _("THANKS");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Yes[] = _("YES");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_HereGoes[] = _("HERE GOES");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_HereICome[] = _("HERE I COME");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_HereItIs[] = _("HERE IT IS");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Yeah[] = _("YEAH");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Welcome[] = _("WELCOME");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Oi[] = _("OI");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_HowDo[] = _("HOW DO");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Congrats[] = _("CONGRATS");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_GiveMe[] = _("GIVE ME");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Sorry[] = _("SORRY");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Apologize[] = _("APOLOGIZE");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Forgive[] = _("FORGIVE");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_HeyThere[] = _("HEY, THERE");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Hello[] = _("HELLO");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_GoodBye[] = _("GOOD-BYE");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_ThankYou[] = _("THANK YOU");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_IveArrived[] = _("I'VE ARRIVED");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Pardon[] = _("PARDON");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Excuse[] = _("EXCUSE");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_SeeYa[] = _("SEE YA");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_ExcuseMe[] = _("EXCUSE ME");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_WellThen[] = _("WELL, THEN");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_GoAhead[] = _("GO AHEAD");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Appreciate[] = _("APPRECIATE");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_HeyQues[] = _("HEY?");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_WhatsUpQues[] = _("WHAT'S UP?");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_HuhQues[] = _("HUH?");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_No[] = _("NO");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Hi[] = _("HI");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_YeahYeah[] = _("YEAH, YEAH");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_ByeBye[] = _("BYE-BYE");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_MeetYou[] = _("MEET YOU");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Hey[] = _("HEY");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Smell[] = _("SMELL");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Listening[] = _("LISTENING");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_HooHah[] = _("HOO-HAH");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Yahoo[] = _("YAHOO");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Yo[] = _("YO");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_ComeOver[] = _("COME OVER");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_CountOn[] = _("COUNT ON");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 
+#if defined(NATIVE_LINUX)
+struct EasyChatWordInfo gEasyChatGroup_Greetings[42];
+#else
 const struct EasyChatWordInfo gEasyChatGroup_Greetings[] = {
     [EC_INDEX(EC_WORD_THANKS)] =
     {
@@ -295,3 +382,4 @@ const struct EasyChatWordInfo gEasyChatGroup_Greetings[] = {
         .enabled = TRUE,
     },
 };
+#endif

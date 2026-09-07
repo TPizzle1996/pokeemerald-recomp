@@ -140,6 +140,9 @@ static const struct CaptureStar sCaptureStars[] =
 #define TAG_PARTICLES_LUXURYBALL  55030
 #define TAG_PARTICLES_PREMIERBALL 55031
 
+#if defined(NATIVE_LINUX)
+struct CompressedSpriteSheet sBallParticleSpriteSheets[POKEBALL_COUNT];
+#else
 static const struct CompressedSpriteSheet sBallParticleSpriteSheets[POKEBALL_COUNT] =
 {
     [BALL_POKE]    = {gBattleAnimSpriteGfx_Particles, 0x100, TAG_PARTICLES_POKEBALL},
@@ -155,7 +158,27 @@ static const struct CompressedSpriteSheet sBallParticleSpriteSheets[POKEBALL_COU
     [BALL_LUXURY]  = {gBattleAnimSpriteGfx_Particles, 0x100, TAG_PARTICLES_LUXURYBALL},
     [BALL_PREMIER] = {gBattleAnimSpriteGfx_Particles, 0x100, TAG_PARTICLES_PREMIERBALL},
 };
+#endif
 
+#if defined(NATIVE_LINUX)
+/* R15 Phase 4: mutable on native - published by the battle-anim gfx compat
+ * seam at init; tags retained. */
+struct CompressedSpritePalette sBallParticlePalettes[POKEBALL_COUNT] =
+{
+    [BALL_POKE]    = {NULL, TAG_PARTICLES_POKEBALL},
+    [BALL_GREAT]   = {NULL, TAG_PARTICLES_GREATBALL},
+    [BALL_SAFARI]  = {NULL, TAG_PARTICLES_SAFARIBALL},
+    [BALL_ULTRA]   = {NULL, TAG_PARTICLES_ULTRABALL},
+    [BALL_MASTER]  = {NULL, TAG_PARTICLES_MASTERBALL},
+    [BALL_NET]     = {NULL, TAG_PARTICLES_NETBALL},
+    [BALL_DIVE]    = {NULL, TAG_PARTICLES_DIVEBALL},
+    [BALL_NEST]    = {NULL, TAG_PARTICLES_NESTBALL},
+    [BALL_REPEAT]  = {NULL, TAG_PARTICLES_REPEATBALL},
+    [BALL_TIMER]   = {NULL, TAG_PARTICLES_TIMERBALL},
+    [BALL_LUXURY]  = {NULL, TAG_PARTICLES_LUXURYBALL},
+    [BALL_PREMIER] = {NULL, TAG_PARTICLES_PREMIERBALL},
+};
+#else
 static const struct CompressedSpritePalette sBallParticlePalettes[POKEBALL_COUNT] =
 {
     [BALL_POKE]    = {gBattleAnimSpritePal_CircleImpact, TAG_PARTICLES_POKEBALL},
@@ -171,6 +194,7 @@ static const struct CompressedSpritePalette sBallParticlePalettes[POKEBALL_COUNT
     [BALL_LUXURY]  = {gBattleAnimSpritePal_CircleImpact, TAG_PARTICLES_LUXURYBALL},
     [BALL_PREMIER] = {gBattleAnimSpritePal_CircleImpact, TAG_PARTICLES_PREMIERBALL},
 };
+#endif
 
 static const union AnimCmd sAnim_RegularBall[] =
 {

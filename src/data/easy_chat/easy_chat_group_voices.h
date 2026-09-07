@@ -1,67 +1,196 @@
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Excl[] = _("!");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_ExclExcl[] = _("!!");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_QuesExcl[] = _("?!");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Ques[] = _("?");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Ellipsis[] = _("…");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_EllipsisExcl[] = _("…!");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_EllipsisEllipsisEllipsis[] = _("………");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Dash[] = _("-");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_DashDashDash[] = _("- - -");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_UhOh[] = _("UH-OH");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Waaah[] = _("WAAAH");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Ahaha[] = _("AHAHA");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_OhQues[] = _("OH?");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Nope[] = _("NOPE");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Urgh[] = _("URGH");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Hmm[] = _("HMM");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Whoah[] = _("WHOAH");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_WroooaarExcl[] = _("WROOOAAR!");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Wow[] = _("WOW");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Giggle[] = _("GIGGLE");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Sigh[] = _("SIGH");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Unbelievable[] = _("UNBELIEVABLE");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Cries[] = _("CRIES");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Agree[] = _("AGREE");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_EhQues[] = _("EH?");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Cry[] = _("CRY");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Ehehe[] = _("EHEHE");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_OiOiOi[] = _("OI, OI, OI");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_OhYeah[] = _("OH, YEAH");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Oh[] = _("OH");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Oops[] = _("OOPS");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Shocked[] = _("SHOCKED");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Eek[] = _("EEK");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Graaah[] = _("GRAAAH");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Gwahahaha[] = _("GWAHAHAHA");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Way[] = _("WAY");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Tch[] = _("TCH");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Hehe[] = _("HEHE");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Hah[] = _("HAH");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Yup[] = _("YUP");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Hahaha[] = _("HAHAHA");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Aiyeeh[] = _("AIYEEH");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Hiyah[] = _("HIYAH");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Fufufu[] = _("FUFUFU");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Lol[] = _("LOL");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Snort[] = _("SNORT");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Humph[] = _("HUMPH");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Hehehe[] = _("HEHEHE");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Heh[] = _("HEH");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Hohoho[] = _("HOHOHO");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_UhHuh[] = _("UH-HUH");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_OhDear[] = _("OH, DEAR");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Arrgh[] = _("ARRGH");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Mufufu[] = _("MUFUFU");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Mmm[] = _("MMM");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_OhKay[] = _("OH-KAY");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Okay[] = _("OKAY");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Lalala[] = _("LALALA");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Yay[] = _("YAY");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Aww[] = _("AWW");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Wowee[] = _("WOWEE");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Gwah[] = _("GWAH");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Wahahaha[] = _("WAHAHAHA");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 
+#if defined(NATIVE_LINUX)
+struct EasyChatWordInfo gEasyChatGroup_Voices[63];
+#else
 const struct EasyChatWordInfo gEasyChatGroup_Voices[] = {
     [EC_INDEX(EC_WORD_EXCL)] =
     {
@@ -442,3 +571,4 @@ const struct EasyChatWordInfo gEasyChatGroup_Voices[] = {
         .enabled = TRUE,
     },
 };
+#endif

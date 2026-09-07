@@ -43,6 +43,16 @@ FAMILIES = [
      r"SPECIES_BATTLE_PAL\((\w+), (gMon\w+)\)"),
     ("shiny_palette", "gMonShinyPaletteTable", "SPECIES_BATTLE_SHINY_PAL",
      r"SPECIES_BATTLE_SHINY_PAL\((\w+), (gMon\w+)\)"),
+    # R15 Phase 2: the three remaining pokemon graphics sub-families.
+    # still_front uses the SPECIES_SPRITE macro (same shape as the sheets);
+    # icon/footprint tables are designated-initializer arrays (the icon
+    # table lives in src/pokemon_icon.c, not under pokemon_graphics/).
+    ("still_front", "gMonStillFrontPicTable", "SPECIES_STILL_SPRITE",
+     r"(?:SPECIES_STILL_SPRITE|SPECIES_BATTLE_SPRITE|SPECIES_SPRITE)\((\w+),\s+(gMon\w+)\)"),
+    ("icon", "gMonIconTable", None,
+     r"SPECIES_ICON\((\w+),\s*(gMon\w+)\)"),
+    ("footprint", "gMonFootprintTable", None,
+     r"SPECIES_FOOTPRINT\((\w+),\s*(gMon\w+)\)"),
 ]
 
 INCBIN_FILES = [
@@ -82,7 +92,7 @@ def parse_species(path):
 def parse_incbins(path):
     symbols = {}
     for line in open(path):
-        m = re.match(r'const u32 (gMon\w+)\[\] = INCBIN_U32\("([^"]+)"\);', line.strip())
+        m = re.match(r'const u(?:8|16|32) (gMon\w+)\[\] = INCBIN_U(?:8|16|32)\(\s*"([^"]+)"\);', line.strip())
         if m:
             symbols[m.group(1)] = m.group(2)
     return symbols
@@ -109,22 +119,29 @@ def main():
     slot_rows = []  # (kind, symbol, index, species) in resource emission order
     for kind, table, macro, pat in FAMILIES:
         slots = []
-        for i, line in enumerate(open(f"{root}/src/data/pokemon_graphics/" + {
-            "front_sheet": "front_pic_table.h",
-            "back_sheet": "back_pic_table.h",
-            "normal_palette": "palette_table.h",
-            "shiny_palette": "shiny_palette_table.h",
+        for i, line in enumerate(open(f"{root}/" + {
+            "front_sheet": "src/data/pokemon_graphics/front_pic_table.h",
+            "back_sheet": "src/data/pokemon_graphics/back_pic_table.h",
+            "normal_palette": "src/data/pokemon_graphics/palette_table.h",
+            "shiny_palette": "src/data/pokemon_graphics/shiny_palette_table.h",
+            "still_front": "src/data/pokemon_graphics/still_front_pic_table.h",
+            "icon": "src/pokemon_icon.c",
+            "footprint": "src/data/pokemon_graphics/footprint_table.h",
         }[kind])):
             m = re.search(pat, line)
             if m:
                 token, symbol = m.groups()
                 # table macros expand [SPECIES_##token]; species.h keys are
-                # "SPECIES_<token>", so map the bare token through the prefix.
-                key = "SPECIES_" + token
+                # "SPECIES_<token>", so map the bare token through the prefix
+                # (the designated-initializer patterns capture it already).
+                key = token if token.startswith("SPECIES_") else "SPECIES_" + token
                 if key not in species:
                     sys.exit(f"FAIL: table {table} line {i + 1}: species token '{token}' not in species.h")
                 idx = species[key]
-                slots.append((idx, token, symbol))
+                # species_mapping rows carry bare tokens (macro kinds emit bare);
+                # strip the prefix the designated-initializer pattern captured.
+                bare = token[len("SPECIES_"):] if token.startswith("SPECIES_") else token
+                slots.append((idx, bare, symbol))
         # designated initializers: index must equal species value and be unique
         seen = set()
         for idx, token, _ in slots:

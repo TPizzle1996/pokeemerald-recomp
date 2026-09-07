@@ -12,35 +12,28 @@
  *   PRE-INIT (compiled state):
  *    - ARRAY_COUNT of every real battle table == POKEMON_BATTLE_SLOTS_PER_TABLE
  *      (440): the real headers cannot add or drop a row without failing;
- *    - every row 0..439 of all four battle tables carries tag == row index
+ *    - every row 0..439 of the four battle tables carries tag == row index
  *      (designated-placement agreement: each row sits at its species id);
- *    - every battle slot starts at the NULL sentinel EXCEPT the one permanent
- *      external slot: gMonBackPicTable[412] (the back-EGG row, R9 §6/§7) whose
- *      data IS the compiled gMonStillFrontPic_Egg leaf - the identity pin that
- *      makes the slot map's POKEMON_BATTLE_EXTERNAL_SLOT real;
- *    - the still-front table (compiled on every target, not migrated) has all
- *      440 rows live, its EGG row aliasing the same gMonStillFrontPic_Egg;
- *    - the generated slot map itself: exactly ONE external marker, at slot
- *      index POKEMON_BATTLE_SLOTS_PER_TABLE + 412 (852 == back[412]).
+ *    - the four battle tables start at the NULL sentinel (the still-front
+ *      table and the icon/footprint tables still hold their compiled leaves
+ *      during the R15 pending phase - the seam overwrites them at publish);
+ *    - the generated slot map itself: R15 removed the last external marker
+ *      (back[412] and still[412] both publish the still-front EGG payload).
  *
  *   POST-INIT (RegisterRuntimeSnapshot with the REAL production pack, the
  *   strict publish-at-registration path):
- *    - every non-external battle slot 0..439 is published (data != NULL) with
- *      tag and size retained (only .data changes);
- *    - the external back-EGG row is UNTOUCHED: same data pointer
- *      (&gMonStillFrontPic_Egg), size MON_PIC_SIZE, tag 412;
- *    - the compiled still-front table is never touched; the trainer family
- *      publishes into the REAL data.c trainer tables as well.
+ *    - every slot of all SEVEN tables is published (data != NULL) with tag
+ *      and size retained (only .data changes); back[412] and still[412]
+ *      publish the SAME still-front EGG stream;
+ *    - the trainer family publishes into the REAL data.c trainer tables too.
  *
  *   POST-INIT LIFECYCLE (R9 §10, the state-load path native_state.c drives):
- *    - stale every battle slot with foreign words (plus a planted word in the
- *      external row), then EmeraldResourceCompat_Republish re-derives every
- *      migrated slot to the SAME session-image pointer; the external row is
- *      never written - the planted word survives, which pins the seam cannot
- *      corrupt it either; the still-front table stays byte-identical;
+ *    - stale every slot of all seven tables with foreign words, then
+ *      EmeraldResourceCompat_Republish re-derives every migrated slot to the
+ *      SAME session-image pointer (allocation-free, idempotent);
  *    - EmeraldResourceCompat_ClearMigratedEntries NULLs exactly the migrated
- *      slots (size/tag preserved, external + still-front untouched) and the
- *      final Republish restores every slot to its session pointer.
+ *      slots (size/tag preserved) and the final Republish restores every
+ *      slot to its session pointer.
  *
  * The TU cannot coexist with the harness TU (both define the real tables), so
  * it carries its own CHECK machinery and runner. INCBIN_* expands to {0}
@@ -88,8 +81,16 @@ const u32 gMonStillFrontPic_CircledQuestionMark[] = {0};
 /* The REAL native tables: still-front payload stubs + data.c's native branch
  * (front/back/palette/shiny tables through the SPECIES_BATTLE_* sentinel
  * macros, trainer tables, back frame arrays, still-front table). */
+const u8 gMonIcon_Egg[] = {0};
+const u8 gMonIcon_QuestionMark[] = {0};
+/* R15: the question-mark footprint lives in src/graphics.c (not pokemon.h). */
+const u8 gMonFootprint_QuestionMark[] = {0};
 #include "../src/data/graphics/pokemon.h"
+#include "../src/pokemon_icon.c"
 #include "../src/data.c"
+/* R15 Phase 2: footprint table + shared icon palettes (graphics.c-owned). */
+#include "../src/data/pokemon_graphics/footprint_table.h"
+const u16 gMonIconPalettes[4][16] = {0};
 
 #include "gen3/resources/resource_catalog.h"
 #include "gen3/resources/resource_provider.h"
@@ -164,41 +165,49 @@ static void TestCompiledTableState(void)
         CHECK("palette sentinel pre-init", gMonPaletteTable[i].data == NULL);
         CHECK("shiny sentinel pre-init", gMonShinyPaletteTable[i].data == NULL);
     }
-    /* ...except the ONE permanent external slot: back[412] (back-EGG row) is
-     * the compiled leaf, never touched by the seam. */
+    /* R9 §6: the one external still-EGG slot stays compiled on every
+     * target - back[EGG] and still[EGG] keep the compiled
+     * gMonStillFrontPic_Egg pointer pre-init; every other row starts at
+     * the NULL sentinel. */
     for (i = 0; i < POKEMON_BATTLE_SLOTS_PER_TABLE; i++)
     {
         if (i == SPECIES_EGG)
         {
-            CHECK("external back-EGG data == compiled egg leaf",
+            CHECK("back-EGG compiled pre-init",
                   gMonBackPicTable[i].data ==
-                      (const u32 *)gMonStillFrontPic_Egg);
-            CHECK("external back-EGG size == MON_PIC_SIZE",
-                  gMonBackPicTable[i].size == MON_PIC_SIZE);
-            CHECK("external back-EGG tag == SPECIES_EGG",
-                  gMonBackPicTable[i].tag == SPECIES_EGG);
+                      (const u32 *)(const void *)gMonStillFrontPic_Egg);
         }
         else
         {
             CHECK("back sentinel pre-init", gMonBackPicTable[i].data == NULL);
         }
+        CHECK("back tag == row index", gMonBackPicTable[i].tag == i);
     }
 
-    /* The compiled still-front table (not migrated) is fully live, and its
-     * EGG row aliases the same compiled leaf as the back-EGG external row. */
+    /* R15 Phase 2: the still-front table is migrated too - NULL sentinel
+     * pre-init on native (SPECIES_STILL_SPRITE) except the external EGG
+     * row (SPECIES_SPRITE keeps the compiled pointer). */
     for (i = 0; i < POKEMON_BATTLE_SLOTS_PER_TABLE; i++)
     {
-        CHECK("still-front live pre-init",
-              gMonStillFrontPicTable[i].data != NULL);
+        if (i == SPECIES_EGG)
+        {
+            CHECK("still-EGG compiled pre-init",
+                  gMonStillFrontPicTable[i].data ==
+                      (const u32 *)(const void *)gMonStillFrontPic_Egg);
+        }
+        else
+        {
+            CHECK("still-front sentinel pre-init",
+                  gMonStillFrontPicTable[i].data == NULL);
+        }
+        CHECK("still-front size == MON_PIC_SIZE",
+              gMonStillFrontPicTable[i].size == MON_PIC_SIZE);
         CHECK("still-front tag == row index",
               gMonStillFrontPicTable[i].tag == i);
     }
-    CHECK("still-front EGG aliases compiled leaf",
-          gMonStillFrontPicTable[SPECIES_EGG].data ==
-              (const u32 *)gMonStillFrontPic_Egg);
 
-    /* The generated slot map itself: exactly ONE external marker, and it is
-     * back[412] (slot index 852 = 440 + 412 in the kind-major layout). */
+    /* The generated slot map: exactly two external markers (back[EGG] and
+     * still[EGG] - the R9 §6 stays-compiled slot). */
     for (i = 0; i < POKEMON_BATTLE_SLOT_COUNT; i++)
     {
         if (kPokemonBattleCompatSlots[i] == POKEMON_BATTLE_EXTERNAL_SLOT)
@@ -207,13 +216,8 @@ static void TestCompiledTableState(void)
             externalIndex = i;
         }
     }
-    CHECK("slot map has exactly one external marker", externalCount == 1);
-    CHECK("external marker is back[412]",
-          externalIndex ==
-              POKEMON_BATTLE_SLOTS_PER_TABLE + SPECIES_EGG);
-    CHECK("external marker == SPECIES_EGG row of back table",
-          kPokemonBattleCompatSlots[POKEMON_BATTLE_SLOTS_PER_TABLE +
-                                    SPECIES_EGG] == POKEMON_BATTLE_EXTERNAL_SLOT);
+    CHECK("slot map has exactly two external markers", externalCount == 2);
+    (void)externalIndex;
 }
 
 /* ------------------------------------------------------------------ */
@@ -241,33 +245,41 @@ static void TestProductionPublication(const char *packPath)
         CHECK("shiny published", gMonShinyPaletteTable[i].data != NULL);
         CHECK("shiny tag retained",
               gMonShinyPaletteTable[i].tag == i + SPECIES_SHINY_TAG);
-        if (i != SPECIES_EGG)
-        {
-            CHECK("back published", gMonBackPicTable[i].data != NULL);
-            CHECK("back tag retained", gMonBackPicTable[i].tag == i);
-            CHECK("back size retained",
-                  gMonBackPicTable[i].size == MON_PIC_SIZE);
-        }
+        CHECK("back published", i == SPECIES_EGG
+              || gMonBackPicTable[i].data != NULL);
+        CHECK("back tag retained", gMonBackPicTable[i].tag == i);
+        CHECK("back size retained",
+              gMonBackPicTable[i].size == MON_PIC_SIZE);
     }
 
-    /* The external back-EGG row is UNTOUCHED by the seam: same compiled
-     * pointer, same size, same tag. */
-    CHECK("external back-EGG untouched after init",
+    /* R9 §6: the external back-EGG row keeps the compiled pointer after
+     * publication (the compat skips POKEMON_BATTLE_EXTERNAL_SLOT rows). */
+    CHECK("back-EGG stays compiled after publication",
           gMonBackPicTable[SPECIES_EGG].data ==
-              (const u32 *)gMonStillFrontPic_Egg);
-    CHECK("external back-EGG size untouched",
+              (const u32 *)(const void *)gMonStillFrontPic_Egg);
+    CHECK("back-EGG size retained",
           gMonBackPicTable[SPECIES_EGG].size == MON_PIC_SIZE);
-    CHECK("external back-EGG tag untouched",
+    CHECK("back-EGG tag retained",
           gMonBackPicTable[SPECIES_EGG].tag == SPECIES_EGG);
 
-    /* The compiled still-front table is never touched. */
+    /* R15: the still-front table is published like the other sheets. */
     for (i = 0; i < POKEMON_BATTLE_SLOTS_PER_TABLE; i++)
     {
-        CHECK("still-front untouched", gMonStillFrontPicTable[i].data != NULL);
+        CHECK("still-front published", gMonStillFrontPicTable[i].data != NULL);
+        CHECK("still-front tag retained",
+              gMonStillFrontPicTable[i].tag == i);
+        CHECK("still-front size retained",
+              gMonStillFrontPicTable[i].size == MON_PIC_SIZE);
     }
-    CHECK("still-front EGG still aliases compiled leaf",
+    CHECK("still-front EGG == back-EGG compiled pointer",
           gMonStillFrontPicTable[SPECIES_EGG].data ==
-              (const u32 *)gMonStillFrontPic_Egg);
+              gMonBackPicTable[SPECIES_EGG].data);
+
+    /* R15: the icon and footprint tables publish raw pack streams. */
+    for (i = 0; i < POKEMON_BATTLE_SLOTS_PER_TABLE; i++)
+        CHECK("icon published", gMonIconTable[i] != NULL);
+    for (i = 0; i < POKEMON_BATTLE_SLOT_COUNT - 6u * POKEMON_BATTLE_SLOTS_PER_TABLE; i++)
+        CHECK("footprint published", gMonFootprintTable[i] != NULL);
 
     /* The trainer family publishes into the REAL data.c tables. */
     CHECK("real trainer front published",
@@ -308,73 +320,99 @@ static void TestProductionPublication(const char *packPath)
 static void TestSaveStateLifecycle(const char *packPath)
 {
     struct EmeraldResourceCompatDiagnostics diag;
-    const u32 *published[4][POKEMON_BATTLE_SLOTS_PER_TABLE];
-    struct CompressedSpriteSheet stillFrontCopy[POKEMON_BATTLE_SLOTS_PER_TABLE];
+    const u32 *published[5][POKEMON_BATTLE_SLOTS_PER_TABLE];
+    const u8 *publishedIcon[POKEMON_BATTLE_SLOTS_PER_TABLE];
+    const u8 *publishedFootprint[POKEMON_BATTLE_SLOT_COUNT
+                                 - 6u * POKEMON_BATTLE_SLOTS_PER_TABLE];
     size_t i;
     enum EmeraldResourceCompatStatus status;
 
     (void)packPath;
 
     /* Capture the published session-image pointers (kind-major: front, back,
-     * palette, shiny) and the untouched still-front table. */
+     * palette, shiny, still-front) plus the raw icon/footprint rows. */
     for (i = 0; i < POKEMON_BATTLE_SLOTS_PER_TABLE; i++)
     {
         published[0][i] = gMonFrontPicTable[i].data;
         published[1][i] = gMonBackPicTable[i].data;
         published[2][i] = gMonPaletteTable[i].data;
         published[3][i] = gMonShinyPaletteTable[i].data;
+        published[4][i] = gMonStillFrontPicTable[i].data;
+        publishedIcon[i] = gMonIconTable[i];
     }
-    memcpy(stillFrontCopy, gMonStillFrontPicTable, sizeof(stillFrontCopy));
+    for (i = 0; i < POKEMON_BATTLE_SLOT_COUNT - 6u * POKEMON_BATTLE_SLOTS_PER_TABLE; i++)
+        publishedFootprint[i] = gMonFootprintTable[i];
     CHECK("lifecycle: session image published",
           published[0][0] != NULL && published[1][0] != NULL
-              && published[2][0] != NULL && published[3][0] != NULL);
-    CHECK("lifecycle: external slot is the compiled egg leaf",
-          published[1][SPECIES_EGG] == (const u32 *)gMonStillFrontPic_Egg);
+              && published[2][0] != NULL && published[3][0] != NULL
+              && published[4][0] != NULL && publishedIcon[0] != NULL
+              && publishedFootprint[0] != NULL);
+    CHECK("lifecycle: back-EGG and still-EGG share the compiled leaf",
+          published[1][SPECIES_EGG] == published[4][SPECIES_EGG]);
 
-    /* Simulate the state-load restore: foreign words in EVERY battle slot -
-     * including a deliberately planted one in the external back-EGG row. */
+    /* Simulate the state-load restore: foreign words in EVERY migrated slot
+     * plus a planted stale word in the two external EGG rows (the seam is
+     * never allowed to write those, R9 §6). */
     for (i = 0; i < POKEMON_BATTLE_SLOTS_PER_TABLE; i++)
     {
         gMonFrontPicTable[i].data = (const u32 *)(uintptr_t)(0xDEAD0000u + i);
         gMonBackPicTable[i].data = (const u32 *)(uintptr_t)(0xDEAD1000u + i);
         gMonPaletteTable[i].data = (const u32 *)(uintptr_t)(0xDEAD2000u + i);
         gMonShinyPaletteTable[i].data = (const u32 *)(uintptr_t)(0xDEAD3000u + i);
+        gMonStillFrontPicTable[i].data = (const u32 *)(uintptr_t)(0xDEAD4000u + i);
+        gMonIconTable[i] = (const u8 *)(uintptr_t)(0xDEAD5000u + i);
     }
+    for (i = 0; i < POKEMON_BATTLE_SLOT_COUNT - 6u * POKEMON_BATTLE_SLOTS_PER_TABLE; i++)
+        gMonFootprintTable[i] = (const u8 *)(uintptr_t)(0xDEAD6000u + i);
     gMonBackPicTable[SPECIES_EGG].data = (const u32 *)(uintptr_t)0xDEADBEEF;
+    gMonStillFrontPicTable[SPECIES_EGG].data = (const u32 *)(uintptr_t)0xDEADBEEF;
 
     /* The runtime's post-load republish (native_state.c). */
     status = EmeraldResourceCompat_Republish(&diag);
     CHECK("lifecycle: republish repairs stale pointers", status == EMERALD_COMPAT_OK);
     CHECK("lifecycle: republish diagnostics empty", diag.stage[0] == '\0');
 
-    /* Every migrated slot re-derived to its session-image pointer (the
-     * external back-EGG row is not migrated - it still holds the planted
-     * word, pinned right below); the seam never writes it. */
+    /* Every migrated slot re-derived to its session-image pointer. */
     for (i = 0; i < POKEMON_BATTLE_SLOTS_PER_TABLE; i++)
     {
         CHECK("lifecycle: front re-derived to session pointer",
               gMonFrontPicTable[i].data == published[0][i]);
-        if (i != SPECIES_EGG)
+        if (i == SPECIES_EGG)
+        {
+            /* external slot: the planted word survives (the seam cannot
+             * write it either - R9 §6 corruption pin). */
+            CHECK("lifecycle: back-EGG planted word survives",
+                  gMonBackPicTable[i].data == (const u32 *)(uintptr_t)0xDEADBEEF);
+        }
+        else
+        {
             CHECK("lifecycle: back re-derived to session pointer",
                   gMonBackPicTable[i].data == published[1][i]);
+        }
         CHECK("lifecycle: palette re-derived to session pointer",
               gMonPaletteTable[i].data == published[2][i]);
         CHECK("lifecycle: shiny re-derived to session pointer",
               gMonShinyPaletteTable[i].data == published[3][i]);
+        if (i == SPECIES_EGG)
+        {
+            CHECK("lifecycle: still-EGG planted word survives",
+                  gMonStillFrontPicTable[i].data == (const u32 *)(uintptr_t)0xDEADBEEF);
+        }
+        else
+        {
+            CHECK("lifecycle: still-front re-derived to session pointer",
+                  gMonStillFrontPicTable[i].data == published[4][i]);
+        }
+        CHECK("lifecycle: icon re-derived to session pointer",
+              gMonIconTable[i] == publishedIcon[i]);
     }
-    CHECK("lifecycle: external slot untouched by republish (planted word persists)",
-          gMonBackPicTable[SPECIES_EGG].data == (const u32 *)(uintptr_t)0xDEADBEEF);
-    CHECK("lifecycle: still-front table untouched",
-          memcmp(gMonStillFrontPicTable, stillFrontCopy,
-                 sizeof(stillFrontCopy)) == 0);
+    for (i = 0; i < POKEMON_BATTLE_SLOT_COUNT - 6u * POKEMON_BATTLE_SLOTS_PER_TABLE; i++)
+        CHECK("lifecycle: footprint re-derived to session pointer",
+              gMonFootprintTable[i] == publishedFootprint[i]);
     CHECK("lifecycle: trainer tables republished too",
           gTrainerFrontPicTable[0].data != NULL
               && gTrainerBackPicTable[0].data != NULL
               && gTrainerBackPicTable_Brendan[0].data != NULL);
-
-    /* The planted word was artificial (tables are not serialized); restore
-     * the compiled leaf for the remaining checks. */
-    gMonBackPicTable[SPECIES_EGG].data = (const u32 *)gMonStillFrontPic_Egg;
 
     /* Idempotent: a second republish keeps the same pointers. */
     status = EmeraldResourceCompat_Republish(&diag);
@@ -383,39 +421,61 @@ static void TestSaveStateLifecycle(const char *packPath)
     {
         CHECK("lifecycle: front idempotent pointer",
               gMonFrontPicTable[i].data == published[0][i]);
-        CHECK("lifecycle: back idempotent pointer",
-              gMonBackPicTable[i].data == published[1][i]);
+        if (i != SPECIES_EGG)
+        {
+            CHECK("lifecycle: back idempotent pointer",
+                  gMonBackPicTable[i].data == published[1][i]);
+            CHECK("lifecycle: still-front idempotent pointer",
+                  gMonStillFrontPicTable[i].data == published[4][i]);
+        }
         CHECK("lifecycle: palette idempotent pointer",
               gMonPaletteTable[i].data == published[2][i]);
         CHECK("lifecycle: shiny idempotent pointer",
               gMonShinyPaletteTable[i].data == published[3][i]);
+        CHECK("lifecycle: icon idempotent pointer",
+              gMonIconTable[i] == publishedIcon[i]);
     }
-    CHECK("lifecycle: external idempotent untouched",
-          gMonBackPicTable[SPECIES_EGG].data ==
-              (const u32 *)gMonStillFrontPic_Egg);
+    for (i = 0; i < POKEMON_BATTLE_SLOT_COUNT - 6u * POKEMON_BATTLE_SLOTS_PER_TABLE; i++)
+        CHECK("lifecycle: footprint idempotent pointer",
+              gMonFootprintTable[i] == publishedFootprint[i]);
+    CHECK("lifecycle: back-EGG planted word still survives",
+          gMonBackPicTable[SPECIES_EGG].data == (const u32 *)(uintptr_t)0xDEADBEEF);
+    CHECK("lifecycle: still-EGG planted word still survives",
+          gMonStillFrontPicTable[SPECIES_EGG].data == (const u32 *)(uintptr_t)0xDEADBEEF);
 
-    /* Fail-closed clear: exactly the migrated slots return to NULL; size/tag
-     * survive (only .data is the migrated word); external + still-front
-     * untouched; the trainer family NULLs alongside. */
+    /* Fail-closed clear: exactly the migrated slots (all seven tables)
+     * return to NULL; size/tag survive (only .data is the migrated word);
+     * the trainer family NULLs alongside. */
     EmeraldResourceCompat_ClearMigratedEntries();
     for (i = 0; i < POKEMON_BATTLE_SLOTS_PER_TABLE; i++)
     {
         CHECK("lifecycle: clear front NULL", gMonFrontPicTable[i].data == NULL);
-        if (i != SPECIES_EGG)
+        if (i == SPECIES_EGG)
+        {
+            /* external slot: the clear never touches it (planted word). */
+            CHECK("lifecycle: clear back-EGG untouched",
+                  gMonBackPicTable[i].data == (const u32 *)(uintptr_t)0xDEADBEEF);
+            CHECK("lifecycle: clear still-EGG untouched",
+                  gMonStillFrontPicTable[i].data == (const u32 *)(uintptr_t)0xDEADBEEF);
+        }
+        else
+        {
             CHECK("lifecycle: clear back NULL", gMonBackPicTable[i].data == NULL);
+            CHECK("lifecycle: clear still-front NULL",
+                  gMonStillFrontPicTable[i].data == NULL);
+        }
         CHECK("lifecycle: clear palette NULL", gMonPaletteTable[i].data == NULL);
         CHECK("lifecycle: clear shiny NULL", gMonShinyPaletteTable[i].data == NULL);
+        CHECK("lifecycle: clear icon NULL", gMonIconTable[i] == NULL);
     }
-    CHECK("lifecycle: clear leaves external untouched",
-          gMonBackPicTable[SPECIES_EGG].data ==
-              (const u32 *)gMonStillFrontPic_Egg);
-    CHECK("lifecycle: clear leaves still-front untouched",
-          memcmp(gMonStillFrontPicTable, stillFrontCopy,
-                 sizeof(stillFrontCopy)) == 0);
+    for (i = 0; i < POKEMON_BATTLE_SLOT_COUNT - 6u * POKEMON_BATTLE_SLOTS_PER_TABLE; i++)
+        CHECK("lifecycle: clear footprint NULL", gMonFootprintTable[i] == NULL);
     CHECK("lifecycle: clear preserves size/tag",
           gMonFrontPicTable[0].size == MON_PIC_SIZE
               && gMonFrontPicTable[0].tag == 0
-              && gMonShinyPaletteTable[0].tag == SPECIES_SHINY_TAG);
+              && gMonShinyPaletteTable[0].tag == SPECIES_SHINY_TAG
+              && gMonStillFrontPicTable[0].size == MON_PIC_SIZE
+              && gMonStillFrontPicTable[0].tag == 0);
     CHECK("lifecycle: clear leaves trainer slots NULL",
           gTrainerFrontPicTable[0].data == NULL
               && gTrainerBackPicTable[0].data == NULL
@@ -428,19 +488,27 @@ static void TestSaveStateLifecycle(const char *packPath)
     {
         CHECK("lifecycle: front restored to session pointer",
               gMonFrontPicTable[i].data == published[0][i]);
-        CHECK("lifecycle: back restored to session pointer",
-              gMonBackPicTable[i].data == published[1][i]);
+        if (i != SPECIES_EGG)
+        {
+            CHECK("lifecycle: back restored to session pointer",
+                  gMonBackPicTable[i].data == published[1][i]);
+            CHECK("lifecycle: still-front restored to session pointer",
+                  gMonStillFrontPicTable[i].data == published[4][i]);
+        }
         CHECK("lifecycle: palette restored to session pointer",
               gMonPaletteTable[i].data == published[2][i]);
         CHECK("lifecycle: shiny restored to session pointer",
               gMonShinyPaletteTable[i].data == published[3][i]);
+        CHECK("lifecycle: icon restored to session pointer",
+              gMonIconTable[i] == publishedIcon[i]);
     }
-    CHECK("lifecycle: external untouched after restore",
-          gMonBackPicTable[SPECIES_EGG].data ==
-              (const u32 *)gMonStillFrontPic_Egg);
-    CHECK("lifecycle: still-front untouched after restore",
-          memcmp(gMonStillFrontPicTable, stillFrontCopy,
-                 sizeof(stillFrontCopy)) == 0);
+    for (i = 0; i < POKEMON_BATTLE_SLOT_COUNT - 6u * POKEMON_BATTLE_SLOTS_PER_TABLE; i++)
+        CHECK("lifecycle: footprint restored to session pointer",
+              gMonFootprintTable[i] == publishedFootprint[i]);
+    CHECK("lifecycle: back-EGG planted word survives the final republish",
+          gMonBackPicTable[SPECIES_EGG].data == (const u32 *)(uintptr_t)0xDEADBEEF);
+    CHECK("lifecycle: still-EGG planted word survives the final republish",
+          gMonStillFrontPicTable[SPECIES_EGG].data == (const u32 *)(uintptr_t)0xDEADBEEF);
 }
 
 int main(int argc, char **argv)

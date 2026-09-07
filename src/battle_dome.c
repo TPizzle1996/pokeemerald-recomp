@@ -904,6 +904,20 @@ static const struct ScanlineEffectParams sTourneyTreeScanlineEffectParams =
     .initState = 1,
 };
 
+#if defined(NATIVE_LINUX)
+struct CompressedSpriteSheet sTourneyTreeButtonsSpriteSheet[2] =
+{
+    {.data = NULL, .size = 0x0600, .tag = TAG_BUTTONS},
+    {},
+};
+
+// Unused
+struct CompressedSpritePalette sTourneyTreeButtonsSpritePal[2] =
+{
+    {.data = NULL, .tag = TAG_BUTTONS},
+    {},
+};
+#else
 static const struct CompressedSpriteSheet sTourneyTreeButtonsSpriteSheet[] =
 {
     {.data = gDomeTourneyTreeButtons_Gfx, .size = 0x0600, .tag = TAG_BUTTONS},
@@ -916,6 +930,7 @@ static const struct CompressedSpritePalette sTourneyTreeButtonsSpritePal[] =
     {.data = gDomeTourneyTreeButtons_Pal, .tag = TAG_BUTTONS},
     {},
 };
+#endif
 
 static const struct OamData sOamData_TourneyTreePokeball =
 {

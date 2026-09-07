@@ -184,6 +184,17 @@ static const struct SpriteTemplate sVersionBannerRightSpriteTemplate =
     .callback = SpriteCB_VersionBannerRight,
 };
 
+#if defined(NATIVE_LINUX)
+struct CompressedSpriteSheet sSpriteSheet_EmeraldVersion[2] =
+{
+    {
+        .data = NULL,
+        .size = 0x1000,
+        .tag = TAG_VERSION
+    },
+    {},
+};
+#else
 static const struct CompressedSpriteSheet sSpriteSheet_EmeraldVersion[] =
 {
     {
@@ -193,6 +204,7 @@ static const struct CompressedSpriteSheet sSpriteSheet_EmeraldVersion[] =
     },
     {},
 };
+#endif
 
 static const struct OamData sOamData_CopyrightBanner =
 {
@@ -292,6 +304,26 @@ static const struct SpriteTemplate sStartCopyrightBannerSpriteTemplate =
     .callback = SpriteCB_PressStartCopyrightBanner,
 };
 
+#if defined(NATIVE_LINUX)
+struct CompressedSpriteSheet sSpriteSheet_PressStart[2] =
+{
+    {
+        .data = NULL,
+        .size = 0x520,
+        .tag = TAG_PRESS_START_COPYRIGHT
+    },
+    {},
+};
+
+struct SpritePalette sSpritePalette_PressStart[2] =
+{
+    {
+        .data = NULL,
+        .tag = TAG_PRESS_START_COPYRIGHT
+    },
+    {},
+};
+#else
 static const struct CompressedSpriteSheet sSpriteSheet_PressStart[] =
 {
     {
@@ -310,6 +342,7 @@ static const struct SpritePalette sSpritePalette_PressStart[] =
     },
     {},
 };
+#endif
 
 static const struct OamData sPokemonLogoShineOamData =
 {

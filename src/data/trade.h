@@ -92,18 +92,26 @@ static const union AnimCmd *const sAnims_Cursor[] =
     [CURSOR_ANIM_ON_CANCEL] = sAnim_Cursor_OnCancel
 };
 
+#if defined(NATIVE_LINUX)
+struct SpriteSheet sCursor_SpriteSheet = {.data = NULL, .size = 0x800, .tag = GFXTAG_CURSOR};
+#else
 static const struct SpriteSheet sCursor_SpriteSheet =
 {
     .data = gTradeCursor_Gfx,
     .size = 0x800,
     .tag = GFXTAG_CURSOR
 };
+#endif
 
+#if defined(NATIVE_LINUX)
+struct SpritePalette sCursor_SpritePalette = {.data = NULL, .tag = PALTAG_CURSOR};
+#else
 static const struct SpritePalette sCursor_SpritePalette =
 {
     .data = gTradeCursor_Pal,
     .tag = PALTAG_CURSOR
 };
+#endif
 
 static const union AnimCmd sAnim_MenuText_0[] =
 {

@@ -24,6 +24,12 @@ cmd=(tools/gen3_resources/pack_build/gen3-pack-build
   --manifest resources/extraction/emerald/bpee01/gameplay/manifest.production.toml
   --manifest resources/extraction/emerald/bpee01/script/modules/manifest.production.toml
   --manifest resources/extraction/emerald/bpee01/battle/modules/manifest.production.toml
+  --manifest resources/extraction/emerald/bpee01/battle_anim_gfx/manifest.production.toml
+  --manifest resources/extraction/emerald/bpee01/item_icon/manifest.production.toml
+  --manifest resources/extraction/emerald/bpee01/wallpaper/manifest.production.toml
+  --manifest resources/extraction/emerald/bpee01/weather/manifest.production.toml
+  --manifest resources/extraction/emerald/bpee01/ui/manifest.production.toml
+  --manifest resources/extraction/emerald/bpee01/easy_chat/manifest.production.toml
   --catalog resources/catalogs/emerald/catalog.toml
   --catalog resources/extraction/emerald/bpee01/pokemon_battle/catalog.generated.toml
   --catalog resources/extraction/emerald/bpee01/object_event/catalog.generated.toml
@@ -35,6 +41,13 @@ cmd=(tools/gen3_resources/pack_build/gen3-pack-build
   --catalog resources/extraction/emerald/bpee01/text/catalog.generated.toml
   --catalog resources/extraction/emerald/bpee01/gameplay/catalog.generated.toml
   --catalog resources/extraction/emerald/bpee01/script/modules/catalog.generated.toml
-  --catalog resources/extraction/emerald/bpee01/battle/modules/catalog.generated.toml)
+  --catalog resources/extraction/emerald/bpee01/battle/modules/catalog.generated.toml
+  --catalog resources/extraction/emerald/bpee01/battle_anim_gfx/catalog.generated.toml
+  --catalog resources/extraction/emerald/bpee01/item_icon/catalog.generated.toml
+  --catalog resources/extraction/emerald/bpee01/wallpaper/catalog.generated.toml
+  --catalog resources/extraction/emerald/bpee01/weather/catalog.generated.toml
+  --catalog resources/extraction/emerald/bpee01/ui/catalog.generated.toml
+  --catalog resources/extraction/emerald/bpee01/easy_chat/catalog.generated.toml
+)
 if [ -n "$check" ]; then cmd+=(--check); fi
 "${cmd[@]}" "$@" 2>&1 | tail -4

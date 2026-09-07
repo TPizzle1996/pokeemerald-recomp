@@ -267,6 +267,25 @@ static const struct WindowTemplate sTrainerCardWindowTemplates[] =
     DUMMY_WIN_TEMPLATE
 };
 
+#if defined(NATIVE_LINUX)
+const u16 *sHoennTrainerCardPals[5] =
+{
+    NULL,                        // Default (0 stars)
+    sHoennTrainerCardBronze_Pal, // 1 star
+    sHoennTrainerCardCopper_Pal, // 2 stars
+    sHoennTrainerCardSilver_Pal, // 3 stars
+    sHoennTrainerCardGold_Pal,   // 4 stars
+};
+
+const u16 *sKantoTrainerCardPals[5] =
+{
+    NULL,                        // Default (0 stars)
+    sKantoTrainerCardGreen_Pal,  // 1 star
+    sKantoTrainerCardBronze_Pal, // 2 stars
+    sKantoTrainerCardSilver_Pal, // 3 stars
+    sKantoTrainerCardGold_Pal,   // 4 stars
+};
+#else
 static const u16 *const sHoennTrainerCardPals[] =
 {
     gHoennTrainerCardGreen_Pal,  // Default (0 stars)
@@ -284,6 +303,7 @@ static const u16 *const sKantoTrainerCardPals[] =
     sKantoTrainerCardSilver_Pal, // 3 stars
     sKantoTrainerCardGold_Pal,   // 4 stars
 };
+#endif
 
 static const u8 sTrainerCardTextColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY};
 static const u8 sTrainerCardStatColors[] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_RED, TEXT_COLOR_LIGHT_RED};

@@ -2,7 +2,11 @@
 #define GUARD_POKEMON_ICON_H
 
 extern const u8 gMonIconPaletteIndices[];
+#if defined(NATIVE_LINUX)
+extern const u8 *gMonIconTable[];
+#else
 extern const u8 *const gMonIconTable[];
+#endif
 extern const struct SpritePalette gMonIconPaletteTable[];
 
 const u8 *GetMonIconTiles(u16 species, bool32 handleDeoxys);

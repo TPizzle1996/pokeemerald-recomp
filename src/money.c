@@ -56,6 +56,10 @@ static const struct SpriteTemplate sSpriteTemplate_MoneyLabel =
     .callback = SpriteCallbackDummy
 };
 
+#if defined(NATIVE_LINUX)
+struct CompressedSpriteSheet sSpriteSheet_MoneyLabel = {.data = NULL, .size = 256, .tag = MONEY_LABEL_TAG};
+struct CompressedSpritePalette sSpritePalette_MoneyLabel = {.data = NULL, .tag = MONEY_LABEL_TAG};
+#else
 static const struct CompressedSpriteSheet sSpriteSheet_MoneyLabel =
 {
     .data = gShopMenuMoney_Gfx,
@@ -68,6 +72,7 @@ static const struct CompressedSpritePalette sSpritePalette_MoneyLabel =
     .data = gShopMenu_Pal,
     .tag = MONEY_LABEL_TAG
 };
+#endif
 
 u32 GetMoney(u32 *moneyPtr)
 {

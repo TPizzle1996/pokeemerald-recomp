@@ -218,50 +218,56 @@ static void CheckFamilyContract(struct Gen3ResourceSnapshot *snapshot,
  * consumers key on tag; sizes are only meaningful for sheets). */
 #define MON_SHEET_STAMP_SIZE 2048u
 
-/* R9 §5: verify the published Pokémon battle family against the production
- * pack. For every one of the 1760 slots: the size/tag stamp is retained (only
- * .data changes); external slots (the back-EGG row) stay NULL; every published
- * slot holds exactly its mapping resource's pack payload - the retail GBA LZ77
- * stream served verbatim - with the stream header declaring the mapping's
- * decoded size. */
+/* R9 §5 + R15 Phase 2: verify the published Pokémon family against the
+ * production pack. For every one of the 3053 slots across the seven tables:
+ * the size/tag stamp is retained (only .data changes); every published slot
+ * holds exactly its mapping resource's pack payload. LZ kinds: the published
+ * stream is the seam's re-encoded GBA LZ77 stream - decode it with the REAL
+ * consumer decompressor and prove it equals the pack's canonical decoded
+ * bytes. RAW kinds (icon, footprint): the published pointer IS the pack's
+ * canonical bytes - memcmp verbatim. */
 static void VerifyPokemonPublished(const struct Gen3ResourcePack *pack)
 {
     size_t kind;
     size_t idx;
     char label[96];
 
-    for (kind = 0u; kind < 4u; kind++)
+    for (kind = 0u; kind < 7u; kind++)
     {
         const struct CompressedSpriteSheet *sheet =
-            kind <= 1u ? (kind == 0u ? gMonFrontPicTable : gMonBackPicTable)
-                       : NULL;
+            (kind == 0u) ? gMonFrontPicTable
+          : (kind == 1u) ? gMonBackPicTable
+          : (kind == 4u) ? gMonStillFrontPicTable
+                         : NULL;
         const struct CompressedSpritePalette *pal =
-            kind >= 2u ? (kind == 2u ? gMonPaletteTable : gMonShinyPaletteTable)
-                       : NULL;
+            (kind == 2u) ? gMonPaletteTable
+          : (kind == 3u) ? gMonShinyPaletteTable
+                         : NULL;
+        const u8 *const *raw = (kind == 5u) ? (const u8 *const *)gMonIconTable
+                              : (kind == 6u) ? (const u8 *const *)gMonFootprintTable
+                                             : NULL;
+        const size_t rows = kind == 6u
+            ? POKEMON_BATTLE_SLOT_COUNT - 6u * POKEMON_BATTLE_SLOTS_PER_TABLE
+            : POKEMON_BATTLE_SLOTS_PER_TABLE;
 
-        for (idx = 0u; idx < POKEMON_BATTLE_SLOTS_PER_TABLE; idx++)
+        for (idx = 0u; idx < rows; idx++)
         {
             const void *data = sheet != NULL ? (const void *)sheet[idx].data
-                                             : (const void *)pal[idx].data;
+                             : pal != NULL ? (const void *)pal[idx].data
+                                           : (const void *)raw[idx];
             /* CompressedSpritePalette carries no size - only tag. */
             const u32 size = sheet != NULL ? sheet[idx].size : 0u;
-            const u16 tag = sheet != NULL ? sheet[idx].tag : pal[idx].tag;
+            const u16 tag = sheet != NULL ? sheet[idx].tag : pal != NULL ? pal[idx].tag : (u16)idx;
             const int32_t ri = kPokemonBattleCompatSlots[
-                kind * POKEMON_BATTLE_SLOTS_PER_TABLE + idx];
+                (kind < 6u ? kind * POKEMON_BATTLE_SLOTS_PER_TABLE
+                           : 6u * POKEMON_BATTLE_SLOTS_PER_TABLE) + idx];
             const struct Gen3ResourcePackEntry *entry;
+            const bool rawKind = raw != NULL;
 
             snprintf(label, sizeof(label),
                      "mon table %zu slot %zu size/tag retained", kind, idx);
             CHECK(label, size == (sheet != NULL ? MON_SHEET_STAMP_SIZE : 0u)
-                             && tag == idx);
-            if (ri == POKEMON_BATTLE_EXTERNAL_SLOT)
-            {
-                snprintf(label, sizeof(label),
-                         "mon table %zu slot %zu external stays compiled",
-                         kind, idx);
-                CHECK(label, data == NULL);
-                continue;
-            }
+                             && tag == (u16)idx);
             snprintf(label, sizeof(label),
                      "mon table %zu slot %zu published", kind, idx);
             CHECK(label, data != NULL);
@@ -274,6 +280,17 @@ static void VerifyPokemonPublished(const struct Gen3ResourcePack *pack)
             CHECK(label, entry != NULL);
             if (entry == NULL)
                 continue;
+            if (rawKind)
+            {
+                snprintf(label, sizeof(label),
+                         "mon table %zu slot %zu raw stream == pack bytes",
+                         kind, idx);
+                CHECK(label, entry->payloadSize
+                                 == kPokemonBattleCompatResources[ri].expectedSize
+                             && memcmp(data, entry->payload,
+                                       entry->payloadSize) == 0);
+                continue;
+            }
             /* The pack stores the DECODED representation; the published
              * stream is the seam's re-encoded GBA LZ77 stream. Decode it
              * with the REAL consumer decompressor and prove it equals the
@@ -313,28 +330,38 @@ static void VerifyPokemonCleared(void)
     size_t idx;
     char label[96];
 
-    for (kind = 0u; kind < 4u; kind++)
+    for (kind = 0u; kind < 7u; kind++)
     {
         const struct CompressedSpriteSheet *sheet =
-            kind <= 1u ? (kind == 0u ? gMonFrontPicTable : gMonBackPicTable)
-                       : NULL;
+            (kind == 0u) ? gMonFrontPicTable
+          : (kind == 1u) ? gMonBackPicTable
+          : (kind == 4u) ? gMonStillFrontPicTable
+                         : NULL;
         const struct CompressedSpritePalette *pal =
-            kind >= 2u ? (kind == 2u ? gMonPaletteTable : gMonShinyPaletteTable)
-                       : NULL;
+            (kind == 2u) ? gMonPaletteTable
+          : (kind == 3u) ? gMonShinyPaletteTable
+                         : NULL;
+        const u8 *const *raw = (kind == 5u) ? (const u8 *const *)gMonIconTable
+                              : (kind == 6u) ? (const u8 *const *)gMonFootprintTable
+                                             : NULL;
+        const size_t rows = kind == 6u
+            ? POKEMON_BATTLE_SLOT_COUNT - 6u * POKEMON_BATTLE_SLOTS_PER_TABLE
+            : POKEMON_BATTLE_SLOTS_PER_TABLE;
 
-        for (idx = 0u; idx < POKEMON_BATTLE_SLOTS_PER_TABLE; idx++)
+        for (idx = 0u; idx < rows; idx++)
         {
             const void *data = sheet != NULL ? (const void *)sheet[idx].data
-                                             : (const void *)pal[idx].data;
+                             : pal != NULL ? (const void *)pal[idx].data
+                                           : (const void *)raw[idx];
             /* CompressedSpritePalette carries no size - only tag. */
             const u32 size = sheet != NULL ? sheet[idx].size : 0u;
-            const u16 tag = sheet != NULL ? sheet[idx].tag : pal[idx].tag;
+            const u16 tag = sheet != NULL ? sheet[idx].tag : pal != NULL ? pal[idx].tag : (u16)idx;
 
             snprintf(label, sizeof(label),
                      "mon table %zu slot %zu cleared", kind, idx);
             CHECK(label, data == NULL && size
                      == (sheet != NULL ? MON_SHEET_STAMP_SIZE : 0u)
-                     && tag == idx);
+                     && tag == (u16)idx);
         }
     }
 }
@@ -676,13 +703,13 @@ int main(int argc, char **argv)
     }
     Gen3ResourcePackDiagnostics_Destroy(&packDiag);
     printf("opened production pack : %zu entries\n", Gen3ResourcePack_GetEntryCount(pack));
-    CHECK("production pack has 23069 entries (196 trainer + 1608 Pokémon "
+    CHECK("production pack has 24287 entries (196 trainer + 2826 Pokémon "
           "battle + 288 object-event + 1544 tileset + 882 layout + 771 audio + 530 song graphs + 1057 leaf + 5187 text + 3310 D1 + 377 items + 1775 E1 + 210 E2 + 786 E3a-1 + 20 R13-G2 gift text + 467 script family + 2081 battle modules)",
-          Gen3ResourcePack_GetEntryCount(pack) == 23069u);
+          Gen3ResourcePack_GetEntryCount(pack) == 24287u);
     printf("loaded catalog          : %zu resources\n", Gen3ResourceCatalog_Count(catalog));
-    CHECK("catalog has 23069 resources (196 trainer + 1608 Pokémon battle + "
+    CHECK("catalog has 24287 resources (196 trainer + 2826 Pokémon battle + "
           "288 object-event + 1544 tileset + 882 layout + 771 audio + 530 song graphs + 1057 leaf + 5187 text + 3310 D1 + 377 items + 1775 E1 + 210 E2 + 786 E3a-1 + 20 R13-G2 gift text + 467 script family + 2081 battle modules)",
-          Gen3ResourceCatalog_Count(catalog) == 23069u);
+          Gen3ResourceCatalog_Count(catalog) == 24287u);
 
     /* 3. Build the production ROM_BASE candidate + snapshot from the real pack. */
     Gen3ResourceDiagnostics_Init(&gdiag);
@@ -715,8 +742,8 @@ int main(int argc, char **argv)
           strcmp(info.providerId, EMERALD_ROM_BASE_PROVIDER_ID) == 0);
     CHECK("provider precedence 300", info.precedence == EMERALD_ROM_BASE_PRECEDENCE);
     CHECK("provider version v1", strcmp(info.providerVersion, "v1") == 0);
-    CHECK("provider entryCount 23069 (196 trainer + 1608 Pokémon + 288 object-event + 1544 tileset + 882 layout + 771 audio + 530 song graphs + 1057 leaf + 5187 text + 3310 D1 + 377 items + 1775 E1 + 210 E2 + 786 E3a-1 + 20 R13-G2 gift text + 467 script family + 2081 battle modules)",
-          info.entryCount == 23069u);
+    CHECK("provider entryCount 24287 (196 trainer + 2826 Pokémon + 288 object-event + 1544 tileset + 882 layout + 771 audio + 530 song graphs + 1057 leaf + 5187 text + 3310 D1 + 377 items + 1775 E1 + 210 E2 + 786 E3a-1 + 20 R13-G2 gift text + 467 script family + 2081 battle modules)",
+          info.entryCount == 24287u);
 
     CHECK("snapshot builds",
           Gen3ResourceCandidate_Build(candidate, &snapshot, &gdiag) && snapshot != NULL);
@@ -786,12 +813,19 @@ int main(int argc, char **argv)
         CHECK("mon back slot starts NULL", gMonBackPicTable[i].data == NULL);
         CHECK("mon palette slot starts NULL", gMonPaletteTable[i].data == NULL);
         CHECK("mon shiny slot starts NULL", gMonShinyPaletteTable[i].data == NULL);
+        /* R15: the still-front table joins the stamped set (its native rows
+         * come from the same data.c SPECIES_SPRITE macro); the icon and
+         * footprint tables carry no size/tag and need no stamps. */
+        CHECK("mon still-front slot starts NULL",
+              gMonStillFrontPicTable[i].data == NULL);
         gMonFrontPicTable[i].size = MON_SHEET_STAMP_SIZE;
         gMonFrontPicTable[i].tag = (u16)i;
         gMonBackPicTable[i].size = MON_SHEET_STAMP_SIZE;
         gMonBackPicTable[i].tag = (u16)i;
         gMonPaletteTable[i].tag = (u16)i;
         gMonShinyPaletteTable[i].tag = (u16)i;
+        gMonStillFrontPicTable[i].size = MON_SHEET_STAMP_SIZE;
+        gMonStillFrontPicTable[i].tag = (u16)i;
     }
 
     /* 6. Publish through the R7B compatibility seam with the production
@@ -973,9 +1007,11 @@ int main(int argc, char **argv)
            info.providerId, info.providerVersion, (int)info.kind, info.precedence);
     printf("  family           : 186 front + 44 back published slots (236 total), "
            "all byte-identical to canonical\n");
-    printf("  pokemon battle   : 1759 published slots + 1 external (back EGG), "
-           "streams decode to pack bytes (real decompressor), size/tag "
-           "retained, lifecycle republish/clear verified\n");
+    printf("  pokemon battle   : 3053 published slots across 7 tables "
+           "(front/back/palette/shiny/still/icon/footprint), LZ streams "
+           "decode to pack bytes (real decompressor), raw streams match "
+           "pack bytes verbatim, size/tag retained, lifecycle "
+           "republish/clear verified\n");
 
     Gen3ResourceSnapshot_Destroy(snapshot);
     Gen3ResourceCandidate_Destroy(candidate);

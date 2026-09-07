@@ -1,73 +1,214 @@
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Meet[] = _("MEET");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Play[] = _("PLAY");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Hurried[] = _("HURRIED");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Goes[] = _("GOES");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Giddy[] = _("GIDDY");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Happy[] = _("HAPPY");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Happiness[] = _("HAPPINESS");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Excite[] = _("EXCITE");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Important[] = _("IMPORTANT");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Funny[] = _("FUNNY");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Got[] = _("GOT");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_GoHome[] = _("GO HOME");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Disappointed[] = _("DISAPPOINTED");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Disappoints[] = _("DISAPPOINTS");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Sad[] = _("SAD");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Try[] = _("TRY");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Tries[] = _("TRIES");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Hears[] = _("HEARS");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Think[] = _("THINK");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Hear[] = _("HEAR");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Wants[] = _("WANTS");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Misheard[] = _("MISHEARD");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Dislike[] = _("DISLIKE");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Angry[] = _("ANGRY");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Anger[] = _("ANGER");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Scary[] = _("SCARY");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Lonesome[] = _("LONESOME");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Disappoint[] = _("DISAPPOINT");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Joy[] = _("JOY");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Gets[] = _("GETS");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Never[] = _("NEVER");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Darn[] = _("DARN");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Downcast[] = _("DOWNCAST");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Incredible[] = _("INCREDIBLE");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Likes[] = _("LIKES");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Dislikes[] = _("DISLIKES");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Boring[] = _("BORING");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Care[] = _("CARE");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Cares[] = _("CARES");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_AllRight[] = _("ALL RIGHT");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Adore[] = _("ADORE");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Disaster[] = _("DISASTER");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Enjoy[] = _("ENJOY");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Enjoys[] = _("ENJOYS");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Eat[] = _("EAT");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Lacking[] = _("LACKING");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Bad[] = _("BAD");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Hard[] = _("HARD");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Terrible[] = _("TERRIBLE");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Should[] = _("SHOULD");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Nice[] = _("NICE");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Drink[] = _("DRINK");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Surprise[] = _("SURPRISE");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Fear[] = _("FEAR");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Want[] = _("WANT");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Wait[] = _("WAIT");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Satisfied[] = _("SATISFIED");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_See[] = _("SEE");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Rare[] = _("RARE");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Negative[] = _("NEGATIVE");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Done[] = _("DONE");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Danger[] = _("DANGER");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Defeated[] = _("DEFEATED");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Beat[] = _("BEAT");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Great[] = _("GREAT");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Romantic[] = _("ROMANTIC");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Question[] = _("QUESTION");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Understand[] = _("UNDERSTAND");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 const u8 gEasyChatWord_Understands[] = _("UNDERSTANDS");
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 
+#if defined(NATIVE_LINUX)
+struct EasyChatWordInfo gEasyChatGroup_Feelings[69];
+#else
 const struct EasyChatWordInfo gEasyChatGroup_Feelings[] = {
     [EC_INDEX(EC_WORD_MEET)] =
     {
@@ -484,3 +625,4 @@ const struct EasyChatWordInfo gEasyChatGroup_Feelings[] = {
         .enabled = TRUE,
     },
 };
+#endif

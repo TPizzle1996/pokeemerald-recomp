@@ -2504,12 +2504,21 @@ static const union AnimCmd *const sAnim_WheelIcon_PurpleMakuhita[] =
     &sAnim_WheelIcons[11]
 };
 
+#if defined(NATIVE_LINUX)
+struct CompressedSpriteSheet sSpriteSheet_Headers =
+{
+    .data = NULL,
+    .size = 0x1600,
+    .tag = GFXTAG_HEADERS
+};
+#else
 static const struct CompressedSpriteSheet sSpriteSheet_Headers =
 {
     .data = gRouletteHeaders_Gfx,
     .size = 0x1600,
     .tag = GFXTAG_HEADERS
 };
+#endif
 
 static const struct CompressedSpriteSheet sSpriteSheet_GridIcons =
 {
@@ -2859,7 +2868,38 @@ static const struct OamData sOam_BallCounter =
     .priority = 1,
 };
 
-static const struct CompressedSpriteSheet sSpriteSheets_Interface[] =
+#if defined(NATIVE_LINUX)
+struct CompressedSpriteSheet sRouletteInterfaceSpriteSheets[6] =
+{
+    {
+        .data = NULL,
+        .size = 0x400,
+        .tag = GFXTAG_CREDIT
+    },
+    {
+        .data = NULL,
+        .size = 0x280,
+        .tag = GFXTAG_CREDIT_DIGIT
+    },
+    {
+        .data = NULL,
+        .size = 0x500,
+        .tag = GFXTAG_MULTIPLIER
+    },
+    {
+        .data = sBallCounter_Gfx,
+        .size = 0x140,
+        .tag = GFXTAG_BALL_COUNTER
+    },
+    {
+        .data = sCursor_Gfx,
+        .size = 0x200,
+        .tag = GFXTAG_CURSOR
+    },
+    {}
+};
+#else
+static const struct CompressedSpriteSheet sRouletteInterfaceSpriteSheets[] =
 {
     {
         .data = gRouletteCredit_Gfx,
@@ -2888,6 +2928,7 @@ static const struct CompressedSpriteSheet sSpriteSheets_Interface[] =
     },
     {}
 };
+#endif
 
 static const union AnimCmd sAnim_CreditDigit[] =
 {
@@ -3118,12 +3159,21 @@ static const struct OamData sOam_WheelCenter =
     .priority = 2,
 };
 
+#if defined(NATIVE_LINUX)
+struct CompressedSpriteSheet sSpriteSheet_WheelCenter =
+{
+    .data = NULL,
+    .size = 0x800,
+    .tag = GFXTAG_WHEEL_CENTER
+};
+#else
 static const struct CompressedSpriteSheet sSpriteSheet_WheelCenter =
 {
     .data = gRouletteCenter_Gfx,
     .size = 0x800,
     .tag = GFXTAG_WHEEL_CENTER
 };
+#endif
 
 static const struct SpriteTemplate sSpriteTemplate_WheelCenter =
 {
@@ -3707,13 +3757,13 @@ static void SpriteCB_WheelIcon(struct Sprite *sprite)
 static void CreateInterfaceSprites(void)
 {
     u8 i;
-    for (i = 0; i < ARRAY_COUNT(sSpriteSheets_Interface) - 1; i++)
+    for (i = 0; i < ARRAY_COUNT(sRouletteInterfaceSpriteSheets) - 1; i++)
     {
         struct SpriteSheet s;
-        LZ77UnCompWram(sSpriteSheets_Interface[i].data, gDecompressionBuffer);
+        LZ77UnCompWram(sRouletteInterfaceSpriteSheets[i].data, gDecompressionBuffer);
         s.data = gDecompressionBuffer;
-        s.size = sSpriteSheets_Interface[i].size;
-        s.tag  = sSpriteSheets_Interface[i].tag;
+        s.size = sRouletteInterfaceSpriteSheets[i].size;
+        s.tag  = sRouletteInterfaceSpriteSheets[i].tag;
         LoadSpriteSheet(&s);
     }
     sRoulette->spriteIds[SPR_CREDIT] = CreateSprite(&sSpriteTemplate_Credit, 208, 16, 4);

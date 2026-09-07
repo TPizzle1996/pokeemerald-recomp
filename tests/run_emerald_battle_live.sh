@@ -233,8 +233,8 @@ if [ "$mode" = "replace" ] || [ "$mode" = "sanitize" ]; then
     "$tmp/emerald_battle_live_test" replace "$pack" > replace.log
     cat replace.log
     grep -q "H4-REPLACE" replace.log
-    grep -q "count=6390" replace.log
-    echo "H4 replace: generation B committed, 6,377 invariant, identity unregister/restore"
+    grep -q "count=7608" replace.log
+    echo "H4 replace: generation B committed, 7,608 invariant, identity unregister/restore"
 fi
 
 if [ "$mode" = "state" ] || [ "$mode" = "sanitize" ] || [ "$mode" = "" ]; then

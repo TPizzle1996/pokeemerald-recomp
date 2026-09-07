@@ -1291,7 +1291,7 @@ static void TestBuildPackFailureMatrix(struct TestAssets *a)
         Gen3Buffer_Init(&big2, 128 * 1024u);
         Gen3Buffer_AppendCStr(&big1, kManifestHead);
         Gen3Buffer_AppendCStr(&big2, kManifestHead);
-        for (i = 0; i < 16385u; i++)
+        for (i = 0; i < 17603u; i++)
         {
             char id[64];
             snprintf(id, sizeof(id), "emerald:x/big1%u", i);

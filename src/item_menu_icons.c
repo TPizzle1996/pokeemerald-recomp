@@ -126,7 +126,20 @@ static const union AffineAnimCmd *const sBagAffineAnimCmds[] =
     [ANIM_BAG_NORMAL] = sSpriteAffineAnim_BagNormal,
     [ANIM_BAG_SHAKE]  = sSpriteAffineAnim_BagShake
 };
-
+#if defined(NATIVE_LINUX)
+struct CompressedSpriteSheet gBagMaleSpriteSheet =
+{
+    NULL, 0x3000, TAG_BAG_GFX
+};
+struct CompressedSpriteSheet gBagFemaleSpriteSheet =
+{
+    NULL, 0x3000, TAG_BAG_GFX
+};
+struct CompressedSpritePalette gBagPaletteTable =
+{
+    NULL, TAG_BAG_GFX
+};
+#else
 const struct CompressedSpriteSheet gBagMaleSpriteSheet =
 {
     gBagMaleTiles, 0x3000, TAG_BAG_GFX
@@ -141,6 +154,7 @@ const struct CompressedSpritePalette gBagPaletteTable =
 {
     gBagPalette, TAG_BAG_GFX
 };
+#endif
 
 static const struct SpriteTemplate sBagSpriteTemplate =
 {

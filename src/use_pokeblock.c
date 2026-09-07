@@ -302,6 +302,10 @@ static const u8 *const sConditionNames[CONDITION_COUNT] =
 };
 #endif
 
+#if defined(NATIVE_LINUX)
+struct SpriteSheet sSpriteSheet_UpDown = {NULL, 0x200, TAG_UP_DOWN};
+struct SpritePalette sSpritePalette_UpDown = {NULL, TAG_UP_DOWN};
+#else
 static const struct SpriteSheet sSpriteSheet_UpDown =
 {
     gUsePokeblockUpDown_Gfx, 0x200, TAG_UP_DOWN
@@ -311,6 +315,7 @@ static const struct SpritePalette sSpritePalette_UpDown =
 {
     gUsePokeblockUpDown_Pal, TAG_UP_DOWN
 };
+#endif
 
 static const s16 sUpDownCoordsOnGraph[CONDITION_COUNT][2] =
 {
@@ -414,10 +419,14 @@ static const struct SpriteTemplate sSpriteTemplate_Condition =
     .callback = SpriteCB_Condition,
 };
 
+#if defined(NATIVE_LINUX)
+struct SpritePalette sSpritePalette_Condition = {NULL, TAG_CONDITION};
+#else
 static const struct SpritePalette sSpritePalette_Condition =
 {
     gUsePokeblockCondition_Pal, TAG_CONDITION
 };
+#endif
 
 // When first opening the selection screen
 void ChooseMonToGivePokeblock(struct Pokeblock *pokeblock, void (*callback)(void))

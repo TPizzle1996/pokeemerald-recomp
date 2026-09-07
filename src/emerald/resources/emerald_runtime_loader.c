@@ -65,6 +65,41 @@
 #include "emerald/resources/emerald_text_compat.h"
 #include "emerald/resources/emerald_trainer_compat.h"
 #include "emerald/resources/emerald_trainer_native_compat.h"
+#include "emerald/resources/emerald_easy_chat_compat.h"
+#include "emerald/resources/emerald_wallpaper_compat.h"
+#include "emerald/resources/emerald_item_icon_compat.h"
+#include "emerald/resources/emerald_battle_anim_gfx_compat.h"
+#include "emerald/resources/emerald_ui_compat.h"
+#include "emerald/resources/emerald_weather_compat.h"
+
+/* R15: the seven content-publication seams are weak-probed exactly like the
+ * R13-H3 state-adapter bridges - production always links them, and the
+ * offline harnesses (resource-state / battle-live / script-faults) skip the
+ * whole R15 section with the same NULL-guard shape. */
+extern enum EmeraldResourceCompatStatus EmeraldEasyChatCompat_TryInitialize(
+    const struct Gen3ResourceSnapshot *snapshot,
+    struct EmeraldResourceCompatDiagnostics *diagnostics);
+#pragma weak EmeraldEasyChatCompat_TryInitialize
+extern enum EmeraldResourceCompatStatus EmeraldWallpaperCompat_TryInitialize(
+    const struct Gen3ResourceSnapshot *snapshot,
+    struct EmeraldResourceCompatDiagnostics *diagnostics);
+#pragma weak EmeraldWallpaperCompat_TryInitialize
+extern enum EmeraldResourceCompatStatus EmeraldItemIconCompat_TryInitialize(
+    const struct Gen3ResourceSnapshot *snapshot,
+    struct EmeraldResourceCompatDiagnostics *diagnostics);
+#pragma weak EmeraldItemIconCompat_TryInitialize
+extern enum EmeraldResourceCompatStatus EmeraldBattleAnimGfxCompat_TryInitialize(
+    const struct Gen3ResourceSnapshot *snapshot,
+    struct EmeraldResourceCompatDiagnostics *diagnostics);
+#pragma weak EmeraldBattleAnimGfxCompat_TryInitialize
+extern enum EmeraldResourceCompatStatus EmeraldUICompat_TryInitialize(
+    const struct Gen3ResourceSnapshot *snapshot,
+    struct EmeraldResourceCompatDiagnostics *diagnostics);
+#pragma weak EmeraldUICompat_TryInitialize
+extern enum EmeraldResourceCompatStatus EmeraldWeatherCompat_TryInitialize(
+    const struct Gen3ResourceSnapshot *snapshot,
+    struct EmeraldResourceCompatDiagnostics *diagnostics);
+#pragma weak EmeraldWeatherCompat_TryInitialize
 
 /* R13-H4: the live battle-anim/FE seam is weak-probed exactly like the
  * state-adapter bridges - production always links emerald_battle_live.c,
@@ -584,7 +619,7 @@ EmeraldResourceCompat_RegisterRuntimeSnapshot(const char *packPath)
                                                     scriptStatus =
                                                         EmeraldScriptCompat_RegisterRanges();
                                                 if (scriptStatus == EMERALD_SCRIPT_OK
-                                                 && EmeraldScriptCompat_GetRangeCount() != 6385u)
+                                                 && EmeraldScriptCompat_GetRangeCount() != 7603u)
                                                     scriptStatus =
                                                         EMERALD_SCRIPT_ERR_UNEXPECTED_COUNT;
                                                 if (scriptStatus == EMERALD_SCRIPT_OK)
@@ -631,7 +666,10 @@ EmeraldResourceCompat_RegisterRuntimeSnapshot(const char *packPath)
                                              * contest-AI + field-effect pack
                                              * surfaces, stage the combined
                                              * generation, register the 5 live
-                                             * arena ranges (6,385 -> 6,390),
+                                             * arena ranges (7,603 -> 7,608; the
+                                             * R15 still/icon/footprint aux family
+                                             * extended the pokemon image by 1,217
+                                             * entry ranges),
                                              * publish live execution, and hand
                                              * the State-v5 adapter its surface
                                              * layouts - all before any battle /
@@ -656,7 +694,7 @@ EmeraldResourceCompat_RegisterRuntimeSnapshot(const char *packPath)
                                                     liveStatus =
                                                         EmeraldBattleLive_RegisterRanges();
                                                 if (liveStatus == EMERALD_BATTLE_LIVE_OK
-                                                 && EmeraldBattleLive_GetRangeCount() != 6390u)
+                                                 && EmeraldBattleLive_GetRangeCount() != 7608u)
                                                     liveStatus =
                                                         EMERALD_BATTLE_LIVE_ERR_UNEXPECTED_COUNT;
                                                 if (liveStatus == EMERALD_BATTLE_LIVE_OK)
@@ -694,6 +732,114 @@ EmeraldResourceCompat_RegisterRuntimeSnapshot(const char *packPath)
                                             }
                                             if (status == EMERALD_COMPAT_OK)
                                             {
+                                            /* R15: publish the easy-chat word
+                                             * payloads from the pack. ADDITIVE
+                                             * DEGRADE: a failed publication
+                                             * means EC_GetWord() returns NULL;
+                                             * the session continues. The
+                                             * weak-probe guard above makes the
+                                             * whole section a no-op in the
+                                             * offline harness links. */
+                                            if (EmeraldEasyChatCompat_TryInitialize != NULL)
+                                            {
+                                                struct EmeraldResourceCompatDiagnostics ecDiag;
+                                                enum EmeraldResourceCompatStatus ecStatus =
+                                                    EmeraldEasyChatCompat_TryInitialize(
+                                                        snapshot, &ecDiag);
+                                                if (ecStatus != EMERALD_COMPAT_OK)
+                                                {
+                                                    fprintf(stderr,
+                                                            "emerald runtime: easy-chat "
+                                                            "words not published "
+                                                            "(additive degrade): "
+                                                            "status %d%s%s\n",
+                                                            (int)ecStatus,
+                                                            ecDiag.canonicalName[0] != '\0'
+                                                                ? " @ " : "",
+                                                            ecDiag.canonicalName);
+                                                }
+                                            }
+                                            /* R15: publish the wallpaper, item
+                                             * icon, battle-animation gfx and UI
+                                             * graphic families from the pack.
+                                             * Weak-probed: harness links skip.
+                                             * ADDITIVE DEGRADE throughout: a
+                                             * failed publication leaves the
+                                             * affected tables with NULL data
+                                             * pointers (the mutable native
+                                             * definitions retain their scalar
+                                             * metadata), and the session
+                                             * continues. */
+                                            if (EmeraldWallpaperCompat_TryInitialize != NULL)
+                                            {
+                                                struct EmeraldResourceCompatDiagnostics r15Diag;
+                                                enum EmeraldResourceCompatStatus r15Status =
+                                                    EmeraldWallpaperCompat_TryInitialize(
+                                                        snapshot, &r15Diag);
+                                                if (r15Status != EMERALD_COMPAT_OK)
+                                                {
+                                                    fprintf(stderr,
+                                                            "emerald runtime: wallpapers "
+                                                            "not published (additive "
+                                                            "degrade): status %d%s%s\n",
+                                                            (int)r15Status,
+                                                            r15Diag.canonicalName[0] != '\0'
+                                                                ? " @ " : "",
+                                                            r15Diag.canonicalName);
+                                                }
+                                                r15Status = EmeraldItemIconCompat_TryInitialize(
+                                                    snapshot, &r15Diag);
+                                                if (r15Status != EMERALD_COMPAT_OK)
+                                                {
+                                                    fprintf(stderr,
+                                                            "emerald runtime: item icons "
+                                                            "not published (additive "
+                                                            "degrade): status %d%s%s\n",
+                                                            (int)r15Status,
+                                                            r15Diag.canonicalName[0] != '\0'
+                                                                ? " @ " : "",
+                                                            r15Diag.canonicalName);
+                                                }
+                                                r15Status = EmeraldBattleAnimGfxCompat_TryInitialize(
+                                                    snapshot, &r15Diag);
+                                                if (r15Status != EMERALD_COMPAT_OK)
+                                                {
+                                                    fprintf(stderr,
+                                                            "emerald runtime: battle-anim "
+                                                            "gfx not published (additive "
+                                                            "degrade): status %d%s%s\n",
+                                                            (int)r15Status,
+                                                            r15Diag.canonicalName[0] != '\0'
+                                                                ? " @ " : "",
+                                                            r15Diag.canonicalName);
+                                                }
+                                                r15Status = EmeraldWeatherCompat_TryInitialize(
+                                                    snapshot, &r15Diag);
+                                                if (r15Status != EMERALD_COMPAT_OK)
+                                                {
+                                                    fprintf(stderr,
+                                                            "emerald runtime: weather "
+                                                            "data not published (additive "
+                                                            "degrade): status %d%s%s\n",
+                                                            (int)r15Status,
+                                                            r15Diag.canonicalName[0] != '\0'
+                                                                ? " @ " : "",
+                                                            r15Diag.canonicalName);
+                                                }
+                                                r15Status = EmeraldUICompat_TryInitialize(
+                                                    snapshot, &r15Diag);
+                                                if (r15Status != EMERALD_COMPAT_OK)
+                                                {
+                                                    fprintf(stderr,
+                                                            "emerald runtime: UI graphics "
+                                                            "not published (additive "
+                                                            "degrade): status %d%s%s\n",
+                                                            (int)r15Status,
+                                                            r15Diag.canonicalName[0] != '\0'
+                                                                ? " @ " : "",
+                                                            r15Diag.canonicalName);
+                                                }
+                                            }
                                             /* R10-F: the session content fingerprint
                                              * pins the exact logical provider content
                                              * this session was built from (the

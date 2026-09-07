@@ -92,8 +92,8 @@ if "$gen_dir/gen-pokemon-family" --inventory "$inventory" \
         --compat-slotmap-out "$root/include/emerald/resources/pokemon_battle_slots.generated.h" \
         --check >"$tmp/check.log" 2>&1; then
     pass "generator --check passes on all six committed outputs"
-    if grep -q "1608 payload resources" "$tmp/check.log"; then
-        pass "--check reports 1608 payload resources"
+    if grep -q "2826 payload resources" "$tmp/check.log"; then
+        pass "--check reports 2826 payload resources"
     else
         fail "--check count message missing (see $tmp/check.log)"
     fi
@@ -228,8 +228,8 @@ elif mode == 'missing-artifact':
 elif mode == 'external-not-allowlisted':
     # A NEW external alias (prefix gMonStillFrontPic_, not allowlisted) with
     # a joinable slot; ResolveAliases fires before any decode.
-    blocks.append('[[resources]]\nsymbol = "gMonStillFrontPic_NotAllowlisted"\nkind = "front_sheet"\nsource_artifact = "graphics/pokemon/bulbasaur/anim_front.4bpp.lz"\nslot_count = 1')
-    blocks.append('[[slots]]\nsymbol = "gMonStillFrontPic_NotAllowlisted"\nkind = "front_sheet"\nindex = 0\nspecies = "NONE"')
+    blocks.append('[[resources]]\nsymbol = "gMonZzz_NotAllowlisted"\nkind = "front_sheet"\nsource_artifact = "graphics/pokemon/bulbasaur/anim_front.4bpp.lz"\nslot_count = 1')
+    blocks.append('[[slots]]\nsymbol = "gMonZzz_NotAllowlisted"\nkind = "front_sheet"\nindex = 0\nspecies = "NONE"')
 else:
     sys.exit(2)
 
@@ -305,6 +305,9 @@ pick = [
     "emerald:pokemon/unown/battle/shiny-palette",
     "emerald:pokemon/mr_mime/battle/front/sheet",
     "emerald:pokemon/question_mark/circled/battle/back/sheet",
+    "emerald:pokemon/bulbasaur/battle/front/still",
+    "emerald:pokemon/bulbasaur/icon",
+    "emerald:pokemon/bulbasaur/footprint",
 ]
 blocks = open(bindings_path).read().split("[[bindings]]")[1:]
 kept = []
@@ -315,7 +318,7 @@ for block in blocks:
         kept.append("[[bindings]]" + block)
         sym = re.search(r'^symbol = "([^"]+)"', block, re.M).group(1)
         art = re.search(r'^source_artifact = "([^"]+)"', block, re.M).group(1)
-        kind = "F" if "/sheet" in m.group(1) else "P"
+        kind = "F" if ("/sheet" in m.group(1) or "/still" in m.group(1) or m.group(1).endswith("/icon") or m.group(1).endswith("/footprint")) else "P"
         lines.append("%s %s %s" % (kind, sym, art))
 assert len(kept) == len(pick), "not all representative ids found in bindings"
 open(list_out, "w").write("\n".join(sorted(lines)) + "\n")
@@ -341,12 +344,18 @@ python3 - "$tmp/f.list" "$tmp/f_manifest.toml" <<'PY'
 import hashlib, re, sys
 list_path, manifest_path = sys.argv[1], sys.argv[2]
 slot = {}
-fi = pi = 0
+fi = pi = ii = ti = 0
 for line in open(list_path):
     kind, sym, _ = line.split()
     if kind == "F":
         slot[sym] = 0x00300000 + fi * 0x1000
         fi += 1
+    elif kind == "I":
+        slot[sym] = 0x00320000 + ii * 0x400
+        ii += 1
+    elif kind == "T":
+        slot[sym] = 0x00330000 + ti * 0x100
+        ti += 1
     else:
         slot[sym] = 0x00310000 + pi * 0x100
         pi += 1
@@ -357,21 +366,25 @@ for block in open(manifest_path).read().split("[[records]]")[1:]:
         d[m.group(1)] = m.group(3) if m.group(2).startswith('"') else int(m.group(4))
     if "id" in d:
         records.append(d)
-assert len(records) == 10, "expected 10 manifest records, got %d" % len(records)
+assert len(records) == 13, "expected 13 manifest records, got %d" % len(records)
 ids = [r["id"] for r in records]
 assert ids == sorted(ids), "manifest records not bytewise sorted"
 ok = 0
 for r in records:
     assert r["rom_offset"] == slot[r["symbol"]], \
         "%s offset %d != slot %d" % (r["id"], r["rom_offset"], slot[r["symbol"]])
-    if r["id"].endswith("/sheet"):
+    if r["id"].endswith("/sheet") or r["id"].endswith("/still"):
         assert r["decoded_length"] % 2048 == 0 and r["type"] == "tile-graphics"
+    elif r["id"].endswith("/icon"):
+        assert r["decoded_length"] == 1024 and r["type"] == "tile-graphics"
+    elif r["id"].endswith("/footprint"):
+        assert r["decoded_length"] == 32 and r["type"] == "tile-graphics"
     else:
         assert r["decoded_length"] % 32 == 0 and r["type"] == "palette"
     key = hashlib.sha256(b"gen3-resource-id-v1\x00" + r["id"].encode()).hexdigest()
     assert r["key"] == key, "key mismatch for %s" % r["id"]
     ok += 1
-print("  PASS Part F: 10 records, sorted, slot offsets, sizes, M0/M1 keys (%d/10)" % ok)
+print("  PASS Part F: 13 records, sorted, slot offsets, sizes, M0/M1 keys (%d/13)" % ok)
 PY
 if [ $? -eq 0 ]; then
     pass "Part F: manifest contents verified"

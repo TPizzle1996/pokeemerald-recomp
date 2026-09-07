@@ -135,4 +135,6 @@ void DoEasyChatScreen(u8 type, u16 *words, MainCallback exitCallback, u8 display
 void InitQuestionnaireWords(void);
 void UnlockTrendySaying(u8 wordIndex);
 
+#include "emerald/resources/easy_chat_accessors.generated.h"
+
 #endif // GUARD_EASYCHAT_H

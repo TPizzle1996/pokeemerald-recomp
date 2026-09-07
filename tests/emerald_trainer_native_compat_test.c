@@ -205,11 +205,18 @@ struct CompressedSpriteSheet gMonFrontPicTable[512] = { 0 };
 struct CompressedSpriteSheet gMonBackPicTable[512] = { 0 };
 struct CompressedSpritePalette gMonPaletteTable[512] = { 0 };
 struct CompressedSpritePalette gMonShinyPaletteTable[512] = { 0 };
+/* R15 Phase 2: the three aux tables, same mutable-on-native shape. */
+struct CompressedSpriteSheet gMonStillFrontPicTable[512] = { 0 };
+const u8 *gMonIconTable[512] = { 0 };
+const u8 *gMonFootprintTable[512] = { 0 };
 #else
 const struct CompressedSpriteSheet gMonFrontPicTable[512] = { 0 };
 const struct CompressedSpriteSheet gMonBackPicTable[512] = { 0 };
 const struct CompressedSpritePalette gMonPaletteTable[512] = { 0 };
 const struct CompressedSpritePalette gMonShinyPaletteTable[512] = { 0 };
+const struct CompressedSpriteSheet gMonStillFrontPicTable[512] = { 0 };
+const u8 *const gMonIconTable[512] = { 0 };
+const u8 *const gMonFootprintTable[512] = { 0 };
 #endif
 
 void *AllocZeroed(u32 size)

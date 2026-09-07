@@ -947,15 +947,23 @@ static const union AnimCmd *const sSpriteAnimTable_MenuPokeball[] =
     sPokeballAnim_Open
 };
 
+#if defined(NATIVE_LINUX)
+struct CompressedSpriteSheet sSpriteSheet_MenuPokeball = {NULL, 0x400, TAG_POKEBALL};
+#else
 static const struct CompressedSpriteSheet sSpriteSheet_MenuPokeball =
 {
     gPartyMenuPokeball_Gfx, 0x400, TAG_POKEBALL
 };
+#endif
 
+#if defined(NATIVE_LINUX)
+struct CompressedSpritePalette sSpritePalette_MenuPokeball = {NULL, TAG_POKEBALL};
+#else
 static const struct CompressedSpritePalette sSpritePalette_MenuPokeball =
 {
     gPartyMenuPokeball_Pal, TAG_POKEBALL
 };
+#endif
 
 // Used for the Poké Ball sprite on each party slot / Cancel button
 static const struct SpriteTemplate sSpriteTemplate_MenuPokeball =
@@ -1033,10 +1041,14 @@ static const union AnimCmd *const sSpriteAnimTable_MenuPokeballSmall[] =
     sSmallPokeballAnim_Blank4
 };
 
+#if defined(NATIVE_LINUX)
+struct CompressedSpriteSheet sSpriteSheet_MenuPokeballSmall = {NULL, 0x0300, TAG_POKEBALL_SMALL};
+#else
 static const struct CompressedSpriteSheet sSpriteSheet_MenuPokeballSmall =
 {
     gPartyMenuPokeballSmall_Gfx, 0x0300, TAG_POKEBALL_SMALL
 };
+#endif
 
 // Used for the pokeball sprite next to Cancel and Confirm when both are present, otherwise sSpriteTemplate_MenuPokeball is used
 static const struct SpriteTemplate sSpriteTemplate_MenuPokeballSmall =
@@ -1127,15 +1139,23 @@ static const union AnimCmd *const sSpriteTemplate_StatusCondition[] =
     sSpriteAnim_Blank
 };
 
+#if defined(NATIVE_LINUX)
+struct CompressedSpriteSheet sSpriteSheet_StatusIcons = {NULL, 0x400, TAG_STATUS_ICONS};
+#else
 static const struct CompressedSpriteSheet sSpriteSheet_StatusIcons =
 {
     gStatusGfx_Icons, 0x400, TAG_STATUS_ICONS
 };
+#endif
 
+#if defined(NATIVE_LINUX)
+struct CompressedSpritePalette sSpritePalette_StatusIcons = {NULL, TAG_STATUS_ICONS};
+#else
 static const struct CompressedSpritePalette sSpritePalette_StatusIcons =
 {
     gStatusPal_Icons, TAG_STATUS_ICONS
 };
+#endif
 
 static const struct SpriteTemplate sSpriteTemplate_StatusIcons =
 {

@@ -179,10 +179,14 @@ static const struct SpriteTemplate sAreaMarkerSpriteTemplate =
 static const u16 sAreaMarkerPalette[] = INCBIN_U16("graphics/pokedex/area_marker.gbapal");
 static const u8 sAreaMarkerTiles[] = INCBIN_U8("graphics/pokedex/area_marker.4bpp");
 
+#if defined(NATIVE_LINUX)
+struct SpritePalette sAreaUnknownSpritePalette = {.data = NULL, .tag = TAG_AREA_UNKNOWN};
+#else
 static const struct SpritePalette sAreaUnknownSpritePalette =
 {
     .data = gPokedexAreaScreenAreaUnknown_Pal, .tag = TAG_AREA_UNKNOWN
 };
+#endif
 
 static const struct OamData sAreaUnknownOamData =
 {

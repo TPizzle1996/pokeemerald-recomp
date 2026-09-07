@@ -1291,7 +1291,7 @@ static void LoadTheEndScreen(u16 tileOffsetLoad, u16 tileOffsetWrite, u16 palOff
     u16 i;
 
     LZ77UnCompVram(sCreditsCopyrightEnd_Gfx, (void *)(VRAM + tileOffsetLoad));
-    LoadPalette(gIntroCopyright_Pal, palOffset, sizeof(gIntroCopyright_Pal));
+    LoadPalette(gIntroCopyright_Pal, palOffset, gIntroCopyright_Pal_SIZE);
 
     baseTile = (palOffset / 16) << 12;
 

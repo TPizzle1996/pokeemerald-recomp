@@ -375,14 +375,22 @@ static const struct TilemapCtrl sStatusTilemapCtrl2 =
 {
     sStatusTilemap, 1, 10, 2, 0, 50
 };
+#if defined(NATIVE_LINUX)
+struct TilemapCtrl sBattleMoveTilemapCtrl = {NULL, 0, 10, 7, 0, 45};
+#else
 static const struct TilemapCtrl sBattleMoveTilemapCtrl =
 {
     gSummaryScreen_MoveEffect_Battle_Tilemap, 0, 10, 7, 0, 45
 };
+#endif
+#if defined(NATIVE_LINUX)
+struct TilemapCtrl sContestMoveTilemapCtrl = {NULL, 0, 10, 7, 0, 45};
+#else
 static const struct TilemapCtrl sContestMoveTilemapCtrl =
 {
     gSummaryScreen_MoveEffect_Contest_Tilemap, 0, 10, 7, 0, 45
 };
+#endif
 static const s8 sMultiBattleOrder[] = {0, 2, 3, 1, 4, 5};
 static const struct WindowTemplate sSummaryTemplate[] =
 {
@@ -868,12 +876,16 @@ static const union AnimCmd *const sSpriteAnimTable_MoveTypes[NUMBER_OF_MON_TYPES
     sSpriteAnim_CategoryTough,
 };
 
+#if defined(NATIVE_LINUX)
+struct CompressedSpriteSheet sSpriteSheet_MoveTypes = {.data = NULL, .size = (NUMBER_OF_MON_TYPES + CONTEST_CATEGORIES_COUNT) * 0x100, .tag = TAG_MOVE_TYPES};
+#else
 static const struct CompressedSpriteSheet sSpriteSheet_MoveTypes =
 {
     .data = gMoveTypes_Gfx,
     .size = (NUMBER_OF_MON_TYPES + CONTEST_CATEGORIES_COUNT) * 0x100,
     .tag = TAG_MOVE_TYPES
 };
+#endif
 static const struct SpriteTemplate sSpriteTemplate_MoveTypes =
 {
     .tileTag = TAG_MOVE_TYPES,
@@ -979,17 +991,25 @@ static const union AnimCmd *const sSpriteAnimTable_MoveSelector[] = {
     sSpriteAnim_MoveSelector8,
     sSpriteAnim_MoveSelector9,
 };
+#if defined(NATIVE_LINUX)
+struct CompressedSpriteSheet sMoveSelectorSpriteSheet = {.data = NULL, .size = 0x400, .tag = TAG_MOVE_SELECTOR};
+#else
 static const struct CompressedSpriteSheet sMoveSelectorSpriteSheet =
 {
     .data = gSummaryMoveSelect_Gfx,
     .size = 0x400,
     .tag = TAG_MOVE_SELECTOR
 };
+#endif
+#if defined(NATIVE_LINUX)
+struct CompressedSpritePalette sMoveSelectorSpritePal = {.data = NULL, .tag = TAG_MOVE_SELECTOR};
+#else
 static const struct CompressedSpritePalette sMoveSelectorSpritePal =
 {
     .data = gSummaryMoveSelect_Pal,
     .tag = TAG_MOVE_SELECTOR
 };
+#endif
 static const struct SpriteTemplate sMoveSelectorSpriteTemplate =
 {
     .tileTag = TAG_MOVE_SELECTOR,
@@ -1053,17 +1073,25 @@ static const union AnimCmd *const sSpriteAnimTable_StatusCondition[] = {
     sSpriteAnim_StatusPokerus,
     sSpriteAnim_StatusFaint,
 };
+#if defined(NATIVE_LINUX)
+struct CompressedSpriteSheet sStatusIconsSpriteSheet = {.data = NULL, .size = 0x380, .tag = TAG_MON_STATUS};
+#else
 static const struct CompressedSpriteSheet sStatusIconsSpriteSheet =
 {
     .data = gStatusGfx_Icons,
     .size = 0x380,
     .tag = TAG_MON_STATUS
 };
+#endif
+#if defined(NATIVE_LINUX)
+struct CompressedSpritePalette sStatusIconsSpritePalette = {.data = NULL, .tag = TAG_MON_STATUS};
+#else
 static const struct CompressedSpritePalette sStatusIconsSpritePalette =
 {
     .data = gStatusPal_Icons,
     .tag = TAG_MON_STATUS
 };
+#endif
 static const struct SpriteTemplate sSpriteTemplate_StatusCondition =
 {
     .tileTag = TAG_MON_STATUS,
@@ -1304,7 +1332,7 @@ static bool8 DecompressGraphics(void)
     {
     case 0:
         ResetTempTileDataBuffers();
-        DecompressAndCopyTileDataToVram(1, &gSummaryScreen_Gfx, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(1, gSummaryScreen_Gfx, 0, 0, 0);
         sMonSummaryScreen->switchCounter++;
         break;
     case 1:
@@ -1332,7 +1360,7 @@ static bool8 DecompressGraphics(void)
         break;
     case 6:
         LoadCompressedPalette(gSummaryScreen_Pal, BG_PLTT_ID(0), 8 * PLTT_SIZE_4BPP);
-        LoadPalette(&gPPTextPalette, BG_PLTT_ID(8) + 1, PLTT_SIZEOF(16 - 1));
+        LoadPalette(gPPTextPalette, BG_PLTT_ID(8) + 1, PLTT_SIZEOF(16 - 1));
         sMonSummaryScreen->switchCounter++;
         break;
     case 7:

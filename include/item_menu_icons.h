@@ -1,9 +1,15 @@
 #ifndef GUARD_ITEM_MENU_ICONS_H
 #define GUARD_ITEM_MENU_ICONS_H
 
+#if defined(NATIVE_LINUX)
+extern struct CompressedSpriteSheet gBagMaleSpriteSheet;
+extern struct CompressedSpriteSheet gBagFemaleSpriteSheet;
+extern struct CompressedSpritePalette gBagPaletteTable;
+#else
 extern const struct CompressedSpriteSheet gBagMaleSpriteSheet;
 extern const struct CompressedSpriteSheet gBagFemaleSpriteSheet;
 extern const struct CompressedSpritePalette gBagPaletteTable;
+#endif
 extern const struct CompressedSpriteSheet gBerryCheckCircleSpriteSheet;
 extern const struct CompressedSpritePalette gBerryCheckCirclePaletteTable;
 

@@ -69,8 +69,26 @@
 #define _(x)  x
 #define __(x) x
 const u32 gMonStillFrontPic_CircledQuestionMark[] = {0};
+/* R15 Phase 2: the question-mark footprints live in src/graphics.c (not
+ * pokemon.h); the test stubs them like the still-front NONE row. */
+const u8 gMonFootprint_QuestionMark[] = {0};
+const u8 gMonFootprint_CircledQuestionMark[] = {0};
+/* R15 Phase 2: the Egg + QuestionMark icons also live in src/graphics.c;
+ * the icon table itself is textually included from pokemon_icon.c (the
+ * real-tables recipe) so the seam publishes into the REAL table. */
+const u8 gMonIcon_Egg[] = {0};
+const u8 gMonIcon_QuestionMark[] = {0};
+/* R15 Phase 2: the three shared icon palettes live in src/graphics.c; the
+ * icon palette table (pokemon_icon.c) references them on every target.
+ * Stub the array here like the graphics.c-only icons above. */
+const u16 gMonIconPalettes[4][16] = {0};
 #include "../src/data/graphics/pokemon.h"
+#include "../src/pokemon_icon.c"
 #include "../src/data.c"
+/* R15 Phase 2: the footprint table lives in its own data header (included
+ * by pokedex.c in the game); the compat seam publishes into the REAL table,
+ * so the harness includes it textually like the other pic tables. */
+#include "../src/data/pokemon_graphics/footprint_table.h"
 
 #include "platform/native_state.h"
 #include "platform/native_world_neighborhood.h"
@@ -3459,7 +3477,7 @@ static int DoG4Create(const char *packPath, const char *statePath)
     CHECK(EmeraldScriptCompat_IsPublished());
     CHECK(EmeraldScriptCompat_AreRangesRegistered());
     CHECK(EmeraldResourceRangeIndex_GetRangeCount(
-              EmeraldResourceCompat_GetRangeIndex()) == 6385u);
+              EmeraldResourceCompat_GetRangeIndex()) == 7603u);
     (void)projected;
     CHECK(NativeState_Save(HARNESS_STATE_SLOT) == NATIVE_STATE_OK);
     CHECK(ParseStateSidecar(statePath, records, ARRAY_COUNT(records),
@@ -4642,14 +4660,14 @@ static int DoH3Create(const char *packPath, const char *statePath)
     /* Layout 0 places arenas in sidecar order (battle before FE). */
     CHECK(battleArena < feArena);
     CHECK(EmeraldBattleCompat_GetGenerationId() != 0u);
-    /* Five-family projected range arithmetic on the live 6,377. */
+    /* Five-family projected range arithmetic on the live 7,602. */
     {
         size_t projected = 0u;
         CHECK(EmeraldResourceRangeIndex_GetRangeCount(
-                  EmeraldResourceCompat_GetRangeIndex()) == 6385u);
+                  EmeraldResourceCompat_GetRangeIndex()) == 7603u);
         CHECK(EmeraldBattleCompat_ValidateProjectedRanges(
-                  6385u, 8192u, &projected) == EMERALD_BATTLE_OK);
-        CHECK(projected == 6390u);
+                  7603u, 8192u, &projected) == EMERALD_BATTLE_OK);
+        CHECK(projected == 7608u);
         CHECK(EmeraldBattleCompat_ValidateProjectedRanges(
                   8190u, 8192u, &projected)
               == EMERALD_BATTLE_ERR_UNEXPECTED_COUNT);
@@ -4886,7 +4904,7 @@ static int DoH3Load(const char *packPath, const char *statePath)
         const struct EmeraldResourceRangeIndex *live =
             EmeraldResourceCompat_GetRangeIndex();
         CHECK(live != NULL);
-        CHECK(EmeraldResourceRangeIndex_GetRangeCount(live) == 6385u);
+        CHECK(EmeraldResourceRangeIndex_GetRangeCount(live) == 7603u);
         scratch = *live;
         CHECK(EmeraldBattleCompat_GetArenaRanges(ranges));
         for (i = 0u; i < EMERALD_BATTLE_FAMILY_COUNT; i++)
@@ -4899,7 +4917,7 @@ static int DoH3Load(const char *packPath, const char *statePath)
                       ranges[i].schema,
                       (enum EmeraldResourceRangeRole)ranges[i].role));
         }
-        CHECK(EmeraldResourceRangeIndex_GetRangeCount(&scratch) == 6390u);
+        CHECK(EmeraldResourceRangeIndex_GetRangeCount(&scratch) == 7608u);
         /* Failed replacement: an overlapping span refuses and rolls
          * back (count unchanged, prior entries untouched). */
         CHECK(!EmeraldResourceRangeIndex_RegisterSpan(
@@ -4907,7 +4925,7 @@ static int DoH3Load(const char *packPath, const char *statePath)
                   "emerald:battle-script/@arena-dup",
                   ranges[0].resourceType, ranges[0].schema,
                   (enum EmeraldResourceRangeRole)ranges[0].role));
-        CHECK(EmeraldResourceRangeIndex_GetRangeCount(&scratch) == 6390u);
+        CHECK(EmeraldResourceRangeIndex_GetRangeCount(&scratch) == 7608u);
         /* Unregister by exact family-generation identity: the 5 arena
          * keys are spliced; everything else survives byte-identical. */
         for (i = 0u; i < EMERALD_BATTLE_FAMILY_COUNT; i++)
@@ -4930,11 +4948,11 @@ static int DoH3Load(const char *packPath, const char *statePath)
             }
             CHECK(removed);
         }
-        CHECK(EmeraldResourceRangeIndex_GetRangeCount(&scratch) == 6385u);
+        CHECK(EmeraldResourceRangeIndex_GetRangeCount(&scratch) == 7603u);
         CHECK(memcmp(scratch.ranges, live->ranges,
                      live->rangeCount * sizeof(live->ranges[0])) == 0);
         /* The production index was never touched. */
-        CHECK(EmeraldResourceRangeIndex_GetRangeCount(live) == 6385u);
+        CHECK(EmeraldResourceRangeIndex_GetRangeCount(live) == 7603u);
     }
 
     /* Zero-width alias policy (brief sec 23): identity canonicalizes to

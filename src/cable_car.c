@@ -137,17 +137,31 @@ static const u16 sBgMountains_Tilemap[] = INCBIN_U16("graphics/cable_car/bg_moun
 static const u16 sPylonTop_Tilemap[] = INCBIN_U16("graphics/cable_car/pylon_top.bin");
 static const u16 sPylonPole_Tilemap[] = INCBIN_U16("graphics/cable_car/pylon_pole.bin.lz");
 
-static const struct CompressedSpriteSheet sSpriteSheets[] = {
+#if defined(NATIVE_LINUX)
+struct CompressedSpriteSheet sCableCarSpriteSheets[4] = {
+    { NULL,      0x800, TAG_CABLE_CAR },
+    { NULL,   0x40, TAG_DOOR },
+    { NULL,  0x80, TAG_CABLE },
+    { },
+};
+
+struct SpritePalette sCableCarSpritePalettes[2] = {
+    { NULL, TAG_CABLE_CAR },
+    { }
+};
+#else
+static const struct CompressedSpriteSheet sCableCarSpriteSheets[] = {
     { gCableCar_Gfx,      0x800, TAG_CABLE_CAR },
     { gCableCarDoor_Gfx,   0x40, TAG_DOOR },
     { gCableCarCable_Gfx,  0x80, TAG_CABLE },
     { },
 };
 
-static const struct SpritePalette sSpritePalettes[] = {
+static const struct SpritePalette sCableCarSpritePalettes[] = {
     { gCableCar_Pal, TAG_CABLE_CAR },
     { }
 };
+#endif
 
 static const struct OamData sOam_CableCar =
 {
@@ -281,10 +295,10 @@ static void CB2_LoadCableCar(void)
         gMain.state++;
         break;
     case 2:
-        for (i = 0; i < ARRAY_COUNT(sSpriteSheets) - 1; i++)
-            LoadCompressedSpriteSheet(&sSpriteSheets[i]);
+        for (i = 0; i < ARRAY_COUNT(sCableCarSpriteSheets) - 1; i++)
+            LoadCompressedSpriteSheet(&sCableCarSpriteSheets[i]);
 
-        LoadSpritePalettes(sSpritePalettes);
+        LoadSpritePalettes(sCableCarSpritePalettes);
         sCableCar->groundTilemap = malloc_and_decompress(sGround_Tilemap, &sizeOut);
         sCableCar->treesTilemap = malloc_and_decompress(sTrees_Tilemap, &sizeOut);
         sCableCar->bgMountainsTilemap = malloc_and_decompress(sBgMountains_Tilemap, &sizeOut);

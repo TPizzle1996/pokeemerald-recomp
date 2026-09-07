@@ -59,8 +59,13 @@ extern const s8 gPokeblockFlavorCompatibilityTable[NUM_NATURES * FLAVOR_COUNT];
 #ifndef NATIVE_LINUX
 extern const u8 *const gPokeblockNames[];
 #endif
+#if defined(NATIVE_LINUX)
+extern struct CompressedSpriteSheet gPokeblockCase_SpriteSheet;
+extern struct CompressedSpritePalette gPokeblockCase_SpritePal;
+#else
 extern const struct CompressedSpriteSheet gPokeblockCase_SpriteSheet;
 extern const struct CompressedSpritePalette gPokeblockCase_SpritePal;
+#endif
 
 void OpenPokeblockCase(u8 caseId, void (*callback)(void));
 void OpenPokeblockCaseInBattle(void);

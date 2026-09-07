@@ -3340,11 +3340,11 @@ void AnimTask_ScaryFace(u8 taskId)
     SetGpuReg(REG_OFFSET_BG1VOFS, gBattle_BG1_Y);
     GetBattleAnimBg1Data(&animBg);
     if (IsContest())
-        AnimLoadCompressedBgTilemapHandleContest(&animBg, &gBattleAnimBgTilemap_ScaryFaceContest, FALSE);
+        AnimLoadCompressedBgTilemapHandleContest(&animBg, gBattleAnimBgTilemap_ScaryFaceContest, FALSE);
     else if (GetBattlerSide(gBattleAnimTarget) == B_SIDE_OPPONENT)
-        AnimLoadCompressedBgTilemapHandleContest(&animBg, &gBattleAnimBgTilemap_ScaryFacePlayer, FALSE);
+        AnimLoadCompressedBgTilemapHandleContest(&animBg, gBattleAnimBgTilemap_ScaryFacePlayer, FALSE);
     else
-        AnimLoadCompressedBgTilemapHandleContest(&animBg, &gBattleAnimBgTilemap_ScaryFaceOpponent, FALSE);
+        AnimLoadCompressedBgTilemapHandleContest(&animBg, gBattleAnimBgTilemap_ScaryFaceOpponent, FALSE);
 
     AnimLoadCompressedBgGfx(animBg.bgId, gBattleAnimBgImage_ScaryFace, animBg.tilesOffset);
     LoadCompressedPalette(gBattleAnimBgPalette_ScaryFace, BG_PLTT_ID(animBg.paletteId), PLTT_SIZE_4BPP);

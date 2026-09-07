@@ -41,6 +41,42 @@ static void Task_ClearBitWhenSpecialAnimDone(u8 taskId);
 static void ClearSpritesBattlerHealthboxAnimData(void);
 
 // const rom data
+#if defined(NATIVE_LINUX)
+struct CompressedSpriteSheet sSpriteSheet_SinglesPlayerHealthbox =
+{
+    NULL, 0x1000, TAG_HEALTHBOX_PLAYER1_TILE
+};
+
+struct CompressedSpriteSheet sSpriteSheet_SinglesOpponentHealthbox =
+{
+    NULL, 0x1000, TAG_HEALTHBOX_OPPONENT1_TILE
+};
+
+struct CompressedSpriteSheet sSpriteSheets_DoublesOpponentHealthbox[2] =
+{
+    {NULL, 0x800, TAG_HEALTHBOX_OPPONENT1_TILE},
+    {NULL, 0x800, TAG_HEALTHBOX_OPPONENT2_TILE}
+};
+
+struct CompressedSpriteSheet sSpriteSheet_SafariHealthbox =
+{
+    NULL, 0x1000, TAG_HEALTHBOX_SAFARI_TILE
+};
+
+struct CompressedSpriteSheet sSpriteSheets_HealthBar[MAX_BATTLERS_COUNT] =
+{
+    {NULL, 0x0100, TAG_HEALTHBAR_PLAYER1_TILE},
+    {NULL, 0x0120, TAG_HEALTHBAR_OPPONENT1_TILE},
+    {NULL, 0x0100, TAG_HEALTHBAR_PLAYER2_TILE},
+    {NULL, 0x0120, TAG_HEALTHBAR_OPPONENT2_TILE}
+};
+
+struct SpritePalette sSpritePalettes_HealthBoxHealthBar[2] =
+{
+    {NULL, TAG_HEALTHBOX_PAL},
+    {NULL, TAG_HEALTHBAR_PAL}
+};
+#else
 static const struct CompressedSpriteSheet sSpriteSheet_SinglesPlayerHealthbox =
 {
     gHealthboxSinglesPlayerGfx, 0x1000, TAG_HEALTHBOX_PLAYER1_TILE
@@ -49,12 +85,6 @@ static const struct CompressedSpriteSheet sSpriteSheet_SinglesPlayerHealthbox =
 static const struct CompressedSpriteSheet sSpriteSheet_SinglesOpponentHealthbox =
 {
     gHealthboxSinglesOpponentGfx, 0x1000, TAG_HEALTHBOX_OPPONENT1_TILE
-};
-
-static const struct CompressedSpriteSheet sSpriteSheets_DoublesPlayerHealthbox[2] =
-{
-    {gHealthboxDoublesPlayerGfx, 0x800, TAG_HEALTHBOX_PLAYER1_TILE},
-    {gHealthboxDoublesPlayerGfx, 0x800, TAG_HEALTHBOX_PLAYER2_TILE}
 };
 
 static const struct CompressedSpriteSheet sSpriteSheets_DoublesOpponentHealthbox[2] =
@@ -80,6 +110,13 @@ static const struct SpritePalette sSpritePalettes_HealthBoxHealthBar[2] =
 {
     {gBattleInterface_BallStatusBarPal, TAG_HEALTHBOX_PAL},
     {gBattleInterface_BallDisplayPal, TAG_HEALTHBAR_PAL}
+};
+#endif
+
+static const struct CompressedSpriteSheet sSpriteSheets_DoublesPlayerHealthbox[2] =
+{
+    {gHealthboxDoublesPlayerGfx, 0x800, TAG_HEALTHBOX_PLAYER1_TILE},
+    {gHealthboxDoublesPlayerGfx, 0x800, TAG_HEALTHBOX_PLAYER2_TILE}
 };
 
 // code

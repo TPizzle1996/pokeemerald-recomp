@@ -102,13 +102,20 @@
 
 /* Symbol prefix -> owning kind. Symbols of one family's table that carry
  * another family's prefix are cross-family aliases; anything else is an
- * external alias (only gMonStillFrontPic_Egg exists today). */
+ * external alias (only gMonStillFrontPic_Egg exists today — the still
+ * table's EGG row AND the back table's EGG row both reference it, and it
+ * stays compiled on native; the egg/front.4bpp.lz artifact exists but the
+ * symbol is intentionally not migrated so the R9 back-EGG invariant is
+ * unchanged). */
 enum Kind
 {
     KIND_FRONT_SHEET,
     KIND_BACK_SHEET,
     KIND_NORMAL_PALETTE,
     KIND_SHINY_PALETTE,
+    KIND_STILL_FRONT,
+    KIND_ICON,
+    KIND_FOOTPRINT,
     KIND_COUNT,
 };
 
@@ -147,6 +154,10 @@ struct PokemonFamily
     char table[64];         /* gMonFrontPicTable ... */
     char idSegment[24];     /* "front/sheet" ... */
     char symbolPrefix[24];  /* "gMonFrontPic_" ... */
+    size_t slotCount;       /* exact table slot count (440, or 413 for footprint) */
+    bool battleScoped;      /* id = emerald:pokemon/<slug>/battle/<segment> vs .../<segment> */
+    bool rawPayload;        /* raw (no LZ container): icon/footprint; else GBA_LZ re-encoded */
+    bool needsRangeIndex;   /* State-v5 resource-range registration needed (battle front/back/palette) */
     size_t resourceCount;
     struct PokemonResource resources[MAX_RESOURCES_PER_FAMILY];
 };
@@ -159,22 +170,67 @@ static const struct PokemonFamily kFamilies[KIND_COUNT] =
                            .kindName = "front_sheet",
                            .table = "gMonFrontPicTable",
                            .idSegment = "front/sheet",
-                           .symbolPrefix = "gMonFrontPic_" },
+                           .symbolPrefix = "gMonFrontPic_",
+                           .battleScoped = true,
+                           .needsRangeIndex = true },
     [KIND_BACK_SHEET] = { .kind = KIND_BACK_SHEET,
                           .kindName = "back_sheet",
                           .table = "gMonBackPicTable",
                           .idSegment = "back/sheet",
-                          .symbolPrefix = "gMonBackPic_" },
+                          .symbolPrefix = "gMonBackPic_",
+                          .battleScoped = true,
+                          .needsRangeIndex = true },
     [KIND_NORMAL_PALETTE] = { .kind = KIND_NORMAL_PALETTE,
                               .kindName = "normal_palette",
                               .table = "gMonPaletteTable",
                               .idSegment = "normal-palette",
-                              .symbolPrefix = "gMonPalette_" },
+                              .symbolPrefix = "gMonPalette_",
+                              .battleScoped = true,
+                              .needsRangeIndex = true },
     [KIND_SHINY_PALETTE] = { .kind = KIND_SHINY_PALETTE,
                              .kindName = "shiny_palette",
                              .table = "gMonShinyPaletteTable",
                              .idSegment = "shiny-palette",
-                             .symbolPrefix = "gMonShinyPalette_" },
+                             .symbolPrefix = "gMonShinyPalette_",
+                             .battleScoped = true,
+                             .needsRangeIndex = true },
+    [KIND_STILL_FRONT] = { .kind = KIND_STILL_FRONT,
+                           .kindName = "still_front",
+                           .table = "gMonStillFrontPicTable",
+                           .idSegment = "front/still",
+                           .symbolPrefix = "gMonStillFrontPic_",
+                           .battleScoped = true,
+                           .needsRangeIndex = false },
+    [KIND_ICON] = { .kind = KIND_ICON,
+                    .kindName = "icon",
+                    .table = "gMonIconTable",
+                    .idSegment = "icon",
+                    .symbolPrefix = "gMonIcon_",
+                    .battleScoped = false,
+                    .rawPayload = true,
+                    .needsRangeIndex = false },
+    [KIND_FOOTPRINT] = { .kind = KIND_FOOTPRINT,
+                         .kindName = "footprint",
+                         .table = "gMonFootprintTable",
+                         .idSegment = "footprint",
+                         .symbolPrefix = "gMonFootprint_",
+                         .battleScoped = false,
+                         .rawPayload = true,
+                         .needsRangeIndex = false },
+};
+
+/* Per-family slot counts: the four battle tables and the still/icon tables
+ * have SLOT_COUNT_PER_TABLE rows; the footprint table covers 0..412 with a
+ * gap (no UNOWN_C..QMARK rows) and is sized by its largest initializer. */
+static const size_t kFamilySlotCounts[KIND_COUNT] =
+{
+    [KIND_FRONT_SHEET] = SLOT_COUNT_PER_TABLE,
+    [KIND_BACK_SHEET] = SLOT_COUNT_PER_TABLE,
+    [KIND_NORMAL_PALETTE] = SLOT_COUNT_PER_TABLE,
+    [KIND_SHINY_PALETTE] = SLOT_COUNT_PER_TABLE,
+    [KIND_STILL_FRONT] = SLOT_COUNT_PER_TABLE,
+    [KIND_ICON] = SLOT_COUNT_PER_TABLE,
+    [KIND_FOOTPRINT] = 413u,
 };
 
 /* External-alias allowlist: symbols referenced by a battle table but owned by
@@ -459,11 +515,16 @@ static bool ParseResources(const struct Gen3TomlDocument *doc,
         r->kind = kind;
         strcpy(r->symbol, symbol);
         strcpy(r->artifact, artifact);
-        strcpy(r->encoding, POKEMON_ENCODING);
+        strcpy(r->encoding,
+               kind == KIND_ICON || kind == KIND_FOOTPRINT
+                   ? "raw" : POKEMON_ENCODING);
         r->declaredSlotCount = (size_t)slotCount;
         strcpy(r->representation,
                kind == KIND_NORMAL_PALETTE || kind == KIND_SHINY_PALETTE
-                   ? POKEMON_PALETTE_REPR : POKEMON_SHEET_REPR);
+                   ? POKEMON_PALETTE_REPR
+               : kind == KIND_FOOTPRINT
+                   ? "gba-1bpp-tiles"
+                   : POKEMON_SHEET_REPR);
         if (!SlugFromArtifact(artifact, r->slug, sizeof(r->slug)))
             return false;
         /* Build in a stack buffer first: the format arguments alias members
@@ -471,9 +532,13 @@ static bool ParseResources(const struct Gen3TomlDocument *doc,
          * disjoint from r->id. */
         {
             char idBuf[GEN3_RESOURCE_NAME_MAX + 1u];
-            int written = snprintf(idBuf, sizeof(idBuf), "%s:pokemon/%s/battle/%s",
-                                   POKEMON_NAMESPACE, r->slug,
-                                   kFamilies[kind].idSegment);
+            int written = kFamilies[kind].battleScoped
+                ? snprintf(idBuf, sizeof(idBuf), "%s:pokemon/%s/battle/%s",
+                           POKEMON_NAMESPACE, r->slug,
+                           kFamilies[kind].idSegment)
+                : snprintf(idBuf, sizeof(idBuf), "%s:pokemon/%s/%s",
+                           POKEMON_NAMESPACE, r->slug,
+                           kFamilies[kind].idSegment);
             if (written < 0 || (size_t)written >= sizeof(idBuf))
             {
                 Fail("canonical id exceeds buffer for %s", r->slug);
@@ -524,7 +589,7 @@ static bool ParseSlots(const struct Gen3TomlDocument *doc,
             Fail("slot references unknown resource symbol: %s", symbol);
             return false;
         }
-        if (index < 0 || (unsigned long long)index >= SLOT_COUNT_PER_TABLE)
+        if (index < 0 || (unsigned long long)index >= (unsigned long long)families[kind].slotCount)
         {
             Fail("slot index out of range in %s: %lld", symbol, index);
             return false;
@@ -633,6 +698,21 @@ static bool DecodeArtifact(struct PokemonResource *r)
         Gen3Buffer_Destroy(&encoded);
         return false;
     }
+
+    /* R15: RAW kinds (icon, footprint) have no LZ77 container — the file IS
+     * the canonical payload (encoded == decoded, verbatim ROM bytes). */
+    if (strcmp(r->encoding, "raw") == 0)
+    {
+        Gen3Sha256_Init(&ctx);
+        Gen3Sha256_Update(&ctx, encoded.data, encoded.length);
+        Gen3Sha256_Final(&ctx, r->encodedSha);
+        memcpy(r->decodedSha, r->encodedSha, sizeof(r->decodedSha));
+        r->encodedLength = encoded.length;
+        r->decodedLength = encoded.length;
+        r->expectedDecodedSize = (long long)encoded.length;
+        Gen3Buffer_Destroy(&encoded);
+        return true;
+    }
     if (!CheckLzHeader((const uint8_t *)encoded.data, encoded.length, r->kind,
                        &expected, r->symbol))
     {
@@ -713,6 +793,20 @@ static enum Kind OwningKindOfSymbol(const char *symbol)
 static bool ResolveAliases(struct PokemonFamily *families)
 {
     enum Kind k;
+    /* R9 §6 pre-pass: the still-front EGG row is the external stays-compiled
+     * slot on every family that references it (still + back tables). Mark it
+     * first so the later per-family pass sees the flag regardless of family
+     * order (the back family is processed before the still family). */
+    for (k = 0u; k < KIND_COUNT; k++)
+    {
+        size_t i;
+        for (i = 0u; i < families[k].resourceCount; i++)
+        {
+            if (strcmp(families[k].resources[i].symbol,
+                       "gMonStillFrontPic_Egg") == 0)
+                families[k].resources[i].externalAlias = true;
+        }
+    }
     for (k = 0u; k < KIND_COUNT; k++)
     {
         size_t i;
@@ -721,7 +815,18 @@ static bool ResolveAliases(struct PokemonFamily *families)
             struct PokemonResource *r = &families[k].resources[i];
             enum Kind owner = OwningKindOfSymbol(r->symbol);
             if (owner == k)
+            {
+                /* R9 §6 external still-EGG slot: the still table's EGG row
+                 * stays compiled on native by design (the back table's EGG
+                 * row aliases the same symbol). Its payload exists in the
+                 * ROM but is intentionally not migrated. */
+                if (strcmp(r->symbol, "gMonStillFrontPic_Egg") == 0)
+                {
+                    r->externalAlias = true;
+                    continue;
+                }
                 continue;                       /* payload-owning */
+            }
             if (owner != KIND_COUNT)
             {
                 /* Cross-family alias: the owning family has the canonical. */
@@ -732,6 +837,16 @@ static bool ResolveAliases(struct PokemonFamily *families)
                     Fail("cross-family alias %s: owning family '%s' has no "
                          "resource for it", r->symbol, kFamilies[owner].kindName);
                     return false;
+                }
+                if (own->externalAlias)
+                {
+                    /* The owning family's row is itself the external
+                     * stays-compiled slot (still-front EGG); this row
+                     * aliases it and is external too (and remains an
+                     * alias - it has no payload of its own). */
+                    r->crossFamily = true;
+                    r->externalAlias = true;
+                    continue;
                 }
                 strcpy(r->aliasOf, own->id);
                 r->crossFamily = true;
@@ -858,7 +973,7 @@ static bool ValidateFamily(struct PokemonFamily *families)
 
     /* Per-family: slug uniqueness (a repeated slug would bind two resources
      * to the same source artifact), slot range/duplicate coverage, and the
-     * exact 440-slot table shape. */
+     * exact table shape (per-family slot counts: 440, or 413 for footprint). */
     for (k = 0u; k < KIND_COUNT; k++)
     {
         size_t i;
@@ -890,7 +1005,7 @@ static bool ValidateFamily(struct PokemonFamily *families)
             for (s = 0u; s < a->slotCount; s++)
             {
                 unsigned long long idx = (unsigned long long)a->slots[s].index;
-                if (idx >= SLOT_COUNT_PER_TABLE)
+                if (idx >= families[k].slotCount)
                 {
                     Fail("slot index out of range: %s[%llu]", a->id, idx);
                     return false;
@@ -905,10 +1020,10 @@ static bool ValidateFamily(struct PokemonFamily *families)
                 totalSlots++;
             }
         }
-        if (totalSlots != SLOT_COUNT_PER_TABLE)
+        if (totalSlots != families[k].slotCount)
         {
-            Fail("family '%s' covers %zu slots, expected %u",
-                 kFamilies[k].kindName, totalSlots, SLOT_COUNT_PER_TABLE);
+            Fail("family '%s' covers %zu slots, expected %zu",
+                 kFamilies[k].kindName, totalSlots, families[k].slotCount);
             return false;
         }
     }
@@ -946,8 +1061,12 @@ static bool CollectPayloadResources(struct PokemonFamily *families,
         for (i = 0u; i < families[k].resourceCount; i++)
         {
             struct PokemonResource *r = &families[k].resources[i];
-            if (r->crossFamily || r->externalAlias)
+            if (r->crossFamily)
                 continue;   /* aliases are not payloads */
+            /* R15 §6: the external still-EGG stays compiled on native, but
+             * its payload IS a pack resource (the provider declares it), so
+             * it joins `all` like every payload - the slot map still emits
+             * POKEMON_BATTLE_EXTERNAL_SLOT for its rows. */
             if (!DecodeArtifact(r))
                 return false;
             memcpy(&all->items[all->count++], r, sizeof(all->items[0]));
@@ -1048,6 +1167,12 @@ static bool EmitOwnership(struct Gen3Buffer *out, const struct AllResources *all
         char decodedShaHex[GEN3_RESOURCE_KEY_HEX_SIZE];
         Gen3ResourceKey key;
 
+        /* External aliases (the compiled gMonStillFrontPic_Egg) are not
+         * ownership records (R9 §6: they stay compiled on native by design;
+         * the consumers map records them in external_slots). */
+        if (r->externalAlias)
+            continue;
+
         Gen3TomlWrite_OpenArrayTable(out, "resources");
         Gen3TomlWrite_String(out, "id", r->id);
         Gen3ResourceId_DeriveKey(r->id, &key);
@@ -1066,6 +1191,8 @@ static bool EmitOwnership(struct Gen3Buffer *out, const struct AllResources *all
         Gen3TomlWrite_String(out, "source_encoded_sha256", encodedShaHex);
         Gen3Util_FormatHex(r->decodedSha, GEN3_RESOURCE_KEY_SIZE, decodedShaHex);
         Gen3TomlWrite_String(out, "canonical_decoded_sha256", decodedShaHex);
+        /* R15 Phase 2 flipped: all seven kinds are ROM_BASE_ONLY on native
+         * (the compiled still/icon/footprint leaves are GBA-only). */
         Gen3TomlWrite_String(out, "ownership_state", "ROM_BASE_ONLY");
         Gen3Buffer_AppendCStr(out, "\n[resources.targets]\n");
         Gen3TomlWrite_String(out, "native", "ROM_BASE_ONLY");
@@ -1227,7 +1354,7 @@ static bool EmitSpeciesMapping(struct Gen3Buffer *out, struct PokemonFamily *fam
             for (s = 0u; s < r->slotCount; s++)
                 byIndex[(size_t)r->slots[s].index] = r;
         }
-        for (idx = 0; idx < (long long)SLOT_COUNT_PER_TABLE; idx++)
+        for (idx = 0; idx < (long long)families[k].slotCount; idx++)
         {
             const struct PokemonResource *r = byIndex[(size_t)idx];
             const char *species = NULL;
@@ -1301,13 +1428,22 @@ static bool EmitCompatSlotMap(struct Gen3Buffer *out,
     Gen3Buffer_AppendCStr(out, "#ifndef EMERALD_RESOURCES_POKEMON_BATTLE_SLOTS_GENERATED_H\n");
     Gen3Buffer_AppendCStr(out, "#define EMERALD_RESOURCES_POKEMON_BATTLE_SLOTS_GENERATED_H\n\n");
     Gen3Buffer_AppendCStr(out, "#include <stdint.h>\n");
-    Gen3Buffer_AppendCStr(out, "#include \"gen3/resources/resource_types.h\"\n\n");
+    Gen3Buffer_AppendCStr(out, "#include \"gen3/resources/resource_types.h\"\n");
+    Gen3Buffer_AppendCStr(out, "#include \"emerald/resources/emerald_resource_ranges.h\"\n\n");
     Gen3Buffer_AppendFormat(out,
         "#define POKEMON_BATTLE_SLOTS_PER_TABLE %lluu\n",
         (unsigned long long)SLOT_COUNT_PER_TABLE);
     Gen3Buffer_AppendFormat(out,
-        "#define POKEMON_BATTLE_SLOT_COUNT %lluu\n",
-        (unsigned long long)KIND_COUNT * SLOT_COUNT_PER_TABLE);
+        "#define POKEMON_BATTLE_FOOTPRINT_SLOTS %lluu\n",
+        (unsigned long long)families[KIND_FOOTPRINT].slotCount);
+    {
+        size_t total = 0u;
+        for (k = 0u; k < KIND_COUNT; k++)
+            total += families[k].slotCount;
+        Gen3Buffer_AppendFormat(out,
+            "#define POKEMON_BATTLE_SLOT_COUNT %lluu\n",
+            (unsigned long long)total);
+    }
     Gen3Buffer_AppendFormat(out,
         "#define POKEMON_BATTLE_RESOURCE_COUNT %zu\n\n", all->count);
     Gen3Buffer_AppendCStr(out,
@@ -1315,9 +1451,11 @@ static bool EmitCompatSlotMap(struct Gen3Buffer *out,
         "struct PokemonBattleCompatResource\n"
         "{\n"
         "    const char *id;             /* canonical id, e.g. \"emerald:pokemon/bulbasaur/battle/front/sheet\" */\n"
-        "    uint32_t expectedSize;      /* decoded size (the GBA LZ77 header's declared length) */\n"
+        "    uint32_t expectedSize;      /* decoded size (the GBA LZ77 header's declared length; raw kinds: file size) */\n"
         "    enum Gen3ResourceType type; /* TILE_GRAPHICS (sheet) or PALETTE */\n"
         "    uint32_t schema;            /* 1 */\n"
+        "    uint32_t role;              /* EMERALD_RESOURCE_ROLE_LEGACY_LZ (re-encoded GBA LZ) or CANONICAL (raw) */\n"
+        "    bool needs_range_index;     /* State-v5 resource-range registration needed */\n"
         "};\n\n");
 
     Gen3Buffer_AppendFormat(out,
@@ -1331,9 +1469,13 @@ static bool EmitCompatSlotMap(struct Gen3Buffer *out,
                                  || r->kind == KIND_SHINY_PALETTE)
             ? "PALETTE" : "TILE_GRAPHICS";
         Gen3Buffer_AppendFormat(out,
-            "    { \"%s\", %lluu, GEN3_RESOURCE_TYPE_%s, %lluu },\n",
+            "    { \"%s\", %lluu, GEN3_RESOURCE_TYPE_%s, %lluu, %s, %s },\n",
             r->id, (unsigned long long)r->expectedDecodedSize, typeToken,
-            (unsigned long long)POKEMON_SCHEMA);
+            (unsigned long long)POKEMON_SCHEMA,
+            kFamilies[r->kind].rawPayload
+                ? "EMERALD_RESOURCE_ROLE_CANONICAL"
+                : "EMERALD_RESOURCE_ROLE_LEGACY_LZ",
+            kFamilies[r->kind].needsRangeIndex ? "true" : "false");
     }
     Gen3Buffer_AppendCStr(out, "};\n\n");
 
@@ -1346,26 +1488,28 @@ static bool EmitCompatSlotMap(struct Gen3Buffer *out,
     Gen3Buffer_AppendFormat(out,
         "static const int32_t kPokemonBattleCompatSlots[POKEMON_BATTLE_SLOT_COUNT] =\n"
         "{\n");
-    for (k = 0u; k < KIND_COUNT; k++)
     {
-        struct PokemonResource *byIndex[SLOT_COUNT_PER_TABLE];
-        long long idx;
-        memset(byIndex, 0, sizeof(byIndex));
-        for (i = 0u; i < families[k].resourceCount; i++)
+        size_t offset = 0u;
+        for (k = 0u; k < KIND_COUNT; k++)
         {
-            struct PokemonResource *r = &families[k].resources[i];
-            size_t s;
-            for (s = 0u; s < r->slotCount; s++)
-                byIndex[(size_t)r->slots[s].index] = r;
-        }
-        Gen3Buffer_AppendFormat(out, "    /* %s (slots %lld..%lld) */\n",
-                                kFamilies[k].table,
-                                (long long)k * (long long)SLOT_COUNT_PER_TABLE,
-                                (long long)(k + 1) * (long long)SLOT_COUNT_PER_TABLE - 1);
-        for (idx = 0; idx < (long long)SLOT_COUNT_PER_TABLE; idx++)
-        {
-            const struct PokemonResource *r = byIndex[(size_t)idx];
-            int emitted = 0;
+            struct PokemonResource *byIndex[SLOT_COUNT_PER_TABLE];
+            long long idx;
+            memset(byIndex, 0, sizeof(byIndex));
+            for (i = 0u; i < families[k].resourceCount; i++)
+            {
+                struct PokemonResource *r = &families[k].resources[i];
+                size_t s;
+                for (s = 0u; s < r->slotCount; s++)
+                    byIndex[(size_t)r->slots[s].index] = r;
+            }
+            Gen3Buffer_AppendFormat(out, "    /* %s (slots %llu..%llu) */\n",
+                                    kFamilies[k].table,
+                                    (unsigned long long)offset,
+                                    (unsigned long long)offset + families[k].slotCount - 1u);
+            for (idx = 0; idx < (long long)families[k].slotCount; idx++)
+            {
+                const struct PokemonResource *r = byIndex[(size_t)idx];
+                int emitted = 0;
             if (r == NULL)
             {
                 Fail("slot %lld of '%s' uncovered", idx, kFamilies[k].table);
@@ -1400,12 +1544,14 @@ static bool EmitCompatSlotMap(struct Gen3Buffer *out,
                     return false;
                 }
             }
+            }
+            offset += families[k].slotCount;
         }
     }
     Gen3Buffer_AppendCStr(out, "};\n\n#endif\n");
     for (i = 0u; i < all->count; i++)
     {
-        if (!referenced[i])
+        if (!referenced[i] && !all->items[i].externalAlias)
         {
             Fail("payload resource '%s' is referenced by no table slot",
                  all->items[i].id);
@@ -1445,7 +1591,9 @@ int main(int argc, char **argv)
     int i;
     struct Gen3Buffer text;
     struct Gen3TomlDocument doc;
-    struct PokemonFamily families[KIND_COUNT];
+    /* File-scope (not stack): seven families × 512 resources × 32-slot arrays
+     * exceeds the default 8 MiB stack with the R15 three added kinds. */
+    static struct PokemonFamily families[KIND_COUNT];
     struct AllResources all;
     struct Gen3Buffer catalog;
     struct Gen3Buffer bindings;
@@ -1503,6 +1651,7 @@ int main(int argc, char **argv)
     for (k = 0u; k < KIND_COUNT; k++)
     {
         families[k] = kFamilies[k];
+        families[k].slotCount = kFamilySlotCounts[k];
         families[k].resourceCount = 0u;
     }
 
@@ -1670,11 +1819,14 @@ int main(int argc, char **argv)
             }
         }
         fprintf(stderr, "wrote %zu payload resources (front %zu, back %zu, "
-                        "palette %zu, shiny %zu):\n"
+                        "palette %zu, shiny %zu, still %zu, icon %zu, "
+                        "footprint %zu):\n"
                         "  %s\n  %s\n  %s\n  %s\n  %s\n",
                 all.count,
                 perFamily[KIND_FRONT_SHEET], perFamily[KIND_BACK_SHEET],
                 perFamily[KIND_NORMAL_PALETTE], perFamily[KIND_SHINY_PALETTE],
+                perFamily[KIND_STILL_FRONT], perFamily[KIND_ICON],
+                perFamily[KIND_FOOTPRINT],
                 catalogOut, bindingsOut, ownershipOut, consumersOut,
                 speciesMapOut);
     }

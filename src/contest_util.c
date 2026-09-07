@@ -265,19 +265,27 @@ static const struct SpriteTemplate sSpriteTemplate_Confetti =
     .callback = SpriteCB_Confetti
 };
 
-static const struct CompressedSpriteSheet sSpriteSheet_Confetti =
+#if defined(NATIVE_LINUX)
+struct CompressedSpriteSheet sContestConfettiSpriteSheet = {.data = NULL, .size = 0x220, .tag = TAG_CONFETTI};
+#else
+static const struct CompressedSpriteSheet sContestConfettiSpriteSheet =
 {
     .data = gConfetti_Gfx,
     .size = 0x220,
     .tag = TAG_CONFETTI
 };
+#endif
 
 
-static const struct CompressedSpritePalette sSpritePalette_Confetti =
+#if defined(NATIVE_LINUX)
+struct CompressedSpritePalette sContestConfettiSpritePalette = {.data = NULL, .tag = TAG_CONFETTI};
+#else
+static const struct CompressedSpritePalette sContestConfettiSpritePalette =
 {
     .data = gConfetti_Pal,
     .tag = TAG_CONFETTI
 };
+#endif
 
 static const struct BgTemplate sBgTemplates[] =
 {
@@ -919,8 +927,8 @@ static void Task_ShowWinnerMonBanner(u8 taskId)
         gSprites[spriteId].oam.priority = 0;
         gSprites[spriteId].callback = SpriteCB_WinnerMonSlideIn;
         sContestResults->data->winnerMonSpriteId = spriteId;
-        LoadCompressedSpriteSheet(&sSpriteSheet_Confetti);
-        LoadCompressedSpritePalette(&sSpritePalette_Confetti);
+        LoadCompressedSpriteSheet(&sContestConfettiSpriteSheet);
+        LoadCompressedSpritePalette(&sContestConfettiSpritePalette);
         CreateTask(Task_CreateConfetti, 10);
         gTasks[taskId].tState++;
         break;

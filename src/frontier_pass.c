@@ -364,12 +364,21 @@ static const sPassAreasLayout[CURSOR_AREA_COUNT - 1] =
     [CURSOR_AREA_SYMBOL_PYRAMID - 1] = { 50,  66,  92, 108},
 };
 
+#if defined(NATIVE_LINUX)
+struct CompressedSpriteSheet sCursorSpriteSheets[3] =
+{
+    {sCursor_Gfx, 0x100, TAG_CURSOR},
+    {sMapCursor_Gfx, 0x400, TAG_MAP_INDICATOR},
+    {NULL, 0x380, TAG_MEDAL_SILVER},
+};
+#else
 static const struct CompressedSpriteSheet sCursorSpriteSheets[] =
 {
     {sCursor_Gfx, 0x100, TAG_CURSOR},
     {sMapCursor_Gfx, 0x400, TAG_MAP_INDICATOR},
     {gFrontierPassMedals_Gfx, 0x380, TAG_MEDAL_SILVER},
 };
+#endif
 
 static const struct CompressedSpriteSheet sHeadsSpriteSheet[] =
 {
@@ -377,7 +386,19 @@ static const struct CompressedSpriteSheet sHeadsSpriteSheet[] =
     {}
 };
 
-static const struct SpritePalette sSpritePalettes[] =
+#if defined(NATIVE_LINUX)
+struct SpritePalette sFrontierPassSpritePalettes[7] =
+{
+    {NULL,                           TAG_CURSOR},
+    {NULL,                           TAG_MAP_INDICATOR},
+    {NULL,                           TAG_MEDAL_SILVER},
+    {NULL,                           TAG_MEDAL_GOLD},
+    {sMaleHead_Pal,                  TAG_HEAD_MALE},
+    {sFemaleHead_Pal,                TAG_HEAD_FEMALE},
+    {}
+};
+#else
+static const struct SpritePalette sFrontierPassSpritePalettes[] =
 {
     {gFrontierPassCursor_Pal,       TAG_CURSOR},
     {gFrontierPassMapCursor_Pal,    TAG_MAP_INDICATOR},
@@ -387,6 +408,7 @@ static const struct SpritePalette sSpritePalettes[] =
     {sFemaleHead_Pal,               TAG_HEAD_FEMALE},
     {}
 };
+#endif
 
 static const union AnimCmd sAnim_Frame1_Unused[] =
 {
@@ -1318,7 +1340,7 @@ static void LoadCursorAndSymbolSprites(void)
 
     FreeAllSpritePalettes();
     ResetAffineAnimData();
-    LoadSpritePalettes(sSpritePalettes);
+    LoadSpritePalettes(sFrontierPassSpritePalettes);
     LoadCompressedSpriteSheet(&sCursorSpriteSheets[0]);
     LoadCompressedSpriteSheet(&sCursorSpriteSheets[2]);
     spriteId = CreateSprite(&sSpriteTemplates_Cursors[0], sPassData->cursorX, sPassData->cursorY, 0);
@@ -1645,7 +1667,7 @@ static void InitFrontierMapSprites(void)
     s16 x = 0, y;
 
     FreeAllSpritePalettes();
-    LoadSpritePalettes(sSpritePalettes);
+    LoadSpritePalettes(sFrontierPassSpritePalettes);
 
     LoadCompressedSpriteSheet(&sCursorSpriteSheets[0]);
     spriteId = CreateSprite(&sSpriteTemplates_Cursors[0], 155, (sMapData->cursorPos * 16) + 8, 2);

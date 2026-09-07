@@ -137,6 +137,20 @@ static const struct CompressedSpriteSheet sSpriteSheet_ClockHand =
 
 static const u8 sUnused[8] = {0};
 
+#if defined(NATIVE_LINUX)
+struct SpritePalette sSpritePalettes_Clock[3] =
+{
+    {
+        .data = NULL,
+        .tag = PALTAG_WALL_CLOCK_MALE
+    },
+    {
+        .data = NULL,
+        .tag = PALTAG_WALL_CLOCK_FEMALE
+    },
+    {}
+};
+#else
 static const struct SpritePalette sSpritePalettes_Clock[] =
 {
     {
@@ -149,6 +163,7 @@ static const struct SpritePalette sSpritePalettes_Clock[] =
     },
     {}
 };
+#endif
 
 static const struct OamData sOam_ClockHand =
 {

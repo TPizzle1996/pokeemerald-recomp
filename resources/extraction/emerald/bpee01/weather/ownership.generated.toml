@@ -1,0 +1,21 @@
+ownership_version = 1
+game = "emerald"
+rom_profile = "bpee01-rev0"
+
+[[resources]]
+id = "emerald:data/weather/drought-colors"
+key = "98407a186e3a4b62768b6b646fcc6db8a4ac49fce4d6813b23d0a7e42d14b6d7"
+legacy_symbol = "gWeatherDroughtColors"
+type = "binary"
+schema = 1
+source_artifact = "resources/extraction/emerald/bpee01/weather/drought_colors.bin"
+encoded_length = 49152
+decoded_length = 49152
+source_encoding = "raw"
+source_encoded_sha256 = "2b5d28a611d07dcc22b6b38e583f68cd8496cc353c36b8c5af7518386bc34a9f"
+canonical_decoded_sha256 = "2b5d28a611d07dcc22b6b38e583f68cd8496cc353c36b8c5af7518386bc34a9f"
+ownership_state = "ROM_BASE_ONLY"
+
+[resources.targets]
+native = "ROM_BASE_ONLY"
+gba = "COMPILED"

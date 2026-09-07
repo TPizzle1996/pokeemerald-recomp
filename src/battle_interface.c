@@ -637,6 +637,22 @@ static const struct SubspriteTable sStatusSummaryBar_SubspriteTable_Exit[] =
 // unused unknown image
 static const u8 sUnusedStatusSummary[] = INCBIN_U8("graphics/battle_interface/unused_status_summary.4bpp");
 
+#if defined(NATIVE_LINUX)
+struct CompressedSpriteSheet sStatusSummaryBarSpriteSheet =
+{
+    NULL, 0x200, TAG_STATUS_SUMMARY_BAR_TILE
+};
+
+struct SpritePalette sStatusSummaryBarSpritePal =
+{
+    NULL, TAG_STATUS_SUMMARY_BAR_PAL
+};
+
+struct SpritePalette sStatusSummaryBallsSpritePal =
+{
+    NULL, TAG_STATUS_SUMMARY_BALLS_PAL
+};
+#else
 static const struct CompressedSpriteSheet sStatusSummaryBarSpriteSheet =
 {
     gBattleInterface_BallStatusBarGfx, 0x200, TAG_STATUS_SUMMARY_BAR_TILE
@@ -651,6 +667,7 @@ static const struct SpritePalette sStatusSummaryBallsSpritePal =
 {
     gBattleInterface_BallDisplayPal, TAG_STATUS_SUMMARY_BALLS_PAL
 };
+#endif
 
 static const struct SpriteSheet sStatusSummaryBallsSpriteSheet =
 {

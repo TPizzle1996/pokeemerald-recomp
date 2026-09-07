@@ -901,8 +901,28 @@ static const struct SpriteSheet sSpriteSheets[] = {
     },
     {0}
 };
-
-static const struct SpritePalette sSpritePalettes[] = {
+#if defined(NATIVE_LINUX)
+struct SpritePalette sEasyChatSpritePalettes[5] = {
+    {
+        .data = sTriangleCursor_Pal,
+        .tag = PALTAG_TRIANGLE_CURSOR,
+    },
+    {
+        .data = NULL,
+        .tag = PALTAG_RECTANGLE_CURSOR,
+    },
+    {
+        .data = NULL,
+        .tag = PALTAG_MISC_UI, // The palette is generated from the button window but used for various parts of the UI
+    },
+    {
+        .data = sRSInterviewFrame_Pal,
+        .tag = PALTAG_RS_INTERVIEW_FRAME,
+    },
+    {0}
+};
+#else
+static const struct SpritePalette sEasyChatSpritePalettes[] = {
     {
         .data = sTriangleCursor_Pal,
         .tag = PALTAG_TRIANGLE_CURSOR,
@@ -921,8 +941,33 @@ static const struct SpritePalette sSpritePalettes[] = {
     },
     {0}
 };
+#endif
 
-static const struct CompressedSpriteSheet sCompressedSpriteSheets[] = {
+#if defined(NATIVE_LINUX)
+struct CompressedSpriteSheet sEasyChatCompressedSpriteSheets[4] = {
+    {
+        .data = sRSInterviewFrame_Gfx,
+        .size = 0x800,
+        .tag = GFXTAG_RS_INTERVIEW_FRAME,
+    },
+    {
+        .data = NULL,
+        .size = 0x1000,
+        .tag = GFXTAG_RECTANGLE_CURSOR,
+    },
+    {
+        .data = NULL,
+        .size = 0x800,
+        .tag = GFXTAG_BUTTON_WINDOW,
+    },
+    {
+        .data = NULL,
+        .size = 0x1000,
+        .tag = GFXTAG_MODE_WINDOW,
+    },
+};
+#else
+static const struct CompressedSpriteSheet sEasyChatCompressedSpriteSheets[] = {
     {
         .data = sRSInterviewFrame_Gfx,
         .size = 0x800,
@@ -944,6 +989,7 @@ static const struct CompressedSpriteSheet sCompressedSpriteSheets[] = {
         .tag = GFXTAG_MODE_WINDOW,
     },
 };
+#endif
 
 static const u8 sAlphabetKeyboardColumnOffsets[NUM_ALPHABET_COLUMNS] = {0, 12, 24, 56, 68, 80, 92};
 
@@ -4659,9 +4705,9 @@ static void LoadEasyChatGfx(void)
     u32 i;
 
     LoadSpriteSheets(sSpriteSheets);
-    LoadSpritePalettes(sSpritePalettes);
-    for (i = 0; i < ARRAY_COUNT(sCompressedSpriteSheets); i++)
-        LoadCompressedSpriteSheet(&sCompressedSpriteSheets[i]);
+    LoadSpritePalettes(sEasyChatSpritePalettes);
+    for (i = 0; i < ARRAY_COUNT(sEasyChatCompressedSpriteSheets); i++)
+        LoadCompressedSpriteSheet(&sEasyChatCompressedSpriteSheets[i]);
 }
 
 #define sDelayTimer    data[0]

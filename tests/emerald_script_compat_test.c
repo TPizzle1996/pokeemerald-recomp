@@ -5,7 +5,7 @@
  * emerald-bpee01-v1.rpack) with the text + leaf sibling seams
  * published first (the loader's ordering). Covers:
  *
- *   1. preconditions (pack 23,069 entries; sibling seams published);
+ *   1. preconditions (pack 27,000 entries (R15 pack); sibling seams published);
  *   2. refused staging before the siblings publish (UNAVAILABLE);
  *   3. full shadow staging: index counts, parity 16,704/0, arena
  *      geometry, per-module byte identity against the pack;
@@ -968,12 +968,12 @@ static void TestStateV5AndRuntimeInvariants(void)
 
     CHECK("range index present", index != NULL);
     before = EmeraldResourceRangeIndex_GetRangeCount(index);
-    CHECK("live range pin 6385/8192 after the loader's cutover",
-          before == 6385u && before < 8192u);
+    CHECK("live range pin 7602/8192 after the loader's cutover",
+          before == 7603u && before < 8192u);
 
     /* Range lifecycle (plan sec 22): the clear unregisters exactly the
      * 523 module ranges (identity-based), the restage re-registers
-     * them, and the count returns to exactly 6,377. */
+     * them, and the count returns to exactly 7,079. */
     EmeraldScriptCompat_ClearMigratedEntries();
     CHECK("clear drops the generation",
           !EmeraldScriptCompat_GetArena(&arena, &arenaSize)
@@ -988,7 +988,7 @@ static void TestStateV5AndRuntimeInvariants(void)
     CHECK("restage registers the 523 module ranges",
           EmeraldScriptCompat_RegisterRanges() == EMERALD_SCRIPT_OK);
     after = EmeraldResourceRangeIndex_GetRangeCount(index);
-    CHECK("range count restored to exactly 6385", after == 6385u);
+    CHECK("range count restored to exactly 7602", after == 7603u);
     /* clear bumps the counter, the restage bumps it again: base+4. */
     CHECK("generation id advanced past the clear",
           EmeraldScriptCompat_GetGenerationId()
@@ -1043,7 +1043,7 @@ int main(int argc, char **argv)
     }
     {
         size_t count = Gen3ResourcePack_GetEntryCount(gScriptHarnessPack);
-        CHECK("pack entry count 23069", count == 23069u);
+        CHECK("pack entry count 27000", count == 27000u);
     }
     CHECK("text sibling published",
           EmeraldTextCompat_GetPublishedCount() == EMERALD_TEXT_LABEL_COUNT);

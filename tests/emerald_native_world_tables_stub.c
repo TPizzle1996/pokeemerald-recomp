@@ -88,4 +88,9 @@ struct CompressedSpriteSheet gMonFrontPicTable[512] = { 0 };
 struct CompressedSpriteSheet gMonBackPicTable[512] = { 0 };
 struct CompressedSpritePalette gMonPaletteTable[512] = { 0 };
 struct CompressedSpritePalette gMonShinyPaletteTable[512] = { 0 };
+/* R15 Phase 2: the three aux tables (still front, icon, footprint) are
+ * mutable on native too and published from the same compat image. */
+struct CompressedSpriteSheet gMonStillFrontPicTable[512] = { 0 };
+const u8 *gMonIconTable[512] = { 0 };
+const u8 *gMonFootprintTable[512] = { 0 };
 #endif

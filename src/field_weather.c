@@ -67,6 +67,12 @@ static const u8 *sPaletteColorMapTypes;
 
 // The drought weather effect uses a precalculated color lookup table. Presumably this
 // is because the underlying color shift calculation is slow.
+#if defined(NATIVE_LINUX)
+/* R15: mutable on native - the weather compat seam publishes the pack-
+ * resolved drought-color lookup table at init (one 49,152-byte RAW
+ * resource, six 0x1000-u16 rows). */
+u16 sDroughtWeatherColors[6][0x1000];
+#else
 static const u16 sDroughtWeatherColors[][0x1000] = {
     INCBIN_U16("graphics/weather/drought/colors_0.bin"),
     INCBIN_U16("graphics/weather/drought/colors_1.bin"),
@@ -75,6 +81,7 @@ static const u16 sDroughtWeatherColors[][0x1000] = {
     INCBIN_U16("graphics/weather/drought/colors_4.bin"),
     INCBIN_U16("graphics/weather/drought/colors_5.bin"),
 };
+#endif
 
 // This is a pointer to gWeather. All code in this file accesses gWeather directly,
 // while code in other field weather files accesses gWeather through this pointer.

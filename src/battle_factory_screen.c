@@ -262,7 +262,7 @@ static const u16 sPokeballGray_Pal[]         = INCBIN_U16("graphics/battle_front
 static const u16 sPokeballSelected_Pal[]     = INCBIN_U16("graphics/battle_frontier/factory_screen/pokeball_selected.gbapal");
 static const u16 sInterface_Pal[]            = INCBIN_U16("graphics/battle_frontier/factory_screen/interface.gbapal"); // Arrow, menu/action highlights, action box, etc
 static const u8 sPokeball_Gfx[]              = INCBIN_U8( "graphics/battle_frontier/factory_screen/pokeball.4bpp"); // Unused, gPokeballSelection_Gfx used instead
-static const u8 sArrow_Gfx[]                 = INCBIN_U8( "graphics/battle_frontier/factory_screen/arrow.4bpp");
+static const u8 sFactoryArrow_Gfx[]                 = INCBIN_U8( "graphics/battle_frontier/factory_screen/arrow.4bpp");
 static const u8 sMenuHighlightLeft_Gfx[]     = INCBIN_U8( "graphics/battle_frontier/factory_screen/menu_highlight_left.4bpp");
 static const u8 sMenuHighlightRight_Gfx[]    = INCBIN_U8( "graphics/battle_frontier/factory_screen/menu_highlight_right.4bpp");
 static const u8 sActionBoxLeft_Gfx[]         = INCBIN_U8( "graphics/battle_frontier/factory_screen/action_box_left.4bpp");
@@ -277,7 +277,7 @@ static const u16 sMonPicBg_Pal[]             = INCBIN_U16("graphics/battle_front
 
 static const struct SpriteSheet sSelect_SpriteSheets[] =
 {
-    {sArrow_Gfx,              sizeof(sArrow_Gfx),              GFXTAG_ARROW},
+    {sFactoryArrow_Gfx,              sizeof(sFactoryArrow_Gfx),              GFXTAG_ARROW},
     {sMenuHighlightLeft_Gfx,  sizeof(sMenuHighlightLeft_Gfx),  GFXTAG_MENU_HIGHLIGHT_LEFT},
     {sMenuHighlightRight_Gfx, sizeof(sMenuHighlightRight_Gfx), GFXTAG_MENU_HIGHLIGHT_RIGHT},
     {sMonPicBgAnim_Gfx,       sizeof(sMonPicBgAnim_Gfx),       GFXTAG_MON_PIC_BG_ANIM},
@@ -633,7 +633,7 @@ static const struct SpriteTemplate sSpriteTemplate_Select_MonPicBgAnim =
 
 static const struct SpriteSheet sSwap_SpriteSheets[] =
 {
-    {sArrow_Gfx,                 sizeof(sArrow_Gfx),                 GFXTAG_ARROW},
+    {sFactoryArrow_Gfx,                 sizeof(sFactoryArrow_Gfx),                 GFXTAG_ARROW},
     {sMenuHighlightLeft_Gfx,     sizeof(sMenuHighlightLeft_Gfx),     GFXTAG_MENU_HIGHLIGHT_LEFT},
     {sMenuHighlightRight_Gfx,    sizeof(sMenuHighlightRight_Gfx),    GFXTAG_MENU_HIGHLIGHT_RIGHT},
     {sActionBoxLeft_Gfx,         sizeof(sActionBoxLeft_Gfx),         GFXTAG_ACTION_BOX_LEFT},
@@ -1150,11 +1150,11 @@ static void CB2_InitSelectScreen(void)
         gMain.state++;
         break;
     case 1:
-        sSelectMenuTilesetBuffer = Alloc(sizeof(gFrontierFactoryMenu_Gfx));
+        sSelectMenuTilesetBuffer = Alloc(gFrontierFactoryMenu_Gfx_SIZE);
 #ifdef BUGFIX
         sSelectMonPicBgTilesetBuffer = AllocZeroed(sizeof(sMonPicBg_Gfx));
 #else
-        sSelectMonPicBgTilesetBuffer = AllocZeroed(sizeof(gFrontierFactoryMenu_Gfx)); // Incorrect size
+        sSelectMonPicBgTilesetBuffer = AllocZeroed(gFrontierFactoryMenu_Gfx_SIZE); // Incorrect size
 #endif
         sSelectMenuTilemapBuffer = Alloc(BG_SCREEN_SIZE);
         sSelectMonPicBgTilemapBuffer = AllocZeroed(BG_SCREEN_SIZE);
@@ -1181,9 +1181,9 @@ static void CB2_InitSelectScreen(void)
         ResetSpriteData();
         ResetTasks();
         FreeAllSpritePalettes();
-        CpuCopy16(gFrontierFactoryMenu_Gfx, sSelectMenuTilesetBuffer, sizeof(gFrontierFactoryMenu_Gfx));
+        CpuCopy16(gFrontierFactoryMenu_Gfx, sSelectMenuTilesetBuffer, gFrontierFactoryMenu_Gfx_SIZE);
         CpuCopy16(sMonPicBg_Gfx, sSelectMonPicBgTilesetBuffer, sizeof(sMonPicBg_Gfx));
-        LoadBgTiles(1, sSelectMenuTilesetBuffer, sizeof(gFrontierFactoryMenu_Gfx), 0);
+        LoadBgTiles(1, sSelectMenuTilesetBuffer, gFrontierFactoryMenu_Gfx_SIZE, 0);
         LoadBgTiles(3, sSelectMonPicBgTilesetBuffer, sizeof(sMonPicBg_Gfx), 0);
         CpuCopy16(gFrontierFactoryMenu_Tilemap, sSelectMenuTilemapBuffer, BG_SCREEN_SIZE);
         LoadBgTilemap(1, sSelectMenuTilemapBuffer, BG_SCREEN_SIZE, 0);
@@ -3282,11 +3282,11 @@ static void CB2_InitSwapScreen(void)
         gMain.state++;
         break;
     case 1:
-        sSwapMenuTilesetBuffer = Alloc(sizeof(gFrontierFactoryMenu_Gfx));
+        sSwapMenuTilesetBuffer = Alloc(gFrontierFactoryMenu_Gfx_SIZE);
 #ifdef BUGFIX
         sSwapMonPicBgTilesetBuffer = AllocZeroed(sizeof(sMonPicBg_Gfx));
 #else
-        sSwapMonPicBgTilesetBuffer = AllocZeroed(sizeof(gFrontierFactoryMenu_Gfx)); // Incorrect size
+        sSwapMonPicBgTilesetBuffer = AllocZeroed(gFrontierFactoryMenu_Gfx_SIZE); // Incorrect size
 #endif
         sSwapMenuTilemapBuffer = Alloc(BG_SCREEN_SIZE);
         sSwapMonPicBgTilemapBuffer = AllocZeroed(BG_SCREEN_SIZE);
@@ -3314,9 +3314,9 @@ static void CB2_InitSwapScreen(void)
         ResetTasks();
         FreeAllSpritePalettes();
         ResetAllPicSprites();
-        CpuCopy16(gFrontierFactoryMenu_Gfx, sSwapMenuTilesetBuffer, sizeof(gFrontierFactoryMenu_Gfx));
+        CpuCopy16(gFrontierFactoryMenu_Gfx, sSwapMenuTilesetBuffer, gFrontierFactoryMenu_Gfx_SIZE);
         CpuCopy16(sMonPicBg_Gfx, sSwapMonPicBgTilesetBuffer, sizeof(sMonPicBg_Gfx));
-        LoadBgTiles(1, sSwapMenuTilesetBuffer, sizeof(gFrontierFactoryMenu_Gfx), 0);
+        LoadBgTiles(1, sSwapMenuTilesetBuffer, gFrontierFactoryMenu_Gfx_SIZE, 0);
         LoadBgTiles(3, sSwapMonPicBgTilesetBuffer, sizeof(sMonPicBg_Gfx), 0);
         CpuCopy16(gFrontierFactoryMenu_Tilemap, sSwapMenuTilemapBuffer, BG_SCREEN_SIZE);
         LoadBgTilemap(1, sSwapMenuTilemapBuffer, BG_SCREEN_SIZE, 0);

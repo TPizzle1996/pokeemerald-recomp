@@ -1007,6 +1007,9 @@ const struct OamData gOamData_AffineDouble_ObjBlend_32x64 =
     .paletteNum = 0,
 };
 
+#if defined(NATIVE_LINUX)
+struct CompressedSpriteSheet gBattleAnimPicTable[289];
+#else
 const struct CompressedSpriteSheet gBattleAnimPicTable[] =
 {
     {gBattleAnimSpriteGfx_Bone, 0x0200, ANIM_TAG_BONE},
@@ -1299,7 +1302,13 @@ const struct CompressedSpriteSheet gBattleAnimPicTable[] =
     {gBattleAnimSpriteGfx_SlamHit, 0x1000, ANIM_TAG_WHIP_HIT},
     {gBattleAnimSpriteGfx_GoldRing, 0x0100, ANIM_TAG_BLUE_RING_2},
 };
+#endif
 
+
+
+#if defined(NATIVE_LINUX)
+struct CompressedSpritePalette gBattleAnimPaletteTable[289];
+#else
 const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
 {
     {gBattleAnimSpritePal_Bone, ANIM_TAG_BONE},
@@ -1592,7 +1601,44 @@ const struct CompressedSpritePalette gBattleAnimPaletteTable[] =
     {gBattleAnimSpritePal_WhipHit, ANIM_TAG_WHIP_HIT},
     {gBattleAnimSpritePal_BlueRing2, ANIM_TAG_BLUE_RING_2},
 };
+#endif
 
+
+
+#if defined(NATIVE_LINUX)
+/* R15 Phase 4: mutable on native - the battle-anim gfx compat seam
+ * publishes the pack-resolved session pointers into every row at init. */
+struct BattleAnimBackground gBattleAnimBackgroundTable[] =
+{
+    [BG_NONE]                = {NULL, NULL, NULL},
+    [BG_DARK]                = {NULL, NULL, NULL},
+    [BG_GHOST]               = {NULL, NULL, NULL},
+    [BG_PSYCHIC]             = {NULL, NULL, NULL},
+    [BG_IMPACT_OPPONENT]     = {NULL, NULL, NULL},
+    [BG_IMPACT_PLAYER]       = {NULL, NULL, NULL},
+    [BG_IMPACT_CONTESTS]     = {NULL, NULL, NULL},
+    [BG_DRILL]               = {NULL, NULL, NULL},
+    [BG_DRILL_CONTESTS]      = {NULL, NULL, NULL},
+    [BG_HIGHSPEED_OPPONENT]  = {NULL, NULL, NULL},
+    [BG_HIGHSPEED_PLAYER]    = {NULL, NULL, NULL},
+    [BG_THUNDER]             = {NULL, NULL, NULL},
+    [BG_GUILLOTINE_OPPONENT] = {NULL, NULL, NULL},
+    [BG_GUILLOTINE_PLAYER]   = {NULL, NULL, NULL},
+    [BG_GUILLOTINE_CONTESTS] = {NULL, NULL, NULL},
+    [BG_ICE]                 = {NULL, NULL, NULL},
+    [BG_COSMIC]              = {NULL, NULL, NULL},
+    [BG_IN_AIR]              = {NULL, NULL, NULL},
+    [BG_SKY]                 = {NULL, NULL, NULL},
+    [BG_SKY_CONTESTS]        = {NULL, NULL, NULL},
+    [BG_AURORA]              = {NULL, NULL, NULL},
+    [BG_FISSURE]             = {NULL, NULL, NULL},
+    [BG_BUG_OPPONENT]        = {NULL, NULL, NULL},
+    [BG_BUG_PLAYER]          = {NULL, NULL, NULL},
+    [BG_SOLAR_BEAM_OPPONENT] = {NULL, NULL, NULL},
+    [BG_SOLAR_BEAM_PLAYER]   = {NULL, NULL, NULL},
+    [BG_SOLAR_BEAM_CONTESTS] = {NULL, NULL, NULL},
+};
+#else
 const struct BattleAnimBackground gBattleAnimBackgroundTable[] =
 {
     [BG_NONE]                = {gBattleAnimBgImage_Dark,       gBattleAnimBgPalette_Dark,       gBattleAnimBgTilemap_Dark},
@@ -1623,3 +1669,5 @@ const struct BattleAnimBackground gBattleAnimBackgroundTable[] =
     [BG_SOLAR_BEAM_PLAYER]   = {gBattleAnimBgImage_Impact,     gBattleAnimBgPalette_SolarBeam,  gBattleAnimBgTilemap_ImpactPlayer},
     [BG_SOLAR_BEAM_CONTESTS] = {gBattleAnimBgImage_Impact,     gBattleAnimBgPalette_SolarBeam,  gBattleAnimBgTilemap_ImpactContests},
 };
+#endif
+

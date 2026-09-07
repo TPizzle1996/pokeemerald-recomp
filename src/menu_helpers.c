@@ -69,6 +69,17 @@ static const union AnimCmd *const sAnims_SwapLine[] =
     sAnim_SwapLine_LeftArrow
 };
 
+#if defined(NATIVE_LINUX)
+struct CompressedSpriteSheet sSpriteSheet_SwapLine =
+{
+    NULL, 0x100, TAG_SWAP_LINE
+};
+
+struct CompressedSpritePalette sSpritePalette_SwapLine =
+{
+    NULL, TAG_SWAP_LINE
+};
+#else
 static const struct CompressedSpriteSheet sSpriteSheet_SwapLine =
 {
     gSwapLineGfx, 0x100, TAG_SWAP_LINE
@@ -78,6 +89,7 @@ static const struct CompressedSpritePalette sSpritePalette_SwapLine =
 {
     gSwapLinePal, TAG_SWAP_LINE
 };
+#endif
 
 static const struct SpriteTemplate sSpriteTemplate_SwapLine =
 {

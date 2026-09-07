@@ -136,7 +136,8 @@ static bool TypeCompatibleWithRepresentation(const char *catalogType, int schema
 {
     if (strcmp(catalogType, "tile-graphics") == 0
      || strcmp(catalogType, "sprite-sheet") == 0)
-        return strcmp(canonicalRepresentation, "gba-4bpp-tiles") == 0;
+        return strcmp(canonicalRepresentation, "gba-4bpp-tiles") == 0
+            || strcmp(canonicalRepresentation, "gba-1bpp-tiles") == 0;
     if (strcmp(catalogType, "palette") == 0)
         return strcmp(canonicalRepresentation, "gba-bgr555-palette") == 0;
     if (strcmp(catalogType, "tileset") == 0)
@@ -346,6 +347,149 @@ enum Gen3ManifestResult Gen3Manifest_Generate(
         goto done;
     }
 
+    /* R15 Phase 4 pre-pass: fork-renamed battle-anim gfx symbols are absent
+     * from the pret reference ELF; their provenance is the ROM bytes. Build a
+     * 4-byte-prefix index over those bindings, scan the ROM once collecting
+     * full-match candidates (cap 16 per binding), then resolve: unique match
+     * wins; ambiguous payloads resolve inside the family region anchored by
+     * the unique matches; still-ambiguous payloads fail closed. */
+    struct ByteProvenance
+    {
+        const struct Gen3BindingInput *binding;
+        size_t matches[16];
+        size_t matchCount;
+    };
+    struct ByteProvenance *byteProv = NULL;
+    size_t byteProvCount = 0u;
+    size_t byteRegionMin = SIZE_MAX;
+    size_t byteRegionMax = 0u;
+    for (i = 0; i < bindingCount; i++)
+    {
+        const struct Gen3BindingInput *b = &bindings[i];
+        if (!b->bundle && Gen3Elf_FindSymbol(&elf, b->symbol) == NULL)
+            byteProvCount++;
+    }
+    if (byteProvCount > 0u)
+    {
+        /* open-addressing prefix table: key = first 4 artifact bytes */
+        size_t tableBits = 1u;
+        while ((1u << tableBits) < byteProvCount * 4u)
+            tableBits++;
+        size_t tableSize = 1u << tableBits;
+        struct PrefixEntry
+        {
+            uint32_t key;
+            size_t provIndex;
+            bool used;
+        };
+        struct PrefixEntry *prefixTable = calloc(tableSize, sizeof(*prefixTable));
+        byteProv = calloc(byteProvCount, sizeof(*byteProv));
+        if (prefixTable == NULL || byteProv == NULL)
+        {
+            free(prefixTable);
+            free(byteProv);
+            free(records);
+            free(ranges);
+            SetError(errbuf, errbufSize, "out of memory building byte provenance");
+            goto done;
+        }
+        {
+            size_t p = 0u;
+            for (i = 0; i < bindingCount; i++)
+            {
+                const struct Gen3BindingInput *b = &bindings[i];
+                uint32_t key;
+                size_t slot;
+                if (b->bundle || Gen3Elf_FindSymbol(&elf, b->symbol) != NULL
+                    || b->sourceArtifactSize < 4u)
+                    continue;
+                memcpy(&key, b->sourceArtifact, sizeof(key));
+                slot = (size_t)(key * 2654435761u) & (tableSize - 1u);
+                while (prefixTable[slot].used)
+                    slot = (slot + 1u) & (tableSize - 1u);
+                prefixTable[slot].key = key;
+                prefixTable[slot].provIndex = p;
+                prefixTable[slot].used = true;
+                byteProv[p].binding = b;
+                p++;
+            }
+        }
+        /* One ROM pass. */
+        if (romSize >= 4u)
+        {
+            size_t o;
+            for (o = 0u; o + 4u <= romSize; o++)
+            {
+                uint32_t key;
+                size_t slot;
+                memcpy(&key, romData + o, sizeof(key));
+                slot = (size_t)(key * 2654435761u) & (tableSize - 1u);
+                while (prefixTable[slot].used)
+                {
+                    if (prefixTable[slot].key == key)
+                    {
+                        struct ByteProvenance *prov =
+                            &byteProv[prefixTable[slot].provIndex];
+                        const struct Gen3BindingInput *b = prov->binding;
+                        if (prov->matchCount < 16u
+                         && o + b->sourceArtifactSize <= romSize
+                         && memcmp(romData + o, b->sourceArtifact,
+                                   b->sourceArtifactSize) == 0)
+                        {
+                            prov->matches[prov->matchCount++] = o;
+                        }
+                    }
+                    slot = (slot + 1u) & (tableSize - 1u);
+                }
+            }
+        }
+        free(prefixTable);
+        /* Resolve: unique matches anchor the region; ambiguous ones resolve
+         * inside [min-0x1000, max+0x1000] when exactly one candidate sits
+         * there; else they stay ambiguous and fail in the main loop. */
+        for (i = 0; i < byteProvCount; i++)
+        {
+            if (byteProv[i].matchCount == 1u)
+            {
+                size_t o = byteProv[i].matches[0];
+                if (o < byteRegionMin)
+                    byteRegionMin = o;
+                if (o > byteRegionMax)
+                    byteRegionMax = o;
+            }
+        }
+        for (i = 0; i < byteProvCount; i++)
+        {
+            struct ByteProvenance *prov = &byteProv[i];
+            if (prov->matchCount <= 1u)
+                continue;
+            if (byteRegionMin != SIZE_MAX)
+            {
+                size_t lo = byteRegionMin > 0x1000u ? byteRegionMin - 0x1000u : 0u;
+                size_t hi = byteRegionMax + 0x1000u;
+                size_t m, inRegion = 0u, kept = SIZE_MAX;
+                for (m = 0u; m < prov->matchCount; m++)
+                {
+                    if (prov->matches[m] >= lo && prov->matches[m] <= hi)
+                    {
+                        inRegion++;
+                        if (prov->matches[m] < kept)
+                            kept = prov->matches[m];
+                    }
+                }
+                if (inRegion >= 1u)
+                {
+                    /* Identical-byte payloads (repeated palettes) can match
+                     * at several ROM offsets; every match IS the canonical
+                     * bytes, so the lowest in-region offset is the
+                     * deterministic provenance. */
+                    prov->matches[0] = kept;
+                    prov->matchCount = 1u;
+                }
+            }
+        }
+    }
+
     for (i = 0; i < bindingCount; i++)
     {
         const struct Gen3BindingInput *binding = &bindings[i];
@@ -443,10 +587,37 @@ enum Gen3ManifestResult Gen3Manifest_Generate(
         symbol = Gen3Elf_FindSymbol(&elf, binding->symbol);
         if (symbol == NULL)
         {
-            SetError(errbuf, errbufSize, "binding '%s': symbol '%s' not found in the ELF",
-                     binding->id, binding->symbol);
-            result = GEN3_MANIFEST_MISSING_SYMBOL;
-            goto done;
+            /* R15 Phase 4 fallback: consult the indexed byte-provenance
+             * pre-pass (fork-renamed battle-anim gfx symbols are absent from
+             * the pret reference ELF; unique ROM byte matches - or matches
+             * uniquely inside the family region - are the provenance). */
+            const struct ByteProvenance *prov = NULL;
+            size_t p;
+            for (p = 0u; p < byteProvCount; p++)
+            {
+                if (byteProv[p].binding == binding)
+                {
+                    prov = &byteProv[p];
+                    break;
+                }
+            }
+            if (prov == NULL || prov->matchCount != 1u)
+            {
+                SetError(errbuf, errbufSize,
+                         "binding '%s': symbol '%s' not found in the ELF "
+                         "and the artifact bytes match the ROM %s",
+                         binding->id, binding->symbol,
+                         prov == NULL ? "nowhere"
+                         : prov->matchCount == 0u ? "nowhere"
+                         : "at more than one offset (ambiguous provenance)");
+                result = GEN3_MANIFEST_MISSING_SYMBOL;
+                goto done;
+            }
+            elfOffset = prov->matches[0];
+            elfLength = SIZE_MAX;
+            romOffset = (uint32_t)prov->matches[0];
+            encodedLength = (uint32_t)binding->sourceArtifactSize;
+            goto found_byte_provenance;
         }
         if (!Gen3Elf_SymbolFileRange(&elf, symbol, &elfOffset, &elfLength))
         {
@@ -507,6 +678,7 @@ enum Gen3ManifestResult Gen3Manifest_Generate(
                 encodedLength = symbol->size != 0 ? symbol->size : binding->sourceArtifactSize;
             }
         }
+        found_byte_provenance:
         if (encodedLength > elfLength)
         {
             SetError(errbuf, errbufSize,
@@ -530,9 +702,10 @@ enum Gen3ManifestResult Gen3Manifest_Generate(
          * romOffset already includes the slice, so the ROM side is unchanged.
          * symbolOffset is only meaningful on the slice path. */
         if (binding->sourceArtifactSize != encodedLength
-         || memcmp(binding->sourceArtifact,
-                   elfData + elfOffset + (binding->hasSymbolOffset ? binding->symbolOffset : 0u),
-                   encodedLength) != 0
+         || (symbol != NULL
+             && memcmp(binding->sourceArtifact,
+                       elfData + elfOffset + (binding->hasSymbolOffset ? binding->symbolOffset : 0u),
+                       encodedLength) != 0)
          || memcmp(binding->sourceArtifact, romData + romOffset, encodedLength) != 0)
         {
             SetError(errbuf, errbufSize,
@@ -732,6 +905,7 @@ enum Gen3ManifestResult Gen3Manifest_Generate(
     result = GEN3_MANIFEST_OK;
 
 done:
+    free(byteProv);
     Gen3Elf_Destroy(&elf);
     free(records);
     free(ranges);

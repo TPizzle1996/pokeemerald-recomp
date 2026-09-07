@@ -2,8 +2,12 @@
 #define GUARD_GRAPHICS_H
 
 // overworld
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u8 gMessageBox_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gMessageBox_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 
 // pokeballs
 extern const u32 gBallGfx_Poke[];
@@ -3080,26 +3084,66 @@ extern const u32 gTrainerBackPicPalette_Red[];
 extern const u32 gTrainerBackPicPalette_Leaf[];
 
 // pokeblock
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gMenuPokeblock_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gMenuPokeblock_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gMenuPokeblock_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gMenuPokeblockDevice_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gMenuPokeblockDevice_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokeblockRed_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokeblockBlue_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokeblockPink_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokeblockGreen_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokeblockYellow_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokeblockPurple_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokeblockIndigo_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokeblockBrown_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokeblockLiteBlue_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokeblockOlive_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokeblockGray_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokeblockBlack_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokeblockWhite_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokeblockGold_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokeblock_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 
 extern const u32 gItemIcon_QuestionMark[];
 extern const u32 gItemIconPalette_QuestionMark[];
@@ -3190,11 +3234,21 @@ extern const u32 gDecorIconPalette_RegiceDoll[];
 extern const u32 gDecorIcon_RegisteelDoll[];
 extern const u32 gDecorIconPalette_RegisteelDoll[];
 
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gWallClock_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gWallClockMale_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gWallClockFemale_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gWallClockStart_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gWallClockView_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 
 extern const u32 gBerryFixGbaConnect_Gfx[];
 extern const u32 gBerryFixGbaConnect_Tilemap[];
@@ -3215,15 +3269,33 @@ extern const u32 gBerryFixWindow_Gfx[];
 extern const u32 gBerryFixWindow_Tilemap[];
 extern const u16 gBerryFixWindow_Pal[];
 
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gBattleTextboxTiles[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gBattleTextboxTilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gBattleTextboxPalette[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gVsLettersGfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gBattleVSFrame_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gBattleVSFrame_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gBattleVSFrame_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gMultiBattleIntroBg_Opponent_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gMultiBattleIntroBg_Player_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 
 // battle environments
 extern const u32 gBattleEnvironmentTiles_TallGrass[];
@@ -3293,25 +3365,59 @@ extern const u32 gBattleEnvironmentPalette_StadiumDrake[];
 extern const u32 gBattleEnvironmentPalette_StadiumWallace[];
 
 // Pokédex
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokedexInterface_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gPokedexBgHoenn_Pal[];
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokedexMenu_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokedexList_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokedexListUnderlay_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokedexStartMenuMain_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokedexStartMenuSearchResults_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gPokedexSearchResults_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gPokedexBgNational_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokedexInfoScreen_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokedexCryScreen_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokedexSizeScreen_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokedexScreenSelectBarMain_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokedexScreenSelectBarSubmenu_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gPokedexCaughtScreen_Pal[];
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokedexSearchMenu_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokedexSearchMenuHoenn_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokedexSearchMenuNational_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gPokedexSearchMenu_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 
 // berry tag screen
 extern const u32 gBerryCheck_Gfx[];
@@ -3865,22 +3971,42 @@ extern const u32 gItemIcon_ReturnToFieldArrow[];
 extern const u32 gItemIconPalette_ReturnToFieldArrow[];
 
 //menu graphics
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gMenuInfoElements1_Pal[16];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gMenuInfoElements2_Pal[16];
 extern const u16 gMenuInfoElements3_Pal[16];
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u8 gMenuInfoElements_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 
 // item menu graphics
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gBagScreen_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gBagScreen_GfxTileMap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gBagScreenFemale_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gBagScreenMale_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u8 gBagMenuHMIcon_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 
 // item menu icons graphics
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gBagMaleTiles[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gBagFemaleTiles[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gBagPalette[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gBerryCheckCircle_Gfx[];
 
 //intro graphics
@@ -3888,8 +4014,12 @@ extern const u32 gIntroSparkle_Gfx[];
 extern const u32 gIntroFlygonSilhouette_Gfx[];
 extern const u32 gIntroLightning_Gfx[];
 extern const u16 gIntroLightning_Pal[];
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gIntroCopyright_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gIntroCopyright_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gIntroCopyright_Pal[16];
 extern const u32 gIntroVolbeat_Gfx[];
 extern const u16 gIntroVolbeat_Pal[];
@@ -3923,9 +4053,15 @@ extern const u16 gIntroFlygon_Pal[];
 extern const u32 gIntroFlygon_Gfx[];
 
 // party menu graphics
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPartyMenuBg_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPartyMenuBg_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPartyMenuBg_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 
 // berry pics
 extern const u32 gBerryPic_Cheri[];
@@ -4016,149 +4152,377 @@ extern const u32 gBerryPic_Enigma[];
 extern const u32 gBerryPalette_Enigma[];
 
 //PokéNav
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gPokenavCondition_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokenavCondition_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokenavCondition_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gPokenavOptions_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokenavOptions_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gPokenavOptions_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gPokenavLeftHeader_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gPokenavHeader_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokenavHeader_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokenavHeader_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokenavLeftHeaderHoennMap_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokenavLeftHeaderMainMenu_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokenavLeftHeaderCondition_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokenavLeftHeaderRibbons_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokenavLeftHeaderMatchCall_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokenavLeftHeaderParty_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokenavLeftHeaderSearch_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokenavLeftHeaderCool_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokenavLeftHeaderBeauty_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokenavLeftHeaderCute_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokenavLeftHeaderSmart_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokenavLeftHeaderTough_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gPokenavRibbonsSummaryBg_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokenavRibbonsSummaryBg_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokenavRibbonsSummaryBg_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gSummaryScreen_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gSummaryScreen_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gSummaryPage_Info_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gSummaryPage_InfoEgg_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gSummaryPage_Skills_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gSummaryPage_BattleMoves_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gSummaryPage_ContestMoves_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gPPTextPalette[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gMoveTypes_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gSummaryScreen_MoveEffect_Battle_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gSummaryScreen_MoveEffect_Contest_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gSummaryScreen_MoveEffect_Cancel_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gMoveTypes_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gSummaryMoveSelect_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gSummaryMoveSelect_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gStatusGfx_Icons[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gStatusPal_Icons[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gShopMenu_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gShopMenu_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gShopMenu_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gShopMenuMoney_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gBattleInterface_BallStatusBarGfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u8 gBattleInterface_BallDisplayGfx[];
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gBattleInterface_BallStatusBarPal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gBattleInterface_BallDisplayPal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u8 gHealthboxElementsGfxTable[][32];
 
 extern const u16 gNamingScreenMenu_Pal[6][16];
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gNamingScreenMenu_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gNamingScreenBackground_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gNamingScreenKeyboardUpper_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gNamingScreenKeyboardLower_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gNamingScreenKeyboardSymbols_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gNamingScreenPageSwapFrame_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gNamingScreenBackButton_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gNamingScreenOKButton_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gNamingScreenPageSwapButton_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gNamingScreenPageSwapUpper_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gNamingScreenPageSwapLower_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gNamingScreenPageSwapOthers_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gNamingScreenCursor_Gfx[];
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gNamingScreenCursorSquished_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gNamingScreenCursorFilled_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gNamingScreenInputArrow_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gNamingScreenUnderscore_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokeblockFeedBg_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gConfetti_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gConfetti_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gBattleInterfaceGfx_BattleBar[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gSubstituteDollBackGfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gSubstituteDollFrontGfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gSubstituteDollPal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gHealthboxSinglesPlayerGfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gHealthboxSinglesOpponentGfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gHealthboxDoublesPlayerGfx[];
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gHealthboxDoublesOpponentGfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gHealthboxSafariGfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gBlankGfxCompressed[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gBattleInterface_BallStatusBarPal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gBattleInterface_BallDisplayPal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gSwapLineGfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gSwapLinePal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gBattlePyramidBag_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gBattlePyramidBag_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gBattlePyramidBagTilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gBattlePyramidBagInterface_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gBattlePyramidFloor_Pal[][16];
 
 extern const u16 gStandardMenuPalette[];
 
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gTitleScreenEmeraldVersionGfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gTitleScreenPressStartGfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gTitleScreenPokemonLogoGfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gTitleScreenPokemonLogoTilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gTitleScreenCloudsTilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gTitleScreenBgPalettes[];
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gTitleScreenPressStartPal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gTitleScreenEmeraldVersionPal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 
 // Battle Dome
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gDomeTourneyInfoCard_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gDomeTourneyInfoCard_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gDomeTourneyInfoCardBg_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gDomeTourneyTree_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gDomeTourneyTreeButtons_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gDomeTourneyMatchCardBg_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gDomeTourneyTree_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gDomeTourneyLine_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gDomeTourneyLineDown_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gDomeTourneyLineUp_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gDomeTourneyTree_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gDomeTourneyTreeButtons_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 #if !defined(NATIVE_LINUX) /* R11-C: floor-light leaves migrated; declared by tileset_native.generated.h */
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gTilesetAnims_BattleDomePals0_0[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gTilesetAnims_BattleDomePals0_1[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gTilesetAnims_BattleDomePals0_2[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gTilesetAnims_BattleDomePals0_3[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 #endif /* !NATIVE_LINUX */
 
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gBattleArenaJudgmentSymbolsGfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gBattleArenaJudgmentSymbolsPalette[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gBattleWindowTextPalette[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gContest2Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gSmokescreenImpactTiles[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gSmokescreenImpactPalette[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 
 extern const u32 gBattleAnimSpriteGfx_Bone[];
 extern const u32 gBattleAnimSpriteGfx_Spark[];
@@ -4214,8 +4578,12 @@ extern const u32 gBattleAnimSpriteGfx_HumanoidFoot[];
 extern const u32 gBattleAnimSpriteGfx_MonsterFoot[];
 extern const u32 gBattleAnimSpriteGfx_HumanoidHand[];
 extern const u32 gBattleAnimSpriteGfx_NoiseLine[];
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 UnusedLevelupAnimationGfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 UnusedLevelupAnimationTilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gBattleAnimSpriteGfx_YellowUnk[];
 extern const u32 gBattleAnimSpriteGfx_RedFist[];
 extern const u32 gBattleAnimSpriteGfx_SlamHit[];
@@ -4681,9 +5049,15 @@ extern const u32 gBattleAnimSpritePal_GreenStar[];
 extern const u32 gBattleAnimSpritePal_PinkCloud[];
 extern const u32 gBattleAnimSpritePal_SweatDrop[];
 extern const u32 gBattleAnimSpritePal_GuardRing[];
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gCureBubblesGfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gCureBubblesPal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gCureBubblesTilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gBattleAnimSpritePal_PurpleScratch[];
 extern const u32 gBattleAnimSpritePal_SmallRedEye[];
 extern const u32 gBattleAnimSpritePal_HollowOrb[];
@@ -4775,42 +5149,104 @@ extern const u32 gBattleAnimBgTilemap_InAir[];
 extern const u32 gBattleAnimBgTilemap_Aurora[];
 extern const u32 gBattleAnimBgTilemap_Fissure[];
 
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gMetalShineGfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gMetalShinePalette[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gMetalShineTilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 
 extern const u32 gBattleAnimMaskImage_Curse[];
 extern const u32 gBattleAnimMaskTilemap_Curse[];
 
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gStatAnim_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gStatAnim_Increase_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gStatAnim_Decrease_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gStatAnim_Defense_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gStatAnim_Attack_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gStatAnim_Accuracy_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gStatAnim_Speed_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gStatAnim_Multiple_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gStatAnim_Evasion_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gStatAnim_SpAttack_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gStatAnim_SpDefense_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gContestInterfaceGfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gContestAudienceGfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u8 gContestApplauseMeterGfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u8 gContestNextTurnNumbersGfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u8 gContestNextTurnRandomGfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gContestAudienceTilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gContestInterfaceAudiencePalette[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gContestInterfaceTilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gContestCurtainTilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u8 gContestSliderHeart_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gContestNextTurnGfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gContestPal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gContestFaces_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gContestApplauseGfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gContestJudgeGfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gContestJudgeSymbolsGfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gContestJudgeSymbolsPal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 
 extern const u32 gBattleAnimBgTilemap_SurfOpponent[];
 extern const u32 gBattleAnimBgTilemap_SurfPlayer[];
@@ -4819,26 +5255,56 @@ extern const u32 gBattleAnimBgImage_Surf[];
 extern const u32 gBattleAnimBgPalette_Surf[];
 extern const u32 gBattleAnimBackgroundImageMuddyWater_Pal[];
 
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gEnemyMonShadow_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 
 extern const u32 gBattleAnimFogTilemap[];
 
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gUsePokeblockGraph_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gUsePokeblockGraph_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gUsePokeblockGraph_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gUsePokeblockNatureWin_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 
 // Berry blender
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u8 gBerryBlenderPlayerArrow_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u8 gBerryBlenderStart_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u8 gBerryBlenderScoreSymbols_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u8 gBerryBlenderParticles_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u8 gBerryBlenderCountdownNumbers_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gBerryBlenderMiscPalette[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gBerryBlenderArrowPalette[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gBerryBlenderCenter_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gBerryBlenderOuter_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gBerryBlenderOuter_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 
 // Slot Machine
 extern const u32 gSlotMachineDigitalDisplay_Gfx[];
@@ -4892,13 +5358,23 @@ extern const u32 gBattleAnimBgTilemap_Sandstorm[];
 extern const u32 gBattleAnimBgImage_Sandstorm[];
 
 // Pokédex Area Screen
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokedexAreaScreenAreaUnknown_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gPokedexAreaScreenAreaUnknown_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 
 // Pokémon Storage System
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gStorageSystemMenu_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gStorageSystemPartyMenu_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gStorageSystemPartyMenu_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gWallpaperIcon_Plusle[];
 extern const u32 gWallpaperIcon_Cross[];
 extern const u32 gWallpaperIcon_Bolt[];
@@ -4910,130 +5386,322 @@ extern const u32 gWallpaperTilemap_Horizontal[];
 extern const u16 gWallpaperPalettes_Horizontal[][16];
 
 // Cable Car
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gCableCarBg_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gCableCarBg_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gCableCar_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gCableCarDoor_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gCableCarCable_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gCableCar_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 
 // Trade
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gTradeMenu_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u8 gTradeMenu_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gTradeMenu_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gTradeGba2_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u8 gTradeGba_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gTradeMenuMonBox_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u8 gTradeCursor_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gTradeCursor_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 
 // Party menu
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPartyMenuPokeball_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPartyMenuPokeballSmall_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gStatusPal_Icons[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPartyMenuPokeball_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gStatusPal_Icons[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 
 // Roulette
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gRouletteMenu_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gRouletteWheel_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gRouletteCenter_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gRouletteHeaders_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gRouletteCredit_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gRouletteNumbers_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gRouletteMultiplier_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 
 // Contest util
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gContestResults_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gContestResults_WinnerBanner_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gContestResults_Interface_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gContestResults_Bg_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gContestResults_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gContestResultsTitle_Link_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gContestResultsTitle_Normal_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gContestResultsTitle_Super_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gContestResultsTitle_Hyper_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gContestResultsTitle_Master_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gContestResultsTitle_Cool_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gContestResultsTitle_Beauty_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gContestResultsTitle_Cute_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gContestResultsTitle_Smart_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gContestResultsTitle_Tough_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gContestResultsTitle_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 
 // Trainer Card.
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gHoennTrainerCardGreen_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gHoennTrainerCard_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gKantoTrainerCardBlue_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gKantoTrainerCard_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gKantoTrainerCardBg_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gHoennTrainerCardBack_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gKantoTrainerCardBack_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gHoennTrainerCardFront_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gKantoTrainerCardFront_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gHoennTrainerCardFrontLink_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gKantoTrainerCardFrontLink_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gHoennTrainerCardBg_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 
 // Frontier Pass
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gFrontierPassBg_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gFrontierPassBg_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gFrontierPassBg_Pal[][16];
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gFrontierPassMapAndCard_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gFrontierPassCancelButton_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gFrontierPassCancelButtonHighlighted_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gFrontierPassMedals_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gFrontierPassCursor_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gFrontierPassMedalsGold_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gFrontierPassMedalsSilver_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gFrontierPassMapCursor_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 
 // Easy Chat Screen
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gEasyChatWindow_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gEasyChatWindow_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gEasyChatMode_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gEasyChatMode_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gEasyChatRectangleCursor_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gEasyChatRectangleCursor_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gEasyChatButtonWindow_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gEasyChatButtonWindow_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 
 // Use Pokeblock
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gUsePokeblockCondition_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 
 // Union Room Chat
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gUnionRoomChat_Background_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gUnionRoomChat_Background_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gUnionRoomChat_Background_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gUnionRoomChat_InputText_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gUnionRoomChat_Keyboard_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gUnionRoomChat_Keyboard_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gUnionRoomChat_Keyboard_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gUnionRoomChat_RButtonLabels[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 
 // Use Pokeblock
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u8 gPokenavConditionCancel_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gPokenavConditionCancel_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u8 gUsePokeblockUpDown_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gUsePokeblockUpDown_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gUsePokeblockCondition_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 
 // Berry Crush
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gBerryCrush_Crusher_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gBerryCrush_Crusher_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gBerryCrush_TextWindows_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 
 // PokéNav
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokenavMessageBox_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokenavMessageBox_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gPokenavMessageBox_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u32 gPokenavOptions_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gPokenavOptions_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 
 // Battle Factory Screen
 extern const u16 gFrontierFactoryMenu_Gfx[34 * TILE_SIZE_4BPP / 2];
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gFrontierFactoryMenu_Tilemap[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gFrontierFactoryMenu_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 
 // Object event pals
 #if defined(NATIVE_LINUX)
@@ -5088,7 +5756,16 @@ extern const u32 gMailTilemap_Fab[];
 extern const u32 gMailTiles_Retro[];
 extern const u32 gMailTilemap_Retro[];
 
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u8 gMonMarkingsMenu_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gMonMarkingsMenu_Pal[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
+
+#include "emerald/resources/ui_accessors.generated.h"
+#include "emerald/resources/wallpaper_accessors.generated.h"
+#include "emerald/resources/item_icon_accessors.generated.h"
+#include "emerald/resources/battle_anim_gfx_accessors.generated.h"
 
 #endif //GUARD_GRAPHICS_H

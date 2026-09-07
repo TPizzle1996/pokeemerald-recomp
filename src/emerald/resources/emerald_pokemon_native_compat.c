@@ -18,6 +18,12 @@
 #include "emerald/resources/emerald_resource_session.h"
 #include "emerald/resources/pokemon_battle_slots.generated.h"
 
+/* R15 Phase 2: the still-front, icon and footprint tables are mutable on
+ * native (their headers stay const on GBA). */
+extern struct CompressedSpriteSheet gMonStillFrontPicTable[];
+extern const u8 *gMonIconTable[];
+extern const u8 *gMonFootprintTable[];
+
 /* Mirrors the trainer seam's diagnostics helper (this module is a separate
  * translation unit; the trainer seam's copy is static there). */
 static void ClearDiagnostics(struct EmeraldResourceCompatDiagnostics *diagnostics)
@@ -229,6 +235,30 @@ PublishPokemonTables(const struct EmeraldResourceCompatibilityImage *image,
                     EmeraldResourceCompatImage_GetStream(image, (size_t)ri);
         }
     }
+    /* R15 Phase 2: still fronts (slots 1760..2199), icons (2200..2639) and
+     * footprints (2640..3052) publish the same way; the one external
+     * still-front EGG slot keeps its compiled payload. */
+    for (idx = 0u; idx < POKEMON_BATTLE_SLOTS_PER_TABLE; idx++)
+    {
+        int32_t ri = kPokemonBattleCompatSlots[slotIndex++];
+        if (ri != POKEMON_BATTLE_EXTERNAL_SLOT)
+            gMonStillFrontPicTable[idx].data = (const u32 *)(const void *)
+                EmeraldResourceCompatImage_GetStream(image, (size_t)ri);
+    }
+    for (idx = 0u; idx < POKEMON_BATTLE_SLOTS_PER_TABLE; idx++)
+    {
+        int32_t ri = kPokemonBattleCompatSlots[slotIndex++];
+        if (ri != POKEMON_BATTLE_EXTERNAL_SLOT)
+            gMonIconTable[idx] = (const u8 *)(const void *)
+                EmeraldResourceCompatImage_GetStream(image, (size_t)ri);
+    }
+    for (idx = 0u; idx < POKEMON_BATTLE_FOOTPRINT_SLOTS; idx++)
+    {
+        int32_t ri = kPokemonBattleCompatSlots[slotIndex++];
+        if (ri != POKEMON_BATTLE_EXTERNAL_SLOT)
+            gMonFootprintTable[idx] = (const u8 *)(const void *)
+                EmeraldResourceCompatImage_GetStream(image, (size_t)ri);
+    }
     return EMERALD_COMPAT_OK;
 }
 
@@ -359,6 +389,23 @@ void EmeraldPokemonCompat_ClearMigratedEntries(void)
             if (kPokemonBattleCompatSlots[slotIndex++] != POKEMON_BATTLE_EXTERNAL_SLOT)
                 table[idx].data = NULL;
         }
+    }
+    /* R15 Phase 2: the three aux tables clear the same way; the external
+     * still-front EGG slot is never touched (it stays compiled). */
+    for (idx = 0u; idx < POKEMON_BATTLE_SLOTS_PER_TABLE; idx++)
+    {
+        if (kPokemonBattleCompatSlots[slotIndex++] != POKEMON_BATTLE_EXTERNAL_SLOT)
+            gMonStillFrontPicTable[idx].data = NULL;
+    }
+    for (idx = 0u; idx < POKEMON_BATTLE_SLOTS_PER_TABLE; idx++)
+    {
+        if (kPokemonBattleCompatSlots[slotIndex++] != POKEMON_BATTLE_EXTERNAL_SLOT)
+            gMonIconTable[idx] = NULL;
+    }
+    for (idx = 0u; idx < POKEMON_BATTLE_FOOTPRINT_SLOTS; idx++)
+    {
+        if (kPokemonBattleCompatSlots[slotIndex++] != POKEMON_BATTLE_EXTERNAL_SLOT)
+            gMonFootprintTable[idx] = NULL;
     }
 }
 

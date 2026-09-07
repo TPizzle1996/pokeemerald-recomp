@@ -148,17 +148,33 @@ static const u8 sMonInfoTextColors[4] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_WHIT
 static const u8 sPlayerInfoTextColors[4] = {TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY};
 static const u8 sUnusedTextColors[4] = {TEXT_COLOR_RED, TEXT_COLOR_LIGHT_RED, TEXT_COLOR_TRANSPARENT};
 
-static const struct CompressedSpriteSheet sSpriteSheet_Confetti[] =
+#if defined(NATIVE_LINUX)
+struct CompressedSpriteSheet sHoFConfettiSpriteSheets[2] =
+{
+    {.data = NULL, .size = 0x220, .tag = TAG_CONFETTI},
+    {},
+};
+#else
+static const struct CompressedSpriteSheet sHoFConfettiSpriteSheets[] =
 {
     {.data = gConfetti_Gfx, .size = 0x220, .tag = TAG_CONFETTI},
     {},
 };
+#endif
 
-static const struct CompressedSpritePalette sSpritePalette_Confetti[] =
+#if defined(NATIVE_LINUX)
+struct CompressedSpritePalette sHoFConfettiSpritePalettes[2] =
+{
+    {.data = NULL, .tag = TAG_CONFETTI},
+    {},
+};
+#else
+static const struct CompressedSpritePalette sHoFConfettiSpritePalettes[] =
 {
     {.data = gConfetti_Pal, .tag = TAG_CONFETTI},
     {},
 };
+#endif
 
 static const s16 sHallOfFame_MonFullTeamPositions[PARTY_SIZE][4] =
 {
@@ -1279,8 +1295,8 @@ static void LoadHofGfx(void)
     ResetAllPicSprites();
     FreeAllSpritePalettes();
     gReservedSpritePaletteCount = 8;
-    LoadCompressedSpriteSheet(sSpriteSheet_Confetti);
-    LoadCompressedSpritePalette(sSpritePalette_Confetti);
+    LoadCompressedSpriteSheet(sHoFConfettiSpriteSheets);
+    LoadCompressedSpritePalette(sHoFConfettiSpritePalettes);
 }
 
 static void InitHofBgs(void)
@@ -1490,8 +1506,8 @@ static void Task_DoDomeConfetti(u8 taskId)
             gSpecialVar_0x8004 = 0;
             gSpecialVar_0x8005 = 0xFFFF;
         }
-        LoadCompressedSpriteSheet(sSpriteSheet_Confetti);
-        LoadCompressedSpritePalette(sSpritePalette_Confetti);
+        LoadCompressedSpriteSheet(sHoFConfettiSpriteSheets);
+        LoadCompressedSpritePalette(sHoFConfettiSpritePalettes);
         tState++;
         break;
     case 1:

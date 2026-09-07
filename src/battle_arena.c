@@ -344,11 +344,19 @@ static const struct SpriteTemplate sSpriteTemplate_JudgmentIcon =
     .callback = SpriteCB_JudgmentIcon,
 };
 
+#if defined(NATIVE_LINUX)
+struct CompressedSpriteSheet sBattleArenaJudgmentSymbolsSpriteSheet[2] =
+{
+    {NULL, 0x200, TAG_JUDGMENT_ICON},
+    {0}
+};
+#else
 static const struct CompressedSpriteSheet sBattleArenaJudgmentSymbolsSpriteSheet[] =
 {
     {gBattleArenaJudgmentSymbolsGfx, 0x200, TAG_JUDGMENT_ICON},
     {0}
 };
+#endif
 
 static void (*const sArenaFunctions[])(void) =
 {

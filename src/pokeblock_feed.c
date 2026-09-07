@@ -466,6 +466,25 @@ static const struct WindowTemplate sWindowTemplates[] =
 };
 
 // - 1 excludes PBLOCK_CLR_NONE
+#if defined(NATIVE_LINUX)
+u32 *sPokeblocksPals[14] =
+{
+    [PBLOCK_CLR_RED - 1]       = NULL,
+    [PBLOCK_CLR_BLUE - 1]      = NULL,
+    [PBLOCK_CLR_PINK - 1]      = NULL,
+    [PBLOCK_CLR_GREEN - 1]     = NULL,
+    [PBLOCK_CLR_YELLOW - 1]    = NULL,
+    [PBLOCK_CLR_PURPLE - 1]    = NULL,
+    [PBLOCK_CLR_INDIGO - 1]    = NULL,
+    [PBLOCK_CLR_BROWN - 1]     = NULL,
+    [PBLOCK_CLR_LITE_BLUE - 1] = NULL,
+    [PBLOCK_CLR_OLIVE - 1]     = NULL,
+    [PBLOCK_CLR_GRAY - 1]      = NULL,
+    [PBLOCK_CLR_BLACK - 1]     = NULL,
+    [PBLOCK_CLR_WHITE - 1]     = NULL,
+    [PBLOCK_CLR_GOLD - 1]      = NULL
+};
+#else
 static const u32 *const sPokeblocksPals[] =
 {
     [PBLOCK_CLR_RED - 1]       = gPokeblockRed_Pal,
@@ -483,6 +502,7 @@ static const u32 *const sPokeblocksPals[] =
     [PBLOCK_CLR_WHITE - 1]     = gPokeblockWhite_Pal,
     [PBLOCK_CLR_GOLD - 1]      = gPokeblockGold_Pal
 };
+#endif
 
 static const union AffineAnimCmd sAffineAnim_Still[] =
 {
@@ -580,10 +600,14 @@ static const union AffineAnimCmd *const sAffineAnims_Pokeblock[] =
     sAffineAnim_Pokeblock
 };
 
+#if defined(NATIVE_LINUX)
+struct CompressedSpriteSheet sSpriteSheet_Pokeblock = {NULL, 0x20, TAG_POKEBLOCK};
+#else
 static const struct CompressedSpriteSheet sSpriteSheet_Pokeblock =
 {
     gPokeblock_Gfx, 0x20, TAG_POKEBLOCK
 };
+#endif
 
 static const struct SpriteTemplate sSpriteTemplate_Pokeblock =
 {

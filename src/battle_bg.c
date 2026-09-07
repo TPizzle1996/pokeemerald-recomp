@@ -115,10 +115,14 @@ static const struct SpriteTemplate sVsLetter_S_SpriteTemplate =
     .callback = SpriteCB_VsLetterDummy
 };
 
+#if defined(NATIVE_LINUX)
+struct CompressedSpriteSheet sVsLettersSpriteSheet = {NULL, 0x1000, TAG_VS_LETTERS};
+#else
 static const struct CompressedSpriteSheet sVsLettersSpriteSheet =
 {
     gVsLettersGfx, 0x1000, TAG_VS_LETTERS
 };
+#endif
 
 const struct BgTemplate gBattleBgTemplates[] =
 {
@@ -599,6 +603,100 @@ const struct WindowTemplate *const gBattleWindowTemplates[] =
     [B_WIN_TYPE_ARENA]  = sBattleArenaWindowTemplates,
 };
 
+#if defined(NATIVE_LINUX)
+struct BattleBackground sBattleEnvironmentTable[] =
+{
+    [BATTLE_ENVIRONMENT_GRASS] =
+    {
+        .tileset = NULL,
+        .tilemap = NULL,
+        .entryTileset = NULL,
+        .entryTilemap = NULL,
+        .palette = NULL,
+    },
+
+    [BATTLE_ENVIRONMENT_LONG_GRASS] =
+    {
+        .tileset = NULL,
+        .tilemap = NULL,
+        .entryTileset = NULL,
+        .entryTilemap = NULL,
+        .palette = NULL,
+    },
+
+    [BATTLE_ENVIRONMENT_SAND] =
+    {
+        .tileset = NULL,
+        .tilemap = NULL,
+        .entryTileset = NULL,
+        .entryTilemap = NULL,
+        .palette = NULL,
+    },
+
+    [BATTLE_ENVIRONMENT_UNDERWATER] =
+    {
+        .tileset = NULL,
+        .tilemap = NULL,
+        .entryTileset = NULL,
+        .entryTilemap = NULL,
+        .palette = NULL,
+    },
+
+    [BATTLE_ENVIRONMENT_WATER] =
+    {
+        .tileset = NULL,
+        .tilemap = NULL,
+        .entryTileset = NULL,
+        .entryTilemap = NULL,
+        .palette = NULL,
+    },
+
+    [BATTLE_ENVIRONMENT_POND] =
+    {
+        .tileset = NULL,
+        .tilemap = NULL,
+        .entryTileset = NULL,
+        .entryTilemap = NULL,
+        .palette = NULL,
+    },
+
+    [BATTLE_ENVIRONMENT_MOUNTAIN] =
+    {
+        .tileset = NULL,
+        .tilemap = NULL,
+        .entryTileset = NULL,
+        .entryTilemap = NULL,
+        .palette = NULL,
+    },
+
+    [BATTLE_ENVIRONMENT_CAVE] =
+    {
+        .tileset = NULL,
+        .tilemap = NULL,
+        .entryTileset = NULL,
+        .entryTilemap = NULL,
+        .palette = NULL,
+    },
+
+    [BATTLE_ENVIRONMENT_BUILDING] =
+    {
+        .tileset = NULL,
+        .tilemap = NULL,
+        .entryTileset = NULL,
+        .entryTilemap = NULL,
+        .palette = NULL,
+    },
+
+    [BATTLE_ENVIRONMENT_PLAIN] =
+    {
+        .tileset = NULL,
+        .tilemap = NULL,
+        .entryTileset = NULL,
+        .entryTilemap = NULL,
+        .palette = NULL,
+    },
+};
+#else
 static const struct BattleBackground sBattleEnvironmentTable[] =
 {
     [BATTLE_ENVIRONMENT_GRASS] =
@@ -691,6 +789,8 @@ static const struct BattleBackground sBattleEnvironmentTable[] =
         .palette = gBattleEnvironmentPalette_Plain,
     },
 };
+#endif
+
 
 static void UNUSED CB2_UnusedBattleInit(void);
 

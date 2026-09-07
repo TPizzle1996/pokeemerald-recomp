@@ -1,3 +1,14 @@
+#if defined(NATIVE_LINUX)
+/* R15 Phase 7: mutable on native - the item-icon compat seam publishes the
+ * pack-resolved session pointers into every slot at init. The two shared
+ * fallback symbols (QuestionMark, ReturnToFieldArrow) stay compiled on
+ * native and keep their rows; the compat only rewrites migrated slots. */
+u32 *gItemIconTable[ITEMS_COUNT + 1][2] =
+{
+    [ITEM_NONE] = {(u32 *)gItemIcon_QuestionMark, (u32 *)gItemIconPalette_QuestionMark},
+    [ITEMS_COUNT] = {(u32 *)gItemIcon_ReturnToFieldArrow, (u32 *)gItemIconPalette_ReturnToFieldArrow},
+};
+#else
 const u32 *const gItemIconTable[ITEMS_COUNT + 1][2] =
 {
     [ITEM_NONE] = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark},
@@ -404,3 +415,4 @@ const u32 *const gItemIconTable[ITEMS_COUNT + 1][2] =
     // Return to field arrow
     [ITEMS_COUNT] = {gItemIcon_ReturnToFieldArrow, gItemIconPalette_ReturnToFieldArrow},
 };
+#endif

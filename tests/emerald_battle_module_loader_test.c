@@ -4,7 +4,7 @@
  * production pack and the committed battle-module artifacts, exactly as the
  * runtime loader consumes them:
  *
- *   1. the pack opens, reports the 23,069-entry surface and the qualified
+ *   1. the pack opens, reports the 27,000-entry surface (R15 pack: +1,217 pokemon still/icon/footprint + 379 UI + 154 wallpaper + 467 item icons + 698 battle-anim gfx + 1 weather + 1,008 easy-chat words; R13 base 23,069) and the qualified
  *      BPEE01 Rev 0 ROM identity (SHA-1 f3ae0881...);
  *   2. all 2,081 payload-bearing battle modules are found by canonical name,
  *      byte-exact against the committed .bin artifacts, and their payload
@@ -226,9 +226,9 @@ int main(int argc, char **argv)
         }
         {
             char line[128];
-            snprintf(line, sizeof(line), "pack entry count == 23,069 (got %zu)",
+            snprintf(line, sizeof(line), "pack entry count == 27,000 (got %zu)",
                      Gen3ResourcePack_GetEntryCount(pack));
-            Check(Gen3ResourcePack_GetEntryCount(pack) == 23069u, line);
+            Check(Gen3ResourcePack_GetEntryCount(pack) == 27000u, line);
         }
     }
 

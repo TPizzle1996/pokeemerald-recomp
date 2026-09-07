@@ -358,6 +358,24 @@ const union AnimCmd *const gAnims_MonPic[MAX_MON_PIC_FRAMES] =
 #define SPECIES_BATTLE_SHINY_PAL(species, pal) [SPECIES_##species] = {pal, SPECIES_##species + SPECIES_SHINY_TAG}
 #endif
 
+/* R15 Phase 2: the still-front, icon and footprint tables are ROM_BASE-
+ * migrated on native - the compiled leaf payloads are gone from the native
+ * link (GBA-only definitions in src/data/graphics/pokemon.h), so their rows
+ * expand to NULL sentinels and the compat seam publishes the session
+ * pointers at init. The `sprite`/`icon`/`footprint` arguments are
+ * intentionally unused on native; sizes, tags and indices are identical on
+ * both targets. The one external still-front EGG row keeps the compiled
+ * SPECIES_SPRITE macro in still_front_pic_table.h. */
+#if defined(NATIVE_LINUX)
+#define SPECIES_STILL_SPRITE(species, sprite) [SPECIES_##species] = {NULL, MON_PIC_SIZE, SPECIES_##species}
+#define SPECIES_ICON(species, icon) [SPECIES_##species] = NULL
+#define SPECIES_FOOTPRINT(species, footprint) [SPECIES_##species] = NULL
+#else
+#define SPECIES_STILL_SPRITE(species, sprite) [SPECIES_##species] = {sprite, MON_PIC_SIZE, SPECIES_##species}
+#define SPECIES_ICON(species, icon) [SPECIES_##species] = icon
+#define SPECIES_FOOTPRINT(species, footprint) [SPECIES_##species] = footprint
+#endif
+
 #include "data/pokemon_graphics/unused_anims.h"
 #include "data/pokemon_graphics/front_pic_coordinates.h"
 #include "data/pokemon_graphics/still_front_pic_table.h"

@@ -130,6 +130,80 @@ static const struct SpritePalette sSpinningNavgearPalettes[] =
     {}
 };
 
+#if defined(NATIVE_LINUX)
+struct CompressedSpriteSheet sMenuLeftHeaderSpriteSheet =
+{
+    .data = NULL, // Hoenn map is the first of the headers listed
+    .size = 0xC00,
+    .tag = 2
+};
+
+struct CompressedSpriteSheet sMenuLeftHeaderSpriteSheets[POKENAV_GFX_SUBMENUS_START] =
+{
+    [POKENAV_GFX_MAIN_MENU] = {
+        .data = NULL,
+        .size = 0x20,
+        .tag = 3
+    },
+    [POKENAV_GFX_CONDITION_MENU] = {
+        .data = NULL,
+        .size = 0x20,
+        .tag = 1
+    },
+    [POKENAV_GFX_RIBBONS_MENU] = {
+        .data = NULL,
+        .size = 0x20,
+        .tag = 2
+    },
+    [POKENAV_GFX_MATCH_CALL_MENU] = {
+        .data = NULL,
+        .size = 0x20,
+        .tag = 4
+    },
+    [POKENAV_GFX_MAP_MENU_ZOOMED_OUT] = {
+        .data = NULL,
+        .size = 0x20,
+        .tag = 0
+    },
+    [POKENAV_GFX_MAP_MENU_ZOOMED_IN] = {
+        .data = NULL,
+        .size = 0x40,
+        .tag = 0
+    }
+};
+
+struct CompressedSpriteSheetNoSize sPokenavSubMenuLeftHeaderSpriteSheets[POKENAV_GFX_MENUS_END - POKENAV_GFX_SUBMENUS_START] =
+{
+    [POKENAV_GFX_PARTY_MENU - POKENAV_GFX_SUBMENUS_START] = {
+        .data = NULL,
+        .tag = 1
+    },
+    [POKENAV_GFX_SEARCH_MENU - POKENAV_GFX_SUBMENUS_START] = {
+        .data = NULL,
+        .tag = 1
+    },
+    [POKENAV_GFX_COOL_MENU - POKENAV_GFX_SUBMENUS_START] = {
+        .data = NULL,
+        .tag = 4
+    },
+    [POKENAV_GFX_BEAUTY_MENU - POKENAV_GFX_SUBMENUS_START] = {
+        .data = NULL,
+        .tag = 1
+    },
+    [POKENAV_GFX_CUTE_MENU - POKENAV_GFX_SUBMENUS_START] = {
+        .data = NULL,
+        .tag = 2
+    },
+    [POKENAV_GFX_SMART_MENU - POKENAV_GFX_SUBMENUS_START] = {
+        .data = NULL,
+        .tag = 0
+    },
+    [POKENAV_GFX_TOUGH_MENU - POKENAV_GFX_SUBMENUS_START] = {
+        .data = NULL,
+        .tag = 0
+    }
+};
+#else
 static const struct CompressedSpriteSheet sMenuLeftHeaderSpriteSheet =
 {
     .data = gPokenavLeftHeaderHoennMap_Gfx, // Hoenn map is the first of the headers listed
@@ -202,6 +276,7 @@ static const struct CompressedSpriteSheetNoSize sPokenavSubMenuLeftHeaderSpriteS
         .tag = 0
     }
 };
+#endif
 
 static const struct OamData sSpinningPokenavSpriteOam =
 {
@@ -353,9 +428,9 @@ static u32 LoopedTask_InitPokenavMenu(s32 state)
         return LT_INC_AND_CONTINUE;
     case 1:
         menu = GetSubstructPtr(POKENAV_SUBSTRUCT_MAIN_MENU);
-        DecompressAndCopyTileDataToVram(0, &gPokenavHeader_Gfx, 0, 0, 0);
+        DecompressAndCopyTileDataToVram(0, gPokenavHeader_Gfx, 0, 0, 0);
         SetBgTilemapBuffer(0, menu->tilemapBuffer);
-        CopyToBgTilemapBuffer(0, &gPokenavHeader_Tilemap, 0, 0);
+        CopyToBgTilemapBuffer(0, gPokenavHeader_Tilemap, 0, 0);
         CopyPaletteIntoBufferUnfaded(gPokenavHeader_Pal, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
         CopyBgTilemapBufferToVram(0);
         return LT_INC_AND_PAUSE;

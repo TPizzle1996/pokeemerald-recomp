@@ -380,7 +380,11 @@ static const union AffineAnimCmd *const sAffineAnims_PyramidBag[] =
     [ANIM_BAG_SHAKE] = sAffineAnim_PyramidBag_Shake,
 };
 
+#if defined(NATIVE_LINUX)
+struct CompressedSpriteSheet sSpriteSheet_PyramidBag = {NULL, 0x0800, TAG_PYRAMID_BAG};
+#else
 static const struct CompressedSpriteSheet sSpriteSheet_PyramidBag = {gBattlePyramidBag_Gfx, 0x0800, TAG_PYRAMID_BAG};
+#endif
 
 static const struct SpriteTemplate sSpriteTemplate_PyramidBag =
 {

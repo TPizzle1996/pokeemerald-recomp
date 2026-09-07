@@ -12,8 +12,13 @@
 #include "constants/battle_anim.h"
 #include "constants/rgb.h"
 
+#if defined(NATIVE_LINUX)
+extern struct CompressedSpriteSheet gBattleAnimPicTable[289];
+extern struct CompressedSpritePalette gBattleAnimPaletteTable[289];
+#else
 extern const struct CompressedSpriteSheet gBattleAnimPicTable[];
 extern const struct CompressedSpritePalette gBattleAnimPaletteTable[];
+#endif
 extern const struct OamData gOamData_AffineOff_ObjNormal_8x8;
 extern const struct OamData gOamData_AffineOff_ObjBlend_64x64;
 

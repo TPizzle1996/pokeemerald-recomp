@@ -46,6 +46,10 @@ const u8 gBattlePalaceNatureToMoveTarget[NUM_NATURES] =
     [NATURE_QUIRKY]  = PALACE_TARGET_STRONGER,
 };
 
+#if defined(NATIVE_LINUX)
+struct CompressedSpriteSheet sSmokescreenImpactSpriteSheet = {NULL, 0x180, TAG_SMOKESCREEN};
+struct CompressedSpritePalette sSmokescreenImpactSpritePalette = {NULL, TAG_SMOKESCREEN};
+#else
 static const struct CompressedSpriteSheet sSmokescreenImpactSpriteSheet =
 {
     .data = gSmokescreenImpactTiles, .size = 0x180, .tag = TAG_SMOKESCREEN
@@ -55,6 +59,7 @@ static const struct CompressedSpritePalette sSmokescreenImpactSpritePalette =
 {
     .data = gSmokescreenImpactPalette, .tag = TAG_SMOKESCREEN
 };
+#endif
 
 static const struct OamData sOamData_SmokescreenImpact =
 {
@@ -124,10 +129,14 @@ static const struct SpriteTemplate sSmokescreenImpactSpriteTemplate =
     .callback = SpriteCB_SmokescreenImpact
 };
 
+#if defined(NATIVE_LINUX)
+struct CompressedSpriteSheet gSpriteSheet_EnemyShadow = {NULL, 0x80, GFXTAG_SHADOW};
+#else
 const struct CompressedSpriteSheet gSpriteSheet_EnemyShadow =
 {
     .data = gEnemyMonShadow_Gfx, .size = 0x80, .tag = GFXTAG_SHADOW
 };
+#endif
 
 static const struct OamData sOamData_EnemyShadow =
 {

@@ -828,9 +828,11 @@ static void TestTextPublication(const char *packPath)
 
     packCount = Gen3ResourcePack_GetEntryCount(pack);
     printf("production pack entry count: %zu\n", packCount);
-    CHECK("production pack entry count pinned at 20501+20+467+2081 "
-          "(R13-E3a-2 + R13-G2 §7.3 gift text + script family + R13-H2 battle family)",
-          packCount == 23069u);
+    CHECK("production pack entry count pinned at 27000 "
+          "(R13 base 24,287 + R15: pokemon still/icon/footprint 1,218 + UI 374 "
+          "+ wallpaper 154 + item icons 467 + battle-anim gfx 698 + weather 1 "
+          "- one cross-family reclassification)",
+          packCount == 27000u);
 
     /* Every text entry: C-side labels resolve by resource id; bundle ids
      * are captured for the blob-slice pass below. */

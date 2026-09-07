@@ -325,7 +325,11 @@ static const struct SpriteTemplate sSpriteTemplate_InputArrow;
 static const struct SpriteTemplate sSpriteTemplate_Underscore;
 static const struct SpriteTemplate sSpriteTemplate_PCIcon;
 static const u8 *const sNamingScreenKeyboardText[KBPAGE_COUNT][KBROW_COUNT];
-static const struct SpriteSheet sSpriteSheets[];
+#if defined(NATIVE_LINUX)
+extern struct SpriteSheet sNamingScreenSpriteSheets[13];
+#else
+static const struct SpriteSheet sNamingScreenSpriteSheets[];
+#endif
 static const struct SpritePalette sSpritePalettes[];
 
 static void CB2_LoadNamingScreen(void);
@@ -1876,7 +1880,7 @@ static void LoadGfx(void)
     LoadBgTiles(1, sNamingScreen->tileBuffer, sizeof(sNamingScreen->tileBuffer), 0);
     LoadBgTiles(2, sNamingScreen->tileBuffer, sizeof(sNamingScreen->tileBuffer), 0);
     LoadBgTiles(3, sNamingScreen->tileBuffer, sizeof(sNamingScreen->tileBuffer), 0);
-    LoadSpriteSheets(sSpriteSheets);
+    LoadSpriteSheets(sNamingScreenSpriteSheets);
     LoadSpritePalettes(sSpritePalettes);
 }
 
@@ -1967,12 +1971,21 @@ static void PrintKeyboardKeys(u8 window, u8 page)
     PutWindowTilemap(window);
 }
 
+#if defined(NATIVE_LINUX)
+const u32 *sNextKeyboardPageTilemaps[3] =
+{
+    [KBPAGE_SYMBOLS] = NULL,
+    [KBPAGE_LETTERS_UPPER] = NULL, // lower
+    [KBPAGE_LETTERS_LOWER] = NULL  // symbols
+};
+#else
 static const u32 *const sNextKeyboardPageTilemaps[] =
 {
     [KBPAGE_SYMBOLS] = gNamingScreenKeyboardUpper_Tilemap,
     [KBPAGE_LETTERS_UPPER] = gNamingScreenKeyboardLower_Tilemap, // lower
     [KBPAGE_LETTERS_LOWER] = gNamingScreenKeyboardSymbols_Tilemap  // symbols
 };
+#endif
 
 // There are always 2 keyboard pages drawn, the current page and the one that will shown next if the player swaps
 // When the page swap is complete this function invisibly replaces the old page with the new next one
@@ -2566,7 +2579,25 @@ static const u8 *const sNamingScreenKeyboardText[KBPAGE_COUNT][KBROW_COUNT] =
     },
 };
 
-static const struct SpriteSheet sSpriteSheets[] =
+#if defined(NATIVE_LINUX)
+struct SpriteSheet sNamingScreenSpriteSheets[13] =
+{
+    {NULL,   0x1E0,  GFXTAG_BACK_BUTTON},
+    {NULL,   0x1E0,  GFXTAG_OK_BUTTON},
+    {NULL,   0x280,  GFXTAG_PAGE_SWAP_FRAME},
+    {NULL,   0x100,  GFXTAG_PAGE_SWAP_BUTTON},
+    {NULL,   0x060,  GFXTAG_PAGE_SWAP_UPPER},
+    {NULL,   0x060,  GFXTAG_PAGE_SWAP_LOWER},
+    {NULL,   0x060,  GFXTAG_PAGE_SWAP_OTHERS},
+    {gNamingScreenCursor_Gfx,         0x080,  GFXTAG_CURSOR},
+    {NULL,   0x080,  GFXTAG_CURSOR_SQUISHED},
+    {NULL,   0x080,  GFXTAG_CURSOR_FILLED},
+    {NULL,   0x020,  GFXTAG_INPUT_ARROW},
+    {NULL,   0x020,  GFXTAG_UNDERSCORE},
+    {}
+};
+#else
+static const struct SpriteSheet sNamingScreenSpriteSheets[] =
 {
     {gNamingScreenBackButton_Gfx,     0x1E0,  GFXTAG_BACK_BUTTON},
     {gNamingScreenOKButton_Gfx,       0x1E0,  GFXTAG_OK_BUTTON},
@@ -2582,6 +2613,7 @@ static const struct SpriteSheet sSpriteSheets[] =
     {gNamingScreenUnderscore_Gfx,     0x020,  GFXTAG_UNDERSCORE},
     {}
 };
+#endif
 
 static const struct SpritePalette sSpritePalettes[] =
 {

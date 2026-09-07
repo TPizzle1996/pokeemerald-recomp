@@ -266,9 +266,9 @@ static int DoOracle(const char *packPath, const char *modsDir, uint32_t layout)
      * the full transactional sequence from scratch (sec 4/25). */
     if (!SetupScriptCompatSession(packPath))
         return 1;
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6390u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 7608u);
     EmeraldBattleLive_ClearMigratedEntries();
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6385u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 7603u);
     /* RegisterRanges with no generation refuses. */
     CHECK(EmeraldBattleLive_RegisterRanges() == EMERALD_BATTLE_LIVE_ERR_UNAVAILABLE);
     memset(&diagnostics, 0, sizeof(diagnostics));
@@ -286,7 +286,7 @@ static int DoOracle(const char *packPath, const char *modsDir, uint32_t layout)
               (uintptr_t)&sHarnessAnimBusy, &(uintptr_t){0})
           == EMERALD_BATTLE_LIVE_ERR_NOT_PUBLISHED);
     CHECK(EmeraldBattleLive_RegisterRanges() == EMERALD_BATTLE_LIVE_OK);
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6390u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 7608u);
     CHECK(EmeraldBattleLive_Publish() == EMERALD_BATTLE_LIVE_OK);
     CHECK(EmeraldBattleLive_IsPublished());
 
@@ -529,7 +529,7 @@ static int DoFaults(const char *packPath)
      * from the cleared-but-index-valid state. */
     if (!SetupScriptCompatSession(packPath))
         return 1;
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6390u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 7608u);
     EmeraldBattleLive_ClearMigratedEntries();
 
     /* 1. invalid layout refuses transactionally. */
@@ -544,7 +544,7 @@ static int DoFaults(const char *packPath)
     /* 2. stage layout 0 + publish (6,382 = 6,377 + the 5 live ranges). */
     status = H4StageLive(0u);
     CHECK(status == EMERALD_BATTLE_LIVE_OK);
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6390u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 7608u);
     passes++;
 
     /* Find the first SCRIPT_TARGET reloc of the first anim payload
@@ -657,7 +657,7 @@ static int DoFaults(const char *packPath)
     /* 10. teardown: ClearMigratedEntries unpublishes and refuses
      * (back to the loader's 6,377 sibling ranges). */
     EmeraldBattleLive_ClearMigratedEntries();
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6385u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 7603u);
     CHECK(EmeraldBattleLive_ResolveLaunchTarget(
               H4_FAMILY_ANIM, t->modules[m].gbaStart, &pointer)
           == EMERALD_BATTLE_LIVE_ERR_NOT_PUBLISHED);
@@ -707,7 +707,7 @@ static int DoBattleOracle(const char *packPath, const char *modsDir,
 
     if (!SetupScriptCompatSession(packPath))
         return 1;
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6390u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 7608u);
     EmeraldBattleLive_ClearMigratedEntries();
     memset(&diagnostics, 0, sizeof(diagnostics));
     status = EmeraldBattleLive_TryInitialize(
@@ -886,7 +886,7 @@ static int DoBattleFaults(const char *packPath)
 
     if (!SetupScriptCompatSession(packPath))
         return 1;
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6390u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 7608u);
     EmeraldBattleLive_ClearMigratedEntries();
 
     /* Find the first battle payload module + its first reloc. */
@@ -1025,9 +1025,9 @@ static int DoBattleFaults(const char *packPath)
 
     /* 8. unregister the exact battle range only (anim + FE + AI intact). */
     EmeraldBattleLive_UnregisterRange("emerald:battle-script/@arena");
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6381u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 7607u);
     CHECK(EmeraldBattleLive_RegisterRanges() == EMERALD_BATTLE_LIVE_OK);
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6390u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 7608u);
     passes++;
 
     printf("H5-BATTLE-FAULTS passed=%u\n", passes);
@@ -1265,7 +1265,7 @@ static int DoBattle249(const char *packPath, const char *modsDir)
     memset(presence, 0, sizeof(presence));
     if (!SetupScriptCompatSession(packPath))
         return 1;
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6390u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 7608u);
     EmeraldBattleLive_ClearMigratedEntries();
     memset(&diagnostics, 0, sizeof(diagnostics));
     status = EmeraldBattleLive_TryInitialize(
@@ -1485,14 +1485,14 @@ static int DoAiOracle(const char *packPath, const char *modsDir,
 
     if (!SetupScriptCompatSession(packPath))
         return 1;
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6390u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 7608u);
     EmeraldBattleLive_ClearMigratedEntries();
     memset(&diagnostics, 0, sizeof(diagnostics));
     status = EmeraldBattleLive_TryInitialize(
         gScriptHarnessSnapshot, gScriptHarnessPack, layout, &diagnostics);
     CHECK(status == EMERALD_BATTLE_LIVE_OK);
     CHECK(EmeraldBattleLive_RegisterRanges() == EMERALD_BATTLE_LIVE_OK);
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6390u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 7608u);
     CHECK(EmeraldBattleLive_Publish() == EMERALD_BATTLE_LIVE_OK);
     CHECK(EmeraldBattleLive_IsPublished());
 
@@ -1783,7 +1783,7 @@ static int DoAiFaults(const char *packPath)
 
     if (!SetupScriptCompatSession(packPath))
         return 1;
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6390u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 7608u);
     EmeraldBattleLive_ClearMigratedEntries();
 
     /* Locate the fixtures: first battle-ai/contest-ai bytecode module,
@@ -1864,7 +1864,7 @@ static int DoAiFaults(const char *packPath)
     /* 1. stage layout 0 + publish (6,382 = 6,377 + the 5 live ranges). */
     status = H4StageLive(0u);
     CHECK(status == EMERALD_BATTLE_LIVE_OK);
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6390u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 7608u);
     passes++;
 
     /* 2. wrong-family launch: a battle-ai root under the contest-ai
@@ -2008,13 +2008,13 @@ static int DoAiFaults(const char *packPath)
     passes++;
 
     /* 10. identity unregister (brief sec 26): the AI ranges drop out by
-     * exact key; re-registration restores the 6,382 invariant. */
+     * exact key; re-registration restores the 7,607 invariant. */
     EmeraldBattleLive_UnregisterRange("emerald:battle-ai/@arena");
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6381u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 7607u);
     EmeraldBattleLive_UnregisterRange("emerald:contest-ai/@arena");
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6380u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 7606u);
     CHECK(EmeraldBattleLive_RegisterRanges() == EMERALD_BATTLE_LIVE_OK);
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6390u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 7608u);
     passes++;
 
     printf("H6-AI-FAULTS passed=%u\n", passes);
@@ -2189,7 +2189,7 @@ static int DoH7Faults(const char *packPath)
 
     if (!SetupScriptCompatSession(packPath))
         return 1;
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6390u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 7608u);
     EmeraldBattleLive_ClearMigratedEntries();
     /* Stage the H arenas exactly like the oracles: the loader publishes
      * the session image, then the seam drives its own transactional
@@ -2423,7 +2423,7 @@ static int DoAi249(const char *packPath, const char *modsDir)
     memset(presence, 0, sizeof(presence));
     if (!SetupScriptCompatSession(packPath))
         return 1;
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6390u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 7608u);
     EmeraldBattleLive_ClearMigratedEntries();
     memset(&diagnostics, 0, sizeof(diagnostics));
     status = EmeraldBattleLive_TryInitialize(
@@ -2614,7 +2614,7 @@ static int DoReplace(const char *packPath)
      * family and the live step (6,377 G ranges + 5 live). */
     if (!SetupScriptCompatSession(packPath))
         return 1;
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6390u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 7608u);
     CHECK(EmeraldBattleLive_IsPublished());
     genA = EmeraldBattleLive_GetGenerationId();
 
@@ -2633,13 +2633,13 @@ static int DoReplace(const char *packPath)
     /* Replace: stage generation B (perturbed layout) while published -
      * the quiescence probe is clear, so the swap commits. */
     EmeraldBattleLive_ClearMigratedEntries();
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6385u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 7603u);
     memset(&diagnostics, 0, sizeof(diagnostics));
     status = EmeraldBattleLive_TryInitialize(
         gScriptHarnessSnapshot, gScriptHarnessPack, 1u, &diagnostics);
     CHECK(status == EMERALD_BATTLE_LIVE_OK);
     CHECK(EmeraldBattleLive_RegisterRanges() == EMERALD_BATTLE_LIVE_OK);
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6390u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 7608u);
     CHECK(EmeraldBattleLive_Publish() == EMERALD_BATTLE_LIVE_OK);
     genB = EmeraldBattleLive_GetGenerationId();
     CHECK(genB > genA);
@@ -2707,20 +2707,20 @@ static int DoReplace(const char *packPath)
      * index by exact key, position-independent - anim + FE untouched by
      * the battle removal and vice versa. */
     EmeraldBattleLive_UnregisterRange("emerald:field-effect-script/@arena");
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6381u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 7607u);
     EmeraldBattleLive_UnregisterRange("emerald:battle-anim-script/@arena");
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6380u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 7606u);
     EmeraldBattleLive_UnregisterRange("emerald:battle-script/@arena");
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6379u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 7605u);
     /* R13-H6: the AI ranges unregister by the same identity rule
      * (battle-ai then contest-ai; the G count returns). */
     EmeraldBattleLive_UnregisterRange("emerald:battle-ai/@arena");
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6378u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 7604u);
     EmeraldBattleLive_UnregisterRange("emerald:contest-ai/@arena");
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6385u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 7603u);
     /* Re-registration restores the invariant. */
     CHECK(EmeraldBattleLive_RegisterRanges() == EMERALD_BATTLE_LIVE_OK);
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6390u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 7608u);
 
     printf("H4-REPLACE genA=%llu genB=%llu arena-a=%p arena-b=%p "
            "count=%zu\n",
@@ -2887,7 +2887,7 @@ static int DoH5StateCreate(const char *packPath, const char *statePath)
     HarnessStatePath_Override(statePath);
     if (!SetupScriptCompatSession(packPath))
         return 1;
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6390u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 7608u);
     memset(fx, 0, sizeof(*fx));
     memset(bfx, 0, sizeof(*bfx));
     H4ClearSurfaces();
@@ -3092,7 +3092,7 @@ static int DoH6StateCreate(const char *packPath, const char *statePath,
     HarnessStatePath_Override(statePath);
     if (!SetupScriptCompatSession(packPath))
         return 1;
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6390u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 7608u);
     memset(afx, 0, sizeof(*afx));
     H4ClearSurfaces();
     H4BindLayout();
@@ -3346,7 +3346,7 @@ static int DoStateCreate(const char *packPath, const char *statePath)
     /* The production loader path publishes the live generation. */
     if (!SetupScriptCompatSession(packPath))
         return 1;
-    CHECK(EmeraldBattleLive_GetRangeCount() == 6390u);
+    CHECK(EmeraldBattleLive_GetRangeCount() == 7608u);
     memset(fx, 0, sizeof(*fx));
     H4ClearSurfaces();
     H4BindLayout();
@@ -3409,7 +3409,7 @@ static int DoStateLoad(const char *packPath, const char *statePath)
             gScriptHarnessSnapshot, gScriptHarnessPack, 1u, &diagnostics);
         CHECK(status == EMERALD_BATTLE_LIVE_OK);
         CHECK(EmeraldBattleLive_RegisterRanges() == EMERALD_BATTLE_LIVE_OK);
-        CHECK(EmeraldBattleLive_GetRangeCount() == 6390u);
+        CHECK(EmeraldBattleLive_GetRangeCount() == 7608u);
         CHECK(EmeraldBattleLive_Publish() == EMERALD_BATTLE_LIVE_OK);
     }
     memset(fx, 0, sizeof(*fx));

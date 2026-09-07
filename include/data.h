@@ -130,7 +130,11 @@ extern const union AffineAnimCmd *const gAffineAnims_BattleSpriteContest[];
 
 extern const union AnimCmd *const gAnims_MonPic[];
 extern const struct MonCoords gMonFrontPicCoords[];
+#if defined(NATIVE_LINUX)
+extern struct CompressedSpriteSheet gMonStillFrontPicTable[];
+#else
 extern const struct CompressedSpriteSheet gMonStillFrontPicTable[];
+#endif
 extern const struct MonCoords gMonBackPicCoords[];
 /* R9: the four Pokémon battle tables are mutable on native so the compat seam
  * publishes the ROM_BASE-resolved session pointers into every slot at init;

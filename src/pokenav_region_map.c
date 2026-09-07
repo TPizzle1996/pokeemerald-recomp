@@ -74,8 +74,10 @@ static u32 LoopedTask_RegionMapZoomOut(s32);
 static u32 LoopedTask_RegionMapZoomIn(s32);
 static u32 LoopedTask_ExitRegionMap(s32);
 
+#ifndef DESKTOP_EXTERNAL_GAME_CONTENT
 extern const u16 gRegionMapCityZoomTiles_Pal[];
 extern const u32 gRegionMapCityZoomText_Gfx[];
+#endif // DESKTOP_EXTERNAL_GAME_CONTENT
 
 static const u16 sMapSecInfoWindow_Pal[] = INCBIN_U16("graphics/pokenav/region_map/info_window.gbapal");
 static const u32 sRegionMapCityZoomTiles_Gfx[] = INCBIN_U32("graphics/pokenav/region_map/zoom_tiles.4bpp.lz");
@@ -122,6 +124,18 @@ static const LoopedTask sRegionMapLoopTaskFuncs[] =
     [POKENAV_MAP_FUNC_EXIT]         = LoopedTask_ExitRegionMap
 };
 
+#if defined(NATIVE_LINUX)
+struct CompressedSpriteSheet sCityZoomTextSpriteSheet[1] =
+{
+    {NULL, 0x800, GFXTAG_CITY_ZOOM}
+};
+
+struct SpritePalette sCityZoomTilesSpritePalette[2] =
+{
+    {NULL, PALTAG_CITY_ZOOM},
+    {}
+};
+#else
 static const struct CompressedSpriteSheet sCityZoomTextSpriteSheet[1] =
 {
     {gRegionMapCityZoomText_Gfx, 0x800, GFXTAG_CITY_ZOOM}
@@ -132,6 +146,7 @@ static const struct SpritePalette sCityZoomTilesSpritePalette[] =
     {gRegionMapCityZoomTiles_Pal, PALTAG_CITY_ZOOM},
     {}
 };
+#endif
 
 static const struct WindowTemplate sMapSecInfoWindowTemplate =
 {
@@ -516,7 +531,7 @@ static void LoadPokenavRegionMapGfx(struct Pokenav_RegionMapGfx *state)
     PutWindowTilemap(state->infoWindowId);
     CopyWindowToVram(state->infoWindowId, COPYWIN_FULL);
     CopyPaletteIntoBufferUnfaded(sMapSecInfoWindow_Pal, BG_PLTT_ID(1), sizeof(sMapSecInfoWindow_Pal));
-    CopyPaletteIntoBufferUnfaded(gRegionMapCityZoomTiles_Pal, BG_PLTT_ID(3), PLTT_SIZE_4BPP);
+    CopyPaletteIntoBufferUnfaded(sCityZoomTilesSpritePalette[0].data, BG_PLTT_ID(3), PLTT_SIZE_4BPP);
     if (!IsRegionMapZoomed())
         ChangeBgY(1, -0x6000, BG_COORD_SET);
     else

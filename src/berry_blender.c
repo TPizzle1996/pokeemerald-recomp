@@ -575,6 +575,22 @@ static const union AnimCmd *const sAnims_PlayerArrow[] =
     sAnim_PlayerArrow_BottomRight_Off
 };
 
+#if defined(NATIVE_LINUX)
+struct SpriteSheet sSpriteSheet_PlayerArrow =
+{
+    NULL, 0x800, GFXTAG_PLAYER_ARROW
+};
+
+struct SpritePalette sSpritePal_BlenderMisc =
+{
+    NULL, PALTAG_MISC
+};
+
+struct SpritePalette sSpritePal_PlayerArrow =
+{
+    NULL, PALTAG_PLAYER_ARROW
+};
+#else
 static const struct SpriteSheet sSpriteSheet_PlayerArrow =
 {
     gBerryBlenderPlayerArrow_Gfx, 0x800, GFXTAG_PLAYER_ARROW
@@ -589,6 +605,7 @@ static const struct SpritePalette sSpritePal_PlayerArrow =
 {
     gBerryBlenderArrowPalette, PALTAG_PLAYER_ARROW
 };
+#endif
 
 static const struct SpriteTemplate sSpriteTemplate_PlayerArrow =
 {
@@ -654,10 +671,17 @@ static const union AnimCmd *const sAnims_ScoreSymbols[] =
     [SCOREANIM_BEST_STATIC] = sAnim_ScoreSymbols_BestStatic,
 };
 
+#if defined(NATIVE_LINUX)
+struct SpriteSheet sSpriteSheet_ScoreSymbols =
+{
+    NULL, 0x200, GFXTAG_SCORE_SYMBOLS
+};
+#else
 static const struct SpriteSheet sSpriteSheet_ScoreSymbols =
 {
     gBerryBlenderScoreSymbols_Gfx, 0x200, GFXTAG_SCORE_SYMBOLS
 };
+#endif
 
 static const struct SpriteTemplate sSpriteTemplate_ScoreSymbols =
 {
@@ -741,10 +765,17 @@ static const union AnimCmd *const sAnims_Particles[] =
     sAnim_GreenDot,
 };
 
+#if defined(NATIVE_LINUX)
+struct SpriteSheet sSpriteSheet_Particles =
+{
+    NULL, 0xE0, GFXTAG_PARTICLES
+};
+#else
 static const struct SpriteSheet sSpriteSheet_Particles =
 {
     gBerryBlenderParticles_Gfx, 0xE0, GFXTAG_PARTICLES
 };
+#endif
 
 static const struct SpriteTemplate sSpriteTemplate_Particles =
 {
@@ -799,10 +830,17 @@ static const union AnimCmd *const sAnims_CountdownNumbers[] =
     sAnim_CountdownNumbers_1,
 };
 
+#if defined(NATIVE_LINUX)
+struct SpriteSheet sSpriteSheet_CountdownNumbers =
+{
+    NULL, 0x600, GFXTAG_COUNTDOWN_NUMBERS
+};
+#else
 static const struct SpriteSheet sSpriteSheet_CountdownNumbers =
 {
     gBerryBlenderCountdownNumbers_Gfx, 0x600, GFXTAG_COUNTDOWN_NUMBERS
 };
+#endif
 
 static const struct SpriteTemplate sSpriteTemplate_CountdownNumbers =
 {
@@ -843,10 +881,17 @@ static const union AnimCmd *const sAnims_Start[] =
     sAnim_Start,
 };
 
+#if defined(NATIVE_LINUX)
+struct SpriteSheet sSpriteSheet_Start =
+{
+    NULL, 0x400, GFXTAG_START
+};
+#else
 static const struct SpriteSheet sSpriteSheet_Start =
 {
     gBerryBlenderStart_Gfx, 0x400, GFXTAG_START
 };
+#endif
 
 static const struct SpriteTemplate sSpriteTemplate_Start =
 {

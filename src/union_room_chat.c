@@ -755,13 +755,23 @@ static const u32 sTextEntryCursorTiles[] = INCBIN_U32("graphics/union_room_chat/
 static const u32 sTextEntryArrowTiles[] = INCBIN_U32("graphics/union_room_chat/text_entry_arrow.4bpp.lz");
 static const u32 sRButtonGfxTiles[] = INCBIN_U32("graphics/union_room_chat/r_button.4bpp.lz");
 
-static const struct CompressedSpriteSheet sSpriteSheets[] = {
+#if defined(NATIVE_LINUX)
+struct CompressedSpriteSheet sUnionRoomChatSpriteSheets[5] = {
+    {.data = sKeyboardCursorTiles,         .size = 0x1000, .tag = GFXTAG_KEYBOARD_CURSOR},
+    {.data = sTextEntryArrowTiles,         .size = 0x0040, .tag = GFXTAG_TEXT_ENTRY_ARROW},
+    {.data = sTextEntryCursorTiles,        .size = 0x0040, .tag = GFXTAG_TEXT_ENTRY_CURSOR},
+    {.data = sRButtonGfxTiles,             .size = 0x0080, .tag = GFXTAG_RBUTTON_ICON},
+    {.data = NULL,                         .size = 0x0400, .tag = GFXTAG_RBUTTON_LABELS}
+};
+#else
+static const struct CompressedSpriteSheet sUnionRoomChatSpriteSheets[] = {
     {.data = sKeyboardCursorTiles,         .size = 0x1000, .tag = GFXTAG_KEYBOARD_CURSOR},
     {.data = sTextEntryArrowTiles,         .size = 0x0040, .tag = GFXTAG_TEXT_ENTRY_ARROW},
     {.data = sTextEntryCursorTiles,        .size = 0x0040, .tag = GFXTAG_TEXT_ENTRY_CURSOR},
     {.data = sRButtonGfxTiles,             .size = 0x0080, .tag = GFXTAG_RBUTTON_ICON},
     {.data = gUnionRoomChat_RButtonLabels, .size = 0x0400, .tag = GFXTAG_RBUTTON_LABELS}
 };
+#endif
 
 static const struct SpritePalette sSpritePalette = {
     .data = sUnionRoomChatInterfacePal, .tag = PALTAG_INTERFACE
@@ -3163,8 +3173,8 @@ static void FinishSlidingKeyboard(s16 bg1hofs)
 static bool32 TryAllocSprites(void)
 {
     u32 i;
-    for (i = 0; i < ARRAY_COUNT(sSpriteSheets); i++)
-        LoadCompressedSpriteSheet(&sSpriteSheets[i]);
+    for (i = 0; i < ARRAY_COUNT(sUnionRoomChatSpriteSheets); i++)
+        LoadCompressedSpriteSheet(&sUnionRoomChatSpriteSheets[i]);
 
     LoadSpritePalette(&sSpritePalette);
     sSprites = Alloc(sizeof(*sSprites));

@@ -172,5 +172,11 @@ echo "== running =="
     --catalog "$root/resources/extraction/emerald/bpee01/text/catalog.generated.toml" \
     --catalog "$root/resources/extraction/emerald/bpee01/gameplay/catalog.generated.toml" \
     --catalog "$root/resources/extraction/emerald/bpee01/multiboot/catalog.generated.toml" \
+    --catalog "$root/resources/extraction/emerald/bpee01/battle_anim_gfx/catalog.generated.toml" \
+    --catalog "$root/resources/extraction/emerald/bpee01/item_icon/catalog.generated.toml" \
+    --catalog "$root/resources/extraction/emerald/bpee01/wallpaper/catalog.generated.toml" \
+    --catalog "$root/resources/extraction/emerald/bpee01/ui/catalog.generated.toml" \
+    --catalog "$root/resources/extraction/emerald/bpee01/easy_chat/catalog.generated.toml" \
+    --catalog "$root/resources/extraction/emerald/bpee01/weather/catalog.generated.toml" \
     --catalog "$tmp/script_embedded_catalog.toml" \
     --catalog "$tmp/battle_embedded_catalog.toml"

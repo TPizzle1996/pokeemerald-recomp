@@ -753,11 +753,19 @@ static const struct SpriteTemplate sDexListStartMenuCursorSpriteTemplate =
     .callback = SpriteCB_DexListStartMenuCursor,
 };
 
+#if defined(NATIVE_LINUX)
+struct CompressedSpriteSheet sInterfaceSpriteSheet[2] =
+{
+    {NULL, 0x2000, TAG_DEX_INTERFACE},
+    {0}
+};
+#else
 static const struct CompressedSpriteSheet sInterfaceSpriteSheet[] =
 {
     {gPokedexInterface_Gfx, 0x2000, TAG_DEX_INTERFACE},
     {0}
 };
+#endif
 
 static const struct SpritePalette sInterfaceSpritePalette[] =
 {
@@ -3553,8 +3561,8 @@ static void Task_LoadCryScreen(u8 taskId)
         }
         break;
     case 1:
-        DecompressAndLoadBgGfxUsingHeap(3, &gPokedexMenu_Gfx, 0x2000, 0, 0);
-        CopyToBgTilemapBuffer(3, &gPokedexCryScreen_Tilemap, 0, 0);
+        DecompressAndLoadBgGfxUsingHeap(3, gPokedexMenu_Gfx, 0x2000, 0, 0);
+        CopyToBgTilemapBuffer(3, gPokedexCryScreen_Tilemap, 0, 0);
         FillWindowPixelBuffer(WIN_INFO, PIXEL_FILL(0));
         PutWindowTilemap(WIN_INFO);
         PutWindowTilemap(WIN_VU_METER);
